@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="U97-hY-BGP">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--StickyHeaderTableView-->
+        <scene sceneID="fJG-5P-4dp">
+            <objects>
+                <tableViewController id="U97-hY-BGP" customClass="StickyHeaderTableViewController" customModule="CustomViews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qGC-3M-Xuo" customClass="StickyHeaderTableView" customModule="CustomViews" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="mPb-LT-pNV">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rn3-iI-uj4">
+                                    <rect key="frame" x="100" y="10" width="120" height="209"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="keyboard_icon" translatesAutoresizingMaskIntoConstraints="NO" id="kBY-Dm-fn8">
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" priority="750" constant="120" id="iWe-9H-bQD"/>
+                                                <constraint firstAttribute="height" priority="750" constant="120" id="vgv-fs-XPv"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Some text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-pl-ULa">
+                                            <rect key="frame" x="21.5" y="144" width="77.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJt-vx-ZCh">
+                                            <rect key="frame" x="39" y="188.5" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Rn3-iI-uj4" firstAttribute="top" secondItem="mPb-LT-pNV" secondAttribute="top" constant="10" id="5r4-NW-2RL"/>
+                                <constraint firstItem="Rn3-iI-uj4" firstAttribute="centerX" secondItem="mPb-LT-pNV" secondAttribute="centerX" id="hNf-DY-7nm"/>
+                                <constraint firstAttribute="bottom" secondItem="Rn3-iI-uj4" secondAttribute="bottom" constant="21" id="tf2-9q-pOi"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="vGo-c4-LYf" style="IBUITableViewCellStyleDefault" id="U5y-WI-UtI">
+                                <rect key="frame" x="0.0" y="268" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U5y-WI-UtI" id="RPP-N9-9KS">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vGo-c4-LYf">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="U97-hY-BGP" id="Xm8-m4-QMc"/>
+                            <outlet property="delegate" destination="U97-hY-BGP" id="HdO-lP-ur8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="StickyHeaderTableView" id="9kx-B1-OvN"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xq3-I3-Ubt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1186.875" y="2360"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="keyboard_icon" width="512" height="512"/>
+    </resources>
+</document>

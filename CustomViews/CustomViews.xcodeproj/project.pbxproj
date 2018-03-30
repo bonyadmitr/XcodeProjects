@@ -1,0 +1,577 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66C578A01E2749B400B15AB9 /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C5789F1E2749B400B15AB9 /* ResizableTextView.swift */; };
+		66CECC401E23581A00F5A957 /* StickyHeaderTableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CECC3E1E23581A00F5A957 /* StickyHeaderTableView.storyboard */; };
+		66CECC431E2358B500F5A957 /* AnimatedLabels.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CECC421E2358B500F5A957 /* AnimatedLabels.storyboard */; };
+		66E033FC1E15398900C8AA9B /* BackgroundDismissAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E033FB1E15398900C8AA9B /* BackgroundDismissAlertController.swift */; };
+		66E033FE1E15407400C8AA9B /* RainbowTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E033FD1E15407400C8AA9B /* RainbowTableViewController.swift */; };
+		66E034011E155A7B00C8AA9B /* RainbowTableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E033FF1E155A7B00C8AA9B /* RainbowTableView.storyboard */; };
+		66E034041E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E034031E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift */; };
+		66E034071E155C2A00C8AA9B /* ResizableHeaderTableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E034051E155C2A00C8AA9B /* ResizableHeaderTableView.storyboard */; };
+		66FB10BC1E2F2C6B00E985DD /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FB10BB1E2F2C6B00E985DD /* CountingLabel.swift */; };
+		66FB10C31E307FA300E985DD /* NoDelayTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FB10C21E307FA300E985DD /* NoDelayTableView.swift */; };
+		66FB10C51E307FBD00E985DD /* StickyHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FB10C41E307FBD00E985DD /* StickyHeaderTableView.swift */; };
+		66FB10C71E30810B00E985DD /* NoDelayScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FB10C61E30810B00E985DD /* NoDelayScrollView.swift */; };
+		7B47062A1E03AF09009BF704 /* ResizableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4706291E03AF09009BF704 /* ResizableCollectionView.swift */; };
+		7B47062C1E043FD3009BF704 /* FadeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47062B1E043FD3009BF704 /* FadeLabel.swift */; };
+		7B47062E1E044025009BF704 /* ResizableHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47062D1E044025009BF704 /* ResizableHeaderTableView.swift */; };
+		7B4706301E0440CC009BF704 /* AnimatedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47062F1E0440CC009BF704 /* AnimatedLabel.swift */; };
+		7B4706331E044364009BF704 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4706321E044364009BF704 /* DesignableTextField.swift */; };
+		7B4706351E047D2C009BF704 /* StickyHeaderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4706341E047D2C009BF704 /* StickyHeaderTableViewController.swift */; };
+		7B4706371E0522AC009BF704 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4706361E0522AC009BF704 /* SpringLabel.swift */; };
+		7B8B7E571E069EA700C7B351 /* AdaptiveTextHeightLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B7E561E069EA700C7B351 /* AdaptiveTextHeightLabel.swift */; };
+		7B8B7E591E069F2B00C7B351 /* StyledLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8B7E581E069F2B00C7B351 /* StyledLabel.swift */; };
+		7BE97E791E02E893001265EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E781E02E893001265EB /* AppDelegate.swift */; };
+		7BE97E7B1E02E893001265EB /* AnimatedLabelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E7A1E02E893001265EB /* AnimatedLabelsController.swift */; };
+		7BE97E7E1E02E893001265EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE97E7C1E02E893001265EB /* Main.storyboard */; };
+		7BE97E801E02E893001265EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE97E7F1E02E893001265EB /* Assets.xcassets */; };
+		7BE97E831E02E893001265EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE97E811E02E893001265EB /* LaunchScreen.storyboard */; };
+		7BE97E8C1E02E8A5001265EB /* MultilineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E8A1E02E8A5001265EB /* MultilineLabel.swift */; };
+		7BE97E8D1E02E8A5001265EB /* SpringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E8B1E02E8A5001265EB /* SpringButton.swift */; };
+		7BE97E911E032AB4001265EB /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E901E032AB4001265EB /* UIColor+Adjust.swift */; };
+		CE2DBA172058EEE900D08C5E /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA162058EEE900D08C5E /* TimerLabel.swift */; };
+		CEE0CD7D20528C2400488980 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7C20528C2300488980 /* TextField.swift */; };
+		CEE0CD7F20528C6000488980 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7E20528C6000488980 /* CursorView.swift */; };
+		CEE0CD8120528C7800488980 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD8020528C7800488980 /* Spinner.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		66C5789F1E2749B400B15AB9 /* ResizableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
+		66CECC3F1E23581A00F5A957 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StickyHeaderTableView.storyboard; sourceTree = "<group>"; };
+		66CECC421E2358B500F5A957 /* AnimatedLabels.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AnimatedLabels.storyboard; sourceTree = "<group>"; };
+		66E033FB1E15398900C8AA9B /* BackgroundDismissAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundDismissAlertController.swift; sourceTree = "<group>"; };
+		66E033FD1E15407400C8AA9B /* RainbowTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowTableViewController.swift; sourceTree = "<group>"; };
+		66E034001E155A7B00C8AA9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RainbowTableView.storyboard; sourceTree = "<group>"; };
+		66E034031E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableHeaderTableViewController.swift; sourceTree = "<group>"; };
+		66E034061E155C2A00C8AA9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ResizableHeaderTableView.storyboard; sourceTree = "<group>"; };
+		66FB10BB1E2F2C6B00E985DD /* CountingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
+		66FB10C21E307FA300E985DD /* NoDelayTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDelayTableView.swift; sourceTree = "<group>"; };
+		66FB10C41E307FBD00E985DD /* StickyHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyHeaderTableView.swift; sourceTree = "<group>"; };
+		66FB10C61E30810B00E985DD /* NoDelayScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoDelayScrollView.swift; sourceTree = "<group>"; };
+		7B4706291E03AF09009BF704 /* ResizableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableCollectionView.swift; sourceTree = "<group>"; };
+		7B47062B1E043FD3009BF704 /* FadeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeLabel.swift; sourceTree = "<group>"; };
+		7B47062D1E044025009BF704 /* ResizableHeaderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableHeaderTableView.swift; sourceTree = "<group>"; };
+		7B47062F1E0440CC009BF704 /* AnimatedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedLabel.swift; sourceTree = "<group>"; };
+		7B4706321E044364009BF704 /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		7B4706341E047D2C009BF704 /* StickyHeaderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyHeaderTableViewController.swift; sourceTree = "<group>"; };
+		7B4706361E0522AC009BF704 /* SpringLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		7B8B7E561E069EA700C7B351 /* AdaptiveTextHeightLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTextHeightLabel.swift; sourceTree = "<group>"; };
+		7B8B7E581E069F2B00C7B351 /* StyledLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledLabel.swift; sourceTree = "<group>"; };
+		7BE97E751E02E892001265EB /* CustomViews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomViews.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BE97E781E02E893001265EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7BE97E7A1E02E893001265EB /* AnimatedLabelsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedLabelsController.swift; sourceTree = "<group>"; };
+		7BE97E7D1E02E893001265EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7BE97E7F1E02E893001265EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7BE97E821E02E893001265EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7BE97E841E02E893001265EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BE97E8A1E02E8A5001265EB /* MultilineLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilineLabel.swift; sourceTree = "<group>"; };
+		7BE97E8B1E02E8A5001265EB /* SpringButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringButton.swift; sourceTree = "<group>"; };
+		7BE97E901E032AB4001265EB /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
+		CE2DBA162058EEE900D08C5E /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
+		CEE0CD7C20528C2300488980 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		CEE0CD7E20528C6000488980 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
+		CEE0CD8020528C7800488980 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BE97E721E02E892001265EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6648C09B1E3113E20038790B /* Designable */ = {
+			isa = PBXGroup;
+			children = (
+				7B4706321E044364009BF704 /* DesignableTextField.swift */,
+			);
+			name = Designable;
+			sourceTree = "<group>";
+		};
+		66CECC411E23582B00F5A957 /* StickyHeaderTableView */ = {
+			isa = PBXGroup;
+			children = (
+				66CECC3E1E23581A00F5A957 /* StickyHeaderTableView.storyboard */,
+				7B4706341E047D2C009BF704 /* StickyHeaderTableViewController.swift */,
+			);
+			path = StickyHeaderTableView;
+			sourceTree = "<group>";
+		};
+		66CECC441E2358BB00F5A957 /* AnimatedLabels */ = {
+			isa = PBXGroup;
+			children = (
+				66CECC421E2358B500F5A957 /* AnimatedLabels.storyboard */,
+				7BE97E7A1E02E893001265EB /* AnimatedLabelsController.swift */,
+			);
+			path = AnimatedLabels;
+			sourceTree = "<group>";
+		};
+		66E034021E155A9600C8AA9B /* RainbowTableView */ = {
+			isa = PBXGroup;
+			children = (
+				66E033FF1E155A7B00C8AA9B /* RainbowTableView.storyboard */,
+				66E033FD1E15407400C8AA9B /* RainbowTableViewController.swift */,
+			);
+			path = RainbowTableView;
+			sourceTree = "<group>";
+		};
+		66E034081E155C6500C8AA9B /* ResizableHeaderTableView */ = {
+			isa = PBXGroup;
+			children = (
+				66E034051E155C2A00C8AA9B /* ResizableHeaderTableView.storyboard */,
+				66E034031E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift */,
+			);
+			path = ResizableHeaderTableView;
+			sourceTree = "<group>";
+		};
+		66FB10CB1E31106F00E985DD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E901E032AB4001265EB /* UIColor+Adjust.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		66FB10CC1E31134100E985DD /* AlertController */ = {
+			isa = PBXGroup;
+			children = (
+				66E033FB1E15398900C8AA9B /* BackgroundDismissAlertController.swift */,
+			);
+			name = AlertController;
+			sourceTree = "<group>";
+		};
+		66FB10CD1E31135300E985DD /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				7B47062D1E044025009BF704 /* ResizableHeaderTableView.swift */,
+				66FB10C21E307FA300E985DD /* NoDelayTableView.swift */,
+				66FB10C41E307FBD00E985DD /* StickyHeaderTableView.swift */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
+		66FB10CE1E31135C00E985DD /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				7B4706291E03AF09009BF704 /* ResizableCollectionView.swift */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		66FB10CF1E31136400E985DD /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				66C5789F1E2749B400B15AB9 /* ResizableTextView.swift */,
+			);
+			name = TextView;
+			sourceTree = "<group>";
+		};
+		66FB10D01E31136D00E985DD /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				66FB10C61E30810B00E985DD /* NoDelayScrollView.swift */,
+			);
+			name = ScrollView;
+			sourceTree = "<group>";
+		};
+		66FB10D11E31137B00E985DD /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E8B1E02E8A5001265EB /* SpringButton.swift */,
+			);
+			name = Button;
+			sourceTree = "<group>";
+		};
+		7B4706311E044101009BF704 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E8A1E02E8A5001265EB /* MultilineLabel.swift */,
+				7B47062B1E043FD3009BF704 /* FadeLabel.swift */,
+				7B47062F1E0440CC009BF704 /* AnimatedLabel.swift */,
+				7B4706361E0522AC009BF704 /* SpringLabel.swift */,
+				7B8B7E561E069EA700C7B351 /* AdaptiveTextHeightLabel.swift */,
+				7B8B7E581E069F2B00C7B351 /* StyledLabel.swift */,
+				66FB10BB1E2F2C6B00E985DD /* CountingLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		7BE97E6C1E02E892001265EB = {
+			isa = PBXGroup;
+			children = (
+				7BE97E771E02E892001265EB /* CustomViews */,
+				7BE97E761E02E892001265EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7BE97E761E02E892001265EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E751E02E892001265EB /* CustomViews.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BE97E771E02E892001265EB /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E8F1E02E8C0001265EB /* Controllers */,
+				7BE97E8E1E02E8B2001265EB /* Classes */,
+				7BE97E781E02E893001265EB /* AppDelegate.swift */,
+				66FB10CB1E31106F00E985DD /* Extensions */,
+				7BE97E7F1E02E893001265EB /* Assets.xcassets */,
+				7BE97E811E02E893001265EB /* LaunchScreen.storyboard */,
+				7BE97E841E02E893001265EB /* Info.plist */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		7BE97E8E1E02E8B2001265EB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6648C09B1E3113E20038790B /* Designable */,
+				66FB10CC1E31134100E985DD /* AlertController */,
+				66FB10CE1E31135C00E985DD /* CollectionView */,
+				66FB10CD1E31135300E985DD /* TableView */,
+				66FB10CF1E31136400E985DD /* TextView */,
+				66FB10D01E31136D00E985DD /* ScrollView */,
+				66FB10D11E31137B00E985DD /* Button */,
+				7B4706311E044101009BF704 /* Labels */,
+				CEE0CD7C20528C2300488980 /* TextField.swift */,
+				CEE0CD7E20528C6000488980 /* CursorView.swift */,
+				CEE0CD8020528C7800488980 /* Spinner.swift */,
+				CE2DBA162058EEE900D08C5E /* TimerLabel.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		7BE97E8F1E02E8C0001265EB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BE97E7C1E02E893001265EB /* Main.storyboard */,
+				66CECC441E2358BB00F5A957 /* AnimatedLabels */,
+				66CECC411E23582B00F5A957 /* StickyHeaderTableView */,
+				66E034021E155A9600C8AA9B /* RainbowTableView */,
+				66E034081E155C6500C8AA9B /* ResizableHeaderTableView */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7BE97E741E02E892001265EB /* CustomViews */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BE97E871E02E893001265EB /* Build configuration list for PBXNativeTarget "CustomViews" */;
+			buildPhases = (
+				7BE97E711E02E892001265EB /* Sources */,
+				7BE97E721E02E892001265EB /* Frameworks */,
+				7BE97E731E02E892001265EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CustomViews;
+			productName = CustomViews;
+			productReference = 7BE97E751E02E892001265EB /* CustomViews.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BE97E6D1E02E892001265EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Bondar Yaroslav";
+				TargetAttributes = {
+					7BE97E741E02E892001265EB = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 227NMT55ZD;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7BE97E701E02E892001265EB /* Build configuration list for PBXProject "CustomViews" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7BE97E6C1E02E892001265EB;
+			productRefGroup = 7BE97E761E02E892001265EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BE97E741E02E892001265EB /* CustomViews */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BE97E731E02E892001265EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CECC401E23581A00F5A957 /* StickyHeaderTableView.storyboard in Resources */,
+				66E034071E155C2A00C8AA9B /* ResizableHeaderTableView.storyboard in Resources */,
+				7BE97E831E02E893001265EB /* LaunchScreen.storyboard in Resources */,
+				7BE97E801E02E893001265EB /* Assets.xcassets in Resources */,
+				7BE97E7E1E02E893001265EB /* Main.storyboard in Resources */,
+				66E034011E155A7B00C8AA9B /* RainbowTableView.storyboard in Resources */,
+				66CECC431E2358B500F5A957 /* AnimatedLabels.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BE97E711E02E892001265EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BE97E7B1E02E893001265EB /* AnimatedLabelsController.swift in Sources */,
+				7B47062C1E043FD3009BF704 /* FadeLabel.swift in Sources */,
+				CEE0CD7D20528C2400488980 /* TextField.swift in Sources */,
+				66FB10BC1E2F2C6B00E985DD /* CountingLabel.swift in Sources */,
+				7B47062E1E044025009BF704 /* ResizableHeaderTableView.swift in Sources */,
+				7B4706371E0522AC009BF704 /* SpringLabel.swift in Sources */,
+				7B4706301E0440CC009BF704 /* AnimatedLabel.swift in Sources */,
+				66C578A01E2749B400B15AB9 /* ResizableTextView.swift in Sources */,
+				CE2DBA172058EEE900D08C5E /* TimerLabel.swift in Sources */,
+				7B8B7E591E069F2B00C7B351 /* StyledLabel.swift in Sources */,
+				66FB10C31E307FA300E985DD /* NoDelayTableView.swift in Sources */,
+				7BE97E791E02E893001265EB /* AppDelegate.swift in Sources */,
+				7BE97E8C1E02E8A5001265EB /* MultilineLabel.swift in Sources */,
+				66E033FE1E15407400C8AA9B /* RainbowTableViewController.swift in Sources */,
+				66FB10C71E30810B00E985DD /* NoDelayScrollView.swift in Sources */,
+				7B8B7E571E069EA700C7B351 /* AdaptiveTextHeightLabel.swift in Sources */,
+				66E034041E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift in Sources */,
+				7B4706351E047D2C009BF704 /* StickyHeaderTableViewController.swift in Sources */,
+				7BE97E8D1E02E8A5001265EB /* SpringButton.swift in Sources */,
+				66FB10C51E307FBD00E985DD /* StickyHeaderTableView.swift in Sources */,
+				CEE0CD8120528C7800488980 /* Spinner.swift in Sources */,
+				66E033FC1E15398900C8AA9B /* BackgroundDismissAlertController.swift in Sources */,
+				CEE0CD7F20528C6000488980 /* CursorView.swift in Sources */,
+				7B4706331E044364009BF704 /* DesignableTextField.swift in Sources */,
+				7B47062A1E03AF09009BF704 /* ResizableCollectionView.swift in Sources */,
+				7BE97E911E032AB4001265EB /* UIColor+Adjust.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		66CECC3E1E23581A00F5A957 /* StickyHeaderTableView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CECC3F1E23581A00F5A957 /* Base */,
+			);
+			name = StickyHeaderTableView.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		66E033FF1E155A7B00C8AA9B /* RainbowTableView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66E034001E155A7B00C8AA9B /* Base */,
+			);
+			name = RainbowTableView.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		66E034051E155C2A00C8AA9B /* ResizableHeaderTableView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66E034061E155C2A00C8AA9B /* Base */,
+			);
+			name = ResizableHeaderTableView.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		7BE97E7C1E02E893001265EB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE97E7D1E02E893001265EB /* Base */,
+			);
+			name = Main.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		7BE97E811E02E893001265EB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BE97E821E02E893001265EB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7BE97E851E02E893001265EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BE97E861E02E893001265EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BE97E881E02E893001265EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 227NMT55ZD;
+				INFOPLIST_FILE = CustomViews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Bonya.CustomViews1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		7BE97E891E02E893001265EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 227NMT55ZD;
+				INFOPLIST_FILE = CustomViews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Bonya.CustomViews1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BE97E701E02E892001265EB /* Build configuration list for PBXProject "CustomViews" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BE97E851E02E893001265EB /* Debug */,
+				7BE97E861E02E893001265EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BE97E871E02E893001265EB /* Build configuration list for PBXNativeTarget "CustomViews" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BE97E881E02E893001265EB /* Debug */,
+				7BE97E891E02E893001265EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7BE97E6D1E02E892001265EB /* Project object */;
+}

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9Ne-2j-yMa">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ResizableHeaderTableView-->
+        <scene sceneID="XDG-rC-vhT">
+            <objects>
+                <tableViewController id="9Ne-2j-yMa" customClass="ResizableHeaderTableViewController" customModule="CustomViews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SOJ-mD-ylM" customClass="ResizableHeaderTableView" customModule="CustomViews" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="1SR-9l-Cpx">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="179"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oab-TZ-dQg">
+                                    <rect key="frame" x="8" y="8" width="304" height="163"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTr-TZ-DVh" customClass="MultilineLabel" customModule="CustomViews" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="14"/>
+                                            <color key="backgroundColor" red="1" green="0.079394028180000006" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">if which swiftlint &gt;/dev/null; then
+swiftlint
+else
+echo "warning: SwiftLint not if which swiftlint &gt;/dev/null; then
+swiftlint
+else
+echo "warning: SwiftLint not if which swiftlint &gt;/dev/null; then
+swiftlint
+else
+echo "warning: SwiftLint not </string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6K-rX-GhV">
+                                            <rect key="frame" x="0.0" y="22" width="304" height="98"/>
+                                            <color key="backgroundColor" red="0.16900000000000001" green="0.51200000000000001" blue="0.625" alpha="1" colorSpace="calibratedRGB"/>
+                                            <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iip-fE-q1e">
+                                            <rect key="frame" x="0.0" y="128" width="304" height="20.5"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQa-S6-MKD" customClass="MultilineLabel" customModule="CustomViews" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="156.5" width="304" height="6.5"/>
+                                            <color key="backgroundColor" red="0.16470000000000001" green="0.61570000000000003" blue="0.89800000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <string key="text">alert touch
+
+
+    let alertVC = UIAlertController(title: "Error", message: "bla bla", preferredStyle: .alert)
+    
+    func dismissAlertTapBackground() {
+        alertVC.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .default) { action in
+            print("cancel action")
+        }
+        
+        self.alertVC.addAction(cancelAction)
+        
+        self.present(self.alertVC, animated: true) {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertTapBackground))
+            self.alertVC.view.superview?.subviews[1].addGestureRecognizer(tap)
+            self.alertVC.view.superview?.subviews[1].isUserInteractionEnabled = true
+            print("alertVC presented")
+        }</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="oab-TZ-dQg" firstAttribute="leading" secondItem="1SR-9l-Cpx" secondAttribute="leading" constant="8" id="3nY-vG-lgI"/>
+                                <constraint firstAttribute="bottom" secondItem="oab-TZ-dQg" secondAttribute="bottom" constant="8" id="VxL-ya-seH"/>
+                                <constraint firstAttribute="trailing" secondItem="oab-TZ-dQg" secondAttribute="trailing" constant="8" id="hNi-6n-1Rl"/>
+                                <constraint firstItem="oab-TZ-dQg" firstAttribute="top" secondItem="1SR-9l-Cpx" secondAttribute="top" constant="8" id="vnz-ZU-Tko"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="c7o-1S-Gxc" style="IBUITableViewCellStyleDefault" id="ZuF-Yl-H7l">
+                                <rect key="frame" x="0.0" y="207" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZuF-Yl-H7l" id="tzM-7O-DCq">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c7o-1S-Gxc">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.28978692569999998" green="0.28685978509999999" blue="0.29271406639999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="9Ne-2j-yMa" id="Nwc-Kl-TeT"/>
+                            <outlet property="delegate" destination="9Ne-2j-yMa" id="Qu8-nc-hfU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="ResizableHeaderTableView" id="9Bk-xs-5Xf"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkt-nw-zpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-654" y="2363"/>
+        </scene>
+    </scenes>
+</document>
