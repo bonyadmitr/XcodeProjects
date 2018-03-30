@@ -12,6 +12,7 @@
 		66559D0E1E3B89F80015C913 /* ModalCustomPresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66559D0D1E3B89F80015C913 /* ModalCustomPresentController.swift */; };
 		669EA1D91EFEDA3C0087559C /* ModalCustomPresentController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 669EA1D71EFEDA3C0087559C /* ModalCustomPresentController.storyboard */; };
 		66A8C4AD1F880C7C00A78734 /* CellHeightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A8C4AC1F880C7C00A78734 /* CellHeightController.swift */; };
+		66C6E5E5206EBB8C0020F8A8 /* BlurController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6E5E4206EBB8C0020F8A8 /* BlurController.swift */; };
 		7B0D06661DEA45C100FE8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0D06651DEA45C100FE8B8A /* AppDelegate.swift */; };
 		7B0D066B1DEA45C100FE8B8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D06691DEA45C100FE8B8A /* Main.storyboard */; };
 		7B0D066D1DEA45C100FE8B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B0D066C1DEA45C100FE8B8A /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		66559D0D1E3B89F80015C913 /* ModalCustomPresentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCustomPresentController.swift; sourceTree = "<group>"; };
 		669EA1D81EFEDA3C0087559C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ModalCustomPresentController.storyboard; sourceTree = "<group>"; };
 		66A8C4AC1F880C7C00A78734 /* CellHeightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellHeightController.swift; sourceTree = "<group>"; };
+		66C6E5E4206EBB8C0020F8A8 /* BlurController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurController.swift; sourceTree = "<group>"; };
 		7B0D06621DEA45C100FE8B8A /* AnimationsAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimationsAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0D06651DEA45C100FE8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B0D066A1DEA45C100FE8B8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				664ED476206BFB630025F87A /* AnimationFlowManager.swift */,
 				7BA946F41DEB003000A51135 /* TableViewController.swift */,
 				66A8C4AC1F880C7C00A78734 /* CellHeightController.swift */,
+				66C6E5E4206EBB8C0020F8A8 /* BlurController.swift */,
 				7B166B821DED474E006AB5A7 /* Dynamic */,
 				7BA947021DEB644200A51135 /* MotionEffect */,
 				7BA946FD1DEB08B100A51135 /* AppearingTableViewCellsController */,
@@ -413,6 +416,7 @@
 				7BA946F51DEB003000A51135 /* TableViewController.swift in Sources */,
 				7B82F6951DEAEEF100911327 /* PopUpFromMinController.swift in Sources */,
 				664ED475206BFB3F0025F87A /* InfinityRotater.swift in Sources */,
+				66C6E5E5206EBB8C0020F8A8 /* BlurController.swift in Sources */,
 				7B0D06661DEA45C100FE8B8A /* AppDelegate.swift in Sources */,
 				7B82F6981DEAF9D200911327 /* SomeRoundButton.swift in Sources */,
 				66A8C4AD1F880C7C00A78734 /* CellHeightController.swift in Sources */,

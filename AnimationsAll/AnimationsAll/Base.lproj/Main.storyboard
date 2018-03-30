@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -200,6 +201,26 @@
                                             <segue destination="ZGj-Lj-m7K" kind="show" id="5WJ-8p-Lz3"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mse-GY-XMS">
+                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mse-GY-XMS" id="j14-Td-lMe">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFZ-es-477">
+                                                    <rect key="frame" x="16" y="11" width="296" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="U8A-VB-TYV" kind="show" id="7HF-Md-0bI"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -358,6 +379,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMV-aa-UaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="986" y="1430"/>
+        </scene>
+        <!--Blur-->
+        <scene sceneID="T1I-Cj-h1X">
+            <objects>
+                <viewController id="U8A-VB-TYV" customClass="BlurController" customModule="AnimationsAll" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wvp-cI-x6Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1R-DR-Mc0">
+                                <rect key="frame" x="110" y="183" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="lP3-II-zYV"/>
+                                    <constraint firstAttribute="height" constant="50" id="qTF-sC-iK5"/>
+                                </constraints>
+                                <state key="normal" title="Blur"/>
+                                <connections>
+                                    <action selector="actionBlurButton:" destination="U8A-VB-TYV" eventType="touchUpInside" id="2xr-jc-zBK"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h84-8E-HAk">
+                                <rect key="frame" x="30" y="30" width="260" height="128"/>
+                                <color key="backgroundColor" red="0.57513124240000002" green="0.54319269830000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="0cD-o9-Iw3"/>
+                                </constraints>
+                            </view>
+                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMJ-bL-ZLX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GpP-4n-eb8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF8-18-8pf">
+                                            <rect key="frame" x="110" y="183" width="100" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="ByZ-Di-DlA"/>
+                                                <constraint firstAttribute="height" constant="50" id="vVM-pw-haB"/>
+                                            </constraints>
+                                            <state key="normal" title="Hide"/>
+                                            <connections>
+                                                <action selector="actionHideButton:" destination="U8A-VB-TYV" eventType="touchUpInside" id="dgj-bw-xge"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="oF8-18-8pf" firstAttribute="centerX" secondItem="GpP-4n-eb8" secondAttribute="centerX" id="SVj-Zx-ArF"/>
+                                        <constraint firstItem="oF8-18-8pf" firstAttribute="centerY" secondItem="GpP-4n-eb8" secondAttribute="centerY" id="yUT-bW-pvp"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="RMJ-bL-ZLX" firstAttribute="bottom" secondItem="dC4-0F-QL4" secondAttribute="bottom" id="2TO-8v-sVp"/>
+                            <constraint firstItem="RMJ-bL-ZLX" firstAttribute="trailing" secondItem="dC4-0F-QL4" secondAttribute="trailing" id="6Gx-nK-mKB"/>
+                            <constraint firstItem="RMJ-bL-ZLX" firstAttribute="leading" secondItem="dC4-0F-QL4" secondAttribute="leading" id="Ad8-52-NqI"/>
+                            <constraint firstItem="h84-8E-HAk" firstAttribute="top" secondItem="dC4-0F-QL4" secondAttribute="top" constant="30" id="ESZ-Md-V0B"/>
+                            <constraint firstItem="h84-8E-HAk" firstAttribute="leading" secondItem="dC4-0F-QL4" secondAttribute="leading" constant="30" id="I1p-r7-1XP"/>
+                            <constraint firstItem="RMJ-bL-ZLX" firstAttribute="top" secondItem="wvp-cI-x6Z" secondAttribute="top" id="Lbj-lb-MxW"/>
+                            <constraint firstItem="dC4-0F-QL4" firstAttribute="trailing" secondItem="h84-8E-HAk" secondAttribute="trailing" constant="30" id="bFG-WN-dea"/>
+                            <constraint firstItem="G1R-DR-Mc0" firstAttribute="centerY" secondItem="dC4-0F-QL4" secondAttribute="centerY" id="rda-FQ-bTV"/>
+                            <constraint firstItem="G1R-DR-Mc0" firstAttribute="centerX" secondItem="dC4-0F-QL4" secondAttribute="centerX" id="thU-nN-di3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dC4-0F-QL4"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Blur" id="4mj-h6-8zm"/>
+                    <connections>
+                        <outlet property="blurView" destination="RMJ-bL-ZLX" id="xYO-1l-VJY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tuu-oB-7F1" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984" y="2154"/>
         </scene>
     </scenes>
 </document>
