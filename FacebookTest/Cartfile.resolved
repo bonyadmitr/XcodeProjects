@@ -1,0 +1,5 @@
+github "BoltsFramework/Bolts-ObjC" "1.8.4"
+github "SwiftyJSON/SwiftyJSON" "3.1.4"
+github "facebook/Facebook-SDK-Swift" "0.2.0"
+github "facebook/facebook-ios-sdk" "sdk-version-4.21.0"
+github "mxcl/PromiseKit" "4.1.8"

@@ -1,0 +1,8 @@
+# Async
+github "mxcl/PromiseKit" ~> 4.0
+
+# Data mapping
+github "SwiftyJSON/SwiftyJSON"
+
+# Social web
+github "facebook/Facebook-SDK-Swift"
