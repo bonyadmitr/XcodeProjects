@@ -1,0 +1,52 @@
+###################### More Options ######################
+# If you want to have even more control, check out the documentation
+# https://github.com/fastlane/fastlane/blob/master/deliver/Deliverfile.md
+# https://github.com/fastlane/fastlane/tree/master/deliver
+
+# app price. 0 = free app, 1 = 0.99 $/Eur
+price_tier 0
+
+# Skip the HTML report file verification
+force false
+
+# Submit the new version for Review after uploading everything
+submit_for_review false
+
+# Should the app be automatically released once it's approved?
+automatic_release false
+
+
+
+# Don't upload the screenshots
+skip_screenshots false
+
+# Clear all previously uploaded screenshots before uploading the new ones
+overwrite_screenshots false
+
+# Skip uploading an ipa or pkg to iTunes Connect
+skip_binary_upload true
+
+# Don't upload the metadata (e.g. title, description), this will still upload screenshots
+skip_metadata true
+
+# app_review_information(
+#   first_name: "YOUR_FIRST_NAME",
+#   last_name: "YOUR_LAST_NAME",
+#   phone_number: "YOUR_PHONE_NUMBER",
+#   email_address: "YOUR_EMAIL_ADDRESS",
+#   demo_user: "N/A",
+#   demo_password: "N/A",
+#   notes: "No demo account needed"
+# )
+
+# submission_information({
+#     export_compliance_encryption_updated: false,
+#     export_compliance_uses_encryption: false,
+#     content_rights_contains_third_party_content: false,
+#     add_id_info_uses_idfa: false
+# })
+
+
+# app_icon './fastlane/metadata/AppIcon.png'
+
+# app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"

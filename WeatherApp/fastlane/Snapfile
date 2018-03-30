@@ -1,0 +1,72 @@
+# A list of devices you want to take the screenshots from
+devices([
+  # "iPhone 4s", # not supported by frameit
+  # "iPhone 5",
+  # "iPhone 6",
+  "iPhone 7 Plus"
+  # "iPad Pro (12.9 inch)"
+  # "iPad Pro (9.7 inch)",
+  # "Apple TV 1080p"
+])
+ 
+# A list of supported languages
+languages([
+  "en-US",
+  "ru"
+  #["pt", "pt_BR"] # Portuguese with Brazilian locale
+])
+
+# The name of the scheme which contains the UI Tests
+scheme "WeatherAppUITests2"
+
+# Where should the resulting screenshots be stored?
+output_directory "./fastlane/screenshots"
+
+# to clear all previously generated screenshots before creating new ones
+clear_previous_screenshots true
+
+# Enabling this option will automatically uninstall the application before running it
+#reinstall_app true
+
+# make file with logs to the output_directory
+output_simulator_logs false
+
+# Should snapshot stop immediately after the tests completely failed on one device?
+stop_after_first_error true
+
+# Skip opening the HTML after all is done
+skip_open_summary true
+
+
+
+
+
+
+#configuration "Release"
+
+# Choose which project/workspace to use
+#project "./Project.xcodeproj"
+#workspace "./Project.xcworkspace"
+
+# Arguments to pass to the app on launch. See https://github.com/fastlane/snapshot#launch-arguments
+# Example: name.text = NSUserDefaults.standardUserDefaults().stringForKey("username")
+# launch_arguments([
+#   "-favColor red",
+#   "-username Felix"
+# ])
+
+# Latest version of iOS
+#ios_version '10.2'
+#ios_version '9.3'
+
+#add_photos ["MyTestApp/Assets/demo.jpg"]
+
+
+# if NSUserDefaults.standardUserDefaults().boolForKey("FASTLANE_SNAPSHOT") {
+#     // runtime check that we are in snapshot mode
+# }
+
+#Could not read build settings. Make sure that the scheme "iGuruTestFastlaneUITests"
+#is configured for running by going to Product → Scheme → Edit Scheme…, selecting the "Build" section,
+#checking the "Run" checkbox and closing the scheme window.
+# if #scheme "iGuruTestFastlaneUITests"

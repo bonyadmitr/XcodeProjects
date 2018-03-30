@@ -1,0 +1,27 @@
+PODS:
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
+  - GoogleMaps/Base (2.2.0)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
+  - KIF (3.5.1):
+    - KIF/Core (= 3.5.1)
+  - KIF/Core (3.5.1)
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - GooglePlaces
+  - KIF
+
+SPEC CHECKSUMS:
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  KIF: '082eb65279e51c3092923802849eb796a04982ab'
+
+PODFILE CHECKSUM: c82c037e1b6f1c0bf366b5feebe9b8f7a88b8a96
+
+COCOAPODS: 1.2.1

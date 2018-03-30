@@ -1,0 +1,19 @@
+"weather_app"="Weather App";
+"cancel"="Cancel";
+"new_city"="Enter new city";
+"settings"="Settings";
+"not_found"="Not found";
+"fonts"="Fonts";
+"default"="Default";
+"colors"="Colors";
+"search"="Search";
+"pull_refresh"="Pull to refresh";
+
+"all"="All";
+"regular"="Regular";
+"light"="Light";
+"bold"="Bold";
+
+"select_font"="Select font";
+"select_color"="Select color";
+"select_language"="Select language";

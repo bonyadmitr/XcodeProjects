@@ -1,0 +1,36 @@
+app_identifier "by.WeatherApp"
+
+apple_id "" 
+
+team_id ""
+
+# app_identifier ENV["APP_IDENTIFIER"] 
+# apple_id ENV["APPLE_ID"]
+# team_id ENV["TEAM_ID"]
+
+# identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+# team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+
+
+## You can uncomment the lines below and add your own 
+## team selection in case you're in multiple teams
+# team_name "Felix Krause"
+# team_id "Q2CBPJ58CA"
+
+## To select a team for iTunes Connect use
+# itc_team_name "Company Name"
+# itc_team_id "18742801"
+
+## Use different bundle identifiers per lane
+
+# for_lane 'ios alpha' do
+#   app_identifier "org.wikimedia.wikipedia.tfalpha"
+# end
+
+# for_lane 'ios beta' do
+#   app_identifier "org.wikimedia.wikipedia.tfbeta"
+# end
+
+# for_lane 'ios store' do
+#   app_identifier "org.wikimedia.wikipedia"
+# end

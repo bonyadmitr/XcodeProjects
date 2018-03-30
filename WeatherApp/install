@@ -1,0 +1,88 @@
+#!/bin/bash
+
+#'gem query -i -n bundler -v 1.6.2.1'
+#[ -z "$String" ]
+
+install_bundler()
+{
+	echo ""
+	echo "Install Bundler"
+	echo " → Checking bundler"
+	local isBundle
+	isBundle=$(gem query -i -n bundler)
+
+	if ! "$isBundle"; then
+		echo " → Installing bundler"
+		gem install bundler
+	fi
+
+	echo " → Bundler installed"
+}
+
+install_bundler_gems()
+{
+	echo ""
+	echo " → Installing bundler gems dependencies"
+	bundle i
+}
+
+install_cocoapods_pods()
+{
+	echo ""
+	echo " → Installing Cocoapods dependencies"
+	bundle e pod install
+}
+
+install_homebrew()
+{
+	echo ""
+	echo " → Checking Homebrew"
+	if ! type "brew" > /dev/null; then
+	    echo " → Installing Homebrew"
+	    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
+	echo " → Homebrew installed"
+}
+
+install_homebrew_bundle()
+{
+	echo ""
+	echo " → Homebrew/bundle installation"
+	brew tap Homebrew/bundle
+}
+
+install_homebrew_bundle_brews()
+{
+	echo ""
+	echo " → Install brews dependencies"
+	brew bundle
+}
+
+install_carthage_deps()
+{
+	echo ""
+	echo " → Install Carthage dependencies"
+	carthage bootstrap --cache-builds --platform iOS
+}
+
+
+install_bundler
+install_bundler_gems
+install_cocoapods_pods
+install_homebrew
+install_homebrew_bundle
+install_homebrew_bundle_brews
+install_carthage_deps
+
+
+
+
+
+
+
+
+
+
+
+
+

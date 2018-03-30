@@ -1,0 +1,34 @@
+{
+  "device_frame_version": "latest",
+
+  "default": {
+
+    "title": {
+      "font": "./fonts/HelveticaNeue-Light.otf",
+      "color": "#545454"
+    },
+
+    "keyword": {
+      "font": "./fonts/HelveticaNeue-Light.otf",
+      "color": "#d21559"
+    },
+
+    "__comment": "background is requed for texts.",
+    "background": "./background.jpg",
+
+    "__comment": "Padding between top and device.",
+    "padding": 25,
+
+    "__comment": "Should shrink the device and frame so that they show in full in the framed screenshot.",
+    "__comment": "If it is false, then they can hang over the bottom of the screenshot.",
+    "show_complete_frame": false,
+
+    "__comment": "Should display the keyword above the title when both keyword and title are defined",
+    "stack_title": false
+  },
+
+  "__comment": "To set unique params",
+  "data": [
+  ]
+
+}

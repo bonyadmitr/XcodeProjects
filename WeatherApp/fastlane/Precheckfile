@@ -1,0 +1,46 @@
+## https://github.com/fastlane/fastlane/tree/master/precheck
+## https://docs.fastlane.tools/actions/
+
+## You have three possible values for each rule options
+## :skip
+## indicates that your metadata will not be checked by this rule
+
+## :warn
+## when triggered, this rule will warn you of a potential problem
+
+## :fail
+## when triggered, this rule will cause an error to be displayed and it will prevent any further fastlane commands from running after precheck finishes
+
+
+
+## indicates that your metadata will not be checked by this rule
+## mentioning  in a way that could be considered negative
+negative_apple_sentiment(level: :skip)
+
+## when triggered, this rule will warn you of a potential problem
+## including words that might be considered objectionable
+curse_words(level: :warn)
+
+## mentioning features or content that is not currently available in your app
+future_functionality(level: :error)
+
+## mentioning other platforms, like Android or Blackberry
+other_platforms(level: :error)
+
+## using placeholder text (e.g.:"lorem ipsum", "text here", etc...)
+placeholder_text(level: :error)
+
+## using text indicating this release is a test
+test_words(level: :error)
+
+## show error and prevent any further commands from running after fastlane precheck finishes
+## unreachable URLs in app metadata
+unreachable_urls(level: :error)
+
+## pass in whatever words you want to check for
+## mentioning any of the user-specified words passed to custom_text(data: [words])
+custom_text(data: ["fabric", "chrome", "webos"],
+			level: :warn)
+
+## using a copyright date that is any different from this current year, or missing a date
+#copyright_date

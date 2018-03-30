@@ -1,0 +1,19 @@
+"weather_app"="Погода";
+"cancel"="Отмена";
+"new_city"="Выбрать другой город";
+"settings"="Настройки";
+"not_found"="Не найдено";
+"fonts"="Шрифты";
+"default"="Стандартный";
+"colors"="Цвета";
+"search"="Поиск";
+"pull_refresh"="Потяните, чтобы обновить";
+
+"all"="Все";
+"regular"="Обычные";
+"light"="Тонкие";
+"bold"="Толстые";
+
+"select_font"="Выбор шрифта";
+"select_color"="Выбор цвета";
+"select_language"="Выбор языка";

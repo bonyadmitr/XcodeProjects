@@ -1,0 +1,566 @@
+# usefull commands
+
+## to get list of all actions
+#fastlane actions
+
+## to get list of parameters of action
+#fastlane action ANY-ACTION
+# example: fastlane action match
+
+
+USERNAME = ''
+BUNDLE_ID = 'by.WeatherApp'
+APP_NAME = 'WeatherApp'
+SCHEME = "WeatherApp"
+TEAM_ID = ""
+DEV_NAME = "" #mayby need Team Name: Alessandro Bazzi
+
+TYPES = ["development", "appstore", "adhoc"]
+CONFIGS = ["debug", "release", "adhoc"]
+#array.each { |x| puts x }
+#array.each_with_index {|val, index| puts "#{val} => #{index}" }
+
+#ENV["APP_IDENTIFIER"] = BUNDLE_ID
+#ENV["APP_NAME"] = APP_NAME
+#ENV["TEAM_ID"] = TEAM_ID
+
+
+#!!!!!!!!!!
+# lane :create
+# check for auto enabled push-notifications
+    #sh "produce enable_services --push-notification"
+#!!!!!!!!!
+
+
+# If you want to automatically update fastlane if a new version is available:
+#update_fastlane
+
+# This is the minimum version number required.
+fastlane_version "2.19.1"
+
+default_platform :ios
+
+platform :ios do
+
+
+  #cocoapods
+  #carthage
+
+  # private_lane
+
+
+  #--------------- Before/after ---------------
+
+  before_all do |lane, options|
+    #setup_jenkins()
+    xcversion(version: "~> 8.0")
+  end
+
+  before_each do |lane, options|
+    puts "options: #{options}"
+  end
+
+  #--------------- Scripts ---------------
+
+  # will be need to replace for new fastlane carthage (not available for now)
+  desc "Update Carthage dependencies"
+  lane :carthages do
+    Dir.chdir("..") do
+      sh "carthage update --cache-builds --platform iOS"
+    end
+  end
+
+  desc "Install Cocoapods dependencies"
+  lane :pods do
+      sh "bundle e pod install"
+
+      ## TODO
+      # cocoapods(
+      #   repo_update: is_ci
+      # )
+  end
+  
+  desc "Synchronize folders and groups in project for development"
+  lane :synx do
+      sh "cd .. && bundle e synx --no-sort-by-name #{APP_NAME}.xcodeproj"
+  end
+
+  desc "Print code lines count"
+  lane :clocc do
+      Action.sh("cd .. && cloc ./#{APP_NAME}")
+  end
+
+
+  #--------------- Single lanes ---------------
+
+  desc "Creates new iOS apps on both the Apple Developer Portal and iTunes Connect"
+  lane :create do
+    produce(
+      # username: USERNAME,
+      # app_identifier: BUNDLE_ID,
+      app_name: APP_NAME,
+      language: 'English',
+      app_version: '0.0.1',
+      sku: '123',
+      skip_itc: false,
+      skip_devcenter: false
+      #team_name: 'SunApps GmbH' # only necessary when in multiple teams
+    )
+
+    # check for auto enabled push-notifications
+    
+  end
+
+  desc "Creates new .pem, .cer, and .p12 files to be uploaded to your push server"
+  lane :server do
+    pem(
+      force: true,
+      development: true, # false for Distribution
+      generate_p12: false,
+      save_private_key: false
+    )
+    pem(
+      force: true,
+      development: false, # false for Distribution
+      generate_p12: false,
+      save_private_key: false
+    )
+  end
+
+  desc "Creates all required certificates & provisioning profiles and stores them in a separate git repository"
+  lane :profiles do
+    TYPES.each { |type|
+      my_match(type: type)
+    }
+  end
+
+
+  lane :services do
+
+    # TODO
+    produce(
+      skip_itc: true,
+      skip_devcenter: true,
+
+      enable_services: {
+        # app_group: "on"               # Valid values: "on", "off"
+        # apple_pay: "on"               # Valid values: "on", "off"
+        # associated_domains: "on"      # Valid values: "on", "off"
+        # data_protection: "complete"   # Valid values: "complete", "unlessopen", "untilfirstauth"
+        # game_center: "on"             # Valid values: "on", "off"
+        # health_kit: "on"              # Valid values: "on", "off"
+        # home_kit: "on"                # Valid values: "on", "off"
+        # wireless_accessory: "on"      # Valid values: "on", "off"
+        # icloud: "cloudkit"            # Valid values: "legacy", "cloudkit"
+        # in_app_purchase: "on"         # Valid values: "on", "off"
+        # inter_app_audio: "on"         # Valid values: "on", "off"
+        # passbook: "on"                # Valid values: "on", "off"
+        push_notification: "on"       # Valid values: "on", "off"
+        # siri_kit: "on"                # Valid values: "on", "off"
+        # vpn_configuration: "on"       # Valid values: "on", "off"
+      }
+    )
+
+    ## push-notification
+    ## '--push-notification' will disable push notification if they are active
+    ## there is no 'Network Extensions' Application Services (like --network-extensions)
+    # sh "fastlane produce enable_services --push-notification"
+
+    ## some
+    #sh "fastlane produce enable_services --vpn-conf --in-app-purchase"
+
+    # profiles
+  end
+
+
+
+  #register_devices(devices_file: "./devices.txt")
+  lane :register do
+    register_devices(
+      devices: {
+        "iPhone-5S-white" => "3c83ff14ce4fc1160976fa28c8b81e381f907b35"
+      }
+    )
+    profiles
+  end
+
+
+  lane :appicons do
+    # image at least 1024x1024
+    appicon(
+      appicon_devices: [:ipad, :iphone], # defaults [:iphone]
+      appicon_path: 'WeatherApp/App/Resources/Assets.xcassets' # defaults in root Assets.xcassets
+      # appicon_image_file: 'spec/fixtures/Themoji.png', # defaults "fastlane/metadata/app_icon.png"
+      # appicon_name: # defaults AppIcon.appiconset
+    )
+  end
+
+  #--------------- Main lanes ---------------
+
+  # lane :production do
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    carthages
+    pods
+    my_scan
+
+    my_match(type: appstore)
+    my_gym(config: release)
+
+    screenshots
+    my_precheck
+    my_deliver
+  end
+
+
+  lane :beta do
+    my_scan
+    profiles
+    my_gym(config: adhoc)
+
+    # my_resign(type: adhoc)
+    my_crashlytics
+
+    my_resign(type: appstore)
+    my_pilot
+  end
+
+  lane :fabric do
+    my_scan
+    my_match(type: adhoc)
+    my_gym(config: adhoc)
+    my_crashlytics
+  end
+
+
+
+  #--------------- screenshots ---------------
+
+  lane :screenshots do
+    my_snapshot
+    my_frameit
+  end
+
+  lane :my_snapshot do #screenshot
+    # all settings in Snapfile
+    snapshot
+  end
+
+  lane :my_frameit do
+    # default is black
+    frameit(
+      # silver: true,
+      # gold: true,
+      rose_gold: true,
+      #path: './screenshots'
+      path: './fastlane/screenshots'
+      #force_device_type: "Mac"
+    )
+  end
+  
+
+
+
+  #--------------- build ipa ---------------
+
+  desc "Create ipa"
+  lane :my_gym do |options|
+    
+    config = options[:config]
+
+    if !CONFIGS.include?(config)
+      raise("config can be debug, release or adhoc")
+      exit
+    end
+
+    gym(
+      configuration: config, #"Adhoc", # Defaults to 'Release'
+      scheme: SCHEME,
+      silent: true, # Hide all information that's not necessary while building
+      clean: false,
+      #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
+      #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
+    )
+  end
+
+
+
+
+  #--------------- beta ---------------
+
+  lane :addTfTesters do #build
+    sh "fastlane pilot import -c fastlane/testers.csv"
+  end
+
+  # to wait processing to be finished takes 1040s ~= 18 min
+  lane :my_pilot do #build
+    pilot(
+      skip_submission: true, #ipa file will only be uploaded and not distributed to testers
+      distribute_external: false, # distributed to external testers. this needed to be added for internal builds
+
+      #Skip waiting for the processing to be finished
+      #If set to true, the changelog won't be set,
+      #distribute_external option won't work
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+
+  lane :my_crashlytics do
+    crashlytics(
+      api_token: "a5d85d058a83a56ab8902af20d910351fd97fc9f",
+      build_secret: "049df64e3d3a6bf913f7600786d68b6d277aa85207a46610e00732276bb3f2a7",
+      groups: ["test"] # группа пользователей, которую оповестить о новом билде
+      #notes: changelog 
+    )
+  end
+
+  lane :ubertesters do
+    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+    time = Time.new
+    sh(
+      "curl -X POST http://beta.ubertesters.com/api/client/upload_build.json"\
+      " -H \"X-UbertestersApiKey:a9210cb0563a0134574b22000a9127ac\""\
+      " -F \"file=@#{ipa_path}\""\
+      " -F \"title=OrderApp-Customer-iOS-#{time.strftime("%Y-%m-%d")}\""\
+      " -F \"notes=build notes\""\
+      " -F \"status=in_progress\""\
+      " -F \"stop_previous=true\""
+    )
+  end
+
+
+  # https://dashboard.diawi.com/docs/apis/upload
+  lane :diawi do
+    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+    time = Time.new
+    diawiToken = 'WmJbGdX3KpWckGfBJCeXQZ1qgglCXCXUBisQ0GL1w0'
+    filePath = "#{File.expand_path("..", Dir.pwd)}/#{APP_NAME}.ipa" # cd .. &&
+    sh(
+      "curl -X POST https://upload.diawi.com/"\
+      " -F \"token=#{diawiToken}\""\
+      " -F \"file=@#{filePath}\""\
+      " -F \"find_by_udid=0\""\
+      " -F \"wall_of_apps=0\""\
+      " -F \"callback_emails=zdaecq@gmail.com\""
+    )
+  end
+
+  # fastlane add_plugin applivery
+  lane :my_applivery do
+    applivery(
+      app_id: "YOUR_APP_ID",            # Your Applivery App Id
+      api_key: "YOUR_API_KEY"           # Your Applivery API Key
+    )
+  end
+
+
+
+  #--------------- Certs ---------------
+
+  lane :my_match do |options|
+
+    check_type(options)
+    type = options[:type]
+
+    match(
+      type: type,
+      readonly: true, # Only fetch existing certificates and profiles, don't generate new ones
+      shallow_clone: true, # truncate the history to 1 revision
+      force_for_new_devices: true, # Renew the provisioning profiles if the device count on the developer portal has changed
+      skip_confirmation: false, # Disables confirmation prompts during nuke
+      skip_docs: false # Skip generation of a README.md for the created git repository
+    )
+  end
+
+  #bash
+  #fastlane my_resign type:appstore
+
+  #ruby(fastlane)
+  #my_resign(type: appstore)
+
+  private_lane :my_resign do |options|
+
+    type = options[:type]
+    my_match(type: type)
+
+    resign(ipa: "./#{APP_NAME}.ipa",
+        signing_identity: "iPhone Distribution: #{DEV_NAME} (#{TEAM_ID})",
+        # iPhone Developer: Alessandro Bazzi (8HSJBE9QS8)
+        #signing_identity: "iPhone Distribution: Alessandro Bazzi (KG8Y956R8L)",
+        provisioning_profile: {
+          BUNDLE_ID => ENV["sigh_#{BUNDLE_ID}_#{type}_profile-path"]
+                        #sigh_com.ab.iGuruTestFastlane_development_profile-path
+            #BUNDLE_ID => ENV["sigh_com.ab.iGuruTestFastlane_adhoc_profile-path"]
+        }
+    )
+  end
+
+
+  def check_type(options)
+    type = options[:type]
+
+    #options[:type] == nil
+    if !TYPES.include?(type)
+      #UI.important "Use 'fastlane my_resign type:appstore' or development or adhoc"
+      #puts
+      raise("Use 'fastlane my_resign type:appstore' or development or adhoc")
+
+      #for lanes (loops)
+      #next # skip doing the rest of this lane, not outside lane
+
+      # global exit
+      exit
+      #abort
+    end
+  end
+
+
+
+
+  #--------------- Deliver ---------------
+
+  desc "Upload to App Store and submit for review"
+  lane :my_deliver do
+    # all settings in Deliverfile
+    deliver
+  end
+
+  desc "check metadata"
+  lane :my_precheck do
+    # all settings in Precheckfile
+    precheck
+  end
+
+  desc "run tests"
+  lane :my_scan do #test
+    scan(
+      scheme: SCHEME,
+      code_coverage: true
+    )
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #--------------- git ---------------
+
+  #changelog will be created from git commits
+  changelog = changelog_from_git_commits(
+    include_merges: false,
+    pretty: "- %s"
+  )
+
+  desc "set versions from git tag"
+  lane :set_versions do
+    # забираем последний тэг из гита 
+    # в формате "<версия>-<билд>" например "1.3.2-45"
+    tag = last_git_tag.split('-')
+    
+    # и проставляем в проекте
+    increment_version_number(
+      version_number: tag[0]
+    )
+    increment_build_number(
+      build_number: tag[1]
+    )
+
+    #increment_build_number(build_number: number_of_commits)
+    #increment_build_number
+  end
+
+
+
+
+
+
+
+
+
+  #--------------- others ---------------
+
+
+
+  lane :test2 do
+    # ставим зависимости
+    cocoapods(
+      repo_update: is_ci
+    )
+
+    # устанавливем development профиль и сертификат,
+    # но только из match репозитория
+    match(
+      type: "development",
+      readonly: true,
+      shallow_clone: true
+    )
+
+    # прогоняем тесты
+    scan(
+      scheme: SCHEME,
+      code_coverage: true
+    )
+  end
+
+
+
+  lane :fabric2 do
+    # ставим зависимости
+    cocoapods(
+      repo_update: is_ci
+    )
+
+    # устанавливем adhoc профиль и сертификат,
+    # но только из match репозитория
+    match(
+      type: "adhoc",
+      readonly: true,
+      shallow_clone: true
+    )
+
+    # запускаем мини лэйн установки версии из гита
+    set_versions
+
+    # собираем ipa
+    gym(
+      scheme: SCHEME,
+      configuration: 'AdHoc'
+    )
+
+  end
+
+
+  lane :tf2 do
+    # ставим зависимости
+    cocoapods(
+      repo_update: is_ci
+    )
+
+    # устанавливем appstore профиль и сертификат,
+    # но только из match репозитория
+    match(
+      type: "appstore",
+      readonly: true,
+      shallow_clone: true
+    )
+
+    # собираем ipa
+    gym(
+      scheme: SCHEME,
+      configuration: 'Release'
+    )
+
+    # выгружаем в TestFlight
+    pilot
+  end
+
+end
