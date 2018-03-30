@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66ACB2141E96761100DDA63B /* SMSSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB2131E96761100DDA63B /* SMSSender.swift */; };
+		66CF485B1E9592C1005C65E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF485A1E9592C1005C65E0 /* AppDelegate.swift */; };
+		66CF485D1E9592C1005C65E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF485C1E9592C1005C65E0 /* ViewController.swift */; };
+		66CF48601E9592C1005C65E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CF485E1E9592C1005C65E0 /* Main.storyboard */; };
+		66CF48621E9592C1005C65E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CF48611E9592C1005C65E0 /* Assets.xcassets */; };
+		66CF48651E9592C1005C65E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CF48631E9592C1005C65E0 /* LaunchScreen.storyboard */; };
+		66CF486F1E95B1C1005C65E0 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */; };
+		66CF48711E95BD1A005C65E0 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */; };
+		66CF48731E95BF84005C65E0 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF48721E95BF84005C65E0 /* EmailSender.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		66ACB2131E96761100DDA63B /* SMSSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSSender.swift; sourceTree = "<group>"; };
+		66CF48571E9592C1005C65E0 /* EmailSender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmailSender.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CF485A1E9592C1005C65E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66CF485C1E9592C1005C65E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66CF485F1E9592C1005C65E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66CF48611E9592C1005C65E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66CF48641E9592C1005C65E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66CF48661E9592C1005C65E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
+		66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
+		66CF48721E95BF84005C65E0 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66CF48541E9592C1005C65E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66ACB2121E96714D00DDA63B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				66CF48721E95BF84005C65E0 /* EmailSender.swift */,
+				66ACB2131E96761100DDA63B /* SMSSender.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		66ACB2151E96821C00DDA63B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */,
+				66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		66CF484E1E9592C1005C65E0 = {
+			isa = PBXGroup;
+			children = (
+				66CF48591E9592C1005C65E0 /* EmailSender */,
+				66CF48581E9592C1005C65E0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66CF48581E9592C1005C65E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66CF48571E9592C1005C65E0 /* EmailSender.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66CF48591E9592C1005C65E0 /* EmailSender */ = {
+			isa = PBXGroup;
+			children = (
+				66CF486D1E95AE9D005C65E0 /* App */,
+				66CF486C1E95AE8A005C65E0 /* Presentation */,
+				66ACB2121E96714D00DDA63B /* Classes */,
+				66ACB2151E96821C00DDA63B /* Extensions */,
+			);
+			path = EmailSender;
+			sourceTree = "<group>";
+		};
+		66CF486C1E95AE8A005C65E0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				66CF485E1E9592C1005C65E0 /* Main.storyboard */,
+				66CF485C1E9592C1005C65E0 /* ViewController.swift */,
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
+		66CF486D1E95AE9D005C65E0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				66CF485A1E9592C1005C65E0 /* AppDelegate.swift */,
+				66CF48611E9592C1005C65E0 /* Assets.xcassets */,
+				66CF48631E9592C1005C65E0 /* LaunchScreen.storyboard */,
+				66CF48661E9592C1005C65E0 /* Info.plist */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66CF48561E9592C1005C65E0 /* EmailSender */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66CF48691E9592C1005C65E0 /* Build configuration list for PBXNativeTarget "EmailSender" */;
+			buildPhases = (
+				66CF48531E9592C1005C65E0 /* Sources */,
+				66CF48541E9592C1005C65E0 /* Frameworks */,
+				66CF48551E9592C1005C65E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmailSender;
+			productName = EmailSender;
+			productReference = 66CF48571E9592C1005C65E0 /* EmailSender.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66CF484F1E9592C1005C65E0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Bondar Yaroslav";
+				TargetAttributes = {
+					66CF48561E9592C1005C65E0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 227NMT55ZD;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 66CF48521E9592C1005C65E0 /* Build configuration list for PBXProject "EmailSender" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66CF484E1E9592C1005C65E0;
+			productRefGroup = 66CF48581E9592C1005C65E0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66CF48561E9592C1005C65E0 /* EmailSender */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66CF48551E9592C1005C65E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CF48651E9592C1005C65E0 /* LaunchScreen.storyboard in Resources */,
+				66CF48621E9592C1005C65E0 /* Assets.xcassets in Resources */,
+				66CF48601E9592C1005C65E0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66CF48531E9592C1005C65E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CF48731E95BF84005C65E0 /* EmailSender.swift in Sources */,
+				66CF485D1E9592C1005C65E0 /* ViewController.swift in Sources */,
+				66ACB2141E96761100DDA63B /* SMSSender.swift in Sources */,
+				66CF485B1E9592C1005C65E0 /* AppDelegate.swift in Sources */,
+				66CF48711E95BD1A005C65E0 /* UIApplication+URL.swift in Sources */,
+				66CF486F1E95B1C1005C65E0 /* UIApplication+Controller.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		66CF485E1E9592C1005C65E0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CF485F1E9592C1005C65E0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		66CF48631E9592C1005C65E0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CF48641E9592C1005C65E0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66CF48671E9592C1005C65E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		66CF48681E9592C1005C65E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66CF486A1E9592C1005C65E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 227NMT55ZD;
+				INFOPLIST_FILE = EmailSender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = by.EmailSender;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		66CF486B1E9592C1005C65E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 227NMT55ZD;
+				INFOPLIST_FILE = EmailSender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = by.EmailSender;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66CF48521E9592C1005C65E0 /* Build configuration list for PBXProject "EmailSender" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CF48671E9592C1005C65E0 /* Debug */,
+				66CF48681E9592C1005C65E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66CF48691E9592C1005C65E0 /* Build configuration list for PBXNativeTarget "EmailSender" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CF486A1E9592C1005C65E0 /* Debug */,
+				66CF486B1E9592C1005C65E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66CF484F1E9592C1005C65E0 /* Project object */;
+}
