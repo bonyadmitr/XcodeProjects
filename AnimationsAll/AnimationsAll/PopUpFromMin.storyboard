@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dst-fZ-yaO">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pop Up from min-->
+        <scene sceneID="9j0-oH-Afe">
+            <objects>
+                <viewController id="dst-fZ-yaO" customClass="PopUpFromMinController" customModule="AnimationsAll" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vxP-n2-f76"/>
+                        <viewControllerLayoutGuide type="bottom" id="WMJ-Sw-DQs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fgz-Gf-phB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-X3-7eG" customClass="SomeRoundButton" customModule="AnimationsAll" customModuleProvider="target">
+                                <rect key="frame" x="117" y="193" width="86" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="86" id="7Tl-BU-i4i"/>
+                                    <constraint firstAttribute="height" constant="30" id="DGR-tQ-Vzo"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <connections>
+                                    <action selector="showButton:" destination="dst-fZ-yaO" eventType="touchUpInside" id="NbH-A1-fcd"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2zs-Se-DWZ">
+                                <rect key="frame" x="51" y="38" width="218" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use spring damping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmg-tH-Dno">
+                                        <rect key="frame" x="0.0" y="0.0" width="154" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRq-mH-iTG">
+                                        <rect key="frame" x="169" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="2zs-Se-DWZ" firstAttribute="top" secondItem="vxP-n2-f76" secondAttribute="bottom" constant="38" id="3x9-GR-ufc"/>
+                            <constraint firstItem="Xg2-X3-7eG" firstAttribute="centerX" secondItem="fgz-Gf-phB" secondAttribute="centerX" id="gG3-xD-vYr"/>
+                            <constraint firstItem="Xg2-X3-7eG" firstAttribute="centerY" secondItem="fgz-Gf-phB" secondAttribute="centerY" id="jD9-eG-lRP"/>
+                            <constraint firstItem="2zs-Se-DWZ" firstAttribute="centerX" secondItem="fgz-Gf-phB" secondAttribute="centerX" id="owx-ph-EWn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pop Up from min" id="2hf-fi-jUB"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="popUpView" destination="Y14-Nn-8Q4" id="lhr-hi-nkz"/>
+                        <outlet property="switchDamping" destination="rRq-mH-iTG" id="1e8-OQ-hCA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U4V-rB-TCz" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Y14-Nn-8Q4">
+                    <rect key="frame" x="0.0" y="0.0" width="254" height="163"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iW-LI-Rau">
+                            <rect key="frame" x="0.0" y="124" width="254" height="39"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <state key="normal" title="Hide"/>
+                            <connections>
+                                <action selector="hideButton:" destination="dst-fZ-yaO" eventType="touchUpInside" id="n4q-wE-ItP"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gB5-gY-AdU">
+                            <rect key="frame" x="106" y="46" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="725.625" y="1797.5"/>
+        </scene>
+    </scenes>
+</document>

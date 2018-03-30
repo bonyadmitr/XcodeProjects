@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ad9-Ix-DAK">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Appearing-->
+        <scene sceneID="1Y9-fu-sh2">
+            <objects>
+                <viewController id="Ad9-Ix-DAK" customClass="AppearingController" customModule="AnimationsAll" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cKe-S4-e8R"/>
+                        <viewControllerLayoutGuide type="bottom" id="BXy-g2-1Gv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fUF-Zf-coe">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYN-vL-SrY" customClass="SomeRoundButton" customModule="AnimationsAll" customModuleProvider="target">
+                                <rect key="frame" x="100" y="193" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bHo-JC-f2f"/>
+                                    <constraint firstAttribute="width" constant="120" id="r9M-Lf-BRV"/>
+                                </constraints>
+                                <state key="normal" title="Hide controller"/>
+                                <connections>
+                                    <segue destination="B4o-mS-rcr" kind="unwind" unwindAction="backToTableViewControllerWithSender:" id="9OS-0v-E6A"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pTM-QQ-bN1">
+                                <rect key="frame" x="50.5" y="48" width="219" height="107"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="420-ZD-vGg" customClass="SomeRoundButton" customModule="AnimationsAll" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="102" height="107"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="107" id="hxg-c4-U0n"/>
+                                            <constraint firstAttribute="width" constant="102" id="px0-MQ-e6u"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gna-6S-4az" customClass="SomeRoundButton" customModule="AnimationsAll" customModuleProvider="target">
+                                        <rect key="frame" x="117" y="0.0" width="102" height="107"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="uYN-vL-SrY" firstAttribute="centerY" secondItem="fUF-Zf-coe" secondAttribute="centerY" id="27Z-EN-5Iu"/>
+                            <constraint firstItem="uYN-vL-SrY" firstAttribute="centerX" secondItem="fUF-Zf-coe" secondAttribute="centerX" id="8Pb-0n-D9Z"/>
+                            <constraint firstItem="pTM-QQ-bN1" firstAttribute="top" secondItem="cKe-S4-e8R" secondAttribute="bottom" constant="48" id="i2S-c3-LbU"/>
+                            <constraint firstItem="pTM-QQ-bN1" firstAttribute="centerX" secondItem="fUF-Zf-coe" secondAttribute="centerX" id="uo4-aZ-GH2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Appearing" id="leS-wF-jhL"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="button1" destination="420-ZD-vGg" id="Q8k-xE-L2F"/>
+                        <outlet property="button2" destination="gna-6S-4az" id="Ikf-lM-uls"/>
+                        <outlet property="hideButton" destination="uYN-vL-SrY" id="NCh-cC-FoO"/>
+                        <outlet property="stackView" destination="pTM-QQ-bN1" id="dsS-tt-s33"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ESN-UH-k7K" sceneMemberID="firstResponder"/>
+                <exit id="B4o-mS-rcr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="954.375" y="1143.75"/>
+        </scene>
+    </scenes>
+</document>
