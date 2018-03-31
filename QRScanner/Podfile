@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'QRScanner' do
+
+  pod 'ZXingObjC', '~> 3.2.2'
+
+end
