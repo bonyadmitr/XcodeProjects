@@ -1,0 +1,1125 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		156B8BE0A52C68CC9CDC4A6A /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4634698D5131E221CD936915 /* ListPresenter.swift */; };
+		1A4B48F6CA7C5CFBC4DFC4E6 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5925B043B51FAE322F4372D /* ListViewController.swift */; };
+		27B0AF39B2677B3D66DFE8D7 /* ListViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E96EE200CBCA2795D9A1BB /* ListViewIO.swift */; };
+		40C95285E868F31792483DF0 /* ListModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D0AF109FC5D0470F4C9355 /* ListModuleInput.swift */; };
+		5E3E875178D04A8EA1A3875C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869EBCCE514C2FEE0D82ED62 /* DetailViewController.swift */; };
+		660228741F7DA77A00171A7C /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6602286C1F7DA77A00171A7C /* PromiseKit.framework */; };
+		660228751F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6602286D1F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework */; };
+		660228761F7DA77A00171A7C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6602286E1F7DA77A00171A7C /* RealmSwift.framework */; };
+		660228771F7DA77A00171A7C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6602286F1F7DA77A00171A7C /* Realm.framework */; };
+		660228781F7DA77A00171A7C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660228701F7DA77A00171A7C /* Alamofire.framework */; };
+		660228791F7DA77A00171A7C /* KeyboardHideManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660228711F7DA77A00171A7C /* KeyboardHideManager.framework */; };
+		6602287A1F7DA77A00171A7C /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660228721F7DA77A00171A7C /* Hero.framework */; };
+		6602287E1F7DA8B700171A7C /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602287D1F7DA8B700171A7C /* PostStorage.swift */; };
+		6602287F1F7DA8FC00171A7C /* RealmStorageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602287B1F7DA88100171A7C /* RealmStorageProtocols.swift */; };
+		660228811F7DAA0F00171A7C /* BaseRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228801F7DAA0F00171A7C /* BaseRealmObject.swift */; };
+		660228831F7DAB7F00171A7C /* PostClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228821F7DAB7F00171A7C /* PostClient.swift */; };
+		660228881F7DACBE00171A7C /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228871F7DACBE00171A7C /* URL+Path.swift */; };
+		660D10B61F7C2A7D00F8EE86 /* DipApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660D10B51F7C2A7D00F8EE86 /* DipApplication.framework */; };
+		6626EE671F7D9FD100817AE9 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626EE661F7D9FD100817AE9 /* PostService.swift */; };
+		662731051F7C512900195D8C /* UIAlertController+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662731041F7C512900195D8C /* UIAlertController+Show.swift */; };
+		662FA6C61F834B3D00B3A8FE /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936D1F72F1EE00F042F1 /* LaunchRouter.swift */; };
+		662FA6CA1F83F3AA00B3A8FE /* MainLaunchRouterMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662FA6C81F83F38D00B3A8FE /* MainLaunchRouterMac.swift */; };
+		6645935C1F72F18E00F042F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6645935A1F72F18E00F042F1 /* Main.storyboard */; };
+		6645935E1F72F18E00F042F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6645935D1F72F18E00F042F1 /* Assets.xcassets */; };
+		664593611F72F18E00F042F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6645935F1F72F18E00F042F1 /* LaunchScreen.storyboard */; };
+		664593711F72F1EE00F042F1 /* AppDelegatesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664593681F72F1EE00F042F1 /* AppDelegatesAssembly.swift */; };
+		664593721F72F1EE00F042F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664593691F72F1EE00F042F1 /* AppDelegate.swift */; };
+		664593731F72F1EE00F042F1 /* MainApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936A1F72F1EE00F042F1 /* MainApplication.swift */; };
+		664593741F72F1EE00F042F1 /* StoryboardsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936B1F72F1EE00F042F1 /* StoryboardsAssembly.swift */; };
+		664593751F72F1EE00F042F1 /* MainAssembliesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936C1F72F1EE00F042F1 /* MainAssembliesFactory.swift */; };
+		664593761F72F1EE00F042F1 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936D1F72F1EE00F042F1 /* LaunchRouter.swift */; };
+		664593771F72F1EE00F042F1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936E1F72F1EE00F042F1 /* main.swift */; };
+		664593781F72F1EE00F042F1 /* MainLaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936F1F72F1EE00F042F1 /* MainLaunchRouter.swift */; };
+		664593791F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664593701F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift */; };
+		664593821F72F43500F042F1 /* Dip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 664593811F72F43500F042F1 /* Dip.framework */; };
+		6645939C1F72F7E900F042F1 /* DipUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6645939B1F72F7E900F042F1 /* DipUI.framework */; };
+		664BE1751F80179300EB3E82 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BE1741F80179300EB3E82 /* PostView.swift */; };
+		664BE1771F801C7C00EB3E82 /* Promisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BE1761F801C7C00EB3E82 /* Promisable.swift */; };
+		664BE1791F80FEBB00EB3E82 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BE1781F80FEBB00EB3E82 /* URLs.swift */; };
+		66716CB91F84065400A07797 /* AppDelegateMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66716C5B1F83F42D00A07797 /* AppDelegateMac.swift */; };
+		66716CD91F8411F300A07797 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66716CD81F8411F300A07797 /* DetailViewController.swift */; };
+		66716CDA1F84125900A07797 /* DetailModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E74831D34ABD119A8767D /* DetailModuleAssembly.swift */; };
+		668D43F21F7D9C6D00747500 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D43F11F7D9C6D00747500 /* Post.swift */; };
+		66CC27A11F7C40A000D6EFF2 /* ViperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CC27A01F7C40A000D6EFF2 /* ViperKit.framework */; };
+		66DAF0C31F82A7350011536C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DAF0C21F82A7350011536C /* ViewController.swift */; };
+		66DAF0C81F82A7350011536C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DAF0C61F82A7350011536C /* Main.storyboard */; };
+		66DAF0CE1F82A8B60011536C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936E1F72F1EE00F042F1 /* main.swift */; };
+		66DAF0D91F82A8B60011536C /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 6645935D1F72F18E00F042F1 /* Assets.xcassets */; };
+		66DAF0DB1F82A8B60011536C /* ListViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E96EE200CBCA2795D9A1BB /* ListViewIO.swift */; };
+		66DAF0DC1F82A8B60011536C /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4634698D5131E221CD936915 /* ListPresenter.swift */; };
+		66DAF0DD1F82A8B60011536C /* ListModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D0AF109FC5D0470F4C9355 /* ListModuleInput.swift */; };
+		66DAF0DE1F82A8B60011536C /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0316CA51909CE54FA229EB92 /* ListInteractor.swift */; };
+		66DAF0DF1F82A8B60011536C /* ListInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBB62C20E1548ED249B254 /* ListInteractorIO.swift */; };
+		66DAF0E01F82A8B60011536C /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B58F1E2D4ED8737C51D0A1 /* ListRouter.swift */; };
+		66DAF0E11F82A8B60011536C /* ListRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B48F18A504635C09FDE6 /* ListRouterInput.swift */; };
+		66DAF0E31F82A8B60011536C /* DetailViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA280BA7FCFCA1DC2E91BE7 /* DetailViewIO.swift */; };
+		66DAF0E41F82A8B60011536C /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E7FA81CE7DCBE4A26143A /* DetailPresenter.swift */; };
+		66DAF0E51F82A8B60011536C /* DetailModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA715593E48076DA69D9BD1 /* DetailModuleInput.swift */; };
+		66DAF0E61F82A8B60011536C /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848977380093E217AAD2BF55 /* DetailInteractor.swift */; };
+		66DAF0E71F82A8B60011536C /* DetailInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4FBE54E410B44C5BF6F49 /* DetailInteractorIO.swift */; };
+		66DAF0E81F82A8B60011536C /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7CFDFC0AFCC12D060B478A /* DetailRouter.swift */; };
+		66DAF0E91F82A8B60011536C /* DetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782C49DB4C66E1CC835D81FE /* DetailRouterInput.swift */; };
+		66DAF0EA1F82A8B60011536C /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BE1781F80FEBB00EB3E82 /* URLs.swift */; };
+		66DAF0EB1F82A8B60011536C /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626EE661F7D9FD100817AE9 /* PostService.swift */; };
+		66DAF0EC1F82A8B60011536C /* RealmStorageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602287B1F7DA88100171A7C /* RealmStorageProtocols.swift */; };
+		66DAF0ED1F82A8B60011536C /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602287D1F7DA8B700171A7C /* PostStorage.swift */; };
+		66DAF0EE1F82A8B60011536C /* AlamofireClientProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B5F1F7EBCEA00DEA754 /* AlamofireClientProtocols.swift */; };
+		66DAF0EF1F82A8B60011536C /* PostClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228821F7DAB7F00171A7C /* PostClient.swift */; };
+		66DAF0F01F82A8B60011536C /* BaseRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228801F7DAA0F00171A7C /* BaseRealmObject.swift */; };
+		66DAF0F11F82A8B60011536C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668D43F11F7D9C6D00747500 /* Post.swift */; };
+		66DAF0F21F82A8B60011536C /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B631F7EBD5D00DEA754 /* BackendError.swift */; };
+		66DAF0F31F82A8B60011536C /* Promisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BE1761F801C7C00EB3E82 /* Promisable.swift */; };
+		66DAF0F41F82A8B60011536C /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660228871F7DACBE00171A7C /* URL+Path.swift */; };
+		66DAF0F61F82A8B60011536C /* Alamofire+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B611F7EBD1700DEA754 /* Alamofire+Codable.swift */; };
+		66DAF0F81F82A8B60011536C /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 66DAF0C91F82A7350011536C /* Info.plist */; };
+		66DAF0F91F82A8B60011536C /* ViperApp_Mac.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = 66DAF0CA1F82A7350011536C /* ViperApp_Mac.entitlements */; };
+		66DAF0FA1F82A8B60011536C /* ViperApp-Mac.app in Sources */ = {isa = PBXBuildFile; fileRef = 66DAF0BE1F82A7350011536C /* ViperApp-Mac.app */; };
+		66DAF0FB1F82A8B60011536C /* Alamofire.framework in Sources */ = {isa = PBXBuildFile; fileRef = 660228701F7DA77A00171A7C /* Alamofire.framework */; };
+		66DAF0FC1F82A8B60011536C /* AlamofireNetworkActivityIndicator.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6602286D1F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework */; };
+		66DAF0FD1F82A8B60011536C /* Hero.framework in Sources */ = {isa = PBXBuildFile; fileRef = 660228721F7DA77A00171A7C /* Hero.framework */; };
+		66DAF0FE1F82A8B60011536C /* KeyboardHideManager.framework in Sources */ = {isa = PBXBuildFile; fileRef = 660228711F7DA77A00171A7C /* KeyboardHideManager.framework */; };
+		66DAF0FF1F82A8B60011536C /* PromiseKit.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6602286C1F7DA77A00171A7C /* PromiseKit.framework */; };
+		66DAF1001F82A8B60011536C /* Realm.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6602286F1F7DA77A00171A7C /* Realm.framework */; };
+		66DAF1011F82A8B60011536C /* RealmSwift.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6602286E1F7DA77A00171A7C /* RealmSwift.framework */; };
+		66DAF1021F82A8B60011536C /* SimulatorStatusMagiciOS.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6602286B1F7DA77A00171A7C /* SimulatorStatusMagiciOS.framework */; };
+		66DAF1031F82A8B60011536C /* ViperKit.framework in Sources */ = {isa = PBXBuildFile; fileRef = 66CC27A01F7C40A000D6EFF2 /* ViperKit.framework */; };
+		66DAF1041F82A8B60011536C /* DipApplication.framework in Sources */ = {isa = PBXBuildFile; fileRef = 660D10B51F7C2A7D00F8EE86 /* DipApplication.framework */; };
+		66DAF1051F82A8B60011536C /* DipUI.framework in Sources */ = {isa = PBXBuildFile; fileRef = 6645939B1F72F7E900F042F1 /* DipUI.framework */; };
+		66DAF1061F82A8B60011536C /* Dip.framework in Sources */ = {isa = PBXBuildFile; fileRef = 664593811F72F43500F042F1 /* Dip.framework */; };
+		66DAF1221F82B3920011536C /* Dip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF11B1F82B3920011536C /* Dip.framework */; };
+		66DAF1231F82B3920011536C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF11C1F82B3920011536C /* Alamofire.framework */; };
+		66DAF1241F82B3920011536C /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF11D1F82B3920011536C /* Realm.framework */; };
+		66DAF1261F82B3920011536C /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF11F1F82B3920011536C /* PromiseKit.framework */; };
+		66DAF1271F82B3920011536C /* DipUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF1201F82B3920011536C /* DipUI.framework */; };
+		66DAF1281F82B3920011536C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF1211F82B3920011536C /* RealmSwift.framework */; };
+		66DAF12B1F82B7940011536C /* ViperKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF12A1F82B7940011536C /* ViperKit.framework */; };
+		66DAF1461F82C0A80011536C /* DipApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DAF1441F82BE8C0011536C /* DipApplication.framework */; };
+		66DAF1471F82C2D00011536C /* MainAssembliesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936C1F72F1EE00F042F1 /* MainAssembliesFactory.swift */; };
+		66DAF1481F82C2D00011536C /* AppDelegatesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664593681F72F1EE00F042F1 /* AppDelegatesAssembly.swift */; };
+		66DAF1491F82C2D00011536C /* SystemInfrastructureAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664593701F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift */; };
+		66DAF14B1F82C2D00011536C /* ServicesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B651F7EBF2500DEA754 /* ServicesAssembly.swift */; };
+		66DAF14C1F82C2D00011536C /* ClientsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B671F7EBFE400DEA754 /* ClientsAssembly.swift */; };
+		66DAF14D1F82C2D00011536C /* StoragesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B691F7EBFFC00DEA754 /* StoragesAssembly.swift */; };
+		66DAF14F1F82C4B60011536C /* MainApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936A1F72F1EE00F042F1 /* MainApplication.swift */; };
+		66DAF1501F82D3DF0011536C /* ListModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1EE51262ECBF4702A64941 /* ListModuleAssembly.swift */; };
+		66DAF1511F82D78F0011536C /* StoryboardsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6645936B1F72F1EE00F042F1 /* StoryboardsAssembly.swift */; };
+		66F91B601F7EBCEA00DEA754 /* AlamofireClientProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B5F1F7EBCEA00DEA754 /* AlamofireClientProtocols.swift */; };
+		66F91B621F7EBD1700DEA754 /* Alamofire+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B611F7EBD1700DEA754 /* Alamofire+Codable.swift */; };
+		66F91B641F7EBD5D00DEA754 /* BackendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B631F7EBD5D00DEA754 /* BackendError.swift */; };
+		66F91B661F7EBF2500DEA754 /* ServicesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B651F7EBF2500DEA754 /* ServicesAssembly.swift */; };
+		66F91B681F7EBFE400DEA754 /* ClientsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B671F7EBFE400DEA754 /* ClientsAssembly.swift */; };
+		66F91B6A1F7EBFFC00DEA754 /* StoragesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F91B691F7EBFFC00DEA754 /* StoragesAssembly.swift */; };
+		6E80B7B746F69653C92DEED5 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848977380093E217AAD2BF55 /* DetailInteractor.swift */; };
+		8824198C3A7653DBB96F7675 /* DetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782C49DB4C66E1CC835D81FE /* DetailRouterInput.swift */; };
+		9A72161F585F4DCC351C0BBD /* DetailInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4FBE54E410B44C5BF6F49 /* DetailInteractorIO.swift */; };
+		9EDC594573454E5C8B3FE73F /* DetailModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E74831D34ABD119A8767D /* DetailModuleAssembly.swift */; };
+		A10CC4A7873F4AC2076240D9 /* ListInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBB62C20E1548ED249B254 /* ListInteractorIO.swift */; };
+		A2D627A3EFF84270FCBE0F3F /* ListRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1957B48F18A504635C09FDE6 /* ListRouterInput.swift */; };
+		A2E0FCDF276D9EC9D559E347 /* ListModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1EE51262ECBF4702A64941 /* ListModuleAssembly.swift */; };
+		C35D6621755CFAD5B975F776 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E7FA81CE7DCBE4A26143A /* DetailPresenter.swift */; };
+		D286E9E1F2D315C2307E113C /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7CFDFC0AFCC12D060B478A /* DetailRouter.swift */; };
+		E2F6383A275E6353D54BD749 /* DetailViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA280BA7FCFCA1DC2E91BE7 /* DetailViewIO.swift */; };
+		E7585858E2BE3FFC1FD21537 /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B58F1E2D4ED8737C51D0A1 /* ListRouter.swift */; };
+		EF34BBF72C885107732A11A3 /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0316CA51909CE54FA229EB92 /* ListInteractor.swift */; };
+		EFEF8BA16D00E515FE2CB405 /* DetailModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA715593E48076DA69D9BD1 /* DetailModuleInput.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0316CA51909CE54FA229EB92 /* ListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
+		1957B48F18A504635C09FDE6 /* ListRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListRouterInput.swift; sourceTree = "<group>"; };
+		398E7FA81CE7DCBE4A26143A /* DetailPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		39E96EE200CBCA2795D9A1BB /* ListViewIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListViewIO.swift; sourceTree = "<group>"; };
+		3CA715593E48076DA69D9BD1 /* DetailModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailModuleInput.swift; sourceTree = "<group>"; };
+		4634698D5131E221CD936915 /* ListPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
+		6602286B1F7DA77A00171A7C /* SimulatorStatusMagiciOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimulatorStatusMagiciOS.framework; path = Carthage/Build/iOS/SimulatorStatusMagiciOS.framework; sourceTree = "<group>"; };
+		6602286C1F7DA77A00171A7C /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		6602286D1F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityIndicator.framework; path = Carthage/Build/iOS/AlamofireNetworkActivityIndicator.framework; sourceTree = "<group>"; };
+		6602286E1F7DA77A00171A7C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		6602286F1F7DA77A00171A7C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		660228701F7DA77A00171A7C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		660228711F7DA77A00171A7C /* KeyboardHideManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyboardHideManager.framework; path = Carthage/Build/iOS/KeyboardHideManager.framework; sourceTree = "<group>"; };
+		660228721F7DA77A00171A7C /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = Carthage/Build/iOS/Hero.framework; sourceTree = "<group>"; };
+		6602287B1F7DA88100171A7C /* RealmStorageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorageProtocols.swift; sourceTree = "<group>"; };
+		6602287D1F7DA8B700171A7C /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
+		660228801F7DAA0F00171A7C /* BaseRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmObject.swift; sourceTree = "<group>"; };
+		660228821F7DAB7F00171A7C /* PostClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostClient.swift; sourceTree = "<group>"; };
+		660228871F7DACBE00171A7C /* URL+Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Path.swift"; sourceTree = "<group>"; };
+		660D10B51F7C2A7D00F8EE86 /* DipApplication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DipApplication.framework; path = Carthage/Build/iOS/DipApplication.framework; sourceTree = "<group>"; };
+		6626EE661F7D9FD100817AE9 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		662731041F7C512900195D8C /* UIAlertController+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Show.swift"; sourceTree = "<group>"; };
+		662FA6C81F83F38D00B3A8FE /* MainLaunchRouterMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLaunchRouterMac.swift; sourceTree = "<group>"; };
+		664593531F72F18E00F042F1 /* ViperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6645935B1F72F18E00F042F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6645935D1F72F18E00F042F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		664593601F72F18E00F042F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		664593621F72F18E00F042F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		664593681F72F1EE00F042F1 /* AppDelegatesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegatesAssembly.swift; sourceTree = "<group>"; };
+		664593691F72F1EE00F042F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6645936A1F72F1EE00F042F1 /* MainApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApplication.swift; sourceTree = "<group>"; };
+		6645936B1F72F1EE00F042F1 /* StoryboardsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardsAssembly.swift; sourceTree = "<group>"; };
+		6645936C1F72F1EE00F042F1 /* MainAssembliesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembliesFactory.swift; sourceTree = "<group>"; };
+		6645936D1F72F1EE00F042F1 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
+		6645936E1F72F1EE00F042F1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6645936F1F72F1EE00F042F1 /* MainLaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLaunchRouter.swift; sourceTree = "<group>"; };
+		664593701F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfrastructureAssembly.swift; sourceTree = "<group>"; };
+		664593811F72F43500F042F1 /* Dip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dip.framework; path = Carthage/Build/iOS/Dip.framework; sourceTree = "<group>"; };
+		6645939B1F72F7E900F042F1 /* DipUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DipUI.framework; path = Carthage/Build/iOS/DipUI.framework; sourceTree = "<group>"; };
+		664BE1741F80179300EB3E82 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		664BE1761F801C7C00EB3E82 /* Promisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promisable.swift; sourceTree = "<group>"; };
+		664BE1781F80FEBB00EB3E82 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		66716C5B1F83F42D00A07797 /* AppDelegateMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateMac.swift; sourceTree = "<group>"; };
+		66716CD81F8411F300A07797 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		668D43F11F7D9C6D00747500 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		669182861F82EF3E001D64A0 /* ViperApp-Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ViperApp-Mac.entitlements"; sourceTree = "<group>"; };
+		66CC27A01F7C40A000D6EFF2 /* ViperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViperKit.framework; path = Carthage/Build/iOS/ViperKit.framework; sourceTree = "<group>"; };
+		66DAF0BE1F82A7350011536C /* ViperApp-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ViperApp-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66DAF0C21F82A7350011536C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		66DAF0C71F82A7350011536C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66DAF0C91F82A7350011536C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66DAF0CA1F82A7350011536C /* ViperApp_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ViperApp_Mac.entitlements; sourceTree = "<group>"; };
+		66DAF11B1F82B3920011536C /* Dip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dip.framework; path = Carthage/Build/Mac/Dip.framework; sourceTree = "<group>"; };
+		66DAF11C1F82B3920011536C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		66DAF11D1F82B3920011536C /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
+		66DAF11E1F82B3920011536C /* ViperKit_macOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViperKit_macOS.framework; path = Carthage/Build/Mac/ViperKit_macOS.framework; sourceTree = "<group>"; };
+		66DAF11F1F82B3920011536C /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
+		66DAF1201F82B3920011536C /* DipUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DipUI.framework; path = Carthage/Build/Mac/DipUI.framework; sourceTree = "<group>"; };
+		66DAF1211F82B3920011536C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
+		66DAF12A1F82B7940011536C /* ViperKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViperKit.framework; path = Carthage/Build/Mac/ViperKit.framework; sourceTree = "<group>"; };
+		66DAF1441F82BE8C0011536C /* DipApplication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DipApplication.framework; path = Carthage/Build/Mac/DipApplication.framework; sourceTree = "<group>"; };
+		66F91B5F1F7EBCEA00DEA754 /* AlamofireClientProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireClientProtocols.swift; sourceTree = "<group>"; };
+		66F91B611F7EBD1700DEA754 /* Alamofire+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Codable.swift"; sourceTree = "<group>"; };
+		66F91B631F7EBD5D00DEA754 /* BackendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendError.swift; sourceTree = "<group>"; };
+		66F91B651F7EBF2500DEA754 /* ServicesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAssembly.swift; sourceTree = "<group>"; };
+		66F91B671F7EBFE400DEA754 /* ClientsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsAssembly.swift; sourceTree = "<group>"; };
+		66F91B691F7EBFFC00DEA754 /* StoragesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragesAssembly.swift; sourceTree = "<group>"; };
+		6CC4FBE54E410B44C5BF6F49 /* DetailInteractorIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailInteractorIO.swift; sourceTree = "<group>"; };
+		782C49DB4C66E1CC835D81FE /* DetailRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailRouterInput.swift; sourceTree = "<group>"; };
+		848977380093E217AAD2BF55 /* DetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		869EBCCE514C2FEE0D82ED62 /* DetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		97D0AF109FC5D0470F4C9355 /* ListModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListModuleInput.swift; sourceTree = "<group>"; };
+		99B58F1E2D4ED8737C51D0A1 /* ListRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
+		9ABBB62C20E1548ED249B254 /* ListInteractorIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListInteractorIO.swift; sourceTree = "<group>"; };
+		AE7CFDFC0AFCC12D060B478A /* DetailRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		DB1EE51262ECBF4702A64941 /* ListModuleAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListModuleAssembly.swift; sourceTree = "<group>"; };
+		E5925B043B51FAE322F4372D /* ListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		FBA280BA7FCFCA1DC2E91BE7 /* DetailViewIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailViewIO.swift; sourceTree = "<group>"; };
+		FE8E74831D34ABD119A8767D /* DetailModuleAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailModuleAssembly.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		664593501F72F18E00F042F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CC27A11F7C40A000D6EFF2 /* ViperKit.framework in Frameworks */,
+				660D10B61F7C2A7D00F8EE86 /* DipApplication.framework in Frameworks */,
+				664593821F72F43500F042F1 /* Dip.framework in Frameworks */,
+				6645939C1F72F7E900F042F1 /* DipUI.framework in Frameworks */,
+				660228741F7DA77A00171A7C /* PromiseKit.framework in Frameworks */,
+				660228751F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework in Frameworks */,
+				660228761F7DA77A00171A7C /* RealmSwift.framework in Frameworks */,
+				660228771F7DA77A00171A7C /* Realm.framework in Frameworks */,
+				660228781F7DA77A00171A7C /* Alamofire.framework in Frameworks */,
+				660228791F7DA77A00171A7C /* KeyboardHideManager.framework in Frameworks */,
+				6602287A1F7DA77A00171A7C /* Hero.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DAF0BB1F82A7350011536C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DAF1461F82C0A80011536C /* DipApplication.framework in Frameworks */,
+				66DAF1221F82B3920011536C /* Dip.framework in Frameworks */,
+				66DAF1231F82B3920011536C /* Alamofire.framework in Frameworks */,
+				66DAF1241F82B3920011536C /* Realm.framework in Frameworks */,
+				66DAF12B1F82B7940011536C /* ViperKit.framework in Frameworks */,
+				66DAF1261F82B3920011536C /* PromiseKit.framework in Frameworks */,
+				66DAF1271F82B3920011536C /* DipUI.framework in Frameworks */,
+				66DAF1281F82B3920011536C /* RealmSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18C7E00CDE9CC4C0130F2778 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				99B58F1E2D4ED8737C51D0A1 /* ListRouter.swift */,
+				1957B48F18A504635C09FDE6 /* ListRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		32DEB5A1580743B2717D01ED /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				398E7FA81CE7DCBE4A26143A /* DetailPresenter.swift */,
+				3CA715593E48076DA69D9BD1 /* DetailModuleInput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		39994EADA0D1B21E03FF7CB1 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				6645935A1F72F18E00F042F1 /* Main.storyboard */,
+				6F96BAB5097A84FCD7A2F7B9 /* List */,
+				FEE20B894014C2A7FBD376DB /* Detail */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		6602287C1F7DA89300171A7C /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				6602287B1F7DA88100171A7C /* RealmStorageProtocols.swift */,
+				6602287D1F7DA8B700171A7C /* PostStorage.swift */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
+		660228841F7DABC200171A7C /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				66F91B5F1F7EBCEA00DEA754 /* AlamofireClientProtocols.swift */,
+				660228821F7DAB7F00171A7C /* PostClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		6626EE681F7DA01B00817AE9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6626EE661F7D9FD100817AE9 /* PostService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6645934A1F72F18E00F042F1 = {
+			isa = PBXGroup;
+			children = (
+				664593551F72F18E00F042F1 /* ViperApp */,
+				66DAF0BF1F82A7350011536C /* ViperApp-Mac */,
+				664593541F72F18E00F042F1 /* Products */,
+				664593801F72F43500F042F1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		664593541F72F18E00F042F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				664593531F72F18E00F042F1 /* ViperApp.app */,
+				66DAF0BE1F82A7350011536C /* ViperApp-Mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		664593551F72F18E00F042F1 /* ViperApp */ = {
+			isa = PBXGroup;
+			children = (
+				6645937A1F72F26E00F042F1 /* App */,
+				6699F5B41F73189B00E0D3B1 /* Presentations */,
+				668D43ED1F7D9C3A00747500 /* Buisness */,
+				6699F5B31F73186A00E0D3B1 /* Support */,
+			);
+			path = ViperApp;
+			sourceTree = "<group>";
+		};
+		6645937A1F72F26E00F042F1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6645939D1F72FAFD00F042F1 /* Base */,
+				6645939E1F72FB4F00F042F1 /* Assemblies */,
+				6645939F1F72FBB300F042F1 /* AppDelegate */,
+				6645935D1F72F18E00F042F1 /* Assets.xcassets */,
+				6645935F1F72F18E00F042F1 /* LaunchScreen.storyboard */,
+				664593621F72F18E00F042F1 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		664593801F72F43500F042F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66DAF1441F82BE8C0011536C /* DipApplication.framework */,
+				66DAF12A1F82B7940011536C /* ViperKit.framework */,
+				660228701F7DA77A00171A7C /* Alamofire.framework */,
+				66DAF11C1F82B3920011536C /* Alamofire.framework */,
+				66DAF11B1F82B3920011536C /* Dip.framework */,
+				66DAF1201F82B3920011536C /* DipUI.framework */,
+				66DAF11F1F82B3920011536C /* PromiseKit.framework */,
+				66DAF11D1F82B3920011536C /* Realm.framework */,
+				66DAF1211F82B3920011536C /* RealmSwift.framework */,
+				66DAF11E1F82B3920011536C /* ViperKit_macOS.framework */,
+				6602286D1F7DA77A00171A7C /* AlamofireNetworkActivityIndicator.framework */,
+				660228721F7DA77A00171A7C /* Hero.framework */,
+				660228711F7DA77A00171A7C /* KeyboardHideManager.framework */,
+				6602286C1F7DA77A00171A7C /* PromiseKit.framework */,
+				6602286F1F7DA77A00171A7C /* Realm.framework */,
+				6602286E1F7DA77A00171A7C /* RealmSwift.framework */,
+				6602286B1F7DA77A00171A7C /* SimulatorStatusMagiciOS.framework */,
+				66CC27A01F7C40A000D6EFF2 /* ViperKit.framework */,
+				660D10B51F7C2A7D00F8EE86 /* DipApplication.framework */,
+				6645939B1F72F7E900F042F1 /* DipUI.framework */,
+				664593811F72F43500F042F1 /* Dip.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6645939D1F72FAFD00F042F1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				6645936E1F72F1EE00F042F1 /* main.swift */,
+				6645936A1F72F1EE00F042F1 /* MainApplication.swift */,
+				6645936D1F72F1EE00F042F1 /* LaunchRouter.swift */,
+				6645936F1F72F1EE00F042F1 /* MainLaunchRouter.swift */,
+				662FA6C81F83F38D00B3A8FE /* MainLaunchRouterMac.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		6645939E1F72FB4F00F042F1 /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				6645936C1F72F1EE00F042F1 /* MainAssembliesFactory.swift */,
+				664593681F72F1EE00F042F1 /* AppDelegatesAssembly.swift */,
+				664593701F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift */,
+				6645936B1F72F1EE00F042F1 /* StoryboardsAssembly.swift */,
+				66F91B651F7EBF2500DEA754 /* ServicesAssembly.swift */,
+				66F91B671F7EBFE400DEA754 /* ClientsAssembly.swift */,
+				66F91B691F7EBFFC00DEA754 /* StoragesAssembly.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		6645939F1F72FBB300F042F1 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				664593691F72F1EE00F042F1 /* AppDelegate.swift */,
+				66716C5B1F83F42D00A07797 /* AppDelegateMac.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		668D43ED1F7D9C3A00747500 /* Buisness */ = {
+			isa = PBXGroup;
+			children = (
+				664BE1781F80FEBB00EB3E82 /* URLs.swift */,
+				6626EE681F7DA01B00817AE9 /* Services */,
+				6602287C1F7DA89300171A7C /* Storages */,
+				660228841F7DABC200171A7C /* Clients */,
+				668D43F01F7D9C6300747500 /* Entities */,
+			);
+			path = Buisness;
+			sourceTree = "<group>";
+		};
+		668D43F01F7D9C6300747500 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				660228801F7DAA0F00171A7C /* BaseRealmObject.swift */,
+				668D43F11F7D9C6D00747500 /* Post.swift */,
+				66F91B631F7EBD5D00DEA754 /* BackendError.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		6699F5B31F73186A00E0D3B1 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				664BE1761F801C7C00EB3E82 /* Promisable.swift */,
+				660228871F7DACBE00171A7C /* URL+Path.swift */,
+				662731041F7C512900195D8C /* UIAlertController+Show.swift */,
+				66F91B611F7EBD1700DEA754 /* Alamofire+Codable.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		6699F5B41F73189B00E0D3B1 /* Presentations */ = {
+			isa = PBXGroup;
+			children = (
+				39994EADA0D1B21E03FF7CB1 /* UserStories */,
+			);
+			path = Presentations;
+			sourceTree = "<group>";
+		};
+		66DAF0BF1F82A7350011536C /* ViperApp-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				669182861F82EF3E001D64A0 /* ViperApp-Mac.entitlements */,
+				66DAF0C21F82A7350011536C /* ViewController.swift */,
+				66716CD81F8411F300A07797 /* DetailViewController.swift */,
+				66DAF0C61F82A7350011536C /* Main.storyboard */,
+				66DAF0C91F82A7350011536C /* Info.plist */,
+				66DAF0CA1F82A7350011536C /* ViperApp_Mac.entitlements */,
+			);
+			path = "ViperApp-Mac";
+			sourceTree = "<group>";
+		};
+		6F96BAB5097A84FCD7A2F7B9 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				AEA7B266CDFB41FAC4460FBA /* Assembly */,
+				E8BE392FC5676C91136BBFAF /* View */,
+				C7A47E1CE05A8F781E38B4BE /* Presenter */,
+				878B728DEE42AAE413156AC0 /* Interactor */,
+				18C7E00CDE9CC4C0130F2778 /* Router */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		878B728DEE42AAE413156AC0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0316CA51909CE54FA229EB92 /* ListInteractor.swift */,
+				9ABBB62C20E1548ED249B254 /* ListInteractorIO.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		91F9FD36B5295B99FAC81956 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				AE7CFDFC0AFCC12D060B478A /* DetailRouter.swift */,
+				782C49DB4C66E1CC835D81FE /* DetailRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		9222AD4027F667A30C556B26 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				848977380093E217AAD2BF55 /* DetailInteractor.swift */,
+				6CC4FBE54E410B44C5BF6F49 /* DetailInteractorIO.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		AEA7B266CDFB41FAC4460FBA /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				DB1EE51262ECBF4702A64941 /* ListModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		C7A47E1CE05A8F781E38B4BE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				4634698D5131E221CD936915 /* ListPresenter.swift */,
+				97D0AF109FC5D0470F4C9355 /* ListModuleInput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		DF49DB22E9D4BAF513B8F60A /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				FE8E74831D34ABD119A8767D /* DetailModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		E8BE392FC5676C91136BBFAF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5925B043B51FAE322F4372D /* ListViewController.swift */,
+				39E96EE200CBCA2795D9A1BB /* ListViewIO.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8F229B3ED9048788964700B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				869EBCCE514C2FEE0D82ED62 /* DetailViewController.swift */,
+				664BE1741F80179300EB3E82 /* PostView.swift */,
+				FBA280BA7FCFCA1DC2E91BE7 /* DetailViewIO.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FEE20B894014C2A7FBD376DB /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DF49DB22E9D4BAF513B8F60A /* Assembly */,
+				E8F229B3ED9048788964700B /* View */,
+				32DEB5A1580743B2717D01ED /* Presenter */,
+				9222AD4027F667A30C556B26 /* Interactor */,
+				91F9FD36B5295B99FAC81956 /* Router */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		664593521F72F18E00F042F1 /* ViperApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 664593651F72F18E00F042F1 /* Build configuration list for PBXNativeTarget "ViperApp" */;
+			buildPhases = (
+				6645934F1F72F18E00F042F1 /* Sources */,
+				664593A01F7301D500F042F1 /* Swiftlint */,
+				664593501F72F18E00F042F1 /* Frameworks */,
+				6645937B1F72F2BF00F042F1 /* Carthage */,
+				664593511F72F18E00F042F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViperApp;
+			productName = ViperApp;
+			productReference = 664593531F72F18E00F042F1 /* ViperApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		66DAF0BD1F82A7350011536C /* ViperApp-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66DAF0CD1F82A7350011536C /* Build configuration list for PBXNativeTarget "ViperApp-Mac" */;
+			buildPhases = (
+				66DAF0BA1F82A7350011536C /* Sources */,
+				66DAF0BB1F82A7350011536C /* Frameworks */,
+				66DAF0BC1F82A7350011536C /* Resources */,
+				66DAF1071F82A8CD0011536C /* Carthage */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ViperApp-Mac";
+			productName = "ViperApp-Mac";
+			productReference = 66DAF0BE1F82A7350011536C /* ViperApp-Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6645934B1F72F18E00F042F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Bondar Yaroslav";
+				TargetAttributes = {
+					664593521F72F18E00F042F1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					66DAF0BD1F82A7350011536C = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 6645934E1F72F18E00F042F1 /* Build configuration list for PBXProject "ViperApp" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6645934A1F72F18E00F042F1;
+			productRefGroup = 664593541F72F18E00F042F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				664593521F72F18E00F042F1 /* ViperApp */,
+				66DAF0BD1F82A7350011536C /* ViperApp-Mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		664593511F72F18E00F042F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				664593611F72F18E00F042F1 /* LaunchScreen.storyboard in Resources */,
+				6645935E1F72F18E00F042F1 /* Assets.xcassets in Resources */,
+				6645935C1F72F18E00F042F1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DAF0BC1F82A7350011536C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DAF0C81F82A7350011536C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6645937B1F72F2BF00F042F1 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Dip.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DipUI.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DipApplication.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ViperKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireNetworkActivityIndicator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Hero.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeyboardHideManager.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Dip.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DipUI.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DipApplication.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ViperKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireNetworkActivityIndicator.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Hero.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeyboardHideManager.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PromiseKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/carthage.sh";
+		};
+		664593A01F7301D500F042F1 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftlint.sh";
+		};
+		66DAF1071F82A8CD0011536C /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/mac/DipApplication.framework",
+				"$(SRCROOT)/Carthage/Build/mac/ViperKit.framework",
+				"$(SRCROOT)/Carthage/Build/mac/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/mac/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/mac/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/mac/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/mac/Dip.framework",
+				"$(SRCROOT)/Carthage/Build/mac/DipUI.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DipApplication.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/carthage.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6645934F1F72F18E00F042F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6626EE671F7D9FD100817AE9 /* PostService.swift in Sources */,
+				664593741F72F1EE00F042F1 /* StoryboardsAssembly.swift in Sources */,
+				664593791F72F1EE00F042F1 /* SystemInfrastructureAssembly.swift in Sources */,
+				664BE1791F80FEBB00EB3E82 /* URLs.swift in Sources */,
+				664BE1771F801C7C00EB3E82 /* Promisable.swift in Sources */,
+				660228831F7DAB7F00171A7C /* PostClient.swift in Sources */,
+				664593761F72F1EE00F042F1 /* LaunchRouter.swift in Sources */,
+				66F91B681F7EBFE400DEA754 /* ClientsAssembly.swift in Sources */,
+				66F91B661F7EBF2500DEA754 /* ServicesAssembly.swift in Sources */,
+				664593771F72F1EE00F042F1 /* main.swift in Sources */,
+				66F91B641F7EBD5D00DEA754 /* BackendError.swift in Sources */,
+				664BE1751F80179300EB3E82 /* PostView.swift in Sources */,
+				6602287F1F7DA8FC00171A7C /* RealmStorageProtocols.swift in Sources */,
+				664593711F72F1EE00F042F1 /* AppDelegatesAssembly.swift in Sources */,
+				6602287E1F7DA8B700171A7C /* PostStorage.swift in Sources */,
+				664593731F72F1EE00F042F1 /* MainApplication.swift in Sources */,
+				662731051F7C512900195D8C /* UIAlertController+Show.swift in Sources */,
+				664593751F72F1EE00F042F1 /* MainAssembliesFactory.swift in Sources */,
+				668D43F21F7D9C6D00747500 /* Post.swift in Sources */,
+				664593781F72F1EE00F042F1 /* MainLaunchRouter.swift in Sources */,
+				664593721F72F1EE00F042F1 /* AppDelegate.swift in Sources */,
+				1A4B48F6CA7C5CFBC4DFC4E6 /* ListViewController.swift in Sources */,
+				27B0AF39B2677B3D66DFE8D7 /* ListViewIO.swift in Sources */,
+				40C95285E868F31792483DF0 /* ListModuleInput.swift in Sources */,
+				156B8BE0A52C68CC9CDC4A6A /* ListPresenter.swift in Sources */,
+				66F91B601F7EBCEA00DEA754 /* AlamofireClientProtocols.swift in Sources */,
+				EF34BBF72C885107732A11A3 /* ListInteractor.swift in Sources */,
+				A10CC4A7873F4AC2076240D9 /* ListInteractorIO.swift in Sources */,
+				E7585858E2BE3FFC1FD21537 /* ListRouter.swift in Sources */,
+				A2D627A3EFF84270FCBE0F3F /* ListRouterInput.swift in Sources */,
+				A2E0FCDF276D9EC9D559E347 /* ListModuleAssembly.swift in Sources */,
+				9EDC594573454E5C8B3FE73F /* DetailModuleAssembly.swift in Sources */,
+				5E3E875178D04A8EA1A3875C /* DetailViewController.swift in Sources */,
+				E2F6383A275E6353D54BD749 /* DetailViewIO.swift in Sources */,
+				660228811F7DAA0F00171A7C /* BaseRealmObject.swift in Sources */,
+				C35D6621755CFAD5B975F776 /* DetailPresenter.swift in Sources */,
+				EFEF8BA16D00E515FE2CB405 /* DetailModuleInput.swift in Sources */,
+				660228881F7DACBE00171A7C /* URL+Path.swift in Sources */,
+				6E80B7B746F69653C92DEED5 /* DetailInteractor.swift in Sources */,
+				9A72161F585F4DCC351C0BBD /* DetailInteractorIO.swift in Sources */,
+				66F91B621F7EBD1700DEA754 /* Alamofire+Codable.swift in Sources */,
+				D286E9E1F2D315C2307E113C /* DetailRouter.swift in Sources */,
+				66F91B6A1F7EBFFC00DEA754 /* StoragesAssembly.swift in Sources */,
+				8824198C3A7653DBB96F7675 /* DetailRouterInput.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DAF0BA1F82A7350011536C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66716CDA1F84125900A07797 /* DetailModuleAssembly.swift in Sources */,
+				66DAF0CE1F82A8B60011536C /* main.swift in Sources */,
+				66DAF14D1F82C2D00011536C /* StoragesAssembly.swift in Sources */,
+				66DAF1481F82C2D00011536C /* AppDelegatesAssembly.swift in Sources */,
+				66DAF0D91F82A8B60011536C /* Assets.xcassets in Sources */,
+				66DAF0DB1F82A8B60011536C /* ListViewIO.swift in Sources */,
+				66DAF0DC1F82A8B60011536C /* ListPresenter.swift in Sources */,
+				66DAF0DD1F82A8B60011536C /* ListModuleInput.swift in Sources */,
+				66DAF0DE1F82A8B60011536C /* ListInteractor.swift in Sources */,
+				66DAF0DF1F82A8B60011536C /* ListInteractorIO.swift in Sources */,
+				66DAF0E01F82A8B60011536C /* ListRouter.swift in Sources */,
+				66DAF0E11F82A8B60011536C /* ListRouterInput.swift in Sources */,
+				66DAF0E31F82A8B60011536C /* DetailViewIO.swift in Sources */,
+				66DAF0E41F82A8B60011536C /* DetailPresenter.swift in Sources */,
+				66DAF0E51F82A8B60011536C /* DetailModuleInput.swift in Sources */,
+				662FA6CA1F83F3AA00B3A8FE /* MainLaunchRouterMac.swift in Sources */,
+				66DAF0E61F82A8B60011536C /* DetailInteractor.swift in Sources */,
+				66DAF0E71F82A8B60011536C /* DetailInteractorIO.swift in Sources */,
+				66DAF0E81F82A8B60011536C /* DetailRouter.swift in Sources */,
+				66DAF0E91F82A8B60011536C /* DetailRouterInput.swift in Sources */,
+				66DAF0EA1F82A8B60011536C /* URLs.swift in Sources */,
+				66DAF0EB1F82A8B60011536C /* PostService.swift in Sources */,
+				66DAF0EC1F82A8B60011536C /* RealmStorageProtocols.swift in Sources */,
+				66DAF0ED1F82A8B60011536C /* PostStorage.swift in Sources */,
+				66DAF0EE1F82A8B60011536C /* AlamofireClientProtocols.swift in Sources */,
+				66DAF1471F82C2D00011536C /* MainAssembliesFactory.swift in Sources */,
+				66DAF0EF1F82A8B60011536C /* PostClient.swift in Sources */,
+				66DAF0F01F82A8B60011536C /* BaseRealmObject.swift in Sources */,
+				66DAF0F11F82A8B60011536C /* Post.swift in Sources */,
+				662FA6C61F834B3D00B3A8FE /* LaunchRouter.swift in Sources */,
+				66DAF0F21F82A8B60011536C /* BackendError.swift in Sources */,
+				66DAF0F31F82A8B60011536C /* Promisable.swift in Sources */,
+				66DAF14F1F82C4B60011536C /* MainApplication.swift in Sources */,
+				66DAF0F41F82A8B60011536C /* URL+Path.swift in Sources */,
+				66DAF0F61F82A8B60011536C /* Alamofire+Codable.swift in Sources */,
+				66DAF14B1F82C2D00011536C /* ServicesAssembly.swift in Sources */,
+				66DAF0F81F82A8B60011536C /* Info.plist in Sources */,
+				66DAF1501F82D3DF0011536C /* ListModuleAssembly.swift in Sources */,
+				66DAF1491F82C2D00011536C /* SystemInfrastructureAssembly.swift in Sources */,
+				66DAF0F91F82A8B60011536C /* ViperApp_Mac.entitlements in Sources */,
+				66DAF0FA1F82A8B60011536C /* ViperApp-Mac.app in Sources */,
+				66DAF0FB1F82A8B60011536C /* Alamofire.framework in Sources */,
+				66DAF0FC1F82A8B60011536C /* AlamofireNetworkActivityIndicator.framework in Sources */,
+				66DAF0FD1F82A8B60011536C /* Hero.framework in Sources */,
+				66DAF0FE1F82A8B60011536C /* KeyboardHideManager.framework in Sources */,
+				66DAF1511F82D78F0011536C /* StoryboardsAssembly.swift in Sources */,
+				66DAF0FF1F82A8B60011536C /* PromiseKit.framework in Sources */,
+				66DAF1001F82A8B60011536C /* Realm.framework in Sources */,
+				66DAF14C1F82C2D00011536C /* ClientsAssembly.swift in Sources */,
+				66716CD91F8411F300A07797 /* DetailViewController.swift in Sources */,
+				66DAF1011F82A8B60011536C /* RealmSwift.framework in Sources */,
+				66DAF1021F82A8B60011536C /* SimulatorStatusMagiciOS.framework in Sources */,
+				66DAF1031F82A8B60011536C /* ViperKit.framework in Sources */,
+				66DAF1041F82A8B60011536C /* DipApplication.framework in Sources */,
+				66716CB91F84065400A07797 /* AppDelegateMac.swift in Sources */,
+				66DAF1051F82A8B60011536C /* DipUI.framework in Sources */,
+				66DAF1061F82A8B60011536C /* Dip.framework in Sources */,
+				66DAF0C31F82A7350011536C /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6645935A1F72F18E00F042F1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6645935B1F72F18E00F042F1 /* Base */,
+			);
+			name = Main.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		6645935F1F72F18E00F042F1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				664593601F72F18E00F042F1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		66DAF0C61F82A7350011536C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66DAF0C71F82A7350011536C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		664593631F72F18E00F042F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		664593641F72F18E00F042F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		664593661F72F18E00F042F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = ViperApp/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				PRODUCT_BUNDLE_IDENTIFIER = by.ViperApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
+			};
+			name = Debug;
+		};
+		664593671F72F18E00F042F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = ViperApp/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
+				PRODUCT_BUNDLE_IDENTIFIER = by.ViperApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
+			};
+			name = Release;
+		};
+		66DAF0CB1F82A7350011536C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5XGA8925AJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "ViperApp-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.by.ViperApp-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		66DAF0CC1F82A7350011536C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5XGA8925AJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "ViperApp-Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.by.ViperApp-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6645934E1F72F18E00F042F1 /* Build configuration list for PBXProject "ViperApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				664593631F72F18E00F042F1 /* Debug */,
+				664593641F72F18E00F042F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		664593651F72F18E00F042F1 /* Build configuration list for PBXNativeTarget "ViperApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				664593661F72F18E00F042F1 /* Debug */,
+				664593671F72F18E00F042F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66DAF0CD1F82A7350011536C /* Build configuration list for PBXNativeTarget "ViperApp-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DAF0CB1F82A7350011536C /* Debug */,
+				66DAF0CC1F82A7350011536C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6645934B1F72F18E00F042F1 /* Project object */;
+}

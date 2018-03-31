@@ -1,0 +1,27 @@
+### Headers settings
+company: Bondar Yaroslav
+
+### Xcode project settings
+project_name: ViperApp
+xcodeproj_path: ViperApp.xcodeproj
+# prefix: #must be none
+
+### Code generation settings section
+# The main project target name
+project_target: ViperApp
+
+# The file path for new modules
+project_file_path: ViperApp/Presentations/UserStories
+
+# The Xcode group path to new modules
+project_group_path: ViperApp/Presentations/UserStories
+
+### Dependencies settings section
+podfile_path: Podfile
+
+catalogs:
+- 'https://github.com/bonyadmitr/generamba-templates.git'
+
+### Templates
+templates:
+- {name: viper_dip}

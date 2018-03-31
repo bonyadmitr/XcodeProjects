@@ -1,0 +1,22 @@
+# Data base
+github "realm/realm-cocoa"
+
+# Async
+github "mxcl/PromiseKit"# ~> 4.0
+
+# Networking
+github "Alamofire/Alamofire"# ~> 4.4
+github "Alamofire/AlamofireNetworkActivityIndicator"# ~> 2.0
+
+# Animation
+github "lkzhao/Hero"
+
+# UI
+github "bonyadmitr/KeyboardHideManager" "develop"
+
+# UI Tests
+github "shinydevelopment/SimulatorStatusMagic"
+
+# DI
+github "bonyadmitr/DipApplication" "develop"
+github "bonyadmitr/ViperKit" "develop"

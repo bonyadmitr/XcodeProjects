@@ -1,0 +1,235 @@
+## swiftlint.yml
+## https://github.com/realm/SwiftLint
+
+## Install
+## or #1
+## brew install swiftlint
+
+## Run Script Phase
+# if which swiftlint >/dev/null; then
+#   swiftlint
+# else
+#   echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+# fi
+
+## or #2
+## pod 'SwiftLint'
+
+## Run Script Phase
+# "${PODS_ROOT}/SwiftLint/swiftlint"
+
+
+
+#included:
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+- Pods
+- Carthage
+- fastlane
+- Scripts
+- R.generated.swift
+#- Source/ExcludedFolder
+#- Source/ExcludedFile.swift
+
+disabled_rules:
+- trailing_whitespace
+- force_try
+- force_cast
+- notification_center_detachment
+- superfluous_disable_command
+#- function_parameter_count
+
+opt_in_rules:
+  - attributes
+  - closure_spacing
+  - overridden_super_call
+  - object_literal ## not UIImage(named: "qwe"), use #imageLiteral(resourceName: "im_cloud")
+  - switch_case_on_newline
+  - vertical_parameter_alignment_on_call
+  - implicit_return ## not return for single line
+  - fatal_error_message
+  - empty_count ## not count > 0, use isEmpty(extension notEmpty)
+
+  # - conditional_returns_on_newline ## not { return }, use {\n return \n}
+  # - explicit_top_level_acl ## use public for
+  # - explicit_type_interface ## not = "", use : String = ""
+  # - extension_access_modifier ## use public for extensions
+  # - sorted_imports
+  # - operator_usage_whitespace ## not 2+2, use 2 + 2
+  # - number_separator #1_000
+  # - private_outlet
+  # - implicitly_unwrapped_optional ## not ! for properties
+  # - force_unwrapping
+  # - first_where ## ???
+  # - multiline_parameters ## ???
+  # - nimble_operator ## ???
+  # - closure_end_indentation ## ???
+  # - closure_spacing ## ???
+  # - explicit_init ## ???
+
+## ---------- rules settings ----------
+
+line_length:
+- 180 #warning
+- 480 #error
+
+vertical_whitespace:
+  max_empty_lines: 2
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+  #warning: 10
+  #error: 20
+
+function_body_length:
+  warning: 50
+  error: 100
+
+identifier_name:
+  validates_start_with_lowercase: true
+  min_length:
+    warning: 2
+    error: 1
+  # max_length:
+  #   warning: 40
+  #   error: 60
+  # excluded:
+  #   - id
+  #   - URL
+  # allowed_symbols: []
+
+# file_length:
+#   warning: 500
+#   error: 1200
+
+## opt_in
+attributes:
+  severity: warning
+  always_on_same_line:
+    - "@IBAction"
+    - "@NSManaged"
+    - "@objc"
+  #always_on_line_above: []
+
+## opt_in
+# private_outlet:
+#   allow_private_set: true
+
+
+
+## From TouchInstinct
+## https://github.com/TouchInstinct/code-quality-ios/blob/master/.swiftlint.yml
+
+custom_rules:
+  # uiwebview_disabled:
+  #   included: ".*.swift"
+  #   name: "UIWebView Usage Disabled"
+  #   regex: 'UIWebView'
+  #   message: "Do not use UIWebView. Use WKWebView Instead. https://developer.apple.com/reference/uikit/uiwebview"
+  #   severity: error
+
+  # native_print:
+  #   name: "print -> DDLog"
+  #   regex: '(print|NSLog)\('
+  #   message: "Please use CocoaLumberjack instead `print` and `NSlog`"
+  #   severity: error
+
+  # zero:
+  #   name: "Short .zero"
+  #   regex: '\(top: 0, left: 0, bottom: 0, right: 0\)'
+  #   message: "Please use short init `.zero`."
+  #   severity: error
+
+  private_variable:
+    name: "Private variable"
+    regex: '(?<!private\s)let\s\w*(:|(\s=))\sVariable'
+    message: "Please use (file)private with variable."
+    severity: error
+
+  let_variable:
+    name: "Let Variable"
+    regex: 'var\s\w*(:|(\s=))\sVariable'
+    message: "Please make variable using `let`."
+    severity: error
+
+  # marks_style:
+  #   name: "Marks"
+  #   regex: '// MARK: -?[a-zA-Z0-9]'
+  #   message: "Marks should follow the following structure: // MARK: - Comment."
+  #   severity: warning
+
+  # no_header_comments:
+  #   name: "Header Comments"
+  #   regex: '//\s*Created by.*\s*//\s*Copyright'
+  #   match_kinds:
+  #     - comment
+  #   message: "Template header comments should be removed."
+
+  private_outlet:
+    name: "Outlet"
+    regex: '@IBOutlet(\sweak)?(\s(file)?private(\(set\))?)?\svar'
+    message: "Please use some of `private` modifiers and make property it weak. Use pattern: `IBOutlet private weak var`."
+    severity: error
+
+  delegate:
+    name: "Delegate"
+    regex: '(?<!weak\s)var\s\w*(D|d)elegate\w*:'
+    message: "Please use `weak` for `delegate`. "
+    severity: error
+
+  unnecessary_type:
+   name: "Unnecessary Type"
+   regex: '[ @a-zA-Z]*(?:let|var)\s\w*: ([a-zA-Z0-9]*)\?? = \1'
+   message: "Type definition not needed"
+   severity: error
+
+  # unowned:
+  #   name: "Unowned"
+  #   regex: 'unowned'
+  #   message: "Please use `weak` instead. "
+  #   severity: error
+
+  # # Should be { braces_body } instead of {braces_body}
+  # spaces_around_braces:
+  #   included: ".*.swift"
+  #   name: "Spaces around the braces"
+  #   regex: '(([A-Za-z0-9])[\{\}])|([\{\}]([A-Za-z0-9]))'
+  #   message: "No spaces around the braces"
+  #   severity: error
+  #   match_kinds:
+  #   - attribute.builtin
+  #   - attribute.id
+  #   - buildconfig.id
+  #   - buildconfig.keyword
+  #   - identifier
+  #   - keyword
+  #   - objectliteral
+  #   - parameter
+  #   - placeholder
+  #   - typeidentifier
+
+  # inout_keyword:
+  #   name: "Inout"
+  #   regex: 'inout'
+  #   message: "Don't use inout arguments"
+  #   severity: error
+  #   match_kinds: keyword
+
+  # continue_keyword:
+  #   name: "Continue"
+  #   regex: 'continue'
+  #   message: "Don't use continue instruction"
+  #   severity: error
+  #   match_kinds: keyword
+
+  cyrillic_strings:
+    name: "Cyrillic strings"
+    regex: '[а-яА-Я]+'
+    message: "Localize or translate"
+    severity: error
+    match_kinds: string
+
+  # simple_ban:
+  #   name: "Simple type name"
+  #   regex: '(class|struct)(.)+[sS]imple(.)+{'
+  #   message: "Don't use 'simple' in type name, use 'default' or 'base' instead"
+  #   severity: warning
