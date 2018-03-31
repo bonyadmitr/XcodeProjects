@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qD9-1z-px5">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LocalizationInspectable" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="I8V-1c-Hr4">
+                                <rect key="frame" x="0.0" y="64" width="320" height="152.5"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIq-BG-NqT">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzText" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzPlaceholder" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzPromt" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </searchBar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h9-Wl-swC">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzText" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Oge-DB-jkO">
+                                        <rect key="frame" x="0.0" y="64.5" width="320" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzText" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzPlaceholder" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7T-HK-SVQ">
+                                        <rect key="frame" x="0.0" y="94.5" width="320" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitleHighlighted" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QnD-Or-fcg">
+                                        <rect key="frame" x="0.0" y="124.5" width="320" height="29"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                            <segment title=""/>
+                                            <segment title=""/>
+                                        </segments>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle0" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle1" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle2" value="hello"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle3" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Sk-9E-8eV">
+                                <rect key="frame" x="0.0" y="387" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="edit" id="nM1-Lh-Olt"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="2hm-hz-p4D"/>
+                                    <barButtonItem title="Item" id="F6s-SM-Ps2">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6Sk-9E-8eV" secondAttribute="trailing" id="26f-xa-ECR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6Sk-9E-8eV" secondAttribute="bottom" id="LdD-CT-p5p"/>
+                            <constraint firstAttribute="trailing" secondItem="I8V-1c-Hr4" secondAttribute="trailing" id="Nsj-SE-ZFZ"/>
+                            <constraint firstItem="I8V-1c-Hr4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PWS-dO-VI0"/>
+                            <constraint firstItem="I8V-1c-Hr4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hZH-8H-ZT4"/>
+                            <constraint firstItem="6Sk-9E-8eV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n4N-Ux-Rsp"/>
+                            <constraint firstItem="I8V-1c-Hr4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w84-a1-GVs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="V4y-yJ-5ZH">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="j4c-8g-Qqg"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="SdX-fF-fiG">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="lzPrompt" value="hello"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2131.875" y="138.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="td7-QS-TXO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ld2-bL-GjZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" id="ZYC-B5-qj8">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c1q-SX-gKg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jPg-D0-vGd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kVT-R7-nqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1368.75" y="138.75"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="slY-n5-TQ7">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qD9-1z-px5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="gIY-HZ-iYG">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Ld2-bL-GjZ" kind="relationship" relationship="viewControllers" id="QCz-AU-MeT"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vro-Go-tNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="371.25" y="138.75"/>
+        </scene>
+    </scenes>
+</document>
