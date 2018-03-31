@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NextTextField" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zff-I7-UTI">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zKl-pX-1CB">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="YTx-tP-Fi8">
+                                                <rect key="frame" x="20" y="20" width="280" height="940"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oFN-tn-env" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="dAb-Lt-rMF" id="FRU-r1-NQq"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dAb-Lt-rMF" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="130" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="addNextToolbar" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="Uwu-2y-eFt" id="hD5-hA-s0Z"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uwu-2y-eFt" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="260" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="lUq-ND-Xaz" id="ZAF-AD-AQ8"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUq-ND-Xaz" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="390" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="addNextToolbar" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="Iv0-EC-Bxy" id="T7G-gt-kTt"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iv0-EC-Bxy" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="520" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="F7g-n6-Ru0" id="rmz-1Z-TBI"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F7g-n6-Ru0" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="650" width="280" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="W06-vz-y2p" id="GpI-yz-zUn"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W06-vz-y2p" customClass="NextTextField" customModule="NextTextField" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="780" width="280" height="30"/>
+                                                        <color key="backgroundColor" red="1" green="0.34548132100000001" blue="0.3199073408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                        <connections>
+                                                            <outlet property="nextUIResponder" destination="oma-4Y-0iK" id="nsa-qz-odr"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oma-4Y-0iK">
+                                                        <rect key="frame" x="0.0" y="910" width="280" height="30"/>
+                                                        <state key="normal" title="Done"/>
+                                                        <connections>
+                                                            <action selector="actionDoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wXb-sk-lmQ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="YTx-tP-Fi8" firstAttribute="top" secondItem="zKl-pX-1CB" secondAttribute="top" constant="20" id="7A7-dg-UAe"/>
+                                            <constraint firstAttribute="bottom" secondItem="YTx-tP-Fi8" secondAttribute="bottom" constant="20" id="EhW-JW-bh6"/>
+                                            <constraint firstAttribute="trailing" secondItem="YTx-tP-Fi8" secondAttribute="trailing" constant="20" id="fec-71-cgf"/>
+                                            <constraint firstItem="YTx-tP-Fi8" firstAttribute="leading" secondItem="zKl-pX-1CB" secondAttribute="leading" constant="20" id="n1B-6l-nv8"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="zKl-pX-1CB" secondAttribute="trailing" id="3sn-Vl-uEi"/>
+                                    <constraint firstItem="zKl-pX-1CB" firstAttribute="leading" secondItem="Zff-I7-UTI" secondAttribute="leading" id="KAr-2t-7Zj"/>
+                                    <constraint firstItem="zKl-pX-1CB" firstAttribute="height" secondItem="Zff-I7-UTI" secondAttribute="height" priority="250" id="bMD-BL-LW4"/>
+                                    <constraint firstItem="zKl-pX-1CB" firstAttribute="top" secondItem="Zff-I7-UTI" secondAttribute="top" id="hsG-xe-NWN"/>
+                                    <constraint firstItem="zKl-pX-1CB" firstAttribute="width" secondItem="Zff-I7-UTI" secondAttribute="width" id="xUR-g4-cRZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="zKl-pX-1CB" secondAttribute="bottom" id="xis-V5-URP"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zff-I7-UTI" secondAttribute="trailing" id="B7w-6J-MvF"/>
+                            <constraint firstItem="Zff-I7-UTI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LkZ-V9-ROB"/>
+                            <constraint firstItem="Zff-I7-UTI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MA4-95-Thl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zff-I7-UTI" secondAttribute="bottom" id="i7l-jA-1Gt" customClass="KeyboardLayoutConstraint" customModule="NextTextField" customModuleProvider="target"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="hwK-dB-1Ya" customClass="KeyboardHideManager" customModule="NextTextField" customModuleProvider="target">
+                    <connections>
+                        <outletCollection property="targets" destination="zKl-pX-1CB" collectionClass="NSMutableArray" id="Lo3-7e-Kay"/>
+                        <outletCollection property="targets" destination="YTx-tP-Fi8" collectionClass="NSMutableArray" id="8wu-Zp-cGx"/>
+                    </connections>
+                </customObject>
+            </objects>
+        </scene>
+    </scenes>
+</document>
