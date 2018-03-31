@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>StringsTable</key>
+        <string>Child</string>
+        <key>PreferenceSpecifiers</key>
+        <array>
+            
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Stay hungry. Stay foolish</string>
+                <key>FooterText</key>
+                <string>1. Follow your heart and trust that it knows where it's going. Six months into his first year at Reed College, Jobs dropped out-a very big deal, since his biological mother had made college education a requirement of his adoption, and his adoptive parents had saved for years so he could go.
+
+"I had no idea what I wanted to do with my life and no idea how college was going to help me figure it out," Jobs said. "And here I was spending all of the money my parents had saved their entire life. So I decided to drop out and trust that it would all work out OK. It was pretty scary at the time, but looking back it was one of the best decisions I ever made."
+
+2. The worst thing that could happen might turn out to be the best thing that could happen.
+
+3. You are already naked.
+"When I was 17, I read a quote that went something like: 'If you live each day as if it was your last, someday you'll most certainly be right,'" Jobs said. "It made an impression on me." From then on, Jobs would look in the mirror each day and ask himself, if this were the last day of his life would he want to spend it doing what he was about to do? "Whenever the answer has been 'no' for too many days in a row, I know I need to change something," he said.
+
+4. Don't let anything drown out your inner voice.
+Knowing your time in life is limited, he told the students, think carefully about how to spend it. "Don't waste it living someone else's life," he said. "Don't be trapped by dogma-which is living with the results of other people's thinking. Don't let the noise of others' opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition. They somehow already know what you truly want to become. Everything else is secondary."
+
+5. Stay hungry. Stay foolish.
+Jobs closed with these simple directives, drawn from the back cover of the final edition of the Whole Earth Catalog. The words ran under the picture of a beckoning country road early in the morning, he said. "It was their farewell message as they signed off."
+
+He wished that for the graduating students, he added, just as he'd always wished it for himself: Stay hungry. Stay foolish. That's advice we can all follow. Jobs always did.</string>
+            </dict>
+            
+        </array>
+    </dict>
+</plist>

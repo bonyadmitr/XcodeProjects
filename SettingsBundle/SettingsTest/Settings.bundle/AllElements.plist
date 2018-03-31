@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>StringsTable</key>
+        <string>AllElements</string>
+        <key>PreferenceSpecifiers</key>
+        <array>
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Group title</string>
+                <key>FooterText</key>
+                <string>Group footer</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Key</key>
+                <string>title_1</string>
+                <key>DefaultValue</key>
+                <integer>123</integer>
+                <key>Title</key>
+                <string>Title</string>
+                <key>Titles</key>
+                <array>
+                    <string>title 1</string>
+                    <string>title 2</string>
+                    <string>title 3</string>
+                </array>
+                <key>Values</key>
+                <array>
+                    <string>Some string</string>
+                    <integer>123</integer>
+                    <false/>
+                </array>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSToggleSwitchSpecifier</string>
+                <key>Key</key>
+                <string>switch_1</string>
+                <key>Title</key>
+                <string>Analytics Enabled</string>
+                <key>DefaultValue</key>
+                <true/>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTextFieldSpecifier</string>
+                <key>Title</key>
+                <string>Username</string>
+                <key>Key</key>
+                <string>text_2</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTextFieldSpecifier</string>
+                <key>Key</key>
+                <string>text_1</string>
+                <key>Title</key>
+                <string>Password</string>
+                <key>DefaultValue</key>
+                <string>1</string>
+                <key>IsSecure</key>
+                <true/>
+                <key>KeyboardType</key>
+                <string>NumbersAndPunctuation</string>
+                <key>AutocapitalizationType</key>
+                <string>None</string>
+                <key>AutocorrectionType</key>
+                <string>No</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSSliderSpecifier</string>
+                <key>Key</key>
+                <string>slider_1</string>
+                <key>DefaultValue</key>
+                <real>30</real>
+                <key>MinimumValue</key>
+                <integer>0</integer>
+                <key>MaximumValue</key>
+                <integer>100</integer>
+                <key>MinimumValueImage</key>
+                <string>1.png</string>
+                <key>MaximumValueImage</key>
+                <string>2.png</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSChildPaneSpecifier</string>
+                <key>Title</key>
+                <string>Child</string>
+                <key>File</key>
+                <string>Child</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSMultiValueSpecifier</string>
+                <key>Key</key>
+                <string>multi_value</string>
+                <key>Title</key>
+                <string>Multi Value</string>
+                <key>DefaultValue</key>
+                <integer>123</integer>
+                <key>Titles</key>
+                <array>
+                    <string>title 1</string>
+                    <string>title 2</string>
+                    <string>title title title title title title title title title title title title 3</string>
+                </array>
+                <key>Values</key>
+                <array>
+                    <string>string 1</string>
+                    <integer>123</integer>
+                    <false/>
+                </array>
+                <key>DisplaySortedByTitle</key>
+                <true/>
+                <key>ShortTitles</key>
+                <array>
+                    <string>t 1</string>
+                    <string>t 2</string>
+                    <string>t 3</string>
+                </array>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Key</key>
+                <string>title_2</string>
+                <key>Title</key>
+                <string>Device type</string>
+                <key>DefaultValue</key>
+                <string>iPhone or iPod</string>
+                <key>SupportedUserInterfaceIdioms</key>
+                <array>
+                    <string>Phone</string>
+                </array>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Key</key>
+                <string>title_2</string>
+                <key>Title</key>
+                <string>Type</string>
+                <key>DefaultValue</key>
+                <string>Device type</string>
+                <key>SupportedUserInterfaceIdioms</key>
+                <array>
+                    <string>Pad</string>
+                </array>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSRadioGroupSpecifier</string>
+                <key>Key</key>
+                <string>radio_group</string>
+                <key>DefaultValue</key>
+                <integer>123</integer>
+                <key>Titles</key>
+                <array>
+                    <string>title 1</string>
+                    <string>title 2</string>
+                    <string>title 3</string>
+                </array>
+                <key>Values</key>
+                <array>
+                    <string>string value</string>
+                    <integer>123</integer>
+                    <true/>
+                </array>
+                <key>Title</key>
+                <string>RadioGroup text</string>
+                <key>FooterText</key>
+                <string>RadioGroup Footer text</string>
+                <key>DisplaySortedByTitle</key>
+                <true/>
+            </dict>
+        </array>
+    </dict>
+</plist>

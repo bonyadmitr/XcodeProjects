@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dSY-uK-Iav">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="K6R-JV-jvI">
+            <objects>
+                <viewController id="dSY-uK-Iav" customClass="ViewController" customModule="SettingsTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ykY-EK-MhV"/>
+                        <viewControllerLayoutGuide type="bottom" id="QQe-fD-Ykz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ioR-KJ-5OS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aYu-AG-95L">
+                                <rect key="frame" x="16" y="30" width="288" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6C-s3-hPd">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="30"/>
+                                        <state key="normal" title="Settings"/>
+                                        <connections>
+                                            <action selector="actionSettingsButton:" destination="dSY-uK-Iav" eventType="touchUpInside" id="WnY-55-eXJ"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nCD-aD-Cfs">
+                                        <rect key="frame" x="-2" y="40" width="292" height="31"/>
+                                        <connections>
+                                            <action selector="actionSlider:" destination="dSY-uK-Iav" eventType="touchUpInside" id="p5O-n3-fOm"/>
+                                            <action selector="actionSlider:" destination="dSY-uK-Iav" eventType="touchUpOutside" id="r0S-8h-iwZ"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aYu-AG-95L" secondAttribute="trailing" constant="16" id="3kv-D3-pQG"/>
+                            <constraint firstItem="aYu-AG-95L" firstAttribute="top" secondItem="ykY-EK-MhV" secondAttribute="bottom" constant="10" id="DNl-h9-FbS"/>
+                            <constraint firstItem="aYu-AG-95L" firstAttribute="leading" secondItem="ioR-KJ-5OS" secondAttribute="leading" constant="16" id="u7r-e4-eKS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="slider1" destination="nCD-aD-Cfs" id="bv7-Lt-pGX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4d-Gi-tNn" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>

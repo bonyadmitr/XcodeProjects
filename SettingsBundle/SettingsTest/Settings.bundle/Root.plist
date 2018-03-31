@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>StringsTable</key>
+        <string>Root</string>
+        <key>PreferenceSpecifiers</key>
+        <array>
+            
+            <!--Group App-->
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>App</string>
+            </dict>
+            
+            <!--Title Version-->
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Key</key>
+                <string>app_version</string>
+                <key>Title</key>
+                <string>Version</string>
+                <key>DefaultValue</key>
+                <string>1.0.0</string>
+            </dict>
+            
+            <!--Title Author-->
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Key</key>
+                <string>app_author</string>
+                <key>Title</key>
+                <string>Author</string>
+                <key>DefaultValue</key>
+                <string>Bondar Yaroslav</string>
+            </dict>
+            
+            
+            <!--Button-->
+            <!--RadioGroup Clear cache-->
+            <dict>
+                <key>Type</key>
+                <string>PSRadioGroupSpecifier</string>
+                <key>Key</key>
+                <string>clear_cache</string>
+                <key>Title</key>
+                <string></string>
+                <key>FooterText</key>
+                <string></string>
+                <key>DefaultValue</key>
+                <false/>
+                <key>Titles</key>
+                <array>
+                    <string>Clear cache</string>
+                </array>
+                <key>Values</key>
+                <array>
+                    <true/>
+                </array>
+            </dict>
+            
+            
+            
+            <!--Group Analytics-->
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Analytics</string>
+            </dict>
+            
+            <!--Switch Enabled-->
+            <dict>
+                <key>Type</key>
+                <string>PSToggleSwitchSpecifier</string>
+                <key>Key</key>
+                <string>analytics_enabled</string>
+                <key>Title</key>
+                <string>Enabled</string>
+                <key>DefaultValue</key>
+                <true/>
+            </dict>
+            
+            
+            
+            <!--Group Example-->
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Example</string>
+            </dict>
+            
+            <!--ChildPane All elements-->
+            <dict>
+                <key>Type</key>
+                <string>PSChildPaneSpecifier</string>
+                <key>Title</key>
+                <string>All elements</string>
+                <key>File</key>
+                <string>AllElements</string>
+            </dict>
+            
+        </array>
+    </dict>
+</plist>
