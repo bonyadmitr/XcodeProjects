@@ -1,0 +1,16 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+## ignore all warnings from all pods
+inhibit_all_warnings!
+
+target 'ImageDownloads' do
+
+  pod 'Kingfisher', '~> 4.0'
+  pod 'SDWebImage', '~> 4.0'
+
+end
+
+## If you have slow HDD
+ENV['COCOAPODS_DISABLE_STATS'] = "true"
