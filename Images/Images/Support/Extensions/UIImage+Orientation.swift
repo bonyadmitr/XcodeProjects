@@ -49,7 +49,8 @@ extension UIImage {
         
         /// Now we draw the underlying CGImage into a new context, applying the transform calculated above.
         
-        guard let cgImage = cgImage,
+        guard
+            let cgImage = cgImage,
             let colorSpace = cgImage.colorSpace,
             let ctx = CGContext(data: nil,
                                 width: Int(size.width),

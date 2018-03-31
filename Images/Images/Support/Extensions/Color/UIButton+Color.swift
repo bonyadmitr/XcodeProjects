@@ -11,10 +11,10 @@ import UIKit
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControlState) {
         let image = UIImage(color: color)
-        setRoundedBackgroundImage(image: image, for: state)
+        setRoundedBackgroundImage(image, for: state)
     }
     
-    private func setRoundedBackgroundImage(image: UIImage?, for state: UIControlState) {
+    private func setRoundedBackgroundImage(_ image: UIImage?, for state: UIControlState) {
         guard clipsToBounds || layer.cornerRadius != 0 else {
             setBackgroundImage(image, for: state)
             return

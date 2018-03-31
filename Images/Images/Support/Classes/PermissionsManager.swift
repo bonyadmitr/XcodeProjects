@@ -9,6 +9,7 @@
 import AVFoundation
 import Photos
 import CoreLocation
+import Contacts
 
 typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
 
@@ -64,12 +65,8 @@ final class PermissionsManager {
     }
      */
     func requestPhotoAccess(handler: @escaping AccessStatusHandler) {
-        switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized:
-            handler(.success)
-        case .denied, .restricted:
-            handler(.denied)
-        case .notDetermined:
+        
+        func requestPhotoAuthorization() {
             PHPhotoLibrary.requestAuthorization() { status in
                 switch status {
                 case .authorized:
@@ -82,7 +79,29 @@ final class PermissionsManager {
                 }
             }
         }
+        
+        func operationSystemVersionLessThen(_ version: Int) -> Bool {
+            return ProcessInfo().operatingSystemVersion.majorVersion < version
+        }
+        
+        /// bug “PHPhotoLibrary.authorizationStatus” is authorized in iOS 9 by default (checked on iPad)
+        /// and "PHAssetResource.assetResources(for: ASSET).first" freezing the app
+        if operationSystemVersionLessThen(10) {
+            requestPhotoAuthorization()
+            return
+        }
+        
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            handler(.success)
+        case .denied, .restricted:
+            handler(.denied)
+        case .notDetermined:
+            requestPhotoAuthorization()
+        }
     }
+    
+    
     
     /// KEYS
     /** Example
@@ -156,6 +175,26 @@ final class PermissionsManager {
                 locationManager?.requestWhenInUseAuthorization()
             case .location:
                 locationManager?.requestLocation()
+            }
+        }
+    }
+    
+    
+    //----------
+    
+    func requestContactsAccess(handler: @escaping AccessStatusHandler) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            handler(.success)
+        case .denied, .restricted:
+            handler(.denied)
+        case .notDetermined:
+            CNContactStore().requestAccess(for: .contacts) { granted, _ in
+                if granted {
+                    handler(.success)
+                } else {
+                    handler(.denied)
+                }
             }
         }
     }

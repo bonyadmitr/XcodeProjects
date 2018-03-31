@@ -20,7 +20,6 @@
 		666E2822201E561E00CDC5EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666E2821201E561E00CDC5EF /* Assets.xcassets */; };
 		666E2825201E561E00CDC5EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666E2823201E561E00CDC5EF /* LaunchScreen.storyboard */; };
 		666E282D201E574600CDC5EF /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E282C201E574600CDC5EF /* UICollectionView+Extensions.swift */; };
-		666E282F201E574F00CDC5EF /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E282E201E574F00CDC5EF /* UIApplication+Settings.swift */; };
 		666E2831201E577900CDC5EF /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E2830201E577900CDC5EF /* UIImage+Orientation.swift */; };
 		666E283A201E594C00CDC5EF /* LocalPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E2839201E594C00CDC5EF /* LocalPhotosController.swift */; };
 		666E283C201E59A900CDC5EF /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E283B201E59A900CDC5EF /* PhotoCell.swift */; };
@@ -60,7 +59,6 @@
 		666E2824201E561E00CDC5EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		666E2826201E561E00CDC5EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		666E282C201E574600CDC5EF /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		666E282E201E574F00CDC5EF /* UIApplication+Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Settings.swift"; sourceTree = "<group>"; };
 		666E2830201E577900CDC5EF /* UIImage+Orientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
 		666E2839201E594C00CDC5EF /* LocalPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPhotosController.swift; sourceTree = "<group>"; };
 		666E283B201E59A900CDC5EF /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
@@ -84,6 +82,7 @@
 		CE055F382037826400E6BFE8 /* LocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
 		CE055F3C203837D800E6BFE8 /* PHAsset+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Info.swift"; sourceTree = "<group>"; };
 		CED7F3082021986F00422167 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		CEDFFF2720389B5800BE7A0E /* UTType+FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UTType+FileExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				669BA87B201E7A1600F218B0 /* Color */,
-				666E282E201E574F00CDC5EF /* UIApplication+Settings.swift */,
 				666E2830201E577900CDC5EF /* UIImage+Orientation.swift */,
 				666E282C201E574600CDC5EF /* UICollectionView+Extensions.swift */,
 				667DCCC920305758002168A3 /* UITableView+Extensions.swift */,
@@ -109,6 +107,7 @@
 				CE055F3C203837D800E6BFE8 /* PHAsset+Info.swift */,
 				66EAE503203353DB00A07DBC /* Data+Size.swift */,
 				66EAE50920335E8700A07DBC /* UINavigationController+Bugs.swift */,
+				CEDFFF2720389B5800BE7A0E /* UTType+FileExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -315,7 +314,6 @@
 				CE055F392037826400E6BFE8 /* LocationRequest.swift in Sources */,
 				667DCCC820305681002168A3 /* LibraryController.swift in Sources */,
 				6639B74B2020DA240074C9A3 /* SettingsRouter.swift in Sources */,
-				666E282F201E574F00CDC5EF /* UIApplication+Settings.swift in Sources */,
 				666E2831201E577900CDC5EF /* UIImage+Orientation.swift in Sources */,
 				669BA893201F7EB600F218B0 /* PhotoManager.swift in Sources */,
 				666E281B201E561E00CDC5EF /* AppDelegate.swift in Sources */,

@@ -431,3 +431,22 @@ extension PhotoViewerController: PHPhotoLibraryChangeObserver {
         }
     }
 }
+
+
+import MobileCoreServices
+
+/// Usage
+/**
+ if Images.isEqual(fileExtension: url.pathExtension, to: kUTTypeImage) {
+    print("This is an image!")
+ }
+ */
+
+func isEqual(fileExtension: String, to utType: CFString) -> Bool {
+    if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil), UTTypeConformsTo(uti.takeRetainedValue(), utType)
+    {
+        return true
+    } else {
+        return false
+    }
+}
