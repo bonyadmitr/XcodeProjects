@@ -1,0 +1,30 @@
+PODS:
+  - PromiseKit (4.1.7):
+    - PromiseKit/Foundation (= 4.1.7)
+    - PromiseKit/QuartzCore (= 4.1.7)
+    - PromiseKit/UIKit (= 4.1.7)
+  - PromiseKit/CorePromise (4.1.7)
+  - PromiseKit/Foundation (4.1.7):
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (4.1.7):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (4.1.7):
+    - PromiseKit/CorePromise
+  - Realm (2.4.2):
+    - Realm/Headers (= 2.4.2)
+  - Realm/Headers (2.4.2)
+  - RealmSwift (2.4.2):
+    - Realm (= 2.4.2)
+
+DEPENDENCIES:
+  - PromiseKit (~> 4.0)
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  PromiseKit: 779f2e41faf62d854e7593026ddbcb0bb5c5002d
+  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
+  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
+
+PODFILE CHECKSUM: db4b957c221b11abd5aa0ac075cc20b0f5e9d55d
+
+COCOAPODS: 1.2.0
