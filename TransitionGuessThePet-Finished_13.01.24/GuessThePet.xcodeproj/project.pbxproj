@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04C137FD1B4D0171007AD7B8 /* FlipPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C137FC1B4D0171007AD7B8 /* FlipPresentAnimationController.swift */; };
+		04C137FF1B4D04AD007AD7B8 /* FlipDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C137FE1B4D04AD007AD7B8 /* FlipDismissAnimationController.swift */; };
+		BB3B33A81B40386700B5C810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33A71B40386700B5C810 /* AppDelegate.swift */; };
+		BB3B33AD1B40386700B5C810 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB3B33AB1B40386700B5C810 /* Main.storyboard */; };
+		BB3B33AF1B40386700B5C810 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB3B33AE1B40386700B5C810 /* Images.xcassets */; };
+		BB3B33B21B40386700B5C810 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3B33B01B40386700B5C810 /* LaunchScreen.xib */; };
+		BB3B33CD1B4038ED00B5C810 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33CC1B4038ED00B5C810 /* RevealViewController.swift */; };
+		BB3B33CF1B4039A600B5C810 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33CE1B4039A600B5C810 /* PageViewController.swift */; };
+		BB3B33D11B4039FB00B5C810 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33D01B4039FB00B5C810 /* CardViewController.swift */; };
+		BB3B33D41B403BAF00B5C810 /* PetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33D31B403BAF00B5C810 /* PetCard.swift */; };
+		BB3B33D81B4049EC00B5C810 /* ViewControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33D71B4049EC00B5C810 /* ViewControllerProvider.swift */; };
+		BB3B33DB1B4056B700B5C810 /* Pets.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3B33DA1B4056B700B5C810 /* Pets.plist */; };
+		BB3B33DD1B4064E600B5C810 /* PetCardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33DC1B4064E600B5C810 /* PetCardStore.swift */; };
+		BB3B33E81B40A1A100B5C810 /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B33E71B40A1A100B5C810 /* SwipeInteractionController.swift */; };
+		BBC248791B4D8EFD00F4C642 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC248781B4D8EFD00F4C642 /* AnimationHelper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04C137FC1B4D0171007AD7B8 /* FlipPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipPresentAnimationController.swift; sourceTree = "<group>"; };
+		04C137FE1B4D04AD007AD7B8 /* FlipDismissAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipDismissAnimationController.swift; sourceTree = "<group>"; };
+		BB3B33A21B40386700B5C810 /* Guess the Pet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guess the Pet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB3B33A61B40386700B5C810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB3B33A71B40386700B5C810 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BB3B33AC1B40386700B5C810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BB3B33AE1B40386700B5C810 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BB3B33B11B40386700B5C810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BB3B33CC1B4038ED00B5C810 /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
+		BB3B33CE1B4039A600B5C810 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		BB3B33D01B4039FB00B5C810 /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		BB3B33D31B403BAF00B5C810 /* PetCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCard.swift; sourceTree = "<group>"; };
+		BB3B33D71B4049EC00B5C810 /* ViewControllerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProvider.swift; sourceTree = "<group>"; };
+		BB3B33DA1B4056B700B5C810 /* Pets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pets.plist; sourceTree = "<group>"; };
+		BB3B33DC1B4064E600B5C810 /* PetCardStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCardStore.swift; sourceTree = "<group>"; };
+		BB3B33E71B40A1A100B5C810 /* SwipeInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
+		BBC248781B4D8EFD00F4C642 /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB3B339F1B40386700B5C810 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BB3B33991B40386700B5C810 = {
+			isa = PBXGroup;
+			children = (
+				BB3B33A41B40386700B5C810 /* GuessThePet */,
+				BB3B33A31B40386700B5C810 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BB3B33A31B40386700B5C810 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33A21B40386700B5C810 /* Guess the Pet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB3B33A41B40386700B5C810 /* GuessThePet */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33C91B40388D00B5C810 /* View controllers */,
+				BB3B33DF1B40654F00B5C810 /* Interaction controllers */,
+				BB3B33DE1B40654700B5C810 /* Animation controllers */,
+				BB3B33C81B40388A00B5C810 /* UI */,
+				BB3B33D91B40568E00B5C810 /* Data */,
+				BB3B33D21B403BA600B5C810 /* Model */,
+				BB3B33D61B4049D300B5C810 /* Helpers */,
+				BB3B33C71B40388600B5C810 /* Bundle files */,
+			);
+			path = GuessThePet;
+			sourceTree = "<group>";
+		};
+		BB3B33C71B40388600B5C810 /* Bundle files */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33AE1B40386700B5C810 /* Images.xcassets */,
+				BB3B33A61B40386700B5C810 /* Info.plist */,
+				BB3B33A71B40386700B5C810 /* AppDelegate.swift */,
+			);
+			path = "Bundle files";
+			sourceTree = "<group>";
+		};
+		BB3B33C81B40388A00B5C810 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33AB1B40386700B5C810 /* Main.storyboard */,
+				BB3B33B01B40386700B5C810 /* LaunchScreen.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		BB3B33C91B40388D00B5C810 /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33D01B4039FB00B5C810 /* CardViewController.swift */,
+				BB3B33CC1B4038ED00B5C810 /* RevealViewController.swift */,
+				BB3B33CE1B4039A600B5C810 /* PageViewController.swift */,
+			);
+			path = "View controllers";
+			sourceTree = "<group>";
+		};
+		BB3B33D21B403BA600B5C810 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33D31B403BAF00B5C810 /* PetCard.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB3B33D61B4049D300B5C810 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33D71B4049EC00B5C810 /* ViewControllerProvider.swift */,
+				BBC248781B4D8EFD00F4C642 /* AnimationHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BB3B33D91B40568E00B5C810 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33DA1B4056B700B5C810 /* Pets.plist */,
+				BB3B33DC1B4064E600B5C810 /* PetCardStore.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BB3B33DE1B40654700B5C810 /* Animation controllers */ = {
+			isa = PBXGroup;
+			children = (
+				04C137FC1B4D0171007AD7B8 /* FlipPresentAnimationController.swift */,
+				04C137FE1B4D04AD007AD7B8 /* FlipDismissAnimationController.swift */,
+			);
+			path = "Animation controllers";
+			sourceTree = "<group>";
+		};
+		BB3B33DF1B40654F00B5C810 /* Interaction controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB3B33E71B40A1A100B5C810 /* SwipeInteractionController.swift */,
+			);
+			path = "Interaction controllers";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB3B33A11B40386700B5C810 /* Guess the Pet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB3B33C11B40386700B5C810 /* Build configuration list for PBXNativeTarget "Guess the Pet" */;
+			buildPhases = (
+				BB3B339E1B40386700B5C810 /* Sources */,
+				BB3B339F1B40386700B5C810 /* Frameworks */,
+				BB3B33A01B40386700B5C810 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Guess the Pet";
+			productName = GuessThePet;
+			productReference = BB3B33A21B40386700B5C810 /* Guess the Pet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB3B339A1B40386700B5C810 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Razeware LLC";
+				TargetAttributes = {
+					BB3B33A11B40386700B5C810 = {
+						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0830;
+					};
+				};
+			};
+			buildConfigurationList = BB3B339D1B40386700B5C810 /* Build configuration list for PBXProject "GuessThePet" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BB3B33991B40386700B5C810;
+			productRefGroup = BB3B33A31B40386700B5C810 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB3B33A11B40386700B5C810 /* Guess the Pet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB3B33A01B40386700B5C810 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB3B33DB1B4056B700B5C810 /* Pets.plist in Resources */,
+				BB3B33AD1B40386700B5C810 /* Main.storyboard in Resources */,
+				BB3B33B21B40386700B5C810 /* LaunchScreen.xib in Resources */,
+				BB3B33AF1B40386700B5C810 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB3B339E1B40386700B5C810 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04C137FF1B4D04AD007AD7B8 /* FlipDismissAnimationController.swift in Sources */,
+				BB3B33E81B40A1A100B5C810 /* SwipeInteractionController.swift in Sources */,
+				BB3B33DD1B4064E600B5C810 /* PetCardStore.swift in Sources */,
+				BB3B33CD1B4038ED00B5C810 /* RevealViewController.swift in Sources */,
+				04C137FD1B4D0171007AD7B8 /* FlipPresentAnimationController.swift in Sources */,
+				BB3B33D41B403BAF00B5C810 /* PetCard.swift in Sources */,
+				BBC248791B4D8EFD00F4C642 /* AnimationHelper.swift in Sources */,
+				BB3B33A81B40386700B5C810 /* AppDelegate.swift in Sources */,
+				BB3B33D81B4049EC00B5C810 /* ViewControllerProvider.swift in Sources */,
+				BB3B33D11B4039FB00B5C810 /* CardViewController.swift in Sources */,
+				BB3B33CF1B4039A600B5C810 /* PageViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BB3B33AB1B40386700B5C810 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB3B33AC1B40386700B5C810 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BB3B33B01B40386700B5C810 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB3B33B11B40386700B5C810 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BB3B33BF1B40386700B5C810 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB3B33C01B40386700B5C810 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BB3B33C21B40386700B5C810 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "GuessThePet/Bundle files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		BB3B33C31B40386700B5C810 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "GuessThePet/Bundle files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.razeware.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB3B339D1B40386700B5C810 /* Build configuration list for PBXProject "GuessThePet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB3B33BF1B40386700B5C810 /* Debug */,
+				BB3B33C01B40386700B5C810 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB3B33C11B40386700B5C810 /* Build configuration list for PBXNativeTarget "Guess the Pet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB3B33C21B40386700B5C810 /* Debug */,
+				BB3B33C31B40386700B5C810 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB3B339A1B40386700B5C810 /* Project object */;
+}

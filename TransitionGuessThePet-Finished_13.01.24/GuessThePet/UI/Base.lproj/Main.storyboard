@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AGd-FU-LZL">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="3Mu-SM-wjz">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="AGd-FU-LZL" customClass="PageViewController" customModule="Guess_the_Pet" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d4w-T5-gZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547" y="1271"/>
+        </scene>
+        <!--Card View Controller-->
+        <scene sceneID="414-sc-bQv">
+            <objects>
+                <viewController storyboardIdentifier="CardViewController" id="YVg-2m-sqi" customClass="CardViewController" customModule="Guess_the_Pet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zws-l1-jdr"/>
+                        <viewControllerLayoutGuide type="bottom" id="0gx-9C-ZBh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s1R-uo-srS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGI-Xm-4A3">
+                                <rect key="frame" x="188" y="150" width="225" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT6-lC-jco">
+                                        <rect key="frame" x="90" y="138" width="45" height="25"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bT6-lC-jco" secondAttribute="trailing" constant="20" id="02j-WQ-yQH"/>
+                                    <constraint firstAttribute="centerY" secondItem="bT6-lC-jco" secondAttribute="centerY" id="BfI-kh-iwE"/>
+                                    <constraint firstItem="bT6-lC-jco" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XGI-Xm-4A3" secondAttribute="leading" constant="20" id="HxO-sD-5nD"/>
+                                    <constraint firstAttribute="height" secondItem="XGI-Xm-4A3" secondAttribute="width" multiplier="4:3" id="WIX-oK-MFj"/>
+                                    <constraint firstAttribute="height" secondItem="XGI-Xm-4A3" secondAttribute="width" multiplier="3:4" id="mTh-5a-BPV"/>
+                                    <constraint firstAttribute="centerX" secondItem="bT6-lC-jco" secondAttribute="centerX" id="tvQ-K8-FMj"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mTh-5a-BPV"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact" misplaced="YES">
+                                    <rect key="frame" x="151" y="88" width="300" height="225"/>
+                                    <mask key="constraints">
+                                        <exclude reference="WIX-oK-MFj"/>
+                                        <include reference="mTh-5a-BPV"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XGI-Xm-4A3" firstAttribute="width" secondItem="s1R-uo-srS" secondAttribute="width" multiplier="1/2" id="V69-TE-ukA"/>
+                            <constraint firstItem="XGI-Xm-4A3" firstAttribute="height" secondItem="s1R-uo-srS" secondAttribute="height" multiplier="1/2" id="YZL-xi-LVr"/>
+                            <constraint firstAttribute="centerX" secondItem="XGI-Xm-4A3" secondAttribute="centerX" id="eHo-BP-NHf"/>
+                            <constraint firstAttribute="centerY" secondItem="XGI-Xm-4A3" secondAttribute="centerY" id="qno-cV-rSQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="V69-TE-ukA"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="V69-TE-ukA"/>
+                                <exclude reference="YZL-xi-LVr"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="cardView" destination="XGI-Xm-4A3" id="6Z9-jS-UKt"/>
+                        <outlet property="titleLabel" destination="bT6-lC-jco" id="QCy-uF-URC"/>
+                        <segue destination="uNX-72-ehJ" kind="presentation" identifier="revealSegue" id="SA3-Xr-cL7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u8e-MV-ec7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1352" y="1271"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="qP3-oN-gvn">
+            <objects>
+                <viewController storyboardIdentifier="RevealViewController" id="uNX-72-ehJ" customClass="RevealViewController" customModule="Guess_the_Pet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bNc-W5-rSu"/>
+                        <viewControllerLayoutGuide type="bottom" id="bZ4-Jc-mLk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e2C-ax-EbM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsQ-2z-rrg">
+                                <rect key="frame" x="260" y="559" width="80" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="Start Over!">
+                                    <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="uNX-72-ehJ" eventType="touchUpInside" id="ugL-ZB-htd"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Umc-3p-hh4">
+                                <rect key="frame" x="131" y="75" width="338" height="450"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="Umc-3p-hh4" secondAttribute="width" multiplier="3:4" id="hou-KN-tR6"/>
+                                    <constraint firstAttribute="width" secondItem="Umc-3p-hh4" secondAttribute="height" multiplier="3:4" id="yDV-a4-pIt"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hou-KN-tR6"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="hou-KN-tR6"/>
+                                        <exclude reference="yDV-a4-pIt"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucA-HX-5kc">
+                                <rect key="frame" x="279" y="43" width="43" height="24"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-MediumItalic" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Umc-3p-hh4" firstAttribute="height" secondItem="e2C-ax-EbM" secondAttribute="height" multiplier="3/4" id="5NF-tm-juI"/>
+                            <constraint firstItem="bZ4-Jc-mLk" firstAttribute="top" secondItem="xsQ-2z-rrg" secondAttribute="bottom" constant="8" symbolic="YES" id="CGK-OF-ack"/>
+                            <constraint firstAttribute="centerX" secondItem="ucA-HX-5kc" secondAttribute="centerX" id="Dph-tL-gwR"/>
+                            <constraint firstAttribute="centerX" secondItem="xsQ-2z-rrg" secondAttribute="centerX" id="Kkj-hG-wXN"/>
+                            <constraint firstItem="Umc-3p-hh4" firstAttribute="width" secondItem="e2C-ax-EbM" secondAttribute="width" multiplier="1/2" id="bso-py-wp9"/>
+                            <constraint firstAttribute="centerX" secondItem="Umc-3p-hh4" secondAttribute="centerX" id="juU-wQ-09I"/>
+                            <constraint firstItem="Umc-3p-hh4" firstAttribute="top" secondItem="ucA-HX-5kc" secondAttribute="bottom" constant="8" id="ohT-qU-1in"/>
+                            <constraint firstAttribute="centerY" secondItem="Umc-3p-hh4" secondAttribute="centerY" id="tqY-se-VoJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="bso-py-wp9"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="5NF-tm-juI"/>
+                                <include reference="bso-py-wp9"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Umc-3p-hh4" id="dd8-jc-6dW"/>
+                        <outlet property="titleLabel" destination="ucA-HX-5kc" id="ng9-pY-uPC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GIv-r4-zpG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2110" y="1271"/>
+        </scene>
+    </scenes>
+</document>
