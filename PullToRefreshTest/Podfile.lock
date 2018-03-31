@@ -1,0 +1,27 @@
+PODS:
+  - ESPullToRefresh (2.6)
+  - ICSPullToRefresh (0.6)
+  - PullToRefresher (2.0.2)
+  - PullToRefreshKit (0.4.0)
+  - PullToRefreshSwift (3.0.3)
+  - Refresher (0.6.1)
+
+DEPENDENCIES:
+  - ESPullToRefresh
+  - ICSPullToRefresh (~> 0.6)
+  - PullToRefresher (~> 2.0)
+  - PullToRefreshKit
+  - PullToRefreshSwift
+  - Refresher
+
+SPEC CHECKSUMS:
+  ESPullToRefresh: 85f4990acf87f78c6a1466bbbee7a75d7de24db9
+  ICSPullToRefresh: a64f102c6558cc34270ea60e99df7c91d1f3d2c0
+  PullToRefresher: 5e101a8c3523e67ee0291375ba932ef59e0853c2
+  PullToRefreshKit: 5ec15cd0c0828804bcac637c9db6df70c048c9ce
+  PullToRefreshSwift: 0743b818072bfd7c9464addc2d1b987b131057ca
+  Refresher: 7c6f09ef3428aa921cb477611fb26bf29a9e5492
+
+PODFILE CHECKSUM: 8e6383de74f9e371136caa702265c3ca704cc98c
+
+COCOAPODS: 1.2.0
