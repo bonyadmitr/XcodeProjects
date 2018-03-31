@@ -1,0 +1,52 @@
+# Full gitignore can be found here:
+# https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
+
+# macOS system. should be in global gitignore
+#.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+
+# AppCode
+.idea/
+
+# CocoaPods
+*.xcworkspace/
+Pods/
+
+# Carthage
+Carthage/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+Preview.html
+fastlane/test_output
+# fastlane screenshots
+# It is recommended to not store the screenshots in the git repo.
+# Instead, use fastlane to re-generate the screenshots whenever they are needed.
+fastlane/screenshots/screenshots.html
+fastlane/screenshots/**/*.png
+!fastlane/screenshots/background.png
+
+# Generamba
+#Templates/
+
+# R Swift
+#*.generated.swift
+
+# Xcode build files
+*.dSYM.zip
+*.ipa
+#DerivedData/
+#build/
+#Builds/
+
+# Xcode temporary files that should never be committed
+#*~.nib
+
+# Dev center. Use fastlane match
+*.mobileprovision
+*.cer
+*.pem
