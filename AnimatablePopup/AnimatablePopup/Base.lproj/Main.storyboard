@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h0F-h4-sKe">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="YQg-LZ-99C">
+            <objects>
+                <viewController id="h0F-h4-sKe" customClass="ViewController" customModule="PopupAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TqR-5y-gVj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJj-Jg-YZZ">
+                                <rect key="frame" x="83.5" y="100" width="153" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="98i-xY-70x"/>
+                                    <constraint firstAttribute="width" constant="153" id="Ktn-dw-jsz"/>
+                                </constraints>
+                                <state key="normal" title="Popup vc"/>
+                                <connections>
+                                    <segue destination="qR5-13-vvM" kind="presentation" animates="NO" modalPresentationStyle="overFullScreen" id="UT2-Fi-Mi4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibl-f6-1gb">
+                                <rect key="frame" x="84" y="235" width="153" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="Nlv-in-HB4"/>
+                                    <constraint firstAttribute="height" constant="92" id="RZP-ZJ-Dwb"/>
+                                </constraints>
+                                <state key="normal" title="Popup view"/>
+                                <connections>
+                                    <action selector="actionPopupButton:" destination="h0F-h4-sKe" eventType="touchUpInside" id="C1B-Yo-ZiM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1954880454" green="1" blue="0.62062692419999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="OJj-Jg-YZZ" firstAttribute="centerX" secondItem="Bx7-sQ-KKb" secondAttribute="centerX" id="4oW-2t-Pnk"/>
+                            <constraint firstItem="Ibl-f6-1gb" firstAttribute="centerX" secondItem="Bx7-sQ-KKb" secondAttribute="centerX" id="RYG-Av-Eec"/>
+                            <constraint firstItem="OJj-Jg-YZZ" firstAttribute="top" secondItem="Bx7-sQ-KKb" secondAttribute="top" constant="80" id="dtF-s6-gmp"/>
+                            <constraint firstItem="Ibl-f6-1gb" firstAttribute="top" secondItem="OJj-Jg-YZZ" secondAttribute="bottom" constant="43" id="mxJ-ep-OL9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Bx7-sQ-KKb"/>
+                    </view>
+                    <connections>
+                        <outlet property="popupView" destination="hWQ-lK-vS3" id="Tmr-8c-l08"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v9q-MO-4XN" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="hWQ-lK-vS3" customClass="PopupView" customModule="PopupAnimator" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJc-ld-ZD8">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <state key="normal" title="Close"/>
+                            <connections>
+                                <action selector="actionCloseButton:" destination="hWQ-lK-vS3" eventType="touchUpInside" id="YpE-lF-aRt"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.31010501499999998" blue="0.32286307580000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="ma6-fw-f0H" firstAttribute="trailing" secondItem="IJc-ld-ZD8" secondAttribute="trailing" id="6rz-4l-88i"/>
+                        <constraint firstItem="ma6-fw-f0H" firstAttribute="bottom" secondItem="IJc-ld-ZD8" secondAttribute="bottom" id="Mpc-87-Ujb"/>
+                        <constraint firstItem="IJc-ld-ZD8" firstAttribute="leading" secondItem="ma6-fw-f0H" secondAttribute="leading" id="ZnJ-He-Afd"/>
+                        <constraint firstItem="IJc-ld-ZD8" firstAttribute="top" secondItem="ma6-fw-f0H" secondAttribute="top" id="nNk-FU-Jun"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="ma6-fw-f0H"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="136.875" y="133.75"/>
+        </scene>
+        <!--Popup Controller-->
+        <scene sceneID="TMX-WQ-Y2O">
+            <objects>
+                <viewController id="qR5-13-vvM" customClass="PopupController" customModule="PopupAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VmE-uB-n5z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jl0-CF-M9w">
+                                <rect key="frame" x="80" y="167" width="160" height="166"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfQ-19-lSL">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="actionCloseButton:" destination="qR5-13-vvM" eventType="touchUpInside" id="30M-6Q-teT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jl0-CF-M9w" secondAttribute="height" multiplier="86:89" id="5gp-hN-Ce5"/>
+                                    <constraint firstAttribute="trailing" secondItem="kfQ-19-lSL" secondAttribute="trailing" id="JlP-EN-EfO"/>
+                                    <constraint firstItem="kfQ-19-lSL" firstAttribute="top" secondItem="Jl0-CF-M9w" secondAttribute="top" id="JxW-hs-8A7"/>
+                                    <constraint firstItem="kfQ-19-lSL" firstAttribute="leading" secondItem="Jl0-CF-M9w" secondAttribute="leading" id="LnG-eI-Pp4"/>
+                                    <constraint firstAttribute="bottom" secondItem="kfQ-19-lSL" secondAttribute="bottom" id="Z5I-OT-PVR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jl0-CF-M9w" firstAttribute="width" secondItem="VmE-uB-n5z" secondAttribute="width" multiplier="0.5" id="Du1-VH-osz"/>
+                            <constraint firstItem="Jl0-CF-M9w" firstAttribute="centerX" secondItem="X3K-xj-3n5" secondAttribute="centerX" id="gvA-99-jgE"/>
+                            <constraint firstItem="Jl0-CF-M9w" firstAttribute="centerY" secondItem="X3K-xj-3n5" secondAttribute="centerY" id="wh8-rj-c2c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="X3K-xj-3n5"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="Jl0-CF-M9w" id="YAZ-Hu-ExY"/>
+                        <outlet property="shadowView" destination="VmE-uB-n5z" id="Gha-9w-oiw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vTp-LY-9OG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="832.5" y="133.75"/>
+        </scene>
+    </scenes>
+</document>
