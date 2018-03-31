@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeView" customModule="Passcode">
+            <connections>
+                <outlet property="passcodeInputView" destination="czr-rG-Jde" id="f7b-x8-1sA"/>
+                <outlet property="passcodeOutputLabel" destination="4xx-Vi-aUo" id="OEj-Nt-5nZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="210" height="234"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isq-lG-wUK">
+                    <rect key="frame" x="0.0" y="0.0" width="210" height="234"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czr-rG-Jde" customClass="PasscodeInputView" customModule="Passcode" customModuleProvider="target">
+                            <rect key="frame" x="28" y="184" width="154" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="RFx-IS-thL"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="passcodeLength">
+                                    <integer key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="dotDiametr">
+                                    <real key="value" value="13"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="dotWidth">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="dotColor">
+                                    <color key="value" red="0.38853236610000003" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isActive" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                    <color key="value" red="1" green="0.34548132100000001" blue="0.3199073408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-Vi-aUo">
+                            <rect key="frame" x="8" y="155" width="194" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="czr-rG-Jde" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="28" id="2Jg-S4-sn7"/>
+                        <constraint firstAttribute="trailing" secondItem="4xx-Vi-aUo" secondAttribute="trailing" constant="8" id="4Vm-nV-cqg"/>
+                        <constraint firstAttribute="bottom" secondItem="czr-rG-Jde" secondAttribute="bottom" id="Z0s-yW-e0W"/>
+                        <constraint firstAttribute="trailing" secondItem="czr-rG-Jde" secondAttribute="trailing" constant="28" id="c72-MP-07I"/>
+                        <constraint firstItem="4xx-Vi-aUo" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="8" id="dfz-i0-GTC"/>
+                        <constraint firstItem="czr-rG-Jde" firstAttribute="top" secondItem="4xx-Vi-aUo" secondAttribute="bottom" constant="8" id="qYv-IO-Mth"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="isq-lG-wUK" secondAttribute="bottom" id="12X-Dd-yFZ"/>
+                <constraint firstAttribute="trailing" secondItem="isq-lG-wUK" secondAttribute="trailing" id="2W1-mm-6FP"/>
+                <constraint firstItem="isq-lG-wUK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VGo-dt-fcd"/>
+                <constraint firstItem="isq-lG-wUK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rhb-Ol-Uzk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-48" y="-163"/>
+        </view>
+    </objects>
+</document>
