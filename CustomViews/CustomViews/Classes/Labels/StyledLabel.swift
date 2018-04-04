@@ -85,7 +85,7 @@ class StyledLabel: UILabel
     private func sizeIf(pointSizeToTry:CGFloat)->(CGFloat)
     {
         let s:CGFloat = text!.size(
-            attributes: [NSFontAttributeName: font.withSize(pointSizeToTry)] )
+            withAttributes: [NSAttributedStringKey.font as NSAttributedStringKey: font.withSize(pointSizeToTry)] )
             .height
         
         print("guessing .. ", pointSizeToTry, " .. " , s)
@@ -95,13 +95,11 @@ class StyledLabel: UILabel
     private func tweak()
     {
         let ats = NSMutableAttributedString(string: self.text!)
-        let rg = NSRange(location: 0, length: self.text!.characters.count)
-        
+        let rg = NSRange(location: 0, length: self.text!.count)
         ats.addAttribute(
-            NSKernAttributeName, value:CGFloat(tracking), range:rg )
+            NSAttributedStringKey.kern, value:CGFloat(tracking), range:rg )
         
-        ats.addAttribute(
-            NSExpansionAttributeName, value:CGFloat(stretching), range:rg )
+        ats.addAttribute(NSAttributedStringKey.expansion, value:CGFloat(stretching), range:rg )
         
         self.attributedText = ats
     }

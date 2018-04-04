@@ -63,7 +63,7 @@ import UIKit
     
     @IBInspectable var placeholderColor: UIColor = UIColor.clear {
         didSet {
-            attributedPlaceholder = NSAttributedString(string: placeholder!, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            attributedPlaceholder = NSAttributedString(string: placeholder!, attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
             layoutSubviews()
             
         }

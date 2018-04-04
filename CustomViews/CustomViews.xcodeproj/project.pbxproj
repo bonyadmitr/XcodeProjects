@@ -37,6 +37,9 @@
 		7BE97E8D1E02E8A5001265EB /* SpringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E8B1E02E8A5001265EB /* SpringButton.swift */; };
 		7BE97E911E032AB4001265EB /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE97E901E032AB4001265EB /* UIColor+Adjust.swift */; };
 		CE2DBA172058EEE900D08C5E /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DBA162058EEE900D08C5E /* TimerLabel.swift */; };
+		CE6A8F1920749E650001EB54 /* PickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1820749E650001EB54 /* PickerController.swift */; };
+		CE6A8F202074A0300001EB54 /* DoneToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */; };
+		CE6A8F212074A0300001EB54 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */; };
 		CEE0CD7D20528C2400488980 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7C20528C2300488980 /* TextField.swift */; };
 		CEE0CD7F20528C6000488980 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7E20528C6000488980 /* CursorView.swift */; };
 		CEE0CD8120528C7800488980 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD8020528C7800488980 /* Spinner.swift */; };
@@ -75,6 +78,9 @@
 		7BE97E8B1E02E8A5001265EB /* SpringButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringButton.swift; sourceTree = "<group>"; };
 		7BE97E901E032AB4001265EB /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
 		CE2DBA162058EEE900D08C5E /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
+		CE6A8F1820749E650001EB54 /* PickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerController.swift; sourceTree = "<group>"; };
+		CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneToolBar.swift; sourceTree = "<group>"; };
+		CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		CEE0CD7C20528C2300488980 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		CEE0CD7E20528C6000488980 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		CEE0CD8020528C7800488980 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -252,6 +258,8 @@
 				CEE0CD7E20528C6000488980 /* CursorView.swift */,
 				CEE0CD8020528C7800488980 /* Spinner.swift */,
 				CE2DBA162058EEE900D08C5E /* TimerLabel.swift */,
+				CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */,
+				CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				7BE97E7C1E02E893001265EB /* Main.storyboard */,
+				CE6A8F1820749E650001EB54 /* PickerController.swift */,
 				66CECC441E2358BB00F5A957 /* AnimatedLabels */,
 				66CECC411E23582B00F5A957 /* StickyHeaderTableView */,
 				66E034021E155A9600C8AA9B /* RainbowTableView */,
@@ -347,13 +356,16 @@
 			files = (
 				7BE97E7B1E02E893001265EB /* AnimatedLabelsController.swift in Sources */,
 				7B47062C1E043FD3009BF704 /* FadeLabel.swift in Sources */,
+				CE6A8F202074A0300001EB54 /* DoneToolBar.swift in Sources */,
 				CEE0CD7D20528C2400488980 /* TextField.swift in Sources */,
+				CE6A8F212074A0300001EB54 /* PickerTextField.swift in Sources */,
 				66FB10BC1E2F2C6B00E985DD /* CountingLabel.swift in Sources */,
 				7B47062E1E044025009BF704 /* ResizableHeaderTableView.swift in Sources */,
 				7B4706371E0522AC009BF704 /* SpringLabel.swift in Sources */,
 				7B4706301E0440CC009BF704 /* AnimatedLabel.swift in Sources */,
 				66C578A01E2749B400B15AB9 /* ResizableTextView.swift in Sources */,
 				CE2DBA172058EEE900D08C5E /* TimerLabel.swift in Sources */,
+				CE6A8F1920749E650001EB54 /* PickerController.swift in Sources */,
 				7B8B7E591E069F2B00C7B351 /* StyledLabel.swift in Sources */,
 				66FB10C31E307FA300E985DD /* NoDelayTableView.swift in Sources */,
 				7BE97E791E02E893001265EB /* AppDelegate.swift in Sources */,
@@ -529,7 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bonya.CustomViews1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				USE_HEADERMAP = NO;
 			};
 			name = Debug;
@@ -545,7 +557,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bonya.CustomViews1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				USE_HEADERMAP = NO;
 			};
 			name = Release;
