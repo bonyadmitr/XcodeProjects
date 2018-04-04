@@ -100,12 +100,12 @@ class SecureTextField: TextField {
             if isEditing {
                 return super.text
             } else {
-                return actualText;
+                return actualText
             }
         }
         
         set {
-            super.text=(newValue)
+            super.text = newValue
         }
     }
     
@@ -116,7 +116,7 @@ class SecureTextField: TextField {
     
     override func setupEvents () {
         super.setupEvents()
-        addTarget(self, action: #selector(SecureTextField.editingDidChange(_:)), for: .editingChanged)
+        addTarget(self, action: #selector(editingDidChange), for: .editingChanged)
     }
     
     override func editingDidBegin (_ sender: AnyObject) {
@@ -126,23 +126,56 @@ class SecureTextField: TextField {
     }
     
     @objc func editingDidChange(_ sender: AnyObject) {
-        actualText = text;
+        actualText = text
     }
     
     override func editingDidFinish(_ sender: AnyObject) {
         super.editingDidFinish(sender)
         isSecureTextEntry = false
-        actualText = text;
-        text = dotPlaceholder();
+        actualText = text
+        text = dotPlaceholder()
     }
     
     func dotPlaceholder() -> String {
-        var index = 0;
-        let dots = NSMutableString();
+        var index = 0
+        var dots = ""
         while (index < text.count) {
-            dots.append("•");
-            index += 1;
+            dots += "•"
+            index += 1
         }
-        return dots as String;
+        return dots
+    }
+}
+
+final class SecureTextField2: UITextField {
+    
+    @IBAction func actionTogglePasswordVisibilityButton(_ sender: UIButton) {
+        togglePasswordVisibility()
+    }
+    
+    var saveTextAfterTogglePasswordVisibility = true
+    
+    func togglePasswordVisibility() {
+        isSecureTextEntry = !isSecureTextEntry
+        updateFont()
+        
+        if saveTextAfterTogglePasswordVisibility, isSecureTextEntry, let existingText = text {
+            /// https://stackoverflow.com/a/48115361/5893286
+            /* When toggling to secure text, all text will be purged if the user 
+             * continues typing unless we intervene. This is prevented by first 
+             * deleting the existing text and then recovering the original text. */
+            deleteBackward()
+            
+            if let textRange = textRange(from: beginningOfDocument, to: endOfDocument) {
+                replace(textRange, withText: existingText)
+            }
+        }
+    }
+    
+    /// https://stackoverflow.com/a/35295940/5893286
+    private func updateFont() {
+        let savedFont = font
+        font = nil
+        font = savedFont
     }
 }
