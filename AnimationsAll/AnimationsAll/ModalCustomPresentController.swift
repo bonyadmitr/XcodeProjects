@@ -32,7 +32,11 @@ class ModalCustomPresentController: UIViewController {
             self.backView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
             self.backView.center = CGPoint(x: self.backView.center.x, y: 20)
         }, completion: { _ in
+            /// after dismiss with presenting by overCyrrentContext or OverFullScreen will not call 
+            /// viewWillAppear and viewDidAppear in presentingViewController
+            self.presentingViewController?.viewWillAppear(true)
             self.dismiss(animated: false, completion: nil)
+            self.presentingViewController?.viewDidAppear(true)
         })
     }
 }

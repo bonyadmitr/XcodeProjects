@@ -14,7 +14,7 @@ class PopUpByCustomClassController: UIViewController {
     
     //button in controller
     @IBAction func showButton(_ sender: UIButton) {
-        popUpView.show(in: view)
+        popUpView.show(in: navigationController?.view ?? view)
     }
     
     //button in popUpView
