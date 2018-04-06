@@ -12,6 +12,8 @@ import Foundation
 typealias StepHandler = () -> Void
 typealias VoidHandler = () -> Void
 
+/// can be used https://github.com/radex/SwiftyTimer
+
 class TimerWrapper: NSObject {
     
     private var timer: Timer?
