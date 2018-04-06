@@ -39,34 +39,3 @@ extension Array {
     }
 }
 
-protocol FlipCellProtocol: class {
-    var front: UIView! { get }
-    var back: UIView! { get }
-    var isFront: Bool { get set }
-    func flipCell()
-}
-
-extension FlipCellProtocol where Self: UIView {
-    
-    //var isFront: Bool {
-    //return true
-    //}
-    
-    func flipCell() {
-        
-        if isFront {
-            UIView.transition(with: self, duration: 1, options: .transitionFlipFromLeft, animations: {
-                self.front.isHidden = true
-                self.back.isHidden = false
-            }, completion: nil)
-            
-        } else {
-            UIView.transition(with: self, duration: 1, options: .transitionFlipFromRight, animations: {
-                self.front.isHidden = false
-                self.back.isHidden = true
-            }, completion: nil)
-        }
-        
-        isFront = !isFront
-    }
-}

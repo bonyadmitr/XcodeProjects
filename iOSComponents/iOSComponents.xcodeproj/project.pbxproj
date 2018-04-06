@@ -17,6 +17,8 @@
 		CE5CAE77207744DB00E763B1 /* ClosureTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */; };
 		CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7C207748BE00E763B1 /* Typealias.swift */; };
 		CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */; };
+		CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D32207796EC00203036 /* ErrorPresenter.swift */; };
+		CEDA2D352077972C00203036 /* Flippable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D342077972C00203036 /* Flippable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureTapGesture.swift; sourceTree = "<group>"; };
 		CE5CAE7C207748BE00E763B1 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		CEDA2D32207796EC00203036 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
+		CEDA2D342077972C00203036 /* Flippable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flippable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,7 @@
 				CE5CAE6220773E8700E763B1 /* Main.storyboard */,
 				CE5CAE6020773E8700E763B1 /* ViewController.swift */,
 				CE5CAE7C207748BE00E763B1 /* Typealias.swift */,
+				CEDA2D362077976000203036 /* Protocols */,
 				CE5CAE782077474B00E763B1 /* Classes */,
 				CE5CAE75207744D200E763B1 /* Extensions */,
 			);
@@ -101,6 +106,15 @@
 				CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		CEDA2D362077976000203036 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CEDA2D32207796EC00203036 /* ErrorPresenter.swift */,
+				CEDA2D342077972C00203036 /* Flippable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,7 +188,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDA2D352077972C00203036 /* Flippable.swift in Sources */,
 				CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */,
+				CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,
 				CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */,
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
