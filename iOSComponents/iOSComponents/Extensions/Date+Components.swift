@@ -8,41 +8,30 @@
 
 import UIKit
 
-protocol Components {
-    
-//    func getYear() -> Int
-//    
-//    func getMonth() -> Int
-}
-
 /// addition
 /// https://github.com/melvitax/DateHelper
 
-extension Date: Components {
+extension Date {
     
     var year: Int {
         return Calendar.current.component(.year, from: self)
     }
     
-    func getMonth() -> Int {
-        let calendar = Calendar.current
-        
-        return calendar.component(.month, from: self)
+    var month: Int {
+        return Calendar.current.component(.month, from: self)
     }
     
-    func getDateInFormat(format: String) -> String {
+    func dateInFormat(_ format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
     
-    func getTimeIntervalBetweenDateAndCurrentDate() -> Int {
-        let curentDate = Date()
-        let deltaDate = curentDate - self.timeIntervalSince1970
-        let calendar = Calendar.current
-        
-        let years = calendar.component(.year, from: deltaDate) - 1970
-        let monthes = calendar.component(.month, from: deltaDate) - 1
+    /// timeIntervalSinceNow
+    var monthesSinceCurrentDate: Int {
+        let deltaDate = Date() - timeIntervalSince1970
+        let years = Calendar.current.component(.year, from: deltaDate) - 1970
+        let monthes = Calendar.current.component(.month, from: deltaDate) - 1
         return monthes + years * 12
     }
     
