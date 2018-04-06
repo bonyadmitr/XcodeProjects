@@ -19,6 +19,7 @@
 		CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */; };
 		CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D32207796EC00203036 /* ErrorPresenter.swift */; };
 		CEDA2D352077972C00203036 /* Flippable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D342077972C00203036 /* Flippable.swift */; };
+		CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D372077981F00203036 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		CEDA2D32207796EC00203036 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		CEDA2D342077972C00203036 /* Flippable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flippable.swift; sourceTree = "<group>"; };
+		CEDA2D372077981F00203036 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5CAE732077449E00E763B1 /* Date+Components.swift */,
+				CEDA2D372077981F00203036 /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDA2D352077972C00203036 /* Flippable.swift in Sources */,
+				CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */,
 				CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */,
 				CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,

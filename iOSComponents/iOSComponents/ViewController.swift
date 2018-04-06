@@ -28,14 +28,3 @@ class ViewController: UIViewController {
         print(q)
     }
 }
-
-//    lazy var vc2: ViewController2 = {
-//        return self.childViewControllers.first(of: ViewController2.self)!
-//    }()
-//Array+Extensions
-extension Array {
-    public func first<T>(of type: T.Type) -> T? {
-        return first { $0 is T } as? T
-    }
-}
-
