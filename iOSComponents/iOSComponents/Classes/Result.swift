@@ -15,7 +15,13 @@ typealias ArrayHandlerResult<T> = (ResponseResult<[T]>) -> Void
 
 enum ResponseResult<T> {
     case success(T)
-    case failed(Error)
+    case failure(Error)
+}
+
+enum CancelableResult<T> {
+    case success(T)
+    case failure(Error)
+    case cancel
 }
 
 /// https://github.com/antitypical/Result

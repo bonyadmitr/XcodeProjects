@@ -16,6 +16,7 @@
 		CE5CAE742077449E00E763B1 /* Date+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE732077449E00E763B1 /* Date+Components.swift */; };
 		CE5CAE77207744DB00E763B1 /* ClosureTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */; };
 		CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7C207748BE00E763B1 /* Typealias.swift */; };
+		CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CE5CAE732077449E00E763B1 /* Date+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Components.swift"; sourceTree = "<group>"; };
 		CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureTapGesture.swift; sourceTree = "<group>"; };
 		CE5CAE7C207748BE00E763B1 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				CE5CAE712077422100E763B1 /* Result.swift */,
 				CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */,
+				CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,
 				CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */,
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
