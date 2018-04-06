@@ -8,9 +8,8 @@
 
 import UIKit
 
-public typealias VoidHandler = () -> Void
-
 /// localizedDescription: "The requested operation couldn’t be completed because the feature is not supported."
+/// localized. example ru: "Операцию не удалось завершить, так как эта функция не поддерживается."
 let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: [:])
 
 class ViewController: UIViewController {
