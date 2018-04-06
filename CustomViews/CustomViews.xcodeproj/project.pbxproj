@@ -40,6 +40,7 @@
 		CE6A8F1920749E650001EB54 /* PickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1820749E650001EB54 /* PickerController.swift */; };
 		CE6A8F202074A0300001EB54 /* DoneToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */; };
 		CE6A8F212074A0300001EB54 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */; };
+		CEDA2D422077DBEE00203036 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D412077DBEE00203036 /* InsetsLabel.swift */; };
 		CEE0CD7D20528C2400488980 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7C20528C2300488980 /* TextField.swift */; };
 		CEE0CD7F20528C6000488980 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7E20528C6000488980 /* CursorView.swift */; };
 		CEE0CD8120528C7800488980 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD8020528C7800488980 /* Spinner.swift */; };
@@ -81,6 +82,7 @@
 		CE6A8F1820749E650001EB54 /* PickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerController.swift; sourceTree = "<group>"; };
 		CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneToolBar.swift; sourceTree = "<group>"; };
 		CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		CEDA2D412077DBEE00203036 /* InsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsLabel.swift; sourceTree = "<group>"; };
 		CEE0CD7C20528C2300488980 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		CEE0CD7E20528C6000488980 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		CEE0CD8020528C7800488980 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				CE2DBA162058EEE900D08C5E /* TimerLabel.swift */,
 				CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */,
 				CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */,
+				CEDA2D412077DBEE00203036 /* InsetsLabel.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			files = (
 				7BE97E7B1E02E893001265EB /* AnimatedLabelsController.swift in Sources */,
 				7B47062C1E043FD3009BF704 /* FadeLabel.swift in Sources */,
+				CEDA2D422077DBEE00203036 /* InsetsLabel.swift in Sources */,
 				CE6A8F202074A0300001EB54 /* DoneToolBar.swift in Sources */,
 				CEE0CD7D20528C2400488980 /* TextField.swift in Sources */,
 				CE6A8F212074A0300001EB54 /* PickerTextField.swift in Sources */,
