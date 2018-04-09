@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665BB413207BD1C30088AB25 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB412207BD1C30088AB25 /* UIColor+Adjust.swift */; };
+		665BB415207BDBBE0088AB25 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB414207BDBBE0088AB25 /* BackButton.swift */; };
+		665BB417207BDBF70088AB25 /* BackButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB416207BDBF70088AB25 /* BackButtonController.swift */; };
 		CE2A52AA20374582002CB548 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A52A920374582002CB548 /* AppDelegate.swift */; };
 		CE2A52AC20374582002CB548 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A52AB20374582002CB548 /* ViewController.swift */; };
 		CE2A52AF20374582002CB548 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2A52AD20374582002CB548 /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		665BB412207BD1C30088AB25 /* UIColor+Adjust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Adjust.swift"; sourceTree = "<group>"; };
+		665BB414207BDBBE0088AB25 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		665BB416207BDBF70088AB25 /* BackButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonController.swift; sourceTree = "<group>"; };
 		CE2A52A620374582002CB548 /* BackButtonHandler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackButtonHandler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2A52A920374582002CB548 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE2A52AB20374582002CB548 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +65,10 @@
 				CE2A52BD203751F7002CB548 /* App */,
 				CE2A52AD20374582002CB548 /* Main.storyboard */,
 				CE2A52AB20374582002CB548 /* ViewController.swift */,
+				665BB416207BDBF70088AB25 /* BackButtonController.swift */,
+				665BB414207BDBBE0088AB25 /* BackButton.swift */,
 				CE2A52BB20374E85002CB548 /* BackButtonHandler.swift */,
+				665BB412207BD1C30088AB25 /* UIColor+Adjust.swift */,
 			);
 			path = BackButtonHandler;
 			sourceTree = "<group>";
@@ -149,7 +158,10 @@
 			files = (
 				CE2A52AC20374582002CB548 /* ViewController.swift in Sources */,
 				CE2A52AA20374582002CB548 /* AppDelegate.swift in Sources */,
+				665BB413207BD1C30088AB25 /* UIColor+Adjust.swift in Sources */,
 				CE2A52BC20374E85002CB548 /* BackButtonHandler.swift in Sources */,
+				665BB417207BDBF70088AB25 /* BackButtonController.swift in Sources */,
+				665BB415207BDBBE0088AB25 /* BackButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +300,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "$(SRCROOT)/BackButtonHandler/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.BackButtonHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +315,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "$(SRCROOT)/BackButtonHandler/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.BackButtonHandler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
