@@ -38,7 +38,8 @@ final class BackButton: UIButton {
     
     private func setup() {
         let color = UIColor.black
-        let image = UIImage(named: "im_backButton") /// as template
+//        let image = UIImage(named: "im_backButton") /// as template
+        let image = UIImage(named: "im_default_back_button") /// as template
         let title = "Back"
         let font = UIFont.systemFont(ofSize: 17)
         let imageInset: CGFloat = -20
