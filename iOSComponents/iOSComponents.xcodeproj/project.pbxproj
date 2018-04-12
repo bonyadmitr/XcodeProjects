@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */; };
 		CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE5E20773E8700E763B1 /* AppDelegate.swift */; };
 		CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE6020773E8700E763B1 /* ViewController.swift */; };
 		CE5CAE6420773E8700E763B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5CAE6220773E8700E763B1 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Subscript.swift"; sourceTree = "<group>"; };
 		CE5CAE5B20773E8700E763B1 /* iOSComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5CAE5E20773E8700E763B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5CAE6020773E8700E763B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				CEDA2D372077981F00203036 /* Array+Extensions.swift */,
 				CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */,
 				CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */,
+				665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
 				CE5CAE742077449E00E763B1 /* Date+Components.swift in Sources */,
 				CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */,
+				665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */,
 				CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */,
 				CE5CAE77207744DB00E763B1 /* ClosureTapGesture.swift in Sources */,
 			);
