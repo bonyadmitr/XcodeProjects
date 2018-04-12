@@ -24,35 +24,65 @@ class ViewController: UIViewController {
 //        Weak внутри weak
 //        autoreleasepool in dispatch queue
 
-        
-        
-//        service.getSome {
-//            print("getSome 1")
-//            self.view.backgroundColor = .red
-//        }
-        
-//        service.getSome { [weak self] in
-//            print("getSome 1")
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.view.backgroundColor = .red
-//        }
-        
-//        Service().getSome {
-//            print("getSome 2")
-//            self.view.backgroundColor = .blue
-//        }
-        
-//        Service().getSome { [weak self] in
-//            print("getSome 2")
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.view.backgroundColor = .blue
-//        }
-        
-        
+        test6()
+    }
+    
+    
+    
+    func test1() {
+        service.getSome {
+            print("getSome 1")
+            self.view.backgroundColor = .red
+        }
+
+    }
+    
+    func test2() {
+        service.getSome { [weak self] in
+            print("getSome 1")
+            guard let `self` = self else {
+                return
+            }
+            self.view.backgroundColor = .red
+        }
+
+    }
+    
+    func test3() {
+        Service().getSome {
+            print("getSome 2")
+            self.view.backgroundColor = .blue
+        }
+
+    }
+    
+    func test4() {
+        Service().getSome { [weak self] in
+            print("getSome 2")
+            guard let `self` = self else {
+                return
+            }
+            self.view.backgroundColor = .blue
+        }
+
+    }
+    
+    func test5() {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {  [weak self] in
+            print("global 3")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {// [weak self] in
+                print("main 3")
+                guard let `self` = self else {
+                    return
+                }
+                self.view.backgroundColor = .blue
+            }
+        }
+
+    }
+    
+    func test6() {
         service.getSome { [weak self] in
             print("getSome 1")
             
@@ -67,27 +97,7 @@ class ViewController: UIViewController {
                     self.view.backgroundColor = .blue
                 }
             }
-            
-            
-//            guard let `self` = self else {
-//                return
-//            }
-//            self.view.backgroundColor = .red
         }
-        
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {  [weak self] in
-//            print("global 3")
-//
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {// [weak self] in
-//                print("main 3")
-//                guard let `self` = self else {
-//                    return
-//                }
-//                self.view.backgroundColor = .blue
-//            }
-//        }
-        
-
     }
 }
 
