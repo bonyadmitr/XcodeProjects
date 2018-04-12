@@ -1,0 +1,4 @@
+# **/Constants/** merge=union
+# Localizable.strings merge=union
+# Podfile merge=union
+# *.pbxproj merge=union
