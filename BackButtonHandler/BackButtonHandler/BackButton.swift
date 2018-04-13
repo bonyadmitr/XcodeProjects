@@ -21,6 +21,17 @@ final class BackButton: UIButton {
     
     private var action: VoidHandler?
     
+    var buttonColor: UIColor {
+        get {
+            return tintColor
+        }
+        set (color) {
+            tintColor = color
+            setTitleColor(color, for: .normal)
+            setTitleColor(color.darker(by: 50), for: .highlighted)
+        }
+    }
+    
     convenience init(action: @escaping VoidHandler) {
         self.init(type: .custom)
         self.action = action
@@ -38,7 +49,8 @@ final class BackButton: UIButton {
     
     private func setup() {
         let color = UIColor.black
-        let image = UIImage(named: "im_backButton") /// as template
+//        let image = UIImage(named: "im_backButton") /// as template
+        let image = UIImage(named: "im_default_back_button") /// as template
         let title = "Back"
         let font = UIFont.systemFont(ofSize: 17)
         let imageInset: CGFloat = -20
@@ -47,10 +59,7 @@ final class BackButton: UIButton {
         titleLabel?.font = font
         setTitle(title, for: .normal)
         setImage(image, for: .normal)
-        
-        tintColor = color
-        setTitleColor(color, for: .normal)
-        setTitleColor(color.darker(by: 50), for: .highlighted)
+        buttonColor = color
         
         imageEdgeInsets = UIEdgeInsets(top: 2, left: imageInset, bottom: 0, right: 0)
         titleEdgeInsets = UIEdgeInsets(top: 2, left: titleInset, bottom: 0, right: 0)
