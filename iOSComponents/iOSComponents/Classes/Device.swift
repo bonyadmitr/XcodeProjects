@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// for disk space
+/// https://stackoverflow.com/questions/26198073/query-available-ios-disk-space-with-swift
 final class Device {
     
     static var homeFolder: String {
@@ -28,7 +30,7 @@ final class Device {
     static var freeDiskSpace: Int64 {
         if #available(iOS 11.0, *) {
             let fileURL = URL(fileURLWithPath: homeFolder)
-            ///.volumeAvailableCapacityForOpportunisticUsageKey
+            ///check vs .volumeAvailableCapacityKey, .volumeAvailableCapacityForOpportunisticUsageKey
             let values = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
             return values?.volumeAvailableCapacityForImportantUsage ?? 0
         } else {
