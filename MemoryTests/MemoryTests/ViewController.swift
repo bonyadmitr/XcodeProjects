@@ -17,11 +17,13 @@ class ViewController: UIViewController {
     }
     
     lazy var service = Service()
+    lazy var service2 = Service2()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testAutoreleasepool()
+        test2()
+//        testAutoreleasepool()
     }
     
     
@@ -97,6 +99,16 @@ class ViewController: UIViewController {
         }
     }
     
+    func test7() {
+        service2.getSome { [weak self] in
+            print("getSome 2")
+            guard let `self` = self else {
+                return
+            }
+            self.view.backgroundColor = .red
+        }
+        
+    }
     
     
     func testAutoreleasepool() {
@@ -124,6 +136,24 @@ class Service {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             DispatchQueue.main.async {
                 handler()
+            }
+        }
+    }
+}
+
+class Service2 {
+    
+    deinit {
+        print("- deinit Service2")
+    }
+    
+    var handler: VoidHandler?
+    
+    func getSome(handler: @escaping VoidHandler) {
+        self.handler = handler
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+            DispatchQueue.main.async {
+                self?.handler?()
             }
         }
     }
