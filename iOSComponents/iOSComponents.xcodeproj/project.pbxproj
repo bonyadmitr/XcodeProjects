@@ -25,6 +25,7 @@
 		CEDA2D3C2077ACB700203036 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */; };
 		CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */; };
 		CEDA2D402077DB5200203036 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3F2077DB5200203036 /* Formatters.swift */; };
+		CEF5325B208289DB006B2BFB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5325A208289DB006B2BFB /* Device.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Layout.swift"; sourceTree = "<group>"; };
 		CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Toggle.swift"; sourceTree = "<group>"; };
 		CEDA2D3F2077DB5200203036 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		CEF5325A208289DB006B2BFB /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				CE5CAE76207744DB00E763B1 /* ClosureTapGesture.swift */,
 				CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */,
 				CEDA2D3F2077DB5200203036 /* Formatters.swift */,
+				CEF5325A208289DB006B2BFB /* Device.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,
 				CEDA2D402077DB5200203036 /* Formatters.swift in Sources */,
+				CEF5325B208289DB006B2BFB /* Device.swift in Sources */,
 				CEDA2D3C2077ACB700203036 /* UICollectionView+Layout.swift in Sources */,
 				CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */,
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
@@ -365,6 +369,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = "$(SRCROOT)/iOSComponents/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -383,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = "$(SRCROOT)/iOSComponents/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

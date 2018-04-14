@@ -10,6 +10,16 @@ import Foundation
 
 final class Formatters {
     
+    static func bytes(from bytes: Int64) -> String {
+        /// bytes only
+//        let formatter = ByteCountFormatter()
+//        formatter.allowedUnits = .useMB
+//        formatter.countStyle = .decimal
+//        formatter.includesUnit = false
+//        return formatter.string(fromByteCount: bytes)
+        return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .binary)
+    }
+    
     func minutesSecond(from value: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
