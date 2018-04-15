@@ -27,6 +27,11 @@ class ViewController: UIViewController {
         let q = Result<Void>.failure(unknownError).error?.localizedDescription
         print(q)
         
+        
+        
+        print(Formatters.bytes(from: Device.totalDiskSpace))
+        print(Formatters.bytes(from: Device.freeDiskSpace))
+        print(Formatters.bytes(from: Device.usedDiskSpace))
     }
 }
 

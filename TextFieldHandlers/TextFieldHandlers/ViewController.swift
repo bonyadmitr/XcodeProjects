@@ -34,6 +34,38 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
+
+final class Validators {
+    
+    /// .*@.*\..*
+   static func isEmail(_ email: String) -> Bool {
+        let emailRegEx = "^.+@.+\\..{2,}$"
+        return check(text: email, regEx: emailRegEx)
+    }
+    
+    /// SELF MATCHES[c]
+    /// [c] makes the equality comparison case-insensitive
+    static func isValid(email: String) -> Bool {
+        let emailRegEx = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
+        return check(text: email, regEx: emailRegEx)
+    }
+    
+    static func isValid(phone: String) -> Bool {
+        var phoneNumber = phone.filter { $0 != "(" && $0 != ")" }
+        if !phone.contains("+") {
+            phoneNumber = "+" + phoneNumber
+        }
+        
+        let phoneRegEx = "^((\\+)|(00))[0-9]{9,15}$"
+        return check(text: phoneNumber, regEx: phoneRegEx)
+    }
+    
+    private static func check(text: String, regEx: String) -> Bool {
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regEx)
+        return predicate.evaluate(with: text)
+    }
+}
+
 //replaceSubrange
 //https://stackoverflow.com/a/48581912/5893286
 
