@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     }
 }
 
+/// https://stackoverflow.com/a/46003924/5893286
 class ReturnButtonHandlingTextField: UITextField {
     
     override init(frame: CGRect) {
@@ -38,8 +39,8 @@ class ReturnButtonHandlingTextField: UITextField {
     }
     
     override var hasText: Bool {
-        if let text = text {
-            return TextHandlers.isAllowed(characters: "123qwe", in: text)
+        if let text = text, !text.isEmpty {
+            return TextHandlers.isNotAllowed(characters: "123qwe", in: text)
         }
         return false
     }
