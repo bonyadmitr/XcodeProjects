@@ -25,12 +25,13 @@ final class TextHandlers {
         return text.rangeOfCharacter(from: characterSetNotAllowed, options: .caseInsensitive) == nil
     }
     
+    /// create for text count > 1 !!!!!!!
     static func isAllowed(characters: String, in text: String) -> Bool {
-        let characterSetAllowed = CharacterSet(charactersIn: characters)
+        let characterSetAllowed = CharacterSet(charactersIn: characters).inverted
         
-        if let rangeOfCharactersAllowed = text.rangeOfCharacter(from: characterSetAllowed, options: .caseInsensitive) {
-            let validCharacterCount = text.distance(from: rangeOfCharactersAllowed.lowerBound,
-                                                    to: rangeOfCharactersAllowed.upperBound)
+        if let range = text.rangeOfCharacter(from: characterSetAllowed, options: .caseInsensitive) {
+            let validCharacterCount = text.distance(from: range.lowerBound, to: range.upperBound)
+//            let validCharacterCount = range.upperBound.encodedOffset - range.lowerBound.encodedOffset
             return validCharacterCount == text.count
         } else  {
             return false

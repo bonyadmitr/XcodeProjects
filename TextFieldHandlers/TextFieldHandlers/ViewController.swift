@@ -17,11 +17,55 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         textField.delegate = self
+        textField.enablesReturnKeyAutomatically = true
+    }
+}
+
+class ReturnButtonHandlingTextField: UITextField {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        enablesReturnKeyAutomatically = true
+    }
+    
+    override var hasText: Bool {
+        if let text = text {
+            return TextHandlers.isAllowed(characters: "123qwe", in: text)
+        }
+        return false
+    }
+}
+
+extension String {
+    var trimmed: String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        /// if we deleting items
+        if string.isEmpty {
+            return true
+        }
+        
+        /// text is pasted
+        var string = string
+        let trimmed = string.trimmed
+        if trimmed == UIPasteboard.general.string {
+            string = trimmed
+        }
+        
 //        return TextHandlers.isDigits(in: string)
 //        return TextHandlers.isAvailableCharacters(in: string)
 //        return TextHandlers.isNotAllowed(characters: "123qwe", in: string)
