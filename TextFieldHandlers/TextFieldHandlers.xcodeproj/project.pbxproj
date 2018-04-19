@@ -12,6 +12,8 @@
 		CEDA2D552077E7D000203036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D532077E7D000203036 /* Main.storyboard */; };
 		CEDA2D572077E7D100203036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D562077E7D100203036 /* Assets.xcassets */; };
 		CEDA2D5A2077E7D100203036 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D582077E7D100203036 /* LaunchScreen.storyboard */; };
+		CEF371A420886B7D007AD36E /* TextHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF371A320886B7D007AD36E /* TextHandlers.swift */; };
+		CEF371A620886B8E007AD36E /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF371A520886B8E007AD36E /* Validators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		CEDA2D562077E7D100203036 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEDA2D592077E7D100203036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDA2D5B2077E7D100203036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEF371A320886B7D007AD36E /* TextHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHandlers.swift; sourceTree = "<group>"; };
+		CEF371A520886B8E007AD36E /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				CEDA2D612077E7EA00203036 /* App */,
-				CEDA2D512077E7D000203036 /* ViewController.swift */,
 				CEDA2D532077E7D000203036 /* Main.storyboard */,
+				CEDA2D512077E7D000203036 /* ViewController.swift */,
+				CEF371A320886B7D007AD36E /* TextHandlers.swift */,
+				CEF371A520886B8E007AD36E /* Validators.swift */,
 			);
 			path = TextFieldHandlers;
 			sourceTree = "<group>";
@@ -143,7 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF371A620886B8E007AD36E /* Validators.swift in Sources */,
 				CEDA2D522077E7D000203036 /* ViewController.swift in Sources */,
+				CEF371A420886B7D007AD36E /* TextHandlers.swift in Sources */,
 				CEDA2D502077E7D000203036 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
