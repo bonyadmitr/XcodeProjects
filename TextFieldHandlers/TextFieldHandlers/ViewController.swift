@@ -30,12 +30,41 @@ extension String {
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        //--- handle length
+        /// !!! create for pasting to limit
+        /// create classes
+        // limit to 4 characters
+        let characterCountLimit = 4
+        
+        // We need to figure out how many characters would be in the string after the change happens
+        let startingLength = textField.text?.count ?? 0
+        let lengthToAdd = string.count
+        let lengthToReplace = range.length
+        let newLength = startingLength + lengthToAdd - lengthToReplace
+        
+        let isNewLengthBigger = newLength > characterCountLimit
+        
+        if isNewLengthBigger {
+            return false
+        }
+        
+        //---
+        
         /// if we deleting items
         if string.isEmpty {
+            let remainLength = characterCountLimit - newLength
+            print("remainLength:", remainLength)
             return true
         }
         
+        
         /// text is pasted
+        /// 1
+        /// or string.count > 1
+        /// 2
+        ///UIPasteboard.general.string?.contains(string) == true
+        /// 3
+        /// there are whitespaces in "string" after copy&past
         var string = string
         let trimmed = string.trimmed
         if trimmed == UIPasteboard.general.string {
@@ -45,7 +74,14 @@ extension ViewController: UITextFieldDelegate {
 //        return TextHandlers.isDigits(in: string)
 //        return TextHandlers.isAvailableCharacters(in: string)
 //        return TextHandlers.isNotAllowed(characters: "123qwe", in: string)
-        return TextHandlers.isAllowed(characters: "123qwe", in: string)
+        let isAllowed = TextHandlers.isAllowed(characters: "123qwe", in: string)
+        
+        if isAllowed {
+            let remainLength = characterCountLimit - newLength
+            print("remainLength:", remainLength)
+        }
+        
+        return isAllowed
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
