@@ -8,6 +8,21 @@
 
 import UIKit
 
+import UIKit
+
+class LanguageTextFieldController: UIViewController {
+    
+    @IBOutlet weak var languageTextField: LanguageTextField!
+    
+    @IBAction private func languageDidChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            languageTextField.keyboardLanguage = "en"
+        } else if sender.selectedSegmentIndex == 1 {
+            languageTextField.keyboardLanguage = "emoji"
+        }
+    }
+}
+
 /// ADD limit for text field
 class ViewController: UIViewController {
 
@@ -53,6 +68,34 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
+
+class LanguageTextField: UITextField {
+    
+    /// UITextInputCurrentInputModeDidChange notification
+    /// emoji
+    /// ru or ru-RU
+    /// en or en-US
+    /// UITextInputMode.activeInputModes.forEach { print($0.primaryLanguage)}
+    var keyboardLanguage = "en" {
+        didSet {
+            if isFirstResponder {
+                resignFirstResponder()
+                becomeFirstResponder()
+            }
+        }
+    }
+    
+    /// https://stackoverflow.com/a/43636068
+    override var textInputMode: UITextInputMode? {
+        for textInputMode in UITextInputMode.activeInputModes {
+            if textInputMode.primaryLanguage?.contains(keyboardLanguage) == true {
+                return textInputMode
+            }
+        }
+        return super.textInputMode
+    }
+}
+
 
 //replaceSubrange
 //https://stackoverflow.com/a/48581912/5893286
