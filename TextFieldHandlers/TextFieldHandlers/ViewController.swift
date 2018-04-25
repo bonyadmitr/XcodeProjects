@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// ADD limit for text field
 class ViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
@@ -16,53 +17,76 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         textField.delegate = self
+        textField.enablesReturnKeyAutomatically = true
     }
-    
-    private func isAvailableCharacters(in text: String) -> Bool {
-        return text.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+}
+
+extension String {
+    var trimmed: String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return isAvailableCharacters(in: string)
+        
+        //--- handle length
+        /// !!! create for pasting to limit
+        /// create classes
+        // limit to 4 characters
+        let characterCountLimit = 4
+        
+        // We need to figure out how many characters would be in the string after the change happens
+        let startingLength = textField.text?.count ?? 0
+        let lengthToAdd = string.count
+        let lengthToReplace = range.length
+        let newLength = startingLength + lengthToAdd - lengthToReplace
+        
+        let isNewLengthBigger = newLength > characterCountLimit
+        
+        if isNewLengthBigger {
+            return false
+        }
+        
+        //---
+        
+        /// if we deleting items
+        if string.isEmpty {
+            let remainLength = characterCountLimit - newLength
+            print("remainLength:", remainLength)
+            return true
+        }
+        
+        
+        /// text is pasted
+        /// 1
+        /// or string.count > 1
+        /// 2
+        ///UIPasteboard.general.string?.contains(string) == true
+        /// 3
+        /// there are whitespaces in "string" after copy&past
+        var string = string
+        let trimmed = string.trimmed
+        if trimmed == UIPasteboard.general.string {
+            string = trimmed
+        }
+        
+//        return TextHandlers.isDigits(in: string)
+//        return TextHandlers.isAvailableCharacters(in: string)
+//        return TextHandlers.isNotAllowed(characters: "123qwe", in: string)
+        let isAllowed = TextHandlers.isAllowed(characters: "123qwe", in: string)
+        
+        if isAllowed {
+            let remainLength = characterCountLimit - newLength
+            print("remainLength:", remainLength)
+        }
+        
+        return isAllowed
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("return button")
         return true
-    }
-}
-
-
-final class Validators {
-    
-    /// .*@.*\..*
-   static func isEmail(_ email: String) -> Bool {
-        let emailRegEx = "^.+@.+\\..{2,}$"
-        return check(text: email, regEx: emailRegEx)
-    }
-    
-    /// SELF MATCHES[c]
-    /// [c] makes the equality comparison case-insensitive
-    static func isValid(email: String) -> Bool {
-        let emailRegEx = "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-+]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z‌​]{2,})$"
-        return check(text: email, regEx: emailRegEx)
-    }
-    
-    static func isValid(phone: String) -> Bool {
-        var phoneNumber = phone.filter { $0 != "(" && $0 != ")" }
-        if !phone.contains("+") {
-            phoneNumber = "+" + phoneNumber
-        }
-        
-        let phoneRegEx = "^((\\+)|(00))[0-9]{9,15}$"
-        return check(text: phoneNumber, regEx: phoneRegEx)
-    }
-    
-    private static func check(text: String, regEx: String) -> Bool {
-        let predicate = NSPredicate(format: "SELF MATCHES %@", regEx)
-        return predicate.evaluate(with: text)
     }
 }
 
@@ -89,9 +113,4 @@ final class Validators {
 //    
 //    return true
 //}
-//
-//
-//let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
-//let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
-//return result == nil
 
