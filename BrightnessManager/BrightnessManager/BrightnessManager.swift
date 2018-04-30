@@ -18,13 +18,19 @@ extension BrightnessManagerDelegate {
 }
 
 /// NSObject need for perform selector method
-class BrightnessManager: NSObject {
+final class BrightnessManager: NSObject {
     
     static let shared = BrightnessManager()
     
     private var savedValue: CGFloat = 0
     
     private var brightnessObserver: NSObjectProtocol!
+    
+    /// https://stackoverflow.com/a/12661121/5893286
+    var isScreenSleepEnabled: Bool {
+        get { return UIApplication.shared.isIdleTimerDisabled }
+        set { UIApplication.shared.isIdleTimerDisabled = newValue }
+    }
     
     weak var delegate: BrightnessManagerDelegate?
     
