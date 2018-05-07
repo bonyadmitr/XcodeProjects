@@ -8,13 +8,19 @@
 
 import CoreLocation
 
+// TODO: need to check
+//#if TARGET_OS_TV
+//[self.locationManager requestLocation];
+//#else
+//[self.locationManager startUpdatingLocation];
+//#endif
+
 protocol LocationManagerDelegate: class {
     func didUpdate(location: CLLocation)
 }
 extension LocationManagerDelegate {
     func didUpdate(location: CLLocation) {}
 }
-
 
 /// https://habrahabr.ru/post/271505/
 /// я бы ещё добавил, что когда мы добавляем permission на location update (в background mode),
