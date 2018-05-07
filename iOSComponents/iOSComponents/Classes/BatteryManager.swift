@@ -10,8 +10,17 @@ import UIKit
 
 final class BatteryManager: NSObject {
     
-    var batteryLevel: Float {
+    static var batteryLevel: Float {
         return UIDevice.current.batteryLevel
+    }
+    
+    /// disable screen sleep
+    /// add in applicationDidBecomeActive
+    /// if isCharging {
+    ///     UIApplication.shared.isIdleTimerDisabled = true
+    /// }
+    static var isCharging: Bool {
+        return UIDevice.current.batteryState == .charging || UIDevice.current.batteryState == .full
     }
     
     override init() {
