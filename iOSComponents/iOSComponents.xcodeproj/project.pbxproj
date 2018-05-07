@@ -10,6 +10,8 @@
 		665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */; };
 		66C9CBD820A0BC3E001D56F1 /* BatteryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9CBD720A0BC3E001D56F1 /* BatteryManager.swift */; };
 		66C9CBDA20A0BF77001D56F1 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */; };
+		66C9CBDC20A0DD4F001D56F1 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */; };
+		66C9CBDE20A0DD79001D56F1 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9CBDD20A0DD79001D56F1 /* ShareData.swift */; };
 		CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE5E20773E8700E763B1 /* AppDelegate.swift */; };
 		CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE6020773E8700E763B1 /* ViewController.swift */; };
 		CE5CAE6420773E8700E763B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5CAE6220773E8700E763B1 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 		665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Subscript.swift"; sourceTree = "<group>"; };
 		66C9CBD720A0BC3E001D56F1 /* BatteryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryManager.swift; sourceTree = "<group>"; };
 		66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
+		66C9CBDD20A0DD79001D56F1 /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		CE5CAE5B20773E8700E763B1 /* iOSComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5CAE5E20773E8700E763B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5CAE6020773E8700E763B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				CEDA2D32207796EC00203036 /* ErrorPresenter.swift */,
 				CEDA2D342077972C00203036 /* Flippable.swift */,
 				CEDA2D392077A11700203036 /* MapToJSON.swift */,
+				66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */,
+				66C9CBDD20A0DD79001D56F1 /* ShareData.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -218,6 +224,7 @@
 				CEDA2D352077972C00203036 /* Flippable.swift in Sources */,
 				CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */,
 				CEDA2D3A2077A11700203036 /* MapToJSON.swift in Sources */,
+				66C9CBDE20A0DD79001D56F1 /* ShareData.swift in Sources */,
 				CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */,
 				CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,
@@ -229,6 +236,7 @@
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
 				CE5CAE742077449E00E763B1 /* Date+Components.swift in Sources */,
 				CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */,
+				66C9CBDC20A0DD4F001D56F1 /* ShareController.swift in Sources */,
 				665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */,
 				CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */,
 				66C9CBDA20A0BF77001D56F1 /* BluetoothManager.swift in Sources */,
