@@ -20,7 +20,8 @@ extension String {
     
     public var localizedImage: UIImage? {
         let imageBundle: Bundle
-        if let path = Bundle.main.path(forResource: LocalizationManager.shared.currentLanguage, ofType: "lproj"),
+        if let path = Bundle.main.path(forResource: LocalizationManager.shared.currentLanguage, ofType: "lproj") ??
+            Bundle.main.path(forResource: LocalizationManager.shared.devLanguage, ofType: "lproj"),
             let bundle = Bundle(path: path)
         {
             imageBundle = bundle

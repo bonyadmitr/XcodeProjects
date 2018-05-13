@@ -25,6 +25,7 @@
 		CEEB7AF120A6B3AD0070FDC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AF020A6B3AD0070FDC2 /* main.swift */; };
 		CEEB7AF320A6B4900070FDC2 /* MainApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AF220A6B4900070FDC2 /* MainApplication.swift */; };
 		CEEB7B0320A8D1960070FDC2 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7B0520A8D1960070FDC2 /* flag.png */; };
+		CEEB7B0B20A8DDDC0070FDC2 /* UIImage+RTL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B0A20A8DDDC0070FDC2 /* UIImage+RTL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		CEEB7B0420A8D1960070FDC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/flag.png; sourceTree = "<group>"; };
 		CEEB7B0620A8D1970070FDC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = he; path = he.lproj/flag.png; sourceTree = "<group>"; };
 		CEEB7B0720A8D1980070FDC2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/flag.png; sourceTree = "<group>"; };
+		CEEB7B0A20A8DDDC0070FDC2 /* UIImage+RTL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+RTL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				666A842B1EA653840084D441 /* UIViewController+IBAction.swift */,
 				666A84291EA64B4C0084D441 /* String+LocalizationManager.swift */,
 				66C4DAB41EA55FC500C7F342 /* UIApplication+Restart.swift */,
+				CEEB7B0A20A8DDDC0070FDC2 /* UIImage+RTL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			files = (
 				66C4DAA81EA5527500C7F342 /* LocalizationManager.swift in Sources */,
 				66C4DAA61EA5526B00C7F342 /* Localization+Views.swift in Sources */,
+				CEEB7B0B20A8DDDC0070FDC2 /* UIImage+RTL.swift in Sources */,
 				CEEB7AF120A6B3AD0070FDC2 /* main.swift in Sources */,
 				CEEB7AF320A6B4900070FDC2 /* MainApplication.swift in Sources */,
 				666A842A1EA64B4C0084D441 /* String+LocalizationManager.swift in Sources */,

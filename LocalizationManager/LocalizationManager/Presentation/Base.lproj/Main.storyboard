@@ -117,7 +117,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTL-rJ-bwF">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-FM-Yq4">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-FM-Yq4">
                                                 <rect key="frame" x="160" y="0.0" width="160" height="60"/>
                                             </imageView>
                                         </subviews>
@@ -163,6 +163,7 @@
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
+                        <outlet property="arrowImageView" destination="lIw-FM-Yq4" id="KMq-Nx-grY"/>
                         <outlet property="flagImageView" destination="GTL-rJ-bwF" id="bw6-8Z-hGd"/>
                         <outlet property="someLabel" destination="05v-8r-Lgi" id="h3U-AU-OWn"/>
                     </connections>
