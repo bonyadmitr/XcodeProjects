@@ -22,6 +22,8 @@
 		CE12299C203A0BF500868E1C /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12299B203A0BF500868E1C /* LanguageManager.swift */; };
 		CE1229A1203A136500868E1C /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1229A0203A136500868E1C /* MulticastDelegate.swift */; };
 		CE1229A3203A19F000868E1C /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1229A2203A19F000868E1C /* BaseNavController.swift */; };
+		CEEB7AF120A6B3AD0070FDC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AF020A6B3AD0070FDC2 /* main.swift */; };
+		CEEB7AF320A6B4900070FDC2 /* MainApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7AF220A6B4900070FDC2 /* MainApplication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		CE1229A0203A136500868E1C /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		CE1229A2203A19F000868E1C /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		CE5E54D0203A04850068CC2C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CEEB7AF020A6B3AD0070FDC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CEEB7AF220A6B4900070FDC2 /* MainApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApplication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				66C4DA911EA5502200C7F342 /* AppDelegate.swift */,
+				CEEB7AF020A6B3AD0070FDC2 /* main.swift */,
+				CEEB7AF220A6B4900070FDC2 /* MainApplication.swift */,
 				66C4DA981EA5502200C7F342 /* Assets.xcassets */,
 				66C4DA9A1EA5502200C7F342 /* LaunchScreen.storyboard */,
 				66C4DA9D1EA5502200C7F342 /* Info.plist */,
@@ -207,6 +213,8 @@
 			files = (
 				66C4DAA81EA5527500C7F342 /* LocalizationManager.swift in Sources */,
 				66C4DAA61EA5526B00C7F342 /* Localization+Views.swift in Sources */,
+				CEEB7AF120A6B3AD0070FDC2 /* main.swift in Sources */,
+				CEEB7AF320A6B4900070FDC2 /* MainApplication.swift in Sources */,
 				666A842A1EA64B4C0084D441 /* String+LocalizationManager.swift in Sources */,
 				66C4DA941EA5502200C7F342 /* ViewController.swift in Sources */,
 				666A84281EA6467F0084D441 /* AppearanceConfigurator.swift in Sources */,

@@ -17,6 +17,8 @@ class BaseNavController: UINavigationController {
 extension BaseNavController: LocalizationManagerDelegate {
     func languageDidChange(to language: String) {
         print(language)
+        // FIXME: this don't change push direction for RTL. Recreating of UINavigationController can help
+        /// https://github.com/marmelroy/Localize-Swift can't do that
         navigationItem.lzTitle = "hello"
         viewControllers[0] = storyboard!.instantiateViewController(withIdentifier: "ViewController")
         UIApplication.shared.animateReload()
