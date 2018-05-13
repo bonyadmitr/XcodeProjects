@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-yu-OS7">
-                                <rect key="frame" x="0.0" y="64" width="320" height="275"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="335"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfa-Vp-G9s">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
@@ -103,6 +103,20 @@
                                         <state key="normal" title="Push"/>
                                         <connections>
                                             <segue destination="vuV-9R-tro" kind="show" id="Nd8-PO-0pP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wF8-PQ-rhC">
+                                        <rect key="frame" x="0.0" y="275" width="320" height="30"/>
+                                        <state key="normal" title="change push"/>
+                                        <connections>
+                                            <action selector="changePush:" destination="UM2-FF-Sbx" eventType="touchUpInside" id="b09-Rv-XIO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eig-gQ-udu">
+                                        <rect key="frame" x="0.0" y="305" width="320" height="30"/>
+                                        <state key="normal" title="restart app"/>
+                                        <connections>
+                                            <action selector="restartApp:" destination="UM2-FF-Sbx" eventType="touchUpInside" id="bdm-GY-H3Y"/>
                                         </connections>
                                     </button>
                                 </subviews>

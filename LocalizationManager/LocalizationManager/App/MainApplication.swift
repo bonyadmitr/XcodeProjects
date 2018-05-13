@@ -10,7 +10,11 @@ import UIKit
 
 final class MainApplication: UIApplication {
     
+    static var layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    
 //    override var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
+//        return MainApplication.layoutDirection
+    
 //        if LocalizationManager.shared.currentLanguage == "he" {
 //            return .rightToLeft
 //        }
