@@ -106,7 +106,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eig-gQ-udu">
                                         <rect key="frame" x="0.0" y="272.5" width="320" height="30"/>
-                                        <state key="normal" title="restart app"/>
+                                        <state key="normal" title="restart app to update push direction"/>
                                         <connections>
                                             <action selector="restartApp:" destination="UM2-FF-Sbx" eventType="touchUpInside" id="bdm-GY-H3Y"/>
                                         </connections>
