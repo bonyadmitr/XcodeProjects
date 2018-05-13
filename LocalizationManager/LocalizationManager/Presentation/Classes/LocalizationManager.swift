@@ -12,6 +12,9 @@ protocol LocalizationManagerDelegate {
     func languageDidChange(to language: String)
 }
 
+/// super simple realization
+/// https://github.com/romansorochak/Localizable/blob/master/Localizable/Localizable.swift
+
 //TODO: TEST plurals
 /// buttons with system text cannot be localized with force switch
 public final class LocalizationManager: MulticastHandler {
@@ -26,15 +29,15 @@ public final class LocalizationManager: MulticastHandler {
     public var devLanguage = "en"
     
     /// key for AppleLanguages
-    private let appleLanguageKey = "AppleLanguages"
+    private let appleLanguagesKey = "AppleLanguages"
     
     /// AppleLanguages wrapper
     private(set) var currentLanguage: String {
         get {
-            return UserDefaults.standard.array(forKey: appleLanguageKey)?.first as? String ?? devLanguage
+            return UserDefaults.standard.array(forKey: appleLanguagesKey)?.first as? String ?? devLanguage
         }
         set {
-            UserDefaults.standard.set([newValue], forKey: appleLanguageKey)
+            UserDefaults.standard.set([newValue], forKey: appleLanguagesKey)
             UserDefaults.standard.synchronize()
         }
     }
@@ -92,8 +95,10 @@ public final class LocalizationManager: MulticastHandler {
     }
     
     /// save Bundle.main for language bundle for kBundleKey
+    /// will use devLanguage if param language is not added
     private func substitutionOfMainBundle(for language: String) {
-        guard let path = Bundle.main.path(forResource: language, ofType: "lproj"),
+        guard let path = Bundle.main.path(forResource: language, ofType: "lproj") ??
+            Bundle.main.path(forResource: devLanguage, ofType: "lproj"),
             let bundle = Bundle(path: path)
             else { return }
         objc_setAssociatedObject(Bundle.main, &kBundleKey, bundle, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

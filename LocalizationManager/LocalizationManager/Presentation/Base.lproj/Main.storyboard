@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WQe-d3-Xtl">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="uR0-aq-5aF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lLB-LY-yDb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3VZ-yu-OS7">
-                                <rect key="frame" x="0.0" y="64" width="320" height="305"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="362.5"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfa-Vp-G9s">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
@@ -31,12 +31,11 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="lzText" value="hello"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="lzPlaceholder" value="hello"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="lzPromt" value="hello"/>
                                         </userDefinedRuntimeAttributes>
                                     </searchBar>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05v-8r-Lgi">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05v-8r-Lgi">
+                                        <rect key="frame" x="0.0" y="56" width="320" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -44,13 +43,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynt-C7-j9k">
-                                        <rect key="frame" x="0.0" y="76.5" width="320" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="74" width="320" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="d4F-fg-X7t">
-                                        <rect key="frame" x="0.0" y="97" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="94.5" width="320" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -60,14 +59,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4g-7n-jxN">
-                                        <rect key="frame" x="0.0" y="127" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="124.5" width="320" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CFI-kr-SSB">
-                                        <rect key="frame" x="0.0" y="157" width="320" height="29"/>
+                                        <rect key="frame" x="0.0" y="154.5" width="320" height="29"/>
                                         <segments>
                                             <segment title="First"/>
                                             <segment title="Second"/>
@@ -82,7 +81,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SS2-Nb-qo9">
-                                        <rect key="frame" x="0.0" y="185" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="182.5" width="320" height="30"/>
                                         <state key="normal" title="Switch Language"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="Switch Language"/>
@@ -92,30 +91,44 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtH-VK-mjf">
-                                        <rect key="frame" x="0.0" y="215" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="212.5" width="320" height="30"/>
                                         <state key="normal" title="Show right to left and present test"/>
                                         <connections>
                                             <segue destination="WAg-Gn-Yjj" kind="presentation" id="Ih1-Kv-E9b"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7F8-5F-A4T">
-                                        <rect key="frame" x="0.0" y="245" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="242.5" width="320" height="30"/>
                                         <state key="normal" title="Push"/>
                                         <connections>
                                             <segue destination="vuV-9R-tro" kind="show" id="Nd8-PO-0pP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eig-gQ-udu">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="272.5" width="320" height="30"/>
                                         <state key="normal" title="restart app"/>
                                         <connections>
                                             <action selector="restartApp:" destination="UM2-FF-Sbx" eventType="touchUpInside" id="bdm-GY-H3Y"/>
                                         </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="T4K-sj-aeH">
+                                        <rect key="frame" x="0.0" y="302.5" width="320" height="60"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTL-rJ-bwF">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-FM-Yq4">
+                                                <rect key="frame" x="160" y="0.0" width="160" height="60"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="FlX-i4-0Gh"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-7C-fwy">
-                                <rect key="frame" x="0.0" y="387" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="475" width="320" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="edit" id="yKO-7s-brT"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="U06-ms-iFa"/>
@@ -147,10 +160,10 @@
                         </barButtonItem>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="lzTitle" value="hello"/>
-                            <userDefinedRuntimeAttribute type="string" keyPath="lzPrompt" value="hello"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
+                        <outlet property="flagImageView" destination="GTL-rJ-bwF" id="bw6-8Z-hGd"/>
                         <outlet property="someLabel" destination="05v-8r-Lgi" id="h3U-AU-OWn"/>
                     </connections>
                 </viewController>
@@ -167,7 +180,7 @@
                         <viewControllerLayoutGuide type="bottom" id="c1W-Yb-qkE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bgz-5Q-k0T">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFo-xm-J1e">
@@ -270,7 +283,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Bsf-Xe-9B1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="I6K-fb-qhK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LW0-Ag-akY">

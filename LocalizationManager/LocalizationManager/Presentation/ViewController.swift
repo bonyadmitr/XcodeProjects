@@ -8,6 +8,16 @@
 
 import UIKit
 
+extension UIImage {
+    var flippedForRTL: UIImage {
+        if #available(iOS 10.0, *) {
+            return withHorizontallyFlippedOrientation()
+        } else {
+            return imageFlippedForRightToLeftLayoutDirection()
+        }
+    }
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var someLabel: UILabel! {
@@ -17,6 +27,12 @@ class ViewController: UIViewController {
             formatter.timeStyle = .full
             formatter.locale = LocalizationManager.shared.locale
             someLabel.text = formatter.string(from: Date()) 
+        }
+    }
+    
+    @IBOutlet private weak var flagImageView: UIImageView! {
+        didSet {
+            flagImageView.image = "flag.png".localizedImage
         }
     }
     
