@@ -8,16 +8,15 @@
 
 import UIKit
 
-final class MainApplication: UIApplication {
+final class MainApplication: UIApplication, UIApplicationDelegate {
     
-    static var layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
-    
-//    override var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
-//        return MainApplication.layoutDirection
-    
-//        if LocalizationManager.shared.currentLanguage == "he" {
-//            return .rightToLeft
-//        }
-//        return .leftToRight
-//    }
+    /// need for right direction of interactivePopGestureRecognizer in navigationController
+    /// called for every view
+    /// https://stackoverflow.com/a/49646499/5893286
+    override var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection {
+        if LocalizationManager.shared.isCurrentLanguageRTL {
+            return .rightToLeft
+        }
+        return .leftToRight
+    }
 }

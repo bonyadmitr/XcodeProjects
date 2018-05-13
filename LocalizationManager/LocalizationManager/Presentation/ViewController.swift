@@ -29,9 +29,9 @@ class ViewController: UIViewController {
         for language in LanguageManager.shared.availableLanguages {
             let displayName = LanguageManager.shared.displayName(for: language)
             let languageAction = UIAlertAction(title: displayName, style: .default, handler: { _ in
-//                LocalizationManager.shared.set(language: language)
+                LocalizationManager.shared.set(language: language)
                 /// to simplify reload restart app 
-                UIApplication.shared.restart()
+                //UIApplication.shared.restart()
             })
             sheetVC.addAction(languageAction)
         }
@@ -44,16 +44,6 @@ class ViewController: UIViewController {
     /// test of memory leak
     deinit {
         print("- deinit ViewController")
-    }
-    
-    @IBAction private func changePush(_ sender: UIButton) {
-        if MainApplication.layoutDirection == .leftToRight {
-            MainApplication.layoutDirection = .rightToLeft
-            sender.setTitle("now is rightToLeft", for: .normal)
-        } else {
-            MainApplication.layoutDirection = .leftToRight
-            sender.setTitle("now is leftToRight", for: .normal)
-        }
     }
     
     @IBAction private func restartApp(_ sender: UIButton) {

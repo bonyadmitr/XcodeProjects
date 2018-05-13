@@ -41,7 +41,10 @@ public final class LocalizationManager: MulticastHandler {
     
     /// check for rightToLeft language
     public var isCurrentLanguageRTL: Bool {
-        return Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
+        /// for all languages but it is heavy func
+        //return Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
+        /// add more if need https://en.wikipedia.org/wiki/Right-to-left
+        return currentLanguage == "he" || currentLanguage == "ar"
     }
     
     /// you have to use 'var localizedBundle: String' of 'extension String'.
