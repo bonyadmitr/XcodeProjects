@@ -44,6 +44,7 @@ class ViewController: UIViewController {
             vc.popoverPresentationController?.sourceRect = UIScreen.main.bounds
             
             vc.popoverPresentationController?.sourceView = view
+            
             /// means no arrow. ".init(rawValue: 0)" same as "[]"
             vc.popoverPresentationController?.permittedArrowDirections = []
             
@@ -53,6 +54,9 @@ class ViewController: UIViewController {
             /// iPad popover style for iPhone
             //vc.modalPresentationStyle = .popover ///???
             //vc.popoverPresentationController?.delegate = self
+            
+            //vc.popoverPresentationController?.sourceView = sender
+            //vc.popoverPresentationController?.sourceRect = sender.frame bounds ///check
         }
         
         
@@ -61,15 +65,15 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-    
+//extension ViewController: UIPopoverPresentationControllerDelegate {
+//    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+//        return .none
+//    }
+
     /// ???
 //    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
 //        childViewControllers.forEach { $0.removeFromParentViewController() }
 //        return true
 //    }
-}
+//}
 
