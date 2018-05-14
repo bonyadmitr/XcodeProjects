@@ -20,8 +20,28 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func changeLanguageButton(_ sender: AnyObject) {
-        present(languagesSheet, animated: true, completion: nil)
+    @IBOutlet private weak var flagImageView: UIImageView! {
+        didSet {
+            flagImageView.image = "flag.png".localizedImage
+        }
+    }
+    
+    @IBOutlet private weak var arrowImageView: UIImageView! {
+        didSet {
+            arrowImageView.image = #imageLiteral(resourceName: "arrow").flippedForRTLIfNeed
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        /// to remove navigation bar shadow on back action
+        /// https://stackoverflow.com/questions/22413193/dark-shadow-on-navigation-bar-during-segue-transition-after-upgrading-to-xcode-5
+        navigationController?.view.backgroundColor = UIColor.white
+    }
+    
+    /// test of memory leak
+    deinit {
+        print("- deinit ViewController")
     }
     
     var languagesSheet: UIAlertController {
@@ -41,9 +61,12 @@ class ViewController: UIViewController {
         return sheetVC
     }
     
-    /// test of memory leak
-    deinit {
-        print("- deinit ViewController")
+    @IBAction func changeLanguageButton(_ sender: AnyObject) {
+        present(languagesSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction private func restartApp(_ sender: UIButton) {
+        UIApplication.shared.restart()
     }
 }
 

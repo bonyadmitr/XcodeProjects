@@ -17,4 +17,22 @@ extension String {
         print("- not found localized: \(self)")
         return NSLocalizedString(self, comment: "")
     }
+    
+    public var localizedImage: UIImage? {
+        let imageBundle: Bundle
+        if let path = Bundle.main.path(forResource: LocalizationManager.shared.currentLanguage, ofType: "lproj") ??
+            Bundle.main.path(forResource: LocalizationManager.shared.devLanguage, ofType: "lproj"),
+            let bundle = Bundle(path: path)
+        {
+            imageBundle = bundle
+        } else {
+            imageBundle = Bundle.main
+        }
+        
+        guard let imagePath = imageBundle.path(forResource: self, ofType: "") else {
+            return nil
+        }
+        
+        return UIImage(contentsOfFile: imagePath)
+    }
 }

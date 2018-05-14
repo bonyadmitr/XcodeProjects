@@ -120,6 +120,14 @@ final class PermissionsManager {
     }
      */
     func requestLocationAccess(for locationManager: CLLocationManager?, request: LocationRequest, handler: @escaping AccessStatusHandler) {
+        
+        // TODO: maybe need to remove handleLocationAuthorization
+        // TODO: request with .restricted
+        ///Location services are disabled in your device settings. To use ..., you need to enable location services under \"Settings - Privacy - Location Services\" menu
+        //if !CLLocationManager.locationServicesEnabled() {
+        //    completion(.restricted)
+        //    return
+        //}        
         if CLLocationManager.locationServicesEnabled() {
             handleLocationAuthorization(status: CLLocationManager.authorizationStatus(),
                                         for: locationManager,

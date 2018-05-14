@@ -15,7 +15,7 @@ final class LanguageManager {
     
     /// array of available languages
     public var availableLanguages: [String] {
-        return ["en", "he", "ru"]
+        return ["en", "he", "ru", "ar"]
         /// get from AppleLanguages
         //return UserDefaults.standard.array(forKey: "AppleLanguages") as! [String]
         //var availableLanguages = Bundle.main.localizations

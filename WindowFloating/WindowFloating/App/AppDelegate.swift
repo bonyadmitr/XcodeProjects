@@ -1,35 +1,32 @@
 //
 //  AppDelegate.swift
-//  LocalizationManager
+//  WindowFloating
 //
-//  Created by Bondar Yaroslav on 17/04/2017.
-//  Copyright © 2017 Bondar Yaroslav. All rights reserved.
+//  Created by Bondar Yaroslav on 4/28/18.
+//  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
 import UIKit
 
-/// added main.swift
-//@UIApplicationMain
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AppearanceConfigurator.shared.configureLocalizedAppearance()
-        return true
-    }
 
-    func animateReload(for window: UIWindow) {
-        UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-        }, completion: nil)
-    }
-    
-    func restart() {
-        guard let window = window else { return }
-        AppearanceConfigurator.shared.configureLocalizedAppearance()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        window.rootViewController = storyboard.instantiateViewController(withIdentifier: "startVC")
-        animateReload(for: window)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        Floating.mode = .button
+        /// or 1
+        //FloatingManager.shared.enableFloatingView()
+        /// or 2
+        //FloatingManager.shared.showOnShakeMotion = true
+        
+        //        let storyboard = UIStoryboard(name: "Manager", bundle: Bundle(for: ManagerViewController.self))
+        //        guard let controller = storyboard.instantiateInitialViewController()
+        FloatingManager.shared.presentingController = NavigationViewController()
+        
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
