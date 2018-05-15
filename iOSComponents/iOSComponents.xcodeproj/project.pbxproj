@@ -32,6 +32,8 @@
 		CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */; };
 		CEEB7B1B20AAC7860070FDC2 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */; };
 		CEEB7B1D20AAC7A20070FDC2 /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */; };
+		CEEB7B2020AAC8410070FDC2 /* UITextField+Extnesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1F20AAC8410070FDC2 /* UITextField+Extnesions.swift */; };
+		CEEB7B2220AAC8AE0070FDC2 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B2120AAC8AE0070FDC2 /* StreamReaderWriter.swift */; };
 		CEF5325B208289DB006B2BFB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5325A208289DB006B2BFB /* Device.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
 		CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
+		CEEB7B1F20AAC8410070FDC2 /* UITextField+Extnesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extnesions.swift"; sourceTree = "<group>"; };
+		CEEB7B2120AAC8AE0070FDC2 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		CEF5325A208289DB006B2BFB /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +145,7 @@
 				CEF5325A208289DB006B2BFB /* Device.swift */,
 				66C9CBD720A0BC3E001D56F1 /* BatteryManager.swift */,
 				66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */,
+				CEEB7B2120AAC8AE0070FDC2 /* StreamReaderWriter.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 				CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */,
 				CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */,
 				CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */,
+				CEEB7B1F20AAC8410070FDC2 /* UITextField+Extnesions.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -247,6 +253,8 @@
 				CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */,
 				CE5CAE722077422100E763B1 /* Result.swift in Sources */,
 				CEDA2D402077DB5200203036 /* Formatters.swift in Sources */,
+				CEEB7B2220AAC8AE0070FDC2 /* StreamReaderWriter.swift in Sources */,
+				CEEB7B2020AAC8410070FDC2 /* UITextField+Extnesions.swift in Sources */,
 				CEF5325B208289DB006B2BFB /* Device.swift in Sources */,
 				CEDA2D3C2077ACB700203036 /* UICollectionView+Layout.swift in Sources */,
 				66C9CBD820A0BC3E001D56F1 /* BatteryManager.swift in Sources */,
