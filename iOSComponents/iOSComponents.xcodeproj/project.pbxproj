@@ -29,6 +29,9 @@
 		CEDA2D3C2077ACB700203036 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */; };
 		CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */; };
 		CEDA2D402077DB5200203036 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3F2077DB5200203036 /* Formatters.swift */; };
+		CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */; };
+		CEEB7B1B20AAC7860070FDC2 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */; };
+		CEEB7B1D20AAC7A20070FDC2 /* UISearchBar+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */; };
 		CEF5325B208289DB006B2BFB /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5325A208289DB006B2BFB /* Device.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +60,9 @@
 		CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Layout.swift"; sourceTree = "<group>"; };
 		CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Toggle.swift"; sourceTree = "<group>"; };
 		CEDA2D3F2077DB5200203036 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
+		CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
+		CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Cancel.swift"; sourceTree = "<group>"; };
 		CEF5325A208289DB006B2BFB /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,11 +121,12 @@
 		CE5CAE75207744D200E763B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CEEB7B1E20AAC7D10070FDC2 /* UI */,
+				CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */,
+				665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */,
 				CE5CAE732077449E00E763B1 /* Date+Components.swift */,
 				CEDA2D372077981F00203036 /* Array+Extensions.swift */,
-				CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */,
 				CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */,
-				665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -148,6 +155,16 @@
 				66C9CBDD20A0DD79001D56F1 /* ShareData.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CEEB7B1E20AAC7D10070FDC2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */,
+				CEEB7B1C20AAC7A20070FDC2 /* UISearchBar+Cancel.swift */,
+				CEDA2D3B2077ACB700203036 /* UICollectionView+Layout.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +240,7 @@
 			files = (
 				CEDA2D352077972C00203036 /* Flippable.swift in Sources */,
 				CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */,
+				CEEB7B1D20AAC7A20070FDC2 /* UISearchBar+Cancel.swift in Sources */,
 				CEDA2D3A2077A11700203036 /* MapToJSON.swift in Sources */,
 				66C9CBDE20A0DD79001D56F1 /* ShareData.swift in Sources */,
 				CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */,
@@ -233,12 +251,14 @@
 				CEDA2D3C2077ACB700203036 /* UICollectionView+Layout.swift in Sources */,
 				66C9CBD820A0BC3E001D56F1 /* BatteryManager.swift in Sources */,
 				CE5CAE6120773E8700E763B1 /* ViewController.swift in Sources */,
+				CEEB7B1B20AAC7860070FDC2 /* UserDefaults+AppGroup.swift in Sources */,
 				CE5CAE5F20773E8700E763B1 /* AppDelegate.swift in Sources */,
 				CE5CAE742077449E00E763B1 /* Date+Components.swift in Sources */,
 				CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */,
 				66C9CBDC20A0DD4F001D56F1 /* ShareController.swift in Sources */,
 				665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */,
 				CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */,
+				CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */,
 				66C9CBDA20A0BF77001D56F1 /* BluetoothManager.swift in Sources */,
 				CE5CAE77207744DB00E763B1 /* ClosureTapGesture.swift in Sources */,
 			);
