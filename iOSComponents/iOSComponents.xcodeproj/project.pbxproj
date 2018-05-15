@@ -174,6 +174,8 @@
 		6611AD9120AB606000814113 /* UIImage+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Bytes.swift"; sourceTree = "<group>"; };
 		6611AD9320AB606000814113 /* UIImage+Color2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Color2.swift"; sourceTree = "<group>"; };
 		66315A6720AB662E009C19BE /* CGRect+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Properties.swift"; sourceTree = "<group>"; };
+		66315A7B20AB6798009C19BE /* NSAttributedString+GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+GooglePlace.swift"; sourceTree = "<group>"; };
+		66315A7C20AB6798009C19BE /* GMSMapView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GMSMapView+Extensions.swift"; sourceTree = "<group>"; };
 		665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Subscript.swift"; sourceTree = "<group>"; };
 		668F914120AB624A0002B3D3 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		668F914320AB625A0002B3D3 /* UICollectionView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Scroll.swift"; sourceTree = "<group>"; };
@@ -255,6 +257,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		66315A7F20AB67A6009C19BE /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				66315A7C20AB6798009C19BE /* GMSMapView+Extensions.swift */,
+				66315A7B20AB6798009C19BE /* NSAttributedString+GooglePlace.swift */,
+			);
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
 		CE5CAE5220773E8700E763B1 = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEB7B1E20AAC7D10070FDC2 /* UI */,
+				66315A7F20AB67A6009C19BE /* GoogleMaps */,
 				CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */,
 				665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */,
 				CE5CAE732077449E00E763B1 /* Date+Components.swift */,
