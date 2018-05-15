@@ -9,14 +9,19 @@
 import Foundation
 import ObjectiveC
 
-//    private static let association = AssociationManager<NSObject>()
-//
-//    var simulatedProperty: NSObject? {
-//        get { return SomeType.association[self] }
-//        set { SomeType.association[self] = newValue }
-//    }
 /// http://stackoverflow.com/questions/25426780/how-to-have-stored-properties-in-swift-the-same-way-i-had-on-objective-c
 ///
+/// Example:
+/// ```
+/// extension SomeType {
+///    private static let association = ObjectAssociation<NSObject>()
+///
+///    var simulatedProperty: NSObject? {
+///        get { return SomeType.association[self] }
+///        set { SomeType.association[self] = newValue }
+///    }
+///}
+/// ```
 public final class AssociationManager<T> {
     
     private let policy: objc_AssociationPolicy
@@ -34,7 +39,6 @@ public final class AssociationManager<T> {
     }
 }
 
-/// Without it
 //private var topPullToRefreshKey: UInt8 = 0
 //
 //fileprivate(set) var topPullToRefresh: PullToRefresh? {
