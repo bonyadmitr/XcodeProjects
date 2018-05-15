@@ -14,17 +14,28 @@ class ViewController: UIViewController {
         print("ViewController")
     }
     
+    let vcQueue = DispatchQueue(label: "vcQueue")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// DispatchQueue retain test ---
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { 
-                self?.view.backgroundColor = UIColor.lightGray
+        let localQueue = DispatchQueue(label: "localQueue")
+        let time: DispatchTime = .now() + 3
+        
+        DispatchQueue.global().asyncAfter(deadline: time) { [weak self] in
+            DispatchQueue.global().asyncAfter(deadline: time) {
+                localQueue.asyncAfter(deadline: time) {
+                    self?.vcQueue.asyncAfter(deadline: time) {
+                        DispatchQueue.main.asyncAfter(deadline: time) {
+                            self?.view.backgroundColor = UIColor.lightGray
+                        }
+                    }
+                }
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.navigationController?.popViewController(animated: false)
         }
         /// ---
