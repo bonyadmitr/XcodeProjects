@@ -22,11 +22,6 @@ import UIKit
 
 extension UIViewController {
     
-    @IBAction func dismissSelf() {
-        view.endEditing(true)
-        dismiss(animated: true, completion: nil)
-    }
-    
     func presentInNavVc(_ controller: UIViewController, doneAction: Selector? = nil) {
         
         let nvc = UINavigationController(rootViewController: controller)

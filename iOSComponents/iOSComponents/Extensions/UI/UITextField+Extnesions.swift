@@ -9,12 +9,14 @@
 import UIKit
 
 extension UITextField {
-    @IBInspectable var placeholderColor: UIColor {
+    @IBInspectable var placeholderColor: UIColor? {
         get {
-            return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
+            return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor
         }
         set {
-            guard let attributedPlaceholder = attributedPlaceholder else { return }
+            guard let attributedPlaceholder = attributedPlaceholder, let newValue = newValue else {
+                return
+            }
             let attributes: [NSAttributedStringKey: UIColor] = [.foregroundColor: newValue]
             self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
         }
