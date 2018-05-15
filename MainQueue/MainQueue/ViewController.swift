@@ -10,22 +10,38 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    deinit {
+        print("ViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.toBackground {
-            DispatchQueue.toMain {
-                self.view.backgroundColor = UIColor.lightGray
+        /// DispatchQueue retain test ---
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in 
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { 
+                self?.view.backgroundColor = UIColor.lightGray
             }
-            DispatchQueue.delay(time: 1) {
-                DispatchQueue.toMain {
-                    UIView.animate(withDuration: 0.3) {
-                        self.view.backgroundColor = UIColor.blue
-                    }
-                }
-            }
-            
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.navigationController?.popViewController(animated: false)
+        }
+        /// ---
+        
+//        DispatchQueue.toBackground {
+//            DispatchQueue.toMain {
+//                self.view.backgroundColor = UIColor.lightGray
+//            }
+//            DispatchQueue.delay(time: 1) {
+//                DispatchQueue.toMain {
+//                    UIView.animate(withDuration: 0.3) {
+//                        self.view.backgroundColor = UIColor.blue
+//                    }
+//                }
+//            }
+//            
+//        }
         
     }
 }
