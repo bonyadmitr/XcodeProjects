@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         let vc = UIAlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            print("OK")
+            //print("OK")
         }
         vc.addAction(okAction)
         vc.addAction(cancelAction)
@@ -62,6 +62,20 @@ class ViewController: UIViewController {
         
         
         present(vc, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    
+    ///only numbers for numPad style textField
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let isAvailableCharacters = string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+        
+        guard isAvailableCharacters else {
+            return false
+        }
+        
+        return true
     }
 }
 
