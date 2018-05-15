@@ -13,6 +13,8 @@
 		CEDA2D552077E7D000203036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D532077E7D000203036 /* Main.storyboard */; };
 		CEDA2D572077E7D100203036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D562077E7D100203036 /* Assets.xcassets */; };
 		CEDA2D5A2077E7D100203036 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDA2D582077E7D100203036 /* LaunchScreen.storyboard */; };
+		CEEB7B2420AAFAF10070FDC2 /* LanguageTextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B2320AAFAF00070FDC2 /* LanguageTextFieldController.swift */; };
+		CEEB7B2620AAFB110070FDC2 /* LanguageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B2520AAFB100070FDC2 /* LanguageTextField.swift */; };
 		CEF371A420886B7D007AD36E /* TextHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF371A320886B7D007AD36E /* TextHandlers.swift */; };
 		CEF371A620886B8E007AD36E /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF371A520886B8E007AD36E /* Validators.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +28,8 @@
 		CEDA2D562077E7D100203036 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEDA2D592077E7D100203036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDA2D5B2077E7D100203036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEB7B2320AAFAF00070FDC2 /* LanguageTextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTextFieldController.swift; sourceTree = "<group>"; };
+		CEEB7B2520AAFB100070FDC2 /* LanguageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTextField.swift; sourceTree = "<group>"; };
 		CEF371A320886B7D007AD36E /* TextHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHandlers.swift; sourceTree = "<group>"; };
 		CEF371A520886B8E007AD36E /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,9 +67,8 @@
 				CEDA2D612077E7EA00203036 /* App */,
 				CEDA2D532077E7D000203036 /* Main.storyboard */,
 				CEDA2D512077E7D000203036 /* ViewController.swift */,
-				665BB43A2088FC740088AB25 /* ReturnButtonHandlingTextField.swift */,
-				CEF371A320886B7D007AD36E /* TextHandlers.swift */,
-				CEF371A520886B8E007AD36E /* Validators.swift */,
+				CEEB7B2320AAFAF00070FDC2 /* LanguageTextFieldController.swift */,
+				CEEB7B2720AAFC370070FDC2 /* Classes */,
 			);
 			path = TextFieldHandlers;
 			sourceTree = "<group>";
@@ -79,6 +82,17 @@
 				CEDA2D5B2077E7D100203036 /* Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		CEEB7B2720AAFC370070FDC2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEEB7B2520AAFB100070FDC2 /* LanguageTextField.swift */,
+				665BB43A2088FC740088AB25 /* ReturnButtonHandlingTextField.swift */,
+				CEF371A320886B7D007AD36E /* TextHandlers.swift */,
+				CEF371A520886B8E007AD36E /* Validators.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,8 +169,10 @@
 				CEF371A620886B8E007AD36E /* Validators.swift in Sources */,
 				CEDA2D522077E7D000203036 /* ViewController.swift in Sources */,
 				CEF371A420886B7D007AD36E /* TextHandlers.swift in Sources */,
+				CEEB7B2620AAFB110070FDC2 /* LanguageTextField.swift in Sources */,
 				CEDA2D502077E7D000203036 /* AppDelegate.swift in Sources */,
 				665BB43B2088FC740088AB25 /* ReturnButtonHandlingTextField.swift in Sources */,
+				CEEB7B2420AAFAF10070FDC2 /* LanguageTextFieldController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
