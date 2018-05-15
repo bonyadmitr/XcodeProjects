@@ -21,12 +21,6 @@ class ViewController: UIViewController {
     }
 }
 
-extension String {
-    var trimmed: String {
-        return trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-}
-
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
