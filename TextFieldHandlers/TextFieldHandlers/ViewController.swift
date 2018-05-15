@@ -8,18 +8,70 @@
 
 import UIKit
 
-import UIKit
+protocol TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool?
+}
 
-class LanguageTextFieldController: UIViewController {
-    
-    @IBOutlet weak var languageTextField: LanguageTextField!
-    
-    @IBAction private func languageDidChanged(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            languageTextField.keyboardLanguage = "en"
-        } else if sender.selectedSegmentIndex == 1 {
-            languageTextField.keyboardLanguage = "emoji"
+final class AvailableCharactersValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        return TextHandlers.isNotAllowed(characters: "123qwe", in: newText)
+    }
+}
+
+final class LimitCharactersValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        let characterCountLimit = 4
+        return resultString.count <= characterCountLimit 
+    }
+}
+
+final class DeleteValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        if newText.isEmpty {
+            return true
         }
+        return nil
+    }
+}
+
+final class ValidatingTextField: UITextField {
+    
+    var validators: [TFValidator] = []
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        delegate = self
+    }
+    
+}
+extension ValidatingTextField: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let resultString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
+            let oldText = textField.text
+        {
+            
+            for validator in validators {
+                if let validatorResult = validator.validate(oldText: oldText, newText: string, resultString: resultString),
+                    !validatorResult
+                {
+                    return false
+                }
+            }
+            
+            /// all validators true
+        }
+        
+        return true
     }
 }
 
@@ -27,18 +79,15 @@ class LanguageTextFieldController: UIViewController {
 class ViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var validatingTextField: ValidatingTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.delegate = self
         textField.enablesReturnKeyAutomatically = true
-    }
-}
-
-extension String {
-    var trimmed: String {
-        return trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        validatingTextField.validators = [LimitCharactersValidator(), DeleteValidator(), AvailableCharactersValidator()]
     }
 }
 
@@ -104,34 +153,6 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
-
-class LanguageTextField: UITextField {
-    
-    /// UITextInputCurrentInputModeDidChange notification
-    /// emoji
-    /// ru or ru-RU
-    /// en or en-US
-    /// UITextInputMode.activeInputModes.forEach { print($0.primaryLanguage)}
-    var keyboardLanguage = "en" {
-        didSet {
-            if isFirstResponder {
-                resignFirstResponder()
-                becomeFirstResponder()
-            }
-        }
-    }
-    
-    /// https://stackoverflow.com/a/43636068
-    override var textInputMode: UITextInputMode? {
-        for textInputMode in UITextInputMode.activeInputModes {
-            if textInputMode.primaryLanguage?.contains(keyboardLanguage) == true {
-                return textInputMode
-            }
-        }
-        return super.textInputMode
-    }
-}
-
 
 //replaceSubrange
 //https://stackoverflow.com/a/48581912/5893286
