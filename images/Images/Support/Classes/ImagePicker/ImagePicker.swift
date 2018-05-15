@@ -19,7 +19,6 @@ NSCameraUsageDescription
  2) Photo Library:
 NSPhotoLibraryUsageDescription
  */
-
 final class ImagePicker: NSObject {
     
     /// better to use UINavigationBar.appearance() for gloabl customization
@@ -57,7 +56,7 @@ final class ImagePicker: NSObject {
         picker.sourceType = type
         picker.modalPresentationStyle = .overCurrentContext /// to turn on landscape mode
         picker.modalPresentationCapturesStatusBarAppearance = true
-//        picker.allowsEditing = true
+        picker.allowsEditing = !Device.isIpad /// https://stackoverflow.com/a/40038752/5893286
         setupPickerBySettings(picker)
         return picker
     }

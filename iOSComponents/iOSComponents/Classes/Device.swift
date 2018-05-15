@@ -40,6 +40,29 @@ final class Device {
         }
     }
     
+    // TODO: need to compare with current method
+//    func getFreeDiskspace() {
+//        var totalSpace: UInt64 = 0
+//        var totalFreeSpace: UInt64 = 0
+//        var error: Error? = nil
+//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let dictionary = try? FileManager.default.attributesOfFileSystem(forPath: paths.last ?? "")
+//
+//        if (dictionary != nil) {
+//            var fileSystemSizeInBytes = dictionary?[.systemSize] as? NSNumber
+//            var freeFileSystemSizeInBytes = dictionary?[.systemFreeSize] as? NSNumber
+//            totalSpace = UInt64(fileSystemSizeInBytes ?? 0)
+//            totalFreeSpace = UInt64(freeFileSystemSizeInBytes ?? 0)
+//            //            CS_Log_Info("Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace / 1024) / 1024), ((totalFreeSpace / 1024) / 1024))
+//        } else {
+//            //            CS_Log_Info("Error Obtaining System Memory Info: Domain = %@, Code = %ld", (error as NSError?)?.domain, Int(error.code))
+//        }
+//        let totalSpace1 = (totalSpace / 1024) / 1024
+//        let totalFreeSpace2 = (totalFreeSpace / 1024) / 1024
+//    }
+    
+    
+    
     static var totalDiskSpace: Int64 {
         let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeFolder)
         let totalSpace = systemAttributes?[.systemSize] as? NSNumber
