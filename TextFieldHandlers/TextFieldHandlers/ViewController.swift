@@ -8,16 +8,86 @@
 
 import UIKit
 
+protocol TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool?
+}
+
+final class AvailableCharactersValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        return TextHandlers.isNotAllowed(characters: "123qwe", in: newText)
+    }
+}
+
+final class LimitCharactersValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        let characterCountLimit = 4
+        return resultString.count <= characterCountLimit 
+    }
+}
+
+final class DeleteValidator: TFValidator {
+    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
+        if newText.isEmpty {
+            return true
+        }
+        return nil
+    }
+}
+
+final class ValidatingTextField: UITextField {
+    
+    var validators: [TFValidator] = []
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        delegate = self
+    }
+    
+}
+extension ValidatingTextField: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let resultString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
+            let oldText = textField.text
+        {
+            
+            for validator in validators {
+                if let validatorResult = validator.validate(oldText: oldText, newText: string, resultString: resultString),
+                    !validatorResult
+                {
+                    return false
+                }
+            }
+            
+            /// all validators true
+        }
+        
+        return true
+    }
+}
+
 /// ADD limit for text field
 class ViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var validatingTextField: ValidatingTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.delegate = self
         textField.enablesReturnKeyAutomatically = true
+        
+        validatingTextField.validators = [LimitCharactersValidator(), DeleteValidator(), AvailableCharactersValidator()]
     }
 }
 

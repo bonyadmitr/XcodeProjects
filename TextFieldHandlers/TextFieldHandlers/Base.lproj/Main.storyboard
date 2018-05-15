@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="i7b-lN-tJD">
-                                <rect key="frame" x="20" y="84" width="280" height="70"/>
+                                <rect key="frame" x="20" y="84" width="280" height="110"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZN2-YD-3rx">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
@@ -29,6 +29,12 @@
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JM0-AY-Aai" customClass="ReturnButtonHandlingTextField" customModule="TextFieldHandlers" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="40" width="280" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kvC-Zy-3yd" customClass="ValidatingTextField" customModule="TextFieldHandlers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="80" width="280" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -46,6 +52,7 @@
                     </view>
                     <connections>
                         <outlet property="textField" destination="ZN2-YD-3rx" id="kMF-kF-tg5"/>
+                        <outlet property="validatingTextField" destination="kvC-Zy-3yd" id="mw8-h8-1jB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
