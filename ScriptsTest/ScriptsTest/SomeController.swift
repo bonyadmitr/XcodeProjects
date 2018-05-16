@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SomeController.swift
 //  ScriptsTest
 //
 //  Created by Bondar Yaroslav on 5/16/18.
@@ -8,13 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class SomeController: UIViewController {
+    
     @IBOutlet private weak var someLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
 }

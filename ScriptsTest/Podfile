@@ -3,6 +3,7 @@ platform :ios, '9.0'
 target 'ScriptsTest' do
   use_frameworks!
 
+  ## scripts
   pod 'IBAnalyzer'
   pod 'SwiftGen'
   pod 'SwiftLint'

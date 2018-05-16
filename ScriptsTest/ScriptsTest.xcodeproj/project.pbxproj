@@ -15,6 +15,8 @@
 		CEA09EE420ABFC1C00A09D5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EE220ABFC1C00A09D5B /* LaunchScreen.storyboard */; };
 		CEA09EF120ABFF1D00A09D5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EF320ABFF1D00A09D5B /* Localizable.strings */; };
 		CEA09EF720AC003D00A09D5B /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EF620AC003D00A09D5B /* L10n.swift */; };
+		CEA09EFA20AC04AC00A09D5B /* SomeController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EF920AC04AC00A09D5B /* SomeController.storyboard */; };
+		CEA09EFC20AC04E100A09D5B /* SomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EFB20AC04E100A09D5B /* SomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		CEA09EE520ABFC1C00A09D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA09EF220ABFF1D00A09D5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEA09EF620AC003D00A09D5B /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		CEA09EF920AC04AC00A09D5B /* SomeController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SomeController.storyboard; sourceTree = "<group>"; };
+		CEA09EFB20AC04E100A09D5B /* SomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeController.swift; sourceTree = "<group>"; };
 		FE8C7758B81D1DB46E6BF639 /* Pods-ScriptsTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScriptsTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScriptsTest/Pods-ScriptsTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,8 +88,10 @@
 			children = (
 				CEA09EF020ABFF0A00A09D5B /* App */,
 				CEA09EEF20ABFEFB00A09D5B /* Resources */,
-				CEA09EDB20ABFC1A00A09D5B /* ViewController.swift */,
 				CEA09EDD20ABFC1A00A09D5B /* Main.storyboard */,
+				CEA09EDB20ABFC1A00A09D5B /* ViewController.swift */,
+				CEA09EF920AC04AC00A09D5B /* SomeController.storyboard */,
+				CEA09EFB20AC04E100A09D5B /* SomeController.swift */,
 			);
 			path = ScriptsTest;
 			sourceTree = "<group>";
@@ -123,6 +129,7 @@
 				CEA09ED420ABFC1A00A09D5B /* Resources */,
 				CEA09EED20ABFD6400A09D5B /* Swiftgen */,
 				CEA09EEE20ABFD7F00A09D5B /* Swiftlint */,
+				CEA09EF820AC016D00A09D5B /* IBAnalyzer */,
 			);
 			buildRules = (
 			);
@@ -172,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA09EE420ABFC1C00A09D5B /* LaunchScreen.storyboard in Resources */,
+				CEA09EFA20AC04AC00A09D5B /* SomeController.storyboard in Resources */,
 				CEA09EF120ABFF1D00A09D5B /* Localizable.strings in Resources */,
 				CEA09EE120ABFC1C00A09D5B /* Assets.xcassets in Resources */,
 				CEA09EDF20ABFC1A00A09D5B /* Main.storyboard in Resources */,
@@ -227,6 +235,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/swiftlint.sh";
 		};
+		CEA09EF820AC016D00A09D5B /* IBAnalyzer */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = IBAnalyzer;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/ibanalyzer.sh";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -237,6 +259,7 @@
 				CEA09EDC20ABFC1A00A09D5B /* ViewController.swift in Sources */,
 				CEA09EDA20ABFC1A00A09D5B /* AppDelegate.swift in Sources */,
 				CEA09EF720AC003D00A09D5B /* L10n.swift in Sources */,
+				CEA09EFC20AC04E100A09D5B /* SomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
