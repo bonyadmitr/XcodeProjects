@@ -1,0 +1,28 @@
+PODS:
+  - IBAnalyzer (0.2.1)
+  - IBLinter (0.2.0)
+  - SwiftGen (5.3.0)
+  - SwiftLint (0.25.1)
+
+DEPENDENCIES:
+  - IBAnalyzer
+  - IBLinter
+  - SwiftGen
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IBAnalyzer
+    - IBLinter
+    - SwiftGen
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  IBAnalyzer: dd44c8f2ebb6bc4c24b4fa4ae4cfd05a197d11cf
+  IBLinter: 07a8c664f0a87b5e96a03c720f09648d1f0d5ab8
+  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
+
+PODFILE CHECKSUM: ac35bf30da82cc5c924dbd76747275fc89c04e00
+
+COCOAPODS: 1.5.2

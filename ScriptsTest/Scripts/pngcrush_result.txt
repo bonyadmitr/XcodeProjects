@@ -1,0 +1,1 @@
+./ScriptsTest/Resources/Assets.xcassets/dot.imageset/dot.png
