@@ -133,6 +133,7 @@
 				CEA09EF820AC016D00A09D5B /* IBLinter */,
 				CEA09EFD20AC239200A09D5B /* IBAnalyzer */,
 				CEA09EFE20AC369B00A09D5B /* unused */,
+				CEA09EFF20AC38D500A09D5B /* AbandonedStrings */,
 			);
 			buildRules = (
 			);
@@ -297,6 +298,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Scripts/unused.rb xcode";
+		};
+		CEA09EFF20AC38D500A09D5B /* AbandonedStrings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = AbandonedStrings;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/abandoned_strings.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
