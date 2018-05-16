@@ -5,5 +5,6 @@ target 'ScriptsTest' do
 
   pod 'IBAnalyzer'
   pod 'SwiftGen'
+  pod 'SwiftLint'
 
 end

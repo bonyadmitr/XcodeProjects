@@ -13,6 +13,8 @@
 		CEA09EDF20ABFC1A00A09D5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EDD20ABFC1A00A09D5B /* Main.storyboard */; };
 		CEA09EE120ABFC1C00A09D5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EE020ABFC1C00A09D5B /* Assets.xcassets */; };
 		CEA09EE420ABFC1C00A09D5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EE220ABFC1C00A09D5B /* LaunchScreen.storyboard */; };
+		CEA09EF120ABFF1D00A09D5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEA09EF320ABFF1D00A09D5B /* Localizable.strings */; };
+		CEA09EF720AC003D00A09D5B /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA09EF620AC003D00A09D5B /* L10n.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		CEA09EE020ABFC1C00A09D5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEA09EE320ABFC1C00A09D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEA09EE520ABFC1C00A09D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA09EF220ABFF1D00A09D5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CEA09EF620AC003D00A09D5B /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		FE8C7758B81D1DB46E6BF639 /* Pods-ScriptsTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScriptsTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScriptsTest/Pods-ScriptsTest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,14 +82,32 @@
 		CEA09ED820ABFC1A00A09D5B /* ScriptsTest */ = {
 			isa = PBXGroup;
 			children = (
-				CEA09ED920ABFC1A00A09D5B /* AppDelegate.swift */,
+				CEA09EF020ABFF0A00A09D5B /* App */,
+				CEA09EEF20ABFEFB00A09D5B /* Resources */,
 				CEA09EDB20ABFC1A00A09D5B /* ViewController.swift */,
 				CEA09EDD20ABFC1A00A09D5B /* Main.storyboard */,
+			);
+			path = ScriptsTest;
+			sourceTree = "<group>";
+		};
+		CEA09EEF20ABFEFB00A09D5B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				CEA09EE020ABFC1C00A09D5B /* Assets.xcassets */,
+				CEA09EF320ABFF1D00A09D5B /* Localizable.strings */,
+				CEA09EF620AC003D00A09D5B /* L10n.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CEA09EF020ABFF0A00A09D5B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEA09ED920ABFC1A00A09D5B /* AppDelegate.swift */,
 				CEA09EE220ABFC1C00A09D5B /* LaunchScreen.storyboard */,
 				CEA09EE520ABFC1C00A09D5B /* Info.plist */,
 			);
-			path = ScriptsTest;
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +121,8 @@
 				CEA09ED220ABFC1A00A09D5B /* Sources */,
 				CEA09ED320ABFC1A00A09D5B /* Frameworks */,
 				CEA09ED420ABFC1A00A09D5B /* Resources */,
+				CEA09EED20ABFD6400A09D5B /* Swiftgen */,
+				CEA09EEE20ABFD7F00A09D5B /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -148,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA09EE420ABFC1C00A09D5B /* LaunchScreen.storyboard in Resources */,
+				CEA09EF120ABFF1D00A09D5B /* Localizable.strings in Resources */,
 				CEA09EE120ABFC1C00A09D5B /* Assets.xcassets in Resources */,
 				CEA09EDF20ABFC1A00A09D5B /* Main.storyboard in Resources */,
 			);
@@ -174,6 +199,34 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CEA09EED20ABFD6400A09D5B /* Swiftgen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftgen;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftgen.sh";
+		};
+		CEA09EEE20ABFD7F00A09D5B /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftlint.sh";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -183,6 +236,7 @@
 			files = (
 				CEA09EDC20ABFC1A00A09D5B /* ViewController.swift in Sources */,
 				CEA09EDA20ABFC1A00A09D5B /* AppDelegate.swift in Sources */,
+				CEA09EF720AC003D00A09D5B /* L10n.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +257,14 @@
 				CEA09EE320ABFC1C00A09D5B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CEA09EF320ABFF1D00A09D5B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEA09EF220ABFF1D00A09D5B /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -328,8 +390,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ScriptsTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INFOPLIST_FILE = "$(SRCROOT)/ScriptsTest/App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ScriptsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -343,8 +408,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ScriptsTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INFOPLIST_FILE = "$(SRCROOT)/ScriptsTest/App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ScriptsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
