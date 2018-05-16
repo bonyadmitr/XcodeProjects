@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+source "https://rubygems.org"
+
+gem "cocoapods"
+gem "constraintClean"
+gem "localization_check"
+gem "xcode-install" ##Install and update your Xcodes automatically
+gem "synx"
+
+#gem "fastlane"
+
+# fastlane plugins
+#plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+#eval_gemfile(plugins_path) if File.exist?(plugins_path)
