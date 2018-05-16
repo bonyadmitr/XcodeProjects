@@ -14,7 +14,7 @@
 		6604D9D420599B3600FA61CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6604D9D220599B3600FA61CB /* LaunchScreen.storyboard */; };
 		669A145F2059AAC2005F9D18 /* TimerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A145E2059AAC2005F9D18 /* TimerWrapper.swift */; };
 		669A14612059AAD4005F9D18 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A14602059AAD4005F9D18 /* CountdownTimer.swift */; };
-		669A14632059AB0C005F9D18 /* MonospacedDigitFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A14622059AB0C005F9D18 /* MonospacedDigitFont.swift */; };
+		669A14632059AB0C005F9D18 /* MonospacedDigitFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A14622059AB0C005F9D18 /* MonospacedDigitFontExtensions.swift */; };
 		669A14652059AC8D005F9D18 /* TimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A14642059AC8D005F9D18 /* TimerLabel.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		6604D9D520599B3600FA61CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		669A145E2059AAC2005F9D18 /* TimerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWrapper.swift; sourceTree = "<group>"; };
 		669A14602059AAD4005F9D18 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
-		669A14622059AB0C005F9D18 /* MonospacedDigitFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonospacedDigitFont.swift; sourceTree = "<group>"; };
+		669A14622059AB0C005F9D18 /* MonospacedDigitFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonospacedDigitFontExtensions.swift; sourceTree = "<group>"; };
 		669A14642059AC8D005F9D18 /* TimerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,7 +67,7 @@
 				6604D9CB20599B3600FA61CB /* ViewController.swift */,
 				669A145E2059AAC2005F9D18 /* TimerWrapper.swift */,
 				669A14602059AAD4005F9D18 /* CountdownTimer.swift */,
-				669A14622059AB0C005F9D18 /* MonospacedDigitFont.swift */,
+				669A14622059AB0C005F9D18 /* MonospacedDigitFontExtensions.swift */,
 				669A14642059AC8D005F9D18 /* TimerLabel.swift */,
 			);
 			path = Timer;
@@ -156,7 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				669A14632059AB0C005F9D18 /* MonospacedDigitFont.swift in Sources */,
+				669A14632059AB0C005F9D18 /* MonospacedDigitFontExtensions.swift in Sources */,
 				6604D9CC20599B3600FA61CB /* ViewController.swift in Sources */,
 				669A14612059AAD4005F9D18 /* CountdownTimer.swift in Sources */,
 				669A145F2059AAC2005F9D18 /* TimerWrapper.swift in Sources */,
