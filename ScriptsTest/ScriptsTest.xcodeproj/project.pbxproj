@@ -132,6 +132,7 @@
 				CEA09EEE20ABFD7F00A09D5B /* Swiftlint */,
 				CEA09EF820AC016D00A09D5B /* IBLinter */,
 				CEA09EFD20AC239200A09D5B /* IBAnalyzer */,
+				CEA09EFE20AC369B00A09D5B /* unused */,
 			);
 			buildRules = (
 			);
@@ -282,6 +283,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/ibanalyzer.sh";
+		};
+		CEA09EFE20AC369B00A09D5B /* unused */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = unused;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/unused.rb xcode";
 		};
 /* End PBXShellScriptBuildPhase section */
 
