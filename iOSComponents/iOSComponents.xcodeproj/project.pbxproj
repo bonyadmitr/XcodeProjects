@@ -201,6 +201,13 @@
 		66315A8D20AB6852009C19BE /* SwizzlingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwizzlingManager.swift; sourceTree = "<group>"; };
 		66315A8E20AB6852009C19BE /* BrightnessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessManager.swift; sourceTree = "<group>"; };
 		66315A8F20AB6852009C19BE /* TimeMeasurer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeMeasurer.swift; sourceTree = "<group>"; };
+		66315AA120ACA32F009C19BE /* DPTransparentEdgesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPTransparentEdgesTableView.swift; sourceTree = "<group>"; };
+		66315AA220ACA32F009C19BE /* DPTransparentEdgesScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPTransparentEdgesScrollView.swift; sourceTree = "<group>"; };
+		66315AA520ACA338009C19BE /* LockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
+		66315AA820ACA34E009C19BE /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
+		66315AA920ACA34E009C19BE /* DesignableCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableCheckbox.swift; sourceTree = "<group>"; };
+		66315AAA20ACA34E009C19BE /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		66315AAB20ACA34E009C19BE /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Subscript.swift"; sourceTree = "<group>"; };
 		668F914120AB624A0002B3D3 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		668F914320AB625A0002B3D3 /* UICollectionView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Scroll.swift"; sourceTree = "<group>"; };
@@ -289,6 +296,28 @@
 				66315A7B20AB6798009C19BE /* NSAttributedString+GooglePlace.swift */,
 			);
 			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		66315AA020ACA31B009C19BE /* old files */ = {
+			isa = PBXGroup;
+			children = (
+				66315AA720ACA34E009C19BE /* DesignableViews */,
+				66315AA220ACA32F009C19BE /* DPTransparentEdgesScrollView.swift */,
+				66315AA120ACA32F009C19BE /* DPTransparentEdgesTableView.swift */,
+				66315AA520ACA338009C19BE /* LockView.swift */,
+			);
+			path = "old files";
+			sourceTree = "<group>";
+		};
+		66315AA720ACA34E009C19BE /* DesignableViews */ = {
+			isa = PBXGroup;
+			children = (
+				66315AA820ACA34E009C19BE /* DesignableButton.swift */,
+				66315AA920ACA34E009C19BE /* DesignableCheckbox.swift */,
+				66315AAA20ACA34E009C19BE /* DesignableTextField.swift */,
+				66315AAB20ACA34E009C19BE /* DesignableView.swift */,
+			);
+			path = DesignableViews;
 			sourceTree = "<group>";
 		};
 		CE5CAE5220773E8700E763B1 = {
@@ -475,6 +504,7 @@
 				66C9CBD720A0BC3E001D56F1 /* BatteryManager.swift */,
 				66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */,
 				CEEB7B2120AAC8AE0070FDC2 /* StreamReaderWriter.swift */,
+				66315AA020ACA31B009C19BE /* old files */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
