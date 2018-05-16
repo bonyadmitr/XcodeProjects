@@ -21,3 +21,11 @@ https://github.com/fastred/IBAnalyzer
 IBLinter
 https://github.com/IBDecodable/IBLinter
 /bin/sh ./Scripts/iblinter.sh
+
+AbandonedStrings
+https://github.com/ijoshsmith/abandoned-strings
+/bin/sh ./Scripts/abandoned_strings.sh
+
+LocalizationCheck
+https://github.com/kohtenko/localization_check
+/bin/sh ./Scripts/localization_check.sh
