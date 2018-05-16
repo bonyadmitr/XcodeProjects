@@ -137,6 +137,7 @@
 				CEA09EFF20AC38D500A09D5B /* AbandonedStrings */,
 				CEA09F0120AC445200A09D5B /* LocalizationCheck */,
 				CEA09F0220AC495C00A09D5B /* pngcrush */,
+				CEA09F0320AC524800A09D5B /* constraintClean */,
 			);
 			buildRules = (
 			);
@@ -344,6 +345,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/pngcrush.sh";
+		};
+		CEA09F0320AC524800A09D5B /* constraintClean */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = constraintClean;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/constraintClean.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
