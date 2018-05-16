@@ -100,14 +100,26 @@ extension ViewController: UITextFieldDelegate {
 //        return TextHandlers.isDigits(in: string)
 //        return TextHandlers.isAvailableCharacters(in: string)
 //        return TextHandlers.isNotAllowed(characters: "123qwe", in: string)
-        let isAllowed = TextHandlers.isAllowed(characters: "123qwe", in: string)
         
-        if isAllowed {
-            let remainLength = characterCountLimit - newLength
-            print("remainLength:", remainLength)
+        /// or 1
+        guard TextHandlers.isAllowed(characters: "123qwe", in: string) else {
+            return false
         }
         
-        return isAllowed
+        let remainLength = characterCountLimit - newLength
+        print("remainLength:", remainLength)
+        
+        return true
+        
+        /// or 2
+//        let isAllowed = TextHandlers.isAllowed(characters: "123qwe", in: string)
+//        
+//        if isAllowed {
+//            let remainLength = characterCountLimit - newLength
+//            print("remainLength:", remainLength)
+//        }
+//        
+//        return isAllowed
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
