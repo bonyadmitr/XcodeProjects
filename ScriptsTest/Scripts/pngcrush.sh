@@ -5,41 +5,42 @@
 
 if which pngcrush >/dev/null; then
 
-	result_file_path="./Scripts/pngcrush_result.txt"
+    result_file_path="./Scripts/pngcrush_result.txt"
 
-	## read file paths from file
-	IFS=$'\n' read -d '' -r -a all_pngs_file < "$result_file_path"
-	## find new ones
-	all_pngs_find=( $(find ./WeatherApp -type f -name "*.png") )
-	## write new paths to file
-	printf "%s\n" "${all_pngs_find[@]}" > "$result_file_path"
+    ## read file paths from file
+    IFS=$'\n' read -d '' -r -a all_pngs_file < "$result_file_path"
+    ## find new ones
+    all_pngs_find=( $(find ./ScriptsTest -type f -name "*.png") )
+    ## write new paths to file
+    printf "%s\n" "${all_pngs_find[@]}" > "$result_file_path"
 
-	## filter new files with old ones
-	for j in "${!all_pngs_file[@]}"; do
-	  for i in "${!all_pngs_find[@]}"; do
-	    if [ "${all_pngs_find[$i]}" = "${all_pngs_file[$j]}" ]; then
-	      unset "all_pngs_find[$i]"
-	      break 1
-	    fi
-	  done
-	done
+    ## filter new files with old ones
+    for j in "${!all_pngs_file[@]}"; do
+      for i in "${!all_pngs_find[@]}"; do
+        if [ "${all_pngs_find[$i]}" = "${all_pngs_file[$j]}" ]; then
+          unset "all_pngs_find[$i]"
+          break 1
+        fi
+      done
+    done
 
-	## exec pngcrush for new files
-	for png in "${all_pngs_find[@]}"; do
-	    echo "pngcrush $png ..."
-	    res=$(pngcrush -brute -reduce "$png" temp.png > /dev/null 2>&1)
+    ## exec pngcrush for new files
+    for png in "${all_pngs_find[@]}"; do
+        echo "pngcrush $png ..."
+        res=$(pngcrush -brute -reduce "$png" temp.png > /dev/null 2>&1)
 
-	    # preserve original on error
-	    if $res; then
-	        mv -f temp.png "$png"
-	    else
-	    	echo "Error with: $png"
-	        rm temp.png
-	    fi
-	done
+        # preserve original on error
+        if $res; then
+            mv -f temp.png "$png"
+        else
+            echo "Error with: $png"
+            rm temp.png
+        fi
+    done
 else
-  	echo "Hmm, you're missing PNGCRUSH. Install it for best result"
+      echo "Hmm, you're missing PNGCRUSH. Install it for best result"
 fi
+
 
 ## other scripts for image optimizations
 # https://gist.github.com/ryansully/1720244
