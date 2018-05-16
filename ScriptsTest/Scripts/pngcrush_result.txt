@@ -1,0 +1,16 @@
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-120x120.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-152x152.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-167x167.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-180x180.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-20x20.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-29x29.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-40x40.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-58x58.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-60x60.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-76x76.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-80x80.png
+./WeatherApp/App/Resources/Assets.xcassets/AppIcon.appiconset/app_icon-87x87.png
+./WeatherApp/App/Resources/Assets.xcassets/im_snowflake.imageset/snowflake.png
+./WeatherApp/Presentation/Settings/AppIcon/AppIcons/clear.png
+./WeatherApp/Presentation/Settings/AppIcon/AppIcons/clouds.png
+./WeatherApp/Presentation/Settings/AppIcon/AppIcons/rain.png

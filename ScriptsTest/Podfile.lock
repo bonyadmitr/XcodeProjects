@@ -1,0 +1,20 @@
+PODS:
+  - IBAnalyzer (0.2.1)
+  - SwiftGen (5.3.0)
+
+DEPENDENCIES:
+  - IBAnalyzer
+  - SwiftGen
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - IBAnalyzer
+    - SwiftGen
+
+SPEC CHECKSUMS:
+  IBAnalyzer: dd44c8f2ebb6bc4c24b4fa4ae4cfd05a197d11cf
+  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
+
+PODFILE CHECKSUM: 301551473a15d4df79bba070f2e7721a57bc4ade
+
+COCOAPODS: 1.5.0
