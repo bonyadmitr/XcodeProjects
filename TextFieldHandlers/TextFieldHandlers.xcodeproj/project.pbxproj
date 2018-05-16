@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6611AC2520AB4B5100814113 /* ValidatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC2420AB4B5100814113 /* ValidatingTextField.swift */; };
 		665BB43B2088FC740088AB25 /* ReturnButtonHandlingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB43A2088FC740088AB25 /* ReturnButtonHandlingTextField.swift */; };
 		CEDA2D502077E7D000203036 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D4F2077E7D000203036 /* AppDelegate.swift */; };
 		CEDA2D522077E7D000203036 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D512077E7D000203036 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6611AC2420AB4B5100814113 /* ValidatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingTextField.swift; sourceTree = "<group>"; };
 		665BB43A2088FC740088AB25 /* ReturnButtonHandlingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnButtonHandlingTextField.swift; sourceTree = "<group>"; };
 		CEDA2D4C2077E7D000203036 /* TextFieldHandlers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextFieldHandlers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDA2D4F2077E7D000203036 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEB7B2520AAFB100070FDC2 /* LanguageTextField.swift */,
+				6611AC2420AB4B5100814113 /* ValidatingTextField.swift */,
 				665BB43A2088FC740088AB25 /* ReturnButtonHandlingTextField.swift */,
 				CEF371A320886B7D007AD36E /* TextHandlers.swift */,
 				CEF371A520886B8E007AD36E /* Validators.swift */,
@@ -171,6 +174,7 @@
 			files = (
 				CEF371A620886B8E007AD36E /* Validators.swift in Sources */,
 				CEDA2D522077E7D000203036 /* ViewController.swift in Sources */,
+				6611AC2520AB4B5100814113 /* ValidatingTextField.swift in Sources */,
 				CEF371A420886B7D007AD36E /* TextHandlers.swift in Sources */,
 				CEEB7B2620AAFB110070FDC2 /* LanguageTextField.swift in Sources */,
 				CEDA2D502077E7D000203036 /* AppDelegate.swift in Sources */,

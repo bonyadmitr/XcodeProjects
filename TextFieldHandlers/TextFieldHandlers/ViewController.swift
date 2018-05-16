@@ -8,51 +8,6 @@
 
 import UIKit
 
-protocol TFValidator {
-    func validate(oldText: String, newText: String, resultString: String) -> Bool?
-}
-
-final class AvailableCharactersValidator: TFValidator {
-    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
-        return TextHandlers.isNotAllowed(characters: "123qwe", in: newText)
-    }
-}
-
-final class LimitCharactersValidator: TFValidator {
-    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
-        let characterCountLimit = 4
-        return resultString.count <= characterCountLimit 
-    }
-}
-
-final class DeleteValidator: TFValidator {
-    func validate(oldText: String, newText: String, resultString: String) -> Bool? {
-        if newText.isEmpty {
-            return true
-        }
-        return nil
-    }
-}
-
-final class ValidatingTextField: UITextField {
-    
-    var validators: [TFValidator] = []
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        delegate = self
-    }
-    
-}
 extension ValidatingTextField: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -74,6 +29,13 @@ extension ValidatingTextField: UITextFieldDelegate {
         return true
     }
 }
+
+
+//let str: String = "this-is-my-id"
+//
+//let result = str.split(separator: "-").reduce("") {(acc, name) in
+//    "\(acc)\(acc.count > 0 ? String(name.capitalized) : String(name))"
+//}
 
 /// ADD limit for text field
 class ViewController: UIViewController {

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VxC-80-8t6">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CollectionViewInTableView-->
+        <scene sceneID="kv9-WF-X2p">
+            <objects>
+                <viewController id="VxC-80-8t6" customClass="CollectionViewInTableViewController" customModule="CollectionViewLayouts" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6UZ-bn-1M4"/>
+                        <viewControllerLayoutGuide type="bottom" id="irP-zm-33J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fnx-nd-w7L">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="202" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="10I-bY-hLI" customClass="CollectionTableView" customModule="CollectionViewLayouts" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="202" id="N68-IA-HSs" customClass="TableCell" customModule="CollectionViewLayouts" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="202"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N68-IA-HSs" id="BNF-YZ-qxd">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XEo-QV-cx0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="193"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="xTl-GS-5hi">
+                                                        <size key="itemSize" width="198" height="174"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells/>
+                                                </collectionView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="XEo-QV-cx0" firstAttribute="top" secondItem="BNF-YZ-qxd" secondAttribute="top" id="OyG-Xw-7GV"/>
+                                                <constraint firstAttribute="bottom" secondItem="XEo-QV-cx0" secondAttribute="bottom" constant="8" id="gFh-9u-2od"/>
+                                                <constraint firstAttribute="trailing" secondItem="XEo-QV-cx0" secondAttribute="trailing" id="gHP-O1-FgL"/>
+                                                <constraint firstItem="XEo-QV-cx0" firstAttribute="leading" secondItem="BNF-YZ-qxd" secondAttribute="leading" id="uWH-gL-zk8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="collectionView" destination="XEo-QV-cx0" id="jwE-DB-Tax"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="VxC-80-8t6" id="NZO-lL-tNF"/>
+                                    <outlet property="delegate" destination="VxC-80-8t6" id="1QJ-us-G0x"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="10I-bY-hLI" firstAttribute="top" secondItem="6UZ-bn-1M4" secondAttribute="bottom" id="BfZ-Wy-nq2"/>
+                            <constraint firstItem="10I-bY-hLI" firstAttribute="leading" secondItem="fnx-nd-w7L" secondAttribute="leading" id="DZO-Wg-Vuo"/>
+                            <constraint firstItem="irP-zm-33J" firstAttribute="top" secondItem="10I-bY-hLI" secondAttribute="bottom" id="fmg-Rk-G7n"/>
+                            <constraint firstAttribute="trailing" secondItem="10I-bY-hLI" secondAttribute="trailing" id="xF0-9W-uMp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CollectionViewInTableView" id="XZx-S8-3ip"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="10I-bY-hLI" id="C8Y-DO-2R4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="giA-JF-O0A" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2012" y="370"/>
+        </scene>
+    </scenes>
+</document>
