@@ -17,3 +17,7 @@ https://fabric.io/kits/ios/crashlytics/install
 IBAnalyzer
 https://github.com/fastred/IBAnalyzer
 /bin/sh ./Scripts/ibanalyzer.sh
+
+IBLinter
+https://github.com/IBDecodable/IBLinter
+/bin/sh ./Scripts/iblinter.sh

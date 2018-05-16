@@ -1,0 +1,15 @@
+## .iblinter.yml
+## https://github.com/IBDecodable/IBLinter
+
+enabled_rules:
+  - custom_class_name
+  - relative_to_margin
+  - misplaced
+  - enable_autolayout
+  - duplicate_constraint
+  # - storyboard_viewcontroller_id
+disabled_rules:
+  - custom_class_name
+excluded:
+  - Pods
+  # - Carthage

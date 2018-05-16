@@ -127,9 +127,11 @@
 				CEA09ED220ABFC1A00A09D5B /* Sources */,
 				CEA09ED320ABFC1A00A09D5B /* Frameworks */,
 				CEA09ED420ABFC1A00A09D5B /* Resources */,
+				588E506B145063A5969732E3 /* [CP] Embed Pods Frameworks */,
 				CEA09EED20ABFD6400A09D5B /* Swiftgen */,
 				CEA09EEE20ABFD7F00A09D5B /* Swiftlint */,
-				CEA09EF820AC016D00A09D5B /* IBAnalyzer */,
+				CEA09EF820AC016D00A09D5B /* IBLinter */,
+				CEA09EFD20AC239200A09D5B /* IBAnalyzer */,
 			);
 			buildRules = (
 			);
@@ -207,6 +209,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		588E506B145063A5969732E3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ScriptsTest/Pods-ScriptsTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IBLinter/IBLinter.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IBLinter.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScriptsTest/Pods-ScriptsTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CEA09EED20ABFD6400A09D5B /* Swiftgen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,7 +255,21 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/swiftlint.sh";
 		};
-		CEA09EF820AC016D00A09D5B /* IBAnalyzer */ = {
+		CEA09EF820AC016D00A09D5B /* IBLinter */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = IBLinter;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/iblinter.sh";
+		};
+		CEA09EFD20AC239200A09D5B /* IBAnalyzer */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
