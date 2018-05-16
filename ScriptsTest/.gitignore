@@ -50,3 +50,6 @@ fastlane/screenshots/**/*.png
 *.mobileprovision
 *.cer
 *.pem
+
+## for ibanalyzer.sh
+default.profraw
