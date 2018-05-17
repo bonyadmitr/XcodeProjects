@@ -49,7 +49,7 @@ final class TimerLabel: UILabel {
     }
     
     func setup(timerLimit: Int, completion: VoidHandler?) {
-        countdownTimer.setup(with: 1, timerLimit: timerLimit, stepHandler: { [weak self] timeString in
+        countdownTimer.setup(timeInterval: 1, timerLimit: timerLimit, stepHandler: { [weak self] timeString in
             self?.text = timeString
             }, completion: completion)
     }

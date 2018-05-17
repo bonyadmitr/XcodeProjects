@@ -34,7 +34,7 @@ final class ViewController: UIViewController {
     }
     
     private func start() {
-        countdownTimer.setup(with: 1, timerLimit: 100, stepHandler: { [weak self] timeString in
+        countdownTimer.setup(timeInterval: 1, timerLimit: 100, stepHandler: { [weak self] timeString in
             self?.timeLabel.text = timeString
         }, completion: { [weak self] in
             self?.presentAlert()
