@@ -22,7 +22,7 @@ final class CountdownTimer: NSObject {
     private var stepHandler: CountdownStepHandler?
     private var completion: VoidHandler?
     
-    func setup(with timeInterval: Float,
+    func setup(timeInterval: Float,
                timerLimit: Int,
                stepHandler: CountdownStepHandler?,
                completion: VoidHandler?) {
@@ -80,6 +80,7 @@ final class CountdownTimer: NSObject {
     }
     
     func stop() {
+        isDead = true
         timer.stop()
         NotificationCenter.default.removeObserver(self)
     }
