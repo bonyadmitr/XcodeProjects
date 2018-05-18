@@ -13,7 +13,8 @@ import Foundation
 final class Device {
     
     static var homeFolder: String {
-        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last ?? ""
+        return NSHomeDirectory() as String
+//        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last ?? ""
     }
     
     /// Available vs Free
