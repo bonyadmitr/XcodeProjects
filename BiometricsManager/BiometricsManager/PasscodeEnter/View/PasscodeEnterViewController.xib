@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeEnterViewController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="passcodeViewImp" destination="lFW-LC-v1I" id="mWf-Lt-q0w"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Gis-sz-let"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFW-LC-v1I" customClass="PasscodeViewImp" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="20" y="24.5" width="280" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="pE1-li-CSD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lFW-LC-v1I" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5KE-51-E8k"/>
+                <constraint firstAttribute="trailing" secondItem="lFW-LC-v1I" secondAttribute="trailing" constant="20" id="dfG-NU-o1P"/>
+                <constraint firstItem="lFW-LC-v1I" firstAttribute="top" secondItem="Pxv-Qs-TMn" secondAttribute="top" constant="24.5" id="iAh-sB-9FC"/>
+                <constraint firstItem="lFW-LC-v1I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="q25-ZL-ETe"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="Pxv-Qs-TMn"/>
+        </view>
+    </objects>
+</document>
