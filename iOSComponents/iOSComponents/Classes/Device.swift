@@ -31,9 +31,12 @@ final class Device {
     static var freeDiskSpace: Int64 {
         if #available(iOS 11.0, *) {
             let fileURL = URL(fileURLWithPath: homeFolder)
-            ///check vs .volumeAvailableCapacityKey, .volumeAvailableCapacityForOpportunisticUsageKey
-            let values = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-            return values?.volumeAvailableCapacityForImportantUsage ?? 0
+            /// volumeAvailableCapacityKey - доступное место, тоже самое что файловый менеджер отдаст.
+            /// volumeAvailableCapacityForImportantUsageKey - всё свободное, с учётом возможности удаления кэша, временных файлов и т.д.
+            /// В случае с volumeAvailableCapacityForImportantUsageKey нас не  пускает система в “защищенное” пространство
+            // TODO: check vs .volumeAvailableCapacityKey, .volumeAvailableCapacityForOpportunisticUsageKey
+            let values = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+            return Int64(values?.volumeAvailableCapacity ?? 0)
         } else {
             let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeFolder)
             let freeSize = systemAttributes?[.systemFreeSize] as? NSNumber
