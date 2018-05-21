@@ -1,5 +1,5 @@
 //
-//  UIColor+Adjust.swift
+//  UITableView+Extensions.swift
 //  CustomViews
 //
 //  Created by Bondar Yaroslav on 08.02.17.
@@ -52,7 +52,7 @@ extension UITableView {
 
 extension UITableView {
 
-    func removeEmptyCells() {
+    func removeEmptyCellsFromBottom() {
         tableFooterView = UIView()
     }
 
