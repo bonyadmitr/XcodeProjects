@@ -15,7 +15,6 @@
 		6611AC5020AB59F600814113 /* UIImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3820AB59F200814113 /* UIImageView+Download.swift */; };
 		6611AC5120AB59F600814113 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3920AB59F200814113 /* UIApplication+Version.swift */; };
 		6611AC5220AB59F600814113 /* Localization+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3A20AB59F300814113 /* Localization+Views.swift */; };
-		6611AC5320AB59F600814113 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3B20AB59F300814113 /* UIApplication+Controller.swift */; };
 		6611AC5420AB59F600814113 /* UIImage+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3C20AB59F300814113 /* UIImage+Image.swift */; };
 		6611AC5620AB59F600814113 /* UIResponder+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC3E20AB59F300814113 /* UIResponder+Set.swift */; };
 		6611AC5820AB59F600814113 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AC4020AB59F400814113 /* UIApplication+topController.swift */; };
@@ -67,6 +66,8 @@
 		66315A9C20AB6853009C19BE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8C20AB6852009C19BE /* LocationManager.swift */; };
 		66315A9E20AB6853009C19BE /* BrightnessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8E20AB6852009C19BE /* BrightnessManager.swift */; };
 		66315A9F20AB6853009C19BE /* TimeMeasurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8F20AB6852009C19BE /* TimeMeasurer.swift */; };
+		66315AD020B3226A009C19BE /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315ACE20B32269009C19BE /* BackButtonActions.swift */; };
+		66315AD120B3226A009C19BE /* StatusBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315ACF20B32269009C19BE /* StatusBarActions.swift */; };
 		665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */; };
 		668F914220AB624A0002B3D3 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668F914120AB624A0002B3D3 /* UIApplication+URL.swift */; };
 		668F914420AB625A0002B3D3 /* UICollectionView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668F914320AB625A0002B3D3 /* UICollectionView+Scroll.swift */; };
@@ -127,7 +128,6 @@
 		6611AC3820AB59F200814113 /* UIImageView+Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Download.swift"; sourceTree = "<group>"; };
 		6611AC3920AB59F200814113 /* UIApplication+Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
 		6611AC3A20AB59F300814113 /* Localization+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Localization+Views.swift"; sourceTree = "<group>"; };
-		6611AC3B20AB59F300814113 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
 		6611AC3C20AB59F300814113 /* UIImage+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Image.swift"; sourceTree = "<group>"; };
 		6611AC3E20AB59F300814113 /* UIResponder+Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Set.swift"; sourceTree = "<group>"; };
 		6611AC4020AB59F400814113 /* UIApplication+topController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+topController.swift"; sourceTree = "<group>"; };
@@ -208,6 +208,8 @@
 		66315AA920ACA34E009C19BE /* DesignableCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableCheckbox.swift; sourceTree = "<group>"; };
 		66315AAA20ACA34E009C19BE /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		66315AAB20ACA34E009C19BE /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		66315ACE20B32269009C19BE /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
+		66315ACF20B32269009C19BE /* StatusBarActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarActions.swift; sourceTree = "<group>"; };
 		665BB4182080064B0088AB25 /* UserDefaults+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Subscript.swift"; sourceTree = "<group>"; };
 		668F914120AB624A0002B3D3 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		668F914320AB625A0002B3D3 /* UICollectionView+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Scroll.swift"; sourceTree = "<group>"; };
@@ -406,7 +408,6 @@
 				6611AC3A20AB59F300814113 /* Localization+Views.swift */,
 				6611AC3620AB59F200814113 /* SKProduct+Localized.swift.swift */,
 				6611AC4120AB59F400814113 /* UI+FirstResponder.swift */,
-				6611AC3B20AB59F300814113 /* UIApplication+Controller.swift */,
 				6611AC4020AB59F400814113 /* UIApplication+topController.swift */,
 				668F914120AB624A0002B3D3 /* UIApplication+URL.swift */,
 				6611AC3920AB59F200814113 /* UIApplication+Version.swift */,
@@ -517,6 +518,8 @@
 				CEDA2D392077A11700203036 /* MapToJSON.swift */,
 				66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */,
 				66C9CBDD20A0DD79001D56F1 /* ShareData.swift */,
+				66315ACE20B32269009C19BE /* BackButtonActions.swift */,
+				66315ACF20B32269009C19BE /* StatusBarActions.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -614,10 +617,10 @@
 				668F915D20AB62D10002B3D3 /* NSObject+AccessLabel.swift in Sources */,
 				CEDA2D3A2077A11700203036 /* MapToJSON.swift in Sources */,
 				66315A9C20AB6853009C19BE /* LocationManager.swift in Sources */,
-				6611AC5320AB59F600814113 /* UIApplication+Controller.swift in Sources */,
 				66315A9020AB6852009C19BE /* SelfSelectedButton.swift in Sources */,
 				66315A9120AB6852009C19BE /* SystemVolumeManager.swift in Sources */,
 				66C9CBDE20A0DD79001D56F1 /* ShareData.swift in Sources */,
+				66315AD120B3226A009C19BE /* StatusBarActions.swift in Sources */,
 				6611AD6620AB5D3300814113 /* UIView+Layer.swift in Sources */,
 				6611AD5420AB5D3300814113 /* UIView+Shadow.swift in Sources */,
 				66315A9520AB6852009C19BE /* ClearableSingleton.swift in Sources */,
@@ -693,6 +696,7 @@
 				6611ADA120AB606000814113 /* UIImage+HEIC.swift in Sources */,
 				668F918C20AB64C60002B3D3 /* Date+MilliSec.swift in Sources */,
 				668F916A20AB62D10002B3D3 /* Radians+Extensions.swift in Sources */,
+				66315AD020B3226A009C19BE /* BackButtonActions.swift in Sources */,
 				6611AD5C20AB5D3300814113 /* UIView+Parent.swift in Sources */,
 				665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */,
 				CE5CAE7D207748BE00E763B1 /* Typealias.swift in Sources */,
