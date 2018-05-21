@@ -1,0 +1,391 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		661F70531D29724F0030B615 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70521D29724F0030B615 /* AppDelegate.swift */; };
+		661F70551D29724F0030B615 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70541D29724F0030B615 /* TimerController.swift */; };
+		661F70571D29724F0030B615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 661F70561D29724F0030B615 /* Assets.xcassets */; };
+		661F705A1D29724F0030B615 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661F70581D29724F0030B615 /* Main.storyboard */; };
+		661F70621D29A8CB0030B615 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70611D29A8CB0030B615 /* LoginController.swift */; };
+		661F70641D2AFBF00030B615 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70631D2AFBF00030B615 /* WindowController.swift */; };
+		661F70661D2AFFE90030B615 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70651D2AFFE90030B615 /* SocketIOManager.swift */; };
+		661F70681D2C50E70030B615 /* CutomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70671D2C50E70030B615 /* CutomCell.swift */; };
+		661F706B1D2C58180030B615 /* CollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661F70691D2C58180030B615 /* CollCell.swift */; };
+		661F706C1D2C58180030B615 /* CollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 661F706A1D2C58180030B615 /* CollCell.xib */; };
+		80E210D651EBF7E8E8B61909 /* Pods_MacTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED753D0F00A72940DFEEC12 /* Pods_MacTimer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2ED753D0F00A72940DFEEC12 /* Pods_MacTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MacTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33A24A015F81A02512D05CB9 /* Pods-MacTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MacTimer/Pods-MacTimer.release.xcconfig"; sourceTree = "<group>"; };
+		4861F99511AC33C5A00600DE /* Pods-MacTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MacTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MacTimer/Pods-MacTimer.debug.xcconfig"; sourceTree = "<group>"; };
+		661F704F1D29724F0030B615 /* MacTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		661F70521D29724F0030B615 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		661F70541D29724F0030B615 /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
+		661F70561D29724F0030B615 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		661F70591D29724F0030B615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		661F705B1D29724F0030B615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		661F70611D29A8CB0030B615 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		661F70631D2AFBF00030B615 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		661F70651D2AFFE90030B615 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		661F70671D2C50E70030B615 /* CutomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CutomCell.swift; sourceTree = "<group>"; };
+		661F70691D2C58180030B615 /* CollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollCell.swift; sourceTree = "<group>"; };
+		661F706A1D2C58180030B615 /* CollCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		661F704C1D29724F0030B615 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80E210D651EBF7E8E8B61909 /* Pods_MacTimer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02999982C86504E268B3DF7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4861F99511AC33C5A00600DE /* Pods-MacTimer.debug.xcconfig */,
+				33A24A015F81A02512D05CB9 /* Pods-MacTimer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		661F70461D29724F0030B615 = {
+			isa = PBXGroup;
+			children = (
+				661F70511D29724F0030B615 /* MacTimer */,
+				661F70501D29724F0030B615 /* Products */,
+				02999982C86504E268B3DF7C /* Pods */,
+				A8089D4C14541DB5EC1D3F82 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		661F70501D29724F0030B615 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				661F704F1D29724F0030B615 /* MacTimer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		661F70511D29724F0030B615 /* MacTimer */ = {
+			isa = PBXGroup;
+			children = (
+				661F70581D29724F0030B615 /* Main.storyboard */,
+				661F70671D2C50E70030B615 /* CutomCell.swift */,
+				661F70691D2C58180030B615 /* CollCell.swift */,
+				661F706A1D2C58180030B615 /* CollCell.xib */,
+				661F70541D29724F0030B615 /* TimerController.swift */,
+				661F70611D29A8CB0030B615 /* LoginController.swift */,
+				661F70651D2AFFE90030B615 /* SocketIOManager.swift */,
+				661F70631D2AFBF00030B615 /* WindowController.swift */,
+				661F70521D29724F0030B615 /* AppDelegate.swift */,
+				661F70561D29724F0030B615 /* Assets.xcassets */,
+				661F705B1D29724F0030B615 /* Info.plist */,
+			);
+			path = MacTimer;
+			sourceTree = "<group>";
+		};
+		A8089D4C14541DB5EC1D3F82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2ED753D0F00A72940DFEEC12 /* Pods_MacTimer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		661F704E1D29724F0030B615 /* MacTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 661F705E1D29724F0030B615 /* Build configuration list for PBXNativeTarget "MacTimer" */;
+			buildPhases = (
+				386048D1D509A08FAB5B7138 /* Check Pods Manifest.lock */,
+				661F704B1D29724F0030B615 /* Sources */,
+				661F704C1D29724F0030B615 /* Frameworks */,
+				661F704D1D29724F0030B615 /* Resources */,
+				AD74E7936B4AD437E476A706 /* Embed Pods Frameworks */,
+				EC577B27584DF14D16892ACA /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacTimer;
+			productName = MacTimer;
+			productReference = 661F704F1D29724F0030B615 /* MacTimer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		661F70471D29724F0030B615 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Bondar Yaroslav";
+				TargetAttributes = {
+					661F704E1D29724F0030B615 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5XGA8925AJ;
+					};
+				};
+			};
+			buildConfigurationList = 661F704A1D29724F0030B615 /* Build configuration list for PBXProject "MacTimer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 661F70461D29724F0030B615;
+			productRefGroup = 661F70501D29724F0030B615 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				661F704E1D29724F0030B615 /* MacTimer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		661F704D1D29724F0030B615 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				661F706C1D2C58180030B615 /* CollCell.xib in Resources */,
+				661F70571D29724F0030B615 /* Assets.xcassets in Resources */,
+				661F705A1D29724F0030B615 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		386048D1D509A08FAB5B7138 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AD74E7936B4AD437E476A706 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacTimer/Pods-MacTimer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC577B27584DF14D16892ACA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MacTimer/Pods-MacTimer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		661F704B1D29724F0030B615 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				661F70551D29724F0030B615 /* TimerController.swift in Sources */,
+				661F70661D2AFFE90030B615 /* SocketIOManager.swift in Sources */,
+				661F70681D2C50E70030B615 /* CutomCell.swift in Sources */,
+				661F70641D2AFBF00030B615 /* WindowController.swift in Sources */,
+				661F706B1D2C58180030B615 /* CollCell.swift in Sources */,
+				661F70621D29A8CB0030B615 /* LoginController.swift in Sources */,
+				661F70531D29724F0030B615 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		661F70581D29724F0030B615 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				661F70591D29724F0030B615 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		661F705C1D29724F0030B615 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		661F705D1D29724F0030B615 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		661F705F1D29724F0030B615 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4861F99511AC33C5A00600DE /* Pods-MacTimer.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MacTimer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BY.MacTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		661F70601D29724F0030B615 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33A24A015F81A02512D05CB9 /* Pods-MacTimer.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MacTimer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BY.MacTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		661F704A1D29724F0030B615 /* Build configuration list for PBXProject "MacTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				661F705C1D29724F0030B615 /* Debug */,
+				661F705D1D29724F0030B615 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		661F705E1D29724F0030B615 /* Build configuration list for PBXNativeTarget "MacTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				661F705F1D29724F0030B615 /* Debug */,
+				661F70601D29724F0030B615 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 661F70471D29724F0030B615 /* Project object */;
+}

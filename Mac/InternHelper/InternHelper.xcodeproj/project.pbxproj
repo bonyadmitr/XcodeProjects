@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F135D059025B908B1C18855 /* Pods_InternHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39208559C003FAAAEC79999 /* Pods_InternHelper.framework */; };
+		CEC425731D2B887700A7512A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425721D2B887700A7512A /* AppDelegate.swift */; };
+		CEC425751D2B887700A7512A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC425741D2B887700A7512A /* Assets.xcassets */; };
+		CEC425781D2B887700A7512A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC425761D2B887700A7512A /* MainMenu.xib */; };
+		CEC425891D2B8EBE00A7512A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425871D2B8EBE00A7512A /* LoginController.swift */; };
+		CEC4258A1D2B8EBE00A7512A /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC425881D2B8EBE00A7512A /* LoginController.xib */; };
+		CEC4258C1D2B907700A7512A /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4258B1D2B907700A7512A /* EventMonitor.swift */; };
+		CEC425A91D2B91C200A7512A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4258F1D2B91C200A7512A /* Errors.swift */; };
+		CEC425AF1D2B91C200A7512A /* OCToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425951D2B91C200A7512A /* OCToken.swift */; };
+		CEC425B01D2B91C200A7512A /* OCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425961D2B91C200A7512A /* OCUser.swift */; };
+		CEC425B11D2B91C200A7512A /* OCUserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425971D2B91C200A7512A /* OCUserCredentials.swift */; };
+		CEC425B61D2B91C200A7512A /* OCRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4259D1D2B91C200A7512A /* OCRepository.swift */; };
+		CEC425B71D2B91C200A7512A /* OCUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4259E1D2B91C200A7512A /* OCUserRepository.swift */; };
+		CEC425C41D2BA25C00A7512A /* OCAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425C31D2BA25C00A7512A /* OCAccountService.swift */; };
+		CEC425C61D2BA34300A7512A /* OCPaginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425C51D2BA34300A7512A /* OCPaginator.swift */; };
+		CEC425CE1D2BB7DE00A7512A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425CD1D2BB7DE00A7512A /* Constants.swift */; };
+		CEC425D31D2BCFEE00A7512A /* UsersListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425D11D2BCFEE00A7512A /* UsersListController.swift */; };
+		CEC425D41D2BCFEE00A7512A /* UsersListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC425D21D2BCFEE00A7512A /* UsersListController.xib */; };
+		CEC425D81D2BE7B800A7512A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425D71D2BE7B800A7512A /* Event.swift */; };
+		CEC425DB1D2C007000A7512A /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425D91D2C007000A7512A /* EventsListController.swift */; };
+		CEC425DC1D2C007000A7512A /* EventsListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC425DA1D2C007000A7512A /* EventsListController.xib */; };
+		CEC425E11D2C031500A7512A /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC425E01D2C031500A7512A /* EventCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		91B56B4B33F0D32838FDC915 /* Pods-InternHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InternHelper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InternHelper/Pods-InternHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		CEC4256F1D2B887600A7512A /* InternHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEC425721D2B887700A7512A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CEC425741D2B887700A7512A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEC425771D2B887700A7512A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CEC425791D2B887700A7512A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEC425871D2B8EBE00A7512A /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		CEC425881D2B8EBE00A7512A /* LoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginController.xib; sourceTree = "<group>"; };
+		CEC4258B1D2B907700A7512A /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		CEC4258F1D2B91C200A7512A /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		CEC425951D2B91C200A7512A /* OCToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCToken.swift; sourceTree = "<group>"; };
+		CEC425961D2B91C200A7512A /* OCUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCUser.swift; sourceTree = "<group>"; };
+		CEC425971D2B91C200A7512A /* OCUserCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCUserCredentials.swift; sourceTree = "<group>"; };
+		CEC4259D1D2B91C200A7512A /* OCRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCRepository.swift; sourceTree = "<group>"; };
+		CEC4259E1D2B91C200A7512A /* OCUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCUserRepository.swift; sourceTree = "<group>"; };
+		CEC425C31D2BA25C00A7512A /* OCAccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCAccountService.swift; sourceTree = "<group>"; };
+		CEC425C51D2BA34300A7512A /* OCPaginator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCPaginator.swift; sourceTree = "<group>"; };
+		CEC425CD1D2BB7DE00A7512A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CEC425D11D2BCFEE00A7512A /* UsersListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListController.swift; sourceTree = "<group>"; };
+		CEC425D21D2BCFEE00A7512A /* UsersListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersListController.xib; sourceTree = "<group>"; };
+		CEC425D71D2BE7B800A7512A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CEC425D91D2C007000A7512A /* EventsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListController.swift; sourceTree = "<group>"; };
+		CEC425DA1D2C007000A7512A /* EventsListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsListController.xib; sourceTree = "<group>"; };
+		CEC425E01D2C031500A7512A /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		D39208559C003FAAAEC79999 /* Pods_InternHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InternHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0C3F0BD0D857185191E3D9B /* Pods-InternHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InternHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-InternHelper/Pods-InternHelper.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEC4256C1D2B887600A7512A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F135D059025B908B1C18855 /* Pods_InternHelper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12BF30C50D3C547FD6CC264D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D39208559C003FAAAEC79999 /* Pods_InternHelper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D9F747E9DD3CD6E655E41AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91B56B4B33F0D32838FDC915 /* Pods-InternHelper.debug.xcconfig */,
+				F0C3F0BD0D857185191E3D9B /* Pods-InternHelper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CEC425661D2B887600A7512A = {
+			isa = PBXGroup;
+			children = (
+				CEC425711D2B887600A7512A /* InternHelper */,
+				CEC425701D2B887600A7512A /* Products */,
+				9D9F747E9DD3CD6E655E41AF /* Pods */,
+				12BF30C50D3C547FD6CC264D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CEC425701D2B887600A7512A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4256F1D2B887600A7512A /* InternHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEC425711D2B887600A7512A /* InternHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425861D2B8EBE00A7512A /* Controllers */,
+				CEC4258D1D2B91C200A7512A /* Model */,
+				CEC425721D2B887700A7512A /* AppDelegate.swift */,
+				CEC425CD1D2BB7DE00A7512A /* Constants.swift */,
+				CEC4258B1D2B907700A7512A /* EventMonitor.swift */,
+				CEC425741D2B887700A7512A /* Assets.xcassets */,
+				CEC425761D2B887700A7512A /* MainMenu.xib */,
+				CEC425791D2B887700A7512A /* Info.plist */,
+			);
+			path = InternHelper;
+			sourceTree = "<group>";
+		};
+		CEC425861D2B8EBE00A7512A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425D61D2BDC6300A7512A /* LoginController */,
+				CEC425D51D2BDC5B00A7512A /* UsersListController */,
+				CEC425DD1D2C007800A7512A /* EventsListController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CEC4258D1D2B91C200A7512A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4258E1D2B91C200A7512A /* Entities */,
+				CEC425991D2B91C200A7512A /* Repositories */,
+				CEC425A11D2B91C200A7512A /* Services */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEC4258E1D2B91C200A7512A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4258F1D2B91C200A7512A /* Errors.swift */,
+				CEC425951D2B91C200A7512A /* OCToken.swift */,
+				CEC425D71D2BE7B800A7512A /* Event.swift */,
+				CEC425961D2B91C200A7512A /* OCUser.swift */,
+				CEC425971D2B91C200A7512A /* OCUserCredentials.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		CEC425991D2B91C200A7512A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				CEC4259D1D2B91C200A7512A /* OCRepository.swift */,
+				CEC425C51D2BA34300A7512A /* OCPaginator.swift */,
+				CEC4259E1D2B91C200A7512A /* OCUserRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		CEC425A11D2B91C200A7512A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425C31D2BA25C00A7512A /* OCAccountService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CEC425D51D2BDC5B00A7512A /* UsersListController */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425D11D2BCFEE00A7512A /* UsersListController.swift */,
+				CEC425D21D2BCFEE00A7512A /* UsersListController.xib */,
+			);
+			name = UsersListController;
+			sourceTree = "<group>";
+		};
+		CEC425D61D2BDC6300A7512A /* LoginController */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425881D2B8EBE00A7512A /* LoginController.xib */,
+				CEC425871D2B8EBE00A7512A /* LoginController.swift */,
+			);
+			name = LoginController;
+			sourceTree = "<group>";
+		};
+		CEC425DD1D2C007800A7512A /* EventsListController */ = {
+			isa = PBXGroup;
+			children = (
+				CEC425D91D2C007000A7512A /* EventsListController.swift */,
+				CEC425DA1D2C007000A7512A /* EventsListController.xib */,
+				CEC425E01D2C031500A7512A /* EventCell.swift */,
+			);
+			name = EventsListController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEC4256E1D2B887600A7512A /* InternHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEC4257C1D2B887700A7512A /* Build configuration list for PBXNativeTarget "InternHelper" */;
+			buildPhases = (
+				FF87CDA6EB27A7C0B89B24B7 /* Check Pods Manifest.lock */,
+				CEC4256B1D2B887600A7512A /* Sources */,
+				CEC4256C1D2B887600A7512A /* Frameworks */,
+				CEC4256D1D2B887600A7512A /* Resources */,
+				C61EEDBCE0F3196EED722A5F /* Embed Pods Frameworks */,
+				2EFBB4F3A2BBEA6902951B6C /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InternHelper;
+			productName = InternHelper;
+			productReference = CEC4256F1D2B887600A7512A /* InternHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEC425671D2B887600A7512A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = SMediaLink;
+				TargetAttributes = {
+					CEC4256E1D2B887600A7512A = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = CEC4256A1D2B887600A7512A /* Build configuration list for PBXProject "InternHelper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CEC425661D2B887600A7512A;
+			productRefGroup = CEC425701D2B887600A7512A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEC4256E1D2B887600A7512A /* InternHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEC4256D1D2B887600A7512A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEC425751D2B887700A7512A /* Assets.xcassets in Resources */,
+				CEC4258A1D2B8EBE00A7512A /* LoginController.xib in Resources */,
+				CEC425781D2B887700A7512A /* MainMenu.xib in Resources */,
+				CEC425DC1D2C007000A7512A /* EventsListController.xib in Resources */,
+				CEC425D41D2BCFEE00A7512A /* UsersListController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2EFBB4F3A2BBEA6902951B6C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InternHelper/Pods-InternHelper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C61EEDBCE0F3196EED722A5F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InternHelper/Pods-InternHelper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF87CDA6EB27A7C0B89B24B7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEC4256B1D2B887600A7512A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEC425C41D2BA25C00A7512A /* OCAccountService.swift in Sources */,
+				CEC425DB1D2C007000A7512A /* EventsListController.swift in Sources */,
+				CEC425B11D2B91C200A7512A /* OCUserCredentials.swift in Sources */,
+				CEC425A91D2B91C200A7512A /* Errors.swift in Sources */,
+				CEC425B01D2B91C200A7512A /* OCUser.swift in Sources */,
+				CEC425B71D2B91C200A7512A /* OCUserRepository.swift in Sources */,
+				CEC4258C1D2B907700A7512A /* EventMonitor.swift in Sources */,
+				CEC425731D2B887700A7512A /* AppDelegate.swift in Sources */,
+				CEC425891D2B8EBE00A7512A /* LoginController.swift in Sources */,
+				CEC425B61D2B91C200A7512A /* OCRepository.swift in Sources */,
+				CEC425C61D2BA34300A7512A /* OCPaginator.swift in Sources */,
+				CEC425D31D2BCFEE00A7512A /* UsersListController.swift in Sources */,
+				CEC425E11D2C031500A7512A /* EventCell.swift in Sources */,
+				CEC425AF1D2B91C200A7512A /* OCToken.swift in Sources */,
+				CEC425D81D2BE7B800A7512A /* Event.swift in Sources */,
+				CEC425CE1D2BB7DE00A7512A /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CEC425761D2B887700A7512A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEC425771D2B887700A7512A /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEC4257A1D2B887700A7512A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CEC4257B1D2B887700A7512A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CEC4257D1D2B887700A7512A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91B56B4B33F0D32838FDC915 /* Pods-InternHelper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = InternHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smedialink.InternHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CEC4257E1D2B887700A7512A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0C3F0BD0D857185191E3D9B /* Pods-InternHelper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = InternHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smedialink.InternHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEC4256A1D2B887600A7512A /* Build configuration list for PBXProject "InternHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEC4257A1D2B887700A7512A /* Debug */,
+				CEC4257B1D2B887700A7512A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEC4257C1D2B887700A7512A /* Build configuration list for PBXNativeTarget "InternHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEC4257D1D2B887700A7512A /* Debug */,
+				CEC4257E1D2B887700A7512A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEC425671D2B887600A7512A /* Project object */;
+}
