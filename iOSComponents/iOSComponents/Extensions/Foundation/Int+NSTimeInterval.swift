@@ -13,7 +13,7 @@ extension Int {
         return self.toDouble * 60
     }
     var hours: NSTimeInterval {
-        return self.minutes * 60
+        return self.minutes * 60.minutes
     }
     var days: NSTimeInterval {
         return self.toDouble * 24.hours

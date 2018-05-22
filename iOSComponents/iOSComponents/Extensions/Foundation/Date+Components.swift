@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// addition
 /// https://github.com/melvitax/DateHelper
