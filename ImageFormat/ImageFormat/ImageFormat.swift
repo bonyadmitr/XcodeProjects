@@ -52,4 +52,13 @@ extension ImageFormat {
     var contentType: String {
         return "image/\(rawValue)"
     }
+    
+    var imageTypeForSave: String {
+        switch self {
+        case .unknown:
+            return ""
+        default:
+            return rawValue
+        }
+    }
 }
