@@ -252,6 +252,7 @@
 		66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		66C9CBDD20A0DD79001D56F1 /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
+		CE46402320B6893800EFC1AE /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		CE5CAE5B20773E8700E763B1 /* iOSComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5CAE5E20773E8700E763B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5CAE6020773E8700E763B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -436,6 +437,7 @@
 		CE5CAE782077474B00E763B1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CE46402320B6893800EFC1AE /* MD5.swift */,
 				66315A8420AB6851009C19BE /* AssociationManager.swift */,
 				66315A8E20AB6852009C19BE /* BrightnessManager.swift */,
 				66315A8A20AB6852009C19BE /* CircleImageView.swift */,
