@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qSG-MU-yzv">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="WAZ-mM-m4g">
+            <objects>
+                <navigationController id="qSG-MU-yzv" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X8C-zl-AAa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IBm-bC-Phb" kind="relationship" relationship="rootViewController" id="YJK-jd-Enb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="adj-WN-xcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-126" y="456"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="J9k-NF-WNM">
+            <objects>
+                <viewController id="IBm-bC-Phb" customClass="ViewController" customModule="GooglePlaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vSg-8x-fnW"/>
+                        <viewControllerLayoutGuide type="bottom" id="kLw-R7-mrD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q7L-68-r5Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kjb-JJ-MBe" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Kjb-JJ-MBe" secondAttribute="trailing" id="Jmk-sq-TLy"/>
+                            <constraint firstItem="Kjb-JJ-MBe" firstAttribute="top" secondItem="vSg-8x-fnW" secondAttribute="bottom" id="WFH-uE-kNO"/>
+                            <constraint firstItem="Kjb-JJ-MBe" firstAttribute="leading" secondItem="Q7L-68-r5Z" secondAttribute="leading" id="fhN-qr-alI"/>
+                            <constraint firstItem="kLw-R7-mrD" firstAttribute="top" secondItem="Kjb-JJ-MBe" secondAttribute="bottom" id="iix-JH-9TH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="oXi-xu-R7w">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ni6-a6-Sts">
+                            <connections>
+                                <action selector="actionSearchBarButton:" destination="IBm-bC-Phb" id="6dF-Pf-Qbu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="Kjb-JJ-MBe" id="AEa-ie-482"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kS8-gP-YPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="456"/>
+        </scene>
+    </scenes>
+</document>
