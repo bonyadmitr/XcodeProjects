@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66CC1CFF1C5E5A11008100A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1CFE1C5E5A11008100A9 /* main.m */; };
+		66CC1D021C5E5A11008100A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D011C5E5A11008100A9 /* AppDelegate.m */; };
+		66CC1D081C5E5A11008100A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CC1D061C5E5A11008100A9 /* Main.storyboard */; };
+		66CC1D0A1C5E5A11008100A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CC1D091C5E5A11008100A9 /* Assets.xcassets */; };
+		66CC1D0D1C5E5A11008100A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CC1D0B1C5E5A11008100A9 /* LaunchScreen.storyboard */; };
+		66CC1D181C5E5A11008100A9 /* TimeTableDynamic2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D171C5E5A11008100A9 /* TimeTableDynamic2Tests.m */; };
+		66CC1D231C5E5A11008100A9 /* TimeTableDynamic2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D221C5E5A11008100A9 /* TimeTableDynamic2UITests.m */; };
+		66CC1D341C5E5ABE008100A9 /* ZZClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D311C5E5ABE008100A9 /* ZZClass.m */; };
+		66CC1D351C5E5ABE008100A9 /* ZZDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D331C5E5ABE008100A9 /* ZZDay.m */; };
+		66CC1D381C5E5B1E008100A9 /* ZZTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CC1D371C5E5B1E008100A9 /* ZZTableViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66CC1D141C5E5A11008100A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66CC1CF21C5E5A11008100A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66CC1CF91C5E5A11008100A9;
+			remoteInfo = TimeTableDynamic2;
+		};
+		66CC1D1F1C5E5A11008100A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66CC1CF21C5E5A11008100A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66CC1CF91C5E5A11008100A9;
+			remoteInfo = TimeTableDynamic2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66CC1CFA1C5E5A11008100A9 /* TimeTableDynamic2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTableDynamic2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CC1CFE1C5E5A11008100A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		66CC1D001C5E5A11008100A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		66CC1D011C5E5A11008100A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		66CC1D071C5E5A11008100A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66CC1D091C5E5A11008100A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66CC1D0C1C5E5A11008100A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66CC1D0E1C5E5A11008100A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66CC1D131C5E5A11008100A9 /* TimeTableDynamic2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeTableDynamic2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CC1D171C5E5A11008100A9 /* TimeTableDynamic2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeTableDynamic2Tests.m; sourceTree = "<group>"; };
+		66CC1D191C5E5A11008100A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66CC1D1E1C5E5A11008100A9 /* TimeTableDynamic2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeTableDynamic2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CC1D221C5E5A11008100A9 /* TimeTableDynamic2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeTableDynamic2UITests.m; sourceTree = "<group>"; };
+		66CC1D241C5E5A11008100A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66CC1D301C5E5ABE008100A9 /* ZZClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZClass.h; sourceTree = "<group>"; };
+		66CC1D311C5E5ABE008100A9 /* ZZClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZClass.m; sourceTree = "<group>"; };
+		66CC1D321C5E5ABE008100A9 /* ZZDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZDay.h; sourceTree = "<group>"; };
+		66CC1D331C5E5ABE008100A9 /* ZZDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZDay.m; sourceTree = "<group>"; };
+		66CC1D361C5E5B1E008100A9 /* ZZTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZTableViewController.h; sourceTree = "<group>"; };
+		66CC1D371C5E5B1E008100A9 /* ZZTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZTableViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66CC1CF71C5E5A11008100A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D101C5E5A11008100A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D1B1C5E5A11008100A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66CC1CF11C5E5A11008100A9 = {
+			isa = PBXGroup;
+			children = (
+				66CC1CFC1C5E5A11008100A9 /* TimeTableDynamic2 */,
+				66CC1D161C5E5A11008100A9 /* TimeTableDynamic2Tests */,
+				66CC1D211C5E5A11008100A9 /* TimeTableDynamic2UITests */,
+				66CC1CFB1C5E5A11008100A9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66CC1CFB1C5E5A11008100A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66CC1CFA1C5E5A11008100A9 /* TimeTableDynamic2.app */,
+				66CC1D131C5E5A11008100A9 /* TimeTableDynamic2Tests.xctest */,
+				66CC1D1E1C5E5A11008100A9 /* TimeTableDynamic2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66CC1CFC1C5E5A11008100A9 /* TimeTableDynamic2 */ = {
+			isa = PBXGroup;
+			children = (
+				66CC1D301C5E5ABE008100A9 /* ZZClass.h */,
+				66CC1D311C5E5ABE008100A9 /* ZZClass.m */,
+				66CC1D321C5E5ABE008100A9 /* ZZDay.h */,
+				66CC1D331C5E5ABE008100A9 /* ZZDay.m */,
+				66CC1D001C5E5A11008100A9 /* AppDelegate.h */,
+				66CC1D011C5E5A11008100A9 /* AppDelegate.m */,
+				66CC1D361C5E5B1E008100A9 /* ZZTableViewController.h */,
+				66CC1D371C5E5B1E008100A9 /* ZZTableViewController.m */,
+				66CC1D061C5E5A11008100A9 /* Main.storyboard */,
+				66CC1D091C5E5A11008100A9 /* Assets.xcassets */,
+				66CC1D0B1C5E5A11008100A9 /* LaunchScreen.storyboard */,
+				66CC1D0E1C5E5A11008100A9 /* Info.plist */,
+				66CC1CFD1C5E5A11008100A9 /* Supporting Files */,
+			);
+			path = TimeTableDynamic2;
+			sourceTree = "<group>";
+		};
+		66CC1CFD1C5E5A11008100A9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66CC1CFE1C5E5A11008100A9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66CC1D161C5E5A11008100A9 /* TimeTableDynamic2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				66CC1D171C5E5A11008100A9 /* TimeTableDynamic2Tests.m */,
+				66CC1D191C5E5A11008100A9 /* Info.plist */,
+			);
+			path = TimeTableDynamic2Tests;
+			sourceTree = "<group>";
+		};
+		66CC1D211C5E5A11008100A9 /* TimeTableDynamic2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				66CC1D221C5E5A11008100A9 /* TimeTableDynamic2UITests.m */,
+				66CC1D241C5E5A11008100A9 /* Info.plist */,
+			);
+			path = TimeTableDynamic2UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66CC1CF91C5E5A11008100A9 /* TimeTableDynamic2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66CC1D271C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2" */;
+			buildPhases = (
+				66CC1CF61C5E5A11008100A9 /* Sources */,
+				66CC1CF71C5E5A11008100A9 /* Frameworks */,
+				66CC1CF81C5E5A11008100A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeTableDynamic2;
+			productName = TimeTableDynamic2;
+			productReference = 66CC1CFA1C5E5A11008100A9 /* TimeTableDynamic2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		66CC1D121C5E5A11008100A9 /* TimeTableDynamic2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66CC1D2A1C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2Tests" */;
+			buildPhases = (
+				66CC1D0F1C5E5A11008100A9 /* Sources */,
+				66CC1D101C5E5A11008100A9 /* Frameworks */,
+				66CC1D111C5E5A11008100A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66CC1D151C5E5A11008100A9 /* PBXTargetDependency */,
+			);
+			name = TimeTableDynamic2Tests;
+			productName = TimeTableDynamic2Tests;
+			productReference = 66CC1D131C5E5A11008100A9 /* TimeTableDynamic2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		66CC1D1D1C5E5A11008100A9 /* TimeTableDynamic2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66CC1D2D1C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2UITests" */;
+			buildPhases = (
+				66CC1D1A1C5E5A11008100A9 /* Sources */,
+				66CC1D1B1C5E5A11008100A9 /* Frameworks */,
+				66CC1D1C1C5E5A11008100A9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66CC1D201C5E5A11008100A9 /* PBXTargetDependency */,
+			);
+			name = TimeTableDynamic2UITests;
+			productName = TimeTableDynamic2UITests;
+			productReference = 66CC1D1E1C5E5A11008100A9 /* TimeTableDynamic2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66CC1CF21C5E5A11008100A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "zdaecqze zdaecq";
+				TargetAttributes = {
+					66CC1CF91C5E5A11008100A9 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+					};
+					66CC1D121C5E5A11008100A9 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+						TestTargetID = 66CC1CF91C5E5A11008100A9;
+					};
+					66CC1D1D1C5E5A11008100A9 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+						TestTargetID = 66CC1CF91C5E5A11008100A9;
+					};
+				};
+			};
+			buildConfigurationList = 66CC1CF51C5E5A11008100A9 /* Build configuration list for PBXProject "TimeTableDynamic2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66CC1CF11C5E5A11008100A9;
+			productRefGroup = 66CC1CFB1C5E5A11008100A9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66CC1CF91C5E5A11008100A9 /* TimeTableDynamic2 */,
+				66CC1D121C5E5A11008100A9 /* TimeTableDynamic2Tests */,
+				66CC1D1D1C5E5A11008100A9 /* TimeTableDynamic2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66CC1CF81C5E5A11008100A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CC1D0D1C5E5A11008100A9 /* LaunchScreen.storyboard in Resources */,
+				66CC1D0A1C5E5A11008100A9 /* Assets.xcassets in Resources */,
+				66CC1D081C5E5A11008100A9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D111C5E5A11008100A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D1C1C5E5A11008100A9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66CC1CF61C5E5A11008100A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CC1D351C5E5ABE008100A9 /* ZZDay.m in Sources */,
+				66CC1D021C5E5A11008100A9 /* AppDelegate.m in Sources */,
+				66CC1D341C5E5ABE008100A9 /* ZZClass.m in Sources */,
+				66CC1CFF1C5E5A11008100A9 /* main.m in Sources */,
+				66CC1D381C5E5B1E008100A9 /* ZZTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D0F1C5E5A11008100A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CC1D181C5E5A11008100A9 /* TimeTableDynamic2Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66CC1D1A1C5E5A11008100A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66CC1D231C5E5A11008100A9 /* TimeTableDynamic2UITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66CC1D151C5E5A11008100A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66CC1CF91C5E5A11008100A9 /* TimeTableDynamic2 */;
+			targetProxy = 66CC1D141C5E5A11008100A9 /* PBXContainerItemProxy */;
+		};
+		66CC1D201C5E5A11008100A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66CC1CF91C5E5A11008100A9 /* TimeTableDynamic2 */;
+			targetProxy = 66CC1D1F1C5E5A11008100A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		66CC1D061C5E5A11008100A9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CC1D071C5E5A11008100A9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		66CC1D0B1C5E5A11008100A9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66CC1D0C1C5E5A11008100A9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66CC1D251C5E5A11008100A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		66CC1D261C5E5A11008100A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66CC1D281C5E5A11008100A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TimeTableDynamic2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		66CC1D291C5E5A11008100A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TimeTableDynamic2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		66CC1D2B1C5E5A11008100A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TimeTableDynamic2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeTableDynamic2.app/TimeTableDynamic2";
+			};
+			name = Debug;
+		};
+		66CC1D2C1C5E5A11008100A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TimeTableDynamic2Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeTableDynamic2.app/TimeTableDynamic2";
+			};
+			name = Release;
+		};
+		66CC1D2E1C5E5A11008100A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TimeTableDynamic2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = TimeTableDynamic2;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		66CC1D2F1C5E5A11008100A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TimeTableDynamic2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.TimeTableDynamic2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = TimeTableDynamic2;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66CC1CF51C5E5A11008100A9 /* Build configuration list for PBXProject "TimeTableDynamic2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CC1D251C5E5A11008100A9 /* Debug */,
+				66CC1D261C5E5A11008100A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66CC1D271C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CC1D281C5E5A11008100A9 /* Debug */,
+				66CC1D291C5E5A11008100A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		66CC1D2A1C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CC1D2B1C5E5A11008100A9 /* Debug */,
+				66CC1D2C1C5E5A11008100A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		66CC1D2D1C5E5A11008100A9 /* Build configuration list for PBXNativeTarget "TimeTableDynamic2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66CC1D2E1C5E5A11008100A9 /* Debug */,
+				66CC1D2F1C5E5A11008100A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66CC1CF21C5E5A11008100A9 /* Project object */;
+}
