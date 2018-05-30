@@ -1,0 +1,13 @@
+language: objective-c
+osx_image: xcode7
+sudo: false
+
+cache:
+  directories:
+    - vendor/bundle
+
+before_install:
+  - bundle install --path=vendor/bundle --binstubs=vendor/bin
+
+script:
+  - bundle exec rake test

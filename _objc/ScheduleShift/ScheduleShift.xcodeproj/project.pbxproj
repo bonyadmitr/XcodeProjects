@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66DFFB511C556CE200B63631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFB501C556CE200B63631 /* main.m */; };
+		66DFFB541C556CE200B63631 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFB531C556CE200B63631 /* AppDelegate.m */; };
+		66DFFB571C556CE200B63631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFB561C556CE200B63631 /* ViewController.m */; };
+		66DFFB5A1C556CE200B63631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DFFB581C556CE200B63631 /* Main.storyboard */; };
+		66DFFB5C1C556CE200B63631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66DFFB5B1C556CE200B63631 /* Assets.xcassets */; };
+		66DFFB5F1C556CE200B63631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DFFB5D1C556CE200B63631 /* LaunchScreen.storyboard */; };
+		66DFFB6A1C556CE200B63631 /* ScheduleShiftTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFB691C556CE200B63631 /* ScheduleShiftTests.m */; };
+		66DFFB751C556CE200B63631 /* ScheduleShiftUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFB741C556CE200B63631 /* ScheduleShiftUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66DFFB661C556CE200B63631 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66DFFB441C556CE200B63631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66DFFB4B1C556CE200B63631;
+			remoteInfo = ScheduleShift;
+		};
+		66DFFB711C556CE200B63631 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66DFFB441C556CE200B63631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66DFFB4B1C556CE200B63631;
+			remoteInfo = ScheduleShift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66DFFB4C1C556CE200B63631 /* ScheduleShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScheduleShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66DFFB501C556CE200B63631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		66DFFB521C556CE200B63631 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		66DFFB531C556CE200B63631 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		66DFFB551C556CE200B63631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		66DFFB561C556CE200B63631 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		66DFFB591C556CE200B63631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		66DFFB5B1C556CE200B63631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66DFFB5E1C556CE200B63631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66DFFB601C556CE200B63631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66DFFB651C556CE200B63631 /* ScheduleShiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScheduleShiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66DFFB691C556CE200B63631 /* ScheduleShiftTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleShiftTests.m; sourceTree = "<group>"; };
+		66DFFB6B1C556CE200B63631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66DFFB701C556CE200B63631 /* ScheduleShiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScheduleShiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66DFFB741C556CE200B63631 /* ScheduleShiftUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleShiftUITests.m; sourceTree = "<group>"; };
+		66DFFB761C556CE200B63631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66DFFB491C556CE200B63631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB621C556CE200B63631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB6D1C556CE200B63631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66DFFB431C556CE200B63631 = {
+			isa = PBXGroup;
+			children = (
+				66DFFB4E1C556CE200B63631 /* ScheduleShift */,
+				66DFFB681C556CE200B63631 /* ScheduleShiftTests */,
+				66DFFB731C556CE200B63631 /* ScheduleShiftUITests */,
+				66DFFB4D1C556CE200B63631 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66DFFB4D1C556CE200B63631 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66DFFB4C1C556CE200B63631 /* ScheduleShift.app */,
+				66DFFB651C556CE200B63631 /* ScheduleShiftTests.xctest */,
+				66DFFB701C556CE200B63631 /* ScheduleShiftUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66DFFB4E1C556CE200B63631 /* ScheduleShift */ = {
+			isa = PBXGroup;
+			children = (
+				66DFFB521C556CE200B63631 /* AppDelegate.h */,
+				66DFFB531C556CE200B63631 /* AppDelegate.m */,
+				66DFFB551C556CE200B63631 /* ViewController.h */,
+				66DFFB561C556CE200B63631 /* ViewController.m */,
+				66DFFB581C556CE200B63631 /* Main.storyboard */,
+				66DFFB5B1C556CE200B63631 /* Assets.xcassets */,
+				66DFFB5D1C556CE200B63631 /* LaunchScreen.storyboard */,
+				66DFFB601C556CE200B63631 /* Info.plist */,
+				66DFFB4F1C556CE200B63631 /* Supporting Files */,
+			);
+			path = ScheduleShift;
+			sourceTree = "<group>";
+		};
+		66DFFB4F1C556CE200B63631 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66DFFB501C556CE200B63631 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66DFFB681C556CE200B63631 /* ScheduleShiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				66DFFB691C556CE200B63631 /* ScheduleShiftTests.m */,
+				66DFFB6B1C556CE200B63631 /* Info.plist */,
+			);
+			path = ScheduleShiftTests;
+			sourceTree = "<group>";
+		};
+		66DFFB731C556CE200B63631 /* ScheduleShiftUITests */ = {
+			isa = PBXGroup;
+			children = (
+				66DFFB741C556CE200B63631 /* ScheduleShiftUITests.m */,
+				66DFFB761C556CE200B63631 /* Info.plist */,
+			);
+			path = ScheduleShiftUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66DFFB4B1C556CE200B63631 /* ScheduleShift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66DFFB791C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShift" */;
+			buildPhases = (
+				66DFFB481C556CE200B63631 /* Sources */,
+				66DFFB491C556CE200B63631 /* Frameworks */,
+				66DFFB4A1C556CE200B63631 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScheduleShift;
+			productName = ScheduleShift;
+			productReference = 66DFFB4C1C556CE200B63631 /* ScheduleShift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		66DFFB641C556CE200B63631 /* ScheduleShiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66DFFB7C1C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShiftTests" */;
+			buildPhases = (
+				66DFFB611C556CE200B63631 /* Sources */,
+				66DFFB621C556CE200B63631 /* Frameworks */,
+				66DFFB631C556CE200B63631 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66DFFB671C556CE200B63631 /* PBXTargetDependency */,
+			);
+			name = ScheduleShiftTests;
+			productName = ScheduleShiftTests;
+			productReference = 66DFFB651C556CE200B63631 /* ScheduleShiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		66DFFB6F1C556CE200B63631 /* ScheduleShiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66DFFB7F1C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShiftUITests" */;
+			buildPhases = (
+				66DFFB6C1C556CE200B63631 /* Sources */,
+				66DFFB6D1C556CE200B63631 /* Frameworks */,
+				66DFFB6E1C556CE200B63631 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66DFFB721C556CE200B63631 /* PBXTargetDependency */,
+			);
+			name = ScheduleShiftUITests;
+			productName = ScheduleShiftUITests;
+			productReference = 66DFFB701C556CE200B63631 /* ScheduleShiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66DFFB441C556CE200B63631 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "zdaecqze zdaecq";
+				TargetAttributes = {
+					66DFFB4B1C556CE200B63631 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+					};
+					66DFFB641C556CE200B63631 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+						TestTargetID = 66DFFB4B1C556CE200B63631;
+					};
+					66DFFB6F1C556CE200B63631 = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 5XGA8925AJ;
+						TestTargetID = 66DFFB4B1C556CE200B63631;
+					};
+				};
+			};
+			buildConfigurationList = 66DFFB471C556CE200B63631 /* Build configuration list for PBXProject "ScheduleShift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 66DFFB431C556CE200B63631;
+			productRefGroup = 66DFFB4D1C556CE200B63631 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66DFFB4B1C556CE200B63631 /* ScheduleShift */,
+				66DFFB641C556CE200B63631 /* ScheduleShiftTests */,
+				66DFFB6F1C556CE200B63631 /* ScheduleShiftUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66DFFB4A1C556CE200B63631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DFFB5F1C556CE200B63631 /* LaunchScreen.storyboard in Resources */,
+				66DFFB5C1C556CE200B63631 /* Assets.xcassets in Resources */,
+				66DFFB5A1C556CE200B63631 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB631C556CE200B63631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB6E1C556CE200B63631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66DFFB481C556CE200B63631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DFFB571C556CE200B63631 /* ViewController.m in Sources */,
+				66DFFB541C556CE200B63631 /* AppDelegate.m in Sources */,
+				66DFFB511C556CE200B63631 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB611C556CE200B63631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DFFB6A1C556CE200B63631 /* ScheduleShiftTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66DFFB6C1C556CE200B63631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66DFFB751C556CE200B63631 /* ScheduleShiftUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66DFFB671C556CE200B63631 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66DFFB4B1C556CE200B63631 /* ScheduleShift */;
+			targetProxy = 66DFFB661C556CE200B63631 /* PBXContainerItemProxy */;
+		};
+		66DFFB721C556CE200B63631 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66DFFB4B1C556CE200B63631 /* ScheduleShift */;
+			targetProxy = 66DFFB711C556CE200B63631 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		66DFFB581C556CE200B63631 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66DFFB591C556CE200B63631 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		66DFFB5D1C556CE200B63631 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66DFFB5E1C556CE200B63631 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66DFFB771C556CE200B63631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		66DFFB781C556CE200B63631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		66DFFB7A1C556CE200B63631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScheduleShift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		66DFFB7B1C556CE200B63631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScheduleShift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		66DFFB7D1C556CE200B63631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ScheduleShiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScheduleShift.app/ScheduleShift";
+			};
+			name = Debug;
+		};
+		66DFFB7E1C556CE200B63631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ScheduleShiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScheduleShift.app/ScheduleShift";
+			};
+			name = Release;
+		};
+		66DFFB801C556CE200B63631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ScheduleShiftUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ScheduleShift;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		66DFFB811C556CE200B63631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ScheduleShiftUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = King.ScheduleShiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ScheduleShift;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66DFFB471C556CE200B63631 /* Build configuration list for PBXProject "ScheduleShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DFFB771C556CE200B63631 /* Debug */,
+				66DFFB781C556CE200B63631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66DFFB791C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DFFB7A1C556CE200B63631 /* Debug */,
+				66DFFB7B1C556CE200B63631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		66DFFB7C1C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DFFB7D1C556CE200B63631 /* Debug */,
+				66DFFB7E1C556CE200B63631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		66DFFB7F1C556CE200B63631 /* Build configuration list for PBXNativeTarget "ScheduleShiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66DFFB801C556CE200B63631 /* Debug */,
+				66DFFB811C556CE200B63631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66DFFB441C556CE200B63631 /* Project object */;
+}

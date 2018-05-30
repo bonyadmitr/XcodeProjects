@@ -1,0 +1,79 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - OMGHTTPURLRQ (2.1.3):
+    - OMGHTTPURLRQ/RQ (= 2.1.3)
+  - OMGHTTPURLRQ/FormURLEncode (2.1.3)
+  - OMGHTTPURLRQ/RQ (2.1.3):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (2.1.3)
+  - PromiseKit (1.7.2):
+    - PromiseKit/CALayer (= 1.7.2)
+    - PromiseKit/NSNotificationCenter (= 1.7.2)
+    - PromiseKit/NSURLConnection (= 1.7.2)
+    - PromiseKit/Pause (= 1.7.2)
+    - PromiseKit/UIActionSheet (= 1.7.2)
+    - PromiseKit/UIAlertView (= 1.7.2)
+    - PromiseKit/UIView (= 1.7.2)
+    - PromiseKit/UIViewController (= 1.7.2)
+    - PromiseKit/Until (= 1.7.2)
+    - PromiseKit/When (= 1.7.2)
+  - PromiseKit/CALayer (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/NSNotificationCenter (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/NSURLConnection (1.7.2):
+    - OMGHTTPURLRQ (~> 2.1)
+    - PromiseKit/Promise
+  - PromiseKit/Pause (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/Promise (1.7.2)
+  - PromiseKit/UIActionSheet (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIAlertView (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIView (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/UIViewController (1.7.2):
+    - PromiseKit/Promise
+  - PromiseKit/Until (1.7.2):
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/When (1.7.2):
+    - PromiseKit/Promise
+  - Realm (0.103.2):
+    - Realm/Headers (= 0.103.2)
+  - Realm+JSON (0.2.14):
+    - Realm (~> 0.95)
+  - Realm/Headers (0.103.2)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - PromiseKit (~> 1.0)
+  - Realm
+  - Realm+JSON (~> 0.2)
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  OMGHTTPURLRQ: c4268dea4295b585d711055dbcd87bfa82badd5f
+  PromiseKit: 102844c7b5ccff53f693e0710365c445d8df3871
+  Realm: 448f0416079fe5b0ed947e7d86f3c4e1c75826cb
+  Realm+JSON: 39bef066156e589b209a14e5f2d68754793f8843
+
+PODFILE CHECKSUM: a658c03e97c26c14118f21e908da32296845a762
+
+COCOAPODS: 1.2.1

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="Apu-lN-Utt">
+                                <rect key="frame" x="0.0" y="28" width="320" height="359"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vbj-Q3-acD"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="Y6z-5m-72p">
+                                <rect key="frame" x="142" y="235" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="zzt-hk-D8B">
+                                <rect key="frame" x="0.0" y="387" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <items>
+                                    <barButtonItem systemItem="rewind" id="MOl-eB-IGM">
+                                        <connections>
+                                            <action selector="actionWebBack:" destination="BYZ-38-t0r" id="jf0-lX-mAv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="26" style="plain" systemItem="fixedSpace" id="NCn-dy-MNY"/>
+                                    <barButtonItem systemItem="fastForward" id="0fT-ve-I2k">
+                                        <connections>
+                                            <action selector="actionWebForward:" destination="BYZ-38-t0r" id="HA4-ed-ACQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9GI-NA-svy"/>
+                                    <barButtonItem systemItem="refresh" id="Be7-eg-TAH">
+                                        <connections>
+                                            <action selector="actionWebRefresh:" destination="BYZ-38-t0r" id="bBj-wp-A49"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <tabBar contentMode="scaleToFill" translucent="NO" id="9yO-gy-s8F">
+                                <rect key="frame" x="0.0" y="431" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Back" id="VLn-bY-chV"/>
+                                    <tabBarItem systemItem="favorites" id="jTy-F9-rA2"/>
+                                    <tabBarItem systemItem="more" id="dGO-B3-MiU"/>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="tAF-0y-Wli"/>
+                                </connections>
+                            </tabBar>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Y6z-5m-72p" id="AnA-iI-hPe"/>
+                        <outlet property="barButtonWebBack" destination="MOl-eB-IGM" id="fBa-Ky-NOy"/>
+                        <outlet property="barButtonWebForward" destination="0fT-ve-I2k" id="6xm-6l-DKg"/>
+                        <outlet property="searchDisplayController" destination="Sb9-ZY-QaW" id="1gS-ia-a8t"/>
+                        <outlet property="tabBar" destination="9yO-gy-s8F" id="700-lz-jV5"/>
+                        <outlet property="tabButtonCustomTest" destination="VLn-bY-chV" id="wNc-ZX-roJ"/>
+                        <outlet property="webView" destination="Apu-lN-Utt" id="pcu-iA-Wip"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Sb9-ZY-QaW">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="K8H-8c-OR6"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="tsO-qN-tpO"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="euP-wE-RCq"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="kTn-ju-fvY"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="162.66666666666666" y="366.36000000000001"/>
+        </scene>
+        <!--Image Test View Controller-->
+        <scene sceneID="WtN-Zx-a0p">
+            <objects>
+                <viewController id="80G-Aa-dq0" customClass="ImageTestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gnr-Zh-OCl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" id="IXW-OV-QYT">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10.jpg" id="B0m-Aj-lMC">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                    </imageView>
+                                </subviews>
+                                <animations/>
+                                <connections>
+                                    <outlet property="delegate" destination="80G-Aa-dq0" id="zfH-y6-21G"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="B0m-Aj-lMC" id="MJh-qv-fg2"/>
+                        <outlet property="scrollView" destination="IXW-OV-QYT" id="PCJ-9q-1Sy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3HT-JT-h8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10.jpg" highlightedImage="5.png" id="AyR-qo-zSg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                </imageView>
+            </objects>
+            <point key="canvasLocation" x="162" y="914"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="10.jpg" width="604" height="559"/>
+        <image name="5.png" width="1024" height="1024"/>
+    </resources>
+</document>

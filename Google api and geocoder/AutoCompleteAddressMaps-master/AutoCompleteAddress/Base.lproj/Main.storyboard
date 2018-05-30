@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WPB-Os-ZnS">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--ADDRESS-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AutoCompleteAddress" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ax-rB-aZM">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0ax-rB-aZM" secondAttribute="bottom" id="Shv-Vq-YNj"/>
+                            <constraint firstItem="0ax-rB-aZM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VZA-ae-syy"/>
+                            <constraint firstAttribute="trailing" secondItem="0ax-rB-aZM" secondAttribute="trailing" id="mBF-ay-k4Z"/>
+                            <constraint firstItem="0ax-rB-aZM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="s7t-81-RLO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="0ax-rB-aZM"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Shv-Vq-YNj"/>
+                                <exclude reference="VZA-ae-syy"/>
+                                <exclude reference="mBF-ay-k4Z"/>
+                                <exclude reference="s7t-81-RLO"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="0ax-rB-aZM"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Shv-Vq-YNj"/>
+                                <include reference="VZA-ae-syy"/>
+                                <include reference="mBF-ay-k4Z"/>
+                                <include reference="s7t-81-RLO"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="ADDRESS" id="WKV-ev-zrg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="rOu-rC-FMl">
+                            <connections>
+                                <action selector="searchWithAddress:" destination="BYZ-38-t0r" id="xVx-V2-2jd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="googleMapsContainer" destination="0ax-rB-aZM" id="Nu0-ew-MJ0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1725" y="182.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0KN-o8-bxV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WPB-Os-ZnS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bLB-AH-3dH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0nq-Rb-zrn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y43-nh-LO1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909" y="182.25"/>
+        </scene>
+    </scenes>
+</document>

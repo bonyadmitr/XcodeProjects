@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  MRCtest
+//
+//  Created by Bondar Yaroslav on 10/07/2017.
+//  Copyright © 2017 Bondar Yaroslav. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+
+#import "CustomNSLog.h"
+
+#import "ZZZObject.h"
+#import "ZZZObject+Extensions.h"
+#import "XXXChild.h"
+
+#endif /* PrefixHeader_pch */

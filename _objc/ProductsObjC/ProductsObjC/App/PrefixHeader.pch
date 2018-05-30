@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  ProductsObjC
+//
+//  Created by Bondar Yaroslav on 01/07/2017.
+//  Copyright © 2017 Bondar Yaroslav. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define WEAK_SELF __weak __typeof(self)wself = self
+#define STRONG_SELF __strong __typeof(wself)sself = wself
+
+#endif /* PrefixHeader_pch */
