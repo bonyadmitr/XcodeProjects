@@ -257,6 +257,8 @@
 		66C9CBD920A0BF77001D56F1 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		66C9CBDD20A0DD79001D56F1 /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
+		CE39615320C2AC3400D145E0 /* Alamofire+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+Response.swift"; sourceTree = "<group>"; };
+		CE39615420C2AC3400D145E0 /* Alamofire+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+Request.swift"; sourceTree = "<group>"; };
 		CE46402320B6893800EFC1AE /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		CE46402520B68A0F00EFC1AE /* UINavigationController+Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Push.swift"; sourceTree = "<group>"; };
 		CE5CAE5B20773E8700E763B1 /* iOSComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +344,8 @@
 				668F914720AB62CD0002B3D3 /* SlideMenuControllerSwift+IB.swift */,
 				668F918320AB64C50002B3D3 /* Alamofire+Extensions.swift */,
 				668F917F20AB64C40002B3D3 /* Alamofire+PromisableMapping.swift */,
+				CE39615420C2AC3400D145E0 /* Alamofire+Request.swift */,
+				CE39615320C2AC3400D145E0 /* Alamofire+Response.swift */,
 				668F914D20AB62CE0002B3D3 /* Realm+Array.swift */,
 			);
 			path = 3dParty;
