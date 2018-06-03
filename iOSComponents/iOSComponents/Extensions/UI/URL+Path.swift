@@ -14,12 +14,18 @@ extension URL {
     static func +/ (lhs: URL, rhs: String) -> URL {
         return lhs.appendingPathComponent(rhs)
     }
-
-    static func encodingURL(string: String, relativeTo url: URL?) -> URL? {
-        var result = URL(string: string, relativeTo: url)
-        if result == nil, let params = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            result = URL(string: params, relativeTo: url)
+    
+    /// https://stackoverflow.com/a/24552028/5893286
+    init?(encodeString: String) {
+        guard let encodedString = encodeString.encodingForURL else {
+            return nil
         }
-        return result
+        self.init(string: encodedString)
+    }
+}
+
+private extension String {
+    var encodingForURL: String? {
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
 }
