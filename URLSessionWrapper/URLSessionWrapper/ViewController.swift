@@ -22,7 +22,7 @@ class ViewController: UIViewController {
             return valid1 && valid2
         }
         
-//        URLSessionWrapper.request(
+//        URLSessionWrapper.shared.request(
 //            .get,
 //            path: "https://jsonplaceholder.typicode.com/posts/1",
 //            headers: nil,
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
 //        })
         
         
-        URLSessionWrapper.request(
+        URLSessionWrapper.shared.request(
             .get,
             path: "https://jsonplaceholder.typicode.com/comments",
             headers: nil,
