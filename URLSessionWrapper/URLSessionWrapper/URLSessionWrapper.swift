@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum URLSessionWrapperErrors {
+    case invalidURL(url: URLConvertible)
+}
+extension URLSessionWrapperErrors: LocalizedError {
+    
+}
+
 let NSURLResponseUnknownLength = -1
 
 typealias VoidResult = (Result<Void>) -> Void
@@ -36,61 +43,6 @@ enum HTTPMethod: String {
 
 typealias ProgressHandler = ((Progress) -> Void)
 typealias PercentageHandler = (Double) -> Void
-
-
-protocol URLTask {
-    
-    var task: URLSessionTask { get }
-    var expectedContentLength: Int64 { get set }
-    var completionHandler: DataResult? { get set }
-    var progressHandler: ProgressHandler? { get set }
-    
-    func resume()
-    func suspend()
-    func cancel()
-}
-
-/// https://stackoverflow.com/a/45290601/5893286 
-final class GenericTask {
-    
-    var completionHandler: DataResult?
-    var progressHandler: ProgressHandler?
-    var percentageHandler: PercentageHandler?
-    
-    let task: URLSessionTask
-    let validator: ResponseValidator?
-    var validatorError: Error?
-    
-    var progress = Progress()
-    var expectedContentLength: Int64 = 1
-    var buffer = Data()
-    
-    init(task: URLSessionTask, validator: ResponseValidator?) {
-        self.task = task
-        self.validator = validator
-    }
-    
-    deinit {
-//        print("Deinit: \(task.originalRequest?.url?.absoluteString ?? "")")
-    }
-    
-}
-extension GenericTask: URLTask {
-    
-    func resume() {
-        task.resume()
-    }
-    
-    func suspend() {
-        task.suspend()
-    }
-    
-    func cancel() {
-        task.cancel()
-    }
-}
-
-
 
 // MARK: - class
 final class URLSessionWrapper: NSObject {
@@ -127,20 +79,23 @@ final class URLSessionWrapper: NSObject {
         return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
 
-
-
-    
-
     
     var tasks: [GenericTask] = []
     
-    func request(_ method: HTTPMethod,
-                 path: String,
+    func request(_ path: String,
+                 method: HTTPMethod = .get,
                  headers: HTTPheaders? = nil,
                  parameters: HTTPParameters? = nil,
                  validator: ResponseValidator? = defaultValidator,
                  percentageHandler: PercentageHandler? = nil,
                  completion: @escaping DataResult) {
+        
+        
+//        #if DEBUG
+//        return text
+//        #else
+//        return "System error"
+//        #endif
         
         guard var components = URLComponents(string: path) else {
             let error = CustomErrors.systemDebug("invalid path for URL")

@@ -48,8 +48,8 @@ class ViewController: UIViewController {
         
         date = Date()
         URLSessionWrapper.shared.request(
-            .get,
-            path: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
+            "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
+            method: .get,
 //            parameters: ["postId": "1"],
 //            validator: validator,
             percentageHandler: { percentage in
