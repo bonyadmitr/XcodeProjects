@@ -8,25 +8,7 @@
 
 import Foundation
 
-enum URLSessionWrapperErrors {
-    case invalidURL(url: URLConvertible)
-}
-extension URLSessionWrapperErrors: LocalizedError {
-    
-}
-
-let NSURLResponseUnknownLength = -1
-
-typealias VoidResult = (Result<Void>) -> Void
-typealias BoolResult = (Result<Bool>) -> Void
-typealias DataResult = (Result<Data>) -> Void
-typealias HandlerResult<T> = (Result<T>) -> Void
-typealias ArrayHandlerResult<T> = (Result<[T]>) -> Void
-
-enum Result<T> {
-    case success(T)
-    case failure(Error)
-}
+private let NSURLResponseUnknownLength = -1
 
 typealias HTTPheaders = [String: String]
 typealias HTTPParameters = [String: String]
@@ -74,15 +56,17 @@ final class URLSessionWrapper: NSObject {
         config.requestCachePolicy = .useProtocolCachePolicy /// default
         config.timeoutIntervalForRequest = 30 /// default 60
         
+        /// for background sessions
         config.isDiscretionary = true
         config.sessionSendsLaunchEvents = true
+        
         return URLSession(configuration: config, delegate: self, delegateQueue: nil)
     }()
 
     
     var tasks: [GenericTask] = []
     
-    func request(_ path: String,
+    func request(_ path: URLConvertible,
                  method: HTTPMethod = .get,
                  headers: HTTPheaders? = nil,
                  parameters: HTTPParameters? = nil,
@@ -90,17 +74,28 @@ final class URLSessionWrapper: NSObject {
                  percentageHandler: PercentageHandler? = nil,
                  completion: @escaping DataResult) {
         
+        let url: URL
         
-//        #if DEBUG
-//        return text
-//        #else
-//        return "System error"
-//        #endif
+        do {
+            url = try path.asURL()
+        } catch  {
+            
+            /// add DEVELOP
+//            #if DEBUG
+//            fatalError("invalid url")
+//            #else
+//            completion(.failure(error))
+//            return
+//            #endif
+            
+            completion(.failure(error))
+            return
+        }
         
-        guard var components = URLComponents(string: path) else {
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             let error = CustomErrors.systemDebug("invalid path for URL")
             completion(.failure(error))
-            return 
+            return
         }
         
         var httpBody: Data?
@@ -123,13 +118,13 @@ final class URLSessionWrapper: NSObject {
         
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         
-        guard let url = components.url else {
+        guard let requestUrl = components.url else {
             let error = CustomErrors.systemDebug("invalid path for URL")
             completion(.failure(error))
             return
         }
         
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: requestUrl)
         urlRequest.timeoutInterval = 30
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headers

@@ -10,7 +10,7 @@ import Foundation
 
 /// Types adopting the `URLConvertible` protocol can be used to construct URLs, which are then used to construct
 /// URL requests.
-public protocol URLConvertible {
+public protocol URLConvertible: CustomStringConvertible {
     func asURL() throws -> URL
 }
 
