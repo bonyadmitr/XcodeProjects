@@ -213,6 +213,24 @@ extension URLSessionWrapper: URLSessionDownloadDelegate {
     /// required
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
+        /// https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
+        guard
+            let httpResponse = downloadTask.response as? HTTPURLResponse,
+            (200...299).contains(httpResponse.statusCode)
+        else {
+            print ("server error")
+            return
+        }
+        
+        do {
+            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
+                                                           appropriateFor: nil, create: false)
+            let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
+            try FileManager.default.moveItem(at: location, to: savedURL)
+        } catch {
+            print ("file error: \(error)")
+        }
+        
     }
     
     
