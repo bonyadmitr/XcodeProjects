@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        let validator: ResponseValidator = { data, response in
+        let validator: ResponseValidator = { response in
 //            print(response)
             
             let valid1 = (response.allHeaderFields["Content-Type"] as? String) == "application/json; charset=utf-8"

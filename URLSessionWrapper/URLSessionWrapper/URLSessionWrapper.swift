@@ -21,7 +21,7 @@ enum Result<T> {
 
 typealias HTTPheaders = [String: String]
 typealias HTTPParameters = [String: String]
-typealias ResponseValidator = (Data, HTTPURLResponse) -> Bool
+typealias ResponseValidator = (HTTPURLResponse) -> Bool
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -31,6 +31,63 @@ enum HTTPMethod: String {
     case put = "PUT"
     case patch = "PATCH"
 }
+
+typealias ProgressHandler = ((Progress) -> Void)
+typealias PercentageHandler = (Double) -> Void
+
+
+protocol URLTask {
+    
+    var task: URLSessionTask { get }
+    var expectedContentLength: Int64 { get set }
+    var completionHandler: DataResult? { get set }
+    var progressHandler: ProgressHandler? { get set }
+    
+    func resume()
+    func suspend()
+    func cancel()
+}
+
+final class GenericTask {
+    
+    var completionHandler: DataResult?
+    var progressHandler: ProgressHandler?
+    var percentageHandler: PercentageHandler?
+    
+    let task: URLSessionTask
+    let validator: ResponseValidator?
+    var validatorError: Error?
+    
+    var progress = Progress()
+    var expectedContentLength: Int64 = 0
+    var buffer = Data()
+    
+    init(task: URLSessionTask, validator: ResponseValidator?) {
+        self.task = task
+        self.validator = validator
+    }
+    
+    deinit {
+//        print("Deinit: \(task.originalRequest?.url?.absoluteString ?? "")")
+    }
+    
+}
+extension GenericTask: URLTask {
+    
+    func resume() {
+        task.resume()
+    }
+    
+    func suspend() {
+        task.suspend()
+    }
+    
+    func cancel() {
+        task.cancel()
+    }
+}
+
+
 
 // MARK: - class
 final class URLSessionWrapper: NSObject {
@@ -72,7 +129,7 @@ final class URLSessionWrapper: NSObject {
     
 
     
-//    var tasks = [URLSessionTask]()
+    var tasks: [GenericTask] = []
     
     func request(_ method: HTTPMethod, path: String, headers: HTTPheaders?, parameters: HTTPParameters?, validator: ResponseValidator? = defaultValidator, completion: @escaping DataResult) {
         
@@ -120,7 +177,7 @@ final class URLSessionWrapper: NSObject {
     }
     
     /// maybe add !data.isEmpty
-    static let defaultValidator: ResponseValidator = { data, response in
+    static let defaultValidator: ResponseValidator = { response in
         return (200 ..< 300) ~= response.statusCode
     }
     
@@ -128,7 +185,10 @@ final class URLSessionWrapper: NSObject {
     func request(_ urlRequest: URLRequest, validator: ResponseValidator? = defaultValidator, completion: @escaping DataResult) -> URLSessionTask {
         
         let task = urlSession.dataTask(with: urlRequest)
-//        tasks.append(task)
+        
+        let gtask = GenericTask(task: task, validator: validator)
+        gtask.completionHandler = completion
+        tasks.append(gtask)
         
 //        { data, response, error in
 //            if let error = error {
@@ -183,6 +243,20 @@ extension URLSessionWrapper: URLSessionDataDelegate {
     
     /// called every time
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void) {
+        
+        guard let task = tasks.first(where: { $0.task == dataTask }), let response = response as? HTTPURLResponse else {
+            completionHandler(.cancel)
+            return
+        }
+        
+        if let validator = task.validator, !validator(response) {
+            task.validatorError = CustomErrors.systemDebug(response.description)
+            completionHandler(.cancel)
+            return
+        }
+        
+        task.expectedContentLength = response.expectedContentLength
+        task.progress.totalUnitCount = response.expectedContentLength
         completionHandler(.allow)
     }
     
@@ -199,7 +273,21 @@ extension URLSessionWrapper: URLSessionDataDelegate {
     
     /// success result
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        print(String(data: data, encoding: .utf8) ?? "nil")
+        
+        guard let task = tasks.first(where: { $0.task == dataTask }) else {
+            return
+        }
+        task.buffer.append(data)
+        let percentageDownloaded = Double(task.buffer.count) / Double(task.expectedContentLength)
+        
+        DispatchQueue.main.async {
+            task.percentageHandler?(percentageDownloaded)
+            
+            // TODO: proress handler
+//            task.progress.completedUnitCount = Int64(task.buffer.count)
+        }
+        
+//        print(String(data: data, encoding: .utf8) ?? "nil")
     }
     
     /// called every time
@@ -288,11 +376,23 @@ extension URLSessionWrapper: URLSessionTaskDelegate {
         
     }
     
-    
     /// called every time
     /// on success error == nil
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
+        guard let index = tasks.index(where: { $0.task == task }) else {
+            return
+        }
+        let task = tasks.remove(at: index)
+        DispatchQueue.main.async {
+            if let validatorError = task.validatorError {
+                task.completionHandler?(.failure(validatorError))
+            } else if let error = error {
+                task.completionHandler?(.failure(error))
+            } else {
+                task.completionHandler?(.success(task.buffer))
+            }
+        }
     }
 }
 
