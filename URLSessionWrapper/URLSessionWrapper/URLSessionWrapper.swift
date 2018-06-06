@@ -8,6 +8,8 @@
 
 import Foundation
 
+let NSURLResponseUnknownLength = -1
+
 typealias VoidResult = (Result<Void>) -> Void
 typealias BoolResult = (Result<Bool>) -> Void
 typealias DataResult = (Result<Data>) -> Void
@@ -48,6 +50,7 @@ protocol URLTask {
     func cancel()
 }
 
+/// https://stackoverflow.com/a/45290601/5893286 
 final class GenericTask {
     
     var completionHandler: DataResult?
@@ -59,7 +62,7 @@ final class GenericTask {
     var validatorError: Error?
     
     var progress = Progress()
-    var expectedContentLength: Int64 = 0
+    var expectedContentLength: Int64 = 1
     var buffer = Data()
     
     init(task: URLSessionTask, validator: ResponseValidator?) {
@@ -131,7 +134,13 @@ final class URLSessionWrapper: NSObject {
     
     var tasks: [GenericTask] = []
     
-    func request(_ method: HTTPMethod, path: String, headers: HTTPheaders?, parameters: HTTPParameters?, validator: ResponseValidator? = defaultValidator, completion: @escaping DataResult) {
+    func request(_ method: HTTPMethod,
+                 path: String,
+                 headers: HTTPheaders? = nil,
+                 parameters: HTTPParameters? = nil,
+                 validator: ResponseValidator? = defaultValidator,
+                 percentageHandler: PercentageHandler? = nil,
+                 completion: @escaping DataResult) {
         
         guard var components = URLComponents(string: path) else {
             let error = CustomErrors.systemDebug("invalid path for URL")
@@ -173,7 +182,7 @@ final class URLSessionWrapper: NSObject {
         
 //        let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
         
-        request(urlRequest, validator: validator, completion: completion)
+        request(urlRequest, validator: validator, percentageHandler: percentageHandler, completion: completion)
     }
     
     /// maybe add !data.isEmpty
@@ -181,13 +190,18 @@ final class URLSessionWrapper: NSObject {
         return (200 ..< 300) ~= response.statusCode
     }
     
+    /// is not supported in Background Sessions
+    /// https://stackoverflow.com/a/20605116/5893286
+    ///
+    /// percentageHandler will not be called if expectedContentLength of response in unknown 
     @discardableResult
-    func request(_ urlRequest: URLRequest, validator: ResponseValidator? = defaultValidator, completion: @escaping DataResult) -> URLSessionTask {
+    func request(_ urlRequest: URLRequest, validator: ResponseValidator?, percentageHandler: PercentageHandler?, completion: @escaping DataResult) -> URLSessionTask {
         
         let task = urlSession.dataTask(with: urlRequest)
         
         let gtask = GenericTask(task: task, validator: validator)
         gtask.completionHandler = completion
+        gtask.percentageHandler = percentageHandler
         tasks.append(gtask)
         
 //        { data, response, error in
@@ -257,6 +271,7 @@ extension URLSessionWrapper: URLSessionDataDelegate {
         
         task.expectedContentLength = response.expectedContentLength
         task.progress.totalUnitCount = response.expectedContentLength
+        
         completionHandler(.allow)
     }
     
@@ -278,6 +293,11 @@ extension URLSessionWrapper: URLSessionDataDelegate {
             return
         }
         task.buffer.append(data)
+        
+        if task.expectedContentLength == NSURLResponseUnknownLength {
+            return
+        }
+        
         let percentageDownloaded = Double(task.buffer.count) / Double(task.expectedContentLength)
         
         DispatchQueue.main.async {

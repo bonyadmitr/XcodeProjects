@@ -39,21 +39,35 @@ class ViewController: UIViewController {
 //        })
         
         
+        var date = Date()
+        
+        let url = URL(string: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG")!
+        let data = try! Data(contentsOf: url)
+        print("contentsOf data", data.count)
+        print("contentsOf date", -date.timeIntervalSinceNow)
+        
+        date = Date()
         URLSessionWrapper.shared.request(
             .get,
-            path: "https://jsonplaceholder.typicode.com/comments",
-            headers: nil,
-            parameters: ["postId": "1"],
-            validator: validator,
-            completion: { result in 
+            path: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
+//            parameters: ["postId": "1"],
+//            validator: validator,
+            percentageHandler: { percentage in
+//                print("percentage", percentage)
+            },
+            completion: { result in
                 switch result {
                 case .success(let data):
-                    let res = String(data: data, encoding: .utf8)!
-                    print(res)
+                    print("request data", data.count)
+                    print("request date", -date.timeIntervalSinceNow)
+                    print("success")
+//                    let res = String(data: data, encoding: .utf8)!
+//                    print(res)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
         })
+        print("async")
         
     }
 }
