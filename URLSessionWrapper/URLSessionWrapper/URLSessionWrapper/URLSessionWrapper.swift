@@ -8,6 +8,10 @@
 
 import Foundation
 
+// TODO: request with completion json
+//        let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+// TODO: error handling
+
 private let NSURLResponseUnknownLength = -1
 
 typealias HTTPheaders = [String: String]
@@ -30,17 +34,6 @@ typealias PercentageHandler = (Double) -> Void
 final class URLSessionWrapper: NSObject {
     
     static let shared = URLSessionWrapper()
-    
-//    lazy var downloadsSession: URLSession = {
-//        let configuration = URLSessionConfiguration.default
-//        configuration.allowsCellularAccess = true /// default true, check false
-////        configuration.httpCookieAcceptPolicy = .always
-////        configuration.httpAdditionalHeaders = ["": ""]
-//        configuration.requestCachePolicy = .useProtocolCachePolicy /// default
-//        configuration.timeoutIntervalForRequest = 30 /// default 60
-//        
-//        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-//    }()
     
     var backgroundCompletionHandler: (() -> Void)?
     
@@ -78,7 +71,7 @@ final class URLSessionWrapper: NSObject {
         
         do {
             url = try path.asURL()
-        } catch  {
+        } catch {
             
             /// add DEVELOP
 //            #if DEBUG
@@ -130,8 +123,6 @@ final class URLSessionWrapper: NSObject {
         urlRequest.allHTTPHeaderFields = headers
         urlRequest.httpBody = httpBody 
         
-//        let responseObject = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
-        
         request(urlRequest, validator: validator, percentageHandler: percentageHandler, completion: completion)
     }
     
@@ -153,31 +144,6 @@ final class URLSessionWrapper: NSObject {
         gtask.completionHandler = completion
         gtask.percentageHandler = percentageHandler
         tasks.append(gtask)
-        
-//        { data, response, error in
-//            if let error = error {
-//                completion(.failure(error))
-//                
-//            } else if let data = data, let response = response as? HTTPURLResponse {
-//                
-//                if let validator = validator {
-//                    if validator(data, response) {
-//                        completion(.success(data))
-//                    } else {
-//                        // TODO: error
-//                        let error = CustomErrors.systemDebug("failed responseValidator \(validator), \(response)")
-//                        completion(.failure(error))
-//                    }
-//                } else {
-//                    completion(.success(data))
-//                }
-//                
-//            } else {
-//                let error = CustomErrors.systemDebug(response?.description ?? "response nil")
-//                completion(.failure(error))
-//            }
-//        }
-        
         gtask.resume()
         
         return task
