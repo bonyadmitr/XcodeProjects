@@ -41,14 +41,15 @@ class ViewController: UIViewController {
         
         var date = Date()
         
-        let url = URL(string: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG")!
-        let data = try! Data(contentsOf: url)
-        print("contentsOf data", data.count)
-        print("contentsOf date", -date.timeIntervalSinceNow)
+//        let url = URL(string: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG")!
+//        let data = try! Data(contentsOf: url)
+//        print("contentsOf data", data.count)
+//        print("contentsOf date", -date.timeIntervalSinceNow)
         
         date = Date()
         URLSessionWrapper.shared.request(
-            "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
+//            "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
+            "https://jsonplaceholder.typicode.com/posts/1",
             method: .get,
 //            parameters: ["postId": "1"],
 //            validator: validator,

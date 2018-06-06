@@ -145,7 +145,7 @@ final class URLSessionWrapper: NSObject {
     ///
     /// percentageHandler will not be called if expectedContentLength of response in unknown 
     @discardableResult
-    func request(_ urlRequest: URLRequest, validator: ResponseValidator?, percentageHandler: PercentageHandler?, completion: @escaping DataResult) -> URLSessionTask {
+    func request(_ urlRequest: URLRequest, validator: ResponseValidator?, percentageHandler: PercentageHandler?, completion: DataResult?) -> URLSessionTask {
         
         let task = urlSession.dataTask(with: urlRequest)
         
@@ -177,7 +177,9 @@ final class URLSessionWrapper: NSObject {
 //                completion(.failure(error))
 //            }
 //        }
-        task.resume()
+        
+        gtask.resume()
+        
         return task
     }
 }
@@ -226,14 +228,14 @@ extension URLSessionWrapper: URLSessionDataDelegate {
     }
     
     
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome downloadTask: URLSessionDownloadTask) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
-        
-    }
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome downloadTask: URLSessionDownloadTask) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didBecome streamTask: URLSessionStreamTask) {
+//        
+//    }
     
     
     /// success result
@@ -267,84 +269,84 @@ extension URLSessionWrapper: URLSessionDataDelegate {
 }
 
 // MARK: - URLSessionDownloadDelegate
-extension URLSessionWrapper: URLSessionDownloadDelegate {
-    /// required
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        
-        /// https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
-        guard
-            let httpResponse = downloadTask.response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode)
-        else {
-            print ("server error")
-            return
-        }
-        
-        do {
-            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
-                                                           appropriateFor: nil, create: false)
-            let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
-            try FileManager.default.moveItem(at: location, to: savedURL)
-        } catch {
-            print ("file error: \(error)")
-        }
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-        
-    }
-}
+//extension URLSessionWrapper: URLSessionDownloadDelegate {
+//    /// required
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+//        
+//        /// https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
+//        guard
+//            let httpResponse = downloadTask.response as? HTTPURLResponse,
+//            (200...299).contains(httpResponse.statusCode)
+//        else {
+//            print ("server error")
+//            return
+//        }
+//        
+//        do {
+//            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
+//                                                           appropriateFor: nil, create: false)
+//            let savedURL = documentsURL.appendingPathComponent(location.lastPathComponent)
+//            try FileManager.default.moveItem(at: location, to: savedURL)
+//        } catch {
+//            print ("file error: \(error)")
+//        }
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+//        
+//    }
+//}
 
 // MARK: - URLSessionTaskDelegate
 extension URLSessionWrapper: URLSessionTaskDelegate {
     
     /// will be called for background sessions
     /// This delegate method should only be implemented if the request might become stale while waiting for the network load and needs to be replaced by a new request
-    @available(iOS 11.0, *)
-    func urlSession(_ session: URLSession, task: URLSessionTask, willBeginDelayedRequest request: URLRequest, completionHandler: @escaping (URLSession.DelayedRequestDisposition, URLRequest?) -> Swift.Void) {
-        completionHandler(.continueLoading, request)
-    }
-    
-    
-    @available(iOS 11.0, *)
-    func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Swift.Void) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, needNewBodyStream completionHandler: @escaping (InputStream?) -> Swift.Void) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        
-    }
-    
-    
-    /// called every time
-    /// URLSessionTaskMetrics is detailed info
-    @available(iOS 10.0, *)
-    func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
-        
-    }
+//    @available(iOS 11.0, *)
+//    func urlSession(_ session: URLSession, task: URLSessionTask, willBeginDelayedRequest request: URLRequest, completionHandler: @escaping (URLSession.DelayedRequestDisposition, URLRequest?) -> Swift.Void) {
+//        completionHandler(.continueLoading, request)
+//    }
+//    
+//    
+//    @available(iOS 11.0, *)
+//    func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Swift.Void) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, task: URLSessionTask, needNewBodyStream completionHandler: @escaping (InputStream?) -> Swift.Void) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+//        
+//    }
+//    
+//    
+//    /// called every time
+//    /// URLSessionTaskMetrics is detailed info
+//    @available(iOS 10.0, *)
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+//        
+//    }
     
     /// called every time
     /// on success error == nil
@@ -353,41 +355,60 @@ extension URLSessionWrapper: URLSessionTaskDelegate {
         guard let index = tasks.index(where: { $0.task == task }) else {
             return
         }
-        let task = tasks.remove(at: index)
-        DispatchQueue.main.async {
-            if let validatorError = task.validatorError {
-                task.completionHandler?(.failure(validatorError))
+        
+        let gtask = tasks.remove(at: index)
+        
+        DispatchQueue.global().async { [weak self] in
+            if let validatorError = gtask.validatorError {
+                gtask.completionHandler?(.failure(validatorError))
             } else if let error = error {
-                task.completionHandler?(.failure(error))
+                
+                /// retrier
+                if let error = error as? URLError, let originalRequest = gtask.task.originalRequest {
+                    
+                    if error.code == .cancelled {
+                        // TODO: handle cancel
+                    } else {
+                        // TODO: wait time
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+                            self?.request(originalRequest, validator: gtask.validator, percentageHandler: gtask.percentageHandler, completion: gtask.completionHandler)
+                        }
+                    }
+                    
+                } else {
+                    gtask.completionHandler?(.failure(error))
+                }
+                
+                
             } else {
-                task.completionHandler?(.success(task.buffer))
+                gtask.completionHandler?(.success(gtask.buffer))
             }
         }
     }
 }
 
 // MARK: - URLSessionStreamDelegate
-extension URLSessionWrapper: URLSessionStreamDelegate {
-    
-    func urlSession(_ session: URLSession, readClosedFor streamTask: URLSessionStreamTask) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, writeClosedFor streamTask: URLSessionStreamTask) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
-        
-    }
-    
-    
-    func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
-        
-    }
-}
+//extension URLSessionWrapper: URLSessionStreamDelegate {
+//    
+//    func urlSession(_ session: URLSession, readClosedFor streamTask: URLSessionStreamTask) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, writeClosedFor streamTask: URLSessionStreamTask) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, betterRouteDiscoveredFor streamTask: URLSessionStreamTask) {
+//        
+//    }
+//    
+//    
+//    func urlSession(_ session: URLSession, streamTask: URLSessionStreamTask, didBecome inputStream: InputStream, outputStream: OutputStream) {
+//        
+//    }
+//}
 
 
 // MARK: - static
