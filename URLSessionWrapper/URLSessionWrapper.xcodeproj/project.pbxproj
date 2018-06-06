@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2E2E0E20C85D52000F5817 /* URLConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E0D20C85D52000F5817 /* URLConvertible.swift */; };
 		CEE78A7620C7918700AAAD8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE78A7520C7918700AAAD8A /* AppDelegate.swift */; };
 		CEE78A7820C7918700AAAD8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE78A7720C7918700AAAD8A /* ViewController.swift */; };
 		CEE78A7B20C7918700AAAD8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE78A7920C7918700AAAD8A /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE2E2E0D20C85D52000F5817 /* URLConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConvertible.swift; sourceTree = "<group>"; };
 		CEE78A7220C7918700AAAD8A /* URLSessionWrapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLSessionWrapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE78A7520C7918700AAAD8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE78A7720C7918700AAAD8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				CEE78A7520C7918700AAAD8A /* AppDelegate.swift */,
 				CEE78A7720C7918700AAAD8A /* ViewController.swift */,
 				CEE78A8720C791A000AAAD8A /* URLSessionWrapper.swift */,
+				CE2E2E0D20C85D52000F5817 /* URLConvertible.swift */,
 				CEE78A8920C79E5E00AAAD8A /* CustomErrors.swift */,
 				CEE78A7920C7918700AAAD8A /* Main.storyboard */,
 				CEE78A7C20C7918800AAAD8A /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 				CEE78A8A20C79E5E00AAAD8A /* CustomErrors.swift in Sources */,
 				CEE78A7620C7918700AAAD8A /* AppDelegate.swift in Sources */,
 				CEE78A8820C791A000AAAD8A /* URLSessionWrapper.swift in Sources */,
+				CE2E2E0E20C85D52000F5817 /* URLConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
