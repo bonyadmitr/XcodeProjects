@@ -16,11 +16,19 @@ public protocol URLConvertible: CustomStringConvertible {
 
 extension String: URLConvertible {
     public func asURL() throws -> URL {
-        guard let url = URL(string: self) else {
-            throw URLSessionWrapperErrors.invalidURL(url: self)
+        guard
+            let encodedString = urlEncoded,
+            let url = URL(string: encodedString)
+            else {
+                throw URLSessionWrapperErrors.invalidURL(url: self)
         }
         return url
     }
+    
+    public var urlEncoded: String? {
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    }
+
 }
 
 extension URL: URLConvertible {

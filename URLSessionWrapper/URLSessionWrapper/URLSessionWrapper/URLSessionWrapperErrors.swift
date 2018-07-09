@@ -16,7 +16,7 @@ extension URLSessionWrapperErrors: LocalizedError {
         switch self {
         case .invalidURL(let url):
             #if DEBUG
-            return "invalidURL: \(url.description)"
+            return "Invalid UR: \(url.description)"
             #else
             return "System error"
             #endif
