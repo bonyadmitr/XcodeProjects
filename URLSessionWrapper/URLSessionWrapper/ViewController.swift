@@ -70,6 +70,15 @@ class ViewController: UIViewController {
         })
         print("async")
         
+        URLSessionWrapper.shared.request("https://ru.wikipedia.org/wiki/Сайт") { result in
+            switch result {
+            case .success(_):
+                //print(String(data: data, encoding: .utf8)!)
+                print("success russian characters in url")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

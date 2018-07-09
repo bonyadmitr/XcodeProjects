@@ -25,7 +25,6 @@
 		666E283C201E59A900CDC5EF /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666E283B201E59A900CDC5EF /* PhotoCell.swift */; };
 		667DCCC2202F6FC7002168A3 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DCCC1202F6FC7002168A3 /* BaseNavigationController.swift */; };
 		667DCCC4202F70AD002168A3 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DCCC3202F70AD002168A3 /* ImageScrollView.swift */; };
-		667DCCC6202F7113002168A3 /* PhotoViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DCCC5202F7113002168A3 /* PhotoViewerController.swift */; };
 		667DCCC820305681002168A3 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DCCC720305681002168A3 /* LibraryController.swift */; };
 		667DCCCA20305758002168A3 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667DCCC920305758002168A3 /* UITableView+Extensions.swift */; };
 		669BA87F201E7A1600F218B0 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BA87C201E7A1600F218B0 /* UIButton+Color.swift */; };
@@ -34,14 +33,15 @@
 		669BA883201E7D3100F218B0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BA882201E7D3100F218B0 /* ImagePicker.swift */; };
 		669BA885201E814700F218B0 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BA884201E814600F218B0 /* ResponseResult.swift */; };
 		669BA893201F7EB600F218B0 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BA891201F7EB500F218B0 /* PhotoManager.swift */; };
-		669BA894201F7EB600F218B0 /* PhotoManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669BA892201F7EB500F218B0 /* PhotoManagerDelegate.swift */; };
 		66C9CBD620A0BA01001D56F1 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C9CBD520A0BA01001D56F1 /* Device.swift */; };
 		66EAE502203353C300A07DBC /* PHAsset+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAE501203353C300A07DBC /* PHAsset+Properties.swift */; };
 		66EAE504203353DB00A07DBC /* Data+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAE503203353DB00A07DBC /* Data+Size.swift */; };
 		66EAE50A20335E8700A07DBC /* UINavigationController+Bugs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EAE50920335E8700A07DBC /* UINavigationController+Bugs.swift */; };
 		CE055F392037826400E6BFE8 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F382037826400E6BFE8 /* LocationRequest.swift */; };
 		CE055F3D203837D800E6BFE8 /* PHAsset+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3C203837D800E6BFE8 /* PHAsset+Info.swift */; };
-		CED7F3092021986F00422167 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED7F3082021986F00422167 /* PermissionsManager.swift */; };
+		CEC4493A20F3A5A800A3A55C /* PhotoViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4493920F3A5A800A3A55C /* PhotoViewerController.swift */; };
+		CEC4493C20F3A5EC00A3A55C /* PhotoManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4493B20F3A5EC00A3A55C /* PhotoManagerDelegate.swift */; };
+		CEC4493E20F3A60000A3A55C /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4493D20F3A60000A3A55C /* PermissionsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,6 @@
 		666E283B201E59A900CDC5EF /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		667DCCC1202F6FC7002168A3 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		667DCCC3202F70AD002168A3 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
-		667DCCC5202F7113002168A3 /* PhotoViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerController.swift; sourceTree = "<group>"; };
 		667DCCC720305681002168A3 /* LibraryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
 		667DCCC920305758002168A3 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		669BA87C201E7A1600F218B0 /* UIButton+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Color.swift"; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 		669BA882201E7D3100F218B0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		669BA884201E814600F218B0 /* ResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 		669BA891201F7EB500F218B0 /* PhotoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
-		669BA892201F7EB500F218B0 /* PhotoManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoManagerDelegate.swift; sourceTree = "<group>"; };
 		66C9CBD520A0BA01001D56F1 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		66EAE501203353C300A07DBC /* PHAsset+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Properties.swift"; sourceTree = "<group>"; };
 		66EAE503203353DB00A07DBC /* Data+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Size.swift"; sourceTree = "<group>"; };
@@ -83,7 +81,9 @@
 		66EAE50920335E8700A07DBC /* UINavigationController+Bugs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Bugs.swift"; sourceTree = "<group>"; };
 		CE055F382037826400E6BFE8 /* LocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
 		CE055F3C203837D800E6BFE8 /* PHAsset+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Info.swift"; sourceTree = "<group>"; };
-		CED7F3082021986F00422167 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		CEC4493920F3A5A800A3A55C /* PhotoViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewerController.swift; sourceTree = "<group>"; };
+		CEC4493B20F3A5EC00A3A55C /* PhotoManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoManagerDelegate.swift; sourceTree = "<group>"; };
+		CEC4493D20F3A60000A3A55C /* PermissionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
 		CEDFFF2720389B5800BE7A0E /* UTType+FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UTType+FileExtension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,11 +123,11 @@
 				669BA884201E814600F218B0 /* ResponseResult.swift */,
 				663CF3242020E31300F00ECC /* AccessStatus.swift */,
 				CE055F382037826400E6BFE8 /* LocationRequest.swift */,
-				CED7F3082021986F00422167 /* PermissionsManager.swift */,
 				663CF32C2022373500F00ECC /* ImageManager.swift */,
 				66EAE505203353F900A07DBC /* FormattersTest.swift */,
 				66EAE5072033544800A07DBC /* ImageMetadata.swift */,
 				66C9CBD520A0BA01001D56F1 /* Device.swift */,
+				CEC4493D20F3A60000A3A55C /* PermissionsManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -149,10 +149,10 @@
 				666E281E201E561E00CDC5EF /* Main.storyboard */,
 				666E281C201E561E00CDC5EF /* ViewController.swift */,
 				666E2839201E594C00CDC5EF /* LocalPhotosController.swift */,
-				667DCCC5202F7113002168A3 /* PhotoViewerController.swift */,
 				667DCCC720305681002168A3 /* LibraryController.swift */,
 				666E283B201E59A900CDC5EF /* PhotoCell.swift */,
 				667DCCC1202F6FC7002168A3 /* BaseNavigationController.swift */,
+				CEC4493920F3A5A800A3A55C /* PhotoViewerController.swift */,
 				667DCCC3202F70AD002168A3 /* ImageScrollView.swift */,
 			);
 			path = Presentation;
@@ -218,8 +218,8 @@
 		669BA890201F7EB500F218B0 /* PhotoManager */ = {
 			isa = PBXGroup;
 			children = (
+				CEC4493B20F3A5EC00A3A55C /* PhotoManagerDelegate.swift */,
 				669BA891201F7EB500F218B0 /* PhotoManager.swift */,
-				669BA892201F7EB500F218B0 /* PhotoManagerDelegate.swift */,
 			);
 			path = PhotoManager;
 			sourceTree = "<group>";
@@ -298,7 +298,6 @@
 			files = (
 				667DCCC2202F6FC7002168A3 /* BaseNavigationController.swift in Sources */,
 				669BA883201E7D3100F218B0 /* ImagePicker.swift in Sources */,
-				669BA894201F7EB600F218B0 /* PhotoManagerDelegate.swift in Sources */,
 				669BA87F201E7A1600F218B0 /* UIButton+Color.swift in Sources */,
 				666E283C201E59A900CDC5EF /* PhotoCell.swift in Sources */,
 				669BA880201E7A1600F218B0 /* UIColor+Adjust.swift in Sources */,
@@ -307,21 +306,22 @@
 				663CF32720222A0A00F00ECC /* CustomErrors.swift in Sources */,
 				667DCCCA20305758002168A3 /* UITableView+Extensions.swift in Sources */,
 				669BA881201E7A1600F218B0 /* UIImage+Color.swift in Sources */,
+				CEC4493E20F3A60000A3A55C /* PermissionsManager.swift in Sources */,
 				66EAE502203353C300A07DBC /* PHAsset+Properties.swift in Sources */,
 				663CF32D2022373500F00ECC /* ImageManager.swift in Sources */,
 				666E283A201E594C00CDC5EF /* LocalPhotosController.swift in Sources */,
 				666E281D201E561E00CDC5EF /* ViewController.swift in Sources */,
-				CED7F3092021986F00422167 /* PermissionsManager.swift in Sources */,
 				66EAE50A20335E8700A07DBC /* UINavigationController+Bugs.swift in Sources */,
 				663CF3202020E08F00F00ECC /* ImagePickerSettings.swift in Sources */,
 				CE055F392037826400E6BFE8 /* LocationRequest.swift in Sources */,
+				CEC4493C20F3A5EC00A3A55C /* PhotoManagerDelegate.swift in Sources */,
 				667DCCC820305681002168A3 /* LibraryController.swift in Sources */,
 				6639B74B2020DA240074C9A3 /* SettingsRouter.swift in Sources */,
 				666E2831201E577900CDC5EF /* UIImage+Orientation.swift in Sources */,
+				CEC4493A20F3A5A800A3A55C /* PhotoViewerController.swift in Sources */,
 				669BA893201F7EB600F218B0 /* PhotoManager.swift in Sources */,
 				66C9CBD620A0BA01001D56F1 /* Device.swift in Sources */,
 				666E281B201E561E00CDC5EF /* AppDelegate.swift in Sources */,
-				667DCCC6202F7113002168A3 /* PhotoViewerController.swift in Sources */,
 				666E282D201E574600CDC5EF /* UICollectionView+Extensions.swift in Sources */,
 				66EAE504203353DB00A07DBC /* Data+Size.swift in Sources */,
 				CE055F3D203837D800E6BFE8 /* PHAsset+Info.swift in Sources */,

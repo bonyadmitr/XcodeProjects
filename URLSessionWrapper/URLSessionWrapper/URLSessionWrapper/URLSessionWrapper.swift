@@ -131,6 +131,11 @@ final class URLSessionWrapper: NSObject {
         request(urlRequest, validator: validator, percentageHandler: percentageHandler, completion: completion)
     }
     
+    private func urlParams(from params: [String: Int]) -> String {
+        return params.map { "\($0)=\($1)" }.joined(separator: "&")
+    }
+
+    
     /// maybe add !data.isEmpty
     static let defaultValidator: ResponseValidator = { response in
         return (200 ..< 300) ~= response.statusCode
