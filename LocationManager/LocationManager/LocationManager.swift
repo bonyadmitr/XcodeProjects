@@ -47,7 +47,10 @@ class LocationManager: NSObject {
         //        <key>NSLocationUsageDescription</key>
         //        <string>Some</string>
         
+        /// need to add: Capabilities - UIBackgroundModes - Location updates
+        /// receive location updates when suspended
         locationManager.allowsBackgroundLocationUpdates = true
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -59,6 +62,8 @@ class LocationManager: NSObject {
     func finish() {
         locationManager.stopUpdatingLocation()
     }
+    
+    /// calls delegate "locationManager(_ manager: CLLocationManager, didUpdateLocations" 2 times
     func getLocationOneTime() {
         locationManager.requestLocation() /// user location one time. need delegate
     }
