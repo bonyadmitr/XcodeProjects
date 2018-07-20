@@ -47,9 +47,9 @@ class LocationManager: NSObject {
         //        <key>NSLocationUsageDescription</key>
         //        <string>Some</string>
         
+        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
-        locationManager.requestLocation() /// user location one time. need delegate
         locationManager.requestAlwaysAuthorization()
     }
     
@@ -58,6 +58,9 @@ class LocationManager: NSObject {
     }
     func finish() {
         locationManager.stopUpdatingLocation()
+    }
+    func getLocationOneTime() {
+        locationManager.requestLocation() /// user location one time. need delegate
     }
 }
 
