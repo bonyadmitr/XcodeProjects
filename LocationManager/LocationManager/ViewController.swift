@@ -9,8 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
     
     @IBOutlet private weak var mapView: MKMapView! {
         didSet {

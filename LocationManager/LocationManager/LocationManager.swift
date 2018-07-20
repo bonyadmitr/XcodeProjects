@@ -27,6 +27,13 @@ extension LocationManagerDelegate {
 /// при публикации приложения в Apple Store нужно обязательно не забыть в конце дописать:
 /// Continued use of GPS running in the background can dramatically decrease battery life
 /// иначе rejection
+///
+/// Privacy - Location When In Use Usage Description
+/// Privacy - Location Usage Description
+//<key>NSLocationWhenInUseUsageDescription</key>
+//<string>In usage</string>
+//<key>NSLocationUsageDescription</key>
+//<string>Some</string>
 class LocationManager: NSObject {
     
     static let shared = LocationManager()
@@ -38,14 +45,6 @@ class LocationManager: NSObject {
     
     override init() {
         super.init()
-        
-        /// Privacy - Location When In Use Usage Description
-        /// Privacy - Location Usage Description
-        
-        //        <key>NSLocationWhenInUseUsageDescription</key>
-        //        <string>In usage</string>
-        //        <key>NSLocationUsageDescription</key>
-        //        <string>Some</string>
         
         /// need to add: Capabilities - UIBackgroundModes - Location updates
         /// receive location updates when suspended
@@ -84,7 +83,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
+        // TODO: request again
     }
 }
 
