@@ -48,6 +48,7 @@ extension PhotoManagerDelegate where Self: PhotoManagerColectionViewDelegate {
                     self.collectionView.moveItem(at: IndexPath(item: fromIndex, section: 0),
                                                  to: IndexPath(item: toIndex, section: 0))
                 }
+                
             }, completion: { _ in
                 self.collectionView.performBatchUpdates({
                     if let changed = collectionChanges.changedIndexes, !changed.isEmpty {

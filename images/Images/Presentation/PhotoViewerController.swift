@@ -335,8 +335,13 @@ final class PhotoViewerController: UIViewController {
     func applyPhotoFilter(_ filterName: String, input: PHContentEditingInput, output: PHContentEditingOutput, completion: () -> Void) {
         
         // Load the full size image.
-        guard let inputImage = CIImage(contentsOf: input.fullSizeImageURL!)
-            else { fatalError("can't load input image to edit") }
+        guard
+            let imageUrl = input.fullSizeImageURL,
+            let inputImage = CIImage(contentsOf: imageUrl)
+        else {
+            /// will fail for videos
+            fatalError("can't load input image to edit")
+        }
         
         // Apply the filter.
         let outputImage = inputImage
