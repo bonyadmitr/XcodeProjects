@@ -22,9 +22,9 @@ final class ViewController: UIViewController {
             mapView.userTrackingMode = .follow
             
             /// zoom 1
-            //        let viewRegion = MKCoordinateRegionMakeWithDistance(.init(), 500, 500)
-            //        let adjustedRegion = mapView.regionThatFits(viewRegion)
-            //        mapView.setRegion(adjustedRegion, animated: true)
+            //let viewRegion = MKCoordinateRegionMakeWithDistance(.init(), 500, 500)
+            //let adjustedRegion = mapView.regionThatFits(viewRegion)
+            //mapView.setRegion(adjustedRegion, animated: true)
             
             /// zoom 2
             let mapRegion = MKCoordinateRegion(center: .init(), span: .init(latitudeDelta: 0.01, longitudeDelta: 0.01))
