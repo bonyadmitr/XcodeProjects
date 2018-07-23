@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 import MapKit
 
 class ViewController: UIViewController {
@@ -35,9 +34,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        BackgroundLocationManager.shared.delegate = self
-        BackgroundLocationManager.shared.startUpdateLocation()
+        debugLog("ViewController viewDidLoad")
     }
     
     @IBAction func sendEmail(_ sender: UIBarButtonItem) {
@@ -54,30 +51,5 @@ class ViewController: UIViewController {
                                     attachments: [attachment],
                                     presentIn: self)
         }
-    }
-    
-    var lastLocation: CLLocation?
-    var lastDate: Date?
-}
-
-extension ViewController: LocationManagerDelegate {
-    func didUpdate(location: CLLocation) {
-        
-        if let lastLocation = lastLocation {
-            let distance = lastLocation.distance(from: location) /// meters
-            debugLog("distance: \(distance)")
-        }
-        
-        if let lastDate = lastDate {
-            let newDate = Date()
-            let timeDifference = -lastDate.timeIntervalSince(newDate)
-            debugLog("timeDifference: \(timeDifference)")
-            self.lastDate = newDate
-        } else {
-            lastDate = Date()
-        }
-        
-        lastLocation = location
-//        debugLog(location)
     }
 }
