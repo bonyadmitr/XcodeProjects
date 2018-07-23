@@ -58,7 +58,7 @@ open class EmailSender: NSObject {
         }
         
         /// !!!!!!!!!
-        let logUrl = Device.documentsFolderUrl(withComponent: "app.log")
+        let logUrl = LoggerConstants.logUrl
         
         if FileManager.default.fileExists(atPath: logUrl.path), let logData = try? Data(contentsOf: logUrl) {
             vc.addAttachmentData(logData, mimeType: "text/plain", fileName: "logs.txt")

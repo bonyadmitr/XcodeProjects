@@ -17,6 +17,7 @@
 		CEDDB6B521060A8D002BEAF6 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */; };
 		CEDDB6B921060AEE002BEAF6 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6B721060AEE002BEAF6 /* UIApplication+URL.swift */; };
 		CEDDB6BA21060B2D002BEAF6 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6B621060AEE002BEAF6 /* UIApplication+Controller.swift */; };
+		CEDDB6BC21060F73002BEAF6 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6BB21060F73002BEAF6 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailSender.swift; path = ../../EmailSender/EmailSender/EmailSender.swift; sourceTree = "<group>"; };
 		CEDDB6B621060AEE002BEAF6 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Controller.swift"; path = "../../EmailSender/EmailSender/UIApplication+Controller.swift"; sourceTree = "<group>"; };
 		CEDDB6B721060AEE002BEAF6 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+URL.swift"; path = "../../EmailSender/EmailSender/UIApplication+URL.swift"; sourceTree = "<group>"; };
+		CEDDB6BB21060F73002BEAF6 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */,
+				CEDDB6BB21060F73002BEAF6 /* Logger.swift */,
 				CEDDB6A22105F981002BEAF6 /* ViewController.swift */,
 				CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */,
 				CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */,
@@ -223,6 +226,7 @@
 				CEDDB6B32105F9AE002BEAF6 /* BackgroundLocationManager.swift in Sources */,
 				CEDDB6BA21060B2D002BEAF6 /* UIApplication+Controller.swift in Sources */,
 				CEDDB6B521060A8D002BEAF6 /* EmailSender.swift in Sources */,
+				CEDDB6BC21060F73002BEAF6 /* Logger.swift in Sources */,
 				CEDDB6A32105F981002BEAF6 /* ViewController.swift in Sources */,
 				CEDDB6A12105F981002BEAF6 /* AppDelegate.swift in Sources */,
 			);
