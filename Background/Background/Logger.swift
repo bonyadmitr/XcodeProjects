@@ -25,7 +25,7 @@ enum LoggerConstants {
 }
 
 // the global reference to logging mechanism to be available in all files
-let log: XCGLogger = {
+private let log: XCGLogger = {
     
     let log = XCGLogger(identifier: LoggerConstants.identifier, includeDefaultDestinations: false)
     
@@ -60,6 +60,7 @@ let log: XCGLogger = {
 
 func debugLog(_ closure: @autoclosure () -> Any?, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line, userInfo: [String: Any] = [:]) {
     
+    /// next line used from "log.debug()" func
     log.logln(.debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber, userInfo: userInfo, closure: closure)
     
     let resultString = String(describing: closure() ?? "nil") 
