@@ -41,9 +41,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sendEmail(_ sender: UIBarButtonItem) {
-        EmailSender.shared.send(message: "",
-                                subject: "Background Test",
-                                to: ["zdaecq@gmail.com"])
+        
+        if let logUrl = LoggerConstants.logUrl,
+            FileManager.default.fileExists(atPath: logUrl.path),
+            let logData = try? Data(contentsOf: logUrl)
+        {
+            let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
+            
+            EmailSender.shared.send(message: "",
+                                    subject: "Background Test",
+                                    to: ["zdaecq@gmail.com"],
+                                    attachments: [attachment],
+                                    presentIn: self)
+        }
     }
     
     var lastLocation: CLLocation?

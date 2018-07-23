@@ -8,6 +8,12 @@
 
 import MessageUI
 
+public struct MailAttachment {
+    let data: Data
+    let mimeType: String
+    let fileName: String
+}
+
 /// You can customize the appearance of the interface using the UIAppearance protocol
 open class EmailSender: NSObject {
     
@@ -33,40 +39,36 @@ open class EmailSender: NSObject {
     /// open MFMailComposeViewController with filled fields
     /// faild on simulator with 'viewServiceDidTerminateWithError: Error'
     open func send(message: String,
-              subject: String? = nil,
-              to emails: [String],
-              presentIn vc: UIViewController? = UIApplication.topViewController()) {
+                   subject: String? = nil,
+                   to emails: [String],
+                   attachments: [MailAttachment]? = nil,
+                   presentIn vc: UIViewController) {
         
-        guard let vc = vc, MFMailComposeViewController.canSendMail() else {
+        guard MFMailComposeViewController.canSendMail() else {
             return UIApplication.shared.openMailApp()
         }
-        let mailVC = getMailVC(with: message, subject: subject, for: emails)
+        let mailVC = getMailVC(with: message, subject: subject, attachments: attachments, for: emails)
         vc.present(mailVC, animated: true, completion: nil)
     }
     
     /// get configured MFMailComposeViewController
     private func getMailVC(with message: String,
-                           subject: String? = nil,
+                           subject: String?,
+                           attachments: [MailAttachment]?,
                            for emails: [String]) -> MFMailComposeViewController {
         
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = self
         vc.setToRecipients(emails)
         vc.setMessageBody(message, isHTML: false)
+        
         if let subject = subject {
             vc.setSubject(subject)
         }
         
-        /// !!!!!!!!!
-        
-        
-        if let logUrl = LoggerConstants.logUrl,
-            FileManager.default.fileExists(atPath: logUrl.path),
-            let logData = try? Data(contentsOf: logUrl)
-        {
-            vc.addAttachmentData(logData, mimeType: "text/plain", fileName: "logs.txt")
+        if let attachments = attachments {
+            attachments.forEach { vc.addAttachmentData($0.data, mimeType: $0.mimeType, fileName: $0.fileName) }
         }
-        /// !!!!!!!!!
         
         return vc
     }
