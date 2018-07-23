@@ -21,12 +21,26 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sf3-Pn-1px">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXc-co-6Ku">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Email" id="pSf-ZH-lDJ">
+                                        <connections>
+                                            <action selector="sendEmail:" destination="BYZ-38-t0r" id="QWR-Zz-Xwt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" id="VWY-qV-vEp"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="pXc-co-6Ku" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0gO-Bo-D7W"/>
                             <constraint firstItem="sf3-Pn-1px" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7Q7-2O-4VM"/>
+                            <constraint firstItem="pXc-co-6Ku" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9ec-43-Jr5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sf3-Pn-1px" secondAttribute="bottom" id="HrS-H2-wTR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sf3-Pn-1px" secondAttribute="trailing" id="JyF-em-QH5"/>
+                            <constraint firstItem="pXc-co-6Ku" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WMw-0m-OWv"/>
                             <constraint firstItem="sf3-Pn-1px" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qXF-G8-7xx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

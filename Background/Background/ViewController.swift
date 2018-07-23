@@ -12,7 +12,7 @@ import MapKit
 
 import XCGLogger
 
-extension XCGLogger {
+enum Device {
     static func documentsFolderUrl(withComponent: String) -> URL {
         let documentsUrls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return documentsUrls[documentsUrls.endIndex - 1].appendingPathComponent(withComponent)
@@ -23,7 +23,7 @@ extension XCGLogger {
 let log: XCGLogger = {
     let log = XCGLogger(identifier: "advancedLogger", includeDefaultDestinations: false)
     
-    let logPath = XCGLogger.documentsFolderUrl(withComponent: "app.log")
+    let logPath = Device.documentsFolderUrl(withComponent: "app.log")
     
     let autoRotatingFileDestination = AutoRotatingFileDestination(owner: log,
                                                                   writeToFile: logPath,
@@ -87,6 +87,12 @@ class ViewController: UIViewController {
         
         BackgroundLocationManager.shared.delegate = self
         BackgroundLocationManager.shared.startUpdateLocation()
+    }
+    
+    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
+        EmailSender.shared.send(message: "",
+                                subject: "Background Test",
+                                to: ["zdaecq@gmail.com"])
     }
     
     var lastLocation: CLLocation?
