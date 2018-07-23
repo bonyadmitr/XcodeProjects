@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'Background' do
+
+  pod 'XCGLogger', '~> 6.0'
+
+end

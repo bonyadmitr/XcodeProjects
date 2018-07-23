@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCAE3EBF1CE47BC1C4EE4A50 /* Pods_Background.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15546CB18F198BCD44BDEB9F /* Pods_Background.framework */; };
 		CEDDB6A12105F981002BEAF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */; };
 		CEDDB6A32105F981002BEAF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6A22105F981002BEAF6 /* ViewController.swift */; };
 		CEDDB6A62105F981002BEAF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDB6A42105F981002BEAF6 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15546CB18F198BCD44BDEB9F /* Pods_Background.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Background.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F57DE19E5F3D4D27CAEACA6 /* Pods-Background.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Background.release.xcconfig"; path = "Pods/Target Support Files/Pods-Background/Pods-Background.release.xcconfig"; sourceTree = "<group>"; };
+		7F94CC94D3043F9E70B16F40 /* Pods-Background.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Background.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Background/Pods-Background.debug.xcconfig"; sourceTree = "<group>"; };
 		CEDDB69D2105F981002BEAF6 /* Background.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Background.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEDDB6A22105F981002BEAF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCAE3EBF1CE47BC1C4EE4A50 /* Pods_Background.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A303815D59B37571AE082076 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F94CC94D3043F9E70B16F40 /* Pods-Background.debug.xcconfig */,
+				1F57DE19E5F3D4D27CAEACA6 /* Pods-Background.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CEDDB6942105F981002BEAF6 = {
 			isa = PBXGroup;
 			children = (
 				CEDDB69F2105F981002BEAF6 /* Background */,
 				CEDDB69E2105F981002BEAF6 /* Products */,
+				A303815D59B37571AE082076 /* Pods */,
+				D49F66CD3673B6755F6AF9F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +83,14 @@
 			path = Background;
 			sourceTree = "<group>";
 		};
+		D49F66CD3673B6755F6AF9F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15546CB18F198BCD44BDEB9F /* Pods_Background.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEDDB6AF2105F983002BEAF6 /* Build configuration list for PBXNativeTarget "Background" */;
 			buildPhases = (
+				9294B3300B0F1D1A0F98AB2E /* [CP] Check Pods Manifest.lock */,
 				CEDDB6992105F981002BEAF6 /* Sources */,
 				CEDDB69A2105F981002BEAF6 /* Frameworks */,
 				CEDDB69B2105F981002BEAF6 /* Resources */,
+				6265A34BAD2BBC1AF0514941 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,6 +163,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6265A34BAD2BBC1AF0514941 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Background/Pods-Background-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Background/Pods-Background-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9294B3300B0F1D1A0F98AB2E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Background-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEDDB6992105F981002BEAF6 /* Sources */ = {
@@ -287,6 +354,7 @@
 		};
 		CEDDB6B02105F983002BEAF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F94CC94D3043F9E70B16F40 /* Pods-Background.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -305,6 +373,7 @@
 		};
 		CEDDB6B12105F983002BEAF6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F57DE19E5F3D4D27CAEACA6 /* Pods-Background.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
