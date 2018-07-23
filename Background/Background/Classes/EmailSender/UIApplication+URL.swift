@@ -14,7 +14,11 @@ extension UIApplication {
     /// open url method, that throws 'canOpenURL'
     func open(url: URL) throws {
         if canOpenURL(url) {
-            openURL(url)
+            if #available(iOS 10.0, *) {
+                open(url, options: [:], completionHandler: nil)
+            } else {
+                openURL(url)
+            }
         }
     }
     
