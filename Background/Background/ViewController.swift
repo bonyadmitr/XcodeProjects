@@ -39,10 +39,30 @@ class ViewController: UIViewController {
         BackgroundLocationManager.shared.delegate = self
         BackgroundLocationManager.shared.startUpdateLocation()
     }
+    
+    var lastLocation: CLLocation?
+    var lastDate: Date?
 }
 
 extension ViewController: LocationManagerDelegate {
     func didUpdate(location: CLLocation) {
-        print(location)
+        
+        if let lastLocation = lastLocation {
+            let distance = lastLocation.distance(from: location) /// meters
+            print("distance", distance)
+        }
+        
+        if let lastDate = lastDate {
+            let newDate = Date()
+            let timeDifference = -lastDate.timeIntervalSince(newDate)
+            print("timeDifference", timeDifference)
+            print()
+            self.lastDate = newDate
+        } else {
+            lastDate = Date()
+        }
+        
+        lastLocation = location
+//        print(location)
     }
 }
