@@ -31,10 +31,10 @@
 		CEDDB6A72105F983002BEAF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEDDB6AA2105F983002BEAF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDDB6AC2105F983002BEAF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundLocationManager.swift; path = ../../LocationManager/LocationManager/BackgroundLocationManager.swift; sourceTree = "<group>"; };
-		CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailSender.swift; path = ../../EmailSender/EmailSender/EmailSender.swift; sourceTree = "<group>"; };
-		CEDDB6B621060AEE002BEAF6 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+Controller.swift"; path = "../../EmailSender/EmailSender/UIApplication+Controller.swift"; sourceTree = "<group>"; };
-		CEDDB6B721060AEE002BEAF6 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+URL.swift"; path = "../../EmailSender/EmailSender/UIApplication+URL.swift"; sourceTree = "<group>"; };
+		CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
+		CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+		CEDDB6B621060AEE002BEAF6 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
+		CEDDB6B721060AEE002BEAF6 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		CEDDB6BB21060F73002BEAF6 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,19 +80,43 @@
 		CEDDB69F2105F981002BEAF6 /* Background */ = {
 			isa = PBXGroup;
 			children = (
-				CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */,
-				CEDDB6BB21060F73002BEAF6 /* Logger.swift */,
+				CEDDB6BF210612F2002BEAF6 /* App */,
+				CEDDB6A42105F981002BEAF6 /* Main.storyboard */,
 				CEDDB6A22105F981002BEAF6 /* ViewController.swift */,
-				CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */,
+				CEDDB6BB21060F73002BEAF6 /* Logger.swift */,
+				CEDDB6BE210612E1002BEAF6 /* Classes */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
+		CEDDB6BD210612D9002BEAF6 /* EmailSender */ = {
+			isa = PBXGroup;
+			children = (
 				CEDDB6B421060A8D002BEAF6 /* EmailSender.swift */,
 				CEDDB6B621060AEE002BEAF6 /* UIApplication+Controller.swift */,
 				CEDDB6B721060AEE002BEAF6 /* UIApplication+URL.swift */,
-				CEDDB6A42105F981002BEAF6 /* Main.storyboard */,
+			);
+			path = EmailSender;
+			sourceTree = "<group>";
+		};
+		CEDDB6BE210612E1002BEAF6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */,
+				CEDDB6BD210612D9002BEAF6 /* EmailSender */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CEDDB6BF210612F2002BEAF6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */,
 				CEDDB6A72105F983002BEAF6 /* Assets.xcassets */,
 				CEDDB6A92105F983002BEAF6 /* LaunchScreen.storyboard */,
 				CEDDB6AC2105F983002BEAF6 /* Info.plist */,
 			);
-			path = Background;
+			path = App;
 			sourceTree = "<group>";
 		};
 		D49F66CD3673B6755F6AF9F5 /* Frameworks */ = {
@@ -375,7 +399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52L6T7H6QG;
-				INFOPLIST_FILE = Background/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Background/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -395,7 +419,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52L6T7H6QG;
-				INFOPLIST_FILE = Background/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Background/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
