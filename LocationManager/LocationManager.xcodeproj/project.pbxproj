@@ -13,7 +13,6 @@
 		CE055F2C20377A0F00E6BFE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE055F2B20377A0F00E6BFE8 /* Assets.xcassets */; };
 		CE055F2F20377A0F00E6BFE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE055F2D20377A0F00E6BFE8 /* LaunchScreen.storyboard */; };
 		CE055F3720377A2200E6BFE8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3620377A2200E6BFE8 /* LocationManager.swift */; };
-		CE055F3B2037FEDE00E6BFE8 /* BackgroundLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE055F3A2037FEDE00E6BFE8 /* BackgroundLocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		CE055F2E20377A0F00E6BFE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE055F3020377A0F00E6BFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE055F3620377A2200E6BFE8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		CE055F3A2037FEDE00E6BFE8 /* BackgroundLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +59,6 @@
 				CE055F2420377A0F00E6BFE8 /* AppDelegate.swift */,
 				CE055F2620377A0F00E6BFE8 /* ViewController.swift */,
 				CE055F3620377A2200E6BFE8 /* LocationManager.swift */,
-				CE055F3A2037FEDE00E6BFE8 /* BackgroundLocationManager.swift */,
 				CE055F2820377A0F00E6BFE8 /* Main.storyboard */,
 				CE055F2B20377A0F00E6BFE8 /* Assets.xcassets */,
 				CE055F2D20377A0F00E6BFE8 /* LaunchScreen.storyboard */,
@@ -149,7 +146,6 @@
 			files = (
 				CE055F2720377A0F00E6BFE8 /* ViewController.swift in Sources */,
 				CE055F2520377A0F00E6BFE8 /* AppDelegate.swift in Sources */,
-				CE055F3B2037FEDE00E6BFE8 /* BackgroundLocationManager.swift in Sources */,
 				CE055F3720377A2200E6BFE8 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
