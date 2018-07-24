@@ -9,45 +9,6 @@
 import UIKit
 import CoreLocation
 
-final class BackgroundTaskService {
-    
-    static let shared = BackgroundTaskService()
-    
-    private var backgroundTaskId = UIBackgroundTaskInvalid
-    
-    func beginBackgroundTask() {
-        guard backgroundTaskId == UIBackgroundTaskInvalid else {
-            DispatchQueue.main.async {
-                debugLog("BACKGROUND backgroundTaskId == UIBackgroundTaskInvalid, backgroundTimeRemaining : \(UIApplication.shared.backgroundTimeRemaining)")
-                //1.79769313486232E+308 means infinite time
-            }
-            return
-        }
-        
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
-            debugLog("BACKGROUND expirationHandler")
-            DispatchQueue.main.async {
-                debugLog("BACKGROUND expirationHandler, backgroundTimeRemaining: \(UIApplication.shared.backgroundTimeRemaining)")
-            }
-            self?.endBackgroundTask()
-        })
-        
-        DispatchQueue.main.async {
-            debugLog("BACKGROUND backgroundTimeRemaining: \(UIApplication.shared.backgroundTimeRemaining)")
-            //1.79769313486232E+308 means infinite time
-        }
-        debugLog("BACKGROUND: Task \(backgroundTaskId) has been added")
-    }
-    
-    private func endBackgroundTask() {
-        if backgroundTaskId != UIBackgroundTaskInvalid {
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
-            backgroundTaskId = UIBackgroundTaskInvalid
-            debugLog("BACKGROUND: Task \(backgroundTaskId) has been ended")
-        }
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -55,10 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
+        if launchOptions?[.location] != nil {
+            debugLog("didFinishLaunchingWithOptions from location !!!")
+        }
+        
         debugLog("didFinishLaunchingWithOptions: \(launchOptions ?? [:])")
         BackgroundLocationManager.shared.delegate = self
         BackgroundLocationManager.shared.startUpdateLocation()
-        BackgroundTaskService.shared.beginBackgroundTask()
+        BackgroundTaskManager.shared.beginBackgroundTask()
         
         return true
     }
@@ -71,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("applicationDidEnterBackground")
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 10) { 
+            BackgroundTaskManager.shared.printBackgroundTimeRemaining()
+        }
+        
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -97,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LocationManagerDelegate {
     func didUpdate(location: CLLocation) {
         
+        debugLog(location)
+        
         if let lastLocation = lastLocation {
             let distance = lastLocation.distance(from: location) /// meters
             debugLog("distance: \(distance)")
@@ -112,7 +85,6 @@ extension AppDelegate: LocationManagerDelegate {
         }
         
         lastLocation = location
-        debugLog(location)
     }
 }
 
