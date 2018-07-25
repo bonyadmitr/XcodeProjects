@@ -12,7 +12,7 @@ final class BackgroundTaskManager {
     
     static let shared = BackgroundTaskManager()
     
-    private var backgroundTaskId = UIBackgroundTaskInvalid /// 0
+    private var backgroundTaskId = UIBackgroundTaskInvalid /// == 0
     
     func beginBackgroundTask() {
         guard backgroundTaskId == UIBackgroundTaskInvalid else {

@@ -37,6 +37,12 @@ class ViewController: UIViewController {
         debugLog("ViewController viewDidLoad")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        debugLog("ViewController viewDidAppear")
+    }
+
+    
     @IBAction func sendEmail(_ sender: UIBarButtonItem) {
         
         if let logUrl = LoggerConstants.logUrl,
