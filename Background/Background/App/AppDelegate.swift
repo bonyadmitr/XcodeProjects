@@ -69,6 +69,7 @@ extension AppDelegate: LocationManagerDelegate {
     func didUpdate(location: CLLocation) {
         
         debugLog(location)
+        BackgroundTaskManager.shared.restartBackgroundTask()
         
         if let lastLocation = lastLocation {
             let distance = lastLocation.distance(from: location) /// meters
