@@ -19,7 +19,7 @@ final class BackgroundTaskManager {
             return
         }
         
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString) { [weak self] in
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask { [weak self] in
             debugLog("BACKGROUND: expirationHandler called")
             self?.endBackgroundTask()
         }
@@ -32,8 +32,8 @@ final class BackgroundTaskManager {
             return
         }
         UIApplication.shared.endBackgroundTask(backgroundTaskId)
-        backgroundTaskId = UIBackgroundTaskInvalid
         debugLog("BACKGROUND: Task \(backgroundTaskId) has been ended")
+        backgroundTaskId = UIBackgroundTaskInvalid
     }
     
     func restartBackgroundTask() {
