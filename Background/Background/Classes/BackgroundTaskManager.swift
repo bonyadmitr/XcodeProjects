@@ -20,7 +20,6 @@ final class BackgroundTaskManager {
         }
         
         backgroundTaskId = UIApplication.shared.beginBackgroundTask { [weak self] in
-            debugLog("BACKGROUND: expirationHandler called")
             self?.endBackgroundTask()
         }
         
@@ -39,6 +38,7 @@ final class BackgroundTaskManager {
     func restartBackgroundTask() {
         endBackgroundTask()
         beginBackgroundTask()
+        printBackgroundTimeRemaining()
     }
     
     ///1.79769313486232E+308 means infinite time
