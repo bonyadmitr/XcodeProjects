@@ -32,9 +32,17 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    var objects = [Any]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         debugLog("ViewController viewDidLoad")
+        
+        for _ in 1...500 {
+            objects.append(MKMapView())
+        }
+        debugLog("500 MKMapView created, about 200mb of memory")
     }
     
     override func viewDidAppear(_ animated: Bool) {
