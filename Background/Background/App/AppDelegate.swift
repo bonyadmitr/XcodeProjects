@@ -26,7 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BackgroundLocationManager.shared.startUpdateLocation()
         BackgroundTaskManager.shared.beginBackgroundTask()
         
+        /// only UIApplicationSignificantTimeChange notification has object: UIApplication. userInfo is nil
+        NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .NSCalendarDayChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .UIApplicationSignificantTimeChange, object: nil)
+        
         return true
+    }
+    
+    @objc private func dateDidChange(_ notification: Notification) {
+        debugLog("dateDidChange. notification: \(notification.name)")
+        debugLog("dateDidChange. date: \(Date())")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -68,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LocationManagerDelegate {
     func didUpdate(location: CLLocation) {
         
-        debugLog(location)
+        debugLog("location \(location.coordinate)")
         BackgroundTaskManager.shared.restartBackgroundTask()
         
         if let lastLocation = lastLocation {
