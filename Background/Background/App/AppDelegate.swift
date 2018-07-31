@@ -26,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BackgroundLocationManager.shared.startUpdateLocation()
         BackgroundTaskManager.shared.beginBackgroundTask()
         
-        /// only UIApplicationSignificantTimeChange notification has object: UIApplication. userInfo is nil
+        /// only UIApplicationSignificantTimeChange notification has object: UIApplication. userInfo is nil in both ones.
+        /// on new day notification will be called with small delay
+        /// will not be called in background. will be called after open app
         NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .NSCalendarDayChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .UIApplicationSignificantTimeChange, object: nil)
         
