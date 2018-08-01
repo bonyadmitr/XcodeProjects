@@ -99,7 +99,7 @@
 				TargetAttributes = {
 					6624FF2B1E8C675100F323CF = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 227NMT55ZD;
+						DevelopmentTeam = 52L6T7H6QG;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -266,7 +266,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Notifications10/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = by.Notifications10;
@@ -282,7 +282,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Notifications10/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = by.Notifications10;
@@ -312,6 +312,7 @@
 				6624FF401E8C675100F323CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
