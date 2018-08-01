@@ -36,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     @objc private func dateDidChange(_ notification: Notification) {
-        debugLog("dateDidChange. notification: \(notification.name)")
-        debugLog("dateDidChange. date: \(Date())")
+        debugLog("notification: \(notification.name.rawValue)")
+        debugLog("date: \(Date())")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -48,10 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("applicationDidEnterBackground")
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 10) { 
-            BackgroundTaskManager.shared.printBackgroundTimeRemaining()
-        }
         
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -79,8 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LocationManagerDelegate {
     func didUpdate(location: CLLocation) {
         
-        debugLog("location \(location.coordinate)")
+        debugLog("didUpdate(location")
         BackgroundTaskManager.shared.restartBackgroundTask()
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 10) { 
+            BackgroundTaskManager.shared.printBackgroundTimeRemaining()
+        }
         
         if let lastLocation = lastLocation {
             let distance = lastLocation.distance(from: location) /// meters
