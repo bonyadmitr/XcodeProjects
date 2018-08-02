@@ -20,6 +20,7 @@ final class BackgroundTaskManager {
         }
         
         backgroundTaskId = UIApplication.shared.beginBackgroundTask { [weak self] in
+            debugLog("BACKGROUND: expirationHandler")
             self?.endBackgroundTask()
         }
         

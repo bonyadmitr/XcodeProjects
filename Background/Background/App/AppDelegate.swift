@@ -78,10 +78,6 @@ extension AppDelegate: LocationManagerDelegate {
         debugLog("didUpdate(location")
         BackgroundTaskManager.shared.restartBackgroundTask()
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 10) { 
-            BackgroundTaskManager.shared.printBackgroundTimeRemaining()
-        }
-        
         if let lastLocation = lastLocation {
             let distance = lastLocation.distance(from: location) /// meters
             debugLog("distance: \(distance)")
