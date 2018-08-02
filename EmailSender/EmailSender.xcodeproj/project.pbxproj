@@ -13,9 +13,9 @@
 		66CF48601E9592C1005C65E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CF485E1E9592C1005C65E0 /* Main.storyboard */; };
 		66CF48621E9592C1005C65E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CF48611E9592C1005C65E0 /* Assets.xcassets */; };
 		66CF48651E9592C1005C65E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CF48631E9592C1005C65E0 /* LaunchScreen.storyboard */; };
-		66CF486F1E95B1C1005C65E0 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */; };
-		66CF48711E95BD1A005C65E0 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */; };
-		66CF48731E95BF84005C65E0 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CF48721E95BF84005C65E0 /* EmailSender.swift */; };
+		CEEC433D2112D87800D7D782 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC433C2112D87800D7D782 /* EmailSender.swift */; };
+		CEEC43402112D87E00D7D782 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC433E2112D87D00D7D782 /* UIApplication+Controller.swift */; };
+		CEEC43412112D87E00D7D782 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC433F2112D87D00D7D782 /* UIApplication+URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		66CF48611E9592C1005C65E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66CF48641E9592C1005C65E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66CF48661E9592C1005C65E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
-		66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
-		66CF48721E95BF84005C65E0 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+		CEEC433C2112D87800D7D782 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+		CEEC433E2112D87D00D7D782 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
+		CEEC433F2112D87D00D7D782 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 		66ACB2121E96714D00DDA63B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				66CF48721E95BF84005C65E0 /* EmailSender.swift */,
+				CEEC433C2112D87800D7D782 /* EmailSender.swift */,
 				66ACB2131E96761100DDA63B /* SMSSender.swift */,
 			);
 			name = Classes;
@@ -55,8 +55,8 @@
 		66ACB2151E96821C00DDA63B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				66CF48701E95BD1A005C65E0 /* UIApplication+URL.swift */,
-				66CF486E1E95B1C1005C65E0 /* UIApplication+Controller.swift */,
+				CEEC433E2112D87D00D7D782 /* UIApplication+Controller.swift */,
+				CEEC433F2112D87D00D7D782 /* UIApplication+URL.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -181,12 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66CF48731E95BF84005C65E0 /* EmailSender.swift in Sources */,
+				CEEC43412112D87E00D7D782 /* UIApplication+URL.swift in Sources */,
 				66CF485D1E9592C1005C65E0 /* ViewController.swift in Sources */,
+				CEEC43402112D87E00D7D782 /* UIApplication+Controller.swift in Sources */,
+				CEEC433D2112D87800D7D782 /* EmailSender.swift in Sources */,
 				66ACB2141E96761100DDA63B /* SMSSender.swift in Sources */,
 				66CF485B1E9592C1005C65E0 /* AppDelegate.swift in Sources */,
-				66CF48711E95BD1A005C65E0 /* UIApplication+URL.swift in Sources */,
-				66CF486F1E95B1C1005C65E0 /* UIApplication+Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
