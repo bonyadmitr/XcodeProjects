@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14113" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYj-dQ-6GF">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item 2-->
+        <scene sceneID="weJ-2Y-DZx">
+            <objects>
+                <viewController id="one-ZZ-8tz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cFA-uP-BEX"/>
+                        <viewControllerLayoutGuide type="bottom" id="teS-Xf-ufs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K2j-BL-D3K">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="fF5-uv-hdl"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="b2g-Bp-UBx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZN-L1-2Go" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="630" y="1646"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="TQd-j4-wdN">
+            <objects>
+                <viewController id="56Z-en-Mia" customClass="ViewController" customModule="tvOStest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jIk-FD-0Dh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xec-lE-dgD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aoj-Pn-gjP">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDf-5a-QJ4">
+                                <rect key="frame" x="140" y="110" width="300" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="RrW-Z6-6tY"/>
+                                    <constraint firstAttribute="width" constant="300" id="wNC-1W-GMD"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="aDf-5a-QJ4" firstAttribute="top" secondItem="jIk-FD-0Dh" secondAttribute="bottom" constant="50" id="7Gy-3c-jQ1"/>
+                            <constraint firstItem="aDf-5a-QJ4" firstAttribute="leading" secondItem="JoT-nj-mgG" secondAttribute="leading" constant="50" id="VVf-6Z-g85"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JoT-nj-mgG"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="MkO-5R-EDu"/>
+                    <connections>
+                        <outlet property="testButton" destination="aDf-5a-QJ4" id="HSM-Zh-XcO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vlW-np-guo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="630" y="357"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="oCM-ss-UNC">
+            <objects>
+                <tabBarController id="BYj-dQ-6GF" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UCE-7x-vDb">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="0.0"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="56Z-en-Mia" kind="relationship" relationship="viewControllers" id="Fmv-X3-vBe"/>
+                        <segue destination="one-ZZ-8tz" kind="relationship" relationship="viewControllers" id="cJg-yt-9VO"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-yf-VkV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1697" y="930"/>
+        </scene>
+    </scenes>
+</document>
