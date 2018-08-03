@@ -69,7 +69,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="oCM-ss-UNC">
             <objects>
-                <tabBarController id="BYj-dQ-6GF" sceneMemberID="viewController">
+                <tabBarController id="BYj-dQ-6GF" customClass="TabBarController" customModule="tvOStest" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UCE-7x-vDb">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -83,6 +83,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-yf-VkV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1697" y="930"/>
+        </scene>
+        <!--Search Results View Controller-->
+        <scene sceneID="BQG-rR-Vfo">
+            <objects>
+                <viewController storyboardIdentifier="SearchResultsViewController" id="Bgx-IA-f6l" customClass="SearchResultsViewController" customModule="tvOStest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5fN-6l-9lQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ahg-is-9Bi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kcc-nB-BVa">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="i3i-fC-LNb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gr-ue-jt1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1638" y="2429"/>
         </scene>
     </scenes>
 </document>
