@@ -16,19 +16,19 @@ final class PhotosController: UIViewController {
             collectionView.delegate = self
             
             if #available(iOS 11.0, *) {
-//                collectionView.dropDelegate = self
-                //collectionView.dragDelegate = self
+                collectionView.dropDelegate = self
+                collectionView.dragDelegate = self
                 
                 /// By default, For iPad this will return YES and iPhone will return NO
                 //collectionView.dragInteractionEnabled = true
                 
                 //collectionView.reorderingCadence = .slow
             } else {
-                // Fallback on earlier versions
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture))
+                collectionView.addGestureRecognizer(longPressGesture)
             }
             
-            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture))
-            collectionView.addGestureRecognizer(longPressGesture)
+            
         }
     }
     
@@ -51,7 +51,9 @@ final class PhotosController: UIViewController {
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
+    
+    /// for iOS 9, 10. not 11
+    @objc private func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)),
             let cell = collectionView.cellForItem(at: selectedIndexPath) as? PhotoCell
         else {
@@ -71,19 +73,6 @@ final class PhotosController: UIViewController {
             collectionView.cancelInteractiveMovement()
             cell.setSelection(false)
         }
-        
-//        case UIGestureRecognizerState.began:
-//            guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
-//                break
-//            }
-//            collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
-//        case UIGestureRecognizerState.changed:
-//            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-//        case UIGestureRecognizerState.ended:
-//            collectionView.endInteractiveMovement()
-//        default:
-//            collectionView.cancelInteractiveMovement()
-//        }
     }
 }
 
@@ -162,13 +151,62 @@ extension PhotosController: UICollectionViewDropDelegate {
      */
     public func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         
-        coordinator.session.loadObjects(ofClass: UIImage.self) { [weak self] imageItems in
-            guard let newImages = imageItems as? [UIImage] else {
-                return
+//        guard let destinationIndexPath = coordinator.destinationIndexPath,
+//            let sourceIndexPath = coordinator.items.last?.dragItem.localObject as? IndexPath
+//        else {
+//            return
+//        }
+//        
+//        // remove
+//        
+//        let draggedItem = images.remove(at: sourceIndexPath.item)
+//        collectionView.deleteItems(at: [sourceIndexPath])
+//        // insert
+//        images.insert(draggedItem, at: destinationIndexPath.item)
+//        collectionView.insertItems(at: [destinationIndexPath])
+
+        
+//        coordinator.session.loadObjects(ofClass: UIImage.self) { [weak self] imageItems in
+//            guard let newImages = imageItems as? [UIImage] else {
+//                return
+//            }
+//            self?.images.insert(contentsOf: newImages, at: 0)
+//            self?.collectionView.reloadData()
+//        }
+        
+        
+        
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+        for item in coordinator.items {
+            if let sourceIndexPath = item.sourceIndexPath {
+                let image = item.dragItem.localObject as! UIImage
+                collectionView.performBatchUpdates({
+                    self.images.remove(at: sourceIndexPath.item)
+                    self.images.insert(image, at: destinationIndexPath.item)
+                    collectionView.deleteItems(at: [sourceIndexPath])
+                    collectionView.insertItems(at: [destinationIndexPath])
+                })
+                coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+            } else {
+                // no sourceIndexPath, so not local
+                let placeholderContext = coordinator.drop(
+                    item.dragItem,
+                    to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "PhotoCell")
+                )
+                item.dragItem.itemProvider.loadObject(ofClass: NSAttributedString.self, completionHandler: { (provider, error) in
+                    DispatchQueue.main.async {
+                        if let image = provider as? UIImage {
+                            placeholderContext.commitInsertion(dataSourceUpdates: { (insertionIndexPath) in
+                                self.images.insert(image, at: insertionIndexPath.item)
+                            })
+                        } else {
+                            placeholderContext.deletePlaceholder()
+                        }
+                    }
+                })
             }
-            self?.images.insert(contentsOf: newImages, at: 0)
-            self?.collectionView.reloadData()
         }
+
     }
     
     // MARK: Optional
@@ -183,9 +221,9 @@ extension PhotosController: UICollectionViewDropDelegate {
     
     /* Called when the drop session begins tracking in the collection view's coordinate space.
      */
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnter session: UIDropSession) {
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnter session: UIDropSession) {
+//        
+//    }
     
     
     /* Called frequently while the drop session being tracked inside the collection view's coordinate space.
@@ -196,22 +234,24 @@ extension PhotosController: UICollectionViewDropDelegate {
      * You may perform your own hit testing via -[UIDropSession locationInView]
      */
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        return UICollectionViewDropProposal(operation: .copy)
+        
+        let isSelf = (session.localDragSession?.localContext as? UICollectionView) == collectionView
+        return UICollectionViewDropProposal(operation: isSelf ? .move : .copy, intent: .insertAtDestinationIndexPath)
     }
     
     
     /* Called when the drop session is no longer being tracked inside the collection view's coordinate space.
      */
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidExit session: UIDropSession) {
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, dropSessionDidExit session: UIDropSession) {
+//        
+//    }
     
     
     /* Called when the drop session completed, regardless of outcome. Useful for performing any cleanup.
      */
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
+//        
+//    }
     
     
     /* Allows customization of the preview used for the item being dropped.
@@ -220,7 +260,91 @@ extension PhotosController: UICollectionViewDropDelegate {
      * This will be called as needed when animating drops via -[UICollectionViewDropCoordinator dropItem:toItemAtIndexPath:]
      * (to customize placeholder drops, please see UICollectionViewDropPlaceholder.previewParametersProvider)
      */
-    func collectionView(_ collectionView: UICollectionView, dropPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
-        return UIDragPreviewParameters()
+//    func collectionView(_ collectionView: UICollectionView, dropPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+//        return UIDragPreviewParameters()
+//    }
+}
+
+
+
+
+
+
+
+// MARK: - UICollectionViewDragDelegate
+@available(iOS 11.0, *)
+extension PhotosController: UICollectionViewDragDelegate {
+    /* Provide items to begin a drag associated with a given indexPath.
+     * If an empty array is returned a drag session will not begin.
+     */
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        session.localContext = collectionView
+        
+        let image = images[indexPath.item]
+        let dragItem = UIDragItem(itemProvider: .init(object: image))
+        dragItem.localObject = image
+        return [dragItem]
     }
+    
+//    private func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
+//        if let imageURL = (collectionView?.cellForItem(at: indexPath) as? ImageCell)?.imageURL as NSURL? {
+//            let dragItem = UIDragItem(itemProvider: NSItemProvider(object: imageURL))
+//            dragItem.localObject = imageURL
+//            return [dragItem]
+//        } else {
+//            return []
+//        }
+//    }
+    
+    // MARK: Optional
+    
+    /* Called to request items to add to an existing drag session in response to the add item gesture.
+     * You can use the provided point (in the collection view's coordinate space) to do additional hit testing if desired.
+     * If not implemented, or if an empty array is returned, no items will be added to the drag and the gesture
+     * will be handled normally.
+     */
+//    func collectionView(_ collectionView: UICollectionView, itemsForAddingTo session: UIDragSession, at indexPath: IndexPath, point: CGPoint) -> [UIDragItem] {
+//        
+//    }
+    
+    
+    /* Allows customization of the preview used for the item being lifted from or cancelling back to the collection view.
+     * If not implemented or if nil is returned, the entire cell will be used for the preview.
+     */
+//    func collectionView(_ collectionView: UICollectionView, dragPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+//        
+//    }
+    
+    
+    /* Called after the lift animation has completed to signal the start of a drag session.
+     * This call will always be balanced with a corresponding call to -collectionView:dragSessionDidEnd:
+     */
+//    func collectionView(_ collectionView: UICollectionView, dragSessionWillBegin session: UIDragSession) {
+//        
+//    }
+    
+    
+    /* Called to signal the end of the drag session.
+     */
+//    func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
+//        
+//    }
+    
+    
+    /* Controls whether move operations (see UICollectionViewDropProposal.operation) are allowed for the drag session.
+     * If not implemented this will default to YES.
+     */
+//    func collectionView(_ collectionView: UICollectionView, dragSessionAllowsMoveOperation session: UIDragSession) -> Bool {
+//        
+//    }
+    
+    
+    /* Controls whether the drag session is restricted to the source application.
+     * If YES the current drag session will not be permitted to drop into another application.
+     * If not implemented this will default to NO.
+     */
+//    func collectionView(_ collectionView: UICollectionView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
+//        
+//    }
 }
