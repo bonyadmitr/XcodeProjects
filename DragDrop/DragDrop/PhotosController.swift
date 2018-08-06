@@ -8,29 +8,21 @@
 
 import UIKit
 
-/// https://stackoverflow.com/questions/26542035/create-uiimage-with-solid-color-in-swift
-public extension UIImage {
-    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        color.setFill()
-        UIRectFill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        guard let cgImage = image?.cgImage else { return nil }
-        self.init(cgImage: cgImage)
-    }
-}
-
-
 final class PhotosController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-//            collectionView.hasActiveDrag = true
+            
+            if #available(iOS 11.0, *) {
+                /// By default, For iPad this will return YES and iPhone will return NO
+                //collectionView.dragInteractionEnabled = true
+                
+                //collectionView.reorderingCadence = .slow
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
     
@@ -103,3 +95,7 @@ extension PhotosController: UIDropInteractionDelegate {
         }
     }
 }
+
+//extension PhotosController: UICollectionViewDropDelegate {
+//    
+//}

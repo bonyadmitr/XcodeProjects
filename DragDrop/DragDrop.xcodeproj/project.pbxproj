@@ -12,6 +12,7 @@
 		CE0FD8552114E181003DEA55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FD8532114E181003DEA55 /* Main.storyboard */; };
 		CE0FD8572114E183003DEA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FD8562114E183003DEA55 /* Assets.xcassets */; };
 		CE0FD85A2114E183003DEA55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FD8582114E183003DEA55 /* LaunchScreen.storyboard */; };
+		CE6E1E172118279900A2255C /* UIImage+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E1E162118279900A2255C /* UIImage+Init.swift */; };
 		CEDB47BF2118193300031FD5 /* PhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB47BE2118193300031FD5 /* PhotosController.swift */; };
 		CEDB47C121181A2E00031FD5 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB47C021181A2E00031FD5 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		CE0FD8562114E183003DEA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0FD8592114E183003DEA55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE0FD85B2114E183003DEA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE6E1E162118279900A2255C /* UIImage+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Init.swift"; sourceTree = "<group>"; };
 		CEDB47BE2118193300031FD5 /* PhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosController.swift; sourceTree = "<group>"; };
 		CEDB47C021181A2E00031FD5 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +64,7 @@
 				CE0FD8512114E181003DEA55 /* ViewController.swift */,
 				CEDB47BE2118193300031FD5 /* PhotosController.swift */,
 				CEDB47C021181A2E00031FD5 /* PhotoCell.swift */,
+				CE6E1E162118279900A2255C /* UIImage+Init.swift */,
 				CE0FD8532114E181003DEA55 /* Main.storyboard */,
 				CE0FD8562114E183003DEA55 /* Assets.xcassets */,
 				CE0FD8582114E183003DEA55 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				CEDB47C121181A2E00031FD5 /* PhotoCell.swift in Sources */,
 				CEDB47BF2118193300031FD5 /* PhotosController.swift in Sources */,
 				CE0FD8522114E181003DEA55 /* ViewController.swift in Sources */,
+				CE6E1E172118279900A2255C /* UIImage+Init.swift in Sources */,
 				CE0FD8502114E181003DEA55 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
