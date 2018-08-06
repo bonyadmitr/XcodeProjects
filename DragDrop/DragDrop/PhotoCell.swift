@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PhotoCell: UICollectionViewCell {
+final class PhotoCell: UICollectionViewCell, Reusable {
     
     @IBOutlet private weak var photoImageView: UIImageView!
     
@@ -32,5 +32,15 @@ final class PhotoCell: UICollectionViewCell {
             }
         }, completion: nil)
         
+    }
+}
+
+protocol Reusable {
+    static var reuseIdentifier: String { get }
+}
+
+extension Reusable {
+    static var reuseIdentifier: String {
+        return String(describing: self)
     }
 }

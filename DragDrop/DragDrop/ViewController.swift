@@ -33,6 +33,7 @@ extension ViewController: UIDropInteractionDelegate {
         //return session.canLoadObjects(ofClass: URL.self) || session.canLoadObjects(ofClass: UIImage.self)
     }
     
+    /// .copy adds (+) icon for item
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
 //        if let view = trashBarButtonItem.value(forKey: "view") as? UIView {
 //            let dropPoint = session.location(in: view)
