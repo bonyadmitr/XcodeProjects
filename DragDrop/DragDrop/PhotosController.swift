@@ -16,7 +16,7 @@ final class PhotosController: UIViewController {
             collectionView.delegate = self
             
             if #available(iOS 11.0, *) {
-                collectionView.dropDelegate = self
+//                collectionView.dropDelegate = self
                 //collectionView.dragDelegate = self
                 
                 /// By default, For iPad this will return YES and iPhone will return NO
@@ -26,6 +26,9 @@ final class PhotosController: UIViewController {
             } else {
                 // Fallback on earlier versions
             }
+            
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture))
+            collectionView.addGestureRecognizer(longPressGesture)
         }
     }
     
@@ -47,6 +50,41 @@ final class PhotosController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
     }
+    
+    @objc func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
+        guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)),
+            let cell = collectionView.cellForItem(at: selectedIndexPath) as? PhotoCell
+        else {
+            return
+        }
+        switch(gesture.state) {
+        case .began:
+            collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+            cell.setSelection(true)
+        case .changed:
+            /// can be fixed not for center
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case .ended:
+            collectionView.endInteractiveMovement()
+            cell.setSelection(false)
+        case .cancelled, .possible, .failed:
+            collectionView.cancelInteractiveMovement()
+            cell.setSelection(false)
+        }
+        
+//        case UIGestureRecognizerState.began:
+//            guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
+//                break
+//            }
+//            collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+//        case UIGestureRecognizerState.changed:
+//            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+//        case UIGestureRecognizerState.ended:
+//            collectionView.endInteractiveMovement()
+//        default:
+//            collectionView.cancelInteractiveMovement()
+//        }
+    }
 }
 
 extension PhotosController: UICollectionViewDataSource {
@@ -67,12 +105,26 @@ extension PhotosController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movingImage = images.remove(at: sourceIndexPath.item)
+        images.insert(movingImage, at: destinationIndexPath.item)
+//        let obj = collectionViewData[sourceIndexPath.row]
+//        collectionViewData.remove(at: sourceIndexPath.row)
+//        collectionViewData.insert(obj, at: destinationIndexPath.row)
+//        updateAllVisibleCell()
+    }
 }
 
 extension PhotosController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = collectionView.frame.width / 2 - 5
-        return CGSize(width: cellWidth, height: cellWidth)
+//        let cellWidth = collectionView.frame.width / 2 - 5
+//        return CGSize(width: cellWidth, height: cellWidth)
+        return CGSize(width: 100, height: 100)
     }
 }
 
