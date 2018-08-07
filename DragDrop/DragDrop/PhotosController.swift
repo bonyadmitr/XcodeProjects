@@ -46,6 +46,11 @@ final class PhotosController: UIViewController {
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail", let vc = segue.destination as? ImageController, let indexPath = sender as? IndexPath {
+            vc.image = images[indexPath.item]
+        }
+    }
     
     /// for iOS 9, 10. not 11
     @objc private func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
@@ -87,7 +92,7 @@ extension PhotosController: UICollectionViewDataSource {
 
 extension PhotosController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "detail", sender: indexPath)
     }
     
 //    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {

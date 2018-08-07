@@ -175,11 +175,41 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="OK7-W4-k7I" id="PMz-nV-895"/>
+                        <segue destination="tYB-gj-Kng" kind="show" identifier="detail" id="5be-ag-vCm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8c-qa-GrZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-172.5" y="800"/>
+        </scene>
+        <!--Image Controller-->
+        <scene sceneID="5aj-fz-oIT">
+            <objects>
+                <viewController id="tYB-gj-Kng" customClass="ImageController" customModule="DragDrop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b6d-Yd-2TK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J7q-T4-JpX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Sab-ff-vdF" firstAttribute="bottom" secondItem="J7q-T4-JpX" secondAttribute="bottom" id="ENj-YF-oqz"/>
+                            <constraint firstItem="J7q-T4-JpX" firstAttribute="top" secondItem="Sab-ff-vdF" secondAttribute="top" id="PCv-Ty-UEB"/>
+                            <constraint firstItem="Sab-ff-vdF" firstAttribute="trailing" secondItem="J7q-T4-JpX" secondAttribute="trailing" id="bG3-ob-CY6"/>
+                            <constraint firstItem="J7q-T4-JpX" firstAttribute="leading" secondItem="Sab-ff-vdF" secondAttribute="leading" id="xbM-3Z-OsA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sab-ff-vdF"/>
+                    </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="J7q-T4-JpX" id="1VZ-Sg-lgE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sab-Ev-3Xv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602" y="800"/>
         </scene>
     </scenes>
 </document>

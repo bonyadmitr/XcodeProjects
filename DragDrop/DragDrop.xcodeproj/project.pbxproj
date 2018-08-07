@@ -16,6 +16,7 @@
 		CE6E1E1921188CC700A2255C /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E1E1821188CC700A2255C /* Reusable.swift */; };
 		CEDB47BF2118193300031FD5 /* PhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB47BE2118193300031FD5 /* PhotosController.swift */; };
 		CEDB47C121181A2E00031FD5 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB47C021181A2E00031FD5 /* PhotoCell.swift */; };
+		CEDED79D21196F640019E64A /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDED79C21196F640019E64A /* ImageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CE6E1E1821188CC700A2255C /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CEDB47BE2118193300031FD5 /* PhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosController.swift; sourceTree = "<group>"; };
 		CEDB47C021181A2E00031FD5 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		CEDED79C21196F640019E64A /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				CE0FD84F2114E181003DEA55 /* AppDelegate.swift */,
 				CE0FD8512114E181003DEA55 /* ViewController.swift */,
 				CEDB47BE2118193300031FD5 /* PhotosController.swift */,
+				CEDED79C21196F640019E64A /* ImageController.swift */,
 				CEDB47C021181A2E00031FD5 /* PhotoCell.swift */,
 				CE6E1E162118279900A2255C /* UIImage+Init.swift */,
 				CE6E1E1821188CC700A2255C /* Reusable.swift */,
@@ -150,6 +153,7 @@
 				CE6E1E1921188CC700A2255C /* Reusable.swift in Sources */,
 				CEDB47C121181A2E00031FD5 /* PhotoCell.swift in Sources */,
 				CEDB47BF2118193300031FD5 /* PhotosController.swift in Sources */,
+				CEDED79D21196F640019E64A /* ImageController.swift in Sources */,
 				CE0FD8522114E181003DEA55 /* ViewController.swift in Sources */,
 				CE6E1E172118279900A2255C /* UIImage+Init.swift in Sources */,
 				CE0FD8502114E181003DEA55 /* AppDelegate.swift in Sources */,
