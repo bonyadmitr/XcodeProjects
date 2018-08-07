@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -100,16 +100,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-p4-FH1">
-                                <rect key="frame" x="30" y="30" width="256" height="208"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop image here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-qr-XvH">
+                                <rect key="frame" x="96.5" y="150" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-p4-FH1">
+                                <rect key="frame" x="30" y="30" width="260" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Iny-p4-FH1" secondAttribute="height" id="wzQ-XJ-JrI"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Iny-p4-FH1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="63L-cS-4Z1"/>
                             <constraint firstItem="Iny-p4-FH1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="EPq-9K-Gaj"/>
-                            <constraint firstItem="Iny-p4-FH1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:2" id="ZJL-Ba-EtU"/>
-                            <constraint firstItem="Iny-p4-FH1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="4:5" id="kTq-4H-aVv"/>
+                            <constraint firstItem="Mxh-qr-XvH" firstAttribute="centerX" secondItem="Iny-p4-FH1" secondAttribute="centerX" id="a9v-fa-Syd"/>
+                            <constraint firstItem="Mxh-qr-XvH" firstAttribute="centerY" secondItem="Iny-p4-FH1" secondAttribute="centerY" id="kmH-aD-E2S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Iny-p4-FH1" secondAttribute="trailing" constant="30" id="kz7-Sp-uE7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

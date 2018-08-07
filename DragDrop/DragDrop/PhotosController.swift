@@ -185,7 +185,7 @@ extension PhotosController: UICollectionViewDropDelegate {
                 })
                 coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
             } else {
-                // there is no sourceIndexPath, so it is not local
+                /// there is no sourceIndexPath, so it is not local
                 
                 // TODO: do not call in background
                 let placeholder = UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, 
