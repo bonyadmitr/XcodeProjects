@@ -8,21 +8,9 @@
 
 import UIKit
 
-extension UIViewController {
-    var contents: UIViewController {
-        if let navVC = self as? UINavigationController {
-            return navVC.visibleViewController ?? navVC
-        } else {
-            return self
-        }
-    }
-}
-
-// TODO: fix for iPhone+
-
-class MasterController: UIViewController {
+final class MasterController: UIViewController, ClearableTableSelection {
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +24,21 @@ class MasterController: UIViewController {
         setupInitialState()
     }
     
-    /// UNSAFE
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        clearsSelectionOnViewWillAppear()
+    }
+
+    
+    /// UNSAFE !!!
     private func setupInitialState() {
         
         let indexPath = IndexPath(row: 0, section: 0)
-        if UI_USER_INTERFACE_IDIOM() == .pad {
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-        }
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         
         for vc in splitViewController?.viewControllers ?? [] {
-            if let secondaryVC = vc.contents as? DetailController, let cell = tableView.cellForRow(at: indexPath) {
+            if let secondaryVC = vc.rootIfNavOrSelf as? DetailController, let cell = tableView.cellForRow(at: indexPath) {
                 secondaryVC.text = cell.textLabel?.text
                 break
             }
@@ -54,7 +47,7 @@ class MasterController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail",
-            let vc = segue.destination.contents as? DetailController,
+            let vc = segue.destination.rootIfNavOrSelf as? DetailController,
             let indexPath = sender as? IndexPath,
             let cell = tableView.cellForRow(at: indexPath)
         {
@@ -83,21 +76,22 @@ extension MasterController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if UI_USER_INTERFACE_IDIOM() == .phone {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
         performSegue(withIdentifier: "detail", sender: indexPath)
+        //navigationController
     }
 }
 
 extension MasterController: UISplitViewControllerDelegate {
     
-    //  iPhone??
-    /// will show master instead detail on the phone
-//    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-//        return true
-//    }
+    /// if "return true" will show master instead of detail on the phone after turn from landscape to portrait orientation
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        
+        /// if nothing selected on iPhone+ in portrait, will show master vc after turned to the landscape
+        if tableView.indexPathForSelectedRow == nil {
+            return true
+        }
+        return false
+    }
     
     func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
         switch svc.displayMode {

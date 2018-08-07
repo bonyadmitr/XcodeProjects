@@ -119,7 +119,7 @@
                     <navigationItem key="navigationItem" title="master" id="QLo-yX-iri"/>
                     <connections>
                         <outlet property="tableView" destination="YPw-hw-QoZ" id="hfv-WZ-acF"/>
-                        <segue destination="u9e-zi-RCJ" kind="show" identifier="detail" id="XtO-ra-kto"/>
+                        <segue destination="u9e-zi-RCJ" kind="showDetail" identifier="detail" id="XtO-ra-kto"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKD-z9-dlD" userLabel="First Responder" sceneMemberID="firstResponder"/>
