@@ -10,11 +10,16 @@ import UIKit
 
 class DetailController: UIViewController {
     
+    @IBOutlet private weak var titleLabel: UILabel!
+    
+    var text: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
+        
+        titleLabel.text = text
     }
-    
 }
