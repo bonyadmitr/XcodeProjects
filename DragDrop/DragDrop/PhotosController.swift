@@ -54,18 +54,24 @@ final class PhotosController: UIViewController {
     
     /// for iOS 9, 10. not 11
     @objc private func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
-        guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)),
+        let location = gesture.location(in: collectionView)
+        
+        guard
+            let selectedIndexPath = collectionView.indexPathForItem(at: location),
             let cell = collectionView.cellForItem(at: selectedIndexPath) as? PhotoCell
         else {
             return
         }
+        
         switch(gesture.state) {
         case .began:
             collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
             cell.setSelection(true)
         case .changed:
-            /// can be fixed not for center
-            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+            /// there is a bug that cell will move center to the touch point
+            collectionView.updateInteractiveMovementTargetPosition(location)
+            /// old case
+            //collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
         case .ended:
             collectionView.endInteractiveMovement()
             cell.setSelection(false)
