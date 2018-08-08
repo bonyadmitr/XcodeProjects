@@ -12,34 +12,46 @@ final class MasterTableView: UITableView {
     
     private var lastSelectedIndexPath: IndexPath?
     
-    override func deselectRow(at indexPath: IndexPath, animated: Bool) {
-        super.deselectRow(at: indexPath, animated: animated)
-        lastSelectedIndexPath = indexPath
-    }
+//    override func deselectRow(at indexPath: IndexPath, animated: Bool) {
+//        super.deselectRow(at: indexPath, animated: animated)
+//        lastSelectedIndexPath = indexPath
+//    }
+    
+//    override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
+//        super.selectRow(at: indexPath, animated: true, scrollPosition: scrollPosition)
+//        lastSelectedIndexPath = indexPath
+//    }
     
     func updateSelectedRowOnViewWillAppear() {
         guard
             UI_USER_INTERFACE_IDIOM() == .phone,
-            UIDevice.current.orientation.isPortrait,
             let selectedIndexPath = indexPathForSelectedRow
         else {
             return
         }
         
         lastSelectedIndexPath = selectedIndexPath
-        deselectRow(at: selectedIndexPath, animated: true)
+        
+        if UIDevice.current.orientation.isPortrait {
+            deselectRow(at: selectedIndexPath, animated: true)
+        }
     }
     
     func updateSelectedRowOnViewWillTransition() {
-        if UIDevice.current.orientation.isLandscape, UI_USER_INTERFACE_IDIOM() == .phone {
-            selectRow(at: lastSelectedIndexPath, animated: false, scrollPosition: .none)
+        guard
+            UIDevice.current.orientation.isLandscape,
+            UI_USER_INTERFACE_IDIOM() == .phone,
+            let selectIndexPath = lastSelectedIndexPath
+        else {
+            return
         }
+        selectRow(at: selectIndexPath, animated: false, scrollPosition: .middle)
     }
 }
 
-final class MasterController: UIViewController, ClearableTableSelection {
+final class MasterController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: MasterTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,29 +65,16 @@ final class MasterController: UIViewController, ClearableTableSelection {
         setupInitialState()
     }
     
-    /// from setupInitialState 
-    private var lastSelectedIndexPath = IndexPath(row: 0, section: 0)
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard
-            UI_USER_INTERFACE_IDIOM() == .phone,
-            UIDevice.current.orientation.isPortrait,
-            let selectedIndexPath = tableView.indexPathForSelectedRow
-        else {
-            return
-        }
-        
-        lastSelectedIndexPath = selectedIndexPath
-        tableView.deselectRow(at: selectedIndexPath, animated: true)
+        tableView.updateSelectedRowOnViewWillAppear()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        if UIDevice.current.orientation.isLandscape, UI_USER_INTERFACE_IDIOM() == .phone {
-            tableView.selectRow(at: lastSelectedIndexPath, animated: false, scrollPosition: .none)
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.tableView.updateSelectedRowOnViewWillTransition()
         }
     }
 
