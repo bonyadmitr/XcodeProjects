@@ -22,4 +22,15 @@ class DetailController: UIViewController {
         
         titleLabel.text = text
     }
+    
+    @IBAction private func showSubDetail(_ sender: UIButton) {
+        performSegue(withIdentifier: "subdetail", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //segue.identifier == "subdetail",
+        if let vc = segue.destination as? SubDetailController {
+            vc.text = text
+        }
+    }
 }
