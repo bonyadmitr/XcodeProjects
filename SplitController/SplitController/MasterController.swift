@@ -8,47 +8,6 @@
 
 import UIKit
 
-final class MasterTableView: UITableView {
-    
-    private var lastSelectedIndexPath: IndexPath?
-    
-//    override func deselectRow(at indexPath: IndexPath, animated: Bool) {
-//        super.deselectRow(at: indexPath, animated: animated)
-//        lastSelectedIndexPath = indexPath
-//    }
-    
-//    override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
-//        super.selectRow(at: indexPath, animated: true, scrollPosition: scrollPosition)
-//        lastSelectedIndexPath = indexPath
-//    }
-    
-    func updateSelectedRowOnViewWillAppear() {
-        guard
-            UI_USER_INTERFACE_IDIOM() == .phone,
-            let selectedIndexPath = indexPathForSelectedRow
-        else {
-            return
-        }
-        
-        lastSelectedIndexPath = selectedIndexPath
-        
-        if UIDevice.current.orientation.isPortrait {
-            deselectRow(at: selectedIndexPath, animated: true)
-        }
-    }
-    
-    func updateSelectedRowOnViewWillTransition() {
-        guard
-            UIDevice.current.orientation.isLandscape,
-            UI_USER_INTERFACE_IDIOM() == .phone,
-            let selectIndexPath = lastSelectedIndexPath
-        else {
-            return
-        }
-        selectRow(at: selectIndexPath, animated: false, scrollPosition: .middle)
-    }
-}
-
 final class MasterController: UIViewController {
     
     @IBOutlet weak var tableView: MasterTableView!

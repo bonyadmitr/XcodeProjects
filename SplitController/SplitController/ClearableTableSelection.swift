@@ -18,13 +18,14 @@ extension ClearableTableSelection where Self: UIViewController {
         guard
             UI_USER_INTERFACE_IDIOM() == .phone,
             let selectedIndexPath = tableView.indexPathForSelectedRow
-            else {
-                return
+        else {
+            return
         }
         switch UIDevice.current.orientation {
         case .portrait, .portraitUpsideDown:
             tableView.deselectRow(at: selectedIndexPath, animated: true)
             
+            /// there is a bug
             let vc = UIViewController()
             vc.view.backgroundColor = .white
             splitViewController?.showDetailViewController(vc, sender: nil)
