@@ -8,6 +8,35 @@
 
 import UIKit
 
+final class MasterTableView: UITableView {
+    
+    private var lastSelectedIndexPath: IndexPath?
+    
+    override func deselectRow(at indexPath: IndexPath, animated: Bool) {
+        super.deselectRow(at: indexPath, animated: animated)
+        lastSelectedIndexPath = indexPath
+    }
+    
+    func updateSelectedRowOnViewWillAppear() {
+        guard
+            UI_USER_INTERFACE_IDIOM() == .phone,
+            UIDevice.current.orientation.isPortrait,
+            let selectedIndexPath = indexPathForSelectedRow
+        else {
+            return
+        }
+        
+        lastSelectedIndexPath = selectedIndexPath
+        deselectRow(at: selectedIndexPath, animated: true)
+    }
+    
+    func updateSelectedRowOnViewWillTransition() {
+        if UIDevice.current.orientation.isLandscape, UI_USER_INTERFACE_IDIOM() == .phone {
+            selectRow(at: lastSelectedIndexPath, animated: false, scrollPosition: .none)
+        }
+    }
+}
+
 final class MasterController: UIViewController, ClearableTableSelection {
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,10 +53,30 @@ final class MasterController: UIViewController, ClearableTableSelection {
         setupInitialState()
     }
     
+    /// from setupInitialState 
+    private var lastSelectedIndexPath = IndexPath(row: 0, section: 0)
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        clearsSelectionOnViewWillAppear()
+        guard
+            UI_USER_INTERFACE_IDIOM() == .phone,
+            UIDevice.current.orientation.isPortrait,
+            let selectedIndexPath = tableView.indexPathForSelectedRow
+        else {
+            return
+        }
+        
+        lastSelectedIndexPath = selectedIndexPath
+        tableView.deselectRow(at: selectedIndexPath, animated: true)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if UIDevice.current.orientation.isLandscape, UI_USER_INTERFACE_IDIOM() == .phone {
+            tableView.selectRow(at: lastSelectedIndexPath, animated: false, scrollPosition: .none)
+        }
     }
 
     
