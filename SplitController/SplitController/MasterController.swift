@@ -23,6 +23,11 @@ final class MasterController: UIViewController {
         splitViewController?.preferredDisplayMode = .allVisible
         
         setupInitialState()
+        
+        guard let splitController = splitViewController as? SplitController else {
+            return
+        }
+        splitController.register(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,9 +104,11 @@ extension MasterController: UITableViewDelegate {
         cell.textLabel?.text = "Row \(indexPath.row + 1)"
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectRaw(at: indexPath)
+    }
+    
+    private func selectRaw(at indexPath: IndexPath) {
         performSegue(withIdentifier: "detail", sender: indexPath)
-        //navigationController
     }
 }
 
@@ -131,3 +138,25 @@ extension MasterController: UISplitViewControllerDelegate {
     }
 }
 
+extension MasterController: SplitControllerKeyCommandDelegate {
+    func didPressed(keyCommand: SplitControllerKeyCommand) {
+        
+        let row: Int
+        switch keyCommand {
+        case .one:
+            row = 0
+        case .two:
+            row = 1
+        case .three:
+            row = 2
+        case .four:
+            row = 3
+        case .f:
+            return
+        }
+        
+        let indexPath = IndexPath(row: row, section: 0)
+        selectRaw(at: indexPath)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+    }
+}
