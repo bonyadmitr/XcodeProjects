@@ -19,6 +19,7 @@ final class MasterController: UIViewController {
         tableView.delegate = self
         
         splitViewController?.delegate = self
+        
         splitViewController?.preferredDisplayMode = .allVisible
         
         setupInitialState()
@@ -61,6 +62,22 @@ final class MasterController: UIViewController {
             vc.text = cell.textLabel?.text
         }
     }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "1", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Types"),
+            UIKeyCommand(input: "2", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Protocols"),
+            UIKeyCommand(input: "3", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Functions"),
+            UIKeyCommand(input: "4", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Operators"),
+            
+            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(selectTab), discoverabilityTitle: "Find…"),
+        ]
+    }
+    
+    @objc private func selectTab(_ sender: UIKeyCommand) {
+        let selectedTab = sender.input
+        // ...
+    }
 }
 
 extension MasterController: UITableViewDataSource {
@@ -102,12 +119,10 @@ extension MasterController: UISplitViewControllerDelegate {
     
     func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
         switch svc.displayMode {
-        case .allVisible:
-            return .primaryHidden
         case .primaryHidden:
             return .allVisible
-        case .primaryOverlay, .automatic:
-            return .allVisible
+        case .allVisible, .primaryOverlay, .automatic:
+            return .primaryHidden
         }
     }
     
@@ -115,3 +130,4 @@ extension MasterController: UISplitViewControllerDelegate {
         
     }
 }
+
