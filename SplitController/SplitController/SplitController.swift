@@ -8,40 +8,8 @@
 
 import UIKit
 
-enum SplitControllerKeyCommand: String {
-    case one = "1"
-    case two = "2"
-    case three = "3"
-    case four = "4"
-    case f = "f"
-}
-extension SplitControllerKeyCommand {
-    var discoverabilityTitle: String {
-        let title: String
-        switch self {
-        case .one:
-            title = "Row 1"
-        case .two:
-            title = "Row 2"
-        case .three:
-            title = "Row 3"
-        case .four:
-            title = "Row 4"
-        case .f:
-            title = "Toggle fullscreen"
-        }
-        return title
-    }
-    
-}
-
-protocol SplitControllerKeyCommandDelegate: class {
-    func didPressed(keyCommand: SplitControllerKeyCommand)
-}
-extension SplitControllerKeyCommandDelegate {
-    func didPressed(keyCommand: SplitControllerKeyCommand) {}
-}
-
+/// https://nshipster.com/uikeycommand/
+/// https://stablekernel.com/creating-a-delightful-user-experience-with-ios-keyboard-shortcuts/
 class SplitController: UISplitViewController, Multicaster {
     
     var delegates = MulticastDelegate<SplitControllerKeyCommandDelegate>()
@@ -70,4 +38,11 @@ class SplitController: UISplitViewController, Multicaster {
         
         delegates.invoke { $0.didPressed(keyCommand: keyCommand) }
     }
+}
+
+protocol SplitControllerKeyCommandDelegate: class {
+    func didPressed(keyCommand: SplitControllerKeyCommand)
+}
+extension SplitControllerKeyCommandDelegate {
+    func didPressed(keyCommand: SplitControllerKeyCommand) {}
 }
