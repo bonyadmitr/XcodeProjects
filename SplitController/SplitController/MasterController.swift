@@ -10,21 +10,25 @@ import UIKit
 
 final class MasterController: UIViewController {
     
-    @IBOutlet weak var tableView: MasterTableView!
+    @IBOutlet weak var tableView: MasterTableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+        }
+    }
     
     private lazy var texts: [String] = (1...100).map { "Raw \($0)"}  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        splitViewController?.delegate = self
-        
-        splitViewController?.preferredDisplayMode = .allVisible
-        
+        setupSplitController()
         setupInitialState()
+    }
+    
+    private func setupSplitController() {
+        splitViewController?.delegate = self
+        splitViewController?.preferredDisplayMode = .allVisible
         
         guard let splitController = splitViewController as? SplitController else {
             return
