@@ -12,6 +12,8 @@ final class MasterController: UIViewController {
     
     @IBOutlet weak var tableView: MasterTableView!
     
+    private lazy var texts: [String] = (1...100).map { "Raw \($0)"}  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +53,8 @@ final class MasterController: UIViewController {
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         
         for vc in splitViewController?.viewControllers ?? [] {
-            if let secondaryVC = vc.rootIfNavOrSelf as? DetailController, let cell = tableView.cellForRow(at: indexPath) {
-                secondaryVC.text = cell.textLabel?.text
+            if let secondaryVC = vc.rootIfNavOrSelf as? DetailController {
+                secondaryVC.text = texts[0]
                 break
             }
         }
@@ -61,33 +63,16 @@ final class MasterController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail",
             let vc = segue.destination.rootIfNavOrSelf as? DetailController,
-            let indexPath = sender as? IndexPath,
-            let cell = tableView.cellForRow(at: indexPath)
+            let indexPath = sender as? IndexPath
         {
-            vc.text = cell.textLabel?.text
+            vc.text = texts[indexPath.row]
         }
-    }
-    
-    override var keyCommands: [UIKeyCommand]? {
-        return [
-            UIKeyCommand(input: "1", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Types"),
-            UIKeyCommand(input: "2", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Protocols"),
-            UIKeyCommand(input: "3", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Functions"),
-            UIKeyCommand(input: "4", modifierFlags: .command, action: #selector(selectTab), discoverabilityTitle: "Operators"),
-            
-            UIKeyCommand(input: "f", modifierFlags: [.command, .alternate], action: #selector(selectTab), discoverabilityTitle: "Find…"),
-        ]
-    }
-    
-    @objc private func selectTab(_ sender: UIKeyCommand) {
-        let selectedTab = sender.input
-        // ...
     }
 }
 
 extension MasterController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return texts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,7 +86,7 @@ extension MasterController: UITableViewDelegate {
 //            return
 //        }
         //cell.fill(with: )
-        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+        cell.textLabel?.text = texts[indexPath.row]
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectRaw(at: indexPath)
