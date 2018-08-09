@@ -18,6 +18,7 @@
 		CED3E5B62119CC7D0061AD5A /* ClearableTableSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3E5B52119CC7D0061AD5A /* ClearableTableSelection.swift */; };
 		CED3E5B82119CD5C0061AD5A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3E5B72119CD5C0061AD5A /* UIViewController+Extensions.swift */; };
 		CED3E5BA211B00690061AD5A /* MasterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3E5B9211B00690061AD5A /* MasterTableView.swift */; };
+		CED3E5BC211C513A0061AD5A /* UISplitViewController+DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3E5BB211C513A0061AD5A /* UISplitViewController+DisplayMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CED3E5B52119CC7D0061AD5A /* ClearableTableSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableTableSelection.swift; sourceTree = "<group>"; };
 		CED3E5B72119CD5C0061AD5A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CED3E5B9211B00690061AD5A /* MasterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTableView.swift; sourceTree = "<group>"; };
+		CED3E5BB211C513A0061AD5A /* UISplitViewController+DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+DisplayMode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				CED3E5B52119CC7D0061AD5A /* ClearableTableSelection.swift */,
 				CED3E5B9211B00690061AD5A /* MasterTableView.swift */,
 				CED3E5B72119CD5C0061AD5A /* UIViewController+Extensions.swift */,
+				CED3E5BB211C513A0061AD5A /* UISplitViewController+DisplayMode.swift */,
 				CED3E59F211996D10061AD5A /* Main.storyboard */,
 				CED3E5A2211996D10061AD5A /* Assets.xcassets */,
 				CED3E5A4211996D10061AD5A /* LaunchScreen.storyboard */,
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED3E5B2211997F70061AD5A /* SplitController.swift in Sources */,
+				CED3E5BC211C513A0061AD5A /* UISplitViewController+DisplayMode.swift in Sources */,
 				CED3E5B62119CC7D0061AD5A /* ClearableTableSelection.swift in Sources */,
 				CED3E5B0211997A60061AD5A /* DetailController.swift in Sources */,
 				CED3E5B82119CD5C0061AD5A /* UIViewController+Extensions.swift in Sources */,
