@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE739472211349300073DA4F /* UISearchController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE739471211349300073DA4F /* UISearchController+Layout.swift */; };
+		CE9AFACC211D5ECF006AF836 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFACB211D5ECF006AF836 /* TabBarController.swift */; };
+		CE9AFACE211D5EF4006AF836 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AFACD211D5EF4006AF836 /* SearchController.swift */; };
 		CEEC436D2112E87600D7D782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC436C2112E87600D7D782 /* AppDelegate.swift */; };
 		CEEC436F2112E87600D7D782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC436E2112E87600D7D782 /* ViewController.swift */; };
 		CEEC43722112E87600D7D782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEC43702112E87600D7D782 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		CE739471211349300073DA4F /* UISearchController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+Layout.swift"; sourceTree = "<group>"; };
+		CE9AFACB211D5ECF006AF836 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE9AFACD211D5EF4006AF836 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		CEEC43692112E87600D7D782 /* tvOStest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOStest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEC436C2112E87600D7D782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEC436E2112E87600D7D782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +41,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE9AFACF211D6879006AF836 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEEC436C2112E87600D7D782 /* AppDelegate.swift */,
+				CEEC43732112E87700D7D782 /* Assets.xcassets */,
+				CEEC43752112E87700D7D782 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		CEEC43602112E87600D7D782 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +70,13 @@
 		CEEC436B2112E87600D7D782 /* tvOStest */ = {
 			isa = PBXGroup;
 			children = (
-				CEEC436C2112E87600D7D782 /* AppDelegate.swift */,
+				CE9AFACF211D6879006AF836 /* App */,
+				CEEC43702112E87600D7D782 /* Main.storyboard */,
 				CEEC436E2112E87600D7D782 /* ViewController.swift */,
+				CE9AFACB211D5ECF006AF836 /* TabBarController.swift */,
+				CE9AFACD211D5EF4006AF836 /* SearchController.swift */,
 				CEEC437B2112F38500D7D782 /* SearchResultsViewController.swift */,
 				CE739471211349300073DA4F /* UISearchController+Layout.swift */,
-				CEEC43702112E87600D7D782 /* Main.storyboard */,
-				CEEC43732112E87700D7D782 /* Assets.xcassets */,
-				CEEC43752112E87700D7D782 /* Info.plist */,
 			);
 			path = tvOStest;
 			sourceTree = "<group>";
@@ -138,8 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEC436F2112E87600D7D782 /* ViewController.swift in Sources */,
+				CE9AFACE211D5EF4006AF836 /* SearchController.swift in Sources */,
 				CEEC437C2112F38500D7D782 /* SearchResultsViewController.swift in Sources */,
 				CEEC436D2112E87600D7D782 /* AppDelegate.swift in Sources */,
+				CE9AFACC211D5ECF006AF836 /* TabBarController.swift in Sources */,
 				CE739472211349300073DA4F /* UISearchController+Layout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = tvOStest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/tvOStest/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,7 +311,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = tvOStest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/tvOStest/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

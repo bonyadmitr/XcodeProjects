@@ -11,6 +11,7 @@ import UIKit
 @available(tvOS 9.0, *)
 extension UISearchController {
     /// call it once in viewDidAppear
+    /// it using private api that was passed to the app store
     func moveSearchBarToCenter() {
         for constraint in view.constraints {
             if let className = constraint.firstItem?.classForCoder, className.description() == "UIKBFocusVCView" {

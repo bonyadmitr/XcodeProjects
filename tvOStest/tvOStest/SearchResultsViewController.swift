@@ -11,33 +11,34 @@ import UIKit
 final class SearchResultsViewController: UIViewController {
     
     
-    
-}
-
-extension SearchResultsViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-}
-
-
-import UIKit
-
-final class SearchController: UISearchController {
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        title = "Search"
+//        tabBarItem.title = "Search"
+//        if let tabBarItem = tabBarItem {
+//            
+//        } else {
+//            tabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
+//        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        hidesNavigationBarDuringPresentation = false
-//        if #available(tvOS 9.1, *) {
-//            obscuresBackgroundDuringPresentation = false
-//        }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        moveSearchBarToCenter()
+}
+
+extension SearchResultsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
         
     }
 }
