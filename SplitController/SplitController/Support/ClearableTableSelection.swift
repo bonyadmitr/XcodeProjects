@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// not so usefull
 protocol ClearableTableSelection {
     var tableView: UITableView! { get }
     func clearsSelectionOnViewWillAppear()
