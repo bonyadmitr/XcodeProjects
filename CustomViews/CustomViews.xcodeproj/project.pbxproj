@@ -44,6 +44,7 @@
 		CEE0CD7D20528C2400488980 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7C20528C2300488980 /* TextField.swift */; };
 		CEE0CD7F20528C6000488980 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD7E20528C6000488980 /* CursorView.swift */; };
 		CEE0CD8120528C7800488980 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE0CD8020528C7800488980 /* Spinner.swift */; };
+		CEF6905621240FB80013075F /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6905521240FB80013075F /* DatePickerTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		CEE0CD7C20528C2300488980 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		CEE0CD7E20528C6000488980 /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
 		CEE0CD8020528C7800488980 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		CEF6905521240FB80013075F /* DatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 				CE6A8F1E2074A02F0001EB54 /* DoneToolBar.swift */,
 				CE6A8F1F2074A02F0001EB54 /* PickerTextField.swift */,
 				CEDA2D412077DBEE00203036 /* InsetsLabel.swift */,
+				CEF6905521240FB80013075F /* DatePickerTextField.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				7BE97E8C1E02E8A5001265EB /* MultilineLabel.swift in Sources */,
 				66E033FE1E15407400C8AA9B /* RainbowTableViewController.swift in Sources */,
 				66FB10C71E30810B00E985DD /* NoDelayScrollView.swift in Sources */,
+				CEF6905621240FB80013075F /* DatePickerTextField.swift in Sources */,
 				7B8B7E571E069EA700C7B351 /* AdaptiveTextHeightLabel.swift in Sources */,
 				66E034041E155B5F00C8AA9B /* ResizableHeaderTableViewController.swift in Sources */,
 				7B4706351E047D2C009BF704 /* StickyHeaderTableViewController.swift in Sources */,
