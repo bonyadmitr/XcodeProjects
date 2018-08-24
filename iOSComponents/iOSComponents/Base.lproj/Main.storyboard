@@ -25,12 +25,22 @@
                                     <action selector="onCheckmarkAlertSheet:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e1e-dY-1Z0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61S-ag-mzJ">
+                                <rect key="frame" x="20" y="90" width="280" height="30"/>
+                                <state key="normal" title="QLPreview"/>
+                                <connections>
+                                    <action selector="onQLPreview:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Io9-cI-eAu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="61S-ag-mzJ" firstAttribute="top" secondItem="zJB-fu-dxj" secondAttribute="bottom" constant="20" id="ECY-CP-lkP"/>
                             <constraint firstItem="zJB-fu-dxj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JKD-lT-iAq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zJB-fu-dxj" secondAttribute="trailing" constant="20" id="LQq-o8-5AI"/>
+                            <constraint firstItem="61S-ag-mzJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QzA-d1-DpS"/>
                             <constraint firstItem="zJB-fu-dxj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="R1x-3B-hsE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="61S-ag-mzJ" secondAttribute="trailing" constant="20" id="Vdn-A7-hQe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -12,6 +12,7 @@ typealias VoidResult = (ResponseResult<Void>) -> Void
 typealias BoolResult = (ResponseResult<Bool>) -> Void
 typealias HandlerResult<T> = (ResponseResult<T>) -> Void
 typealias ArrayHandlerResult<T> = (ResponseResult<[T]>) -> Void
+typealias UrlResult = (ResponseResult<URL>) -> Void
 
 enum ResponseResult<T> {
     case success(T)

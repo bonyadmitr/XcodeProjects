@@ -36,7 +36,18 @@ class ViewController: UIViewController {
     @IBAction private func onCheckmarkAlertSheet(_ sender: UIButton) {
         showCheckmarkAlertSheet()
     }
+    
+    @IBAction private func onQLPreview(_ sender: UIButton) {
+        let urls = [URL(string: "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf")!,
+                    URL(string: "https://images.apple.com/environment/pdf/Apple_Environmental_Responsibility_Report_2017.pdf")!]
+        let items = urls.map { RemotePreviewItem(url: $0) }
+        
+        let vc = PreviewController()
+        vc.setup(withRemotes: items)
+        present(vc, animated: true, completion: nil)
+    }
 }
+
 
 // MARK: - showCheckmarkAlertSheet
 extension ViewController {
