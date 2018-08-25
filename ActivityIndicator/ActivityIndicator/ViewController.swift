@@ -8,25 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController, ActivityIndicatorCounterController, UIBlockable {
+class ViewController: UIViewController, ActivityIndicatorCounterDelegate, UIBlockable {
     
     /// or 1
-//    lazy var activityIndicator: ActivityIndicator = ActivityIndicatorView()
+    lazy var activityIndicator: ActivityIndicator = ActivityIndicatorView()
     /// or 2
-    lazy var activityIndicator: ActivityIndicator = ActivityIndicatorObject()
+//    lazy var activityIndicator: ActivityIndicator = ActivityIndicatorObject()
     
-    lazy var activityIndicatorCounter = ActivityIndicatorCounter(controller: self)
+    lazy var activityIndicatorCounter = ActivityIndicatorCounter(delegate: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let start: Double = 2
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + start) { [weak self] in 
+        DispatchQueue.main.asyncAfter(deadline: .now() + start) { [weak self] in
+            GlobalActivityIndicator.show()
             self?.activityIndicatorCounter.start()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + start + 1) { [weak self] in
+            GlobalActivityIndicator.show()
+            GlobalActivityIndicator.hide()
             /// first start, then stop, to continue activityIndicator 
             self?.activityIndicatorCounter.start()
             self?.activityIndicatorCounter.stop()
@@ -34,6 +37,7 @@ class ViewController: UIViewController, ActivityIndicatorCounterController, UIBl
         
         DispatchQueue.main.asyncAfter(deadline: .now() + start + 2) { [weak self] in 
             self?.activityIndicatorCounter.stop()
+            GlobalActivityIndicator.hide()
         }
     }
 }

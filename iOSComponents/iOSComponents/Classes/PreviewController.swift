@@ -19,8 +19,10 @@ final class PreviewController: QLPreviewController {
     }
     
     func setup(withRemotes items: [RemotePreviewItem]) {
+        
         for item in items {
             group.enter()
+            //        activityIndicator.stopAnimating()
             downloadfile(at: item.url) { result in
                 switch result {
                 case .success(let readyUrl):
@@ -38,11 +40,34 @@ final class PreviewController: QLPreviewController {
         }
     }
     
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
+//    convenience init() {
+//        self.init(nibName: nil, bundle: nil)
+//    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         dataSource = self
         //        delegate = self
+        
+
+        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+//        let activityIndicator = UIView()
+//        activityIndicator.frame = view.bounds
+//        activityIndicator.backgroundColor = .red
+//        //        activityIndicator.center = view.center
+//        //        activityIndicator.hidesWhenStopped = true
+//        //        activityIndicator.startAnimating()
+//        view.addSubview(activityIndicator)
+    }
+
     
     private var items = [QLPreviewItem]()
     
@@ -81,7 +106,7 @@ final class PreviewController: QLPreviewController {
                 } catch {
                     completion(.failure(error))
                 }
-                }.resume()
+            }.resume()
         }
     }
     
@@ -89,12 +114,12 @@ final class PreviewController: QLPreviewController {
 
 extension PreviewController: QLPreviewControllerDataSource {
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return items.count
+        return 1
     }
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         //return readyUrls[index] as QLPreviewItem
-        return items[index]
+        return PreviewItem()// items[index]
     }
 }
 

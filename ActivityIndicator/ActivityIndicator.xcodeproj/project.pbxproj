@@ -13,11 +13,10 @@
 		CE197EC32064CA5E00C7A650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE197EC22064CA5E00C7A650 /* Assets.xcassets */; };
 		CE197EC62064CA5E00C7A650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE197EC42064CA5E00C7A650 /* LaunchScreen.storyboard */; };
 		CE197ECE2064CA7500C7A650 /* ActivityIndicatorCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE197ECD2064CA7500C7A650 /* ActivityIndicatorCounter.swift */; };
+		CE966CEA21302C1B00901295 /* GlobalActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE921302C1B00901295 /* GlobalActivityIndicator.swift */; };
 		CEC2BD442064D5AF004949D5 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD432064D5AF004949D5 /* ActivityIndicator.swift */; };
-		CEC2BD462064D5DF004949D5 /* ActivityIndicatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD452064D5DF004949D5 /* ActivityIndicatorPresenter.swift */; };
 		CEC2BD482064D646004949D5 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD472064D646004949D5 /* ActivityIndicatorView.swift */; };
 		CEC2BD4B20655777004949D5 /* UIBlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD4A20655777004949D5 /* UIBlockable.swift */; };
-		CEC2BD4D20655793004949D5 /* ActivityIndicatorCounterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD4C20655793004949D5 /* ActivityIndicatorCounterController.swift */; };
 		CEC2BD4F206558F1004949D5 /* ActivityIndicatorObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2BD4E206558F1004949D5 /* ActivityIndicatorObject.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,11 +29,11 @@
 		CE197EC52064CA5E00C7A650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE197EC72064CA5E00C7A650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE197ECD2064CA7500C7A650 /* ActivityIndicatorCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCounter.swift; sourceTree = "<group>"; };
+		CE966CE921302C1B00901295 /* GlobalActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalActivityIndicator.swift; sourceTree = "<group>"; };
 		CEC2BD432064D5AF004949D5 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		CEC2BD452064D5DF004949D5 /* ActivityIndicatorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorPresenter.swift; sourceTree = "<group>"; };
 		CEC2BD472064D646004949D5 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		CEC2BD4A20655777004949D5 /* UIBlockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockable.swift; sourceTree = "<group>"; };
-		CEC2BD4C20655793004949D5 /* ActivityIndicatorCounterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCounterController.swift; sourceTree = "<group>"; };
 		CEC2BD4E206558F1004949D5 /* ActivityIndicatorObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,9 +74,9 @@
 				CEC2BD4A20655777004949D5 /* UIBlockable.swift */,
 				CEC2BD432064D5AF004949D5 /* ActivityIndicator.swift */,
 				CE197ECD2064CA7500C7A650 /* ActivityIndicatorCounter.swift */,
-				CEC2BD4C20655793004949D5 /* ActivityIndicatorCounterController.swift */,
 				CEC2BD472064D646004949D5 /* ActivityIndicatorView.swift */,
 				CEC2BD4E206558F1004949D5 /* ActivityIndicatorObject.swift */,
+				CE966CE921302C1B00901295 /* GlobalActivityIndicator.swift */,
 			);
 			path = ActivityIndicator;
 			sourceTree = "<group>";
@@ -166,10 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC2BD4B20655777004949D5 /* UIBlockable.swift in Sources */,
-				CEC2BD4D20655793004949D5 /* ActivityIndicatorCounterController.swift in Sources */,
 				CEC2BD442064D5AF004949D5 /* ActivityIndicator.swift in Sources */,
 				CE197ECE2064CA7500C7A650 /* ActivityIndicatorCounter.swift in Sources */,
-				CEC2BD462064D5DF004949D5 /* ActivityIndicatorPresenter.swift in Sources */,
+				CE966CEA21302C1B00901295 /* GlobalActivityIndicator.swift in Sources */,
 				CEC2BD4F206558F1004949D5 /* ActivityIndicatorObject.swift in Sources */,
 				CEC2BD482064D646004949D5 /* ActivityIndicatorView.swift in Sources */,
 				CE197EBE2064CA5E00C7A650 /* ViewController.swift in Sources */,

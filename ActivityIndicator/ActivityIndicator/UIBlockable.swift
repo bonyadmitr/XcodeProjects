@@ -6,16 +6,19 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol UIBlockable: ActivityIndicatorPresenter {
+protocol UIBlockable {
     var activityIndicator: ActivityIndicator { get }
     func showIndicator()
     func hideIndicator()
 }
-extension UIBlockable {
+extension UIBlockable where Self: UIViewController {
     func showIndicator() {
-        present(activityIndicator: activityIndicator)
+        activityIndicator.activityView.frame = view.bounds
+        activityIndicator.activityView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        activityIndicator.start()
+        view.addSubview(activityIndicator.activityView)
     }
     
     func hideIndicator() {

@@ -118,6 +118,7 @@
 		CE5CAE7F20775A8800E763B1 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */; };
 		CE896489212C58E0001CAA00 /* UIBarButtonItem+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE896488212C58E0001CAA00 /* UIBarButtonItem+Init.swift */; };
 		CE966CE6212E946B00901295 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE5212E946B00901295 /* PreviewController.swift */; };
+		CE966CE82130222100901295 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */; };
 		CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D32207796EC00203036 /* ErrorPresenter.swift */; };
 		CEDA2D352077972C00203036 /* Flippable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D342077972C00203036 /* Flippable.swift */; };
 		CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D372077981F00203036 /* Array+Extensions.swift */; };
@@ -294,6 +295,7 @@
 		CE5CAE7E20775A8800E763B1 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		CE896488212C58E0001CAA00 /* UIBarButtonItem+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Init.swift"; sourceTree = "<group>"; };
 		CE966CE5212E946B00901295 /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
 		CEDA2D32207796EC00203036 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		CEDA2D342077972C00203036 /* Flippable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flippable.swift; sourceTree = "<group>"; };
 		CEDA2D372077981F00203036 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				6650B00E20B49AAA00017AB1 /* TypeManager.swift */,
 				6650B01820B49B5E00017AB1 /* ImageFormat.swift */,
 				CE966CE5212E946B00901295 /* PreviewController.swift */,
+				CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */,
 				66315AA020ACA31B009C19BE /* old files */,
 			);
 			path = Classes;
@@ -773,6 +776,7 @@
 				6611ADA520AB606000814113 /* UIImage+Bytes.swift in Sources */,
 				6611AC2E20AB572A00814113 /* UIViewController+Present.swift in Sources */,
 				6611AC5E20AB59F600814113 /* UIImageView+Properties.swift in Sources */,
+				CE966CE82130222100901295 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */,
 				6611AC5620AB59F600814113 /* UIResponder+Set.swift in Sources */,
 				66C9CBDA20A0BF77001D56F1 /* BluetoothManager.swift in Sources */,
