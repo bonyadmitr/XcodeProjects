@@ -119,6 +119,7 @@
 		CE896489212C58E0001CAA00 /* UIBarButtonItem+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE896488212C58E0001CAA00 /* UIBarButtonItem+Init.swift */; };
 		CE966CE6212E946B00901295 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE5212E946B00901295 /* PreviewController.swift */; };
 		CE966CE82130222100901295 /* TapGestureRecognizerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */; };
+		CE966CF42133D4F400901295 /* GoogleStaticMapsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE966CF32133D4F400901295 /* GoogleStaticMapsWrapper.swift */; };
 		CEDA2D33207796EC00203036 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D32207796EC00203036 /* ErrorPresenter.swift */; };
 		CEDA2D352077972C00203036 /* Flippable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D342077972C00203036 /* Flippable.swift */; };
 		CEDA2D382077981F00203036 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D372077981F00203036 /* Array+Extensions.swift */; };
@@ -296,6 +297,7 @@
 		CE896488212C58E0001CAA00 /* UIBarButtonItem+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Init.swift"; sourceTree = "<group>"; };
 		CE966CE5212E946B00901295 /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerWithClosure.swift; sourceTree = "<group>"; };
+		CE966CF32133D4F400901295 /* GoogleStaticMapsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleStaticMapsWrapper.swift; sourceTree = "<group>"; };
 		CEDA2D32207796EC00203036 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		CEDA2D342077972C00203036 /* Flippable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flippable.swift; sourceTree = "<group>"; };
 		CEDA2D372077981F00203036 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				6650B01820B49B5E00017AB1 /* ImageFormat.swift */,
 				CE966CE5212E946B00901295 /* PreviewController.swift */,
 				CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */,
+				CE966CF32133D4F400901295 /* GoogleStaticMapsWrapper.swift */,
 				66315AA020ACA31B009C19BE /* old files */,
 			);
 			path = Classes;
@@ -727,6 +730,7 @@
 				668F918920AB64C60002B3D3 /* CGRect+WithNew.swift in Sources */,
 				6611ADA720AB606000814113 /* UIImage+Color2.swift in Sources */,
 				66315A9E20AB6853009C19BE /* BrightnessManager.swift in Sources */,
+				CE966CF42133D4F400901295 /* GoogleStaticMapsWrapper.swift in Sources */,
 				668F915B20AB62D10002B3D3 /* NSExtensionContext+URL.swift in Sources */,
 				6611AC3220AB572A00814113 /* UIView+Self.swift in Sources */,
 				6611AC5920AB59F600814113 /* UI+FirstResponder.swift in Sources */,
