@@ -1,0 +1,15 @@
+## swiftgen.yml
+## https://github.com/SwiftGen/SwiftGen
+
+## old
+# if which swiftgen >/dev/null; then
+#     swiftgen strings "$PROJECT_DIR/WeatherApp/App/Resources/en.lproj/Localizable.strings" --output "$PROJECT_DIR/WeatherApp/App/Resources/Strings.swift" -t structured-swift3
+# else
+#     echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
+# fi
+
+strings:
+  paths: WeatherApp/App/Resources/en.lproj/Localizable.strings
+  templateName: structured-swift3
+  output: WeatherApp/App/Resources/Strings.swift
+    
