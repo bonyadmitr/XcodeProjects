@@ -12,8 +12,8 @@ extension UIApplication {
     var appIcon: UIImage? {
         guard
             let bundleIcons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
-            let prima‌​ryIcon = bundleIcons["CFBundlePrimaryIcon"] as? [String: Any],
-            let iconsArray = prima‌​ryIcon["CFBundleIconFiles"] as? [String],
+            let primaryIcon = bundleIcons["CFBundlePrimaryIcon"] as? [String: Any],
+            let iconsArray = primaryIcon["CFBundleIconFiles"] as? [String],
             let name = iconsArray.last
             else { return nil }
         
