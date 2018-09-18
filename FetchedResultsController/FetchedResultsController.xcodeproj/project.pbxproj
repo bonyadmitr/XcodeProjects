@@ -14,6 +14,10 @@
 		CEA2D3C32150D69E007E82C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA2D3C22150D69E007E82C0 /* Assets.xcassets */; };
 		CEA2D3C62150D69E007E82C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */; };
 		CEA2D3D12150D69E007E82C0 /* FetchedResultsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3D02150D69E007E82C0 /* FetchedResultsControllerTests.swift */; };
+		CEA2D3E02150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */; };
+		CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */; };
+		CEA2D3E22150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		CEA2D3E32150D7B4007E82C0 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		CEA2D3CC2150D69E007E82C0 /* FetchedResultsControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchedResultsControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA2D3D02150D69E007E82C0 /* FetchedResultsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerTests.swift; sourceTree = "<group>"; };
 		CEA2D3D22150D69E007E82C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
+		CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		CEA2D3B72150D69D007E82C0 /* FetchedResultsController */ = {
 			isa = PBXGroup;
 			children = (
+				CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */,
 				CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */,
 				CEA2D3BA2150D69D007E82C0 /* ViewController.swift */,
 				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
@@ -97,6 +106,17 @@
 				CEA2D3D22150D69E007E82C0 /* Info.plist */,
 			);
 			path = FetchedResultsControllerTests;
+			sourceTree = "<group>";
+		};
+		CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */,
+				CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */,
+				CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */,
+				CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */,
+			);
+			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,9 +220,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA2D3E22150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
+				CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */,
 				CEA2D3BB2150D69D007E82C0 /* ViewController.swift in Sources */,
 				CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */,
 				CEA2D3C12150D69D007E82C0 /* FetchedResultsController.xcdatamodeld in Sources */,
+				CEA2D3E02150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift in Sources */,
+				CEA2D3E32150D7B4007E82C0 /* NSManagedObject+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
