@@ -44,12 +44,12 @@ install_homebrew()
 	echo " → Homebrew installed"
 }
 
-install_homebrew_bundle()
-{
-	echo ""
-	echo " → Homebrew/bundle installation"
-	brew tap Homebrew/bundle
-}
+# install_homebrew_bundle()
+# {
+# 	echo ""
+# 	echo " → Homebrew/bundle installation"
+# 	brew tap Homebrew/bundle
+# }
 
 install_homebrew_bundle_brews()
 {
@@ -70,7 +70,7 @@ install_bundler
 install_bundler_gems
 install_cocoapods_pods
 install_homebrew
-install_homebrew_bundle
+# install_homebrew_bundle
 install_homebrew_bundle_brews
 install_carthage_deps
 
