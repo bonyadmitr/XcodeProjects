@@ -25,7 +25,8 @@ class CollectionDataSourceController: UIViewController {
     }
     
     
-    private lazy var dataSource = CoreDataCollectionDataSource<EventDB>(collectionView: self.collectionView,
+    private lazy var dataSource = CoreDataCollectionDataSource<EventDB>(cellReuseId: "EventCollectionCell",
+                                                                        headerReuseId: "EventCollectionHeader", collectionView: self.collectionView,
                                                                         fetchedResultsController: EventDB.fetchedResultsController()) 
     
     override func viewDidLoad() {
@@ -69,5 +70,11 @@ extension CollectionDataSourceController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = floor(collectionView.bounds.width / 2) - 3
         return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        ///return CGSize(width: collectionView.contentSize.width, height: 50)
+        ///.zero
+        return CGSize(width: 0, height: 44)
     }
 }

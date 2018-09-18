@@ -242,7 +242,7 @@
         <!--CollectionDataSourceController-->
         <scene sceneID="Dpy-Dq-M1e">
             <objects>
-                <viewController id="YyE-DD-55V" customClass="CollectionController" customModule="FetchedResultsController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YyE-DD-55V" customClass="CollectionDataSourceController" customModule="FetchedResultsController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nfx-1n-OZh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

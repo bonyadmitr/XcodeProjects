@@ -14,10 +14,19 @@ final class CoreDataCollectionDataSource <T: NSFetchRequestResult> {
     private let fetchedResultsController: NSFetchedResultsController<T>
     private let fetchedResultsCollectionDelegate: FetchedResultsCollectionDelegate
     
-    init(collectionView: UICollectionView!, fetchedResultsController: NSFetchedResultsController<T>) {
+    init(cellReuseId: String,
+         headerReuseId: String,
+         collectionView: UICollectionView!,
+         fetchedResultsController: NSFetchedResultsController<T>)
+    {
         self.fetchedResultsController = fetchedResultsController
         
-        fetchedResultsCollectionDelegate = FetchedResultsCollectionDelegate(collectionView: collectionView, fetchedResultsController: fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>)
+        fetchedResultsCollectionDelegate = FetchedResultsCollectionDelegate(
+            cellReuseId: cellReuseId,
+            headerReuseId: headerReuseId,
+            collectionView: collectionView,
+            fetchedResultsController: fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>
+        )
         
         fetchedResultsController.delegate = fetchedResultsCollectionDelegate
         collectionView.dataSource = fetchedResultsCollectionDelegate
@@ -38,13 +47,21 @@ final class CoreDataCollectionDataSource <T: NSFetchRequestResult> {
 
 private final class FetchedResultsCollectionDelegate: NSObject {
     
-    private var sectionChanges = [() -> Void]()
-    private var objectChanges = [() -> Void]()
-    
+    private let cellReuseId: String
+    private let headerReuseId: String
     private weak var collectionView: UICollectionView!
     private weak var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
-    init(collectionView: UICollectionView!, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>) {
+    private var sectionChanges = [() -> Void]()
+    private var objectChanges = [() -> Void]()
+    
+    init(cellReuseId: String,
+         headerReuseId: String,
+         collectionView: UICollectionView!,
+         fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>)
+    {
+        self.cellReuseId = cellReuseId
+        self.headerReuseId = headerReuseId
         self.collectionView = collectionView
         self.fetchedResultsController = fetchedResultsController
     }
@@ -59,11 +76,11 @@ extension FetchedResultsCollectionDelegate: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionCell", for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseId, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "EventCollectionHeader", for: indexPath)
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseId, for: indexPath)
     }
 }
 
@@ -87,7 +104,7 @@ extension FetchedResultsCollectionDelegate: NSFetchedResultsControllerDelegate {
                 self.collectionView.insertSections(section)
             case .delete:
                 self.collectionView.deleteSections(section)
-            default:
+            case .move, .update:
                 break
             }
         }
