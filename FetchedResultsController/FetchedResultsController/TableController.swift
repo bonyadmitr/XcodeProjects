@@ -21,11 +21,12 @@ class TableController: UIViewController {
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html
     /// The sectionNameKeyPath property must also be an NSSortDescriptor instance.
     /// The NSSortDescriptor must be the first descriptor in the array passed to the fetch request.
-    private lazy var fetchedResultsController = EventDB.fetchedResultsController(delegate: self)
+    private lazy var fetchedResultsController = EventDB.fetchedResultsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchedResultsController.delegate = self
         try? fetchedResultsController.performFetch()
         tableView.reloadData()
     }

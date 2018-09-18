@@ -39,11 +39,12 @@ extension EventDB {
         }
     }
     
-    static func fetchedResultsController(delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<EventDB> {
+    static func fetchedResultsController() -> NSFetchedResultsController<EventDB> {
         let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
         //fetchRequest.fetchLimit = 100
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor2]
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
         if UI_USER_INTERFACE_IDIOM() == .pad {
             fetchRequest.fetchBatchSize = 50
@@ -53,8 +54,6 @@ extension EventDB {
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.shared.mainContext
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.date), cacheName: nil)
-        frController.delegate = delegate
-        return frController
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.date), cacheName: nil)
     }
 }

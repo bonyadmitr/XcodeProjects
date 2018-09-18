@@ -1,5 +1,5 @@
 //
-//  CollectionController.swift
+//  CoreDataCollectionDataSource.swift
 //  FetchedResultsController
 //
 //  Created by Bondar Yaroslav on 9/18/18.
@@ -9,49 +9,48 @@
 import UIKit
 import CoreData
 
-class CollectionController: UIViewController {
+final class CoreDataCollectionDataSource <T: NSFetchRequestResult> {
     
-    @IBOutlet private weak var collectionView: UICollectionView! {
-        willSet {
-            newValue.dataSource = self
-            newValue.delegate = self
-            
-            newValue.alwaysBounceVertical = true
-            
-            if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.minimumLineSpacing = 1
-                layout.minimumInteritemSpacing = 1
-                layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
-            }
-        }
-    }
+    private let fetchedResultsController: NSFetchedResultsController<T>
+    private let fetchedResultsCollectionDelegate: FetchedResultsCollectionDelegate
     
-    private var sectionChanges = [() -> Void]()
-    private var objectChanges = [() -> Void]()
-
-    
-    private lazy var fetchedResultsController = EventDB.fetchedResultsController()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init(collectionView: UICollectionView!, fetchedResultsController: NSFetchedResultsController<T>) {
+        self.fetchedResultsController = fetchedResultsController
         
-        fetchedResultsController.delegate = self
+        fetchedResultsCollectionDelegate = FetchedResultsCollectionDelegate(collectionView: collectionView, fetchedResultsController: fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>)
+        
+        fetchedResultsController.delegate = fetchedResultsCollectionDelegate
+        collectionView.dataSource = fetchedResultsCollectionDelegate
+    }
+    
+    func object(at indexPath: IndexPath) -> T {
+        return fetchedResultsController.object(at: indexPath)
+    }
+    
+    func indexPath(forObject object: T) -> IndexPath? {
+        return fetchedResultsController.indexPath(forObject: object)
+    }
+    
+    func performFetch() {
         try? fetchedResultsController.performFetch()
-        collectionView.reloadData()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
-    @IBAction private func addEvent(_ sender: UIBarButtonItem) {
-        EventDB.createAndSaveNewOne()
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension CollectionController: UICollectionViewDataSource {
+private final class FetchedResultsCollectionDelegate: NSObject {
+    
+    private var sectionChanges = [() -> Void]()
+    private var objectChanges = [() -> Void]()
+    
+    private weak var collectionView: UICollectionView!
+    private weak var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    
+    init(collectionView: UICollectionView!, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.collectionView = collectionView
+        self.fetchedResultsController = fetchedResultsController
+    }
+}
+
+extension FetchedResultsCollectionDelegate: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
@@ -68,53 +67,10 @@ extension CollectionController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension CollectionController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? EventCollectionCell else {
-            return
-        }
-        let event = fetchedResultsController.object(at: indexPath)
-        cell.fill(with: event)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? EventCollectionCell else {
-//            return
-//        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        guard let view = view as? EventCollectionHeader else {
-            return
-        }
-        let event = fetchedResultsController.object(at: indexPath)
-        view.fill(with: event)
-    }
-    
-    /// tvOS only
-    /// https://stackoverflow.com/questions/47772185/how-to-add-an-indextitles-in-a-collectionview-ios-10
-//    func indexTitles(for collectionView: UICollectionView) -> [String]? {
-//        return fetchedResultsController.sectionIndexTitles
-//    }
-//    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
-//        return IndexPath(item: 0, section: fetchedResultsController.section(forSectionIndexTitle: title, at: index))
-//    }
-}
-
-extension CollectionController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = floor(collectionView.bounds.width / 2) - 3
-        return CGSize(width: width, height: width)
-    }
-}
-
-
 // MARK: - NSFetchedResultsControllerDelegate
 /// https://github.com/jessesquires/JSQDataSourcesKit/blob/develop/Source/FetchedResultsDelegate.swift
 /// https://gist.github.com/nor0x/c48463e429ba7b053fff6e277c72f8ec
-extension CollectionController: NSFetchedResultsControllerDelegate {
+extension FetchedResultsCollectionDelegate: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         sectionChanges.removeAll()
@@ -171,9 +127,9 @@ extension CollectionController: NSFetchedResultsControllerDelegate {
         collectionView.performBatchUpdates({ [weak self] in
             self?.objectChanges.forEach { $0() }
             self?.sectionChanges.forEach { $0() }
-        }, completion: { [weak self] _ in
-            /// check: may be don't need
-            self?.reloadSupplementaryViewsIfNeeded()
+            }, completion: { [weak self] _ in
+                /// check: may be don't need
+                self?.reloadSupplementaryViewsIfNeeded()
         })
     }
     
@@ -182,5 +138,5 @@ extension CollectionController: NSFetchedResultsControllerDelegate {
             collectionView.reloadData()
         }
     }
-        
+    
 }
