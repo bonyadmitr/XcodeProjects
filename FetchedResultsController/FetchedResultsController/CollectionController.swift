@@ -16,11 +16,13 @@ class CollectionController: UIViewController {
             newValue.dataSource = self
             newValue.delegate = self
             
+            newValue.alwaysBounceVertical = true
+            
             if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.minimumLineSpacing = 1
                 layout.minimumInteritemSpacing = 1
                 layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
-            } 
+            }
         }
     }
     
@@ -30,7 +32,7 @@ class CollectionController: UIViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<EventDB> = {
         let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor2]
         
         if UI_USER_INTERFACE_IDIOM() == .pad {
@@ -40,8 +42,7 @@ class CollectionController: UIViewController {
         }
         
         let context = CoreDataStack.shared.mainContext
-        //#keyPath(EventDB.title)
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.date), cacheName: nil)
         frController.delegate = self
         return frController
     }()
@@ -65,7 +66,7 @@ class CollectionController: UIViewController {
             
             let event = EventDB(managedObjectContext: context)
             event.title = "Event \(numberOfEvents + 1)"
-            event.date = Date()
+            event.date = Date().withoutSeconds
             context.saveAsync()
         }
     }
@@ -84,9 +85,9 @@ extension CollectionController: UICollectionViewDataSource {
         return collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionCell", for: indexPath)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "EventCollectionHeader", for: indexPath)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -101,18 +102,18 @@ extension CollectionController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoCell else {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? EventCollectionCell else {
 //            return
 //        }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-//        guard let view = view as? CollectionViewSimpleHeaderWithText else {
-//            return
-//        }
-//        let mediaItem = dataSource.object(at: indexPath)
-//        view.setup(with: mediaItem)
-//    }
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        guard let view = view as? EventCollectionHeader else {
+            return
+        }
+        let event = fetchedResultsController.object(at: indexPath)
+        view.fill(with: event)
+    }
 }
 
 extension CollectionController: UICollectionViewDelegateFlowLayout {
@@ -180,16 +181,12 @@ extension CollectionController: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.performBatchUpdates({ [weak self] in  
+        collectionView.performBatchUpdates({ [weak self] in
             self?.objectChanges.forEach { $0() }
-            ///check: self?.sectionChanges.forEach { $0() }
-            }, completion: { [weak self] _ in
-                
-                self?.collectionView.performBatchUpdates({
-                    self?.sectionChanges.forEach { $0() }
-                }, completion: { _ in 
-                    self?.reloadSupplementaryViewsIfNeeded()
-                })
+            self?.sectionChanges.forEach { $0() }
+        }, completion: { [weak self] _ in
+            /// check: may be don't need
+            self?.reloadSupplementaryViewsIfNeeded()
         })
     }
     

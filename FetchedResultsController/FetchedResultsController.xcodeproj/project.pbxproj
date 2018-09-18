@@ -21,6 +21,7 @@
 		CEA2D3E52150DA34007E82C0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3E42150DA33007E82C0 /* EventCell.swift */; };
 		CECF6A2C2150DDAF00FEF0E6 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */; };
 		CECF6A2E2150E0C300FEF0E6 /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */; };
+		CECF6A302150E93500FEF0E6 /* Date+New.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF6A2F2150E93500FEF0E6 /* Date+New.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		CEA2D3E42150DA33007E82C0 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
+		CECF6A2F2150E93500FEF0E6 /* Date+New.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+New.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */,
 				CEA2D3E42150DA33007E82C0 /* EventCell.swift */,
 				CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */,
+				CECF6A2F2150E93500FEF0E6 /* Date+New.swift */,
 				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
 				CEA2D3C22150D69E007E82C0 /* Assets.xcassets */,
 				CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */,
@@ -235,6 +238,7 @@
 				CEA2D3BB2150D69D007E82C0 /* TableController.swift in Sources */,
 				CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */,
 				CECF6A2C2150DDAF00FEF0E6 /* CollectionController.swift in Sources */,
+				CECF6A302150E93500FEF0E6 /* Date+New.swift in Sources */,
 				CEA2D3E52150DA34007E82C0 /* EventCell.swift in Sources */,
 				CEA2D3C12150D69D007E82C0 /* FetchedResultsController.xcdatamodeld in Sources */,
 				CEA2D3E02150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift in Sources */,

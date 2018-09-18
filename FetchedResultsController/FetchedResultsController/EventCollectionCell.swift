@@ -25,3 +25,11 @@ final class EventCollectionCell: UICollectionViewCell {
         layer.borderColor = UIColor.black.cgColor
     }
 }
+
+final class EventCollectionHeader: UICollectionReusableView {
+    @IBOutlet private weak var titleLabel: UILabel!
+    
+    func fill(with event: EventDB) {
+        titleLabel.text = event.date?.description
+    }
+}
