@@ -20,6 +20,7 @@
 		CEA2D3E32150D7B4007E82C0 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */; };
 		CEA2D3E52150DA34007E82C0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3E42150DA33007E82C0 /* EventCell.swift */; };
 		CECF6A2C2150DDAF00FEF0E6 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */; };
+		CECF6A2E2150E0C300FEF0E6 /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 		CEA2D3E42150DA33007E82C0 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
+		CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				CEA2D3BA2150D69D007E82C0 /* TableController.swift */,
 				CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */,
 				CEA2D3E42150DA33007E82C0 /* EventCell.swift */,
+				CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */,
 				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
 				CEA2D3C22150D69E007E82C0 /* Assets.xcassets */,
 				CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECF6A2E2150E0C300FEF0E6 /* EventCollectionCell.swift in Sources */,
 				CEA2D3E22150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */,
 				CEA2D3BB2150D69D007E82C0 /* TableController.swift in Sources */,
