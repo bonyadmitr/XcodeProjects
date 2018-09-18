@@ -21,24 +21,7 @@ class TableController: UIViewController {
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html
     /// The sectionNameKeyPath property must also be an NSSortDescriptor instance.
     /// The NSSortDescriptor must be the first descriptor in the array passed to the fetch request.
-    lazy var fetchedResultsController: NSFetchedResultsController<EventDB> = {
-        let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
-        //fetchRequest.fetchLimit = 100
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor2]
-        
-        if UI_USER_INTERFACE_IDIOM() == .pad {
-            fetchRequest.fetchBatchSize = 50
-        } else {
-            fetchRequest.fetchBatchSize = 20
-        }
-        
-        //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = CoreDataStack.shared.mainContext
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.date), cacheName: nil)
-        frController.delegate = self
-        return frController
-    }()
+    private lazy var fetchedResultsController = EventDB.fetchedResultsController(delegate: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
