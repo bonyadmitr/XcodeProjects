@@ -19,8 +19,6 @@ final class CoreDataCollectionDataSource <T: NSFetchRequestResult> {
          collectionView: UICollectionView!,
          fetchedResultsController: NSFetchedResultsController<T>)
     {
-        self.fetchedResultsController = fetchedResultsController
-        
         fetchedResultsCollectionDelegate = FetchedResultsCollectionDelegate(
             cellReuseId: cellReuseId,
             headerReuseId: headerReuseId,
@@ -28,6 +26,7 @@ final class CoreDataCollectionDataSource <T: NSFetchRequestResult> {
             fetchedResultsController: fetchedResultsController as! NSFetchedResultsController<NSFetchRequestResult>
         )
         
+        self.fetchedResultsController = fetchedResultsController
         fetchedResultsController.delegate = fetchedResultsCollectionDelegate
         collectionView.dataSource = fetchedResultsCollectionDelegate
     }
