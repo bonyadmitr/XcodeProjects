@@ -11,12 +11,29 @@ import UIKit
 
 extension EventDB {
     static func createAndSaveNewOne() {
+        
+        func randomString(length: Int) -> String {
+            
+            let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            let len = UInt32(letters.length)
+            
+            var randomString = ""
+            
+            for _ in 0 ..< length {
+                let rand = arc4random_uniform(len)
+                var nextChar = letters.character(at: Int(rand))
+                randomString += NSString(characters: &nextChar, length: 1) as String
+            }
+            
+            return randomString
+        }
+        
         CoreDataStack.shared.performBackgroundTask { context in
             let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
             let numberOfEvents = (try? context.count(for: fetchRequest)) ?? 0
             
             let event = EventDB(managedObjectContext: context)
-            event.title = "Event \(numberOfEvents + 1)"
+            event.title = "\(randomString(length: 5)) \(numberOfEvents + 1)" 
             event.date = Date().withoutSeconds
             context.saveAsync()
         }

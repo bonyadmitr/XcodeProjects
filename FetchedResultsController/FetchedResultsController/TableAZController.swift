@@ -1,5 +1,5 @@
 //
-//  TableController.swift
+//  TableAZController.swift
 //  FetchedResultsController
 //
 //  Created by Bondar Yaroslav on 9/18/18.
@@ -9,8 +9,18 @@
 import UIKit
 import CoreData
 
-class TableController: UIViewController {
+extension EventDB {
+    @objc dynamic var section: String? {
+        if let char = title?.first {
+            return String(char)
+        }
+        return nil
+    }
 
+}
+
+class TableAZController: UIViewController {
+    
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -21,7 +31,24 @@ class TableController: UIViewController {
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html
     /// The sectionNameKeyPath property must also be an NSSortDescriptor instance.
     /// The NSSortDescriptor must be the first descriptor in the array passed to the fetch request.
-    private lazy var fetchedResultsController = EventDB.fetchedResultsController(delegate: self)
+    private lazy var fetchedResultsController: NSFetchedResultsController<EventDB> = {
+        let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
+        //fetchRequest.fetchLimit = 100
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor2]
+        
+        if UI_USER_INTERFACE_IDIOM() == .pad {
+            fetchRequest.fetchBatchSize = 50
+        } else {
+            fetchRequest.fetchBatchSize = 20
+        }
+        
+        //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
+        let context = CoreDataStack.shared.mainContext
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.section), cacheName: nil)
+        frController.delegate = self
+        return frController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +62,7 @@ class TableController: UIViewController {
     }
 }
 
-extension TableController: UITableViewDataSource {
+extension TableAZController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
@@ -48,14 +75,9 @@ extension TableController: UITableViewDataSource {
     }
 }
 
-extension TableController: UITableViewDelegate {
-    
+extension TableAZController: UITableViewDelegate {
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return fetchedResultsController.sectionIndexTitles
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -65,11 +87,9 @@ extension TableController: UITableViewDelegate {
         let event = fetchedResultsController.object(at: indexPath)
         cell.fill(with: event)
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         /// weak?
         let action = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] _, indexPath in
@@ -84,11 +104,7 @@ extension TableController: UITableViewDelegate {
     }
 }
 
-extension TableController: NSFetchedResultsControllerDelegate {
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-        return sectionName
-    }
+extension TableAZController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
