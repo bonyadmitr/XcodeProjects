@@ -91,6 +91,15 @@ extension CollectionController: UICollectionViewDelegate {
         let event = fetchedResultsController.object(at: indexPath)
         view.fill(with: event)
     }
+    
+    /// tvOS only
+    /// https://stackoverflow.com/questions/47772185/how-to-add-an-indextitles-in-a-collectionview-ios-10
+//    func indexTitles(for collectionView: UICollectionView) -> [String]? {
+//        return fetchedResultsController.sectionIndexTitles
+//    }
+//    func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+//        return IndexPath(item: 0, section: fetchedResultsController.section(forSectionIndexTitle: title, at: index))
+//    }
 }
 
 extension CollectionController: UICollectionViewDelegateFlowLayout {
