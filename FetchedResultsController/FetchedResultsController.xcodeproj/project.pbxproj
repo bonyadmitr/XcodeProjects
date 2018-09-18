@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */; };
-		CEA2D3BB2150D69D007E82C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3BA2150D69D007E82C0 /* ViewController.swift */; };
+		CEA2D3BB2150D69D007E82C0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3BA2150D69D007E82C0 /* TableViewController.swift */; };
 		CEA2D3BE2150D69D007E82C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA2D3BC2150D69D007E82C0 /* Main.storyboard */; };
 		CEA2D3C12150D69D007E82C0 /* FetchedResultsController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3BF2150D69D007E82C0 /* FetchedResultsController.xcdatamodeld */; };
 		CEA2D3C32150D69E007E82C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA2D3C22150D69E007E82C0 /* Assets.xcassets */; };
@@ -18,6 +18,7 @@
 		CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */; };
 		CEA2D3E22150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */; };
 		CEA2D3E32150D7B4007E82C0 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */; };
+		CEA2D3E52150DA34007E82C0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3E42150DA33007E82C0 /* EventCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,7 @@
 /* Begin PBXFileReference section */
 		CEA2D3B52150D69D007E82C0 /* FetchedResultsController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchedResultsController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CEA2D3BA2150D69D007E82C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEA2D3BA2150D69D007E82C0 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		CEA2D3BD2150D69D007E82C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEA2D3C02150D69D007E82C0 /* FetchedResultsController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FetchedResultsController.xcdatamodel; sourceTree = "<group>"; };
 		CEA2D3C22150D69E007E82C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
 		CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
+		CEA2D3E42150DA33007E82C0 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +91,8 @@
 			children = (
 				CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */,
 				CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */,
-				CEA2D3BA2150D69D007E82C0 /* ViewController.swift */,
+				CEA2D3BA2150D69D007E82C0 /* TableViewController.swift */,
+				CEA2D3E42150DA33007E82C0 /* EventCell.swift */,
 				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
 				CEA2D3C22150D69E007E82C0 /* Assets.xcassets */,
 				CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */,
@@ -111,8 +114,8 @@
 		CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
-				CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */,
 				CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */,
+				CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */,
 				CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */,
 				CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */,
 			);
@@ -222,8 +225,9 @@
 			files = (
 				CEA2D3E22150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */,
-				CEA2D3BB2150D69D007E82C0 /* ViewController.swift in Sources */,
+				CEA2D3BB2150D69D007E82C0 /* TableViewController.swift in Sources */,
 				CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */,
+				CEA2D3E52150DA34007E82C0 /* EventCell.swift in Sources */,
 				CEA2D3C12150D69D007E82C0 /* FetchedResultsController.xcdatamodeld in Sources */,
 				CEA2D3E02150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CEA2D3E32150D7B4007E82C0 /* NSManagedObject+Extensions.swift in Sources */,

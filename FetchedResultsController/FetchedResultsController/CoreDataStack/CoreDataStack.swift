@@ -77,7 +77,7 @@ final class CoreDataStack: NSObject {
     
     @available(iOS 10.0, *)
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "EventsCountdown")
+        let container = NSPersistentContainer(name: "FetchedResultsController")
         container.loadPersistentStores { (storeDescription, error) in
             print("CoreData: Inited \(storeDescription)")
             if let error = error {
@@ -91,7 +91,7 @@ final class CoreDataStack: NSObject {
     ///--- available iOS 9
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         do {
-            return try NSPersistentStoreCoordinator.coordinator(name: "EventsCountdown")
+            return try NSPersistentStoreCoordinator.coordinator(name: "FetchedResultsController")
         } catch {
             print("CoreData: Unresolved error \(error)")
         }
