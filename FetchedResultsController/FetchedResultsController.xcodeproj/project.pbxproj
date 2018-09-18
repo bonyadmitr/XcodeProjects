@@ -95,18 +95,14 @@
 		CEA2D3B72150D69D007E82C0 /* FetchedResultsController */ = {
 			isa = PBXGroup;
 			children = (
+				CECF6A312150F3EB00FEF0E6 /* App */,
 				CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */,
-				CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */,
+				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
 				CEA2D3BA2150D69D007E82C0 /* TableController.swift */,
 				CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */,
 				CEA2D3E42150DA33007E82C0 /* EventCell.swift */,
 				CECF6A2D2150E0C300FEF0E6 /* EventCollectionCell.swift */,
 				CECF6A2F2150E93500FEF0E6 /* Date+New.swift */,
-				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
-				CEA2D3C22150D69E007E82C0 /* Assets.xcassets */,
-				CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */,
-				CEA2D3C72150D69E007E82C0 /* Info.plist */,
-				CEA2D3BF2150D69D007E82C0 /* FetchedResultsController.xcdatamodeld */,
 			);
 			path = FetchedResultsController;
 			sourceTree = "<group>";
@@ -123,12 +119,24 @@
 		CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
+				CEA2D3BF2150D69D007E82C0 /* FetchedResultsController.xcdatamodeld */,
 				CEA2D3DD2150D7B4007E82C0 /* CoreDataStack.swift */,
 				CEA2D3DC2150D7B4007E82C0 /* NSManagedObjectContext+Extensions.swift */,
 				CEA2D3DE2150D7B4007E82C0 /* NSPersistentStoreCoordinator+Extensions.swift */,
 				CEA2D3DF2150D7B4007E82C0 /* NSManagedObject+Extensions.swift */,
 			);
 			path = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		CECF6A312150F3EB00FEF0E6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */,
+				CEA2D3C22150D69E007E82C0 /* Assets.xcassets */,
+				CEA2D3C42150D69E007E82C0 /* LaunchScreen.storyboard */,
+				CEA2D3C72150D69E007E82C0 /* Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,7 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FetchedResultsController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FetchedResultsController/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -421,7 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FetchedResultsController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/FetchedResultsController/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
