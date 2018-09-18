@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  TableController.swift
 //  FetchedResultsController
 //
 //  Created by Bondar Yaroslav on 9/18/18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TableViewController: UIViewController {
+class TableController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -57,7 +57,7 @@ class TableViewController: UIViewController {
     }
 }
 
-extension TableViewController: UITableViewDataSource {
+extension TableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
@@ -67,7 +67,7 @@ extension TableViewController: UITableViewDataSource {
     }
 }
 
-extension TableViewController: UITableViewDelegate {
+extension TableController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? EventCell else {
             return
@@ -88,7 +88,7 @@ extension TableViewController: UITableViewDelegate {
     }
 }
 
-extension TableViewController: NSFetchedResultsControllerDelegate {
+extension TableController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
