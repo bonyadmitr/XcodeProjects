@@ -15,12 +15,18 @@ extension Date {
     }
     
     var nextDay: Date {
-        return Date(timeIntervalSince1970: timeIntervalSince1970 + 3600 * 24)
+        return Date(timeIntervalSince1970: timeIntervalSince1970 + .day)
         /// return optional
         //Calendar.current.date(byAdding: .day, value: 1, to: self)
     }
     
     static var tommorow: Date {
-        return Date(timeIntervalSinceNow: 3600 * 24)
+        return Date(timeIntervalSinceNow: .day)
+    }
+}
+
+private extension TimeInterval {
+    static var day: TimeInterval {
+        return 3600 * 24
     }
 }

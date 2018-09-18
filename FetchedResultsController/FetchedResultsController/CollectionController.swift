@@ -60,15 +60,7 @@ class CollectionController: UIViewController {
     }
     
     @IBAction private func addEvent(_ sender: UIBarButtonItem) {
-        CoreDataStack.shared.performBackgroundTask { context in
-            let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
-            let numberOfEvents = (try? context.count(for: fetchRequest)) ?? 0
-            
-            let event = EventDB(managedObjectContext: context)
-            event.title = "Event \(numberOfEvents + 1)"
-            event.date = Date().withoutSeconds
-            context.saveAsync()
-        }
+        EventDB.createAndSaveNewOne()
     }
 }
 

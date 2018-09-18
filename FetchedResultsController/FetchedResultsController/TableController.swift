@@ -18,12 +18,15 @@ class TableController: UIViewController {
         }
     }
     
+    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/nsfetchedresultscontroller.html
+    /// The sectionNameKeyPath property must also be an NSSortDescriptor instance.
+    /// The NSSortDescriptor must be the first descriptor in the array passed to the fetch request.
     lazy var fetchedResultsController: NSFetchedResultsController<EventDB> = {
         let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: true)
+        //fetchRequest.fetchLimit = 100
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor2]
         
-        // TODO: device isIpad
         if UI_USER_INTERFACE_IDIOM() == .pad {
             fetchRequest.fetchBatchSize = 50
         } else {
@@ -32,7 +35,7 @@ class TableController: UIViewController {
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
         let context = CoreDataStack.shared.mainContext
-        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(EventDB.date), cacheName: nil)
         frController.delegate = self
         return frController
     }()
@@ -45,19 +48,14 @@ class TableController: UIViewController {
     }
     
     @IBAction private func addEvent(_ sender: UIBarButtonItem) {
-        CoreDataStack.shared.performBackgroundTask { context in
-            let fetchRequest: NSFetchRequest = EventDB.fetchRequest()
-            let numberOfEvents = (try? context.count(for: fetchRequest)) ?? 0
-            
-            let event = EventDB(managedObjectContext: context)
-            event.title = "Event \(numberOfEvents + 1)"
-            event.date = Date()
-            context.saveAsync()
-        }
+        EventDB.createAndSaveNewOne()
     }
 }
 
 extension TableController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
@@ -68,6 +66,13 @@ extension TableController: UITableViewDataSource {
 }
 
 extension TableController: UITableViewDelegate {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return fetchedResultsController.sectionIndexTitles
+    }
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? EventCell else {
             return
@@ -86,9 +91,18 @@ extension TableController: UITableViewDelegate {
         }
         return [action]
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let indexPath = IndexPath(row: 0, section: section)
+        let event = fetchedResultsController.object(at: indexPath)
+        return event.date?.description
+    }
 }
 
 extension TableController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        return sectionName
+    }
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
