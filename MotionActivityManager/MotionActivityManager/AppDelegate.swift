@@ -15,7 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        Logger.shared.configure { 
+            $0.showDate = true
+//                        $0.dateFormatter.dateFormat = "MM/dd/yyyy hh:mma"
+            
+//            $0.showThreadName = false
+//            $0.showFileName = false
+//            $0.showLineNumber = false
+//            $0.showFunctionName = false
+//            $0.watchMainThead = true
+        }
+        log("didFinishLaunchingWithOptions")
+        
         return true
     }
 
@@ -25,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        log("applicationDidEnterBackground")
+        BackgroundTaskManager.shared.restartBackgroundTask()
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }

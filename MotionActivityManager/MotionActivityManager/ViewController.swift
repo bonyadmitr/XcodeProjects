@@ -23,8 +23,22 @@ class ViewController: UIViewController {
             case .success:
                 self.startActivityUpdates()
             case .denied:
-                print("denied")
+                log("denied")
             }
+        }
+    }
+    
+    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
+        if FileManager.default.fileExists(atPath: Logger.shared.fileUrl.path),
+            let logData = try? Data(contentsOf: Logger.shared.fileUrl)
+        {
+            let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
+            
+            EmailSender.shared.send(message: "",
+                                    subject: "MotionActivityManager Test",
+                                    to: ["zdaecq@gmail.com"],
+                                    attachments: [attachment],
+                                    presentIn: self)
         }
     }
 
@@ -99,14 +113,14 @@ class ViewController: UIViewController {
             }
             
             if activity.unknown {
-                modes.insert("❓")
+                modes.insert("??")
             }
             
             if modes.isEmpty {
                 modes.insert("∅")
             }
             
-            print(modes.joined(separator: ", "))
+            log(modes.joined(separator: ", "))
             
         }
 
