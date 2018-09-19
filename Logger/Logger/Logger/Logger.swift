@@ -39,17 +39,9 @@ final public class Logger {
     open var logResponse = true
     
     open var showDate = false
-    
-    
     open var showThreadName = false
-    
-    
     open var showFileName = true
-    
-    
     open var showLineNumber = true
-    
-    
     open var showFunctionName = true
     
     lazy var dateFormatter: DateFormatter = {
@@ -58,6 +50,8 @@ final public class Logger {
         df.timeStyle = .short
         return df
     }()
+    
+    lazy var fileLogger = FileLogger(fileName: "app.log")
     
     func log(_ closure: @autoclosure () -> Any?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         
@@ -97,75 +91,55 @@ final public class Logger {
         
         res += String(describing: closure() ?? "nil")
         print(res)
+        fileLogger.writeToFile(res)
     }
 }
 
-// TODO: check all, create writing to file
-
-//func logPath() -> URL {
-//    let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-//    return docs.appendingPathComponent("logger.txt")
-//}
-//
-//let logger = Logger(destination: logPath())
-//
-//class Logger {
-//    let destination: URL
-//    lazy fileprivate var dateFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale.current
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-//        
-//        return formatter
-//    }()
-//    lazy fileprivate var fileHandle: FileHandle? = {
-//        let path = self.destination.path
-//        FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
-//        
-//        do {
-//            let fileHandle = try FileHandle(forWritingTo: self.destination)
-//            print("Successfully logging to: \(path)")
-//            return fileHandle
-//        } catch let error as NSError {
-//            print("Serious error in logging: could not open path to log file. \(error).")
-//        }
-//        
-//        return nil
-//    }()
-//    
-//    init(destination: URL) {
-//        self.destination = destination
-//    }
-//    
-//    deinit {
-//        fileHandle?.closeFile()
-//    }
-//    
-//    func log(_ message: String, function: String = #function, file: String = #file, line: Int = #line) {
-//        let logMessage = stringRepresentation(message, function: function, file: file, line: line)
-//        
-//        printToConsole(logMessage)
-//        printToDestination(logMessage)
-//    }
-//}
-//
-//private extension Logger {
-//    func stringRepresentation(_ message: String, function: String, file: String, line: Int) -> String {
-//        let dateString = dateFormatter.string(from: Date())
-//        
-//        let file = URL(fileURLWithPath: file).lastPathComponent 
-//        return "\(dateString) [\(file):\(line)] \(function): \(message)\n"
-//    }
-//    
-//    func printToConsole(_ logMessage: String) {
-//        print(logMessage)
-//    }
-//    
-//    func printToDestination(_ logMessage: String) {
-//        if let data = logMessage.data(using: String.Encoding.utf8) {
-//            fileHandle?.write(data)
-//        } else {
-//            print("Serious error in logging: could not encode logged string into data.")
-//        }
-//    }
-//}
+class FileLogger {
+    
+    private let fileUrl: URL
+    
+    private lazy var fileHandle: FileHandle? = {
+        let filePath = fileUrl.path
+        let isFileExists = FileManager.default.fileExists(atPath: filePath)
+        
+        if !isFileExists {
+            FileManager.default.createFile(atPath: filePath, contents: nil, attributes: nil)
+        }
+        
+        do {
+            let fileHandle = try FileHandle(forWritingTo: fileUrl)
+            return fileHandle
+        } catch {
+            #if DEBUG
+                fatalError("could not open path to log file")
+            #else
+                print("Serious error in logging: could not open path to log file. \(error).")
+            #endif
+        }
+        
+        return nil
+    }()
+    
+    init(fileUrl: URL) {
+        self.fileUrl = fileUrl
+    }
+    
+    convenience init(fileName: String) {
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let fileUrl = documentDirectory.appendingPathComponent(fileName)
+        self.init(fileUrl: fileUrl)
+    }
+    
+    deinit {
+        fileHandle?.closeFile()
+    }
+    
+    func writeToFile(_ logMessage: String) {
+        if let data = logMessage.data(using: .utf8) {
+            fileHandle?.write(data)
+        } else {
+            print("Serious error in logging: could not encode logged string into data.")
+        }
+    }
+}

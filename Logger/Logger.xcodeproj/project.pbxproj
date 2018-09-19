@@ -12,7 +12,6 @@
 		6604D99F20587B5C00FA61CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6604D99D20587B5C00FA61CB /* Main.storyboard */; };
 		6604D9A120587B5C00FA61CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6604D9A020587B5C00FA61CB /* Assets.xcassets */; };
 		6604D9A420587B5C00FA61CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6604D9A220587B5C00FA61CB /* LaunchScreen.storyboard */; };
-		6604D9AC20587C9800FA61CB /* Logger2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6604D9AB20587C9800FA61CB /* Logger2.swift */; };
 		6604D9B420587CE000FA61CB /* Dispatch+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6604D9AF20587CE000FA61CB /* Dispatch+Current.swift */; };
 		6604D9B520587CE000FA61CB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6604D9B020587CE000FA61CB /* Logger.swift */; };
 		6604D9B720587CE000FA61CB /* Watchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6604D9B220587CE000FA61CB /* Watchdog.swift */; };
@@ -29,7 +28,6 @@
 		6604D9A020587B5C00FA61CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6604D9A320587B5C00FA61CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6604D9A520587B5C00FA61CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6604D9AB20587C9800FA61CB /* Logger2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger2.swift; sourceTree = "<group>"; };
 		6604D9AE20587CE000FA61CB /* AlamofireLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		6604D9AF20587CE000FA61CB /* Dispatch+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Current.swift"; sourceTree = "<group>"; };
 		6604D9B020587CE000FA61CB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 			children = (
 				6604D99920587B5C00FA61CB /* AppDelegate.swift */,
 				6604D99B20587B5C00FA61CB /* ViewController.swift */,
-				6604D9AB20587C9800FA61CB /* Logger2.swift */,
 				6604D9AD20587CE000FA61CB /* Logger */,
 				6604D99D20587B5C00FA61CB /* Main.storyboard */,
 				6604D9A020587B5C00FA61CB /* Assets.xcassets */,
@@ -172,7 +169,6 @@
 				6604D9B720587CE000FA61CB /* Watchdog.swift in Sources */,
 				6604D99C20587B5C00FA61CB /* ViewController.swift in Sources */,
 				6604D9B420587CE000FA61CB /* Dispatch+Current.swift in Sources */,
-				6604D9AC20587C9800FA61CB /* Logger2.swift in Sources */,
 				6604D99A20587B5C00FA61CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
