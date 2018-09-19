@@ -10,6 +10,7 @@ import AVFoundation
 import Photos
 import CoreLocation
 import Contacts
+import CoreMotion
 
 typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
 
@@ -207,4 +208,22 @@ final class PermissionsManager {
         }
     }
     
+    func requestAcivityAccess(handler: @escaping AccessStatusHandler) {
+        guard CMMotionActivityManager.isActivityAvailable() else {
+            handler(.denied)
+            return
+        }
+        if #available(iOS 11.0, *) {
+            switch CMMotionActivityManager.authorizationStatus() {
+            case .authorized:
+                handler(.success)
+            case .denied, .restricted:
+                handler(.denied)
+            case .notDetermined:
+                handler(.denied)
+            }
+        } else {
+            handler(.success)
+        }
+    }
 }
