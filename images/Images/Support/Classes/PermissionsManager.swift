@@ -14,6 +14,7 @@ import CoreMotion
 
 typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
 
+// TODO: AccessStatus.unavailable
 /// .restricted: restricted by e.g. parental controls. User can't enable Location Services
 /// .denied: user denied your app access to Location Services, but can grant access from Settings.app
 final class PermissionsManager {
@@ -208,11 +209,32 @@ final class PermissionsManager {
         }
     }
     
+    /// there is case where can be any error. will be called .denied for it now. maybe will be need additional case for handler
     func requestAcivityAccess(handler: @escaping AccessStatusHandler) {
+        
         guard CMMotionActivityManager.isActivityAvailable() else {
-            handler(.denied)
+            handler(.denied) /// unavailable
             return
         }
+        
+        /// https://stackoverflow.com/a/35353617
+        func requestAccess() {
+            let manager = CMMotionActivityManager()
+            let now = Date()
+            manager.queryActivityStarting(from: now, to: now, to: .main) { _, error in
+                if let error = error as NSError? {
+                    if error.code == CMErrorMotionActivityNotAuthorized.rawValue {
+                        handler(.denied)
+                    } else { /// some system error.
+                        handler(.denied)
+                    }
+                } else {
+                    handler(.success)
+                }
+            }
+
+        }
+        
         if #available(iOS 11.0, *) {
             switch CMMotionActivityManager.authorizationStatus() {
             case .authorized:
@@ -220,10 +242,10 @@ final class PermissionsManager {
             case .denied, .restricted:
                 handler(.denied)
             case .notDetermined:
-                handler(.denied)
+                requestAccess()
             }
         } else {
-            handler(.success)
+            requestAccess()
         }
     }
 }
