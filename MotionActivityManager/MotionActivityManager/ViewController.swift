@@ -41,8 +41,6 @@ class ViewController: UIViewController {
                                     presentIn: self)
         }
     }
-
-    
     
     func requestAcivityAccess(handler: @escaping AccessStatusHandler) {
         
@@ -121,7 +119,6 @@ class ViewController: UIViewController {
             }
             
             log(modes.joined(separator: ", "))
-            
         }
 
     }
