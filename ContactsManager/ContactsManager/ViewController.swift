@@ -101,10 +101,11 @@ extension ViewController: UITableViewDelegate {
         }
         
         let contactVC = CNContactViewController(for: contactToView)
-        contactVC.delegate = self
+//        contactVC.delegate = self
         //contactVC.modalPresentationStyle = .formSheet
         //contactVC.allowsEditing = true
-        //contactVC.contactStore =
+        contactVC.allowsActions = false
+        contactVC.contactStore = ContactsManager.shared.contactStore
         
         
         navigationController?.pushViewController(contactVC, animated: true)

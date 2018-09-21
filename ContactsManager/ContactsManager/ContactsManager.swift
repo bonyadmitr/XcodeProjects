@@ -8,6 +8,11 @@
 
 import Contacts
 
+
+// TODO: Merge duplicate https://stackoverflow.com/a/46023501
+// TODO: progress callback https://developer.apple.com/documentation/foundation/progress
+// TODO: background queue
+
 typealias DuplicatesByName = [String: [CNContact]]
 
 /// if you try to get contact property without fetch it
@@ -31,11 +36,26 @@ typealias DuplicatesByName = [String: [CNContact]]
 /// https://developer.apple.com/documentation/contacts
 /// https://github.com/satishbabariya/SwiftyContacts/blob/master/Sources/Core/SwiftyContacts.swift
 /// Info.plist: NSContactsUsageDescription
-final class ContactsManager {
+final class ContactsManager: NSObject {
+    
+    override init() {
+        super.init()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(contactStoreDidChange), name: .CNContactStoreDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func contactStoreDidChange(_ notification: Notification) {
+//        print("---", notification)
+        print("---", notification.userInfo!)
+    }
     
     static let shared = ContactsManager()
     
-    private let contactStore = CNContactStore()
+    let contactStore = CNContactStore()
     
     /// let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
     func create(name: String) {
