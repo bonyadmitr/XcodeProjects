@@ -20,6 +20,7 @@
 		CEF38E3C2152830600755145 /* Dispatch+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3B2152830600755145 /* Dispatch+Current.swift */; };
 		CEF38E3E2152868A00755145 /* BackgroundTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */; };
 		CEF38E402154BDEC00755145 /* CMMotionActivity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */; };
+		CEF38E442154BE3E00755145 /* MotionActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E432154BE3E00755145 /* MotionActivityManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		CEF38E3B2152830600755145 /* Dispatch+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Current.swift"; sourceTree = "<group>"; };
 		CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTaskManager.swift; sourceTree = "<group>"; };
 		CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMMotionActivity+Extensions.swift"; sourceTree = "<group>"; };
+		CEF38E432154BE3E00755145 /* MotionActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionActivityManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			children = (
 				CEF38E1621521ED700755145 /* Main.storyboard */,
 				CEF38E1421521ED700755145 /* ViewController.swift */,
+				CEF38E432154BE3E00755145 /* MotionActivityManager.swift */,
 				CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */,
 				CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */,
 				CEF38E412154BE0300755145 /* Logger */,
@@ -198,6 +201,7 @@
 				CEF38E1521521ED700755145 /* ViewController.swift in Sources */,
 				CEF38E1321521ED700755145 /* AppDelegate.swift in Sources */,
 				CEF38E3C2152830600755145 /* Dispatch+Current.swift in Sources */,
+				CEF38E442154BE3E00755145 /* MotionActivityManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
