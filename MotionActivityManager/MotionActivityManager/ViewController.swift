@@ -13,15 +13,16 @@ import CoreMotion
 /// https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager
 class ViewController: UIViewController {
 
-    var manager: CMMotionActivityManager? = CMMotionActivityManager()
+    lazy var activityManager = MotionActivityManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestAcivityAccess { status in
+        activityManager.requestAcivityAccess { [weak self] status in
             switch status {
             case .success:
-                self.startActivityUpdates()
+                //self?.activityManager.startActivityUpdates()
+                self?.activityManager.loadHistory()
             case .denied:
                 log("denied")
             }
@@ -41,6 +42,19 @@ class ViewController: UIViewController {
                                     presentIn: self)
         }
     }
+}
+
+typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
+enum AccessStatus {
+    case success
+    case denied
+}
+
+import CoreMotion
+
+final class MotionActivityManager {
+    private let motionManager = CMMotionActivityManager()
+    private let activityQueue = OperationQueue()
     
     func requestAcivityAccess(handler: @escaping AccessStatusHandler) {
         
@@ -50,9 +64,10 @@ class ViewController: UIViewController {
         }
         
         func requestAccess() {
-            let manager = CMMotionActivityManager()
+            /// if you need separate function
+            ///let motionManager = CMMotionActivityManager()
             let now = Date()
-            manager.queryActivityStarting(from: now, to: now, to: .main) { _, error in
+            motionManager.queryActivityStarting(from: now, to: now, to: .main) { _, error in
                 if let error = error as NSError? {
                     if error.code == CMErrorMotionActivityNotAuthorized.rawValue {
                         handler(.denied)
@@ -81,66 +96,102 @@ class ViewController: UIViewController {
     }
     
     func startActivityUpdates() {
-        let manager = CMMotionActivityManager()
-        manager.startActivityUpdates(to: .main) { activity in
+        motionManager.startActivityUpdates(to: activityQueue) { activity in
             
             guard let activity = activity else {
                 return
             }
             
-            var modes = Set<String>()
+//            var modes = Set<String>()
+//            
+//            if activity.walking {
+//                modes.insert("🚶‍")
+//            }
+//            
+//            if activity.running {
+//                modes.insert("🏃‍")
+//            }
+//            
+//            if activity.cycling {
+//                modes.insert("🚴‍")
+//            }
+//            
+//            if activity.automotive {
+//                modes.insert("🚗")
+//            }
+//            
+//            if activity.stationary {
+//                modes.insert("🛑")
+//            }
+//            
+//            if activity.unknown {
+//                modes.insert("??")
+//            }
+//            
+//            if modes.isEmpty {
+//                modes.insert("∅")
+//            }
             
-            if activity.walking {
-                modes.insert("🚶‍")
-            }
-            
-            if activity.running {
-                modes.insert("🏃‍")
-            }
-            
-            if activity.cycling {
-                modes.insert("🚴‍")
-            }
-            
-            if activity.automotive {
-                modes.insert("🚗")
-            }
-            
-            if activity.stationary {
-                modes.insert("🛑")
-            }
-            
-            if activity.unknown {
-                modes.insert("??")
-            }
-            
-            if modes.isEmpty {
-                modes.insert("∅")
-            }
-            
-            log(modes.joined(separator: ", "))
+            log(activity.modes)
         }
-
+        
+    }
+    
+    func startActivityUpdates(to queue: OperationQueue? = nil, withHandler handler: @escaping CoreMotion.CMMotionActivityHandler) {
+        let queue2 = queue ?? activityQueue
+        motionManager.startActivityUpdates(to: queue2, withHandler: handler)
+    }
+    
+    func loadHistory() {
+        let firstDate = Date(timeIntervalSince1970: 0)
+        motionManager.queryActivityStarting(from: firstDate, to: Date(), to: activityQueue) { activities, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let activities = activities {
+                for activity in activities {
+                    print(activity.modes)
+                }
+                print("activities.count", activities.count)
+                print("activities startDate", activities.first?.startDate ?? "nil")
+            } else {
+                print("unknown errro")
+            }
+        }
     }
 }
 
-typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
-enum AccessStatus {
-    case success
-    case denied
+extension CMMotionActivity {
+    var modes: String {
+        var modes = Set<String>()
+        
+        if walking {
+            modes.insert("🚶‍")
+        }
+        
+        if running {
+            modes.insert("🏃‍")
+        }
+        
+        if cycling {
+            modes.insert("🚴‍")
+        }
+        
+        if automotive {
+            modes.insert("🚗")
+        }
+        
+        if stationary {
+            modes.insert("🛑")
+        }
+        
+        if unknown {
+            modes.insert("??")
+        }
+        
+        if modes.isEmpty {
+            modes.insert("∅")
+        }
+        
+        return modes.joined(separator: ", ")
+    }
 }
-
-import CoreMotion
-
-//class MotionActivityManager {
-//    private let motionManager = CMMotionActivityManager()
-//    private let activityQueue = OperationQueue()
-//    
-//    
-//    
-//    func startActivityUpdates(to queue: OperationQueue? = nil, withHandler handler: @escaping CoreMotion.CMMotionActivityHandler) {
-//        let queue2 = queue ?? activityQueue
-//        motionManager.startActivityUpdates(to: queue2, withHandler: handler)
-//    }
-//}
-
