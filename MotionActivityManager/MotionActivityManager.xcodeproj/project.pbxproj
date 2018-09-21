@@ -19,6 +19,7 @@
 		CEF38E38215282A500755145 /* Watchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E37215282A500755145 /* Watchdog.swift */; };
 		CEF38E3C2152830600755145 /* Dispatch+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3B2152830600755145 /* Dispatch+Current.swift */; };
 		CEF38E3E2152868A00755145 /* BackgroundTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */; };
+		CEF38E402154BDEC00755145 /* CMMotionActivity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +34,10 @@
 		CEF38E312152828B00755145 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
 		CEF38E322152828B00755145 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
 		CEF38E332152828B00755145 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
-		CEF38E37215282A500755145 /* Watchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Watchdog.swift; path = ../../Logger/Logger/Logger/Watchdog.swift; sourceTree = "<group>"; };
+		CEF38E37215282A500755145 /* Watchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watchdog.swift; sourceTree = "<group>"; };
 		CEF38E3B2152830600755145 /* Dispatch+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Current.swift"; sourceTree = "<group>"; };
 		CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTaskManager.swift; sourceTree = "<group>"; };
+		CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMMotionActivity+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,17 +70,13 @@
 		CEF38E1121521ED700755145 /* MotionActivityManager */ = {
 			isa = PBXGroup;
 			children = (
-				CEF38E1221521ED700755145 /* AppDelegate.swift */,
-				CEF38E1421521ED700755145 /* ViewController.swift */,
 				CEF38E1621521ED700755145 /* Main.storyboard */,
-				CEF38E2E2152827E00755145 /* Logger.swift */,
-				CEF38E3B2152830600755145 /* Dispatch+Current.swift */,
+				CEF38E1421521ED700755145 /* ViewController.swift */,
 				CEF38E3D2152868A00755145 /* BackgroundTaskManager.swift */,
-				CEF38E37215282A500755145 /* Watchdog.swift */,
+				CEF38E3F2154BDEC00755145 /* CMMotionActivity+Extensions.swift */,
+				CEF38E412154BE0300755145 /* Logger */,
 				CEF38E302152828B00755145 /* EmailSender */,
-				CEF38E1921521ED800755145 /* Assets.xcassets */,
-				CEF38E1B21521ED800755145 /* LaunchScreen.storyboard */,
-				CEF38E1E21521ED800755145 /* Info.plist */,
+				CEF38E422154BE1D00755145 /* App */,
 			);
 			path = MotionActivityManager;
 			sourceTree = "<group>";
@@ -91,6 +89,27 @@
 				CEF38E332152828B00755145 /* UIApplication+URL.swift */,
 			);
 			path = EmailSender;
+			sourceTree = "<group>";
+		};
+		CEF38E412154BE0300755145 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38E2E2152827E00755145 /* Logger.swift */,
+				CEF38E3B2152830600755145 /* Dispatch+Current.swift */,
+				CEF38E37215282A500755145 /* Watchdog.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		CEF38E422154BE1D00755145 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38E1221521ED700755145 /* AppDelegate.swift */,
+				CEF38E1921521ED800755145 /* Assets.xcassets */,
+				CEF38E1B21521ED800755145 /* LaunchScreen.storyboard */,
+				CEF38E1E21521ED800755145 /* Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +192,7 @@
 				CEF38E362152828B00755145 /* UIApplication+URL.swift in Sources */,
 				CEF38E2F2152827F00755145 /* Logger.swift in Sources */,
 				CEF38E352152828B00755145 /* UIApplication+Controller.swift in Sources */,
+				CEF38E402154BDEC00755145 /* CMMotionActivity+Extensions.swift in Sources */,
 				CEF38E3E2152868A00755145 /* BackgroundTaskManager.swift in Sources */,
 				CEF38E342152828B00755145 /* EmailSender.swift in Sources */,
 				CEF38E1521521ED700755145 /* ViewController.swift in Sources */,
@@ -323,7 +343,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5XGA8925AJ;
-				INFOPLIST_FILE = MotionActivityManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MotionActivityManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -342,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5XGA8925AJ;
-				INFOPLIST_FILE = MotionActivityManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MotionActivityManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
