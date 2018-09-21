@@ -54,14 +54,22 @@
 		CEF38E502154E79000755145 /* ContactsManager */ = {
 			isa = PBXGroup;
 			children = (
-				CEF38E512154E79000755145 /* AppDelegate.swift */,
-				CEF38E532154E79000755145 /* ViewController.swift */,
+				CEF38E632154E7CA00755145 /* App */,
 				CEF38E552154E79000755145 /* Main.storyboard */,
+				CEF38E532154E79000755145 /* ViewController.swift */,
+			);
+			path = ContactsManager;
+			sourceTree = "<group>";
+		};
+		CEF38E632154E7CA00755145 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38E512154E79000755145 /* AppDelegate.swift */,
 				CEF38E582154E79200755145 /* Assets.xcassets */,
 				CEF38E5A2154E79200755145 /* LaunchScreen.storyboard */,
 				CEF38E5D2154E79200755145 /* Info.plist */,
 			);
-			path = ContactsManager;
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ContactsManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ContactsManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ContactsManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ContactsManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
