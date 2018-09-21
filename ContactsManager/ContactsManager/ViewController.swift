@@ -7,187 +7,149 @@
 //
 
 import UIKit
+import Contacts
+import ContactsUI
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var tableView: UITableView! {
+        willSet {
+            newValue.dataSource = self
+            newValue.delegate = self
+        }
+    }
+    
+    private var duplicatesByName = [(name: String, contacts: [CNContact])]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ContactsManager.shared.requestContactsAccess { status in
+        let backItem = UIBarButtonItem()
+        backItem.title = "Contacts"
+        navigationItem.backBarButtonItem = backItem
+        
+        ContactsManager.shared.requestContactsAccess { [weak self] status in
             switch status {
             case .success:
                 print("success")
 //                ContactsManager.shared.create(name: "111")
 //                ContactsManager.shared.create(name: "222")
-                ContactsManager.shared.getContacts()
+                
+                //try? ContactsManager.shared.fetchContacts(sortOrder: .givenName)
+                
+//                ContactsManager.shared.fetchAllContacts { result in
+//                    switch result {
+//                    case .success(let contacts):
+//                        print("contacts.count: ", contacts.count)
+//                    case .failure(let error):
+//                        print(error.localizedDescription)
+//                    }
+//                }
+                
+                do {
+                    let duplicatesByName = try ContactsManager.shared.findDuplicateContacts()
+                    
+                    duplicatesByName.forEach({
+                        self?.duplicatesByName.append($0)
+                    })
+                    self?.tableView.reloadData()
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
             case .denied:
                 print("denied")
             }
         }
-        
-        
     }
 }
 
-import Contacts
+extension ViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return duplicatesByName.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return duplicatesByName[section].contacts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+    }
+}
 
-/// https://developer.apple.com/documentation/contacts
-/// Info.plist: NSContactsUsageDescription
-final class ContactsManager {
-    
-    static let shared = ContactsManager()
-    
-    private let store = CNContactStore()
-    
-    func create(name: String) {
-        // Creating a mutable object to add to the contact
-        let contact = CNMutableContact()
-        
-        //contact.imageData = Data() // The profile picture as a NSData object
-        
-        contact.givenName = name
-        contact.familyName = "Appleseed"
-        
-        let homeEmail = CNLabeledValue(label: CNLabelHome, value: "john@example.com" as NSString)
-        let workEmail = CNLabeledValue(label: CNLabelWork, value: "j.appleseed@icloud.com" as NSString)
-        contact.emailAddresses = [homeEmail, workEmail]
-        
-        contact.phoneNumbers = [CNLabeledValue(
-            label:CNLabelPhoneNumberiPhone,
-            value:CNPhoneNumber(stringValue:"(408) 555-0126"))]
-        
-        let homeAddress = CNMutablePostalAddress()
-        homeAddress.street = "1 Infinite Loop"
-        homeAddress.city = "Cupertino"
-        homeAddress.state = "CA"
-        homeAddress.postalCode = "95014"
-        let contactHomeAddress = CNLabeledValue(label: CNLabelHome, value: homeAddress as CNPostalAddress)
-        contact.postalAddresses = [contactHomeAddress]
-        
-        var birthday = DateComponents()
-        birthday.day = 1
-        birthday.month = 4
-        birthday.year = 1988  // You can omit the year value for a yearless birthday
-        contact.birthday = birthday
-        
-        // Saving the newly created contact
-        let saveRequest = CNSaveRequest()
-        saveRequest.add(contact, toContainerWithIdentifier: nil)
-        try? store.execute(saveRequest)
-    }
-    
-    /// To avoid having your app’s UI main thread block for this access, you can use either the asynchronous method requestAccess(for:completionHandler:) or dispatch your CNContactStore usage to a background thread
-    func requestContactsAccess(handler: @escaping AccessStatusHandler) {
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .authorized:
-            handler(.success)
-        case .denied, .restricted:
-            handler(.denied)
-        case .notDetermined:
-            CNContactStore().requestAccess(for: .contacts) { granted, _ in
-                if granted {
-                    handler(.success)
-                } else {
-                    handler(.denied)
-                }
-            }
-        }
-    }
-    
-    func getContacts() {
-//        let contactFetchRequest = CNContactFetchRequest(keysToFetch: allowedContactKeys())
-//        var contactsArray = [CNContact]()
-//        try? store.enumerateContacts(with: contactFetchRequest) { contact, _ in
-//            contactsArray.append(contact)   
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let cell = cell as? UITableViewCell else {
+//            return
 //        }
         
-        var allContainers: [CNContainer] = []
-        do {
-            allContainers = try store.containers(matching: nil)
-        } catch {
-            print("Error fetching containers")
-        }
+//        let duplicateByName = duplicatesByName[indexPath.section]
         
-        var results: [CNContact] = []
+        cell.textLabel?.text = "\(indexPath.row + 1)"
+//        cell.textLabel?.text = duplicateByName.contacts[indexPath.row].identifier
+//        cell.detailTextLabel?.text = 
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        // Iterate all containers and append their contacts to our results array
-        for container in allContainers {
-            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-            do {
-                let containerResults = try store.unifiedContacts(matching: fetchPredicate, keysToFetch: allowedContactKeys())
-                results.append(contentsOf: containerResults)
-            } catch {
-                print("Error fetching results for container")
-            }
-        }
+        let contact = duplicatesByName[indexPath.section].contacts[indexPath.row]
         
-        print("results.count: ", results.count)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        guard let contact = results.first else {
+        let keys = CNContactViewController.descriptorForRequiredKeys()
+        guard let contactToView = try? ContactsManager.shared.fetchContacts(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
             return
         }
+        let contactVC = CNContactViewController(for: contactToView)
+        navigationController?.pushViewController(contactVC, animated: true)
         
-        /// if you try to get contact property without fetch it
-        /// it will crash with error "A property was not requested when contact was fetched"
-        /// Example for "givenName"
+        //contactVC.modalPresentationStyle = .formSheet
+        //contactVC.allowsEditing = true
+        //contactVC.contactStore =
+//        contactVC.delegate = self
         
-        print("contact.givenName:", contact.givenName)
-        
-        if contact.isKeyAvailable(CNContactEmailAddressesKey) {
-            print("contact.emailAddresses:", contact.emailAddresses.first?.value ?? "nil")
-        } else {
-            /// you should add all previus contact keysToFetch
-            let refetchedContact = try? store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [CNContactEmailAddressesKey as CNKeyDescriptor])
-            print("refetchedContact.emailAddresses:", refetchedContact?.emailAddresses.first?.value ?? "nil")
-            
-            /// crash here
-            //print("refetchedContact.givenName:", refetchedContact.givenName)
-            
-        }
-
-
-        
-////        let fetchPredicate2 = CNContact.predicateForContactsInContainer(withIdentifier: store.defaultContainerIdentifier())
-//        let fetchPredicate2 = CNContact.predicateForContacts(matchingName: "Aaa")
-//        do {
-//            
-//            let containerResults = try store.unifiedContacts(matching: fetchPredicate2, keysToFetch: allowedContactKeys())
-//            print(containerResults.count)
-//        } catch {
-//            print("Error fetching results for container")
-//        }
+//        let navVC = UINavigationController(rootViewController: contactVC)
+//        present(navVC, animated: true, completion: nil)
     }
     
-    ///We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
-    func allowedContactKeys() -> [CNKeyDescriptor]{
-        return [
-            CNContactPhoneNumbersKey,
-//            CNContactEmailAddressesKey,
-            CNContactNamePrefixKey,
-            CNContactGivenNameKey,
-            CNContactFamilyNameKey,
-            //CNContactOrganizationNameKey,
-            //CNContactBirthdayKey,
-            //CNContactImageDataKey,
-            //CNContactThumbnailImageDataKey,
-            //CNContactImageDataAvailableKey
-        ] as [CNKeyDescriptor]
-        //+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return duplicatesByName[section].name
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        /// weak?
+        let action = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] _, indexPath in
+            guard let `self` = self else {
+                return
+            }
+            let contact = self.duplicatesByName[indexPath.section].contacts[indexPath.row]
+            do {
+                try ContactsManager.shared.deleteContact(contact.mutableCopy() as! CNMutableContact)
+                
+                if self.duplicatesByName[indexPath.section].contacts.count > 2 {
+                    self.duplicatesByName[indexPath.section].contacts.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                } else {
+                    self.duplicatesByName.remove(at: indexPath.section)
+                    self.tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+//            let event = self?.fetchedResultsController.object(at: indexPath)
+//            event?.delete()
+        }
+        return [action]
     }
 }
 
-typealias AccessStatusHandler = (_ status: AccessStatus) -> Void
-
-enum AccessStatus {
-    case success
-    case denied
+extension ViewController: CNContactViewControllerDelegate {
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func contactViewController(_ viewController: CNContactViewController, shouldPerformDefaultActionFor property: CNContactProperty) -> Bool {
+        return true
+    }
 }
-
