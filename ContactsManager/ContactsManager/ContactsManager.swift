@@ -37,6 +37,7 @@ final class ContactsManager {
     
     private let contactStore = CNContactStore()
     
+    /// let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
     func create(name: String) {
         // Creating a mutable object to add to the contact
         let contact = CNMutableContact()

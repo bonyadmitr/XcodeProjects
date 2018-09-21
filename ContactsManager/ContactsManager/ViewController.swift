@@ -99,13 +99,15 @@ extension ViewController: UITableViewDelegate {
         guard let contactToView = try? ContactsManager.shared.fetchContacts(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
             return
         }
-        let contactVC = CNContactViewController(for: contactToView)
-        navigationController?.pushViewController(contactVC, animated: true)
         
+        let contactVC = CNContactViewController(for: contactToView)
+        contactVC.delegate = self
         //contactVC.modalPresentationStyle = .formSheet
         //contactVC.allowsEditing = true
         //contactVC.contactStore =
-//        contactVC.delegate = self
+        
+        
+        navigationController?.pushViewController(contactVC, animated: true)
         
 //        let navVC = UINavigationController(rootViewController: contactVC)
 //        present(navVC, animated: true, completion: nil)
@@ -146,9 +148,15 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: CNContactViewControllerDelegate {
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        viewController.dismiss(animated: true, completion: nil)
+        if let contact = contact {
+            print(contact)
+        } else { /// edit canceled by user
+            print("edit canceled by user")
+        }
+//        viewController.dismiss(animated: true, completion: nil)
     }
     
+    /// allow tap on phone to call and etc.
     func contactViewController(_ viewController: CNContactViewController, shouldPerformDefaultActionFor property: CNContactProperty) -> Bool {
         return true
     }
