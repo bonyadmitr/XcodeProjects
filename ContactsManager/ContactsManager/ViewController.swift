@@ -91,21 +91,34 @@ class ViewController: UIViewController {
         let picker = CNContactPickerViewController()
         
         /// If not set all properties are displayed
-        //picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
+        /// usefull only for delegate method:
+        /// "func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty"
+        picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
+        
+        /// to don't fetch contacts info
+        //picker.displayedPropertyKeys = []
         
         /// If not set all contacts are selectable
-//        picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
+        picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
         
         /// It determines whether a selected contact should be returned (predicate evaluates to TRUE)
         /// or if the contact detail card should be displayed (evaluates to FALSE).
-        /// If not set the picker displays the contact detail card when the contact is selected.
-        //picker.predicateForSelectionOfContact = NSPredicate(value: false) //default
+        /// If not set the picker displays the contact detail card when the contact is selected. !!! NOT TRUE !!!
+        ///
+        /// usefull only for delegate method:
+        /// "func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact)"
+        picker.predicateForSelectionOfContact = NSPredicate(format: "emailAddresses.@count > 0")
+        //picker.predicateForSelectionOfContact = NSPredicate(value: false)
         
         /// It determines whether a selected property should be returned (predicate evaluates to TRUE)
         /// or if the default action for the property should be performed (predicate evaluates to FALSE).
         /// If not set the picker returns the first selected property.
         /// The predicate is evaluated on the CNContactProperty that is being selected.
-        //picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'emailAddresses'")  
+        ///
+        /// if you don't need extra predicate like "value LIKE '*@apple.com'"
+        /// better don't show others options(contact keys) by setting "picker.displayedPropertyKeys = [KEYS]"
+//        picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'emailAddresses'")
+        
         picker.delegate = self  
         present(picker, animated: true, completion: nil)  
     }  
@@ -245,9 +258,9 @@ extension ViewController: CNContactPickerDelegate {
      * @discussion  These delegate methods will be invoked when the user is done selecting multiple contacts or properties.
      *              Implementing one of these methods will configure the picker for multi-selection.
      */
-//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
-//        print("--- didSelect contacts", contacts)
-//    }
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+        print("--- didSelect contacts", contacts)
+    }
     
 //    func contactPicker(_ picker: CNContactPickerViewController, didSelectContactProperties contactProperties: [CNContactProperty]) {  
 //        print("--- contactProperties: ", contactProperties)
