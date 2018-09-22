@@ -91,12 +91,10 @@ class ViewController: UIViewController {
         let picker = CNContactPickerViewController()
         
         /// If not set all properties are displayed
+        /// if set "[]" none properties are displayed
         /// usefull only for delegate method:
         /// "func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty"
         picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
-        
-        /// to don't fetch contacts info
-        //picker.displayedPropertyKeys = []
         
         /// If not set all contacts are selectable
         picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
@@ -107,6 +105,7 @@ class ViewController: UIViewController {
         ///
         /// usefull only for delegate method:
         /// "func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact)"
+        /// in this case "picker.displayedPropertyKeys" can be usefull too
         picker.predicateForSelectionOfContact = NSPredicate(format: "emailAddresses.@count > 0")
         //picker.predicateForSelectionOfContact = NSPredicate(value: false)
         
