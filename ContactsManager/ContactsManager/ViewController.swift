@@ -52,7 +52,11 @@ class ViewController: UIViewController {
                     duplicatesByName.forEach({
                         self?.duplicatesByName.append($0)
                     })
-                    self?.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                    
                     
                 } catch {
                     print(error.localizedDescription)
@@ -61,6 +65,24 @@ class ViewController: UIViewController {
             case .denied:
                 print("denied")
             }
+        }
+    }
+    
+    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
+        do {
+            let contacts = try ContactsManager.shared.fetchAllContacts()
+            let vCardData = try ContactsManager.shared.convertToVCard(contacts: contacts)
+            
+            let attachment = MailAttachment(data: vCardData, mimeType: "text/vcard", fileName: "contacts.vcf")
+            
+            EmailSender.shared.send(message: "",
+                                    subject: "ContactsManager",
+                                    to: ["zdaecq@gmail.com"],
+                                    attachments: [attachment],
+                                    presentIn: self)
+            
+        } catch {
+            print("sendEmail error: ", error.localizedDescription)
         }
     }
 }

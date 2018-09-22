@@ -13,6 +13,8 @@
 		CEF38E592154E79200755145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF38E582154E79200755145 /* Assets.xcassets */; };
 		CEF38E5C2154E79200755145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF38E5A2154E79200755145 /* LaunchScreen.storyboard */; };
 		CEF38E6521552CFE00755145 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E6421552CFE00755145 /* ContactsManager.swift */; };
+		CEF38E692156133000755145 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E672156133000755145 /* EmailSender.swift */; };
+		CEF38E6A2156133000755145 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E682156133000755145 /* UIApplication+URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		CEF38E5B2154E79200755145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEF38E5D2154E79200755145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF38E6421552CFE00755145 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
+		CEF38E672156133000755145 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
+		CEF38E682156133000755145 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 				CEF38E552154E79000755145 /* Main.storyboard */,
 				CEF38E532154E79000755145 /* ViewController.swift */,
 				CEF38E6421552CFE00755145 /* ContactsManager.swift */,
+				CEF38E662156133000755145 /* EmailSender */,
 			);
 			path = ContactsManager;
 			sourceTree = "<group>";
@@ -73,6 +78,15 @@
 				CEF38E5D2154E79200755145 /* Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		CEF38E662156133000755145 /* EmailSender */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38E672156133000755145 /* EmailSender.swift */,
+				CEF38E682156133000755145 /* UIApplication+URL.swift */,
+			);
+			path = EmailSender;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF38E542154E79000755145 /* ViewController.swift in Sources */,
+				CEF38E692156133000755145 /* EmailSender.swift in Sources */,
 				CEF38E6521552CFE00755145 /* ContactsManager.swift in Sources */,
+				CEF38E6A2156133000755145 /* UIApplication+URL.swift in Sources */,
 				CEF38E522154E79000755145 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5XGA8925AJ;
 				INFOPLIST_FILE = "$(SRCROOT)/ContactsManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -311,6 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5XGA8925AJ;
 				INFOPLIST_FILE = "$(SRCROOT)/ContactsManager/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

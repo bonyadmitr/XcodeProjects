@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1J1-Bw-WiN">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UITableViewCell" textLabel="c1Z-jr-6PM" style="IBUITableViewCellStyleDefault" id="Ffn-XD-TxN">
@@ -38,6 +38,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.31157295039999999" green="0.94961681610000004" blue="0.3722645665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -46,12 +47,18 @@
                         <constraints>
                             <constraint firstItem="1J1-Bw-WiN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="07q-m0-Vsd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1J1-Bw-WiN" secondAttribute="bottom" id="DcU-eu-Lwc"/>
-                            <constraint firstItem="1J1-Bw-WiN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UAP-f1-gu5"/>
+                            <constraint firstItem="1J1-Bw-WiN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="UAP-f1-gu5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1J1-Bw-WiN" secondAttribute="trailing" id="Wc4-7j-GaI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Duplicated contacts" id="AMW-OS-hwX"/>
+                    <navigationItem key="navigationItem" title="Duplicated contacts" id="AMW-OS-hwX">
+                        <barButtonItem key="leftBarButtonItem" title="Send VCard" id="ueZ-6W-yNg">
+                            <connections>
+                                <action selector="sendEmail:" destination="BYZ-38-t0r" id="UeB-9o-0jI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="1J1-Bw-WiN" id="pKy-5K-Iax"/>
                     </connections>
