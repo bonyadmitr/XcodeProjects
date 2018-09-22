@@ -57,6 +57,11 @@
                                 <action selector="sendEmail:" destination="BYZ-38-t0r" id="UeB-9o-0jI"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Picker" id="eAk-sO-ylt">
+                            <connections>
+                                <action selector="showPicker:" destination="BYZ-38-t0r" id="rRg-oQ-tgG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="1J1-Bw-WiN" id="pKy-5K-Iax"/>

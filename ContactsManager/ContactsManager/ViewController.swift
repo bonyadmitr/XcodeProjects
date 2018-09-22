@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
+    @IBAction private func sendEmail(_ sender: UIBarButtonItem) {
         do {
             let contacts = try ContactsManager.shared.fetchAllContacts()
             let vCardData = try ContactsManager.shared.convertToVCard(contacts: contacts)
@@ -85,6 +85,32 @@ class ViewController: UIViewController {
             print("sendEmail error: ", error.localizedDescription)
         }
     }
+    
+    @IBAction private func showPicker(_ sender: UIBarButtonItem) {
+        /// https://forums.developer.apple.com/thread/19061
+        let picker = CNContactPickerViewController()
+        
+        /// If not set all properties are displayed
+        //picker.displayedPropertyKeys = [CNContactEmailAddressesKey]
+        
+        /// If not set all contacts are selectable
+//        picker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
+        
+        /// It determines whether a selected contact should be returned (predicate evaluates to TRUE)
+        /// or if the contact detail card should be displayed (evaluates to FALSE).
+        /// If not set the picker displays the contact detail card when the contact is selected.
+        //picker.predicateForSelectionOfContact = NSPredicate(value: false) //default
+        
+        /// It determines whether a selected property should be returned (predicate evaluates to TRUE)
+        /// or if the default action for the property should be performed (predicate evaluates to FALSE).
+        /// If not set the picker returns the first selected property.
+        /// The predicate is evaluated on the CNContactProperty that is being selected.
+        //picker.predicateForSelectionOfProperty = NSPredicate(format: "key == 'emailAddresses'")  
+        picker.delegate = self  
+        present(picker, animated: true, completion: nil)  
+    }  
+    
+    //#MARK: CNContactPickerDelegate methods  
 }
 
 extension ViewController: UITableViewDataSource {
@@ -136,6 +162,8 @@ extension ViewController: UITableViewDelegate {
         //contactVC.modalPresentationStyle = .formSheet
         contactVC.allowsEditing = false
 //        contactVC.allowsActions = false /// "Send Message", "Share Contact", etc
+        
+        /// The contact store from which the contact was fetched or to which it will be saved
         contactVC.contactStore = ContactsManager.shared.contactStore
         
         
@@ -189,4 +217,40 @@ extension ViewController: CNContactViewControllerDelegate {
     func contactViewController(_ viewController: CNContactViewController, shouldPerformDefaultActionFor property: CNContactProperty) -> Bool {
         return true
     }
+}
+
+extension ViewController: CNContactPickerDelegate {
+    
+    /// The picker will be dismissed automatically after a contact or property is picked.
+//    func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+//        print("--- contactPickerDidCancel")
+//    }
+    
+    
+    /*!
+     * @abstract    Singular delegate methods.
+     * @discussion  These delegate methods will be invoked when the user selects a single contact or property.
+     */
+//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+//        print("--- didSelect contact", contact)
+//    }
+    
+//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
+//        print("--- didSelect contactProperty", contactProperty)
+//    }
+    
+    
+    /*!
+     * @abstract    Plural delegate methods.
+     * @discussion  These delegate methods will be invoked when the user is done selecting multiple contacts or properties.
+     *              Implementing one of these methods will configure the picker for multi-selection.
+     */
+//    func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
+//        print("--- didSelect contacts", contacts)
+//    }
+    
+//    func contactPicker(_ picker: CNContactPickerViewController, didSelectContactProperties contactProperties: [CNContactProperty]) {  
+//        print("--- contactProperties: ", contactProperties)
+////        self.resultLabel.text = "Picked \(contactPropertiesCount) contact email(s)"  
+//    }
 }
