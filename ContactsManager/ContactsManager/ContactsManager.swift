@@ -346,36 +346,9 @@ final class ContactsManager: NSObject {
     
     
     func findDuplicateContacts() throws -> DuplicatesByName {
-        
         let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
         /// maybe need CNContactIdentifierKey for older iOSs
         //let keys = [CNContactIdentifierKey as CNKeyDescriptor, CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
-        
-        
-//        let mainProgress = Progress(totalUnitCount: 10)
-//        mainProgress.completedUnitCount = 1
-////        progress.fractionCompleted
-//        let progress1 = Progress(totalUnitCount: 5, parent: mainProgress, pendingUnitCount: 4)        
-        
-        
-        
-//        let fullNames = contacts.compactMap { CNContactFormatter.string(from: $0, style: .fullName) }
-//        var contactGroupedByDuplicated = [Array<CNContact>]()
-//        
-//        let uniqueArray = Set(fullNames)
-//        var contactGroupedByUnique = [Array<CNContact>]()
-//        
-//        for fullName in uniqueArray {
-//            let group = contacts.filter { CNContactFormatter.string(from: $0, style: .fullName) == fullName }
-//            contactGroupedByUnique.append(group)
-//        }
-//        for items in contactGroupedByUnique{
-//            if items.count > 1 {
-//                contactGroupedByDuplicated.append(items)
-//            }
-//        }
-//        completionHandler(contactGroupedByDuplicated)
-        
         
         var duplicatesByName = DuplicatesByName()
         
@@ -400,13 +373,7 @@ final class ContactsManager: NSObject {
         //duplicatesByName = duplicatesByName.filter { $1.count > 1 }
         
         return duplicatesByName.filter { $1.count > 1 }
-        
-//        for (name, duplicates) in duplicatesByName {
-//            print(name, duplicates.count)
-//        }
-//        print("duplicatesByName count:" ,duplicatesByName.keys.count)
     }
-
 }
 
 extension CNPhoneNumber {
