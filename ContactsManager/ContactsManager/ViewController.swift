@@ -122,11 +122,20 @@ extension ViewController: UITableViewDelegate {
             return
         }
         
+        /// this init don't need
+        /// it's like "CNContactViewController(for" with ".allowsEditing = false"
+        /// let contactVC = CNContactViewController(forUnknownContact: contactToView)
+        
+        /// must be presented
+//        let contactVC = CNContactViewController(forNewContact: contactToView)
+        
+        /// must be pushed
         let contactVC = CNContactViewController(for: contactToView)
+        
 //        contactVC.delegate = self
         //contactVC.modalPresentationStyle = .formSheet
-        //contactVC.allowsEditing = true
-        contactVC.allowsActions = false
+        contactVC.allowsEditing = false
+//        contactVC.allowsActions = false /// "Send Message", "Share Contact", etc
         contactVC.contactStore = ContactsManager.shared.contactStore
         
         
@@ -161,9 +170,6 @@ extension ViewController: UITableViewDelegate {
             } catch {
                 print(error.localizedDescription)
             }
-            
-//            let event = self?.fetchedResultsController.object(at: indexPath)
-//            event?.delete()
         }
         return [action]
     }

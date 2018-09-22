@@ -12,6 +12,9 @@ import Contacts
 // TODO: Merge duplicate https://stackoverflow.com/a/46023501
 // TODO: progress callback https://developer.apple.com/documentation/foundation/progress
 // TODO: background queue
+// TODO: manual Merge duplicate by selecting controller
+// TODO: Merge all duplicate
+// TODO: view all contacts controller
 
 typealias DuplicatesByName = [String: [CNContact]]
 
