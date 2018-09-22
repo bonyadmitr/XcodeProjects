@@ -14,7 +14,6 @@
 		CEF38E1D21521ED800755145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF38E1B21521ED800755145 /* LaunchScreen.storyboard */; };
 		CEF38E2F2152827F00755145 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E2E2152827E00755145 /* Logger.swift */; };
 		CEF38E342152828B00755145 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E312152828B00755145 /* EmailSender.swift */; };
-		CEF38E352152828B00755145 /* UIApplication+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E322152828B00755145 /* UIApplication+Controller.swift */; };
 		CEF38E362152828B00755145 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E332152828B00755145 /* UIApplication+URL.swift */; };
 		CEF38E38215282A500755145 /* Watchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E37215282A500755145 /* Watchdog.swift */; };
 		CEF38E3C2152830600755145 /* Dispatch+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E3B2152830600755145 /* Dispatch+Current.swift */; };
@@ -33,7 +32,6 @@
 		CEF38E1E21521ED800755145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF38E2E2152827E00755145 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CEF38E312152828B00755145 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
-		CEF38E322152828B00755145 /* UIApplication+Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Controller.swift"; sourceTree = "<group>"; };
 		CEF38E332152828B00755145 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		CEF38E37215282A500755145 /* Watchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watchdog.swift; sourceTree = "<group>"; };
 		CEF38E3B2152830600755145 /* Dispatch+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Current.swift"; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				CEF38E312152828B00755145 /* EmailSender.swift */,
-				CEF38E322152828B00755145 /* UIApplication+Controller.swift */,
 				CEF38E332152828B00755145 /* UIApplication+URL.swift */,
 			);
 			path = EmailSender;
@@ -194,7 +191,6 @@
 				CEF38E38215282A500755145 /* Watchdog.swift in Sources */,
 				CEF38E362152828B00755145 /* UIApplication+URL.swift in Sources */,
 				CEF38E2F2152827F00755145 /* Logger.swift in Sources */,
-				CEF38E352152828B00755145 /* UIApplication+Controller.swift in Sources */,
 				CEF38E402154BDEC00755145 /* CMMotionActivity+Extensions.swift in Sources */,
 				CEF38E3E2152868A00755145 /* BackgroundTaskManager.swift in Sources */,
 				CEF38E342152828B00755145 /* EmailSender.swift in Sources */,
