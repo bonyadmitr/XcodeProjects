@@ -406,6 +406,40 @@ final class ContactsManager: NSObject {
         
         return duplicatesByName.filter { $1.count > 1 }
     }
+    
+    func findEmptyNameContacts() throws -> [CNContact] {
+        var contacts = [CNContact]()
+        let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        let request = CNContactFetchRequest(keysToFetch: keys)
+        try contactStore.enumerateContacts(with: request) { contact, stop in
+            if CNContactFormatter.string(from: contact, style: .fullName) == nil {
+                contacts.append(contact)
+            }
+        }
+        
+        return contacts
+    }
+    
+    /// can be create with return "String?" but without localized string
+    func phoneOrEmailForNoNameContact(_ contact: CNContact) throws -> String {
+        
+        if contact.isKeyAvailable(CNContactPhoneNumbersKey), let phone = contact.phoneNumbers.first?.value.stringValue {
+            return phone
+        } else if contact.isKeyAvailable(CNContactEmailAddressesKey), let email = contact.emailAddresses.first?.value as String? {
+            return email
+        }
+        
+        let keys = [CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor]
+        let newContact = try fetchContact(contactIdentifier: contact.identifier, keysToFetch: keys)
+        if let phone = newContact.phoneNumbers.first?.value.stringValue {
+            return phone
+        } else if let email = newContact.emailAddresses.first?.value as String? {
+            return email
+        } else {
+            return "No Name Phone Email"
+        }
+
+    }
 }
 
 extension CNPhoneNumber {
