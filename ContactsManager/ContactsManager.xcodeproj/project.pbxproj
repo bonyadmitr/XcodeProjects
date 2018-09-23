@@ -15,6 +15,7 @@
 		CEF38E6521552CFE00755145 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E6421552CFE00755145 /* ContactsManager.swift */; };
 		CEF38E692156133000755145 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E672156133000755145 /* EmailSender.swift */; };
 		CEF38E6A2156133000755145 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E682156133000755145 /* UIApplication+URL.swift */; };
+		CEF38E6E2157AE4C00755145 /* NoNameContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CEF38E6421552CFE00755145 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		CEF38E672156133000755145 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
 		CEF38E682156133000755145 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
+		CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameContactsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				CEF38E632154E7CA00755145 /* App */,
 				CEF38E552154E79000755145 /* Main.storyboard */,
 				CEF38E532154E79000755145 /* ViewController.swift */,
+				CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */,
 				CEF38E6421552CFE00755145 /* ContactsManager.swift */,
 				CEF38E662156133000755145 /* EmailSender */,
 			);
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF38E6E2157AE4C00755145 /* NoNameContactsController.swift in Sources */,
 				CEF38E542154E79000755145 /* ViewController.swift in Sources */,
 				CEF38E692156133000755145 /* EmailSender.swift in Sources */,
 				CEF38E6521552CFE00755145 /* ContactsManager.swift in Sources */,

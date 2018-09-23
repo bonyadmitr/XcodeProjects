@@ -53,9 +53,9 @@ class ViewController: UIViewController {
                         self?.duplicatesByName.append($0)
                     })
                     
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
+//                    DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+//                    }
                     
                     
                 } catch {

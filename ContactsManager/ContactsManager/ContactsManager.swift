@@ -63,6 +63,10 @@ typealias DuplicatesByName = [String: [CNContact]]
 //    
 //}
 
+/// CNSaveRequest error:
+/// CNError.Code.insertedRecordAlreadyExists
+/// CNErrorUserInfoAffectedRecordsKey
+
 /// https://developer.apple.com/documentation/contacts
 /// https://github.com/satishbabariya/SwiftyContacts/blob/master/Sources/Core/SwiftyContacts.swift
 /// Info.plist: NSContactsUsageDescription
@@ -71,7 +75,6 @@ final class ContactsManager: NSObject {
     
      private override init() {
         super.init()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(contactStoreDidChange), name: .CNContactStoreDidChange, object: nil)
     }
     
@@ -409,7 +412,7 @@ final class ContactsManager: NSObject {
     
     func findEmptyNameContacts() throws -> [CNContact] {
         var contacts = [CNContact]()
-        let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor]
         let request = CNContactFetchRequest(keysToFetch: keys)
         try contactStore.enumerateContacts(with: request) { contact, stop in
             if CNContactFormatter.string(from: contact, style: .fullName) == nil {
@@ -421,24 +424,14 @@ final class ContactsManager: NSObject {
     }
     
     /// can be create with return "String?" but without localized string
-    func phoneOrEmailForNoNameContact(_ contact: CNContact) throws -> String {
-        
+    func phoneOrEmailForNoNameContact(_ contact: CNContact) -> String {
         if contact.isKeyAvailable(CNContactPhoneNumbersKey), let phone = contact.phoneNumbers.first?.value.stringValue {
             return phone
         } else if contact.isKeyAvailable(CNContactEmailAddressesKey), let email = contact.emailAddresses.first?.value as String? {
             return email
-        }
-        
-        let keys = [CNContactPhoneNumbersKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor]
-        let newContact = try fetchContact(contactIdentifier: contact.identifier, keysToFetch: keys)
-        if let phone = newContact.phoneNumbers.first?.value.stringValue {
-            return phone
-        } else if let email = newContact.emailAddresses.first?.value as String? {
-            return email
         } else {
             return "No Name Phone Email"
         }
-
     }
 }
 
