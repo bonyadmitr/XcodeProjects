@@ -73,7 +73,13 @@ typealias DuplicatesByName = [String: [CNContact]]
 /// Compound predicates in most fetches are not supported
 final class ContactsManager: NSObject {
     
-     private override init() {
+    static let shared = ContactsManager()
+    
+    let contactStore = CNContactStore()
+    
+    private let queue = DispatchQueue(label: "ContactsManagerQueue")
+    
+     override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(contactStoreDidChange), name: .CNContactStoreDidChange, object: nil)
     }
@@ -109,10 +115,6 @@ final class ContactsManager: NSObject {
             //let contactStores = userInfo["CNNotificationSourcesKey"] as? [CNContactStore] /// tipicaly one item of ContactsManager 
         }
     }
-    
-    static let shared = ContactsManager()
-    
-    let contactStore = CNContactStore()
     
     
     func create(name: String) {
@@ -152,22 +154,28 @@ final class ContactsManager: NSObject {
         try? contactStore.execute(saveRequest)
     }
     
-    /// To avoid having your app’s UI main thread block for this access, you can use either the asynchronous method requestAccess(for:completionHandler:) or dispatch your CNContactStore usage to a background thread
+    /// handler will be execute on private queue
     func requestContactsAccess(handler: @escaping AccessStatusHandler) {
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .authorized:
-            handler(.success)
-        case .denied, .restricted:
-            handler(.denied)
-        case .notDetermined:
-            CNContactStore().requestAccess(for: .contacts) { granted, _ in
-                if granted {
-                    handler(.success)
-                } else {
-                    handler(.denied)
+        queue.async { [weak self] in
+            switch CNContactStore.authorizationStatus(for: .contacts) {
+            case .authorized:
+                handler(.success)
+            case .denied, .restricted:
+                handler(.denied)
+            case .notDetermined:
+                /// requestAccess exec completionHandler on own queue
+                self?.contactStore.requestAccess(for: .contacts) { granted, _ in
+                    self?.queue.async {
+                        if granted {
+                            handler(.success)
+                        } else {
+                            handler(.denied)
+                        }
+                    }
                 }
             }
         }
+
     }
     
     static var allContactKeys: CNKeyDescriptor {
@@ -176,122 +184,170 @@ final class ContactsManager: NSObject {
     
     /// https://stackoverflow.com/q/32669612
     func fetchAllContacts(keysToFetch: [CNKeyDescriptor] = [ContactsManager.allContactKeys], completion: @escaping ContactsResult) {
-        var allContainers = [CNContainer]()
-        
-        do {
-            allContainers = try contactStore.containers(matching: nil)
-        } catch {
-            completion(.failure(error))
-        }
-        
-        var contacts = [CNContact]()
-        
-        for container in allContainers {
-            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            var allContainers = [CNContainer]()
+            
             do {
-                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
-                contacts.append(contentsOf: containerResults)
+                allContainers = try self.contactStore.containers(matching: nil)
+            } catch {
+                completion(.failure(error))
+            }
+            
+            var contacts = [CNContact]()
+            
+            for container in allContainers {
+                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+                do {
+                    let containerResults = try self.contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
+                    contacts.append(contentsOf: containerResults)
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            completion(.success(contacts))
+        }
+
+    }
+    
+    public func fetchContacts(sortOrder: CNContactSortOrder, completion: @escaping ContactsResult) {
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let fetchRequest = CNContactFetchRequest(keysToFetch: [ContactsManager.allContactKeys])
+            fetchRequest.unifyResults = true
+            fetchRequest.sortOrder = sortOrder
+            
+            //fetchRequest.predicate = 
+            
+            //if #available(iOS 10.0, *) {
+            //    fetchRequest.mutableObjects = true
+            //} else {
+            //    
+            //}
+            
+            do {
+                var contacts = [CNContact]()
+                try self.contactStore.enumerateContacts(with: fetchRequest) { contact, _ in
+                    contacts.append(contact)   
+                }
+                completion(.success(contacts))
             } catch {
                 completion(.failure(error))
             }
         }
-        
-        completion(.success(contacts))
-    }
-    
-    public func fetchContacts(sortOrder: CNContactSortOrder, completion: @escaping ContactsResult) {
-        
-        let fetchRequest = CNContactFetchRequest(keysToFetch: [ContactsManager.allContactKeys])
-        fetchRequest.unifyResults = true
-        fetchRequest.sortOrder = sortOrder
-        
-        //fetchRequest.predicate = 
-        
-        //if #available(iOS 10.0, *) {
-        //    fetchRequest.mutableObjects = true
-        //} else {
-        //    
-        //}
-        
-        do {
-            var contacts = [CNContact]()
-            try contactStore.enumerateContacts(with: fetchRequest) { contact, _ in
-                contacts.append(contact)   
-            }
-            completion(.success(contacts))
-        } catch {
-            completion(.failure(error))
-        }
+
     }
     
     public func fetchContacts(searchString: String, completion: @escaping ContactsResult) {
-        let predicate = CNContact.predicateForContacts(matchingName: searchString)
-        do {
-            let contacts = try contactStore.unifiedContacts(matching: predicate, keysToFetch: [ContactsManager.allContactKeys])
-            completion(.success(contacts))
-        } catch {
-            completion(.failure(error))
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let predicate = CNContact.predicateForContacts(matchingName: searchString)
+            do {
+                let contacts = try self.contactStore.unifiedContacts(matching: predicate, keysToFetch: [ContactsManager.allContactKeys])
+                completion(.success(contacts))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
     
     public func fetchContacts(contactIdentifiers: [String], keysToFetch: [CNKeyDescriptor] = [ContactsManager.allContactKeys], completion: @escaping ContactsResult) {
-        let predicate: NSPredicate = CNContact.predicateForContacts(withIdentifiers: contactIdentifiers)
-        do {
-            let contacts = try contactStore.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
-            completion(.success(contacts))
-        } catch {
-            completion(.failure(error))
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let predicate: NSPredicate = CNContact.predicateForContacts(withIdentifiers: contactIdentifiers)
+            do {
+                let contacts = try self.contactStore.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
+                completion(.success(contacts))
+            } catch {
+                completion(.failure(error))
+            }
         }
+
     }
     
     public func createContact(_ contact: CNMutableContact, containerIdentifier: String? = nil, completion: @escaping VoidResult) {
-        let request = CNSaveRequest()
-        request.add(contact, toContainerWithIdentifier: containerIdentifier)
-        do {
-            try contactStore.execute(request)
-            completion(.success(()))
-        } catch {
-            completion(.failure(error))
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let request = CNSaveRequest()
+            request.add(contact, toContainerWithIdentifier: containerIdentifier)
+            do {
+                try self.contactStore.execute(request)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
     
     public func updateContact(_ contact: CNMutableContact, completion: @escaping VoidResult) {
-        let request = CNSaveRequest()
-        request.update(contact)
-        do {
-            try contactStore.execute(request)
-            completion(.success(()))
-        } catch {
-            completion(.failure(error))
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let request = CNSaveRequest()
+            request.update(contact)
+            do {
+                try self.contactStore.execute(request)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
     
     public func deleteContact(_ contact: CNMutableContact, completion: @escaping VoidResult) {
-        let request = CNSaveRequest()
-        request.delete(contact)
-        do {
-            try contactStore.execute(request)
-            completion(.success(()))
-        } catch {
-            completion(.failure(error))
+        queue.async { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            let request = CNSaveRequest()
+            request.delete(contact)
+            do {
+                try self.contactStore.execute(request)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
     
     public func convertToVCard(contacts: [CNContact], completion: @escaping HandlerResult<Data>) {
-        do {
-            let vcardFromContacts = try CNContactVCardSerialization.data(with: contacts)
-            completion(.success(vcardFromContacts))
-        } catch {
-            completion(.failure(error))
+        queue.async {
+            do {
+                let vcardFromContacts = try CNContactVCardSerialization.data(with: contacts)
+                completion(.success(vcardFromContacts))
+            } catch {
+                completion(.failure(error))
+            }
         }
+
     }
     
     public func convertToContacts(vCardData: Data, completion: @escaping ContactsResult) {
-        do {
-            let contacts = try CNContactVCardSerialization.contacts(with: vCardData)
-            completion(.success(contacts))
-        } catch {
-            completion(.failure(error))
+        queue.async {
+            do {
+                let contacts = try CNContactVCardSerialization.contacts(with: vCardData)
+                completion(.success(contacts))
+            } catch {
+                completion(.failure(error))
+            }
         }
     }
 

@@ -44,7 +44,9 @@ final class NoNameContactsController: UIViewController {
                     self?.noNameContacts = noNameContacts
                     self?.noNameContactsDisplayName = noNameContacts.map { ContactsManager.shared.phoneOrEmailForNoNameContact($0) }
                     
-                    self?.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
                 } catch {
                     assertionFailure(error.localizedDescription)
                 }
