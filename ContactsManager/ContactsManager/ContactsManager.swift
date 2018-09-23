@@ -10,14 +10,7 @@ import Contacts
 
 private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: nil)
 
-// TODO: research classes
-//CNPostalAddressFormatter
-//CNContactFormatter
-//CNContact.descriptorForAllComparatorKeys()
-
-/// settings from "Setting app - Contacts"
-//CNContactsUserDefaults, CNContactsUserDefaults.shared().sortOrder
-//---
+typealias DuplicatesByName = [String: [CNContact]]
 
 // TODO: Merge duplicate https://stackoverflow.com/a/46023501
 // TODO: progress callback https://developer.apple.com/documentation/foundation/progress
@@ -25,58 +18,44 @@ private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUn
 // TODO: Merge all duplicate
 // TODO: view all contacts controller
 // TODO: backups controller
+// TODO: methods for groups
 
-
-//let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
-
-///We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
-//    var allowedContactKeys: [CNKeyDescriptor] {
-//        return [
-//            CNContactPhoneNumbersKey,
-//            //CNContactEmailAddressesKey,
-//            CNContactNamePrefixKey,
-//            CNContactGivenNameKey,
-//            CNContactFamilyNameKey,
-//            //CNContactOrganizationNameKey,
-//            //CNContactBirthdayKey,
-//            //CNContactImageDataKey,
-//            //CNContactThumbnailImageDataKey,
-//            //CNContactImageDataAvailableKey
-//            ] as [CNKeyDescriptor]
-//        //+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
-//    }
-
-typealias DuplicatesByName = [String: [CNContact]]
+// TODO: research classes
+//CNPostalAddressFormatter
+//CNContactFormatter
+//CNContact.descriptorForAllComparatorKeys()
+////let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
+//
+/// settings from "Setting app - Contacts"
+//CNContactsUserDefaults, CNContactsUserDefaults.shared().sortOrder
 
 /// if you try to get contact property without fetch it
 /// it will crash with error "A property was not requested when contact was fetched"
-/// Example for "givenName"
-///
-//print("contact.givenName:", contact.givenName)
-//
-//if contact.isKeyAvailable(CNContactEmailAddressesKey) {
-//    print("contact.emailAddresses:", contact.emailAddresses.first?.value ?? "nil")
-//} else {
-//    /// you should add all previus contact keysToFetch
-//    let refetchedContact = try? contactStore.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [CNContactEmailAddressesKey as CNKeyDescriptor])
-//    print("refetchedContact.emailAddresses:", refetchedContact?.emailAddresses.first?.value ?? "nil")
-//    
-//    /// crash here
-//    //print("refetchedContact.givenName:", refetchedContact.givenName)
-//    
-//}
-
 
 /// list of favorite contacts are stored inside Phone.app. there is no public api
 
-/// CNSaveRequest error:
+/// possible errors in CNSaveRequest:
 /// CNError.Code.insertedRecordAlreadyExists
 /// CNErrorUserInfoAffectedRecordsKey
+
+/// Compound predicates in most fetches are not supported
+
+/// We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
+//[CNContactPhoneNumbersKey,
+//CNContactEmailAddressesKey,
+//CNContactNamePrefixKey,
+//CNContactGivenNameKey,
+//CNContactFamilyNameKey,
+//CNContactOrganizationNameKey,
+//CNContactBirthdayKey,
+//CNContactImageDataKey,
+//CNContactThumbnailImageDataKey
+//] as [CNKeyDescriptor]
+//+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
 
 /// https://developer.apple.com/documentation/contacts
 /// https://github.com/satishbabariya/SwiftyContacts/blob/master/Sources/Core/SwiftyContacts.swift
 /// Info.plist: NSContactsUsageDescription
-/// Compound predicates in most fetches are not supported
 final class ContactsManager: NSObject {
     
     static let shared = ContactsManager()
