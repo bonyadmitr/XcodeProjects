@@ -11,7 +11,26 @@ import Contacts
 // TODO: research classes
 //CNPostalAddressFormatter
 //CNContactFormatter
-//CNContactsUserDefaults
+//CNContact.descriptorForAllComparatorKeys()
+//CNContactsUserDefaults, CNContactsUserDefaults.shared().sortOrder
+//let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
+
+///We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
+//    var allowedContactKeys: [CNKeyDescriptor] {
+//        return [
+//            CNContactPhoneNumbersKey,
+//            //CNContactEmailAddressesKey,
+//            CNContactNamePrefixKey,
+//            CNContactGivenNameKey,
+//            CNContactFamilyNameKey,
+//            //CNContactOrganizationNameKey,
+//            //CNContactBirthdayKey,
+//            //CNContactImageDataKey,
+//            //CNContactThumbnailImageDataKey,
+//            //CNContactImageDataAvailableKey
+//            ] as [CNKeyDescriptor]
+//        //+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+//    }
 
 
 // TODO: Merge duplicate https://stackoverflow.com/a/46023501
@@ -44,6 +63,7 @@ typealias DuplicatesByName = [String: [CNContact]]
 /// https://developer.apple.com/documentation/contacts
 /// https://github.com/satishbabariya/SwiftyContacts/blob/master/Sources/Core/SwiftyContacts.swift
 /// Info.plist: NSContactsUsageDescription
+/// Compound predicates in most fetches are not supported
 final class ContactsManager: NSObject {
     
      private override init() {
@@ -67,6 +87,7 @@ final class ContactsManager: NSObject {
         /// change outside the app
         if let isExtenralChanges = userInfo["CNNotificationOriginationExternally"] as? Bool, isExtenralChanges == true {
             // TODO: delegate refetch contacts
+            
         } else { /// in app changes
             if let changedContactIdentifiers = userInfo["CNNotificationSaveIdentifiersKey"] as?  [String] {
                 do {
@@ -87,9 +108,9 @@ final class ContactsManager: NSObject {
     
     let contactStore = CNContactStore()
     
-    /// let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
+    
     func create(name: String) {
-        // Creating a mutable object to add to the contact
+        /// Creating a mutable object to add to the contact
         let contact = CNMutableContact()
         
         //contact.imageData = Data() // The profile picture as a NSData object
@@ -119,7 +140,7 @@ final class ContactsManager: NSObject {
         birthday.year = 1988  // You can omit the year value for a yearless birthday
         contact.birthday = birthday
         
-        // Saving the newly created contact
+        /// Saving the newly created contact
         let saveRequest = CNSaveRequest()
         saveRequest.add(contact, toContainerWithIdentifier: nil)
         try? contactStore.execute(saveRequest)
@@ -141,23 +162,6 @@ final class ContactsManager: NSObject {
                 }
             }
         }
-    }
-    
-    ///We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.
-    var allowedContactKeys: [CNKeyDescriptor] {
-        return [
-            CNContactPhoneNumbersKey,
-            //CNContactEmailAddressesKey,
-            CNContactNamePrefixKey,
-            CNContactGivenNameKey,
-            CNContactFamilyNameKey,
-            //CNContactOrganizationNameKey,
-            //CNContactBirthdayKey,
-            //CNContactImageDataKey,
-            //CNContactThumbnailImageDataKey,
-            //CNContactImageDataAvailableKey
-            ] as [CNKeyDescriptor]
-        //+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
     }
     
     static var allContactKeys: CNKeyDescriptor {
@@ -187,19 +191,21 @@ final class ContactsManager: NSObject {
         }
         
         completion(.success(contacts))
-        
-//        CNContact.descriptorForAllComparatorKeys()
     }
     
     public func fetchContacts(sortOrder: CNContactSortOrder, completion: @escaping ContactsResult) {
         
-        // TODO: check
-//        CNContactsUserDefaults.shared().sortOrder
-        
-        
         let fetchRequest = CNContactFetchRequest(keysToFetch: [ContactsManager.allContactKeys])
         fetchRequest.unifyResults = true
         fetchRequest.sortOrder = sortOrder
+        
+        //fetchRequest.predicate = 
+        
+        //if #available(iOS 10.0, *) {
+        //    fetchRequest.mutableObjects = true
+        //} else {
+        //    
+        //}
         
         do {
             var contacts = [CNContact]()
@@ -287,8 +293,6 @@ final class ContactsManager: NSObject {
     
     // MARK: - without callback
     
-    
-    
     /// https://stackoverflow.com/q/32669612
     func fetchAllContacts(keysToFetch: [CNKeyDescriptor] = [ContactsManager.allContactKeys]) throws -> [CNContact] {
         var allContainers = [CNContainer]()
@@ -305,11 +309,6 @@ final class ContactsManager: NSObject {
     }
     
     public func fetchContacts(sortOrder: CNContactSortOrder) throws -> [CNContact] {
-        
-        // TODO: check
-        //        CNContactsUserDefaults.shared().sortOrder
-        
-        
         let fetchRequest = CNContactFetchRequest(keysToFetch: [ContactsManager.allContactKeys])
         fetchRequest.unifyResults = true
         fetchRequest.sortOrder = sortOrder
