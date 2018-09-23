@@ -81,7 +81,7 @@ final class ContactsManager: NSObject {
             return assertionFailure()
         }
         
-        /// change outside the app
+        /// change outside of the app
         if let isExtenralChanges = userInfo["CNNotificationOriginationExternally"] as? Bool, isExtenralChanges == true {
             // TODO: delegate refetch contacts
             
@@ -97,46 +97,10 @@ final class ContactsManager: NSObject {
                 }
                 
             }
-            //let contactStores = userInfo["CNNotificationSourcesKey"] as? [CNContactStore] /// tipicaly one item of ContactsManager 
+            
+            /// tipicaly one item of ContactsManager 
+            //let contactStores = userInfo["CNNotificationSourcesKey"] as? [CNContactStore]
         }
-    }
-    
-    
-    func create(name: String) {
-        /// Creating a mutable object to add to the contact
-        let contact = CNMutableContact()
-        
-        //contact.imageData = Data() // The profile picture as a NSData object
-        
-        contact.givenName = name
-        contact.familyName = "Appleseed"
-        
-        let homeEmail = CNLabeledValue(label: CNLabelHome, value: "john@example.com" as NSString)
-        let workEmail = CNLabeledValue(label: CNLabelWork, value: "j.appleseed@icloud.com" as NSString)
-        contact.emailAddresses = [homeEmail, workEmail]
-        
-        contact.phoneNumbers = [CNLabeledValue(
-            label:CNLabelPhoneNumberiPhone,
-            value:CNPhoneNumber(stringValue:"(408) 555-0126"))]
-        
-        let homeAddress = CNMutablePostalAddress()
-        homeAddress.street = "1 Infinite Loop"
-        homeAddress.city = "Cupertino"
-        homeAddress.state = "CA"
-        homeAddress.postalCode = "95014"
-        let contactHomeAddress = CNLabeledValue(label: CNLabelHome, value: homeAddress as CNPostalAddress)
-        contact.postalAddresses = [contactHomeAddress]
-        
-        var birthday = DateComponents()
-        birthday.day = 1
-        birthday.month = 4
-        birthday.year = 1988  // You can omit the year value for a yearless birthday
-        contact.birthday = birthday
-        
-        /// Saving the newly created contact
-        let saveRequest = CNSaveRequest()
-        saveRequest.add(contact, toContainerWithIdentifier: nil)
-        try? contactStore.execute(saveRequest)
     }
     
     /// handler will be execute on private queue
@@ -508,6 +472,43 @@ final class ContactsManager: NSObject {
     
     func performOnQueue(_ handler: @escaping () -> Void) {
         queue.async(execute: handler)
+    }
+    
+    func createContact(name: String) {
+        /// Creating a mutable object to add to the contact
+        let contact = CNMutableContact()
+        
+        //contact.imageData = Data() // The profile picture as a NSData object
+        
+        contact.givenName = name
+        contact.familyName = "Appleseed"
+        
+        let homeEmail = CNLabeledValue(label: CNLabelHome, value: "john@example.com" as NSString)
+        let workEmail = CNLabeledValue(label: CNLabelWork, value: "j.appleseed@icloud.com" as NSString)
+        contact.emailAddresses = [homeEmail, workEmail]
+        
+        contact.phoneNumbers = [CNLabeledValue(
+            label:CNLabelPhoneNumberiPhone,
+            value:CNPhoneNumber(stringValue:"(408) 555-0126"))]
+        
+        let homeAddress = CNMutablePostalAddress()
+        homeAddress.street = "1 Infinite Loop"
+        homeAddress.city = "Cupertino"
+        homeAddress.state = "CA"
+        homeAddress.postalCode = "95014"
+        let contactHomeAddress = CNLabeledValue(label: CNLabelHome, value: homeAddress as CNPostalAddress)
+        contact.postalAddresses = [contactHomeAddress]
+        
+        var birthday = DateComponents()
+        birthday.day = 1
+        birthday.month = 4
+        birthday.year = 1988  // You can omit the year value for a yearless birthday
+        contact.birthday = birthday
+        
+        /// Saving the newly created contact
+        let saveRequest = CNSaveRequest()
+        saveRequest.add(contact, toContainerWithIdentifier: nil)
+        try? contactStore.execute(saveRequest)
     }
 }
 
