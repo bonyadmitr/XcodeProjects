@@ -74,6 +74,7 @@ class ViewController: UIViewController {
     
     @IBAction private func showPicker(_ sender: UIBarButtonItem) {
         /// must be presented
+        /// using picker user will not be prompted for "grant permission" access
         /// implementing one of two delegate methods will configure the picker for multi-selection
         let picker = CNContactPickerViewController()
         

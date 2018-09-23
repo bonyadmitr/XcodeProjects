@@ -66,6 +66,9 @@ typealias DuplicatesByName = [String: [CNContact]]
 //    
 //}
 
+
+/// list of favorite contacts are stored inside Phone.app. there is no public api
+
 /// CNSaveRequest error:
 /// CNError.Code.insertedRecordAlreadyExists
 /// CNErrorUserInfoAffectedRecordsKey
