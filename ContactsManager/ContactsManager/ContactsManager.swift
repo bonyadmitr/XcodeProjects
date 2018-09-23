@@ -12,7 +12,10 @@ import Contacts
 //CNPostalAddressFormatter
 //CNContactFormatter
 //CNContact.descriptorForAllComparatorKeys()
+
+/// settings from "Setting app - Contacts"
 //CNContactsUserDefaults, CNContactsUserDefaults.shared().sortOrder
+
 //let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
 
 ///We have to provide only the keys which we have to access. We should avoid unnecessary keys when fetching the contact. Reducing the keys means faster the access.

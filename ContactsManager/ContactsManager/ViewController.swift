@@ -32,7 +32,7 @@ class ViewController: UIViewController {
             switch status {
             case .success:
                 print("success")
-                ContactsManager.shared.create(name: "111")
+//                ContactsManager.shared.create(name: "111")
 //                ContactsManager.shared.create(name: "222")
                 
                 //try? ContactsManager.shared.fetchContacts(sortOrder: .givenName)
