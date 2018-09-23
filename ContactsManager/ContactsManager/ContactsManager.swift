@@ -329,8 +329,8 @@ final class ContactsManager: NSObject {
         return contacts
     }
     
-    public func fetchContacts(sortOrder: CNContactSortOrder) throws -> [CNContact] {
-        let fetchRequest = CNContactFetchRequest(keysToFetch: [ContactsManager.allContactKeys])
+    public func fetchContacts(sortOrder: CNContactSortOrder, keysToFetch: [CNKeyDescriptor] = [ContactsManager.allContactKeys]) throws -> [CNContact] {
+        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
         fetchRequest.unifyResults = true
         fetchRequest.sortOrder = sortOrder
         

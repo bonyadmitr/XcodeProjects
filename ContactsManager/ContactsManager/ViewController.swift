@@ -29,19 +29,22 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = backItem
         
         ContactsManager.shared.requestContactsAccess { [weak self] status in
+            guard let `self` = self else {
+                return
+            }
+            
             switch status {
             case .success:
                 print("success")
                 
                 do {
-                    let duplicatesByName = try ContactsManager.shared.findDuplicateContacts()
+                    let duplicatesByNameDict = try ContactsManager.shared.findDuplicateContacts()
                     
-                    duplicatesByName.forEach({
-                        self?.duplicatesByName.append($0)
-                    })
+                    duplicatesByNameDict.forEach { self.duplicatesByName.append($0) }
+                    self.duplicatesByName.sort { $0.name < $1.name }
                     
                     DispatchQueue.main.async {
-                        self?.tableView.reloadData()
+                        self.tableView.reloadData()
                     }
                     
                 } catch {
