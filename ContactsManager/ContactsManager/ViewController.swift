@@ -32,7 +32,7 @@ class ViewController: UIViewController {
             switch status {
             case .success:
                 print("success")
-//                ContactsManager.shared.create(name: "111")
+                ContactsManager.shared.create(name: "111")
 //                ContactsManager.shared.create(name: "222")
                 
                 //try? ContactsManager.shared.fetchContacts(sortOrder: .givenName)
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func showPicker(_ sender: UIBarButtonItem) {
-        /// https://forums.developer.apple.com/thread/19061
+        /// must be presented
         let picker = CNContactPickerViewController()
         
         /// If not set all properties are displayed
@@ -156,7 +156,8 @@ extension ViewController: UITableViewDelegate {
         let contact = duplicatesByName[indexPath.section].contacts[indexPath.row]
         
         let keys = CNContactViewController.descriptorForRequiredKeys()
-        guard let contactToView = try? ContactsManager.shared.fetchContacts(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
+        
+        guard let contactToView = try? ContactsManager.shared.fetchContact(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
             return
         }
         

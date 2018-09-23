@@ -8,6 +8,11 @@
 
 import Contacts
 
+// TODO: research classes
+//CNPostalAddressFormatter
+//CNContactFormatter
+//CNContactsUserDefaults
+
 
 // TODO: Merge duplicate https://stackoverflow.com/a/46023501
 // TODO: progress callback https://developer.apple.com/documentation/foundation/progress
@@ -41,7 +46,7 @@ typealias DuplicatesByName = [String: [CNContact]]
 /// Info.plist: NSContactsUsageDescription
 final class ContactsManager: NSObject {
     
-    override init() {
+     private override init() {
         super.init()
         
         NotificationCenter.default.addObserver(self, selector: #selector(contactStoreDidChange), name: .CNContactStoreDidChange, object: nil)
@@ -52,8 +57,30 @@ final class ContactsManager: NSObject {
     }
     
     @objc private func contactStoreDidChange(_ notification: Notification) {
-//        print("---", notification)
-        print("---", notification.userInfo!)
+        
+        print("---", notification)
+        
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        
+        /// change outside the app
+        if let isExtenralChanges = userInfo["CNNotificationOriginationExternally"] as? Bool, isExtenralChanges == true {
+            // TODO: delegate refetch contacts
+        } else { /// in app changes
+            if let changedContactIdentifiers = userInfo["CNNotificationSaveIdentifiersKey"] as?  [String] {
+                do {
+                    let contact = try ContactsManager.shared.fetchContact(contactIdentifier: changedContactIdentifiers[0], keysToFetch: [ContactsManager.allContactKeys])
+                    print(contact)
+                } catch {
+                    print(error)
+                    print(error as NSError)
+                    print(error.localizedDescription)
+                }
+                
+            }
+            //let contactStores = userInfo["CNNotificationSourcesKey"] as? [CNContactStore] /// tipicaly one item of ContactsManager 
+        }
     }
     
     static let shared = ContactsManager()
@@ -304,7 +331,7 @@ final class ContactsManager: NSObject {
         return try contactStore.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
     }
     
-    public func fetchContacts(contactIdentifier: String, keysToFetch: [CNKeyDescriptor]) throws -> CNContact {
+    public func fetchContact(contactIdentifier: String, keysToFetch: [CNKeyDescriptor]) throws -> CNContact {
         return try contactStore.unifiedContact(withIdentifier: contactIdentifier, keysToFetch: keysToFetch)
     }
     
