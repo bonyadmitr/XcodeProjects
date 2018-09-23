@@ -8,6 +8,8 @@
 
 import Contacts
 
+private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUnsupportedError, userInfo: nil)
+
 // TODO: research classes
 //CNPostalAddressFormatter
 //CNContactFormatter
@@ -328,6 +330,16 @@ final class ContactsManager: NSObject {
         }
     }
     
+    
+    public func deleteContact(_ contact: CNContact, completion: @escaping VoidResult) {
+        guard let deletingContact = contact.mutableCopy() as? CNMutableContact else {
+            assertionFailure()
+            completion(.failure(unknownError))
+            return
+        }
+        deleteContact(deletingContact, completion: completion)
+    }
+    
     public func convertToVCard(contacts: [CNContact], completion: @escaping HandlerResult<Data>) {
         queue.async {
             do {
@@ -414,6 +426,16 @@ final class ContactsManager: NSObject {
         try contactStore.execute(request)
     }
     
+    public func deleteContact(_ contact: CNContact) throws {
+        guard let deletingContact = contact.mutableCopy() as? CNMutableContact else {
+            assertionFailure()
+            throw unknownError
+        }
+        try deleteContact(deletingContact)
+    }
+    
+
+    
     public func convertToVCard(contacts: [CNContact]) throws -> Data {
         return try CNContactVCardSerialization.data(with: contacts)
     }
@@ -488,6 +510,21 @@ final class ContactsManager: NSObject {
         } else {
             return "No Name Phone Email"
         }
+    }
+    
+    func delete(contacts: [CNContact]) throws {
+        try contacts.forEach {
+            try deleteContact($0)
+        }
+    }
+    
+    func deleteAllContacts() throws {
+        let contacts = try fetchAllContacts(keysToFetch: [CNContactIdentifierKey as CNKeyDescriptor])
+        try delete(contacts: contacts)
+    }
+    
+    func performOnQueue(_ handler: @escaping () -> Void) {
+        queue.async(execute: handler)
     }
 }
 

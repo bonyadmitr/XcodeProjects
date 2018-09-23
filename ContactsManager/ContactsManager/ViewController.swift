@@ -198,7 +198,7 @@ extension ViewController: UITableViewDelegate {
             }
             let contact = self.duplicatesByName[indexPath.section].contacts[indexPath.row]
             do {
-                try ContactsManager.shared.deleteContact(contact.mutableCopy() as! CNMutableContact)
+                try ContactsManager.shared.deleteContact(contact)
                 
                 if self.duplicatesByName[indexPath.section].contacts.count > 2 {
                     self.duplicatesByName[indexPath.section].contacts.remove(at: indexPath.row)

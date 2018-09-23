@@ -150,9 +150,9 @@
                         <viewLayoutGuide key="safeArea" id="q3e-8w-O6m"/>
                     </view>
                     <navigationItem key="navigationItem" title="No Name Contacts" id="qC1-vG-DqF">
-                        <barButtonItem key="rightBarButtonItem" title="Picker" id="aWH-Js-t66">
+                        <barButtonItem key="rightBarButtonItem" title="Delete All" id="aWH-Js-t66">
                             <connections>
-                                <action selector="showPicker:" destination="Mct-4f-RHg" id="bmE-jk-dw8"/>
+                                <action selector="deleteAllNoNameContacts:" destination="Mct-4f-RHg" id="ukh-EC-x09"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

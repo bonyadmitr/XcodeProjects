@@ -56,6 +56,27 @@ final class NoNameContactsController: UIViewController {
             }
         }
     }
+    
+    // TODO: UI block or guard on cell selection
+    @IBAction private func deleteAllNoNameContacts(_ sender: UIBarButtonItem) {
+        ContactsManager.shared.performOnQueue { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            do {
+                try ContactsManager.shared.delete(contacts: self.noNameContacts)
+                self.noNameContacts.removeAll()
+                self.noNameContactsDisplayName.removeAll()
+                
+                DispatchQueue.main.async { 
+                    self.tableView.reloadData()
+                }
+            } catch {
+                assertionFailure(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension NoNameContactsController: UITableViewDataSource {
@@ -100,7 +121,7 @@ extension NoNameContactsController: UITableViewDelegate {
             }
             let deletingContact = self.noNameContacts[indexPath.row]
             do {
-                try ContactsManager.shared.deleteContact(deletingContact.mutableCopy() as! CNMutableContact)
+                try ContactsManager.shared.deleteContact(deletingContact)
                 self.noNameContacts.remove(at: indexPath.row)
                 self.noNameContactsDisplayName.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
