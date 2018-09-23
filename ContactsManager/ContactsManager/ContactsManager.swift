@@ -17,6 +17,15 @@ private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUn
 
 /// settings from "Setting app - Contacts"
 //CNContactsUserDefaults, CNContactsUserDefaults.shared().sortOrder
+//---
+
+// TODO: Merge duplicate https://stackoverflow.com/a/46023501
+// TODO: progress callback https://developer.apple.com/documentation/foundation/progress
+// TODO: manual Merge duplicate
+// TODO: Merge all duplicate
+// TODO: view all contacts controller
+// TODO: backups controller
+
 
 //let q = CNLabeledValue<NSString>.localizedString(forLabel: contactHomeAddress.label!)
 
@@ -36,14 +45,6 @@ private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUn
 //            ] as [CNKeyDescriptor]
 //        //+ [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
 //    }
-
-
-// TODO: Merge duplicate https://stackoverflow.com/a/46023501
-// TODO: progress callback https://developer.apple.com/documentation/foundation/progress
-// TODO: background queue
-// TODO: manual Merge duplicate by selecting controller
-// TODO: Merge all duplicate
-// TODO: view all contacts controller
 
 typealias DuplicatesByName = [String: [CNContact]]
 
