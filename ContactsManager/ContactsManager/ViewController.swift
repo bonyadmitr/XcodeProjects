@@ -32,19 +32,6 @@ class ViewController: UIViewController {
             switch status {
             case .success:
                 print("success")
-//                ContactsManager.shared.create(name: "111")
-//                ContactsManager.shared.create(name: "222")
-                
-                //try? ContactsManager.shared.fetchContacts(sortOrder: .givenName)
-                
-//                ContactsManager.shared.fetchAllContacts { result in
-//                    switch result {
-//                    case .success(let contacts):
-//                        print("contacts.count: ", contacts.count)
-//                    case .failure(let error):
-//                        print(error.localizedDescription)
-//                    }
-//                }
                 
                 do {
                     let duplicatesByName = try ContactsManager.shared.findDuplicateContacts()
@@ -56,7 +43,6 @@ class ViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                     }
-                    
                     
                 } catch {
                     print(error.localizedDescription)
@@ -88,6 +74,7 @@ class ViewController: UIViewController {
     
     @IBAction private func showPicker(_ sender: UIBarButtonItem) {
         /// must be presented
+        /// implementing one of two delegate methods will configure the picker for multi-selection
         let picker = CNContactPickerViewController()
         
         /// If not set all properties are displayed
@@ -140,30 +127,21 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let cell = cell as? UITableViewCell else {
-//            return
-//        }
-        
-//        let duplicateByName = duplicatesByName[indexPath.section]
-        
         cell.textLabel?.text = "\(indexPath.row + 1)"
-//        cell.textLabel?.text = duplicateByName.contacts[indexPath.row].identifier
-//        cell.detailTextLabel?.text = 
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let contact = duplicatesByName[indexPath.section].contacts[indexPath.row]
-        
         let keys = CNContactViewController.descriptorForRequiredKeys()
         
         guard let contactToView = try? ContactsManager.shared.fetchContact(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
             return assertionFailure()
         }
         
-        /// this init don't need
-        /// it's like "CNContactViewController(for" with ".allowsEditing = false"
-        /// let contactVC = CNContactViewController(forUnknownContact: contactToView)
+        /// this init don't need. it's like "CNContactViewController(for" with ".allowsEditing = false"
+        //let contactVC = CNContactViewController(forUnknownContact: contactToView)
         
         /// must be presented
 //        let contactVC = CNContactViewController(forNewContact: contactToView)
@@ -178,7 +156,6 @@ extension ViewController: UITableViewDelegate {
         
         /// The contact store from which the contact was fetched or to which it will be saved
         contactVC.contactStore = ContactsManager.shared.contactStore
-        
         
         navigationController?.pushViewController(contactVC, animated: true)
         
@@ -239,11 +216,6 @@ extension ViewController: CNContactPickerDelegate {
 //        print("--- contactPickerDidCancel")
 //    }
     
-    
-    /*!
-     * @abstract    Singular delegate methods.
-     * @discussion  These delegate methods will be invoked when the user selects a single contact or property.
-     */
 //    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
 //        print("--- didSelect contact", contact)
 //    }
@@ -252,18 +224,13 @@ extension ViewController: CNContactPickerDelegate {
 //        print("--- didSelect contactProperty", contactProperty)
 //    }
     
-    
-    /*!
-     * @abstract    Plural delegate methods.
-     * @discussion  These delegate methods will be invoked when the user is done selecting multiple contacts or properties.
-     *              Implementing one of these methods will configure the picker for multi-selection.
-     */
+    /// implementing this method will configure the picker for multi-selection
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
         print("--- didSelect contacts", contacts)
     }
     
+    /// implementing this method will configure the picker for multi-selection
 //    func contactPicker(_ picker: CNContactPickerViewController, didSelectContactProperties contactProperties: [CNContactProperty]) {  
-//        print("--- contactProperties: ", contactProperties)
-////        self.resultLabel.text = "Picked \(contactPropertiesCount) contact email(s)"  
+//        print("--- contactProperties: ", contactProperties)  
 //    }
 }
