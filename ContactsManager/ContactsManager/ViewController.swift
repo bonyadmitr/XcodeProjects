@@ -158,7 +158,7 @@ extension ViewController: UITableViewDelegate {
         let keys = CNContactViewController.descriptorForRequiredKeys()
         
         guard let contactToView = try? ContactsManager.shared.fetchContact(contactIdentifier: contact.identifier, keysToFetch: [keys]) else {
-            return
+            return assertionFailure()
         }
         
         /// this init don't need
@@ -194,7 +194,7 @@ extension ViewController: UITableViewDelegate {
         /// weak?
         let action = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] _, indexPath in
             guard let `self` = self else {
-                return
+                return assertionFailure()
             }
             let contact = self.duplicatesByName[indexPath.section].contacts[indexPath.row]
             do {

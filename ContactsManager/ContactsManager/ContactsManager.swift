@@ -84,7 +84,7 @@ final class ContactsManager: NSObject {
         print("---", notification)
         
         guard let userInfo = notification.userInfo else {
-            return
+            return assertionFailure()
         }
         
         /// change outside the app
