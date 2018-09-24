@@ -60,6 +60,10 @@ final class NoNameContactsController: UIViewController {
     
     // TODO: UI block or guard on cell selection
     @IBAction private func deleteAllNoNameContacts(_ sender: UIBarButtonItem) {
+        if isDeletingContacts {
+            return
+        }
+        GlobalActivityIndicator.show()
         isDeletingContacts = true
         ContactsManager.shared.performOnQueue { [weak self] in
             guard let `self` = self else {
@@ -78,6 +82,7 @@ final class NoNameContactsController: UIViewController {
                 assertionFailure(error.localizedDescription)
             }
             self.isDeletingContacts = false
+            GlobalActivityIndicator.hide()
         }
     }
 }

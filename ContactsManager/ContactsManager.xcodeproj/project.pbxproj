@@ -16,6 +16,11 @@
 		CEF38E692156133000755145 /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E672156133000755145 /* EmailSender.swift */; };
 		CEF38E6A2156133000755145 /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E682156133000755145 /* UIApplication+URL.swift */; };
 		CEF38E6E2157AE4C00755145 /* NoNameContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */; };
+		CEF38E742158BEFF00755145 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E6F2158BEFE00755145 /* ActivityIndicator.swift */; };
+		CEF38E752158BEFF00755145 /* GlobalActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E702158BEFE00755145 /* GlobalActivityIndicator.swift */; };
+		CEF38E762158BEFF00755145 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E712158BEFE00755145 /* ActivityIndicatorView.swift */; };
+		CEF38E772158BEFF00755145 /* ActivityIndicatorCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E722158BEFE00755145 /* ActivityIndicatorCounter.swift */; };
+		CEF38E782158BEFF00755145 /* UIBlockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF38E732158BEFE00755145 /* UIBlockable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		CEF38E672156133000755145 /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
 		CEF38E682156133000755145 /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameContactsController.swift; sourceTree = "<group>"; };
+		CEF38E6F2158BEFE00755145 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		CEF38E702158BEFE00755145 /* GlobalActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalActivityIndicator.swift; sourceTree = "<group>"; };
+		CEF38E712158BEFE00755145 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		CEF38E722158BEFE00755145 /* ActivityIndicatorCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCounter.swift; sourceTree = "<group>"; };
+		CEF38E732158BEFE00755145 /* UIBlockable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlockable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +77,7 @@
 				CEF38E532154E79000755145 /* ViewController.swift */,
 				CEF38E6D2157AE4C00755145 /* NoNameContactsController.swift */,
 				CEF38E6421552CFE00755145 /* ContactsManager.swift */,
+				CEF38E792158BF0800755145 /* ActivityIndicator */,
 				CEF38E662156133000755145 /* EmailSender */,
 			);
 			path = ContactsManager;
@@ -90,6 +101,18 @@
 				CEF38E682156133000755145 /* UIApplication+URL.swift */,
 			);
 			path = EmailSender;
+			sourceTree = "<group>";
+		};
+		CEF38E792158BF0800755145 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				CEF38E6F2158BEFE00755145 /* ActivityIndicator.swift */,
+				CEF38E722158BEFE00755145 /* ActivityIndicatorCounter.swift */,
+				CEF38E712158BEFE00755145 /* ActivityIndicatorView.swift */,
+				CEF38E702158BEFE00755145 /* GlobalActivityIndicator.swift */,
+				CEF38E732158BEFE00755145 /* UIBlockable.swift */,
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,12 +186,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF38E782158BEFF00755145 /* UIBlockable.swift in Sources */,
 				CEF38E6E2157AE4C00755145 /* NoNameContactsController.swift in Sources */,
 				CEF38E542154E79000755145 /* ViewController.swift in Sources */,
 				CEF38E692156133000755145 /* EmailSender.swift in Sources */,
+				CEF38E752158BEFF00755145 /* GlobalActivityIndicator.swift in Sources */,
 				CEF38E6521552CFE00755145 /* ContactsManager.swift in Sources */,
+				CEF38E742158BEFF00755145 /* ActivityIndicator.swift in Sources */,
+				CEF38E762158BEFF00755145 /* ActivityIndicatorView.swift in Sources */,
 				CEF38E6A2156133000755145 /* UIApplication+URL.swift in Sources */,
 				CEF38E522154E79000755145 /* AppDelegate.swift in Sources */,
+				CEF38E772158BEFF00755145 /* ActivityIndicatorCounter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
