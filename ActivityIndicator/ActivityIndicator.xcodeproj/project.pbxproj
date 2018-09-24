@@ -71,12 +71,8 @@
 				CE197EBF2064CA5E00C7A650 /* Main.storyboard */,
 				CE197EBD2064CA5E00C7A650 /* ViewController.swift */,
 				CEC2BD452064D5DF004949D5 /* ActivityIndicatorPresenter.swift */,
-				CEC2BD4A20655777004949D5 /* UIBlockable.swift */,
-				CEC2BD432064D5AF004949D5 /* ActivityIndicator.swift */,
-				CE197ECD2064CA7500C7A650 /* ActivityIndicatorCounter.swift */,
-				CEC2BD472064D646004949D5 /* ActivityIndicatorView.swift */,
 				CEC2BD4E206558F1004949D5 /* ActivityIndicatorObject.swift */,
-				CE966CE921302C1B00901295 /* GlobalActivityIndicator.swift */,
+				CEF38E7A2158C1D100755145 /* ActivityIndicator */,
 			);
 			path = ActivityIndicator;
 			sourceTree = "<group>";
@@ -90,6 +86,18 @@
 				CE197EC72064CA5E00C7A650 /* Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		CEF38E7A2158C1D100755145 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2BD4A20655777004949D5 /* UIBlockable.swift */,
+				CEC2BD432064D5AF004949D5 /* ActivityIndicator.swift */,
+				CE197ECD2064CA7500C7A650 /* ActivityIndicatorCounter.swift */,
+				CEC2BD472064D646004949D5 /* ActivityIndicatorView.swift */,
+				CE966CE921302C1B00901295 /* GlobalActivityIndicator.swift */,
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
