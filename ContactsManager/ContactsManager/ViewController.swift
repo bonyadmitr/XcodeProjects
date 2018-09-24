@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         
         picker.delegate = self  
         present(picker, animated: true, completion: nil)  
-    }  
+    }
     
     //#MARK: CNContactPickerDelegate methods  
 }
@@ -155,7 +155,7 @@ extension ViewController: UITableViewDelegate {
         
 //        contactVC.delegate = self
         //contactVC.modalPresentationStyle = .formSheet
-        contactVC.allowsEditing = false
+        //contactVC.allowsEditing = false
 //        contactVC.allowsActions = false /// "Send Message", "Share Contact", etc
         
         /// The contact store from which the contact was fetched or to which it will be saved

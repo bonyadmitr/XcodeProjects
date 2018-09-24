@@ -12,6 +12,7 @@ private let unknownError = NSError(domain: NSCocoaErrorDomain, code: NSFeatureUn
 
 typealias DuplicatesByName = [String: [CNContact]]
 
+// TODO: update on CNContactStoreDidChange
 // TODO: Merge duplicate https://stackoverflow.com/a/46023501
 // TODO: progress callback https://developer.apple.com/documentation/foundation/progress
 // TODO: manual Merge duplicate

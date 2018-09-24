@@ -22,6 +22,7 @@ final class NoNameContactsController: UIViewController {
     
     private var noNameContacts = [CNContact]() 
     private var noNameContactsDisplayName = [String]()
+    private var isDeletingContacts = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,7 @@ final class NoNameContactsController: UIViewController {
     
     // TODO: UI block or guard on cell selection
     @IBAction private func deleteAllNoNameContacts(_ sender: UIBarButtonItem) {
+        isDeletingContacts = true
         ContactsManager.shared.performOnQueue { [weak self] in
             guard let `self` = self else {
                 return
@@ -75,6 +77,7 @@ final class NoNameContactsController: UIViewController {
             } catch {
                 assertionFailure(error.localizedDescription)
             }
+            self.isDeletingContacts = false
         }
     }
 }
@@ -98,6 +101,10 @@ extension NoNameContactsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if isDeletingContacts {
+            return
+        }
+        
         let contact = noNameContacts[indexPath.row]
         let keys = CNContactViewController.descriptorForRequiredKeys()
         
@@ -115,6 +122,9 @@ extension NoNameContactsController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if isDeletingContacts {
+            return nil
+        }
         let action = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] _, indexPath in
             guard let `self` = self else {
                 return assertionFailure()
