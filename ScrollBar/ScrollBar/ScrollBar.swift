@@ -34,8 +34,19 @@ final class ScrollBar: UIView {
     
     private weak var scrollView: UIScrollView?
     
-    private var handleView: UIImageView?
-    private var trackView: UIImageView?
+    private lazy var handleView: UIImageView = {
+        let handleImage = ScrollBar.verticalCapsuleImage(withWidth: handleWidth)
+        let handleView = UIImageView(image: handleImage)
+        handleView.tintColor = .black
+        return handleView
+    }()
+    
+    private lazy var trackView: UIImageView = {
+        let trackImage = ScrollBar.verticalCapsuleImage(withWidth: trackWidth)
+        let trackView = UIImageView(image: trackImage)
+        trackView.tintColor = .lightGray
+        return trackView
+    }()
     
     var isDisabled = false
     
@@ -45,6 +56,21 @@ final class ScrollBar: UIView {
     let trackWidth: CGFloat = 2
     let handleWidth: CGFloat = 4
     var horizontalOffset: CGFloat = 0
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        addSubview(trackView)
+        addSubview(handleView)
+    }
     
     func add(to scrollView: UIScrollView) {
         if self.scrollView == scrollView {
@@ -56,24 +82,6 @@ final class ScrollBar: UIView {
         config(scrollView: scrollView)
         scrollView.addSubview(self)
         layoutInScrollView()
-    }
-    
-    private func setUpViews() {
-        guard self.handleView == nil, self.trackView == nil else {
-            return
-        }
-        
-        let trackImage = ScrollBar.verticalCapsuleImage(withWidth: trackWidth)
-        let trackView = UIImageView(image: trackImage)
-        trackView.tintColor = .lightGray
-        self.trackView = trackView
-        addSubview(trackView)
-        
-        let handleImage = ScrollBar.verticalCapsuleImage(withWidth: handleWidth)
-        let handleView = UIImageView(image: handleImage)
-        handleView.tintColor = .black
-        self.handleView = handleView
-        addSubview(handleView)
     }
     
     //    private var observation: NSKeyValueObservation?
@@ -190,7 +198,7 @@ final class ScrollBar: UIView {
         trackFrame.size.width = trackWidth
         trackFrame.size.height = frame.size.height
         trackFrame.origin.x = CGFloat(ceilf(Float( ((frame.size.width - trackWidth) * 0.5) + horizontalOffset) ))
-        trackView?.frame = trackFrame.integral
+        trackView.frame = trackFrame.integral
         
         // Don't handle automatic layout when dragging; we'll do that manually elsewhere
         if isDragging || isDisabled {
@@ -233,7 +241,7 @@ final class ScrollBar: UIView {
         handleFrame.origin.y = max(handleFrame.origin.y, 0.0)
         handleFrame.origin.y = min(handleFrame.origin.y, (frame.size.height - handleFrame.size.height))
         
-        handleView?.frame = handleFrame
+        handleView.frame = handleFrame
     }
     
     func heightOfHandleForContentSize() -> CGFloat {
@@ -247,7 +255,7 @@ final class ScrollBar: UIView {
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        if handleExclusiveInteractionEnabled, let handleView = handleView {
+        if handleExclusiveInteractionEnabled {
             let handleMinY = handleView.frame.minY
             let handleMaxY = handleView.frame.maxY
             return (0 <= point.x) && (handleMinY <= point.y) && (point.y <= handleMaxY)
@@ -258,7 +266,7 @@ final class ScrollBar: UIView {
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        setUpViews()
+//        setUpViews()
     }
     
     class func verticalCapsuleImage(withWidth width: CGFloat) -> UIImage? {
