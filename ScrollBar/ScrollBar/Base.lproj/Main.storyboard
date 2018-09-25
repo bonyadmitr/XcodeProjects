@@ -56,6 +56,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="ScrollBar" id="CB5-Yz-lch"/>
+                    <connections>
+                        <outlet property="tableView" destination="eUl-xK-aWJ" id="udF-hn-bSX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
