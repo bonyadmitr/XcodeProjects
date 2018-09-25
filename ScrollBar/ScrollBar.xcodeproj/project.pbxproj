@@ -54,14 +54,22 @@
 		CE45DA59215A299F00AD2AB2 /* ScrollBar */ = {
 			isa = PBXGroup;
 			children = (
-				CE45DA5A215A299F00AD2AB2 /* AppDelegate.swift */,
-				CE45DA5C215A299F00AD2AB2 /* ViewController.swift */,
+				CE45DA6C215A2A7000AD2AB2 /* App */,
 				CE45DA5E215A299F00AD2AB2 /* Main.storyboard */,
+				CE45DA5C215A299F00AD2AB2 /* ViewController.swift */,
+			);
+			path = ScrollBar;
+			sourceTree = "<group>";
+		};
+		CE45DA6C215A2A7000AD2AB2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE45DA5A215A299F00AD2AB2 /* AppDelegate.swift */,
 				CE45DA61215A29A000AD2AB2 /* Assets.xcassets */,
 				CE45DA63215A29A000AD2AB2 /* LaunchScreen.storyboard */,
 				CE45DA66215A29A000AD2AB2 /* Info.plist */,
 			);
-			path = ScrollBar;
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ScrollBar/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ScrollBar/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,7 +306,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ScrollBar/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ScrollBar/App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
