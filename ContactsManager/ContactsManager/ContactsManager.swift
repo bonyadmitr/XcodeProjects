@@ -408,6 +408,7 @@ final class ContactsManager: NSObject {
     
     func findDuplicateContacts() throws -> DuplicatesByName {
         let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        // TODO: check for older iOSs
         /// maybe need CNContactIdentifierKey for older iOSs
         //let keys = [CNContactIdentifierKey as CNKeyDescriptor, CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
         
