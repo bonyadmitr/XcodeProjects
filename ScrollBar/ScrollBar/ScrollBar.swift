@@ -93,16 +93,10 @@ final class ScrollBar: UIView {
         layoutInScrollView()
     }
     
-    //    private var observation: NSKeyValueObservation?
-    
     private func config(scrollView: UIScrollView?) {
         guard let scrollView = scrollView else {
             return
         }
-        //        observation = scrollView.observe(\.contentOffset) { scrollView, change in
-        //            
-        //        }
-        
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: [.new], context: nil)
@@ -145,20 +139,20 @@ final class ScrollBar: UIView {
         }
         
         var scrollViewFrame = scrollView.frame
-        var insets = scrollView.contentInset
-        let contentOffset = scrollView.contentOffset
-        
+        var contentInset = scrollView.contentInset
         let halfWidth = scrollBarWidth * 0.5
         
         if #available(iOS 11.0, *) {
-            insets = scrollView.adjustedContentInset
+            contentInset = scrollView.adjustedContentInset
         }
         
-        scrollViewFrame.size.height -= insets.top + insets.bottom
+        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
-        var largeTitleDelta: CGFloat = 0
+        let largeTitleDelta: CGFloat
         if isInsetForLargeTitles {
-            largeTitleDelta = abs(min(insets.top + contentOffset.y, 0))
+            largeTitleDelta = abs(min(contentInset.top + scrollView.contentOffset.y, 0))
+        } else {
+            largeTitleDelta = 0
         }
         
         let height = scrollViewFrame.height - (verticalInset.top + verticalInset.bottom) - largeTitleDelta
@@ -181,15 +175,13 @@ final class ScrollBar: UIView {
             frame.origin.y = originalYOffset
         } else {
             frame.origin.y = verticalInset.top
-            frame.origin.y += insets.top
+            frame.origin.y += contentInset.top
             frame.origin.y += largeTitleDelta
         }
         
-        frame.origin.y += contentOffset.y
+        frame.origin.y += scrollView.contentOffset.y
         
         self.frame = frame
-        
-        superview?.bringSubview(toFront: self)
     }
     
     override func layoutSubviews() {
@@ -199,47 +191,41 @@ final class ScrollBar: UIView {
             return
         }
         
-        let frame = self.frame
-        
-        // The frame of the track
-        var trackFrame = CGRect.zero
-        trackFrame.size.width = trackWidth
-        trackFrame.size.height = frame.height 
-        trackFrame.origin.x = ceil((frame.width - trackWidth) * 0.5 + horizontalOffset)
-        trackView.frame = trackFrame.integral
+        trackView.frame = CGRect(x: ceil((frame.width - trackWidth) * 0.5 + horizontalOffset),
+                                 y: 0, width: trackWidth, height: frame.height).integral
         
         // Don't handle automatic layout when dragging; we'll do that manually elsewhere
         if isDragging || isDisabled {
             return
         }
         
-        // The frame of the handle
-        var handleFrame = CGRect.zero
-        handleFrame.size.width = handleWidth
-        handleFrame.size.height = heightOfHandleForContentSize()
-        handleFrame.origin.x = ceil((frame.width - handleWidth) * 0.5 + horizontalOffset)
+        var handleFrame = CGRect(x: ceil((frame.width - handleWidth) * 0.5 + horizontalOffset),
+                                 y: 0, width: handleWidth, height: heightOfHandleForContentSize)
         
         // Work out the y offset of the handle
-        var contentInset: UIEdgeInsets = scrollView.contentInset
+        // TODO: check other scrollView.contentInset for 
+        let contentInset: UIEdgeInsets
         if #available(iOS 11.0, *) {
             contentInset = scrollView.safeAreaInsets
+        } else {
+            contentInset = scrollView.contentInset
         }
         
-        let contentOffset: CGPoint = scrollView.contentOffset
-        let contentSize: CGSize = scrollView.contentSize
-        let scrollViewFrame: CGRect = scrollView.frame
+        let contentOffset = scrollView.contentOffset
+        let contentSize = scrollView.contentSize
         
-        let scrollableHeight: CGFloat = (contentSize.height + contentInset.top + contentInset.bottom) - scrollViewFrame.height
-        let scrollProgress: CGFloat = (contentOffset.y + contentInset.top) / scrollableHeight
+        let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
+        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
         handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
+        
         if contentOffset.y < -contentInset.top {
             // The top
             handleFrame.size.height -= -contentOffset.y - contentInset.top
             handleFrame.size.height = max(handleFrame.height, trackWidth * 2 + 2)
-        } else if contentOffset.y + scrollViewFrame.height > contentSize.height + contentInset.bottom {
+        } else if contentOffset.y + scrollView.frame.height > contentSize.height + contentInset.bottom {
             // The bottom
-            let adjustedContentOffset: CGFloat = contentOffset.y + scrollViewFrame.height
-            let delta: CGFloat = adjustedContentOffset - (contentSize.height + contentInset.bottom)
+            let adjustedContentOffset: CGFloat = contentOffset.y + scrollView.frame.height
+            let delta = adjustedContentOffset - (contentSize.height + contentInset.bottom)
             handleFrame.size.height -= delta
             handleFrame.size.height = max(handleFrame.height, trackWidth * 2 + 2)
             handleFrame.origin.y = frame.height - handleFrame.height
@@ -247,12 +233,12 @@ final class ScrollBar: UIView {
         
         // Clamp to the bounds of the frame
         handleFrame.origin.y = max(handleFrame.origin.y, 0.0)
-        handleFrame.origin.y = min(handleFrame.origin.y, (frame.height - handleFrame.height))
+        handleFrame.origin.y = min(handleFrame.origin.y, frame.height - handleFrame.height)
         
         handleView.frame = handleFrame
     }
     
-    func heightOfHandleForContentSize() -> CGFloat {
+    var heightOfHandleForContentSize: CGFloat {
         guard let scrollView = scrollView else {
             return scrollBarHandleMinHeight
         }
@@ -311,9 +297,10 @@ final class ScrollBar: UIView {
         }
         
         var handleFrame = handleView.frame
+        let handleY = handleFrame.origin.y
         
-        if touchPoint.y > (handleFrame.origin.y - 20), touchPoint.y < handleFrame.origin.y + (handleFrame.height + 20) {
-            yOffset = touchPoint.y - handleFrame.origin.y
+        if touchPoint.y > (handleY - 20), touchPoint.y < handleY + (handleFrame.height + 20) {
+            yOffset = touchPoint.y - handleY
             return
         }
         
@@ -321,13 +308,13 @@ final class ScrollBar: UIView {
             let halfHeight = handleFrame.height * 0.5
             
             var destinationYOffset = touchPoint.y - halfHeight
-            destinationYOffset = max(0.0, destinationYOffset)
+            destinationYOffset = max(0, destinationYOffset)
             destinationYOffset = min(frame.height - halfHeight, destinationYOffset)
             
             yOffset = touchPoint.y - destinationYOffset
             handleFrame.origin.y = destinationYOffset
             
-            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.1, options: .beginFromCurrentState, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .beginFromCurrentState, animations: {
                 self.handleView.frame = handleFrame
             })
             
@@ -340,34 +327,32 @@ final class ScrollBar: UIView {
             return
         }
         
-        var yOffset = yOffset
         let heightRange = trackView.frame.height - handleView.frame.height
-        yOffset = max(0.0, yOffset)
+        var yOffset = max(0, yOffset)
         yOffset = min(heightRange, yOffset)
         
-        let positionRatio: CGFloat = yOffset / heightRange
+        let positionRatio = yOffset / heightRange
         
-        let frame: CGRect = scrollView.frame
-        var inset: UIEdgeInsets = scrollView.contentInset
-        let contentSize: CGSize = scrollView.contentSize
+        var contentInset = scrollView.contentInset
+        let contentSize = scrollView.contentSize
         
         if #available(iOS 11.0, *) {
-            inset = scrollView.adjustedContentInset
+            contentInset = scrollView.adjustedContentInset
         }
-        inset.top = originalTopInset
+        contentInset.top = originalTopInset
         
-        let totalScrollSize: CGFloat = (contentSize.height + inset.top + inset.bottom) - frame.height
-        var scrollOffset: CGFloat = totalScrollSize * positionRatio
-        scrollOffset -= inset.top
+        let totalScrollSize = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
+        var scrollOffset = totalScrollSize * positionRatio
+        scrollOffset -= contentInset.top
         
-        var contentOffset: CGPoint = scrollView.contentOffset
+        var contentOffset = scrollView.contentOffset
         contentOffset.y = scrollOffset
         
         // Animate to help coax the large title navigation bar to behave
         if #available(iOS 11.0, *) {
-            UIView.animate(withDuration: animated ? 0.1 : 0.00001, animations: {
+            UIView.animate(withDuration: animated ? 0.1 : 0.00001) {
                 scrollView.setContentOffset(contentOffset, animated: false)
-            })
+            }
         } else {
             scrollView.setContentOffset(contentOffset, animated: false)
         }
@@ -380,7 +365,7 @@ final class ScrollBar: UIView {
         
         var handleFrame: CGRect = handleView.frame
         let trackFrame: CGRect = trackView.frame
-        let minimumY: CGFloat = 0.0
+        let minimumY: CGFloat = 0
         let maximumY = trackFrame.height - handleFrame.height
         
         if handleExclusiveInteractionEnabled {
@@ -399,6 +384,7 @@ final class ScrollBar: UIView {
             yOffset += handleFrame.origin.y
             yOffset = max(minimumY, yOffset)
             handleFrame.origin.y = minimumY
+            
         } else if handleFrame.origin.y > maximumY {
             let handleOverflow = handleFrame.maxY - trackFrame.height
             yOffset += handleOverflow
