@@ -20,7 +20,7 @@ final class ScrollBar: UIView {
     
     private let edgeInset: CGFloat = 7.5
     
-    var isDragging = false
+    private var isDragging = false
     
     
     /// The amount of padding above and below the scroll bar (Only top and bottom values are counted.)
@@ -30,8 +30,8 @@ final class ScrollBar: UIView {
     /** When enabled, the scroll bar will only respond to direct touches to the handle control.
      Touches to the track will be passed to the UI controls beneath it.
      Default is NO. */
-    var handleExclusiveInteractionEnabled = true
-    
+    // TODO: need to create pan gester with begin on tap
+    private var handleExclusiveInteractionEnabled = true
     
     private weak var scrollView: UIScrollView?
     
@@ -49,19 +49,19 @@ final class ScrollBar: UIView {
         return trackView
     }()
     
-    var isDisabled = false
+    private var isDisabled = false
     
-    var originalHeight: CGFloat = 0
-    var originalYOffset: CGFloat = 0
+    private var originalHeight: CGFloat = 0
+    private var originalYOffset: CGFloat = 0
     
-    let trackWidth: CGFloat = 2
-    let handleWidth: CGFloat = 4
-    var horizontalOffset: CGFloat = 0
+    private let trackWidth: CGFloat = 2
+    private let handleWidth: CGFloat = 4
+    private var horizontalOffset: CGFloat = 0
     
-    var originalTopInset: CGFloat = 0
-    var yOffset: CGFloat = 0
+    private var originalTopInset: CGFloat = 0
+    private var yOffset: CGFloat = 0
     
-    var isInsetForLargeTitles = false
+    private var isInsetForLargeTitles = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -372,12 +372,13 @@ final class ScrollBar: UIView {
         let minimumY: CGFloat = 0
         let maximumY = trackFrame.height - handleFrame.height
         
-        if handleExclusiveInteractionEnabled {
-            if touchPoint.y < (handleFrame.origin.y - 20) || touchPoint.y > handleFrame.origin.y + (handleFrame.height + 20) {
-                // This touch is not on the handle; eject.
-                return
-            }
-        }
+        /// to prevent too fast scroll
+//        if handleExclusiveInteractionEnabled {
+//            if touchPoint.y < (handleFrame.origin.y - 20) || touchPoint.y > handleFrame.origin.y + (handleFrame.height + 20) {
+//                // This touch is not on the handle; eject.
+//                return
+//            }
+//        }
         
         // Apply the updated Y value plus the previous offset
         var delta = handleFrame.origin.y
@@ -434,18 +435,10 @@ final class ScrollBar: UIView {
         // If the user contacts the screen in a swiping motion,
         // the scroll view will automatically highjack the touch
         // event unless we explicitly override it here.
-        
         scrollView?.isScrollEnabled = result != self
         return result
 
     }
-    
-    // MARK: - refactor
-    
-//    override func willMove(toSuperview newSuperview: UIView?) {
-//        super.willMove(toSuperview: newSuperview)
-//        setUpViews()
-//    }
     
     class func verticalCapsuleImage(withWidth width: CGFloat) -> UIImage? {
         let radius = width * 0.5
