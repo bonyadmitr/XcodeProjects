@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     
-    private let scrollBar = ScrollBar()
+    private let scrollBar = ScrollBarView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
