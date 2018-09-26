@@ -9,6 +9,7 @@
 import UIKit
 
 /// https://github.com/TimOliver/TOScrollBar
+
 final class ScrollBar: UIView {
     
     /// The width of this control (44 is minimum recommended tapping space)
@@ -29,7 +30,7 @@ final class ScrollBar: UIView {
     /** When enabled, the scroll bar will only respond to direct touches to the handle control.
      Touches to the track will be passed to the UI controls beneath it.
      Default is NO. */
-    var handleExclusiveInteractionEnabled = false
+    var handleExclusiveInteractionEnabled = true
     
     
     private weak var scrollView: UIScrollView?
@@ -57,6 +58,9 @@ final class ScrollBar: UIView {
     let handleWidth: CGFloat = 4
     var horizontalOffset: CGFloat = 0
     
+    var originalTopInset: CGFloat = 0
+    var yOffset: CGFloat = 0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -70,6 +74,9 @@ final class ScrollBar: UIView {
     private func setup() {
         addSubview(trackView)
         addSubview(handleView)
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(scrollBarGestureRecognized))
+        addGestureRecognizer(gestureRecognizer)
     }
     
     func add(to scrollView: UIScrollView) {
@@ -264,10 +271,190 @@ final class ScrollBar: UIView {
         }
     }
     
-    override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-//        setUpViews()
+    // MARK: - scrollBarGestureRecognized
+    
+    @objc private func scrollBarGestureRecognized(_ gesture: UIPanGestureRecognizer) {
+        let touchPoint = gesture.location(in: self)
+        
+        switch gesture.state {
+        case .began:
+            gestureBegan(at: touchPoint)
+        case .changed:
+            gestureMoved(to: touchPoint)
+        case .ended, .cancelled:
+            gestureEnded()
+        case .possible, .failed:
+            break
+        }
     }
+    
+    private func gestureBegan(at touchPoint: CGPoint) {
+        if isDisabled {
+            return
+        }
+        
+        guard let scrollView = scrollView else {
+            return
+        }
+        
+        scrollView.isScrollEnabled = false
+        isDragging = true
+        
+        originalHeight = frame.height
+        originalYOffset = frame.origin.y - scrollView.contentOffset.y
+        
+        if #available(iOS 11.0, *) {
+            originalTopInset = scrollView.adjustedContentInset.top
+        } else {
+            originalTopInset = scrollView.contentInset.top
+        }
+        
+        var handleFrame = handleView.frame
+        
+        if touchPoint.y > (handleFrame.origin.y - 20), touchPoint.y < handleFrame.origin.y + (handleFrame.size.height + 20) {
+            yOffset = touchPoint.y - handleFrame.origin.y
+            return
+        }
+        
+        if !handleExclusiveInteractionEnabled {
+            let halfHeight = handleFrame.size.height * 0.5
+            
+            var destinationYOffset = touchPoint.y - halfHeight
+            destinationYOffset = max(0.0, destinationYOffset)
+            destinationYOffset = min(frame.height - halfHeight, destinationYOffset)
+            
+            yOffset = touchPoint.y - destinationYOffset
+            handleFrame.origin.y = destinationYOffset
+            
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.1, options: .beginFromCurrentState, animations: {
+                self.handleView.frame = handleFrame
+            })
+            
+            setScrollYOffsetForHandleYOffset(floor(destinationYOffset), animated: false)
+        }
+    }
+    
+    func setScrollYOffsetForHandleYOffset(_ yOffset: CGFloat, animated: Bool) {
+        guard let scrollView = scrollView else {
+            return
+        }
+        
+        var yOffset = yOffset
+        let heightRange: CGFloat = trackView.frame.size.height - handleView.frame.size.height
+        yOffset = max(0.0, yOffset)
+        yOffset = min(heightRange, yOffset)
+        
+        let positionRatio: CGFloat = yOffset / heightRange
+        
+        let frame: CGRect = scrollView.frame
+        var inset: UIEdgeInsets = scrollView.contentInset
+        let contentSize: CGSize = scrollView.contentSize
+        
+        if #available(iOS 11.0, *) {
+            inset = scrollView.adjustedContentInset
+        }
+        inset.top = originalTopInset
+        
+        let totalScrollSize: CGFloat = (contentSize.height + inset.top + inset.bottom) - frame.size.height
+        var scrollOffset: CGFloat = totalScrollSize * positionRatio
+        scrollOffset -= inset.top
+        
+        var contentOffset: CGPoint = scrollView.contentOffset
+        contentOffset.y = scrollOffset
+        
+        // Animate to help coax the large title navigation bar to behave
+        if #available(iOS 11.0, *) {
+            UIView.animate(withDuration: animated ? 0.1 : 0.00001, animations: {
+                scrollView.setContentOffset(contentOffset, animated: false)
+            })
+        } else {
+            scrollView.setContentOffset(contentOffset, animated: false)
+        }
+    }
+    
+    private func gestureMoved(to touchPoint: CGPoint) {
+        if isDisabled {
+            return
+        }        
+        var delta: CGFloat = 0.0
+        var handleFrame: CGRect = handleView.frame
+        let trackFrame: CGRect = trackView.frame
+        let minimumY: CGFloat = 0.0
+        let maximumY: CGFloat = trackFrame.size.height - handleFrame.size.height
+        
+        if handleExclusiveInteractionEnabled {
+            if touchPoint.y < (handleFrame.origin.y - 20) || touchPoint.y > handleFrame.origin.y + (handleFrame.size.height + 20) {
+                // This touch is not on the handle; eject.
+                return
+            }
+        }
+        
+        // Apply the updated Y value plus the previous offset
+        delta = handleFrame.origin.y
+        handleFrame.origin.y = touchPoint.y - yOffset
+        
+        //Clamp the handle, and adjust the y offset to counter going outside the bounds
+        if handleFrame.origin.y < minimumY {
+            yOffset += handleFrame.origin.y
+            yOffset = max(minimumY, yOffset)
+            handleFrame.origin.y = minimumY
+        } else if handleFrame.origin.y > maximumY {
+            let handleOverflow: CGFloat = handleFrame.maxY - trackFrame.size.height
+            yOffset += handleOverflow
+            yOffset = min(yOffset, handleFrame.size.height)
+            handleFrame.origin.y = min(handleFrame.origin.y, maximumY)
+        }
+        
+        handleView.frame = handleFrame
+        
+        delta -= handleFrame.origin.y
+        delta = CGFloat(fabs(Float(delta)))
+        
+        // If the delta is not 0.0, but we're at either extreme,
+        // this is first frame we've since reaching that point.
+        // Play a taptic feedback impact
+//        if delta > FLT_EPSILON && (handleFrame.minY < FLT_EPSILON || handleFrame.minY >= maximumY - FLT_EPSILON) {
+//            feedbackGenerator.impactOccurred()
+//        }
+        
+        // If the user is doing really granualar swipes, add a subtle amount
+        // of vertical animation so the scroll view isn't jumping on each frame
+        setScrollYOffsetForHandleYOffset(floor(handleFrame.origin.y), animated: false) //(delta < 0.51f)
+
+    }
+    
+    private func gestureEnded() {
+        scrollView?.isScrollEnabled = true
+        isDragging = false
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { 
+            self.layoutInScrollView()
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let result = super.hitTest(point, with: event)
+        
+        if isDisabled || isDragging {
+            return result
+        }
+        
+        // If the user contacts the screen in a swiping motion,
+        // the scroll view will automatically highjack the touch
+        // event unless we explicitly override it here.
+        
+        scrollView?.isScrollEnabled = result != self
+        return result
+
+    }
+    
+    // MARK: - refactor
+    
+//    override func willMove(toSuperview newSuperview: UIView?) {
+//        super.willMove(toSuperview: newSuperview)
+//        setUpViews()
+//    }
     
     class func verticalCapsuleImage(withWidth width: CGFloat) -> UIImage? {
         let radius = width * 0.5
