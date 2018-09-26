@@ -36,14 +36,14 @@ final class ScrollBar: UIView {
     private weak var scrollView: UIScrollView?
     
     private lazy var handleView: UIImageView = {
-        let handleImage = ScrollBar.verticalCapsuleImage(withWidth: handleWidth)
+        let handleImage = UIImage.verticalCapsuleImage(withWidth: handleWidth)
         let handleView = UIImageView(image: handleImage)
         handleView.tintColor = .black
         return handleView
     }()
     
     private lazy var trackView: UIImageView = {
-        let trackImage = ScrollBar.verticalCapsuleImage(withWidth: trackWidth)
+        let trackImage = UIImage.verticalCapsuleImage(withWidth: trackWidth)
         let trackView = UIImageView(image: trackImage)
         trackView.tintColor = .lightGray
         return trackView
@@ -438,9 +438,11 @@ final class ScrollBar: UIView {
         scrollView?.isScrollEnabled = result != self
         return result
 
-    }
-    
-    class func verticalCapsuleImage(withWidth width: CGFloat) -> UIImage? {
+    }    
+}
+
+private extension UIImage {
+    static func verticalCapsuleImage(withWidth width: CGFloat) -> UIImage? {
         let radius = width * 0.5
         let frame = CGRect(x: 0, y: 0, width: width + 1, height: width + 1)
         
@@ -454,5 +456,4 @@ final class ScrollBar: UIView {
         image = image.withRenderingMode(.alwaysTemplate)
         return image
     }
-    
 }
