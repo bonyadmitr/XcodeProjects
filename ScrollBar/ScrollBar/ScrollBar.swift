@@ -139,11 +139,13 @@ final class ScrollBar: UIView {
         }
         
         var scrollViewFrame = scrollView.frame
-        var contentInset = scrollView.contentInset
         let halfWidth = scrollBarWidth * 0.5
         
+        let contentInset: UIEdgeInsets
         if #available(iOS 11.0, *) {
             contentInset = scrollView.adjustedContentInset
+        } else {
+            contentInset = scrollView.contentInset
         }
         
         scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
@@ -333,9 +335,9 @@ final class ScrollBar: UIView {
         
         let positionRatio = yOffset / heightRange
         
-        var contentInset = scrollView.contentInset
         let contentSize = scrollView.contentSize
         
+        var contentInset = scrollView.contentInset
         if #available(iOS 11.0, *) {
             contentInset = scrollView.adjustedContentInset
         }
@@ -348,14 +350,16 @@ final class ScrollBar: UIView {
         var contentOffset = scrollView.contentOffset
         contentOffset.y = scrollOffset
         
+        
+        scrollView.setContentOffset(contentOffset, animated: false)
         // Animate to help coax the large title navigation bar to behave
-        if #available(iOS 11.0, *) {
-            UIView.animate(withDuration: animated ? 0.1 : 0.00001) {
-                scrollView.setContentOffset(contentOffset, animated: false)
-            }
-        } else {
-            scrollView.setContentOffset(contentOffset, animated: false)
-        }
+//        if #available(iOS 11.0, *) {
+//            UIView.animate(withDuration: animated ? 0.1 : 0.00001) {
+//                scrollView.setContentOffset(contentOffset, animated: false)
+//            }
+//        } else {
+//            scrollView.setContentOffset(contentOffset, animated: false)
+//        }
     }
     
     private func gestureMoved(to touchPoint: CGPoint) {
@@ -363,8 +367,8 @@ final class ScrollBar: UIView {
             return
         }
         
-        var handleFrame: CGRect = handleView.frame
-        let trackFrame: CGRect = trackView.frame
+        var handleFrame = handleView.frame
+        let trackFrame = trackView.frame
         let minimumY: CGFloat = 0
         let maximumY = trackFrame.height - handleFrame.height
         
