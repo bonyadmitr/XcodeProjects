@@ -12,6 +12,15 @@
 		CEEEB78A215D0949003C5BD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB788215D0949003C5BD8 /* Main.storyboard */; };
 		CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78B215D094A003C5BD8 /* Assets.xcassets */; };
 		CEEEB78F215D094A003C5BD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */; };
+		CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB797215D0996003C5BD8 /* LanguageManager.swift */; };
+		CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB798215D0996003C5BD8 /* MulticastDelegate.swift */; };
+		CEEEB7A3215D0996003C5BD8 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB799215D0996003C5BD8 /* LocalizationManager.swift */; };
+		CEEEB7A4215D0996003C5BD8 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79A215D0996003C5BD8 /* AppearanceConfigurator.swift */; };
+		CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */; };
+		CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */; };
+		CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */; };
+		CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */; };
+		CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +31,15 @@
 		CEEEB78B215D094A003C5BD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEEB78E215D094A003C5BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEEEB790215D094A003C5BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEEB797215D0996003C5BD8 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		CEEEB798215D0996003C5BD8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		CEEEB799215D0996003C5BD8 /* LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		CEEEB79A215D0996003C5BD8 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
+		CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+IBAction.swift"; sourceTree = "<group>"; };
+		CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RTL.swift"; sourceTree = "<group>"; };
+		CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Localization+Views.swift"; sourceTree = "<group>"; };
+		CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Restart.swift"; sourceTree = "<group>"; };
+		CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizationManager.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +74,37 @@
 			children = (
 				CEEEB784215D0949003C5BD8 /* AppDelegate.swift */,
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
+				CEEEB796215D0996003C5BD8 /* Classes */,
+				CEEEB79B215D0996003C5BD8 /* Extensions */,
 				CEEEB788215D0949003C5BD8 /* Main.storyboard */,
 				CEEEB78B215D094A003C5BD8 /* Assets.xcassets */,
 				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		CEEEB796215D0996003C5BD8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEEEB797215D0996003C5BD8 /* LanguageManager.swift */,
+				CEEEB798215D0996003C5BD8 /* MulticastDelegate.swift */,
+				CEEEB799215D0996003C5BD8 /* LocalizationManager.swift */,
+				CEEEB79A215D0996003C5BD8 /* AppearanceConfigurator.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CEEEB79B215D0996003C5BD8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */,
+				CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */,
+				CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */,
+				CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */,
+				CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +178,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEEB7A3215D0996003C5BD8 /* LocalizationManager.swift in Sources */,
+				CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */,
+				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
+				CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */,
+				CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */,
+				CEEEB7A4215D0996003C5BD8 /* AppearanceConfigurator.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
+				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
+				CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */,
+				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
