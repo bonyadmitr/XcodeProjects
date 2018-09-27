@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
+        
         scrollBar.add(to: tableView)
     }
 }
