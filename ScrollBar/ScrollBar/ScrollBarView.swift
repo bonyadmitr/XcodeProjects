@@ -175,15 +175,15 @@ final class ScrollBarView: UIView {
             return
         }
         
-        var scrollViewFrame = scrollView.frame
+        let scrollViewFrame = scrollView.frame
         let halfWidth = scrollBarWidth * 0.5
         
-        let contentInset: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            contentInset = scrollView.adjustedContentInset
-        } else {
-            contentInset = scrollView.contentInset
-        }
+//        let contentInset: UIEdgeInsets
+//        if #available(iOS 11.0, *) {
+//            contentInset = scrollView.adjustedContentInset
+//        } else {
+//            contentInset = scrollView.contentInset
+//        }
         
 //        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
