@@ -14,6 +14,7 @@
 		CE45DA65215A29A000AD2AB2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE45DA63215A29A000AD2AB2 /* LaunchScreen.storyboard */; };
 		CE45DA6E215A74BD00AD2AB2 /* ScrollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45DA6D215A74BD00AD2AB2 /* ScrollBar.swift */; };
 		CEF76205215BB487001D1C0F /* ScrollBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF76204215BB487001D1C0F /* ScrollBarView.swift */; };
+		CEF76207215BCB3C001D1C0F /* TextInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF76206215BCB3C001D1C0F /* TextInsetsLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE45DA66215A29A000AD2AB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE45DA6D215A74BD00AD2AB2 /* ScrollBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollBar.swift; sourceTree = "<group>"; };
 		CEF76204215BB487001D1C0F /* ScrollBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollBarView.swift; sourceTree = "<group>"; };
+		CEF76206215BCB3C001D1C0F /* TextInsetsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInsetsLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				CE45DA5C215A299F00AD2AB2 /* ViewController.swift */,
 				CE45DA6D215A74BD00AD2AB2 /* ScrollBar.swift */,
 				CEF76204215BB487001D1C0F /* ScrollBarView.swift */,
+				CEF76206215BCB3C001D1C0F /* TextInsetsLabel.swift */,
 			);
 			path = ScrollBar;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				CE45DA5D215A299F00AD2AB2 /* ViewController.swift in Sources */,
 				CEF76205215BB487001D1C0F /* ScrollBarView.swift in Sources */,
+				CEF76207215BCB3C001D1C0F /* TextInsetsLabel.swift in Sources */,
 				CE45DA6E215A74BD00AD2AB2 /* ScrollBar.swift in Sources */,
 				CE45DA5B215A299F00AD2AB2 /* AppDelegate.swift in Sources */,
 			);

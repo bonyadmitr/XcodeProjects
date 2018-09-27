@@ -60,6 +60,44 @@ final class ScrollBarView: UIView {
     
     private var isInsetForLargeTitles = false
     
+    private let insetsLabel: TextInsetsLabel = {
+        let insetsLabel = TextInsetsLabel()
+        insetsLabel.text = "Some text"
+        insetsLabel.textAlignment = .center
+        insetsLabel.font = UIFont.systemFont(ofSize: 11)
+        insetsLabel.backgroundColor = UIColor.blue
+        insetsLabel.textColor = UIColor.white
+        insetsLabel.center.x -= 60
+        insetsLabel.textInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        insetsLabel.sizeToFit()
+        insetsLabel.layer.cornerRadius = insetsLabel.frame.height * 0.5
+        insetsLabel.layer.masksToBounds = true
+        return insetsLabel
+    }()
+    
+    var isAutoHideLabel = true {
+        didSet {
+            if isAutoHideLabel {
+                
+            }
+        }
+    }
+    
+    private let animationDuration = 0.3
+    
+    private func hideLabelAnimated() {
+        UIView.animate(withDuration: animationDuration) { 
+            self.alpha = 0
+        }
+    }
+    
+    private func showLabelAnimated() {
+        UIView.animate(withDuration: animationDuration) { 
+            self.alpha = 1
+        }
+    }
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -73,6 +111,7 @@ final class ScrollBarView: UIView {
     private func setup() {
 //        addSubview(trackView)
         addSubview(handleView)
+        addSubview(insetsLabel)
         
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(scrollBarGestureRecognized))
         addGestureRecognizer(gestureRecognizer)
@@ -236,6 +275,7 @@ final class ScrollBarView: UIView {
         handleFrame.origin.y = min(handleFrame.origin.y, frame.height - handleFrame.height)
         
         handleView.frame = handleFrame
+        insetsLabel.center.y = handleView.center.y
     }
     
     var heightOfHandleForContentSize: CGFloat {
@@ -316,6 +356,7 @@ final class ScrollBarView: UIView {
             
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.1, options: .beginFromCurrentState, animations: {
                 self.handleView.frame = handleFrame
+                self.insetsLabel.center.y = self.handleView.center.y
             })
             
             setScrollYOffsetForHandleYOffset(floor(destinationYOffset), animated: false)
@@ -396,6 +437,7 @@ final class ScrollBarView: UIView {
         }
         
         handleView.frame = handleFrame
+        insetsLabel.center.y = handleView.center.y
         
         delta -= handleFrame.origin.y
         delta = abs(delta)
