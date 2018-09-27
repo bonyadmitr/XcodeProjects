@@ -38,4 +38,9 @@ final class LanguageManager {
         let locale = NSLocale(localeIdentifier: LocalizationManager.shared.currentLanguage)
         return locale.displayName(forKey: NSLocale.Key.identifier, value: language)?.capitalized ?? nil
     }
+    
+    public func displayName(for language: String, in translateLanguage: String) -> String? {
+        let locale = NSLocale(localeIdentifier: translateLanguage)
+        return locale.displayName(forKey: NSLocale.Key.identifier, value: language)?.capitalized ?? nil
+    }
 }
