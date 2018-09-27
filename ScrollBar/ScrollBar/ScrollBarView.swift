@@ -73,31 +73,24 @@ final class ScrollBarView: UIView {
         insetsLabel.sizeToFit()
         insetsLabel.layer.cornerRadius = insetsLabel.frame.height * 0.5
         insetsLabel.layer.masksToBounds = true
+        insetsLabel.alpha = 0
         return insetsLabel
     }()
     
-    var isAutoHideLabel = true {
-        didSet {
-            if isAutoHideLabel {
-                
-            }
-        }
-    }
-    
     private let animationDuration = 0.3
+    private let hideAnimationDelay = 1.0
     
     private func hideLabelAnimated() {
-        UIView.animate(withDuration: animationDuration) { 
-            self.alpha = 0
-        }
+        UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: { 
+            self.insetsLabel.alpha = 0
+        }, completion: nil)
     }
     
     private func showLabelAnimated() {
-        UIView.animate(withDuration: animationDuration) { 
-            self.alpha = 1
+        UIView.animate(withDuration: self.animationDuration) { 
+            self.insetsLabel.alpha = 1
         }
     }
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -307,10 +300,12 @@ final class ScrollBarView: UIView {
         switch gesture.state {
         case .began:
             gestureBegan(at: touchPoint)
+            showLabelAnimated()
         case .changed:
             gestureMoved(to: touchPoint)
         case .ended, .cancelled:
             gestureEnded()
+            hideLabelAnimated()
         case .possible, .failed:
             break
         }
