@@ -24,6 +24,8 @@ final class LanguageSelectController: UIViewController {
     
     private let tableView = UITableView()
     private let cellId = String(describing: UITableViewCell.self)
+    private let localizationManager = LocalizationManager.shared
+    private let languageManager = LanguageManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,7 @@ final class LanguageSelectController: UIViewController {
 
 extension LanguageSelectController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return LanguageManager.shared.availableLanguages.count
+        return languageManager.availableLanguages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,26 +52,26 @@ extension LanguageSelectController: UITableViewDataSource {
 
 extension LanguageSelectController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let language = LanguageManager.shared.availableLanguages[indexPath.row]
-        let languageDisplayName = LanguageManager.shared.displayName(for: language)
+        let language = languageManager.availableLanguages[indexPath.row]
+        let languageDisplayName = languageManager.displayName(for: language)
         cell.textLabel?.text = languageDisplayName
         
-        if language == LocalizationManager.shared.currentLanguage {
+        if language == localizationManager.currentLanguage {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
         
-        if LocalizationManager.shared.currentLanguage != "en" {
-            let englishDisplayName = LanguageManager.shared.displayName(for: language, in: "en")
+        if localizationManager.currentLanguage != "en" {
+            let englishDisplayName = languageManager.displayName(for: language, in: "en")
             cell.detailTextLabel?.text = englishDisplayName
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let language = LanguageManager.shared.availableLanguages[indexPath.row]
-        LocalizationManager.shared.set(language: language)
+        let language = languageManager.availableLanguages[indexPath.row]
+        localizationManager.set(language: language)
     }
 }
 
