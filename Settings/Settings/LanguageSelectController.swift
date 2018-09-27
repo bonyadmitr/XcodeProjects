@@ -10,7 +10,16 @@ import UIKit
 
 final class LanguageSelectController: UIViewController {
     
-    private let tableView = UITableView()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.frame = view.bounds
+        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]    
+        tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
+        tableView.dataSource = self
+        tableView.delegate = self
+        return tableView
+    }()
+    
     private let cellId = String(describing: UITableViewCell.self)
     private let localizationManager = LocalizationManager.shared
     private let languageManager = LanguageManager.shared
@@ -18,13 +27,7 @@ final class LanguageSelectController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         view.addSubview(tableView)
-        
-        tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
-        tableView.dataSource = self
-        tableView.delegate = self
     }
 }
 
