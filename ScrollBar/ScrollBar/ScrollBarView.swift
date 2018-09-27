@@ -9,8 +9,9 @@
 import UIKit
 
 /// https://github.com/TimOliver/TOScrollBar
-
-final class ScrollBarView: UIView {    
+final class ScrollBarView: UIView {  
+    
+    private static let scrollBarHandleImage = #imageLiteral(resourceName: "scroll_bar_view")
     
     /// The width of this control (44 is minimum recommended tapping space)
     private let scrollBarWidth: CGFloat = 44
@@ -18,7 +19,7 @@ final class ScrollBarView: UIView {
     /// The minimum usable size to which the handle can shrink
     private let scrollBarHandleMinHeight: CGFloat = 64
     
-    private let edgeInset: CGFloat = #imageLiteral(resourceName: "scroll_bar_view").size.width * 0.5
+    private let edgeInset: CGFloat = scrollBarHandleImage.size.width * 0.5
     
     private var isDragging = false
     
@@ -36,7 +37,7 @@ final class ScrollBarView: UIView {
     private weak var scrollView: UIScrollView?
     
     private lazy var handleView: UIImageView = {
-        return UIImageView(image: #imageLiteral(resourceName: "scroll_bar_view"))
+        return UIImageView(image: ScrollBarView.scrollBarHandleImage)
     }()
     
     private lazy var trackView: UIImageView = {
@@ -52,7 +53,7 @@ final class ScrollBarView: UIView {
     private var originalYOffset: CGFloat = 0
     
     private let trackWidth: CGFloat = 2
-    private let handleWidth: CGFloat = #imageLiteral(resourceName: "scroll_bar_view").size.width
+    private let handleWidth: CGFloat = scrollBarHandleImage.size.width
     private var horizontalOffset: CGFloat = 0
     
     private var originalTopInset: CGFloat = 0

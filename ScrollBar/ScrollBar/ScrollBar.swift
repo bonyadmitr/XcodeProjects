@@ -9,7 +9,6 @@
 import UIKit
 
 /// https://github.com/TimOliver/TOScrollBar
-
 final class ScrollBar: UIView {
     
     /// The width of this control (44 is minimum recommended tapping space)
