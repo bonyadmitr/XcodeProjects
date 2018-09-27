@@ -8,18 +8,18 @@
 
 import UIKit
 
-extension UIApplication {
-    
-    func animateReload() {
-        guard let delegate = delegate as? AppDelegate, let window = delegate.window else { return }
-        delegate.animateReload(for: window)
-    }
-    
-    func restart() {
-        guard let delegate = delegate as? AppDelegate else { return }
-        delegate.restart()
-    }
-}
+//extension UIApplication {
+//    
+//    func animateReload() {
+//        guard let delegate = delegate as? AppDelegate, let window = delegate.window else { return }
+//        delegate.animateReload(for: window)
+//    }
+//    
+//    func restart() {
+//        guard let delegate = delegate as? AppDelegate else { return }
+//        delegate.restart()
+//    }
+//}
 
 /// maybe there is any good way to reload only one controller
 /// need to try do with dismiss/present animated: false
