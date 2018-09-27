@@ -22,6 +22,7 @@
 		CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */; };
 		CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */; };
 		CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */; };
+		CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Restart.swift"; sourceTree = "<group>"; };
 		CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizationManager.swift"; sourceTree = "<group>"; };
 		CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				CEEEB788215D0949003C5BD8 /* Main.storyboard */,
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
 				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
+				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
 				CEEEB796215D0996003C5BD8 /* Classes */,
 				CEEEB79B215D0996003C5BD8 /* Extensions */,
 			);
@@ -201,6 +204,7 @@
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */,
 				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
+				CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
