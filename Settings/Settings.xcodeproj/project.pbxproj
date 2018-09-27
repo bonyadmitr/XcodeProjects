@@ -21,6 +21,7 @@
 		CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */; };
 		CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */; };
 		CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */; };
+		CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Localization+Views.swift"; sourceTree = "<group>"; };
 		CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Restart.swift"; sourceTree = "<group>"; };
 		CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizationManager.swift"; sourceTree = "<group>"; };
+		CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,14 +74,12 @@
 		CEEEB783215D0949003C5BD8 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				CEEEB784215D0949003C5BD8 /* AppDelegate.swift */,
+				CEEEB7AC215D1104003C5BD8 /* App */,
 				CEEEB788215D0949003C5BD8 /* Main.storyboard */,
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
+				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
 				CEEEB796215D0996003C5BD8 /* Classes */,
 				CEEEB79B215D0996003C5BD8 /* Extensions */,
-				CEEEB78B215D094A003C5BD8 /* Assets.xcassets */,
-				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
-				CEEEB790215D094A003C5BD8 /* Info.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -105,6 +105,17 @@
 				CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CEEEB7AC215D1104003C5BD8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEEEB784215D0949003C5BD8 /* AppDelegate.swift */,
+				CEEEB78B215D094A003C5BD8 /* Assets.xcassets */,
+				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
+				CEEEB790215D094A003C5BD8 /* Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */,
 				CEEEB7A3215D0996003C5BD8 /* LocalizationManager.swift in Sources */,
 				CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */,
 				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
@@ -333,7 +345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Settings/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Settings/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -351,7 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Settings/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Settings/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
