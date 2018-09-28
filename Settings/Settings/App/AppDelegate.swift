@@ -18,6 +18,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         LocalizationManager.shared.register(self)
+//        AppearanceConfigurator.configurate()
+        AppearanceConfigurator.shared.configurate()
         
         return true
     }
@@ -93,7 +95,7 @@ extension AppDelegate: LocalizationManagerDelegate {
         /// call after window.rootViewController =
         settingsVC.performSegue(withIdentifier: "detail!", sender: nil)
         
-        animateReload(for: window)
+//        animateReload(for: window)
     }
     
     private func animateReload(for window: UIWindow) {
