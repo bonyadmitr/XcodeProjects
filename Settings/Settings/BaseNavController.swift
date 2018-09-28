@@ -23,5 +23,6 @@ final class BaseNavController: UINavigationController {
     private func setup() {
         /// will be called on UITabBarController loading, UITabBarItem title will be set with this title
         title = topViewController?.title
+        tabBarItem = topViewController?.tabBarItem
     }
 }
