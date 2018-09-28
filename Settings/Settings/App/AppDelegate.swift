@@ -63,22 +63,37 @@ extension AppDelegate: LocalizationManagerDelegate {
         let lastIndex = tabBarControllers.count - 1
         tabBarVC.selectedIndex = lastIndex
         
-        guard let settingsNavVC = tabBarControllers[lastIndex] as? UINavigationController else {
+        guard
+            let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
+            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
+        else {
             assertionFailure()
             return
         }
         
-        let vc = LanguageSelectController()
+        let settingsVC = settingsNavVC.topViewController as! SettingsController
+        
+        
+//        guard let settingsNavVC = tabBarControllers[lastIndex] as? UINavigationController else {
+//            assertionFailure()
+//            return
+//        }
+        
+//        let vc = LanguageSelectController()
         
         /// need bcz of iOS 10 bug with back button
-        if ProcessInfo().operatingSystemVersion.majorVersion == 10 {
-            settingsNavVC.pushViewController(vc, animated: true)
-        } else {
-            settingsNavVC.pushViewController(vc, animated: false)
-        }
+//        if ProcessInfo().operatingSystemVersion.majorVersion == 10 {
+//            settingsNavVC.pushViewController(vc, animated: true)
+//        } else {
+//            settingsNavVC.pushViewController(vc, animated: false)
+//        }
         
         window.rootViewController = tabBarVC
-//        animateReload(for: window)
+        
+        /// call after window.rootViewController =
+        settingsVC.performSegue(withIdentifier: "detail!", sender: nil)
+        
+        animateReload(for: window)
     }
     
     private func animateReload(for window: UIWindow) {

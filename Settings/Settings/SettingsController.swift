@@ -48,6 +48,15 @@ final class SettingsController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "detail",
+//            let vc = segue.destination.rootIfNavOrSelf as? DetailController,
+//            let indexPath = sender as? IndexPath
+//        {
+//            vc.text = texts[indexPath.row]
+//        }
+    }
 }
 
 extension SettingsController: UITableViewDataSource {
@@ -107,8 +116,9 @@ extension SettingsController: UITableViewDelegate {
             
             switch row {
             case .select:
-                let vc = LanguageSelectController()
-                navigationController?.pushViewController(vc, animated: true)
+                performSegue(withIdentifier: "detail", sender: nil)
+//                let vc = LanguageSelectController()
+//                navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
