@@ -39,7 +39,6 @@ final class SettingsController: UIViewController {
     
     private func setup() {
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        /// but there is a bug with back arrow overlap
         title = "settings".localized
         
         automaticallyAdjustsScrollViewInsets = false
@@ -95,6 +94,7 @@ extension SettingsController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let section = Section(rawValue: indexPath.section) else {
+            assertionFailure()
             return
         }
         
