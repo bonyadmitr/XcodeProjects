@@ -12,6 +12,7 @@
 		6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6624D439215EADA000DF1B92 /* UISearchBar+Properties.swift */; };
 		66E65EB7215EB91E00D2BCCA /* SplitDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */; };
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
+		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
 		CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78B215D094A003C5BD8 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		6624D439215EADA000DF1B92 /* UISearchBar+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Properties.swift"; sourceTree = "<group>"; };
 		66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailController.swift; sourceTree = "<group>"; };
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
+		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEB786215D0949003C5BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
 				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
 				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
+				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
 				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
 				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
 				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
@@ -233,6 +236,7 @@
 			files = (
 				66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */,
 				6624D43A215EADA100DF1B92 /* UITextField+Properties.swift in Sources */,
+				66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */,
 				66E65EB7215EB91E00D2BCCA /* SplitDetailController.swift in Sources */,
 				CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */,
 				6624D43B215EADA100DF1B92 /* AppearanceConfigurator.swift in Sources */,

@@ -17,6 +17,9 @@ final class SettingsController: UIViewController, BackButtonActions {
         
         enum LanguageRaws: Int {
             case select = 0
+            case appearance
+            
+            static let count = 2
         }
     }
     
@@ -72,7 +75,7 @@ extension SettingsController: UITableViewDataSource {
             return 0
         }
         switch section {
-        case .language: return 1
+        case .language: return Section.LanguageRaws.count
         }
     }
     
@@ -99,6 +102,9 @@ extension SettingsController: UITableViewDelegate {
             case .select:
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.text = "language".localized
+            case .appearance:
+                cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.text = "appearance".localized
             }
         }
     }
@@ -122,6 +128,8 @@ extension SettingsController: UITableViewDelegate {
                 performSegue(withIdentifier: "detail", sender: LanguageSelectController())
 //                let vc = LanguageSelectController()
 //                navigationController?.pushViewController(vc, animated: true)
+            case .appearance:
+                performSegue(withIdentifier: "detail", sender: AppearanceSelectController())
             }
         }
     }

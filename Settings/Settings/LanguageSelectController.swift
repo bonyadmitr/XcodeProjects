@@ -20,7 +20,7 @@ final class LanguageSelectController: UIViewController {
         return tableView
     }()
     
-    private let cellId = String(describing: UITableViewCell.self)
+    private let cellId = String(describing: DetailCell.self)
     private let localizationManager = LocalizationManager.shared
     private let languageManager = LanguageManager.shared
     
@@ -76,6 +76,7 @@ extension LanguageSelectController: UITableViewDelegate {
             cell.detailTextLabel?.text = ""
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -86,12 +87,6 @@ extension LanguageSelectController: UITableViewDelegate {
         }
         
         localizationManager.set(language: language)
-    }
-}
-
-extension LanguageSelectController: LocalizationManagerDelegate {
-    func languageDidChange(to language: String) {
-//        tableView.reloadData()
     }
 }
 

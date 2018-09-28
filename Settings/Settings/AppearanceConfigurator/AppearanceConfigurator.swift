@@ -31,6 +31,9 @@ class AppearanceConfigurator {
     func configurate() {
         UIApplication.shared.delegate?.window??.tintColor = UIColor.magenta
     }
+    func configurate2() {
+        UIApplication.shared.delegate?.window??.tintColor = UIColor.blue
+    }
     
     class func configurate() {
         

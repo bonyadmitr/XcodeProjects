@@ -19,7 +19,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LocalizationManager.shared.register(self)
 //        AppearanceConfigurator.configurate()
-        AppearanceConfigurator.shared.configurate()
+//        AppearanceConfigurator.shared.configurate()
         
         return true
     }
