@@ -114,7 +114,7 @@
         <!--Settings-->
         <scene sceneID="SWK-Ru-dwe">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BaseNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="RH9-yN-oUK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9W-Ks-l9e">

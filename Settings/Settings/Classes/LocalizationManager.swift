@@ -21,6 +21,7 @@ protocol LocalizationManagerDelegate {
 /// system back buttons cannot be localized with force switch
 /// there is a bug with back arrow overlap on iOS 10 with force switch (iOS 9, 11 are normal)
 /// if you set UIViewController title in viewDidLoad(loadView too), it will not be set in language changing
+/// to localize UITabBarController items, you can localize UIViewController title (or UINavigationController)
 /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public final class LocalizationManager: MulticastHandler {
     
