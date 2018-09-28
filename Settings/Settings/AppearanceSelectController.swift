@@ -42,7 +42,7 @@ final class AppearanceSelectController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        appearanceConfigurator.register(self)
+//        appearanceConfigurator.register(self)
     }
 }
 
@@ -58,21 +58,24 @@ extension AppearanceSelectController: UITableViewDataSource {
 
 extension AppearanceSelectController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let language = languageManager.availableLanguages[indexPath.row]
-//        let languageDisplayName = languageManager.displayName(for: language)
-//        cell.textLabel?.text = languageDisplayName
         
-//        if language == localizationManager.currentLanguage {
-//            cell.accessoryType = .checkmark
-//        } else {
-//            cell.accessoryType = .none
-//        }
+        if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
         cell.textLabel?.text = themes[indexPath.row].name
-//        cell.backgroundColor =
+        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
+            return
+        }
+        
         AppearanceConfigurator.shared.apply(theme: themes[indexPath.row])
     }
 }

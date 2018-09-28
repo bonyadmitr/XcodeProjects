@@ -44,7 +44,7 @@ final class SettingsController: UIViewController, BackButtonActions {
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
         title = "settings".localized
         tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "ic_settings"), selectedImage: nil)
-        automaticallyAdjustsScrollViewInsets = false
+//        automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewDidLoad() {
@@ -106,6 +106,8 @@ extension SettingsController: UITableViewDelegate {
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.text = "appearance".localized
             }
+            
+            cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

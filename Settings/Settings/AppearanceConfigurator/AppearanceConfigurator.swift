@@ -15,7 +15,7 @@ struct Colors {
     static let text1 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 }
 
-struct AppearanceTheme {
+struct AppearanceTheme: Equatable {
     let name: String
     let windowTintColor: UIColor
     let backgroundColor: UIColor
@@ -52,25 +52,35 @@ final class AppearanceConfigurator: MulticastHandler {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).lzTitle = "cancel"
     }
     
+    var currentTheme: AppearanceTheme = AppearanceConfigurator.themes[0]
+    
     func apply(theme: AppearanceTheme) {
-        UIApplication.shared.delegate?.window??.tintColor = theme.windowTintColor
+        UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
         
         UINavigationBar.appearance().barTintColor = theme.backgroundColor //bar's background
-        UINavigationBar.appearance().titleTextAttributes = [
+        
+        let textAttributes: [NSAttributedStringKey: Any] = [
             .foregroundColor: theme.textColor
         ]
-        UITabBar.appearance().backgroundColor = theme.backgroundColor
-//        UITabBar.appearance().tintColor = theme.backgroundColor
+        
+        UINavigationBar.appearance().titleTextAttributes = textAttributes
+//        UITabBar.appearance().backgroundColor = theme.backgroundColor
+        UITabBar.appearance().barTintColor = theme.backgroundColor
+        
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes(textAttributes, for: .selected)
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
+        //UITableViewCell.appearance().textLabel?.textColor = theme.textColor
         UITableView.appearance().backgroundColor = theme.backgroundColor
         
 //        applyBaseTheme()
+        currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }
     }
     
     func applyBaseTheme() {
-        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().isTranslucent = true
     }
     
     class func configurate() {

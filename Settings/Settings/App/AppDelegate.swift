@@ -18,8 +18,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         LocalizationManager.shared.register(self)
+        AppearanceConfigurator.shared.register(self)
 //        AppearanceConfigurator.configurate()
-//        AppearanceConfigurator.shared.configurate()
         
         return true
     }
@@ -101,5 +101,36 @@ extension AppDelegate: LocalizationManagerDelegate {
     private func animateReload(for window: UIWindow) {
         UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromLeft, animations: {
         }, completion: nil)
+    }
+}
+
+extension AppDelegate: AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard
+            let window = window,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: String(describing: UITabBarController.self)) as? UITabBarController,
+            let tabBarControllers = tabBarVC.viewControllers
+            else {
+                assertionFailure()
+                return
+        }
+        
+        let lastIndex = tabBarControllers.count - 1
+        tabBarVC.selectedIndex = lastIndex
+        
+        guard
+            let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
+            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
+            else {
+                assertionFailure()
+                return
+        }
+        
+        let settingsVC = settingsNavVC.topViewController as! SettingsController
+        window.rootViewController = tabBarVC
+        settingsVC.performSegue(withIdentifier: "detail!", sender: AppearanceSelectController())
     }
 }

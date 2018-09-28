@@ -15,11 +15,11 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="plH-p0-Hx9" customClass="SettingsController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gS-ik-Fe2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XKE-Ol-7eZ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UITableViewCell" textLabel="rLk-Rm-stU" style="IBUITableViewCellStyleDefault" id="fFb-VB-BcZ">
@@ -44,7 +44,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="XKE-Ol-7eZ" firstAttribute="top" secondItem="BAE-Xj-xHy" secondAttribute="top" id="N9X-A0-rw8"/>
+                            <constraint firstItem="XKE-Ol-7eZ" firstAttribute="top" secondItem="0gS-ik-Fe2" secondAttribute="top" id="N9X-A0-rw8"/>
                             <constraint firstItem="XKE-Ol-7eZ" firstAttribute="leading" secondItem="0gS-ik-Fe2" secondAttribute="leading" id="Qdo-EU-MMn"/>
                             <constraint firstItem="BAE-Xj-xHy" firstAttribute="bottom" secondItem="XKE-Ol-7eZ" secondAttribute="bottom" id="tXP-eB-Rk6"/>
                             <constraint firstItem="BAE-Xj-xHy" firstAttribute="trailing" secondItem="XKE-Ol-7eZ" secondAttribute="trailing" id="zki-a6-gzq"/>
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAc-jC-UsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961.875" y="1370"/>
+            <point key="canvasLocation" x="2944" y="1689"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hI1-f4-6jx">
@@ -121,7 +121,7 @@
                 <navigationController storyboardIdentifier="BaseNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="RH9-yN-oUK"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="q9W-Ks-l9e">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9W-Ks-l9e">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -132,7 +132,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivT-2D-IyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3136.875" y="1370"/>
+            <point key="canvasLocation" x="2119" y="1689"/>
         </scene>
         <!--title-->
         <scene sceneID="3Og-Om-sNZ">
@@ -148,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOE-hT-z5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2966" y="2213"/>
+            <point key="canvasLocation" x="2944" y="2518"/>
         </scene>
         <!--settings-->
         <scene sceneID="xN6-C9-VdE">
@@ -180,7 +180,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSx-pw-Df7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2139" y="2213"/>
+            <point key="canvasLocation" x="2117" y="2518"/>
         </scene>
         <!--Controller-->
         <scene sceneID="c9o-Sf-m9N">
@@ -203,6 +203,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ysk-l1-81d"/>
+        <segue reference="nR8-lm-mpX"/>
     </inferredMetricsTieBreakers>
 </document>
