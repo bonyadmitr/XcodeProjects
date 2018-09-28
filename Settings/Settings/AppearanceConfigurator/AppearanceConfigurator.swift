@@ -60,6 +60,10 @@ final class AppearanceConfigurator: MulticastHandler {
     
     var currentTheme: AppearanceTheme = AppearanceConfigurator.themes[0]
     
+    init() {
+        applyBaseTheme()
+    }
+    
     func apply(theme: AppearanceTheme) {
         UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
         

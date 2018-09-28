@@ -137,7 +137,7 @@
         <!--title-->
         <scene sceneID="3Og-Om-sNZ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNF-FW-vye">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -203,6 +203,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ysk-l1-81d"/>
+        <segue reference="A4Q-KM-7MW"/>
     </inferredMetricsTieBreakers>
 </document>

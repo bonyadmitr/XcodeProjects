@@ -56,4 +56,11 @@ final class BaseNavController: UINavigationController {
         title = topViewController?.title
         tabBarItem = topViewController?.tabBarItem
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// to remove navigation bar shadow on back action
+        view.backgroundColor = UIColor.white
+    }
 }
