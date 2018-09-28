@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SettingsController: UIViewController {
+final class SettingsController: UIViewController, BackButtonActions {
     
     private enum Section: Int {
         case language = 0
@@ -47,15 +47,18 @@ final class SettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeBackButtonTitle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "detail",
-//            let vc = segue.destination.rootIfNavOrSelf as? DetailController,
-//            let indexPath = sender as? IndexPath
-//        {
-//            vc.text = texts[indexPath.row]
-//        }
+        if segue.identifier == "detail" || segue.identifier == "detail!",
+            let vc = sender as? UIViewController,
+            let navVC = segue.destination as? UINavigationController,
+            let detailVC = navVC.topViewController as? SplitDetailController
+        {
+            detailVC.childVC = vc
+            detailVC.title = vc.title
+        }
     }
 }
 
@@ -116,7 +119,7 @@ extension SettingsController: UITableViewDelegate {
             
             switch row {
             case .select:
-                performSegue(withIdentifier: "detail", sender: nil)
+                performSegue(withIdentifier: "detail", sender: LanguageSelectController())
 //                let vc = LanguageSelectController()
 //                navigationController?.pushViewController(vc, animated: true)
             }

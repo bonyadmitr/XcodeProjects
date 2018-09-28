@@ -93,7 +93,7 @@ extension AppDelegate: LocalizationManagerDelegate {
         window.rootViewController = tabBarVC
         
         /// call after window.rootViewController =
-        settingsVC.performSegue(withIdentifier: "detail!", sender: nil)
+        settingsVC.performSegue(withIdentifier: "detail!", sender: LanguageSelectController())
         
 //        animateReload(for: window)
     }

@@ -132,17 +132,17 @@
             </objects>
             <point key="canvasLocation" x="2141" y="1370"/>
         </scene>
-        <!--LanguageSelectController-->
+        <!--title-->
         <scene sceneID="3Og-Om-sNZ">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="7Ww-dF-dqw" customClass="LanguageSelectController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNF-FW-vye">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Af2-Zr-qEg"/>
                     </view>
-                    <navigationItem key="navigationItem" title="LanguageSelectController" id="jQJ-ow-p0E"/>
+                    <navigationItem key="navigationItem" title="title" id="jQJ-ow-p0E"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOE-hT-z5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,6 +182,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nR8-lm-mpX"/>
+        <segue reference="Ysk-l1-81d"/>
     </inferredMetricsTieBreakers>
 </document>

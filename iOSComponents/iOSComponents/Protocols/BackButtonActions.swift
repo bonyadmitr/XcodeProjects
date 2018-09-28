@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BackButtonActions {
-    
+    func removeBackButtonTitle()
 }
 extension BackButtonActions where Self: UIViewController {
     func removeBackButtonTitle() {
