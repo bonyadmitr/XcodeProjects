@@ -69,8 +69,20 @@ extension AppDelegate: LocalizationManagerDelegate {
         }
         
         let vc = LanguageSelectController()
-        settingsNavVC.pushViewController(vc, animated: false)
+        
+        /// need bcz of iOS 10 bug with back button
+        if ProcessInfo().operatingSystemVersion.majorVersion == 10 {
+            settingsNavVC.pushViewController(vc, animated: true)
+        } else {
+            settingsNavVC.pushViewController(vc, animated: false)
+        }
         
         window.rootViewController = tabBarVC
+//        animateReload(for: window)
+    }
+    
+    private func animateReload(for window: UIWindow) {
+        UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+        }, completion: nil)
     }
 }
