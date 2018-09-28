@@ -16,7 +16,10 @@ protocol LocalizationManagerDelegate {
 /// https://github.com/romansorochak/Localizable/blob/master/Localizable/Localizable.swift
 
 //TODO: TEST plurals
-/// buttons with system text cannot be localized with force switch
+/// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/// buttons with system text cannot be localized with force switch.
+/// system back buttons cannot be localized with force switch
+/// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public final class LocalizationManager: MulticastHandler {
     
     /// MulticastHandler protocol

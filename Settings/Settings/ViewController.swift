@@ -16,3 +16,11 @@ class ViewController: UIViewController {
         
     }
 }
+
+final class SampleDesigner: NSObject {
+    @IBOutlet private weak var sampleLabel: UILabel! {
+        willSet {
+            newValue.text = "language".localized
+        }
+    }
+}

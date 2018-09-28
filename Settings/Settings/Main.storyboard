@@ -13,7 +13,6 @@
         <!--Settings Controller-->
         <scene sceneID="GZm-mN-Wip">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VAc-jC-UsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="plH-p0-Hx9" customClass="SettingsController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gS-ik-Fe2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -57,6 +56,7 @@
                         <outlet property="tableView" destination="XKE-Ol-7eZ" id="Ps2-HO-j9q"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VAc-jC-UsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1171.875" y="865"/>
         </scene>
@@ -67,27 +67,44 @@
                     <view key="view" contentMode="scaleToFill" id="4xm-Go-3PP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2o-s7-yW1">
+                                <rect key="frame" x="139" y="215" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="a2o-s7-yW1" firstAttribute="centerX" secondItem="YGx-X0-h5m" secondAttribute="centerX" id="fIJ-8x-JIx"/>
+                            <constraint firstItem="a2o-s7-yW1" firstAttribute="centerY" secondItem="YGx-X0-h5m" secondAttribute="centerY" id="nhA-PY-F2N"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YGx-X0-h5m"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Controller" id="QYL-tx-GfI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3j-qk-paB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="luz-JU-kdH" customClass="SampleDesigner" customModule="Settings" customModuleProvider="target">
+                    <connections>
+                        <outlet property="sampleLabel" destination="a2o-s7-yW1" id="R1y-aS-uQl"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="176" y="175"/>
         </scene>
-        <!--Base Nav Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="o6d-B8-cHN">
             <objects>
-                <tabBarController storyboardIdentifier="BaseNavBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Or8-OK-vhj" customClass="BaseNavBarController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="UITabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Or8-OK-vhj" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qfq-e6-phM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="dUe-UE-9Sd" kind="relationship" relationship="viewControllers" id="8K8-bN-WsZ"/>
                         <segue destination="Q6X-O4-0CW" kind="relationship" relationship="viewControllers" id="79j-Hm-A5o"/>
+                        <segue destination="dUe-UE-9Sd" kind="relationship" relationship="viewControllers" id="8K8-bN-WsZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5E2-cN-vFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -97,7 +114,7 @@
         <!--Settings-->
         <scene sceneID="SWK-Ru-dwe">
             <objects>
-                <navigationController storyboardIdentifier="BaseNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="RH9-yN-oUK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9W-Ks-l9e">

@@ -10,13 +10,15 @@ import UIKit
 
 /// added main.swift
 //@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        LocalizationManager.shared.register(self)
+        
         return true
     }
 
@@ -45,3 +47,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: LocalizationManagerDelegate {
+    func languageDidChange(to language: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard
+            let window = window,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: String(describing: UITabBarController.self)) as? UITabBarController,
+            let tabBarControllers = tabBarVC.viewControllers
+        else {
+            assertionFailure()
+            return
+        }
+        
+        let lastIndex = tabBarControllers.count - 1
+        tabBarVC.selectedIndex = lastIndex
+        
+        guard let settingsNavVC = tabBarControllers[lastIndex] as? UINavigationController else {
+            assertionFailure()
+            return
+        }
+        
+        let vc = LanguageSelectController()
+        settingsNavVC.pushViewController(vc, animated: false)
+        
+        window.rootViewController = tabBarVC
+    }
+}

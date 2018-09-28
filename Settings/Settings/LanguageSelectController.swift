@@ -8,45 +8,6 @@
 
 import UIKit
 
-final class BaseNavController: UINavigationController {
-    override func awakeFromNib() {
-        super.awakeFromNib()   
-//        LocalizationManager.shared.register(self)
-    }
-}
-extension BaseNavController: LocalizationManagerDelegate {
-    func languageDidChange(to language: String) {
-//        navigationItem.lzTitle = "hello"
-        let vcId = String(describing: SettingsController.self)
-        viewControllers[0] = storyboard!.instantiateViewController(withIdentifier: vcId)
-        
-        let vc = LanguageSelectController()
-        pushViewController(vc, animated: false)
-//        UIApplication.shared.animateReload()
-    }
-}
-
-final class BaseNavBarController: UITabBarController {
-    override func awakeFromNib() {
-        super.awakeFromNib()   
-        LocalizationManager.shared.register(self)
-    }
-}
-extension BaseNavBarController: LocalizationManagerDelegate {
-    func languageDidChange(to language: String) {
-        
-        let navVC = storyboard!.instantiateViewController(withIdentifier: String(describing: BaseNavController.self)) as! BaseNavController
-        
-        let vc1 = storyboard!.instantiateViewController(withIdentifier: String(describing: ViewController.self))
-        viewControllers = [navVC, vc1]
-        selectedIndex = 0
-        
-        let vc = LanguageSelectController()
-        navVC.pushViewController(vc, animated: false)
-        //        UIApplication.shared.animateReload()
-    }
-}
-
 final class LanguageSelectController: UIViewController {
     
     private lazy var tableView: UITableView = {
@@ -68,6 +29,7 @@ final class LanguageSelectController: UIViewController {
         
         view.addSubview(tableView)
         localizationManager.register(self)
+        title = "language".localized
     }
 }
 
