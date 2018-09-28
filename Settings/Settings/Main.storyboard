@@ -14,7 +14,7 @@
         <scene sceneID="GZm-mN-Wip">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAc-jC-UsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="plH-p0-Hx9" customClass="SettingsController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="plH-p0-Hx9" customClass="SettingsController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gS-ik-Fe2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
         <!--Controller-->
         <scene sceneID="hI1-f4-6jx">
             <objects>
-                <viewController id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4xm-Go-3PP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="176" y="175"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Base Nav Bar Controller-->
         <scene sceneID="o6d-B8-cHN">
             <objects>
-                <tabBarController id="Or8-OK-vhj" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="BaseNavBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Or8-OK-vhj" customClass="BaseNavBarController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qfq-e6-phM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -97,7 +97,7 @@
         <!--Settings-->
         <scene sceneID="SWK-Ru-dwe">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dUe-UE-9Sd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BaseNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="RH9-yN-oUK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9W-Ks-l9e">

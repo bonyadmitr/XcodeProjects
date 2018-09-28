@@ -27,10 +27,26 @@ final class SettingsController: UIViewController {
         }
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
+        title = "Settings".localized
+        
+        automaticallyAdjustsScrollViewInsets = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Settings".localized
     }
 }
 

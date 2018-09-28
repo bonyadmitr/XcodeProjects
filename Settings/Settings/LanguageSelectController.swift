@@ -8,6 +8,45 @@
 
 import UIKit
 
+final class BaseNavController: UINavigationController {
+    override func awakeFromNib() {
+        super.awakeFromNib()   
+//        LocalizationManager.shared.register(self)
+    }
+}
+extension BaseNavController: LocalizationManagerDelegate {
+    func languageDidChange(to language: String) {
+//        navigationItem.lzTitle = "hello"
+        let vcId = String(describing: SettingsController.self)
+        viewControllers[0] = storyboard!.instantiateViewController(withIdentifier: vcId)
+        
+        let vc = LanguageSelectController()
+        pushViewController(vc, animated: false)
+//        UIApplication.shared.animateReload()
+    }
+}
+
+final class BaseNavBarController: UITabBarController {
+    override func awakeFromNib() {
+        super.awakeFromNib()   
+        LocalizationManager.shared.register(self)
+    }
+}
+extension BaseNavBarController: LocalizationManagerDelegate {
+    func languageDidChange(to language: String) {
+        
+        let navVC = storyboard!.instantiateViewController(withIdentifier: String(describing: BaseNavController.self)) as! BaseNavController
+        
+        let vc1 = storyboard!.instantiateViewController(withIdentifier: String(describing: ViewController.self))
+        viewControllers = [navVC, vc1]
+        selectedIndex = 0
+        
+        let vc = LanguageSelectController()
+        navVC.pushViewController(vc, animated: false)
+        //        UIApplication.shared.animateReload()
+    }
+}
+
 final class LanguageSelectController: UIViewController {
     
     private lazy var tableView: UITableView = {
@@ -28,6 +67,7 @@ final class LanguageSelectController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+        localizationManager.register(self)
     }
 }
 
@@ -53,9 +93,13 @@ extension LanguageSelectController: UITableViewDelegate {
             cell.accessoryType = .none
         }
         
+//        let englishDisplayName = languageManager.displayName(for: language, in: "en")
+//        cell.detailTextLabel?.text = englishDisplayName
         if localizationManager.currentLanguage != "en" {
             let englishDisplayName = languageManager.displayName(for: language, in: "en")
             cell.detailTextLabel?.text = englishDisplayName
+        } else {
+            cell.detailTextLabel?.text = ""
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,6 +107,12 @@ extension LanguageSelectController: UITableViewDelegate {
         
         let language = languageManager.availableLanguages[indexPath.row]
         localizationManager.set(language: language)
+    }
+}
+
+extension LanguageSelectController: LocalizationManagerDelegate {
+    func languageDidChange(to language: String) {
+//        tableView.reloadData()
     }
 }
 
