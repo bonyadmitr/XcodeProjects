@@ -4,5 +4,6 @@ use_frameworks!
 target 'SamsungTV' do
 
   pod 'Starscream', '~> 3.0.2'
+  pod 'MMLanScan'
 
 end

@@ -8,15 +8,25 @@
 
 import UIKit
 import Starscream
+import MMLanScan
 
 class ViewController: UIViewController {
 
     var socket: WebSocket!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private lazy var lanScanner = MMLANScanner(delegate: self)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let ip = "192.168.100.2"
+        
+        
+        
+        lanScanner?.start()
+        
+        
+        
+        let ip = "192.168.100.3"
         let port = "8001"
         let name = "SamsungTvRemote"
         let base64Name = Data(name.utf8).base64EncodedString()
@@ -27,6 +37,7 @@ class ViewController: UIViewController {
         let url = URL(string: str)!
         
         socket = WebSocket(url: url)
+        
         //websocketDidConnect
         socket.onConnect = {
             
@@ -47,15 +58,26 @@ class ViewController: UIViewController {
             print("got some text: \(text)")
         }
         
-//        got some text: {"data":{"clients":[{"attributes":{"name":"U2Ftc3VuZ1R2UmVtb3Rl"},"connectTime":1516483907701,"deviceName":"U2Ftc3VuZ1R2UmVtb3Rl","id":"c11b5de8-4f5a-44d0-a0bc-9125dcb39dc","isHost":false}],"id":"c11b5de8-4f5a-44d0-a0bc-9125dcb39dc"},"event":"ms.channel.connect"}
+        //        got some text: {"data":{"clients":[{"attributes":{"name":"U2Ftc3VuZ1R2UmVtb3Rl"},"connectTime":1516483907701,"deviceName":"U2Ftc3VuZ1R2UmVtb3Rl","id":"c11b5de8-4f5a-44d0-a0bc-9125dcb39dc","isHost":false}],"id":"c11b5de8-4f5a-44d0-a0bc-9125dcb39dc"},"event":"ms.channel.connect"}
         
         //websocketDidReceiveData
         socket.onData = { (data: Data) in
             print("got some data: \(data.count)")
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+
         //you could do onPong as well.
         socket.connect()
 
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        socket.disconnect(forceTimeout: 0)
     }
     
     @IBAction func actionMenuButton(_ sender: UIButton) {
@@ -77,7 +99,6 @@ class ViewController: UIViewController {
     }
     
     deinit {
-        socket.disconnect(forceTimeout: 0)
         socket.delegate = nil
     }
 }
@@ -101,4 +122,25 @@ struct MessageParams: Codable {
     var DataOfCmd: String
     var Option: Bool
     var TypeOfRemote: String
+}
+
+
+extension ViewController: MMLANScannerDelegate {
+    func lanScanDidFindNewDevice(_ device: MMDevice!) {
+        print("hostname", device!.hostname)
+        print("ipAddress", device!.ipAddress)
+        print("brand", device!.brand)
+        print("isLocalDevice", device!.isLocalDevice)
+        print("---------")
+    }
+    
+    func lanScanDidFinishScanning(with status: MMLanScannerStatus) {
+        
+    }
+    
+    func lanScanDidFailedToScan() {
+        
+    }
+    
+    
 }
