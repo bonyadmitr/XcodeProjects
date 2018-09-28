@@ -21,7 +21,8 @@ final class AppearanceSelectController: UIViewController {
     }()
     
     private let cellId = String(describing: UITableViewCell.self)
-    private let themes = ["1", "2"]
+    private let themes = AppearanceConfigurator.themes
+    private let appearanceConfigurator = AppearanceConfigurator.shared
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -41,6 +42,7 @@ final class AppearanceSelectController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+        appearanceConfigurator.register(self)
     }
 }
 
@@ -65,16 +67,18 @@ extension AppearanceSelectController: UITableViewDelegate {
 //        } else {
 //            cell.accessoryType = .none
 //        }
-        cell.textLabel?.text = themes[indexPath.row]
+        cell.textLabel?.text = themes[indexPath.row].name
+//        cell.backgroundColor =
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row == 0 {
-            AppearanceConfigurator.shared.configurate()
-        } else if indexPath.row == 1 {
-            AppearanceConfigurator.shared.configurate2()
-        }
+        AppearanceConfigurator.shared.apply(theme: themes[indexPath.row])
+    }
+}
+
+extension AppearanceSelectController: AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme) {
+//        tableView.backgroundColor = theme.backgroundColor
     }
 }

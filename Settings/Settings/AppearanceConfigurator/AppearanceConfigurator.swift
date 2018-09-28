@@ -15,11 +15,36 @@ struct Colors {
     static let text1 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 }
 
+struct AppearanceTheme {
+    let name: String
+    let windowTintColor: UIColor
+    let backgroundColor: UIColor
+    let textColor: UIColor
+//    let navigationBarColor: UIColor
+}
+
+protocol AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme)
+}
+
+extension AppearanceConfigurator {
+    static var themes = [AppearanceTheme(name: "Light",
+                                         windowTintColor: UIColor.magenta,
+                                         backgroundColor: UIColor.white,
+                                         textColor: UIColor.black),
+                         AppearanceTheme(name: "Dark",
+                                         windowTintColor: UIColor.blue,
+                                         backgroundColor: UIColor.black,
+                                         textColor: UIColor.white)]
+}
+
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
 // TODO: appearance(for: UITraitCollection)
 /// I didn't find a way to localize standart buttons like "done", "cancel" without app restrart
 // sp don't use them. Simply write title "done" and addd translation to Localizable.strings
-class AppearanceConfigurator {
+final class AppearanceConfigurator: MulticastHandler {
+    
+    internal var delegates = MulticastDelegate<AppearanceConfiguratorDelegate>()
     
     static let shared = AppearanceConfigurator()
     
@@ -27,12 +52,25 @@ class AppearanceConfigurator {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).lzTitle = "cancel"
     }
     
-    
-    func configurate() {
-        UIApplication.shared.delegate?.window??.tintColor = UIColor.magenta
+    func apply(theme: AppearanceTheme) {
+        UIApplication.shared.delegate?.window??.tintColor = theme.windowTintColor
+        
+        UINavigationBar.appearance().barTintColor = theme.backgroundColor //bar's background
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: theme.textColor
+        ]
+        UITabBar.appearance().backgroundColor = theme.backgroundColor
+//        UITabBar.appearance().tintColor = theme.backgroundColor
+        
+        UITableViewCell.appearance().backgroundColor = theme.backgroundColor
+        UITableView.appearance().backgroundColor = theme.backgroundColor
+        
+//        applyBaseTheme()
+        delegates.invoke { $0.didApplied(theme: theme) }
     }
-    func configurate2() {
-        UIApplication.shared.delegate?.window??.tintColor = UIColor.blue
+    
+    func applyBaseTheme() {
+        UINavigationBar.appearance().isTranslucent = false
     }
     
     class func configurate() {
