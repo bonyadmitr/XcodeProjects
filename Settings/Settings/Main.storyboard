@@ -185,7 +185,7 @@
         <!--Controller-->
         <scene sceneID="c9o-Sf-m9N">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UYS-Us-gY2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UYS-Us-gY2" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Controller" id="QYL-tx-GfI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QsA-6G-5wL">
@@ -203,6 +203,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nR8-lm-mpX"/>
+        <segue reference="Ysk-l1-81d"/>
     </inferredMetricsTieBreakers>
 </document>

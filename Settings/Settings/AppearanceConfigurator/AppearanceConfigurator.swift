@@ -13,6 +13,9 @@ struct Colors {
     
     static let main = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     static let text1 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
+    static let tableViewBackground = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+//    rgb(239, 239, 244
 }
 
 struct AppearanceTheme: Equatable {
@@ -20,6 +23,7 @@ struct AppearanceTheme: Equatable {
     let windowTintColor: UIColor
     let backgroundColor: UIColor
     let textColor: UIColor
+    let tableViewBackgroundColor: UIColor
 //    let navigationBarColor: UIColor
 }
 
@@ -31,11 +35,13 @@ extension AppearanceConfigurator {
     static var themes = [AppearanceTheme(name: "Light",
                                          windowTintColor: UIColor.magenta,
                                          backgroundColor: UIColor.white,
-                                         textColor: UIColor.black),
+                                         textColor: UIColor.black,
+                                         tableViewBackgroundColor: Colors.tableViewBackground),
                          AppearanceTheme(name: "Dark",
                                          windowTintColor: UIColor.blue,
                                          backgroundColor: UIColor.black,
-                                         textColor: UIColor.white)]
+                                         textColor: UIColor.white,
+                                         tableViewBackgroundColor: UIColor.black)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -72,7 +78,7 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         //UITableViewCell.appearance().textLabel?.textColor = theme.textColor
-        UITableView.appearance().backgroundColor = theme.backgroundColor
+        UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
         
 //        applyBaseTheme()
         currentTheme = theme
