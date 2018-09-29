@@ -65,7 +65,7 @@
         <!--View Controller-->
         <scene sceneID="hI1-f4-6jx">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4xm-Go-3PP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.57513124240000002" green="0.54319269830000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bxd-9V-fZv" firstAttribute="bottom" secondItem="x6d-ut-e7G" secondAttribute="bottom" id="GBj-2F-QDu"/>
                             <constraint firstItem="bxd-9V-fZv" firstAttribute="trailing" secondItem="x6d-ut-e7G" secondAttribute="trailing" id="SZ2-j0-Awn"/>
