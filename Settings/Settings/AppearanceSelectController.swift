@@ -37,6 +37,8 @@ final class AppearanceSelectController: UIViewController {
     
     private func setup() {
         title = "appearance".localized
+        restorationIdentifier = String(describing: AppearanceSelectController.self)
+        restorationClass = AppearanceSelectController.self
     }
     
     override func viewDidLoad() {
@@ -44,6 +46,12 @@ final class AppearanceSelectController: UIViewController {
         
         view.addSubview(tableView)
 //        appearanceConfigurator.register(self)
+    }
+}
+
+extension AppearanceSelectController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        return AppearanceSelectController(coder: coder)
     }
 }
 

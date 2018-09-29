@@ -46,16 +46,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
 
+// MARK: - LocalizationManagerDelegate
 extension AppDelegate: LocalizationManagerDelegate {
     func languageDidChange(to language: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard
             let window = window,
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: String(describing: UITabBarController.self)) as? UITabBarController,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController,
             let tabBarControllers = tabBarVC.viewControllers
         else {
             assertionFailure()
@@ -104,6 +104,7 @@ extension AppDelegate: LocalizationManagerDelegate {
     }
 }
 
+// MARK: - AppearanceConfiguratorDelegate
 extension AppDelegate: AppearanceConfiguratorDelegate {
     func didApplied(theme: AppearanceTheme) {
         
@@ -111,7 +112,7 @@ extension AppDelegate: AppearanceConfiguratorDelegate {
         
         guard
             let window = window,
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: String(describing: UITabBarController.self)) as? UITabBarController,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController,
             let tabBarControllers = tabBarVC.viewControllers
             else {
                 assertionFailure()
@@ -132,5 +133,17 @@ extension AppDelegate: AppearanceConfiguratorDelegate {
         let settingsVC = settingsNavVC.topViewController as! SettingsController
         window.rootViewController = tabBarVC
         settingsVC.performSegue(withIdentifier: "detail!", sender: AppearanceSelectController())
+    }
+}
+
+// MARK: - UIStateRestoration
+extension AppDelegate {
+    
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        return true
     }
 }

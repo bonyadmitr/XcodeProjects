@@ -37,12 +37,20 @@ final class LanguageSelectController: UIViewController {
     
     private func setup() {
         title = "language".localized
+        restorationIdentifier = String(describing: LanguageSelectController.self)
+        restorationClass = LanguageSelectController.self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+    }
+}
+
+extension LanguageSelectController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        return LanguageSelectController(coder: coder)
     }
 }
 

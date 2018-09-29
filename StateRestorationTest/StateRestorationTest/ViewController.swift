@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// to debug UIStateRestoration do:
+/// 1. go to the detail screen
+/// 2. press Cmd+Shift+H (home button)
+/// 3. stop the app from xcode
+/// 4. run the app from xcode
 class ViewController: UIViewController {
 
     @IBOutlet weak var someTextLabel: UILabel!
