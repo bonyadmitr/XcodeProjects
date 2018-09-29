@@ -17,6 +17,7 @@ final class LanguageSelectController: UIViewController {
         tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableFooterView = UIView()
         return tableView
     }()
     
@@ -75,6 +76,9 @@ extension LanguageSelectController: UITableViewDelegate {
         } else {
             cell.detailTextLabel?.text = ""
         }
+        
+        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+        cell.detailTextLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

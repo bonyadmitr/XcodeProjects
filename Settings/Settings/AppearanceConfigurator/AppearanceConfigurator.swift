@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: status bar style
+
 struct Colors {
     private init() {}
     
@@ -15,7 +17,6 @@ struct Colors {
     static let text1 = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     static let tableViewBackground = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
-//    rgb(239, 239, 244
 }
 
 struct AppearanceTheme: Equatable {

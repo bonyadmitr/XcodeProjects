@@ -17,6 +17,7 @@ final class AppearanceSelectController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableFooterView = UIView()
         return tableView
     }()
     
