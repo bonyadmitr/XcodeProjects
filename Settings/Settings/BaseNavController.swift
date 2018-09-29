@@ -23,8 +23,8 @@ final class BaseSplitController: UISplitViewController {
     private func setup() {
         /// will be called on UITabBarController loading, UITabBarItem title will be set with this title
         title = viewControllers.first?.title
-        tabBarItem = viewControllers.first?.tabBarItem
         
+        tabBarItem = viewControllers.first?.tabBarItem
         delegate = self
     }
     
@@ -54,7 +54,11 @@ final class BaseNavController: UINavigationController {
     private func setup() {
         /// will be called on UITabBarController loading, UITabBarItem title will be set with this title
         title = topViewController?.title
+        
         tabBarItem = topViewController?.tabBarItem
+        
+        ///Hide tab bar in view with push has a slight delay
+        edgesForExtendedLayout = []
     }
     
     override func viewDidLoad() {

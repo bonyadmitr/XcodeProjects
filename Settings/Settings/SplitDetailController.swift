@@ -23,7 +23,7 @@ final class SplitDetailController: UIViewController {
     }
     
     private func setup() {
-        /// in viewDidLoad it will be with changin animation from storyboard title
+        /// in viewDidLoad it will be with changing animation from storyboard title
         title = childVC?.title
     }
     
@@ -64,7 +64,7 @@ extension SplitDetailController {
         if let childControllers = coder.decodeObject(forKey: SplitDetailController.restoreChildControllers) as? [UIViewController] {
             
             if childControllers.isEmpty {
-                assertionFailure()
+//                assertionFailure()
                 _ = navigationController?.popViewController(animated: false)
                 return
             }
