@@ -95,11 +95,7 @@ extension SplitDetailController {
 extension UIViewController {
     
     func add(childController: UIViewController, to container: UIView? = nil) {
-        
-        var holderView = self.view!
-        if let container = container {
-            holderView = container
-        }
+        let holderView = container ?? self.view!
         
         addChildViewController(childController)
         childController.view.frame = holderView.bounds
