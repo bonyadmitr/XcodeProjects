@@ -57,14 +57,14 @@ final class BaseNavController: UINavigationController {
         
         tabBarItem = topViewController?.tabBarItem
         
-        ///Hide tab bar in view with push has a slight delay
+        /// hide tab bar on push in view has a slight delay
         edgesForExtendedLayout = []
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// to remove navigation bar shadow on back action
+        /// to remove translucent navigation bar shadow on push and pop actions
         view.backgroundColor = UIColor.white
     }
 }
