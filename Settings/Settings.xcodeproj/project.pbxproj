@@ -10,6 +10,8 @@
 		6624D43A215EADA100DF1B92 /* UITextField+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6624D437215EADA000DF1B92 /* UITextField+Properties.swift */; };
 		6624D43B215EADA100DF1B92 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6624D438215EADA000DF1B92 /* AppearanceConfigurator.swift */; };
 		6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6624D439215EADA000DF1B92 /* UISearchBar+Properties.swift */; };
+		662D0D3D21616B10008D244E /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D3B21616B10008D244E /* DetailCell.swift */; };
+		662D0D3E21616B10008D244E /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 662D0D3C21616B10008D244E /* DetailCell.xib */; };
 		66E65EB7215EB91E00D2BCCA /* SplitDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */; };
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
 		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
@@ -38,6 +40,8 @@
 		6624D437215EADA000DF1B92 /* UITextField+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Properties.swift"; sourceTree = "<group>"; };
 		6624D438215EADA000DF1B92 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
 		6624D439215EADA000DF1B92 /* UISearchBar+Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Properties.swift"; sourceTree = "<group>"; };
+		662D0D3B21616B10008D244E /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		662D0D3C21616B10008D244E /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailController.swift; sourceTree = "<group>"; };
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
 				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
 				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
+				662D0D3C21616B10008D244E /* DetailCell.xib */,
+				662D0D3B21616B10008D244E /* DetailCell.swift */,
 				6624D43D215EADA900DF1B92 /* AppearanceConfigurator */,
 				CEEEB796215D0996003C5BD8 /* Classes */,
 				CEEEB79B215D0996003C5BD8 /* Extensions */,
@@ -224,6 +230,7 @@
 				CEEEB7BB215DF5EC003C5BD8 /* Localizable.strings in Resources */,
 				CEEEB78F215D094A003C5BD8 /* LaunchScreen.storyboard in Resources */,
 				CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */,
+				662D0D3E21616B10008D244E /* DetailCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +253,7 @@
 				CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */,
 				CEEEB7B1215D2036003C5BD8 /* MainApplication.swift in Sources */,
 				CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */,
+				662D0D3D21616B10008D244E /* DetailCell.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,

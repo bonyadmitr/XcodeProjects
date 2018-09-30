@@ -13,8 +13,11 @@ final class LanguageSelectController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]    
-        tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
+        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        let cellId = String(describing: DetailCell.self)
+        let nib = UINib(nibName: cellId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
+//        tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -102,12 +105,13 @@ extension LanguageSelectController: UITableViewDelegate {
     }
 }
 
-private final class DetailCell: UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+//private final class DetailCell: UITableViewCell {
+//
+//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+//        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
