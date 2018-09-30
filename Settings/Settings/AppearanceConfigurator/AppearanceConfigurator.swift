@@ -112,9 +112,12 @@ final class AppearanceConfigurator: MulticastHandler {
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
         
-//        UILabel.appearance().textColor = theme.textColor
-        UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = theme.textColor
-        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = theme.textColor
+//        UILabel.appearance().isOpaque = true
+        let cellLabel = UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self])
+        cellLabel.isOpaque = true
+        cellLabel.backgroundColor = theme.backgroundColor
+        cellLabel.textColor = theme.textColor
+        cellLabel.textColor = theme.textColor
         
         currentTheme = theme
         updateAppearance()

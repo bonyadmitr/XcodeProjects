@@ -93,11 +93,11 @@ extension LanguageSelectController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         
         let language = languageManager.availableLanguages[indexPath.row]
         
         if language == localizationManager.currentLanguage {
+            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         

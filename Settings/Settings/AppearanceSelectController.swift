@@ -14,14 +14,17 @@ final class AppearanceSelectController: UIViewController {
         let tableView = UITableView()
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        let cellId = String(describing: DetailCell.self)
+        let nib = UINib(nibName: cellId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         return tableView
     }()
     
-    private let cellId = String(describing: UITableViewCell.self)
+    private let cellId = String(describing: DetailCell.self)
     private let themes = AppearanceConfigurator.themes
     private let appearanceConfigurator = AppearanceConfigurator.shared
     
@@ -70,24 +73,26 @@ extension AppearanceSelectController: UITableViewDelegate {
         
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
             cell.accessoryType = .checkmark
+//            cell.selectionStyle = .default
         } else {
             cell.accessoryType = .none
+//            cell.selectionStyle = .none
         }
         
         cell.textLabel?.text = themes[indexPath.row].name
-        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
-        cell.selectionStyle = .none
+//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
+            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
-        
         /// without recreation needs reloadData
         tableView.reloadData()
         
         AppearanceConfigurator.shared.apply(theme: themes[indexPath.row])
+//        tableView.reloadData()
     }
 }
 
