@@ -114,15 +114,30 @@ final class AppearanceConfigurator: MulticastHandler {
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
         
-//        UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = theme.textColor
+//        UILabel.appearance().textColor = theme.textColor
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = theme.textColor
         
         currentTheme = theme
+        updateAppearance()
         delegates.invoke { $0.didApplied(theme: theme) }
     }
     
     func applyBaseTheme() {
         UINavigationBar.appearance().isTranslucent = true
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     class func configurate() {
         
@@ -233,5 +248,14 @@ final class AppearanceConfigurator: MulticastHandler {
     class func configureLabel() {
         UILabel.appearance().textColor = UIColor.cyan
         UILabel.appearance().font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private func updateAppearance() {
+        for window in UIApplication.shared.windows {
+            window.subviews.forEach {
+                $0.removeFromSuperview()
+                window.addSubview($0)
+            }
+        }
     }
 }

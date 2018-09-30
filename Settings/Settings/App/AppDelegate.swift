@@ -107,32 +107,31 @@ extension AppDelegate: LocalizationManagerDelegate {
 // MARK: - AppearanceConfiguratorDelegate
 extension AppDelegate: AppearanceConfiguratorDelegate {
     func didApplied(theme: AppearanceTheme) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard
-            let window = window,
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController,
-            let tabBarControllers = tabBarVC.viewControllers
-            else {
-                assertionFailure()
-                return
-        }
-        
-        let lastIndex = tabBarControllers.count - 1
-        tabBarVC.selectedIndex = lastIndex
-        
-        guard
-            let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
-            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
-            else {
-                assertionFailure()
-                return
-        }
-        
-        let settingsVC = settingsNavVC.topViewController as! SettingsController
-        window.rootViewController = tabBarVC
-        settingsVC.performSegue(withIdentifier: "detail!", sender: AppearanceSelectController())
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        guard
+//            let window = window,
+//            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController,
+//            let tabBarControllers = tabBarVC.viewControllers
+//            else {
+//                assertionFailure()
+//                return
+//        }
+//
+//        let lastIndex = tabBarControllers.count - 1
+//        tabBarVC.selectedIndex = lastIndex
+//
+//        guard
+//            let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
+//            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
+//            else {
+//                assertionFailure()
+//                return
+//        }
+//
+//        let settingsVC = settingsNavVC.topViewController as! SettingsController
+//        window.rootViewController = tabBarVC
+//        settingsVC.performSegue(withIdentifier: "detail!", sender: AppearanceSelectController())
     }
 }
 

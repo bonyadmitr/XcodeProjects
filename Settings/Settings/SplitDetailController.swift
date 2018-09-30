@@ -48,13 +48,13 @@ final class SplitDetailController: UIViewController {
 extension SplitDetailController {
     
     /// Constants for state restoration.
-    private static let restoreChildVC = "childVCKey"
+//    private static let restoreChildVC = "childVCKey"
     private static let restoreChildControllers = "restoreChildControllers"
     
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         
-        coder.encode(childVC, forKey: SplitDetailController.restoreChildVC)
+//        coder.encode(childVC, forKey: SplitDetailController.restoreChildVC)
         coder.encode(childViewControllers, forKey: SplitDetailController.restoreChildControllers)
     }
     

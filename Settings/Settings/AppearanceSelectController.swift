@@ -75,15 +75,17 @@ extension AppearanceSelectController: UITableViewDelegate {
         }
         
         cell.textLabel?.text = themes[indexPath.row].name
-        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+        cell.selectionStyle = .none
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
             return
         }
+        
+        /// without recreation needs reloadData
+        tableView.reloadData()
         
         AppearanceConfigurator.shared.apply(theme: themes[indexPath.row])
     }

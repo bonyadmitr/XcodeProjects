@@ -70,7 +70,7 @@ extension ViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.text = "Row \(indexPath.row + 1)"
-        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
 }
 

@@ -85,8 +85,8 @@ extension LanguageSelectController: UITableViewDelegate {
             cell.detailTextLabel?.text = ""
         }
         
-        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
-        cell.detailTextLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+//        cell.detailTextLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
