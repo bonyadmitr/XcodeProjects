@@ -18,6 +18,9 @@ extension SystemVolumeManagerDelegate {
     func systemVolumeSliderDidChange(value: Float) {}
 }
 
+/// another solution
+/// https://github.com/andreamazz/SubtleVolume
+
 // add button handler or create new class
 // http://stackoverflow.com/questions/28471481/swift-detect-volume-button-press
 // https://github.com/jpsim/JPSVolumeButtonHandler
