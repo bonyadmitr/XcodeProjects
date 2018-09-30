@@ -33,7 +33,8 @@ protocol AppearanceConfiguratorDelegate {
 }
 
 extension AppearanceConfigurator {
-    static var themes = [AppearanceTheme(name: "Light",
+    // TODO: default theme
+    static var themes = [AppearanceTheme(name: "Black and White",
                                          windowTintColor: UIColor.magenta,
                                          backgroundColor: UIColor.white,
                                          textColor: UIColor.black,

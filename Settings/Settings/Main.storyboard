@@ -90,7 +90,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.042891039829999998" green="0.80784314869999996" blue="0.002558831689" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <segue destination="AEJ-6a-BlE" kind="show" id="3DT-N4-O7g"/>
                                         </connections>

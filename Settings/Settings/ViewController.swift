@@ -66,15 +66,17 @@ extension ViewController: UITableViewDataSource {
         return 100
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.text = "Row \(indexPath.row + 1)"
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
     }
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
 }
 
