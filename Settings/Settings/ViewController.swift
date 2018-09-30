@@ -52,13 +52,7 @@ extension ViewController {
         
         let contentOffset = coder.decodeCGPoint(forKey: ViewController.restoreTableViewOffet)
         tableView.setContentOffset(contentOffset, animated: false)
-//        automaticallyAdjustsScrollViewInsets = false
     }
-    
-//    override func applicationFinishedRestoringState() {
-//        super.applicationFinishedRestoringState()
-//        automaticallyAdjustsScrollViewInsets = true
-//    }
 }
 
 extension ViewController: UITableViewDataSource {
