@@ -19,13 +19,37 @@ struct Colors {
     static let tableViewBackground = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
 }
 
+enum AppearanceStyle {
+    case light
+    case dark
+}
+extension AppearanceStyle {
+    var tabAndNavBars: UIBarStyle {
+        switch self {
+        case .light:
+            return .default
+        case .dark:
+            return .black
+        }
+    }
+    var statusBar: UIStatusBarStyle {
+        switch self {
+        case .light:
+            return .default
+        case .dark:
+            return .lightContent
+        }
+    }
+}
+
+
 struct AppearanceTheme: Equatable {
     let name: String
     let windowTintColor: UIColor
     let backgroundColor: UIColor
     let textColor: UIColor
     let tableViewBackgroundColor: UIColor
-//    let navigationBarColor: UIColor
+    let barStyle: AppearanceStyle
 }
 
 protocol AppearanceConfiguratorDelegate {
@@ -38,12 +62,14 @@ extension AppearanceConfigurator {
                                          windowTintColor: UIColor.magenta,
                                          backgroundColor: UIColor.white,
                                          textColor: UIColor.black,
-                                         tableViewBackgroundColor: Colors.tableViewBackground),
+                                         tableViewBackgroundColor: Colors.tableViewBackground,
+                                         barStyle: .light),
                          AppearanceTheme(name: "Dark",
                                          windowTintColor: UIColor.blue,
                                          backgroundColor: UIColor.black,
                                          textColor: UIColor.white,
-                                         tableViewBackgroundColor: UIColor.black)]
+                                         tableViewBackgroundColor: UIColor.black,
+                                         barStyle: .dark)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -67,26 +93,29 @@ final class AppearanceConfigurator: MulticastHandler {
     }
     
     func apply(theme: AppearanceTheme) {
+        UIApplication.shared.statusBarStyle = theme.barStyle.statusBar
         UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
         
-        UINavigationBar.appearance().barTintColor = theme.backgroundColor //bar's background
         
         let textAttributes: [NSAttributedStringKey: Any] = [
             .foregroundColor: theme.textColor
         ]
         
         UINavigationBar.appearance().titleTextAttributes = textAttributes
-//        UITabBar.appearance().backgroundColor = theme.backgroundColor
-        UITabBar.appearance().barTintColor = theme.backgroundColor
+//        UINavigationBar.appearance().barTintColor = theme.backgroundColor //bar's background
+        UINavigationBar.appearance().barStyle = theme.barStyle.tabAndNavBars
+        
+//        UITabBar.appearance().barTintColor = theme.backgroundColor
+        UITabBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes(textAttributes, for: .selected)
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
-        //UITableViewCell.appearance().textLabel?.textColor = theme.textColor
         UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
         
-//        applyBaseTheme()
+//        UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = theme.textColor
+        
         currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }
     }

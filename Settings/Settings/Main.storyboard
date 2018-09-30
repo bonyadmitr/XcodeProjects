@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XKE-Ol-7eZ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UITableViewCell" textLabel="rLk-Rm-stU" style="IBUITableViewCellStyleDefault" id="fFb-VB-BcZ">
@@ -46,7 +46,7 @@
                         <constraints>
                             <constraint firstItem="XKE-Ol-7eZ" firstAttribute="top" secondItem="0gS-ik-Fe2" secondAttribute="top" id="N9X-A0-rw8"/>
                             <constraint firstItem="XKE-Ol-7eZ" firstAttribute="leading" secondItem="0gS-ik-Fe2" secondAttribute="leading" id="Qdo-EU-MMn"/>
-                            <constraint firstItem="BAE-Xj-xHy" firstAttribute="bottom" secondItem="XKE-Ol-7eZ" secondAttribute="bottom" id="tXP-eB-Rk6"/>
+                            <constraint firstAttribute="bottom" secondItem="XKE-Ol-7eZ" secondAttribute="bottom" id="tXP-eB-Rk6"/>
                             <constraint firstItem="BAE-Xj-xHy" firstAttribute="trailing" secondItem="XKE-Ol-7eZ" secondAttribute="trailing" id="zki-a6-gzq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BAE-Xj-xHy"/>
