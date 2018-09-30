@@ -65,6 +65,6 @@ final class BaseNavController: UINavigationController {
         super.viewDidLoad()
         
         /// to remove translucent navigation bar shadow on push and pop actions
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.white
     }
 }

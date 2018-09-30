@@ -8,6 +8,10 @@
 
 import UIKit
 
+// TODO: dark tabbar in split detail
+// TODO: default theme
+// TODO: apply theme on launch
+
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +25,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppearanceConfigurator.shared.register(self)
 //        AppearanceConfigurator.configurate()
         
+        AppearanceConfigurator.shared.apply(theme: AppearanceConfigurator.themes[1])
         return true
     }
 

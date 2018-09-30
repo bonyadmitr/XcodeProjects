@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO: status bar style
-
 struct Colors {
     private init() {}
     
@@ -57,7 +55,6 @@ protocol AppearanceConfiguratorDelegate {
 }
 
 extension AppearanceConfigurator {
-    // TODO: default theme
     static var themes = [AppearanceTheme(name: "Black and White",
                                          windowTintColor: UIColor.magenta,
                                          backgroundColor: UIColor.white,
@@ -94,8 +91,9 @@ final class AppearanceConfigurator: MulticastHandler {
     
     func apply(theme: AppearanceTheme) {
         UIApplication.shared.statusBarStyle = theme.barStyle.statusBar
+        // TODO: create window property
         UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
-        
+        UIApplication.shared.delegate?.window??.backgroundColor = theme.backgroundColor
         
         let textAttributes: [NSAttributedStringKey: Any] = [
             .foregroundColor: theme.textColor
@@ -116,6 +114,7 @@ final class AppearanceConfigurator: MulticastHandler {
         
 //        UILabel.appearance().textColor = theme.textColor
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = theme.textColor
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = theme.textColor
         
         currentTheme = theme
         updateAppearance()

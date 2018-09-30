@@ -75,7 +75,7 @@ extension AppearanceSelectController: UITableViewDelegate {
         }
         
         cell.textLabel?.text = themes[indexPath.row].name
-//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
+        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
         cell.selectionStyle = .none
     }
     
