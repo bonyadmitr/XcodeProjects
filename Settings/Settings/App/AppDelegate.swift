@@ -8,9 +8,10 @@
 
 import UIKit
 
-// TODO: log app started with restoration
+// TODO: swiftgen strings file
 // TODO: debug state restoration without xcode (mayby create memory leak)
 // TODO: iPhone+ lanscape settings initial state
+// TODO: UIKeyCommand (from SplitController project)
 
 /// added main.swift
 //@UIApplicationMain
