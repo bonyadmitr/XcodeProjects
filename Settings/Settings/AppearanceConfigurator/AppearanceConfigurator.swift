@@ -64,7 +64,7 @@ extension AppearanceConfigurator {
                                          backgroundColor: UIColor.white,
                                          secondaryBackgroundColor: Colors.tableViewBackground,
                                          textColor: UIColor.black,
-                                         secondaryTextColor: UIColor.darkGray,
+                                         secondaryTextColor: UIColor.lightGray,
                                          barStyle: .light,
                                          navBarColor: nil,
                                          tabBarColor: nil,
@@ -78,7 +78,17 @@ extension AppearanceConfigurator {
                                          barStyle: .dark,
                                          navBarColor: nil,
                                          tabBarColor: nil,
-                                         cellSelectedColor: UIColor.cyan)]
+                                         cellSelectedColor: UIColor.cyan),
+                         AppearanceTheme(name: "Default",
+                                         windowTintColor: UIColor.defaultBlue,
+                                         backgroundColor: UIColor.white,
+                                         secondaryBackgroundColor: Colors.tableViewBackground,
+                                         textColor: UIColor.black,
+                                         secondaryTextColor: UIColor.lightGray,
+                                         barStyle: .light,
+                                         navBarColor: nil,
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.lightGray)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -120,7 +130,7 @@ final class AppearanceConfigurator: MulticastHandler {
         UITabBar.appearance().barTintColor = theme.tabBarColor
         UITabBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.secondaryTextColor], for: .normal)
+//        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.secondaryTextColor], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.windowTintColor], for: .selected)
         
         /// set cellSelectedColor
