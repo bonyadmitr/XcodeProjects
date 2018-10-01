@@ -46,6 +46,7 @@ struct AppearanceTheme: Equatable {
     let windowTintColor: UIColor
     let backgroundColor: UIColor
     let textColor: UIColor
+    let secondaryTextColor: UIColor
     let tableViewBackgroundColor: UIColor
     let barStyle: AppearanceStyle
     let navBarColor: UIColor?
@@ -61,6 +62,7 @@ extension AppearanceConfigurator {
                                          windowTintColor: UIColor.magenta,
                                          backgroundColor: UIColor.white,
                                          textColor: UIColor.black,
+                                         secondaryTextColor: UIColor.darkGray,
                                          tableViewBackgroundColor: Colors.tableViewBackground,
                                          barStyle: .light,
                                          navBarColor: nil,
@@ -69,6 +71,7 @@ extension AppearanceConfigurator {
                                          windowTintColor: UIColor.cyan,
                                          backgroundColor: UIColor.black,
                                          textColor: UIColor.white,
+                                         secondaryTextColor: UIColor.lightGray,
                                          tableViewBackgroundColor: UIColor.black,
                                          barStyle: .dark,
                                          navBarColor: nil,
@@ -114,11 +117,13 @@ final class AppearanceConfigurator: MulticastHandler {
         UITabBar.appearance().barTintColor = theme.tabBarColor
         UITabBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.secondaryTextColor], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.windowTintColor], for: .selected)
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
+        
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = theme.secondaryTextColor
         
 //        UILabel.appearance().isOpaque = true
         let cellLabel = UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self])

@@ -14,7 +14,6 @@ import UIKit
 // TODO: debug state restoration without xcode (mayby create memory leak)
 // TODO: selection color
 // TODO: secondaryBackgroundColor
-// TODO: secondaryTextColor
 
 /// added main.swift
 //@UIApplicationMain
