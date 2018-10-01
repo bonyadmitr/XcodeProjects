@@ -81,8 +81,9 @@ final class FloatingPresentingController: UIViewController {
         
         enum DebugRaws: Int {
             case crashApp = 0
+            case moveToBackgroundAndCrash
             
-            static let count = 1
+            static let count = 2
         }
     }
     
@@ -174,9 +175,11 @@ extension FloatingPresentingController: UITableViewDelegate {
             
             switch row {
             case .crashApp:
-//                cell.accessoryType = .disclosureIndicator
-                cell.textLabel?.text = "Crash the app for UIStateRestoration"
+                cell.textLabel?.text = "Crash the app"
+            case .moveToBackgroundAndCrash:
+                cell.textLabel?.text = "Background & crash in 1 sec"
             }
+            //cell.accessoryType = .disclosureIndicator
         }
     }
     
@@ -197,6 +200,8 @@ extension FloatingPresentingController: UITableViewDelegate {
             
             switch row {
             case .crashApp:
+                exit(0)
+            case .moveToBackgroundAndCrash:
                 isGoingToCrash = true
                 UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
             }

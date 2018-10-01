@@ -57,11 +57,16 @@ extension ViewController {
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         
+        guard isViewLoaded else {
+            return
+        }
+        
         coder.encode(tableView.contentOffset, forKey: ViewController.restoreTableViewOffet)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
         
         let contentOffset = coder.decodeCGPoint(forKey: ViewController.restoreTableViewOffet)
         tableView.setContentOffset(contentOffset, animated: false)
