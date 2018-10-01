@@ -153,12 +153,59 @@ extension AppDelegate {
         return true
     }
     
-    /// another methods
+    /// decode any state at the app delegate level
+    ///
+    /// if you plan to do any asynchronous initialization for restoration -
+    /// Use these methods to inform the system that state restoration is occuring
+    /// asynchronously after the application has processed its restoration archive on launch.
+    /// In the event of a crash, the system will be able to detect that it may have been
+    /// caused by a bad restoration archive and arrange to ignore it on a subsequent application launch.
+    ///
+//    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
+//
+//        application.extendStateRestoration()
+//
+//        DispatchQueue.global().async {
+//            /// do any additional asynchronous initialization work here...
+//
+//            DispatchQueue.main.async {
+//                application.completeStateRestoration()
+//            }
+//        }
+//
+//        // if you ever want to check for restore bundle version of user interface idiom, use this code:
+//        //
+//        //ask for the restoration version (used in case we have multiple versions of the app with varying UIs)
+//        // String with value of info.plist's Bundle Version (app version) when state was last saved for the app
+//        //
+//        guard let restoreBundleVersion = coder.decodeObject(forKey: UIApplicationStateRestorationBundleVersionKey) as? String else {
+//            return
+//        }
+//
+//        print("Restore bundle version:", restoreBundleVersion)
+//
+//        // ask for the restoration idiom (used in case user ran used to run an iPhone version but now running on an iPad)
+//        // NSNumber containing the UIUSerInterfaceIdiom enum value of the app that saved state
+//        //
+//        guard let restoreUserInterfaceIdiom = coder.decodeObject(forKey: UIApplicationStateRestorationUserInterfaceIdiomKey) as? NSNumber else {
+//            return
+//        }
+//
+//        print("Restore User Interface Idiom:", restoreUserInterfaceIdiom.intValue)
+//
+//    }
+    
+    /// note: if you don't assign a restoration class to each view controller,
+    /// here we need to implement "viewControllerWithRestorationIdentifierPath"
 //    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+//
+//        /// to get our main storyboard
+//        guard let storyboard = coder.decodeObject(forKey: UIStateRestorationViewControllerStoryboardKey) as? UIStoryboard else {
+//            return nil
+//        }
 //        return nil
 //    }
-//    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
-//    }
+    
 //    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
 //    }
 }
