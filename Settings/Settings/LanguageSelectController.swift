@@ -42,6 +42,7 @@ final class LanguageSelectController: UIViewController {
         title = "language".localized
         restorationIdentifier = String(describing: LanguageSelectController.self)
         restorationClass = LanguageSelectController.self
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
