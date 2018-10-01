@@ -19,6 +19,8 @@ import UIKit
 // TODO: sounds settings
 // TODO: crashlitics
 // TODO: fabric analytics
+// TODO: #if DEBUG all debug code
+// TODO: clear Floating file
 
 // TODO: other options in settings:
 // send feedback (emailSender in anther project)
