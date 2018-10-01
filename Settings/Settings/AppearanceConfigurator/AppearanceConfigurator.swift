@@ -48,6 +48,8 @@ struct AppearanceTheme: Equatable {
     let textColor: UIColor
     let tableViewBackgroundColor: UIColor
     let barStyle: AppearanceStyle
+    let navBarColor: UIColor?
+    let tabBarColor: UIColor?
 }
 
 protocol AppearanceConfiguratorDelegate {
@@ -60,13 +62,17 @@ extension AppearanceConfigurator {
                                          backgroundColor: UIColor.white,
                                          textColor: UIColor.black,
                                          tableViewBackgroundColor: Colors.tableViewBackground,
-                                         barStyle: .light),
+                                         barStyle: .light,
+                                         navBarColor: nil,
+                                         tabBarColor: nil),
                          AppearanceTheme(name: "Dark",
                                          windowTintColor: UIColor.blue,
                                          backgroundColor: UIColor.black,
                                          textColor: UIColor.white,
                                          tableViewBackgroundColor: UIColor.black,
-                                         barStyle: .dark)]
+                                         barStyle: .dark,
+                                         navBarColor: nil,
+                                         tabBarColor: nil)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -99,10 +105,10 @@ final class AppearanceConfigurator: MulticastHandler {
         ]
         
         UINavigationBar.appearance().titleTextAttributes = textAttributes
-//        UINavigationBar.appearance().barTintColor = theme.backgroundColor //bar's background
+        UINavigationBar.appearance().barTintColor = theme.navBarColor //bar's background
         UINavigationBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
-//        UITabBar.appearance().barTintColor = theme.backgroundColor
+        UITabBar.appearance().barTintColor = theme.tabBarColor
         UITabBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
