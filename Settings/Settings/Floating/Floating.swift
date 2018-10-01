@@ -114,12 +114,28 @@ final class FloatingPresentingController: UIViewController {
     private func setup() {
         title = "Debug"
         //extendedLayoutIncludesOpaqueBars = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: .willEncodeRestorableState, object: nil)
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+    }
+    
+    private var isGoingToCrash = false
+    
+    @objc private func appMovedToBackground() {
+        if isGoingToCrash {
+            UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            dismiss(animated: false) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    exit(0)
+                }
+            }
+        }
     }
 }
 
@@ -181,7 +197,8 @@ extension FloatingPresentingController: UITableViewDelegate {
             
             switch row {
             case .crashApp:
-                exit(0)
+                isGoingToCrash = true
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
             }
         }
     }

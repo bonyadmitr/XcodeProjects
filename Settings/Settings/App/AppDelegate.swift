@@ -213,6 +213,11 @@ extension AppDelegate {
 //        return nil
 //    }
     
-//    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
-//    }
+    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
+        NotificationCenter.default.post(name: .willEncodeRestorableState, object: nil)
+    }
+}
+
+extension NSNotification.Name {
+    static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
 }
