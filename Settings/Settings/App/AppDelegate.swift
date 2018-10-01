@@ -11,10 +11,22 @@ import UIKit
 // TODO: swiftgen strings file
 // TODO: iPhone+ lanscape settings initial state
 // TODO: UIKeyCommand (from SplitController project)
-// TODO: other options in settings
 // TODO: settings bundle
 // TODO: UISelectionFeedbackGenerator
 // TODO: add logger
+// TODO: log JailbreakChecker
+// TODO: sounds on tap
+// TODO: sounds settings
+// TODO: crashlitics
+// TODO: fabric analytics
+
+// TODO: other options in settings:
+// send feedback (emailSender in anther project)
+// share with social, qr code (QRScanner)
+// update app
+// rate app
+// pods lisence
+// privacy policy (wkwebview)
 
 /// added main.swift
 //@UIApplicationMain
