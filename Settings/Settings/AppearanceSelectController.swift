@@ -87,11 +87,11 @@ extension AppearanceSelectController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
-        /// without recreation needs reloadData
-        tableView.reloadData()
         
         AppearanceConfigurator.shared.applyAndSaveCurrent(theme: themes[indexPath.row])
-//        tableView.reloadData()
+        
+        /// without recreation needs reloadData
+        tableView.reloadData()
     }
 }
 

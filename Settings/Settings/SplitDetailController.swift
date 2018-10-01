@@ -63,6 +63,7 @@ extension SplitDetailController {
         if let childControllers = coder.decodeObject(forKey: SplitDetailController.restoreChildControllers) as? [UIViewController] {
             
             if childControllers.isEmpty {
+                /// called in bcz of splitController
 //                assertionFailure()
                 _ = navigationController?.popViewController(animated: false)
                 return
