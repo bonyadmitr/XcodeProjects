@@ -126,6 +126,9 @@ final class AppearanceConfigurator: MulticastHandler {
     
     func applyBaseTheme() {
         UINavigationBar.appearance().isTranslucent = false
+        
+        /// https://stackoverflow.com/a/21007803/5893286
+        /// extendedLayoutIncludesOpaqueBars = true in all controllers
         UITabBar.appearance().isTranslucent = false
     }
     
