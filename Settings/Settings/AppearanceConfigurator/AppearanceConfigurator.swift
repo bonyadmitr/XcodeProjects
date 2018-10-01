@@ -117,7 +117,6 @@ final class AppearanceConfigurator: MulticastHandler {
         cellLabel.isOpaque = true
         cellLabel.backgroundColor = theme.backgroundColor
         cellLabel.textColor = theme.textColor
-        cellLabel.textColor = theme.textColor
         
         currentTheme = theme
         updateAppearance()
