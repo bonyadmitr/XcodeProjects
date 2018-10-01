@@ -12,7 +12,6 @@ import UIKit
 // TODO: apply theme with saving and on launch apply
 // TODO: log app started with restoration
 // TODO: debug state restoration without xcode (mayby create memory leak)
-// TODO: cell selection color
 
 /// added main.swift
 //@UIApplicationMain

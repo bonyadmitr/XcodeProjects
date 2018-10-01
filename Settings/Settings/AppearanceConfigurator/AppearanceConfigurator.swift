@@ -51,6 +51,7 @@ struct AppearanceTheme: Equatable {
     let barStyle: AppearanceStyle
     let navBarColor: UIColor?
     let tabBarColor: UIColor?
+    let cellSelectedColor: UIColor
 }
 
 protocol AppearanceConfiguratorDelegate {
@@ -66,7 +67,8 @@ extension AppearanceConfigurator {
                                          secondaryTextColor: UIColor.darkGray,
                                          barStyle: .light,
                                          navBarColor: nil,
-                                         tabBarColor: nil),
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.magenta),
                          AppearanceTheme(name: "Dark",
                                          windowTintColor: UIColor.cyan,
                                          backgroundColor: UIColor.black,
@@ -75,7 +77,8 @@ extension AppearanceConfigurator {
                                          secondaryTextColor: UIColor.lightGray,
                                          barStyle: .dark,
                                          navBarColor: nil,
-                                         tabBarColor: nil)]
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.cyan)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -119,6 +122,11 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.secondaryTextColor], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.windowTintColor], for: .selected)
+        
+        /// set cellSelectedColor
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = theme.cellSelectedColor
+        UITableViewCell.appearance().selectedBackgroundView = backgroundView
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.secondaryBackgroundColor
