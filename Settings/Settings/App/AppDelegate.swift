@@ -10,15 +10,18 @@ import UIKit
 
 // TODO: log app started with restoration
 // TODO: debug state restoration without xcode (mayby create memory leak)
+// TODO: iPhone+ lanscape settings initial state
 
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var isApplicationRestored = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        print("--- isApplicationRestored: ", isApplicationRestored)
         
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.register(self)
@@ -143,6 +146,16 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        isApplicationRestored = true
         return true
     }
+    
+    /// another methods
+//    func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+//        return nil
+//    }
+//    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
+//    }
+//    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
+//    }
 }
