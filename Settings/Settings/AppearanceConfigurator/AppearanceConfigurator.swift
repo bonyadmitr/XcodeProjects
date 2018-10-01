@@ -125,7 +125,8 @@ final class AppearanceConfigurator: MulticastHandler {
     }
     
     func applyBaseTheme() {
-        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().isTranslucent = false
+        UITabBar.appearance().isTranslucent = false
     }
     
     

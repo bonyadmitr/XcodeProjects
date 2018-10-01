@@ -12,7 +12,7 @@ final class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 50, right: 0)
+//            newValue.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 50, right: 0)
         }
     }
     

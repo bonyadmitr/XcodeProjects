@@ -26,6 +26,7 @@ final class BaseSplitController: UISplitViewController {
         
         tabBarItem = viewControllers.first?.tabBarItem
         delegate = self
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
@@ -63,6 +64,7 @@ final class BaseNavController: UINavigationController {
         /// fixed tabbar appearance on push for child controllers
         /// not working for master vc in split controller for iPhone+ landscape mode
         edgesForExtendedLayout = [.all]
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
