@@ -27,6 +27,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.loadSavedTheme()
         
+        /// not working
+        //application.ignoreSnapshotOnNextApplicationLaunch()
+        
         return true
     }
 
@@ -110,6 +113,9 @@ extension AppDelegate: LocalizationManagerDelegate {
 extension AppDelegate {
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        /// to see path to restoration file: data.data
+        let lib = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!.appendingPathComponent("Saved Application State")
+        print("Restoration files: \(lib.path)")
         return true
     }
     
