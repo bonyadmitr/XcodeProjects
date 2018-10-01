@@ -27,7 +27,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.loadSavedTheme()
         
-        Floating.mode = .button
+        #if DEBUG
+        /// cmd + ctrl + z
+        Floating.mode = .shake
+        
+        let vc = FloatingPresentingController()
+        let navVC = FloatingNavigationController(rootViewController: vc)
+        FloatingManager.shared.presentingController = navVC
+        #endif
         
         /// not working
         //application.ignoreSnapshotOnNextApplicationLaunch()

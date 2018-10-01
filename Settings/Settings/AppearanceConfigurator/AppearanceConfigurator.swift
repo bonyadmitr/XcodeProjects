@@ -79,13 +79,17 @@ final class AppearanceConfigurator: MulticastHandler {
         applyBaseTheme()
     }
     
-    private lazy var window: UIWindow? = {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
-    }()
+//    private lazy var window: UIWindow? = {
+//        return (UIApplication.shared.delegate as? AppDelegate)?.window
+//    }()
     
     func apply(theme: AppearanceTheme) {
-        window?.tintColor = theme.windowTintColor
-        window?.backgroundColor = theme.backgroundColor
+        
+        /// need all windows for Floating window
+        UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
+        
+        /// need for translucent UINavigationBar
+//        window?.backgroundColor = theme.backgroundColor
         
         let textAttributes: [NSAttributedStringKey: Any] = [
             .foregroundColor: theme.textColor
