@@ -8,9 +8,8 @@
 
 import UIKit
 
-// TODO: dark tabbar in split detail
 // TODO: default theme
-// TODO: apply theme on launch
+// TODO: apply theme with saving and on launch apply
 // TODO: log app started with restoration
 
 /// added main.swift

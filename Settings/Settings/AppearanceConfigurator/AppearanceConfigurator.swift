@@ -95,10 +95,13 @@ final class AppearanceConfigurator: MulticastHandler {
         applyBaseTheme()
     }
     
+    private lazy var window: UIWindow? = {
+        return (UIApplication.shared.delegate as? AppDelegate)?.window
+    }()
+    
     func apply(theme: AppearanceTheme) {
-        // TODO: create window property
-        UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
-        UIApplication.shared.delegate?.window??.backgroundColor = theme.backgroundColor
+        window?.tintColor = theme.windowTintColor
+        window?.backgroundColor = theme.backgroundColor
         
         let textAttributes: [NSAttributedStringKey: Any] = [
             .foregroundColor: theme.textColor
@@ -112,7 +115,7 @@ final class AppearanceConfigurator: MulticastHandler {
         UITabBar.appearance().barStyle = theme.barStyle.tabAndNavBars
         
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes(textAttributes, for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.windowTintColor], for: .selected)
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.tableViewBackgroundColor
