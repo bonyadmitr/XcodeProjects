@@ -30,12 +30,22 @@ extension AppearanceStyle {
             return .black
         }
     }
+    
     var statusBar: UIStatusBarStyle {
         switch self {
         case .light:
             return .default
         case .dark:
             return .lightContent
+        }
+    }
+    
+    var keyboard: UIKeyboardAppearance {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
         }
     }
 }
@@ -121,6 +131,8 @@ final class AppearanceConfigurator: MulticastHandler {
         cellLabel.isOpaque = true
         cellLabel.backgroundColor = theme.backgroundColor
         cellLabel.textColor = theme.textColor
+        
+        UITextField.appearance().keyboardAppearance = theme.barStyle.keyboard
         
         currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }

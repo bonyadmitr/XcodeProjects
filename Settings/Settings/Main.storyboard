@@ -140,12 +140,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gVJ-Gi-bYR">
+                                <rect key="frame" x="16" y="80" width="288" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.57513124240000002" green="0.54319269830000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bxd-9V-fZv" firstAttribute="trailing" secondItem="gVJ-Gi-bYR" secondAttribute="trailing" constant="16" id="2DY-HZ-8ga"/>
                             <constraint firstItem="bxd-9V-fZv" firstAttribute="bottom" secondItem="x6d-ut-e7G" secondAttribute="bottom" id="GBj-2F-QDu"/>
+                            <constraint firstItem="gVJ-Gi-bYR" firstAttribute="top" secondItem="bxd-9V-fZv" secondAttribute="top" constant="16" id="GKu-8e-Gm2"/>
                             <constraint firstItem="bxd-9V-fZv" firstAttribute="trailing" secondItem="x6d-ut-e7G" secondAttribute="trailing" id="SZ2-j0-Awn"/>
                             <constraint firstItem="x6d-ut-e7G" firstAttribute="leading" secondItem="bxd-9V-fZv" secondAttribute="leading" id="iNx-F7-4Mf"/>
+                            <constraint firstItem="gVJ-Gi-bYR" firstAttribute="leading" secondItem="bxd-9V-fZv" secondAttribute="leading" constant="16" id="m4C-vS-ig8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bxd-9V-fZv"/>
                     </view>
