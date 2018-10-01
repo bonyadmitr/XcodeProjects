@@ -53,12 +53,19 @@ extension SplitDetailController {
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
         
+        /// If the view has not been loaded, the app will crash
+        /// upon accessing force-unwrapped outlets, e.g., `slider`.
+        guard isViewLoaded else {
+            return
+        }
+        
 //        coder.encode(childVC, forKey: SplitDetailController.restoreChildVC)
         coder.encode(childViewControllers, forKey: SplitDetailController.restoreChildControllers)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
         
         if let childControllers = coder.decodeObject(forKey: SplitDetailController.restoreChildControllers) as? [UIViewController] {
             

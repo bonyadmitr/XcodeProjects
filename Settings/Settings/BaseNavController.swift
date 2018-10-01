@@ -11,25 +11,28 @@ import UIKit
 //import UIKit
 //
 //class BaseController: UIViewController {
-//    
+//
 //    var statusBarStyle = AppearanceStyle.light
-//    
+//
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return statusBarStyle.statusBar
 //    }
-//    
+//
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 //        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 //        setup()
 //    }
-//    
+//
 //    required init?(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
 //        setup()
 //    }
-//    
+//
 //    private func setup() {
 //        AppearanceConfigurator.shared.register(self)
+//        // TODO: need to check for subclasses
+//        restorationIdentifier = String(describing: type(of: self))
+//        restorationClass = type(of: self)
 //    }
 //}
 //extension BaseController: AppearanceConfiguratorDelegate {

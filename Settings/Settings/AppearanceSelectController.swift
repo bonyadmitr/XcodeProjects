@@ -39,8 +39,8 @@ final class AppearanceSelectController: UIViewController {
     
     private func setup() {
         title = "appearance".localized
-        restorationIdentifier = String(describing: AppearanceSelectController.self)
-        restorationClass = AppearanceSelectController.self
+        restorationIdentifier = String(describing: type(of: self))
+        restorationClass = type(of: self)
         extendedLayoutIncludesOpaqueBars = true
     }
     
@@ -54,6 +54,7 @@ final class AppearanceSelectController: UIViewController {
 
 extension AppearanceSelectController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
         return AppearanceSelectController(coder: coder)
     }
 }

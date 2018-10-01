@@ -39,9 +39,13 @@ final class LanguageSelectController: UIViewController {
     
     private func setup() {
         title = "language".localized
-        restorationIdentifier = String(describing: LanguageSelectController.self)
-        restorationClass = LanguageSelectController.self
+        restorationIdentifier = String(describing: type(of: self))
         extendedLayoutIncludesOpaqueBars = true
+        
+        /// The class specified here must conform to `UIViewControllerRestoration`,
+        /// explained above. If not set, you'd get a second chance to create the
+        /// view controller on demand in the app delegate.
+        restorationClass = type(of: self)
     }
     
     override func viewDidLoad() {
@@ -51,8 +55,14 @@ final class LanguageSelectController: UIViewController {
     }
 }
 
+/*
+ Note the extra protocol: This view controller is not initially created
+ (before `application(_:willFinishLaunchingWithOptions:)` returns), so
+ it may have to be created on demand for state restoration.
+ */
 extension LanguageSelectController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
         return LanguageSelectController(coder: coder)
     }
 }
