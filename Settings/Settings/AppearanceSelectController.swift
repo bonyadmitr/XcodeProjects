@@ -17,7 +17,6 @@ final class AppearanceSelectController: UIViewController {
         let cellId = String(describing: DetailCell.self)
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -81,7 +80,6 @@ extension AppearanceSelectController: UITableViewDelegate {
         }
         
         cell.textLabel?.text = themes[indexPath.row].name
-//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

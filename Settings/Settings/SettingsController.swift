@@ -106,8 +106,6 @@ extension SettingsController: UITableViewDelegate {
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.text = "appearance".localized
             }
-            
-//            cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

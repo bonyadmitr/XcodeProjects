@@ -17,7 +17,6 @@ final class LanguageSelectController: UIViewController {
         let cellId = String(describing: DetailCell.self)
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
-//        tableView.register(DetailCell.self, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -88,9 +87,6 @@ extension LanguageSelectController: UITableViewDelegate {
         } else {
             cell.detailTextLabel?.text = ""
         }
-        
-//        cell.textLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
-//        cell.detailTextLabel?.textColor = AppearanceConfigurator.shared.currentTheme.textColor
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
