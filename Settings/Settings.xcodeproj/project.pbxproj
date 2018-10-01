@@ -13,6 +13,11 @@
 		662D0D3D21616B10008D244E /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D3B21616B10008D244E /* DetailCell.swift */; };
 		662D0D3E21616B10008D244E /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 662D0D3C21616B10008D244E /* DetailCell.xib */; };
 		662D0D4021628C38008D244E /* ChildHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D3F21628C38008D244E /* ChildHandler.swift */; };
+		662D0D472162A3F6008D244E /* Floating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D422162A3F6008D244E /* Floating.swift */; };
+		662D0D482162A3F6008D244E /* FloatingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D432162A3F6008D244E /* FloatingController.swift */; };
+		662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D442162A3F6008D244E /* FloatingManager.swift */; };
+		662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D452162A3F6008D244E /* FloatingView.swift */; };
+		662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D462162A3F6008D244E /* FloatingWindow.swift */; };
 		66E65EB7215EB91E00D2BCCA /* SplitDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */; };
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
 		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
@@ -45,6 +50,11 @@
 		662D0D3B21616B10008D244E /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		662D0D3C21616B10008D244E /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		662D0D3F21628C38008D244E /* ChildHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildHandler.swift; sourceTree = "<group>"; };
+		662D0D422162A3F6008D244E /* Floating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Floating.swift; sourceTree = "<group>"; };
+		662D0D432162A3F6008D244E /* FloatingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingController.swift; sourceTree = "<group>"; };
+		662D0D442162A3F6008D244E /* FloatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingManager.swift; sourceTree = "<group>"; };
+		662D0D452162A3F6008D244E /* FloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
+		662D0D462162A3F6008D244E /* FloatingWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingWindow.swift; sourceTree = "<group>"; };
 		66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailController.swift; sourceTree = "<group>"; };
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
@@ -96,6 +106,18 @@
 			path = AppearanceConfigurator;
 			sourceTree = "<group>";
 		};
+		662D0D412162A3F6008D244E /* Floating */ = {
+			isa = PBXGroup;
+			children = (
+				662D0D422162A3F6008D244E /* Floating.swift */,
+				662D0D432162A3F6008D244E /* FloatingController.swift */,
+				662D0D442162A3F6008D244E /* FloatingManager.swift */,
+				662D0D452162A3F6008D244E /* FloatingView.swift */,
+				662D0D462162A3F6008D244E /* FloatingWindow.swift */,
+			);
+			path = Floating;
+			sourceTree = "<group>";
+		};
 		CEEEB778215D0949003C5BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +149,7 @@
 				662D0D3C21616B10008D244E /* DetailCell.xib */,
 				662D0D3B21616B10008D244E /* DetailCell.swift */,
 				662D0D3F21628C38008D244E /* ChildHandler.swift */,
+				662D0D412162A3F6008D244E /* Floating */,
 				6624D43D215EADA900DF1B92 /* AppearanceConfigurator */,
 				CEEEB796215D0996003C5BD8 /* Classes */,
 				CEEEB79B215D0996003C5BD8 /* Extensions */,
@@ -258,9 +281,13 @@
 				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
 				CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */,
 				CEEEB7B1215D2036003C5BD8 /* MainApplication.swift in Sources */,
+				662D0D482162A3F6008D244E /* FloatingController.swift in Sources */,
 				CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */,
 				662D0D3D21616B10008D244E /* DetailCell.swift in Sources */,
+				662D0D472162A3F6008D244E /* Floating.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
+				662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */,
+				662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
@@ -270,6 +297,7 @@
 				CEEEB7C3215E073C003C5BD8 /* BaseNavController.swift in Sources */,
 				6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */,
 				CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */,
+				662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */,
 				662D0D4021628C38008D244E /* ChildHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

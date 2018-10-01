@@ -9,7 +9,7 @@
 import UIKit
 
 // TODO: swiftgen strings file
-// TODO: debug state restoration without xcode (mayby create memory leak)
+// TODO: debug state restoration without xcode (mayby create memory leak) // exit(0)
 // TODO: iPhone+ lanscape settings initial state
 // TODO: UIKeyCommand (from SplitController project)
 
@@ -26,6 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.loadSavedTheme()
+        
+        Floating.mode = .button
         
         /// not working
         //application.ignoreSnapshotOnNextApplicationLaunch()
