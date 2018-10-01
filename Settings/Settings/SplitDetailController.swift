@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SplitDetailController: UIViewController {
+final class SplitDetailController: UIViewController, ChildHandler {
     
     var childVC: UIViewController?
     
@@ -87,24 +87,5 @@ extension SplitDetailController {
     override func applicationFinishedRestoringState() {
         super.applicationFinishedRestoringState()
         
-    }
-}
-
-// TODO: ParantController/ChildHandler/ChildManager
-extension UIViewController {
-    
-    func add(childController: UIViewController, to container: UIView? = nil) {
-        let holderView = container ?? self.view!
-        
-        addChildViewController(childController)
-        childController.view.frame = holderView.bounds
-        childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        holderView.addSubview(childController.view)
-        childController.didMove(toParentViewController: self)
-    }
-    
-    func removeFromParentVC() {
-        view.removeFromSuperview()
-        removeFromParentViewController()
     }
 }

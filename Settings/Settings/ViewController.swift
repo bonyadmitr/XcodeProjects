@@ -87,10 +87,10 @@ extension ViewController: UITableViewDelegate {
 }
 
 
-final class SampleDesigner: NSObject {
-    @IBOutlet private weak var sampleLabel: UILabel! {
-        willSet {
-            newValue.text = "language".localized
-        }
-    }
-}
+//final class SampleDesigner: NSObject {
+//    @IBOutlet private weak var sampleLabel: UILabel! {
+//        willSet {
+//            newValue.text = "language".localized
+//        }
+//    }
+//}
