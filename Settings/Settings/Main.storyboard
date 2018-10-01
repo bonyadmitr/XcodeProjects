@@ -65,7 +65,7 @@
         <!--View Controller-->
         <scene sceneID="hI1-f4-6jx">
             <objects>
-                <viewController storyboardIdentifier="ViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q6X-O4-0CW" customClass="ViewController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4xm-Go-3PP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +125,7 @@
         <!--View Controller-->
         <scene sceneID="eBV-Gf-nss">
             <objects>
-                <viewController storyboardIdentifier="SampleController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AEJ-6a-BlE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SampleController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AEJ-6a-BlE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JUQ-tI-qJ2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,7 +175,7 @@
         <!--Settings-->
         <scene sceneID="SWK-Ru-dwe">
             <objects>
-                <navigationController storyboardIdentifier="SettingsNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dUe-UE-9Sd" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="RH9-yN-oUK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9W-Ks-l9e">
@@ -194,9 +194,9 @@
         <!--Detail-->
         <scene sceneID="3Og-Om-sNZ">
             <objects>
-                <viewController storyboardIdentifier="SplitDetailController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplitDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNF-FW-vye">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Af2-Zr-qEg"/>
@@ -224,7 +224,7 @@
         <!--Base Nav Controller-->
         <scene sceneID="Kkl-AU-k6a">
             <objects>
-                <navigationController storyboardIdentifier="DetailNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ekW-z9-iyw" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DetailNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ekW-z9-iyw" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="eiX-45-DSI">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -242,7 +242,7 @@
         <!--Controller-->
         <scene sceneID="c9o-Sf-m9N">
             <objects>
-                <navigationController storyboardIdentifier="FirstNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYS-Us-gY2" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FirstNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYS-Us-gY2" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Controller" id="QYL-tx-GfI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QsA-6G-5wL">
@@ -260,6 +260,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A4Q-KM-7MW"/>
+        <segue reference="nR8-lm-mpX"/>
     </inferredMetricsTieBreakers>
 </document>

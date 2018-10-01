@@ -38,7 +38,6 @@ final class SplitDetailController: UIViewController {
 //            assertionFailure()
             return
         }
-        
         add(childController: childVC)
     }
     
@@ -69,7 +68,7 @@ extension SplitDetailController {
                 return
             }
             
-            automaticallyAdjustsScrollViewInsets = false
+//            automaticallyAdjustsScrollViewInsets = false
             title = childControllers.first?.title
             childControllers.forEach { add(childController: $0)}
         }

@@ -66,7 +66,7 @@ extension AppearanceConfigurator {
                                          navBarColor: nil,
                                          tabBarColor: nil),
                          AppearanceTheme(name: "Dark",
-                                         windowTintColor: UIColor.blue,
+                                         windowTintColor: UIColor.cyan,
                                          backgroundColor: UIColor.black,
                                          textColor: UIColor.white,
                                          tableViewBackgroundColor: UIColor.black,

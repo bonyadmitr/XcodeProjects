@@ -60,6 +60,7 @@ final class SettingsController: UIViewController, BackButtonActions {
             let detailVC = navVC.topViewController as? SplitDetailController
         {
             detailVC.childVC = vc
+            detailVC.title = vc.title
         }
     }
 }

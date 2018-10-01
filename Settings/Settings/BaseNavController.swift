@@ -97,12 +97,12 @@ final class BaseNavController: UINavigationController {
         
         tabBarItem = topViewController?.tabBarItem
         
-        /// hide tab bar on push in view has a slight delay
-//        edgesForExtendedLayout = []
+        /// hide tab bar on push in view has a slight delay 
+        edgesForExtendedLayout = []
         
         /// fixed tabbar appearance on push for child controllers
         /// not working for master vc in split controller for iPhone+ landscape mode
-        edgesForExtendedLayout = [.all]
+//        edgesForExtendedLayout = [.all]
         extendedLayoutIncludesOpaqueBars = true
     }
     
