@@ -11,6 +11,10 @@ import UIKit
 // TODO: swiftgen strings file
 // TODO: iPhone+ lanscape settings initial state
 // TODO: UIKeyCommand (from SplitController project)
+// TODO: other options in settings
+// TODO: settings bundle
+// TODO: UISelectionFeedbackGenerator
+// TODO: add logger
 
 /// added main.swift
 //@UIApplicationMain
