@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO: default theme
-// TODO: apply theme with saving and on launch apply
 // TODO: log app started with restoration
 // TODO: debug state restoration without xcode (mayby create memory leak)
 
@@ -26,7 +24,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppearanceConfigurator.shared.register(self)
 //        AppearanceConfigurator.configurate()
         
-        AppearanceConfigurator.shared.apply(theme: AppearanceConfigurator.themes[1])
+        AppearanceConfigurator.shared.loadSavedTheme()
         return true
     }
 

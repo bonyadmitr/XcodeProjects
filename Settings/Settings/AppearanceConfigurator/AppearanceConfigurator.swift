@@ -42,6 +42,7 @@ extension AppearanceStyle {
 
 
 struct AppearanceTheme: Equatable {
+    let saveId: String
     let name: String
     let windowTintColor: UIColor
     let backgroundColor: UIColor
@@ -56,39 +57,6 @@ struct AppearanceTheme: Equatable {
 
 protocol AppearanceConfiguratorDelegate {
     func didApplied(theme: AppearanceTheme)
-}
-
-extension AppearanceConfigurator {
-    static var themes = [AppearanceTheme(name: "Black and White",
-                                         windowTintColor: UIColor.magenta,
-                                         backgroundColor: UIColor.white,
-                                         secondaryBackgroundColor: Colors.tableViewBackground,
-                                         textColor: UIColor.black,
-                                         secondaryTextColor: UIColor.lightGray,
-                                         barStyle: .light,
-                                         navBarColor: nil,
-                                         tabBarColor: nil,
-                                         cellSelectedColor: UIColor.magenta),
-                         AppearanceTheme(name: "Dark",
-                                         windowTintColor: UIColor.cyan,
-                                         backgroundColor: UIColor.black,
-                                         secondaryBackgroundColor: #colorLiteral(red: 0.06274509804, green: 0.06274509804, blue: 0.06274509804, alpha: 1),
-                                         textColor: UIColor.white,
-                                         secondaryTextColor: UIColor.lightGray,
-                                         barStyle: .dark,
-                                         navBarColor: nil,
-                                         tabBarColor: nil,
-                                         cellSelectedColor: UIColor.cyan),
-                         AppearanceTheme(name: "Default",
-                                         windowTintColor: UIColor.defaultBlue,
-                                         backgroundColor: UIColor.white,
-                                         secondaryBackgroundColor: Colors.tableViewBackground,
-                                         textColor: UIColor.black,
-                                         secondaryTextColor: UIColor.lightGray,
-                                         barStyle: .light,
-                                         navBarColor: nil,
-                                         tabBarColor: nil,
-                                         cellSelectedColor: UIColor.lightGray)]
 }
 
 ///appearance(whenContainedInInstancesOf: or appearanceForTraitCollection:whenContainedIn
@@ -176,116 +144,116 @@ final class AppearanceConfigurator: MulticastHandler {
     
     
     
-    class func configurate() {
-        
-        /// color of all buttons text (tintColor)
-        /// can be overriden by doneButton.tintColor = UIColor.cyan
-        /// or any other appearance()
-        UIApplication.shared.delegate?.window??.tintColor = UIColor.magenta
-        
-        /// need View controller-based status bar appearance = NO in Info.plist
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        configureNavigationBar()
-        configureBarButtonItem()
-        configureToolbar()
-        configureButton()
-        configureLabel()
-        configureSearchBar()
-    }
-    
-    class func configureSearchBar() {
-        
-        /// change the color of the text
-        //UILabel.appearanceWhenContainedInInstancesOfClasses([UITextField.self]).textColor = UIColor.whiteColor()
-        
-        //        UISearchBar.appearance().searchBarStyle = UISearchBarStyle.minimal
-        //        UISearchBar.appearance().scopeButtonTitles = nil
-        
-        /// cursor, buttons and others subviews color
-        UISearchBar.appearance().tintColor = UIColor.yellow
-        
-        /// out of textField color
-        UISearchBar.appearance().barTintColor = UIColor.black
-        
-        /// cursor only color
-        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.red
-        
-        /// textField backgroundColor. for UISearchBarStyle.prominent only
-        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.blue
-        
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).layer.backgroundColor = UIColor.blue.cgColor
-        
-        
-        /// text color
-        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.blue
-        // UISearchBar.appearance().textColor = UIColor.turquoise
-        
-        /// placeholder color
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).placeholderColor = UIColor.black
-        
-        /// search image color
-        //        UISearchBar.appearance().searchImageColor = UIColor.turquoise
-        
-        /// clear button color
-        //        UISearchBar.appearance().clearButtonColor = UIColor.turquoise
-        
-        UISearchBar.appearance().isRoundTextField = true
-    }
-    
-    class func configureNavigationBar() {
-        
-        /// don't work if View controller-based status bar appearance = NO in Info.plist
-        /// can be edited by:
-        /// override func viewDidLoad() {
-        ///     navigationController?.navigationBar.barStyle = .default
-        /// }
-        /// but it will change status bar color for all controller in that navigationController
-        UINavigationBar.appearance().barStyle = .black
-        
-        /// back button
-//        UINavigationBar.appearance().backIndicatorImage
-//        UINavigationBar.appearance().backIndicatorTransitionMaskImage
-        
-        /// colors
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = Colors.main //bar's background
-        UINavigationBar.appearance().tintColor = Colors.text1 //bar's buttons
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
-            NSAttributedStringKey.foregroundColor: Colors.text1
-        ]
-//        NSForegroundColorAttributeName
+//    class func configurate() {
 //
-//        /// shadow line off.
-//        /// need: UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-    }
-    
-    class func configureBarButtonItem() {
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = UIColor.green
-        
-        /// don't work for UIBarButtonItem in navigation bar
-        /// need UINavigationController and it's subclass
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [ViewController.self]).tintColor = UIColor.orange
-    }
-    
-    class func configureToolbar() {
-        UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
-        UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor
-        UIToolbar.appearance().isTranslucent = false
-    }
-    
-    class func configureButton() {
-        /// don't work for font
-        UIButton.appearance().titleLabel?.font = UIFont.systemFont(ofSize: 12)
-    }
-    
-    class func configureLabel() {
-        UILabel.appearance().textColor = UIColor.cyan
-        UILabel.appearance().font = UIFont.systemFont(ofSize: 12)
-    }
+//        /// color of all buttons text (tintColor)
+//        /// can be overriden by doneButton.tintColor = UIColor.cyan
+//        /// or any other appearance()
+//        UIApplication.shared.delegate?.window??.tintColor = UIColor.magenta
+//
+//        /// need View controller-based status bar appearance = NO in Info.plist
+//        UIApplication.shared.statusBarStyle = .lightContent
+//
+//        configureNavigationBar()
+//        configureBarButtonItem()
+//        configureToolbar()
+//        configureButton()
+//        configureLabel()
+//        configureSearchBar()
+//    }
+//
+//    class func configureSearchBar() {
+//
+//        /// change the color of the text
+//        //UILabel.appearanceWhenContainedInInstancesOfClasses([UITextField.self]).textColor = UIColor.whiteColor()
+//
+//        //        UISearchBar.appearance().searchBarStyle = UISearchBarStyle.minimal
+//        //        UISearchBar.appearance().scopeButtonTitles = nil
+//
+//        /// cursor, buttons and others subviews color
+//        UISearchBar.appearance().tintColor = UIColor.yellow
+//
+//        /// out of textField color
+//        UISearchBar.appearance().barTintColor = UIColor.black
+//
+//        /// cursor only color
+//        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.red
+//
+//        /// textField backgroundColor. for UISearchBarStyle.prominent only
+//        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.blue
+//
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).layer.backgroundColor = UIColor.blue.cgColor
+//
+//
+//        /// text color
+//        //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.blue
+//        // UISearchBar.appearance().textColor = UIColor.turquoise
+//
+//        /// placeholder color
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).placeholderColor = UIColor.black
+//
+//        /// search image color
+//        //        UISearchBar.appearance().searchImageColor = UIColor.turquoise
+//
+//        /// clear button color
+//        //        UISearchBar.appearance().clearButtonColor = UIColor.turquoise
+//
+//        UISearchBar.appearance().isRoundTextField = true
+//    }
+//
+//    class func configureNavigationBar() {
+//
+//        /// don't work if View controller-based status bar appearance = NO in Info.plist
+//        /// can be edited by:
+//        /// override func viewDidLoad() {
+//        ///     navigationController?.navigationBar.barStyle = .default
+//        /// }
+//        /// but it will change status bar color for all controller in that navigationController
+//        UINavigationBar.appearance().barStyle = .black
+//
+//        /// back button
+////        UINavigationBar.appearance().backIndicatorImage
+////        UINavigationBar.appearance().backIndicatorTransitionMaskImage
+//
+//        /// colors
+//        UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().barTintColor = Colors.main //bar's background
+//        UINavigationBar.appearance().tintColor = Colors.text1 //bar's buttons
+//        UINavigationBar.appearance().titleTextAttributes = [
+//            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
+//            NSAttributedStringKey.foregroundColor: Colors.text1
+//        ]
+////        NSForegroundColorAttributeName
+////
+////        /// shadow line off.
+////        /// need: UINavigationBar.appearance().isTranslucent = false
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//    }
+//
+//    class func configureBarButtonItem() {
+//        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = UIColor.green
+//
+//        /// don't work for UIBarButtonItem in navigation bar
+//        /// need UINavigationController and it's subclass
+//        UIBarButtonItem.appearance(whenContainedInInstancesOf: [ViewController.self]).tintColor = UIColor.orange
+//    }
+//
+//    class func configureToolbar() {
+//        UIToolbar.appearance().barTintColor = UINavigationBar.appearance().barTintColor
+//        UIToolbar.appearance().tintColor = UINavigationBar.appearance().tintColor
+//        UIToolbar.appearance().isTranslucent = false
+//    }
+//
+//    class func configureButton() {
+//        /// don't work for font
+//        UIButton.appearance().titleLabel?.font = UIFont.systemFont(ofSize: 12)
+//    }
+//
+//    class func configureLabel() {
+//        UILabel.appearance().textColor = UIColor.cyan
+//        UILabel.appearance().font = UIFont.systemFont(ofSize: 12)
+//    }
     
     private func updateAppearance() {
         for window in UIApplication.shared.windows {
@@ -295,4 +263,66 @@ final class AppearanceConfigurator: MulticastHandler {
             }
         }
     }
+}
+
+extension AppearanceConfigurator {
+    private static let saveThemeKey = "AppearanceConfigurator_saveThemeKey"
+    
+    private func saveCurrenThemet(_ theme: AppearanceTheme) {
+        UserDefaults.standard.set(theme.saveId, forKey: AppearanceConfigurator.saveThemeKey)
+    }
+    
+    func loadSavedTheme() {
+        guard
+            let themeSaveId = UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey),
+            let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId})
+        else {
+            /// will be drop here at first launch
+            //assertionFailure()
+            return
+        }
+        apply(theme: savedTheme)
+    }
+    
+    func applyAndSaveCurrent(theme: AppearanceTheme) {
+        apply(theme: theme)
+        saveCurrenThemet(theme)
+    }
+}
+
+extension AppearanceConfigurator {
+    
+    static var themes = [AppearanceTheme(saveId: "0",
+                                         name: "Default",
+                                         windowTintColor: UIColor.defaultBlue,
+                                         backgroundColor: UIColor.white,
+                                         secondaryBackgroundColor: Colors.tableViewBackground,
+                                         textColor: UIColor.black,
+                                         secondaryTextColor: UIColor.lightGray,
+                                         barStyle: .light,
+                                         navBarColor: nil,
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.lightGray),
+                         AppearanceTheme(saveId: "1",
+                                         name: "Black and White",
+                                         windowTintColor: UIColor.magenta,
+                                         backgroundColor: UIColor.white,
+                                         secondaryBackgroundColor: Colors.tableViewBackground,
+                                         textColor: UIColor.black,
+                                         secondaryTextColor: UIColor.lightGray,
+                                         barStyle: .light,
+                                         navBarColor: nil,
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.magenta),
+                         AppearanceTheme(saveId: "2",
+                                         name: "Dark",
+                                         windowTintColor: UIColor.cyan,
+                                         backgroundColor: UIColor.black,
+                                         secondaryBackgroundColor: #colorLiteral(red: 0.06274509804, green: 0.06274509804, blue: 0.06274509804, alpha: 1),
+                                         textColor: UIColor.white,
+                                         secondaryTextColor: UIColor.lightGray,
+                                         barStyle: .dark,
+                                         navBarColor: nil,
+                                         tabBarColor: nil,
+                                         cellSelectedColor: UIColor.cyan)]
 }

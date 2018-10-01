@@ -92,7 +92,7 @@ extension AppearanceSelectController: UITableViewDelegate {
         /// without recreation needs reloadData
         tableView.reloadData()
         
-        AppearanceConfigurator.shared.apply(theme: themes[indexPath.row])
+        AppearanceConfigurator.shared.applyAndSaveCurrent(theme: themes[indexPath.row])
 //        tableView.reloadData()
     }
 }
