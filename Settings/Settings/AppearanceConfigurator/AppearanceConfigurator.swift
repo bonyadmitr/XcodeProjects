@@ -124,6 +124,7 @@ final class AppearanceConfigurator: MulticastHandler {
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: theme.windowTintColor], for: .selected)
         
         /// set cellSelectedColor
+        /// https://stackoverflow.com/a/32938456/5893286
         let backgroundView = UIView()
         backgroundView.backgroundColor = theme.cellSelectedColor
         UITableViewCell.appearance().selectedBackgroundView = backgroundView
