@@ -8,7 +8,43 @@
 
 import UIKit
 
+//import UIKit
+//
+//class BaseController: UIViewController {
+//    
+//    var statusBarStyle = AppearanceStyle.light
+//    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return statusBarStyle.statusBar
+//    }
+//    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//        setup()
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//    
+//    private func setup() {
+//        AppearanceConfigurator.shared.register(self)
+//    }
+//}
+//extension BaseController: AppearanceConfiguratorDelegate {
+//    func didApplied(theme: AppearanceTheme) {
+//        statusBarStyle = theme.barStyle
+//    }
+//}
+
 final class BaseSplitController: UISplitViewController {
+    
+    private var statusBarStyle = AppearanceStyle.light
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle.statusBar
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -27,12 +63,15 @@ final class BaseSplitController: UISplitViewController {
         tabBarItem = viewControllers.first?.tabBarItem
         delegate = self
         extendedLayoutIncludesOpaqueBars = true
+        AppearanceConfigurator.shared.register(self)
+    }
+}
+extension BaseSplitController: AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme) {
+        statusBarStyle = theme.barStyle
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        preferredDisplayMode = .allVisible
-    }
+    
 }
 extension BaseSplitController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {

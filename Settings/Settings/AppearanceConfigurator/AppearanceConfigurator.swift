@@ -90,7 +90,6 @@ final class AppearanceConfigurator: MulticastHandler {
     }
     
     func apply(theme: AppearanceTheme) {
-        UIApplication.shared.statusBarStyle = theme.barStyle.statusBar
         // TODO: create window property
         UIApplication.shared.delegate?.window??.tintColor = theme.textColor//theme.windowTintColor
         UIApplication.shared.delegate?.window??.backgroundColor = theme.backgroundColor
@@ -119,8 +118,8 @@ final class AppearanceConfigurator: MulticastHandler {
         cellLabel.textColor = theme.textColor
         
         currentTheme = theme
-        updateAppearance()
         delegates.invoke { $0.didApplied(theme: theme) }
+        updateAppearance()
     }
     
     func applyBaseTheme() {
