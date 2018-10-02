@@ -30,6 +30,8 @@
 		CE77AB1A216353DC00728C64 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE77AB19216353DB00728C64 /* Settings.bundle */; };
 		CE77AB1C2163546200728C64 /* SettingsBundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */; };
 		CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */; };
+		CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */; };
+		CE77AB222163599200728C64 /* FloatingPresentingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB212163599200728C64 /* FloatingPresentingController.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
 		CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78B215D094A003C5BD8 /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		CE77AB19216353DB00728C64 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleManager.swift; sourceTree = "<group>"; };
 		CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
+		CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNavigationController.swift; sourceTree = "<group>"; };
+		CE77AB212163599200728C64 /* FloatingPresentingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPresentingController.swift; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEB786215D0949003C5BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				662D0D442162A3F6008D244E /* FloatingManager.swift */,
 				662D0D452162A3F6008D244E /* FloatingView.swift */,
 				662D0D462162A3F6008D244E /* FloatingWindow.swift */,
+				CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */,
+				CE77AB212163599200728C64 /* FloatingPresentingController.swift */,
 			);
 			path = Floating;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 				6624D43A215EADA100DF1B92 /* UITextField+Properties.swift in Sources */,
 				66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */,
 				66E65EB7215EB91E00D2BCCA /* SplitDetailController.swift in Sources */,
+				CE77AB222163599200728C64 /* FloatingPresentingController.swift in Sources */,
 				CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */,
 				66D380922163300700EFA49C /* EmailSender.swift in Sources */,
 				6624D43B215EADA100DF1B92 /* AppearanceConfigurator.swift in Sources */,
@@ -329,6 +336,7 @@
 				66D380942163300700EFA49C /* Dispatch+Current.swift in Sources */,
 				662D0D472162A3F6008D244E /* Floating.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
+				CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */,
 				662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */,
 				662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
