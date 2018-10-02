@@ -21,7 +21,7 @@ import UIKit
 
 // TODO: other options in settings:
 // send feedback (emailSender in anther project)
-// share with social, qr code (QRScanner)
+// share with iOS share action, social, qr code (QRScanner)
 // update app
 // rate app
 // pods lisence
@@ -36,7 +36,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var isApplicationRestored = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         
         #if DEBUG
         Logger.shared.configure {

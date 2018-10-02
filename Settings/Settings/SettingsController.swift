@@ -12,14 +12,21 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     private enum Section: Int {
         case language = 0
+        case support
         
-        static let count = 1
+        static let count = 2
         
         enum LanguageRaws: Int {
             case select = 0
             case appearance
             
             static let count = 2
+        }
+        
+        enum SupportRaws: Int {
+            case feedback = 0
+            
+            static let count = 1
         }
     }
     
@@ -63,6 +70,13 @@ final class SettingsController: UIViewController, BackButtonActions {
             detailVC.title = vc.title
         }
     }
+    
+    private func sendFeedback() {
+        EmailSender.shared.send(message: "",
+                                subject: "Settings feedback",
+                                to: [EmailSender.devEmail],
+                                presentIn: self)
+    }
 }
 
 extension SettingsController: UITableViewDataSource {
@@ -76,6 +90,7 @@ extension SettingsController: UITableViewDataSource {
         }
         switch section {
         case .language: return Section.LanguageRaws.count
+        case .support: return Section.SupportRaws.count
         }
     }
     
@@ -106,6 +121,17 @@ extension SettingsController: UITableViewDelegate {
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.text = "appearance".localized
             }
+            
+        case .support:
+            guard let row = Section.SupportRaws(rawValue: indexPath.row) else {
+                assertionFailure()
+                return
+            }
+            
+            switch row {
+            case .feedback:
+                cell.textLabel?.text = "Send feedback"
+            }
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -131,6 +157,17 @@ extension SettingsController: UITableViewDelegate {
             case .appearance:
                 performSegue(withIdentifier: "detail", sender: AppearanceSelectController())
             }
+            
+        case .support:
+            guard let row = Section.SupportRaws(rawValue: indexPath.row) else {
+                assertionFailure()
+                return
+            }
+            
+            switch row {
+            case .feedback:
+                sendFeedback()
+            }
         }
     }
     
@@ -143,6 +180,8 @@ extension SettingsController: UITableViewDelegate {
         switch section {
         case .language:
             return "language".localized
+        case .support:
+            return "support".localized
         }
     }
 }
