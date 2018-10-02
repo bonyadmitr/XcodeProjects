@@ -8,6 +8,19 @@
 
 import Foundation
 
+func print(_ items: Any...) {
+    #if DEBUG
+    Swift.print(items)
+    #endif
+}
+
+func log(_ closure: @autoclosure () -> Any?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    #if DEBUG
+    Logger.shared.log(closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    #endif
+}
+
+
 public enum LogLevel {
     case none
     /// Prints the request and response at their respective `.simple` levels.
@@ -16,10 +29,6 @@ public enum LogLevel {
     case verbose
     
     case debug
-}
-
-func log(_ closure: @autoclosure () -> Any?, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    Logger.shared.log(closure, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
 }
 
 final public class Logger {
@@ -109,7 +118,7 @@ final public class Logger {
     }
 }
 
-class FileLogger {
+final class FileLogger {
     
     let fileUrl: URL
     

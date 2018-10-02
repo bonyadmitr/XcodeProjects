@@ -38,25 +38,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var isApplicationRestored = false
-
-//    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
-//        if FileManager.default.fileExists(atPath: Logger.shared.fileUrl.path),
-//            let logData = try? Data(contentsOf: Logger.shared.fileUrl)
-//        {
-//            let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
-//
-//            EmailSender.shared.send(message: "",
-//                                    subject: "MotionActivityManager Test",
-//                                    to: ["zdaecq@gmail.com"],
-//                                    attachments: [attachment],
-//                                    presentIn: self)
-//        }
-//    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        print("--- isApplicationRestored: ", isApplicationRestored)
         
+        #if DEBUG
         Logger.shared.configure {
             $0.showDate = true
             //                        $0.dateFormatter.dateFormat = "MM/dd/yyyy hh:mma"
@@ -67,12 +53,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             //            $0.showFunctionName = false
             //            $0.watchMainThead = true
         }
-        log("didFinishLaunchingWithOptions")
+        log("didFinishLaunchingWithOptions -----")
+        log("--- isApplicationRestored: \(isApplicationRestored)")
         
-        LocalizationManager.shared.register(self)
-        AppearanceConfigurator.shared.loadSavedTheme()
         
-        #if DEBUG
         /// cmd + ctrl + z
         Floating.mode = .shake
         
@@ -80,6 +64,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let navVC = FloatingNavigationController(rootViewController: vc)
         FloatingManager.shared.presentingController = navVC
         #endif
+        
+        LocalizationManager.shared.register(self)
+        AppearanceConfigurator.shared.loadSavedTheme()
         
         /// not working
         //application.ignoreSnapshotOnNextApplicationLaunch()

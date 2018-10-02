@@ -82,8 +82,9 @@ final class FloatingPresentingController: UIViewController {
         enum DebugRaws: Int {
             case crashApp = 0
             case moveToBackgroundAndCrash
+            case sendLogs
             
-            static let count = 2
+            static let count = 3
         }
     }
     
@@ -138,6 +139,20 @@ final class FloatingPresentingController: UIViewController {
             }
         }
     }
+    
+    private func sendLogs() {
+        if FileManager.default.fileExists(atPath: Logger.shared.fileUrl.path),
+            let logData = try? Data(contentsOf: Logger.shared.fileUrl)
+        {
+            let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
+
+            EmailSender.shared.send(message: "",
+                                    subject: "Settings Debug",
+                                    to: ["zdaecq@gmail.com"],
+                                    attachments: [attachment],
+                                    presentIn: self)
+        }
+    }
 }
 
 extension FloatingPresentingController: UITableViewDataSource {
@@ -178,6 +193,8 @@ extension FloatingPresentingController: UITableViewDelegate {
                 cell.textLabel?.text = "Crash the app"
             case .moveToBackgroundAndCrash:
                 cell.textLabel?.text = "Background & crash in 1 sec"
+            case .sendLogs:
+                cell.textLabel?.text = "Send logs via email"
             }
             //cell.accessoryType = .disclosureIndicator
         }
@@ -204,6 +221,8 @@ extension FloatingPresentingController: UITableViewDelegate {
             case .moveToBackgroundAndCrash:
                 isGoingToCrash = true
                 UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+            case .sendLogs:
+                sendLogs()
             }
         }
     }

@@ -94,6 +94,7 @@ final class AppearanceConfigurator: MulticastHandler {
 //    }()
     
     func apply(theme: AppearanceTheme) {
+        log("")
         
         /// need all windows for Floating window
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
