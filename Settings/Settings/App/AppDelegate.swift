@@ -12,8 +12,6 @@ import UIKit
 // TODO: UIKeyCommand (from SplitController project)
 // TODO: settings bundle
 // TODO: UISelectionFeedbackGenerator
-// TODO: add logger
-// TODO: send logs in debug mode
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
 // TODO: sounds settings
