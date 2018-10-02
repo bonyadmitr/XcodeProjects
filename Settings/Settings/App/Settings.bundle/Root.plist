@@ -16,6 +16,26 @@
 			<key>DefaultValue</key>
 			<string>1.0.0</string>
 		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>author</string>
+            <key>Key</key>
+            <string>app_author</string>
+            <key>DefaultValue</key>
+            <string>Bondar Yaroslav</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>email</string>
+            <key>Key</key>
+            <string>author_email</string>
+            <key>DefaultValue</key>
+            <string>zdaecq@gmail.com</string>
+        </dict>
 	</array>
 </dict>
 </plist>

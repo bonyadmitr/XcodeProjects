@@ -84,7 +84,7 @@ final class FloatingPresentingController: UIViewController {
             
             EmailSender.shared.send(message: "",
                                     subject: "Settings Debug",
-                                    to: ["zdaecq@gmail.com"],
+                                    to: [EmailSender.devEmail],
                                     attachments: [attachment],
                                     presentIn: self)
         }

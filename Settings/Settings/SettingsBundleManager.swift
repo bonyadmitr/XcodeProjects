@@ -19,9 +19,14 @@ final class SettingsBundleManager {
     
     func setup() {
         setVersion()
+        setEmail()
     }
     
     private func setVersion() {   
         UserDefaults.standard.set(UIApplication.shared.version, forKey: "version_preference")
+    }
+    
+    private func setEmail() {
+        UserDefaults.standard.set(EmailSender.devEmail, forKey: "author_email")
     }
 }

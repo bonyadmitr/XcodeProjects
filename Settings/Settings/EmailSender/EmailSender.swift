@@ -24,6 +24,10 @@ public enum EmailSenderCompletionStatus {
     case failed(Error)
 }
 
+extension EmailSender {
+    static let devEmail = "zdaecq@gmail.com"
+}
+
 /// You can customize the appearance of the interface using the UIAppearance protocol
 open class EmailSender: NSObject {
     

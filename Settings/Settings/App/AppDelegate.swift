@@ -16,7 +16,6 @@ import UIKit
 // TODO: sounds settings
 // TODO: crashlitics?
 // TODO: fabric analytics?
-// TODO: clear Floating file
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
 
