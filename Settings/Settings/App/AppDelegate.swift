@@ -10,14 +10,12 @@ import UIKit
 
 // TODO: swiftgen strings file
 // TODO: UIKeyCommand (from SplitController project)
-// TODO: settings bundle
 // TODO: UISelectionFeedbackGenerator
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
 // TODO: sounds settings
 // TODO: crashlitics?
 // TODO: fabric analytics?
-// TODO: #if DEBUG all debug code
 // TODO: clear Floating file
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
@@ -29,6 +27,7 @@ import UIKit
 // rate app
 // pods lisence
 // privacy policy (wkwebview)
+// app version
 
 /// added main.swift
 //@UIApplicationMain
