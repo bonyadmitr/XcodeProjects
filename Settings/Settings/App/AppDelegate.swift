@@ -14,13 +14,16 @@ import UIKit
 // TODO: settings bundle
 // TODO: UISelectionFeedbackGenerator
 // TODO: add logger
+// TODO: send logs in debug mode
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
 // TODO: sounds settings
-// TODO: crashlitics
-// TODO: fabric analytics
+// TODO: crashlitics?
+// TODO: fabric analytics?
 // TODO: #if DEBUG all debug code
 // TODO: clear Floating file
+// TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
+// TODO: for release mode shake to send a bug via email
 
 // TODO: other options in settings:
 // send feedback (emailSender in anther project)
