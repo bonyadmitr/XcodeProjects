@@ -40,9 +40,35 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var isApplicationRestored = false
 
+//    @IBAction func sendEmail(_ sender: UIBarButtonItem) {
+//        if FileManager.default.fileExists(atPath: Logger.shared.fileUrl.path),
+//            let logData = try? Data(contentsOf: Logger.shared.fileUrl)
+//        {
+//            let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
+//
+//            EmailSender.shared.send(message: "",
+//                                    subject: "MotionActivityManager Test",
+//                                    to: ["zdaecq@gmail.com"],
+//                                    attachments: [attachment],
+//                                    presentIn: self)
+//        }
+//    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         print("--- isApplicationRestored: ", isApplicationRestored)
+        
+        Logger.shared.configure {
+            $0.showDate = true
+            //                        $0.dateFormatter.dateFormat = "MM/dd/yyyy hh:mma"
+            
+            //            $0.showThreadName = false
+            //            $0.showFileName = false
+            //            $0.showLineNumber = false
+            //            $0.showFunctionName = false
+            //            $0.watchMainThead = true
+        }
+        log("didFinishLaunchingWithOptions")
         
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.loadSavedTheme()
