@@ -9,7 +9,6 @@
 import UIKit
 
 // TODO: swiftgen strings file
-// TODO: iPhone+ lanscape settings initial state
 // TODO: UIKeyCommand (from SplitController project)
 // TODO: settings bundle
 // TODO: UISelectionFeedbackGenerator

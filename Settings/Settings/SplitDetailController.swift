@@ -10,7 +10,7 @@ import UIKit
 
 final class SplitDetailController: UIViewController, ChildHandler {
     
-    var childVC: UIViewController?
+    var childVC: UIViewController = LanguageSelectController()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -24,7 +24,7 @@ final class SplitDetailController: UIViewController, ChildHandler {
     
     private func setup() {
         /// in viewDidLoad it will be with changing animation from storyboard title
-        title = childVC?.title
+        title = childVC.title
     }
     
     override func viewDidLoad() {
@@ -34,21 +34,16 @@ final class SplitDetailController: UIViewController, ChildHandler {
     }
     
     private func addChildVC() {
-        guard let childVC = childVC else {
-//            assertionFailure()
-            return
-        }
         add(childController: childVC)
     }
-    
 }
 
 // MARK: - UIStateRestoration
 extension SplitDetailController {
     
     /// Constants for state restoration.
-//    private static let restoreChildVC = "childVCKey"
-    private static let restoreChildControllers = "restoreChildControllers"
+    private static let restoreChildVC = "childVCKey"
+//    private static let restoreChildControllers = "restoreChildControllers"
     
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
@@ -59,37 +54,38 @@ extension SplitDetailController {
             return
         }
         
-//        coder.encode(childVC, forKey: SplitDetailController.restoreChildVC)
-        coder.encode(childViewControllers, forKey: SplitDetailController.restoreChildControllers)
+        coder.encode(childVC, forKey: SplitDetailController.restoreChildVC)
+//        coder.encode(childViewControllers, forKey: SplitDetailController.restoreChildControllers)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
         super.decodeRestorableState(with: coder)
         assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
         
-        if let childControllers = coder.decodeObject(forKey: SplitDetailController.restoreChildControllers) as? [UIViewController] {
-            
-            if childControllers.isEmpty {
-                /// called in bcz of splitController
-//                assertionFailure()
-                _ = navigationController?.popViewController(animated: false)
-                return
-            }
-            
-//            automaticallyAdjustsScrollViewInsets = false
-            title = childControllers.first?.title
-            childControllers.forEach { add(childController: $0)}
-        }
+//        if let childControllers = coder.decodeObject(forKey: SplitDetailController.restoreChildControllers) as? [UIViewController] {
+//            
+//            if childControllers.isEmpty {
+//                /// called in bcz of splitController
+////                assertionFailure()
+//                _ = navigationController?.popViewController(animated: false)
+//                return
+//            }
+//            
+//            title = childControllers.first?.title
+//            childControllers.forEach { add(childController: $0)}
+//        }
         
         /// can be used coder.containsValue(forKey
-//        if let childVC = coder.decodeObject(forKey: SplitDetailController.restoreChildVC) as? UIViewController {
-//            self.childVC = childVC
-//            automaticallyAdjustsScrollViewInsets = false
-//            addChildVC()
-//        } else {
-//            assertionFailure()
-//            _ = navigationController?.popViewController(animated: false)
-//        }
+        if let childVC = coder.decodeObject(forKey: SplitDetailController.restoreChildVC) as? UIViewController {
+            self.childVC = childVC
+            title = childVC.title
+            automaticallyAdjustsScrollViewInsets = false
+            childVC.removeFromParentVC()
+            addChildVC()
+        } else {
+            assertionFailure()
+            _ = navigationController?.popViewController(animated: false)
+        }
     }
     
     override func applicationFinishedRestoringState() {
