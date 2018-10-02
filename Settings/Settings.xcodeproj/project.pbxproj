@@ -27,6 +27,9 @@
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
 		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
 		CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE87B2162653500E16E4B /* UIColor+Default.swift */; };
+		CE77AB1A216353DC00728C64 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE77AB19216353DB00728C64 /* Settings.bundle */; };
+		CE77AB1C2163546200728C64 /* SettingsBundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */; };
+		CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
 		CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78B215D094A003C5BD8 /* Assets.xcassets */; };
@@ -37,7 +40,6 @@
 		CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */; };
 		CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */; };
 		CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */; };
-		CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */; };
 		CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */; };
 		CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */; };
 		CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */; };
@@ -69,6 +71,9 @@
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
 		CE0FE87B2162653500E16E4B /* UIColor+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Default.swift"; sourceTree = "<group>"; };
+		CE77AB19216353DB00728C64 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleManager.swift; sourceTree = "<group>"; };
+		CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEB786215D0949003C5BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +86,6 @@
 		CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+IBAction.swift"; sourceTree = "<group>"; };
 		CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RTL.swift"; sourceTree = "<group>"; };
 		CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Localization+Views.swift"; sourceTree = "<group>"; };
-		CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Restart.swift"; sourceTree = "<group>"; };
 		CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizationManager.swift"; sourceTree = "<group>"; };
 		CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				662D0D3C21616B10008D244E /* DetailCell.xib */,
 				662D0D3B21616B10008D244E /* DetailCell.swift */,
 				662D0D3F21628C38008D244E /* ChildHandler.swift */,
+				CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */,
 				66D3808B2163300700EFA49C /* EmailSender */,
 				66D3808E2163300700EFA49C /* Logger */,
 				662D0D412162A3F6008D244E /* Floating */,
@@ -204,7 +209,7 @@
 				CEEEB79C215D0996003C5BD8 /* UIViewController+IBAction.swift */,
 				CEEEB79D215D0996003C5BD8 /* UIImage+RTL.swift */,
 				CEEEB79E215D0996003C5BD8 /* Localization+Views.swift */,
-				CEEEB79F215D0996003C5BD8 /* UIApplication+Restart.swift */,
+				CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */,
 				CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */,
 				CE0FE87B2162653500E16E4B /* UIColor+Default.swift */,
 			);
@@ -221,6 +226,7 @@
 				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
 				CEEEB7BD215DF5EC003C5BD8 /* Localizable.strings */,
+				CE77AB19216353DB00728C64 /* Settings.bundle */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -290,6 +296,7 @@
 				CEEEB7BB215DF5EC003C5BD8 /* Localizable.strings in Resources */,
 				CEEEB78F215D094A003C5BD8 /* LaunchScreen.storyboard in Resources */,
 				CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */,
+				CE77AB1A216353DC00728C64 /* Settings.bundle in Resources */,
 				662D0D3E21616B10008D244E /* DetailCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */,
+				CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */,
 				66D380952163300700EFA49C /* Logger.swift in Sources */,
 				66D380962163300700EFA49C /* Watchdog.swift in Sources */,
 				6624D43A215EADA100DF1B92 /* UITextField+Properties.swift in Sources */,
@@ -327,13 +335,13 @@
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
 				66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */,
-				CEEEB7A8215D0996003C5BD8 /* UIApplication+Restart.swift in Sources */,
 				CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */,
 				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
 				CEEEB7C3215E073C003C5BD8 /* BaseNavController.swift in Sources */,
 				6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */,
 				CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */,
 				662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */,
+				CE77AB1C2163546200728C64 /* SettingsBundleManager.swift in Sources */,
 				662D0D4021628C38008D244E /* ChildHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

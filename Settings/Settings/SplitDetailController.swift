@@ -83,8 +83,9 @@ extension SplitDetailController {
             childVC.removeFromParentVC()
             addChildVC()
         } else {
-            assertionFailure()
-            _ = navigationController?.popViewController(animated: false)
+            /// called in bcz of splitController
+//            assertionFailure()
+//            _ = navigationController?.popViewController(animated: false)
         }
     }
     

@@ -65,6 +65,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LocalizationManager.shared.register(self)
         AppearanceConfigurator.shared.loadSavedTheme()
+        SettingsBundleManager.shared.setup()
         
         /// not working
         //application.ignoreSnapshotOnNextApplicationLaunch()
