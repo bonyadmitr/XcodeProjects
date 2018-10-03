@@ -46,6 +46,8 @@ import UIKit
 // https://medium.com/bbc-design-engineering/improving-your-apps-accessibility-with-ios-11-db8bb4ee7c9f
 // https://developer.apple.com/videos/play/wwdc2017/204/
 //
+// adopt cell size for large text
+//
 //self.accessibilityIgnoresInvertColors = true
 //
 //titleLabel.adjustsFontForContentSizeCategory = true
@@ -57,8 +59,8 @@ import UIKit
 //
 /// To activate large bar items (navbar nad tabbar items)
 /// Settings - General - Accessibility - Large Text
-/// or 1: check Larger Accessibility Sizes - move slider right 4 times
-/// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time
+/// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
+/// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
 /// added main.swift
 //@UIApplicationMain
