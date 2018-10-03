@@ -79,24 +79,27 @@ extension LanguageSelectController: UITableViewDataSource {
 
 extension LanguageSelectController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
+        
         let language = languageManager.availableLanguages[indexPath.row]
-        let languageDisplayName = languageManager.displayName(for: language)
-        cell.textLabel?.text = languageDisplayName
+        let languageDisplayName = languageManager.displayName(for: language) ?? language
         
-        if language == localizationManager.currentLanguage {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        
-//        let englishDisplayName = languageManager.displayName(for: language, in: "en")
-//        cell.detailTextLabel?.text = englishDisplayName
+        let englishDisplayName: String?
         if localizationManager.currentLanguage != "en" {
-            let englishDisplayName = languageManager.displayName(for: language, in: "en")
-            cell.detailTextLabel?.text = englishDisplayName
+            englishDisplayName = languageManager.displayName(for: language, in: "en")
         } else {
-            cell.detailTextLabel?.text = ""
+            englishDisplayName = nil
         }
+        
+        let cellIsChecked = language == localizationManager.currentLanguage
+        
+        /// call before setup method for correct accessibilityLabel
+        cell.isChecked = cellIsChecked
+        
+        cell.setup(title: languageDisplayName, subtitle: englishDisplayName)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
