@@ -42,6 +42,15 @@ import UIKit
 // Terms of Service
 // Lisences (Legal notices) (pods)
 
+// TODO: accessibility
+// TODO: text adopts for 
+//titleLabel.adjustsFontForContentSizeCategory = true
+//
+//iOS 11 for custom font: titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
+//titleLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
+//
+//  check "Preserve Vector Data" for the PDF image asset
+
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
