@@ -47,6 +47,8 @@ import UIKit
 // https://developer.apple.com/videos/play/wwdc2017/204/
 //
 // adopt cell size for large text
+// basic cell is normal in basic tableView
+// basic cell is NOT normal in GROUPED tableView
 //
 //self.accessibilityIgnoresInvertColors = true
 //
