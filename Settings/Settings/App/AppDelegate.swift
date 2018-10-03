@@ -43,13 +43,22 @@ import UIKit
 // Lisences (Legal notices) (pods)
 
 // TODO: accessibility
-// TODO: text adopts for 
+// https://medium.com/bbc-design-engineering/improving-your-apps-accessibility-with-ios-11-db8bb4ee7c9f
+// https://developer.apple.com/videos/play/wwdc2017/204/
+//
+//self.accessibilityIgnoresInvertColors = true
+//
 //titleLabel.adjustsFontForContentSizeCategory = true
 //
 //iOS 11 for custom font: titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
 //titleLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
 //
-//  check "Preserve Vector Data" for the PDF image asset
+// check "Preserve Vector Data" for the PDF image asset
+//
+/// To activate large bar items (navbar nad tabbar items)
+/// Settings - General - Accessibility - Large Text
+/// or 1: check Larger Accessibility Sizes - move slider right 4 times
+/// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time
 
 /// added main.swift
 //@UIApplicationMain
