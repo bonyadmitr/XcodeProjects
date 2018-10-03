@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: window round coners 
 // TODO: swiftgen strings file
 // TODO: UIKeyCommand (from SplitController project)
 // TODO: UISelectionFeedbackGenerator
@@ -20,13 +21,26 @@ import UIKit
 // TODO: for release mode shake to send a bug via email
 
 // TODO: other options in settings:
-// send feedback (emailSender in anther project)
-// share with iOS share action, social, qr code (QRScanner)
-// update app
-// rate app
-// pods lisence
-// privacy policy (wkwebview)
-// app version
+//
+/// Optional:
+// Clear cash (mb)
+// Collect anonimus statistics
+// Passcode
+// font size slider
+//
+/// FAQ (Questions & Answers)
+/// More applications
+/// Tell a friend (social, email, qr code (QRScanner), More(share with iOS share action) )
+/// Software update (new update)
+/// About (Help / О приложении):
+// Icon
+// app version (с билд номером и без него)
+// Feedback (Send feedback / Contact Us / Написать автору)
+// Social links (buttons)
+// Rate Us
+// Privacy Policy (Terms and Privacy Policy) (wkwebview)
+// Terms of Service
+// Lisences (Legal notices) (pods)
 
 /// added main.swift
 //@UIApplicationMain
