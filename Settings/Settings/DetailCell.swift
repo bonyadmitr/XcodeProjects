@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// fixed appearance in LanguageSelectController by new DetailCell nib
 final class DetailCell: UITableViewCell {
 
     override func awakeFromNib() {
