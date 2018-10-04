@@ -79,7 +79,7 @@ final class YearsView: UIView {
     }
     
     private var labels = [UILabel]()
-    var labelsOffesRation: [CGFloat] = []
+    var labelsOffsetRatio: [CGFloat] = []
     
     func update(by dates: [Date]) {
         
@@ -117,11 +117,11 @@ final class YearsView: UIView {
         
         
         
-        labelsOffesRation = [0]
+        labelsOffsetRatio = [0]
         
         for year in yearsArray.dropLast() {
             let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
-            labelsOffesRation.append(yearContentRatio)
+            labelsOffsetRatio.append(yearContentRatio)
         }
         
         
@@ -129,7 +129,7 @@ final class YearsView: UIView {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
         
-        for _ in labelsOffesRation {
+        for _ in labelsOffsetRatio {
             let label = UILabel()
             label.backgroundColor = .red
             
@@ -141,7 +141,7 @@ final class YearsView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        for (label, offsetRatio) in zip(labels, labelsOffesRation) {
+        for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             let offet = offsetRatio * frame.height
             label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
         }
