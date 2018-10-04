@@ -8,17 +8,43 @@
 
 import UIKit
 
-class DetailCell: UITableViewCell {
+final class DetailCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        isAccessibilityElement = true  
     }
     
+    /// call before setup method for correct accessibilityLabel
+    var isChecked = false {
+        didSet {
+            accessoryType = isChecked ? .checkmark : .none
+        }
+    }
+    
+    func setup(title: String, subtitle: String?) {
+        textLabel?.text = title
+        detailTextLabel?.text = subtitle
+        
+        // MARK: setup accessibilityLabel
+        
+        var accessLabel = title
+        if let subtitle = subtitle {
+            accessLabel += ", \(subtitle)"
+        }
+        
+        // TODO: maybe this don't need. need to check
+        if isChecked {
+            accessLabel += ". checked"
+        }
+        
+        accessibilityLabel = accessLabel
+    }
+    
+    override func accessibilityActivate() -> Bool {
+        let text = "Language selected"
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, text)
+        return true
+    }
 }
