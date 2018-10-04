@@ -267,13 +267,14 @@ final class ScrollBarView: UIView {
     }
     
     var heightOfHandleForContentSize: CGFloat {
-        guard let scrollView = scrollView else {
-            return scrollBarHandleMinHeight
-        }
-        
-        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
-        let height = frame.height * heightRatio
-        return max(floor(height), scrollBarHandleMinHeight)
+        return scrollBarHandleMinHeight
+//        guard let scrollView = scrollView else {
+//            return scrollBarHandleMinHeight
+//        }
+//        
+//        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
+//        let height = frame.height * heightRatio
+//        return max(floor(height), scrollBarHandleMinHeight)
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
