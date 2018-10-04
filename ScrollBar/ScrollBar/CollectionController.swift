@@ -61,27 +61,6 @@ final class CollectionController: UIViewController {
         yearsView.update(by: sections.flatMap({ $0.value }))
         
         collectionView.reloadData()
-        
-        
-        
-        
-        
-
-        
-//        let prop1 = CGFloat(yearsArray[0].value.lines) / CGFloat(allItems.count)
-        
-        
-//        let year2 = scrollView.frame.height * prop1
-//        
-//        let minYearHeight: CGFloat = 30
-//        if year2 < minYearHeight {
-//            
-//        }
-        
-        //add line, header vertical spacing
-        
-//        let prop = scrollView.frame.height / scrollView.contentSize.height
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
