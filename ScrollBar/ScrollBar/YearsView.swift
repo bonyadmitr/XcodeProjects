@@ -10,6 +10,8 @@ import UIKit
 
 final class YearsView: UIView {
     
+    typealias YearsArray = [(key: Int, value: (months: Set<Int>, lines: Int))]
+    
     private weak var scrollView: UIScrollView?
     
     override init(frame: CGRect) {
@@ -26,6 +28,8 @@ final class YearsView: UIView {
         autoresizingMask = [.flexibleHeight]
         backgroundColor = UIColor.lightGray
     }
+    
+    // MARK: - UIScrollView
     
     func add(to scrollView: UIScrollView) {
         if self.scrollView == scrollView {
@@ -76,11 +80,35 @@ final class YearsView: UIView {
                        height: scrollView.frame.height)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
+            let offet = offsetRatio * frame.height
+            label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
+        }
+    }
+    
+    // MARK: - Dates
+    
     private var labels = [UILabel]()
-    var labelsOffsetRatio: [CGFloat] = []
-    let width: CGFloat = 100
+    private var labelsOffsetRatio: [CGFloat] = []
+    private let width: CGFloat = 100
     
     func update(by dates: [Date]) {
+        let yearsArray = getYearsArray(from: dates)
+        
+        if yearsArray.isEmpty {
+            assertionFailure()
+            return
+        }
+        
+        updateLabelsOffsetRatio(from: yearsArray, dates: dates)
+        
+        udpateLabels()
+    }
+    
+    private func getYearsArray(from dates: [Date]) -> YearsArray {
         
         var years: [Int: (months: Set<Int>, lines: Int)] = [:]
         
@@ -90,7 +118,7 @@ final class YearsView: UIView {
             
             guard let year = componets.year, let month = componets.month else {
                 assertionFailure()
-                return
+                return []
             }
             
             if years[year] == nil {
@@ -104,27 +132,19 @@ final class YearsView: UIView {
         let yearsArray = years.sorted { year1, year2 in
             year1.key < year2.key
         }
-        
-        
-        
-        
-        
-        if yearsArray.isEmpty {
-            assertionFailure()
-            return
-        }
-        
-        
-        
+        return yearsArray
+    }
+    
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) {
         labelsOffsetRatio = [0]
         
         for year in yearsArray.dropLast() {
             let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
             labelsOffsetRatio.append(yearContentRatio)
         }
-        
-        
-        
+    }
+    
+    private func udpateLabels() {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
         
@@ -134,15 +154,6 @@ final class YearsView: UIView {
             
             addSubview(label)
             labels.append(label)
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
-            let offet = offsetRatio * frame.height
-            label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
         }
     }
 }
