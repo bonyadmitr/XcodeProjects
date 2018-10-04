@@ -79,7 +79,7 @@ final class YearsView: UIView {
     }
     
     private var labels = [UILabel]()
-    var labelsOffesRation: [CGFloat] = [0]
+    var labelsOffesRation: [CGFloat] = []
     
     func update(by dates: [Date]) {
         
@@ -107,12 +107,6 @@ final class YearsView: UIView {
         }
         
         
-        print("allItems count:", dates.count)
-        print(yearsArray)
-        print()
-        
-        
-        
         
         
         
@@ -121,16 +115,16 @@ final class YearsView: UIView {
             return
         }
         
-        guard let scrollView = scrollView else {
-            assertionFailure()
-            return
-        }
         
+        
+        labelsOffesRation = [0]
         
         for year in yearsArray.dropLast() {
             let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
             labelsOffesRation.append(yearContentRatio)
         }
+        
+        
         
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
