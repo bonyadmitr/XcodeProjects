@@ -18,25 +18,32 @@ final class DetailCell: UITableViewCell {
             return
         }
         
+//        textLabel.minimumScaleFactor = 0.5
+//        textLabel.adjustsFontSizeToFitWidth = true
+        
         textLabel.font = UIFont.preferredFont(forTextStyle: .body)
         detailTextLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         
         isAccessibilityElement = true
+        
         if #available(iOS 10.0, *) {
-//            textLabel.adjustsFontForContentSizeCategory = true
-//            detailTextLabel.adjustsFontForContentSizeCategory = true
+            /// don't need to be set manualy
+            textLabel.adjustsFontForContentSizeCategory = true
+            detailTextLabel.adjustsFontForContentSizeCategory = true
         }
         if #available(iOS 11.0, *) {
+            /// for custom font:
+            //titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
+            //titleLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
+            
             //accessibilityIgnoresInvertColors = true
             //imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
             
             //let q = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
             
-            textLabel
-                .firstBaselineAnchor
-                .constraintEqualToSystemSpacingBelow(detailTextLabel.lastBaselineAnchor, multiplier: 1.0)
-            
-            
+//            textLabel
+//                .firstBaselineAnchor
+//                .constraintEqualToSystemSpacingBelow(detailTextLabel.lastBaselineAnchor, multiplier: 1.0)
         }
     }
     

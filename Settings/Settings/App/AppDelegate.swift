@@ -50,9 +50,6 @@ import UIKit
 // basic cell is normal in basic tableView
 // basic cell is NOT normal in GROUPED tableView
 //
-//iOS 11 for custom font: titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
-//titleLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
-//
 /// To activate large bar items (navbar nad tabbar items)
 /// Settings - General - Accessibility - Large Text
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
