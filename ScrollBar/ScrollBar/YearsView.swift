@@ -44,7 +44,6 @@ final class YearsView: UIView {
             return
         }
         
-        scrollView.showsVerticalScrollIndicator = false
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: [.new], context: nil)
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: [.new], context: nil)
     }
@@ -53,7 +52,6 @@ final class YearsView: UIView {
         guard let scrollView = scrollView else {
             return
         }
-        scrollView.showsVerticalScrollIndicator = true
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
     }
@@ -80,6 +78,7 @@ final class YearsView: UIView {
     
     private var labels = [UILabel]()
     var labelsOffsetRatio: [CGFloat] = []
+    let width: CGFloat = 100
     
     func update(by dates: [Date]) {
         
@@ -145,10 +144,5 @@ final class YearsView: UIView {
             let offet = offsetRatio * frame.height
             label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
         }
-    }
-    
-    let width: CGFloat = 100
-    func updateFrame(by newFrame: CGRect) {
-        frame = CGRect(x: newFrame.width - width, y: 0, width: width, height: newFrame.height)
     }
 }
