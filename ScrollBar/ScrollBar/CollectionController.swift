@@ -8,6 +8,36 @@
 
 import UIKit
 
+struct YearMonth {
+    let year: Int
+    let month: Int
+    
+    init(date: Date) {
+        let comps = Calendar.current.dateComponents([.year, .month], from: date)
+        self.year = comps.year!
+        self.month = comps.month!
+    }
+}
+extension YearMonth: Hashable {
+    var hashValue: Int {
+        return year * 12 + month
+    }
+}
+extension YearMonth: Equatable {
+    static func == (lhs: YearMonth, rhs: YearMonth) -> Bool {
+        return lhs.year == rhs.year && lhs.month == rhs.month
+    }
+}
+extension YearMonth: Comparable {
+    static func < (lhs: YearMonth, rhs: YearMonth) -> Bool {
+        if lhs.year != rhs.year {
+            return lhs.year < rhs.year
+        } else {
+            return lhs.month < rhs.month
+        }
+    }
+}
+
 final class CollectionController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -29,7 +59,7 @@ final class CollectionController: UIViewController {
     
     private let scrollBar = ScrollBarView()
     
-    private var items = [[Date]]()
+    private var sections: [(key: YearMonth, value: [Date])] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +69,71 @@ final class CollectionController: UIViewController {
         
         let initialDate = Date()
         
-        items = [
-            (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) }),
-            (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) }),
-            (70...90).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        ]
+        var dates = (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (70...90).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        
+        var datesByYearMonth: [YearMonth: [Date]] = [:]
+        
+        for date in dates {
+            let yearMonth = YearMonth(date: date)
+            datesByYearMonth[yearMonth, default: []].append(date)
+        }
+        
+        sections = datesByYearMonth.sorted { section1, section2 in
+            return section1.key < section2.key
+        }
         
         collectionView.reloadData()
+        
+        
+        
+        
+        
+        var years: [Int: (months: Set<Int>, lines: Int)] = [:]
+        
+        let allItems = sections.flatMap { $0.value }
+        
+        for item in allItems {
+            
+            let componets = Calendar.current.dateComponents([.year, .month], from: item)
+            
+            guard let year = componets.year, let month = componets.month else {
+                assertionFailure()
+                return
+            }
+            
+            if years[year] == nil {
+                years[year] = (Set([month]), 1)
+            } else {
+                years[year]!.lines += 1
+                years[year]!.months.insert(month)
+            }
+        }
+        
+        let yearsArray = years.sorted { year1, year2 in
+            year1.key < year2.key
+        }
+        
+        
+        print("allItems count:", allItems.count)
+        print(yearsArray)
+        print()
+        
+        let prop1 = CGFloat(yearsArray[0].value.lines) / CGFloat(allItems.count)
+        let scrollView: UIScrollView = collectionView
+        
+        let year2 = scrollView.frame.height * prop1
+        
+        let minYearHeight: CGFloat = 30
+        if year2 < minYearHeight {
+            
+        }
+        
+        //add line, header vertical spacing
+        
+//        let prop = scrollView.frame.height / scrollView.contentSize.height
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -56,10 +144,10 @@ final class CollectionController: UIViewController {
 
 extension CollectionController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return items.count
+        return sections.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items[section].count
+        return sections[section].value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,7 +165,8 @@ extension CollectionController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
-        let date = items[indexPath.section][indexPath.row]
+        
+        let date = sections[indexPath.section].value[indexPath.row]
         cell.textLabel.text = "\(date)"
     }
     
@@ -92,7 +181,8 @@ extension CollectionController: UICollectionViewDelegate {
         guard let view = view as? CollectionHeader else {
             return
         }
-        let date = items[indexPath.section][indexPath.row]
+        
+        let date = sections[indexPath.section].value[indexPath.row]
         view.textLabel.text = "\(date)"
     }
     
