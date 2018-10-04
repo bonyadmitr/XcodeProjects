@@ -25,8 +25,8 @@ final class YearsView: UIView {
     }
     
     private func setup() {
-        autoresizingMask = [.flexibleHeight]
-        backgroundColor = UIColor.lightGray
+        //autoresizingMask = [.flexibleHeight]
+        //backgroundColor = UIColor.lightGray
     }
     
     // MARK: - UIScrollView
@@ -85,7 +85,7 @@ final class YearsView: UIView {
         
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             let offet = offsetRatio * frame.height
-            label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
+            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
         }
     }
     
@@ -104,8 +104,7 @@ final class YearsView: UIView {
         }
         
         updateLabelsOffsetRatio(from: yearsArray, dates: dates)
-        
-        udpateLabels()
+        udpateLabels(from: yearsArray)
     }
     
     private func getYearsArray(from dates: [Date]) -> YearsArray {
@@ -144,13 +143,21 @@ final class YearsView: UIView {
         }
     }
     
-    private func udpateLabels() {
+    private func udpateLabels(from yearsArray: YearsArray) {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
         
-        for _ in labelsOffsetRatio {
-            let label = UILabel()
-            label.backgroundColor = .red
+        for year in yearsArray {
+            let label = TextInsetsLabel()
+            label.text = "\(year.key)"
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 8) //UIFont.TurkcellSaturaDemFont(size: 8)
+            label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+            label.textColor = .red
+            label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+            label.sizeToFit()
+            label.layer.cornerRadius = label.frame.height * 0.5
+            label.layer.masksToBounds = true
             
             addSubview(label)
             labels.append(label)
