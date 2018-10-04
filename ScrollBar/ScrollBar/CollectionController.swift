@@ -46,6 +46,7 @@ final class CollectionController: UIViewController {
         dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var datesByYearMonth: [YearMonth: [Date]] = [:]
         
@@ -58,7 +59,8 @@ final class CollectionController: UIViewController {
             return section1.key < section2.key
         }
         
-        yearsView.update(by: sections.flatMap({ $0.value }))
+        //let allDates = sections.flatMap({ $0.value })
+        yearsView.update(by: dates)
         
         collectionView.reloadData()
     }
