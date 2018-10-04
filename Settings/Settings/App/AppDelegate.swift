@@ -50,14 +50,8 @@ import UIKit
 // basic cell is normal in basic tableView
 // basic cell is NOT normal in GROUPED tableView
 //
-//self.accessibilityIgnoresInvertColors = true
-//
-//titleLabel.adjustsFontForContentSizeCategory = true
-//
 //iOS 11 for custom font: titleLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
 //titleLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: customFont)
-//
-// check "Preserve Vector Data" for the PDF image asset
 //
 /// To activate large bar items (navbar nad tabbar items)
 /// Settings - General - Accessibility - Large Text

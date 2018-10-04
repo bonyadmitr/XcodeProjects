@@ -118,7 +118,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3j-qk-paB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="luz-JU-kdH" customClass="SampleDesigner" customModule="Settings" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2116.875" y="790"/>
         </scene>

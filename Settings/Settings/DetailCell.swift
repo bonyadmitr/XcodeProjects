@@ -13,7 +13,31 @@ final class DetailCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        isAccessibilityElement = true  
+        guard let textLabel = textLabel, let detailTextLabel = detailTextLabel else {
+            assertionFailure()
+            return
+        }
+        
+        textLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        detailTextLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        
+        isAccessibilityElement = true
+        if #available(iOS 10.0, *) {
+//            textLabel.adjustsFontForContentSizeCategory = true
+//            detailTextLabel.adjustsFontForContentSizeCategory = true
+        }
+        if #available(iOS 11.0, *) {
+            //accessibilityIgnoresInvertColors = true
+            //imageView?.adjustsImageSizeForAccessibilityContentSizeCategory = true
+            
+            //let q = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+            
+            textLabel
+                .firstBaselineAnchor
+                .constraintEqualToSystemSpacingBelow(detailTextLabel.lastBaselineAnchor, multiplier: 1.0)
+            
+            
+        }
     }
     
     /// call before setup method for correct accessibilityLabel
@@ -42,9 +66,9 @@ final class DetailCell: UITableViewCell {
         accessibilityLabel = accessLabel
     }
     
-    override func accessibilityActivate() -> Bool {
-        let text = "Language selected"
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, text)
-        return true
-    }
+//    override func accessibilityActivate() -> Bool {
+//        let text = "Language selected"
+//        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, text)
+//        return true
+//    }
 }
