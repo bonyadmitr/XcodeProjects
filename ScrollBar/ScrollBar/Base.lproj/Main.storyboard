@@ -64,7 +64,7 @@
             </objects>
             <point key="canvasLocation" x="1076" y="133.5832083958021"/>
         </scene>
-        <!--Collection Controller-->
+        <!--CollectionController-->
         <scene sceneID="rqi-lW-ZE8">
             <objects>
                 <viewController id="gAC-QJ-ent" customClass="CollectionController" customModule="ScrollBar" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +102,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nm6-mf-Le0"/>
                     </view>
-                    <navigationItem key="navigationItem" id="PEW-sX-ILE"/>
+                    <navigationItem key="navigationItem" title="CollectionController" id="PEW-sX-ILE"/>
                     <connections>
                         <outlet property="collectionView" destination="VKN-z1-dmm" id="NBj-nO-Qx6"/>
                     </connections>

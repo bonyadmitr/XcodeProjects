@@ -27,10 +27,15 @@ final class CollectionController: UIViewController {
         }
     }
     
+    private let scrollBar = ScrollBarView()
+    
     private var items = [[Date]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
+        scrollBar.add(to: collectionView)
         
         let initialDate = Date()
         
