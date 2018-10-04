@@ -96,6 +96,7 @@ final class YearsView: UIView {
     private let width: CGFloat = 100
     
     func update(by dates: [Date]) {
+        
         let yearsArray = getYearsArray(from: dates)
         
         if yearsArray.isEmpty {
@@ -136,9 +137,10 @@ final class YearsView: UIView {
     
     private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) {
         labelsOffsetRatio = [0]
-        
+        var previusOffsetRation: CGFloat = 0
         for year in yearsArray.dropLast() {
-            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
+            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count) + previusOffsetRation
+            previusOffsetRation = yearContentRatio
             labelsOffsetRatio.append(yearContentRatio)
         }
     }

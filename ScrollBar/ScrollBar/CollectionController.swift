@@ -44,6 +44,8 @@ final class CollectionController: UIViewController {
         var dates = (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var datesByYearMonth: [YearMonth: [Date]] = [:]
         
