@@ -63,18 +63,6 @@ final class YearsView: UIView {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        guard let scrollView = scrollView else {
-            return
-        }
-        
-//        isDisabled = scrollView.contentSize.height < scrollView.frame.height
-//        isHidden = isDisabled
-//        
-//        if isDisabled {
-//            return
-//        }
-        
         layoutInScrollView()
         setNeedsLayout()
     }
@@ -89,8 +77,6 @@ final class YearsView: UIView {
                        width: width,
                        height: scrollView.frame.height)
     }
-    
-//    weak var view: UIView!
     
     private var labels = [UILabel]()
     var labelsOffesRation: [CGFloat] = [0]
@@ -140,48 +126,23 @@ final class YearsView: UIView {
             return
         }
         
-//        guard let view = view else {
-//            assertionFailure()
-//            return
-//        }
-        
-//        var labelsOffes: [CGFloat] = [0]
-        
         
         for year in yearsArray.dropLast() {
             let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
             labelsOffesRation.append(yearContentRatio)
-//            let yearHeight = yearContentRatio * scrollView.frame.height
-//            labelsOffes.append(yearHeight)
         }
         
-        print("view.frame.height:", scrollView.frame.height)
-//        print("labelsOffes:", labelsOffes)
-        print()
-        
-        
-        
-        
         labels.forEach { $0.removeFromSuperview() }
-        labels = []
+        labels.removeAll()
         
         for _ in labelsOffesRation {
             let label = UILabel()
-//            label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
             label.backgroundColor = .red
             
             addSubview(label)
             labels.append(label)
         }
-        
-        //        labels.forEach { addSubview($0) }
     }
-    
-//    func add(to view: UIView) {
-//        self.view = view
-//        updateFrame(by: view.frame)
-//        view.addSubview(self)
-//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
