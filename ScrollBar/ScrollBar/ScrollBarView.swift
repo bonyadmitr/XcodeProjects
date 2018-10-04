@@ -9,9 +9,10 @@
 import UIKit
 
 /// https://github.com/TimOliver/TOScrollBar
-final class ScrollBarView: UIView {  
+
+final class ScrollBarView: UIView {    
     
-    private static let scrollBarHandleImage = #imageLiteral(resourceName: "scroll_bar_view")
+    private static let scrollBarHandleImage = #imageLiteral(resourceName: "scroll_bar_view") //Images.scrollBarHandle
     
     /// The width of this control (44 is minimum recommended tapping space)
     private let scrollBarWidth: CGFloat = 44
@@ -21,7 +22,7 @@ final class ScrollBarView: UIView {
     
     private let edgeInset: CGFloat = scrollBarHandleImage.size.width * 0.5
     
-    private var isDragging = false
+    var isDragging = false
     
     
     /// The amount of padding above and below the scroll bar (Only top and bottom values are counted.)
@@ -63,10 +64,10 @@ final class ScrollBarView: UIView {
     
     private let insetsLabel: TextInsetsLabel = {
         let insetsLabel = TextInsetsLabel()
-        insetsLabel.text = "Some text"
+        insetsLabel.text = "Apr 2018"
         insetsLabel.textAlignment = .center
-        insetsLabel.font = UIFont.systemFont(ofSize: 11)
-        insetsLabel.backgroundColor = UIColor.blue
+        insetsLabel.font = UIFont.systemFont(ofSize: 11) //UIFont.TurkcellSaturaDemFont(size: 11)
+        insetsLabel.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1) //ColorConstants.activityTimelineDraws
         insetsLabel.textColor = UIColor.white
         insetsLabel.center.x -= 60
         insetsLabel.textInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
@@ -80,6 +81,22 @@ final class ScrollBarView: UIView {
     private let animationDuration = 0.3
     private let hideAnimationDelay = 1.0
     
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setText(_ text: String) {
+        insetsLabel.text = text
+        insetsLabel.center.x = -insetsLabel.frame.width * 0.5 /// +- constant for inset from handle view
+    }
+    
     private func hideLabelAnimated() {
         UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: { 
             self.insetsLabel.alpha = 0
@@ -92,18 +109,8 @@ final class ScrollBarView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
     private func setup() {
-//        addSubview(trackView)
+        //        addSubview(trackView)
         addSubview(handleView)
         addSubview(insetsLabel)
         
@@ -171,14 +178,15 @@ final class ScrollBarView: UIView {
         let scrollViewFrame = scrollView.frame
         let halfWidth = scrollBarWidth * 0.5
         
-//        let contentInset: UIEdgeInsets
-//        if #available(iOS 11.0, *) {
-//            contentInset = scrollView.adjustedContentInset
-//        } else {
-//            contentInset = scrollView.contentInset
-//        }
+        /// maybe will be need for instes
+        //        let contentInset: UIEdgeInsets
+        //        if #available(iOS 11.0, *) {
+        //            contentInset = scrollView.adjustedContentInset
+        //        } else {
+        //            contentInset = scrollView.contentInset
+        //        }
         
-//        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
+        //        scrollViewFrame.size.height -= contentInset.top + contentInset.bottom
         
         let largeTitleDelta: CGFloat
         if isInsetForLargeTitles {
@@ -207,7 +215,7 @@ final class ScrollBarView: UIView {
             frame.origin.y = originalYOffset
         } else {
             frame.origin.y = verticalInset.top
-//            frame.origin.y += contentInset.top
+            //            frame.origin.y += contentInset.top
             frame.origin.y += largeTitleDelta
         }
         
@@ -249,20 +257,6 @@ final class ScrollBarView: UIView {
         let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
         let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
         handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
-        
-        /// removed scaling on top and end of scrollView
-//        if contentOffset.y < -contentInset.top {
-//            // The top
-////            handleFrame.size.height -= -contentOffset.y - contentInset.top
-////            handleFrame.size.height = max(handleFrame.height, trackWidth * 2 + 2)
-//        } else if contentOffset.y + scrollView.frame.height > contentSize.height + contentInset.bottom {
-//            // The bottom
-////            let adjustedContentOffset: CGFloat = contentOffset.y + scrollView.frame.height
-////            let delta = adjustedContentOffset - (contentSize.height + contentInset.bottom)
-////            handleFrame.size.height -= delta
-////            handleFrame.size.height = max(handleFrame.height, trackWidth * 2 + 2)
-//            handleFrame.origin.y = frame.height - handleFrame.height
-//        }
         
         // Clamp to the bounds of the frame
         handleFrame.origin.y = max(handleFrame.origin.y, 0.0)
@@ -387,14 +381,6 @@ final class ScrollBarView: UIView {
         
         
         scrollView.setContentOffset(contentOffset, animated: false)
-        // Animate to help coax the large title navigation bar to behave
-        //        if #available(iOS 11.0, *) {
-        //            UIView.animate(withDuration: animated ? 0.1 : 0.00001) {
-        //                scrollView.setContentOffset(contentOffset, animated: false)
-        //            }
-        //        } else {
-        //            scrollView.setContentOffset(contentOffset, animated: false)
-        //        }
     }
     
     private func gestureMoved(to touchPoint: CGPoint) {
@@ -406,14 +392,6 @@ final class ScrollBarView: UIView {
         let trackFrame = trackView.frame
         let minimumY: CGFloat = 0
         let maximumY = trackFrame.height - handleFrame.height
-        
-        /// to prevent too fast scroll
-        //        if handleExclusiveInteractionEnabled {
-        //            if touchPoint.y < (handleFrame.origin.y - 20) || touchPoint.y > handleFrame.origin.y + (handleFrame.height + 20) {
-        //                // This touch is not on the handle; eject.
-        //                return
-        //            }
-        //        }
         
         // Apply the updated Y value plus the previous offset
         var delta = handleFrame.origin.y
@@ -437,13 +415,6 @@ final class ScrollBarView: UIView {
         
         delta -= handleFrame.origin.y
         delta = abs(delta)
-        
-        // If the delta is not 0.0, but we're at either extreme,
-        // this is first frame we've since reaching that point.
-        // Play a taptic feedback impact
-        //        if delta > CGFloat.ulpOfOne, handleFrame.minY < CGFloat.ulpOfOne || handleFrame.minY >= maximumY - CGFloat.ulpOfOne {
-        //            feedbackGenerator.impactOccurred()
-        //        }
         
         // If the user is doing really granualar swipes, add a subtle amount
         // of vertical animation so the scroll view isn't jumping on each frame
