@@ -27,11 +27,6 @@ final class CollectionController: UIViewController {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     private var items = [[Date]]()
     
     override func viewDidLoad() {
@@ -46,6 +41,11 @@ final class CollectionController: UIViewController {
         ]
         
         collectionView.reloadData()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
@@ -77,6 +77,13 @@ extension CollectionController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        
+        /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
+        /// https://stackoverflow.com/a/46930410/5893286
+        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+            view.layer.zPosition = 0
+        }
+        
         guard let view = view as? CollectionHeader else {
             return
         }
