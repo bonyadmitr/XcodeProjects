@@ -120,15 +120,37 @@ final class CollectionController: UIViewController {
         print(yearsArray)
         print()
         
-        let prop1 = CGFloat(yearsArray[0].value.lines) / CGFloat(allItems.count)
-        let scrollView: UIScrollView = collectionView
         
-        let year2 = scrollView.frame.height * prop1
         
-        let minYearHeight: CGFloat = 30
-        if year2 < minYearHeight {
-            
+        
+        if yearsArray.isEmpty {
+            assertionFailure()
+            return
         }
+        
+        
+        let scrollView: UIScrollView = collectionView
+        var labelsOffes: [CGFloat] = [0]
+        
+        for year in yearsArray.dropLast() {
+            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(allItems.count)
+            let yearHeight = yearContentRatio * scrollView.frame.height
+            labelsOffes.append(yearHeight)
+        }
+        
+        print("scrollView.frame.height:", scrollView.frame.height)
+        print("labelsOffes:", labelsOffes)
+        print()
+        
+//        let prop1 = CGFloat(yearsArray[0].value.lines) / CGFloat(allItems.count)
+        
+        
+//        let year2 = scrollView.frame.height * prop1
+//        
+//        let minYearHeight: CGFloat = 30
+//        if year2 < minYearHeight {
+//            
+//        }
         
         //add line, header vertical spacing
         
