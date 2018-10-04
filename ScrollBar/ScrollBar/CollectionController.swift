@@ -38,63 +38,32 @@ extension YearMonth: Comparable {
     }
 }
 
-final class CollectionController: UIViewController {
+final class YearsView: UIView {
     
-    @IBOutlet private weak var collectionView: UICollectionView! {
-        willSet {
-            newValue.dataSource = self
-            newValue.delegate = self
-            newValue.register(ImageTextColCell.self, forCellWithReuseIdentifier: "ImageTextColCell")
-            newValue.register(CollectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CollectionHeader")
-            
-            newValue.alwaysBounceVertical = true
-            
-            if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.minimumLineSpacing = 1
-                layout.minimumInteritemSpacing = 1
-                layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
-            }
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
     }
     
-    private let scrollBar = ScrollBarView()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
     
-    private var sections: [(key: YearMonth, value: [Date])] = []
+    private func setup() {
+        autoresizingMask = [.flexibleHeight]
+        backgroundColor = UIColor.lightGray
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
-        scrollBar.add(to: collectionView)
-        
-        let initialDate = Date()
-        
-        var dates = (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (70...90).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        
-        var datesByYearMonth: [YearMonth: [Date]] = [:]
-        
-        for date in dates {
-            let yearMonth = YearMonth(date: date)
-            datesByYearMonth[yearMonth, default: []].append(date)
-        }
-        
-        sections = datesByYearMonth.sorted { section1, section2 in
-            return section1.key < section2.key
-        }
-        
-        collectionView.reloadData()
-        
-        
-        
-        
+    weak var view: UIView!
+    
+    private var labels = [UILabel]()
+    
+    func update(by dates: [Date]) {
         
         var years: [Int: (months: Set<Int>, lines: Int)] = [:]
         
-        let allItems = sections.flatMap { $0.value }
-        
-        for item in allItems {
+        for item in dates {
             
             let componets = Calendar.current.dateComponents([.year, .month], from: item)
             
@@ -116,9 +85,11 @@ final class CollectionController: UIViewController {
         }
         
         
-        print("allItems count:", allItems.count)
+        print("allItems count:", dates.count)
         print(yearsArray)
         print()
+        
+        
         
         
         
@@ -128,19 +99,110 @@ final class CollectionController: UIViewController {
             return
         }
         
+        guard let view = view else {
+            assertionFailure()
+            return
+        }
         
-        let scrollView: UIScrollView = collectionView
         var labelsOffes: [CGFloat] = [0]
         
         for year in yearsArray.dropLast() {
-            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(allItems.count)
-            let yearHeight = yearContentRatio * scrollView.frame.height
+            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count)
+            let yearHeight = yearContentRatio * view.frame.height
             labelsOffes.append(yearHeight)
         }
         
-        print("scrollView.frame.height:", scrollView.frame.height)
+        print("view.frame.height:", view.frame.height)
         print("labelsOffes:", labelsOffes)
         print()
+        
+        
+        
+        
+        labels.forEach { $0.removeFromSuperview() }
+        labels = []
+        
+        for offet in labelsOffes {
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: offet, width: 50, height: 30)
+            label.backgroundColor = .red
+            
+            addSubview(label)
+            labels.append(label)
+        }
+        
+//        labels.forEach { addSubview($0) }
+    }
+    
+    func add(to view: UIView) {
+        self.view = view
+        updateFrame(by: view.frame)
+        view.addSubview(self)
+    }
+    
+    let width: CGFloat = 100
+    func updateFrame(by newFrame: CGRect) {
+        frame = CGRect(x: newFrame.width - width, y: 0, width: width, height: newFrame.height)
+    }
+}
+
+final class CollectionController: UIViewController {
+    
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.dataSource = self
+            newValue.delegate = self
+            newValue.register(ImageTextColCell.self, forCellWithReuseIdentifier: "ImageTextColCell")
+            newValue.register(CollectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CollectionHeader")
+            
+            newValue.alwaysBounceVertical = true
+            
+            if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.minimumLineSpacing = 1
+                layout.minimumInteritemSpacing = 1
+                layout.sectionInset = .init(top: 1, left: 1, bottom: 1, right: 1)
+            }
+        }
+    }
+    
+    private let scrollBar = ScrollBarView()
+    private let yearsView = YearsView()
+    
+    private var sections: [(key: YearMonth, value: [Date])] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
+        yearsView.add(to: collectionView)
+        scrollBar.add(to: collectionView)
+        
+        let initialDate = Date()
+        
+        var dates = (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (70...90).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        
+        var datesByYearMonth: [YearMonth: [Date]] = [:]
+        
+        for date in dates {
+            let yearMonth = YearMonth(date: date)
+            datesByYearMonth[yearMonth, default: []].append(date)
+        }
+        
+        sections = datesByYearMonth.sorted { section1, section2 in
+            return section1.key < section2.key
+        }
+        
+        yearsView.update(by: sections.flatMap({ $0.value }))
+        
+        collectionView.reloadData()
+        
+        
+        
+        
+        
+
         
 //        let prop1 = CGFloat(yearsArray[0].value.lines) / CGFloat(allItems.count)
         
@@ -156,6 +218,11 @@ final class CollectionController: UIViewController {
         
 //        let prop = scrollView.frame.height / scrollView.contentSize.height
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        yearsView.updateFrame(by: collectionView.frame)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
