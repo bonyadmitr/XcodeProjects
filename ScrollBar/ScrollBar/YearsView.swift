@@ -114,8 +114,8 @@ final class YearsView: UIView {
             return
         }
         
-        updateLabelsOffsetRatio(from: yearsArray, dates: dates)
-        udpateLabels(from: yearsArray)
+        let newYearsArray = updateLabelsOffsetRatio(from: yearsArray, dates: dates)
+        udpateLabels(from: newYearsArray)
     }
     
     func update(by cellHeight: CGFloat, headerHeight: CGFloat) {
@@ -157,20 +157,58 @@ final class YearsView: UIView {
         return yearsArray
     }
     
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) {
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) -> YearsArray {
         labelsOffsetRatio = [0]
         
+        var newYearsArray = yearsArray
+        
+        var connectNextYear = false
+        
+        var lastYearRatio: CGFloat = 0
+        
         var previusOffsetRation: CGFloat = 0
-        for year in yearsArray.dropLast() {
+        
+        for (index, year) in yearsArray.dropLast().enumerated() {
+            
             let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.months.count)
             let yearHeaderRatio = CGFloat(year.value.months.count) * cellHeaderRatio
-            let yearContentRatio = (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)) / CGFloat(dates.count) + previusOffsetRation
+            let yearRatio = yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)
+            
+            let yearContentRatio = yearRatio / CGFloat(dates.count) + previusOffsetRation
+            
             
             print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
             
             previusOffsetRation = yearContentRatio
-            labelsOffsetRatio.append(yearContentRatio)
+            
+            
+            if connectNextYear {
+                connectNextYear = false
+                newYearsArray.remove(at: index)
+                
+                if !labelsOffsetRatio.isEmpty {
+                    labelsOffsetRatio[labelsOffsetRatio.count - 1] += yearContentRatio
+                    
+                    
+                    if lastYearRatio + yearRatio < 20 {
+                        connectNextYear = true
+                    }
+                }
+                
+            } else {
+                
+                if yearRatio < 20 {
+                    connectNextYear = true
+                } else {
+                    //                labelsOffsetRatio.append(yearContentRatio)
+                }
+                labelsOffsetRatio.append(yearContentRatio)
+            }
+            
+            lastYearRatio = yearRatio
+
         }
+        return newYearsArray
     }
     
     private func udpateLabels(from yearsArray: YearsArray) {
