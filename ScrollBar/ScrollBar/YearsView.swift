@@ -80,12 +80,22 @@ final class YearsView: UIView {
                        height: scrollView.frame.height)
     }
     
+    private let handleViewCenterY: CGFloat = 32
+    private let handleViewCenterY2: CGFloat = 64
+    private var firstOffest: CGFloat = 1
     override func layoutSubviews() {
         super.layoutSubviews()
         
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
-            let offet = offsetRatio * frame.height
-            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+            if offsetRatio == 0 {
+                let offet = handleViewCenterY - label.frame.height * 0.5
+//                firstOffest = offet
+                label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+            } else {
+                let offet = offsetRatio * (frame.height - handleViewCenterY2) + label.frame.height * 0.5
+                label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+            }
+            
         }
     }
     
@@ -107,6 +117,18 @@ final class YearsView: UIView {
         updateLabelsOffsetRatio(from: yearsArray, dates: dates)
         udpateLabels(from: yearsArray)
     }
+    
+    func update(by cellHeight: CGFloat, headerHeight: CGFloat) {
+//        self.cellHeight = cellHeight
+//        self.headerHeight = headerHeight
+        cellHeaderRatio = headerHeight / cellHeight
+        cellSpaceRatio = 1 / cellHeight
+    }
+    
+//    private var cellHeight: CGFloat = 1
+//    private var headerHeight: CGFloat = 1
+    private var cellHeaderRatio: CGFloat = 1
+    private var cellSpaceRatio: CGFloat = 1
     
     private func getYearsArray(from dates: [Date]) -> YearsArray {
         
@@ -137,9 +159,15 @@ final class YearsView: UIView {
     
     private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) {
         labelsOffsetRatio = [0]
+        
         var previusOffsetRation: CGFloat = 0
         for year in yearsArray.dropLast() {
-            let yearContentRatio = CGFloat(year.value.lines) / CGFloat(dates.count) + previusOffsetRation
+            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.months.count)
+            let yearHeaderRatio = CGFloat(year.value.months.count) * cellHeaderRatio
+            let yearContentRatio = (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)) / CGFloat(dates.count) + previusOffsetRation
+            
+            print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
+            
             previusOffsetRation = yearContentRatio
             labelsOffsetRatio.append(yearContentRatio)
         }

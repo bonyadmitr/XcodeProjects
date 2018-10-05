@@ -60,6 +60,7 @@ final class CollectionController: UIViewController {
         }
         
         //let allDates = sections.flatMap({ $0.value })
+        yearsView.update(by: 100.5, headerHeight: 44)
         yearsView.update(by: dates)
         
         collectionView.reloadData()
