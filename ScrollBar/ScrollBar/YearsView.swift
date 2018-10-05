@@ -161,6 +161,7 @@ final class YearsView: UIView {
         labelsOffsetRatio = [0]
         
         var newYearsArray = yearsArray
+        var numberOfDeltedItems = 0
         
         var connectNextYear = false
         
@@ -179,24 +180,32 @@ final class YearsView: UIView {
             
             print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
             
-            previusOffsetRation = yearContentRatio
+            
             
             
             if connectNextYear {
                 connectNextYear = false
-                newYearsArray.remove(at: index)
                 
                 if !labelsOffsetRatio.isEmpty {
-                    labelsOffsetRatio[labelsOffsetRatio.count - 1] += yearContentRatio
+                    labelsOffsetRatio[labelsOffsetRatio.count - 1] += yearContentRatio - previusOffsetRation
+                    let indexToDelete = index - numberOfDeltedItems
+                    newYearsArray.remove(at: indexToDelete)
+                    numberOfDeltedItems += 1
                     
+                    previusOffsetRation = labelsOffsetRatio[labelsOffsetRatio.count - 1]
                     
                     if lastYearRatio + yearRatio < 20 {
                         connectNextYear = true
                     }
+                } else {
+                    
+                    
+                    previusOffsetRation = yearContentRatio
+                    labelsOffsetRatio.append(yearContentRatio)
                 }
                 
             } else {
-                
+                previusOffsetRation = yearContentRatio
                 if yearRatio < 20 {
                     connectNextYear = true
                 } else {
