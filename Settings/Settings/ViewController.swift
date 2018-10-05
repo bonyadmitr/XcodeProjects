@@ -45,6 +45,17 @@ final class ViewController: UIViewController {
 //        } else {
 //            automaticallyAdjustsScrollViewInsets = false
 //        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(textSizeDidChange), name: .UIContentSizeCategoryDidChange, object: nil)
+    }
+    
+    @objc private func textSizeDidChange(_ notification: Notification) {
+        /// not working
+        tableView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIContentSizeCategoryDidChange, object: nil)
     }
 }
 
@@ -87,6 +98,9 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        
         cell.textLabel?.text = "Row________ \(indexPath.row + 1)"
     }
 }
