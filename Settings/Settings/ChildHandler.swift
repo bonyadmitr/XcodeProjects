@@ -31,6 +31,7 @@ extension ChildHandler where Self:UIViewController {
 
 extension UIViewController {
     func removeFromParentVC() {
+        willMove(toParentViewController: nil)
         view.removeFromSuperview()
         removeFromParentViewController()
     }
