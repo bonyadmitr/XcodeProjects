@@ -8,6 +8,16 @@
 
 import UIKit
 
+/// Larger Dynamic Type from iOS 11 working for all types, not only .body
+///
+/// To see font sizes for Dynamic Types
+/// https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
+///
+/// Since iOS 10 you no longer need to observe the content size category did change notification
+/// For iOS 10 use LABEL.adjustsFontForContentSizeCategory = true
+
+
+// TODO: there is a bug after restoration state ofr lagerst font size
 final class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
@@ -47,15 +57,45 @@ final class ViewController: UIViewController {
 //        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(textSizeDidChange), name: .UIContentSizeCategoryDidChange, object: nil)
+        
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    @objc private func textSizeDidChange(_ notification: Notification) {
-        /// not working
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.beginUpdates()
+        tableView.endUpdates()
         tableView.reloadData()
+    }
+
+    
+    @objc private func textSizeDidChange(_ notification: Notification) {
+        tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        /// not working
     }
     
     deinit {
+        /// If your app targets iOS 9.0 and later or macOS 10.11 and later, you don't need to unregister an observer in its dealloc method
         NotificationCenter.default.removeObserver(self, name: .UIContentSizeCategoryDidChange, object: nil)
+    }
+    
+    // TODO: check call for iOS 9
+    /// on iOS 11 called on launch with previousTraitCollection == nil
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 10.0, *) {
+            if let previousTraitCollection = previousTraitCollection,
+                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+                tableView.reloadData()
+                tableView.beginUpdates()
+                tableView.endUpdates()
+                // content size has changed
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
@@ -89,7 +129,17 @@ extension ViewController: UITableViewDataSource {
         return 100
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        //return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        
+        if #available(iOS 10.0, *) {
+            cell.textLabel?.adjustsFontForContentSizeCategory = true
+            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
+        }
+        
+        return cell
     }
 }
 
@@ -100,6 +150,11 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        
+        if #available(iOS 10.0, *) {
+            cell.textLabel?.adjustsFontForContentSizeCategory = true
+            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
+        }
         
         cell.textLabel?.text = "Row________ \(indexPath.row + 1)"
     }
