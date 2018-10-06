@@ -57,24 +57,22 @@ final class ViewController: UIViewController {
 //        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(textSizeDidChange), name: .UIContentSizeCategoryDidChange, object: nil)
-        
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        tableView.reloadData()
-    }
-
     
     @objc private func textSizeDidChange(_ notification: Notification) {
-        tableView.reloadData()
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        /// not working
+        /// don't need for iOS 10 and iOS 9
+        if #available(iOS 10.0, *) {
+            if traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+            {
+                UIView.performWithoutAnimation {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     deinit {
@@ -84,13 +82,20 @@ final class ViewController: UIViewController {
     
     // TODO: check call for iOS 9
     /// on iOS 11 called on launch with previousTraitCollection == nil
+    /// don't need for iOS 10 and iOS 9
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOS 10.0, *) {
             if let previousTraitCollection = previousTraitCollection,
-                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-                tableView.reloadData()
-                tableView.beginUpdates()
-                tableView.endUpdates()
+                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
+                traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+            {
+                UIView.performWithoutAnimation {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                    self.tableView.reloadData()
+                }
                 // content size has changed
             }
         } else {
@@ -129,17 +134,7 @@ extension ViewController: UITableViewDataSource {
         return 100
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
-        
-        if #available(iOS 10.0, *) {
-            cell.textLabel?.adjustsFontForContentSizeCategory = true
-            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
-        }
-        
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
     }
 }
 
@@ -151,12 +146,14 @@ extension ViewController: UITableViewDelegate {
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         
-        if #available(iOS 10.0, *) {
-            cell.textLabel?.adjustsFontForContentSizeCategory = true
-            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
-        }
+        /// need for iOS 10, don't need for iOS 11
+        cell.textLabel?.numberOfLines = 0
         
-        cell.textLabel?.text = "Row________ \(indexPath.row + 1)"
+//        if #available(iOS 10.0, *) {
+//            cell.textLabel?.adjustsFontForContentSizeCategory = true
+//        }
+        
+        cell.textLabel?.text = "Row ________ _ _ _ _ _ \(indexPath.row + 1)"
     }
 }
 
