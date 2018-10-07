@@ -77,6 +77,14 @@ final class SettingsController: UIViewController, BackButtonActions {
                                 to: [EmailSender.devEmail],
                                 presentIn: self)
     }
+    
+    /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+    }
 }
 
 extension SettingsController: UITableViewDataSource {
@@ -137,6 +145,7 @@ extension SettingsController: UITableViewDelegate {
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         //cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
         
+        /// need only for iOS 9 and 10. don't need for iOS 11
         cell.textLabel?.numberOfLines = 0
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
