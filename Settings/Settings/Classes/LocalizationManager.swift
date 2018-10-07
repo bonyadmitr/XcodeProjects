@@ -38,28 +38,48 @@ public final class LocalizationManager: MulticastHandler {
     private let appleLanguagesKey = "AppleLanguages"
     
     /// AppleLanguages wrapper
-    private(set) var currentLanguage: String {
-        get {
-            return UserDefaults.standard.array(forKey: appleLanguagesKey)?.first as? String ?? devLanguage
-        }
-        set {
-            UserDefaults.standard.set([newValue], forKey: appleLanguagesKey)
+    private(set) var currentLanguage: String = "en" {
+        didSet {
+            UserDefaults.standard.set([currentLanguage], forKey: appleLanguagesKey)
             UserDefaults.standard.synchronize()
+            updateIsCurrentLanguageRTL()
         }
     }
     
     /// check for rightToLeft language
-    public var isCurrentLanguageRTL: Bool {
-        /// for all languages but it is heavy func
-        //return Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
-        /// add more if need https://en.wikipedia.org/wiki/Right-to-left
-        return currentLanguage == "he" || currentLanguage == "ar"
+    public var isCurrentLanguageRTL: Bool = false
+    /// old
+//    {
+//        /// for all languages but it is heavy func
+//        //return Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
+//        /// add more if need https://en.wikipedia.org/wiki/Right-to-left
+//        return currentLanguage == "he" || currentLanguage == "ar"
+//    }
+    
+    private func updateIsCurrentLanguageRTL() {
+        isCurrentLanguageRTL = Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
+    }
+    
+    init() {
+        if let savedLanguage = UserDefaults.standard.array(forKey: appleLanguagesKey)?.first as? String {
+            
+            /// fix for en-US etc system languages
+            if savedLanguage.count > 2 {
+                let index = savedLanguage.index(savedLanguage.startIndex, offsetBy: 2)
+                let twoCharsLanguage = String(savedLanguage.prefix(upTo: index))
+                currentLanguage = twoCharsLanguage
+            } else {
+                currentLanguage = savedLanguage
+            }
+        }
+        updateIsCurrentLanguageRTL()
     }
     
     /// you have to use 'var localizedBundle: String' of 'extension String'.
     /// it don't use substitution of Bundle.main to BundleEx
     public func setForBundle(language: String) {
         currentLanguage = language
+        
         forceLanguageDirection()
         delegates.invoke { $0.languageDidChange(to: language)}
     }
