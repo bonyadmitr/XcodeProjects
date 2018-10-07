@@ -135,7 +135,9 @@ extension SettingsController: UITableViewDelegate {
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        //cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+        
+        cell.textLabel?.numberOfLines = 0
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
