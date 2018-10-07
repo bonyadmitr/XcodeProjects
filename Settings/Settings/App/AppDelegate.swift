@@ -41,6 +41,7 @@ import UIKit
 // Privacy Policy (Terms and Privacy Policy) (wkwebview)
 // Terms of Service
 // Lisences (Legal notices) (pods)
+// Developer note (about bugs)
 
 // TODO: accessibility
 // TODO: restoration scroll offset for large titles
