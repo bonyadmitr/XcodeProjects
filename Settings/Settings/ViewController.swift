@@ -76,8 +76,7 @@ final class ViewController: UIViewController {
 //        }
 //    }
     
-    // TODO: check first call for iOS 9
-    /// on iOS 11 called on launch with previousTraitCollection == nil
+    /// called on launch with previousTraitCollection == nil
     /// don't need for iOS 10 and iOS 9
     /// we have realod in AppDelegate
 //    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
