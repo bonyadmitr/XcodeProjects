@@ -48,7 +48,31 @@ final class AppearanceSelectController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-//        appearanceConfigurator.register(self)
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+        
+//        if #available(iOS 10.0, *) {
+//            if let previousTraitCollection = previousTraitCollection,
+//                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
+//                traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+//            {
+//                UIView.performWithoutAnimation {
+//                    self.tableView.beginUpdates()
+//                    self.tableView.endUpdates()
+//                }
+//            }
+//        }
     }
 }
 
@@ -74,30 +98,28 @@ extension AppearanceSelectController: UITableViewDelegate {
         
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
             cell.accessoryType = .checkmark
-//            cell.selectionStyle = .default
         } else {
             cell.accessoryType = .none
-//            cell.selectionStyle = .none
         }
         
         cell.textLabel?.text = themes[indexPath.row].name
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         
-        AppearanceConfigurator.shared.applyAndSaveCurrent(theme: themes[indexPath.row])
+        /// fixing of UILable instant color change
+        /// otherwise will be need "cell.selectionStyle = .none"
+        tableView.deselectRow(at: indexPath, animated: false)
         
-        /// without recreation needs reloadData
-        tableView.reloadData()
-    }
-}
-
-extension AppearanceSelectController: AppearanceConfiguratorDelegate {
-    func didApplied(theme: AppearanceTheme) {
-//        tableView.backgroundColor = theme.backgroundColor
+        /// fixing of UILable instant color change
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            AppearanceConfigurator.shared.applyAndSaveCurrent(theme: self.themes[indexPath.row])
+            tableView.reloadData()
+        }
     }
 }

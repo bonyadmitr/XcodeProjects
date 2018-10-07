@@ -19,6 +19,10 @@ final class DetailCell: UITableViewCell {
             return
         }
         
+        /// need for iOS 10, don't need for iOS 11
+        textLabel.numberOfLines = 0
+        detailTextLabel.numberOfLines = 0
+        
 //        textLabel.minimumScaleFactor = 0.5
 //        textLabel.adjustsFontSizeToFitWidth = true
         

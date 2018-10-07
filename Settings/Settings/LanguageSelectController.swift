@@ -52,7 +52,32 @@ final class LanguageSelectController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+            UIView.performWithoutAnimation {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+            }
+            
+//            if #available(iOS 10.0, *) {
+//                if let previousTraitCollection = previousTraitCollection,
+//                    previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
+//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+//                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+//                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+//                {
+//                    UIView.performWithoutAnimation {
+//                        self.tableView.beginUpdates()
+//                        self.tableView.endUpdates()
+//                    }
+//                }
+//            }
+        }
 }
 
 /*

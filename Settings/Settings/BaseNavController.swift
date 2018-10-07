@@ -66,6 +66,7 @@ final class BaseSplitController: UISplitViewController {
         tabBarItem = viewControllers.first?.tabBarItem
         delegate = self
         extendedLayoutIncludesOpaqueBars = true
+        statusBarStyle = AppearanceConfigurator.shared.currentTheme.barStyle
         AppearanceConfigurator.shared.register(self)
     }
 }
