@@ -23,6 +23,11 @@ import UIKit
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
 
+// TODO: POEditor 
+// TODO: POEditor shared localization
+// TODO: real time localization by
+// https://github.com/willpowell8/LocalizationKit_iOS
+
 // TODO: other options in settings:
 //
 /// Optional:
@@ -43,7 +48,7 @@ import UIKit
 // Rate Us
 // Privacy Policy (Terms and Privacy Policy) (wkwebview)
 // Terms of Service
-// Lisences (Legal notices) (pods)
+// Lisences (Legal notices, Acknowledgements) (pods)
 // Developer note (about bugs)
 // Notify about app?? (.never) (by local notifications)
 
@@ -102,6 +107,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //application.ignoreSnapshotOnNextApplicationLaunch()
         
         /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
+        /// and subsribe all tableViews for theme did change
         /// and add label text color setting in all tableViews
         NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
         
