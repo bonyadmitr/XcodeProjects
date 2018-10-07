@@ -9,7 +9,6 @@
 import UIKit
 
 // TODO: fix restoration layout in appearnce
-// TODO: think about english and en-US in localization Manager
 
 // TODO: window round coners 
 // TODO: swiftgen strings file

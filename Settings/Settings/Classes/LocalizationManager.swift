@@ -61,18 +61,19 @@ public final class LocalizationManager: MulticastHandler {
     }
     
     init() {
-        if let savedLanguage = UserDefaults.standard.array(forKey: appleLanguagesKey)?.first as? String {
-            
-            /// fix for en-US etc system languages
-            if savedLanguage.count > 2 {
-                let index = savedLanguage.index(savedLanguage.startIndex, offsetBy: 2)
-                let twoCharsLanguage = String(savedLanguage.prefix(upTo: index))
-                currentLanguage = twoCharsLanguage
-            } else {
-                currentLanguage = savedLanguage
-            }
+        guard let savedLanguage = UserDefaults.standard.array(forKey: appleLanguagesKey)?.first as? String else {
+            assertionFailure()
+            return
         }
-        updateIsCurrentLanguageRTL()
+            
+        /// fix for en-US etc system languages
+        if savedLanguage.count > 2 {
+            let index = savedLanguage.index(savedLanguage.startIndex, offsetBy: 2)
+            let twoCharsLanguage = String(savedLanguage.prefix(upTo: index))
+            currentLanguage = twoCharsLanguage
+        } else {
+            currentLanguage = savedLanguage
+        }
     }
     
     /// you have to use 'var localizedBundle: String' of 'extension String'.
