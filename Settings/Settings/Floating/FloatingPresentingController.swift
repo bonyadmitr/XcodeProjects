@@ -67,6 +67,13 @@ final class FloatingPresentingController: UIViewController {
         view.addSubview(tableView)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+    }
+    
     private var isGoingToCrash = false
     
     @objc private func appMovedToBackground() {
