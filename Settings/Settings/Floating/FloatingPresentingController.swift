@@ -10,19 +10,23 @@ import UIKit
 
 final class FloatingPresentingController: UIViewController {
     
-    private enum Section: Int {
-        case debug = 0
-        
-        static let count = 1
-        
-        enum DebugRaws: Int {
-            case crashApp = 0
-            case moveToBackgroundAndCrash
-            case sendLogs
-            
-            static let count = 3
-        }
+    struct Section {
+        let type: SectionType
+        let raws: [RawType]
     }
+    
+    enum SectionType {
+        case debug
+    }
+    
+    enum RawType {
+        case crashApp
+        case moveToBackgroundAndCrash
+        case sendLogs
+    }
+    
+    private let sections = [Section(type: .debug,
+                                    raws: [.crashApp, .moveToBackgroundAndCrash, .sendLogs])]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -63,6 +67,13 @@ final class FloatingPresentingController: UIViewController {
         view.addSubview(tableView)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+    }
+    
     private var isGoingToCrash = false
     
     @objc private func appMovedToBackground() {
@@ -93,16 +104,10 @@ final class FloatingPresentingController: UIViewController {
 
 extension FloatingPresentingController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.count
+        return sections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Section(rawValue: section) else {
-            assertionFailure()
-            return 0
-        }
-        switch section {
-        case .debug: return Section.DebugRaws.count
-        }
+        return sections[section].raws.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,64 +117,37 @@ extension FloatingPresentingController: UITableViewDataSource {
 
 extension FloatingPresentingController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            assertionFailure()
-            return
-        }
+        let raw = sections[indexPath.section].raws[indexPath.row]
         
-        switch section {
-        case .debug:
-            guard let row = Section.DebugRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .crashApp:
-                cell.textLabel?.text = "Crash the app"
-            case .moveToBackgroundAndCrash:
-                cell.textLabel?.text = "Background & crash in 1 sec"
-            case .sendLogs:
-                cell.textLabel?.text = "Send logs via email"
-            }
-            //cell.accessoryType = .disclosureIndicator
+        switch raw {
+        case .crashApp:
+            cell.textLabel?.text = "Crash the app"
+        case .moveToBackgroundAndCrash:
+            cell.textLabel?.text = "Background & crash in 1 sec"
+        case .sendLogs:
+            cell.textLabel?.text = "Send logs via email"
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let raw = sections[indexPath.section].raws[indexPath.row]
         
-        guard let section = Section(rawValue: indexPath.section) else {
-            assertionFailure()
-            return
-        }
-        
-        switch section {
-        case .debug:
-            guard let row = Section.DebugRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .crashApp:
-                exit(0)
-            case .moveToBackgroundAndCrash:
-                isGoingToCrash = true
-                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-            case .sendLogs:
-                sendLogs()
-            }
+        switch raw {
+        case .crashApp:
+            exit(0)
+        case .moveToBackgroundAndCrash:
+            isGoingToCrash = true
+            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        case .sendLogs:
+            sendLogs()
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = Section(rawValue: section) else {
-            assertionFailure()
-            return nil
-        }
+        let section = sections[section]
         
-        switch section {
+        switch section.type {
         case .debug:
             return "Debug"
         }

@@ -212,6 +212,8 @@ extension AppDelegate: LocalizationManagerDelegate {
 
 extension AppDelegate {
     @objc private func largeTextAccessibilityDidChanged() {
+
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard
             let window = window,
@@ -221,7 +223,22 @@ extension AppDelegate {
             return
         }
         
+        // TODO: check for any presentedViewController controller
+        #if DEBUG
+        if let oldVC = window.rootViewController?.presentedViewController as? FloatingNavigationController {
+            oldVC.dismiss(animated: false) {
+                window.rootViewController = tabBarVC
+                Floating.isShownOnShake = false
+                let vc = FloatingPresentingController()
+                let navVC = FloatingNavigationController(rootViewController: vc)
+                FloatingManager.shared.presentingController = navVC
+            }
+        } else {
+            window.rootViewController = tabBarVC
+        }
+        #else
         window.rootViewController = tabBarVC
+        #endif
     }
     
 }
