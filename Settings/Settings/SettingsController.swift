@@ -8,23 +8,23 @@
 
 import UIKit
 
-struct Section {
-    let type: SectionType
-    let raws: [RawType]
-}
-
-enum SectionType {
-    case language
-    case support
-}
-
-enum RawType {
-    case select
-    case appearance
-    case feedback
-}
-
 final class SettingsController: UIViewController, BackButtonActions {
+    
+    private struct Section {
+        let type: SectionType
+        let raws: [RawType]
+    }
+    
+    private enum SectionType {
+        case language
+        case support
+    }
+    
+    private enum RawType {
+        case select
+        case appearance
+        case feedback
+    }
     
     private let sections = [Section(type: .language,
                                     raws: [.select, .appearance]),
@@ -139,9 +139,9 @@ extension SettingsController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = sections[section].type
+        let section = sections[section]
         
-        switch section {
+        switch section.type {
         case .language:
             return "language".localized
         case .support:
