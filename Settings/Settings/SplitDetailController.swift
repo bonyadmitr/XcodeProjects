@@ -83,6 +83,11 @@ extension SplitDetailController {
             title = childVC.title
 //            extendedLayoutIncludesOpaqueBars = false
 //            automaticallyAdjustsScrollViewInsets = false
+            
+            /// need for iOS 10. don't need for iOS 11
+            edgesForExtendedLayout = [.bottom]
+            
+            /// viewDidLoad called first and will add child controller by default
             childVC.removeFromParentVC()
             addChildVC()
         } else {
