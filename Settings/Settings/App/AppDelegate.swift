@@ -43,6 +43,7 @@ import UIKit
 // Lisences (Legal notices) (pods)
 
 // TODO: accessibility
+// TODO: restoration scroll offset for large titles
 // https://medium.com/bbc-design-engineering/improving-your-apps-accessibility-with-ios-11-db8bb4ee7c9f
 // https://developer.apple.com/videos/play/wwdc2017/204/
 //
@@ -88,11 +89,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         LocalizationManager.shared.register(self)
+        
         AppearanceConfigurator.shared.loadSavedTheme()
         SettingsBundleManager.shared.setup()
         
         /// not working
         //application.ignoreSnapshotOnNextApplicationLaunch()
+        
+        /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
+        /// and subsribe all tableViews for theme did change
+        NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
         
         return true
     }
@@ -202,6 +208,23 @@ extension AppDelegate: LocalizationManagerDelegate {
  when the app goes into the background. To debug state restoration on device, read the
  documentation provided with the `restorationArchiveTool` mentioned above.
  */
+
+extension AppDelegate {
+    @objc private func largeTextAccessibilityDidChanged() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard
+            let window = window,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController
+        else {
+            assertionFailure()
+            return
+        }
+        
+        window.rootViewController = tabBarVC
+    }
+    
+}
+
 extension AppDelegate {
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {

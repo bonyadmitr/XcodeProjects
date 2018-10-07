@@ -56,47 +56,45 @@ final class ViewController: UIViewController {
 //            automaticallyAdjustsScrollViewInsets = false
 //        }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(textSizeDidChange), name: .UIContentSizeCategoryDidChange, object: nil)
+        /// we have realod in AppDelegate
+//        NotificationCenter.default.addObserver(self, selector: #selector(textSizeDidChange), name: .UIContentSizeCategoryDidChange, object: nil)
     }
     
-    @objc private func textSizeDidChange(_ notification: Notification) {
-        /// don't need for iOS 10 and iOS 9
-        if #available(iOS 10.0, *) {
-            if traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
-                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
-                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
-            {
-                UIView.performWithoutAnimation {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
-            }
-        }
-    }
+    /// we have realod in AppDelegate
+//    @objc private func textSizeDidChange(_ notification: Notification) {
+//        /// don't need for iOS 10 and iOS 9
+//        if #available(iOS 10.0, *) {
+//            if traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+//                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+//                traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+//            {
+//                UIView.performWithoutAnimation {
+//                    self.tableView.beginUpdates()
+//                    self.tableView.endUpdates()
+//                }
+//            }
+//        }
+//    }
     
-    deinit {
-        /// If your app targets iOS 9.0 and later or macOS 10.11 and later, you don't need to unregister an observer in its dealloc method
-        NotificationCenter.default.removeObserver(self, name: .UIContentSizeCategoryDidChange, object: nil)
-    }
-    
-    // TODO: check call for iOS 9
+    // TODO: check first call for iOS 9
     /// on iOS 11 called on launch with previousTraitCollection == nil
     /// don't need for iOS 10 and iOS 9
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        if #available(iOS 10.0, *) {
-            if let previousTraitCollection = previousTraitCollection,
-                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
-                traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
-                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
-                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
-            {
-                UIView.performWithoutAnimation {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
-            }
-        }
-    }
+    /// we have realod in AppDelegate
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        if #available(iOS 10.0, *) {
+//            if let previousTraitCollection = previousTraitCollection,
+//                previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
+//                traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
+//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+//            {
+//                UIView.performWithoutAnimation {
+//                    self.tableView.beginUpdates()
+//                    self.tableView.endUpdates()
+//                }
+//            }
+//        }
+//    }
 }
 
 // MARK: - UIStateRestoration
