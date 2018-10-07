@@ -133,6 +133,9 @@ final class AppearanceConfigurator: MulticastHandler {
         cellLabel.backgroundColor = theme.backgroundColor
         cellLabel.textColor = theme.textColor
         
+        /// not working coorectly for dynamic font changing (large titles)
+        ///cellLabel.font
+        
         UITextField.appearance().keyboardAppearance = theme.barStyle.keyboard
         
         currentTheme = theme

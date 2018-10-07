@@ -45,6 +45,7 @@ import UIKit
 // Terms of Service
 // Lisences (Legal notices) (pods)
 // Developer note (about bugs)
+// Notify about app?? (.never) (by local notifications)
 
 // TODO: accessibility
 // TODO: restoration scroll offset for large titles
@@ -101,7 +102,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //application.ignoreSnapshotOnNextApplicationLaunch()
         
         /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
-        /// and subsribe all tableViews for theme did change
+        /// and add label text color setting in all tableViews
         NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
         
         return true
