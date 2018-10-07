@@ -10,6 +10,7 @@ import UIKit
 
 final class SplitDetailController: UIViewController, ChildHandler {
     
+    /// initial vc need for split controller
     var childVC: UIViewController = LanguageSelectController()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -25,6 +26,7 @@ final class SplitDetailController: UIViewController, ChildHandler {
     private func setup() {
         /// in viewDidLoad it will be with changing animation from storyboard title
         title = childVC.title
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
@@ -79,7 +81,8 @@ extension SplitDetailController {
         if let childVC = coder.decodeObject(forKey: SplitDetailController.restoreChildVC) as? UIViewController {
             self.childVC = childVC
             title = childVC.title
-            automaticallyAdjustsScrollViewInsets = false
+//            extendedLayoutIncludesOpaqueBars = false
+//            automaticallyAdjustsScrollViewInsets = false
             childVC.removeFromParentVC()
             addChildVC()
         } else {

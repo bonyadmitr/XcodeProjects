@@ -41,7 +41,7 @@ final class AppearanceSelectController: UIViewController {
         title = "appearance".localized
         restorationIdentifier = String(describing: type(of: self))
         restorationClass = type(of: self)
-        extendedLayoutIncludesOpaqueBars = true
+//        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {

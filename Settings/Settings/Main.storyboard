@@ -202,9 +202,9 @@
         <!--Detail-->
         <scene sceneID="3Og-Om-sNZ">
             <objects>
-                <viewController storyboardIdentifier="SplitDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplitDetailController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Ww-dF-dqw" customClass="SplitDetailController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NNF-FW-vye">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Af2-Zr-qEg"/>

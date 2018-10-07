@@ -40,7 +40,7 @@ final class LanguageSelectController: UIViewController {
     private func setup() {
         title = "language".localized
         restorationIdentifier = String(describing: type(of: self))
-        extendedLayoutIncludesOpaqueBars = true
+//        extendedLayoutIncludesOpaqueBars = true
         
         /// The class specified here must conform to `UIViewControllerRestoration`,
         /// explained above. If not set, you'd get a second chance to create the
