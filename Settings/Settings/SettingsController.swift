@@ -8,27 +8,28 @@
 
 import UIKit
 
+struct Section {
+    let type: SectionType
+    let raws: [RawType]
+}
+
+enum SectionType {
+    case language
+    case support
+}
+
+enum RawType {
+    case select
+    case appearance
+    case feedback
+}
+
 final class SettingsController: UIViewController, BackButtonActions {
     
-    private enum Section: Int {
-        case language = 0
-        case support
-        
-        static let count = 2
-        
-        enum LanguageRaws: Int {
-            case select = 0
-            case appearance
-            
-            static let count = 2
-        }
-        
-        enum SupportRaws: Int {
-            case feedback = 0
-            
-            static let count = 1
-        }
-    }
+    private let sections = [Section(type: .language,
+                                    raws: [.select, .appearance]),
+                            Section(type: .support,
+                                    raws: [.feedback])]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
@@ -89,17 +90,10 @@ final class SettingsController: UIViewController, BackButtonActions {
 
 extension SettingsController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.count
+        return sections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = Section(rawValue: section) else {
-            assertionFailure()
-            return 0
-        }
-        switch section {
-        case .language: return Section.LanguageRaws.count
-        case .support: return Section.SupportRaws.count
-        }
+        return sections[section].raws.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,37 +103,18 @@ extension SettingsController: UITableViewDataSource {
 
 extension SettingsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let section = Section(rawValue: indexPath.section) else {
-            assertionFailure()
-            return
-        }
+        let raw = sections[indexPath.section].raws[indexPath.row]
         
-        switch section {
-        case .language:
-            guard let row = Section.LanguageRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .select:
-                cell.accessoryType = .disclosureIndicator
-                cell.textLabel?.text = "language".localized
-            case .appearance:
-                cell.accessoryType = .disclosureIndicator
-                cell.textLabel?.text = "appearance".localized
-            }
-            
-        case .support:
-            guard let row = Section.SupportRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .feedback:
-                cell.textLabel?.text = "Send feedback"
-            }
+        switch raw {
+        case .select:
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "language".localized
+        case .appearance:
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "appearance".localized
+        case .feedback:
+            cell.accessoryType = .none
+            cell.textLabel?.text = "Send feedback"
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -151,45 +126,20 @@ extension SettingsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let section = Section(rawValue: indexPath.section) else {
-            assertionFailure()
-            return
-        }
+        let raw = sections[indexPath.section].raws[indexPath.row]
         
-        switch section {
-        case .language:
-            guard let row = Section.LanguageRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .select:
-                performSegue(withIdentifier: "detail", sender: LanguageSelectController())
-//                let vc = LanguageSelectController()
-//                navigationController?.pushViewController(vc, animated: true)
-            case .appearance:
-                performSegue(withIdentifier: "detail", sender: AppearanceSelectController())
-            }
-            
-        case .support:
-            guard let row = Section.SupportRaws(rawValue: indexPath.row) else {
-                assertionFailure()
-                return
-            }
-            
-            switch row {
-            case .feedback:
-                sendFeedback()
-            }
+        switch raw {
+        case .select:
+            performSegue(withIdentifier: "detail", sender: LanguageSelectController())
+        case .appearance:
+            performSegue(withIdentifier: "detail", sender: AppearanceSelectController())
+        case .feedback:
+            sendFeedback()
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = Section(rawValue: section) else {
-            assertionFailure()
-            return nil
-        }
+        let section = sections[section].type
         
         switch section {
         case .language:
