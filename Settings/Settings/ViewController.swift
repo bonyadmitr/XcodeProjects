@@ -69,7 +69,6 @@ final class ViewController: UIViewController {
                 UIView.performWithoutAnimation {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
-                    self.tableView.reloadData()
                 }
             }
         }
@@ -94,12 +93,8 @@ final class ViewController: UIViewController {
                 UIView.performWithoutAnimation {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
-                    self.tableView.reloadData()
                 }
-                // content size has changed
             }
-        } else {
-            // Fallback on earlier versions
         }
     }
 }
