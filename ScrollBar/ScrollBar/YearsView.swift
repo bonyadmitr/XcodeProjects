@@ -9,22 +9,29 @@
 import UIKit
 
 final class YearsView: UIView {
+    //typealias YearsArray = [(key: Int, value: (months: Set<Int>, lines: Int))]
     
-    struct YearMonthDays {
-        let year: Int
-        let months: MonthDays
-    }
-    
-    struct MonthDays {
-        let month: Int
-        let daysNumber: Int
-    }
-    
-    typealias YearsArray = [(key: Int, value: (months: Set<Int>, lines: Int))]
-    
-    typealias YearsArray2 = [(key: Int, value: (monthNumber: Int, lines: Int))]
+    typealias YearsArray = [(key: Int, value: (monthNumber: Int, lines: Int))]
     
     private weak var scrollView: UIScrollView?
+    
+    
+    private let handleViewCenterY: CGFloat = 32
+    private let handleViewCenterY2: CGFloat = 64
+    private var firstOffest: CGFloat = 1
+    
+    
+    private var labels = [UILabel]()
+    private var labelsOffsetRatio: [CGFloat] = []
+    private let selfWidth: CGFloat = 100
+    
+    
+    private var cellHeight: CGFloat = 1
+    private var headerHeight: CGFloat = 1
+    private var cellSpaceHeight: CGFloat = 1
+    private var numberOfColumns = 1
+    //    private var cellHeaderRatio: CGFloat = 1
+    //    private var cellSpaceRatio: CGFloat = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,15 +93,12 @@ final class YearsView: UIView {
             return
         }
         
-        frame = CGRect(x: scrollView.frame.width - width,
+        frame = CGRect(x: scrollView.frame.width - selfWidth,
                        y: scrollView.contentOffset.y,
-                       width: width,
+                       width: selfWidth,
                        height: scrollView.frame.height)
     }
-    
-    private let handleViewCenterY: CGFloat = 32
-    private let handleViewCenterY2: CGFloat = 64
-    private var firstOffest: CGFloat = 1
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -148,10 +152,6 @@ final class YearsView: UIView {
     
     // MARK: - Dates
     
-    private var labels = [UILabel]()
-    private var labelsOffsetRatio: [CGFloat] = []
-    private let width: CGFloat = 100
-    
     func update(by dates: [Date]) {
         
         let yearsArray = getYearsArray(from: dates)
@@ -165,21 +165,17 @@ final class YearsView: UIView {
         udpateLabels(from: newYearsArray)
     }
     
-    func update(by cellHeight: CGFloat, headerHeight: CGFloat) {
+    func update(cellHeight: CGFloat, headerHeight: CGFloat, numberOfColumns: Int) {
         self.cellHeight = cellHeight
         self.headerHeight = headerHeight
+        self.numberOfColumns = numberOfColumns
         
 //        cellHeaderRatio = headerHeight / cellHeight
 //        cellSpaceRatio = 1 / cellHeight
     }
+
     
-    private var cellHeight: CGFloat = 1
-    private var headerHeight: CGFloat = 1
-    private var cellSpaceHeight: CGFloat = 1
-//    private var cellHeaderRatio: CGFloat = 1
-//    private var cellSpaceRatio: CGFloat = 1
-    
-    private func getYearsArray(from dates: [Date]) -> YearsArray2 {
+    private func getYearsArray(from dates: [Date]) -> YearsArray {
         
 //        var years: [Int: (months: Set<Int>, lines: Int)] = [:]
         var years: [Int: [Int: Int]] = [:]
@@ -221,8 +217,8 @@ final class YearsView: UIView {
         years.forEach { yearArg in
             let (year, month) = yearArg
             let monthLines = month.reduce(0, { sum, arg in
-                let addtionalLine = (arg.value % 4 == 0) ? 0 : 1 
-                return sum + arg.value / 4 + addtionalLine
+                let addtionalLine = (arg.value % numberOfColumns == 0) ? 0 : 1 
+                return sum + arg.value / numberOfColumns + addtionalLine
             })
             
             
@@ -238,7 +234,7 @@ final class YearsView: UIView {
         return yearsArray
     }
     
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray2, dates: [Date]) -> YearsArray2 {        
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) -> YearsArray {        
         labelsOffsetRatio = [0]
         
 //        var yearLines: [Int: Int] = [:]
@@ -346,7 +342,7 @@ final class YearsView: UIView {
         return yearsArray
     }
     
-    private func udpateLabels(from yearsArray: YearsArray2) {
+    private func udpateLabels(from yearsArray: YearsArray) {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
         
