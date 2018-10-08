@@ -35,7 +35,7 @@ final class CollectionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
         yearsView.add(to: collectionView)
         scrollBar.add(to: collectionView)
         
@@ -61,11 +61,12 @@ final class CollectionController: UIViewController {
         }
         
         sections = datesByYearMonth.sorted { section1, section2 in
-            return section1.key < section2.key
+            return section1.key > section2.key
         }
         
         //let allDates = sections.flatMap({ $0.value })
         yearsView.update(cellHeight: 100.5, headerHeight: 44, numberOfColumns: 4)
+        yearsView.update(sectionsWithCount: [("Missing dates", 100)])
         yearsView.update(by: dates)
         
         collectionView.reloadData()
@@ -79,9 +80,12 @@ final class CollectionController: UIViewController {
 
 extension CollectionController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
+        return sections.count + 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == sections.count {
+            return 100
+        }
         return sections[section].value.count
     }
     
@@ -101,8 +105,12 @@ extension CollectionController: UICollectionViewDelegate {
             return
         }
         
-        let date = sections[indexPath.section].value[indexPath.row]
-        cell.textLabel.text = "\(date)"
+        if indexPath.section == sections.count {
+            cell.textLabel.text = "Empty"
+        } else {
+            let date = sections[indexPath.section].value[indexPath.row]
+            cell.textLabel.text = "\(date)"
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -117,8 +125,14 @@ extension CollectionController: UICollectionViewDelegate {
             return
         }
         
-        let date = sections[indexPath.section].value[indexPath.row]
-        view.textLabel.text = "\(date)"
+        if indexPath.section == sections.count {
+            view.textLabel.text = "Missing dates"
+        } else {
+            let date = sections[indexPath.section].value[indexPath.row]
+            view.textLabel.text = "\(date)"
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
