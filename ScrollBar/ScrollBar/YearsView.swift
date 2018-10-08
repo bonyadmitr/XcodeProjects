@@ -95,17 +95,51 @@ final class YearsView: UIView {
     private let handleViewCenterY: CGFloat = 32
     private let handleViewCenterY2: CGFloat = 64
     private var firstOffest: CGFloat = 1
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        
+        guard let scrollView = scrollView else {
+            assertionFailure()
+            return
+        }
+        
+        let contentInset: UIEdgeInsets
+        if #available(iOS 11.0, *) {
+            contentInset = scrollView.safeAreaInsets
+        } else {
+            contentInset = scrollView.contentInset
+        }
+        
+        let contentOffset = scrollView.contentOffset
+        let contentSize = scrollView.contentSize
+        
+        let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
+        //        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
+        //        handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
+        
+        let q = scrollView.frame.height / scrollableHeight
+        
+        var lastLabelOffset: CGFloat = 0
+        
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
+            let offet: CGFloat
             if offsetRatio == 0 {
-                let offet = handleViewCenterY - label.frame.height * 0.5
-                label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+                offet = handleViewCenterY - label.frame.height * 0.5
             } else {
-                let offet = offsetRatio * (frame.height - handleViewCenterY2) + label.frame.height * 0.5
-                label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+                offet = offsetRatio * (frame.height - handleViewCenterY) + label.frame.height * 0.5
+//                let offet = offsetRatio * (frame.height)
             }
+            
+            if lastLabelOffset > offet {
+                label.isHidden = true
+                continue
+            }
+            label.isHidden = false
+            
+            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+            lastLabelOffset = offet + label.frame.height
             
 //            let offet = offsetRatio * (frame.height - handleViewCenterY2) + label.frame.height * 0.5
 //            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
@@ -133,14 +167,15 @@ final class YearsView: UIView {
     }
     
     func update(by cellHeight: CGFloat, headerHeight: CGFloat) {
-//        self.cellHeight = cellHeight
-//        self.headerHeight = headerHeight
+        self.cellHeight = cellHeight
+        self.headerHeight = headerHeight
+        
         cellHeaderRatio = headerHeight / cellHeight
         cellSpaceRatio = 1 / cellHeight
     }
     
-//    private var cellHeight: CGFloat = 1
-//    private var headerHeight: CGFloat = 1
+    private var cellHeight: CGFloat = 1
+    private var headerHeight: CGFloat = 1
     private var cellHeaderRatio: CGFloat = 1
     private var cellSpaceRatio: CGFloat = 1
     
@@ -203,7 +238,7 @@ final class YearsView: UIView {
         return yearsArray
     }
     
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray2, dates: [Date]) -> YearsArray2 {
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray2, dates: [Date]) -> YearsArray2 {        
         labelsOffsetRatio = [0]
         
 //        var yearLines: [Int: Int] = [:]
@@ -225,9 +260,9 @@ final class YearsView: UIView {
         let totalMonthes = yearsArray.reduce(0) { sum, arg in
             sum + arg.value.monthNumber
         }
-
         
-        let totalSpace = CGFloat(totalLines) + cellHeaderRatio * CGFloat(totalMonthes) + cellSpaceRatio * CGFloat(totalLines + totalMonthes)
+//        let totalSpace = CGFloat(totalLines) + cellHeaderRatio * CGFloat(totalMonthes) + cellSpaceRatio * CGFloat(totalLines + totalMonthes)
+        let totalSpace = CGFloat(totalLines) * cellHeight + headerHeight * CGFloat(totalMonthes) + 1 * CGFloat(totalLines + totalMonthes)
         
         
         var newYearsArray = yearsArray
@@ -243,9 +278,14 @@ final class YearsView: UIView {
 
 //            let yearHeaderRatio = (CGFloat(year.value.monthNumber) / CGFloat(totalMonthes))// * cellHeaderRatio
             
-            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.monthNumber)
-            let yearHeaderRatio = CGFloat(year.value.monthNumber) * cellHeaderRatio
-            let linesRatio = CGFloat(year.value.lines)
+//            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.monthNumber)
+//            let yearHeaderRatio = CGFloat(year.value.monthNumber) * cellHeaderRatio
+//            let linesRatio = CGFloat(year.value.lines)
+//            let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
+            
+            let yearCellSpaceRatio = 1 * CGFloat(year.value.lines + year.value.monthNumber)
+            let yearHeaderRatio = CGFloat(year.value.monthNumber) * headerHeight
+            let linesRatio = CGFloat(year.value.lines) * cellHeight
             let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
             
             
@@ -259,7 +299,8 @@ final class YearsView: UIView {
 //            let yearContentRatio = yearRatio / CGFloat(totalLines) + previusOffsetRation
             
             
-//            print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
+            print(yearRatio * frame.height)
+            print("---", yearRatio)
             
             
             
