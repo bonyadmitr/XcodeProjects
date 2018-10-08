@@ -18,6 +18,7 @@ final class YearsSectionIndex: UIView {
     var cellHeight: CGFloat = 100.5
     var headerHeight: CGFloat = 44
     let cellSpaceHeight: CGFloat = 1
+    let scrollInsets = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -109,7 +110,8 @@ final class YearsSectionIndex: UIView {
         
         let totalSpace = CGFloat(totalLines) * cellHeight +
                         headerHeight * CGFloat(totalMonthes) +
-                        cellSpaceHeight * CGFloat(totalLines + totalMonthes)
+                        cellSpaceHeight * CGFloat(totalLines + totalMonthes) +
+                        scrollInsets.top + scrollInsets.bottom
         
         var previusOffsetRation: CGFloat = 0
         labelsOffsetRatio = [0]
@@ -120,7 +122,15 @@ final class YearsSectionIndex: UIView {
             let yearCellSpaceRatio = cellSpaceHeight * CGFloat(year.value.lines + year.value.monthNumber)
             let yearHeaderRatio = CGFloat(year.value.monthNumber) * headerHeight
             let linesRatio = CGFloat(year.value.lines) * cellHeight
-            let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
+            
+            let yearRatio: CGFloat
+            if year.key == yearsArray.first?.key {
+                yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio + scrollInsets.top) / totalSpace
+            } else {
+                yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
+            }
+            
+            // FIXME: if new section will be added. remove "dropLast()" and "year.key == last?.key"
             
             let yearContentRatio = yearRatio + previusOffsetRation
 
