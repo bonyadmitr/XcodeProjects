@@ -100,26 +100,26 @@ final class YearsView: UIView {
         super.layoutSubviews()
         
         
-        guard let scrollView = scrollView else {
-            assertionFailure()
-            return
-        }
-        
-        let contentInset: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            contentInset = scrollView.safeAreaInsets
-        } else {
-            contentInset = scrollView.contentInset
-        }
-        
-        let contentOffset = scrollView.contentOffset
-        let contentSize = scrollView.contentSize
-        
-        let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
-        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
-        //        handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
-        
-        let q = scrollView.frame.height / scrollableHeight
+//        guard let scrollView = scrollView else {
+//            assertionFailure()
+//            return
+//        }
+//        
+//        let contentInset: UIEdgeInsets
+//        if #available(iOS 11.0, *) {
+//            contentInset = scrollView.safeAreaInsets
+//        } else {
+//            contentInset = scrollView.contentInset
+//        }
+//        
+//        let contentOffset = scrollView.contentOffset
+//        let contentSize = scrollView.contentSize
+//        
+//        let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
+//        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
+//        //        handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
+//        
+//        let q = scrollView.frame.height / scrollableHeight
         
         var lastLabelOffset: CGFloat = 0
         
@@ -129,7 +129,6 @@ final class YearsView: UIView {
                 offet = handleViewCenterY - label.frame.height * 0.5
             } else {
                 offet = offsetRatio * 0.98 * (frame.height - handleViewCenterY) + label.frame.height * 0.5
-//                let offet = offsetRatio * (frame.height)
             }
             
             if lastLabelOffset > offet {
