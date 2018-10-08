@@ -116,7 +116,7 @@ final class YearsView: UIView {
         let contentSize = scrollView.contentSize
         
         let scrollableHeight = contentSize.height + contentInset.top + contentInset.bottom - scrollView.frame.height
-        //        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
+        let scrollProgress = (contentOffset.y + contentInset.top) / scrollableHeight
         //        handleFrame.origin.y = scrollProgress * (frame.height - handleFrame.height)
         
         let q = scrollView.frame.height / scrollableHeight
@@ -128,7 +128,7 @@ final class YearsView: UIView {
             if offsetRatio == 0 {
                 offet = handleViewCenterY - label.frame.height * 0.5
             } else {
-                offet = offsetRatio * (frame.height - handleViewCenterY) + label.frame.height * 0.5
+                offet = offsetRatio * 0.98 * (frame.height - handleViewCenterY) + label.frame.height * 0.5
 //                let offet = offsetRatio * (frame.height)
             }
             
@@ -265,12 +265,12 @@ final class YearsView: UIView {
         let totalSpace = CGFloat(totalLines) * cellHeight + headerHeight * CGFloat(totalMonthes) + 1 * CGFloat(totalLines + totalMonthes)
         
         
-        var newYearsArray = yearsArray
-        var numberOfDeltedItems = 0
-        
-        var connectNextYear = false
-        
-        var lastYearRatio: CGFloat = 0
+//        var newYearsArray = yearsArray
+//        var numberOfDeltedItems = 0
+//        
+//        var connectNextYear = false
+//        
+//        var lastYearRatio: CGFloat = 0
         
         var previusOffsetRation: CGFloat = 0
         
@@ -342,7 +342,8 @@ final class YearsView: UIView {
             labelsOffsetRatio.append(yearContentRatio)
             
         }
-        return newYearsArray
+//        return newYearsArray
+        return yearsArray
     }
     
     private func udpateLabels(from yearsArray: YearsArray2) {
