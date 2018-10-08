@@ -169,14 +169,15 @@ final class YearsView: UIView {
         self.cellHeight = cellHeight
         self.headerHeight = headerHeight
         
-        cellHeaderRatio = headerHeight / cellHeight
-        cellSpaceRatio = 1 / cellHeight
+//        cellHeaderRatio = headerHeight / cellHeight
+//        cellSpaceRatio = 1 / cellHeight
     }
     
     private var cellHeight: CGFloat = 1
     private var headerHeight: CGFloat = 1
-    private var cellHeaderRatio: CGFloat = 1
-    private var cellSpaceRatio: CGFloat = 1
+    private var cellSpaceHeight: CGFloat = 1
+//    private var cellHeaderRatio: CGFloat = 1
+//    private var cellSpaceRatio: CGFloat = 1
     
     private func getYearsArray(from dates: [Date]) -> YearsArray2 {
         
@@ -261,7 +262,7 @@ final class YearsView: UIView {
         }
         
 //        let totalSpace = CGFloat(totalLines) + cellHeaderRatio * CGFloat(totalMonthes) + cellSpaceRatio * CGFloat(totalLines + totalMonthes)
-        let totalSpace = CGFloat(totalLines) * cellHeight + headerHeight * CGFloat(totalMonthes) + 1 * CGFloat(totalLines + totalMonthes)
+        let totalSpace = CGFloat(totalLines) * cellHeight + headerHeight * CGFloat(totalMonthes) + cellSpaceHeight * CGFloat(totalLines + totalMonthes)
         
         
 //        var newYearsArray = yearsArray
@@ -282,7 +283,7 @@ final class YearsView: UIView {
 //            let linesRatio = CGFloat(year.value.lines)
 //            let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
             
-            let yearCellSpaceRatio = 1 * CGFloat(year.value.lines + year.value.monthNumber)
+            let yearCellSpaceRatio = cellSpaceHeight * CGFloat(year.value.lines + year.value.monthNumber)
             let yearHeaderRatio = CGFloat(year.value.monthNumber) * headerHeight
             let linesRatio = CGFloat(year.value.lines) * cellHeight
             let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
