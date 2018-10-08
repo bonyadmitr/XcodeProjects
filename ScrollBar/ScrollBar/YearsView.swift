@@ -235,8 +235,6 @@ final class YearsView: UIView {
     }
     
     private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) -> YearsArray {        
-        labelsOffsetRatio = [0]
-        
 //        var yearLines: [Int: Int] = [:]
 //        
 //        yearsArray.forEach { yearArg in
@@ -269,7 +267,9 @@ final class YearsView: UIView {
 //        var lastYearRatio: CGFloat = 0
         
         var previusOffsetRation: CGFloat = 0
+        labelsOffsetRatio = [0]
         
+        /// dropLast bcz we put 0 to labelsOffsetRatio
         for (index, year) in yearsArray.dropLast().enumerated() {
 
 //            let yearHeaderRatio = (CGFloat(year.value.monthNumber) / CGFloat(totalMonthes))// * cellHeaderRatio
