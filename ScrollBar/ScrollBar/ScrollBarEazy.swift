@@ -150,8 +150,10 @@ final class ScrollBarEazy: UIView {
         
         /// check top negative offset
         /// 0 == -contentInset.top
-        if scrollView.contentOffset.y < 0 { 
-            let maybeNewHandleHeight = heightOfHandleForContentSize + handleOffset * heightOfHandleForContentSize
+        if scrollView.contentOffset.y < 0 {
+            let negativeInset = scrollView.contentOffset.y
+            let handleHeightRatio = (heightOfHandleForContentSize + negativeInset) / heightOfHandleForContentSize
+            let maybeNewHandleHeight = heightOfHandleForContentSize * handleHeightRatio
             handleHeight = max(maybeNewHandleHeight, 7)
             
             /// to prevent handleView overlap verticalInset
@@ -159,8 +161,9 @@ final class ScrollBarEazy: UIView {
             
         /// check bottom negative offset
         } else if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height {
-            let bottomOffset = handleOffset - (frame.height - handleView.frame.height)
-            let maybeNewHandleHeight = heightOfHandleForContentSize - bottomOffset * heightOfHandleForContentSize
+            let negativeInset = scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.frame.height)
+            let handleHeightRatio = (heightOfHandleForContentSize + negativeInset) / heightOfHandleForContentSize
+            let maybeNewHandleHeight = heightOfHandleForContentSize * handleHeightRatio
             handleHeight = max(maybeNewHandleHeight, 7)
             
             /// to prevent handleView overlap verticalInset
