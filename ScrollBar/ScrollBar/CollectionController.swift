@@ -37,7 +37,7 @@ final class CollectionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
 //        yearsView.add(to: collectionView)
 //        scrollBar.add(to: collectionView)
         

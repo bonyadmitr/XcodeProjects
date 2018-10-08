@@ -127,38 +127,27 @@ final class ScrollBarEazy: UIView {
             let maybeNewHandleHeight = heightOfHandleForContentSize * handleHeightRatio
             return max(maybeNewHandleHeight, 7)
         }
-        
-        // Work out the y offset of the handle
-        // TODO: check other scrollView.contentInset for 
-//        let contentInset: UIEdgeInsets
-//        if #available(iOS 11.0, *) {
-//            contentInset = scrollView.safeAreaInsets
-//        } else {
-//            contentInset = scrollView.contentInset
-//        }        
-//        let contentOffset = scrollView.contentOffset
+         
+        let contentInset = scrollView.contentInset
+//        let contentOffsetY = scrollView.contentOffset.y
 //        let contentSize = scrollView.contentSize
-//        let scrollableHeight = scrollView.contentSize.height - scrollView.frame.height + contentInset.top + contentInset.bottom
         
-        let scrollableHeight = scrollView.contentSize.height - scrollView.frame.height
-        let scrollProgress = scrollView.contentOffset.y / scrollableHeight
+        let scrollableHeight = scrollView.contentSize.height - scrollView.frame.height + contentInset.top + contentInset.bottom
+        let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
         var handleOffset = scrollProgress * (frame.height - handleView.frame.height)
         
         let handleHeight: CGFloat
-        
         /// check top negative offset
-        /// 0 == -contentInset.top
-        if scrollView.contentOffset.y < 0 {
-            let negativeInset = scrollView.contentOffset.y
+        if scrollView.contentOffset.y < -contentInset.top {
+            let negativeInset = scrollView.contentOffset.y + contentInset.top
             handleHeight = getHandleHeight(for: negativeInset)
             
             /// to prevent handleView overlap verticalInset
             handleOffset = max(handleOffset, 0)
             
         /// check bottom negative offset
-        /// 0 == contentInset.bottom
-        } else if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height + 0 {
-            let negativeInset = scrollView.contentSize.height + 0 - (scrollView.contentOffset.y + scrollView.frame.height)
+        } else if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height + contentInset.bottom {
+            let negativeInset = scrollView.contentSize.height + contentInset.bottom - (scrollView.contentOffset.y + scrollView.frame.height)
             handleHeight = getHandleHeight(for: negativeInset)
             
             /// to prevent handleView overlap verticalInset
