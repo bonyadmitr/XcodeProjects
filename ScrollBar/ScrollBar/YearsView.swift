@@ -10,7 +10,19 @@ import UIKit
 
 final class YearsView: UIView {
     
+    struct YearMonthDays {
+        let year: Int
+        let months: MonthDays
+    }
+    
+    struct MonthDays {
+        let month: Int
+        let daysNumber: Int
+    }
+    
     typealias YearsArray = [(key: Int, value: (months: Set<Int>, lines: Int))]
+    
+    typealias YearsArray2 = [(key: Int, value: (monthNumber: Int, lines: Int))]
     
     private weak var scrollView: UIScrollView?
     
@@ -89,12 +101,14 @@ final class YearsView: UIView {
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             if offsetRatio == 0 {
                 let offet = handleViewCenterY - label.frame.height * 0.5
-//                firstOffest = offet
                 label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
             } else {
                 let offet = offsetRatio * (frame.height - handleViewCenterY2) + label.frame.height * 0.5
                 label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
             }
+            
+//            let offet = offsetRatio * (frame.height - handleViewCenterY2) + label.frame.height * 0.5
+//            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
             
         }
     }
@@ -130,9 +144,10 @@ final class YearsView: UIView {
     private var cellHeaderRatio: CGFloat = 1
     private var cellSpaceRatio: CGFloat = 1
     
-    private func getYearsArray(from dates: [Date]) -> YearsArray {
+    private func getYearsArray(from dates: [Date]) -> YearsArray2 {
         
-        var years: [Int: (months: Set<Int>, lines: Int)] = [:]
+//        var years: [Int: (months: Set<Int>, lines: Int)] = [:]
+        var years: [Int: [Int: Int]] = [:]
         
         for item in dates {
             
@@ -143,22 +158,77 @@ final class YearsView: UIView {
                 return []
             }
             
+//            if years[year] == nil {
+//                years[year] = (Set([month]), 1)
+//            } else {
+//                years[year]!.lines += 1
+//                years[year]!.months.insert(month)
+//            }
+            
             if years[year] == nil {
-                years[year] = (Set([month]), 1)
+                years[year] = [month: 1]
             } else {
-                years[year]!.lines += 1
-                years[year]!.months.insert(month)
+                if years[year]![month] == nil {
+                   years[year]![month] = 1 
+                } else {
+                    years[year]![month]! += 1
+                }
             }
         }
         
-        let yearsArray = years.sorted { year1, year2 in
+        
+//        let yearsArray = years.sorted { year1, year2 in
+//            year1.key < year2.key
+//        }
+        
+        var yearLines: [Int: (monthNumber: Int, lines: Int)] = [:]
+        
+        years.forEach { yearArg in
+            let (year, month) = yearArg
+            let monthLines = month.reduce(0, { sum, arg in
+                let addtionalLine = (arg.value % 4 == 0) ? 0 : 1 
+                return sum + arg.value / 4 + addtionalLine
+            })
+            
+            
+            
+            yearLines[year, default: (0, 0)].lines += monthLines
+            yearLines[year, default: (0, 0)].monthNumber += month.keys.count
+        }
+        
+        let yearsArray = yearLines.sorted { year1, year2 in
             year1.key < year2.key
         }
+        
         return yearsArray
     }
     
-    private func updateLabelsOffsetRatio(from yearsArray: YearsArray, dates: [Date]) -> YearsArray {
+    private func updateLabelsOffsetRatio(from yearsArray: YearsArray2, dates: [Date]) -> YearsArray2 {
         labelsOffsetRatio = [0]
+        
+//        var yearLines: [Int: Int] = [:]
+//        
+//        yearsArray.forEach { yearArg in
+//            let (year, month) = yearArg
+//            let monthLines = month.reduce(0, { sum, arg in
+//                let addtionalLine = (arg.value % 4 == 0) ? 0 : 1 
+//                return sum + arg.value / 4 + addtionalLine
+//            })
+//            
+//            yearLines[year, default: 0] += monthLines
+//        }
+        
+        let totalLines = yearsArray.reduce(0) { sum, arg in
+            sum + arg.value.lines
+        }
+        
+        let totalMonthes = yearsArray.reduce(0) { sum, arg in
+            sum + arg.value.monthNumber
+        }
+
+        
+        let totalSpace = CGFloat(totalLines) + cellHeaderRatio * CGFloat(totalMonthes) + cellSpaceRatio * CGFloat(totalLines + totalMonthes)
+        
         
         var newYearsArray = yearsArray
         var numberOfDeltedItems = 0
@@ -170,57 +240,71 @@ final class YearsView: UIView {
         var previusOffsetRation: CGFloat = 0
         
         for (index, year) in yearsArray.dropLast().enumerated() {
-            
-            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.months.count)
-            let yearHeaderRatio = CGFloat(year.value.months.count) * cellHeaderRatio
-            let yearRatio = yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)
-            
-            let yearContentRatio = yearRatio / CGFloat(dates.count) + previusOffsetRation
-            
-            
-            print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
-            
-            
-            
-            
-            if connectNextYear {
-                connectNextYear = false
-                
-                if !labelsOffsetRatio.isEmpty {
-                    labelsOffsetRatio[labelsOffsetRatio.count - 1] += yearContentRatio - previusOffsetRation
-                    let indexToDelete = index - numberOfDeltedItems
-                    newYearsArray.remove(at: indexToDelete)
-                    numberOfDeltedItems += 1
-                    
-                    previusOffsetRation = labelsOffsetRatio[labelsOffsetRatio.count - 1]
-                    
-                    if lastYearRatio + yearRatio < 20 {
-                        connectNextYear = true
-                    }
-                } else {
-                    
-                    
-                    previusOffsetRation = yearContentRatio
-                    labelsOffsetRatio.append(yearContentRatio)
-                }
-                
-            } else {
-                previusOffsetRation = yearContentRatio
-                if yearRatio < 20 {
-                    connectNextYear = true
-                } else {
-                    //                labelsOffsetRatio.append(yearContentRatio)
-                }
-                labelsOffsetRatio.append(yearContentRatio)
-            }
-            
-            lastYearRatio = yearRatio
 
+//            let yearHeaderRatio = (CGFloat(year.value.monthNumber) / CGFloat(totalMonthes))// * cellHeaderRatio
+            
+            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.monthNumber)
+            let yearHeaderRatio = CGFloat(year.value.monthNumber) * cellHeaderRatio
+            let linesRatio = CGFloat(year.value.lines)
+            let yearRatio = (linesRatio + yearHeaderRatio + yearCellSpaceRatio) / totalSpace
+            
+            
+//            let yearRatio = CGFloat(year.value.lines) / CGFloat(totalLines)
+            
+            let yearContentRatio = yearRatio + previusOffsetRation
+            
+//            let yearCellSpaceRatio = cellSpaceRatio * CGFloat(year.value.lines + year.value.monthNumber)
+//            let yearHeaderRatio = CGFloat(year.value.monthNumber) * cellHeaderRatio
+//            let yearRatio = yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)
+//            let yearContentRatio = yearRatio / CGFloat(totalLines) + previusOffsetRation
+            
+            
+//            print("---", (yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)))
+            
+            
+            
+            
+//            if connectNextYear {
+//                connectNextYear = false
+//                
+//                if !labelsOffsetRatio.isEmpty {
+//                    labelsOffsetRatio[labelsOffsetRatio.count - 1] += yearContentRatio - previusOffsetRation
+//                    let indexToDelete = index - numberOfDeltedItems
+//                    newYearsArray.remove(at: indexToDelete)
+//                    numberOfDeltedItems += 1
+//                    
+//                    previusOffsetRation = labelsOffsetRatio[labelsOffsetRatio.count - 1]
+//                    
+//                    if lastYearRatio + yearRatio < 20 {
+//                        connectNextYear = true
+//                    }
+//                } else {
+//                    
+//                    
+//                    previusOffsetRation = yearContentRatio
+//                    labelsOffsetRatio.append(yearContentRatio)
+//                }
+//                
+//            } else {
+//                previusOffsetRation = yearContentRatio
+//                if yearRatio < 20 {
+//                    connectNextYear = true
+//                } else {
+//                    //                labelsOffsetRatio.append(yearContentRatio)
+//                }
+//                labelsOffsetRatio.append(yearContentRatio)
+//            }
+//            
+//            lastYearRatio = yearRatio
+
+            previusOffsetRation = yearContentRatio
+            labelsOffsetRatio.append(yearContentRatio)
+            
         }
         return newYearsArray
     }
     
-    private func udpateLabels(from yearsArray: YearsArray) {
+    private func udpateLabels(from yearsArray: YearsArray2) {
         labels.forEach { $0.removeFromSuperview() }
         labels.removeAll()
         
