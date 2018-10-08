@@ -129,8 +129,6 @@ final class ScrollBarEazy: UIView {
         }
          
         let contentInset = scrollView.contentInset
-//        let contentOffsetY = scrollView.contentOffset.y
-//        let contentSize = scrollView.contentSize
         
         let scrollableHeight = scrollView.contentSize.height - scrollView.frame.height + contentInset.top + contentInset.bottom
         let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
