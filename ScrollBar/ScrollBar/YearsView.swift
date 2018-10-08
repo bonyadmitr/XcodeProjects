@@ -294,13 +294,6 @@ final class YearsView: UIView {
 //            let yearRatio = yearHeaderRatio + yearCellSpaceRatio + CGFloat(year.value.lines)
 //            let yearContentRatio = yearRatio / CGFloat(totalLines) + previusOffsetRation
             
-            
-            print(yearRatio * frame.height)
-            print("---", yearRatio)
-            
-            
-            
-            
 //            if connectNextYear {
 //                connectNextYear = false
 //                
