@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE39D3E9216BDE97004AB6D7 /* YearsSectionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3E8216BDE97004AB6D7 /* YearsSectionIndex.swift */; };
+		CE39D3EB216BE8A5004AB6D7 /* ScrollBarEazy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39D3EA216BE8A5004AB6D7 /* ScrollBarEazy.swift */; };
 		CE3DB1AE2165F4A000E520B9 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DB1AD2165F4A000E520B9 /* CollectionController.swift */; };
 		CE3DB1B021663CCD00E520B9 /* YearMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DB1AF21663CCD00E520B9 /* YearMonth.swift */; };
 		CE3DB1B221663CDB00E520B9 /* YearsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3DB1B121663CDB00E520B9 /* YearsView.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		CE39D3E8216BDE97004AB6D7 /* YearsSectionIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsSectionIndex.swift; sourceTree = "<group>"; };
+		CE39D3EA216BE8A5004AB6D7 /* ScrollBarEazy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollBarEazy.swift; sourceTree = "<group>"; };
 		CE3DB1AD2165F4A000E520B9 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 		CE3DB1AF21663CCD00E520B9 /* YearMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonth.swift; sourceTree = "<group>"; };
 		CE3DB1B121663CDB00E520B9 /* YearsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				CE39D3E8216BDE97004AB6D7 /* YearsSectionIndex.swift */,
 				CE45DA6D215A74BD00AD2AB2 /* ScrollBar.swift */,
 				CEF76204215BB487001D1C0F /* ScrollBarView.swift */,
+				CE39D3EA216BE8A5004AB6D7 /* ScrollBarEazy.swift */,
 				CEF76206215BCB3C001D1C0F /* TextInsetsLabel.swift */,
 			);
 			path = ScrollBar;
@@ -171,6 +174,7 @@
 				CEF76205215BB487001D1C0F /* ScrollBarView.swift in Sources */,
 				CEF76207215BCB3C001D1C0F /* TextInsetsLabel.swift in Sources */,
 				CE45DA6E215A74BD00AD2AB2 /* ScrollBar.swift in Sources */,
+				CE39D3EB216BE8A5004AB6D7 /* ScrollBarEazy.swift in Sources */,
 				CE3DB1B021663CCD00E520B9 /* YearMonth.swift in Sources */,
 				CE45DA5B215A299F00AD2AB2 /* AppDelegate.swift in Sources */,
 			);

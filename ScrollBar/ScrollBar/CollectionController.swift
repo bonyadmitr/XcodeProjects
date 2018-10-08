@@ -30,6 +30,7 @@ final class CollectionController: UIViewController {
     private let scrollBar = ScrollBarView()
 //    private let yearsView = YearsView()
     private let yearsView = YearsSectionIndex()
+    private let scrollBarEazy = ScrollBarEazy()
     
     private var sections: [(key: YearMonth, value: [Date])] = []
     
@@ -41,7 +42,12 @@ final class CollectionController: UIViewController {
 //        scrollBar.add(to: collectionView)
         
 
+        
+        
         view.addSubview(yearsView)
+        
+        scrollBarEazy.observe(scrollView: collectionView)
+        view.addSubview(scrollBarEazy)
         
         let initialDate = Date()
         
@@ -79,6 +85,10 @@ final class CollectionController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         yearsView.frame = CGRect(x: collectionView.frame.width - 100,
+                                 y: 0,
+                                 width: 100,
+                                 height: collectionView.frame.height)
+        scrollBarEazy.frame = CGRect(x: collectionView.frame.width - 100,
                                  y: 0,
                                  width: 100,
                                  height: collectionView.frame.height)
