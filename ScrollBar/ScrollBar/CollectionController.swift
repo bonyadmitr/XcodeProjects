@@ -28,16 +28,20 @@ final class CollectionController: UIViewController {
     }
     
     private let scrollBar = ScrollBarView()
-    private let yearsView = YearsView()
+//    private let yearsView = YearsView()
+    private let yearsView = YearsSectionIndex()
     
     private var sections: [(key: YearMonth, value: [Date])] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
-        yearsView.add(to: collectionView)
-        scrollBar.add(to: collectionView)
+//        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
+//        yearsView.add(to: collectionView)
+//        scrollBar.add(to: collectionView)
+        
+
+        view.addSubview(yearsView)
         
         let initialDate = Date()
         
@@ -65,11 +69,19 @@ final class CollectionController: UIViewController {
         }
         
         //let allDates = sections.flatMap({ $0.value })
-        yearsView.update(cellHeight: 100.5, headerHeight: 44, numberOfColumns: 4)
-        yearsView.update(sectionsWithCount: [("Missing dates", 100)])
+//        yearsView.update(cellHeight: 100.5, headerHeight: 44, numberOfColumns: 4)
+//        yearsView.update(sectionsWithCount: [("Missing dates", 100)])
         yearsView.update(by: dates)
         
         collectionView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        yearsView.frame = CGRect(x: collectionView.frame.width - 100,
+                                 y: 0,
+                                 width: 100,
+                                 height: collectionView.frame.height)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -80,7 +92,8 @@ final class CollectionController: UIViewController {
 
 extension CollectionController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count + 1
+        return sections.count
+        //return sections.count + 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == sections.count {

@@ -27,20 +27,13 @@ final class YearsSectionIndex: UIView {
         var lastLabelOffset: CGFloat = 0
         
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
-//            let offet: CGFloat
-//            if offsetRatio == 0 {
-//                offet = handleViewCenterY - label.frame.height * 0.5
-//            } else {
-//                offet = offsetRatio * 0.98 * (frame.height - handleViewCenterY) + label.frame.height * 0.5
-//            }
-            
             let offet = offsetRatio * frame.height
             
-            if lastLabelOffset > offet {
-                label.isHidden = true
-                continue
-            }
-            label.isHidden = false
+//            if lastLabelOffset > offet {
+//                label.isHidden = true
+//                continue
+//            }
+//            label.isHidden = false
             
             label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
             lastLabelOffset = offet + label.frame.height
@@ -90,10 +83,10 @@ final class YearsSectionIndex: UIView {
             
             
             if yearLines[year] == nil {
-                yearLines[year] = (0, 0)
+                yearLines[year] = (month.keys.count, monthLines)
             } else {
-                yearLines[year]!.lines += monthLines
                 yearLines[year]!.monthNumber += month.keys.count
+                yearLines[year]!.lines += monthLines
             }
         }
         
