@@ -41,7 +41,8 @@ final class ScrollBarEazy: UIView {
         
         let heightRatio = scrollView.frame.height / scrollView.contentSize.height
         let height = frame.height * heightRatio
-        heightOfHandleForContentSize = max(floor(height), scrollBarHandleMinHeight)
+        //heightOfHandleForContentSize = max(floor(height), scrollBarHandleMinHeight)
+        heightOfHandleForContentSize = floor(height)
     }
     
     
