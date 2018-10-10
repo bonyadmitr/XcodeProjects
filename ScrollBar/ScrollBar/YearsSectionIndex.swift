@@ -97,20 +97,26 @@ final class YearsSectionIndex: UIView {
 //        let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
 //        var handleOffset = scrollProgress * (frame.height - scrollBarHandleMinHeight)
         
-        let heightRatio = frame.height / scrollableHeight//scrollView.contentSize.height
+        let heightRatio = frame.height / scrollView.contentSize.height
+        //let defaultBarHeight = max(floor(frame.height * heightRatio), scrollBarHandleMinHeight)
         let defaultBarHeight = frame.height * heightRatio
+        print(defaultBarHeight)
         
 //        let q = (height - scrollBarHandleMinHeight) / scrollableHeight
-        let q = scrollBarHandleMinHeight / defaultBarHeight
-        print(q)
-        
-        let w = (defaultBarHeight - scrollBarHandleMinHeight) * q
-        print(w)
+//        let q = scrollBarHandleMinHeight / defaultBarHeight
+//        print(q)
+//        
+//        let w = (defaultBarHeight - scrollBarHandleMinHeight) * q
+//        print(w)
         
 //        let totalOffset = labelsOffsetRatio.reduce(0, { $0 + $1})
         
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             
+            
+            if defaultBarHeight < scrollBarHandleMinHeight {
+                
+            }
             
 //            let offet = max(0, (offsetRatio - q)) * frame.height
             let offet = (offsetRatio) * (frame.height) - defaultBarHeight * (1 - offsetRatio)// - (offsetRatio) * (frame.height)
