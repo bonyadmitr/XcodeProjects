@@ -52,19 +52,19 @@ final class CollectionController: UIViewController {
         
         let initialDate = Date()
         
-        var dates = (1...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        var dates = (1...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
-//        var dates = (1...30).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-////        dates += (30...31).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-////        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (-500...(-490)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (1000...1030).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (500...510).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        var dates = (1...30).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (30...31).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (-500...(-490)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (1000...1030).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (500...510).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var datesByYearMonth: [YearMonth: [Date]] = [:]
         
