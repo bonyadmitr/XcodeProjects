@@ -18,7 +18,7 @@ final class YearsSectionIndex: UIView {
     var cellHeight: CGFloat = 100.5
     var headerHeight: CGFloat = 44
     let cellSpaceHeight: CGFloat = 1
-    let scrollInsets = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
+    let scrollInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     private weak var scrollView: UIScrollView?
     private var lastContentHeight: CGFloat = 0
@@ -97,9 +97,9 @@ final class YearsSectionIndex: UIView {
 //        let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
 //        var handleOffset = scrollProgress * (frame.height - scrollBarHandleMinHeight)
         
-        let heightRatio = frame.height / scrollableHeight//scrollView.contentSize.height
+        let heightRatio = scrollView.frame.height / scrollView.contentSize.height
         //let defaultBarHeight = max(floor(frame.height * heightRatio), scrollBarHandleMinHeight)
-        let defaultBarHeight = frame.height * heightRatio
+        let defaultBarHeight = scrollView.frame.height * heightRatio
         print(defaultBarHeight)
         
 //        let q = (height - scrollBarHandleMinHeight) / scrollableHeight
@@ -119,7 +119,7 @@ final class YearsSectionIndex: UIView {
             }
             
 //            let offet = max(0, (offsetRatio - q)) * frame.height
-            let offet = (offsetRatio) * (frame.height) - defaultBarHeight * (1 - offsetRatio) + 3// - (offsetRatio) * (frame.height)
+            let offet = (offsetRatio) * (frame.height) - defaultBarHeight * (1 - offsetRatio)
             print("offsetRatio:", offsetRatio)
             print("offet:", offet)
             

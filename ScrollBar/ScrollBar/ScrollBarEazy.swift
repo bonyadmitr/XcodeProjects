@@ -163,7 +163,7 @@ final class ScrollBarEazy: UIView {
                                  y: handleOffset,
                                  width: handleWidth,
                                  height: handleHeight)
-        print("handleOffset:", handleOffset + handleHeight)
+        print("handleOffset:", handleOffset + handleHeight + insets.top)
         handleView.frame = handleFrame
     }
 }
