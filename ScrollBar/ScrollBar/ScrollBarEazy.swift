@@ -23,7 +23,7 @@ final class ScrollBarEazy: UIView {
     private let handleWidth: CGFloat = 2.33
     
     /// 36 - apple default
-    private let scrollBarHandleMinHeight: CGFloat = 36
+    private let scrollBarHandleMinHeight: CGFloat = scrollBarHandleMinHeightGlobal
     
     /// The amount of padding above, below and right the scroll bar (left doesn't used)
     /// 3 - apple default for all sides

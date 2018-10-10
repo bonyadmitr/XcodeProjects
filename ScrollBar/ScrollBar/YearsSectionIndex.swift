@@ -8,6 +8,8 @@
 
 import UIKit
 
+let scrollBarHandleMinHeightGlobal: CGFloat = 36
+
 final class YearsSectionIndex: UIView {
     
     typealias YearsArray = [(key: Int, value: (monthNumber: Int, lines: Int))]
@@ -15,9 +17,9 @@ final class YearsSectionIndex: UIView {
     var numberOfColumns = 4
     var labelsOffsetRatio: [CGFloat] = []
     
-    var cellHeight: CGFloat = 100.5
+    var cellHeight: CGFloat = 102
     var headerHeight: CGFloat = 44
-    let cellSpaceHeight: CGFloat = 1
+    let cellSpaceHeight: CGFloat = 1//.167
     let scrollInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     private weak var scrollView: UIScrollView?
@@ -67,7 +69,7 @@ final class YearsSectionIndex: UIView {
     }
     
     private var scrollableHeight: CGFloat = 1
-    private let scrollBarHandleMinHeight: CGFloat = 36
+    private let scrollBarHandleMinHeight: CGFloat = scrollBarHandleMinHeightGlobal
     
     private func updateHeightOffset() {
         guard let scrollView = scrollView, scrollView.contentSize.height > 0 else {
@@ -115,15 +117,24 @@ final class YearsSectionIndex: UIView {
         let userLabelOffset = (userOffset / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight)
         
         
-        print("1:", scrollView.contentSize.height - scrollView.frame.height)
-        print("2:", scrollView.frame.height - scrollBarHandleMinHeight)
-        print("3:", (1 / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight))
+//        print("1:", scrollView.contentSize.height - scrollView.frame.height)
+//        print("2:", scrollView.frame.height - scrollBarHandleMinHeight)
+//        print("3:", (1 / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight))
         
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             
             
-            if defaultBarHeight < scrollBarHandleMinHeight {
+            let offset: CGFloat
+            if offsetRatio == 0 {
+                offset = 0
+            } else if defaultBarHeight < scrollBarHandleMinHeight {
+                offset = offsetRatio * frame.height + (1 - offsetRatio) * (scrollBarHandleMinHeight - defaultBarHeight) 
+            } else {
                 
+//                let q: CGFloat = offsetRatio * scrollView.contentSize.height
+//                let w = (q / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight)
+                
+                offset = (offsetRatio) * (frame.height) - (1 - offsetRatio) * (defaultBarHeight - scrollBarHandleMinHeight + (defaultBarHeight - scrollBarHandleMinHeight) / 7)// - scrollBarHandleMinHeight / defaultBarHeight * scrollBarHandleMinHeight * (1 - offsetRatio)
             }
             
             
@@ -134,10 +145,12 @@ final class YearsSectionIndex: UIView {
             
             
             
-//            let offet = max(0, (offsetRatio - q)) * frame.height
-            let offet = (offsetRatio) * (frame.height) - (defaultBarHeight) * (1 - offsetRatio)// + userLabelOffset 
+//            let offset = max(0, (offsetRatio - q)) * frame.height
+//            let offset = (offsetRatio) * (frame.height)// + (defaultBarHeight - 3) * (1 - offsetRatio)// + userLabelOffset
+            
+            
             print("offsetRatio:", offsetRatio)
-            print("offet:", offet)
+            print("offet:", offset)
             
 //            if lastLabelOffset > offet {
 //                label.isHidden = true
@@ -145,8 +158,8 @@ final class YearsSectionIndex: UIView {
 //            }
 //            label.isHidden = false
             
-            label.frame = CGRect(x: 50, y: offet, width: label.frame.width, height: label.frame.height)
-            lastLabelOffset = offet + label.frame.height
+            label.frame = CGRect(x: 40, y: offset, width: label.frame.width, height: label.frame.height)
+            lastLabelOffset = offset + label.frame.height
             
         }
     }
@@ -274,7 +287,7 @@ final class YearsSectionIndex: UIView {
         let label = TextInsetsLabel()
         label.text = text
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 8)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.backgroundColor = UIColor.black//.withAlphaComponent(0.7)
         label.textColor = .red
         label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
