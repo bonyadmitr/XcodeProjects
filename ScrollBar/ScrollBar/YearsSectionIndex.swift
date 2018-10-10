@@ -114,6 +114,11 @@ final class YearsSectionIndex: UIView {
         let userOffset = cellHeight + headerHeight + cellSpaceHeight * 2
         let userLabelOffset = (userOffset / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight)
         
+        
+        print("1:", scrollView.contentSize.height - scrollView.frame.height)
+        print("2:", scrollView.frame.height - scrollBarHandleMinHeight)
+        print("3:", (1 / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight))
+        
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             
             
