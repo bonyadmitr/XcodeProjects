@@ -20,6 +20,67 @@ final class YearsSectionIndex: UIView {
     let cellSpaceHeight: CGFloat = 1
     let scrollInsets = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
     
+    private weak var scrollView: UIScrollView?
+    private var lastContentHeight: CGFloat = 0
+    
+    func observe(scrollView: UIScrollView) {
+        restore(scrollView: self.scrollView)
+        self.scrollView = scrollView
+        config(scrollView: scrollView)
+    }
+    
+    private func config(scrollView: UIScrollView?) {
+        guard let scrollView = scrollView else {
+            return
+        }
+        
+        //        scrollView.showsVerticalScrollIndicator = false
+        scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: [.new], context: nil)
+        scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: [.new], context: nil)
+    }
+    
+    private func restore(scrollView: UIScrollView?) {
+        guard let scrollView = scrollView else {
+            return
+        }
+        //        scrollView.showsVerticalScrollIndicator = true
+        scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
+        scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
+    }
+    
+    deinit {
+        restore(scrollView: scrollView)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        guard let scrollView = scrollView else {
+            assertionFailure()
+            return
+        }
+        
+        if keyPath == #keyPath(UIScrollView.contentSize), lastContentHeight != scrollView.contentSize.height {
+            lastContentHeight = scrollView.contentSize.height
+            updateHeightOffset()
+            setNeedsLayout()
+        }
+    }
+    
+    private var scrollableHeight: CGFloat = 1
+    private let scrollBarHandleMinHeight: CGFloat = 36
+    
+    private func updateHeightOffset() {
+        guard let scrollView = scrollView, scrollView.contentSize.height > 0 else {
+            return
+        }
+        
+        let contentInset = scrollView.contentInset
+        
+        scrollableHeight = scrollView.contentSize.height - scrollView.frame.height + contentInset.top + contentInset.bottom
+//        let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
+//        var handleOffset = scrollProgress * (frame.height - 30)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         lock.lock()
@@ -27,8 +88,34 @@ final class YearsSectionIndex: UIView {
         
         var lastLabelOffset: CGFloat = 0
         
+        guard let scrollView = scrollView, scrollView.contentSize.height > 0 else {
+            return
+        }
+        
+        let contentInset = scrollView.contentInset
+        let scrollableHeight = scrollView.contentSize.height + contentInset.top + contentInset.bottom
+//        let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
+//        var handleOffset = scrollProgress * (frame.height - scrollBarHandleMinHeight)
+        
+        let heightRatio = frame.height / scrollableHeight//scrollView.contentSize.height
+        let defaultBarHeight = frame.height * heightRatio
+        
+//        let q = (height - scrollBarHandleMinHeight) / scrollableHeight
+        let q = scrollBarHandleMinHeight / defaultBarHeight
+        print(q)
+        
+        let w = (defaultBarHeight - scrollBarHandleMinHeight) * q
+        print(w)
+        
+//        let totalOffset = labelsOffsetRatio.reduce(0, { $0 + $1})
+        
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
-            let offet = offsetRatio * frame.height
+            
+            
+//            let offet = max(0, (offsetRatio - q)) * frame.height
+            let offet = (offsetRatio) * (frame.height) - defaultBarHeight * (1 - offsetRatio)// - (offsetRatio) * (frame.height)
+            print("offsetRatio:", offsetRatio)
+            print("offet:", offet)
             
 //            if lastLabelOffset > offet {
 //                label.isHidden = true
@@ -36,7 +123,7 @@ final class YearsSectionIndex: UIView {
 //            }
 //            label.isHidden = false
             
-            label.frame = CGRect(x: 0, y: offet, width: label.frame.width, height: label.frame.height)
+            label.frame = CGRect(x: 50, y: offet, width: label.frame.width, height: label.frame.height)
             lastLabelOffset = offet + label.frame.height
             
         }
@@ -166,11 +253,11 @@ final class YearsSectionIndex: UIView {
         label.text = text
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 8)
-        label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        label.backgroundColor = UIColor.black//.withAlphaComponent(0.7)
         label.textColor = .red
         label.textInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
         label.sizeToFit()
-        label.layer.cornerRadius = label.frame.height * 0.5
+//        label.layer.cornerRadius = label.frame.height * 0.5
         label.layer.masksToBounds = true
         return label
     }

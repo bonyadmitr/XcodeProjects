@@ -34,6 +34,8 @@ final class ScrollBarEazy: UIView {
     private var heightOfHandleForContentSize: CGFloat = 1
     
     private func updateHeightOfHandleForContentSize() {
+        heightOfHandleForContentSize = scrollBarHandleMinHeight
+        return
         guard let scrollView = scrollView else {
             heightOfHandleForContentSize = scrollBarHandleMinHeight
             return
@@ -89,7 +91,7 @@ final class ScrollBarEazy: UIView {
         restore(scrollView: scrollView)
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         
         guard let scrollView = scrollView else {
             assertionFailure()
@@ -101,6 +103,7 @@ final class ScrollBarEazy: UIView {
             updateHeightOfHandleForContentSize()
         }
         
+        // TODO: optimize
         setNeedsLayout()
     }
     
@@ -160,7 +163,7 @@ final class ScrollBarEazy: UIView {
                                  y: handleOffset,
                                  width: handleWidth,
                                  height: handleHeight)
-        
+        print("handleOffset:", handleOffset + handleHeight)
         handleView.frame = handleFrame
     }
 }

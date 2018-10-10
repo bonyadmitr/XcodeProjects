@@ -44,6 +44,7 @@ final class CollectionController: UIViewController {
 
         
         
+        yearsView.observe(scrollView: collectionView)
         view.addSubview(yearsView)
         
         scrollBarEazy.observe(scrollView: collectionView)
@@ -58,10 +59,12 @@ final class CollectionController: UIViewController {
         dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
-//        var dates = (1...20).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (30...31).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (1000...1150).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        var dates = (1...30).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+////        dates += (30...31).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+////        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (-500...(-490)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1000...1030).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (500...510).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var datesByYearMonth: [YearMonth: [Date]] = [:]
         
@@ -85,11 +88,11 @@ final class CollectionController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         yearsView.frame = CGRect(x: collectionView.frame.width - 100,
-                                 y: 0,
+                                 y: collectionView.frame.minY,
                                  width: 100,
                                  height: collectionView.frame.height)
         scrollBarEazy.frame = CGRect(x: collectionView.frame.width - 100,
-                                 y: 0,
+                                 y: collectionView.frame.minY,
                                  width: 100,
                                  height: collectionView.frame.height)
     }
