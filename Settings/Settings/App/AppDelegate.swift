@@ -11,6 +11,7 @@ import UIKit
 // TODO: fix restoration layout in appearnce
 // TODO: there is degrease performance after set theme or language a lot of times
 
+// TODO: large titles support
 // TODO: window round coners 
 // TODO: swiftgen strings file
 // TODO: UIKeyCommand (from SplitController project)
