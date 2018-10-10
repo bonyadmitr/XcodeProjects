@@ -60,8 +60,8 @@ final class CollectionController: UIViewController {
 //        dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var dates = (1...30).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (30...50).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (30...50).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (-500...(-490)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (1000...1030).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         dates += (500...510).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })

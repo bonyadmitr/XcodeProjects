@@ -111,6 +111,9 @@ final class YearsSectionIndex: UIView {
         
 //        let totalOffset = labelsOffsetRatio.reduce(0, { $0 + $1})
         
+        let userOffset = cellHeight + headerHeight + cellSpaceHeight * 2
+        let userLabelOffset = (userOffset / (scrollView.contentSize.height - scrollView.frame.height)) * (scrollView.frame.height - scrollBarHandleMinHeight)
+        
         for (label, offsetRatio) in zip(labels, labelsOffsetRatio) {
             
             
@@ -118,8 +121,16 @@ final class YearsSectionIndex: UIView {
                 
             }
             
+            
+            
+//            let scrollableHeight = scrollView.contentSize.height - scrollView.frame.height + contentInset.top + contentInset.bottom
+//            let scrollProgress = (scrollView.contentOffset.y + contentInset.top) / scrollableHeight
+//            var handleOffset = scrollProgress * (frame.height - handleView.frame.height)
+            
+            
+            
 //            let offet = max(0, (offsetRatio - q)) * frame.height
-            let offet = (offsetRatio) * (frame.height) - defaultBarHeight * (1 - offsetRatio)
+            let offet = (offsetRatio) * (frame.height) - (defaultBarHeight) * (1 - offsetRatio)// + userLabelOffset 
             print("offsetRatio:", offsetRatio)
             print("offet:", offet)
             
