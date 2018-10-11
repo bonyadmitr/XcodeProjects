@@ -10,6 +10,7 @@ import UIKit
 
 // TODO: fix restoration layout in appearnce
 // TODO: there is degrease performance after set theme or language a lot of times
+// TODO: split controller for iPhone+ in landscape after first any select don't reset to main vc for rotating to portrait orientation
 
 // TODO: window round coners 
 // TODO: swiftgen strings file

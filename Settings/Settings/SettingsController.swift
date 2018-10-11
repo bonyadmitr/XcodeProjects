@@ -24,12 +24,13 @@ final class SettingsController: UIViewController, BackButtonActions {
         case select
         case appearance
         case feedback
+        case privacyPolicy
     }
     
     private let sections = [Section(type: .language,
                                     raws: [.select, .appearance]),
                             Section(type: .support,
-                                    raws: [.feedback])]
+                                    raws: [.feedback, .privacyPolicy])]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
@@ -115,6 +116,9 @@ extension SettingsController: UITableViewDelegate {
         case .feedback:
             cell.accessoryType = .none
             cell.textLabel?.text = "Send feedback"
+        case .privacyPolicy:
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "Privacy Policy"
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -135,6 +139,8 @@ extension SettingsController: UITableViewDelegate {
             performSegue(withIdentifier: "detail", sender: AppearanceSelectController())
         case .feedback:
             sendFeedback()
+        case .privacyPolicy:
+            performSegue(withIdentifier: "detail", sender: PrivacyPolicyController())
         }
     }
     

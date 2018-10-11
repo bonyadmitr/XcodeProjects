@@ -32,6 +32,7 @@
 		CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */; };
 		CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */; };
 		CE77AB222163599200728C64 /* FloatingPresentingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB212163599200728C64 /* FloatingPresentingController.swift */; };
+		CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
 		CEEEB78C215D094A003C5BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB78B215D094A003C5BD8 /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
 		CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNavigationController.swift; sourceTree = "<group>"; };
 		CE77AB212163599200728C64 /* FloatingPresentingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPresentingController.swift; sourceTree = "<group>"; };
+		CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEEB786215D0949003C5BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
 				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
 				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
+				CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */,
 				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
 				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
 				662D0D3C21616B10008D244E /* DetailCell.xib */,
@@ -316,6 +319,7 @@
 			files = (
 				66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */,
 				CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */,
+				CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */,
 				66D380952163300700EFA49C /* Logger.swift in Sources */,
 				66D380962163300700EFA49C /* Watchdog.swift in Sources */,
 				6624D43A215EADA100DF1B92 /* UITextField+Properties.swift in Sources */,
