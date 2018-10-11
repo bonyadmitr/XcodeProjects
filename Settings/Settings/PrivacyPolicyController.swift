@@ -111,8 +111,7 @@ final class PrivacyPolicyController: UIViewController {
         /// don't need
 //        automaticallyAdjustsScrollViewInsets = false
         
-        guard let url = URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi") else {
-//        guard let url = URL(string: "https://termsfeed.com/privacy-policy/da1b66dee2c0e974d68d1d47e787bbf2") else {
+        guard let url = URL(string: "https://termsfeed.com/privacy-policy/da1b66dee2c0e974d68d1d47e787bbf2") else {
             assertionFailure()
             return
         }
@@ -138,6 +137,21 @@ extension PrivacyPolicyController: UIViewControllerRestoration {
 extension PrivacyPolicyController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
+        /// #1
+//        guard let currentUrl = navigationAction.request.url?.absoluteString else {
+//            decisionHandler(.cancel)
+//            return
+//        }
+//        
+//        //        if currentUrl.contains("#access_token"), navigationAction.navigationType == .formSubmitted {
+//        //            isLoginStarted = true
+//        //        } else if currentUrl.contains("access_denied"), navigationAction.navigationType == .formSubmitted {
+//        //            isLoginCanceled = true
+//        //        }
+//        
+//        decisionHandler(.allow)
+        
+        /// #2
         switch navigationAction.navigationType {
         case .linkActivated:
 //            UIApplication.shared.openSafely(navigationAction.request.url)
@@ -159,7 +173,7 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        webView.scrollView.contentInset.bottom = 0
+//        webView.scrollView.contentInset.bottom = 0
 //        showErrorAlert(message: error.description)
     }
 //    
