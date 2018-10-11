@@ -88,11 +88,14 @@ final class PrivacyPolicyController: UIViewController {
         super.viewDidLoad()
         
         
-        if #available(iOS 11.0, *) {
-//            webView.scrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            // Fallback on earlier versions
-        }
+//        if #available(iOS 11.0, *) {
+////            webView.scrollView.contentInsetAdjustmentBehavior = .never
+////            webView.scrollView.insetsLayoutMarginsFromSafeArea = false //.bottom = 0
+////            webView.scrollView.safe
+//            additionalSafeAreaInsets.bottom = -49
+//        } else {
+//            // Fallback on earlier versions
+//        }
         
         view.addSubview(webView)
         
@@ -141,13 +144,15 @@ extension PrivacyPolicyController: WKNavigationDelegate {
         }
     }
     
-    
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        webView.scrollView.contentInset = .zero
-        /// need for iOS 10. don't need for iOS 11 (contentInset == .zero)
-        /// https://stackoverflow.com/a/35345720/5893286
-        webView.scrollView.contentInset.bottom = 0
+//        if #available(iOS 11.0, *) {
+//            print("-- safeAreaInsets", webView.scrollView.safeAreaInsets)
+//        } else {
+//            /// need for iOS 10. don't need for iOS 11 (contentInset == .zero)
+//            /// https://stackoverflow.com/a/35345720/5893286
+//            webView.scrollView.contentInset.bottom = 0
+//    //        webView.scrollView.contentInset = .zero
+//        } 
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

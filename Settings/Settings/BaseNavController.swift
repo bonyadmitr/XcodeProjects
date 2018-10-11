@@ -65,6 +65,7 @@ final class BaseSplitController: UISplitViewController {
         
         tabBarItem = viewControllers.first?.tabBarItem
         delegate = self
+//        edgesForExtendedLayout = [.bottom]
         extendedLayoutIncludesOpaqueBars = true
         statusBarStyle = AppearanceConfigurator.shared.currentTheme.barStyle
         AppearanceConfigurator.shared.register(self)
@@ -101,8 +102,10 @@ final class BaseNavController: UINavigationController {
         
         tabBarItem = topViewController?.tabBarItem
         
-        /// hide tab bar on push in view has a slight delay 
-        edgesForExtendedLayout = []
+        /// hide tab bar on push in view has a slight delay
+        /// don't need for iOS 11. need for iOS 10 with hideButtomOnpush
+//        edgesForExtendedLayout = []
+        edgesForExtendedLayout = [.bottom]
         
         /// fixed tabbar appearance on push for child controllers
         /// not working for master vc in split controller for iPhone+ landscape mode
