@@ -119,6 +119,9 @@ final class PrivacyPolicyController: UIViewController {
         webView.load(URLRequest(url: url))
         //webView.loadHTMLString(eulaHTML, baseURL: nil)
         //start activity indicator
+        
+        /// for local files
+        //webView.loadFileURL(url, allowingReadAccessTo: url)
     }
     
     deinit {
