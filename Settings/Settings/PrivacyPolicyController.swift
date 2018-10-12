@@ -70,7 +70,7 @@ final class PrivacyPolicyController: UIViewController {
     }
     
     private func setup() {
-        title = "Privacy Policy".localized
+        title = "Privacy Policy".localized /// Terms and Privacy Policy
         restorationIdentifier = String(describing: type(of: self))
         restorationClass = type(of: self)
         

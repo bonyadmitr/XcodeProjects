@@ -47,7 +47,6 @@ import UIKit
 // Feedback (Send feedback / Contact Us / Написать автору)
 // Social links (buttons)
 // Rate Us
-// Privacy Policy (Terms and Privacy Policy) (wkwebview)
 // Terms of Service
 // Lisences (Legal notices, Acknowledgements) (pods)
 // Developer note (about bugs)
