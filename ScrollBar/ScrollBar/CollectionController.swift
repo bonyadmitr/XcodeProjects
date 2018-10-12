@@ -18,6 +18,7 @@ final class CollectionController: UIViewController {
             newValue.register(CollectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CollectionHeader")
             
             newValue.alwaysBounceVertical = true
+//            newValue.contentInset
             
             if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.minimumLineSpacing = 1
@@ -37,13 +38,14 @@ final class CollectionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
+//        collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
 //        yearsView.add(to: collectionView)
 //        scrollBar.add(to: collectionView)
         
 
         
         
+        yearsView.observe(scrollView: collectionView)
         view.addSubview(yearsView)
         
         scrollBarEazy.observe(scrollView: collectionView)
@@ -51,17 +53,19 @@ final class CollectionController: UIViewController {
         
         let initialDate = Date()
         
-        var dates = (1...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        dates += (1500...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        var dates = (1...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (70...190).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1000...1015).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (-500...(-450)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1999...2000).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
-//        var dates = (1...20).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (30...31).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-//        dates += (1000...1150).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        var dates = (1...30).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (30...50).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (70...71).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+        dates += (-500...(-490)).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (1000...1030).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
+//        dates += (450...510).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
         
         var datesByYearMonth: [YearMonth: [Date]] = [:]
         
@@ -85,11 +89,11 @@ final class CollectionController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         yearsView.frame = CGRect(x: collectionView.frame.width - 100,
-                                 y: 0,
+                                 y: collectionView.frame.minY,
                                  width: 100,
                                  height: collectionView.frame.height)
         scrollBarEazy.frame = CGRect(x: collectionView.frame.width - 100,
-                                 y: 0,
+                                 y: collectionView.frame.minY,
                                  width: 100,
                                  height: collectionView.frame.height)
     }
@@ -165,7 +169,7 @@ extension CollectionController: UICollectionViewDelegate {
 
 extension CollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 4 - 3
+        let width = collectionView.bounds.width / 4 - 1.5
         return CGSize(width: width, height: width)
     }
     

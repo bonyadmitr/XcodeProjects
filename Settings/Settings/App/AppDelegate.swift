@@ -10,6 +10,7 @@ import UIKit
 
 // TODO: fix restoration layout in appearnce
 // TODO: there is degrease performance after set theme or language a lot of times
+// TODO: split controller for iPhone+ in landscape after first any select don't reset to main vc for rotating to portrait orientation
 
 // TODO: large titles support
 // TODO: window round coners 
@@ -47,7 +48,6 @@ import UIKit
 // Feedback (Send feedback / Contact Us / Написать автору)
 // Social links (buttons)
 // Rate Us
-// Privacy Policy (Terms and Privacy Policy) (wkwebview)
 // Terms of Service
 // Lisences (Legal notices, Acknowledgements) (pods)
 // Developer note (about bugs)

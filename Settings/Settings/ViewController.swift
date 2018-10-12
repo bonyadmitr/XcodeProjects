@@ -43,7 +43,7 @@ final class ViewController: UIViewController {
         /// if need separate localization
         //tabBarItem = UITabBarItem(title: "language".localized, image: nil, selectedImage: nil)
         
-        edgesForExtendedLayout = []
+//        edgesForExtendedLayout = []
 //        extendedLayoutIncludesOpaqueBars = true
     }
     
