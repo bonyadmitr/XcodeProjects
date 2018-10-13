@@ -48,6 +48,15 @@ extension AppearanceStyle {
             return .dark
         }
     }
+    
+    var scrollBar: UIScrollViewIndicatorStyle {
+        switch self {
+        case .light:
+            return .default //.black
+        case .dark:
+            return .white
+        }
+    }
 }
 
 
@@ -124,6 +133,7 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.secondaryBackgroundColor
+        UIScrollView.appearance().indicatorStyle = theme.barStyle.scrollBar
         
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = theme.secondaryTextColor
         
