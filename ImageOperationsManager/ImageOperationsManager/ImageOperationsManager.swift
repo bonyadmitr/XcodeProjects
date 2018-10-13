@@ -15,7 +15,7 @@ final class ImageOperationsManager {
     lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
         //queue.name = "Download queue"
-//        queue.maxConcurrentOperationCount = 1
+        queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .userInteractive
         return queue
     }()
@@ -68,7 +68,7 @@ final class ImageOperationsManager {
             }
             blurOperation?.inputImage = thumbnailOperation.image
             self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)
-            completion(webPhoto, thumbnailOperation.image)
+//            completion(webPhoto, thumbnailOperation.image)
         }
         inProgressOperations[webPhoto.thumbnailUrl] = thumbnailOperation
         downloadQueue.addOperation(thumbnailOperation)
@@ -94,7 +94,7 @@ final class ImageOperationsManager {
         
         
         let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
-        urlOperation.addDependency(thumbnailOperation)
+//        urlOperation.addDependency(thumbnailOperation)
         urlOperation.addDependency(blurOperation)
         thumbnailOperation.queuePriority = .veryLow
         urlOperation.completionBlock = {
@@ -204,7 +204,7 @@ final class ImageBlurOperation: Operation {
         }
         
         //resultImage = blurEffect(image: image)
-        resultImage = image.grayScaleImage
+        resultImage = UIImage(color: .black)
     }
     
     private func blurEffect(image: UIImage) -> UIImage? {
@@ -238,6 +238,18 @@ final class ImageBlurOperation: Operation {
 }
 
 extension UIImage {
+    convenience init?(color: UIColor) {
+        let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+    
     func mask(with color: UIColor) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         guard let context = UIGraphicsGetCurrentContext(), let cgImage = cgImage else {
