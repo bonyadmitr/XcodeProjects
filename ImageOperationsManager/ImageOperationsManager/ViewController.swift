@@ -8,11 +8,6 @@
 
 import UIKit
 
-struct WebPhoto: Decodable {
-    let thumbnailUrl: URL
-    let url: URL
-}
-
 final class CollectionController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -80,14 +75,24 @@ extension CollectionController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
+        cell.imageView.image = nil
         let photo = photos[indexPath.row]
-        let data = try! Data(contentsOf: photo.thumbnailUrl)
-        let image = UIImage(data: data)
-        cell.imageView.image = image
+        ImageOperationsManager.shared.load(webPhoto: photo) { webPhoto, image in
+            if webPhoto == photo, let image = image {
+                DispatchQueue.main.async {
+                    cell.imageView.image = image
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        ImageOperationsManager.shared.cancel(webPhoto: photos[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        let photo = photos[indexPath.row]
+        print(photo.thumbnailUrl)
     }
 }
 
