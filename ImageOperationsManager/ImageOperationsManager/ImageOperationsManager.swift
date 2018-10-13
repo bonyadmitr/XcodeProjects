@@ -14,28 +14,15 @@ final class ImageOperationsManager {
     
     lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
-        //queue.name = "Download queue"
-//        queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .userInteractive
+        //queue.maxConcurrentOperationCount = 1
+        //queue.qualityOfService = .userInteractive
         return queue
     }()
-    
-    private let queue = DispatchQueue(label: "qweqweqwe")
-    
-//    private var inProgressOperations = [URL: Operation]()
-//    private var inProgressBlurOperations = [URL: Operation]()
     
     private var inProgressOperationsAll = [WebPhoto: [Operation]]()
     
     
     func load(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
-//        queue.async {
-            self.load2(webPhoto: webPhoto, completion: completion)
-//        }
-    }
-    
-    func load2(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
-        
         if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.url.absoluteString as NSString) {
             completion(webPhoto, image)
             return
@@ -50,61 +37,45 @@ final class ImageOperationsManager {
                 if urlOperation.isCancelled {
                     return
                 }
-//                self.inProgressOperations.removeValue(forKey: webPhoto.url)
                 completion(webPhoto, urlOperation.image)
             }
             
-//            inProgressOperations[webPhoto.url] = urlOperation
             downloadQueue.addOperation(urlOperation)
-            
+            inProgressOperationsAll[webPhoto] = [urlOperation]
             return
         }
         
         
-        
+        /// https://medium.com/@marcosantadev/4-ways-to-pass-data-between-operations-with-swift-2fa5b3a3d561
+        /// If you don’t set maxConcurrentOperationCount of OperationQueue to 1, blurOperation would start without waiting the completion block of thumbnailOperation. It means that we would inject the data too late when the operation is already started. Instead, we must inject it before running blurOperation
         let thumbnailOperation = ImageDownloaderOperation(url: webPhoto.thumbnailUrl)
-        
         thumbnailOperation.completionBlock = { [unowned thumbnailOperation] in
             if thumbnailOperation.isCancelled {
                 return
             }
-//            self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)
-//            completion(webPhoto, thumbnailOperation.image)
+            //completion(webPhoto, thumbnailOperation.image)
         }
-//        inProgressOperations[webPhoto.thumbnailUrl] = thumbnailOperation
-
+        
         let blurOperation = ImageBlurOperation()
         blurOperation.completionBlock = { [unowned blurOperation] in
             if blurOperation.isCancelled {
                 return
             }
-//            self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)
-            if blurOperation.resultImage == nil {
-                return
-            }
-            
             completion(webPhoto, blurOperation.resultImage)
         }
-//        inProgressBlurOperations[webPhoto.thumbnailUrl] = blurOperation
         
-        
-        /// https://medium.com/@marcosantadev/4-ways-to-pass-data-between-operations-with-swift-2fa5b3a3d561
-        /// If you don’t set maxConcurrentOperationCount of OperationQueue to 1, blurOperation would start without waiting the completion block of thumbnailOperation. It means that we would inject the data too late when the operation is already started. Instead, we must inject it before running blurOperation
         let adapter = BlockOperation() { [unowned blurOperation, unowned thumbnailOperation] in
             blurOperation.inputImage = thumbnailOperation.image
         }
-//        inProgressBlurOperations[webPhoto.url] = adapter
         
         let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
         urlOperation.completionBlock = { [unowned urlOperation] in
             if urlOperation.isCancelled {
                 return
             }
-//            self.inProgressOperations.removeValue(forKey: webPhoto.url)
             self.inProgressOperationsAll.removeValue(forKey: webPhoto)
             completion(webPhoto, urlOperation.image)
         }
-//        inProgressOperations[webPhoto.url] = urlOperation
         
         thumbnailOperation.queuePriority = .veryHigh
         adapter.queuePriority = .veryHigh
@@ -121,35 +92,7 @@ final class ImageOperationsManager {
     }
     
     func cancel(webPhoto: WebPhoto) {
-        
         inProgressOperationsAll.removeValue(forKey: webPhoto)?.forEach { $0.cancel() }
-        
-//        queue.async {
-            
-            //        inProgressOperations[webPhoto.thumbnailUrl]?.cancel()
-            //        inProgressOperations[webPhoto.url]?.cancel()
-        
-        //        inProgressOperations[webPhoto.thumbnailUrl]!.cancel()
-//        self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
-//        self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
-//        self.inProgressBlurOperations.removeValue(forKey: webPhoto.url)?.cancel()
-//        self.inProgressOperations.removeValue(forKey: webPhoto.url)?.cancel()
-        
-        
-        
-        //        if let op1 = self.inProgressOperations.removeValue(forKey: webPhoto.url) {
-        //            op1.cancel()
-        //            
-//            if let op2 = self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl) {
-//                op2.cancel()
-//                op1.removeDependency(op2)
-//            } 
-//            
-//            
-//        }
-//        
-//        }
-
     }
 }
 
