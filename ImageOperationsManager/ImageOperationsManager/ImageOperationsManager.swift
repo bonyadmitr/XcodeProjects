@@ -15,7 +15,7 @@ final class ImageOperationsManager {
     lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
         //queue.name = "Download queue"
-        queue.maxConcurrentOperationCount = 1
+//        queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .userInteractive
         return queue
     }()
@@ -68,7 +68,7 @@ final class ImageOperationsManager {
             }
             blurOperation?.inputImage = thumbnailOperation.image
             self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)
-//            completion(webPhoto, thumbnailOperation.image)
+            completion(webPhoto, thumbnailOperation.image)
         }
         inProgressOperations[webPhoto.thumbnailUrl] = thumbnailOperation
         downloadQueue.addOperation(thumbnailOperation)
@@ -76,7 +76,7 @@ final class ImageOperationsManager {
         
         
         blurOperation.addDependency(thumbnailOperation)
-        thumbnailOperation.queuePriority = .normal
+        blurOperation.queuePriority = .normal
         blurOperation.completionBlock = {
             if blurOperation.isCancelled {
                 return
@@ -96,7 +96,7 @@ final class ImageOperationsManager {
         let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
 //        urlOperation.addDependency(thumbnailOperation)
         urlOperation.addDependency(blurOperation)
-        thumbnailOperation.queuePriority = .veryLow
+        urlOperation.queuePriority = .veryLow
         urlOperation.completionBlock = {
             if urlOperation.isCancelled {
                 return
@@ -203,7 +203,7 @@ final class ImageBlurOperation: Operation {
             return
         }
         
-        //resultImage = blurEffect(image: image)
+//        resultImage = blurEffect(image: image)
         resultImage = UIImage(color: .black)
     }
     
