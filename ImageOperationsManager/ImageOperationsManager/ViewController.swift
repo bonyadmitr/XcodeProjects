@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct WebPhoto: Decodable {
+    let thumbnailUrl: URL
+    let url: URL
+}
+
 final class CollectionController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
@@ -27,20 +32,26 @@ final class CollectionController: UIViewController {
         }
     }
     
-    private var items = [[Date]]()
+    private var photos = [WebPhoto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let initialDate = Date()
-        
-        items = [
-            (0...10).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) }),
-            (30...45).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) }),
-            (70...90).map({ initialDate.addingTimeInterval(TimeInterval(3600 * 24 * $0)) })
-        ]
+        readJson()
         
         collectionView.reloadData()
+    }
+    
+    private func readJson() {
+        guard
+            let file = Bundle.main.url(forResource: "photos", withExtension: "json"),
+            let data = try? Data(contentsOf: file),
+            let photos = try? JSONDecoder().decode([WebPhoto].self, from: data)
+        else {
+            assertionFailure()
+            return
+        }
+        self.photos = photos
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -50,11 +61,8 @@ final class CollectionController: UIViewController {
 }
 
 extension CollectionController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return items.count
-    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items[section].count
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,23 +80,10 @@ extension CollectionController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
-        let date = items[indexPath.section][indexPath.row]
-        cell.textLabel.text = "\(date)"
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        
-        /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
-        /// https://stackoverflow.com/a/46930410/5893286
-        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
-            view.layer.zPosition = 0
-        }
-        
-        guard let view = view as? CollectionHeader else {
-            return
-        }
-        let date = items[indexPath.section][indexPath.row]
-        view.textLabel.text = "\(date)"
+        let photo = photos[indexPath.row]
+        let data = try! Data(contentsOf: photo.thumbnailUrl)
+        let image = UIImage(data: data)
+        cell.imageView.image = image
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -100,10 +95,6 @@ extension CollectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 4 - 3
         return CGSize(width: width, height: width)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 0, height: 44)
     }
 }
 
