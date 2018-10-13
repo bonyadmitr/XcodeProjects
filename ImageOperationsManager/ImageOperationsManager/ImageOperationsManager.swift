@@ -61,7 +61,10 @@ final class ImageOperationsManager {
             if blurOperation.isCancelled {
                 return
             }
-            completion(webPhoto, blurOperation.resultImage)
+            if let image = blurOperation.resultImage {
+                ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.thumbnailUrl.absoluteString as NSString)
+                completion(webPhoto, image)
+            }
         }
         
         let adapter = BlockOperation() { [unowned blurOperation, unowned thumbnailOperation] in
@@ -73,8 +76,13 @@ final class ImageOperationsManager {
             if urlOperation.isCancelled {
                 return
             }
+            
+            /// all operations are finished, delete them
             self.inProgressOperationsAll.removeValue(forKey: webPhoto)
-            completion(webPhoto, urlOperation.image)
+            if let image = urlOperation.image {
+                ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.url.absoluteString as NSString)
+                completion(webPhoto, image)
+            }
         }
         
         thumbnailOperation.queuePriority = .veryHigh
@@ -111,6 +119,12 @@ final class ImageDownloaderOperation: Operation {
     
     static let cache = NSCache<NSString, UIImage>()
     
+    static var maxMemoryCost: Int = 0 {
+        didSet {
+            cache.totalCostLimit = maxMemoryCost
+        }
+    }
+    
     private let semaphore = DispatchSemaphore(value: 0)
     private let url: URL
     private var task: URLSessionTask?
@@ -129,9 +143,7 @@ final class ImageDownloaderOperation: Operation {
         let task = URLSession.sharedCustom.dataTask(with: url) { [weak self] data, response, error in
             if let data = data, let image = UIImage(data: data), let `self` = self {
                 self.image = image
-                ImageDownloaderOperation.cache.setObject(image, forKey: self.url.absoluteString as NSString)
             }
-            
             
             self?.semaphore.signal()
         }
