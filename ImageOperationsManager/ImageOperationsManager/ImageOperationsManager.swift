@@ -22,8 +22,10 @@ final class ImageOperationsManager {
     
     private let queue = DispatchQueue(label: "qweqweqwe")
     
-    private var inProgressOperations = [URL: Operation]()
-    private var inProgressBlurOperations = [URL: Operation]()
+//    private var inProgressOperations = [URL: Operation]()
+//    private var inProgressBlurOperations = [URL: Operation]()
+    
+    private var inProgressOperationsAll = [WebPhoto: [Operation]]()
     
     
     func load(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
@@ -34,100 +36,110 @@ final class ImageOperationsManager {
     
     func load2(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
         
-//        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.url.absoluteString as NSString) {
-//            completion(webPhoto, image)
-//            return
-//        }
-//        
-//        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.thumbnailUrl.absoluteString as NSString) {
-//            completion(webPhoto, image)
-//            
-//            
-//            let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
-//            urlOperation.completionBlock = { [unowned urlOperation] in
-//                if urlOperation.isCancelled {
-//                    return
-//                }
-//                self.inProgressOperations.removeValue(forKey: webPhoto.url)
-//                completion(webPhoto, urlOperation.image)
-//            }
-//            
-//            inProgressOperations[webPhoto.url] = urlOperation
-//            downloadQueue.addOperation(urlOperation)
-//            
-//            return
-//        }
+        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.url.absoluteString as NSString) {
+            completion(webPhoto, image)
+            return
+        }
         
-        let blurOperation = ImageBlurOperation()
+        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.thumbnailUrl.absoluteString as NSString) {
+            completion(webPhoto, image)
+            
+            
+            let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
+            urlOperation.completionBlock = { [unowned urlOperation] in
+                if urlOperation.isCancelled {
+                    return
+                }
+//                self.inProgressOperations.removeValue(forKey: webPhoto.url)
+                completion(webPhoto, urlOperation.image)
+            }
+            
+//            inProgressOperations[webPhoto.url] = urlOperation
+            downloadQueue.addOperation(urlOperation)
+            
+            return
+        }
+        
+        
         
         let thumbnailOperation = ImageDownloaderOperation(url: webPhoto.thumbnailUrl)
-        thumbnailOperation.queuePriority = .veryHigh
-        thumbnailOperation.completionBlock = { [weak blurOperation] in
+        
+        thumbnailOperation.completionBlock = { [unowned thumbnailOperation] in
             if thumbnailOperation.isCancelled {
                 return
             }
-            blurOperation?.inputImage = thumbnailOperation.image
-            self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)
-            completion(webPhoto, thumbnailOperation.image)
+//            self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)
+//            completion(webPhoto, thumbnailOperation.image)
         }
-        inProgressOperations[webPhoto.thumbnailUrl] = thumbnailOperation
-        downloadQueue.addOperation(thumbnailOperation)
-        
-        
-        
-        blurOperation.addDependency(thumbnailOperation)
-        blurOperation.queuePriority = .normal
-        blurOperation.completionBlock = {
+//        inProgressOperations[webPhoto.thumbnailUrl] = thumbnailOperation
+
+        let blurOperation = ImageBlurOperation()
+        blurOperation.completionBlock = { [unowned blurOperation] in
             if blurOperation.isCancelled {
                 return
             }
-            self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)
+//            self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)
             if blurOperation.resultImage == nil {
                 return
             }
             
             completion(webPhoto, blurOperation.resultImage)
         }
-        inProgressBlurOperations[webPhoto.thumbnailUrl] = blurOperation
-        downloadQueue.addOperation(blurOperation)
+//        inProgressBlurOperations[webPhoto.thumbnailUrl] = blurOperation
         
         
+        /// https://medium.com/@marcosantadev/4-ways-to-pass-data-between-operations-with-swift-2fa5b3a3d561
+        /// If you don’t set maxConcurrentOperationCount of OperationQueue to 1, blurOperation would start without waiting the completion block of thumbnailOperation. It means that we would inject the data too late when the operation is already started. Instead, we must inject it before running blurOperation
+        let adapter = BlockOperation() { [unowned blurOperation, unowned thumbnailOperation] in
+            blurOperation.inputImage = thumbnailOperation.image
+        }
+//        inProgressBlurOperations[webPhoto.url] = adapter
         
         let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
-//        urlOperation.addDependency(thumbnailOperation)
-        urlOperation.addDependency(blurOperation)
-        urlOperation.queuePriority = .veryLow
-        urlOperation.completionBlock = {
+        urlOperation.completionBlock = { [unowned urlOperation] in
             if urlOperation.isCancelled {
                 return
             }
-            self.inProgressOperations.removeValue(forKey: webPhoto.url)
+//            self.inProgressOperations.removeValue(forKey: webPhoto.url)
+            self.inProgressOperationsAll.removeValue(forKey: webPhoto)
             completion(webPhoto, urlOperation.image)
         }
+//        inProgressOperations[webPhoto.url] = urlOperation
         
-        inProgressOperations[webPhoto.url] = urlOperation
-//        downloadQueue.addOperation(urlOperation)
+        thumbnailOperation.queuePriority = .veryHigh
+        adapter.queuePriority = .veryHigh
+        blurOperation.queuePriority = .veryHigh
+        urlOperation.queuePriority = .veryLow
         
-        downloadQueue.addOperations([urlOperation], waitUntilFinished: false)
+        adapter.addDependency(thumbnailOperation)
+        blurOperation.addDependency(adapter)
+        urlOperation.addDependency(blurOperation)
+        
+        let allOperations = [thumbnailOperation, adapter, blurOperation, urlOperation]
+        inProgressOperationsAll[webPhoto] = allOperations
+        downloadQueue.addOperations(allOperations, waitUntilFinished: false)
     }
     
     func cancel(webPhoto: WebPhoto) {
+        
+        inProgressOperationsAll.removeValue(forKey: webPhoto)?.forEach { $0.cancel() }
+        
 //        queue.async {
             
             //        inProgressOperations[webPhoto.thumbnailUrl]?.cancel()
             //        inProgressOperations[webPhoto.url]?.cancel()
-            
-            //        inProgressOperations[webPhoto.thumbnailUrl]!.cancel()
-            self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
-            //        inProgressOperations[webPhoto.url]!.cancel()
-            self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
-            self.inProgressOperations.removeValue(forKey: webPhoto.url)?.cancel()
-            
-            
         
-//        if let op1 = self.inProgressOperations.removeValue(forKey: webPhoto.url) {
-//            op1.cancel()
-//            
+        //        inProgressOperations[webPhoto.thumbnailUrl]!.cancel()
+//        self.inProgressOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
+//        self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl)?.cancel()
+//        self.inProgressBlurOperations.removeValue(forKey: webPhoto.url)?.cancel()
+//        self.inProgressOperations.removeValue(forKey: webPhoto.url)?.cancel()
+        
+        
+        
+        //        if let op1 = self.inProgressOperations.removeValue(forKey: webPhoto.url) {
+        //            op1.cancel()
+        //            
 //            if let op2 = self.inProgressBlurOperations.removeValue(forKey: webPhoto.thumbnailUrl) {
 //                op2.cancel()
 //                op1.removeDependency(op2)
@@ -204,7 +216,7 @@ final class ImageBlurOperation: Operation {
         }
         
 //        resultImage = blurEffect(image: image)
-        resultImage = UIImage(color: .black)
+        resultImage = image.grayScaleImage
     }
     
     private func blurEffect(image: UIImage) -> UIImage? {
@@ -298,5 +310,10 @@ struct WebPhoto: Decodable {
 extension WebPhoto: Equatable {
     static func == (lhs: WebPhoto, rhs: WebPhoto) -> Bool {
         return lhs.thumbnailUrl == rhs.thumbnailUrl && lhs.url == rhs.url
+    }
+}
+extension WebPhoto: Hashable {
+    var hashValue: Int {
+        return thumbnailUrl.hashValue// + url.hashValue
     }
 }
