@@ -22,30 +22,7 @@ final class ImageOperationsManager {
     private var inProgressOperationsAll = [WebPhoto: [Operation]]()
     
     
-    func load(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
-        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.url.absoluteString as NSString) {
-            completion(webPhoto, image)
-            return
-        }
-        
-        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.thumbnailUrl.absoluteString as NSString) {
-            completion(webPhoto, image)
-            
-            
-            let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
-            urlOperation.completionBlock = { [unowned urlOperation] in
-                if urlOperation.isCancelled {
-                    return
-                }
-                completion(webPhoto, urlOperation.image)
-            }
-            
-            downloadQueue.addOperation(urlOperation)
-            inProgressOperationsAll[webPhoto] = [urlOperation]
-            return
-        }
-        
-        
+    func load2(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
         /// https://medium.com/@marcosantadev/4-ways-to-pass-data-between-operations-with-swift-2fa5b3a3d561
         /// If you don’t set maxConcurrentOperationCount of OperationQueue to 1, blurOperation would start without waiting the completion block of thumbnailOperation. It means that we would inject the data too late when the operation is already started. Instead, we must inject it before running blurOperation
         let thumbnailOperation = ImageDownloaderOperation(url: webPhoto.thumbnailUrl)
@@ -62,7 +39,8 @@ final class ImageOperationsManager {
                 return
             }
             if let image = blurOperation.resultImage {
-                ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.thumbnailUrl.absoluteString as NSString)
+                ImageCacheManager.store(object: image, forKey: webPhoto.thumbnailUrl.absoluteString, toMemoty: false, toDisk: true)
+                //ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.thumbnailUrl.absoluteString as NSString)
                 completion(webPhoto, image)
             }
         }
@@ -80,7 +58,8 @@ final class ImageOperationsManager {
             /// all operations are finished, delete them
             self.inProgressOperationsAll.removeValue(forKey: webPhoto)
             if let image = urlOperation.image {
-                ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.url.absoluteString as NSString)
+                ImageCacheManager.store(object: image, forKey: webPhoto.url.absoluteString, toMemoty: false, toDisk: true)
+                //ImageDownloaderOperation.cache.setObject(image, forKey: webPhoto.url.absoluteString as NSString)
                 completion(webPhoto, image)
             }
         }
@@ -97,6 +76,62 @@ final class ImageOperationsManager {
         let allOperations = [thumbnailOperation, adapter, blurOperation, urlOperation]
         inProgressOperationsAll[webPhoto] = allOperations
         downloadQueue.addOperations(allOperations, waitUntilFinished: false)
+    } 
+    
+    func load(webPhoto: WebPhoto, completion: @escaping (WebPhoto, UIImage?) -> Void) {
+        ImageCacheManager.getObject(forKey: webPhoto.url.absoluteString) { image in
+            if let image = image {
+                completion(webPhoto, image)
+                return
+            }
+            
+            ImageCacheManager.getObject(forKey: webPhoto.thumbnailUrl.absoluteString) { image in
+                if let image = image {
+                    completion(webPhoto, image)
+                    
+                    let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
+                    urlOperation.completionBlock = { [unowned urlOperation] in
+                        if urlOperation.isCancelled {
+                            return
+                        }
+                        completion(webPhoto, urlOperation.image)
+                    }
+                    
+                    self.downloadQueue.addOperation(urlOperation)
+                    self.inProgressOperationsAll[webPhoto] = [urlOperation]
+                    
+                    return
+                }
+                
+                
+                self.load2(webPhoto: webPhoto, completion: completion)
+            }
+        }
+        
+//        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.url.absoluteString as NSString) {
+//            completion(webPhoto, image)
+//            return
+//        }
+//        
+//        if let image = ImageDownloaderOperation.cache.object(forKey: webPhoto.thumbnailUrl.absoluteString as NSString) {
+//            completion(webPhoto, image)
+//            
+//            
+//            let urlOperation = ImageDownloaderOperation(url: webPhoto.url)
+//            urlOperation.completionBlock = { [unowned urlOperation] in
+//                if urlOperation.isCancelled {
+//                    return
+//                }
+//                completion(webPhoto, urlOperation.image)
+//            }
+//            
+//            downloadQueue.addOperation(urlOperation)
+//            inProgressOperationsAll[webPhoto] = [urlOperation]
+//            return
+//        }
+        
+        
+
     }
     
     func cancel(webPhoto: WebPhoto) {

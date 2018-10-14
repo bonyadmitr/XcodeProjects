@@ -9,11 +9,21 @@
 import Foundation
 
 protocol DataPresentable: class {
-    var data: Data { get }
-    init(data: Data)
+    var data: Data? { get }
+    init?(data: Data)
+}
+
+extension UIImage: DataPresentable {
+    var data: Data? {
+        return UIImageJPEGRepresentation(self, 0.9)
+    }
 }
 
 typealias VoidHnadler = () -> Void
+
+import UIKit
+/// static not supported
+let ImageCacheManager = CacheManager<UIImage>()
 
 final class CacheManager<T: DataPresentable> {
     
@@ -30,7 +40,6 @@ final class CacheManager<T: DataPresentable> {
         }
     }
     
-    
     init() {
         if let cacheDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
             diskCachePath = (cacheDirectory as NSString).appendingPathComponent(diskCacheFolderName)
@@ -40,7 +49,7 @@ final class CacheManager<T: DataPresentable> {
         }
     }
     
-    func getObject(forKey key: String, completionHandler: ((T?) -> Void)? = nil) {
+    func getObject(forKey key: String, completionHandler: ((T?) -> Void)?) {
         fileManagerQueue.async {
             if let object = self.memotyCache.object(forKey: key as NSString) {
                 completionHandler?(object)
@@ -62,12 +71,12 @@ final class CacheManager<T: DataPresentable> {
                 self.memotyCache.setObject(object, forKey: key as NSString)
             }
             
-            if toDisk {
+            if toDisk, let data = object.data {
                 /// we need check on every write bcz system can clear it
                 self.createCacheFolderIfNeed()
                 
                 let filePath = self.pathInDiskCacheFolder(for: key)
-                self.fileManager.createFile(atPath: filePath, contents: object.data, attributes: nil)
+                self.fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
                 completionHandler?()
             }
         }
@@ -104,7 +113,7 @@ final class CacheManager<T: DataPresentable> {
     }
     
     private func pathInDiskCacheFolder(for key: String) -> String {
-        let fileName = key /// md5
+        let fileName = Data(key.utf8).base64EncodedString() //key /// md5
         return (diskCachePath as NSString).appendingPathComponent(fileName)
     }
     
