@@ -25,6 +25,7 @@ import UIKit
 /// static not supported
 let ImageCacheManager = CacheManager<UIImage>()
 
+/// https://github.com/onevcat/Kingfisher/blob/master/Sources/ImageCache.swift
 final class CacheManager<T: DataPresentable> {
     
     private let fileManager = FileManager.default
