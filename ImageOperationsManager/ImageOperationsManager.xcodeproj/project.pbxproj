@@ -14,6 +14,7 @@
 		CE37AE742171EE0F00957228 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE37AE722171EE0F00957228 /* LaunchScreen.storyboard */; };
 		CE37AE7C2171EF1D00957228 /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = CE37AE7B2171EF1D00957228 /* photos.json */; };
 		CE37AE7E2172006D00957228 /* ImageOperationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37AE7D2172006D00957228 /* ImageOperationsManager.swift */; };
+		CE37AE80217300D900957228 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37AE7F217300D900957228 /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE37AE752171EE0F00957228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE37AE7B2171EF1D00957228 /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
 		CE37AE7D2172006D00957228 /* ImageOperationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperationsManager.swift; sourceTree = "<group>"; };
+		CE37AE7F217300D900957228 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				CE37AE692171EE0D00957228 /* AppDelegate.swift */,
 				CE37AE6B2171EE0D00957228 /* ViewController.swift */,
 				CE37AE7D2172006D00957228 /* ImageOperationsManager.swift */,
+				CE37AE7F217300D900957228 /* CacheManager.swift */,
 				CE37AE6D2171EE0D00957228 /* Main.storyboard */,
 				CE37AE702171EE0F00957228 /* Assets.xcassets */,
 				CE37AE722171EE0F00957228 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE37AE80217300D900957228 /* CacheManager.swift in Sources */,
 				CE37AE7E2172006D00957228 /* ImageOperationsManager.swift in Sources */,
 				CE37AE6C2171EE0D00957228 /* ViewController.swift in Sources */,
 				CE37AE6A2171EE0D00957228 /* AppDelegate.swift in Sources */,
