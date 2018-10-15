@@ -177,9 +177,14 @@ final class RateAppManager {
         
         /// open app review page in AppStore
         /// "mt=8&" can be added after "?"
+        
+        /// will be trigered in simulator by safary.
+        /// from apple example code.
         //https://itunes.apple.com/app/idXXXXXXXXXX?action=write-review
         guard let url = URL(string : "https://itunes.apple.com/app/\(appId)?action=write-review") else {
-        //guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)?action=write-review") else {
+            
+            /// will not be trigered in simulator
+//        guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)?action=write-review") else {
             completion?(false)
             assertionFailure()
             return
