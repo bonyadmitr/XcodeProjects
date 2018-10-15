@@ -25,12 +25,13 @@ final class SettingsController: UIViewController, BackButtonActions {
         case appearance
         case feedback
         case privacyPolicy
+        case rateApp
     }
     
     private let sections = [Section(type: .language,
                                     raws: [.select, .appearance]),
                             Section(type: .support,
-                                    raws: [.feedback, .privacyPolicy])]
+                                    raws: [.feedback, .privacyPolicy, .rateApp])]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
@@ -119,6 +120,9 @@ extension SettingsController: UITableViewDelegate {
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = "Privacy Policy"
+        case .rateApp:
+            cell.accessoryType = .none
+            cell.textLabel?.text = "Rate Us"
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -141,6 +145,8 @@ extension SettingsController: UITableViewDelegate {
             sendFeedback()
         case .privacyPolicy:
             performSegue(withIdentifier: "detail", sender: PrivacyPolicyController())
+        case .rateApp:
+            RateAppManager.shared.rateApp()
         }
     }
     
@@ -153,5 +159,37 @@ extension SettingsController: UITableViewDelegate {
         case .support:
             return "support".localized
         }
+    }
+}
+
+
+final class RateAppManager {
+    
+    static let shared = RateAppManager()
+    
+    func rateApp(appId: String, completion: ((_ success: Bool) -> ())?) {
+        
+        //guard let url = URL(string : "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)") else {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)") else {
+        
+        /// not working
+        ///guard let url = URL(string : "itms-apps:itunes.apple.com/us/app/apple-store/\(appId)?mt=8&action=write-review") else {
+            completion?(false)
+            assertionFailure()
+            return
+        }
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: completion)
+        } else {
+            completion?(UIApplication.shared.openURL(url))
+        }
+    }
+}
+
+extension RateAppManager {
+    func rateApp() {
+        /// google example
+        rateApp(appId: "id284815942", completion: nil)
     }
 }
