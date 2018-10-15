@@ -167,13 +167,16 @@ final class RateAppManager {
     
     static let shared = RateAppManager()
     
+    /// https://stackoverflow.com/questions/27755069/how-can-i-add-a-link-for-a-rate-button-with-swift
     func rateApp(appId: String, completion: ((_ success: Bool) -> ())?) {
         
+        /// open app page in AppStore
         //guard let url = URL(string : "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)") else {
-        guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)") else {
+        //guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)") else {
         
-        /// not working
-        ///guard let url = URL(string : "itms-apps:itunes.apple.com/us/app/apple-store/\(appId)?mt=8&action=write-review") else {
+        /// open app review page in AppStore
+        /// mt=8& can be added after "?"
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)?action=write-review") else {
             completion?(false)
             assertionFailure()
             return
