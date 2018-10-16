@@ -168,9 +168,6 @@ typealias BoolHandler = (Bool) -> Void
 
 final class RateAppManager {
     
-     /// google appId for example
-    static let shared = RateAppManager(appId: "id284815942")
-    
     private let appId: String
     
     init(appId: String) {
@@ -215,6 +212,9 @@ final class RateAppManager {
 }
 
 extension RateAppManager {
+    /// google appId for example
+    static let shared = RateAppManager(appId: "id284815942")
+    
     func rateApp() {
         if #available(iOS 10.3, *) {
             SKStoreReviewController.requestReview()
