@@ -133,7 +133,6 @@ extension SettingsController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
@@ -163,13 +162,15 @@ extension SettingsController: UITableViewDelegate {
 }
 
 
+import StoreKit
+
 final class RateAppManager {
     
     static let shared = RateAppManager()
     
-    /// appId should look like idXXXXXXXXXX
+    /// appId should look like "idXXXXXXXXXX"
     /// https://stackoverflow.com/questions/27755069/how-can-i-add-a-link-for-a-rate-button-with-swift
-    func rateApp(appId: String, completion: ((_ success: Bool) -> ())?) {
+    func rateAppByRedirectToStore(appId: String, completion: ((_ success: Bool) -> ())?) {
         
         /// open app page in AppStore
         //guard let url = URL(string : "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)") else {
@@ -200,7 +201,11 @@ final class RateAppManager {
 
 extension RateAppManager {
     func rateApp() {
-        /// google example
-        rateApp(appId: "id284815942", completion: nil)
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            /// google example
+            rateAppByRedirectToStore(appId: "id284815942", completion: nil)
+        }
     }
 }
