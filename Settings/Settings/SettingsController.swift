@@ -164,28 +164,43 @@ extension SettingsController: UITableViewDelegate {
 
 import StoreKit
 
+typealias BoolHandler = (Bool) -> Void
+
 final class RateAppManager {
     
-    static let shared = RateAppManager()
+     /// google appId for example
+    static let shared = RateAppManager(appId: "id284815942")
     
+    private let appId: String
+    
+    init(appId: String) {
+        self.appId = appId
+    }
+    
+    /// open app page in AppStore
+    func openAppStorePage(completion: BoolHandler?) {
+        //let urlPath = "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)"
+        let urlPath = "itms-apps://itunes.apple.com/app/\(appId)"
+        openURL(string: urlPath, completion: completion)
+    }
+    
+    /// open app review page in AppStore
     /// appId should look like "idXXXXXXXXXX"
     /// https://stackoverflow.com/questions/27755069/how-can-i-add-a-link-for-a-rate-button-with-swift
-    func rateAppByRedirectToStore(appId: String, completion: ((_ success: Bool) -> ())?) {
-        
-        /// open app page in AppStore
-        //guard let url = URL(string : "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)") else {
-        //guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)") else {
-        
-        /// open app review page in AppStore
-        /// "mt=8&" can be added after "?"
-        
+    /// "mt=8&" can be added after "?"
+    func rateAppByRedirectToStore(completion: BoolHandler?) {
         /// will be trigered in simulator by safary.
         /// from apple example code.
-        //https://itunes.apple.com/app/idXXXXXXXXXX?action=write-review
-        guard let url = URL(string : "https://itunes.apple.com/app/\(appId)?action=write-review") else {
-            
-            /// will not be trigered in simulator
-//        guard let url = URL(string : "itms-apps://itunes.apple.com/app/\(appId)?action=write-review") else {
+        let urlPath = "https://itunes.apple.com/app/\(appId)?action=write-review"
+        
+        /// will not be trigered in simulator
+        //let urlPath = "itms-apps://itunes.apple.com/app/\(appId)?action=write-review"
+        
+        openURL(string: urlPath, completion: completion)
+    }
+    
+    private func openURL(string: String, completion: BoolHandler?) {
+        guard let url = URL(string: string) else {
             completion?(false)
             assertionFailure()
             return
@@ -205,7 +220,7 @@ extension RateAppManager {
             SKStoreReviewController.requestReview()
         } else {
             /// google example
-            rateAppByRedirectToStore(appId: "id284815942", completion: nil)
+            rateAppByRedirectToStore(completion: nil)
         }
     }
 }
