@@ -378,7 +378,7 @@ final class ScrollBarView: UIView {
         scrollOffset -= contentInset.top
         
         var contentOffset = scrollView.contentOffset
-        contentOffset.y = scrollOffset
+        contentOffset.y = scrollOffset + contentInset.top
         
         
         scrollView.setContentOffset(contentOffset, animated: false)
