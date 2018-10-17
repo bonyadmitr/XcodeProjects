@@ -145,7 +145,7 @@ extension SettingsController: UITableViewDelegate {
         case .privacyPolicy:
             performSegue(withIdentifier: "detail", sender: PrivacyPolicyController())
         case .rateApp:
-            RateAppManager.shared.rateApp()
+            RateAppManager.googleApp.rateInAppOrRedirectToStore()
         }
     }
     

@@ -18,8 +18,16 @@ final class RateAppManager {
         self.appId = appId
     }
     
+    func rateInAppOrRedirectToStore() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            rateAppByRedirectToStore()
+        }
+    }
+    
     /// open app page in AppStore
-    func openAppStorePage(completion: BoolHandler?) {
+    func openAppStorePage(completion: BoolHandler? = nil) {
         //let urlPath = "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)"
         let urlPath = "itms-apps://itunes.apple.com/app/\(appId)"
         openURL(string: urlPath, completion: completion)
@@ -29,7 +37,7 @@ final class RateAppManager {
     /// appId should look like "idXXXXXXXXXX"
     /// https://stackoverflow.com/questions/27755069/how-can-i-add-a-link-for-a-rate-button-with-swift
     /// "mt=8&" can be added after "?"
-    func rateAppByRedirectToStore(completion: BoolHandler?) {
+    func rateAppByRedirectToStore(completion: BoolHandler? = nil) {
         /// will be trigered in simulator by safary.
         /// from apple example code.
         let urlPath = "https://itunes.apple.com/app/\(appId)?action=write-review"
@@ -57,14 +65,5 @@ final class RateAppManager {
 
 extension RateAppManager {
     /// google appId for example
-    static let shared = RateAppManager(appId: "id284815942")
-    
-    func rateApp() {
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        } else {
-            /// google example
-            rateAppByRedirectToStore(completion: nil)
-        }
-    }
+    static let googleApp = RateAppManager(appId: "id284815942")
 }
