@@ -37,30 +37,29 @@ import UIKit
 // Collect anonimus statistics
 // Passcode
 // font size slider
+// prevent from sleeping / brightness slider
 //
 /// FAQ (Questions & Answers)
 /// More applications
 /// Tell a friend (social, email, qr code (QRScanner), More(share with iOS share action) )
 /// Software update (new update)
-/// About (Help / О приложении):
+/// -About (Help / О приложении):
 // Icon
 // app version (с билд номером и без него)
-// Feedback (Send feedback / Contact Us / Написать автору)
 // Social links (buttons)
-// Rate Us
 // Terms of Service
 // Lisences (Legal notices, Acknowledgements) (pods)
-// Developer note (about bugs)
 // Notify about app?? (.never) (by local notifications)
+/// --DONE
+// Developer note (about bugs)
+// Rate Us
+// Feedback (Send feedback / Contact Us / Написать автору)
+// Privacy Policy
 
 // TODO: accessibility
 // TODO: restoration scroll offset for large titles
 // https://medium.com/bbc-design-engineering/improving-your-apps-accessibility-with-ios-11-db8bb4ee7c9f
 // https://developer.apple.com/videos/play/wwdc2017/204/
-//
-// adopt cell size for large text
-// basic cell is normal in basic tableView
-// basic cell is NOT normal in GROUPED tableView
 //
 /// To activate large bar items (navbar nad tabbar items)
 /// Settings - General - Accessibility - Large Text
