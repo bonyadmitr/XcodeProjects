@@ -82,6 +82,10 @@ final class RateCounter {
         static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     }
     
+    func setUntilPromptLimits(days: Int, launches: Int, significantEvents: Int) {
+        
+    }
+    
     func q() {
         var count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.processCompletedCountKey)
         count += 1
