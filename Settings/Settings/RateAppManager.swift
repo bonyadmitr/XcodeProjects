@@ -14,8 +14,17 @@ final class RateAppManager {
     
     private let appId: String
     
+    /// appId should look like "idXXXXXXXXXX"
     init(appId: String) {
         self.appId = appId
+    }
+    
+    /// open developer page in AppStore
+    /// devId should look like "idXXXXXXXXXX"
+    /// appId doesn't need, can be refactored with openURL func
+    func openDeveloperAppStorePage(devId: String, completion: BoolHandler? = nil) {
+        let urlPath = "https://itunes.apple.com/us/developer/\(devId)"
+        openURL(string: urlPath, completion: completion)
     }
     
     func rateInAppOrRedirectToStore() {
@@ -28,13 +37,11 @@ final class RateAppManager {
     
     /// open app page in AppStore
     func openAppStorePage(completion: BoolHandler? = nil) {
-        //let urlPath = "itms-apps://itunes.apple.com/ru/app/cosmeteria/\(appId)"
-        let urlPath = "itms-apps://itunes.apple.com/app/\(appId)"
+        let urlPath = "https://itunes.apple.com/app/\(appId)"
         openURL(string: urlPath, completion: completion)
     }
     
     /// open app review page in AppStore
-    /// appId should look like "idXXXXXXXXXX"
     /// https://stackoverflow.com/questions/27755069/how-can-i-add-a-link-for-a-rate-button-with-swift
     /// "mt=8&" can be added after "?"
     func rateAppByRedirectToStore(completion: BoolHandler? = nil) {
