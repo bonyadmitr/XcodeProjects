@@ -26,12 +26,13 @@ final class SettingsController: UIViewController, BackButtonActions {
         case feedback
         case privacyPolicy
         case rateApp
+        case appStorePage
     }
     
     private let sections = [Section(type: .language,
                                     raws: [.select, .appearance]),
                             Section(type: .support,
-                                    raws: [.feedback, .privacyPolicy, .rateApp])]
+                                    raws: [.feedback, .privacyPolicy, .rateApp, .appStorePage])]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
@@ -123,6 +124,9 @@ extension SettingsController: UITableViewDelegate {
         case .rateApp:
             cell.accessoryType = .none
             cell.textLabel?.text = "Rate Us"
+        case .appStorePage:
+            cell.accessoryType = .none
+            cell.textLabel?.text = "Open in App Store"
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -146,6 +150,8 @@ extension SettingsController: UITableViewDelegate {
             performSegue(withIdentifier: "detail", sender: PrivacyPolicyController())
         case .rateApp:
             RateAppManager.googleApp.rateInAppOrRedirectToStore()
+        case .appStorePage:
+            RateAppManager.googleApp.openAppStorePage()
         }
     }
     
