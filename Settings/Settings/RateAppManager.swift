@@ -78,13 +78,40 @@ extension RateAppManager {
 final class RateCounter {
     
     private enum UserDefaultsKeys {
-        static let processCompletedCountKey = "processCompletedCountKey"
+        static let launchesCount = "RateCounter.launchesLimit"
         static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     }
     
     private let daysLimit: Int
     private let launchesLimit: Int
     private let eventsLimit: Int
+    
+    private var launchesCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
+        }
+    }
+    
+    private var eventsCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
+        }
+    }
+    
+//    private var daysCount: Int {
+//        get {
+//            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
+//        }
+//        set {
+//            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
+//        }
+//    }
     
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int) {
         daysLimit = days
@@ -93,18 +120,30 @@ final class RateCounter {
     }
     
     func appLaunched() {
-        
+        launchesCount += 1
+//        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
+//        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
     }
     
     func incrementUseCount() {
         
     }
     
-    func q() {
-        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.processCompletedCountKey) + 1
-        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.processCompletedCountKey)
+    func checkConditions() -> Bool {
         
-        print("Process completed \(count) time(s)")
+        if launchesCount < launchesLimit {
+            return false
+        }
+        
+        if eventsCount < eventsLimit {
+            return false
+        }
+        
+        
+        /// check version
+        
+        /// check days
+        
         
         // Get the current bundle version for the app
         let infoDictionaryKey = kCFBundleVersionKey as String
@@ -114,15 +153,16 @@ final class RateCounter {
         let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
         
         // Has the process been completed several times and the user has not already been prompted for this version?
-        if count >= 4 && currentVersion != lastVersionPromptedForReview {
-            let twoSecondsFromNow = DispatchTime.now() + 2.0
-            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) {
-//                if UIViewController() is ProcessCompletedViewController {
-//                    SKStoreReviewController.requestReview()
-                    UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
-//                }
-            }
-        }
+//        if count >= 4 && currentVersion != lastVersionPromptedForReview {
+//            let twoSecondsFromNow = DispatchTime.now() + 2.0
+//            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) {
+////                if UIViewController() is ProcessCompletedViewController {
+////                    SKStoreReviewController.requestReview()
+//                    UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+////                }
+//            }
+//        }
 
+        return true
     }
 }
