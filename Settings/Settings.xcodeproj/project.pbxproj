@@ -18,6 +18,7 @@
 		662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D442162A3F6008D244E /* FloatingManager.swift */; };
 		662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D452162A3F6008D244E /* FloatingView.swift */; };
 		662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D0D462162A3F6008D244E /* FloatingWindow.swift */; };
+		66AA3EC4217905D3000E549D /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AA3EC3217905D3000E549D /* AboutController.swift */; };
 		66D380922163300700EFA49C /* EmailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3808C2163300700EFA49C /* EmailSender.swift */; };
 		66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3808D2163300700EFA49C /* UIApplication+URL.swift */; };
 		66D380942163300700EFA49C /* Dispatch+Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D3808F2163300700EFA49C /* Dispatch+Current.swift */; };
@@ -66,6 +67,7 @@
 		662D0D442162A3F6008D244E /* FloatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingManager.swift; sourceTree = "<group>"; };
 		662D0D452162A3F6008D244E /* FloatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingView.swift; sourceTree = "<group>"; };
 		662D0D462162A3F6008D244E /* FloatingWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingWindow.swift; sourceTree = "<group>"; };
+		66AA3EC3217905D3000E549D /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		66D3808C2163300700EFA49C /* EmailSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSender.swift; sourceTree = "<group>"; };
 		66D3808D2163300700EFA49C /* UIApplication+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+URL.swift"; sourceTree = "<group>"; };
 		66D3808F2163300700EFA49C /* Dispatch+Current.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dispatch+Current.swift"; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				CEEEB7B6215DF4B7003C5BD8 /* Main.storyboard */,
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
 				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
+				66AA3EC3217905D3000E549D /* AboutController.swift */,
 				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
 				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
 				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
@@ -351,6 +354,7 @@
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
 				66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */,
+				66AA3EC4217905D3000E549D /* AboutController.swift in Sources */,
 				CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */,
 				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
 				CEEEB7C3215E073C003C5BD8 /* BaseNavController.swift in Sources */,
