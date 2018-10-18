@@ -77,18 +77,31 @@ extension RateAppManager {
 
 final class RateCounter {
     
-    enum UserDefaultsKeys {
+    private enum UserDefaultsKeys {
         static let processCompletedCountKey = "processCompletedCountKey"
         static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     }
     
-    func setUntilPromptLimits(days: Int, launches: Int, significantEvents: Int) {
+    private let daysLimit: Int
+    private let launchesLimit: Int
+    private let eventsLimit: Int
+    
+    init(untilPromptDays days: Int, launches: Int, significantEvents: Int) {
+        daysLimit = days
+        launchesLimit = launches
+        eventsLimit = significantEvents
+    }
+    
+    func appLaunched() {
+        
+    }
+    
+    func incrementUseCount() {
         
     }
     
     func q() {
-        var count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.processCompletedCountKey)
-        count += 1
+        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.processCompletedCountKey) + 1
         UserDefaults.standard.set(count, forKey: UserDefaultsKeys.processCompletedCountKey)
         
         print("Process completed \(count) time(s)")
