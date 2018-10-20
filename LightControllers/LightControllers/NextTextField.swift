@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 open class NextTextField: UITextField {
     
