@@ -79,6 +79,7 @@ final class RateCounter {
     
     private enum UserDefaultsKeys {
         static let launchesCount = "RateCounter.launchesLimit"
+        static let firstUseTimeInterval = "RateCounter.firstUseTimeInterval"
         static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     }
     
@@ -122,6 +123,19 @@ final class RateCounter {
         eventsLimit = significantEvents
         
         canBeTriggered = isNewVersion
+        
+        
+        
+    }
+    
+    var firstUseTimeInterval: TimeInterval {
+        if let firstUseTimeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.firstUseTimeInterval) as? Double {
+            return firstUseTimeInterval
+        } else {
+            let firstUseTimeInterval = Date().timeIntervalSince1970
+            UserDefaults.standard.set(firstUseTimeInterval, forKey: UserDefaultsKeys.firstUseTimeInterval)
+            return firstUseTimeInterval
+        }
     }
     
     func appLaunched() {
@@ -131,7 +145,8 @@ final class RateCounter {
         
     }
     
-    var isNewVersion: Bool {
+    /// triggered in init only
+    private var isNewVersion: Bool {
         // Get the current bundle version for the app
         guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
             return true
@@ -173,26 +188,7 @@ final class RateCounter {
             return false
         }
         
-        
-        /// check version
-        
         /// check days
-        
-        
-        
-        
-        
-        
-        // Has the process been completed several times and the user has not already been prompted for this version?
-//        if count >= 4 && currentVersion != lastVersionPromptedForReview {
-//            let twoSecondsFromNow = DispatchTime.now() + 2.0
-//            DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) {
-////                if UIViewController() is ProcessCompletedViewController {
-////                    SKStoreReviewController.requestReview()
-//                    UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
-////                }
-//            }
-//        }
 
         return true
     }
