@@ -79,6 +79,8 @@ final class RateCounter {
     
     private enum UserDefaultsKeys {
         static let launchesCount = "RateCounter.launchesLimit"
+        static let foregroundAppearsCount = "RateCounter.foregroundAppearsCount"
+        static let eventsCount = "RateCounter.eventsCount"
         static let firstUseTimeInterval = "RateCounter.firstUseTimeInterval"
         static let lastVersionPromptedForReviewKey = "lastVersionPromptedForReviewKey"
     }
@@ -86,6 +88,7 @@ final class RateCounter {
     private let daysLimit: Int
     private let launchesLimit: Int
     private let eventsLimit: Int
+    private let foregroundAppearsLimit: Int
     
     private var launchesCount: Int {
         get {
@@ -96,34 +99,27 @@ final class RateCounter {
         }
     }
     
-    private var eventsCount: Int {
+    private var foregroundAppearsCount: Int {
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.foregroundAppearsCount)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.foregroundAppearsCount)
         }
     }
     
-//    private var daysCount: Int {
-//        get {
-//            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
-//        }
-//        set {
-//            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
-//        }
-//    }
+    private var eventsCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.eventsCount)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.eventsCount)
+        }
+    }
     
     private var canBeTriggered = true
     
-    /// pass 0 to skip check
-    init(untilPromptDays days: Int, launches: Int, significantEvents: Int) {
-        daysLimit = days
-        launchesLimit = launches
-        eventsLimit = significantEvents
-        
-//        canBeTriggered = isNewVersion
-    }
+    private var token: NSObjectProtocol?
     
     private var firstUseTimeInterval: TimeInterval {
         if let firstUseTimeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.firstUseTimeInterval) as? Double {
@@ -137,13 +133,68 @@ final class RateCounter {
     
     private lazy var daysLimitTimeInterval: TimeInterval = firstUseTimeInterval + TimeInterval(daysLimit * 3600 * 24)
     
-    func appLaunched() {
-        launchesCount += 1
-//        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
-//        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
+    /// pass 0 to skip check
+    init(untilPromptDays days: Int, launches: Int, significantEvents: Int, foregroundAppears: Int) {
+        daysLimit = days
+        launchesLimit = launches
+        eventsLimit = significantEvents
+        foregroundAppearsLimit = foregroundAppears
+        
+        subscribeForegroundAppears()
+//        canBeTriggered = isNewVersion
     }
     
-    /// triggered in init only
+    private func subscribeForegroundAppears() {
+        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { _ in
+            self.foregroundAppearsCount += 1
+        }
+    }
+    
+    deinit {
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+    
+    func appLaunched() {
+        launchesCount += 1
+        //        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
+        //        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
+    }
+    
+    func incrementEventsCount() {
+        eventsCount += 1
+    }
+    
+    /// HaveBeenMet
+    func areConditionsFulfilled() -> Bool {
+        
+        guard canBeTriggered else {
+            return false
+        }
+        
+        /// this check can be added to appLaunched func
+        if launchesCount < launchesLimit {
+            return false
+        }
+        
+        if eventsCount < eventsLimit {
+            return false
+        }
+        
+        if Date().timeIntervalSince1970 < daysLimitTimeInterval {
+            return false
+        }
+        
+        if foregroundAppearsCount < foregroundAppearsLimit {
+            return false
+        }
+
+        return true
+    }
+}
+
+/// triggered in init only
 //    private var isNewVersion: Bool {
 //        /// Get the current bundle version for the app
 //        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
@@ -173,31 +224,3 @@ final class RateCounter {
 //        }
 //        UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
 //    }
-    
-    func incrementUseCount() {
-        
-    }
-    
-    /// HaveBeenMet
-    func areConditionsFulfilled() -> Bool {
-        
-        guard canBeTriggered else {
-            return false
-        }
-        
-        /// this check can be added to appLaunched func
-        if launchesCount < launchesLimit {
-            return false
-        }
-        
-        if eventsCount < eventsLimit {
-            return false
-        }
-        
-        if Date().timeIntervalSince1970 < daysLimitTimeInterval {
-            return false
-        }
-
-        return true
-    }
-}
