@@ -115,6 +115,7 @@ final class RateCounter {
     
     private var canBeTriggered = true
     
+    /// pass 0 to skip check
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int) {
         daysLimit = days
         launchesLimit = launches
@@ -160,12 +161,11 @@ final class RateCounter {
             return false
         }
         
-        
-        if launchesCount < launchesLimit {
+        if launchesLimit != 0, launchesCount < launchesLimit {
             return false
         }
         
-        if eventsCount < eventsLimit {
+        if eventsLimit != 0, eventsCount < eventsLimit {
             return false
         }
         
