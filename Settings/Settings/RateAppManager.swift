@@ -113,10 +113,14 @@ final class RateCounter {
 //        }
 //    }
     
+    private var canBeTriggered = true
+    
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int) {
         daysLimit = days
         launchesLimit = launches
         eventsLimit = significantEvents
+        
+        canBeTriggered = isNewVersion
     }
     
     func appLaunched() {
@@ -125,11 +129,37 @@ final class RateCounter {
 //        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
     }
     
+    var isNewVersion: Bool {
+        // Get the current bundle version for the app
+        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
+            return true
+        }
+        
+        guard let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey) else {
+            /// first launch
+            UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+            return true
+        }
+        
+        if currentVersion != lastVersionPromptedForReview {
+            UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+            return true
+        }
+        
+        return false
+    }
+    
     func incrementUseCount() {
         
     }
     
-    func checkConditions() -> Bool {
+    /// HaveBeenMet
+    func areConditionsFulfilled() -> Bool {
+        
+        guard canBeTriggered else {
+            return false
+        }
+        
         
         if launchesCount < launchesLimit {
             return false
@@ -145,12 +175,9 @@ final class RateCounter {
         /// check days
         
         
-        // Get the current bundle version for the app
-        let infoDictionaryKey = kCFBundleVersionKey as String
-        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
-            else { fatalError("Expected to find a bundle version in the info dictionary") }
         
-        let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+        
+        
         
         // Has the process been completed several times and the user has not already been prompted for this version?
 //        if count >= 4 && currentVersion != lastVersionPromptedForReview {
