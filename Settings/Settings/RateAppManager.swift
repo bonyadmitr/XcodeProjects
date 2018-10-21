@@ -122,10 +122,7 @@ final class RateCounter {
         launchesLimit = launches
         eventsLimit = significantEvents
         
-        canBeTriggered = isNewVersion
-        
-        
-        
+//        canBeTriggered = isNewVersion
     }
     
     private var firstUseTimeInterval: TimeInterval {
@@ -144,39 +141,38 @@ final class RateCounter {
         launchesCount += 1
 //        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
 //        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
-        
     }
     
     /// triggered in init only
-    private var isNewVersion: Bool {
-        /// Get the current bundle version for the app
-        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
-            return true
-        }
-        
-        guard let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey) else {
-            /// first launch
-            UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
-            return true
-        }
-        
-        if currentVersion != lastVersionPromptedForReview {
-            
-            /// reset launchesCount for new version
-            //launchesCount = 0
-            return true
-        }
-        
-        return false
-    }
-    
-    func saveCurrentAppVersionAsNew() {
-        /// Get the current bundle version for the app
-        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
-            return
-        }
-        UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
-    }
+//    private var isNewVersion: Bool {
+//        /// Get the current bundle version for the app
+//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
+//            return true
+//        }
+//
+//        guard let lastVersionPromptedForReview = UserDefaults.standard.string(forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey) else {
+//            /// first launch
+//            UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+//            return true
+//        }
+//
+//        if currentVersion != lastVersionPromptedForReview {
+//
+//            /// reset launchesCount for new version
+//            //launchesCount = 0
+//            return true
+//        }
+//
+//        return false
+//    }
+//
+//    func saveCurrentAppVersionAsNew() {
+//        /// Get the current bundle version for the app
+//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
+//            return
+//        }
+//        UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)
+//    }
     
     func incrementUseCount() {
         
