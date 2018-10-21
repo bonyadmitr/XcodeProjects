@@ -90,6 +90,8 @@ final class RateCounter {
     private let eventsLimit: Int
     private let foregroundAppearsLimit: Int
     
+    private var token: NSObjectProtocol?
+    
     private var launchesCount: Int {
         get {
             return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
@@ -117,10 +119,6 @@ final class RateCounter {
         }
     }
     
-    private var canBeTriggered = true
-    
-    private var token: NSObjectProtocol?
-    
     private var firstUseTimeInterval: TimeInterval {
         if let firstUseTimeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.firstUseTimeInterval) as? Double {
             return firstUseTimeInterval
@@ -141,13 +139,6 @@ final class RateCounter {
         foregroundAppearsLimit = foregroundAppears
         
         subscribeForegroundAppears()
-//        canBeTriggered = isNewVersion
-    }
-    
-    private func subscribeForegroundAppears() {
-        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { _ in
-            self.foregroundAppearsCount += 1
-        }
     }
     
     deinit {
@@ -156,10 +147,14 @@ final class RateCounter {
         }
     }
     
+    private func subscribeForegroundAppears() {
+        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { _ in
+            self.foregroundAppearsCount += 1
+        }
+    }
+    
     func appLaunched() {
         launchesCount += 1
-        //        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
-        //        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
     }
     
     func incrementEventsCount() {
@@ -168,10 +163,6 @@ final class RateCounter {
     
     /// HaveBeenMet
     func areConditionsFulfilled() -> Bool {
-        
-        guard canBeTriggered else {
-            return false
-        }
         
         /// this check can be added to appLaunched func
         if launchesCount < launchesLimit {
