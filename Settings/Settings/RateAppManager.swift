@@ -128,7 +128,7 @@ final class RateCounter {
         
     }
     
-    var firstUseTimeInterval: TimeInterval {
+    private var firstUseTimeInterval: TimeInterval {
         if let firstUseTimeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.firstUseTimeInterval) as? Double {
             return firstUseTimeInterval
         } else {
@@ -137,6 +137,8 @@ final class RateCounter {
             return firstUseTimeInterval
         }
     }
+    
+    private lazy var daysLimitTimeInterval: TimeInterval = firstUseTimeInterval + TimeInterval(daysLimit * 3600 * 24)
     
     func appLaunched() {
         launchesCount += 1
@@ -180,15 +182,17 @@ final class RateCounter {
         }
         
         /// this check can be added to appLaunched func
-        if launchesLimit != 0, launchesCount < launchesLimit {
+        if launchesCount < launchesLimit {
             return false
         }
         
-        if eventsLimit != 0, eventsCount < eventsLimit {
+        if eventsCount < eventsLimit {
             return false
         }
         
-        /// check days
+        if Date().timeIntervalSince1970 < daysLimitTimeInterval {
+            return false
+        }
 
         return true
     }
