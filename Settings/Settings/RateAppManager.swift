@@ -139,6 +139,9 @@ final class RateCounter {
         foregroundAppearsLimit = foregroundAppears
         
         subscribeForegroundAppears()
+        
+        /// must be triggered first time
+        _ = firstUseTimeInterval
     }
     
     deinit {
