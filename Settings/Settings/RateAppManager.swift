@@ -148,8 +148,8 @@ final class RateCounter {
     }
     
     private func subscribeForegroundAppears() {
-        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { _ in
-            self.foregroundAppearsCount += 1
+        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+            self?.foregroundAppearsCount += 1
         }
     }
     
