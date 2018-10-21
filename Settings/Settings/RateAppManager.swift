@@ -128,6 +128,10 @@ final class RateCounter {
         launchesCount += 1
 //        let count = UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount) + 1
 //        UserDefaults.standard.set(count, forKey: UserDefaultsKeys.launchesCount)
+        
+        if launchesLimit != 0, launchesCount < launchesLimit {
+            canBeTriggered = false
+        }
     }
     
     var isNewVersion: Bool {
@@ -161,9 +165,9 @@ final class RateCounter {
             return false
         }
         
-        if launchesLimit != 0, launchesCount < launchesLimit {
-            return false
-        }
+//        if launchesLimit != 0, launchesCount < launchesLimit {
+//            return false
+//        }
         
         if eventsLimit != 0, eventsCount < eventsLimit {
             return false
