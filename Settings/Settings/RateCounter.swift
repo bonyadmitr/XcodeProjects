@@ -118,6 +118,12 @@ final class RateCounter {
         
         return true
     }
+    
+    func resetLaunchesEventsAndForegroundAppears() {
+        launchesCount = 0
+        eventsCount = 0
+        foregroundAppearsCount = 0
+    }
 }
 
 /// triggered in init only
