@@ -10,7 +10,7 @@ import Foundation
 
 final class RateCounter {
     
-    private enum UserDefaultsKeys {
+    private enum Keys {
         static let launchesCount = "RateCounter.launchesLimit"
         static let foregroundAppearsCount = "RateCounter.foregroundAppearsCount"
         static let eventsCount = "RateCounter.eventsCount"
@@ -26,37 +26,37 @@ final class RateCounter {
     
     private var launchesCount: Int {
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.launchesCount)
+            return UserDefaults.standard.integer(forKey: Keys.launchesCount)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.launchesCount)
+            UserDefaults.standard.set(newValue, forKey: Keys.launchesCount)
         }
     }
     
     private var foregroundAppearsCount: Int {
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.foregroundAppearsCount)
+            return UserDefaults.standard.integer(forKey: Keys.foregroundAppearsCount)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.foregroundAppearsCount)
+            UserDefaults.standard.set(newValue, forKey: Keys.foregroundAppearsCount)
         }
     }
     
     private var eventsCount: Int {
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.eventsCount)
+            return UserDefaults.standard.integer(forKey: Keys.eventsCount)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.eventsCount)
+            UserDefaults.standard.set(newValue, forKey: Keys.eventsCount)
         }
     }
     
     private var firstUseTimeInterval: TimeInterval {
-        if let firstUseTimeInterval = UserDefaults.standard.object(forKey: UserDefaultsKeys.firstUseTimeInterval) as? Double {
+        if let firstUseTimeInterval = UserDefaults.standard.object(forKey: Keys.firstUseTimeInterval) as? Double {
             return firstUseTimeInterval
         } else {
             let firstUseTimeInterval = Date().timeIntervalSince1970
-            UserDefaults.standard.set(firstUseTimeInterval, forKey: UserDefaultsKeys.firstUseTimeInterval)
+            UserDefaults.standard.set(firstUseTimeInterval, forKey: Keys.firstUseTimeInterval)
             return firstUseTimeInterval
         }
     }
