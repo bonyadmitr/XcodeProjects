@@ -98,6 +98,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         FloatingManager.shared.presentingController = navVC
         #endif
         
+        roundWindowCorners()
+        
         LocalizationManager.shared.register(self)
         
         AppearanceConfigurator.shared.loadSavedTheme()
@@ -112,6 +114,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
         
         return true
+    }
+    
+    private func roundWindowCorners() {
+        guard let window = window else {
+            assertionFailure()
+            return
+        }
+        window.clipsToBounds = true
+        window.layer.cornerRadius = 5
+        window.backgroundColor = UIColor.black
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
