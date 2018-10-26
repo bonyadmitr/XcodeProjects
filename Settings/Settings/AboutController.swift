@@ -21,10 +21,11 @@ final class AboutController: UIViewController, BackButtonActions {
     private let raws: [RawType] = [.feedback, .privacyPolicy, .rateApp, .appStorePage, .developerPage]
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.register(AboutHeader.self, forHeaderFooterViewReuseIdentifier: "AboutHeader")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -83,15 +84,15 @@ extension AboutController: UITableViewDataSource {
         return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "Header")
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "AboutHeader")
+    }
 }
 
 extension AboutController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let raw = raws[indexPath.row]
-//
+        
         switch raw {
         case .feedback:
             cell.accessoryType = .none
@@ -117,7 +118,17 @@ extension AboutController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let view = view as? AboutHeader else {
+            assertionFailure()
+            return
+        }
         
+        view.label.text = "APP name"
+//        view.detailTextLabel?.text = UIApplication.shared.version
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -137,5 +148,47 @@ extension AboutController: UITableViewDelegate {
         case .developerPage:
             RateAppManager.googleApp.openDeveloperAppStorePage(devId: "id281956209")
         }
+    }
+}
+
+final class AboutHeader: UITableViewHeaderFooterView {
+    
+    let label: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textColor = UIColor.blue
+        label.textAlignment = .center
+        return label
+    }()
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+//        if #available(iOS 11.0, *) {
+//            safeAreaLayoutGuide.topAnchor
+//        } else {
+//        }
+        
+        /// addSubview before activate constraints
+        addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
     }
 }
