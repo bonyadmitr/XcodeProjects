@@ -124,11 +124,12 @@ extension AboutController: UITableViewDelegate {
         }
         
         view.label.text = "APP name"
-//        view.detailTextLabel?.text = UIApplication.shared.version
+        view.imageView.image = #imageLiteral(resourceName: "ic_settings")
+        view.versionLabel.text = UIApplication.shared.version
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 200
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -153,10 +154,24 @@ extension AboutController: UITableViewDelegate {
 
 final class AboutHeader: UITableViewHeaderFooterView {
     
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
     let label: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let versionLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textColor = UIColor.blue
+        label.textColor = UIColor.black
         label.textAlignment = .center
         return label
     }()
@@ -174,16 +189,40 @@ final class AboutHeader: UITableViewHeaderFooterView {
     private func setup() {
 //        if #available(iOS 11.0, *) {
 //            safeAreaLayoutGuide.topAnchor
+//            directionalLayoutMargins
 //        } else {
 //        }
         
         /// addSubview before activate constraints
         addSubview(label)
+        addSubview(versionLabel)
+        addSubview(imageView)
+        
+        let constant: CGFloat = 8
+        
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        versionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        /// defailt constraint priority is 1000
+        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        imageView.setContentHuggingPriority(UILayoutPriority(250), for: .vertical)
+        //imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        //imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
+        //layoutMargins.bottom
+        
+        label.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: constant).isActive = true
+        label.bottomAnchor.constraint(equalTo: versionLabel.topAnchor, constant: -constant).isActive = true
+        label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
+        
+        versionLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        versionLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        versionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -constant).isActive = true
+        versionLabel.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
     }
     
     override func layoutSubviews() {
