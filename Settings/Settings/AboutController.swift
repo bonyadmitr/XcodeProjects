@@ -123,7 +123,7 @@ extension AboutController: UITableViewDelegate {
             return
         }
         
-        view.label.text = "APP name"
+        view.label.text = "Settings app"
         view.imageView.image = #imageLiteral(resourceName: "ic_settings")
         view.versionLabel.text = UIApplication.shared.version
     }

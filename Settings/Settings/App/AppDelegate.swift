@@ -19,7 +19,7 @@ import UIKit
 // TODO: UISelectionFeedbackGenerator
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
-// TODO: sounds settings
+// TODO: sounds settings (turned off by defalut)
 // TODO: crashlitics?
 // TODO: fabric analytics?
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
@@ -38,19 +38,21 @@ import UIKit
 // Passcode
 // font size slider
 // prevent from sleeping / brightness slider
+// Save after app deleted (by keychain, instant export/import after chnaging)
+// iCloud sync of settings
 //
 /// FAQ (Questions & Answers)
 /// More applications
 /// Tell a friend (social, email, qr code (QRScanner), More(share with iOS share action) )
 /// Software update (new update)
 /// -About (Help / О приложении):
-// Icon
-// app version (с билд номером и без него)
 // Social links (buttons)
 // Terms of Service
 // Lisences (Legal notices, Acknowledgements) (pods)
 // Notify about app?? (.never) (by local notifications)
 /// --DONE
+// Icon
+// app version (с билд номером и без него)
 // Developer note (about bugs)
 // Rate Us
 // Feedback (Send feedback / Contact Us / Написать автору)
