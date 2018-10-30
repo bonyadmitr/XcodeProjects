@@ -70,6 +70,14 @@ final class BaseSplitController: UISplitViewController {
         statusBarStyle = AppearanceConfigurator.shared.currentTheme.barStyle
         AppearanceConfigurator.shared.register(self)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// don't call in setup func (will crash)
+        /// need for iPad in portrait mode
+        preferredDisplayMode = .allVisible
+    }
 }
 extension BaseSplitController: AppearanceConfiguratorDelegate {
     func didApplied(theme: AppearanceTheme) {
