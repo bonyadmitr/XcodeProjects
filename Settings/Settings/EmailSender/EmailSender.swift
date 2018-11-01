@@ -45,9 +45,14 @@ open class EmailSender: NSObject {
         mailto += "body=\(message)"
         
         guard let coded = mailto.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            assertionFailure()
             return
         }
-        try? UIApplication.shared.open(scheme: coded)
+        do {
+            try UIApplication.shared.open(scheme: coded)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
     }
     
     private var completion: EmailSenderCompletionStatusHandler?

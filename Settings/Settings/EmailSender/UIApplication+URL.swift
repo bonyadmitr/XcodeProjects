@@ -35,17 +35,29 @@ extension UIApplication {
     
     /// "mailto:" will open Mail app with clear send window
     func openMailApp() {
-        try? open(scheme: "message://")
+        do {
+            try open(scheme: "message://")
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
     }
     
     /// call to any number, even on "something"
     func call(phoneNumber: String) {
-        try? open(scheme: "tel://\(phoneNumber)")
+        do {
+            try open(scheme: "tel://\(phoneNumber)")
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
     }
     
     /// will open app settings if they are exists
     /// can be not exist if there is no anything to set (you didn't get any privacy)
     func openSettings() {
-        try? open(scheme: UIApplicationOpenSettingsURLString)
+        do {
+            try open(scheme: UIApplicationOpenSettingsURLString)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
     }
 }
