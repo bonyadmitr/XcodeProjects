@@ -30,6 +30,11 @@ import UIKit
 // TODO: real time localization by
 // https://github.com/willpowell8/LocalizationKit_iOS
 
+// TODO: URL Schemes for tab bar
+// TODO: 3D touch for tab bar
+// TODO: developer apps by (+ can open url)
+//UIApplication.shared.open(scheme: "com.ios://")
+
 // TODO: other options in settings:
 //
 /// Optional:
