@@ -147,7 +147,7 @@ extension AboutController: UITableViewDelegate {
         case .appStorePage:
             RateAppManager.googleApp.openAppStorePage()
         case .developerPage:
-            RateAppManager.googleApp.openDeveloperAppStorePage(devId: "id281956209")
+            DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
         }
     }
 }

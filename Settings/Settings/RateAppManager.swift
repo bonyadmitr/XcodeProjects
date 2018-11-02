@@ -10,6 +10,24 @@ import StoreKit
 
 typealias BoolHandler = (Bool) -> Void
 
+final class DeveloperAppsManager {
+    
+    static let shared = DeveloperAppsManager()
+    
+    /// open developer page in AppStore
+    /// devId should look like "idXXXXXXXXXX"
+    /// appId doesn't need, can be refactored with openURL func
+    func openDeveloperAppStorePage(devId: String, completion: BoolHandler? = nil) {
+        let urlPath = "https://itunes.apple.com/us/developer/\(devId)"
+        do {
+            try UIApplication.shared.open(scheme: urlPath)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+    
+}
+
 final class RateAppManager {
     
     private let appId: String
@@ -17,14 +35,6 @@ final class RateAppManager {
     /// appId should look like "idXXXXXXXXXX"
     init(appId: String) {
         self.appId = appId
-    }
-    
-    /// open developer page in AppStore
-    /// devId should look like "idXXXXXXXXXX"
-    /// appId doesn't need, can be refactored with openURL func
-    func openDeveloperAppStorePage(devId: String, completion: BoolHandler? = nil) {
-        let urlPath = "https://itunes.apple.com/us/developer/\(devId)"
-        openURL(string: urlPath, completion: completion)
     }
     
     func rateInAppOrRedirectToStore() {
