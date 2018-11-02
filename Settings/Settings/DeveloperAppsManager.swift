@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+struct SchemeApp {
+    let name: String
+    let scheme: String
+}
+
 final class DeveloperAppsManager {
     
     static let shared = DeveloperAppsManager()
@@ -24,4 +30,32 @@ final class DeveloperAppsManager {
         }
     }
     
+    private let allApps: [SchemeApp] = [SchemeApp(name: "Test app", scheme: "com.ios://")]
+    
+    lazy var apps: (availableApps: [SchemeApp], unavailableApps: [SchemeApp]) = {
+        var availableApps: [SchemeApp] = []
+        var unavailableApps: [SchemeApp] = []
+        
+        for app in allApps {
+            guard let url = URL(string: app.scheme) else {
+                assertionFailure("app scheme: app.scheme is invalid")
+                continue
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                availableApps.append(app)
+            } else {
+                unavailableApps.append(app)
+            }
+        }
+        return (availableApps, unavailableApps)
+    }()
+    //lazy var availableApps: [SchemeApp] = allApps.filter { app in
+    //    guard let url = URL(string: app.scheme) else {
+    //        assertionFailure()
+    //        return false
+    //    }
+    //    return UIApplication.shared.canOpenURL(url)
+    //}
+
 }
