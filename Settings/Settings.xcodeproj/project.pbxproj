@@ -35,6 +35,7 @@
 		CE77AB222163599200728C64 /* FloatingPresentingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB212163599200728C64 /* FloatingPresentingController.swift */; };
 		CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */; };
 		CE99210E2180EC18004E118A /* RateCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99210D2180EC18004E118A /* RateCounter.swift */; };
+		CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */; };
 		CEEDAAB62176202E002AC3B3 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
@@ -85,6 +86,7 @@
 		CE77AB212163599200728C64 /* FloatingPresentingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPresentingController.swift; sourceTree = "<group>"; };
 		CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CE99210D2180EC18004E118A /* RateCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCounter.swift; sourceTree = "<group>"; };
+		CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsManager.swift; sourceTree = "<group>"; };
 		CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppManager.swift; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */,
 				CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */,
 				CE99210D2180EC18004E118A /* RateCounter.swift */,
+				CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */,
 				66D3808B2163300700EFA49C /* EmailSender */,
 				66D3808E2163300700EFA49C /* Logger */,
 				662D0D412162A3F6008D244E /* Floating */,
@@ -342,6 +345,7 @@
 				CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */,
 				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
 				CEEDAAB62176202E002AC3B3 /* RateAppManager.swift in Sources */,
+				CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */,
 				CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */,
 				CEEEB7B1215D2036003C5BD8 /* MainApplication.swift in Sources */,
 				662D0D482162A3F6008D244E /* FloatingController.swift in Sources */,
