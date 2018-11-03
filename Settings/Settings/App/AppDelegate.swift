@@ -76,6 +76,8 @@ import UIKit
 
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
 // TODO: loading activity (+ network) view for PrivacyPolicyController
+// TODO: not working dark theme in DeveloperAppsController
+// TODO: about header theme appearance
 
 /// added main.swift
 //@UIApplicationMain
