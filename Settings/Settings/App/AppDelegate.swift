@@ -45,9 +45,9 @@ import UIKit
 // prevent from sleeping / brightness slider
 // Save after app deleted (by keychain, instant export/import after chnaging)
 // iCloud sync of settings
+// reset to default
 //
 /// FAQ (Questions & Answers)
-/// More applications
 /// Tell a friend (social, email, qr code (QRScanner), More(share with iOS share action) )
 /// Software update (new update)
 /// -About (Help / О приложении):
@@ -58,10 +58,11 @@ import UIKit
 /// --DONE
 // Icon
 // app version (с билд номером и без него)
-// Developer note (about bugs)
+// Developer page
 // Rate Us
 // Feedback (Send feedback / Contact Us / Написать автору)
 // Privacy Policy
+// More applications
 
 // TODO: accessibility
 // TODO: restoration scroll offset for large titles
@@ -73,7 +74,7 @@ import UIKit
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
-// TODO: custom cells for DeveloperAppsController
+// TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
 
 /// added main.swift
 //@UIApplicationMain
