@@ -13,6 +13,7 @@ typealias SchemeAppTuple = (installedApps: [SchemeApp], newApps: [SchemeApp])
 struct SchemeApp {
     let name: String
     let scheme: String
+    let appStoreId: String
 }
 
 final class DeveloperAppsManager {
@@ -21,7 +22,6 @@ final class DeveloperAppsManager {
     
     /// open developer page in AppStore
     /// devId should look like "idXXXXXXXXXX"
-    /// appId doesn't need, can be refactored with openURL func
     func openDeveloperAppStorePage(devId: String, completion: BoolHandler? = nil) {
         let urlPath = "https://itunes.apple.com/us/developer/\(devId)"
         do {
@@ -31,8 +31,18 @@ final class DeveloperAppsManager {
         }
     }
     
-    private let allApps: [SchemeApp] = [SchemeApp(name: "Test app", scheme: "com.ios://"),
-                                        SchemeApp(name: "Some app", scheme: "unavailableApp://")]
+    private let allApps: [SchemeApp] = [SchemeApp(name: "Test app",
+                                                  scheme: "com.ios://",
+                                                  appStoreId: "id544007664"),
+                                        SchemeApp(name: "Some app",
+                                                  scheme: "unavailableApp://",
+                                                  appStoreId: "id284815942"),
+                                        SchemeApp(name: "Google translate",
+                                                  scheme: "googletranslate://",
+                                                  appStoreId: "id414706506"),
+                                        SchemeApp(name: "YouTube",
+                                                  scheme: "youtube://",
+                                                  appStoreId: "id544007664")]
     
     var apps: SchemeAppTuple {
         var installedApps: [SchemeApp] = []

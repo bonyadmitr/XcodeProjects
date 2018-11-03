@@ -41,9 +41,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>com.ios</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.ios</string>
+		<string>googletranslate</string>
+		<string>youtube</string>
+		<string>unavailableApp</string>
+	</array>
 </dict>
 </plist>

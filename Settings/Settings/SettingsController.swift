@@ -34,7 +34,8 @@ final class SettingsController: UIViewController, BackButtonActions {
     private let sections = [Section(type: .language,
                                     raws: [.select, .appearance]),
                             Section(type: .support,
-                                    raws: [.feedback, .privacyPolicy, .rateApp, .appStorePage, .developerPage, .about])]
+                                    raws: [/*.privacyPolicy, .appStorePage, .developerPage,*/
+                                        .feedback, .rateApp, .about])]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {

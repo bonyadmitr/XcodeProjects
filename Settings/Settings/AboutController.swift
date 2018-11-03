@@ -43,6 +43,9 @@ final class AboutController: UIViewController, BackButtonActions {
     }
     
     private func setup() {
+        restorationIdentifier = String(describing: type(of: self))
+        restorationClass = type(of: self)
+        
         title = "About".localized
         extendedLayoutIncludesOpaqueBars = true
     }
@@ -75,6 +78,15 @@ final class AboutController: UIViewController, BackButtonActions {
     }
 }
 
+// MARK: - UIViewControllerRestoration
+extension AboutController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
+        return AboutController(coder: coder)
+    }
+}
+
+// MARK: - UITableViewDataSource
 extension AboutController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return raws.count
@@ -89,6 +101,7 @@ extension AboutController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension AboutController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let raw = raws[indexPath.row]
@@ -107,7 +120,7 @@ extension AboutController: UITableViewDelegate {
             cell.accessoryType = .none
             cell.textLabel?.text = "Open in App Store"
         case .developerPage:
-            cell.accessoryType = .none
+            cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = "More apps from me"
         }
         

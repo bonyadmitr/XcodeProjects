@@ -53,15 +53,18 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
     }
     
     private func setup() {
+        restorationIdentifier = String(describing: type(of: self))
+        restorationClass = type(of: self)
+        
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        title = "settings".localized
+        title = "Developer Apps".localized
         extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        removeBackButtonTitle()
+        //removeBackButtonTitle()
         view.addSubview(tableView)
     }
     
@@ -103,6 +106,15 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
     }
 }
 
+// MARK: - UIViewControllerRestoration
+extension DeveloperAppsController: UIViewControllerRestoration {
+    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
+        return DeveloperAppsController(coder: coder)
+    }
+}
+
+// MARK: - UITableViewDataSource
 extension DeveloperAppsController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -116,6 +128,7 @@ extension DeveloperAppsController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension DeveloperAppsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let raw = sections[indexPath.section].raws[indexPath.row]
@@ -147,8 +160,7 @@ extension DeveloperAppsController: UITableViewDelegate {
             try? UIApplication.shared.open(scheme: app.scheme)
         case .newApp:
             let app = apps.newApps[indexPath.row]
-            // TODO: open app store page
-            try? UIApplication.shared.open(scheme: app.scheme)
+            RateAppManager(appId: app.appStoreId).openAppStorePage()
         case .developerPage:
             DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
         }
