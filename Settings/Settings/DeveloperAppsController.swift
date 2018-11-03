@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DeveloperAppsController: UIViewController, BackButtonActions {
+final class DeveloperAppsController: UIViewController {
     
     private struct Section {
         let type: SectionType
@@ -68,7 +68,6 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        removeBackButtonTitle()
         view.addSubview(tableView)
     }
     
