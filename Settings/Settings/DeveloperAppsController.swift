@@ -15,20 +15,20 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         let raws: [RawType]
     }
     
-    private enum RawType {
-        case installed
-        case newApp
-        case developerPage
-    }
-    
     private enum SectionType {
         case installed
         case newApps
         case emptyTitle
     }
     
+    private enum RawType {
+        case installedApp
+        case newApp
+        case developerPage
+    }
+    
     private var sections: [Section] = []
-    private var apps: (availableApps: [SchemeApp], unavailableApps: [SchemeApp]) = ([],[])
+    private var apps: SchemeAppTuple = ([],[])
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -70,17 +70,6 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         updateApps()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detail" || segue.identifier == "detail!",
-            let vc = sender as? UIViewController,
-            let navVC = segue.destination as? UINavigationController,
-            let detailVC = navVC.topViewController as? SplitDetailController
-        {
-            detailVC.childVC = vc
-            detailVC.title = vc.title
-        }
-    }
-    
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         UIView.performWithoutAnimation {
@@ -94,14 +83,14 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         
         apps = DeveloperAppsManager.shared.apps
         
-        if !apps.unavailableApps.isEmpty {
-            let raws = Array<RawType>(repeating: .newApp, count: apps.availableApps.count)
+        if !apps.newApps.isEmpty {
+            let raws = Array<RawType>(repeating: .newApp, count: apps.newApps.count)
             let section = Section(type: .newApps, raws: raws)
             newSections.append(section)
         }
         
-        if !apps.availableApps.isEmpty {
-            let raws = Array<RawType>(repeating: .installed, count: apps.availableApps.count)
+        if !apps.installedApps.isEmpty {
+            let raws = Array<RawType>(repeating: .installedApp, count: apps.installedApps.count)
             let section = Section(type: .installed, raws: raws)
             newSections.append(section)
         }
@@ -111,17 +100,6 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         
         sections = newSections
         tableView.reloadData()
-    }
-    
-    private func sendFeedback() {
-        EmailSender.shared.send(message: "",
-                                subject: "Settings feedback",
-                                to: [EmailSender.devEmail],
-                                presentIn: self)
-    }
-    
-    private func push(controller: UIViewController) {
-        performSegue(withIdentifier: "detail", sender: controller)
     }
 }
 
@@ -143,11 +121,11 @@ extension DeveloperAppsController: UITableViewDelegate {
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
-        case .installed:
-            let app = apps.availableApps[indexPath.row]
+        case .installedApp:
+            let app = apps.installedApps[indexPath.row]
             cell.textLabel?.text = app.name
         case .newApp:
-            let app = apps.unavailableApps[indexPath.row]
+            let app = apps.newApps[indexPath.row]
             cell.textLabel?.text = app.name
         case .developerPage:
             cell.textLabel?.text = "More apps from me at App Store"
@@ -164,11 +142,11 @@ extension DeveloperAppsController: UITableViewDelegate {
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
-        case .installed:
-            let app = apps.availableApps[indexPath.row]
+        case .installedApp:
+            let app = apps.installedApps[indexPath.row]
             try? UIApplication.shared.open(scheme: app.scheme)
         case .newApp:
-            let app = apps.unavailableApps[indexPath.row]
+            let app = apps.newApps[indexPath.row]
             // TODO: open app store page
             try? UIApplication.shared.open(scheme: app.scheme)
         case .developerPage:

@@ -8,6 +8,7 @@
 
 import UIKit
 
+typealias SchemeAppTuple = (installedApps: [SchemeApp], newApps: [SchemeApp])
 
 struct SchemeApp {
     let name: String
@@ -31,11 +32,11 @@ final class DeveloperAppsManager {
     }
     
     private let allApps: [SchemeApp] = [SchemeApp(name: "Test app", scheme: "com.ios://"),
-                                        SchemeApp(name: "unavailable app", scheme: "unavailableApp://")]
+                                        SchemeApp(name: "Some app", scheme: "unavailableApp://")]
     
-    var apps: (availableApps: [SchemeApp], unavailableApps: [SchemeApp]) {
-        var availableApps: [SchemeApp] = []
-        var unavailableApps: [SchemeApp] = []
+    var apps: SchemeAppTuple {
+        var installedApps: [SchemeApp] = []
+        var newApps: [SchemeApp] = []
         
         for app in allApps {
             guard let url = URL(string: app.scheme) else {
@@ -44,11 +45,11 @@ final class DeveloperAppsManager {
             }
             
             if UIApplication.shared.canOpenURL(url) {
-                availableApps.append(app)
+                installedApps.append(app)
             } else {
-                unavailableApps.append(app)
+                newApps.append(app)
             }
         }
-        return (availableApps, unavailableApps)
+        return (installedApps, newApps)
     }
 }
