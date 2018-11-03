@@ -75,7 +75,6 @@ import UIKit
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
-// TODO: not working dark theme in DeveloperAppsController
 // TODO: about header theme appearance
 
 /// added main.swift

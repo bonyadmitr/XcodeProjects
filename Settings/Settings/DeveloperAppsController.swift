@@ -70,10 +70,6 @@ final class DeveloperAppsController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         updateApps()
     }
     
@@ -106,7 +102,8 @@ final class DeveloperAppsController: UIViewController {
         newSections.append(section)
         
         sections = newSections
-        tableView.reloadData()
+        /// don't work with AppearanceConfigurator
+        //tableView.reloadData()
     }
 }
 
