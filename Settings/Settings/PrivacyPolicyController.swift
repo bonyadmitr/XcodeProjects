@@ -120,6 +120,7 @@ final class PrivacyPolicyController: UIViewController {
         }
         webView.load(URLRequest(url: url))
         //webView.loadHTMLString(eulaHTML, baseURL: nil)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         //start activity indicator
         
         /// for local files
@@ -165,6 +166,7 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 //        if #available(iOS 11.0, *) {
 //            print("-- safeAreaInsets", webView.scrollView.safeAreaInsets)
 //        } else {
@@ -176,6 +178,7 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 //        webView.scrollView.contentInset.bottom = 0
 //        showErrorAlert(message: error.description)
     }
