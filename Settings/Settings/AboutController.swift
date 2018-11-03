@@ -18,17 +18,23 @@ final class AboutController: UIViewController {
         case developerPage
     }
     
+    private let cellId = String(describing: DetailCell.self)
     private let raws: [RawType] = [.feedback, .privacyPolicy, .rateApp, .appStorePage, .developerPage]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        let nib = UINib(nibName: cellId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.register(AboutHeader.self, forHeaderFooterViewReuseIdentifier: "AboutHeader")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
     
@@ -54,10 +60,6 @@ final class AboutController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        
-        /// need for iOS 10, don't need for iOS 11
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
@@ -70,7 +72,7 @@ final class AboutController: UIViewController {
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
-                                subject: "Settings feedback",
+                                subject: "Feedback",
                                 to: [EmailSender.devEmail],
                                 presentIn: self)
     }
@@ -91,7 +93,7 @@ extension AboutController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -160,7 +162,6 @@ extension AboutController: UITableViewDelegate {
         case .developerPage:
             let vc = DeveloperAppsController()
             navigationController?.pushViewController(vc, animated: true)
-            //DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
         }
     }
 }

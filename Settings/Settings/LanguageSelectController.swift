@@ -14,12 +14,15 @@ final class LanguageSelectController: UIViewController {
         let tableView = UITableView()
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        let cellId = String(describing: DetailCell.self)
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
     
@@ -38,46 +41,41 @@ final class LanguageSelectController: UIViewController {
     }
     
     private func setup() {
-        title = "language".localized
-        restorationIdentifier = String(describing: type(of: self))
-//        extendedLayoutIncludesOpaqueBars = true
-        
         /// The class specified here must conform to `UIViewControllerRestoration`,
         /// explained above. If not set, you'd get a second chance to create the
         /// view controller on demand in the app delegate.
         restorationClass = type(of: self)
+        restorationIdentifier = String(describing: type(of: self))
+        title = "language".localized
+//        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        
-        /// need for iOS 10, don't need for iOS 11
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-            UIView.performWithoutAnimation {
-                self.tableView.beginUpdates()
-                self.tableView.endUpdates()
-            }
-            
-//            if #available(iOS 10.0, *) {
-//                if let previousTraitCollection = previousTraitCollection,
-//                    previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
-//                    traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
-//                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge || 
-//                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
-//                {
-//                    UIView.performWithoutAnimation {
-//                        self.tableView.beginUpdates()
-//                        self.tableView.endUpdates()
-//                    }
-//                }
-//            }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        UIView.performWithoutAnimation {
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
         }
+        
+        //            if #available(iOS 10.0, *) {
+        //                if let previousTraitCollection = previousTraitCollection,
+        //                    previousTraitCollection.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory,
+        //                    traitCollection.preferredContentSizeCategory == .accessibilityExtraLarge ||
+        //                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraLarge ||
+        //                        traitCollection.preferredContentSizeCategory == .accessibilityExtraExtraExtraLarge
+        //                {
+        //                    UIView.performWithoutAnimation {
+        //                        self.tableView.beginUpdates()
+        //                        self.tableView.endUpdates()
+        //                    }
+        //                }
+        //            }
+    }
 }
 
 /*

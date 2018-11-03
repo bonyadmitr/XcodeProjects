@@ -29,13 +29,14 @@ final class DeveloperAppsController: UIViewController {
     
     private var sections: [Section] = []
     private var apps: SchemeAppTuple = ([],[])
+    private let cellId = String(describing: DetailCell.self)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        let cellId = String(describing: UITableViewCell.self)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        let nib = UINib(nibName: cellId, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -122,12 +123,13 @@ extension DeveloperAppsController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].raws.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
 }
 
