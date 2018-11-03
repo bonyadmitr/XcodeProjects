@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 struct Colors {
     private init() {}
@@ -145,6 +146,8 @@ final class AppearanceConfigurator: MulticastHandler {
         ///cellLabel.font
         
         UITextField.appearance().keyboardAppearance = theme.barStyle.keyboard
+        
+        WKWebView.appearance().backgroundColor = theme.secondaryBackgroundColor
         
         currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }
