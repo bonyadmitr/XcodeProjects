@@ -75,6 +75,7 @@ import UIKit
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
+// TODO: loading activity (+ network) view for PrivacyPolicyController
 
 /// added main.swift
 //@UIApplicationMain

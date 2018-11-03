@@ -56,6 +56,8 @@ final class PrivacyPolicyController: UIViewController {
 //        }
 //        
 //        let web = WKWebView(frame: .zero, configuration: webConfig)
+        /// fixing push bug when backgroundColor = .clear (can be set to controller's view)
+        //web.backgroundColor = .white
 //        web.navigationDelegate = self
 //        return web
 //    }()
