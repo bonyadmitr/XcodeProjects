@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="2116.875" y="790"/>
         </scene>
-        <!--View Controller-->
+        <!--Temp-->
         <scene sceneID="eBV-Gf-nss">
             <objects>
-                <viewController storyboardIdentifier="SampleController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AEJ-6a-BlE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SampleController" title="Temp" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AEJ-6a-BlE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JUQ-tI-qJ2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -250,7 +250,7 @@
         <!--Controller-->
         <scene sceneID="c9o-Sf-m9N">
             <objects>
-                <navigationController storyboardIdentifier="FirstNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYS-Us-gY2" customClass="BaseNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FirstNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYS-Us-gY2" customClass="HideTabBarNavController" customModule="Settings" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Controller" id="QYL-tx-GfI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QsA-6G-5wL">

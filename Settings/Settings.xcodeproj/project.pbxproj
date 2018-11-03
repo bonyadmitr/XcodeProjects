@@ -37,6 +37,7 @@
 		CE99210E2180EC18004E118A /* RateCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99210D2180EC18004E118A /* RateCounter.swift */; };
 		CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */; };
 		CED51B5B218BCE5A0050734A /* DeveloperAppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */; };
+		CED51B5D218DFE540050734A /* BaseSplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B5C218DFE540050734A /* BaseSplitController.swift */; };
 		CEEDAAB62176202E002AC3B3 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */; };
 		CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB784215D0949003C5BD8 /* AppDelegate.swift */; };
 		CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB786215D0949003C5BD8 /* ViewController.swift */; };
@@ -89,6 +90,7 @@
 		CE99210D2180EC18004E118A /* RateCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCounter.swift; sourceTree = "<group>"; };
 		CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsManager.swift; sourceTree = "<group>"; };
 		CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsController.swift; sourceTree = "<group>"; };
+		CED51B5C218DFE540050734A /* BaseSplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSplitController.swift; sourceTree = "<group>"; };
 		CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppManager.swift; sourceTree = "<group>"; };
 		CEEEB781215D0949003C5BD8 /* Settings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Settings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEEB784215D0949003C5BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
 				CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */,
 				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
+				CED51B5C218DFE540050734A /* BaseSplitController.swift */,
 				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
 				662D0D3C21616B10008D244E /* DetailCell.xib */,
 				662D0D3B21616B10008D244E /* DetailCell.swift */,
@@ -355,6 +358,7 @@
 				CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */,
 				662D0D3D21616B10008D244E /* DetailCell.swift in Sources */,
 				66D380942163300700EFA49C /* Dispatch+Current.swift in Sources */,
+				CED51B5D218DFE540050734A /* BaseSplitController.swift in Sources */,
 				662D0D472162A3F6008D244E /* Floating.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
 				CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */,
