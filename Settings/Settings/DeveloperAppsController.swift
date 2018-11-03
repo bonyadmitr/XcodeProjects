@@ -21,8 +21,7 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         case support
     }
     
-    private let sections = [Section(name: "availableApps", type: .language, apps: DeveloperAppsManager.shared.apps.availableApps),
-                            Section(name: "unavailableApps", type: .support, apps: DeveloperAppsManager.shared.apps.unavailableApps)]
+    private var sections: [Section] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -56,9 +55,30 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         super.viewDidLoad()
         
         removeBackButtonTitle()
-        
         view.addSubview(tableView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let (availableApps, unavailableApps) = DeveloperAppsManager.shared.apps
+        
+        var newSections: [Section] = []
+        
+        if !availableApps.isEmpty {
+            let section = Section(name: "availableApps", type: .language, apps: availableApps)
+            newSections.append(section)
+        }
+        
+        if !unavailableApps.isEmpty {
+            let section = Section(name: "unavailableApps", type: .support, apps: unavailableApps)
+            newSections.append(section)
+        }
+        
+        sections = newSections
+        tableView.reloadData()
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" || segue.identifier == "detail!",

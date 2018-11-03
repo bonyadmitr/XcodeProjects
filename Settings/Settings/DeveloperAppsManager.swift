@@ -30,7 +30,8 @@ final class DeveloperAppsManager {
         }
     }
     
-    private let allApps: [SchemeApp] = [SchemeApp(name: "Test app", scheme: "com.ios://")]
+    private let allApps: [SchemeApp] = [SchemeApp(name: "Test app", scheme: "com.ios://"),
+                                        SchemeApp(name: "unavailable app", scheme: "unavailableApp://")]
     
     var apps: (availableApps: [SchemeApp], unavailableApps: [SchemeApp]) {
         var availableApps: [SchemeApp] = []
