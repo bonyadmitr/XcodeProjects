@@ -21,15 +21,20 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         case support
     }
     
-    private var sections = [Section(name: "availableApps", type: .language, apps: DeveloperAppsManager.shared.apps.availableApps),
+    private let sections = [Section(name: "availableApps", type: .language, apps: DeveloperAppsManager.shared.apps.availableApps),
                             Section(name: "unavailableApps", type: .support, apps: DeveloperAppsManager.shared.apps.unavailableApps)]
     
-    @IBOutlet private weak var tableView: UITableView! {
-        willSet {
-            newValue.dataSource = self
-            newValue.delegate = self
-        }
-    }
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.frame = view.bounds
+        tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        let cellId = String(describing: UITableViewCell.self)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+        return tableView
+    }()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -52,7 +57,7 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         
         removeBackButtonTitle()
         
-        
+        view.addSubview(tableView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,16 +121,10 @@ extension DeveloperAppsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let app = sections[indexPath.section].apps[indexPath.row]
+        try? UIApplication.shared.open(scheme: app.scheme)
         
-        switch indexPath.row {
-        case 0:
-            try? UIApplication.shared.open(scheme: app.scheme)
-        case 1:
-            /// redirect to store
-            break
-        default:
-            DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
-        }
+        
+        //DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -133,9 +132,9 @@ extension DeveloperAppsController: UITableViewDelegate {
         
         switch section.type {
         case .language:
-            return "availableApps".localized
+            return "Installed".localized
         case .support:
-            return "unavailableApps".localized
+            return "New apps".localized
         }
     }
 }
