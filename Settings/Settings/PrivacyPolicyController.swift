@@ -87,6 +87,15 @@ final class PrivacyPolicyController: UIViewController {
 //        view = webView
 //    }
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        activityIndicator.frame = view.bounds
+        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,6 +110,7 @@ final class PrivacyPolicyController: UIViewController {
 //        }
         
         view.addSubview(webView)
+        view.addSubview(activityIndicator)
         
 //        webView.translatesAutoresizingMaskIntoConstraints = false
 //        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -167,6 +177,8 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+        
 //        if #available(iOS 11.0, *) {
 //            print("-- safeAreaInsets", webView.scrollView.safeAreaInsets)
 //        } else {
@@ -179,6 +191,8 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+        
 //        webView.scrollView.contentInset.bottom = 0
 //        showErrorAlert(message: error.description)
     }

@@ -148,6 +148,7 @@ final class AppearanceConfigurator: MulticastHandler {
         UITextField.appearance().keyboardAppearance = theme.barStyle.keyboard
         
         WKWebView.appearance().backgroundColor = theme.secondaryBackgroundColor
+        UIActivityIndicatorView.appearance().color = theme.textColor
         
         currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }
