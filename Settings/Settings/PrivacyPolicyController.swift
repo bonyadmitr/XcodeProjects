@@ -33,8 +33,9 @@ final class PrivacyPolicyController: UIViewController {
     private lazy var webView: WKWebView = {
         let web = WKWebView(frame: .zero, configuration: webViewConfiguration)
         web.isOpaque = false
-        web.backgroundColor = .clear
-        web.scrollView.backgroundColor = .clear
+        /// fixing push bug when backgroundColor = .clear (can be set to controller's view)
+        web.backgroundColor = .white
+        //web.scrollView.backgroundColor = .white
         web.navigationDelegate = self
         web.frame = view.bounds
         web.autoresizingMask = [.flexibleWidth, .flexibleHeight]
