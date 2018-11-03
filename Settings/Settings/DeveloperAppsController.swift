@@ -11,17 +11,24 @@ import UIKit
 final class DeveloperAppsController: UIViewController, BackButtonActions {
     
     private struct Section {
-        let name: String
         let type: SectionType
-        let apps: [SchemeApp]
+        let raws: [RawType]
+    }
+    
+    private enum RawType {
+        case installed
+        case newApp
+        case developerPage
     }
     
     private enum SectionType {
-        case language
-        case support
+        case installed
+        case newApps
+        case emptyTitle
     }
     
     private var sections: [Section] = []
+    private var apps: (availableApps: [SchemeApp], unavailableApps: [SchemeApp]) = ([],[])
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -60,25 +67,8 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let (availableApps, unavailableApps) = DeveloperAppsManager.shared.apps
-        
-        var newSections: [Section] = []
-        
-        if !availableApps.isEmpty {
-            let section = Section(name: "availableApps", type: .language, apps: availableApps)
-            newSections.append(section)
-        }
-        
-        if !unavailableApps.isEmpty {
-            let section = Section(name: "unavailableApps", type: .support, apps: unavailableApps)
-            newSections.append(section)
-        }
-        
-        sections = newSections
-        tableView.reloadData()
+        updateApps()
     }
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" || segue.identifier == "detail!",
@@ -99,6 +89,30 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         }
     }
     
+    private func updateApps() {
+        var newSections: [Section] = []
+        
+        apps = DeveloperAppsManager.shared.apps
+        
+        if !apps.unavailableApps.isEmpty {
+            let raws = Array<RawType>(repeating: .newApp, count: apps.availableApps.count)
+            let section = Section(type: .newApps, raws: raws)
+            newSections.append(section)
+        }
+        
+        if !apps.availableApps.isEmpty {
+            let raws = Array<RawType>(repeating: .installed, count: apps.availableApps.count)
+            let section = Section(type: .installed, raws: raws)
+            newSections.append(section)
+        }
+        
+        let section = Section(type: .emptyTitle, raws: [.developerPage])
+        newSections.append(section)
+        
+        sections = newSections
+        tableView.reloadData()
+    }
+    
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
                                 subject: "Settings feedback",
@@ -113,13 +127,10 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
 
 extension DeveloperAppsController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count //+1
+        return sections.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 2 {
-//            return 1
-//        }
-        return sections[section].apps.count
+        return sections[section].raws.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,8 +140,18 @@ extension DeveloperAppsController: UITableViewDataSource {
 
 extension DeveloperAppsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let app = sections[indexPath.section].apps[indexPath.row]
-        cell.textLabel?.text = app.name
+        let raw = sections[indexPath.section].raws[indexPath.row]
+        
+        switch raw {
+        case .installed:
+            let app = apps.availableApps[indexPath.row]
+            cell.textLabel?.text = app.name
+        case .newApp:
+            let app = apps.unavailableApps[indexPath.row]
+            cell.textLabel?.text = app.name
+        case .developerPage:
+            cell.textLabel?.text = "More apps from me at App Store"
+        }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         
@@ -140,21 +161,31 @@ extension DeveloperAppsController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let app = sections[indexPath.section].apps[indexPath.row]
-        try? UIApplication.shared.open(scheme: app.scheme)
+        let raw = sections[indexPath.section].raws[indexPath.row]
         
-        
-        //DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
+        switch raw {
+        case .installed:
+            let app = apps.availableApps[indexPath.row]
+            try? UIApplication.shared.open(scheme: app.scheme)
+        case .newApp:
+            let app = apps.unavailableApps[indexPath.row]
+            // TODO: open app store page
+            try? UIApplication.shared.open(scheme: app.scheme)
+        case .developerPage:
+            DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = sections[section]
         
         switch section.type {
-        case .language:
+        case .installed:
             return "Installed".localized
-        case .support:
+        case .newApps:
             return "New apps".localized
+        case .emptyTitle:
+            return nil
         }
     }
 }
