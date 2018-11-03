@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SplitDetailController: UIViewController, ChildHandler {
+final class SplitDetailController: UIViewController, ChildHandler, BackButtonActions {
     
     /// initial vc need for split controller
     var childVC: UIViewController = LanguageSelectController()
@@ -33,6 +33,7 @@ final class SplitDetailController: UIViewController, ChildHandler {
         super.viewDidLoad()
         
         addChildVC()
+        //removeBackButtonTitle()
     }
     
     private func addChildVC() {

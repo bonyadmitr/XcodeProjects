@@ -39,6 +39,10 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
     
@@ -64,7 +68,7 @@ final class DeveloperAppsController: UIViewController, BackButtonActions {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //removeBackButtonTitle()
+//        removeBackButtonTitle()
         view.addSubview(tableView)
     }
     

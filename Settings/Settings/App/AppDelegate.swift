@@ -73,6 +73,8 @@ import UIKit
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
+// TODO: custom cells for DeveloperAppsController
+
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {

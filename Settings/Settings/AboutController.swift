@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AboutController: UIViewController, BackButtonActions {
+final class AboutController: UIViewController {
     
     private enum RawType {
         case feedback
@@ -52,8 +52,6 @@ final class AboutController: UIViewController, BackButtonActions {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        removeBackButtonTitle()
         
         view.addSubview(tableView)
         

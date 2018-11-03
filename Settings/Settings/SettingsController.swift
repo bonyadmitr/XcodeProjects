@@ -64,7 +64,7 @@ final class SettingsController: UIViewController, BackButtonActions {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        removeBackButtonTitle()
+        //removeBackButtonTitle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
