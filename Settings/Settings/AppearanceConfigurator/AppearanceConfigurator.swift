@@ -147,7 +147,9 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UITextField.appearance().keyboardAppearance = theme.barStyle.keyboard
         
+        /// fixing push bug when backgroundColor = .clear (can be set to controller's view)
         WKWebView.appearance().backgroundColor = theme.secondaryBackgroundColor
+        
         UIActivityIndicatorView.appearance().color = theme.textColor
         
         currentTheme = theme

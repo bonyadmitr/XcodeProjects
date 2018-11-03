@@ -11,56 +11,31 @@ import WebKit
 
 final class PrivacyPolicyController: UIViewController {
     
-    /// #1
-    private var userWebContentController: WKUserContentController {
+    private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
-        //let scriptSource = "document.body.style.color = 'white'; document.body.style.webkitTextSizeAdjust = 'auto';"
         let scriptSource = "document.body.style.webkitTextSizeAdjust = 'auto';"
         let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         contentController.addUserScript(script)
-        return contentController
-    }
-    
-    private var webViewConfiguration: WKWebViewConfiguration {
+        
         let webConfig = WKWebViewConfiguration()
-        webConfig.userContentController = userWebContentController
+        webConfig.userContentController = contentController
         if #available(iOS 10.0, *) {
             webConfig.dataDetectorTypes = [.phoneNumber, .link]
         }
-        return webConfig
-    }
-    
-    private lazy var webView: WKWebView = {
-        let web = WKWebView(frame: .zero, configuration: webViewConfiguration)
-        web.isOpaque = false
-        /// fixing push bug when backgroundColor = .clear (can be set to controller's view)
-//        web.backgroundColor = .white
-        //web.scrollView.backgroundColor = .white
-        web.navigationDelegate = self
-        web.frame = view.bounds
-        web.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return web
+        
+        let webView = WKWebView(frame: .zero, configuration: webConfig)
+        webView.isOpaque = false
+        webView.navigationDelegate = self
+        return webView
     }()
-
-    /// #2    
-//    private lazy var webView: WKWebView = {
-//        let contentController = WKUserContentController()
-//        let scriptSource = "document.body.style.webkitTextSizeAdjust = 'auto';"
-//        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-//        contentController.addUserScript(script)
-//        
-//        let webConfig = WKWebViewConfiguration()
-//        webConfig.userContentController = contentController
-//        if #available(iOS 10.0, *) {
-//            webConfig.dataDetectorTypes = [.phoneNumber, .link]
-//        }
-//        
-//        let web = WKWebView(frame: .zero, configuration: webConfig)
-        /// fixing push bug when backgroundColor = .clear (can be set to controller's view)
-        //web.backgroundColor = .white
-//        web.navigationDelegate = self
-//        return web
-//    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.frame = view.bounds
+        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return activityIndicator
+    }()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -76,53 +51,22 @@ final class PrivacyPolicyController: UIViewController {
         title = "Privacy Policy".localized /// Terms and Privacy Policy
         restorationIdentifier = String(describing: type(of: self))
         restorationClass = type(of: self)
-        
-//        edgesForExtendedLayout = [.bottom]
-//        edgesForExtendedLayout = []
-//        extendedLayoutIncludesOpaqueBars = false
     }
     
-    
-//    override func loadView() {
-//        view = webView
-//    }
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        activityIndicator.frame = view.bounds
-        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return activityIndicator
-    }()
+    override func loadView() {
+        view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        webView.frame = view.bounds
+//        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.addSubview(webView)
         
-//        if #available(iOS 11.0, *) {
-////            webView.scrollView.contentInsetAdjustmentBehavior = .never
-////            webView.scrollView.insetsLayoutMarginsFromSafeArea = false //.bottom = 0
-////            webView.scrollView.safe
-//            additionalSafeAreaInsets.bottom = -49
-//        } else {
-//            // Fallback on earlier versions
-//        }
-        
-        view.addSubview(webView)
         view.addSubview(activityIndicator)
         
-//        webView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        
-//        webView.clearPage()
-        
-        /// don't need
-//        automaticallyAdjustsScrollViewInsets = false
+        //webView.clearPage()
         
         guard let url = URL(string: "https://termsfeed.com/privacy-policy/da1b66dee2c0e974d68d1d47e787bbf2") else {
             assertionFailure()
@@ -130,24 +74,38 @@ final class PrivacyPolicyController: UIViewController {
         }
         webView.load(URLRequest(url: url))
         //webView.loadHTMLString(eulaHTML, baseURL: nil)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        //start activity indicator
         
         /// for local files
         //webView.loadFileURL(url, allowingReadAccessTo: url)
+        
+        startActivity()
     }
     
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
     }
+    
+    private func startActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        activityIndicator.startAnimating()
+    }
+    
+    private func stopActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+    }
 }
+
+// MARK: - UIViewControllerRestoration
 extension PrivacyPolicyController: UIViewControllerRestoration {
     static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
         assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
         return PrivacyPolicyController(coder: coder)
     }
 }
+
+// MARK: - WKNavigationDelegate
 extension PrivacyPolicyController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
@@ -176,8 +134,7 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        activityIndicator.stopAnimating()
+        stopActivity()
         
 //        if #available(iOS 11.0, *) {
 //            print("-- safeAreaInsets", webView.scrollView.safeAreaInsets)
@@ -190,8 +147,7 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        activityIndicator.stopAnimating()
+        stopActivity()
         
 //        webView.scrollView.contentInset.bottom = 0
 //        showErrorAlert(message: error.description)
