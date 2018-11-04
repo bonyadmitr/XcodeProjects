@@ -95,6 +95,10 @@ extension AppearanceSelectController: UITableViewDataSource {
 
 extension AppearanceSelectController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
         
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
             cell.accessoryType = .checkmark
@@ -102,19 +106,21 @@ extension AppearanceSelectController: UITableViewDelegate {
             cell.accessoryType = .none
         }
         
-        cell.textLabel?.text = themes[indexPath.row].name
+        cell.selectionStyle = .none
+        cell.titleLabel.text = themes[indexPath.row].name
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
+        tableView.deselectRow(at: indexPath, animated: false)
+        
         if themes[indexPath.row] == AppearanceConfigurator.shared.currentTheme {
-            tableView.deselectRow(at: indexPath, animated: true)
+//            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         
         /// fixing of UILable instant color change
         /// otherwise will be need "cell.selectionStyle = .none"
-        tableView.deselectRow(at: indexPath, animated: false)
+//        tableView.deselectRow(at: indexPath, animated: false)
         
         /// fixing of UILable instant color change
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
