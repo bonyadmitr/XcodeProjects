@@ -66,23 +66,23 @@ final class DetailCell: UITableViewCell {
         }
     }
     
-    func setup(title: String, subtitle: String?) {
+    func setup(title: String, subtitle: String? = nil) {
         titleLabel?.text = title
         subtitleLabel?.text = subtitle
         
         // MARK: setup accessibilityLabel
         
-        var accessLabel = title
+        var newAccessibilityLabel = title
         if let subtitle = subtitle {
-            accessLabel += ", \(subtitle)"
+            newAccessibilityLabel += ", \(subtitle)"
         }
         
         // TODO: maybe this don't need. need to check
         if isChecked {
-            accessLabel += ". checked"
+            newAccessibilityLabel += ". checked"
         }
         
-        accessibilityLabel = accessLabel
+        accessibilityLabel = newAccessibilityLabel
     }
     
 //    override func accessibilityActivate() -> Bool {
