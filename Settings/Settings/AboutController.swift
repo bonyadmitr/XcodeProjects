@@ -114,19 +114,19 @@ extension AboutController: UITableViewDelegate {
         switch raw {
         case .feedback:
             cell.accessoryType = .none
-            cell.titleLabel.text = "Send feedback"
+            cell.setup(title: "Send feedback")
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
-            cell.titleLabel.text = "Privacy Policy"
+            cell.setup(title: "Privacy Policy")
         case .rateApp:
             cell.accessoryType = .none
-            cell.titleLabel.text = "Rate Us"
+            cell.setup(title: "Rate Us")
         case .appStorePage:
             cell.accessoryType = .none
-            cell.titleLabel.text = "Open in App Store"
+            cell.setup(title: "Open in App Store")
         case .developerPage:
             cell.accessoryType = .disclosureIndicator
-            cell.titleLabel.text = "More apps from me"
+            cell.setup(title: "More apps from me")
         }
     }
     

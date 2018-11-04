@@ -107,7 +107,7 @@ extension AppearanceSelectController: UITableViewDelegate {
         }
         
         cell.selectionStyle = .none
-        cell.titleLabel.text = themes[indexPath.row].name
+        cell.setup(title: themes[indexPath.row].name)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

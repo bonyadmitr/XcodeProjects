@@ -143,12 +143,12 @@ extension DeveloperAppsController: UITableViewDelegate {
         switch raw {
         case .installedApp:
             let app = apps.installedApps[indexPath.row]
-            cell.titleLabel.text = app.name
+            cell.setup(title: app.name)
         case .newApp:
             let app = apps.newApps[indexPath.row]
-            cell.titleLabel.text = app.name
+            cell.setup(title: app.name)
         case .developerPage:
-            cell.titleLabel.text = "More apps from me at App Store"
+            cell.setup(title: "More apps from me at App Store")
         }
     }
     

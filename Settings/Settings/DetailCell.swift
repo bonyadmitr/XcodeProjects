@@ -12,8 +12,8 @@ import UIKit
 /// don't use standart labels (textLabel), setting textColor is not working in subclass
 final class DetailCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,7 @@ final class DetailCell: UITableViewCell {
             return
         }
         
-        detailTextLabel.text = ""
+        detailTextLabel.text = " "
         
         /// need for iOS 10, don't need for iOS 11
         textLabel.numberOfLines = 0
@@ -67,8 +67,8 @@ final class DetailCell: UITableViewCell {
     }
     
     func setup(title: String, subtitle: String? = nil) {
-        titleLabel?.text = title
-        subtitleLabel?.text = subtitle
+        titleLabel.text = title
+        subtitleLabel.text = subtitle
         
         // MARK: setup accessibilityLabel
         
