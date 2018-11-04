@@ -103,7 +103,7 @@ final class DeveloperAppsController: UIViewController {
         
         sections = newSections
         /// don't work with AppearanceConfigurator
-        //tableView.reloadData()
+        tableView.reloadData()
     }
 }
 
@@ -133,23 +133,23 @@ extension DeveloperAppsController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension DeveloperAppsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
+        
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
         case .installedApp:
             let app = apps.installedApps[indexPath.row]
-            cell.textLabel?.text = app.name
+            cell.titleLabel.text = app.name
         case .newApp:
             let app = apps.newApps[indexPath.row]
-            cell.textLabel?.text = app.name
+            cell.titleLabel.text = app.name
         case .developerPage:
-            cell.textLabel?.text = "More apps from me at App Store"
+            cell.titleLabel.text = "More apps from me at App Store"
         }
-        
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        /// need only for iOS 9 and 10. don't need for iOS 11
-        cell.textLabel?.numberOfLines = 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

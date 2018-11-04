@@ -104,30 +104,30 @@ extension AboutController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension AboutController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
+        
         let raw = raws[indexPath.row]
         
         switch raw {
         case .feedback:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Send feedback"
+            cell.titleLabel.text = "Send feedback"
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "Privacy Policy"
+            cell.titleLabel.text = "Privacy Policy"
         case .rateApp:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Rate Us"
+            cell.titleLabel.text = "Rate Us"
         case .appStorePage:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Open in App Store"
+            cell.titleLabel.text = "Open in App Store"
         case .developerPage:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "More apps from me"
+            cell.titleLabel.text = "More apps from me"
         }
-        
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        /// need only for iOS 9 and 10. don't need for iOS 11
-        cell.textLabel?.numberOfLines = 0
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

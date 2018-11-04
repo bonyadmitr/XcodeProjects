@@ -9,15 +9,22 @@
 import UIKit
 
 /// fixed appearance in LanguageSelectController by new DetailCell nib
+/// don't use standart labels (textLabel), setting textColor is not working in subclass
 final class DetailCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        guard let textLabel = textLabel, let detailTextLabel = detailTextLabel else {
+        //guard let textLabel = textLabel, let detailTextLabel = detailTextLabel else {
+        guard let textLabel = titleLabel, let detailTextLabel = subtitleLabel else {
             assertionFailure()
             return
         }
+        
+        detailTextLabel.text = ""
         
         /// need for iOS 10, don't need for iOS 11
         textLabel.numberOfLines = 0
@@ -60,8 +67,8 @@ final class DetailCell: UITableViewCell {
     }
     
     func setup(title: String, subtitle: String?) {
-        textLabel?.text = title
-        detailTextLabel?.text = subtitle
+        titleLabel?.text = title
+        subtitleLabel?.text = subtitle
         
         // MARK: setup accessibilityLabel
         
