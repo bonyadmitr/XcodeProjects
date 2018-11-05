@@ -19,6 +19,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet private weak var forceLabel: UILabel!
+    @IBOutlet private weak var pushFromCodeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,13 @@ class ViewController: UIViewController {
         
         
         setupShortcutItems()
+        registerForPreviewing(with: self, sourceView: pushFromCodeButton)
+    }
+    
+    @IBAction private func pushFromCode(_ sender: UIButton) {
+        let vc = PreviewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,3 +125,26 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let vc = PreviewController()
+        return vc
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+}
+
+
+import UIKit
+
+final class PreviewController: UIViewController {
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.magenta
+    }
+}
