@@ -32,6 +32,13 @@ class ViewController: UIViewController {
 //            return
 //        }
         
+        guard traitCollection.forceTouchCapability == .available else {
+            /// Fall back to other non 3D Touch features
+            return
+        }
+        
+        /// max number of ShortcutItems (static + dynamic) = 4
+        /// static quick actions are shown first, starting at the topmost position in the list
         /// register ShortcutItem. should be called once
         let newShortcutItem1 = UIApplicationShortcutItem(type: "some1", localizedTitle: "Some 1")
         /// for this need UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
@@ -40,6 +47,8 @@ class ViewController: UIViewController {
         
         let newShortcutItem2 = UIApplicationShortcutItem(type: "some2", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
         UIApplication.shared.shortcutItems?.append(newShortcutItem2)
+        
+        print(UIApplication.shared.shortcutItems ?? [])
         
         /// for dynamic quick actions only
 //        var shortcutItems = UIApplication.shared.shortcutItems ?? []
@@ -68,7 +77,9 @@ class ViewController: UIViewController {
     }
     
     private func handleForceTouch(_ touch: UITouch) {
-        guard #available(iOS 9.0, *), traitCollection.forceTouchCapability == .available else {
+        
+        /// #available(iOS 9.0, *)
+        guard traitCollection.forceTouchCapability == .available else {
             /// Fall back to other non 3D Touch features
             return
         }
