@@ -8,8 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+/// https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/tracking_the_force_of_3d_touch_events
 
+/// Quick Actions
+/// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
+/// Quick Actions system icons
+/// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
+class ViewController: UIViewController {
+    
     @IBOutlet private weak var forceLabel: UILabel!
     
     override func viewDidLoad() {
@@ -18,6 +24,12 @@ class ViewController: UIViewController {
         let text = "0 gram"
         print(text)
         forceLabel.text = text
+        
+        
+//        guard let bundleIdentifier =  Bundle.main.bundleIdentifier else {
+//            assertionFailure()
+//            return
+//        }
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
