@@ -28,7 +28,21 @@ class ViewController: UIViewController {
         forceLabel.text = text
         
         
+        setupShortcutItems()
+    }
+    
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         
+        guard let touch = touches.first else {
+            assertionFailure()
+            return
+        }
+        
+        handleForceTouch(touch)
+    }
+    
+    private func setupShortcutItems() {
         /// max number of ShortcutItems (static + dynamic) = 4
         /// static quick actions are shown first, starting at the topmost position in the list
         
@@ -60,25 +74,14 @@ class ViewController: UIViewController {
                 else { preconditionFailure("Expected a UIMutableApplicationShortcutItem") }
             guard let index = shortcutItems.index(of: existingShortcutItem)
                 else { preconditionFailure("Expected a valid index") }
-
+            
             mutableShortcutItem.localizedTitle = "New Title"
             shortcutItems[index] = mutableShortcutItem
             UIApplication.shared.shortcutItems = shortcutItems
         }
-
+        
         /// for dynamic quick actions only
         print("---", UIApplication.shared.shortcutItems ?? [])
-    }
-    
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        
-        guard let touch = touches.first else {
-            assertionFailure()
-            return
-        }
-        
-        handleForceTouch(touch)
     }
     
     private func handleForceTouch(_ touch: UITouch) {
