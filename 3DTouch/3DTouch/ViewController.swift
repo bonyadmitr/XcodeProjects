@@ -10,10 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var forceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let text = "0 gram"
+        print(text)
+        forceLabel.text = text
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -33,19 +37,26 @@ class ViewController: UIViewController {
         }
         
         if touch.force >= touch.maximumPossibleForce {
-            print("385+ grams")
-            //forceLabel.text = "385+ grams"
+            let text = "385+ grams"
+            print(text)
+            forceLabel.text = text
         } else {
             let force = touch.force / touch.maximumPossibleForce
             let grams = force * 385
             let roundGrams = Int(grams)
-            print("\(roundGrams) grams")
+            
+            let text = "\(roundGrams) grams"
+            print(text)
+            forceLabel.text = text
         }
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        print("0 gram")
+        
+        let text = "0 gram"
+        print(text)
+        forceLabel.text = text
     }
 }
 
