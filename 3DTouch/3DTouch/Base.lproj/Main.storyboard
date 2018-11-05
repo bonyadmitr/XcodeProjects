@@ -66,14 +66,13 @@
             </objects>
             <point key="canvasLocation" x="1136.25" y="125"/>
         </scene>
-        <!--View Controller-->
+        <!--Preview Controller-->
         <scene sceneID="l9S-QF-Vd5">
             <objects>
-                <viewController id="BTc-du-VXU" sceneMemberID="viewController">
+                <viewController id="BTc-du-VXU" customClass="PreviewController" customModule="_DTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xgs-Ou-hZ7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="kj3-SA-4y2"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="0.0" height="100"/>

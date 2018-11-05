@@ -9,6 +9,8 @@
 import UIKit
 
 /// https://developer.apple.com/documentation/uikit/peek_and_pop
+/// https://developer.apple.com/documentation/uikit/peek_and_pop/implementing_peek_and_pop
+/// https://developer.apple.com/documentation/uikit/peek_and_pop/add_home_screen_quick_actions
 /// https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/tracking_the_force_of_3d_touch_events
 
 /// Quick Actions
@@ -141,10 +143,22 @@ import UIKit
 
 final class PreviewController: UIViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.magenta
     }
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let action1 = UIPreviewAction(title: "Title 1", style: .default) { _,_ in // [unowned self] (_, _) in /// from appe sample code
+            print("--- Title 1")
+        }
+        
+        let action2 = UIPreviewAction(title: "Title 2", style: .selected) { _,_ in // [unowned self] (_, _) in
+            print("--- Title 2")
+        }
+        
+        return [action1, action2]
+    }
+
 }
