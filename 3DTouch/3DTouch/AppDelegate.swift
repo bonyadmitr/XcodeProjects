@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum Shortcut: String {
+    case openBlue = "OpenBlue"
+    case some1 = "some1"
+    case some2 = "some2"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,10 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         completionHandler(handleQuickAction(shortcutItem))
-    }
-    
-    private enum Shortcut: String {
-        case openBlue = "OpenBlue"
     }
     
     private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
@@ -43,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch shortcutType {
         case .openBlue:
             window?.rootViewController?.view.backgroundColor = UIColor(red: 151.0/255.0, green: 187.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        case .some1:
+            window?.rootViewController?.view.backgroundColor = .red
+        case .some2:
+            window?.rootViewController?.view.backgroundColor = .cyan
         }
         
         return true

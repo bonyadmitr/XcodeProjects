@@ -27,10 +27,10 @@ class ViewController: UIViewController {
         forceLabel.text = text
         
         
-//        guard let bundleIdentifier =  Bundle.main.bundleIdentifier else {
-//            assertionFailure()
-//            return
-//        }
+        guard let bundleIdentifier =  Bundle.main.bundleIdentifier else {
+            assertionFailure()
+            return
+        }
         
         guard traitCollection.forceTouchCapability == .available else {
             /// Fall back to other non 3D Touch features
@@ -39,11 +39,11 @@ class ViewController: UIViewController {
         
         /// max number of ShortcutItems (static + dynamic) = 4
         /// static quick actions are shown first, starting at the topmost position in the list
-        let newShortcutItem1 = UIApplicationShortcutItem(type: "some1", localizedTitle: "Some 1")
+        let newShortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).\(Shortcut.some1.rawValue)", localizedTitle: "Some 1")
         /// for this needs UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
         //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
         
-        let newShortcutItem2 = UIApplicationShortcutItem(type: "some2", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
+        let newShortcutItem2 = UIApplicationShortcutItem(type: "\(bundleIdentifier).\(Shortcut.some2.rawValue)", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
         
         /// don't append. they are saved
         /// beter call this logic only once for first app launch after installation
