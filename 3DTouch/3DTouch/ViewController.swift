@@ -9,9 +9,6 @@
 import UIKit
 
 /// https://developer.apple.com/documentation/uikit/peek_and_pop
-/// https://developer.apple.com/documentation/uikit/peek_and_pop/implementing_peek_and_pop
-/// https://developer.apple.com/documentation/uikit/peek_and_pop/add_home_screen_quick_actions
-/// https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/tracking_the_force_of_3d_touch_events
 
 /// Quick Actions
 /// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
@@ -32,6 +29,8 @@ class ViewController: UIViewController {
         
         
         setupShortcutItems()
+        
+        /// https://developer.apple.com/documentation/uikit/peek_and_pop/implementing_peek_and_pop
         registerForPreviewing(with: self, sourceView: pushFromCodeButton)
     }
     
@@ -52,27 +51,23 @@ class ViewController: UIViewController {
         handleForceTouch(touch)
     }
     
+    /// https://developer.apple.com/documentation/uikit/peek_and_pop/add_home_screen_quick_actions
+    /// You don’t need to limit the number of quick actions provided to the shortcutItems property
+    /// because system displays only the number of items that fit the screen.
+    /// (from me) max number of ShortcutItems (static + dynamic) = 4
+    /// static quick actions are shown first, starting at the topmost position in the list
+    /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
     private func setupShortcutItems() {
-        /// max number of ShortcutItems (static + dynamic) = 4
-        /// static quick actions are shown first, starting at the topmost position in the list
-        
-        /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
-        // TODO: remove from code and info.plist
-        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
-            assertionFailure()
-            return
-        }
-        
         guard traitCollection.forceTouchCapability == .available else {
             /// Fall back to other non 3D Touch features
             return
         }
         
-        let newShortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).\(Shortcut.some1.rawValue)", localizedTitle: "Some 1")
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.some1.rawValue, localizedTitle: "Some 1")
         /// for this needs UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
         //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
         
-        let newShortcutItem2 = UIApplicationShortcutItem(type: "\(bundleIdentifier).\(Shortcut.some2.rawValue)", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.some2.rawValue, localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
         
         /// don't append. they are saved
         /// beter call this logic only once for first app launch after installation
@@ -96,6 +91,7 @@ class ViewController: UIViewController {
         print("---", UIApplication.shared.shortcutItems ?? [])
     }
     
+    /// https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/tracking_the_force_of_3d_touch_events
     private func handleForceTouch(_ touch: UITouch) {
         
         /// #available(iOS 9.0, *)

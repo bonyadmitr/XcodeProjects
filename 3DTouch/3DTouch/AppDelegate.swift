@@ -51,13 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            return false
 //        }
         
-        /// #1
-        let type = (shortcutItem.type as NSString).pathExtension
-        
         guard
-            /// #2
-            //let type = shortcutItem.type.components(separatedBy: ".").last,
-            let shortcutType = Shortcut(rawValue: type),
+            let shortcutType = Shortcut(rawValue: shortcutItem.type),
             let nacVC = window?.rootViewController as? UINavigationController,
             let vc = nacVC.topViewController
         else {

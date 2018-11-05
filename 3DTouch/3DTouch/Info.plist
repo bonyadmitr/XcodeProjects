@@ -10,7 +10,7 @@
 			<key>UIApplicationShortcutItemSubtitle</key>
 			<string>SubTitle</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER).OpenBlue</string>
+			<string>OpenBlue</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Open blue title</string>
 		</dict>
