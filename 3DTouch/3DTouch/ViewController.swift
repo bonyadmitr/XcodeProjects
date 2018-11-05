@@ -33,8 +33,10 @@ class ViewController: UIViewController {
     
     private func handleForceTouch(_ touch: UITouch) {
         guard #available(iOS 9.0, *), traitCollection.forceTouchCapability == .available else {
+            /// Fall back to other non 3D Touch features
             return
         }
+        /// Enable 3D Touch features
         
         if touch.force >= touch.maximumPossibleForce {
             let text = "385+ grams"
