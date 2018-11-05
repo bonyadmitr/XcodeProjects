@@ -56,6 +56,8 @@ class ViewController: UIViewController {
         /// max number of ShortcutItems (static + dynamic) = 4
         /// static quick actions are shown first, starting at the topmost position in the list
         
+        /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
+        // TODO: remove from code and info.plist
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             assertionFailure()
             return
