@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// https://developer.apple.com/documentation/uikit/peek_and_pop
 /// https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/tracking_the_force_of_3d_touch_events
 
 /// Quick Actions
@@ -27,7 +28,11 @@ class ViewController: UIViewController {
         forceLabel.text = text
         
         
-        guard let bundleIdentifier =  Bundle.main.bundleIdentifier else {
+        
+        /// max number of ShortcutItems (static + dynamic) = 4
+        /// static quick actions are shown first, starting at the topmost position in the list
+        
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             assertionFailure()
             return
         }
@@ -37,8 +42,6 @@ class ViewController: UIViewController {
             return
         }
         
-        /// max number of ShortcutItems (static + dynamic) = 4
-        /// static quick actions are shown first, starting at the topmost position in the list
         let newShortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).\(Shortcut.some1.rawValue)", localizedTitle: "Some 1")
         /// for this needs UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
         //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
