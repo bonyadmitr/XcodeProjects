@@ -9,12 +9,6 @@
 import UIKit
 
 /// https://developer.apple.com/documentation/uikit/peek_and_pop
-
-/// Quick Actions
-/// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
-/// ru: https://habr.com/post/271291/
-/// Quick Actions system icons
-/// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
 class ViewController: UIViewController {
     
     @IBOutlet private weak var forceLabel: UILabel!
@@ -30,6 +24,7 @@ class ViewController: UIViewController {
         
         setupShortcutItems()
         
+        // MARK: - Peek and Pop (3d touch preview)
         /// https://developer.apple.com/documentation/uikit/peek_and_pop/implementing_peek_and_pop
         registerForPreviewing(with: self, sourceView: pushFromCodeButton)
     }
@@ -51,7 +46,13 @@ class ViewController: UIViewController {
         handleForceTouch(touch)
     }
     
+    // MARK: - Quick Actions (3d touch in app icon)
     /// https://developer.apple.com/documentation/uikit/peek_and_pop/add_home_screen_quick_actions
+    /// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
+    /// ru: https://habr.com/post/271291/
+    /// Quick Actions system icons
+    /// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
+    ///
     /// You don’t need to limit the number of quick actions provided to the shortcutItems property
     /// because system displays only the number of items that fit the screen.
     /// (from me) max number of ShortcutItems (static + dynamic) = 4
