@@ -18,6 +18,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(handleQuickAction(shortcutItem))
+    }
+    
+    private enum Shortcut: String {
+        case openBlue = "OpenBlue"
+    }
+    
+    private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        /// #1
+        let type = (shortcutItem.type as NSString).pathExtension
+        
+        guard
+            /// #2
+            //let type = shortcutItem.type.components(separatedBy: ".").last,
+            let shortcutType = Shortcut(rawValue: type)
+        else {
+            assertionFailure()
+            return false
+        }
+        
+        switch shortcutType {
+        case .openBlue:
+            window?.rootViewController?.view.backgroundColor = UIColor(red: 151.0/255.0, green: 187.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        }
+        
+        return true
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
