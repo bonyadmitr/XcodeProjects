@@ -12,6 +12,7 @@ import UIKit
 
 /// Quick Actions
 /// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
+/// ru: https://habr.com/post/271291/
 /// Quick Actions system icons
 /// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
 class ViewController: UIViewController {
@@ -30,6 +31,29 @@ class ViewController: UIViewController {
 //            assertionFailure()
 //            return
 //        }
+        
+        /// register ShortcutItem. should be called once
+        let newShortcutItem1 = UIApplicationShortcutItem(type: "some1", localizedTitle: "Some 1")
+        /// for this need UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
+        //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
+        UIApplication.shared.shortcutItems?.append(newShortcutItem1)
+        
+        let newShortcutItem2 = UIApplicationShortcutItem(type: "some2", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
+        UIApplication.shared.shortcutItems?.append(newShortcutItem2)
+        
+        /// for dynamic quick actions only
+//        var shortcutItems = UIApplication.shared.shortcutItems ?? []
+//        if let existingShortcutItem = shortcutItems.first {
+//            guard let mutableShortcutItem = existingShortcutItem.mutableCopy() as? UIMutableApplicationShortcutItem
+//                else { preconditionFailure("Expected a UIMutableApplicationShortcutItem") }
+//            guard let index = shortcutItems.index(of: existingShortcutItem)
+//                else { preconditionFailure("Expected a valid index") }
+//
+//            mutableShortcutItem.localizedTitle = "New Title"
+//            shortcutItems[index] = mutableShortcutItem
+//            UIApplication.shared.shortcutItems = shortcutItems
+//        }
+
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
