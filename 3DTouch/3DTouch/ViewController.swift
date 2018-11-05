@@ -39,30 +39,32 @@ class ViewController: UIViewController {
         
         /// max number of ShortcutItems (static + dynamic) = 4
         /// static quick actions are shown first, starting at the topmost position in the list
-        /// register ShortcutItem. should be called once
         let newShortcutItem1 = UIApplicationShortcutItem(type: "some1", localizedTitle: "Some 1")
-        /// for this need UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
+        /// for this needs UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
         //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
-        UIApplication.shared.shortcutItems?.append(newShortcutItem1)
         
         let newShortcutItem2 = UIApplicationShortcutItem(type: "some2", localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
-        UIApplication.shared.shortcutItems?.append(newShortcutItem2)
         
-        print(UIApplication.shared.shortcutItems ?? [])
+        /// don't append. they are saved
+        /// beter call this logic only once for first app launch after installation
+        print("--- shortcutItems?.count: ", UIApplication.shared.shortcutItems?.count ?? 0)
+        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
         
-        /// for dynamic quick actions only
-//        var shortcutItems = UIApplication.shared.shortcutItems ?? []
-//        if let existingShortcutItem = shortcutItems.first {
-//            guard let mutableShortcutItem = existingShortcutItem.mutableCopy() as? UIMutableApplicationShortcutItem
-//                else { preconditionFailure("Expected a UIMutableApplicationShortcutItem") }
-//            guard let index = shortcutItems.index(of: existingShortcutItem)
-//                else { preconditionFailure("Expected a valid index") }
-//
-//            mutableShortcutItem.localizedTitle = "New Title"
-//            shortcutItems[index] = mutableShortcutItem
-//            UIApplication.shared.shortcutItems = shortcutItems
-//        }
+        /// change existing ShortcutItems
+        var shortcutItems = UIApplication.shared.shortcutItems ?? []
+        if let existingShortcutItem = shortcutItems.first {
+            guard let mutableShortcutItem = existingShortcutItem.mutableCopy() as? UIMutableApplicationShortcutItem
+                else { preconditionFailure("Expected a UIMutableApplicationShortcutItem") }
+            guard let index = shortcutItems.index(of: existingShortcutItem)
+                else { preconditionFailure("Expected a valid index") }
 
+            mutableShortcutItem.localizedTitle = "New Title"
+            shortcutItems[index] = mutableShortcutItem
+            UIApplication.shared.shortcutItems = shortcutItems
+        }
+
+        /// for dynamic quick actions only
+        print("---", UIApplication.shared.shortcutItems ?? [])
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
