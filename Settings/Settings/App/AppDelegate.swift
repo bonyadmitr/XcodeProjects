@@ -143,32 +143,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func registerShortcutItemsIfNeed() {
-        guard
-            UIApplication.shared.shortcutItems?.isEmpty == true,
-            UIScreen.main.traitCollection.forceTouchCapability == .available
-        else {
-            /// Fall back to other non 3D Touch features
-            return
-        }
-        
-        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.first.rawValue, localizedTitle: "First vc", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
-        
-        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: "Settings", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
-        
-        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
-    }
-    
-    private func roundWindowCorners() {
-        guard let window = window else {
-            assertionFailure()
-            return
-        }
-        window.clipsToBounds = true
-        window.layer.cornerRadius = 5
-        window.backgroundColor = UIColor.black
-    }
-    
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         /// Alternatively, a shortcut item may be passed in through this delegate method if the app was
         /// still in memory when the Home screen quick action was used. Again, store it for processing.
@@ -176,6 +150,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// apple sample code dont use completionHandler.
         completionHandler(handleQuickAction(shortcutItem))
+    }
+    
+    private func registerShortcutItemsIfNeed() {
+        guard
+            UIApplication.shared.shortcutItems?.isEmpty == true,
+            UIScreen.main.traitCollection.forceTouchCapability == .available
+            else {
+                /// Fall back to other non 3D Touch features
+                return
+        }
+        
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.first.rawValue, localizedTitle: "First vc", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
+        
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: "Settings", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
     }
     
     private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
@@ -195,6 +185,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    private func roundWindowCorners() {
+        guard let window = window else {
+            assertionFailure()
+            return
+        }
+        window.clipsToBounds = true
+        window.layer.cornerRadius = 5
+        window.backgroundColor = UIColor.black
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -408,10 +408,8 @@ extension AppDelegate {
     }
 }
 
-extension NSNotification.Name {
-    static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
-}
-
+// MARK: - UITraitEnvironment
+/// need only for traitCollectionDidChange
 extension AppDelegate: UITraitEnvironment {
     var traitCollection: UITraitCollection {
         return UIScreen.main.traitCollection
@@ -420,4 +418,8 @@ extension AppDelegate: UITraitEnvironment {
     func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         registerShortcutItemsIfNeed()
     }
+}
+
+extension NSNotification.Name {
+    static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
 }
