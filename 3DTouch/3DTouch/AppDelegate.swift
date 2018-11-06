@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ = handleQuickAction(shortcutItem)
         }
         
+        setupShortcutItems()
+        
         return true
     }
     
@@ -43,6 +45,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// apple sample code dont use completionHandler.
         completionHandler(handleQuickAction(shortcutItem))
+    }
+    
+    // MARK: - Quick Actions (3d touch in app icon)
+    /// https://developer.apple.com/documentation/uikit/peek_and_pop/add_home_screen_quick_actions
+    /// https://developer.apple.com/documentation/uikit/uiapplicationshortcutitem
+    /// ru: https://habr.com/post/271291/
+    /// Quick Actions system icons
+    /// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
+    ///
+    /// You don’t need to limit the number of quick actions provided to the shortcutItems property
+    /// because system displays only the number of items that fit the screen.
+    /// (from me) max number of ShortcutItems (static + dynamic) = 4 (others will not be displayes)
+    /// static quick actions are shown first, starting at the topmost position in the list
+    /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
+    private func setupShortcutItems() {
+        guard
+            UIApplication.shared.shortcutItems?.isEmpty == true,
+            UIScreen.main.traitCollection.forceTouchCapability == .available
+        else {
+            /// Fall back to other non 3D Touch features
+            return
+        }
+        
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.some1.rawValue, localizedTitle: "Some 1")
+        /// for this needs UIMutableApplicationShortcutItem instead of UIApplicationShortcutItem
+        //newShortcutItem1.icon = UIApplicationShortcutIcon(templateImageName: "")
+        
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.some2.rawValue, localizedTitle: "Some 2", localizedSubtitle: "Subtitle", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
+        
+        /// don't append. they are saved
+        /// beter call this logic only once for first app launch after installation
+        print("--- shortcutItems?.count: ", UIApplication.shared.shortcutItems?.count ?? 0)
+        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
+        
+        /// change existing ShortcutItems
+        var shortcutItems = UIApplication.shared.shortcutItems ?? []
+        if let existingShortcutItem = shortcutItems.first {
+            guard let mutableShortcutItem = existingShortcutItem.mutableCopy() as? UIMutableApplicationShortcutItem
+                else { preconditionFailure("Expected a UIMutableApplicationShortcutItem") }
+            guard let index = shortcutItems.index(of: existingShortcutItem)
+                else { preconditionFailure("Expected a valid index") }
+            
+            mutableShortcutItem.localizedTitle = "New Title"
+            shortcutItems[index] = mutableShortcutItem
+            UIApplication.shared.shortcutItems = shortcutItems
+        }
+        
+        /// for dynamic quick actions only
+        print("---", UIApplication.shared.shortcutItems ?? [])
     }
     
     private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
@@ -105,3 +156,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: - UITraitEnvironment
+/// need only for traitCollectionDidChange
+extension AppDelegate: UITraitEnvironment {
+    var traitCollection: UITraitCollection {
+        return UIScreen.main.traitCollection
+    }
+    
+    func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setupShortcutItems()
+    }
+}
