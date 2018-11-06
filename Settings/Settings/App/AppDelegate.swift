@@ -77,6 +77,11 @@ import UIKit
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
 // TODO: about header theme appearance
 
+enum Shortcut: String {
+    case first
+    case settings
+}
+
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -124,7 +129,34 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         /// and add label text color setting in all tableViews
         NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
         
+        
+        
+        /// quick action can be handled from "didFinishLaunchingWithOptions" (at launch)
+        /// or "performActionFor shortcutItem:" (when in memory)
+        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+            //shortcutItemToProcess = shortcutItem
+            _ = handleQuickAction(shortcutItem)
+        }
+        
+        registerShortcutItemsIfNeed()
+        
         return true
+    }
+    
+    private func registerShortcutItemsIfNeed() {
+        guard
+            UIApplication.shared.shortcutItems?.isEmpty == true,
+            UIScreen.main.traitCollection.forceTouchCapability == .available
+        else {
+            /// Fall back to other non 3D Touch features
+            return
+        }
+        
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.first.rawValue, localizedTitle: "First vc", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
+        
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: "Settings", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
     }
     
     private func roundWindowCorners() {
@@ -135,6 +167,34 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.clipsToBounds = true
         window.layer.cornerRadius = 5
         window.backgroundColor = UIColor.black
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        /// Alternatively, a shortcut item may be passed in through this delegate method if the app was
+        /// still in memory when the Home screen quick action was used. Again, store it for processing.
+        //shortcutItemToProcess = shortcutItem
+        
+        /// apple sample code dont use completionHandler.
+        completionHandler(handleQuickAction(shortcutItem))
+    }
+    
+    private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        guard
+            let shortcutType = Shortcut(rawValue: shortcutItem.type),
+            let tabBarVC = window?.rootViewController as? UITabBarController
+        else {
+            assertionFailure()
+            return false
+        }
+        
+        switch shortcutType {
+        case .first:
+            tabBarVC.selectedIndex = 0
+        case .settings:
+            tabBarVC.selectedIndex = 1
+        }
+        
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -350,4 +410,14 @@ extension AppDelegate {
 
 extension NSNotification.Name {
     static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
+}
+
+extension AppDelegate: UITraitEnvironment {
+    var traitCollection: UITraitCollection {
+        return UIScreen.main.traitCollection
+    }
+    
+    func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        registerShortcutItemsIfNeed()
+    }
 }
