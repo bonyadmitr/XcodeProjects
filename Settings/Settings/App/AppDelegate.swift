@@ -76,6 +76,7 @@ import UIKit
 
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
 // TODO: about header theme appearance
+// TODO: check traitCollectionDidChange in background (user enabled 3d touch)
 
 enum Shortcut: String {
     case first
