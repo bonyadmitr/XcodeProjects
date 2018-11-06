@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// user can turn off 3D Touch while your app is running
+/// https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/Adopting3DTouchOniPhone/index.html
 /// https://developer.apple.com/documentation/uikit/peek_and_pop
 class ViewController: UIViewController {
     
@@ -55,7 +57,7 @@ class ViewController: UIViewController {
     ///
     /// You don’t need to limit the number of quick actions provided to the shortcutItems property
     /// because system displays only the number of items that fit the screen.
-    /// (from me) max number of ShortcutItems (static + dynamic) = 4
+    /// (from me) max number of ShortcutItems (static + dynamic) = 4 (others will not be displayes)
     /// static quick actions are shown first, starting at the topmost position in the list
     /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
     private func setupShortcutItems() {
@@ -128,8 +130,16 @@ class ViewController: UIViewController {
 
 extension ViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        let vc = PreviewController()
-        return vc
+        if previewingContext.sourceView == pushFromCodeButton {
+            let vc = PreviewController()
+            /// can be setted in storyboard (Use Preferred Explicit Size)
+            /// set size for previre vc in 3d touch
+            /// set width = 0 to stretch up to the screen width
+            vc.preferredContentSize = CGSize(width: 100, height: 100)
+            return vc
+        }
+        
+        return nil
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
