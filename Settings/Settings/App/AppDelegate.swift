@@ -157,9 +157,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         guard
             UIApplication.shared.shortcutItems?.isEmpty == true,
             UIScreen.main.traitCollection.forceTouchCapability == .available
-            else {
-                /// Fall back to other non 3D Touch features
-                return
+        else {
+            /// Fall back to other non 3D Touch features
+            return
         }
         
         let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.first.rawValue, localizedTitle: "First vc", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
