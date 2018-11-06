@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet private weak var forceLabel: UILabel!
     @IBOutlet private weak var pushFromCodeButton: UIButton!
     
+    /// https://developer.apple.com/library/archive/samplecode/AppChat/Introduction/Intro.html
+    //@available(iOS 10.0, *)
+    //private lazy var previewObject = UIPreviewInteraction(view: pushFromCodeButton)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +33,13 @@ class ViewController: UIViewController {
         // MARK: - Peek and Pop (3d touch preview)
         /// https://developer.apple.com/documentation/uikit/peek_and_pop/implementing_peek_and_pop
         registerForPreviewing(with: self, sourceView: pushFromCodeButton)
+        /// don't need manualy
+        /// previewVC is result of registerForPreviewing
+        /// unregisterForPreviewing(withContext: previewVC)
+        
+        //if #available(iOS 10.0, *) {
+        //    previewObject.delegate = self
+        //}
     }
     
     @IBAction private func pushFromCode(_ sender: UIButton) {
@@ -146,6 +157,17 @@ extension ViewController: UIViewControllerPreviewingDelegate {
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
+
+//@available(iOS 10.0, *)
+//extension ViewController: UIPreviewInteractionDelegate {
+//    func previewInteraction(_ previewInteraction: UIPreviewInteraction, didUpdatePreviewTransition transitionProgress: CGFloat, ended: Bool) {
+//        print(transitionProgress)
+//    }
+//
+//    func previewInteractionDidCancel(_ previewInteraction: UIPreviewInteraction) {
+//
+//    }
+//}
 
 
 import UIKit
