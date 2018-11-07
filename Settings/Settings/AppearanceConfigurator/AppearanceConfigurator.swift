@@ -338,7 +338,7 @@ extension AppearanceConfigurator {
                                          tabBarColor: nil,
                                          cellSelectedColor: UIColor.lightGray),
                          AppearanceTheme(saveId: "1",
-                                         name: "Black and White",
+                                         name: "Default Black",
                                          windowTintColor: UIColor.black,
                                          backgroundColor: UIColor.white,
                                          secondaryBackgroundColor: Colors.tableViewBackground,
