@@ -126,9 +126,10 @@ final class AppearanceConfigurator: MulticastHandler {
         
         /// set cellSelectedColor
         /// https://stackoverflow.com/a/32938456/5893286
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = theme.cellSelectedColor
-        UITableViewCell.appearance().selectedBackgroundView = backgroundView
+        /// not working deselecting animation (need to set for every cell)
+//        let backgroundView = UIView()
+//        backgroundView.backgroundColor = theme.cellSelectedColor
+//        UITableViewCell.appearance().selectedBackgroundView = backgroundView
         
         UITableViewCell.appearance().backgroundColor = theme.backgroundColor
         UITableView.appearance().backgroundColor = theme.secondaryBackgroundColor
