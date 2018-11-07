@@ -115,6 +115,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         FloatingManager.shared.presentingController = navVC
         #endif
         
+        LocalizationManager.shared.updateIsCurrentLanguageRTL()
         roundWindowCorners()
         
         LocalizationManager.shared.register(self)

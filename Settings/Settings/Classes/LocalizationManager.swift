@@ -56,7 +56,7 @@ public final class LocalizationManager: MulticastHandler {
 //        return currentLanguage == "he" || currentLanguage == "ar"
 //    }
     
-    private func updateIsCurrentLanguageRTL() {
+    func updateIsCurrentLanguageRTL() {
         isCurrentLanguageRTL = Locale.characterDirection(forLanguage: currentLanguage) == .rightToLeft
     }
     
