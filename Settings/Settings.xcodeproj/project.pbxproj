@@ -28,6 +28,7 @@
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
 		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
 		CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE87B2162653500E16E4B /* UIColor+Default.swift */; };
+		CE57D786219323C00046A979 /* UISplitViewController+DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */; };
 		CE77AB1A216353DC00728C64 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE77AB19216353DB00728C64 /* Settings.bundle */; };
 		CE77AB1C2163546200728C64 /* SettingsBundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */; };
 		CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */; };
@@ -81,6 +82,7 @@
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
 		CE0FE87B2162653500E16E4B /* UIColor+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Default.swift"; sourceTree = "<group>"; };
+		CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+DisplayMode.swift"; sourceTree = "<group>"; };
 		CE77AB19216353DB00728C64 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleManager.swift; sourceTree = "<group>"; };
 		CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				CE77AB1D2163588F00728C64 /* UIApplication+Version.swift */,
 				CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */,
 				CE0FE87B2162653500E16E4B /* UIColor+Default.swift */,
+				CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */,
+				CE57D786219323C00046A979 /* UISplitViewController+DisplayMode.swift in Sources */,
 				CE77AB1E2163588F00728C64 /* UIApplication+Version.swift in Sources */,
 				CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */,
 				66D380952163300700EFA49C /* Logger.swift in Sources */,
