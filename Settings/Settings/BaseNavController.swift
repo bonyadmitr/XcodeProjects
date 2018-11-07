@@ -8,36 +8,6 @@
 
 import UIKit
 
-import UIKit
-
-final class TabBarController: UITabBarController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        guard traitCollection.forceTouchCapability == .available else {
-//            /// Fall back to other non 3D Touch features
-//            return
-//        }
-//
-////        tabBar.items?.compactMap { item in
-////            item.title
-////        }
-//
-//        guard
-//            let viewControllers = viewControllers,
-//            viewControllers.count >= 2,
-//            let vc1 = viewControllers[0] as? ViewController
-//        else {
-//            assertionFailure()
-//            return
-//        }
-//
-//
-    }
-    
-}
-
 final class BaseNavController: UINavigationController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

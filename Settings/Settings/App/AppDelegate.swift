@@ -83,58 +83,9 @@ enum Shortcut: String {
     case settings
 }
 
-enum AppKeyCommand: String {
-    case first = "1"
-    case settings = "2"
-}
-extension AppKeyCommand {
-    var discoverabilityTitle: String {
-        let title: String
-        switch self {
-        case .first:
-            title = "First tab"
-        case .settings:
-            title = "Settings tab"
-        }
-        return title
-    }
-}
-
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    /// input: "\u{8}" for backspace(delete) key
-    /// https://stackoverflow.com/a/27608606
-    /// need bcz a lot of calls of "var keyCommands"
-    private lazy var privateLazyKeyCommands = [AppKeyCommand.first, .settings].map { keyComand in
-        UIKeyCommand(input: keyComand.rawValue,
-                     modifierFlags: .command,
-                     action: #selector(keyCommandPressed),
-                     discoverabilityTitle: keyComand.discoverabilityTitle)
-    }
-    
-    override var keyCommands: [UIKeyCommand]? {
-        return privateLazyKeyCommands
-    }
-    
-    @objc private func keyCommandPressed(_ sender: UIKeyCommand) {
-        guard
-            let keyinput = sender.input,
-            let keyCommand = AppKeyCommand(rawValue: keyinput),
-            let tabBarVC = window?.rootViewController as? UITabBarController
-        else {
-            assertionFailure()
-            return
-        }
-        
-        switch keyCommand {
-        case .first:
-            tabBarVC.selectedIndex = 0
-        case .settings:
-            tabBarVC.selectedIndex = 1
-        }
-    }
     
     var window: UIWindow?
     var isApplicationRestored = false
