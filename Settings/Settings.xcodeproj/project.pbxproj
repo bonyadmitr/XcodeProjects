@@ -175,6 +175,24 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
+		CE11D99221935A50000F8AD9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
+				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
+				66AA3EC3217905D3000E549D /* AboutController.swift */,
+				CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */,
+				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
+				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
+				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
+				CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */,
+				CE57D7872193257D0046A979 /* TabBarController.swift */,
+				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
+				CED51B5C218DFE540050734A /* BaseSplitController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		CEEEB778215D0949003C5BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -196,17 +214,7 @@
 			children = (
 				CEEEB7AC215D1104003C5BD8 /* App */,
 				CEEEB7B6215DF4B7003C5BD8 /* Main.storyboard */,
-				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
-				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
-				66AA3EC3217905D3000E549D /* AboutController.swift */,
-				CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */,
-				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
-				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
-				66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */,
-				CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */,
-				CE57D7872193257D0046A979 /* TabBarController.swift */,
-				CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */,
-				CED51B5C218DFE540050734A /* BaseSplitController.swift */,
+				CE11D99221935A50000F8AD9 /* Controllers */,
 				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
 				662D0D3C21616B10008D244E /* DetailCell.xib */,
 				662D0D3B21616B10008D244E /* DetailCell.swift */,
