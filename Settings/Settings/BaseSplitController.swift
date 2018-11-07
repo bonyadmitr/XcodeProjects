@@ -59,6 +59,15 @@ extension BaseSplitController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
+    
+    func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+        switch svc.displayMode {
+        case .primaryHidden:
+            return .allVisible
+        case .allVisible, .primaryOverlay, .automatic:
+            return .primaryHidden
+        }
+    }
 }
 
 // MARK: - UIKeyCommands

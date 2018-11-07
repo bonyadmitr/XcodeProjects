@@ -224,7 +224,7 @@ extension AppDelegate: LocalizationManagerDelegate {
         
         guard
             let window = window,
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController,
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController,
             let tabBarControllers = tabBarVC.viewControllers
         else {
             assertionFailure()
@@ -306,12 +306,11 @@ extension AppDelegate: LocalizationManagerDelegate {
 
 extension AppDelegate {
     @objc private func largeTextAccessibilityDidChanged() {
-
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard
             let window = window,
-            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController
+            let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
         else {
             assertionFailure()
             return
