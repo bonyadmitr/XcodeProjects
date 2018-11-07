@@ -108,10 +108,13 @@ public final class LocalizationManager: MulticastHandler {
     
     /// will change view directionality to current language
     private func forceLanguageDirection() {
+        let cellLabel = UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self])
         if isCurrentLanguageRTL {
             UIView.appearance().semanticContentAttribute = .forceRightToLeft
+            cellLabel.textAlignment = .right
         } else {
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            cellLabel.textAlignment = .left
         }
         
         /// maybe will be need
