@@ -177,7 +177,6 @@ final class AboutHeader: UITableViewHeaderFooterView {
     let label: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = UIColor.black
         label.textAlignment = .center
         return label
     }()
@@ -185,10 +184,18 @@ final class AboutHeader: UITableViewHeaderFooterView {
     let versionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textColor = UIColor.black
         label.textAlignment = .center
         return label
     }()
+    
+    /// for UIAppearance (not working with UIViews)
+    @objc dynamic var color: UIColor = .black {
+        didSet {
+            imageView.tintColor = color /// can be used window.tintColor (remove this set)
+            label.textColor = color
+            versionLabel.textColor = color
+        }
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)

@@ -152,6 +152,8 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UIActivityIndicatorView.appearance().color = theme.textColor
         
+        AboutHeader.appearance().color = theme.textColor
+        
         currentTheme = theme
         delegates.invoke { $0.didApplied(theme: theme) }
         updateAppearance()
