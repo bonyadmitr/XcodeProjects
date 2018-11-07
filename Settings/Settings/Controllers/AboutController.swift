@@ -62,6 +62,11 @@ final class AboutController: UIViewController {
         view.addSubview(tableView)
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        deselectRowIfNeed()
+//    }
+    
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         UIView.performWithoutAnimation {
@@ -69,6 +74,12 @@ final class AboutController: UIViewController {
             self.tableView.endUpdates()
         }
     }
+    
+//    private func deselectRowIfNeed() {
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//    }
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",

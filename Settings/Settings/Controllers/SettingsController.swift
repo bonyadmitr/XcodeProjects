@@ -65,7 +65,17 @@ final class SettingsController: UIViewController, BackButtonActions {
         super.viewDidLoad()
         
         //removeBackButtonTitle()
+        
+//        if tableView.indexPathForSelectedRow == nil, splitViewController?.isCollapsed == false {
+//            let indexPath = IndexPath(row: 0, section: 0)
+//            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+//        }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        deselectRowIfNeed()
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" || segue.identifier == "detail!",
@@ -84,7 +94,15 @@ final class SettingsController: UIViewController, BackButtonActions {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
+        
+//        deselectRowIfNeed()
     }
+    
+//    private func deselectRowIfNeed() {
+//        if splitViewController?.isCollapsed == true, let indexPath = tableView.indexPathForSelectedRow {
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//    }
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
@@ -184,3 +202,37 @@ extension SettingsController: UITableViewDelegate {
         }
     }
 }
+
+// MARK: - UIStateRestoration
+//extension SettingsController {
+//
+//    /// Constants for state restoration.
+//    private static let restoreTableViewOffet = "restoreTableViewOffet"
+//    private static let restoreSelectedIndexPath = "restoreSelectedIndexPath"
+//
+//    override func encodeRestorableState(with coder: NSCoder) {
+//        super.encodeRestorableState(with: coder)
+//
+//        guard isViewLoaded else {
+//            return
+//        }
+//
+//        coder.encode(tableView.contentOffset, forKey: type(of: self).restoreTableViewOffet)
+//        coder.encode(tableView.indexPathForSelectedRow, forKey: type(of: self).restoreSelectedIndexPath)
+//    }
+//
+//    override func decodeRestorableState(with coder: NSCoder) {
+//        super.decodeRestorableState(with: coder)
+//        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
+//
+//        let contentOffset = coder.decodeCGPoint(forKey: type(of: self).restoreTableViewOffet)
+//        tableView.setContentOffset(contentOffset, animated: false)
+//
+//
+//
+////        let indexPath = coder.decodeObject(forKey: type(of: self).restoreSelectedIndexPath) as? IndexPath ?? IndexPath(row: 0, section: 0)
+//        if let indexPath = coder.decodeObject(forKey: type(of: self).restoreSelectedIndexPath) as? IndexPath {
+//            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
+//        }
+//    }
+//}

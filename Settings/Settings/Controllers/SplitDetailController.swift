@@ -41,6 +41,7 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
     }
     
     private func addChildVC() {
+        childVC.removeFromParentVC()
         add(childController: childVC)
     }
 }
@@ -93,7 +94,6 @@ extension SplitDetailController {
             edgesForExtendedLayout = [.bottom]
             
             /// viewDidLoad called first and will add child controller by default
-            childVC.removeFromParentVC()
             addChildVC()
         } else {
             /// called in bcz of splitController
