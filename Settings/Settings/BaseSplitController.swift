@@ -46,15 +46,79 @@ final class BaseSplitController: UISplitViewController {
         preferredDisplayMode = .allVisible
     }
 }
+
+// MARK: - AppearanceConfiguratorDelegate
 extension BaseSplitController: AppearanceConfiguratorDelegate {
     func didApplied(theme: AppearanceTheme) {
         statusBarStyle = theme.barStyle
     }
-    
-    
 }
+
+// MARK: - UISplitViewControllerDelegate
 extension BaseSplitController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
+    }
+}
+
+// MARK: - UIKeyCommands
+extension BaseSplitController {
+    
+    private enum KeyCommands: String {
+        case fullscreen = "f"
+        
+        var discoverabilityTitle: String {
+            switch self {
+            case .fullscreen:
+                return "Full screen"
+            }
+        }
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [KeyCommands.fullscreen].map { keyComand in
+            UIKeyCommand(input: keyComand.rawValue,
+                         modifierFlags: .command,
+                         action: #selector(keyCommandPressed),
+                         discoverabilityTitle: keyComand.discoverabilityTitle)
+        }
+    }
+    
+    @objc private func keyCommandPressed(_ sender: UIKeyCommand) {
+        guard let keyinput = sender.input, let keyCommand = KeyCommands(rawValue: keyinput) else {
+            assertionFailure()
+            return
+        }
+        
+        switch keyCommand {
+        case .fullscreen:
+            toggleDisplayMode()
+        }
+    }
+}
+
+import UIKit
+
+extension UISplitViewController {
+    func toggleDisplayMode() {
+        guard let mode = delegate?.targetDisplayModeForAction?(in: self) else {
+            toggleDisplayModeManual()
+            return
+        }
+        
+        /// 0.3 is too may for this animation
+        UIView.animate(withDuration: 0.2) {
+            self.preferredDisplayMode = mode
+        }
+    }
+    
+    func toggleDisplayModeManual() {
+        UIView.animate(withDuration: 0.2) {
+            if self.displayMode == .allVisible {
+                self.preferredDisplayMode = .primaryHidden
+            } else {
+                self.preferredDisplayMode = .allVisible
+            }
+        }
     }
 }
