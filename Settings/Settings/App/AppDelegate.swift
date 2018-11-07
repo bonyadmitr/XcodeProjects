@@ -45,6 +45,8 @@ import UIKit
 // TODO: fabric analytics?
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
+// TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
+// TODO: check traitCollectionDidChange in background (user enabled 3d touch)
 
 // TODO: POEditor 
 // TODO: POEditor shared localization
@@ -94,9 +96,6 @@ import UIKit
 /// Settings - General - Accessibility - Large Text
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
-
-// TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
-// TODO: check traitCollectionDidChange in background (user enabled 3d touch)
 
 enum Shortcut: String {
     case first
