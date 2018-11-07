@@ -96,7 +96,6 @@ import UIKit
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
-// TODO: about header theme appearance
 // TODO: check traitCollectionDidChange in background (user enabled 3d touch)
 
 enum Shortcut: String {
