@@ -13,17 +13,21 @@ import UIKit
 // Supports 4 languages
 // Supports navigation for RTL languages (Hebrew, Arabic)
 // Language changing without reload
-//
 // Themes of interface
 // Smart keyboard support
 // Supporting Accessibility: Larger Text
 // Supporting Accessibility: VoiceOver
+// Supports 3D touch on app icon (Quick Actions)
+// Supports landscape (horizontal) mode
+// Supports iPad and split screen (controller)
 //
+/// Marketing:
 // No ads
 // Feedback is reading
 // There is no any (auto turn on) statistics
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
+
 
 // TODO: fix restoration layout in appearnce
 // TODO: there is degrease performance after set theme or language a lot of times
