@@ -35,6 +35,7 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         addChildVC()
         //removeBackButtonTitle()
         
+        /// not working in setup func
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
     }
