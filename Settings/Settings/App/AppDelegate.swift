@@ -20,8 +20,10 @@ import UIKit
 // Supports 3D touch on app icon (Quick Actions)
 // Supports landscape (horizontal) mode
 // Supports iPad and split screen (controller)
+// App restoration if system killed it (not user manual)
 //
 /// Marketing:
+// Battery effective
 // No ads
 // Feedback is reading
 // There is no any (auto turn on) statistics
