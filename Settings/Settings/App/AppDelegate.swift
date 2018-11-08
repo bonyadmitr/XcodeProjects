@@ -47,6 +47,7 @@ import UIKit
 // TODO: for release mode shake to send a bug via email
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
 // TODO: check traitCollectionDidChange in background (user enabled 3d touch)
+// TODO: split controller save selected index
 
 // TODO: POEditor 
 // TODO: POEditor shared localization
