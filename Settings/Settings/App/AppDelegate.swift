@@ -45,7 +45,7 @@ import UIKit
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)
-// TODO: crashlitics?
+// TODO: crashlitics? (Crash reports switch)
 // TODO: fabric analytics?
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
@@ -59,9 +59,7 @@ import UIKit
 // https://github.com/willpowell8/LocalizationKit_iOS
 
 // TODO: URL Schemes for tab bar
-// TODO: 3D touch for tab bar
-// TODO: developer apps by (+ can open url)
-//UIApplication.shared.open(scheme: "com.ios://")
+// TODO: Reset to default settings
 
 // TODO: other options in settings:
 //
