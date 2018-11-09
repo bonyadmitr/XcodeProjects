@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 final class Floating {
@@ -36,7 +37,6 @@ final class Floating {
     }
 }
 
-#if DEBUG
 extension UIWindow {
     override open func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake, Floating.showOnShakeMotion, !Floating.isShownOnShake {

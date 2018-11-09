@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 /// https://github.com/remirobert/Dotzu
@@ -56,5 +57,4 @@ extension FloatingManager: FloatingWindowDelegate {
         return controller.shouldReceive(point: point)
     }
 }
-
-
+#endif

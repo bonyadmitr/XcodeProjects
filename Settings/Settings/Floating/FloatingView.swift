@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 protocol FloatingViewDelegate: class {
@@ -58,3 +59,4 @@ final class FloatingView: UIView {
         center = CGPoint(x: originX, y: newOrigin)
     }
 }
+#endif

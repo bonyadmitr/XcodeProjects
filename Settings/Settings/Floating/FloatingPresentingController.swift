@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 final class FloatingPresentingController: UIViewController {
@@ -153,3 +154,4 @@ extension FloatingPresentingController: UITableViewDelegate {
         }
     }
 }
+#endif

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 protocol FloatingWindowDelegate: class {
@@ -31,3 +32,4 @@ final class FloatingWindow: UIWindow {
         return delegate?.isPointEvent(point: point) ?? false
     }
 }
+#endif

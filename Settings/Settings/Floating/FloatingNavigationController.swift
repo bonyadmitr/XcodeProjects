@@ -6,6 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
+#if DEBUG
 import UIKit
 
 final class FloatingNavigationController: UINavigationController {
@@ -30,3 +31,4 @@ final class FloatingNavigationController: UINavigationController {
         dismiss(animated: true, completion: nil)
     }
 }
+#endif
