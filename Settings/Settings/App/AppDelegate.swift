@@ -21,8 +21,10 @@ import UIKit
 // Supports landscape (horizontal) mode
 // Supports iPad and split screen (controller)
 // App restoration if system killed it (not user manual)
+// AppRater by events
 //
 /// Marketing:
+// Fully offline
 // Battery effective
 // No ads
 // Feedback is reading
