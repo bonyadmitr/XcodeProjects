@@ -433,15 +433,16 @@ extension AppDelegate {
 
 // MARK: - UITraitEnvironment
 /// need only for traitCollectionDidChange
-extension AppDelegate: UITraitEnvironment {
-    var traitCollection: UITraitCollection {
-        return UIScreen.main.traitCollection
-    }
-    
-    func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        registerShortcutItemsIfNeed()
-    }
-}
+/// not working
+//extension AppDelegate: UITraitEnvironment {
+//    var traitCollection: UITraitCollection {
+//        return UIScreen.main.traitCollection
+//    }
+//
+//    func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        registerShortcutItemsIfNeed()
+//    }
+//}
 
 extension NSNotification.Name {
     static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
