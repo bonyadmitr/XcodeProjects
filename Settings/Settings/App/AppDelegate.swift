@@ -32,8 +32,8 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
-
-// TODO: fix restoration layout in appearnce
+// TODO: implement and test AppRater logic
+// TODO: fix restoration layout in appearance
 // TODO: there is degrease performance after set theme or language a lot of times
 // TODO: split controller for iPhone+ in landscape after first any select don't reset to main vc for rotating to portrait orientation
 
