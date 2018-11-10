@@ -12,10 +12,14 @@ typealias BoolHandler = (Bool) -> Void
 
 final class RateAppDisplayManager {
     
-    private let rateCounter = RateCounter(untilPromptDays: 5,
-                                          launches: 5,
-                                          significantEvents: 2,
-                                          foregroundAppears: 3)
+    private let rateCounter: RateCounter
+    
+    init(untilPromptDays days: Int, launches: Int, significantEvents: Int, foregroundAppears: Int) {
+        rateCounter = RateCounter(untilPromptDays: days,
+                                  launches: launches,
+                                  significantEvents: significantEvents,
+                                  foregroundAppears: foregroundAppears)
+    }
     
     private weak var controller: UIViewController?
     

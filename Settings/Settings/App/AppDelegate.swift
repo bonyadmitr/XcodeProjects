@@ -112,7 +112,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var isApplicationRestored = false
     
-    private let rateAppDisplayManager = RateAppDisplayManager()
+    private let rateAppDisplayManager = RateAppDisplayManager(untilPromptDays: 7,
+                                                              launches: 10,
+                                                              significantEvents: 3,
+                                                              foregroundAppears: 15)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
