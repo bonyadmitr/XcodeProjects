@@ -93,6 +93,8 @@ final class RateCounter {
     
     weak var delegate: RateCounterDelegate?
     
+    var isDebug = false
+    
     /// pass 0 to skip check
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int, foregroundAppears: Int) {
         daysLimit = days
@@ -132,6 +134,10 @@ final class RateCounter {
     /// HaveBeenMet
     func checkConditionsForFulfill() {
         
+        if isDebug {
+            conditionsAreFulfilled()
+        }
+        
         if isDisabled {
             return
         }
@@ -153,7 +159,10 @@ final class RateCounter {
             return
         }
         
-        /// conditions are fulfilled
+        conditionsAreFulfilled()
+    }
+    
+    func conditionsAreFulfilled() {
         delegate?.rateCounterConditionsFulfilled()
     }
     

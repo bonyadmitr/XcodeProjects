@@ -112,6 +112,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var isApplicationRestored = false
     
+    private let rateAppDisplayManager = RateAppDisplayManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         #if DEBUG
@@ -163,6 +165,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         registerShortcutItemsIfNeed()
+        
+        rateAppDisplayManager.startObserving(presentIn: window?.rootViewController)
+        //rateAppDisplayManager.isDebug = true
         
         return true
     }

@@ -19,18 +19,34 @@ final class RateAppDisplayManager {
     
     private weak var controller: UIViewController?
     
-    func startObserving(presentIn controller: UIViewController) {
+    
+    var isDebug: Bool {
+        get {
+            return rateCounter.isDebug
+        }
+        set {
+            rateCounter.isDebug = newValue
+            
+            if newValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.rateCounter.conditionsAreFulfilled()
+                }
+            }
+        }
+    }
+    
+    func startObserving(presentIn controller: UIViewController?) {
         self.controller = controller
         rateCounter.delegate = self
     }
     
     func presentAlert() {
         let vc = UIAlertController(title: "Do you like the app?", message: "Rate us, please, to share it with others!", preferredStyle: .alert)
-        vc.addAction(.init(title: "Rate", style: .default) { [weak self] _ in
+        vc.addAction(.init(title: "Rate now", style: .default) { [weak self] _ in
             RateAppManager.googleApp.rateInAppOrRedirectToStore()
             self?.rateCounter.isDisabled = true
         })
-        vc.addAction(.init(title: "Remind me later", style: .cancel) { [weak self] _ in
+        vc.addAction(.init(title: "Remind me later", style: .default) { [weak self] _ in
             self?.rateCounter.remindMeLater(for: 7)
         })
         vc.addAction(.init(title: "Don't show it again", style: .destructive)  { [weak self] _ in
