@@ -10,6 +10,42 @@ import StoreKit
 
 typealias BoolHandler = (Bool) -> Void
 
+final class RateAppDisplayManager {
+    
+    private let rateCounter = RateCounter(untilPromptDays: 5,
+                                          launches: 5,
+                                          significantEvents: 2,
+                                          foregroundAppears: 3)
+    
+    private weak var controller: UIViewController?
+    
+    func startObserving(presentIn controller: UIViewController) {
+        self.controller = controller
+        rateCounter.delegate = self
+    }
+    
+    func presentAlert() {
+        let vc = UIAlertController(title: "Do you like the app?", message: "Rate us, please, to share it with others!", preferredStyle: .alert)
+        vc.addAction(.init(title: "Rate", style: .default) { [weak self] _ in
+            RateAppManager.googleApp.rateInAppOrRedirectToStore()
+            self?.rateCounter.isDisabled = true
+        })
+        vc.addAction(.init(title: "Remind me later", style: .cancel) { [weak self] _ in
+            self?.rateCounter.remindMeLater(for: 7)
+        })
+        vc.addAction(.init(title: "Don't show it again", style: .destructive)  { [weak self] _ in
+            self?.rateCounter.isDisabled = true
+        })
+        controller?.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension RateAppDisplayManager: RateCounterDelegate {
+    func rateCounterConditionsFulfilled() {
+        presentAlert()
+    }
+}
+
 final class RateAppManager {
     
     private let appId: String

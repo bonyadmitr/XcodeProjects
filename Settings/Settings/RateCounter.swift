@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol RateCounterDelegate: class {
+    func rateCounterConditionsFulfilled()
+}
+
 final class RateCounter {
     
     private enum Keys {
@@ -15,6 +19,8 @@ final class RateCounter {
         static let foregroundAppearsCount = "RateCounter.foregroundAppearsCount"
         static let eventsCount = "RateCounter.eventsCount"
         static let firstUseTimeInterval = "RateCounter.firstUseTimeInterval"
+        static let isDisabled = "RateCounter.isDisabled"
+        static let remindMeLaterDays = "RateCounter.remindMeLaterDays"
     }
     
     private let daysLimit: Int
@@ -51,6 +57,24 @@ final class RateCounter {
         }
     }
     
+    var isDisabled: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.isDisabled)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.isDisabled)
+        }
+    }
+    
+    private var remindMeLaterDays: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.remindMeLaterDays)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.remindMeLaterDays)
+        }
+    }
+    
     private var firstUseTimeInterval: TimeInterval {
         if let firstUseTimeInterval = UserDefaults.standard.object(forKey: Keys.firstUseTimeInterval) as? Double {
             return firstUseTimeInterval
@@ -61,7 +85,13 @@ final class RateCounter {
         }
     }
     
-    private lazy var daysLimitTimeInterval: TimeInterval = firstUseTimeInterval + TimeInterval(daysLimit * 3600 * 24)
+    private lazy var daysLimitTimeInterval: TimeInterval = firstUseTimeInterval + timeInterval(from: daysLimit) + timeInterval(from: remindMeLaterDays)
+    
+    private func timeInterval(from days: Int) -> TimeInterval {
+        return TimeInterval(days * 3600 * 24)
+    }
+    
+    weak var delegate: RateCounterDelegate?
     
     /// pass 0 to skip check
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int, foregroundAppears: Int) {
@@ -85,44 +115,58 @@ final class RateCounter {
     private func subscribeForegroundAppears() {
         token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
             self?.foregroundAppearsCount += 1
+            self?.checkConditionsForFulfill()
         }
     }
     
     func appLaunched() {
         launchesCount += 1
+        checkConditionsForFulfill()
     }
     
     func incrementEventsCount() {
         eventsCount += 1
+        checkConditionsForFulfill()
     }
     
     /// HaveBeenMet
-    func areConditionsFulfilled() -> Bool {
+    func checkConditionsForFulfill() {
+        
+        if isDisabled {
+            return
+        }
         
         /// this check can be added to appLaunched func
         if launchesCount < launchesLimit {
-            return false
+            return
         }
         
         if eventsCount < eventsLimit {
-            return false
+            return
         }
         
         if Date().timeIntervalSince1970 < daysLimitTimeInterval {
-            return false
+            return
         }
         
         if foregroundAppearsCount < foregroundAppearsLimit {
-            return false
+            return
         }
         
-        return true
+        /// conditions are fulfilled
+        delegate?.rateCounterConditionsFulfilled()
     }
     
     func resetLaunchesEventsAndForegroundAppears() {
         launchesCount = 0
         eventsCount = 0
         foregroundAppearsCount = 0
+        isDisabled = false
+    }
+    
+    func remindMeLater(for days: Int) {
+        remindMeLaterDays += days
+        daysLimitTimeInterval += timeInterval(from: days)
     }
 }
 
