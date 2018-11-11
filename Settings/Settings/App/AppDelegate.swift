@@ -170,6 +170,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         registerShortcutItemsIfNeed()
         
         rateAppDisplayManager.startObserving(presentIn: window?.rootViewController)
+        rateAppDisplayManager.rateCounter.appLaunched()
         //rateAppDisplayManager.isDebug = true
         
         return true

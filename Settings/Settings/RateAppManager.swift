@@ -12,7 +12,7 @@ typealias BoolHandler = (Bool) -> Void
 
 final class RateAppDisplayManager {
     
-    private let rateCounter: RateCounter
+    let rateCounter: RateCounter
     
     init(untilPromptDays days: Int, launches: Int, significantEvents: Int, foregroundAppears: Int) {
         rateCounter = RateCounter(untilPromptDays: days,
