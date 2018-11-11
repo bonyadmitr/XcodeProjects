@@ -26,6 +26,10 @@ final class PrivacyPolicyController: UIViewController {
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false
         webView.navigationDelegate = self
+        
+        /// there is a bug for iOS 9
+        /// https://stackoverflow.com/a/32843700/5893286
+        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
         return webView
     }()
     
