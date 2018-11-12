@@ -3,7 +3,7 @@
 
 ## without pod
 if which swiftgen >/dev/null; then
-    swiftgen strings "$PROJECT_DIR/Settings/App/en.lproj/Localizable.strings" --output "$PROJECT_DIR/Settings/App/L10n.swift" -t structured-swift3
+    swiftgen strings "$PROJECT_DIR/Settings/App/en.lproj/Localizable.strings" --output "$PROJECT_DIR/Settings/App/L10n.swift" -p "$PROJECT_DIR/Scripts/structured-swift3_my.stencil"
 else
     echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
 fi
