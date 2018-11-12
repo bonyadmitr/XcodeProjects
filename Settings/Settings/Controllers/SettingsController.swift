@@ -136,28 +136,28 @@ extension SettingsController: UITableViewDelegate {
         switch raw {
         case .select:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "language".localized
+            cell.textLabel?.text = L10n.language
         case .appearance:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "appearance".localized
+            cell.textLabel?.text = L10n.appearance
         case .feedback:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Send feedback"
+            cell.textLabel?.text = L10n.sendFeedback
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "Privacy Policy"
+            cell.textLabel?.text = L10n.privacyPolicy
         case .rateApp:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Rate Us"
+            cell.textLabel?.text = L10n.rateUs
         case .appStorePage:
             cell.accessoryType = .none
-            cell.textLabel?.text = "Open in App Store"
+            cell.textLabel?.text = L10n.openInAppStore
         case .developerPage:
             cell.accessoryType = .none
-            cell.textLabel?.text = "More apps from me"
+            cell.textLabel?.text = L10n.moreAppsFromMe
         case .about:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = "About"
+            cell.textLabel?.text = L10n.about
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -196,9 +196,9 @@ extension SettingsController: UITableViewDelegate {
         
         switch section.type {
         case .language:
-            return "language".localized
+            return L10n.language
         case .support:
-            return "support".localized
+            return L10n.support
         }
     }
 }
