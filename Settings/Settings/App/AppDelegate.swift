@@ -36,9 +36,6 @@ import UIKit
 // TODO: split controller for iPhone+ in landscape after first any select don't reset to main vc for rotating to portrait orientation
 
 // TODO: large titles support
-// TODO: window round coners 
-// TODO: swiftgen strings file
-// TODO: UIKeyCommand (from SplitController project)
 // TODO: UISelectionFeedbackGenerator
 // TODO: log JailbreakChecker
 // TODO: sounds on tap
