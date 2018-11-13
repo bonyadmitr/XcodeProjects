@@ -34,30 +34,29 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
-// TODO: there is degrease performance after set theme or language a lot of times
-// TODO: split controller for iPhone+ in landscape after first any select don't reset to main vc for rotating to portrait orientation
-
 // TODO: large titles support
 // TODO: UISelectionFeedbackGenerator
-// TODO: log JailbreakChecker
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)
-// TODO: crashlitics? (Crash reports switch)
-// TODO: fabric analytics?
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
-// TODO: check traitCollectionDidChange in background (user enabled 3d touch)
-// TODO: split controller save selected index
 
-// TODO: POEditor 
 // TODO: POEditor shared localization
 // TODO: real time localization by
 // https://github.com/willpowell8/LocalizationKit_iOS
 
+/// Not necessary right now
+// TODO: there is degrease performance after set theme or language a lot of times
 // TODO: URL Schemes for tab bar
+// TODO: handling manager for URL Schemes + Quick Actions + UIKeyCommand + Notifcations
 // TODO: Reset to default settings
 // TODO: fix restoration layout for large texts
+// TODO: check traitCollectionDidChange in background (user enabled 3d touch) (traitCollectionDidChange in AppDelegate don't work)
+// TODO: split controller save selected index
+// TODO: crashlitics? (Crash reports switch)
+// TODO: fabric analytics?
+// TODO: log JailbreakChecker
 
 // TODO: other options in settings:
 //
@@ -437,19 +436,6 @@ extension AppDelegate {
         NotificationCenter.default.post(name: .willEncodeRestorableState, object: nil)
     }
 }
-
-// MARK: - UITraitEnvironment
-/// need only for traitCollectionDidChange
-/// not working
-//extension AppDelegate: UITraitEnvironment {
-//    var traitCollection: UITraitCollection {
-//        return UIScreen.main.traitCollection
-//    }
-//
-//    func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        registerShortcutItemsIfNeed()
-//    }
-//}
 
 extension NSNotification.Name {
     static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
