@@ -58,6 +58,12 @@ import UIKit
 // TODO: fabric analytics?
 // TODO: log JailbreakChecker
 
+// TODO: external display support (iPad pro 2018 + AirPlay)
+// TODO: AirPlay support
+//https://developer.apple.com/documentation/uikit/windows_and_screens/displaying_content_on_a_connected_screen
+//https://www.swiftjectivec.com/supporting-external-displays/
+//https://developer.apple.com/library/archive/documentation/WindowsViews/Conceptual/WindowAndScreenGuide/Introduction/Introduction.html
+
 // TODO: other options in settings:
 //
 /// Optional:
