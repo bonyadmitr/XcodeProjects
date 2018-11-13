@@ -25,7 +25,9 @@ import Foundation
 {{sp}}    return {{enumName}}.tr("{{table}}", "{{string.key}}", {% call argumentsBlock string.types %})
 {{sp}}  }
 {{sp}}  {% else %}
-{{sp}}  static let {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{enumName}}.tr("{{table}}", "{{string.key}}")
+{{sp}}  static var {{string.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: String {
+{{sp}}    return {{enumName}}.tr("{{table}}", "{{string.key}}")
+{{sp}}  }
 {{sp}}  {% endif %}
 {{sp}}  {% endfor %}
 {{sp}}  {% for child in item.children %}
