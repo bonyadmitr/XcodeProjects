@@ -21,3 +21,7 @@
 "rate_now" =  "Rate now";
 "remind_me_later" = "Remind me later";
 "dont_show_it_again" = "Don't show it again";
+"theme_name_default" = "Default";
+"theme_name_default_black" = "Default Black";
+"theme_name_dark" = "Dark";
+"theme_name_dark_negative" = "Dark Negative";

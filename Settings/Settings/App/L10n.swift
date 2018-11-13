@@ -91,6 +91,22 @@ enum L10n {
   static var support: String {
     return L10n.tr("Localizable", "support")
   }
+  /// Dark
+  static var themeNameDark: String {
+    return L10n.tr("Localizable", "theme_name_dark")
+  }
+  /// Dark Negative
+  static var themeNameDarkNegative: String {
+    return L10n.tr("Localizable", "theme_name_dark_negative")
+  }
+  /// Default
+  static var themeNameDefault: String {
+    return L10n.tr("Localizable", "theme_name_default")
+  }
+  /// Default Black
+  static var themeNameDefaultBlack: String {
+    return L10n.tr("Localizable", "theme_name_default_black")
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 
