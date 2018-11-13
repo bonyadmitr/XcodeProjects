@@ -11,12 +11,16 @@ enum L10n {
   static let about = L10n.tr("Localizable", "about")
   /// appearance
   static let appearance = L10n.tr("Localizable", "Appearance")
+  /// Developer Apps
+  static let developerApps = L10n.tr("Localizable", "developer_apps")
   /// Installed
   static let installed = L10n.tr("Localizable", "installed")
   /// Language
   static let language = L10n.tr("Localizable", "language")
   /// More apps from me
   static let moreAppsFromMe = L10n.tr("Localizable", "more_apps_from_me")
+  /// More apps from me at App Store
+  static let moreAppsFromMeAppStore = L10n.tr("Localizable", "more_apps_from_me_app_store")
   /// New apps
   static let newApps = L10n.tr("Localizable", "new_apps")
   /// Open in App Store

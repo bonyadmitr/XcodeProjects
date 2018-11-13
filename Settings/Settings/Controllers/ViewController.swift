@@ -38,7 +38,7 @@ final class ViewController: UIViewController {
     
     private func setup() {
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        title = "language".localized
+        title = L10n.language
         
         /// if need separate localization
         //tabBarItem = UITabBarItem(title: "language".localized, image: nil, selectedImage: nil)

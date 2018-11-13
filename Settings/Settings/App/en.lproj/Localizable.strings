@@ -8,5 +8,9 @@
 "rate_us" = "Rate Us";
 "open_in_app_store" = "Open in App Store";
 "more_apps_from_me" = "More apps from me";
+"more_apps_from_me_app_store" = "More apps from me at App Store";
 "about" = "About";
 "support" = "Support";
+"developer_apps" = "Developer Apps";
+"installed" = "Installed";
+"new_apps" = "New apps";

@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum NonL10n {
+    static let emailTitle = "Settings feedback"
+}
+
 final class SettingsController: UIViewController, BackButtonActions {
     
     private struct Section {
@@ -56,7 +60,7 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     private func setup() {
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        title = "settings".localized
+        title = L10n.settings
         tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "ic_settings"), selectedImage: nil)
         extendedLayoutIncludesOpaqueBars = true
     }
@@ -106,7 +110,7 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
-                                subject: "Settings feedback",
+                                subject: NonL10n.emailTitle,
                                 to: [EmailSender.devEmail],
                                 presentIn: self)
     }
@@ -120,6 +124,7 @@ extension SettingsController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].raws.count
     }

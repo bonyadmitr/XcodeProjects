@@ -62,7 +62,7 @@ final class DeveloperAppsController: UIViewController {
         restorationClass = type(of: self)
         
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        title = "Developer Apps".localized
+        title = L10n.developerApps
         extendedLayoutIncludesOpaqueBars = true
     }
     
@@ -148,7 +148,7 @@ extension DeveloperAppsController: UITableViewDelegate {
             let app = apps.newApps[indexPath.row]
             cell.setup(title: app.name)
         case .developerPage:
-            cell.setup(title: "More apps from me at App Store")
+            cell.setup(title: L10n.moreAppsFromMeAppStore)
         }
     }
     
@@ -173,9 +173,9 @@ extension DeveloperAppsController: UITableViewDelegate {
         
         switch section.type {
         case .installed:
-            return "Installed".localized
+            return L10n.installed
         case .newApps:
-            return "New apps".localized
+            return L10n.newApps
         case .emptyTitle:
             return nil
         }

@@ -52,7 +52,7 @@ final class AboutController: UIViewController {
         restorationIdentifier = String(describing: type(of: self))
         restorationClass = type(of: self)
         
-        title = "About".localized
+        title = L10n.about
         extendedLayoutIncludesOpaqueBars = true
     }
     
@@ -83,7 +83,7 @@ final class AboutController: UIViewController {
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
-                                subject: "Feedback",
+                                subject: NonL10n.emailTitle,
                                 to: [EmailSender.devEmail],
                                 presentIn: self)
     }
@@ -125,19 +125,19 @@ extension AboutController: UITableViewDelegate {
         switch raw {
         case .feedback:
             cell.accessoryType = .none
-            cell.setup(title: "Send feedback")
+            cell.setup(title: L10n.sendFeedback)
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
-            cell.setup(title: "Privacy Policy")
+            cell.setup(title: L10n.privacyPolicy)
         case .rateApp:
             cell.accessoryType = .none
-            cell.setup(title: "Rate Us")
+            cell.setup(title: L10n.rateUs)
         case .appStorePage:
             cell.accessoryType = .none
-            cell.setup(title: "Open in App Store")
+            cell.setup(title: L10n.openInAppStore)
         case .developerPage:
             cell.accessoryType = .disclosureIndicator
-            cell.setup(title: "More apps from me")
+            cell.setup(title: L10n.moreAppsFromMe)
         }
     }
     
@@ -147,7 +147,7 @@ extension AboutController: UITableViewDelegate {
             return
         }
         
-        view.label.text = "Settings app"
+        view.label.text = L10n.settings
         view.imageView.image = #imageLiteral(resourceName: "ic_settings")
         view.versionLabel.text = UIApplication.shared.version
     }
