@@ -14,7 +14,7 @@ import UIKit
 // Supports navigation for RTL languages (Hebrew, Arabic)
 // Language changing without reload
 // Themes of interface
-// Smart keyboard support
+// Smart keyboard shortcuts support (UIKeyCommand)
 // Supporting Accessibility: Larger Text
 // Supporting Accessibility: VoiceOver
 // Supports 3D touch on app icon (Quick Actions)
@@ -22,6 +22,8 @@ import UIKit
 // Supports iPad and split screen (controller)
 // App restoration if system killed it (not user manual)
 // AppRater by events
+// Localization strings by swiftgen
+// Window round coners
 //
 /// Marketing:
 // Fully offline
