@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// https://habr.com/post/425817/
 class ViewController: UIViewController {
 
     @IBOutlet private weak var photoImageView: UIImageView!
