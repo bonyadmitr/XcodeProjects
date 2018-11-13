@@ -13,7 +13,7 @@ enum L10n {
   }
   /// appearance
   static var appearance: String {
-    return L10n.tr("Localizable", "Appearance")
+    return L10n.tr("Localizable", "appearance")
   }
   /// checked
   static var checked: String {
