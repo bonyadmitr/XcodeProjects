@@ -78,8 +78,9 @@ final class DetailCell: UITableViewCell {
         }
         
         // TODO: maybe this don't need. need to check
+        // TODO: improve for rtl
         if isChecked {
-            newAccessibilityLabel += ". checked"
+            newAccessibilityLabel += ". " + L10n.checked
         }
         
         accessibilityLabel = newAccessibilityLabel

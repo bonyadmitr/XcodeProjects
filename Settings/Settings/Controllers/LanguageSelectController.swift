@@ -46,7 +46,7 @@ final class LanguageSelectController: UIViewController {
         /// view controller on demand in the app delegate.
         restorationClass = type(of: self)
         restorationIdentifier = String(describing: type(of: self))
-        title = "language".localized
+        title = L10n.language
 //        extendedLayoutIncludesOpaqueBars = true
     }
     

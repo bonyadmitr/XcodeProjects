@@ -52,7 +52,7 @@ final class PrivacyPolicyController: UIViewController {
     }
     
     private func setup() {
-        title = "Privacy Policy".localized /// Terms and Privacy Policy
+        title = L10n.privacyPolicy
         restorationIdentifier = String(describing: type(of: self))
         restorationClass = type(of: self)
     }

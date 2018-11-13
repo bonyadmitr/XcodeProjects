@@ -26,9 +26,9 @@ extension TabBarController {
         var discoverabilityTitle: String {
             switch self {
             case .first:
-                return "First tab"
+                return L10n.language
             case .settings:
-                return "Settings tab"
+                return L10n.settings
             }
         }
     }

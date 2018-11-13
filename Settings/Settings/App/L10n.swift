@@ -11,8 +11,16 @@ enum L10n {
   static let about = L10n.tr("Localizable", "about")
   /// appearance
   static let appearance = L10n.tr("Localizable", "Appearance")
+  /// checked
+  static let checked = L10n.tr("Localizable", "checked")
   /// Developer Apps
   static let developerApps = L10n.tr("Localizable", "developer_apps")
+  /// Do you like the app?
+  static let doYouLikeApp = L10n.tr("Localizable", "do_you_like_app")
+  /// Don't show it again
+  static let dontShowItAgain = L10n.tr("Localizable", "dont_show_it_again")
+  /// Full screen
+  static let fullScreen = L10n.tr("Localizable", "full_screen")
   /// Installed
   static let installed = L10n.tr("Localizable", "installed")
   /// Language
@@ -27,8 +35,14 @@ enum L10n {
   static let openInAppStore = L10n.tr("Localizable", "open_in_app_store")
   /// Privacy Policy
   static let privacyPolicy = L10n.tr("Localizable", "privacy_policy")
+  /// Rate now
+  static let rateNow = L10n.tr("Localizable", "rate_now")
   /// Rate Us
   static let rateUs = L10n.tr("Localizable", "rate_us")
+  /// Rate us, please, to share it with others!
+  static let rateUsShareIt = L10n.tr("Localizable", "rate_us_share_it")
+  /// Remind me later
+  static let remindMeLater = L10n.tr("Localizable", "remind_me_later")
   /// Send feedback
   static let sendFeedback = L10n.tr("Localizable", "send_feedback")
   /// Settings

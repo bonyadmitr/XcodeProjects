@@ -4,7 +4,7 @@
 "installed" = "Installed";
 "new_apps" = "New apps";
 "Appearance" = "appearance";
-"privacy_policy" = "Privacy Policy";
+"privacy_policy" = "Privacy Policy";  /// Terms and Privacy Policy
 "rate_us" = "Rate Us";
 "open_in_app_store" = "Open in App Store";
 "more_apps_from_me" = "More apps from me";
@@ -14,3 +14,10 @@
 "developer_apps" = "Developer Apps";
 "installed" = "Installed";
 "new_apps" = "New apps";
+"full_screen" = "Full screen";
+"checked" = "checked";
+"do_you_like_app" = "Do you like the app?";
+"rate_us_share_it" = "Rate us, please, to share it with others!";
+"rate_now" =  "Rate now";
+"remind_me_later" = "Remind me later";
+"dont_show_it_again" = "Don't show it again";

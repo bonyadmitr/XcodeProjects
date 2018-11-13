@@ -79,7 +79,7 @@ extension BaseSplitController {
         var discoverabilityTitle: String {
             switch self {
             case .fullscreen:
-                return "Full screen"
+                return L10n.fullScreen
             }
         }
     }
