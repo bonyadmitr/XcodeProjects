@@ -62,13 +62,13 @@ class SettingsTests: XCTestCase {
         rateAppDisplayManager?.startObserving(presentIn: vc)
         
         if vc.presentedViewController == nil {
-            NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
-            NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
+            NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+            NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
         } else {
             vc.dismiss(animated: false, completion: {
                 /// UIApplicationWillEnterForeground func will be called bcz we have two objects of RateAppDisplayManager (main app + test)
-                NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
-                NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
+                NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+                NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
             })
         }
 
@@ -102,13 +102,13 @@ class SettingsTests: XCTestCase {
 //        })
         
         if vc.presentedViewController == nil {
-            NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
-            NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
+            NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+            NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
         } else {
             vc.dismiss(animated: false, completion: {
                 /// UIApplicationWillEnterForeground func will be called bcz we have two objects of RateAppDisplayManager (main app + test)
-                NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
-                NotificationCenter.default.post(name: .UIApplicationWillEnterForeground, object: UIApplication.shared)
+                NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+                NotificationCenter.default.post(name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
             })
         }
         

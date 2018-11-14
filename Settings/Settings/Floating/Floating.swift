@@ -38,7 +38,7 @@ final class Floating {
 }
 
 extension UIWindow {
-    override open func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override open func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake, Floating.showOnShakeMotion, !Floating.isShownOnShake {
             Floating.isShownOnShake = true
             if let vc = FloatingManager.shared.presentingController {

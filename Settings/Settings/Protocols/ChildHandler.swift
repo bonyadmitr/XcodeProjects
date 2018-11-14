@@ -21,18 +21,18 @@ extension ChildHandler where Self:UIViewController {
             return
         }
         
-        addChildViewController(childController)
+        addChild(childController)
         childController.view.frame = holderView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         holderView.addSubview(childController.view)
-        childController.didMove(toParentViewController: self)
+        childController.didMove(toParent: self)
     }
 }
 
 extension UIViewController {
     func removeFromParentVC() {
-        willMove(toParentViewController: nil)
+        willMove(toParent: nil)
         view.removeFromSuperview()
-        removeFromParentViewController()
+        removeFromParent()
     }
 }

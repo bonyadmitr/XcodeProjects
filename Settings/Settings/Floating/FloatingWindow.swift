@@ -21,7 +21,7 @@ final class FloatingWindow: UIWindow {
         super.init(frame: frame)
         
         backgroundColor = UIColor.clear
-        windowLevel = UIWindowLevelStatusBar - 1
+        windowLevel = UIWindow.Level.statusBar - 1
     }
     
     required init?(coder aDecoder: NSCoder) {

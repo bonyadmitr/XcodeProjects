@@ -60,7 +60,7 @@ extension BaseSplitController: UISplitViewControllerDelegate {
         return true
     }
     
-    func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+    func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewController.DisplayMode {
         switch svc.displayMode {
         case .primaryHidden:
             return .allVisible

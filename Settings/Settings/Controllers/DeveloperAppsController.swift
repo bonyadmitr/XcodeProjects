@@ -43,7 +43,7 @@ final class DeveloperAppsController: UIViewController {
         
         /// need for iOS 10, don't need for iOS 11
         tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -109,8 +109,8 @@ final class DeveloperAppsController: UIViewController {
 
 // MARK: - UIViewControllerRestoration
 extension DeveloperAppsController: UIViewControllerRestoration {
-    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
-        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
         return DeveloperAppsController(coder: coder)
     }
 }

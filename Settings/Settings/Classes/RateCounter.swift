@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol RateCounterDelegate: class {
     func rateCounterConditionsFulfilled()
@@ -115,7 +115,7 @@ final class RateCounter {
     }
     
     private func subscribeForegroundAppears() {
-        token = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+        token = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.foregroundAppearsCount += 1
             self?.checkConditionsForFulfill()
         }

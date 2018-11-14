@@ -22,7 +22,7 @@ final class LanguageSelectController: UIViewController {
         
         /// need for iOS 10, don't need for iOS 11
         tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -84,8 +84,8 @@ final class LanguageSelectController: UIViewController {
  it may have to be created on demand for state restoration.
  */
 extension LanguageSelectController: UIViewControllerRestoration {
-    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
-        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
         return LanguageSelectController(coder: coder)
     }
 }

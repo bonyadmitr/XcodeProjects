@@ -377,9 +377,11 @@
 				TargetAttributes = {
 					CEEEB780215D0949003C5BD8 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1010;
 					};
 					CEF1D2002197768300963421 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1010;
 						TestTargetID = CEEEB780215D0949003C5BD8;
 					};
 				};
@@ -673,7 +675,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -692,7 +694,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -710,7 +712,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.SettingsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Settings.app/Settings";
 			};
@@ -729,7 +731,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.SettingsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Settings.app/Settings";
 			};

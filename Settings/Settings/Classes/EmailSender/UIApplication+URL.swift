@@ -55,7 +55,7 @@ extension UIApplication {
     /// can be not exist if there is no anything to set (you didn't get any privacy)
     func openSettings() {
         do {
-            try open(scheme: UIApplicationOpenSettingsURLString)
+            try open(scheme: UIApplication.openSettingsURLString)
         } catch {
             assertionFailure(error.localizedDescription)
         }

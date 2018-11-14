@@ -120,7 +120,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                                                               significantEvents: 3,
                                                               foregroundAppears: 15)
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         #if DEBUG
         Logger.shared.configure {
@@ -159,7 +159,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
         /// and subsribe all tableViews for theme did change
         /// and add label text color setting in all tableViews
-        NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: .UIContentSizeCategoryDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: UIContentSizeCategory.didChangeNotification, object: nil)
         
         
         

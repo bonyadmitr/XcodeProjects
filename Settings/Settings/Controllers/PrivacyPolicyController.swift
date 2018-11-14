@@ -29,12 +29,12 @@ final class PrivacyPolicyController: UIViewController {
         
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
-        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        webView.scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
         return webView
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = view.bounds
         activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -103,8 +103,8 @@ final class PrivacyPolicyController: UIViewController {
 
 // MARK: - UIViewControllerRestoration
 extension PrivacyPolicyController: UIViewControllerRestoration {
-    static func viewController(withRestorationIdentifierPath identifierComponents: [Any], coder: NSCoder) -> UIViewController? {
-        assert(String(describing: self) == (identifierComponents.last as? String), "unexpected restoration path: \(identifierComponents)")
+    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
+        assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
         return PrivacyPolicyController(coder: coder)
     }
 }

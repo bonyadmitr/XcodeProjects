@@ -50,7 +50,7 @@ extension AppearanceStyle {
         }
     }
     
-    var scrollBar: UIScrollViewIndicatorStyle {
+    var scrollBar: UIScrollView.IndicatorStyle {
         switch self {
         case .light:
             return .default //.black
@@ -110,7 +110,7 @@ final class AppearanceConfigurator: MulticastHandler {
         /// need for translucent UINavigationBar
 //        window?.backgroundColor = theme.backgroundColor
         
-        let textAttributes: [NSAttributedStringKey: Any] = [
+        let textAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: theme.textColor
         ]
         
