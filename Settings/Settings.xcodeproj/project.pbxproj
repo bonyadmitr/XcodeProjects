@@ -93,7 +93,7 @@
 		66D380902163300700EFA49C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		66D380912163300700EFA49C /* Watchdog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watchdog.swift; sourceTree = "<group>"; };
 		66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailController.swift; sourceTree = "<group>"; };
-		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../iOSComponents/iOSComponents/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
+		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
 		CE08888E2199587B0072F45C /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE088890219AD00B0072F45C /* AboutHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeader.swift; sourceTree = "<group>"; };
@@ -218,6 +218,25 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		CE91F56B219C179600F2E827 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
+				662D0D3F21628C38008D244E /* ChildHandler.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CE91F56C219C17C100F2E827 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				662D0D3C21616B10008D244E /* DetailCell.xib */,
+				662D0D3B21616B10008D244E /* DetailCell.swift */,
+				CE088890219AD00B0072F45C /* AboutHeader.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CEEEB778215D0949003C5BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -242,20 +261,11 @@
 				CEEEB7AC215D1104003C5BD8 /* App */,
 				CEEEB7B6215DF4B7003C5BD8 /* Main.storyboard */,
 				CE11D99221935A50000F8AD9 /* Controllers */,
-				66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */,
-				662D0D3C21616B10008D244E /* DetailCell.xib */,
-				662D0D3B21616B10008D244E /* DetailCell.swift */,
-				CE088890219AD00B0072F45C /* AboutHeader.swift */,
-				662D0D3F21628C38008D244E /* ChildHandler.swift */,
-				CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */,
-				CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */,
-				CE99210D2180EC18004E118A /* RateCounter.swift */,
-				CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */,
-				66D3808B2163300700EFA49C /* EmailSender */,
-				66D3808E2163300700EFA49C /* Logger */,
+				CE91F56C219C17C100F2E827 /* Views */,
 				662D0D412162A3F6008D244E /* Floating */,
 				6624D43D215EADA900DF1B92 /* AppearanceConfigurator */,
 				CEEEB796215D0996003C5BD8 /* Classes */,
+				CE91F56B219C179600F2E827 /* Protocols */,
 				CEEEB79B215D0996003C5BD8 /* Extensions */,
 			);
 			path = Settings;
@@ -264,9 +274,15 @@
 		CEEEB796215D0996003C5BD8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				66D3808B2163300700EFA49C /* EmailSender */,
+				66D3808E2163300700EFA49C /* Logger */,
 				CEEEB797215D0996003C5BD8 /* LanguageManager.swift */,
 				CEEEB798215D0996003C5BD8 /* MulticastDelegate.swift */,
 				CEEEB799215D0996003C5BD8 /* LocalizationManager.swift */,
+				CE77AB1B2163546200728C64 /* SettingsBundleManager.swift */,
+				CEEDAAB52176202E002AC3B3 /* RateAppManager.swift */,
+				CE99210D2180EC18004E118A /* RateCounter.swift */,
+				CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

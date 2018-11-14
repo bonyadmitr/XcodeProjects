@@ -31,7 +31,7 @@ extension EmailSender {
 /// You can customize the appearance of the interface using the UIAppearance protocol
 open class EmailSender: NSObject {
     
-    open static let shared = EmailSender()
+    public static let shared = EmailSender()
     
     /// open Mail app with filled fields
     /// will not be open on simulator

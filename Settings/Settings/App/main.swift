@@ -9,7 +9,7 @@
 import UIKit
 
 /// remove @UIApplicationMain in AppDelegate
-UIApplicationMain(
+_ = UIApplicationMain(
     CommandLine.argc,
     UnsafeMutableRawPointer(CommandLine.unsafeArgv)
         .bindMemory(to: UnsafeMutablePointer<Int8>.self,

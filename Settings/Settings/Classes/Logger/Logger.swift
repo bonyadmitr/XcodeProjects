@@ -41,7 +41,7 @@ final public class Logger {
     
     /// for test: Thread.sleep(forTimeInterval: 2)
     private var watchdog: Watchdog?
-    open var watchMainThead = false {
+    public var watchMainThead = false {
         didSet {
             if !watchMainThead {
                 watchdog = nil
@@ -53,15 +53,15 @@ final public class Logger {
     
     /// can be used another log method
     /// NetworkActivityLogger.shared.startLogging()
-    open var logLevel: LogLevel = .simple
-    open var logRequests = true
-    open var logResponse = true
+    public var logLevel: LogLevel = .simple
+    public var logRequests = true
+    public var logResponse = true
     
-    open var showDate = false
-    open var showThreadName = false
-    open var showFileName = true
-    open var showLineNumber = true
-    open var showFunctionName = true
+    public var showDate = false
+    public var showThreadName = false
+    public var showFileName = true
+    public var showLineNumber = true
+    public var showFunctionName = true
     
     lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
