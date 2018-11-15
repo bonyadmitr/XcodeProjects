@@ -260,7 +260,8 @@ extension AppDelegate: LocalizationManagerDelegate {
         guard
             let window = window,
             let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController,
-            let tabBarControllers = tabBarVC.viewControllers
+            let tabBarControllers = tabBarVC.viewControllers,
+            tabBarControllers.count > 0
         else {
             assertionFailure()
             return
