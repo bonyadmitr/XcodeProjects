@@ -272,13 +272,14 @@ extension AppDelegate: LocalizationManagerDelegate {
         guard
             let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
             settingsSplitVC.viewControllers.count > 0,
-            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
+            let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController,
+            let settingsVC = settingsNavVC.topViewController as? SettingsController
         else {
             assertionFailure()
             return
         }
         
-        let settingsVC = settingsNavVC.topViewController as! SettingsController
+        
         
         
 //        guard let settingsNavVC = tabBarControllers[lastIndex] as? UINavigationController else {
