@@ -271,6 +271,7 @@ extension AppDelegate: LocalizationManagerDelegate {
         
         guard
             let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
+            settingsSplitVC.viewControllers.count > 0,
             let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController
         else {
             assertionFailure()
