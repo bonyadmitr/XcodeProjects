@@ -76,14 +76,14 @@ final class AboutHeader: UITableViewHeaderFooterView {
         //imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
         //layoutMargins.bottom
         
-        label.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        label.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: constant).isActive = true
         label.bottomAnchor.constraint(equalTo: versionLabel.topAnchor, constant: -constant).isActive = true
         label.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         
-        versionLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        versionLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        versionLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        versionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         versionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -constant).isActive = true
         versionLabel.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
     }
