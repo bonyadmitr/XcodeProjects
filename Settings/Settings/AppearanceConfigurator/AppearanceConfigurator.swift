@@ -309,7 +309,7 @@ extension AppearanceConfigurator {
     private static let saveThemeKey = "AppearanceConfigurator_saveThemeKey"
     
     private func saveCurrenThemet(_ theme: AppearanceTheme) {
-        UserDefaults.standard.set(theme.saveId, forKey: AppearanceConfigurator.saveThemeKey)
+        UserDefaults.standard.set(theme.saveId, forKey: type(of: self).saveThemeKey)
     }
     
     func loadSavedTheme() {
