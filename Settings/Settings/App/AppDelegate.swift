@@ -137,7 +137,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         log("--- isApplicationRestored: \(isApplicationRestored)")
         
         
-        /// cmd + ctrl + z
+        /// cmd + ctrl + z to shake
         Floating.mode = .shake
         
         let vc = FloatingPresentingController()

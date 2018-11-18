@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox.AudioServices
 
 enum NonL10n {
     static let emailTitle = "Settings feedback"
@@ -194,6 +195,29 @@ extension SettingsController: UITableViewDelegate {
         case .about:
             push(controller: AboutController())
         }
+        
+        /// import AudioToolbox.AudioServices
+        let vibration = SystemSoundID(kSystemSoundID_Vibrate)
+        AudioServicesPlaySystemSound(vibration)
+        //AudioServicesPlaySystemSoundWithCompletion(vibration) {
+        //    print("did vibrate")
+        //}
+        
+        if #available(iOS 10.0, *) {
+            /// check Taptic Engine iPhone 6s, 6s+
+            /// https://developer.apple.com/documentation/uikit/uifeedbackgenerator
+            /// https://medium.com/@sdrzn/make-your-ios-app-feel-better-a-comprehensive-guide-over-taptic-engine-and-haptic-feedback-724dec425f10
+            let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+            selectionFeedbackGenerator.prepare()
+            selectionFeedbackGenerator.selectionChanged()
+            
+//            let lightImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+//            lightImpactFeedbackGenerator.prepare()
+//            lightImpactFeedbackGenerator.impactOccurred()
+        } else {
+            // Fallback on earlier versions
+        }
+
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
