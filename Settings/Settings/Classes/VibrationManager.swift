@@ -172,8 +172,8 @@ final class VibrationManager {
     
     private let vibrationStorage: VibrationStorage
     
-    init(vibrationSaver: VibrationStorage) {
-        self.vibrationStorage = vibrationSaver
+    init(vibrationStorage: VibrationStorage) {
+        self.vibrationStorage = vibrationStorage
     }
 
     func basicVibrate(_ type: BasicViration) {
