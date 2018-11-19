@@ -9,14 +9,14 @@
 import UIKit
 import AudioToolbox.AudioServices
 
-//enum BasicViration: SystemSoundID {
+//enum BasicVibration: SystemSoundID {
 //    case standart = 4095 /// kSystemSoundID_Vibrate
 //    case alert = 1011 /// double vibration
 //    case light = 1102
 //    case silenceMode = 1107 /// like standart but working only in silence mode
 //}
 //
-//enum HapticViration {
+//enum HapticVibration {
 //    case error
 //    case success
 //    case warning
@@ -27,11 +27,11 @@ import AudioToolbox.AudioServices
 //}
 //
 //protocol VibrationManager {
-//    func basicVibrate(_ type: BasicViration)
-//    func hapticVibrate(_ type: HapticViration)
+//    func basicVibrate(_ type: BasicVibration)
+//    func hapticVibrate(_ type: HapticVibration)
 //}
 //extension VibrationManager {
-//    func basicVibrate(_ type: BasicViration) {
+//    func basicVibrate(_ type: BasicVibration) {
 //        AudioServicesPlaySystemSound(type.rawValue)
 //        //AudioServicesPlaySystemSoundWithCompletion(type.rawValue) {
 //        //    print("did vibrate")
@@ -39,7 +39,7 @@ import AudioToolbox.AudioServices
 //    }
 //
 //    //@available(iOS 10.0, *)
-//    func hapticVibrate(_ type: HapticViration) {
+//    func hapticVibrate(_ type: HapticVibration) {
 //        //generator.prepare()
 //        //if #available(iOS 10.0, *) {
 //
@@ -156,14 +156,22 @@ final class VibrationManager {
 
     static let shared = VibrationManager(vibrationStorage: SettingsStorageImp.shared)
     
-    enum BasicViration: SystemSoundID {
+    enum BasicVibration: SystemSoundID {
         case standart = 4095 /// kSystemSoundID_Vibrate
         case alert = 1011 /// double vibration
-        case light = 1102
-        case silenceMode = 1107 /// like standart but working only in silence mode
+        case light = 1102 /// same id in TapticVibration
+        case silenceMode = 1107 /// like standart but working only in silence mode. same id in TapticVibration
+    }
+    
+    enum TapticVibration: SystemSoundID {
+        case peek = 1519 /// 1 medium vibrations
+        case pop = 1520 /// 1 medium vibrations
+        case cancelled = 1521 /// 3 light vibrations
+        case tryAgain = 1102 /// 2 medium vibrations
+        case silenceModeFailed = 1107 /// 3 medium vibrations but working only in silence mode
     }
 
-    enum HapticViration {
+    enum HapticVibration {
         case error
         case success
         case warning
@@ -266,7 +274,7 @@ final class VibrationManager {
         }
     }
 
-    func basicVibrate(_ type: BasicViration) {
+    func basicVibrate(_ type: BasicVibration) {
         guard vibrationStorage.isEnabledVibration else {
             return
         }
@@ -278,7 +286,7 @@ final class VibrationManager {
 
     //@available(iOS 10.0, *)
     /// available iPhone 7...
-    func hapticVibrate(_ type: HapticViration) {
+    func hapticVibrate(_ type: HapticVibration) {
         //generator.prepare()
         //if #available(iOS 10.0, *) {
         guard vibrationStorage.isEnabledVibration else {
