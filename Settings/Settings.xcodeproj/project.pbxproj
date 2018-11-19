@@ -28,6 +28,8 @@
 		66E65EB9215EBB3700D2BCCA /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */; };
 		66E65EBB215EBE4100D2BCCA /* AppearanceSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */; };
 		C4131E3C21A1FADD003C3DAB /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */; };
+		C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3D21A32615003C3DAB /* NonL10n.swift */; };
+		C4131E4021A328A4003C3DAB /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */; };
 		CE08888F2199587B0072F45C /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08888E2199587B0072F45C /* L10n.swift */; };
 		CE088891219AD00B0072F45C /* AboutHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE088890219AD00B0072F45C /* AboutHeader.swift */; };
 		CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE87B2162653500E16E4B /* UIColor+Default.swift */; };
@@ -97,6 +99,8 @@
 		66E65EB8215EBB3700D2BCCA /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
 		66E65EBA215EBE4100D2BCCA /* AppearanceSelectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSelectController.swift; sourceTree = "<group>"; };
 		C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
+		C4131E3D21A32615003C3DAB /* NonL10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonL10n.swift; sourceTree = "<group>"; };
+		C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorage.swift; sourceTree = "<group>"; };
 		CE08888E2199587B0072F45C /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE088890219AD00B0072F45C /* AboutHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeader.swift; sourceTree = "<group>"; };
 		CE0FE87B2162653500E16E4B /* UIColor+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Default.swift"; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				CE99210D2180EC18004E118A /* RateCounter.swift */,
 				CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */,
 				C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */,
+				C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
 				CE08888E2199587B0072F45C /* L10n.swift */,
+				C4131E3D21A32615003C3DAB /* NonL10n.swift */,
 				CEEEB7BD215DF5EC003C5BD8 /* Localizable.strings */,
 				CE77AB19216353DB00728C64 /* Settings.bundle */,
 			);
@@ -472,12 +478,14 @@
 				6624D43B215EADA100DF1B92 /* AppearanceConfigurator.swift in Sources */,
 				CE08888F2199587B0072F45C /* L10n.swift in Sources */,
 				CEEEB7A3215D0996003C5BD8 /* LocalizationManager.swift in Sources */,
+				C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */,
 				CE088891219AD00B0072F45C /* AboutHeader.swift in Sources */,
 				CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */,
 				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
 				CEEDAAB62176202E002AC3B3 /* RateAppManager.swift in Sources */,
 				CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */,
 				CEEEB7A6215D0996003C5BD8 /* UIImage+RTL.swift in Sources */,
+				C4131E4021A328A4003C3DAB /* SettingsStorage.swift in Sources */,
 				CEEEB7B1215D2036003C5BD8 /* MainApplication.swift in Sources */,
 				662D0D482162A3F6008D244E /* FloatingController.swift in Sources */,
 				CEEEB7A7215D0996003C5BD8 /* Localization+Views.swift in Sources */,

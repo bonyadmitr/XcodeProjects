@@ -8,10 +8,6 @@
 
 import UIKit
 
-enum NonL10n {
-    static let emailTitle = "Settings feedback"
-}
-
 final class SettingsController: UIViewController, BackButtonActions {
     
     private struct Section {
