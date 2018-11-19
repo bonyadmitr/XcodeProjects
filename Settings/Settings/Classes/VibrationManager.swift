@@ -157,9 +157,8 @@ final class VibrationManager {
     static let shared = VibrationManager(vibrationStorage: SettingsStorageImp.shared)
     
     enum BasicVibration: SystemSoundID {
-        case standart = 4095 /// kSystemSoundID_Vibrate
+        case standart = 4095 /// kSystemSoundID_Vibrate. same as 1102
         case alert = 1011 /// double vibration
-        case light = 1102 /// same id in TapticVibration
         case silenceMode = 1107 /// like standart but working only in silence mode. same id in TapticVibration
     }
     
@@ -273,8 +272,28 @@ final class VibrationManager {
             }
         }
     }
+    
+    func clickVibrate() {
+        if isAvailableHapticEngine {
+            hapticVibrate(.selection)
+        } else if isAvailableTapticEngine {
+            tapticVibrate(.peek)
+        } else {
+            /// nothing. there is no light basicVibrate
+        }
+    }
 
     func basicVibrate(_ type: BasicVibration) {
+        guard vibrationStorage.isEnabledVibration else {
+            return
+        }
+        AudioServicesPlaySystemSound(type.rawValue)
+        //AudioServicesPlaySystemSoundWithCompletion(type.rawValue) {
+        //    print("did vibrate")
+        //}
+    }
+    
+    func tapticVibrate(_ type: TapticVibration) {
         guard vibrationStorage.isEnabledVibration else {
             return
         }
