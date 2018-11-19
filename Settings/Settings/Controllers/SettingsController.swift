@@ -33,13 +33,16 @@ final class SettingsController: UIViewController, BackButtonActions {
         case appStorePage
         case developerPage
         case about
+        case vibration
     }
     
     private let sections = [Section(type: .language,
-                                    raws: [.select, .appearance]),
+                                    raws: [.select, .appearance, .vibration]),
                             Section(type: .support,
                                     raws: [/*.privacyPolicy, .appStorePage, .developerPage,*/
                                         .feedback, .rateApp, .about])]
+    
+    private lazy var settingsStorage: SettingsStorage = SettingsStorageImp.shared
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
@@ -163,6 +166,14 @@ extension SettingsController: UITableViewDelegate {
         case .about:
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = L10n.about
+        case .vibration:
+            cell.textLabel?.text = L10n.vibration
+            
+            if settingsStorage.isEnabledVibration {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -194,6 +205,9 @@ extension SettingsController: UITableViewDelegate {
             DeveloperAppsManager.shared.openDeveloperAppStorePage(devId: "id281956209")
         case .about:
             push(controller: AboutController())
+        case .vibration:
+            settingsStorage.isEnabledVibration.toggle()
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
     

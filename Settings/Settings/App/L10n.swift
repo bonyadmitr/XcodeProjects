@@ -107,6 +107,10 @@ enum L10n {
   static var themeNameDefaultBlack: String {
     return L10n.tr("Localizable", "theme_name_default_black")
   }
+  /// Vibration
+  static var vibration: String {
+    return L10n.tr("Localizable", "vibration")
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 
