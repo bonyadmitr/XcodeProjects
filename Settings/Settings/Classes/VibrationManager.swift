@@ -187,6 +187,7 @@ final class VibrationManager {
     private let vibrationStorage: VibrationStorage
     
     
+    // there is no for iPad
     lazy var isAvailableTapticEngine: Bool = {
         #if targetEnvironment(simulator)
         return false
@@ -195,15 +196,38 @@ final class VibrationManager {
         var sysinfo = utsname()
         uname(&sysinfo)
         let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
-        guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters),
-            let device = platform.slice(from: "iPhone", to: ",") else {
-                assertionFailure()
-                return false
+        guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters) else {
+            assertionFailure()
+            return false
         }
         /// iPhone6S or iPhone6SPlus
         /// https://gist.github.com/adamawolf/3048717
-        
         return platform == "iPhone8,1" || platform == "iPhone8,2"
+        #endif
+    }()
+    
+    // there is no for iPad
+    /// check https://stackoverflow.com/a/42057620/5893286
+    /// UIDevice.currentDevice().valueForKey("_feedbackSupportLevel")
+    lazy var isAvailableHapticEngine: Bool = {
+        #if targetEnvironment(simulator)
+        return false
+        #else
+        
+        var sysinfo = utsname()
+        uname(&sysinfo)
+        let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
+        guard
+            let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters),
+            let device = platform.slice(from: "iPhone", to: ","),
+            let deviceVersion = Int(device)
+        else {
+            assertionFailure()
+            return false
+        }
+        /// iPhone7...
+        /// https://gist.github.com/adamawolf/3048717
+        return deviceVersion > 8
         #endif
     }()
     
