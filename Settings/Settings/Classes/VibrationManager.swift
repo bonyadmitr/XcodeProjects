@@ -188,6 +188,10 @@ final class VibrationManager {
     
     
     lazy var isAvailableTapticEngine: Bool = {
+        #if targetEnvironment(simulator)
+        return false
+        #else
+        
         var sysinfo = utsname()
         uname(&sysinfo)
         let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
@@ -200,6 +204,7 @@ final class VibrationManager {
         /// https://gist.github.com/adamawolf/3048717
         
         return platform == "iPhone8,1" || platform == "iPhone8,2"
+        #endif
     }()
     
     init(vibrationStorage: VibrationStorage) {

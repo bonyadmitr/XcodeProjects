@@ -122,6 +122,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        print(VibrationManager.shared.isAvailableTapticEngine)
+        
         #if DEBUG
         Logger.shared.configure {
             $0.showDate = true
