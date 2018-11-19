@@ -93,14 +93,14 @@ final class SettingsStorageImp: MulticastHandler {
     
     static let shared = SettingsStorageImp()
     
-    internal var delegates = MulticastDelegate<SettingsStorageDelegate>()
-    
     private enum Keys {
         private static let base = "SettingsStorageImp_"
         static let isEnabledVibrationKey = base + "isEnabledVibrationKey"
     }
     
     private let defaults = UserDefaults.standard
+    
+    internal var delegates = MulticastDelegate<SettingsStorageDelegate>()
     
     //    var isEnabledVibration: Bool {
     //        get {
@@ -110,6 +110,7 @@ final class SettingsStorageImp: MulticastHandler {
     //            UserDefaults.standard.set(newValue, forKey: Keys.isEnabledVibrationKey)
     //        }
     //    }
+    
     var isEnabledVibration: Bool {
         didSet {
             defaults.set(isEnabledVibration, forKey: Keys.isEnabledVibrationKey)
@@ -117,8 +118,13 @@ final class SettingsStorageImp: MulticastHandler {
     }
     
     init() {
-        isEnabledVibration = defaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? false
-        //isEnabledVibration = defaults.bool(forKey: Keys.isEnabledVibrationKey)
+        type(of: self).setupDefaultValuesIfNeed()
+//        isEnabledVibration = defaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? DefaultValues.isEnabledVibration
+        isEnabledVibration = defaults.bool(forKey: Keys.isEnabledVibrationKey)
+    }
+    
+    private static func setupDefaultValuesIfNeed() {
+        UserDefaults.standard.register(defaults: [Keys.isEnabledVibrationKey: true])
     }
 }
 
@@ -128,8 +134,15 @@ extension SettingsStorageImp: SettingsStorage {
     }
     
     func resetToDefault() {
-        isEnabledVibration = false
+        defaults.removeObjects(for: [Keys.isEnabledVibrationKey])
+        type(of: self).setupDefaultValuesIfNeed()
         delegates.invoke { $0.settingsRestoredToDefaults() }
+    }
+}
+
+extension UserDefaults {
+    func removeObjects(for keys: [String]) {
+        keys.forEach { removeObject(forKey: $0) }
     }
 }
 
@@ -158,16 +171,16 @@ final class VibrationManager {
     
     enum BasicVibration: SystemSoundID {
         case standart = 4095 /// kSystemSoundID_Vibrate. same as 1102
-        case alert = 1011 /// double vibration
-        case silenceMode = 1107 /// like standart but working only in silence mode. same id in TapticVibration
+        case warning = 1011 /// double vibration
+        case standartSilenceMode = 1107 /// like standart but working only in silence mode. same id in TapticVibration
     }
     
     enum TapticVibration: SystemSoundID {
         case peek = 1519 /// 1 medium vibrations
         case pop = 1520 /// 1 medium vibrations
-        case cancelled = 1521 /// 3 light vibrations
-        case tryAgain = 1102 /// 2 medium vibrations
-        case silenceModeFailed = 1107 /// 3 medium vibrations but working only in silence mode
+        case warning = 1102 /// 2 medium vibrations
+        case error = 1521 /// 3 light vibrations
+        case errorSilenceMode = 1107 /// 3 medium vibrations but working only in silence mode
     }
 
     enum HapticVibration {
@@ -259,27 +272,47 @@ final class VibrationManager {
         
         /// private api method
         /// https://stackoverflow.com/a/39592312/5893286
-        if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
-            switch feedbackSupportLevel {
-            case 1:
-                print("TapticEngine")
-            case 2:
-                print("HapticEngine")
-            default:
-                /// feedbackSupportLevel == 0 for simulator, iPhone SE
-                print("feedbackSupportLevel: ",feedbackSupportLevel)
-                print("other")
-            }
-        }
+        //if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
+        //    switch feedbackSupportLevel {
+        //    case 1:
+        //        print("TapticEngine")
+        //    case 2:
+        //        print("HapticEngine")
+        //    default:
+        //        /// feedbackSupportLevel == 0 for simulator, iPhone SE
+        //        print("feedbackSupportLevel: ",feedbackSupportLevel)
+        //        print("other")
+        //    }
+        //}
     }
     
-    func clickVibrate() {
+    func lightVibrate() {
         if isAvailableHapticEngine {
             hapticVibrate(.selection)
         } else if isAvailableTapticEngine {
             tapticVibrate(.peek)
         } else {
             /// nothing. there is no light basicVibrate
+        }
+    }
+    
+    func mediumVibrate() {
+        if isAvailableHapticEngine {
+            hapticVibrate(.medium)
+        } else if isAvailableTapticEngine {
+            tapticVibrate(.pop)
+        } else {
+            basicVibrate(.standart)
+        }
+    }
+    
+    func doubleVibrate() {
+        if isAvailableHapticEngine {
+            hapticVibrate(.warning)
+        } else if isAvailableTapticEngine {
+            tapticVibrate(.warning)
+        } else {
+            basicVibrate(.warning)
         }
     }
 

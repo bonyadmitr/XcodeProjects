@@ -126,7 +126,8 @@ extension LanguageSelectController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        /// there is no deselect bcz of controllers recreating
+        VibrationManager.shared.mediumVibrate()
         let language = languageManager.availableLanguages[indexPath.row]
         
         if language == localizationManager.currentLanguage {
