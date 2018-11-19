@@ -48,14 +48,17 @@ final class SettingsStorageImp: MulticastHandler {
     
     init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults
-        setupDefaultValuesIfNeed()
-        //        isEnabledVibration = defaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? DefaultValues.isEnabledVibration
-        isEnabledVibration = userDefaults.bool(forKey: Keys.isEnabledVibrationKey)
+        registerDefaultValues()
+        setupDefaultValues()
     }
 
-    
-    private func setupDefaultValuesIfNeed() {
+    private func registerDefaultValues() {
         userDefaults.register(defaults: [Keys.isEnabledVibrationKey: true])
+    }
+    
+    func setupDefaultValues() {
+        //isEnabledVibration = userDefaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? true
+        isEnabledVibration = userDefaults.bool(forKey: Keys.isEnabledVibrationKey)
     }
 }
 
@@ -66,7 +69,8 @@ extension SettingsStorageImp: SettingsStorage {
     
     func resetToDefault() {
         userDefaults.removeObjects(for: [Keys.isEnabledVibrationKey])
-        setupDefaultValuesIfNeed()
+        registerDefaultValues()
+        setupDefaultValues()
         delegates.invoke { $0.settingsRestoredToDefaults() }
     }
 }
