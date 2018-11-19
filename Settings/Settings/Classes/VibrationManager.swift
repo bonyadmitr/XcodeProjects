@@ -117,7 +117,8 @@ final class SettingsStorageImp: MulticastHandler {
     }
     
     init() {
-        isEnabledVibration = defaults.bool(forKey: Keys.isEnabledVibrationKey)
+        isEnabledVibration = defaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? false
+        //isEnabledVibration = defaults.bool(forKey: Keys.isEnabledVibrationKey)
     }
 }
 
@@ -132,6 +133,19 @@ extension SettingsStorageImp: SettingsStorage {
     }
 }
 
+extension String {
+    
+    /// https://stackoverflow.com/a/31727051/5893286
+    func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+}
+
+
 protocol VibrationStorage {
     var isEnabledVibration: Bool { get set }
 }
@@ -140,7 +154,7 @@ protocol VibrationStorage {
 /// https://medium.com/@sdrzn/make-your-ios-app-feel-better-a-comprehensive-guide-over-taptic-engine-and-haptic-feedback-724dec425f10
 final class VibrationManager {
 
-    static let shared = VibrationManager(vibrationSaver: SettingsStorageImp.shared)
+    static let shared = VibrationManager(vibrationStorage: SettingsStorageImp.shared)
     
     enum BasicViration: SystemSoundID {
         case standart = 4095 /// kSystemSoundID_Vibrate
@@ -171,6 +185,22 @@ final class VibrationManager {
 //    }
     
     private let vibrationStorage: VibrationStorage
+    
+    
+    lazy var isAvailableTapticEngine: Bool = {
+        var sysinfo = utsname()
+        uname(&sysinfo)
+        let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
+        guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters),
+            let device = platform.slice(from: "iPhone", to: ",") else {
+                assertionFailure()
+                return false
+        }
+        /// iPhone6S or iPhone6SPlus
+        /// https://gist.github.com/adamawolf/3048717
+        
+        return platform == "iPhone8,1" || platform == "iPhone8,2"
+    }()
     
     init(vibrationStorage: VibrationStorage) {
         self.vibrationStorage = vibrationStorage
