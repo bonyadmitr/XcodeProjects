@@ -196,13 +196,29 @@ final class VibrationManager {
         var sysinfo = utsname()
         uname(&sysinfo)
         let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
-        guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters) else {
+        
+        /// #1
+        guard
+            let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters),
+            let mainDeviceVersionString = platform.slice(from: "iPhone", to: ","),
+            let mainDeviceVersion = Int(mainDeviceVersionString)
+        else {
             assertionFailure()
             return false
         }
-        /// iPhone6S or iPhone6SPlus
+        /// #2
+//        guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters) else {
+//            assertionFailure()
+//            return false
+//        }
+        
+        /// list of platforms https://gist.github.com/adamawolf/3048717
         /// https://gist.github.com/adamawolf/3048717
-        return platform == "iPhone8,1" || platform == "iPhone8,2"
+        
+        /// #1
+        return platform == "iPhone8,1" || platform == "iPhone8,2" || mainDeviceVersion >= 9
+        /// #2
+        //return platform == "iPhone8,1" || platform == "iPhone8,2"
         #endif
     }()
     
@@ -219,20 +235,35 @@ final class VibrationManager {
         let date = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
         guard
             let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters),
-            let device = platform.slice(from: "iPhone", to: ","),
-            let deviceVersion = Int(device)
+            let mainDeviceVersionString = platform.slice(from: "iPhone", to: ","),
+            let mainDeviceVersion = Int(mainDeviceVersionString)
         else {
             assertionFailure()
             return false
         }
         /// iPhone7...
-        /// https://gist.github.com/adamawolf/3048717
-        return deviceVersion > 8
+        /// list of platforms https://gist.github.com/adamawolf/3048717
+        return mainDeviceVersion >= 9
         #endif
     }()
     
     init(vibrationStorage: VibrationStorage) {
         self.vibrationStorage = vibrationStorage
+        
+        /// private api method
+        /// https://stackoverflow.com/a/39592312/5893286
+        if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
+            switch feedbackSupportLevel {
+            case 1:
+                print("TapticEngine")
+            case 2:
+                print("HapticEngine")
+            default:
+                /// feedbackSupportLevel == 0 for simulator, iPhone SE
+                print("feedbackSupportLevel: ",feedbackSupportLevel)
+                print("other")
+            }
+        }
     }
 
     func basicVibrate(_ type: BasicViration) {
