@@ -27,7 +27,7 @@ final class SettingsStorageImp: MulticastHandler {
         static let isEnabledVibrationKey = base + "isEnabledVibrationKey"
     }
     
-    private let defaults = UserDefaults.standard
+    private let userDefaults: UserDefaults
     
     internal var delegates = MulticastDelegate<SettingsStorageDelegate>()
     
@@ -40,31 +40,33 @@ final class SettingsStorageImp: MulticastHandler {
     //        }
     //    }
     
-    var isEnabledVibration: Bool {
+    var isEnabledVibration: Bool = false {
         didSet {
-            defaults.set(isEnabledVibration, forKey: Keys.isEnabledVibrationKey)
+            userDefaults.set(isEnabledVibration, forKey: Keys.isEnabledVibrationKey)
         }
     }
     
-    init() {
-        type(of: self).setupDefaultValuesIfNeed()
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
+        self.userDefaults = userDefaults
+        setupDefaultValuesIfNeed()
         //        isEnabledVibration = defaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? DefaultValues.isEnabledVibration
-        isEnabledVibration = defaults.bool(forKey: Keys.isEnabledVibrationKey)
+        isEnabledVibration = userDefaults.bool(forKey: Keys.isEnabledVibrationKey)
     }
+
     
-    private static func setupDefaultValuesIfNeed() {
-        UserDefaults.standard.register(defaults: [Keys.isEnabledVibrationKey: true])
+    private func setupDefaultValuesIfNeed() {
+        userDefaults.register(defaults: [Keys.isEnabledVibrationKey: true])
     }
 }
 
 extension SettingsStorageImp: SettingsStorage {
     func saveIfNeed() {
-        defaults.synchronize()
+        userDefaults.synchronize()
     }
     
     func resetToDefault() {
-        defaults.removeObjects(for: [Keys.isEnabledVibrationKey])
-        type(of: self).setupDefaultValuesIfNeed()
+        userDefaults.removeObjects(for: [Keys.isEnabledVibrationKey])
+        setupDefaultValuesIfNeed()
         delegates.invoke { $0.settingsRestoredToDefaults() }
     }
 }
