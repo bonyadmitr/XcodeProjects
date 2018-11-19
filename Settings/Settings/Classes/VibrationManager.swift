@@ -172,13 +172,13 @@ final class VibrationManager {
     }
 
     enum HapticVibration {
-        case error
-        case success
-        case warning
-        case light
-        case medium
-        case heavy
-        case selection
+        case success /// 2 fast vibrations
+        case warning /// 2 medium fast vibrations
+        case error /// 3 quickly vibrations
+        case light /// 1 vibration
+        case medium /// 1 vibration
+        case heavy /// 1 vibration
+        case selection /// 1 vibration. the lightest one
     }
     
 //    private static let isEnabledVibrationKey = "VibrationManager_isEnabledVibrationKey"
