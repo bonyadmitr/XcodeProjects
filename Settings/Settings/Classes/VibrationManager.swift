@@ -125,8 +125,10 @@ enum Device {
 enum VibrationType {
     /// iPhone7 or newer
     case haptic
+    
     /// iPhone 6s, 6s+ only
     case taptic
+    
     /// all others
     case basic
 }
@@ -141,38 +143,50 @@ final class VibrationManager {
     enum BasicVibration: SystemSoundID {
         /// kSystemSoundID_Vibrate. same as 1102
         case standard = 4095
-         /// double vibration
+        
+        /// double vibration
         case warning = 1011
-         /// like standart but working only in silence mode. same id in TapticVibration
+        
+        /// like standart but working only in silence mode. same id in TapticVibration
         case standardSilenceMode = 1107
     }
     
     enum TapticVibration: SystemSoundID {
-         /// 1 medium vibrations
+        /// 1 medium vibrations
         case peek = 1519
-         /// 1 medium vibrations
+        
+        /// 1 medium vibrations
         case pop = 1520
-         /// 2 medium vibrations
+        
+        /// 2 medium vibrations
         case warning = 1102
-         /// 3 light vibrations
+        
+        /// 3 light vibrations
         case error = 1521
-         /// 3 medium vibrations but working only in silence mode
+        
+        /// 3 medium vibrations but working only in silence mode
         case errorSilenceMode = 1107
     }
 
     enum HapticVibration {
         /// 2 fast vibrations
         case success
+        
         /// 2 medium fast vibrations
         case warning
+        
         /// 3 quickly vibrations
         case error
+        
         /// 1 vibration
         case light
+        
         /// 1 vibration
         case medium
+        
         /// 1 vibration
         case heavy
+        
         /// 1 vibration. the lightest one
         case selection
     }
@@ -200,7 +214,7 @@ final class VibrationManager {
 //        #endif
 //    }()
     
-    let vibrationType = Device.Vibration.type
+    private let vibrationType = Device.Vibration.type
     private let vibrationStorage: VibrationStorage
     
     init(vibrationStorage: VibrationStorage) {
