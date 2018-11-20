@@ -121,10 +121,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                                                               significantEvents: 3,
                                                               foregroundAppears: 15)
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        print(VibrationManager.shared.isAvailableTapticEngine)
-        print(VibrationManager.shared.isAvailableHapticEngine)        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {     
         
         #if DEBUG
         Logger.shared.configure {
