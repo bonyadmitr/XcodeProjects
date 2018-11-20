@@ -183,31 +183,33 @@ class SettingsTests: XCTestCase {
 
 class SettingsStorageTests: XCTestCase {
     
+    private let suiteName = "test"
+    
+    override func tearDown() {
+        
+        UserDefaults.standard.removePersistentDomain(forName: suiteName)
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
     func testInit() {
-        let suiteName = "test"
         let userDefaults = UserDefaults(suiteName: suiteName)!
         var settingsStorage: SettingsStorage = SettingsStorageImp(userDefaults: userDefaults)
         XCTAssert(settingsStorage.isEnabledVibration == true)
-        UserDefaults.standard.removePersistentDomain(forName: suiteName)
     }
     
     func testSave() {
-        let suiteName = "test"
         let userDefaults = UserDefaults(suiteName: suiteName)!
         var settingsStorage: SettingsStorage = SettingsStorageImp(userDefaults: userDefaults)
         settingsStorage.isEnabledVibration = false
         XCTAssert(settingsStorage.isEnabledVibration == false)
-        UserDefaults.standard.removePersistentDomain(forName: suiteName)
     }
     
     func testResetToDefault() {
-        let suiteName = "test"
         let userDefaults = UserDefaults(suiteName: suiteName)!
-//        UserDefautls.standard.removeSuite(named: "test")
         var settingsStorage: SettingsStorage = SettingsStorageImp(userDefaults: userDefaults)
         settingsStorage.isEnabledVibration = false
         settingsStorage.resetToDefault()
         XCTAssert(settingsStorage.isEnabledVibration == true)
-        UserDefaults.standard.removePersistentDomain(forName: suiteName)
     }
 }
