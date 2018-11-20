@@ -60,7 +60,7 @@ enum Device {
         /// #1
         guard let platform = String(bytes: date, encoding: .ascii)?.trimmingCharacters(in: .controlCharacters) else {
             assertionFailure()
-            return ""
+            return "simulator"
         }
         return platform
     }()
@@ -70,11 +70,65 @@ enum Device {
             let mainDeviceVersionString = platform.slice(from: "iPhone", to: ","),
             let mainDeviceVersion = Int(mainDeviceVersionString)
         else {
+            #if !targetEnvironment(simulator)
             assertionFailure()
+            #endif
             return 0
         }
         return mainDeviceVersion
     }()
+    
+    
+    enum Vibration {
+        
+        static let type: VibrationType = {
+            if isAvailableHapticEngine {
+                return .haptic
+            } else if isAvailableTapticEngine {
+                return .taptic
+            } else {
+                return .basic
+            }
+            
+            /// private api method
+            /// https://stackoverflow.com/a/39592312/5893286
+            //if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
+            //    switch feedbackSupportLevel {
+            //    case 1:
+            //        vibrationType = .taptic
+            //    case 2:
+            //        vibrationType = .haptic
+            //    default:
+            //        /// feedbackSupportLevel == 0 for simulator, iPhone SE
+            //        vibrationType = .basic
+            //    }
+            //} else {
+            //    assertionFailure()
+            //    vibrationType = .basic
+            //}
+        }()
+        
+        /// iPhone7 or newer.
+        /// there is no for iPad
+        private static var isAvailableHapticEngine: Bool {
+            return Device.mainDeviceVersion >= 9
+        }
+        
+        /// iPhone 6s, 6s+ only
+        private static var isAvailableTapticEngine: Bool {
+            /// list of platforms https://gist.github.com/adamawolf/3048717
+            return Device.platform == "iPhone8,1" || Device.platform == "iPhone8,2"
+        }
+    }
+}
+
+enum VibrationType {
+    /// iPhone7 or newer
+    case haptic
+    /// iPhone 6s, 6s+ only
+    case taptic
+    /// all others
+    case basic
 }
 
 /// https://github.com/efremidze/Haptica
@@ -83,12 +137,6 @@ enum Device {
 final class VibrationManager {
 
     static let shared = VibrationManager(vibrationStorage: SettingsStorageImp.shared)
-    
-    enum VibrationType {
-        case haptic
-        case taptic
-        case basic
-    }
     
     enum BasicVibration: SystemSoundID {
         /// kSystemSoundID_Vibrate. same as 1102
@@ -130,58 +178,33 @@ final class VibrationManager {
     }
     
     // there is no for iPad
-    let isAvailableTapticEngine: Bool = {
-        #if targetEnvironment(simulator)
-        return false
-        #else
-        /// list of platforms https://gist.github.com/adamawolf/3048717
-        /// iPhone 6s, 6s+ and iPhone7...
-        return Device.platform == "iPhone8,1" || Device.platform == "iPhone8,2" || Device.mainDeviceVersion >= 9
-        #endif
-    }()
+//    let isAvailableTapticEngine: Bool = {
+//        #if targetEnvironment(simulator)
+//        return false
+//        #else
+//        /// list of platforms https://gist.github.com/adamawolf/3048717
+//        /// iPhone 6s, 6s+ and iPhone7...
+//        return Device.platform == "iPhone8,1" || Device.platform == "iPhone8,2" || Device.mainDeviceVersion >= 9
+//        #endif
+//    }()
+//
+//    // there is no for iPad
+//    /// check https://stackoverflow.com/a/42057620/5893286
+//    /// UIDevice.currentDevice().valueForKey("_feedbackSupportLevel")
+//    let isAvailableHapticEngine: Bool = {
+//        #if targetEnvironment(simulator)
+//        return false
+//        #else
+//        /// iPhone7...
+//        return Device.mainDeviceVersion >= 9
+//        #endif
+//    }()
     
-    // there is no for iPad
-    /// check https://stackoverflow.com/a/42057620/5893286
-    /// UIDevice.currentDevice().valueForKey("_feedbackSupportLevel")
-    let isAvailableHapticEngine: Bool = {
-        #if targetEnvironment(simulator)
-        return false
-        #else
-        /// iPhone7...
-        return Device.mainDeviceVersion >= 9
-        #endif
-    }()
-    
-    let vibrationType: VibrationType
+    let vibrationType = Device.Vibration.type
     private let vibrationStorage: VibrationStorage
     
     init(vibrationStorage: VibrationStorage) {
         self.vibrationStorage = vibrationStorage
-        
-        /// can be lazy var
-        if isAvailableHapticEngine {
-            vibrationType = .haptic
-        } else if isAvailableTapticEngine {
-            vibrationType = .taptic
-        } else {
-            vibrationType = .basic
-        }
-        /// private api method
-        /// https://stackoverflow.com/a/39592312/5893286
-        //if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
-        //    switch feedbackSupportLevel {
-        //    case 1:
-        //        vibrationType = .taptic
-        //    case 2:
-        //        vibrationType = .haptic
-        //    default:
-        //        /// feedbackSupportLevel == 0 for simulator, iPhone SE
-        //        vibrationType = .basic
-        //    }
-        //} else {
-        //    assertionFailure()
-        //    vibrationType = .basic
-        //}
     }
     
     func lightVibrate() {
@@ -222,9 +245,7 @@ final class VibrationManager {
             return
         }
         AudioServicesPlaySystemSound(type.rawValue)
-        //AudioServicesPlaySystemSoundWithCompletion(type.rawValue) {
-        //    print("did vibrate")
-        //}
+        //AudioServicesPlaySystemSoundWithCompletion(type.rawValue) {}
     }
     
     func tapticVibrate(_ type: TapticVibration) {
@@ -232,9 +253,6 @@ final class VibrationManager {
             return
         }
         AudioServicesPlaySystemSound(type.rawValue)
-        //AudioServicesPlaySystemSoundWithCompletion(type.rawValue) {
-        //    print("did vibrate")
-        //}
     }
 
     //@available(iOS 10.0, *)
