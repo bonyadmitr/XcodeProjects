@@ -113,7 +113,8 @@ enum Shortcut: String {
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var isApplicationRestored = false
+    private var isApplicationRestored = false
+    private let settingsStorage: SettingsStorage = SettingsStorageImp.shared
     
     private let rateAppDisplayManager = RateAppDisplayManager(untilPromptDays: 7,
                                                               launches: 10,
@@ -241,7 +242,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     func applicationDidEnterBackground(_ application: UIApplication) {
-        UserDefaults.standard.synchronize()
+        settingsStorage.saveIfNeed()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -251,7 +252,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        UserDefaults.standard.synchronize()
+        settingsStorage.saveIfNeed()
     }
 }
 
