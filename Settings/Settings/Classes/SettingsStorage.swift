@@ -53,6 +53,9 @@ final class SettingsStorageImp: MulticastHandler {
     }
 
     private func registerDefaultValues() {
+        /// turn off basic vibration by default
+        //let isVibrationOn = VibrationManager.shared.isAvailableHapticEngine || VibrationManager.shared.isAvailableTapticEngine
+        
         userDefaults.register(defaults: [Keys.isEnabledVibrationKey: true])
     }
     

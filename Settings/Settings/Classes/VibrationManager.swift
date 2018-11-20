@@ -26,12 +26,28 @@ extension String {
         }
     }
 }
+extension UINavigationController: UINavigationBarDelegate  {
+    /// NOTE: this funcion will be called for all pop actions
+    /// https://stackoverflow.com/a/43585267
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        VibrationManager.shared.lightVibrate()
+        popVC()
+        return true
+    }
+    
+    private func popVC() {
+        DispatchQueue.main.async {
+            _ = self.popViewController(animated: true)
+        }
+    }
+}
 
 
 protocol VibrationStorage {
     var isEnabledVibration: Bool { get set }
 }
 
+/// https://github.com/efremidze/Haptica
 /// https://developer.apple.com/documentation/uikit/uifeedbackgenerator
 /// https://medium.com/@sdrzn/make-your-ios-app-feel-better-a-comprehensive-guide-over-taptic-engine-and-haptic-feedback-724dec425f10
 final class VibrationManager {
