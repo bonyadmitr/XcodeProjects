@@ -28,7 +28,6 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         title = childVC.title
         extendedLayoutIncludesOpaqueBars = true
         
-        
         if #available(iOS 11.0, *) {
             /// working with lags in viewDidLoad
             navigationItem.largeTitleDisplayMode = .never
@@ -106,10 +105,5 @@ extension SplitDetailController {
 //            assertionFailure()
 //            _ = navigationController?.popViewController(animated: false)
         }
-    }
-    
-    override func applicationFinishedRestoringState() {
-        super.applicationFinishedRestoringState()
-        
     }
 }
