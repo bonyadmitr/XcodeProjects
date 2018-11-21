@@ -29,15 +29,28 @@ extension String {
 extension UINavigationController: UINavigationBarDelegate  {
     /// NOTE: this funcion will be called for all pop actions
     /// https://stackoverflow.com/a/43585267
+    /// https://gist.github.com/HamGuy/a099058e674b573ffe433132f7b5651e
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        
+        guard let items = navigationBar.items else {
+            assertionFailure()
+            return false
+        }
+        
+        /// will be called twice
+        /// second one falls in this case
+        if viewControllers.count < items.count {
+            return true
+        }
+        
         VibrationManager.shared.lightVibrate()
         popVC()
-        return true
+        return false
     }
     
     private func popVC() {
         DispatchQueue.main.async {
-            _ = self.popViewController(animated: true)
+            self.popViewController(animated: true)
         }
     }
 }
