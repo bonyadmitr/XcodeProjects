@@ -103,6 +103,12 @@ final class AppearanceConfigurator: MulticastHandler {
 //        return (UIApplication.shared.delegate as? AppDelegate)?.window
 //    }()
     
+    func setupLargeTitles(for navigationBar: UINavigationBar) {
+        if #available(iOS 11.0, *) {
+            navigationBar.prefersLargeTitles = true
+        }
+    }
+    
     func apply(theme: AppearanceTheme) {
         /// need all windows for Floating window
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
@@ -114,9 +120,11 @@ final class AppearanceConfigurator: MulticastHandler {
             .foregroundColor: theme.textColor
         ]
         
-        UINavigationBar.appearance().titleTextAttributes = textAttributes
-        UINavigationBar.appearance().barTintColor = theme.navBarColor //bar's background
-        UINavigationBar.appearance().barStyle = theme.barStyle.tabAndNavBars
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.titleTextAttributes = textAttributes
+        navigationBar.barTintColor = theme.navBarColor //bar's background
+        navigationBar.barStyle = theme.barStyle.tabAndNavBars
+        setupLargeTitles(for: navigationBar)
 //        if #available(iOS 11.0, *) {
 //            UINavigationBar.appearance().prefersLargeTitles = true
 //        }

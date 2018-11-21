@@ -43,7 +43,18 @@ final class BaseNavController: UINavigationController {
         /// to remove translucent navigation bar shadow on push and pop actions
 //        view.backgroundColor = UIColor.white
     }
+    
+    
 }
+extension BaseNavController {
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
+        
+        AppearanceConfigurator.shared.setupLargeTitles(for: navigationBar)
+    }
+}
+
 
 final class HideTabBarNavController: UINavigationController {
     
@@ -78,6 +89,15 @@ final class HideTabBarNavController: UINavigationController {
         
         /// to remove translucent navigation bar shadow on push and pop actions
         //        view.backgroundColor = UIColor.white
+    }
+}
+extension HideTabBarNavController {
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
+        
+        title = topViewController?.title
+        AppearanceConfigurator.shared.setupLargeTitles(for: navigationBar)
     }
 }
 

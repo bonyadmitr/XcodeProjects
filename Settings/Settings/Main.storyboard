@@ -157,6 +157,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bxd-9V-fZv"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Temp" largeTitleDisplayMode="never" id="Bh0-q4-Uyr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6eO-aS-nRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

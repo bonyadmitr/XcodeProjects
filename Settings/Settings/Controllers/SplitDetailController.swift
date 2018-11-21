@@ -27,6 +27,12 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         /// in viewDidLoad it will be with changing animation from storyboard title
         title = childVC.title
         extendedLayoutIncludesOpaqueBars = true
+        
+        
+        if #available(iOS 11.0, *) {
+            /// working with lags in viewDidLoad
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
     
     override func viewDidLoad() {
@@ -36,8 +42,8 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         //removeBackButtonTitle()
         
         /// not working in setup func
-        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        navigationItem.leftItemsSupplementBackButton = true
     }
     
     private func addChildVC() {

@@ -26,6 +26,7 @@ import UIKit
 // Localization strings by swiftgen
 // Window round coners
 // Supports in-call status bar
+// Supports iOS 11 large titles (there is a bug in pop vc after restoration)
 //
 /// Marketing:
 // Fully offline
@@ -36,7 +37,6 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
-// TODO: large titles support
 // TODO: UISelectionFeedbackGenerator
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)
