@@ -103,6 +103,8 @@ final class AppearanceConfigurator: MulticastHandler {
 //        return (UIApplication.shared.delegate as? AppDelegate)?.window
 //    }()
     
+    /// using Large Titles
+    /// https://www.youtube.com/watch?v=oFMeH02jMUc
     func setupLargeTitles(for navigationBar: UINavigationBar) {
         if #available(iOS 11.0, *) {
             navigationBar.prefersLargeTitles = true
