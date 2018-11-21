@@ -52,6 +52,7 @@ enum Device {
         return TARGET_OS_SIMULATOR != 0
     }
     
+    /// list of platforms https://gist.github.com/adamawolf/3048717
     static let platform: String = {
         var sysinfo = utsname()
         uname(&sysinfo)
@@ -115,7 +116,6 @@ enum Device {
         
         /// iPhone 6s, 6s+ only
         private static var isAvailableTapticEngine: Bool {
-            /// list of platforms https://gist.github.com/adamawolf/3048717
             return Device.platform == "iPhone8,1" || Device.platform == "iPhone8,2"
         }
     }
@@ -191,29 +191,6 @@ final class VibrationManager {
         /// 1 vibration. the lightest one
         case selection
     }
-    
-    // there is no for iPad
-//    let isAvailableTapticEngine: Bool = {
-//        #if targetEnvironment(simulator)
-//        return false
-//        #else
-//        /// list of platforms https://gist.github.com/adamawolf/3048717
-//        /// iPhone 6s, 6s+ and iPhone7...
-//        return Device.platform == "iPhone8,1" || Device.platform == "iPhone8,2" || Device.mainDeviceVersion >= 9
-//        #endif
-//    }()
-//
-//    // there is no for iPad
-//    /// check https://stackoverflow.com/a/42057620/5893286
-//    /// UIDevice.currentDevice().valueForKey("_feedbackSupportLevel")
-//    let isAvailableHapticEngine: Bool = {
-//        #if targetEnvironment(simulator)
-//        return false
-//        #else
-//        /// iPhone7...
-//        return Device.mainDeviceVersion >= 9
-//        #endif
-//    }()
     
     private let vibrationType = Device.Vibration.type
     private let vibrationStorage: VibrationStorage
