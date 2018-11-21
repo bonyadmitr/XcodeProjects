@@ -11,7 +11,7 @@ enum L10n {
   static var about: String {
     return L10n.tr("Localizable", "about")
   }
-  /// appearance
+  /// Appearance
   static var appearance: String {
     return L10n.tr("Localizable", "appearance")
   }
