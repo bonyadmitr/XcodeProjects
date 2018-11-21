@@ -231,9 +231,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             assertionFailure()
             return
         }
+        
+        if Device.isIphoneXOrNewer {
+            return
+        }
+        
         window.clipsToBounds = true
         window.layer.cornerRadius = 5
-        window.backgroundColor = UIColor.black
+        //window.backgroundColor = UIColor.black
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
