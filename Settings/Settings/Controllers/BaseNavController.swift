@@ -46,15 +46,6 @@ final class BaseNavController: UINavigationController {
     
     
 }
-extension BaseNavController {
-    override func decodeRestorableState(with coder: NSCoder) {
-        super.decodeRestorableState(with: coder)
-        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
-        
-        AppearanceConfigurator.shared.setupLargeTitles(for: navigationBar)
-    }
-}
-
 
 final class HideTabBarNavController: UINavigationController {
     
@@ -91,12 +82,10 @@ final class HideTabBarNavController: UINavigationController {
         //        view.backgroundColor = UIColor.white
     }
 }
-extension HideTabBarNavController {
-    override func decodeRestorableState(with coder: NSCoder) {
-        super.decodeRestorableState(with: coder)
-        assert(isViewLoaded, "We assume the controller is never restored without loading its view first.")
-        
-        title = topViewController?.title
+
+extension UINavigationController {
+    override open func applicationFinishedRestoringState() {
+        super.applicationFinishedRestoringState()
         AppearanceConfigurator.shared.setupLargeTitles(for: navigationBar)
     }
 }
