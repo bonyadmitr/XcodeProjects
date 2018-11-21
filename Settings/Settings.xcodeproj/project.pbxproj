@@ -30,6 +30,7 @@
 		C4131E3C21A1FADD003C3DAB /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */; };
 		C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3D21A32615003C3DAB /* NonL10n.swift */; };
 		C4131E4021A328A4003C3DAB /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */; };
+		C43E420221A60BC50099F9E5 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43E420121A60BC50099F9E5 /* Device.swift */; };
 		CE08888F2199587B0072F45C /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08888E2199587B0072F45C /* L10n.swift */; };
 		CE088891219AD00B0072F45C /* AboutHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE088890219AD00B0072F45C /* AboutHeader.swift */; };
 		CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE87B2162653500E16E4B /* UIColor+Default.swift */; };
@@ -101,6 +102,7 @@
 		C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
 		C4131E3D21A32615003C3DAB /* NonL10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonL10n.swift; sourceTree = "<group>"; };
 		C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorage.swift; sourceTree = "<group>"; };
+		C43E420121A60BC50099F9E5 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		CE08888E2199587B0072F45C /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE088890219AD00B0072F45C /* AboutHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeader.swift; sourceTree = "<group>"; };
 		CE0FE87B2162653500E16E4B /* UIColor+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Default.swift"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */,
 				C4131E3B21A1FADD003C3DAB /* VibrationManager.swift */,
 				C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */,
+				C43E420121A60BC50099F9E5 /* Device.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
 				66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */,
+				C43E420221A60BC50099F9E5 /* Device.swift in Sources */,
 				66AA3EC4217905D3000E549D /* AboutController.swift in Sources */,
 				CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */,
 				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
