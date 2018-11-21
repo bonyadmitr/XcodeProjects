@@ -25,6 +25,7 @@ import UIKit
 // AppRater by events
 // Localization strings by swiftgen
 // Window round coners
+// Supports in-call status bar
 //
 /// Marketing:
 // Fully offline
