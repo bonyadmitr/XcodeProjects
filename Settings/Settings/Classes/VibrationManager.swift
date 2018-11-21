@@ -42,12 +42,12 @@ extension UINavigationController: UINavigationBarDelegate  {
     }
 }
 
-
 protocol VibrationStorage {
     var isEnabledVibration: Bool { get set }
 }
 
 enum Device {
+    
     static var isSimulator: Bool {
         return TARGET_OS_SIMULATOR != 0
     }
@@ -77,7 +77,6 @@ enum Device {
         }
         return mainDeviceVersion
     }()
-    
     
     enum Vibration {
         
@@ -151,6 +150,7 @@ final class VibrationManager {
         case standardSilenceMode = 1107
     }
     
+    /// iPhone 6s, 6s+ only
     enum TapticVibration: SystemSoundID {
         /// 1 medium vibrations
         case peek = 1519
@@ -168,6 +168,7 @@ final class VibrationManager {
         case errorSilenceMode = 1107
     }
 
+    /// iPhone7 or newer
     enum HapticVibration {
         /// 2 fast vibrations
         case success
@@ -269,11 +270,9 @@ final class VibrationManager {
         AudioServicesPlaySystemSound(type.rawValue)
     }
 
-    //@available(iOS 10.0, *)
-    /// available iPhone 7...
+    /// available iPhone 7 or newer
     func hapticVibrate(_ type: HapticVibration) {
         //generator.prepare()
-        //if #available(iOS 10.0, *) {
         guard vibrationStorage.isEnabledVibration else {
             return
         }
