@@ -18,7 +18,8 @@ import UIKit
 // Supporting Accessibility: Larger Text
 // Supporting Accessibility: VoiceOver
 // Supports 3D touch on app icon (Quick Actions)
-// Supports landscape (horizontal) mode
+// Supports iPhoneX and newer
+// Supports landscape (horizontal) mode + iPhoneX, XR split
 // Supports iPad and split screen (controller)
 // App restoration if system killed it (not user manual)
 // AppRater by events
