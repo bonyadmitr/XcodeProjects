@@ -29,6 +29,7 @@ final class FloatingPresentingController: UIViewController {
     private let sections = [Section(type: .debug,
                                     raws: [.crashApp, .moveToBackgroundAndCrash, .sendLogs])]
     
+    private var isGoingToCrash = false
     private let cellId = String(describing: DetailCell.self)
     
     private lazy var tableView: UITableView = {
@@ -62,7 +63,6 @@ final class FloatingPresentingController: UIViewController {
         //extendedLayoutIncludesOpaqueBars = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: .willEncodeRestorableState, object: nil)
-        
     }
     
     override func viewDidLoad() {
@@ -79,8 +79,6 @@ final class FloatingPresentingController: UIViewController {
             self.tableView.endUpdates()
         }
     }
-    
-    private var isGoingToCrash = false
     
     @objc private func appMovedToBackground() {
         if isGoingToCrash {
@@ -112,6 +110,7 @@ extension FloatingPresentingController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].raws.count
     }
