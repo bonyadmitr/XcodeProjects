@@ -37,7 +37,7 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
-// TODO: UISelectionFeedbackGenerator
+// TODO: UISelectionFeedbackGenerator on tabBar click
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
