@@ -122,15 +122,20 @@ extension FloatingPresentingController: UITableViewDataSource {
 
 extension FloatingPresentingController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
+        
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
         case .crashApp:
-            cell.textLabel?.text = "Crash the app"
+            cell.setup(title: "Crash the app")
         case .moveToBackgroundAndCrash:
-            cell.textLabel?.text = "Background & crash in 1 sec"
+            cell.setup(title: "Background & crash in 1 sec")
         case .sendLogs:
-            cell.textLabel?.text = "Send logs via email"
+            cell.setup(title: "Send logs via email")
         }
     }
     
