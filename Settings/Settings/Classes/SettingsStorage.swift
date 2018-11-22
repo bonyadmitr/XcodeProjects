@@ -12,6 +12,12 @@ protocol SettingsStorage: VibrationStorage {
     //var isEnabledVibration: Bool { get set }
     func saveIfNeed()
     func resetToDefault()
+    func register(_ delegate: SettingsStorageDelegate)
+    func unregister(_ delegate: SettingsStorageDelegate)
+}
+
+protocol VibrationStorage {
+    var isEnabledVibration: Bool { get set }
 }
 
 protocol SettingsStorageDelegate {

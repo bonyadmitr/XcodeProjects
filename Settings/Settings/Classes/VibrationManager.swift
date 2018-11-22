@@ -55,10 +55,6 @@ extension UINavigationController: UINavigationBarDelegate  {
     }
 }
 
-protocol VibrationStorage {
-    var isEnabledVibration: Bool { get set }
-}
-
 enum VibrationType {
     /// iPhone7 or newer
     case haptic
