@@ -40,6 +40,10 @@ final class FloatingPresentingController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        /// need for iOS 10, don't need for iOS 11
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -68,6 +72,8 @@ final class FloatingPresentingController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()

@@ -93,6 +93,8 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()

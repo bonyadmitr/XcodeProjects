@@ -14,7 +14,6 @@ final class AppearanceSelectController: UIViewController {
         let tableView = UITableView()
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        let cellId = String(describing: DetailCell.self)
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
@@ -55,6 +54,8 @@ final class AppearanceSelectController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
