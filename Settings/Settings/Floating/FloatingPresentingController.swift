@@ -29,11 +29,12 @@ final class FloatingPresentingController: UIViewController {
     private let sections = [Section(type: .debug,
                                     raws: [.crashApp, .moveToBackgroundAndCrash, .sendLogs])]
     
+    private let cellId = String(describing: DetailCell.self)
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        let cellId = String(describing: DetailCell.self)
         let nib = UINib(nibName: cellId, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
         tableView.dataSource = self
@@ -41,8 +42,6 @@ final class FloatingPresentingController: UIViewController {
         tableView.tableFooterView = UIView()
         return tableView
     }()
-    
-    private let cellId = String(describing: DetailCell.self)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
