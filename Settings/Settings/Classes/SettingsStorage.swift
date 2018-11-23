@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SettingsStorage: VibrationStorage {
+protocol SettingsStorage: VibrationStorage, SoundStorage {
     //var isEnabledVibration: Bool { get set }
     func saveIfNeed()
     func resetToDefault()
@@ -18,6 +18,10 @@ protocol SettingsStorage: VibrationStorage {
 
 protocol VibrationStorage {
     var isEnabledVibration: Bool { get set }
+}
+
+protocol SoundStorage {
+    var isEnabledSounds: Bool { get set }
 }
 
 protocol SettingsStorageDelegate {
@@ -30,7 +34,8 @@ final class SettingsStorageImp: MulticastHandler {
     
     private enum Keys {
         private static let base = "SettingsStorageImp_"
-        static let isEnabledVibrationKey = base + "isEnabledVibrationKey"
+        static let isEnabledVibration = base + "isEnabledVibration"
+        static let isEnabledSounds = base + "isEnabledSounds"
     }
     
     private let userDefaults: UserDefaults
@@ -48,7 +53,13 @@ final class SettingsStorageImp: MulticastHandler {
     
     var isEnabledVibration: Bool = false {
         didSet {
-            userDefaults.set(isEnabledVibration, forKey: Keys.isEnabledVibrationKey)
+            userDefaults.set(isEnabledVibration, forKey: Keys.isEnabledVibration)
+        }
+    }
+    
+    var isEnabledSounds: Bool = false {
+        didSet {
+            userDefaults.set(isEnabledVibration, forKey: Keys.isEnabledSounds)
         }
     }
     
@@ -61,12 +72,13 @@ final class SettingsStorageImp: MulticastHandler {
     private func registerDefaultValues() {
         /// turn off basic vibration by default
         let isVibrationOn = Device.Vibration.type == .haptic || Device.Vibration.type == .taptic
-        userDefaults.register(defaults: [Keys.isEnabledVibrationKey: isVibrationOn])
+        userDefaults.register(defaults: [Keys.isEnabledVibration: isVibrationOn])
     }
     
     func setupDefaultValues() {
         //isEnabledVibration = userDefaults.object(forKey: Keys.isEnabledVibrationKey) as? Bool ?? true
-        isEnabledVibration = userDefaults.bool(forKey: Keys.isEnabledVibrationKey)
+        isEnabledVibration = userDefaults.bool(forKey: Keys.isEnabledVibration)
+        isEnabledSounds = userDefaults.bool(forKey: Keys.isEnabledSounds)
     }
 }
 
@@ -76,7 +88,7 @@ extension SettingsStorageImp: SettingsStorage {
     }
     
     func resetToDefault() {
-        userDefaults.removeObjects(for: [Keys.isEnabledVibrationKey])
+        userDefaults.removeObjects(for: [Keys.isEnabledVibration, Keys.isEnabledSounds])
         registerDefaultValues()
         setupDefaultValues()
         delegates.invoke { $0.settingsRestoredToDefaults() }
