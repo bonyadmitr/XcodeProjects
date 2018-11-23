@@ -10,8 +10,8 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
+    /// don't call super. it will crash. it is UITabBarDelegate method
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        super.tabBar(tabBar, didSelect: item)
         VibrationManager.shared.lightVibrate()
     }
 }
