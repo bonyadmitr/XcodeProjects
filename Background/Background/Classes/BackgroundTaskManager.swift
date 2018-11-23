@@ -14,6 +14,18 @@ final class BackgroundTaskManager {
     
     private var backgroundTaskId = UIBackgroundTaskInvalid /// == 0
     
+    let timer = DispatchSource.makeTimerSource(queue: .global(qos: .background))
+    
+    init() {
+        timer.schedule(deadline: .now(), repeating: .seconds(3))
+        timer.setEventHandler {
+            DispatchQueue.main.async {
+                debugLog("- backgroundTimeRemaining: \(UIApplication.shared.backgroundTimeRemaining)")
+            }
+        }
+        timer.resume()
+    }
+    
     func beginBackgroundTask() {
         guard backgroundTaskId == UIBackgroundTaskInvalid else {
             return
@@ -36,6 +48,7 @@ final class BackgroundTaskManager {
         backgroundTaskId = UIBackgroundTaskInvalid
     }
     
+    /// backgroundTimeRemaining will be restarted automatically when enter foreground
     func restartBackgroundTask() {
         endBackgroundTask()
         beginBackgroundTask()
