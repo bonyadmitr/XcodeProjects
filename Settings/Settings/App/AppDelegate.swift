@@ -37,6 +37,7 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
+// TODO: check all present on iPad (share app)
 // TODO: custom cell with switcher
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)

@@ -139,7 +139,7 @@ final class RateAppManager {
         }
         
         /// for iPad
-        activityVC.popoverPresentationController?.sourceRect = controller.view.frame
+        //activityVC.popoverPresentationController?.sourceRect = controller.view.frame
         activityVC.popoverPresentationController?.sourceView = controller.view
         activityVC.popoverPresentationController?.permittedArrowDirections = []
         
