@@ -38,6 +38,7 @@ final class URLSessionWrapper: NSObject {
     var backgroundCompletionHandler: (() -> Void)?
     
     /// https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW2
+    /// https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html
     /// Because only one process can use a background session at a time, you need to create a different background session for the containing app and each of its app extensions. (Each background session should have a unique identifier.) It’s recommended that your containing app only use a background session that was created by one of its extensions when the app is launched in the background to handle events for that extension. If you need to perform other network-related tasks in your containing app, create different URL sessions for them.
     private lazy var urlSession: URLSession = {
         /// Completion handler blocks are not supported in background sessions
@@ -45,20 +46,20 @@ final class URLSessionWrapper: NSObject {
         let config = URLSessionConfiguration.background(withIdentifier: "MySession")
 //        let config = URLSessionConfiguration.default
         
-        config.allowsCellularAccess = true /// default true, check false
-        config.httpCookieAcceptPolicy = .onlyFromMainDocumentDomain /// default
-        config.httpAdditionalHeaders = URLSessionWrapper.defaultHTTPHeaders
-        config.requestCachePolicy = .useProtocolCachePolicy /// default
-        config.timeoutIntervalForRequest = 30 /// default 60
-        
-        /// for background sessions
-        config.isDiscretionary = true
-        config.sessionSendsLaunchEvents = true
+//        config.allowsCellularAccess = true /// default true, check false
+//        config.httpCookieAcceptPolicy = .onlyFromMainDocumentDomain /// default
+//        config.httpAdditionalHeaders = URLSessionWrapper.defaultHTTPHeaders
+//        config.requestCachePolicy = .useProtocolCachePolicy /// default
+//        config.timeoutIntervalForRequest = 30 /// default 60
+//
+//        /// for background sessions
+//        config.isDiscretionary = true
+//        config.sessionSendsLaunchEvents = true
         
         /// To access the shared container you set up, use the sharedContainerIdentifier property on your configuration object.
         //config.sharedContainerIdentifier = "com.mycompany.myappgroupidentifier"
         
-        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        return URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue())
     }()
 
     
@@ -148,7 +149,7 @@ final class URLSessionWrapper: NSObject {
     @discardableResult
     func request(_ urlRequest: URLRequest, validator: ResponseValidator?, percentageHandler: PercentageHandler?, completion: DataResult?) -> URLSessionTask {
         
-        let task = urlSession.dataTask(with: urlRequest)
+        let task = urlSession.downloadTask(with: urlRequest)
         
         let gtask = GenericTask(task: task, validator: validator)
         gtask.completionHandler = completion
@@ -245,7 +246,23 @@ extension URLSessionWrapper: URLSessionDataDelegate {
 }
 
 // MARK: - URLSessionDownloadDelegate
-//extension URLSessionWrapper: URLSessionDownloadDelegate {
+extension URLSessionWrapper: URLSessionDownloadDelegate {
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        
+        guard let gtask = tasks.first(where: { $0.task == downloadTask }) else {
+//            assertionFailure()
+            return
+        }
+        
+        if let data = FileManager.default.contents(atPath: location.path) {
+            gtask.buffer = data
+        } else {
+            assertionFailure()
+        }
+        
+    }
+    
 //    /// required
 //    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
 //        
@@ -270,15 +287,35 @@ extension URLSessionWrapper: URLSessionDataDelegate {
 //    }
 //    
 //    
-//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-//        
-//    }
-//    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+        guard let task = tasks.first(where: { $0.task == downloadTask }) else {
+//            assertionFailure()
+            return
+        }
+//        task.buffer.append(data)
+        
+        if task.expectedContentLength == NSURLResponseUnknownLength {
+            return
+        }
+        
+//        let percentageDownloaded = Double(task.buffer.count) / Double(task.expectedContentLength)
+        
+        let percentageDownloaded = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+        
+        DispatchQueue.main.async {
+            task.percentageHandler?(percentageDownloaded)
+            
+            // TODO: proress handler
+            //            task.progress.completedUnitCount = Int64(task.buffer.count)
+        }
+    }
+//
 //    
 //    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
 //        
 //    }
-//}
+}
 
 // MARK: - URLSessionTaskDelegate
 extension URLSessionWrapper: URLSessionTaskDelegate {
@@ -329,6 +366,7 @@ extension URLSessionWrapper: URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
         guard let index = tasks.index(where: { $0.task == task }) else {
+//            assertionFailure()
             return
         }
         
