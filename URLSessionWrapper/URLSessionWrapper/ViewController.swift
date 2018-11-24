@@ -48,13 +48,14 @@ class ViewController: UIViewController {
         
         date = Date()
         URLSessionWrapper.shared.request(
-//            "https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
-            "https://jsonplaceholder.typicode.com/posts/1",
+//            "https://commons.wikimedia.org/wiki/File:Fronalpstock_big.jpg",
+            "https://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi",
+//            "https://jsonplaceholder.typicode.com/posts/1",
             method: .get,
 //            parameters: ["postId": "1"],
 //            validator: validator,
             percentageHandler: { percentage in
-//                print("percentage", percentage)
+                print("percentage", percentage)
             },
             completion: { result in
                 switch result {
@@ -70,15 +71,15 @@ class ViewController: UIViewController {
         })
         print("async")
         
-        URLSessionWrapper.shared.request("https://ru.wikipedia.org/wiki/Сайт") { result in
-            switch result {
-            case .success(_):
-                //print(String(data: data, encoding: .utf8)!)
-                print("success russian characters in url")
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+//        URLSessionWrapper.shared.request("https://ru.wikipedia.org/wiki/Сайт") { result in
+//            switch result {
+//            case .success(_):
+//                //print(String(data: data, encoding: .utf8)!)
+//                print("success russian characters in url")
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 }
 
