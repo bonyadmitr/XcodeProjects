@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 
+/// https://habr.com/post/271505/
+/// https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
