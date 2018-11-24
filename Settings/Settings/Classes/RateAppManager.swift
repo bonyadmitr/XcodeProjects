@@ -103,6 +103,37 @@ final class RateAppManager {
         openURL(string: urlPath, completion: completion)
     }
     
+    func shareApp(in controller: UIViewController) {
+        let urlPath = "https://itunes.apple.com/app/\(appId)"
+        guard let link = URL(string: urlPath) else {
+            assertionFailure()
+            return
+        }
+        let objectsToShare: [Any] = ["Settings app by Yaroslav Bondar", link,  #imageLiteral(resourceName: "ic_settings")]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = { activityType, completed, array, error in
+            guard let activityType = activityType else {
+                assertionFailure()
+                return
+            }
+            if activityType == .mail {
+            }
+            guard completed, let activityTypeString = (activityType as NSString?) as String? else {
+                assertionFailure()
+                return
+            }
+            print(activityTypeString)
+        }
+        
+        /// for iPad
+        activityVC.popoverPresentationController?.sourceRect = controller.view.frame
+        activityVC.popoverPresentationController?.sourceView = controller.view
+        activityVC.popoverPresentationController?.permittedArrowDirections = []
+        
+        controller.present(activityVC, animated: true, completion: nil)
+    }
+    
     private func openURL(string: String, completion: BoolHandler?) {
         guard let url = URL(string: string) else {
             completion?(false)
