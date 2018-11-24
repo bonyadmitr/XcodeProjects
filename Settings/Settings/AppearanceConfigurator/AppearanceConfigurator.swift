@@ -113,6 +113,7 @@ final class AppearanceConfigurator: MulticastHandler {
     
     func apply(theme: AppearanceTheme) {
         /// need all windows for Floating window
+        /// affects UIActivityViewController and MFMailComposeViewController buttons color
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
         
         /// need for translucent UINavigationBar
