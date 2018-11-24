@@ -39,6 +39,8 @@ final class URLSessionWrapper: NSObject {
     
     /// https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW2
     /// https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html
+    /// https://developer.apple.com/documentation/foundation/url_loading_system/downloading_files_in_the_background
+    /// https://www.ralfebert.de/ios-examples/networking/urlsession-background-downloads
     /// Because only one process can use a background session at a time, you need to create a different background session for the containing app and each of its app extensions. (Each background session should have a unique identifier.) It’s recommended that your containing app only use a background session that was created by one of its extensions when the app is launched in the background to handle events for that extension. If you need to perform other network-related tasks in your containing app, create different URL sessions for them.
     private lazy var urlSession: URLSession = {
         /// Completion handler blocks are not supported in background sessions
