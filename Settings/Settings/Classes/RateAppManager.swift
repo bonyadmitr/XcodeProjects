@@ -110,6 +110,9 @@ final class RateAppManager {
             return
         }
         let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link,  #imageLiteral(resourceName: "ic_settings")]
+        
+        /// taking long time to present
+        /// https://stackoverflow.com/questions/13907156/uiactivityviewcontroller-taking-long-time-to-present
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         activityVC.completionWithItemsHandler = { activityType, completed, array, error in
