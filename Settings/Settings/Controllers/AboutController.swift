@@ -16,10 +16,11 @@ final class AboutController: UIViewController {
         case rateApp
         case appStorePage
         case developerPage
+        case shareApp
     }
     
     private let cellId = String(describing: DetailCell.self)
-    private let raws: [RawType] = [.feedback, .privacyPolicy, .rateApp, .appStorePage, .developerPage]
+    private let raws: [RawType] = [.feedback, .privacyPolicy, .rateApp, .appStorePage, .developerPage, .shareApp]
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -140,6 +141,9 @@ extension AboutController: UITableViewDelegate {
         case .developerPage:
             cell.accessoryType = .disclosureIndicator
             cell.setup(title: L10n.moreAppsFromMe)
+        case .shareApp:
+            cell.accessoryType = .none
+            cell.setup(title: L10n.shareApp)
         }
     }
     
@@ -177,6 +181,8 @@ extension AboutController: UITableViewDelegate {
         case .developerPage:
             let vc = DeveloperAppsController()
             navigationController?.pushViewController(vc, animated: true)
+        case .shareApp:
+            RateAppManager.googleApp.shareApp(in: self)
         }
     }
 }
