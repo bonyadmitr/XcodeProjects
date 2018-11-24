@@ -54,11 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Quick Actions system icons
     /// https://developer.apple.com/documentation/uikit/uiapplicationshortcuticontype?language=objc
     ///
-    /// You don’t need to limit the number of quick actions provided to the shortcutItems property
+    /// - You don’t need to limit the number of quick actions provided to the shortcutItems property
     /// because system displays only the number of items that fit the screen.
-    /// (from me) max number of ShortcutItems (static + dynamic) = 4 (others will not be displayes)
-    /// static quick actions are shown first, starting at the topmost position in the list
-    /// UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
+    /// - (from me) max number of ShortcutItems (static + dynamic) = 4 (others will not be displayes). Also + 1 for system share app
+    /// - OS adds the sharing menu item automatically to all apps downloaded from the App Store (https://stackoverflow.com/a/39749606)
+    /// - static quick actions are shown first, starting at the topmost position in the list
+    /// - UIApplicationShortcutItem.type is application-specific string, so we don't need to create system-specific string (via bundleIdentifier)
     private func setupShortcutItems() {
         guard
             UIApplication.shared.shortcutItems?.isEmpty == true,
