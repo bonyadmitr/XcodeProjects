@@ -73,6 +73,7 @@ final class SettingsStorageImp: MulticastHandler {
         /// turn off basic vibration by default
         let isVibrationOn = Device.Vibration.type == .haptic || Device.Vibration.type == .taptic
         userDefaults.register(defaults: [Keys.isEnabledVibration: isVibrationOn])
+        userDefaults.register(defaults: [Keys.isEnabledSounds: false])
     }
     
     func setupDefaultValues() {

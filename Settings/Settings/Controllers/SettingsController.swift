@@ -30,10 +30,11 @@ final class SettingsController: UIViewController, BackButtonActions {
         case developerPage
         case about
         case vibration
+        case sound
     }
     
     private let sections = [Section(type: .language,
-                                    raws: [.select, .appearance, .vibration]),
+                                    raws: [.select, .appearance, .vibration, .sound]),
                             Section(type: .support,
                                     raws: [/*.privacyPolicy, .appStorePage, .developerPage,*/
                                         .feedback, .rateApp, .about])]
@@ -172,6 +173,14 @@ extension SettingsController: UITableViewDelegate {
             } else {
                 cell.accessoryType = .none
             }
+        case .sound:
+            cell.textLabel?.text = L10n.soundOnTap
+            
+            if settingsStorage.isEnabledSounds {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
         }
         
         cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
@@ -184,6 +193,7 @@ extension SettingsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         VibrationManager.shared.lightVibrate()
+        SoundManager.shared.playTapSound()
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
@@ -205,6 +215,9 @@ extension SettingsController: UITableViewDelegate {
             push(controller: AboutController())
         case .vibration:
             settingsStorage.isEnabledVibration.toggle()
+            tableView.reloadRows(at: [indexPath], with: .none)
+        case .sound:
+            settingsStorage.isEnabledSounds.toggle()
             tableView.reloadRows(at: [indexPath], with: .none)
         }
     }

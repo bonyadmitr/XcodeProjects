@@ -157,6 +157,7 @@ extension DeveloperAppsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         VibrationManager.shared.lightVibrate()
+        SoundManager.shared.playTapSound()
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {

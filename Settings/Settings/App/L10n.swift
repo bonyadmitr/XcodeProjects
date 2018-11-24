@@ -87,6 +87,10 @@ enum L10n {
   static var settings: String {
     return L10n.tr("Localizable", "settings")
   }
+  /// Sound on tap
+  static var soundOnTap: String {
+    return L10n.tr("Localizable", "sound_on_tap")
+  }
   /// Support
   static var support: String {
     return L10n.tr("Localizable", "support")

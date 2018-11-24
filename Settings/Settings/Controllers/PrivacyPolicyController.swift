@@ -99,6 +99,7 @@ final class PrivacyPolicyController: UIViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         activityIndicator.stopAnimating()
         VibrationManager.shared.lightVibrate()
+        SoundManager.shared.playTapSound()
     }
 }
 

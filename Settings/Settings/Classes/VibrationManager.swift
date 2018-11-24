@@ -44,6 +44,7 @@ extension UINavigationController: UINavigationBarDelegate  {
         }
         
         VibrationManager.shared.lightVibrate()
+        SoundManager.shared.playTapSound()
         popVC()
         return false
     }
@@ -266,6 +267,7 @@ final class SoundManager {
         case tweet = 1016
         case typewriters = 1035
         case update = 1036
+        case tap = 1104
     }
     
     static let shared = SoundManager(soundStorage: SettingsStorageImp.shared)
@@ -277,6 +279,13 @@ final class SoundManager {
     }
     
     func play(_ sound: AlertTone) {
+        guard soundStorage.isEnabledSounds else {
+            return
+        }
         AudioServicesPlaySystemSound(sound.rawValue)
+    }
+    
+    func playTapSound() {
+        play(.tap)
     }
 }
