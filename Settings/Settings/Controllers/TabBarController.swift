@@ -10,6 +10,13 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
+    /// possible fix of tab bar for iPhone X (reproducible sometimes)
+    /// https://stackoverflow.com/a/47225568
+    //    override func viewWillLayoutSubviews() {
+    //        super.viewWillLayoutSubviews()
+    //        tabBar.invalidateIntrinsicContentSize()
+    //    }
+    
     /// don't call super. it will crash. it is UITabBarDelegate method
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         VibrationManager.shared.lightVibrate()
