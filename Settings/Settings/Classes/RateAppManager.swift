@@ -109,21 +109,30 @@ final class RateAppManager {
             assertionFailure()
             return
         }
-        let objectsToShare: [Any] = ["Settings app by Yaroslav Bondar", link,  #imageLiteral(resourceName: "ic_settings")]
+        let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link,  #imageLiteral(resourceName: "ic_settings")]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
         activityVC.completionWithItemsHandler = { activityType, completed, array, error in
+            
+            guard completed else {
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("user cancel")
+                }
+                return
+            }
+            
+            /// should not be nil in any cases
             guard let activityType = activityType else {
                 assertionFailure()
                 return
             }
-            if activityType == .mail {
-            }
-            guard completed, let activityTypeString = (activityType as NSString?) as String? else {
-                assertionFailure()
-                return
-            }
-            print(activityTypeString)
+//            if activityType == .mail {
+//            }
+//            if activityType.rawValue == "com.apple.mobilenotes.SharingExtension" {
+//            }
+            print(activityType.rawValue)
         }
         
         /// for iPad
