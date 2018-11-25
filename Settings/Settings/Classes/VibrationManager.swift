@@ -37,9 +37,19 @@ extension UINavigationController: UINavigationBarDelegate  {
             return false
         }
         
+        /// if there is splitViewController and pushes more then 2 (2 + 1 base item >= 3)
+        let viewControllersCount = (splitViewController?.isCollapsed == true && items.count >= 3) ? viewControllers.count + 1 : viewControllers.count
+        /// #2
+//        let viewControllersCount: Int
+//        if let splitVC = splitViewController, splitVC.isCollapsed, items.count >= 3 {
+//            viewControllersCount = viewControllers.count + 1
+//        } else {
+//            viewControllersCount = viewControllers.count
+//        }
+        
         /// will be called twice
         /// second one falls in this case
-        if viewControllers.count < items.count {
+        if viewControllersCount < items.count {
             return true
         }
         
