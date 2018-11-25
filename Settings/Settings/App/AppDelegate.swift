@@ -38,6 +38,7 @@ import UIKit
 // Using latest version of Swift for best performance of app
 
 // TODO: check all present on iPad (share app)
+// TODO: Copyable version label
 // TODO: custom cell with switcher
 // TODO: sounds on tap
 // TODO: sounds settings (turned off by defalut)
@@ -60,6 +61,8 @@ import UIKit
 // TODO: crashlitics? (Crash reports switch)
 // TODO: fabric analytics?
 // TODO: log JailbreakChecker
+// TODO: spotlight
+// TODO: siri
 
 // TODO: external display support (iPad pro 2018 + AirPlay)
 // TODO: AirPlay support
