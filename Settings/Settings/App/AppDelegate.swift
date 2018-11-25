@@ -40,8 +40,6 @@ import UIKit
 // TODO: check all present on iPad (share app)
 // TODO: Copyable version label
 // TODO: custom cell with switcher
-// TODO: sounds on tap
-// TODO: sounds settings (turned off by defalut)
 // TODO: auto turn on dark theme (Pet Finder_Completed_Swift3 project)
 // TODO: for release mode shake to send a bug via email
 // TODO: custom cells for DeveloperAppsController (get/optn button, icon image)
