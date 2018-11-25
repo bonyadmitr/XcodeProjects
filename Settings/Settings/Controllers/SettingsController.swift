@@ -68,6 +68,9 @@ final class SettingsController: UIViewController, BackButtonActions {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// fix color during rotation
+        AppearanceConfigurator.shared.register(self)
+        didApplied(theme: AppearanceConfigurator.shared.currentTheme)
         //removeBackButtonTitle()
         
 //        if tableView.indexPathForSelectedRow == nil, splitViewController?.isCollapsed == false {
@@ -119,6 +122,13 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     private func push(controller: UIViewController) {
         performSegue(withIdentifier: "detail", sender: controller)
+    }
+}
+
+// MARK: - AppearanceConfiguratorDelegate
+extension SettingsController: AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme) {
+        view.backgroundColor = theme.backgroundColor
     }
 }
 

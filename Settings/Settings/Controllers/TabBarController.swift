@@ -17,10 +17,24 @@ final class TabBarController: UITabBarController {
     //        tabBar.invalidateIntrinsicContentSize()
     //    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        /// fix color during pop with large titles
+        AppearanceConfigurator.shared.register(self)
+        didApplied(theme: AppearanceConfigurator.shared.currentTheme)
+    }
+    
     /// don't call super. it will crash. it is UITabBarDelegate method
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         VibrationManager.shared.lightVibrate()
         SoundManager.shared.playTapSound()
+    }
+}
+
+// MARK: - AppearanceConfiguratorDelegate
+extension TabBarController: AppearanceConfiguratorDelegate {
+    func didApplied(theme: AppearanceTheme) {
+        view.backgroundColor = theme.backgroundColor
     }
 }
 

@@ -34,8 +34,8 @@ final class BaseSplitController: UISplitViewController {
         delegate = self
         //        edgesForExtendedLayout = [.bottom]
         extendedLayoutIncludesOpaqueBars = true
-        statusBarStyle = AppearanceConfigurator.shared.currentTheme.barStyle
         AppearanceConfigurator.shared.register(self)
+        didApplied(theme: AppearanceConfigurator.shared.currentTheme)
     }
     
     override func viewDidLoad() {
