@@ -37,6 +37,8 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
+// TODO: clear appDelegate
+// TODO: fix window tintColor for standart controllers
 // TODO: check all present on iPad (share app)
 // TODO: Copyable version label
 // TODO: custom cell with switcher
