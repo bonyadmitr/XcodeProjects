@@ -216,12 +216,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func roundWindowCorners() {
-        guard let window = window else {
-            assertionFailure()
+        if Device.isIphoneXOrNewer {
             return
         }
-        
-        if Device.isIphoneXOrNewer {
+        guard let window = window else {
+            assertionFailure()
             return
         }
         
