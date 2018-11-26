@@ -111,7 +111,7 @@ import UIKit
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
 enum Shortcut: String {
-    case first
+    case language
     case settings
 }
 
@@ -205,9 +205,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.first.rawValue, localizedTitle: "First vc", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.language.rawValue, localizedTitle: L10n.language, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
         
-        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: "Settings", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: L10n.settings, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
         
         UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
     }
@@ -222,7 +222,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         switch shortcutType {
-        case .first:
+        case .language:
             tabBarVC.selectedIndex = 0
         case .settings:
             tabBarVC.selectedIndex = 1
