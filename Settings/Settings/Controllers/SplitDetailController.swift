@@ -28,6 +28,9 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         title = childVC.title
         extendedLayoutIncludesOpaqueBars = true
         
+        /// must be set before "navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem"
+        navigationItem.leftItemsSupplementBackButton = true
+        
         if #available(iOS 11.0, *) {
             /// working with lags in viewDidLoad
             navigationItem.largeTitleDisplayMode = .never
@@ -40,9 +43,8 @@ final class SplitDetailController: UIViewController, ChildHandler, BackButtonAct
         addChildVC()
         //removeBackButtonTitle()
         
-        /// not working in setup func
+        /// not working in setup func (displayModeButtonItem == nil)
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        navigationItem.leftItemsSupplementBackButton = true
     }
     
     private func addChildVC() {
