@@ -29,6 +29,7 @@ final class ShortcutManager {
     }
     
     func registerShortcutItemsIfNeed() {
+        /// we don't need register twice or 3D touch is not available or disabled
         guard
             UIApplication.shared.shortcutItems?.isEmpty == true,
             UIScreen.main.traitCollection.forceTouchCapability == .available
