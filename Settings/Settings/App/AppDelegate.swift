@@ -458,7 +458,3 @@ extension AppDelegate {
         NotificationCenter.default.post(name: .willEncodeRestorableState, object: nil)
     }
 }
-
-extension NSNotification.Name {
-    static let willEncodeRestorableState = NSNotification.Name("custom_willEncodeRestorableState")
-}

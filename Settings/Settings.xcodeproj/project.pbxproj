@@ -42,6 +42,7 @@
 		CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */; };
 		CE77AB222163599200728C64 /* FloatingPresentingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AB212163599200728C64 /* FloatingPresentingController.swift */; };
 		CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */; };
+		CE88D61B21ABC14C00138040 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88D61A21ABC14C00138040 /* NotificationNames.swift */; };
 		CE99210E2180EC18004E118A /* RateCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99210D2180EC18004E118A /* RateCounter.swift */; };
 		CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */; };
 		CED51B5B218BCE5A0050734A /* DeveloperAppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */; };
@@ -114,6 +115,7 @@
 		CE77AB1F2163597A00728C64 /* FloatingNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNavigationController.swift; sourceTree = "<group>"; };
 		CE77AB212163599200728C64 /* FloatingPresentingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPresentingController.swift; sourceTree = "<group>"; };
 		CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
+		CE88D61A21ABC14C00138040 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		CE99210D2180EC18004E118A /* RateCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCounter.swift; sourceTree = "<group>"; };
 		CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsManager.swift; sourceTree = "<group>"; };
 		CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsController.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
 				CE08888E2199587B0072F45C /* L10n.swift */,
 				C4131E3D21A32615003C3DAB /* NonL10n.swift */,
+				CE88D61A21ABC14C00138040 /* NotificationNames.swift */,
 				CEEEB7BD215DF5EC003C5BD8 /* Localizable.strings */,
 				CE77AB19216353DB00728C64 /* Settings.bundle */,
 			);
@@ -513,6 +516,7 @@
 				CE99210E2180EC18004E118A /* RateCounter.swift in Sources */,
 				6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */,
 				CED51B5B218BCE5A0050734A /* DeveloperAppsController.swift in Sources */,
+				CE88D61B21ABC14C00138040 /* NotificationNames.swift in Sources */,
 				CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */,
 				662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */,
 				CE77AB1C2163546200728C64 /* SettingsBundleManager.swift in Sources */,
