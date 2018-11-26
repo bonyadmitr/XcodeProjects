@@ -110,11 +110,6 @@ import UIKit
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
-enum Shortcut: String {
-    case language
-    case settings
-}
-
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -128,7 +123,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                                                               significantEvents: 3,
                                                               foregroundAppears: 15)
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {     
+    private lazy var shortcutManager = ShortcutManager(window: window)
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         #if DEBUG
         Logger.shared.configure {
@@ -173,12 +170,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// quick action can be handled from "didFinishLaunchingWithOptions" (at launch)
         /// or "performActionFor shortcutItem:" (when in memory)
-        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
-            //shortcutItemToProcess = shortcutItem
-            _ = handleQuickAction(shortcutItem)
-        }
-        
-        registerShortcutItemsIfNeed()
+        shortcutManager.handle(launchOptions: launchOptions)
+        shortcutManager.registerShortcutItemsIfNeed()
         
         rateAppDisplayManager.startObserving(presentIn: window?.rootViewController)
         rateAppDisplayManager.rateCounter.appLaunched()
@@ -193,42 +186,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         //shortcutItemToProcess = shortcutItem
         
         /// apple sample code dont use completionHandler.
-        completionHandler(handleQuickAction(shortcutItem))
-    }
-    
-    private func registerShortcutItemsIfNeed() {
-        guard
-            UIApplication.shared.shortcutItems?.isEmpty == true,
-            UIScreen.main.traitCollection.forceTouchCapability == .available
-        else {
-            /// Fall back to other non 3D Touch features
-            return
-        }
-        
-        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.language.rawValue, localizedTitle: L10n.language, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
-        
-        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: L10n.settings, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
-        
-        UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
-    }
-    
-    private func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-        guard
-            let shortcutType = Shortcut(rawValue: shortcutItem.type),
-            let tabBarVC = window?.rootViewController as? UITabBarController
-        else {
-            assertionFailure()
-            return false
-        }
-        
-        switch shortcutType {
-        case .language:
-            tabBarVC.selectedIndex = 0
-        case .settings:
-            tabBarVC.selectedIndex = 1
-        }
-        
-        return true
+        completionHandler(shortcutManager.handleQuickAction(shortcutItem))
     }
     
     private func roundWindowCorners() {
