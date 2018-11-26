@@ -110,6 +110,33 @@ import UIKit
 /// or 1: check Larger Accessibility Sizes - move slider right 4 times (for all iPhones)
 /// or 2: move slider top right - check Larger Accessibility Sizes - move slider right one more time (for all iPhones)
 
+extension Logger {
+    func setupDefaultConfig() {
+        configure {
+            $0.showDate = true
+            //                        $0.dateFormatter.dateFormat = "MM/dd/yyyy hh:mma"
+            
+            //            $0.showThreadName = false
+            //            $0.showFileName = false
+            //            $0.showLineNumber = false
+            //            $0.showFunctionName = false
+            //            $0.watchMainThead = true
+        }
+    }
+}
+
+extension Floating {
+    static func setupDefaultConfig() {
+        /// cmd + ctrl + z to shake
+        Floating.mode = .shake
+        
+        let vc = FloatingPresentingController()
+        let navVC = FloatingNavigationController(rootViewController: vc)
+        FloatingManager.shared.presentingController = navVC
+    }
+}
+
+
 /// added main.swift
 //@UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -128,45 +155,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         #if DEBUG
-        Logger.shared.configure {
-            $0.showDate = true
-            //                        $0.dateFormatter.dateFormat = "MM/dd/yyyy hh:mma"
-            
-            //            $0.showThreadName = false
-            //            $0.showFileName = false
-            //            $0.showLineNumber = false
-            //            $0.showFunctionName = false
-            //            $0.watchMainThead = true
-        }
+        Logger.shared.setupDefaultConfig()
         log("didFinishLaunchingWithOptions -----")
         log("--- isApplicationRestored: \(isApplicationRestored)")
         
-        
-        /// cmd + ctrl + z to shake
-        Floating.mode = .shake
-        
-        let vc = FloatingPresentingController()
-        let navVC = FloatingNavigationController(rootViewController: vc)
-        FloatingManager.shared.presentingController = navVC
+        Floating.setupDefaultConfig()
         #endif
         
         LocalizationManager.shared.updateIsCurrentLanguageRTL()
-        roundWindowCorners()
-        
         LocalizationManager.shared.register(self)
         
         AppearanceConfigurator.shared.loadSavedTheme()
         SettingsBundleManager.shared.setup()
-        
-        /// not working
-        //application.ignoreSnapshotOnNextApplicationLaunch()
-        
-        /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
-        /// and subsribe all tableViews for theme did change
-        /// and add label text color setting in all tableViews
-        NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        
-        
         
         /// quick action can be handled from "didFinishLaunchingWithOptions" (at launch)
         /// or "performActionFor shortcutItem:" (when in memory)
@@ -176,6 +176,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         rateAppDisplayManager.startObserving(presentIn: window?.rootViewController)
         rateAppDisplayManager.rateCounter.appLaunched()
         //rateAppDisplayManager.isDebug = true
+        
+        observeLargeTextAccessibilityChanging()
+        roundWindowCorners()
+        
+        /// not working
+        //application.ignoreSnapshotOnNextApplicationLaunch()
         
         return true
     }
@@ -187,21 +193,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// apple sample code dont use completionHandler.
         completionHandler(shortcutManager.handleQuickAction(shortcutItem))
-    }
-    
-    private func roundWindowCorners() {
-        guard let window = window else {
-            assertionFailure()
-            return
-        }
-        
-        if Device.isIphoneXOrNewer {
-            return
-        }
-        
-        window.clipsToBounds = true
-        window.layer.cornerRadius = 5
-        //window.backgroundColor = UIColor.black
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -220,6 +211,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         settingsStorage.saveIfNeed()
+    }
+}
+
+extension AppDelegate {
+    private func roundWindowCorners() {
+        guard let window = window else {
+            assertionFailure()
+            return
+        }
+        
+        if Device.isIphoneXOrNewer {
+            return
+        }
+        
+        window.clipsToBounds = true
+        window.layer.cornerRadius = 5
+        //window.backgroundColor = UIColor.black
     }
 }
 
@@ -314,6 +322,15 @@ extension AppDelegate: LocalizationManagerDelegate {
  */
 
 extension AppDelegate {
+    
+    private func observeLargeTextAccessibilityChanging() {
+        
+        /// Another solution is apple AppearanceConfigurator theme textColor for lables in cells
+        /// and subsribe all tableViews for theme did change
+        /// and add label text color setting in all tableViews
+        NotificationCenter.default.addObserver(self, selector: #selector(largeTextAccessibilityDidChanged), name: UIContentSizeCategory.didChangeNotification, object: nil)
+    }
+    
     @objc private func largeTextAccessibilityDidChanged() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
