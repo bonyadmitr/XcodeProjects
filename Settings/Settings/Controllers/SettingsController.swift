@@ -41,11 +41,14 @@ final class SettingsController: UIViewController, BackButtonActions {
     
     private lazy var settingsStorage: SettingsStorage = SettingsStorageImp.shared
     private var heightsCache: [IndexPath: CGFloat] = [:]
+    private let cellId = String(describing: DetailCell.self)
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
             newValue.dataSource = self
             newValue.delegate = self
+            let nib = UINib(nibName: cellId, bundle: nil)
+            newValue.register(nib, forCellReuseIdentifier: cellId)
         }
     }
     
@@ -125,41 +128,46 @@ extension SettingsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
 }
 
 extension SettingsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? DetailCell else {
+            assertionFailure()
+            return
+        }
+        
         let raw = sections[indexPath.section].raws[indexPath.row]
         
         switch raw {
         case .select:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = L10n.language
+            cell.setup(title: L10n.language)
         case .appearance:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = L10n.appearance
+            cell.setup(title: L10n.appearance)
         case .feedback:
             cell.accessoryType = .none
-            cell.textLabel?.text = L10n.sendFeedback
+            cell.setup(title: L10n.sendFeedback)
         case .privacyPolicy:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = L10n.privacyPolicy
+            cell.setup(title: L10n.privacyPolicy)
         case .rateApp:
             cell.accessoryType = .none
-            cell.textLabel?.text = L10n.rateUs
+            cell.setup(title: L10n.rateUs)
         case .appStorePage:
             cell.accessoryType = .none
-            cell.textLabel?.text = L10n.openInAppStore
+            cell.setup(title: L10n.openInAppStore)
         case .developerPage:
             cell.accessoryType = .none
-            cell.textLabel?.text = L10n.moreAppsFromMe
+            cell.setup(title: L10n.moreAppsFromMe)
         case .about:
             cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = L10n.about
+            cell.setup(title: L10n.about)
         case .vibration:
-            cell.textLabel?.text = L10n.vibration
+            cell.setup(title: L10n.vibration)
             
             if settingsStorage.isEnabledVibration {
                 cell.accessoryType = .checkmark
@@ -167,7 +175,7 @@ extension SettingsController: UITableViewDelegate {
                 cell.accessoryType = .none
             }
         case .sound:
-            cell.textLabel?.text = L10n.soundOnTap
+            cell.setup(title: L10n.soundOnTap)
             
             if settingsStorage.isEnabledSounds {
                 cell.accessoryType = .checkmark
@@ -176,11 +184,11 @@ extension SettingsController: UITableViewDelegate {
             }
         }
         
-        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        //cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
-        
-        /// need only for iOS 9 and 10. don't need for iOS 11
-        cell.textLabel?.numberOfLines = 0
+//        cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+//        //cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+//
+//        /// need only for iOS 9 and 10. don't need for iOS 11
+//        cell.textLabel?.numberOfLines = 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -233,18 +241,19 @@ extension SettingsController: UITableViewDelegate {
 
         /// not working. seem like recursion:
         //let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? DetailCell else {
             assertionFailure()
             return 0
         }
 
         self.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
 
-        guard let font = cell.textLabel?.font, let title = cell.textLabel?.text else {
+        guard let title = cell.titleText else {
             assertionFailure()
             return 0
         }
 
+        let font = cell.titleFont
         let width = cell.contentView.bounds.width
         let needHeight = title.height(forWidth: width, font: font)
         let height = needHeight < Constants.minCellHeight ? Constants.minCellHeight : needHeight

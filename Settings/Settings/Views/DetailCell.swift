@@ -15,6 +15,21 @@ final class DetailCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
     
+    var titleFont: UIFont {
+        return titleLabel.font
+    }
+    
+    var titleText: String? {
+        return titleLabel.text
+    }
+    
+    /// call before setup method for correct accessibilityLabel
+    var isChecked = false {
+        didSet {
+            accessoryType = isChecked ? .checkmark : .none
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -56,13 +71,6 @@ final class DetailCell: UITableViewCell {
 //            textLabel
 //                .firstBaselineAnchor
 //                .constraintEqualToSystemSpacingBelow(detailTextLabel.lastBaselineAnchor, multiplier: 1.0)
-        }
-    }
-    
-    /// call before setup method for correct accessibilityLabel
-    var isChecked = false {
-        didSet {
-            accessoryType = isChecked ? .checkmark : .none
         }
     }
     
