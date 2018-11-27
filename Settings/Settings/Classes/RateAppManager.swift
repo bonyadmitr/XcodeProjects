@@ -115,6 +115,9 @@ final class RateAppManager {
         /// https://stackoverflow.com/questions/13907156/uiactivityviewcontroller-taking-long-time-to-present
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
+        /// need access to gallery. NSPhotoLibraryUsageDescription key
+        activityVC.excludedActivityTypes = [.saveToCameraRoll]
+        
         activityVC.completionWithItemsHandler = { activityType, completed, array, error in
             
             guard completed else {
