@@ -72,18 +72,7 @@ final class SettingsController: UIViewController, BackButtonActions {
         /// fix color during rotation
         AppearanceConfigurator.shared.register(self)
         didApplied(theme: AppearanceConfigurator.shared.currentTheme)
-        //removeBackButtonTitle()
-        
-//        if tableView.indexPathForSelectedRow == nil, splitViewController?.isCollapsed == false {
-//            let indexPath = IndexPath(row: 0, section: 0)
-//            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-//        }
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        deselectRowIfNeed()
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" || segue.identifier == "detail!",
@@ -105,15 +94,7 @@ final class SettingsController: UIViewController, BackButtonActions {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
-        
-//        deselectRowIfNeed()
     }
-    
-//    private func deselectRowIfNeed() {
-//        if splitViewController?.isCollapsed == true, let indexPath = tableView.indexPathForSelectedRow {
-//            tableView.deselectRow(at: indexPath, animated: true)
-//        }
-//    }
     
     private func sendFeedback() {
         EmailSender.shared.send(message: "",
