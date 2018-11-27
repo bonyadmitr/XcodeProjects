@@ -88,6 +88,7 @@ final class PrivacyPolicyController: UIViewController {
     deinit {
         webView.navigationDelegate = nil
         webView.stopLoading()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     private func startActivity() {
