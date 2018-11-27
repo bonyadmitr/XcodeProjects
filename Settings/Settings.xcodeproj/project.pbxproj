@@ -44,6 +44,8 @@
 		CE830298216F2FD900A09095 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */; };
 		CE88D61B21ABC14C00138040 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88D61A21ABC14C00138040 /* NotificationNames.swift */; };
 		CE88D61D21ABC52300138040 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88D61C21ABC52300138040 /* ShortcutManager.swift */; };
+		CE991F2921AD324800B67A03 /* Text+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F2821AD324800B67A03 /* Text+Size.swift */; };
+		CE991F2B21AD336600B67A03 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F2A21AD336600B67A03 /* Constants.swift */; };
 		CE99210E2180EC18004E118A /* RateCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99210D2180EC18004E118A /* RateCounter.swift */; };
 		CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */; };
 		CED51B5B218BCE5A0050734A /* DeveloperAppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */; };
@@ -118,6 +120,8 @@
 		CE830297216F2FD900A09095 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CE88D61A21ABC14C00138040 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		CE88D61C21ABC52300138040 /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
+		CE991F2821AD324800B67A03 /* Text+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Size.swift"; sourceTree = "<group>"; };
+		CE991F2A21AD336600B67A03 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE99210D2180EC18004E118A /* RateCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCounter.swift; sourceTree = "<group>"; };
 		CED51B58218BCB2A0050734A /* DeveloperAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsManager.swift; sourceTree = "<group>"; };
 		CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperAppsController.swift; sourceTree = "<group>"; };
@@ -312,6 +316,7 @@
 				CEEEB7A0215D0996003C5BD8 /* String+LocalizationManager.swift */,
 				CE0FE87B2162653500E16E4B /* UIColor+Default.swift */,
 				CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */,
+				CE991F2821AD324800B67A03 /* Text+Size.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
 				CE08888E2199587B0072F45C /* L10n.swift */,
 				C4131E3D21A32615003C3DAB /* NonL10n.swift */,
+				CE991F2A21AD336600B67A03 /* Constants.swift */,
 				CE88D61A21ABC14C00138040 /* NotificationNames.swift */,
 				CE88D61C21ABC52300138040 /* ShortcutManager.swift */,
 				CEEEB7BD215DF5EC003C5BD8 /* Localizable.strings */,
@@ -486,6 +492,7 @@
 				CEEEB7AB215D10F3003C5BD8 /* SettingsController.swift in Sources */,
 				66D380922163300700EFA49C /* EmailSender.swift in Sources */,
 				6624D43B215EADA100DF1B92 /* AppearanceConfigurator.swift in Sources */,
+				CE991F2921AD324800B67A03 /* Text+Size.swift in Sources */,
 				CE08888F2199587B0072F45C /* L10n.swift in Sources */,
 				CEEEB7A3215D0996003C5BD8 /* LocalizationManager.swift in Sources */,
 				C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */,
@@ -509,6 +516,7 @@
 				662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
+				CE991F2B21AD336600B67A03 /* Constants.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
 				66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */,
 				C43E420221A60BC50099F9E5 /* Device.swift in Sources */,

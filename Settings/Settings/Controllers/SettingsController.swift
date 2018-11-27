@@ -269,44 +269,12 @@ extension SettingsController: UITableViewDelegate {
 
         let width = cell.contentView.bounds.width
         let needHeight = title.height(forWidth: width, font: font)
-
-        let minHeight: CGFloat = 44
-        let height = needHeight < minHeight ? minHeight : needHeight
+        let height = needHeight < Constants.minCellHeight ? Constants.minCellHeight : needHeight
 
         heightsCache[indexPath] = height
         return height
     }
 }
-
-import UIKit
-
-/// http://stackoverflow.com/questions/30450434/figure-out-size-of-uilabel-based-on-string-in-swift
-
-extension String {
-    func height(forWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let maxSize = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
-                                            attributes: [NSAttributedString.Key.font: font], context: nil)
-        return boundingBox.height
-    }
-}
-
-extension NSAttributedString {
-    func height(forWidth width: CGFloat) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
-        
-        return boundingBox.height
-    }
-    
-    func width(forHeight height: CGFloat) -> CGFloat {
-        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
-        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
-        
-        return boundingBox.width
-    }
-}
-
 
 // MARK: - UIStateRestoration
 //extension SettingsController {
