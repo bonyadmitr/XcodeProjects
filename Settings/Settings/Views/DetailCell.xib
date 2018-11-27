@@ -20,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="X6z-IX-FGa">
-                        <rect key="frame" x="20" y="0.0" width="292" height="65.5"/>
+                        <rect key="frame" x="16" y="0.0" width="296" height="65.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="titleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAp-N9-JZC">
-                                <rect key="frame" x="0.0" y="0.0" width="292" height="36"/>
+                                <rect key="frame" x="0.0" y="0.0" width="296" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subtitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="web-zn-w7v">
-                                <rect key="frame" x="0.0" y="36" width="292" height="29.5"/>
+                                <rect key="frame" x="0.0" y="36" width="296" height="29.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="X6z-IX-FGa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6V5-B7-d9U"/>
-                    <constraint firstItem="X6z-IX-FGa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Jjy-4F-sTc"/>
+                    <constraint firstItem="X6z-IX-FGa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Jjy-4F-sTc"/>
                     <constraint firstAttribute="bottom" secondItem="X6z-IX-FGa" secondAttribute="bottom" id="bHy-0u-433"/>
                     <constraint firstAttribute="trailing" secondItem="X6z-IX-FGa" secondAttribute="trailing" constant="8" id="iqE-01-42U"/>
                 </constraints>
