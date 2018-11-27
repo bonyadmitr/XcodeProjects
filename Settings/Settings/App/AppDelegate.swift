@@ -37,6 +37,9 @@ import UIKit
 // There is no registration (Registration don't need)
 // Using latest version of Swift for best performance of app
 
+/// Test cases
+//cell height. iOS 10, iPhone 5. steps: settings screen - scroll to bottom - landscape - portrait
+
 // FIXME: window tintColor for standart controllers
 // TODO: clear appDelegate
 // TODO: check all present on iPad (share app)
