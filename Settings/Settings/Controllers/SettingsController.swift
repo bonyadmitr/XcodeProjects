@@ -46,11 +46,6 @@ final class SettingsController: UIViewController, BackButtonActions {
         willSet {
             newValue.dataSource = self
             newValue.delegate = self
-            
-            
-            /// need for iOS 10, don't need for iOS 11
-//            newValue.estimatedRowHeight = 44.0
-//            newValue.rowHeight = UITableView.automaticDimension
         }
     }
     
@@ -105,6 +100,7 @@ final class SettingsController: UIViewController, BackButtonActions {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        heightsCache = [:]
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
@@ -256,27 +252,27 @@ extension SettingsController: UITableViewDelegate {
         if let height = heightsCache[indexPath] {
             return height
         }
-        
+
         /// not working. seem like recursion:
         //let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
             assertionFailure()
             return 0
         }
-        
+
         self.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
-        
+
         guard let font = cell.textLabel?.font, let title = cell.textLabel?.text else {
             assertionFailure()
             return 0
         }
-        
-        let width = cell.bounds.width
+
+        let width = cell.contentView.bounds.width
         let needHeight = title.height(forWidth: width, font: font)
-        
+
         let minHeight: CGFloat = 44
         let height = needHeight < minHeight ? minHeight : needHeight
-        
+
         heightsCache[indexPath] = height
         return height
     }
