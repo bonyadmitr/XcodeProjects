@@ -246,9 +246,6 @@ extension SettingsController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        /// was 21 calculations without cache for iPhone 5s
-        /// with it only 5 times (dataSource.someArray.count)
-        /// and will caculate for every new display cell
         if let height = heightsCache[indexPath] {
             return height
         }
