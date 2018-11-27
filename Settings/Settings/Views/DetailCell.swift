@@ -92,12 +92,12 @@ final class DetailCell: UITableViewCell {
         var minHeight: CGFloat = 0
         
         if let title = titleLabel.text {
-            let titleHeight = title.height(forWidth: contentView.bounds.width, font: titleLabel.font)
+            let titleHeight = title.height(for: contentView.bounds.width, font: titleLabel.font)
             minHeight += titleHeight
         }
         
         if let subtitle = subtitleLabel.text {
-            let subtitleHeight = subtitle.height(forWidth: contentView.bounds.width, font: subtitleLabel.font)
+            let subtitleHeight = subtitle.height(for: contentView.bounds.width, font: subtitleLabel.font)
             minHeight += subtitleHeight
             minHeight += spaceBetweenLabels
         }
