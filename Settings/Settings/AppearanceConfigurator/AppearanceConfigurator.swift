@@ -151,11 +151,11 @@ final class AppearanceConfigurator: MulticastHandler {
         
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = theme.secondaryTextColor
         
-//        UILabel.appearance().isOpaque = true
         let cellLabel = UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self])
-        cellLabel.isOpaque = true
-        cellLabel.backgroundColor = theme.backgroundColor
         cellLabel.textColor = theme.textColor
+        // TODO: changing appearance not working in selected cells
+        //cellLabel.isOpaque = true
+        //cellLabel.backgroundColor = theme.backgroundColor
         
         /// not working coorectly for dynamic font changing (large titles)
         ///cellLabel.font
