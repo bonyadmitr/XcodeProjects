@@ -31,6 +31,7 @@
 		C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3D21A32615003C3DAB /* NonL10n.swift */; };
 		C4131E4021A328A4003C3DAB /* SettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */; };
 		C43E420221A60BC50099F9E5 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43E420121A60BC50099F9E5 /* Device.swift */; };
+		C4A8B6BD21ADC82800FED3F0 /* UITableViewCell+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A8B6BC21ADC82800FED3F0 /* UITableViewCell+Color.swift */; };
 		CE08888F2199587B0072F45C /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08888E2199587B0072F45C /* L10n.swift */; };
 		CE088891219AD00B0072F45C /* AboutHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE088890219AD00B0072F45C /* AboutHeader.swift */; };
 		CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE87B2162653500E16E4B /* UIColor+Default.swift */; };
@@ -107,6 +108,7 @@
 		C4131E3D21A32615003C3DAB /* NonL10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonL10n.swift; sourceTree = "<group>"; };
 		C4131E3F21A328A4003C3DAB /* SettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorage.swift; sourceTree = "<group>"; };
 		C43E420121A60BC50099F9E5 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		C4A8B6BC21ADC82800FED3F0 /* UITableViewCell+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Color.swift"; sourceTree = "<group>"; };
 		CE08888E2199587B0072F45C /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		CE088890219AD00B0072F45C /* AboutHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeader.swift; sourceTree = "<group>"; };
 		CE0FE87B2162653500E16E4B /* UIColor+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Default.swift"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				CE0FE87B2162653500E16E4B /* UIColor+Default.swift */,
 				CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */,
 				CE991F2821AD324800B67A03 /* Text+Size.swift */,
+				C4A8B6BC21ADC82800FED3F0 /* UITableViewCell+Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				C4131E3E21A32615003C3DAB /* NonL10n.swift in Sources */,
 				CE088891219AD00B0072F45C /* AboutHeader.swift in Sources */,
 				CEEEB7A9215D0996003C5BD8 /* String+LocalizationManager.swift in Sources */,
+				C4A8B6BD21ADC82800FED3F0 /* UITableViewCell+Color.swift in Sources */,
 				CEEEB7A1215D0996003C5BD8 /* LanguageManager.swift in Sources */,
 				CEEDAAB62176202E002AC3B3 /* RateAppManager.swift in Sources */,
 				CED51B59218BCB2A0050734A /* DeveloperAppsManager.swift in Sources */,
