@@ -40,11 +40,17 @@ final class SettingsController: UIViewController, BackButtonActions {
                                         .feedback, .rateApp, .about])]
     
     private lazy var settingsStorage: SettingsStorage = SettingsStorageImp.shared
+    private var heightsCache: [IndexPath: CGFloat] = [:]
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
             newValue.dataSource = self
             newValue.delegate = self
+            
+            
+            /// need for iOS 10, don't need for iOS 11
+//            newValue.estimatedRowHeight = 44.0
+//            newValue.rowHeight = UITableView.automaticDimension
         }
     }
     
@@ -242,7 +248,69 @@ extension SettingsController: UITableViewDelegate {
             return L10n.support
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        /// was 21 calculations without cache for iPhone 5s
+        /// with it only 5 times (dataSource.someArray.count)
+        /// and will caculate for every new display cell
+        if let height = heightsCache[indexPath] {
+            return height
+        }
+        
+        /// not working. seem like recursion:
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
+            assertionFailure()
+            return 0
+        }
+        
+        self.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+        
+        guard let font = cell.textLabel?.font, let title = cell.textLabel?.text else {
+            assertionFailure()
+            return 0
+        }
+        
+        let width = cell.bounds.width
+        let needHeight = title.height(forWidth: width, font: font)
+        
+        let minHeight: CGFloat = 44
+        let height = needHeight < minHeight ? minHeight : needHeight
+        
+        heightsCache[indexPath] = height
+        return height
+    }
 }
+
+import UIKit
+
+/// http://stackoverflow.com/questions/30450434/figure-out-size-of-uilabel-based-on-string-in-swift
+
+extension String {
+    func height(forWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: maxSize, options: .usesLineFragmentOrigin,
+                                            attributes: [NSAttributedString.Key.font: font], context: nil)
+        return boundingBox.height
+    }
+}
+
+extension NSAttributedString {
+    func height(forWidth width: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+        
+        return boundingBox.height
+    }
+    
+    func width(forHeight height: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, context: nil)
+        
+        return boundingBox.width
+    }
+}
+
 
 // MARK: - UIStateRestoration
 //extension SettingsController {
