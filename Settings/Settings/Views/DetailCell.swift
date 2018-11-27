@@ -15,13 +15,7 @@ final class DetailCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
     
-    var titleFont: UIFont {
-        return titleLabel.font
-    }
-    
-    var titleText: String? {
-        return titleLabel.text
-    }
+    private let spaceBetweenLabels: CGFloat = 8
     
     /// call before setup method for correct accessibilityLabel
     var isChecked = false {
@@ -92,6 +86,23 @@ final class DetailCell: UITableViewCell {
         }
         
         accessibilityLabel = newAccessibilityLabel
+    }
+    
+    func height() -> CGFloat {
+        var minHeight: CGFloat = 0
+        
+        if let title = titleLabel.text {
+            let titleHeight = title.height(forWidth: contentView.bounds.width, font: titleLabel.font)
+            minHeight += titleHeight
+        }
+        
+        if let subtitle = subtitleLabel.text {
+            let subtitleHeight = subtitle.height(forWidth: contentView.bounds.width, font: subtitleLabel.font)
+            minHeight += subtitleHeight
+            minHeight += spaceBetweenLabels
+        }
+        
+        return minHeight < Constants.minCellHeight ? Constants.minCellHeight : minHeight
     }
     
 //    override func accessibilityActivate() -> Bool {

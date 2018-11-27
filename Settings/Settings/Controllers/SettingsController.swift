@@ -245,21 +245,11 @@ extension SettingsController: UITableViewDelegate {
             assertionFailure()
             return 0
         }
-
+        
+        /// fill cell with texts
         self.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
-
-        guard let title = cell.titleText else {
-            assertionFailure()
-            return 0
-        }
-
-        let font = cell.titleFont
-        let width = cell.contentView.bounds.width
-        let needHeight = title.height(forWidth: width, font: font)
-        let height = needHeight < Constants.minCellHeight ? Constants.minCellHeight : needHeight
-
-        heightsCache[indexPath] = height
-        return height
+        
+        return cell.height()
     }
 }
 
