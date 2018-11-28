@@ -16,11 +16,13 @@ final class CoreDataStack {
     
 //    let storeType: PersistentStoreType
 //    private let modelName: String
-    private let container: StoreContainer
+    let container: StoreContainer
     
     init(storeType: PersistentStoreType, modelName: String) {
 //        self.storeType = storeType
 //        self.modelName = modelName
+        
+//        container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
         
         if #available(iOS 10.0, *) {
             container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)

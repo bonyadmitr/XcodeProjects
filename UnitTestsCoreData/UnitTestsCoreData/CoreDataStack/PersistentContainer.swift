@@ -111,4 +111,17 @@ final class PersistentContainer: NSObject {
             block(context)
         }
     }
+    
+    func clearAll() {
+        //let storeTypes = persistentStoreCoordinator.persistentStores.map { $0.type}
+        do {
+            for store in persistentStoreCoordinator.persistentStores {
+                try persistentStoreCoordinator.remove(store)
+            }
+            try loadPersistentStore(type: .sqlite)
+            
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
 }
