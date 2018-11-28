@@ -29,6 +29,7 @@ extension NSManagedObjectContext {
                 try self.save()
                 completion?(.saved)
             } catch {
+                assertionFailure(error.localizedDescription)
                 self.rollback()
                 completion?(.rolledBack(error))
             }
@@ -46,6 +47,7 @@ extension NSManagedObjectContext {
                 try self.save()
                 completion?(.saved)
             } catch {
+                assertionFailure(error.localizedDescription)
                 self.rollback()
                 completion?(.rolledBack(error))
             }
@@ -64,6 +66,7 @@ extension NSManagedObjectContext {
                 try self.save()
                 completion?(.saved)
             } catch {
+                assertionFailure(error.localizedDescription)
                 self.rollback()
                 completion?(.rolledBack(error))
             }
@@ -100,6 +103,7 @@ extension NSManagedObjectContext {
                 try save()
                 return .saved
             } catch {
+                assertionFailure(error.localizedDescription)
                 rollback()
                 return .rolledBack(error)
             }
@@ -120,6 +124,7 @@ extension NSManagedObjectContext {
             try execute(deleteRequest)
             try save()
         } catch {
+            assertionFailure(error.localizedDescription)
             print ("There was an error")
         }
     }
@@ -144,6 +149,7 @@ extension NSManagedObjectContext {
                 try self?.save()
                 completion?(.saved)
             } catch {
+                assertionFailure(error.localizedDescription)
                 self?.rollback()
                 completion?(.rolledBack(error))
             }

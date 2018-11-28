@@ -111,8 +111,8 @@
 		CE991F6721AED68800B67A03 /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
-				CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */,
 				CE991F6921AED68800B67A03 /* CoreDataStack.swift */,
+				CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */,
 				CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */,
 				CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */,
 			);
@@ -390,6 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = UnitTestsCoreData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -407,6 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = UnitTestsCoreData/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

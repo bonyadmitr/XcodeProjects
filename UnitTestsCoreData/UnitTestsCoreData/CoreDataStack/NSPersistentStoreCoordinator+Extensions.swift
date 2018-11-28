@@ -10,17 +10,7 @@ import CoreData
 
 extension NSPersistentStoreCoordinator {
     
-    /// NSPersistentStoreCoordinator error types
-    public enum CoordinatorError: Error {
-        /// .momd file not found
-        case modelFileNotFound
-        
-        /// NSManagedObjectModel creation fail
-        case modelCreationError
-        
-        /// Gettings document directory fail
-        case storePathNotFound
-    }
+
     
     /// Return NSPersistentStoreCoordinator
     private convenience init(name: String) throws {
@@ -48,6 +38,7 @@ extension NSPersistentStoreCoordinator {
                            NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch {
+            assertionFailure(error.localizedDescription)
             throw error
         }
         

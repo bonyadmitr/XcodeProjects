@@ -42,6 +42,7 @@ extension NSManagedObject {
                 try context.save()
                 completion?(.deleted)
             } catch {
+                assertionFailure(error.localizedDescription)
                 completion?(.error(error))
             }
             
