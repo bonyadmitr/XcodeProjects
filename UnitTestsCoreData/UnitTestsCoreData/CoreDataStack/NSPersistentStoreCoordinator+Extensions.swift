@@ -14,8 +14,10 @@ extension NSPersistentStoreCoordinator {
     public enum CoordinatorError: Error {
         /// .momd file not found
         case modelFileNotFound
+        
         /// NSManagedObjectModel creation fail
         case modelCreationError
+        
         /// Gettings document directory fail
         case storePathNotFound
     }
@@ -41,6 +43,7 @@ extension NSPersistentStoreCoordinator {
         
         do {
             let url = documents.appendingPathComponent("\(name).sqlite")
+            print("CoreData path: \(url.path)")
             let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                            NSInferMappingModelAutomaticallyOption: true]
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)

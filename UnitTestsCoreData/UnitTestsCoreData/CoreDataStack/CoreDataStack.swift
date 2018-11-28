@@ -53,11 +53,17 @@ final class CoreDataStack: NSObject {
     
     private override init() {
         super.init()
-        
+        setupMergesChangesFromParent()
+    }
+    
+    private func setupMergesChangesFromParent() {
         if #available(iOS 10.0, *) {
             mainContext.automaticallyMergesChangesFromParent = true
         } else {
-            NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(managedObjectContextDidSave),
+                                                   name: .NSManagedObjectContextDidSave,
+                                                   object: nil)
         }
     }
     
@@ -67,6 +73,7 @@ final class CoreDataStack: NSObject {
     
     @objc private func managedObjectContextDidSave(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else {
+            assertionFailure()
             return
         }
         if context != mainContext, context.parent == mainContext {
@@ -78,7 +85,7 @@ final class CoreDataStack: NSObject {
     @available(iOS 10.0, *)
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "UnitTestsCoreData")
-        container.loadPersistentStores { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             print("CoreData: Inited \(storeDescription)")
             if let error = error {
                 print("CoreData: Unresolved error \(error)")
