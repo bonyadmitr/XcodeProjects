@@ -14,6 +14,10 @@
 		CE991F4321AED61E00B67A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE991F4221AED61E00B67A03 /* Assets.xcassets */; };
 		CE991F4621AED61E00B67A03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE991F4421AED61E00B67A03 /* LaunchScreen.storyboard */; };
 		CE991F5421AED64300B67A03 /* UnitTestsCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F5321AED64300B67A03 /* UnitTestsCoreDataTests.swift */; };
+		CE991F6E21AED68800B67A03 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */; };
+		CE991F6F21AED68800B67A03 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6921AED68800B67A03 /* CoreDataStack.swift */; };
+		CE991F7121AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		CE991F7221AED68800B67A03 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		CE991F5121AED64300B67A03 /* UnitTestsCoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestsCoreDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE991F5321AED64300B67A03 /* UnitTestsCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestsCoreDataTests.swift; sourceTree = "<group>"; };
 		CE991F5521AED64300B67A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		CE991F6921AED68800B67A03 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
+		CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		CE991F3721AED61D00B67A03 /* UnitTestsCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CE991F6721AED68800B67A03 /* CoreDataStack */,
 				CE991F3821AED61D00B67A03 /* AppDelegate.swift */,
 				CE991F3A21AED61D00B67A03 /* ViewController.swift */,
 				CE991F3C21AED61D00B67A03 /* Main.storyboard */,
@@ -97,6 +106,17 @@
 				CE991F5521AED64300B67A03 /* Info.plist */,
 			);
 			path = UnitTestsCoreDataTests;
+			sourceTree = "<group>";
+		};
+		CE991F6721AED68800B67A03 /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */,
+				CE991F6921AED68800B67A03 /* CoreDataStack.swift */,
+				CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */,
+				CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */,
+			);
+			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,9 +220,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE991F6F21AED68800B67A03 /* CoreDataStack.swift in Sources */,
 				CE991F4121AED61D00B67A03 /* UnitTestsCoreData.xcdatamodeld in Sources */,
+				CE991F7121AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CE991F3B21AED61D00B67A03 /* ViewController.swift in Sources */,
 				CE991F3921AED61D00B67A03 /* AppDelegate.swift in Sources */,
+				CE991F7221AED68800B67A03 /* NSManagedObject+Extensions.swift in Sources */,
+				CE991F6E21AED68800B67A03 /* NSManagedObjectContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
