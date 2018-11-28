@@ -87,32 +87,6 @@ final class CoreDataStack {
         return container
     }
     
-//    @available(iOS 10.0, *)
-//    private lazy var persistentContainer: NSPersistentContainer = {
-//        let container = NSPersistentContainer(name: modelName)
-//
-//        switch storeType {
-//        case .memory:
-//            let description = NSPersistentStoreDescription()
-//            description.type = NSInMemoryStoreType
-//            // TODO: - need shouldAddStoreAsynchronously? -
-//            description.shouldAddStoreAsynchronously = false
-//            container.persistentStoreDescriptions = [description]
-//        case .sqlite:
-//            break
-//        }
-//
-//        container.loadPersistentStores { storeDescription, error in
-//            print("CoreData: Inited \(storeDescription)")
-//            if let error = error {
-//                assertionFailure(error.localizedDescription)
-//                print("CoreData: Unresolved error \(error)")
-//                return
-//            }
-//        }
-//        return container
-//    }()
-    
     private static func basicPersistentContainer(storeType: PersistentStoreType, modelName: String) -> PersistentContainer {
         let container = PersistentContainer(name: modelName)
         do {
@@ -123,27 +97,16 @@ final class CoreDataStack {
         }
         return container
     }
-    
-//    private lazy var basicPersistentContainer: PersistentContainer = {
-//        let container = PersistentContainer(name: modelName)
-//        do {
-//            try container.loadPersistentStore(type: storeType)
-//        } catch {
-//            assertionFailure(error.localizedDescription)
-//            print(error.localizedDescription)
-//        }
-//        return container
-//    }()
 }
 
 
 /// NSPersistentStoreCoordinator error types
 public enum CoordinatorError: Error {
     /// .momd file not found
-    case modelFileNotFound
+    //case modelFileNotFound
     
     /// NSManagedObjectModel creation fail
-    case modelCreationError
+    //case modelCreationError
     
     /// Gettings document directory fail
     case storePathNotFound
@@ -156,14 +119,13 @@ enum PersistentStoreType {
 }
 
 final class PersistentContainer: NSObject {
-//    open class func defaultDirectoryURL() -> URL
     
     let viewContext: NSManagedObjectContext
     private let name: String
     private let managedObjectModel: NSManagedObjectModel
     private let persistentStoreCoordinator: NSPersistentStoreCoordinator
     
-    // Creates a container using the model named `name` in the main bundle
+    /// Creates a container using the model named `name` in the main bundle
     convenience init(name: String) {
         
         let moModel: NSManagedObjectModel
@@ -177,34 +139,13 @@ final class PersistentContainer: NSObject {
         }
         
         self.init(name: name, managedObjectModel: moModel)
-        
-//        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
-//            throw CoordinatorError.modelFileNotFound
-//        }
-//
-//        /// NSManagedObjectModel.mergedModel(from: nil)
-//        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
-//            throw CoordinatorError.modelCreationError
-//        }
-//
-//        self.init(name: name, managedObjectModel: model)
     }
     
     init(name: String, managedObjectModel model: NSManagedObjectModel) {
         self.name = name
         self.managedObjectModel = model
         
-//        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-//            throw CoordinatorError.storePathNotFound
-//        }
-//        let url = documents.appendingPathComponent("\(name).sqlite")
-//        print("CoreData path: \(url.path)")
-//
-//        let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-//                       NSInferMappingModelAutomaticallyOption: true]
-        
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-//        try coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: url, options: options)
         persistentStoreCoordinator = coordinator
         
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)

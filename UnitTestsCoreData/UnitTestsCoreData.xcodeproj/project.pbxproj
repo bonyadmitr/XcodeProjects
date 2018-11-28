@@ -16,7 +16,6 @@
 		CE991F5421AED64300B67A03 /* UnitTestsCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F5321AED64300B67A03 /* UnitTestsCoreDataTests.swift */; };
 		CE991F6E21AED68800B67A03 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */; };
 		CE991F6F21AED68800B67A03 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6921AED68800B67A03 /* CoreDataStack.swift */; };
-		CE991F7121AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */; };
 		CE991F7221AED68800B67A03 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 		CE991F5521AED64300B67A03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		CE991F6921AED68800B67A03 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
 		CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +111,6 @@
 			children = (
 				CE991F6921AED68800B67A03 /* CoreDataStack.swift */,
 				CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */,
-				CE991F6C21AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift */,
 				CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */,
 			);
 			path = CoreDataStack;
@@ -222,7 +219,6 @@
 			files = (
 				CE991F6F21AED68800B67A03 /* CoreDataStack.swift in Sources */,
 				CE991F4121AED61D00B67A03 /* UnitTestsCoreData.xcdatamodeld in Sources */,
-				CE991F7121AED68800B67A03 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				CE991F3B21AED61D00B67A03 /* ViewController.swift in Sources */,
 				CE991F3921AED61D00B67A03 /* AppDelegate.swift in Sources */,
 				CE991F7221AED68800B67A03 /* NSManagedObject+Extensions.swift in Sources */,
