@@ -9,7 +9,7 @@
 import CoreData
 
 extension CoreDataStack {
-    static let shared = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+    static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
 }
 
 final class CoreDataStack {
@@ -55,7 +55,7 @@ extension CoreDataStack {
             let description = NSPersistentStoreDescription()
             description.type = NSInMemoryStoreType
             // TODO: - need shouldAddStoreAsynchronously? -
-            description.shouldAddStoreAsynchronously = false
+            //description.shouldAddStoreAsynchronously = true
             container.persistentStoreDescriptions = [description]
         case .sqlite:
             break

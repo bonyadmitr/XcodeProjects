@@ -7,6 +7,8 @@
 //
 
 import XCTest
+@testable import UnitTestsCoreData
+import CoreData
 
 class UnitTestsCoreDataTests: XCTestCase {
 
@@ -18,9 +20,33 @@ class UnitTestsCoreDataTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCoreDataSave() {
+        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+        let expec = expectation(description: "CoreDataStack")
+        
+        coreDataStack.performBackgroundTask { context in
+            let event = DBEvent(managedObjectContext: context)
+            event.name = "Some event"
+            context.saveSyncUnsafe()
+            expec.fulfill()
+        }
+        
+        wait(for: [expec], timeout: 1)
+        
+        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
+        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+        
+        XCTAssertNotNil(events)
+        XCTAssertEqual(events!.count, 1)
+        XCTAssert(events?.first?.name == "Some event")
+    }
+    
+    func test() {
+        //        let expec = expectation(description: "1")
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        //            expec.fulfill()
+        //        }
+        //        waitForExpectations(timeout: 2, handler: nil)
     }
 
     func testPerformanceExample() {
