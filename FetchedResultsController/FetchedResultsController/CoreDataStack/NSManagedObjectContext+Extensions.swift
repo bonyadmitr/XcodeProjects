@@ -106,4 +106,52 @@ extension NSManagedObjectContext {
         }
         return .hasNoChanges
     }
+    
+    
+    func delete<T: NSManagedObject>(_ type: T.Type) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+        if #available(iOS 10.0, *) {
+            fetchRequest = type.fetchRequest()
+        } else {
+            fetchRequest = NSFetchRequest(entityName: type.className())
+        }
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try execute(deleteRequest)
+            try save()
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+        if #available(iOS 10.0, *) {
+            fetchRequest = type.fetchRequest()
+        } else {
+            fetchRequest = NSFetchRequest(entityName: type.className())
+        }
+        return NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    }
+    
+    func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
+        perform {
+            do {
+                try [EventDB.self]
+                    .map { self.deleteRequest(for: $0) }
+                    .forEach { try self.execute($0) }
+                try self.save()
+                completion?(.saved)
+            } catch {
+                self.rollback()
+                completion?(.rolledBack(error))
+            }
+        }
+    }
+}
+
+extension NSObject {
+    static func className() -> String {
+        return String(describing: EventDB.self)
+    }
 }
