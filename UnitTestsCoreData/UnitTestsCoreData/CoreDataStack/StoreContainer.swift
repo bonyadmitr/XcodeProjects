@@ -21,7 +21,11 @@ extension NSPersistentContainer: StoreContainer {
     func clearAll() {
         do {
             for store in persistentStoreCoordinator.persistentStores {
-                try persistentStoreCoordinator.remove(store)
+                if store.type == NSInMemoryStoreType {
+                    try persistentStoreCoordinator.remove(store)
+                } else if let url = store.url {
+                    try persistentStoreCoordinator.destroyPersistentStore(at: url, ofType: store.type, options: store.options)
+                }
             }
             
             loadPersistentStores { storeDescription, error in

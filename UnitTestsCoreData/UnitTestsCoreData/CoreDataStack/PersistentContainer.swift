@@ -116,9 +116,14 @@ final class PersistentContainer: NSObject {
         //let storeTypes = persistentStoreCoordinator.persistentStores.map { $0.type}
         do {
             for store in persistentStoreCoordinator.persistentStores {
-                try persistentStoreCoordinator.remove(store)
+                if store.type == NSInMemoryStoreType {
+                    try persistentStoreCoordinator.remove(store)
+                    try loadPersistentStore(type: .memory)
+                } else if let url = store.url {
+                    try persistentStoreCoordinator.destroyPersistentStore(at: url, ofType: store.type, options: store.options)
+                    try loadPersistentStore(type: .sqlite)
+                }
             }
-            try loadPersistentStore(type: .sqlite)
             
         } catch {
             assertionFailure(error.localizedDescription)
