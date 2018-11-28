@@ -9,91 +9,74 @@
 import UIKit
 import CoreData
 
-/// pass "*.xcdatamodeld" name 
-/// in "private lazy var persistentContainer: NSPersistentContainer"
-/// and "private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator?"
-final class CoreDataStack: NSObject {
+extension CoreDataStack {
+    static let shared = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+}
+
+
+protocol StoreContainer {
+    var viewContext: NSManagedObjectContext { get }
+    func newBackgroundContext() -> NSManagedObjectContext
+    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
+    func automaticallyMergesChangesFromParent()
+}
+
+@available(iOS 10.0, *)
+extension NSPersistentContainer: StoreContainer {
+    func automaticallyMergesChangesFromParent() {
+        viewContext.automaticallyMergesChangesFromParent = true
+    }
+}
+
+extension PersistentContainer: StoreContainer {}
+
+final class CoreDataStack {
     
-    // MARK: Public methods
+//    let storeType: PersistentStoreType
+//    private let modelName: String
+    private let container: StoreContainer
     
-    static let shared = CoreDataStack()
-    
-    func newBackgroundContext() -> NSManagedObjectContext {
+    init(storeType: PersistentStoreType, modelName: String) {
+//        self.storeType = storeType
+//        self.modelName = modelName
+        
         if #available(iOS 10.0, *) {
-            /// don't set parent for newBackgroundContext(), it will crash
-            /// with error "Context already has a coordinator; cannot replace"
-            return persistentContainer.newBackgroundContext()
+            container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
         } else {
-            let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            context.parent = mainContext
-            return context
+            container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
         }
+        container.automaticallyMergesChangesFromParent()
     }
     
-    var mainContext: NSManagedObjectContext {
-        if #available(iOS 10.0, *) {
-            return persistentContainer.viewContext
-        } else {
-            return managedObjectContext
-        }
+    func newBackgroundContext() -> NSManagedObjectContext {
+        return container.newBackgroundContext()
+    }
+    
+    var viewContext: NSManagedObjectContext {
+        return container.viewContext
     }
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
-        if #available(iOS 10.0, *) {
-            persistentContainer.performBackgroundTask(block)
-        } else {
-            let context = newBackgroundContext()
-            context.perform { 
-                block(context)
-            }
-        }
+        container.performBackgroundTask(block)
     }
     
-    // MARK: Private methods
-    
-    private override init() {
-        super.init()
-        setupMergesChangesFromParent()
-    }
-    
-    private func setupMergesChangesFromParent() {
-        if #available(iOS 10.0, *) {
-            mainContext.automaticallyMergesChangesFromParent = true
-        } else {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(managedObjectContextDidSave),
-                                                   name: .NSManagedObjectContextDidSave,
-                                                   object: nil)
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc private func managedObjectContextDidSave(_ notification: Notification) {
-        guard let context = notification.object as? NSManagedObjectContext else {
-            assertionFailure()
-            return
-        }
-        if context != mainContext, context.parent == mainContext {
-            /// will be called on background queue
-            mainContext.saveAsync()
-        }
-    }
     
     @available(iOS 10.0, *)
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "UnitTestsCoreData")
+    static func persistentContainer(storeType: PersistentStoreType, modelName: String) -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: modelName)
         
-//        let description = NSPersistentStoreDescription()
-//        description.type = NSInMemoryStoreType
-//        description.shouldAddStoreAsynchronously = false /// Make it simpler in test env
-//        container.persistentStoreDescriptions = [description]
+        switch storeType {
+        case .memory:
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            // TODO: - need shouldAddStoreAsynchronously? -
+            description.shouldAddStoreAsynchronously = false
+            container.persistentStoreDescriptions = [description]
+        case .sqlite:
+            break
+        }
         
         container.loadPersistentStores { storeDescription, error in
-            //precondition(storeDescription.type == NSInMemoryStoreType)
-            
             print("CoreData: Inited \(storeDescription)")
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -102,25 +85,55 @@ final class CoreDataStack: NSObject {
             }
         }
         return container
-    }()
+    }
     
-    ///--- available iOS 9
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+//    @available(iOS 10.0, *)
+//    private lazy var persistentContainer: NSPersistentContainer = {
+//        let container = NSPersistentContainer(name: modelName)
+//
+//        switch storeType {
+//        case .memory:
+//            let description = NSPersistentStoreDescription()
+//            description.type = NSInMemoryStoreType
+//            // TODO: - need shouldAddStoreAsynchronously? -
+//            description.shouldAddStoreAsynchronously = false
+//            container.persistentStoreDescriptions = [description]
+//        case .sqlite:
+//            break
+//        }
+//
+//        container.loadPersistentStores { storeDescription, error in
+//            print("CoreData: Inited \(storeDescription)")
+//            if let error = error {
+//                assertionFailure(error.localizedDescription)
+//                print("CoreData: Unresolved error \(error)")
+//                return
+//            }
+//        }
+//        return container
+//    }()
+    
+    private static func basicPersistentContainer(storeType: PersistentStoreType, modelName: String) -> PersistentContainer {
+        let container = PersistentContainer(name: modelName)
         do {
-            return try NSPersistentStoreCoordinator.coordinator(name: "UnitTestsCoreData")
+            try container.loadPersistentStore(type: storeType)
         } catch {
             assertionFailure(error.localizedDescription)
-            print("CoreData: Unresolved error \(error)")
+            print(error.localizedDescription)
         }
-        return nil
-    }()
+        return container
+    }
     
-    private lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        return managedObjectContext
-    }()
-    ///---
+//    private lazy var basicPersistentContainer: PersistentContainer = {
+//        let container = PersistentContainer(name: modelName)
+//        do {
+//            try container.loadPersistentStore(type: storeType)
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//            print(error.localizedDescription)
+//        }
+//        return container
+//    }()
 }
 
 
@@ -151,21 +164,33 @@ final class PersistentContainer: NSObject {
     private let persistentStoreCoordinator: NSPersistentStoreCoordinator
     
     // Creates a container using the model named `name` in the main bundle
-    convenience init(name: String) throws {
+    convenience init(name: String) {
         
-        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
-            throw CoordinatorError.modelFileNotFound
+        let moModel: NSManagedObjectModel
+        if let modelURL = Bundle.main.url(forResource: name, withExtension: "momd"),
+            let model = NSManagedObjectModel(contentsOf: modelURL)
+        {
+            moModel = model
+        } else {
+            assertionFailure("\(name).xcdatamodeld not found in Bundle")
+            moModel = NSManagedObjectModel()
         }
         
-        /// NSManagedObjectModel.mergedModel(from: nil)
-        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
-            throw CoordinatorError.modelCreationError
-        }
+        self.init(name: name, managedObjectModel: moModel)
         
-        try self.init(name: name, managedObjectModel: model)
+//        guard let modelURL = Bundle.main.url(forResource: name, withExtension: "momd") else {
+//            throw CoordinatorError.modelFileNotFound
+//        }
+//
+//        /// NSManagedObjectModel.mergedModel(from: nil)
+//        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
+//            throw CoordinatorError.modelCreationError
+//        }
+//
+//        self.init(name: name, managedObjectModel: model)
     }
     
-    init(name: String, managedObjectModel model: NSManagedObjectModel) throws {
+    init(name: String, managedObjectModel model: NSManagedObjectModel) {
         self.name = name
         self.managedObjectModel = model
         
@@ -188,7 +213,7 @@ final class PersistentContainer: NSObject {
     }
     
     func loadPersistentStore(type: PersistentStoreType) throws {
-        /// need for memory
+        // TODO: - need for memory type? -
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                        NSInferMappingModelAutomaticallyOption: true]
         
