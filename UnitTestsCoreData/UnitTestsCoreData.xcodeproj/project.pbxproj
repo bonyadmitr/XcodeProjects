@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4A8B6BF21AF1EAF00FED3F0 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A8B6BE21AF1EAF00FED3F0 /* PersistentContainer.swift */; };
+		C4A8B6C121AF239800FED3F0 /* StoreContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A8B6C021AF239800FED3F0 /* StoreContainer.swift */; };
 		CE991F3921AED61D00B67A03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F3821AED61D00B67A03 /* AppDelegate.swift */; };
 		CE991F3B21AED61D00B67A03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE991F3A21AED61D00B67A03 /* ViewController.swift */; };
 		CE991F3E21AED61D00B67A03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE991F3C21AED61D00B67A03 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C4A8B6BE21AF1EAF00FED3F0 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
+		C4A8B6C021AF239800FED3F0 /* StoreContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreContainer.swift; sourceTree = "<group>"; };
 		CE991F3521AED61D00B67A03 /* UnitTestsCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTestsCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE991F3821AED61D00B67A03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE991F3A21AED61D00B67A03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				CE991F6921AED68800B67A03 /* CoreDataStack.swift */,
+				C4A8B6BE21AF1EAF00FED3F0 /* PersistentContainer.swift */,
+				C4A8B6C021AF239800FED3F0 /* StoreContainer.swift */,
 				CE991F6821AED68800B67A03 /* NSManagedObjectContext+Extensions.swift */,
 				CE991F6D21AED68800B67A03 /* NSManagedObject+Extensions.swift */,
 			);
@@ -221,8 +227,10 @@
 				CE991F4121AED61D00B67A03 /* UnitTestsCoreData.xcdatamodeld in Sources */,
 				CE991F3B21AED61D00B67A03 /* ViewController.swift in Sources */,
 				CE991F3921AED61D00B67A03 /* AppDelegate.swift in Sources */,
+				C4A8B6BF21AF1EAF00FED3F0 /* PersistentContainer.swift in Sources */,
 				CE991F7221AED68800B67A03 /* NSManagedObject+Extensions.swift in Sources */,
 				CE991F6E21AED68800B67A03 /* NSManagedObjectContext+Extensions.swift in Sources */,
+				C4A8B6C121AF239800FED3F0 /* StoreContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
