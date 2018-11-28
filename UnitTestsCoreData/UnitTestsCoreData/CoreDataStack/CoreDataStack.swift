@@ -88,11 +88,15 @@ final class CoreDataStack: NSObject {
         
 //        let description = NSPersistentStoreDescription()
 //        description.type = NSInMemoryStoreType
+//        description.shouldAddStoreAsynchronously = false /// Make it simpler in test env
 //        container.persistentStoreDescriptions = [description]
         
         container.loadPersistentStores { storeDescription, error in
+            //precondition(storeDescription.type == NSInMemoryStoreType)
+            
             print("CoreData: Inited \(storeDescription)")
             if let error = error {
+                assertionFailure(error.localizedDescription)
                 print("CoreData: Unresolved error \(error)")
                 return
             }
@@ -130,6 +134,12 @@ public enum CoordinatorError: Error {
     
     /// Gettings document directory fail
     case storePathNotFound
+}
+
+
+enum PersistentStoreType {
+    case memory
+    case sqlite
 }
 
 final class PersistentContainer: NSObject {
@@ -175,11 +185,6 @@ final class PersistentContainer: NSObject {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         viewContext = managedObjectContext
-    }
-    
-    enum PersistentStoreType {
-        case memory
-        case sqlite
     }
     
     func loadPersistentStore(type: PersistentStoreType) throws {
