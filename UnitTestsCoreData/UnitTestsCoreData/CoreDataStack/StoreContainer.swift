@@ -14,6 +14,7 @@ protocol StoreContainer {
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void)
     func automaticallyMergesChangesFromParent()
     func clearAll()
+    var persistentStoreCoordinator: NSPersistentStoreCoordinator { get }
 }
 
 @available(iOS 10.0, *)

@@ -30,7 +30,7 @@ final class PersistentContainer: NSObject {
     let viewContext: NSManagedObjectContext
     private let name: String
     private let managedObjectModel: NSManagedObjectModel
-    private let persistentStoreCoordinator: NSPersistentStoreCoordinator
+    let persistentStoreCoordinator: NSPersistentStoreCoordinator
     
     /// Creates a container using the model named `name` in the main bundle
     convenience init(name: String) {

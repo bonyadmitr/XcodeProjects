@@ -10,6 +10,26 @@ import CoreData
 
 extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+    
+    /// working ONLY with NSSQLiteStoreType
+    /// https://stackoverflow.com/a/50154532/5893286
+    func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
+        
+        let context = newBackgroundContext()
+        context.perform {
+            do {
+                try [DBEvent.self]
+                    .compactMap { context.deleteRequest(for: $0) }
+                    .forEach { try context.execute($0) }
+                try context.save()
+                completion?(.saved)
+            } catch {
+                assertionFailure(error.localizedDescription)
+                context.rollback()
+                completion?(.rolledBack(error))
+            }
+        }
+    }
 }
 
 final class CoreDataStack {
