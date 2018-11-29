@@ -195,7 +195,9 @@ class SettingsStorageTests: XCTestCase {
     func testInit() {
         let userDefaults = UserDefaults(suiteName: suiteName)!
         var settingsStorage: SettingsStorage = SettingsStorageImp(userDefaults: userDefaults)
-        XCTAssert(settingsStorage.isEnabledVibration == true)
+        
+        /// check default value
+        XCTAssert(settingsStorage.isEnabledVibration == false)
     }
     
     func testSave() {
@@ -210,6 +212,8 @@ class SettingsStorageTests: XCTestCase {
         var settingsStorage: SettingsStorage = SettingsStorageImp(userDefaults: userDefaults)
         settingsStorage.isEnabledVibration = false
         settingsStorage.resetToDefault()
-        XCTAssert(settingsStorage.isEnabledVibration == true)
+        
+        /// check default value
+        XCTAssert(settingsStorage.isEnabledVibration == false)
     }
 }
