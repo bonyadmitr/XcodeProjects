@@ -42,12 +42,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
     func testClearAll() {
-        //        let expec = expectation(description: "1")
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        //            expec.fulfill()
-        //        }
-        //        waitForExpectations(timeout: 2, handler: nil)
-        
         let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
@@ -70,12 +64,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
     func testClearAllAndSave() {
-        //        let expec = expectation(description: "1")
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        //            expec.fulfill()
-        //        }
-        //        waitForExpectations(timeout: 2, handler: nil)
-        
         let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
@@ -109,6 +97,12 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssert(events?.first?.name == "Some event")
     }
 
+//        let expec = expectation(description: "1")
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            expec.fulfill()
+//        }
+//        waitForExpectations(timeout: 2, handler: nil)
+    
 //    func testPerformanceExample() {
 //        // This is an example of a performance test case.
 //        self.measure {
