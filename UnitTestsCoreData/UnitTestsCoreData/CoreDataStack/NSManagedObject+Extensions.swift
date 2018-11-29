@@ -21,11 +21,13 @@ extension NSManagedObject {
         if #available(iOS 10.0, macOS 10.12, *) {
             self.init(context: moc)
         } else {
-            let name = String(describing: type(of: self))
-            guard let entityDescription = NSEntityDescription.entity(forEntityName: name, in: moc) else {
-                fatalError("Unable to create entity description with \(name)")
+            let className = String(describing: type(of: self))
+            if let entityDescription = NSEntityDescription.entity(forEntityName: className, in: moc) {
+                self.init(entity: entityDescription, insertInto: moc)
+            } else {
+                assertionFailure("Unable to create entity description with \(className)")
+                self.init()
             }
-            self.init(entity: entityDescription, insertInto: moc)
         }
     }
     
