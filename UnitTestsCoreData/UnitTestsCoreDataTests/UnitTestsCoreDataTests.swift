@@ -82,7 +82,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
-            event.name = "Some event"
+            event.name = "Some event 2"
             context.saveSyncUnsafe()
             expec2.fulfill()
         }
@@ -94,7 +94,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         
         XCTAssertNotNil(events)
         XCTAssertEqual(events!.count, 1)
-        XCTAssert(events?.first?.name == "Some event")
+        XCTAssert(events?.first?.name == "Some event 2")
     }
 
 //        let expec = expectation(description: "1")
