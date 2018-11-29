@@ -157,8 +157,19 @@ extension NSManagedObjectContext {
     }
 }
 
-extension NSObject {
+protocol ClassName {
+    static func className() -> String
+    func className() -> String
+}
+
+extension ClassName {
     static func className() -> String {
         return String(describing: self.self)
     }
+    
+    func className() -> String {
+        return String(describing: type(of: self))
+    }
 }
+
+extension NSObject: ClassName {}
