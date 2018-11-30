@@ -24,7 +24,7 @@ protocol SoundStorage {
     var isEnabledSounds: Bool { get set }
 }
 
-protocol SettingsStorageDelegate {
+protocol SettingsStorageDelegate: class {
     func settingsRestoredToDefaults()
 }
 

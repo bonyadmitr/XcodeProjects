@@ -241,7 +241,7 @@ extension AppDelegate: LocalizationManagerDelegate {
             let window = window,
             let tabBarVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController,
             let tabBarControllers = tabBarVC.viewControllers,
-            tabBarControllers.count > 0
+            !tabBarControllers.isEmpty
         else {
             assertionFailure()
             return
@@ -252,7 +252,7 @@ extension AppDelegate: LocalizationManagerDelegate {
         
         guard
             let settingsSplitVC = tabBarControllers[lastIndex] as? UISplitViewController,
-            settingsSplitVC.viewControllers.count > 0,
+            !settingsSplitVC.viewControllers.isEmpty,
             let settingsNavVC = settingsSplitVC.viewControllers[0] as? UINavigationController,
             let settingsVC = settingsNavVC.topViewController as? SettingsController
         else {

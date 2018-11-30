@@ -81,8 +81,7 @@ final class SettingsController: UIViewController, BackButtonActions {
         if segue.identifier == "detail" || segue.identifier == "detail!",
             let vc = sender as? UIViewController,
             let navVC = segue.destination as? UINavigationController,
-            let detailVC = navVC.topViewController as? SplitDetailController
-        {
+            let detailVC = navVC.topViewController as? SplitDetailController {
             detailVC.childVC = vc
             detailVC.title = vc.title
         }

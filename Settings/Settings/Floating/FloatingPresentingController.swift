@@ -93,8 +93,7 @@ final class FloatingPresentingController: UIViewController {
     
     private func sendLogs() {
         if FileManager.default.fileExists(atPath: Logger.shared.fileUrl.path),
-            let logData = try? Data(contentsOf: Logger.shared.fileUrl)
-        {
+            let logData = try? Data(contentsOf: Logger.shared.fileUrl) {
             let attachment = MailAttachment(data: logData, mimeType: "text/plain", fileName: "logs.txt")
             
             EmailSender.shared.send(message: "",

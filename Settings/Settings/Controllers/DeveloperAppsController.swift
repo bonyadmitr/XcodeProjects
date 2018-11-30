@@ -89,13 +89,13 @@ final class DeveloperAppsController: UIViewController {
         apps = DeveloperAppsManager.shared.apps
         
         if !apps.newApps.isEmpty {
-            let raws = Array<RawType>(repeating: .newApp, count: apps.newApps.count)
+            let raws = [RawType](repeating: .newApp, count: apps.newApps.count)
             let section = Section(type: .newApps, raws: raws)
             newSections.append(section)
         }
         
         if !apps.installedApps.isEmpty {
-            let raws = Array<RawType>(repeating: .installedApp, count: apps.installedApps.count)
+            let raws = [RawType](repeating: .installedApp, count: apps.installedApps.count)
             let section = Section(type: .installed, raws: raws)
             newSections.append(section)
         }

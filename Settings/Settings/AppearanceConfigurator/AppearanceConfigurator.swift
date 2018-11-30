@@ -75,7 +75,7 @@ struct AppearanceTheme: Equatable {
     let cellSelectedColor: UIColor
 }
 
-protocol AppearanceConfiguratorDelegate {
+protocol AppearanceConfiguratorDelegate: class {
     func didApplied(theme: AppearanceTheme)
 }
 

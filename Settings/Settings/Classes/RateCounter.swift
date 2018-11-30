@@ -180,9 +180,11 @@ final class RateCounter {
 }
 
 /// triggered in init only
+/// check version
 //    private var isNewVersion: Bool {
 //        /// Get the current bundle version for the app
-//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
+//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else {
+//            assertionFailure("Expected to find a bundle version in the info dictionary")
 //            return true
 //        }
 //
@@ -204,7 +206,8 @@ final class RateCounter {
 //
 //    func saveCurrentAppVersionAsNew() {
 //        /// Get the current bundle version for the app
-//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else { assertionFailure("Expected to find a bundle version in the info dictionary")
+//        guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String else {
+//            assertionFailure("Expected to find a bundle version in the info dictionary")
 //            return
 //        }
 //        UserDefaults.standard.set(currentVersion, forKey: UserDefaultsKeys.lastVersionPromptedForReviewKey)

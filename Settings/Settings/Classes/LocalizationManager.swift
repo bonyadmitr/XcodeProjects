@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LocalizationManagerDelegate {
+protocol LocalizationManagerDelegate: class {
     func languageDidChange(to language: String)
 }
 

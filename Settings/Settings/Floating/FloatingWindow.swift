@@ -25,7 +25,8 @@ final class FloatingWindow: UIWindow {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        assertionFailure("should not be used")
+        super.init(coder: aDecoder)
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
