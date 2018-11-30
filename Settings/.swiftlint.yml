@@ -41,6 +41,8 @@ disabled_rules:
 - force_unwrapping ## NSURL(string: str)↓!
 - prohibited_interface_builder ## Creating views using Interface Builder should be avoided
 - switch_case_on_newline ## Cases inside a switch should always be on a newline
+- identifier_name ## names should only contain alphanumeric characters and start with a lowercase character ...
+- todo ## TODOs and FIXMEs should be resolved
 
 ## All ruels
 ## https://github.com/realm/SwiftLint/blob/master/Rules.md
@@ -49,7 +51,7 @@ opt_in_rules:
 ## default
 # - unused_closure_parameter
 
-- attributes
+# - attributes
 - overridden_super_call ## Some overridden methods should always call super, NOT ALL
 
 - switch_case_on_newline
@@ -87,7 +89,6 @@ opt_in_rules:
 - for_where ## where clauses are preferred over a single if inside a for
 - function_body_length ## Functions bodies should not span too many lines
 - generic_type_name ## name should only contain alphanumeric characters, start with an uppercase character and span between 1 and 20 characters in length
-- identifier_name ## names should only contain alphanumeric characters and start with a lowercase character ...
 - implicit_getter ## Computed read-only properties and subscripts should avoid using the get keyword
 # - implicitly_unwrapped_optional ## Implicitly unwrapped optionals should be avoided when possible
 - large_tuple ## Tuples shouldn't have too many members. Create a custom type instead
@@ -106,7 +107,6 @@ opt_in_rules:
 - sorted_first_last ## Prefer using min() or max() over sorted().first or sorted().last
 - switch_case_alignment ## Case statements should vertically align with their enclosing switch statement, or indented if configured otherwise
 - syntactic_sugar ## Shorthand syntactic sugar should be used, i.e. [Int] instead of Array
-- todo ## TODOs and FIXMEs should be resolved
 - toggle_bool ## Prefer someBool.toggle() over someBool = !someBool
 # - trailing_closure ## Trailing closure syntax should be used whenever possible
 # - unavailable_function ## Unimplemented functions should be marked as unavailable
@@ -211,18 +211,18 @@ function_body_length:
   warning: 50
   error: 100
 
-identifier_name:
-  validates_start_with_lowercase: true
-  min_length:
-    warning: 2
-    error: 1
-  # max_length:
-  #   warning: 40
-  #   error: 60
-  # excluded:
-  #   - id
-  #   - URL
-  # allowed_symbols: []
+# identifier_name:
+#   validates_start_with_lowercase: true
+#   min_length:
+#     warning: 2
+#     error: 1
+#   # max_length:
+#   #   warning: 40
+#   #   error: 60
+#   # excluded:
+#   #   - id
+#   #   - URL
+#   # allowed_symbols: []
 
 # file_length:
 #   warning: 500
@@ -307,7 +307,7 @@ custom_rules:
    name: "Unnecessary Type"
    regex: '[ @a-zA-Z]*(?:let|var)\s\w*: ([a-zA-Z0-9]*)\?? = \1'
    message: "Type definition not needed"
-   severity: error
+   severity: warning
 
   unowned:
     name: "Unowned"
