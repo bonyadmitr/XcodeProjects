@@ -64,6 +64,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events?.count, 0)
     }
     
+    /// working ONLY with NSSQLiteStoreType
     func testClearAll2() {
         let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
