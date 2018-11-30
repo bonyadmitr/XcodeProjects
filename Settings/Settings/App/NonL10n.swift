@@ -10,4 +10,5 @@ import Foundation
 
 enum NonL10n {
     static let emailTitle = "Settings feedback"
+    static let settingsShortcutIconName = "ic_settings"
 }

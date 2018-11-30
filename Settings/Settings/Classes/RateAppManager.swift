@@ -109,7 +109,7 @@ final class RateAppManager {
             assertionFailure()
             return
         }
-        let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link, #imageLiteral(resourceName: "ic_settings")]
+        let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link, Images.icSettings]
         
         /// taking long time to present
         /// https://stackoverflow.com/questions/13907156/uiactivityviewcontroller-taking-long-time-to-present

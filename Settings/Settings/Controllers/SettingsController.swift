@@ -65,7 +65,7 @@ final class SettingsController: UIViewController, BackButtonActions {
     private func setup() {
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
         title = L10n.settings
-        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "ic_settings"), selectedImage: nil)
+        tabBarItem = UITabBarItem(title: title, image: Images.icSettings, selectedImage: nil)
         extendedLayoutIncludesOpaqueBars = true
     }
     

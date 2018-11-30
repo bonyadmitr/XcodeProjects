@@ -44,10 +44,11 @@ final class ShortcutManager {
                                                          icon: UIApplicationShortcutIcon(type: .compose),
                                                          userInfo: nil)
         
+        let settingsShortcutIcon = UIApplicationShortcutIcon(templateImageName: NonL10n.settingsShortcutIconName)
         let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue,
                                                          localizedTitle: L10n.settings,
                                                          localizedSubtitle: nil,
-                                                         icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"),
+                                                         icon: settingsShortcutIcon,
                                                          userInfo: nil)
         
         UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]

@@ -71,6 +71,7 @@
 		CEEEB7BB215DF5EC003C5BD8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEEB7BD215DF5EC003C5BD8 /* Localizable.strings */; };
 		CEEEB7C3215E073C003C5BD8 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */; };
 		CEF1D2042197768300963421 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1D2032197768300963421 /* SettingsTests.swift */; };
+		CEFFA8F921B15D8A00B34F36 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F821B15D8A00B34F36 /* Images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +156,7 @@
 		CEF1D2012197768300963421 /* SettingsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SettingsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF1D2032197768300963421 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		CEF1D2052197768300963421 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEFFA8F821B15D8A00B34F36 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 				CEEEB78B215D094A003C5BD8 /* Assets.xcassets */,
 				CEEEB78D215D094A003C5BD8 /* LaunchScreen.storyboard */,
 				CEEEB790215D094A003C5BD8 /* Info.plist */,
+				CEFFA8F821B15D8A00B34F36 /* Images.swift */,
 				CE08888E2199587B0072F45C /* L10n.swift */,
 				C4131E3D21A32615003C3DAB /* NonL10n.swift */,
 				CE991F2A21AD336600B67A03 /* Constants.swift */,
@@ -361,6 +364,7 @@
 			buildConfigurationList = CEEEB793215D094A003C5BD8 /* Build configuration list for PBXNativeTarget "Settings" */;
 			buildPhases = (
 				CE08888D219957800072F45C /* Swiftgen */,
+				CEFFA8F721B15C6900B34F36 /* Swiftgen Images */,
 				CEFFA8F621B1170400B34F36 /* Swiftlint */,
 				CEEEB77D215D0949003C5BD8 /* Sources */,
 				CEEEB77E215D0949003C5BD8 /* Frameworks */,
@@ -492,6 +496,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/swiftlint.sh\n";
 		};
+		CEFFA8F721B15C6900B34F36 /* Swiftgen Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftgen Images";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftgen_images.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -538,6 +560,7 @@
 				662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */,
 				662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
+				CEFFA8F921B15D8A00B34F36 /* Images.swift in Sources */,
 				CEEEB7A2215D0996003C5BD8 /* MulticastDelegate.swift in Sources */,
 				CE991F2B21AD336600B67A03 /* Constants.swift in Sources */,
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,

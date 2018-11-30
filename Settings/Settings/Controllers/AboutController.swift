@@ -154,7 +154,7 @@ extension AboutController: UITableViewDelegate {
         }
         
         header.label.text = L10n.settings
-        header.imageView.image = #imageLiteral(resourceName: "ic_settings")
+        header.imageView.image = Images.icSettings
         header.versionLabel.text = UIApplication.shared.version
     }
     
