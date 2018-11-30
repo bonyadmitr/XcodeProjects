@@ -1,0 +1,77 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+{% if catalogs %}
+{% set colorAlias %}{{param.colorAliasName|default:"AssetColorTypeAlias"}}{% endset %}
+{% set imageAlias %}{{param.imageAliasName|default:"Image"}}{% endset %}
+#if os(OSX)
+  import AppKit.NSImage
+  typealias {{colorAlias}} = NSColor
+  typealias {{imageAlias}} = NSImage
+#elseif os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIImage
+  typealias {{colorAlias}} = UIColor
+  typealias {{imageAlias}} = UIImage
+#endif
+
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+{% set enumName %}{{param.enumName|default:"Images"}}{% endset %}
+{% set imageType %}{{param.imageTypeName|default:"ImageAsset"}}{% endset %}
+{% macro enumBlock assets sp %}
+{{sp}}  {% call casesBlock assets sp %}
+{{sp}}  {% if not param.noAllValues %}
+
+{{sp}}  private static func image(name: String) -> Image {
+{{sp}}    let bundle = Bundle(for: BundleToken.self)
+{{sp}}    #if os(iOS) || os(tvOS)
+{{sp}}    let image = {{imageAlias}}(named: name, in: bundle, compatibleWith: nil)
+{{sp}}    #elseif os(OSX)
+{{sp}}    let image = bundle.image(forResource: NSImage.Name(name))
+{{sp}}    #elseif os(watchOS)
+{{sp}}    let image = {{imageAlias}}(named: name)
+{{sp}}    #endif
+{{sp}}    assert(image != nil)
+{{sp}}    //guard let result = image else { fatalError("Unable to load image named \(name).") }
+{{sp}}    return image ?? Image()
+{{sp}}  }
+{{sp}}  {% endif %}
+{% endmacro %}
+{% macro casesBlock assets sp %}
+{{sp}}  {% for asset in assets %}
+{{sp}}  {% if asset.type == "image" %}
+{{sp}}  /// {{asset.name}}
+{{sp}}  static var {{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}: Image {
+{{sp}}    return image(name: "{{asset.value}}")
+{{sp}}  }
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{% endmacro %}
+{% macro allValuesBlock assets filter prefix sp %}
+{{sp}}  {% for asset in assets %}
+{{sp}}  {% if asset.type == filter %}
+{{sp}}  {{prefix}}{{asset.name|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}},
+{{sp}}  {% elif asset.items %}
+{{sp}}  {% set prefix2 %}{{prefix}}{{asset.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.{% endset %}
+{{sp}}  {% call allValuesBlock asset.items filter prefix2 sp %}
+{{sp}}  {% endif %}
+{{sp}}  {% endfor %}
+{% endmacro %}
+
+// swiftlint:disable identifier_name line_length nesting type_body_length type_name
+enum {{enumName}} {
+  {% if catalogs.count > 1 %}
+  {% for catalog in catalogs %}
+  enum {{catalog.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% call enumBlock catalog.assets "  " %}
+  }
+  {% endfor %}
+  {% else %}
+  {% call enumBlock catalogs.first.assets "" %}
+  {% endif %}
+}
+// swiftlint:enable identifier_name line_length nesting type_body_length type_name
+
+private final class BundleToken {}
+{% else %}
+// No assets found
+{% endif %}
