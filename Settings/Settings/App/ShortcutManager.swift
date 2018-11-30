@@ -38,9 +38,17 @@ final class ShortcutManager {
             return
         }
         
-        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.language.rawValue, localizedTitle: L10n.language, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .compose), userInfo: nil)
+        let newShortcutItem1 = UIApplicationShortcutItem(type: Shortcut.language.rawValue,
+                                                         localizedTitle: L10n.language,
+                                                         localizedSubtitle: nil,
+                                                         icon: UIApplicationShortcutIcon(type: .compose),
+                                                         userInfo: nil)
         
-        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue, localizedTitle: L10n.settings, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"), userInfo: nil)
+        let newShortcutItem2 = UIApplicationShortcutItem(type: Shortcut.settings.rawValue,
+                                                         localizedTitle: L10n.settings,
+                                                         localizedSubtitle: nil,
+                                                         icon: UIApplicationShortcutIcon(templateImageName: "ic_settings"),
+                                                         userInfo: nil)
         
         UIApplication.shared.shortcutItems = [newShortcutItem1, newShortcutItem2]
     }
