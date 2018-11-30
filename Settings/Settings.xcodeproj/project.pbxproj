@@ -361,6 +361,7 @@
 			buildConfigurationList = CEEEB793215D094A003C5BD8 /* Build configuration list for PBXNativeTarget "Settings" */;
 			buildPhases = (
 				CE08888D219957800072F45C /* Swiftgen */,
+				CEFFA8F621B1170400B34F36 /* Swiftlint */,
 				CEEEB77D215D0949003C5BD8 /* Sources */,
 				CEEEB77E215D0949003C5BD8 /* Frameworks */,
 				CEEEB77F215D0949003C5BD8 /* Resources */,
@@ -471,7 +472,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh ./Scripts/swiftgen.sh";
+			shellScript = "/bin/sh ./Scripts/swiftgen.sh\n";
+		};
+		CEFFA8F621B1170400B34F36 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftlint.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
