@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITextField{
+extension UITextField {
     
     /// Placeholder color
     @IBInspectable var placeholderColor: UIColor {

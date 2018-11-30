@@ -112,7 +112,6 @@ class SettingsTests: XCTestCase {
             })
         }
         
-
         
         let expec = expectation(description: "1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -178,7 +177,6 @@ class SettingsTests: XCTestCase {
 //    }
     
 }
-
 
 
 class SettingsStorageTests: XCTestCase {

@@ -13,7 +13,7 @@ protocol ChildHandler {
     func add(childController: UIViewController, to container: UIView?)
 }
 
-extension ChildHandler where Self:UIViewController {
+extension ChildHandler where Self: UIViewController {
     
     func add(childController: UIViewController, to container: UIView? = nil) {
         guard let holderView = container ?? view else {

@@ -28,7 +28,7 @@ final class DeveloperAppsController: UIViewController {
     }
     
     private var sections: [Section] = []
-    private var apps: SchemeAppTuple = ([],[])
+    private var apps: SchemeAppTuple = ([], [])
     private let cellId = String(describing: DetailCell.self)
     
     private lazy var tableView: UITableView = {

@@ -26,7 +26,7 @@ extension UILabel {
 
 extension UIButton {
     @IBInspectable public var lzTitle: String? {
-        set {titleForAllStates = newValue?.localized }
+        set { titleForAllStates = newValue?.localized }
         get { return titleForAllStates }
     }
     public var titleForAllStates: String? {
@@ -50,7 +50,7 @@ extension UITextField {
         get { return text }
         set { text = newValue?.localized }
     }
-    @IBInspectable public var lzPlaceholder : String? {
+    @IBInspectable public var lzPlaceholder: String? {
         get { return placeholder }
         set { placeholder = newValue?.localized }
     }
@@ -93,15 +93,15 @@ extension UISegmentedControl {
         get { return titleForSegment(at: 0) }
         set { setTitle(newValue?.localized, forSegmentAt: 0) }
     }
-    @IBInspectable public var lzTitle1 : String? {
+    @IBInspectable public var lzTitle1: String? {
         get { return titleForSegment(at: 1) }
         set { setTitle(newValue?.localized, forSegmentAt: 1) }
     }
-    @IBInspectable public var lzTitle2 : String? {
+    @IBInspectable public var lzTitle2: String? {
         get { return titleForSegment(at: 2) }
         set { setTitle(newValue?.localized, forSegmentAt: 2) }
     }
-    @IBInspectable public var lzTitle3 : String? {
+    @IBInspectable public var lzTitle3: String? {
         get { return titleForSegment(at: 3) }
         set { setTitle(newValue?.localized, forSegmentAt: 3) }
     }

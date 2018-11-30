@@ -82,7 +82,7 @@ public final class LocalizationManager: MulticastHandler {
         currentLanguage = language
         
         forceLanguageDirection()
-        delegates.invoke { $0.languageDidChange(to: language)}
+        delegates.invoke { $0.languageDidChange(to: language) }
     }
     
     /// can be used for any NSLocalizedString method
@@ -91,7 +91,7 @@ public final class LocalizationManager: MulticastHandler {
         bundleSubstitutionOnce()
         substitutionOfMainBundle(for: language)
         forceLanguageDirection()
-        delegates.invoke { $0.languageDidChange(to: language)}
+        delegates.invoke { $0.languageDidChange(to: language) }
     }
     
     /// dispatch once token. set only one time.

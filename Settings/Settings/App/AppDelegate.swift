@@ -261,8 +261,6 @@ extension AppDelegate: LocalizationManagerDelegate {
         }
         
         
-        
-        
 //        guard let settingsNavVC = tabBarControllers[lastIndex] as? UINavigationController else {
 //            assertionFailure()
 //            return

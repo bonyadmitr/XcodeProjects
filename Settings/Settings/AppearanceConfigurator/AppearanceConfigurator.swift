@@ -183,18 +183,6 @@ final class AppearanceConfigurator: MulticastHandler {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 //    class func configurate() {
 //
 //        /// color of all buttons text (tintColor)
@@ -325,7 +313,7 @@ extension AppearanceConfigurator {
     
     func loadSavedTheme() {
         let themeSaveId = UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey) ?? type(of: self).themes[0].saveId
-        guard let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId}) else {
+        guard let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId }) else {
             /// will be drop here at first launch
             //assertionFailure()
             return

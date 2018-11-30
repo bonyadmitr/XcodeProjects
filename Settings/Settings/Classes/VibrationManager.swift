@@ -26,7 +26,7 @@ extension String {
         }
     }
 }
-extension UINavigationController: UINavigationBarDelegate  {
+extension UINavigationController: UINavigationBarDelegate {
     /// NOTE: this funcion will be called for all pop actions
     /// https://stackoverflow.com/a/43585267
     /// https://gist.github.com/HamGuy/a099058e674b573ffe433132f7b5651e

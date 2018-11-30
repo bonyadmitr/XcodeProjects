@@ -53,7 +53,7 @@ final class RateAppDisplayManager {
         vc.addAction(.init(title: L10n.remindMeLater, style: .default) { [weak self] _ in
             self?.rateCounter.remindMeLater(for: 7)
         })
-        vc.addAction(.init(title: L10n.dontShowItAgain, style: .destructive)  { [weak self] _ in
+        vc.addAction(.init(title: L10n.dontShowItAgain, style: .destructive) { [weak self] _ in
             self?.rateCounter.isDisabled = true
         })
         controller?.present(vc, animated: true, completion: nil)
@@ -109,7 +109,7 @@ final class RateAppManager {
             assertionFailure()
             return
         }
-        let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link,  #imageLiteral(resourceName: "ic_settings")]
+        let objectsToShare: [Any] = ["Settings by Yaroslav Bondar", link, #imageLiteral(resourceName: "ic_settings")]
         
         /// taking long time to present
         /// https://stackoverflow.com/questions/13907156/uiactivityviewcontroller-taking-long-time-to-present

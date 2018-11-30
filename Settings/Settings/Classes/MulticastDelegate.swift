@@ -31,7 +31,7 @@ final class MulticastDelegate <T> {
     /// not nessary for dealocated objects,
     /// they will be removed automaticaly on invoke
     func remove(_ delegate: T) {
-        weakDelegates = weakDelegates.filter {$0.value !== delegate as AnyObject}
+        weakDelegates = weakDelegates.filter { $0.value !== delegate as AnyObject }
     }
     
     func invoke(invocation: (T) -> Void) {
