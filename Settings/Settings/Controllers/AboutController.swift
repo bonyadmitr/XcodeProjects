@@ -186,3 +186,160 @@ extension AboutController: UITableViewDelegate {
         }
     }
 }
+
+
+import UIKit
+
+/// QRCode generator
+/// https://github.com/aschuch/QRCode
+public final class QRCode {
+    
+    /**
+     The level of error correction.
+     
+     - Low:      7%
+     - Medium:   15%
+     - Quartile: 25%
+     - High:     30%
+     */
+    public enum ErrorCorrection: String {
+        case Low = "L"
+        case Medium = "M"
+        case Quartile = "Q"
+        case High = "H"
+    }
+    
+    /// Data contained in the generated QRCode
+    public let data: Data
+    
+    /// Foreground color of the output
+    /// Defaults to black
+    public var color = CIColor(red: 0, green: 0, blue: 0)
+    
+    /// Background color of the output
+    /// Defaults to white
+    public var backgroundColor = CIColor(red: 1, green: 1, blue: 1)
+    
+    /// Size of the output
+    public var size = CGSize(width: 200, height: 200)
+    
+    /// The error correction. The default value is `.Low`.
+    public var errorCorrection = ErrorCorrection.Low
+    
+    // MARK: Init
+    
+    public init(_ data: Data) {
+        self.data = data
+    }
+    
+    public init?(_ string: String) {
+        if let data = string.data(using: .isoLatin1) {
+            self.data = data
+        } else {
+            return nil
+        }
+    }
+    
+    public init?(_ url: URL) {
+        if let data = url.absoluteString.data(using: .isoLatin1) {
+            self.data = data
+        } else {
+            return nil
+        }
+    }
+    
+    // MARK: Generate QRCode
+    
+    /// The QRCode's UIImage representation
+    public func image() -> UIImage? {
+        guard let ciImage = ciImage() else {
+            assertionFailure()
+            return nil
+        }
+        
+        // Size
+        let ciImageSize = ciImage.extent.size
+        let widthRatio = size.width / ciImageSize.width
+        let heightRatio = size.height / ciImageSize.height
+        let scale = Scale(dx: widthRatio, dy: heightRatio)
+        return ciImage.nonInterpolatedImage(with: scale)
+    }
+    
+    /// The QRCode's CIImage representation
+    public func ciImage() -> CIImage? {
+        // Generate QRCode
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
+            assertionFailure()
+            return nil
+        }
+        
+        qrFilter.setDefaults()
+        qrFilter.setValue(data, forKey: "inputMessage")
+        qrFilter.setValue(errorCorrection.rawValue, forKey: "inputCorrectionLevel")
+        
+        // Color code and background
+        guard let colorFilter = CIFilter(name: "CIFalseColor") else {
+            assertionFailure()
+            return nil
+        }
+        
+        colorFilter.setDefaults()
+        colorFilter.setValue(qrFilter.outputImage, forKey: "inputImage")
+        colorFilter.setValue(color, forKey: "inputColor0")
+        colorFilter.setValue(backgroundColor, forKey: "inputColor1")
+        
+        return colorFilter.outputImage
+    }
+    
+//    func barcodeImage() -> UIImage? {
+//
+//        guard let filter = CIFilter(name: "CICode128BarcodeGenerator") else {
+//            assertionFailure()
+//            return nil
+//        }
+//
+//        filter.setValue(data, forKey: "inputMessage")
+//        let transform = CGAffineTransform(scaleX: 3, y: 3)
+//
+//        if let output = filter.outputImage?.transformed(by: transform) {
+//            return UIImage(ciImage: output)
+//        }
+//
+//        return nil
+//    }
+}
+
+internal typealias Scale = (dx: CGFloat, dy: CGFloat)
+
+internal extension CIImage {
+    
+    /// Creates an `UIImage` with interpolation disabled and scaled given a scale property
+    ///
+    /// - parameter withScale:  a given scale using to resize the result image
+    ///
+    /// - returns: an non-interpolated UIImage
+    internal func nonInterpolatedImage(with scale: Scale = Scale(dx: 1, dy: 1)) -> UIImage? {
+        
+        guard let cgImage = CIContext(options: nil).createCGImage(self, from: extent) else {
+            assertionFailure()
+            return nil
+        }
+        
+        let size = CGSize(width: extent.size.width * scale.dx, height: extent.size.height * scale.dy)
+        UIGraphicsBeginImageContextWithOptions(size, true, 0)
+        
+        guard let context = UIGraphicsGetCurrentContext() else {
+            assertionFailure()
+            return nil
+        }
+        
+        context.interpolationQuality = .none
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.draw(cgImage, in: context.boundingBoxOfClipPath)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return result
+    }
+}
