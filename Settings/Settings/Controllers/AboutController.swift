@@ -203,18 +203,18 @@ public final class QRCode {
      - High:     30%
      */
     public enum ErrorCorrection: String {
-        case Low = "L"
-        case Medium = "M"
-        case Quartile = "Q"
-        case High = "H"
+        case low = "L"
+        case medium = "M"
+        case quartile = "Q"
+        case high = "H"
     }
     
     /// Data contained in the generated QRCode
-    public let data: Data
+    public var data: Data?
     
     /// Foreground color of the output
     /// Defaults to black
-    public var color = CIColor(red: 0, green: 0, blue: 0)
+    public var mainColor = CIColor(red: 0, green: 0, blue: 0)
     
     /// Background color of the output
     /// Defaults to white
@@ -224,28 +224,26 @@ public final class QRCode {
     public var size = CGSize(width: 200, height: 200)
     
     /// The error correction. The default value is `.Low`.
-    public var errorCorrection = ErrorCorrection.Low
+    public var errorCorrection = ErrorCorrection.low
     
     // MARK: Init
     
-    public init(_ data: Data) {
+    public init(mainColor: UIColor, backgroundColor: UIColor, data: Data? = nil) {
+        self.mainColor = mainColor.ciColor
+        self.backgroundColor = backgroundColor.ciColor
         self.data = data
     }
     
-    public init?(_ string: String) {
-        if let data = string.data(using: .isoLatin1) {
-            self.data = data
-        } else {
-            return nil
-        }
+    func setup(_ data: Data?) {
+        self.data = data
     }
     
-    public init?(_ url: URL) {
-        if let data = url.absoluteString.data(using: .isoLatin1) {
-            self.data = data
-        } else {
-            return nil
-        }
+    func setup(_ url: URL) {
+        data = url.absoluteString.data(using: .isoLatin1)
+    }
+    
+    func setup(_ string: String) {
+        data = string.data(using: .isoLatin1)
     }
     
     // MARK: Generate QRCode
@@ -267,7 +265,12 @@ public final class QRCode {
     
     /// The QRCode's CIImage representation
     public func ciImage() -> CIImage? {
-        // Generate QRCode
+        
+        guard let data = data else {
+            assertionFailure()
+            return nil
+        }
+        
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else {
             assertionFailure()
             return nil
@@ -285,13 +288,13 @@ public final class QRCode {
         
         colorFilter.setDefaults()
         colorFilter.setValue(qrFilter.outputImage, forKey: "inputImage")
-        colorFilter.setValue(color, forKey: "inputColor0")
+        colorFilter.setValue(mainColor, forKey: "inputColor0")
         colorFilter.setValue(backgroundColor, forKey: "inputColor1")
         
         return colorFilter.outputImage
     }
     
-    func generateInBackground(completion: @escaping Results<UIImage>) {
+    func generateInBackground(completion: @escaping ResultHandler<UIImage>) {
         DispatchQueue.global().async { [weak self] in
             if let image = self?.image() {
                 DispatchQueue.main.async {
@@ -299,6 +302,7 @@ public final class QRCode {
                 }
             } else {
                 DispatchQueue.main.async {
+                    // TODO: error
                     completion(.failure(NSError()))
                 }
             }
@@ -328,7 +332,7 @@ enum Result<T> {
     case failure(Error)
 }
 
-typealias Results<T> = (Result<T>) -> Void
+typealias ResultHandler<T> = (Result<T>) -> Void
 
 internal typealias Scale = (dx: CGFloat, dy: CGFloat)
 
