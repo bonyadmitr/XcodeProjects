@@ -291,6 +291,20 @@ public final class QRCode {
         return colorFilter.outputImage
     }
     
+    func generateInBackground(completion: @escaping Results<UIImage>) {
+        DispatchQueue.global().async { [weak self] in
+            if let image = self?.image() {
+                DispatchQueue.main.async {
+                    completion(.success(image))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError()))
+                }
+            }
+        }
+    }
+    
 //    func barcodeImage() -> UIImage? {
 //
 //        guard let filter = CIFilter(name: "CICode128BarcodeGenerator") else {
@@ -308,6 +322,13 @@ public final class QRCode {
 //        return nil
 //    }
 }
+
+enum Result<T> {
+    case success(T)
+    case failure(Error)
+}
+
+typealias Results<T> = (Result<T>) -> Void
 
 internal typealias Scale = (dx: CGFloat, dy: CGFloat)
 
