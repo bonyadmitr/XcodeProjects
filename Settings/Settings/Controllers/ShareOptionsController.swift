@@ -8,35 +8,6 @@
 
 import UIKit
 
-final class ImageCell: UITableViewCell {
-    
-    let mainImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        let constant: CGFloat = 8
-        mainImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        mainImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant).isActive = true
-        mainImageView.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
-        mainImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: constant).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: constant).isActive = true
-    }
-}
-
 final class ShareOptionsController: UIViewController {
     
 //    private struct Section {
@@ -51,19 +22,22 @@ final class ShareOptionsController: UIViewController {
 //    }
     
     private enum RawType {
-        case qrCode
+        case emailShare
+        case systemShare
         
-        var cellId: String {
-            switch self {
-            case .qrCode:
-                return String(describing: ImageCell.self)
-            }
-        }
+//        var cellId: String {
+//
+//            switch self {
+//            case .qrCode:
+//                return String(describing: ImageCell.self)
+//            }
+//        }
+        
+//        tableView.register(ImageCell.self, forCellReuseIdentifier: RawType.qrCode.cellId)
     }
     
 //    private var sections: [Section] = []
-    private let raws: [RawType] = [.qrCode]
-    private var apps: SchemeAppTuple = ([], [])
+    private let raws: [RawType] = [.emailShare, .systemShare]
     private let cellId = String(describing: DetailCell.self)
     
     private lazy var tableView: UITableView = {
@@ -100,11 +74,25 @@ final class ShareOptionsController: UIViewController {
         title = L10n.developerApps
         extendedLayoutIncludesOpaqueBars = true
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableView)
+        
+        let insetsView = InsetImageView()
+        insetsView.frame.size.height = UIScreen.main.bounds.width
+        
+        let inset: CGFloat = 50
+        let insets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        insetsView.insets = insets
+        tableView.tableHeaderView = insetsView
+        
+        let qr = QRCode()
+        qr.setup("qwerty")
+        qr.size = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: UIScreen.main.bounds.width - inset * 2)
+        let image = qr.image()!
+        insetsView.imageView.image = image
     }
     
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
@@ -117,6 +105,13 @@ final class ShareOptionsController: UIViewController {
         }
     }
     
+    private func shareViaEmail() {
+        EmailSender.shared.send(message: "",
+                                subject: NonL10n.emailTitle,
+                                to: [EmailSender.devEmail],
+                                attachments: [],
+                                presentIn: self)
+    }
 }
 
 // MARK: - UIViewControllerRestoration
@@ -134,89 +129,42 @@ extension ShareOptionsController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let raw = raws[indexPath.row]
-        
-        switch raw {
-        case .qrCode:
-            return tableView.dequeueReusableCell(withIdentifier: raw.cellId, for: indexPath)
-        }
+        return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
 }
 
 // MARK: - UITableViewDelegate
 extension ShareOptionsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let raw = raws[indexPath.row]
-        
-        switch raw {
-        case .qrCode:
-            guard let cell = cell as? ImageCell else {
-                assertionFailure()
-                return
-            }
-            cell.mainImageView.image = UIImage()
-        }
-        
-//        let raw = raws[indexPath.row]
-//
-//        switch raw {
-//        case .feedback:
-//            cell.accessoryType = .none
-//            cell.setup(title: L10n.sendFeedback)
-//        case .privacyPolicy:
-//            cell.accessoryType = .disclosureIndicator
-//            cell.setup(title: L10n.privacyPolicy)
-//        case .rateApp:
-//            cell.accessoryType = .none
-//            cell.setup(title: L10n.rateUs)
-//        case .appStorePage:
-//            cell.accessoryType = .none
-//            cell.setup(title: L10n.openInAppStore)
-//        case .developerPage:
-//            cell.accessoryType = .disclosureIndicator
-//            cell.setup(title: L10n.moreAppsFromMe)
-//        case .shareApp:
-//            cell.accessoryType = .none
-//            cell.setup(title: L10n.shareApp)
-//        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? AboutHeader else {
+        guard let cell = cell as? DetailCell else {
             assertionFailure()
             return
         }
         
-        header.label.text = L10n.settings
-        header.imageView.image = Images.icSettings
-        header.versionLabel.text = UIApplication.shared.version
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+        let raw = raws[indexPath.row]
+        
+        switch raw {
+        case .emailShare:
+            cell.accessoryType = .none
+            cell.setup(title: L10n.shareAppEmail)
+        case .systemShare:
+            cell.accessoryType = .none
+            cell.setup(title: L10n.shareAppSystem)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         VibrationManager.shared.lightVibrate()
         SoundManager.shared.playTapSound()
-//        let raw = raws[indexPath.row]
-//
-//        switch raw {
-//        case .feedback:
-//            sendFeedback()
-//        case .privacyPolicy:
-//            let vc = PrivacyPolicyController()
-//            navigationController?.pushViewController(vc, animated: true)
-//        case .rateApp:
-//            RateAppManager.googleApp.rateInAppOrRedirectToStore()
-//        case .appStorePage:
-//            RateAppManager.googleApp.openAppStorePage()
-//        case .developerPage:
-//            let vc = DeveloperAppsController()
-//            navigationController?.pushViewController(vc, animated: true)
-//        case .shareApp:
-//            RateAppManager.googleApp.shareApp(in: self)
-//        }
+        
+        let raw = raws[indexPath.row]
+        
+        switch raw {
+        case .emailShare:
+            shareViaEmail()
+        case .systemShare:
+            RateAppManager.googleApp.shareApp(in: self)
+        }
     }
 }

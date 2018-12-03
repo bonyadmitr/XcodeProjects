@@ -91,6 +91,14 @@ enum L10n {
   static var shareApp: String {
     return L10n.tr("Localizable", "share_app")
   }
+  /// Share via E-Mail
+  static var shareAppEmail: String {
+    return L10n.tr("Localizable", "share_app_email")
+  }
+  /// Share via system alert
+  static var shareAppSystem: String {
+    return L10n.tr("Localizable", "share_app_system")
+  }
   /// Sound on tap
   static var soundOnTap: String {
     return L10n.tr("Localizable", "sound_on_tap")

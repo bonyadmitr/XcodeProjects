@@ -142,7 +142,7 @@ extension AboutController: UITableViewDelegate {
             cell.accessoryType = .disclosureIndicator
             cell.setup(title: L10n.moreAppsFromMe)
         case .shareApp:
-            cell.accessoryType = .none
+            cell.accessoryType = .disclosureIndicator
             cell.setup(title: L10n.shareApp)
         }
     }
@@ -182,7 +182,8 @@ extension AboutController: UITableViewDelegate {
             let vc = DeveloperAppsController()
             navigationController?.pushViewController(vc, animated: true)
         case .shareApp:
-            RateAppManager.googleApp.shareApp(in: self)
+            let vc = ShareOptionsController()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
@@ -228,10 +229,11 @@ public final class QRCode {
     
     // MARK: Init
     
-    public init(mainColor: UIColor, backgroundColor: UIColor, data: Data? = nil) {
+    init() {}
+    
+    public init(mainColor: UIColor, backgroundColor: UIColor) {
         self.mainColor = mainColor.ciColor
         self.backgroundColor = backgroundColor.ciColor
-        self.data = data
     }
     
     func setup(_ data: Data?) {
