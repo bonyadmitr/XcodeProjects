@@ -72,6 +72,7 @@
 		CEEEB7C3215E073C003C5BD8 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEB7C2215E073C003C5BD8 /* BaseNavController.swift */; };
 		CEF1D2042197768300963421 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1D2032197768300963421 /* SettingsTests.swift */; };
 		CEFFA8F921B15D8A00B34F36 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F821B15D8A00B34F36 /* Images.swift */; };
+		CEFFA8FB21B5053600B34F36 /* ShareOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8FA21B5053600B34F36 /* ShareOptionsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 		CEF1D2032197768300963421 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		CEF1D2052197768300963421 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFFA8F821B15D8A00B34F36 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		CEFFA8FA21B5053600B34F36 /* ShareOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOptionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 				CEEEB786215D0949003C5BD8 /* ViewController.swift */,
 				CEEEB7AA215D10F3003C5BD8 /* SettingsController.swift */,
 				66AA3EC3217905D3000E549D /* AboutController.swift */,
+				CEFFA8FA21B5053600B34F36 /* ShareOptionsController.swift */,
 				CED51B5A218BCE5A0050734A /* DeveloperAppsController.swift */,
 				66E65EB6215EB91E00D2BCCA /* SplitDetailController.swift */,
 				CEEEB7AD215D17D2003C5BD8 /* LanguageSelectController.swift */,
@@ -574,6 +577,7 @@
 				CE99210E2180EC18004E118A /* RateCounter.swift in Sources */,
 				6624D43C215EADA100DF1B92 /* UISearchBar+Properties.swift in Sources */,
 				CED51B5B218BCE5A0050734A /* DeveloperAppsController.swift in Sources */,
+				CEFFA8FB21B5053600B34F36 /* ShareOptionsController.swift in Sources */,
 				CE88D61B21ABC14C00138040 /* NotificationNames.swift in Sources */,
 				CEEEB7AE215D17D2003C5BD8 /* LanguageSelectController.swift in Sources */,
 				662D0D492162A3F7008D244E /* FloatingManager.swift in Sources */,

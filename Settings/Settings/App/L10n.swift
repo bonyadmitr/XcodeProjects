@@ -87,7 +87,7 @@ enum L10n {
   static var settings: String {
     return L10n.tr("Localizable", "settings")
   }
-  /// Share Settings
+  /// Share the App
   static var shareApp: String {
     return L10n.tr("Localizable", "share_app")
   }
