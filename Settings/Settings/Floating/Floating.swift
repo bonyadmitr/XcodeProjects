@@ -9,7 +9,7 @@
 #if DEBUG
 import UIKit
 
-final class Floating {
+enum Floating {
     
     enum FloatingMode {
         case shake
