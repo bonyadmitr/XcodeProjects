@@ -127,6 +127,7 @@ extension Logger {
     }
 }
 
+#if DEBUG
 extension Floating {
     static func setupDefaultConfig() {
         /// cmd + ctrl + z to shake
@@ -137,7 +138,7 @@ extension Floating {
         FloatingManager.shared.presentingController = navVC
     }
 }
-
+#endif
 
 /// added main.swift
 //@UIApplicationMain
