@@ -305,7 +305,8 @@ public final class QRCode {
             } else {
                 DispatchQueue.main.async {
                     // TODO: error
-                    completion(.failure(NSError()))
+                    let error = NSError(domain: "", code: 0, userInfo: nil)
+                    completion(.failure(error))
                 }
             }
         }

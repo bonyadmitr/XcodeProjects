@@ -22,6 +22,7 @@ final class ShareOptionsController: UIViewController {
 //    }
     
     private enum RawType {
+        case copyToPasteboard
         case emailShare
         case systemShare
         
@@ -37,7 +38,8 @@ final class ShareOptionsController: UIViewController {
     }
     
 //    private var sections: [Section] = []
-    private let raws: [RawType] = [.emailShare, .systemShare]
+    private let qrCode = QRCode()
+    private let raws: [RawType] = [.copyToPasteboard, .emailShare, .systemShare]
     private let cellId = String(describing: DetailCell.self)
     
     private lazy var tableView: UITableView = {
@@ -71,7 +73,7 @@ final class ShareOptionsController: UIViewController {
         restorationClass = type(of: self)
         
         /// if you set title in viewDidLoad(loadView too), it will not be set in language changing
-        title = L10n.developerApps
+        title = L10n.shareApp
         extendedLayoutIncludesOpaqueBars = true
     }
 
@@ -79,20 +81,7 @@ final class ShareOptionsController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        
-        let insetsView = InsetImageView()
-        insetsView.frame.size.height = UIScreen.main.bounds.width
-        
-        let inset: CGFloat = 50
-        let insets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-        insetsView.insets = insets
-        tableView.tableHeaderView = insetsView
-        
-        let qr = QRCode()
-        qr.setup("qwerty")
-        qr.size = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: UIScreen.main.bounds.width - inset * 2)
-        let image = qr.image()!
-        insetsView.imageView.image = image
+        setupQRCode()
     }
     
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
@@ -102,6 +91,27 @@ final class ShareOptionsController: UIViewController {
         UIView.performWithoutAnimation {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
+        }
+    }
+    
+    private func setupQRCode() {
+        let qrCodeWidth = UIScreen.main.bounds.width
+        let qrCodeInset: CGFloat = 50
+        
+        let insetsView = InsetImageView()
+        insetsView.frame.size.height = qrCodeWidth
+        insetsView.insets = UIEdgeInsets(top: qrCodeInset, left: qrCodeInset, bottom: qrCodeInset, right: qrCodeInset)
+        self.tableView.tableHeaderView = insetsView
+        
+        qrCode.setup(RateAppManager.googleApp.itunesAppUrlPath)
+        qrCode.size = CGSize(width: qrCodeWidth - qrCodeInset * 2, height: qrCodeWidth - qrCodeInset * 2)
+        qrCode.generateInBackground { result in
+            switch result {
+            case .success(let image):
+                insetsView.imageView.image = image
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -150,6 +160,9 @@ extension ShareOptionsController: UITableViewDelegate {
         case .systemShare:
             cell.accessoryType = .none
             cell.setup(title: L10n.shareAppSystem)
+        case .copyToPasteboard:
+            cell.accessoryType = .none
+            cell.setup(title: L10n.copyToPasteboard)
         }
     }
     
@@ -165,6 +178,8 @@ extension ShareOptionsController: UITableViewDelegate {
             shareViaEmail()
         case .systemShare:
             RateAppManager.googleApp.shareApp(in: self)
+        case .copyToPasteboard:
+            UIPasteboard.general.string = RateAppManager.googleApp.itunesAppUrlPath
         }
     }
 }

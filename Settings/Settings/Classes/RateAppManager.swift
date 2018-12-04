@@ -69,10 +69,12 @@ extension RateAppDisplayManager: RateCounterDelegate {
 final class RateAppManager {
     
     private let appId: String
+    let itunesAppUrlPath: String
     
     /// appId should look like "idXXXXXXXXXX"
     init(appId: String) {
         self.appId = appId
+        itunesAppUrlPath = "https://itunes.apple.com/app/\(appId)"
     }
     
     func rateInAppOrRedirectToStore() {
@@ -85,8 +87,7 @@ final class RateAppManager {
     
     /// open app page in AppStore
     func openAppStorePage(completion: BoolHandler? = nil) {
-        let urlPath = "https://itunes.apple.com/app/\(appId)"
-        openURL(string: urlPath, completion: completion)
+        openURL(string: itunesAppUrlPath, completion: completion)
     }
     
     /// open app review page in AppStore
@@ -104,8 +105,7 @@ final class RateAppManager {
     }
     
     func shareApp(in controller: UIViewController) {
-        let urlPath = "https://itunes.apple.com/app/\(appId)"
-        guard let link = URL(string: urlPath) else {
+        guard let link = URL(string: itunesAppUrlPath) else {
             assertionFailure()
             return
         }

@@ -19,6 +19,10 @@ enum L10n {
   static var checked: String {
     return L10n.tr("Localizable", "checked")
   }
+  /// Copy App Link
+  static var copyToPasteboard: String {
+    return L10n.tr("Localizable", "copy_to_pasteboard")
+  }
   /// Developer Apps
   static var developerApps: String {
     return L10n.tr("Localizable", "developer_apps")
@@ -91,11 +95,11 @@ enum L10n {
   static var shareApp: String {
     return L10n.tr("Localizable", "share_app")
   }
-  /// Share via E-Mail
+  /// Share by E-Mail
   static var shareAppEmail: String {
     return L10n.tr("Localizable", "share_app_email")
   }
-  /// Share via system alert
+  /// System Sharing
   static var shareAppSystem: String {
     return L10n.tr("Localizable", "share_app_system")
   }

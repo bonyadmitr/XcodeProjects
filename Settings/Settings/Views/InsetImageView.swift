@@ -5,7 +5,7 @@ final class InsetImageView: UIView {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return imageView
     }()
