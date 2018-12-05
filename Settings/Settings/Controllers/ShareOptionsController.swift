@@ -9,35 +9,13 @@
 import UIKit
 
 final class ShareOptionsController: UIViewController {
-    
-//    private struct Section {
-//        let type: SectionType
-//        let raws: [RawType]
-//    }
-//
-//    private enum SectionType {
-//        case installed
-//        case newApps
-//        case emptyTitle
-//    }
-    
+
     private enum RawType {
         case copyToPasteboard
         case emailShare
         case systemShare
-        
-//        var cellId: String {
-//
-//            switch self {
-//            case .qrCode:
-//                return String(describing: ImageCell.self)
-//            }
-//        }
-        
-//        tableView.register(ImageCell.self, forCellReuseIdentifier: RawType.qrCode.cellId)
     }
-    
-//    private var sections: [Section] = []
+        
     private let qrCode = QRCode()
     private let raws: [RawType] = [.copyToPasteboard, .emailShare, .systemShare]
     private let cellId = String(describing: DetailCell.self)
