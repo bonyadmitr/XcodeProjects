@@ -74,6 +74,8 @@
 		CEF1D2042197768300963421 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF1D2032197768300963421 /* SettingsTests.swift */; };
 		CEFFA8F921B15D8A00B34F36 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8F821B15D8A00B34F36 /* Images.swift */; };
 		CEFFA8FB21B5053600B34F36 /* ShareOptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8FA21B5053600B34F36 /* ShareOptionsController.swift */; };
+		CEFFA8FD21B79DCC00B34F36 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8FC21B79DCC00B34F36 /* Result.swift */; };
+		CEFFA8FF21B79E4E00B34F36 /* CIImage+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFA8FE21B79E4E00B34F36 /* CIImage+UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +163,8 @@
 		CEF1D2052197768300963421 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFFA8F821B15D8A00B34F36 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEFFA8FA21B5053600B34F36 /* ShareOptionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareOptionsController.swift; sourceTree = "<group>"; };
+		CEFFA8FC21B79DCC00B34F36 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		CEFFA8FE21B79E4E00B34F36 /* CIImage+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+UIImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +290,7 @@
 			children = (
 				CEEEB7AC215D1104003C5BD8 /* App */,
 				CEEEB7B6215DF4B7003C5BD8 /* Main.storyboard */,
+				CEFFA8FC21B79DCC00B34F36 /* Result.swift */,
 				CE11D99221935A50000F8AD9 /* Controllers */,
 				CE91F56C219C17C100F2E827 /* Views */,
 				662D0D412162A3F6008D244E /* Floating */,
@@ -328,6 +333,7 @@
 				CE57D785219323C00046A979 /* UISplitViewController+DisplayMode.swift */,
 				CE991F2821AD324800B67A03 /* Text+Size.swift */,
 				C4A8B6BC21ADC82800FED3F0 /* UITableViewCell+Color.swift */,
+				CEFFA8FE21B79E4E00B34F36 /* CIImage+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				662D0D472162A3F6008D244E /* Floating.swift in Sources */,
 				CEEEB787215D0949003C5BD8 /* ViewController.swift in Sources */,
 				CE77AB202163597A00728C64 /* FloatingNavigationController.swift in Sources */,
+				CEFFA8FD21B79DCC00B34F36 /* Result.swift in Sources */,
 				662D0D4A2162A3F7008D244E /* FloatingView.swift in Sources */,
 				662D0D4B2162A3F7008D244E /* FloatingWindow.swift in Sources */,
 				CEEEB785215D0949003C5BD8 /* AppDelegate.swift in Sources */,
@@ -573,6 +580,7 @@
 				CEEEB7B2215D2036003C5BD8 /* main.swift in Sources */,
 				66D380932163300700EFA49C /* UIApplication+URL.swift in Sources */,
 				C43E420221A60BC50099F9E5 /* Device.swift in Sources */,
+				CEFFA8FF21B79E4E00B34F36 /* CIImage+UIImage.swift in Sources */,
 				66AA3EC4217905D3000E549D /* AboutController.swift in Sources */,
 				CE0FE87C2162653500E16E4B /* UIColor+Default.swift in Sources */,
 				CEEEB7A5215D0996003C5BD8 /* UIViewController+IBAction.swift in Sources */,
