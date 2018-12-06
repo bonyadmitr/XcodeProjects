@@ -59,7 +59,7 @@ final class ShareOptionsController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        setupQRCodeGenerator()
+        setupQRCode()
     }
     
     /// need for iOS 11(maybe others too. iOS 10 don't need) split controller, opened in landscape with large text accessibility
@@ -72,17 +72,18 @@ final class ShareOptionsController: UIViewController {
         }
     }
     
-    private func setupQRCodeGenerator() {
+    private func setupQRCode() {
         let qrCodeWidth = UIScreen.main.bounds.width
         let qrCodeInset: CGFloat = 50
         
         let insetsView = InsetImageView()
         insetsView.frame.size.height = qrCodeWidth
         insetsView.insets = UIEdgeInsets(top: qrCodeInset, left: qrCodeInset, bottom: qrCodeInset, right: qrCodeInset)
-        self.tableView.tableHeaderView = insetsView
+        tableView.tableHeaderView = insetsView
         
         qrCodeGenerator.setup(RateAppManager.googleApp.itunesAppUrlPath)
         qrCodeGenerator.size = CGSize(width: qrCodeWidth - qrCodeInset * 2, height: qrCodeWidth - qrCodeInset * 2)
+        
         qrCodeGenerator.generateInBackground { result in
             switch result {
             case .success(let image):
