@@ -362,6 +362,7 @@ extension AppDelegate {
     
 }
 
+// MARK: - State Restoration
 extension AppDelegate {
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
