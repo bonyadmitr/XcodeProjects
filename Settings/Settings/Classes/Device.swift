@@ -16,11 +16,11 @@ enum Device {
     
     /// iPhone X, XS, XS Max, XR.
     /// https://stackoverflow.com/a/46227186
-    static var isIphoneXOrNewer: Bool {
+    static let isIphoneXOrNewer: Bool = {
         /// 812.0 on iPhone X, XS.
         /// 896.0 on iPhone XS Max, XR.
-        return UIScreen.main.bounds.height >= 812
-    }
+        return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
+    }()
     
     /// list of platforms https://gist.github.com/adamawolf/3048717
     static let platform: String = {
