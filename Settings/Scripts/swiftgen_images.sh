@@ -3,7 +3,7 @@
 
 ## without pod
 if which swiftgen >/dev/null; then
-    swiftgen xcassets "$PROJECT_DIR/Settings/App/Assets.xcassets" --output "$PROJECT_DIR/Settings/App/Images.swift"  -p "$PROJECT_DIR/Scripts/images_swift4.stencil"
+    swiftgen xcassets "$PROJECT_DIR/Settings/App/Assets.xcassets" --output "$PROJECT_DIR/Settings/App/Images.swift"  -p "$PROJECT_DIR/Scripts/SwiftGenTemplates/images_swift4.stencil"
 #-t swift4
 else
     echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
