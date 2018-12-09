@@ -66,6 +66,7 @@ import UIKit
 // TODO: log JailbreakChecker
 // TODO: spotlight
 // TODO: siri
+// TODO: external display support
 
 // TODO: external display support (iPad pro 2018 + AirPlay)
 // TODO: AirPlay support
