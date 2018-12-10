@@ -13,18 +13,16 @@ import CoreData
 class UnitTestsCoreDataTests: XCTestCase {
 
     override func setUp() {
-//        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
-//        coreDataStack.container.clearAll()
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+        coreDataStack.container.clearAll()
     }
 
     override func tearDown() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
-        coreDataStack.container.clearAll()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testCoreDataSave() {
-        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -45,7 +43,7 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
     func testClearAllMemory() {
-        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -66,7 +64,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events?.count, 0)
     }
     
-    func testClearAllSqlite() {
+    func testClearAllSQLite() {
         let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
