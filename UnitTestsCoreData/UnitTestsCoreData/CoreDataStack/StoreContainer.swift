@@ -30,7 +30,6 @@ extension NSPersistentContainer: StoreContainer {
 //                    try loadPersistentStore(type: .sqlite)
                 }
             }
-            
             loadPersistentStores { storeDescription, error in
                 print("CoreData: Inited \(storeDescription)")
                 if let error = error {
@@ -39,7 +38,7 @@ extension NSPersistentContainer: StoreContainer {
                     return
                 }
             }
-            
+            //viewContext.reset()
         } catch {
             assertionFailure(error.localizedDescription)
         }

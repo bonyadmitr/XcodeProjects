@@ -42,27 +42,27 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssert(events?.first?.name == "Some event")
     }
     
-    func testClearAllMemory() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
-        let expec = expectation(description: "CoreDataStack")
-        
-        coreDataStack.performBackgroundTask { context in
-            let event = DBEvent(managedObjectContext: context)
-            event.name = "Some event"
-            context.saveSyncUnsafe()
-            expec.fulfill()
-        }
-        
-        wait(for: [expec], timeout: 1)
-        
-        coreDataStack.container.clearAll()
-        
-        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
-        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
-        
-        XCTAssertNotNil(events)
-        XCTAssertEqual(events?.count, 0)
-    }
+//    func testClearAllMemory() {
+//        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+//        let expec = expectation(description: "CoreDataStack")
+//
+//        coreDataStack.performBackgroundTask { context in
+//            let event = DBEvent(managedObjectContext: context)
+//            event.name = "Some event"
+//            context.saveSyncUnsafe()
+//            expec.fulfill()
+//        }
+//
+//        wait(for: [expec], timeout: 1)
+//
+//        coreDataStack.container.clearAll()
+//
+//        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
+//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+//
+//        XCTAssertNotNil(events)
+//        XCTAssertEqual(events?.count, 0)
+//    }
     
     func testClearAllSQLite() {
         let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
