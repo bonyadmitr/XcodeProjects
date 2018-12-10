@@ -13,11 +13,13 @@ import CoreData
 class UnitTestsCoreDataTests: XCTestCase {
 
     override func setUp() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
-        coreDataStack.container.clearAll()
+//        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+//        coreDataStack.container.clearAll()
     }
 
     override func tearDown() {
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+        coreDataStack.container.clearAll()
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
@@ -42,7 +44,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssert(events?.first?.name == "Some event")
     }
     
-    func testClearAll() {
+    func testClearAllMemory() {
         let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
@@ -64,8 +66,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events?.count, 0)
     }
     
-    /// working ONLY with NSSQLiteStoreType
-    func testClearAll2() {
+    func testClearAllSqlite() {
         let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
@@ -78,12 +79,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         
         wait(for: [expec], timeout: 1)
         
-        let expec2 = expectation(description: "CoreDataStack2")
-        coreDataStack.deleteAll { status in
-            expec2.fulfill()
-        }
-        
-        wait(for: [expec2], timeout: 1)
+        coreDataStack.container.clearAll()
         
         let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
         let events = try? coreDataStack.viewContext.fetch(fetchRequest)
@@ -92,8 +88,36 @@ class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events?.count, 0)
     }
     
+    /// working ONLY with NSSQLiteStoreType
+//    func testClearAll2() {
+//        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+//        let expec = expectation(description: "CoreDataStack")
+//
+//        coreDataStack.performBackgroundTask { context in
+//            let event = DBEvent(managedObjectContext: context)
+//            event.name = "Some event"
+//            context.saveSyncUnsafe()
+//            expec.fulfill()
+//        }
+//
+//        wait(for: [expec], timeout: 1)
+//
+//        let expec2 = expectation(description: "CoreDataStack2")
+//        coreDataStack.deleteAll { status in
+//            expec2.fulfill()
+//        }
+//
+//        wait(for: [expec2], timeout: 1)
+//
+//        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
+//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+//
+//        XCTAssertNotNil(events)
+//        XCTAssertEqual(events?.count, 0)
+//    }
+    
     func testClearAllAndSave() {
-        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
