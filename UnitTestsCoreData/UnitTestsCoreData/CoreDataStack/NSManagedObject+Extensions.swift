@@ -18,17 +18,28 @@ enum ManagedObjectDeleteStatus {
 
 extension NSManagedObject {
     convenience init(managedObjectContext moc: NSManagedObjectContext) {
-        if #available(iOS 10.0, macOS 10.12, *) {
-            self.init(context: moc)
+        let className = String(describing: type(of: self))
+        if let entityDescription = NSEntityDescription.entity(forEntityName: className, in: moc) {
+            self.init(entity: entityDescription, insertInto: moc)
         } else {
-            let className = String(describing: type(of: self))
-            if let entityDescription = NSEntityDescription.entity(forEntityName: className, in: moc) {
-                self.init(entity: entityDescription, insertInto: moc)
-            } else {
-                assertionFailure("Unable to create entity description with \(className)")
-                self.init()
-            }
+            assertionFailure("Unable to create entity description with \(className)")
+            self.init()
         }
+        
+        /// don't use iOS 10 "init(context:".
+        /// there will be warnings from CoreData with "entity is unable to disambiguate"
+        /// https://github.com/drewmccormack/ensembles/issues/275
+        //if #available(iOS 10.0, macOS 10.12, *) {
+        //    self.init(context: moc)
+        //} else {
+        //    let className = String(describing: type(of: self))
+        //    if let entityDescription = NSEntityDescription.entity(forEntityName: className, in: moc) {
+        //        self.init(entity: entityDescription, insertInto: moc)
+        //    } else {
+        //        assertionFailure("Unable to create entity description with \(className)")
+        //        self.init()
+        //    }
+        //}
     }
     
     /// delete NSManagedObject on same context that was fetched
