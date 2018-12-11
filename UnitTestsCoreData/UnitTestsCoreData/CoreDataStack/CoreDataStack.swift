@@ -82,8 +82,9 @@ final class CoreDataStack {
             } else {
                 container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
             }
-            container.automaticallyMergesChangesFromParent()
         }
+        
+        container.automaticallyMergesChangesFromParent()
     }
     
     func newBackgroundContext() -> NSManagedObjectContext {
