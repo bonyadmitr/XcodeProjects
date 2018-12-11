@@ -28,7 +28,7 @@ final class CoreDataDeletePerformanceTests: XCTestCase {
         super.tearDown()
     }
     
-    private func saveManuObjects() {
+    private func saveManyObjects() {
         let expec = expectation(description: "expec")
         
         coreDataStack.performBackgroundTask { context in
@@ -71,14 +71,14 @@ final class CoreDataDeletePerformanceTests: XCTestCase {
     }
     
     func testPerformanceDeleteAllMany() {
-        saveManuObjects()
+        saveManyObjects()
         measure {
             coreDataStack.deleteAll()
         }
     }
     
     func testPerformanceClearAllMany() {
-        saveManuObjects()
+        saveManyObjects()
         measure {
             coreDataStack.clearAll()
         }
