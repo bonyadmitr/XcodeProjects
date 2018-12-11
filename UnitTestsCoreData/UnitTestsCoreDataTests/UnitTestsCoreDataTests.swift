@@ -106,41 +106,6 @@ final class UnitTestsCoreDataTests: XCTestCase {
 //        }
 //        waitForExpectations(timeout: 2, handler: nil)
     
-    func testPerformanceDeleteAll() {
-        let expec = expectation(description: "expec")
-        
-        coreDataStack.performBackgroundTask { context in
-            let event = DBEvent(managedObjectContext: context)
-            event.name = "Some event"
-            context.saveSyncUnsafe()
-            expec.fulfill()
-        }
-        
-        wait(for: [expec], timeout: 1)
-        
-        measure {
-            coreDataStack.deleteAll()
-        }
-    }
-
-    func testPerformanceClearAll() {
-        let expec = expectation(description: "expec")
-        
-        coreDataStack.performBackgroundTask { context in
-            let event = DBEvent(managedObjectContext: context)
-            event.name = "Some event"
-            context.saveSyncUnsafe()
-            expec.fulfill()
-        }
-        
-        wait(for: [expec], timeout: 1)
-        
-        measure {
-            coreDataStack.clearAll()
-        }
-    }
-    
-    
     /// working ONLY with NSSQLiteStoreType
     func testDeleteAll() {
         let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
