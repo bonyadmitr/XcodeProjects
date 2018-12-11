@@ -84,7 +84,8 @@ extension CoreDataStack {
         }
         
         container.loadPersistentStores { storeDescription, error in
-            print("CoreData: Inited \(storeDescription)")
+            //print("CoreData: Inited \(storeDescription)")
+            print("- CoreData: Inited")
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 print("CoreData: Unresolved error \(error)")

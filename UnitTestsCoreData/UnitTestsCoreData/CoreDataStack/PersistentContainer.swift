@@ -74,7 +74,8 @@ final class PersistentContainer: NSObject {
             }
             let url = documents.appendingPathComponent("\(name).sqlite")
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-            print("CoreData path: \(url.path)")
+            //print("CoreData path: \(url.path)")
+            print("- CoreData loadPersistentStore")
         }
     }
     

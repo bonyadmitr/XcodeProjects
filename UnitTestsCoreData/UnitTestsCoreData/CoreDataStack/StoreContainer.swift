@@ -31,7 +31,8 @@ extension NSPersistentContainer: StoreContainer {
                 }
             }
             loadPersistentStores { storeDescription, error in
-                print("CoreData: Inited \(storeDescription)")
+                //print("CoreData: Inited \(storeDescription)")
+                print("- CoreData: Inited clearAll")
                 if let error = error {
                     assertionFailure(error.localizedDescription)
                     print("CoreData: Unresolved error \(error)")
@@ -48,23 +49,23 @@ extension NSPersistentContainer: StoreContainer {
         viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    private func loadPersistentStore(type: PersistentStoreType) throws {
-        // TODO: - need for memory type? -
-        let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                       NSInferMappingModelAutomaticallyOption: true]
-        
-        switch type {
-        case .memory:
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: options)
-        case .sqlite:
-            guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-                throw CoordinatorError.storePathNotFound
-            }
-            let url = documents.appendingPathComponent("\(name).sqlite")
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-            print("CoreData path: \(url.path)")
-        }
-    }
+//    private func loadPersistentStore(type: PersistentStoreType) throws {
+//        // TODO: - need for memory type? -
+//        let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+//                       NSInferMappingModelAutomaticallyOption: true]
+//
+//        switch type {
+//        case .memory:
+//            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: options)
+//        case .sqlite:
+//            guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+//                throw CoordinatorError.storePathNotFound
+//            }
+//            let url = documents.appendingPathComponent("\(name).sqlite")
+//            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
+//            print("CoreData path: \(url.path)")
+//        }
+//    }
 }
 
 extension PersistentContainer: StoreContainer {}
