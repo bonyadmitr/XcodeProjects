@@ -15,6 +15,25 @@ extension CoreDataStack {
     /// https://stackoverflow.com/a/50154532/5893286
     func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
         
+        /// sync
+        //let context = newBackgroundContext()
+//        let context = viewContext
+//        do {
+//            try [DBEvent.self]
+//                .compactMap { context.deleteRequest(for: $0) }
+//                .forEach { try context.execute($0) }
+//            try context.save()
+//            completion?(.saved)
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//            context.rollback()
+//            completion?(.rolledBack(error))
+//        }
+        
+//        container.performBackgroundTask { context in
+//        }
+        
+        /// async
         let context = newBackgroundContext()
         context.perform {
             do {
@@ -36,7 +55,7 @@ final class CoreDataStack {
     
 //    let storeType: PersistentStoreType
 //    private let modelName: String
-    let container: StoreContainer
+    private let container: StoreContainer
     
     init(storeType: PersistentStoreType, modelName: String) {
 //        self.storeType = storeType
@@ -62,6 +81,10 @@ final class CoreDataStack {
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         container.performBackgroundTask(block)
+    }
+    
+    func clearAll() {
+        container.clearAll()
     }
 }
 

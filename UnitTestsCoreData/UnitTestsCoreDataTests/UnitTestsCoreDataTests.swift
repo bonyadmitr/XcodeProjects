@@ -16,7 +16,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        coreDataStack.container.clearAll()
+        coreDataStack.clearAll()
     }
 
     override func tearDown() {
@@ -56,7 +56,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
 //
 //        wait(for: [expec], timeout: 1)
 //
-//        coreDataStack.container.clearAll()
+//        coreDataStack.clearAll()
 //
 //        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
 //        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
@@ -77,7 +77,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
         
         wait(for: [expec], timeout: 1)
         
-        coreDataStack.container.clearAll()
+        coreDataStack.clearAll()
         
         let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
         let events = try? coreDataStack.viewContext.fetch(fetchRequest)
@@ -125,7 +125,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
         
         wait(for: [expec], timeout: 1)
         
-        coreDataStack.container.clearAll()
+        coreDataStack.clearAll()
         let expec2 = expectation(description: "CoreDataStack2")
         
         coreDataStack.performBackgroundTask { context in
