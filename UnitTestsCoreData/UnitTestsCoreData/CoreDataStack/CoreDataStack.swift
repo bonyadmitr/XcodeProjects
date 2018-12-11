@@ -69,18 +69,21 @@ final class CoreDataStack {
 //    private let modelName: String
     private let container: StoreContainer
     
-    init(storeType: PersistentStoreType, modelName: String) {
+    /// oldAPI is iOS 9 api
+    init(storeType: PersistentStoreType, modelName: String, oldAPI: Bool = false) {
 //        self.storeType = storeType
 //        self.modelName = modelName
         
-//        container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
-        
-        if #available(iOS 10.0, *) {
-            container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
-        } else {
+        if oldAPI {
             container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
+        } else {
+            if #available(iOS 10.0, *) {
+                container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
+            } else {
+                container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
+            }
+            container.automaticallyMergesChangesFromParent()
         }
-        container.automaticallyMergesChangesFromParent()
     }
     
     func newBackgroundContext() -> NSManagedObjectContext {
