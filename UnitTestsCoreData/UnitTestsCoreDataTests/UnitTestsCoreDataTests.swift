@@ -14,11 +14,11 @@ private let modelName = "UnitTestsCoreData"
 
 final class UnitTestsCoreDataTests: XCTestCase {
 
-    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
+    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldAPI: true)
     
     override func setUp() {
         super.setUp()
-//        coreDataStack.clearAll()
+        //coreDataStack.clearAll()
         coreDataStack.deleteAll()
     }
 
@@ -47,7 +47,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
         XCTAssert(events?.first?.name == "Some event")
     }
     
-    func testClearAllSQLite() {
+    func testClearAll() {
         let expec = expectation(description: "expec1")
         
         coreDataStack.performBackgroundTask { context in
@@ -59,7 +59,8 @@ final class UnitTestsCoreDataTests: XCTestCase {
         
         wait(for: [expec], timeout: 1)
         
-        coreDataStack.clearAll()
+//        coreDataStack.clearAll()
+        coreDataStack.deleteAll()
         
         let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
         let events = try? coreDataStack.viewContext.fetch(fetchRequest)
