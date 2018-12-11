@@ -15,7 +15,7 @@ private let modelName = "UnitTestsCoreData"
 /// If your test is more than 10% slower than the baseline, it'll fail
 final class CoreDataDeletePerformanceTests: XCTestCase {
     
-    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldAPI: true)
+    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldApi: true)
     
     override func setUp() {
         super.setUp()

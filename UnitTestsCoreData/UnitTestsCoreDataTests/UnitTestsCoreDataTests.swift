@@ -12,13 +12,40 @@ import CoreData
 
 private let modelName = "UnitTestsCoreData"
 
-final class UnitTestsCoreDataTests: XCTestCase {
+class UnitTestsCoreDataTests: XCTestCase {
+}
 
-    private let coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldAPI: true)
+final class CoreDataOldApiSQLTests: CoreDataMemoryTests {
+    override class func setUp() {
+        super.setUp()
+        coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldApi: true)
+    }
+}
+
+final class CoreDataOldApiMemoryTests: CoreDataMemoryTests {
+    override class func setUp() {
+        super.setUp()
+        coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: true)
+    }
+}
+
+final class CoreDataSQLTests: CoreDataMemoryTests {
+    override class func setUp() {
+        super.setUp()
+        coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
+    }
+}
+
+class CoreDataMemoryTests: XCTestCase {
+
+    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
+    
+    private var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
     
     override func setUp() {
         super.setUp()
-//        coreDataStack.clearAll()
+        
+        coreDataStack = type(of: self).coreDataStack
         coreDataStack.deleteAll()
     }
 
@@ -45,6 +72,11 @@ final class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertNotNil(events)
         XCTAssertEqual(events!.count, 1)
         XCTAssert(events?.first?.name == "Some event")
+        
+        /// Called when test method ends.
+        addTeardownBlock {
+            print("--- testCoreDataSave ended")
+        }
     }
     
     func testClearAll() {

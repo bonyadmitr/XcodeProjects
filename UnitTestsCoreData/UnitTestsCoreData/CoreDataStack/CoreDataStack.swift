@@ -119,11 +119,11 @@ final class CoreDataStack {
     private let container: StoreContainer
     
     /// oldAPI is iOS 9 api
-    init(storeType: PersistentStoreType, modelName: String, oldAPI: Bool = false) {
+    init(storeType: PersistentStoreType, modelName: String, oldApi: Bool = false) {
         self.storeType = storeType
 //        self.modelName = modelName
         
-        if oldAPI {
+        if oldApi {
             container = type(of: self).basicPersistentContainer(storeType: storeType, modelName: modelName)
         } else {
             if #available(iOS 10.0, *) {
