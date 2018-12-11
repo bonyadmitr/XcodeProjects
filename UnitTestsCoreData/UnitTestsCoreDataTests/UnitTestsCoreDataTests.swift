@@ -6,23 +6,25 @@
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
 //
 
-import XCTest
 @testable import UnitTestsCoreData
+import XCTest
 import CoreData
 
-class UnitTestsCoreDataTests: XCTestCase {
+final class UnitTestsCoreDataTests: XCTestCase {
 
+    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+    
     override func setUp() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+        super.setUp()
         coreDataStack.container.clearAll()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
 
     func testCoreDataSave() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -43,7 +45,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
 //    func testClearAllMemory() {
-//        let coreDataStack = CoreDataStack(storeType: .memory, modelName: "UnitTestsCoreData")
 //        let expec = expectation(description: "CoreDataStack")
 //
 //        coreDataStack.performBackgroundTask { context in
@@ -65,7 +66,6 @@ class UnitTestsCoreDataTests: XCTestCase {
 //    }
     
     func testClearAllSQLite() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -88,7 +88,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     
     /// working ONLY with NSSQLiteStoreType
 //    func testClearAll2() {
-//        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
 //        let expec = expectation(description: "CoreDataStack")
 //
 //        coreDataStack.performBackgroundTask { context in
@@ -115,7 +114,6 @@ class UnitTestsCoreDataTests: XCTestCase {
 //    }
     
     func testClearAllAndSave() {
-        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
