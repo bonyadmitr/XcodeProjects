@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if XCTEST
+        print("--- Custom configuration for tests in AppDelegate")
+        #endif
         // Override point for customization after application launch.
         return true
     }
