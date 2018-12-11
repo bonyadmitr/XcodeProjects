@@ -70,6 +70,7 @@ extension CoreDataStack {
             let context = newBackgroundContext()
             //context.perform {}
             do {
+                /// very long operation: 10 seconds for 10_000 objects
                 try [DBEvent.self]
                     .map { deleteRequest(for: $0) }
                     .forEach { fetchRequest in
@@ -84,11 +85,11 @@ extension CoreDataStack {
                 completion?(.rolledBack(error))
             }
         }
-
     }
     
     private func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSFetchRequest<T> {
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: type.className())
+        ///only fetch the managedObjectID
         fetchRequest.includesPropertyValues = false
         //fetchRequest.returnsObjectsAsFaults = false
         return fetchRequest
@@ -98,12 +99,12 @@ extension CoreDataStack {
     /// https://developer.apple.com/library/archive/featuredarticles/CoreData_Batch_Guide/BatchDeletes/BatchDeletes.html
     func batchDeleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
         /// this will work only with NSManagedObject(context: that we removed
-        //        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
-        //        if #available(iOS 10.0, *) {
-        //            fetchRequest = type.fetchRequest()
-        //        } else {
-        //            fetchRequest = NSFetchRequest(entityName: type.className())
-        //        }
+        //let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+        //if #available(iOS 10.0, *) {
+        //    fetchRequest = type.fetchRequest()
+        //} else {
+        //    fetchRequest = NSFetchRequest(entityName: type.className())
+        //}
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
         fetchRequest.includesPropertyValues = false
         fetchRequest.returnsObjectsAsFaults = false
