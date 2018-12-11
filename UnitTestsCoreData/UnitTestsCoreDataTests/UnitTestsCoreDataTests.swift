@@ -15,6 +15,8 @@ private let modelName = "UnitTestsCoreData"
 class UnitTestsCoreDataTests: XCTestCase {
 }
 
+/// https://developer.apple.com/documentation/xctest/xctestcase/understanding_setup_and_teardown_for_test_methods
+
 final class CoreDataOldApiSQLTests: CoreDataMemoryTests {
     override class func setUp() {
         super.setUp()
@@ -52,6 +54,11 @@ class CoreDataMemoryTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+    
+    override class func tearDown() {
+        super.tearDown()
+        coreDataStack.deleteAll()
     }
 
     func testCoreDataSave() {
