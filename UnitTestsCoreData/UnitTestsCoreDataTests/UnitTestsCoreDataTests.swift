@@ -39,9 +39,11 @@ final class CoreDataSQLTests: CoreDataMemoryTests {
 }
 
 class CoreDataMemoryTests: XCTestCase {
-
+    
+    /// need for override
     static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
     
+    /// need any instance
     private var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
     
     override func setUp() {
