@@ -15,63 +15,111 @@ extension CoreDataStack {
     /// https://stackoverflow.com/a/50154532/5893286
     func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
         
-        /// sync
-        let context = newBackgroundContext()
-//        let context = viewContext
-        do {
-            try [DBEvent.self]
-                .compactMap { context.deleteRequest(for: $0) }
-                .forEach { try context.execute($0) }
-            try context.save()
-            completion?(.saved)
-        } catch {
-            assertionFailure(error.localizedDescription)
-            context.rollback()
-            completion?(.rolledBack(error))
+        
+        switch storeType {
+        case .sqlite:
+            
+            /// sync
+            let context = newBackgroundContext()
+            //        let context = viewContext
+            do {
+                try [DBEvent.self]
+                    .compactMap { batchDeleteRequest(for: $0) }
+                    .forEach { try context.execute($0) }
+                try context.save()
+                completion?(.saved)
+            } catch {
+                assertionFailure(error.localizedDescription)
+                context.rollback()
+                completion?(.rolledBack(error))
+            }
+            
+            /// async
+            //        container.performBackgroundTask { context in
+            //            do {
+            //                try [DBEvent.self]
+            //                    .compactMap { context.deleteRequest(for: $0) }
+            //                    .forEach { try context.execute($0) }
+            //                try context.save()
+            //                completion?(.saved)
+            //            } catch {
+            //                assertionFailure(error.localizedDescription)
+            //                context.rollback()
+            //                completion?(.rolledBack(error))
+            //            }
+            //        }
+            
+            /// async
+            //        let context = newBackgroundContext()
+            //        context.perform {
+            //            do {
+            //                try [DBEvent.self]
+            //                    .compactMap { context.deleteRequest(for: $0) }
+            //                    .forEach { try context.execute($0) }
+            //                try context.save()
+            //                completion?(.saved)
+            //            } catch {
+            //                assertionFailure(error.localizedDescription)
+            //                context.rollback()
+            //                completion?(.rolledBack(error))
+            //            }
+        //        }
+            
+            
+        case .memory:
+            let context = newBackgroundContext()
+            //context.perform {}
+            do {
+                try [DBEvent.self]
+                    .map { deleteRequest(for: $0) }
+                    .forEach { fetchRequest in
+                        let models = try context.fetch(fetchRequest)
+                        models.forEach { context.delete($0) }
+                    }
+                try context.save()
+                completion?(.saved)
+            } catch {
+                assertionFailure(error.localizedDescription)
+                context.rollback()
+                completion?(.rolledBack(error))
+            }
         }
-        
-        /// async
-//        container.performBackgroundTask { context in
-//            do {
-//                try [DBEvent.self]
-//                    .compactMap { context.deleteRequest(for: $0) }
-//                    .forEach { try context.execute($0) }
-//                try context.save()
-//                completion?(.saved)
-//            } catch {
-//                assertionFailure(error.localizedDescription)
-//                context.rollback()
-//                completion?(.rolledBack(error))
-//            }
-//        }
-        
-        /// async
-//        let context = newBackgroundContext()
-//        context.perform {
-//            do {
-//                try [DBEvent.self]
-//                    .compactMap { context.deleteRequest(for: $0) }
-//                    .forEach { try context.execute($0) }
-//                try context.save()
-//                completion?(.saved)
-//            } catch {
-//                assertionFailure(error.localizedDescription)
-//                context.rollback()
-//                completion?(.rolledBack(error))
-//            }
-//        }
+
+    }
+    
+    private func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSFetchRequest<T> {
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: type.className())
+        fetchRequest.includesPropertyValues = false
+        //fetchRequest.returnsObjectsAsFaults = false
+        return fetchRequest
+    }
+    
+    /// work only with SQLite persistent store
+    /// https://developer.apple.com/library/archive/featuredarticles/CoreData_Batch_Guide/BatchDeletes/BatchDeletes.html
+    func batchDeleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
+        /// this will work only with NSManagedObject(context: that we removed
+        //        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+        //        if #available(iOS 10.0, *) {
+        //            fetchRequest = type.fetchRequest()
+        //        } else {
+        //            fetchRequest = NSFetchRequest(entityName: type.className())
+        //        }
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
+        fetchRequest.includesPropertyValues = false
+        fetchRequest.returnsObjectsAsFaults = false
+        return NSBatchDeleteRequest(fetchRequest: fetchRequest)
     }
 }
 
 final class CoreDataStack {
     
-//    let storeType: PersistentStoreType
+    let storeType: PersistentStoreType
 //    private let modelName: String
     private let container: StoreContainer
     
     /// oldAPI is iOS 9 api
     init(storeType: PersistentStoreType, modelName: String, oldAPI: Bool = false) {
-//        self.storeType = storeType
+        self.storeType = storeType
 //        self.modelName = modelName
         
         if oldAPI {

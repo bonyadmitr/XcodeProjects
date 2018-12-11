@@ -129,36 +129,38 @@ extension NSManagedObjectContext {
         }
     }
     
-    func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
-        /// this will work only with NSManagedObject(context: that we removed
-//        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
-//        if #available(iOS 10.0, *) {
-//            fetchRequest = type.fetchRequest()
-//        } else {
-//            fetchRequest = NSFetchRequest(entityName: type.className())
-//        }
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
-        fetchRequest.includesPropertyValues = false
-        fetchRequest.returnsObjectsAsFaults = false
-        return NSBatchDeleteRequest(fetchRequest: fetchRequest)
-    }
+//    /// work only with SQLite persistent store
+//    /// https://developer.apple.com/library/archive/featuredarticles/CoreData_Batch_Guide/BatchDeletes/BatchDeletes.html
+//    func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
+//        /// this will work only with NSManagedObject(context: that we removed
+////        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+////        if #available(iOS 10.0, *) {
+////            fetchRequest = type.fetchRequest()
+////        } else {
+////            fetchRequest = NSFetchRequest(entityName: type.className())
+////        }
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
+//        fetchRequest.includesPropertyValues = false
+//        fetchRequest.returnsObjectsAsFaults = false
+//        return NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//    }
     
-    func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
-        assertionFailure("NSManagedObject")
-        perform { [weak self] in
-            do {
-                try [NSManagedObject.self]
-                    .compactMap { self?.deleteRequest(for: $0) }
-                    .forEach { try self?.execute($0) }
-                try self?.save()
-                completion?(.saved)
-            } catch {
-                assertionFailure(error.localizedDescription)
-                self?.rollback()
-                completion?(.rolledBack(error))
-            }
-        }
-    }
+//    func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
+//        assertionFailure("NSManagedObject")
+//        perform { [weak self] in
+//            do {
+//                try [NSManagedObject.self]
+//                    .compactMap { self?.deleteRequest(for: $0) }
+//                    .forEach { try self?.execute($0) }
+//                try self?.save()
+//                completion?(.saved)
+//            } catch {
+//                assertionFailure(error.localizedDescription)
+//                self?.rollback()
+//                completion?(.rolledBack(error))
+//            }
+//        }
+//    }
 }
 
 protocol ClassName {
