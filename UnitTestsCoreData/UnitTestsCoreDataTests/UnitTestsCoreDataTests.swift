@@ -20,7 +20,6 @@ final class UnitTestsCoreDataTests: XCTestCase {
         super.setUp()
 //        coreDataStack.clearAll()
         coreDataStack.deleteAll()
-        print("--- 2")
     }
 
     override func tearDown() {
@@ -29,7 +28,6 @@ final class UnitTestsCoreDataTests: XCTestCase {
     }
 
     func testCoreDataSave() {
-        print("--- 3")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -37,7 +35,6 @@ final class UnitTestsCoreDataTests: XCTestCase {
             event.name = "Some event"
             context.saveSyncUnsafe()
             expec.fulfill()
-            print("--- 4")
         }
         
         wait(for: [expec], timeout: 1)
@@ -49,27 +46,6 @@ final class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events!.count, 1)
         XCTAssert(events?.first?.name == "Some event")
     }
-    
-//    func testClearAllMemory() {
-//        let expec = expectation(description: "CoreDataStack")
-//
-//        coreDataStack.performBackgroundTask { context in
-//            let event = DBEvent(managedObjectContext: context)
-//            event.name = "Some event"
-//            context.saveSyncUnsafe()
-//            expec.fulfill()
-//        }
-//
-//        wait(for: [expec], timeout: 1)
-//
-//        coreDataStack.clearAll()
-//
-//        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
-//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
-//
-//        XCTAssertNotNil(events)
-//        XCTAssertEqual(events?.count, 0)
-//    }
     
     func testClearAllSQLite() {
         let expec = expectation(description: "expec1")
@@ -130,13 +106,39 @@ final class UnitTestsCoreDataTests: XCTestCase {
 //        }
 //        waitForExpectations(timeout: 2, handler: nil)
     
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
+    func testPerformanceDeleteAll() {
+        let expec = expectation(description: "expec")
+        
+        coreDataStack.performBackgroundTask { context in
+            let event = DBEvent(managedObjectContext: context)
+            event.name = "Some event"
+            context.saveSyncUnsafe()
+            expec.fulfill()
+        }
+        
+        wait(for: [expec], timeout: 1)
+        
+        measure {
+            coreDataStack.deleteAll()
+        }
+    }
 
+    func testPerformanceClearAll() {
+        let expec = expectation(description: "expec")
+        
+        coreDataStack.performBackgroundTask { context in
+            let event = DBEvent(managedObjectContext: context)
+            event.name = "Some event"
+            context.saveSyncUnsafe()
+            expec.fulfill()
+        }
+        
+        wait(for: [expec], timeout: 1)
+        
+        measure {
+            coreDataStack.clearAll()
+        }
+    }
     
     
     /// working ONLY with NSSQLiteStoreType
