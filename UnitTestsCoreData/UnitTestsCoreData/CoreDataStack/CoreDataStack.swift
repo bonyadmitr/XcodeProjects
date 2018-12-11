@@ -16,38 +16,51 @@ extension CoreDataStack {
     func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
         
         /// sync
-        //let context = newBackgroundContext()
+        let context = newBackgroundContext()
 //        let context = viewContext
-//        do {
-//            try [DBEvent.self]
-//                .compactMap { context.deleteRequest(for: $0) }
-//                .forEach { try context.execute($0) }
-//            try context.save()
-//            completion?(.saved)
-//        } catch {
-//            assertionFailure(error.localizedDescription)
-//            context.rollback()
-//            completion?(.rolledBack(error))
-//        }
+        do {
+            try [DBEvent.self]
+                .compactMap { context.deleteRequest(for: $0) }
+                .forEach { try context.execute($0) }
+            try context.save()
+            completion?(.saved)
+        } catch {
+            assertionFailure(error.localizedDescription)
+            context.rollback()
+            completion?(.rolledBack(error))
+        }
         
+        /// async
 //        container.performBackgroundTask { context in
+//            do {
+//                try [DBEvent.self]
+//                    .compactMap { context.deleteRequest(for: $0) }
+//                    .forEach { try context.execute($0) }
+//                try context.save()
+//                completion?(.saved)
+//            } catch {
+//                assertionFailure(error.localizedDescription)
+//                context.rollback()
+//                completion?(.rolledBack(error))
+//            }
 //        }
         
         /// async
-        let context = newBackgroundContext()
-        context.perform {
-            do {
-                try [DBEvent.self]
-                    .compactMap { context.deleteRequest(for: $0) }
-                    .forEach { try context.execute($0) }
-                try context.save()
-                completion?(.saved)
-            } catch {
-                assertionFailure(error.localizedDescription)
-                context.rollback()
-                completion?(.rolledBack(error))
-            }
-        }
+//        let context = newBackgroundContext()
+//        context.perform {
+//            do {
+//                try [DBEvent.self]
+//                    .compactMap { context.deleteRequest(for: $0) }
+//                    .forEach { try context.execute($0) }
+//                try context.save()
+//                completion?(.saved)
+//            } catch {
+//                assertionFailure(error.localizedDescription)
+//                context.rollback()
+//                completion?(.rolledBack(error))
+//            }
+//            print("--- 1")
+//        }
     }
 }
 

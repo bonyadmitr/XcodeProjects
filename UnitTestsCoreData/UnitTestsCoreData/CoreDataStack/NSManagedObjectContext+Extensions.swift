@@ -130,12 +130,16 @@ extension NSManagedObjectContext {
     }
     
     func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSBatchDeleteRequest {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
-        if #available(iOS 10.0, *) {
-            fetchRequest = type.fetchRequest()
-        } else {
-            fetchRequest = NSFetchRequest(entityName: type.className())
-        }
+        /// this will work only with NSManagedObject(context: that we removed
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult>
+//        if #available(iOS 10.0, *) {
+//            fetchRequest = type.fetchRequest()
+//        } else {
+//            fetchRequest = NSFetchRequest(entityName: type.className())
+//        }
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
+        fetchRequest.includesPropertyValues = false
+        fetchRequest.returnsObjectsAsFaults = false
         return NSBatchDeleteRequest(fetchRequest: fetchRequest)
     }
     

@@ -10,13 +10,17 @@
 import XCTest
 import CoreData
 
+private let modelName = "UnitTestsCoreData"
+
 final class UnitTestsCoreDataTests: XCTestCase {
 
-    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
+    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
     
     override func setUp() {
         super.setUp()
-        coreDataStack.clearAll()
+//        coreDataStack.clearAll()
+        coreDataStack.deleteAll()
+        print("--- 2")
     }
 
     override func tearDown() {
@@ -25,6 +29,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
     }
 
     func testCoreDataSave() {
+        print("--- 3")
         let expec = expectation(description: "CoreDataStack")
         
         coreDataStack.performBackgroundTask { context in
@@ -32,6 +37,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
             event.name = "Some event"
             context.saveSyncUnsafe()
             expec.fulfill()
+            print("--- 4")
         }
         
         wait(for: [expec], timeout: 1)
@@ -66,7 +72,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
 //    }
     
     func testClearAllSQLite() {
-        let expec = expectation(description: "CoreDataStack")
+        let expec = expectation(description: "expec1")
         
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
@@ -86,35 +92,8 @@ final class UnitTestsCoreDataTests: XCTestCase {
         XCTAssertEqual(events?.count, 0)
     }
     
-    /// working ONLY with NSSQLiteStoreType
-//    func testClearAll2() {
-//        let expec = expectation(description: "CoreDataStack")
-//
-//        coreDataStack.performBackgroundTask { context in
-//            let event = DBEvent(managedObjectContext: context)
-//            event.name = "Some event"
-//            context.saveSyncUnsafe()
-//            expec.fulfill()
-//        }
-//
-//        wait(for: [expec], timeout: 1)
-//
-//        let expec2 = expectation(description: "CoreDataStack2")
-//        coreDataStack.deleteAll { status in
-//            expec2.fulfill()
-//        }
-//
-//        wait(for: [expec2], timeout: 1)
-//
-//        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
-//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
-//
-//        XCTAssertNotNil(events)
-//        XCTAssertEqual(events?.count, 0)
-//    }
-    
     func testClearAllAndSave() {
-        let expec = expectation(description: "CoreDataStack")
+        let expec = expectation(description: "expec")
         
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
@@ -126,7 +105,7 @@ final class UnitTestsCoreDataTests: XCTestCase {
         wait(for: [expec], timeout: 1)
         
         coreDataStack.clearAll()
-        let expec2 = expectation(description: "CoreDataStack2")
+        let expec2 = expectation(description: "expec2")
         
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
@@ -158,4 +137,33 @@ final class UnitTestsCoreDataTests: XCTestCase {
 //        }
 //    }
 
+    
+    
+    /// working ONLY with NSSQLiteStoreType
+    func testDeleteAll() {
+        let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
+        let expec = expectation(description: "expec")
+        
+        coreDataStack.performBackgroundTask { context in
+            let event = DBEvent(managedObjectContext: context)
+            event.name = "Some event"
+            context.saveSyncUnsafe()
+            expec.fulfill()
+        }
+        
+        wait(for: [expec], timeout: 1)
+        
+        let expec2 = expectation(description: "expec2")
+        coreDataStack.deleteAll { status in
+            expec2.fulfill()
+        }
+        
+        wait(for: [expec2], timeout: 1)
+        
+        let fetchRequest: NSFetchRequest<DBEvent> = DBEvent.fetchRequest()
+        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+        
+        XCTAssertNotNil(events)
+        XCTAssertEqual(events?.count, 0)
+    }
 }
