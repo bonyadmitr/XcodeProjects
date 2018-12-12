@@ -12,27 +12,53 @@ import CoreData
 
 private let modelName = "UnitTestsCoreData"
 
+//final class CoreDataDeleteOldApiSQLPerformanceTests: CoreDataDeleteMemoryPerformanceTests {
+//    override class func setUp() {
+//        super.setUp()
+//        coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldApi: true)
+//    }
+//}
+//
+//final class CoreDataDeleteOldApiMemoryPerformanceTests: CoreDataDeleteMemoryPerformanceTests {
+//    override class func setUp() {
+//        super.setUp()
+//        coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: true)
+//    }
+//}
+//
+//final class CoreDataDeleteSQLPerformanceTests: CoreDataDeleteMemoryPerformanceTests {
+//    override class func setUp() {
+//        super.setUp()
+//        coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
+//    }
+//}
+
 /// If your test is more than 10% slower than the baseline, it'll fail
-final class CoreDataDeletePerformanceTests: XCTestCase {
+class CoreDataDeleteMemoryPerformanceTests: XCTestCase {
     
-    private let coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName, oldApi: true)
+    /// need for override
+    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
+    
+    /// will be nil after every test
+    private var coreDataStack: CoreDataStack!
     
     override func setUp() {
         super.setUp()
-        //        coreDataStack.clearAll()
+        
+        coreDataStack = type(of: self).coreDataStack
         coreDataStack.deleteAll()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override class func tearDown() {
         super.tearDown()
+        coreDataStack.deleteAll()
     }
     
     private func saveManyObjects() {
         let expec = expectation(description: "expec")
         
         coreDataStack.performBackgroundTask { context in
-            for i in 1...10000 {
+            for i in 1...1000 {
                 let event = DBEvent(managedObjectContext: context)
                 event.name = "Some event \(i)"
             }
@@ -57,29 +83,29 @@ final class CoreDataDeletePerformanceTests: XCTestCase {
     }
     
     func testPerformanceDeleteAll() {
-        saveOneObject()
         measure {
+            saveOneObject()
             coreDataStack.deleteAll()
         }
     }
     
     func testPerformanceClearAll() {
-        saveOneObject()
         measure {
+            saveOneObject()
             coreDataStack.clearAll()
         }
     }
     
     func testPerformanceDeleteAllMany() {
-        saveManyObjects()
         measure {
+            saveManyObjects()
             coreDataStack.deleteAll()
         }
     }
     
     func testPerformanceClearAllMany() {
-        saveManyObjects()
         measure {
+            saveManyObjects()
             coreDataStack.clearAll()
         }
     }
