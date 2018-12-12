@@ -21,8 +21,21 @@ extension CoreDataStack {
             
             /// sync
             let context = newBackgroundContext()
-            //        let context = viewContext
+            //let context = viewContext
+            
+            
             do {
+//                let objectIDs = try [DBEvent.self]
+//                    .compactMap { batchDeleteRequest(for: $0) }
+//                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+//                    .compactMap { $0.result as? [NSManagedObjectID] }
+//                    .flatMap { $0 }
+//
+//                let changes = [NSDeletedObjectsKey: objectIDs]
+//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [viewContext])
+//                completion?(.saved)
+                
+                
                 try [DBEvent.self]
                     .compactMap { batchDeleteRequest(for: $0) }
                     .forEach { try context.execute($0) }
@@ -108,7 +121,11 @@ extension CoreDataStack {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: type.className())
         fetchRequest.includesPropertyValues = false
         fetchRequest.returnsObjectsAsFaults = false
-        return NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        fetchRequest.resultType = .managedObjectIDResultType
+        
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        deleteRequest.resultType = .resultTypeObjectIDs
+        return deleteRequest
     }
 }
 
