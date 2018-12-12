@@ -10,6 +10,9 @@
 import XCTest
 import CoreData
 
+/// old perfermance tests
+/// https://github.com/bizz84/MVCoreDataStack
+
 private let modelName = "UnitTestsCoreData"
 
 //final class CoreDataDeleteOldApiSQLPerformanceTests: CoreDataDeleteMemoryPerformanceTests {
