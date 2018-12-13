@@ -11,9 +11,107 @@ import XCTest
 import CoreData
 
 private let modelName = "UnitTestsCoreData"
+private let eventName = "Some event"
 
 class UnitTestsCoreDataTests: XCTestCase {
+    
+    /// need for override
+    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: true)
+    
+    /// will be nil after every test
+    private var coreDataStack: CoreDataStack!
+    
+    override func setUp() {
+        super.setUp()
+        
+        coreDataStack = type(of: self).coreDataStack
+        coreDataStack.deleteAll()
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    override class func tearDown() {
+        super.tearDown()
+        coreDataStack.deleteAll()
+    }
+    
+    private func createEvent() {
+//        let expec = expectation(description: "expec")
+        
+        let context = coreDataStack.viewContext
+        let event = DBEvent(managedObjectContext: context)
+        event.name = eventName
+        context.saveSyncUnsafe()
+        
+//        coreDataStack.performBackgroundTask { context in
+//            let event = DBEvent(managedObjectContext: context)
+//            event.name = eventName
+//            context.saveSyncUnsafe()
+//            expec.fulfill()
+//        }
+//
+//        wait(for: [expec], timeout: 1)
+    }
+    
+    func testFetchControllerSave() {
+        
+        
+        createEvent()
+        
+//        let fetchController = DBEvent.fetchedResultsController()
+//        try? fetchController.performFetch()
+//
+//        let events = fetchController.fetchedObjects
+        
+//        let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
+//        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(DBEvent.name), ascending: false)
+//        fetchRequest.sortDescriptors = [sortDescriptor1]
+//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+        
+        let expec = expectation(description: "expec")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            expec.fulfill()
+        }
+        wait(for: [expec], timeout: 2)
+        
+        let fetchController = DBEvent.fetchedResultsController()
+        try? fetchController.performFetch()
+        
+        let events = fetchController.fetchedObjects
+        
+        XCTAssertNotNil(events)
+        XCTAssertEqual(events?.count, 1)
+        XCTAssert(events?.first?.name == eventName)
+    }
+    
+    func testFetchControllerDelete() {
+        let fetchController = DBEvent.fetchedResultsController()
+        try? fetchController.performFetch()
+        
+        createEvent()
+        coreDataStack.deleteAll()
+        //coreDataStack.clearAll()
+        let events = fetchController.fetchedObjects
+        
+        XCTAssertNotNil(events)
+        XCTAssertEqual(events?.count, 0)
+    }
+    
 }
+
+extension DBEvent {
+    static func fetchedResultsController() -> NSFetchedResultsController<DBEvent> {
+        let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(DBEvent.name), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1]
+        let context = CoreDataStack.shared.viewContext
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }
+}
+
 
 /// https://developer.apple.com/documentation/xctest/xctestcase/understanding_setup_and_teardown_for_test_methods
 
@@ -41,7 +139,7 @@ final class CoreDataSQLTests: CoreDataMemoryTests {
 class CoreDataMemoryTests: XCTestCase {
     
     /// need for override
-    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
+    static var coreDataStack = CoreDataStack(storeType: .sqlite, modelName: modelName)
     
     /// will be nil after every test
     private var coreDataStack: CoreDataStack!
@@ -64,7 +162,7 @@ class CoreDataMemoryTests: XCTestCase {
     }
 
     func testCoreDataSave() {
-        let expec = expectation(description: "CoreDataStack")
+        let expec = expectation(description: "expec")
         
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
@@ -79,7 +177,7 @@ class CoreDataMemoryTests: XCTestCase {
         let events = try? coreDataStack.viewContext.fetch(fetchRequest)
         
         XCTAssertNotNil(events)
-        XCTAssertEqual(events!.count, 1)
+        XCTAssertEqual(events?.count, 1)
         XCTAssert(events?.first?.name == "Some event")
         
         /// Called when test method ends.
@@ -138,7 +236,7 @@ class CoreDataMemoryTests: XCTestCase {
         let events = try? coreDataStack.viewContext.fetch(fetchRequest)
         
         XCTAssertNotNil(events)
-        XCTAssertEqual(events!.count, 1)
+        XCTAssertEqual(events?.count, 1)
         XCTAssert(events?.first?.name == "Some event 2")
     }
 
