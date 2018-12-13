@@ -21,6 +21,7 @@ protocol StoreContainer {
 extension NSPersistentContainer: StoreContainer {
     func clearAll() {
         do {
+            viewContext.reset()
             for store in persistentStoreCoordinator.persistentStores {
                 if store.type == NSInMemoryStoreType {
                     try persistentStoreCoordinator.remove(store)
