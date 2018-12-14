@@ -19,14 +19,12 @@ final class FetchDelegate: NSObject, NSFetchedResultsControllerDelegate {
     }
 }
 
-class UnitTestsCoreDataTests: XCTestCase {
-    
+class BaseCoreDataTests: XCTestCase {
     /// need for override
     static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: false)
     
     /// will be nil after every test
-    private var coreDataStack: CoreDataStack!
-    private let fetchDelegate = FetchDelegate()
+    var coreDataStack: CoreDataStack!
     
     override func setUp() {
         super.setUp()
@@ -45,18 +43,22 @@ class UnitTestsCoreDataTests: XCTestCase {
         coreDataStack.deleteAll()
     }
     
-    private func createEvent() {
+    func createEvent() {
         let expec = expectation(description: "expec")
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
             event.name = eventName
-            //context.saveSyncUnsafe()
-            try? context.save()
+            context.saveSyncUnsafe()
             expec.fulfill()
         }
-
+        
         wait(for: [expec], timeout: 1)
     }
+}
+
+class UnitTestsCoreDataTests: BaseCoreDataTests {
+    
+    private let fetchDelegate = FetchDelegate()
     
     private func fetchedResultsController() -> NSFetchedResultsController<DBEvent> {
         let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
