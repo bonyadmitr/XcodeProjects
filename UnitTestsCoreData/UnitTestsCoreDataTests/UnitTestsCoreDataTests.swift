@@ -13,13 +13,49 @@ import CoreData
 private let modelName = "UnitTestsCoreData"
 private let eventName = "Some event"
 
+final class FetchDelegate: NSObject, NSFetchedResultsControllerDelegate {
+    
+//    override init() {
+//        super.init()
+//    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+
+    }
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//
+//    }
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//
+//        switch type {
+//        case .insert:
+//            if let indexPath = newIndexPath {
+////                tableView.insertRows(at: [indexPath], with: .automatic)
+//            }
+//        case .delete:
+//            if let indexPath = indexPath {
+////                tableView.deleteRows(at: [indexPath], with: .automatic)
+//            }
+//        case .update:
+//            if let indexPath = indexPath {
+////                tableView.reloadRows(at: [indexPath], with: .automatic)
+//            }
+//        case .move:
+//            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+////                tableView.moveRow(at: indexPath, to: newIndexPath)
+//            }
+//        }
+//    }
+}
+
 class UnitTestsCoreDataTests: XCTestCase {
     
     /// need for override
-    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: true)
+    static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName, oldApi: false)
     
     /// will be nil after every test
     private var coreDataStack: CoreDataStack!
+    private let fetchDelegate = FetchDelegate()
     
     override func setUp() {
         super.setUp()
@@ -39,64 +75,63 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
     private func createEvent() {
-//        let expec = expectation(description: "expec")
         
-        let context = coreDataStack.viewContext
-        let event = DBEvent(managedObjectContext: context)
-        event.name = eventName
-        context.saveSyncUnsafe()
-        
-//        coreDataStack.performBackgroundTask { context in
-//            let event = DBEvent(managedObjectContext: context)
-//            event.name = eventName
-//            context.saveSyncUnsafe()
-//            expec.fulfill()
-//        }
-//
-//        wait(for: [expec], timeout: 1)
-    }
-    
-    func testFetchControllerSave() {
-        
-        
-        createEvent()
-        
-//        let fetchController = DBEvent.fetchedResultsController()
-//        try? fetchController.performFetch()
-//
-//        let events = fetchController.fetchedObjects
-        
-//        let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
-//        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(DBEvent.name), ascending: false)
-//        fetchRequest.sortDescriptors = [sortDescriptor1]
-//        let events = try? coreDataStack.viewContext.fetch(fetchRequest)
+//        let context = coreDataStack.viewContext
+//        let event = DBEvent(managedObjectContext: context)
+//        event.name = eventName
+//        //context.saveSyncUnsafe()
+//        try? context.save()
         
         let expec = expectation(description: "expec")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        coreDataStack.performBackgroundTask { context in
+            let event = DBEvent(managedObjectContext: context)
+            event.name = eventName
+            //context.saveSyncUnsafe()
+            try? context.save()
             expec.fulfill()
         }
-        wait(for: [expec], timeout: 2)
-        
-        let fetchController = DBEvent.fetchedResultsController()
+
+        wait(for: [expec], timeout: 1)
+    }
+    
+    private func fetchedResultsController() -> NSFetchedResultsController<DBEvent> {
+        let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(DBEvent.name), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor1]
+        let context = coreDataStack.viewContext
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }
+    
+    
+    func testFetchControllerSave() {
+        let fetchController = fetchedResultsController()
+        fetchController.delegate = fetchDelegate
         try? fetchController.performFetch()
         
+        createEvent()
         let events = fetchController.fetchedObjects
         
-        XCTAssertNotNil(events)
         XCTAssertEqual(events?.count, 1)
         XCTAssert(events?.first?.name == eventName)
     }
     
     func testFetchControllerDelete() {
-        let fetchController = DBEvent.fetchedResultsController()
+        let fetchController = fetchedResultsController()
+        fetchController.delegate = fetchDelegate
         try? fetchController.performFetch()
         
         createEvent()
         coreDataStack.deleteAll()
-        //coreDataStack.clearAll()
+//        coreDataStack.clearAll()
+        
+        let expec = expectation(description: "expec")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            expec.fulfill()
+        }
+        wait(for: [expec], timeout: 1)
+        
         let events = fetchController.fetchedObjects
         
-        XCTAssertNotNil(events)
         XCTAssertEqual(events?.count, 0)
     }
     

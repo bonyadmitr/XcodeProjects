@@ -25,22 +25,22 @@ extension CoreDataStack {
             
             
             do {
-//                let objectIDs = try [DBEvent.self]
-//                    .compactMap { batchDeleteRequest(for: $0) }
-//                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
-//                    .compactMap { $0.result as? [NSManagedObjectID] }
-//                    .flatMap { $0 }
-//
-//                let changes = [NSDeletedObjectsKey: objectIDs]
-//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [viewContext])
-//                completion?(.saved)
-                
-                
-                try [DBEvent.self]
+                let objectIDs = try [DBEvent.self]
                     .compactMap { batchDeleteRequest(for: $0) }
-                    .forEach { try context.execute($0) }
-                try context.save()
+                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+                    .compactMap { $0.result as? [NSManagedObjectID] }
+                    .flatMap { $0 }
+                
+                let changes = [NSDeletedObjectsKey: objectIDs]
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? viewContext])
                 completion?(.saved)
+                
+                
+//                try [DBEvent.self]
+//                    .compactMap { batchDeleteRequest(for: $0) }
+//                    .forEach { try context.execute($0) }
+//                try context.save()
+//                completion?(.saved)
             } catch {
                 assertionFailure(error.localizedDescription)
                 context.rollback()
