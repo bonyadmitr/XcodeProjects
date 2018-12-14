@@ -13,39 +13,10 @@ import CoreData
 private let modelName = "UnitTestsCoreData"
 private let eventName = "Some event"
 
+/// one method of NSFetchedResultsControllerDelegate need for NSFetchedResultsController updates
 final class FetchDelegate: NSObject, NSFetchedResultsControllerDelegate {
-    
-//    override init() {
-//        super.init()
-//    }
-    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-
     }
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//
-//    }
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//
-//        switch type {
-//        case .insert:
-//            if let indexPath = newIndexPath {
-////                tableView.insertRows(at: [indexPath], with: .automatic)
-//            }
-//        case .delete:
-//            if let indexPath = indexPath {
-////                tableView.deleteRows(at: [indexPath], with: .automatic)
-//            }
-//        case .update:
-//            if let indexPath = indexPath {
-////                tableView.reloadRows(at: [indexPath], with: .automatic)
-//            }
-//        case .move:
-//            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-////                tableView.moveRow(at: indexPath, to: newIndexPath)
-//            }
-//        }
-//    }
 }
 
 class UnitTestsCoreDataTests: XCTestCase {
@@ -75,13 +46,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
     private func createEvent() {
-        
-//        let context = coreDataStack.viewContext
-//        let event = DBEvent(managedObjectContext: context)
-//        event.name = eventName
-//        //context.saveSyncUnsafe()
-//        try? context.save()
-        
         let expec = expectation(description: "expec")
         coreDataStack.performBackgroundTask { context in
             let event = DBEvent(managedObjectContext: context)
@@ -102,7 +66,6 @@ class UnitTestsCoreDataTests: XCTestCase {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     }
     
-    
     func testFetchControllerSave() {
         let fetchController = fetchedResultsController()
         fetchController.delegate = fetchDelegate
@@ -122,7 +85,7 @@ class UnitTestsCoreDataTests: XCTestCase {
         
         createEvent()
         coreDataStack.deleteAll()
-//        coreDataStack.clearAll()
+        //coreDataStack.clearAll()
         
         let expec = expectation(description: "expec")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -136,17 +99,6 @@ class UnitTestsCoreDataTests: XCTestCase {
     }
     
 }
-
-extension DBEvent {
-    static func fetchedResultsController() -> NSFetchedResultsController<DBEvent> {
-        let fetchRequest: NSFetchRequest = DBEvent.fetchRequest()
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(DBEvent.name), ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor1]
-        let context = CoreDataStack.shared.viewContext
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-    }
-}
-
 
 /// https://developer.apple.com/documentation/xctest/xctestcase/understanding_setup_and_teardown_for_test_methods
 
