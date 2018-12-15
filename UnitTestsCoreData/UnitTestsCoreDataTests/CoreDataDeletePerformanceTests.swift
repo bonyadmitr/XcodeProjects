@@ -4,16 +4,12 @@
 //
 //  Created by Bondar Yaroslav on 12/11/18.
 //  Copyright © 2018 Bondar Yaroslav. All rights reserved.
-//
-
 @testable import UnitTestsCoreData
 import XCTest
 import CoreData
 
 /// old perfermance tests
 /// https://github.com/bizz84/MVCoreDataStack
-
-private let modelName = "UnitTestsCoreData"
 
 //final class CoreDataDeleteOldApiSQLPerformanceTests: CoreDataDeleteMemoryPerformanceTests {
 //    override class func setUp() {
