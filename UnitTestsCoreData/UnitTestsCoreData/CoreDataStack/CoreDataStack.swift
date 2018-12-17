@@ -181,8 +181,9 @@ extension CoreDataStack {
         case .memory:
             let description = NSPersistentStoreDescription()
             description.type = NSInMemoryStoreType
-            // TODO: - need shouldAddStoreAsynchronously? -
-            //description.shouldAddStoreAsynchronously = true
+            description.shouldAddStoreAsynchronously = false
+            //description.shouldMigrateStoreAutomatically = true
+            //description.shouldInferMappingModelAutomatically = true
             container.persistentStoreDescriptions = [description]
         case .sqlite:
             break
