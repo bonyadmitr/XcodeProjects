@@ -39,12 +39,14 @@ extension PhotoManagerDelegate where Self: PhotoManagerColectionViewDelegate {
                 // delete, insert, reload, move
                 if let removed = collectionChanges.removedIndexes, !removed.isEmpty {
                     collectionView.deleteItems(at: removed.map({ IndexPath(item: $0, section: 0) }))
+                    print("--- removed:", removed.map{$0})
                 }
                 if let inserted = collectionChanges.insertedIndexes, !inserted.isEmpty {
                     collectionView.insertItems(at: inserted.map({ IndexPath(item: $0, section: 0) }))
+                    print("--- inserted:", inserted.map{$0})
                 }
                 collectionChanges.enumerateMoves { fromIndex, toIndex in
-                    print(fromIndex, toIndex)
+                    print("--- moveItem to:", fromIndex, toIndex)
                     self.collectionView.moveItem(at: IndexPath(item: fromIndex, section: 0),
                                                  to: IndexPath(item: toIndex, section: 0))
                 }
@@ -52,8 +54,7 @@ extension PhotoManagerDelegate where Self: PhotoManagerColectionViewDelegate {
             }, completion: { _ in
                 self.collectionView.performBatchUpdates({
                     if let changed = collectionChanges.changedIndexes, !changed.isEmpty {
-                        print(changed.map({ IndexPath(item: $0, section: 0) }))
-                        print(changed)
+                        print("--- changed:", changed.map{$0})
                         self.collectionView.reloadItems(at: changed.map({ IndexPath(item: $0, section: 0) }))
                     }
                 })
