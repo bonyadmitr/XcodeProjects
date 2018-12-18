@@ -29,5 +29,12 @@ extension PHAsset {
             return value(forKey: "uniformTypeIdentifier") as? String
         }
     }
+    
+    var fileSize: Int64? {
+        if let unsignedInt64 = resource?.value(forKey: "fileSize") as? UInt64 {
+            return Int64(bitPattern: unsignedInt64)
+        }
+        return nil
+    }
 }
 

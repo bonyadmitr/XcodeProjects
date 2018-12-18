@@ -114,6 +114,10 @@ final class PhotoViewerController: UIViewController {
             title = originalFilename
         }
         
+        if let fileSize = asset.fileSize {
+            print("- fileSize:", fileSize)
+        }
+        
         print(asset.location ?? "location nil")
         
         
