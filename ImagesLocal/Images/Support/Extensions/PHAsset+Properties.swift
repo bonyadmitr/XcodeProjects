@@ -30,11 +30,13 @@ extension PHAsset {
         }
     }
     
-    var fileSize: Int64? {
-        if let unsignedInt64 = resource?.value(forKey: "fileSize") as? UInt64 {
-            return Int64(bitPattern: unsignedInt64)
-        }
-        return nil
+    var originalFileSize: Int64? {
+        return resource?.fileSize()
     }
 }
 
+extension PHAssetResource {
+    func fileSize() -> Int64? {
+        return value(forKey: "fileSize") as? Int64
+    }
+}
