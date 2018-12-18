@@ -32,64 +32,8 @@ import CoreData
 //    }
 //}
 
-extension Double {
-    func toInt() -> Int? {
-        return (Double(Int.min).nextUp...Double(Int.max).nextDown ~= self) ? Int(self) : nil
-    }
-    
-    func toInt2() -> Int? {
-        guard self < Double(Int.max), self > Double(Int.min) else {
-            return nil
-        }
-        return Int(self)
-    }
-    
-    func toInt3() -> Int? {
-        if self < Double(Int.max), self > Double(Int.min) {
-            return Int(self)
-        }
-        return nil
-    }
-}
-
 /// If your test is more than 10% slower than the baseline, it'll fail
 class CoreDataDeleteMemoryPerformanceTests: XCTestCase {
-    
-    func testQQQ1() {
-        measure {
-            for _ in 1...1000 {
-                _ = Double(0).toInt()
-                _ = Double(1000000000).toInt()
-                _ = Double(-1000000000).toInt()
-                //            _ = Double(Int.max).toInt()
-                //            _ = Double(Int.min).toInt()
-            }
-        }
-    }
-    
-    func testQQQ2() {
-        measure {
-            for _ in 1...1000 {
-                _ = Double(0).toInt2()
-                _ = Double(1000000000).toInt2()
-                _ = Double(-1000000000).toInt2()
-                //            _ = Double(Int.max).toInt2()
-                //            _ = Double(Int.min).toInt2()
-            }
-        }
-    }
-    
-    func testQQQ3() {
-        measure {
-            for _ in 1...1000 {
-                _ = Double(0).toInt3()
-                _ = Double(1000000000).toInt3()
-                _ = Double(-1000000000).toInt3()
-                //            _ = Double(Int.max).toInt3()
-                //            _ = Double(Int.min).toInt3()
-            }
-        }
-    }
     
     /// need for override
     static var coreDataStack = CoreDataStack(storeType: .memory, modelName: modelName)
@@ -137,32 +81,32 @@ class CoreDataDeleteMemoryPerformanceTests: XCTestCase {
         wait(for: [expec], timeout: 1)
     }
     
-    //    func testPerformanceDeleteAll() {
-    //        measure {
-    //            saveOneObject()
-    //            coreDataStack.deleteAll()
-    //        }
-    //    }
-    //
-    //    func testPerformanceClearAll() {
-    //        measure {
-    //            saveOneObject()
-    //            coreDataStack.clearAll()
-    //        }
-    //    }
-    //
-    //    func testPerformanceDeleteAllMany() {
-    //        measure {
-    //            saveManyObjects()
-    //            coreDataStack.deleteAll()
-    //        }
-    //    }
-    //
-    //    func testPerformanceClearAllMany() {
-    //        measure {
-    //            saveManyObjects()
-    //            coreDataStack.clearAll()
-    //        }
-    //    }
+    func testPerformanceDeleteAll() {
+        measure {
+            saveOneObject()
+            coreDataStack.deleteAll()
+        }
+    }
+    
+    func testPerformanceClearAll() {
+        measure {
+            saveOneObject()
+            coreDataStack.clearAll()
+        }
+    }
+    
+    func testPerformanceDeleteAllMany() {
+        measure {
+            saveManyObjects()
+            coreDataStack.deleteAll()
+        }
+    }
+    
+    func testPerformanceClearAllMany() {
+        measure {
+            saveManyObjects()
+            coreDataStack.clearAll()
+        }
+    }
     
 }
