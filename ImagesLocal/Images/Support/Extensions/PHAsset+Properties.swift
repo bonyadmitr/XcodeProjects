@@ -30,6 +30,7 @@ extension PHAsset {
         }
     }
     
+    /// will be different for edited photos
     var originalFileSize: Int64? {
         return resource?.fileSize()
     }
