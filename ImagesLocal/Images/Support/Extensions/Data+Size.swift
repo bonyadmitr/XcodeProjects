@@ -20,3 +20,12 @@ extension Data {
         }.string(fromByteCount: size)
     }
 }
+
+enum Formatters {
+    static func formattedSize(for size: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = .useAll
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: size)
+    }
+}
