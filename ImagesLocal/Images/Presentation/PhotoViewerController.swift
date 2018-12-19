@@ -69,6 +69,7 @@ final class PhotoViewerController: UIViewController {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
+        options.version = .unadjusted
         //options.isSynchronous = true
         
         /// for iCloud only
@@ -107,15 +108,35 @@ final class PhotoViewerController: UIViewController {
             return
         }
         
+        if let allProperties = asset.allProperties() {
+            print("--- allProperties")
+            print("- filename", allProperties.filename)
+            print("- fileSize", allProperties.fileSize)
+            print("- isEdited", allProperties.isEdited)
+            print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
+        } else {
+            assertionFailure()
+        }
+        
+        
+        
         print("creationDate", asset.creationDate ?? "nil")
         print("modificationDate", asset.modificationDate ?? "nil")
         
-        if let originalFilename = asset.originalFilename {
+        if let originalFilename = asset.originalFilename() {
             title = originalFilename
         }
         
-        if let fileSize = asset.originalFileSize {
+        if let fileSize = asset.originalFileSize() {
             print("- originalFileSize:", fileSize)
+        }
+        
+        if let fileSize = asset.fileSize() {
+            print("- fileSize:", fileSize)
+        }
+        
+        if let type = asset.uniformTypeIdentifier() {
+            print("- uniformTypeIdentifier:", type)
         }
         
         print(asset.location ?? "location nil")
@@ -125,12 +146,13 @@ final class PhotoViewerController: UIViewController {
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
         //options.isSynchronous = true
-        options.resizeMode = .exact
+        options.resizeMode = .none
+        options.version = .current
         
         PHImageManager.default().requestImageData(for: asset, options: options) { (data, uniformTypeIdentifier, orientation, info) in
             
             if let type = uniformTypeIdentifier {
-                print("uniformTypeIdentifier:", type)
+                print("- request uniformTypeIdentifier:", type)
             }
             
             if let data = data {
@@ -147,6 +169,8 @@ final class PhotoViewerController: UIViewController {
 //                }
 
             }
+            
+            print("-------------")
         }
     }
     

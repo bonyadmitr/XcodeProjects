@@ -23,6 +23,10 @@ extension PHAsset {
         }
     }
     
+    func filename() -> String? {
+        return mainResource()?.originalFilename
+    }
+    
     /// will be different for edited photos
     func originalFileSize() -> Int64? {
         return self.mainResource()?.fileSize()
@@ -50,6 +54,7 @@ extension PHAsset {
         return getUniformTypeIdentifier(for: resource)
     }
     
+    /// for public.png image edited image become public.jpeg
     private func getUniformTypeIdentifier(for resource: PHAssetResource?) -> String? {
         if #available(iOS 9.0, *) {
             return resource?.uniformTypeIdentifier
@@ -67,13 +72,18 @@ extension PHAsset {
             return nil
         }
         
+        let isEdited = resources.count > 1
+        let filename: String = resources.first?.originalFilename ?? ""
         let fileSize = resource.fileSize() ?? 0
+//        let uniformTypeIdentifier = resource.uniformTypeIdentifier ? ""
+        
+        
         assert(fileSize != 0, "could not get fileSize for resource")
         
         return (fileSize: fileSize,
                 uniformTypeIdentifier: resource.uniformTypeIdentifier,
-                filename: resource.originalFilename,
-                isEdited: resources.count > 1)
+                filename: filename,
+                isEdited: isEdited)
     }
 }
 
