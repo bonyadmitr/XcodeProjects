@@ -146,7 +146,7 @@ final class PhotoViewerController: UIViewController {
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
         //options.isSynchronous = true
-        options.resizeMode = .none
+        options.resizeMode = .exact
         options.version = .current
         
         PHImageManager.default().requestImageData(for: asset, options: options) { (data, uniformTypeIdentifier, orientation, info) in
@@ -154,6 +154,8 @@ final class PhotoViewerController: UIViewController {
             if let type = uniformTypeIdentifier {
                 print("- request uniformTypeIdentifier:", type)
             }
+            
+            //let data2 = FileManager.default.contents(atPath: PHAsset.fileURL(from: info)!.path)
             
             if let data = data {
                 print(data.formattedSize)
