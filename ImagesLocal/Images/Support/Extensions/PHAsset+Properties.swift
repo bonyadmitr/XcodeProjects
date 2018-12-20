@@ -143,6 +143,8 @@ extension PHAsset {
 typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: String, fileName: String, isEdited: Bool)
 
 extension PHAssetResource {
+    
+    //@available(iOS 10.0, *)
     func fileSize() -> Int64? {
         return value(forKey: "fileSize") as? Int64
     }
