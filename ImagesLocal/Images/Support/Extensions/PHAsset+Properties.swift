@@ -24,7 +24,25 @@ extension PHAsset {
     }
     
     func filename() -> String? {
-        return mainResource()?.originalFilename
+        let resources = PHAssetResource.assetResources(for: self)
+        guard let mainResource = resources.first else {
+            assertionFailure()
+            return nil
+        }
+        let fullFileName: String
+        
+        if let resource = resources[safe: 1],
+            let fileExtension = resource.originalFilename.split(separator: ".").last,
+            let dotIndex = mainResource.originalFilename.lastIndex(of: ".") {
+            let dotNextIndex = mainResource.originalFilename.index(after: dotIndex)
+            
+            let fileNameAndDot = String(mainResource.originalFilename.prefix(upTo: dotNextIndex))
+            fullFileName = fileNameAndDot + fileExtension
+        } else {
+            fullFileName = mainResource.originalFilename
+        }
+        
+        return fullFileName
     }
     
     /// will be different for edited photos
@@ -67,27 +85,46 @@ extension PHAsset {
     func allProperties() -> AllResourcesProperties? {
         let resources = PHAssetResource.assetResources(for: self)
         
-        guard let resource = resources[safe: 1] ?? resources.first else {
-            assertionFailure("assetResources empty")
+        guard let mainResource = resources.first else {
+            assertionFailure()
             return nil
         }
         
-        let isEdited = resources.count > 1
-        let filename: String = resources.first?.originalFilename ?? ""
-        let fileSize = resource.fileSize() ?? 0
-//        let uniformTypeIdentifier = resource.uniformTypeIdentifier ? ""
+        let fileName: String
+        let resource: PHAssetResource
         
+        
+        /// mainResource.originalFilename equals something like "IMG_7937.HEIC"
+        /// originalResource.originalFilename == "FullSizeRender.jpg"
+        /// need take extnesion(jpg) of edited photo(FullSizeRender.jpg) and name+last dot(IMG_7937.) from original image (IMG_7937.HEIC)
+        if let originalResource = resources[safe: 1],
+            let fileExtension = originalResource.originalFilename.split(separator: ".").last,
+            let dotIndex = mainResource.originalFilename.lastIndex(of: ".")
+        {
+            let dotNextIndex = mainResource.originalFilename.index(after: dotIndex)
+            let fileNameAndDot = String(mainResource.originalFilename.prefix(upTo: dotNextIndex))
+            fileName = fileNameAndDot + fileExtension
+            
+            resource = originalResource
+        } else {
+            fileName = mainResource.originalFilename
+            resource = mainResource
+        }
+        
+        let isEdited = resources.count > 1
+        let fileSize = resource.fileSize() ?? 0
+        let uniformTypeIdentifier = resource.uniformTypeIdentifier
         
         assert(fileSize != 0, "could not get fileSize for resource")
         
         return (fileSize: fileSize,
-                uniformTypeIdentifier: resource.uniformTypeIdentifier,
-                filename: filename,
+                uniformTypeIdentifier: uniformTypeIdentifier,
+                fileName: fileName,
                 isEdited: isEdited)
     }
 }
 
-typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: String, filename: String, isEdited: Bool)
+typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: String, fileName: String, isEdited: Bool)
 
 extension PHAssetResource {
     func fileSize() -> Int64? {

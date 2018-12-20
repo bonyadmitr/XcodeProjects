@@ -69,7 +69,7 @@ final class PhotoViewerController: UIViewController {
         let options = PHImageRequestOptions()
         options.deliveryMode = .highQualityFormat
         options.isNetworkAccessAllowed = true
-        options.version = .unadjusted
+        options.version = .current
         //options.isSynchronous = true
         
         /// for iCloud only
@@ -110,7 +110,7 @@ final class PhotoViewerController: UIViewController {
         
         if let allProperties = asset.allProperties() {
             print("--- allProperties")
-            print("- filename", allProperties.filename)
+            print("- fileName", allProperties.fileName)
             print("- fileSize", allProperties.fileSize)
             print("- isEdited", allProperties.isEdited)
             print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
@@ -125,6 +125,10 @@ final class PhotoViewerController: UIViewController {
         
         if let originalFilename = asset.originalFilename() {
             title = originalFilename
+        }
+        
+        if let filename = asset.filename() {
+            print("- filename:", filename)
         }
         
         if let fileSize = asset.originalFileSize() {
@@ -162,8 +166,11 @@ final class PhotoViewerController: UIViewController {
                 print("- fileSize data:", data.count)
                 
                 if let fileName = PHAsset.filename(from: info) {
-                    print("iOS fileName", fileName)
+                    print("- iOS fileName", fileName)
                 }
+                
+                
+                print("- UIImage size", UIImage(data: data)?.size ?? "nil")
                 
                 /// metadata
 //                if let ciImage = CIImage(data: data) {
