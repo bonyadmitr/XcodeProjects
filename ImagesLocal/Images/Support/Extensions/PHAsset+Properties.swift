@@ -99,8 +99,8 @@ extension PHAsset {
         /// need take extnesion(jpg) of edited photo(FullSizeRender.jpg) and name+last dot(IMG_7937.) from original image (IMG_7937.HEIC)
         if let originalResource = resources[safe: 1],
             let fileExtension = originalResource.originalFilename.split(separator: ".").last,
-            let dotIndex = mainResource.originalFilename.lastIndex(of: ".")
-        {
+            let dotIndex = mainResource.originalFilename.lastIndex(of: ".") {
+            
             let dotNextIndex = mainResource.originalFilename.index(after: dotIndex)
             let fileNameAndDot = String(mainResource.originalFilename.prefix(upTo: dotNextIndex))
             fileName = fileNameAndDot + fileExtension
@@ -120,6 +120,22 @@ extension PHAsset {
         return (fileSize: fileSize,
                 uniformTypeIdentifier: uniformTypeIdentifier,
                 fileName: fileName,
+                isEdited: isEdited)
+    }
+    
+    func allOriginalProperties() -> AllResourcesProperties? {
+        let resources = PHAssetResource.assetResources(for: self)
+        
+        guard let mainResource = resources.first else {
+            assertionFailure()
+            return nil
+        }
+        
+        let isEdited = resources.count > 1
+        
+        return (fileSize: mainResource.fileSize() ?? 0,
+                uniformTypeIdentifier: mainResource.uniformTypeIdentifier,
+                fileName: mainResource.originalFilename,
                 isEdited: isEdited)
     }
 }

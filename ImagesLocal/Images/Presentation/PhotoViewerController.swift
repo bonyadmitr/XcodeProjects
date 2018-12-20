@@ -114,10 +114,21 @@ final class PhotoViewerController: UIViewController {
             print("- fileSize", allProperties.fileSize)
             print("- isEdited", allProperties.isEdited)
             print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
+            print("---")
         } else {
             assertionFailure()
         }
         
+        if let allProperties = asset.allOriginalProperties() {
+            print("--- allOriginalProperties")
+            print("- fileName", allProperties.fileName)
+            print("- fileSize", allProperties.fileSize)
+            print("- isEdited", allProperties.isEdited)
+            print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
+            print("---")
+        } else {
+            assertionFailure()
+        }
         
         
         print("creationDate", asset.creationDate ?? "nil")
