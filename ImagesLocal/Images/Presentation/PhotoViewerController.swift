@@ -82,6 +82,8 @@ final class PhotoViewerController: UIViewController {
         
         progressView.isHidden = false
         //progressView.progress = 0 /// need?
+        
+        /// for requestImage CIImage(image: image)?.properties is empty
         requestID = PHImageManager.default().requestImage(
             for: asset,
             targetSize: PHImageManagerMaximumSize,
@@ -96,6 +98,8 @@ final class PhotoViewerController: UIViewController {
                 }
                 self.imageScrollView.image = image
                 self.imageScrollView.updateZoom()
+                
+                //print(CIImage(image: image)?.properties)
         })
         
         
@@ -184,9 +188,9 @@ final class PhotoViewerController: UIViewController {
                 print("- UIImage size", UIImage(data: data)?.size ?? "nil")
                 
                 /// metadata
-//                if let ciImage = CIImage(data: data) {
-//                    print(ciImage.properties)
-//                }
+                if let ciImage = CIImage(data: data) {
+                    print(ciImage.properties)
+                }
 
             }
             
