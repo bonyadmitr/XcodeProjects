@@ -162,7 +162,7 @@ final class PhotoViewerController: UIViewController {
         
         
         let options = PHImageRequestOptions()
-        options.deliveryMode = .highQualityFormat
+        //options.deliveryMode = .fastFormat /// requestImageData ignores this option
         options.isNetworkAccessAllowed = true
         //options.isSynchronous = true
         options.resizeMode = .exact
@@ -184,14 +184,12 @@ final class PhotoViewerController: UIViewController {
                     print("- iOS fileName", fileName)
                 }
                 
-                
                 print("- UIImage size", UIImage(data: data)?.size ?? "nil")
                 
                 /// metadata
                 if let ciImage = CIImage(data: data) {
                     print(ciImage.properties)
                 }
-
             }
             
             print("-------------")
