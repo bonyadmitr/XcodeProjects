@@ -24,7 +24,8 @@ final class Validators {
     //
     /// .*  - 0 or any number
     /// .+  - 1 or any number
-    /// .*@.*\..*
+    /// "\\" used only for iOS string. it is "\"
+    /// "$" used only for iOS string
     static func isEmail(_ email: String) -> Bool {
         let emailRegEx = "^.+@.+\\..{2,}$"
         return check(text: email, regEx: emailRegEx)
