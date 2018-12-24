@@ -13,9 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         let window = UIWindow()
         window.rootViewController = GameController()
         window.makeKeyAndVisible()
@@ -40,12 +38,23 @@ final class GameController: UIViewController {
     }
     
     private func setup() {
-        
+        //view = GameView()
     }
     
+    /// don't call super.loadView()
+    /// "view = ..." in setup() will not call viewDidLoad
     override func loadView() {
         view = GameView()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view().backgroundColor = .red
+    }
+}
+
+extension GameController: ViewSpecificController {
+    typealias RootView = GameView
 }
 
 final class GameView: UIView {
@@ -62,5 +71,14 @@ final class GameView: UIView {
     
     private func setup() {
         backgroundColor = .white
+    }
+}
+
+protocol ViewSpecificController {
+    associatedtype RootView: UIView
+}
+extension ViewSpecificController where Self: UIViewController {
+    func view() -> RootView {
+        return self.view as! RootView
     }
 }
