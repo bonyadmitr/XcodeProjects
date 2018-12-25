@@ -49,7 +49,7 @@ final class GameController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view().backgroundColor = .red
+        //view().backgroundColor = .red
     }
 }
 
@@ -58,6 +58,10 @@ extension GameController: ViewSpecificController {
 }
 
 final class GameView: UIView {
+    
+    let cellSpace: CGFloat = 1
+    var boardWidthSize: CGFloat = 20
+    var cellSize: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,6 +75,31 @@ final class GameView: UIView {
     
     private func setup() {
         backgroundColor = .white
+        
+
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        /// add insets
+        
+        cellSize = bounds.width / (boardWidthSize + cellSpace)
+        
+        let numberOfLines = 30
+        
+        for i in 0..<Int(boardWidthSize) {
+            for j in 0..<numberOfLines {
+                let cellY = bounds.height - CGFloat(j) * (cellSpace + cellSize)
+                
+                let layer = CALayer()
+                layer.frame = CGRect(x: CGFloat(i) * (cellSize + cellSpace), y: cellY, width: cellSize, height: cellSize)
+                layer.backgroundColor = UIColor.red.cgColor
+                self.layer.addSublayer(layer)
+            }
+            
+        }
     }
 }
 
