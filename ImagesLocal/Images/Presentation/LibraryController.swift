@@ -57,7 +57,7 @@ final class LibraryController: UIViewController {
         tableView.delegate = self
         
         let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
