@@ -138,6 +138,12 @@ final class PhotoViewerController: UIViewController {
         print("creationDate", asset.creationDate ?? "nil")
         print("modificationDate", asset.modificationDate ?? "nil")
         
+        if let creationDate = asset.creationDate, let modificationDate = asset.modificationDate {
+            if abs(creationDate.timeIntervalSince1970 - modificationDate.timeIntervalSince1970) < 2 {
+                print("- it is duplicate by iPhone action")
+            }
+        }
+        
         if let originalFilename = asset.originalFilename() {
             title = originalFilename
         }
@@ -188,7 +194,7 @@ final class PhotoViewerController: UIViewController {
                 
                 /// metadata
                 if let ciImage = CIImage(data: data) {
-                    print(ciImage.properties)
+                    //print(ciImage.properties)
                 }
             }
             

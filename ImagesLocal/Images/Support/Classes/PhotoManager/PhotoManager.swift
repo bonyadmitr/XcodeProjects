@@ -38,8 +38,8 @@ final class PhotoManager: NSObject {
     func prepereForUse() {
         photoLibrary.register(self)
         let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "isFavorite", ascending: true)]
-        //allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        //allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "isFavorite", ascending: true)]
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
     }
     
