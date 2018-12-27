@@ -176,6 +176,9 @@ final class PhotoViewerController: UIViewController {
         
         PHImageManager.default().requestImageData(for: asset, options: options) { (data, uniformTypeIdentifier, orientation, info) in
             
+            /// https://developer.apple.com/documentation/photokit/phimagemanager/image_result_info_keys
+            //print("- info keys", info ?? "nil")
+            
             if let type = uniformTypeIdentifier {
                 print("- request uniformTypeIdentifier:", type)
             }
