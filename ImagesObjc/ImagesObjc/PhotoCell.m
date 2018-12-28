@@ -17,8 +17,10 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
         _imageView.clipsToBounds = YES;
-        _imageView.backgroundColor = [UIColor lightGrayColor];
+        //_imageView.backgroundColor = [UIColor lightGrayColor];
         _imageView.opaque = YES;
+        self.opaque = YES;
+        self.contentView.opaque = YES;
         [self addSubview: _imageView];
     }
     return self;
