@@ -35,7 +35,7 @@
 }
 @end
 
-@interface ViewController () <UICollectionViewDelegateFlowLayout>
+@interface ViewController () <UICollectionViewDelegateFlowLayout> //UICollectionViewDataSourcePrefetching
 
 @property (strong, nonatomic) PHFetchResult *fetchResult;
 @property (strong, nonatomic) PHCachingImageManager *cachingManager;
@@ -58,6 +58,7 @@ static NSString *cellIdentifier = @"PhotoCell";
     [self.collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:cellIdentifier];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.alwaysBounceVertical = YES;
+    //self.collectionView.prefetchDataSource = self;
     
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         switch (status) {
@@ -72,10 +73,10 @@ static NSString *cellIdentifier = @"PhotoCell";
                 self.cachingManager.allowsCachingHighQualityImages = NO;
                 
                 self.requestOptions = [[PHImageRequestOptions alloc] init];
-                self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
-                self.requestOptions.networkAccessAllowed = NO;
-                self.requestOptions.version = PHImageRequestOptionsVersionCurrent;
-                self.requestOptions.synchronous = NO;
+                //self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
+                //self.requestOptions.networkAccessAllowed = NO;
+                //self.requestOptions.version = PHImageRequestOptionsVersionCurrent;
+                //self.requestOptions.synchronous = NO;
                 
                 [self performFetch];
                 
@@ -146,7 +147,7 @@ static NSString *cellIdentifier = @"PhotoCell";
     [self.cachingManager requestImageForAsset:asset
                                    targetSize:self.itemSize
                                   contentMode:PHImageContentModeAspectFill
-                                      options:self.requestOptions
+                                      options:nil
                                 resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info)
      {
          if ([photoCell.representedAssetIdentifier isEqualToString:asset.localIdentifier]) {
@@ -193,10 +194,26 @@ static NSString *cellIdentifier = @"PhotoCell";
 //    }];
 //}
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [self updateCachedAssets];
-}
+//-(void)collectionView:(UICollectionView *)collectionView prefetchItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
+//    NSArray *assetsToStartCaching = [self assetsAtIndexPaths:indexPaths];
+//    [self.cachingManager startCachingImagesForAssets:assetsToStartCaching
+//                                          targetSize:self.itemSize
+//                                         contentMode:PHImageContentModeAspectFill
+//                                             options:nil];
+//
+//}
+//-(void)collectionView:(UICollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
+//        NSArray *assetsToStopCaching = [self assetsAtIndexPaths:indexPaths];
+//        [self.cachingManager stopCachingImagesForAssets:assetsToStopCaching
+//                                             targetSize:self.itemSize
+//                                            contentMode:PHImageContentModeAspectFill
+//                                                options:nil];
+//}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    [self updateCachedAssets];
+//}
 
 
 #pragma mark - Asset Caching
