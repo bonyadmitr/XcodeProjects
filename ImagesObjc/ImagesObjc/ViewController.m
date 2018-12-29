@@ -180,13 +180,13 @@ static NSString *cellIdentifier = @"PhotoCell";
 //
 //    PhotoCell *photoCell = (PhotoCell *)cell;
 //    if (!photoCell) {
-//        assert(photoCell)
+//        assert(photoCell);
 //        return;
 //    }
 //
 //    PHAsset *asset = [self.fetchResult objectAtIndex:indexPath.item];
 //    if (!asset) {
-//        assert(photoCell)
+//        assert(photoCell);
 //        return;
 //    }
 //
@@ -204,6 +204,7 @@ static NSString *cellIdentifier = @"PhotoCell";
 //
 //    }];
 //}
+
 
 //-(void)collectionView:(UICollectionView *)collectionView prefetchItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
 //    NSArray *assetsToStartCaching = [self assetsAtIndexPaths:indexPaths];
