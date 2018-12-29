@@ -143,18 +143,28 @@ static NSString *cellIdentifier = @"PhotoCell";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *photoCell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath: indexPath];
     PHAsset *asset = [self.fetchResult objectAtIndex:indexPath.item];
+    
+    
+//    if (photoCell.imageRequestID != 0 && ![photoCell.representedAssetIdentifier isEqualToString:asset.localIdentifier]) {
+//        PHImageRequestID imageRequestID = photoCell.imageRequestID;
+////        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//            [self.cachingManager cancelImageRequest:imageRequestID];
+////        });
+//    }
+    
     photoCell.representedAssetIdentifier = asset.localIdentifier;
     
-    [self.cachingManager requestImageForAsset:asset
-                                   targetSize:self.itemSize
-                                  contentMode:PHImageContentModeAspectFill
-                                      options:nil
-                                resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info)
-     {
-         if ([photoCell.representedAssetIdentifier isEqualToString:asset.localIdentifier]) {
-             photoCell.imageView.image = result;
-         }
-     }];
+    photoCell.imageRequestID = [self.cachingManager requestImageForAsset:asset
+                                                              targetSize:self.itemSize
+                                                             contentMode:PHImageContentModeAspectFill
+                                                                 options:nil
+                                                           resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info)
+                                {
+                                    if ([photoCell.representedAssetIdentifier isEqualToString:asset.localIdentifier]) {
+                                        photoCell.imageView.image = result;
+                                        photoCell.imageRequestID = 0;
+                                    }
+                                }];
     
     return photoCell;
 }

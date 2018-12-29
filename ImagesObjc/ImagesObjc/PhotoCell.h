@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Photos;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) UIImageView *imageView;
 @property (copy, nonatomic) NSString *representedAssetIdentifier;
+@property (assign, nonatomic) PHImageRequestID imageRequestID;
 
 @end
 
