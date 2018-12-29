@@ -97,9 +97,10 @@ static NSString *cellIdentifier = @"PhotoCell";
 }
 
 - (void)updateCellSize {
-    CGFloat desiredItemWidth = 100;
+//    CGFloat desiredItemWidth = 100;
+    BOOL isIpad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
     CGFloat viewWidth = UIScreen.mainScreen.bounds.size.width;
-    CGFloat columns = fmax(floor(viewWidth / desiredItemWidth), 4);
+    CGFloat columns = isIpad ? 6 : 4;//fmax(floor(viewWidth / desiredItemWidth), 4);
     CGFloat padding = 1;
     CGFloat itemWidth = floor((viewWidth - (columns - 1) * padding) / columns);
     CGSize itemSize = CGSizeMake(itemWidth, itemWidth);
