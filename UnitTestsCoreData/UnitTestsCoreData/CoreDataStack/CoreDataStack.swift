@@ -8,6 +8,25 @@
 
 import CoreData
 
+
+//                /// https://developer.apple.com/library/archive/featuredarticles/CoreData_Batch_Guide/BatchUpdates/BatchUpdates.html
+//                let bur = NSBatchUpdateRequest(entityName: PHItemDB.className())
+//                bur.propertiesToUpdate = ["favorite": NSExpression(forConstantValue: 1)]
+//                bur.includesSubentities = false
+//                bur.predicate = nil
+//                bur.resultType = .updatedObjectIDsResultType
+//
+//                do {
+//                    let result = try context.execute(bur) as! NSBatchUpdateResult
+//                    let objectIDs = result.result as! [NSManagedObjectID]
+//                    let changes = [NSUpdatedObjectsKey: objectIDs]
+//                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? CoreDataStack.shared.viewContext])
+//                } catch {
+//                    fatalError("Failed to perform batch update: \(error)")
+//                }
+
+
+
 extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
     
