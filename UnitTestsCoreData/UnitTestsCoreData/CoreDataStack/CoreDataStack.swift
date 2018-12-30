@@ -26,6 +26,14 @@ import CoreData
 //                }
 
 
+//let ced = NSExpressionDescription()
+//ced.expression = NSExpression(forFunction: "count:",
+//                              arguments: [NSExpression(forKeyPath: "day")])
+//ced.name = "count"
+//ced.expressionResultType = .integer64AttributeType
+
+
+
 
 extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
