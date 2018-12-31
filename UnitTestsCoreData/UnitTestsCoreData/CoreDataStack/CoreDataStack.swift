@@ -34,6 +34,27 @@ import CoreData
 
 
 
+//if #available(iOS 11.0, *) {
+//    let context = CoreDataStack.shared.viewContext
+//    context.performAndWait {
+//
+//        let request = NSPersistentHistoryChangeRequest()
+//        request.resultType = .transactionsAndChanges
+//        do {
+//            let result = try context.execute(request) as! NSPersistentHistoryResult
+//            let transactions = result.result as! Array<NSPersistentHistoryTransaction>
+//            for transaction in transactions {
+//                context.mergeChanges(fromContextDidSave: transaction.objectIDNotification())
+//            }
+//        } catch {
+//            //...
+//        }
+//
+//    }
+//} else {
+//    // Fallback on earlier versions
+//}
+
 
 extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
