@@ -193,16 +193,19 @@ final class PhotoViewerController: UIViewController {
                     print("- iOS fileName", fileName)
                 }
                 
-                print("- UIImage size", UIImage(data: data)?.size ?? "nil")
+                let image = UIImage(data: data)
+                print("- UIImage size", image?.size ?? "nil")
+                
                 
                 /// metadata
                 if let ciImage = CIImage(data: data) {
                     //print(ciImage.properties)
                 }
             }
-            
+            print("--- asset pixels", asset.pixelWidth, asset.pixelHeight)
             print("-------------")
         }
+        
     }
     
     @IBAction func actionDeleteBarButton(_ sender: UIBarButtonItem) {
