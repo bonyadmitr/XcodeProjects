@@ -148,6 +148,17 @@ extension PHAssetResource {
     func fileSize() -> Int64? {
         return value(forKey: "fileSize") as? Int64
     }
+    
+    func isInCloud() -> Bool? {
+        /// without optional
+//        let isLocal = value(forKey: "locallyAvailable") as? Bool
+//        return !(isLocal ?? true)
+        
+        if let isLocal = value(forKey: "locallyAvailable") as? Bool {
+            return !isLocal
+        }
+        return nil
+    }
 }
 
 extension Collection {
