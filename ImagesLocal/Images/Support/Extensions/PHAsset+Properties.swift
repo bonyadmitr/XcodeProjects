@@ -149,6 +149,8 @@ extension PHAssetResource {
         return value(forKey: "fileSize") as? Int64
     }
     
+    // TODO: check for iOS 9
+    /// https://stackoverflow.com/a/46389950
     func isInCloud() -> Bool? {
         /// without optional
 //        let isLocal = value(forKey: "locallyAvailable") as? Bool
