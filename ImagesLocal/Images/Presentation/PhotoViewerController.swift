@@ -174,6 +174,29 @@ final class PhotoViewerController: UIViewController {
         options.resizeMode = .exact
         options.version = .current
         
+        
+//        let editingOptions = PHContentEditingInputRequestOptions()
+//        editingOptions.isNetworkAccessAllowed = false
+//        
+//        asset.requestContentEditingInput(with: editingOptions) { contentEditingInput, info in
+//            let url = contentEditingInput!.fullSizeImageURL
+//            let orientation = contentEditingInput!.fullSizeImageOrientation
+//            var inputImage = CIImage(contentsOf: url!)
+//            inputImage = inputImage!.oriented(forExifOrientation: orientation)
+//            
+//            for (key, value) in inputImage!.properties {
+//                print("key: \(key)")
+//                print("value: \(value)")
+//            }
+//            
+//            do {
+//                let fileSize = try contentEditingInput?.fullSizeImageURL?.resourceValues(forKeys: [URLResourceKey.fileSizeKey]).fileSize
+//                print("file size: \(String(describing: fileSize))")
+//            } catch let error {
+//                fatalError("error: \(error)")
+//            }
+//        }
+        
         PHImageManager.default().requestImageData(for: asset, options: options) { (data, uniformTypeIdentifier, orientation, info) in
             
             /// https://developer.apple.com/documentation/photokit/phimagemanager/image_result_info_keys
