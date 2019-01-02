@@ -46,11 +46,17 @@ extension PHAsset {
     }
     
     /// will be different for edited photos
+    @available(iOS 10.0, *)
     func originalFileSize() -> Int64? {
         return self.mainResource()?.fileSize()
     }
     
+    func isInCloud() -> Bool? {
+        return self.mainResource()?.isInCloud()
+    }
+    
     /// edited or original one
+    @available(iOS 10.0, *)
     func fileSize() -> Int64? {
         let resources = PHAssetResource.assetResources(for: self)
         let resource = resources[safe: 1] ?? resources.first
@@ -82,6 +88,7 @@ extension PHAsset {
     }
     
     /// optmized to get all values
+    @available(iOS 10.0, *)
     func allProperties() -> AllResourcesProperties? {
         let resources = PHAssetResource.assetResources(for: self)
         
@@ -123,6 +130,7 @@ extension PHAsset {
                 isEdited: isEdited)
     }
     
+    @available(iOS 10.0, *)
     func allOriginalProperties() -> AllResourcesProperties? {
         let resources = PHAssetResource.assetResources(for: self)
         
@@ -144,7 +152,7 @@ typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: Stri
 
 extension PHAssetResource {
     
-    //@available(iOS 10.0, *)
+    @available(iOS 10.0, *)
     func fileSize() -> Int64? {
         return value(forKey: "fileSize") as? Int64
     }

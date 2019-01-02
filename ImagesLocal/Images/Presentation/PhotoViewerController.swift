@@ -112,28 +112,41 @@ final class PhotoViewerController: UIViewController {
             return
         }
         
-        if let allProperties = asset.allProperties() {
-            print("--- allProperties")
-            print("- fileName", allProperties.fileName)
-            print("- fileSize", allProperties.fileSize)
-            print("- isEdited", allProperties.isEdited)
-            print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
-            print("---")
-        } else {
-            assertionFailure()
+        if #available(iOS 10.0, *) {
+            if let allProperties = asset.allProperties() {
+                print("--- allProperties")
+                print("- fileName", allProperties.fileName)
+                print("- fileSize", allProperties.fileSize)
+                print("- isEdited", allProperties.isEdited)
+                print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
+                print("---")
+            } else {
+                assertionFailure()
+            }
+            
+            if let allProperties = asset.allOriginalProperties() {
+                print("--- allOriginalProperties")
+                print("- fileName", allProperties.fileName)
+                print("- fileSize", allProperties.fileSize)
+                print("- isEdited", allProperties.isEdited)
+                print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
+                print("---")
+            } else {
+                assertionFailure()
+            }
+            
+            if let fileSize = asset.originalFileSize() {
+                print("- originalFileSize:", fileSize)
+            } else {
+                assertionFailure()
+            }
+            
+            if let fileSize = asset.fileSize() {
+                print("- fileSize:", fileSize)
+            } else {
+                assertionFailure()
+            }
         }
-        
-        if let allProperties = asset.allOriginalProperties() {
-            print("--- allOriginalProperties")
-            print("- fileName", allProperties.fileName)
-            print("- fileSize", allProperties.fileSize)
-            print("- isEdited", allProperties.isEdited)
-            print("- uniformTypeIdentifier", allProperties.uniformTypeIdentifier)
-            print("---")
-        } else {
-            assertionFailure()
-        }
-        
         
         print("creationDate", asset.creationDate ?? "nil")
         print("modificationDate", asset.modificationDate ?? "nil")
@@ -142,26 +155,32 @@ final class PhotoViewerController: UIViewController {
             if abs(creationDate.timeIntervalSince1970 - modificationDate.timeIntervalSince1970) < 2 {
                 print("- it is duplicate by iPhone action")
             }
+        } else {
+            assertionFailure()
         }
         
         if let originalFilename = asset.originalFilename() {
             title = originalFilename
+        } else {
+            assertionFailure()
         }
         
         if let filename = asset.filename() {
             print("- filename:", filename)
-        }
-        
-        if let fileSize = asset.originalFileSize() {
-            print("- originalFileSize:", fileSize)
-        }
-        
-        if let fileSize = asset.fileSize() {
-            print("- fileSize:", fileSize)
+        } else {
+            assertionFailure()
         }
         
         if let type = asset.uniformTypeIdentifier() {
             print("- uniformTypeIdentifier:", type)
+        } else {
+            assertionFailure()
+        }
+        
+        if let isInCloud = asset.isInCloud() {
+            print("- isInCloud:", isInCloud)
+        } else {
+            assertionFailure()
         }
         
         print(asset.location ?? "location nil")
@@ -204,6 +223,8 @@ final class PhotoViewerController: UIViewController {
             
             if let type = uniformTypeIdentifier {
                 print("- request uniformTypeIdentifier:", type)
+            } else {
+                assertionFailure()
             }
             
             //let data2 = FileManager.default.contents(atPath: PHAsset.fileURL(from: info)!.path)
@@ -214,6 +235,8 @@ final class PhotoViewerController: UIViewController {
                 
                 if let fileName = PHAsset.filename(from: info) {
                     print("- iOS fileName", fileName)
+                } else {
+                    assertionFailure()
                 }
                 
                 let image = UIImage(data: data)
@@ -223,7 +246,11 @@ final class PhotoViewerController: UIViewController {
                 /// metadata
                 if let ciImage = CIImage(data: data) {
                     //print(ciImage.properties)
+                } else {
+                    assertionFailure()
                 }
+            } else {
+                assertionFailure()
             }
             print("--- asset pixels", asset.pixelWidth, asset.pixelHeight)
             print("-------------")
