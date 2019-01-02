@@ -157,7 +157,7 @@ extension PHAssetResource {
         return value(forKey: "fileSize") as? Int64
     }
     
-    // TODO: check for iOS 9
+    // TODO: check for edited photos
     /// https://stackoverflow.com/a/46389950
     func isInCloud() -> Bool? {
         /// without optional
