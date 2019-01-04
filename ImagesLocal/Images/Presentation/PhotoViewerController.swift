@@ -113,7 +113,7 @@ final class PhotoViewerController: UIViewController {
         }
         
         if #available(iOS 10.0, *) {
-            if let allProperties = asset.allProperties() {
+            if let allProperties = asset.allCurrentProperties() {
                 print("--- allProperties")
                 print("- fileName", allProperties.fileName)
                 print("- fileSize", allProperties.fileSize)

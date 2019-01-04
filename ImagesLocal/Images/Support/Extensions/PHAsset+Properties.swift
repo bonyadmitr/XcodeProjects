@@ -89,7 +89,7 @@ extension PHAsset {
     
     /// optmized to get all values
     @available(iOS 10.0, *)
-    func allProperties() -> AllResourcesProperties? {
+    func allCurrentProperties() -> AllResourcesProperties? {
         let resources = PHAssetResource.assetResources(for: self)
         
         guard let mainResource = resources.first else {
