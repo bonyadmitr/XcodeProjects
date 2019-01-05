@@ -25,6 +25,10 @@ extension PHAsset {
     
     func filename() -> String? {
         let resources = PHAssetResource.assetResources(for: self)
+        return filename(from: resources)
+    }
+    
+    func filename(from resources: [PHAssetResource]) -> String? {
         guard let mainResource = resources.first else {
             assertionFailure()
             return nil
