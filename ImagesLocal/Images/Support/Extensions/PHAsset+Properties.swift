@@ -131,7 +131,8 @@ extension PHAsset {
         return (fileSize: fileSize,
                 uniformTypeIdentifier: uniformTypeIdentifier,
                 fileName: fileName,
-                isEdited: isEdited)
+                isEdited: isEdited,
+                isInCloud: mainResource.isInCloud() ?? false)
     }
     
     @available(iOS 10.0, *)
@@ -148,11 +149,12 @@ extension PHAsset {
         return (fileSize: mainResource.fileSize() ?? 0,
                 uniformTypeIdentifier: mainResource.uniformTypeIdentifier,
                 fileName: mainResource.originalFilename,
-                isEdited: isEdited)
+                isEdited: isEdited,
+                isInCloud: mainResource.isInCloud() ?? false)
     }
 }
 
-typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: String, fileName: String, isEdited: Bool)
+typealias AllResourcesProperties = (fileSize: Int64, uniformTypeIdentifier: String, fileName: String, isEdited: Bool, isInCloud: Bool)
 
 extension PHAssetResource {
     
