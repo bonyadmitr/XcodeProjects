@@ -187,6 +187,34 @@ final class PhotoViewerController: UIViewController {
         print(asset.location ?? "location nil")
         
         
+        
+        if asset.mediaType == .video {
+            let options = PHVideoRequestOptions()
+            options.version = .original
+            options.deliveryMode = .highQualityFormat
+            options.isNetworkAccessAllowed = false
+            
+            PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { avAsset, aVAudioMix, dict in
+                
+                if let avUrlAsset = avAsset as? AVURLAsset {
+                    do {
+                        let urlToFile = avUrlAsset.url
+                        print("urlToFile", urlToFile)
+                        if let size = try FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as? NSNumber {
+                            print("video size", size.int64Value)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                } else {
+                }
+
+            }
+            
+            return
+        }
+        
+        
         let options = PHImageRequestOptions()
         //options.deliveryMode = .fastFormat /// requestImageData ignores this option
         options.isNetworkAccessAllowed = true
@@ -222,6 +250,7 @@ final class PhotoViewerController: UIViewController {
             /// https://developer.apple.com/documentation/photokit/phimagemanager/image_result_info_keys
             //print("- info keys", info ?? "nil")
             
+            /// nil for video
             if let type = uniformTypeIdentifier {
                 print("- request uniformTypeIdentifier:", type)
             } else {
@@ -246,7 +275,7 @@ final class PhotoViewerController: UIViewController {
                 
                 /// metadata
                 if let ciImage = CIImage(data: data) {
-                    //print(ciImage.properties)
+                    print(ciImage.properties)
                 } else {
                     assertionFailure()
                 }
@@ -456,7 +485,11 @@ final class PhotoViewerController: UIViewController {
             /// will fail for videos
             fatalError("can't load input image to edit")
         }
-        
+//        if #available(iOS 10.0, *) {
+//            inputImage.settingProperties([:])
+//        } else {
+//            // Fallback on earlier versions
+//        }
         // Apply the filter.
         let outputImage = inputImage
             .oriented(forExifOrientation: input.fullSizeImageOrientation)
