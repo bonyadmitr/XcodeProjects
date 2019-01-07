@@ -26,4 +26,8 @@ extension PHAsset {
     static func uniformTypeIdentifier(from info: [AnyHashable : Any]?) -> String? {
         return info?["PHImageFileUTIKey"] as? String
     }
+    
+    static func error(from info: [AnyHashable : Any]?) -> NSError? {
+        return info?[PHImageErrorKey] as? NSError
+    }
 }
