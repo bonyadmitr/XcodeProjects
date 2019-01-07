@@ -60,6 +60,7 @@ final class PhotoViewerController: UIViewController {
     
     func updateStillImage() {
         guard let asset = asset else {
+            assertionFailure()
             return
         }
         
@@ -102,19 +103,19 @@ final class PhotoViewerController: UIViewController {
                 //print(CIImage(image: image)?.properties)
         })
         
-        
         printSize()
         //printMetadata()
     }
     
     func printSize() {
         guard let asset = asset else {
+            assertionFailure()
             return
         }
         
         if #available(iOS 10.0, *) {
             if let allProperties = asset.allCurrentProperties() {
-                print("--- allProperties")
+                print("--- allCurrentProperties")
                 print("- fileName", allProperties.fileName)
                 print("- fileSize", allProperties.fileSize)
                 print("- isEdited", allProperties.isEdited)
