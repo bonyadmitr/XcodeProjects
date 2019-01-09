@@ -204,9 +204,11 @@ final class PhotoViewerController: UIViewController {
                             print("video size", size.int64Value)
                         }
                     } catch {
+                        assertionFailure(error.localizedDescription)
                         print(error.localizedDescription)
                     }
                 } else {
+                    assertionFailure("iOS error")
                 }
 
             }
