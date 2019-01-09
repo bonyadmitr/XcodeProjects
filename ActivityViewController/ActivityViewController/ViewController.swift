@@ -117,3 +117,136 @@ extension UIActivity.ActivityType {
     static let streamShareService = UIActivity.ActivityType(rawValue: "com.apple.mobileslideshow.StreamShareService")
 }
 
+
+//class FavoriteActivity: UIActivity {
+//    override func activityType() -> String? {
+//        return "TestActionss.Favorite"
+//    }
+//
+//    override func activityTitle() -> String? {
+//        return "Add to Favorites"
+//    }
+//
+//    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+//        NSLog("%@", __FUNCTION__)
+//        return true
+//    }
+//
+//    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+//        NSLog("%@", __FUNCTION__)
+//    }
+//
+//    override func activityViewController() -> UIViewController? {
+//        NSLog("%@", __FUNCTION__)
+//        return nil
+//    }
+//
+//    override func performActivity() {
+//        // Todo: handle action:
+//        NSLog("%@", __FUNCTION__)
+//
+//        self.activityDidFinish(true)
+//    }
+//
+//    override func activityImage() -> UIImage? {
+//        return UIImage(named: "favorites_action")
+//    }
+//}
+
+//class ActivityViewCustomActivity: UIActivity {
+//
+//    // MARK: Properties
+//
+//    var customActivityType: UIActivityType
+//    var activityName: String
+//    var activityImageName: String
+//    var customActionWhenTapped: () -> Void
+//
+//
+//    // MARK: Initializer
+//
+//    init(title: String, imageName: String, performAction: @escaping () -> Void) {
+//        self.activityName = title
+//        self.activityImageName = imageName
+//        self.customActivityType = UIActivityType(rawValue: "Action \(title)")
+//        self.customActionWhenTapped = performAction
+//        super.init()
+//    }
+//
+//
+//
+//    // MARK: Overrides
+//
+//    override var activityType: UIActivityType? {
+//        return customActivityType
+//    }
+//
+//
+//
+//    override var activityTitle: String? {
+//        return activityName
+//    }
+//
+//
+//
+//    override class var activityCategory: UIActivityCategory {
+//        return .share
+//    }
+//
+//
+//
+//    override var activityImage: UIImage? {
+//        return UIImage(named: activityImageName)
+//    }
+//
+//
+//
+//    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+//        return true
+//    }
+//
+//
+//
+//    override func prepare(withActivityItems activityItems: [Any]) {
+//        // Nothing to prepare
+//    }
+//
+//
+//
+//    override func perform() {
+//        customActionWhenTapped()
+//    }
+//}
+
+
+//class CustomActivity: UIActivity {
+//
+//    override class var activityCategory: UIActivityCategory {
+//        return .action
+//    }
+//
+//    override var activityType: UIActivityType? {
+//        guard let bundleId = Bundle.main.bundleIdentifier else {return nil}
+//        return UIActivityType(rawValue: bundleId + "\(self.classForCoder)")
+//    }
+//
+//    override var activityTitle: String? {
+//        return <# Title #>
+//    }
+//
+//    override var activityImage: UIImage? {
+//        return <# UIImage #>
+//    }
+//
+//    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+//        return true
+//    }
+//
+//    override func prepare(withActivityItems activityItems: [Any]) {
+//        //
+//    }
+//
+//    override func perform() {
+//        activityDidFinish(true)
+//    }
+//}
