@@ -229,7 +229,7 @@ extension UIActivity.ActivityType {
 //    }
 //}
 
-
+/// https://developer.apple.com/documentation/uikit/uiactivity
 final class CustomActivity: UIActivity {
 
     override class var activityCategory: UIActivity.Category {
