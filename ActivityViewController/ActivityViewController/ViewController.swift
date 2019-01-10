@@ -32,17 +32,23 @@ class ViewController: UIViewController {
         let objectsToShare = [UIImage(color: .red, size: CGSize(width: 100, height: 100))!]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
 //        let activityVC = ActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
         activityVC.excludedActivityTypes = [
-            .airDrop, .openInIBooks, .saveToCameraRoll, .assignToContact,
-            .copyToPasteboard,
+            .postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll,  .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks,
             /// does not work in iOS 9.3, working in iOS 10.3 and 11
             /// https://stackoverflow.com/a/39710905/5893286
-            UIActivity.ActivityType(rawValue: "by.come.life.Lifebox.LifeboxShared")
-//            UIActivity.ActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-//            UIActivity.ActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
-//            UIActivity.ActivityType(rawValue: "com.google.Drive.ShareExtension")
+            UIActivity.ActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+            UIActivity.ActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+            UIActivity.ActivityType(rawValue: "com.apple.mobileslideshow.StreamShareService"),
+            
+            UIActivity.ActivityType(rawValue: "by.come.life.Lifebox.LifeboxShared"),
+            UIActivity.ActivityType(rawValue: "com.turkcell.akillidepo.LifeboxShared"),
+            UIActivity.ActivityType(rawValue: "com.apple.CloudDocsUI.AddToiCloudDrive"),
+            UIActivity.ActivityType(rawValue: "com.google.Drive.ShareExtension")
         ]
-        
+        if #available(iOS 11.0, *) {
+            activityVC.excludedActivityTypes?.append(.markupAsPDF)
+        }
         present(activityVC, animated: true, completion: nil)
     }
 }
