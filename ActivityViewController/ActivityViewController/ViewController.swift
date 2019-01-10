@@ -26,24 +26,30 @@ class ViewController: UIViewController {
 
     private func showActivityVC() {
         /// abstract class
-        //let activity = UIActivity()
+        let activity = CustomActivity()
         
         //let objectsToShare = ["Some text"]
         let objectsToShare = [UIImage(color: .red, size: CGSize(width: 100, height: 100))!]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//        let activityVC = ActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: [activity])
+        let activityVC = ActivityViewController(activityItems: objectsToShare, applicationActivities: [activity])
         
         activityVC.excludedActivityTypes = [
             .postToFacebook, .postToTwitter, .postToWeibo, .message, .mail, .print, .copyToPasteboard, .assignToContact, .saveToCameraRoll,  .addToReadingList, .postToFlickr, .postToVimeo, .postToTencentWeibo, .airDrop, .openInIBooks,
             /// does not work in iOS 9.3, working in iOS 10.3 and 11
             /// https://stackoverflow.com/a/39710905/5893286
-            UIActivity.ActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+            
+            /// working
             UIActivity.ActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+            
+            /// need to test
+            UIActivity.ActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
             UIActivity.ActivityType(rawValue: "com.apple.mobileslideshow.StreamShareService"),
             
-            UIActivity.ActivityType(rawValue: "by.come.life.Lifebox.LifeboxShared"),
-            UIActivity.ActivityType(rawValue: "com.turkcell.akillidepo.LifeboxShared"),
-            UIActivity.ActivityType(rawValue: "com.apple.CloudDocsUI.AddToiCloudDrive"),
+            /// not working. "Save to Files"
+            //UIActivity.ActivityType(rawValue: "com.apple.CloudDocsUI.AddToiCloudDrive"),
+            
+            /// http://johnszumski.com/blog/excluding-third-party-apps-from-ios-8-share-sheet
+            /// https://medium.com/@patoroco/uiactivityviewcontroller-workaround-to-share-in-whatsapp-in-ios-cac1df245a89
             UIActivity.ActivityType(rawValue: "com.google.Drive.ShareExtension")
         ]
         if #available(iOS 11.0, *) {
@@ -122,7 +128,6 @@ extension UIActivity.ActivityType {
     static let googleDriveShareExtension = UIActivity.ActivityType(rawValue: "com.google.Drive.ShareExtension")
     static let streamShareService = UIActivity.ActivityType(rawValue: "com.apple.mobileslideshow.StreamShareService")
 }
-
 
 //class FavoriteActivity: UIActivity {
 //    override func activityType() -> String? {
@@ -225,34 +230,42 @@ extension UIActivity.ActivityType {
 //}
 
 
-//class CustomActivity: UIActivity {
-//
-//    override class var activityCategory: UIActivityCategory {
-//        return .action
-//    }
-//
-//    override var activityType: UIActivityType? {
-//        guard let bundleId = Bundle.main.bundleIdentifier else {return nil}
-//        return UIActivityType(rawValue: bundleId + "\(self.classForCoder)")
-//    }
-//
-//    override var activityTitle: String? {
-//        return <# Title #>
-//    }
-//
-//    override var activityImage: UIImage? {
-//        return <# UIImage #>
-//    }
-//
-//    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
-//        return true
-//    }
-//
-//    override func prepare(withActivityItems activityItems: [Any]) {
-//        //
-//    }
-//
-//    override func perform() {
-//        activityDidFinish(true)
-//    }
-//}
+final class CustomActivity: UIActivity {
+
+    override class var activityCategory: UIActivity.Category {
+        return .action
+    }
+
+    override var activityType: UIActivity.ActivityType? {
+        guard let bundleId = Bundle.main.bundleIdentifier else {return nil}
+        return UIActivity.ActivityType(rawValue: bundleId + "\(self.classForCoder)")
+    }
+
+    override var activityTitle: String? {
+        return "Custom"
+    }
+
+    override var activityImage: UIImage? {
+        return UIImage(named: "ic_settings")
+    }
+
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        return true
+    }
+
+    override func prepare(withActivityItems activityItems: [Any]) {
+        print("save activityItems")
+    }
+
+    override func perform() {
+        print("CustomActivity action 1")
+        
+        let vc = UIAlertController(title: "qqq", message: "www", preferredStyle: .alert)
+        vc.addAction(.init(title: "ok", style: .default, handler: { _ in
+            print("CustomActivity action 2")
+            self.activityDidFinish(true)
+        }))
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
+}
