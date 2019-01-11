@@ -34,12 +34,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .NSCalendarDayChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dateDidChange), name: .UIApplicationSignificantTimeChange, object: nil)
         
+        /// https://developer.apple.com/documentation/uikit/core_app/managing_your_app_s_life_cycle/preparing_your_app_to_run_in_the_background/updating_your_app_with_background_app_refresh
+        /// https://developer.apple.com/documentation/uikit/uiapplication/1622994-backgroundrefreshstatus
+        /// https://www.raywenderlich.com/5817-background-modes-tutorial-getting-started
+        /// https://habr.com/post/208434/
+        /// UIApplicationBackgroundFetchIntervalMinimum (simulator iOS 12 = 0.0)
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        
+        switch application.backgroundRefreshStatus {
+        case .restricted:
+            print("backgroundRefreshStatus restricted")
+        case .denied:
+            print("backgroundRefreshStatus denied")
+        case .available:
+            print("backgroundRefreshStatus available")
+        }
+        
         return true
     }
     
     @objc private func dateDidChange(_ notification: Notification) {
         debugLog("notification: \(notification.name.rawValue)")
         debugLog("date: \(Date())")
+    }
+    
+    /// max 30 sec
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("- Background Fetch performFetchWithCompletionHandler")
+        BackgroundTaskManager.shared.restartBackgroundTask()
+        completionHandler(.newData)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
