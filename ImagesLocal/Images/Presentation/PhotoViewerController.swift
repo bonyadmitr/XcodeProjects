@@ -487,6 +487,13 @@ final class PhotoViewerController: UIViewController {
             /// will fail for videos
             fatalError("can't load input image to edit")
         }
+        
+        /// not exif
+        /// https://stackoverflow.com/questions/39206967/attach-metadata-to-image-using-photo-framework
+        
+        /// https://stackoverflow.com/questions/25715280/how-to-preserve-original-photo-metadata-when-editing-phassets
+        /// https://gist.github.com/kwylez/a4b6ec261e52970e1fa5dd4ccfe8898f
+        /// https://stackoverflow.com/questions/26208277/metadata-exif-tiff-etc-in-photokit
 //        if #available(iOS 10.0, *) {
 //            inputImage.settingProperties([:])
 //        } else {
