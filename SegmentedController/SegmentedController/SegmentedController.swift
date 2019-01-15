@@ -1,9 +1,77 @@
 import UIKit
 
+/// https://stackoverflow.com/a/42866766
+final class TransparentGradientView: UIView {
+    
+    private let gradientMask = CAGradientLayer()
+    
+    /// animated
+    var style = TransparentGradientStyle.vertical {
+        didSet {
+            setupStyle()
+        }
+    }
+    
+    enum TransparentGradientStyle {
+        case vertical
+        case horizontal
+    }
+    
+    init(style: TransparentGradientStyle, mainColor: UIColor) {
+        /// will not call didSet
+        self.style = style
+        
+        self.init()
+        backgroundColor = mainColor
+    }
+    
+    /// setup backgroundColor to change color of gradient
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    /// setup backgroundColor to change color of gradient
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setupStyle() {
+        switch style {
+        case .vertical:
+            gradientMask.startPoint = CGPoint(x: 0, y: 0)
+            gradientMask.endPoint = CGPoint(x: 0, y: 1)
+            
+        case .horizontal:
+            gradientMask.startPoint = CGPoint(x: 0, y: 0)
+            gradientMask.endPoint = CGPoint(x: 1, y: 0)
+        }
+    }
+    
+    private func setup() {
+        setupStyle()
+        
+        let anyNotClearColor = UIColor.white
+        gradientMask.colors = [UIColor.clear.cgColor, anyNotClearColor, anyNotClearColor.cgColor]
+        
+        /// 0 - 0.1 is 10% of view will be UIColor.clear
+        gradientMask.locations = [NSNumber(value: 0), NSNumber(value: 0.1), NSNumber(value: 1)]
+        layer.mask = gradientMask
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradientMask.frame = bounds
+    }
+}
+
 final class SegmentedController: UIViewController {
     
     private let topView = UIView()
     private let contanerView = UIView()
+    let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
@@ -35,37 +103,30 @@ final class SegmentedController: UIViewController {
         contanerView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
-        topView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        let edgeConstant: CGFloat = 35
-        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeConstant).isActive = true
-        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeConstant).isActive = true
+        let edgeOffset: CGFloat = 35
+        segmentedControl.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: edgeOffset).isActive = true
+        segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
-        contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 0).isActive = true
-        contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         
-//        NSLayoutConstraint.activate([
-//            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-//            topView.heightAnchor.constraint(equalToConstant: 50),
-//
-//            segmentedControl.leadingAnchor.constraint(equalTo: contanerView.leadingAnchor, constant: edgeConstant),
-//            segmentedControl.trailingAnchor.constraint(equalTo: contanerView.trailingAnchor, constant: edgeConstant),
-//            segmentedControl.centerYAnchor.constraint(equalTo: contanerView.centerYAnchor),
-//
-//            contanerView.topAnchor.constraint(equalTo: topView.topAnchor, constant: 0),
-//            contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//            contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-//            contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-//            ])
+        view.addSubview(transparentGradientView)
+        let transparentGradientViewHeight: CGFloat = 100
+        transparentGradientView.translatesAutoresizingMaskIntoConstraints = false
+        transparentGradientView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        transparentGradientView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        transparentGradientView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        transparentGradientView.heightAnchor.constraint(equalToConstant: transparentGradientViewHeight).isActive = true
     }
     
     override func viewDidLoad() {
