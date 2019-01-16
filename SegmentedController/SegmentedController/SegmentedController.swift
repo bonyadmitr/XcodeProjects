@@ -117,6 +117,12 @@ final class SegmentedController: UIViewController {
         contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        NSLayoutConstraint.activate([
+//            contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+//            contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//            ])
         
         segmentedControl.addTarget(self, action: #selector(controllerDidChange), for: .valueChanged)
         
