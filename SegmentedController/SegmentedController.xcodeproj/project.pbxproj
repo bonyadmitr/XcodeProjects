@@ -11,6 +11,7 @@
 		C4D9C04221EDD97C00693D94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D9C04121EDD97C00693D94 /* Assets.xcassets */; };
 		C4D9C04521EDD97C00693D94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D9C04321EDD97C00693D94 /* LaunchScreen.storyboard */; };
 		C4D9C04D21EDD99A00693D94 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */; };
+		CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6B21EF040400BE352D /* TransparentGradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		C4D9C04421EDD97C00693D94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4D9C04621EDD97C00693D94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
+		CE170F6B21EF040400BE352D /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				C4D9C03F21EDD97A00693D94 /* AppDelegate.swift */,
 				C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */,
+				CE170F6B21EF040400BE352D /* TransparentGradientView.swift */,
 				C4D9C04121EDD97C00693D94 /* Assets.xcassets */,
 				C4D9C04321EDD97C00693D94 /* LaunchScreen.storyboard */,
 				C4D9C04621EDD97C00693D94 /* Info.plist */,
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4D9C04D21EDD99A00693D94 /* SegmentedController.swift in Sources */,
+				CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */,
 				C4D9C04021EDD97A00693D94 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
