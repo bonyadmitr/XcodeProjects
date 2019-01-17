@@ -12,7 +12,7 @@ final class SegmentedController: UIViewController {
         return segmentedControl
     }()
     
-    private var viewControllers: [UIViewController] = []
+    private var viewControllers: [UIViewController] = [PhotosController()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
