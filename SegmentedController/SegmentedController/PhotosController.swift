@@ -18,6 +18,7 @@ final class PhotosController: UIViewController {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
+        collectionView.allowsMultipleSelection = true
         
         return collectionView
     }()
@@ -51,6 +52,8 @@ final class PhotosController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
     }
+    
+    var qqqq = false
 }
 
 // MARK: - UICollectionViewDataSource
@@ -74,6 +77,12 @@ extension PhotosController: UICollectionViewDelegate {
             return
         }
         let item = photos[indexPath.row]
+        if qqqq {
+            cell.sizeLabel.text = "ready"
+        } else {
+            cell.sizeLabel.text = ""
+        }
+        
         URLSession.shared.dataTask(with: item.thumbnailUrl) { data, response, error in
             guard
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
@@ -96,6 +105,54 @@ extension PhotosController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        print(indexPath)
+        
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
+//            assertionFailure()
+//            return
+//        }
+        
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        if selectedCount == 5 {
+            qqqq = true
+            
+            collectionView.visibleCells
+                .compactMap({ $0 as? PhotoCell })
+                .forEach({ $0.sizeLabel.text = "ready" })
+        } else {
+            qqqq = false
+            
+            collectionView.visibleCells
+                .compactMap({ $0 as? PhotoCell })
+                .forEach({ $0.sizeLabel.text = "" })
+        }
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        if selectedCount == 5 {
+            qqqq = true
+            
+            collectionView.visibleCells
+                .compactMap({ $0 as? PhotoCell })
+                .forEach({ $0.sizeLabel.text = "ready" })
+        } else {
+            qqqq = false
+            
+            collectionView.visibleCells
+                .compactMap({ $0 as? PhotoCell })
+                .forEach({ $0.sizeLabel.text = "" })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        return selectedCount < 5
+//        if selectedCount == 5 {
+//            return false
+//        }
     }
 }
 
@@ -112,7 +169,7 @@ extension PhotosController: UIScrollViewDelegate {
     }
 }
 
-final class PhotoCell: UICollectionViewCell {
+final class PhotoCell2: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -139,6 +196,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private func setup() {
         addSubview(imageView)
+        layer.borderColor = UIColor.red.cgColor
     }
     
     override func layoutSubviews() {
@@ -149,6 +207,85 @@ final class PhotoCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                layer.borderWidth = 3
+            } else {
+                layer.borderWidth = 0
+            }
+        }
+    }
+}
+
+
+final class PhotoCell: UICollectionViewCell {
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        //imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .lightGray
+        imageView.isOpaque = true
+        return imageView
+    }()
+    
+    let sizeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textAlignment = .center
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        label.textColor = .white
+        return label
+    }()
+    
+    var representedAssetIdentifier = ""
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        addSubview(imageView)
+        addSubview(sizeLabel)
+        assert(subviews.firstIndex(of: sizeLabel) ?? 0 > subviews.firstIndex(of: imageView) ?? 0)
+        layer.borderColor = UIColor.red.cgColor
+    }
+    
+    let sizeLabelHeight: CGFloat = 20
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = bounds
+        sizeLabel.frame = CGRect(x: 0, y: bounds.height - sizeLabelHeight, width: bounds.width, height: sizeLabelHeight)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        sizeLabel.text = ""
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+//                sizeLabel.text = "Selected"
+                layer.borderWidth = 3
+            } else {
+//                sizeLabel.text = ""
+                layer.borderWidth = 0
+            }
+        }
     }
 }
 
