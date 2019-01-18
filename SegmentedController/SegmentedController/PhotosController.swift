@@ -2,6 +2,13 @@ import UIKit
 
 final class PhotosController: UIViewController {
     
+    enum SelectionState {
+        case selecting
+        case ended
+    }
+    
+    var selectionState = SelectionState.selecting
+    
     private let cellId = String(describing: PhotoCell.self)
     
     internal lazy var collectionView: UICollectionView = {
@@ -52,8 +59,6 @@ final class PhotosController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
     }
-    
-    var qqqq = false
 }
 
 // MARK: - UICollectionViewDataSource
@@ -77,11 +82,18 @@ extension PhotosController: UICollectionViewDelegate {
             return
         }
         let item = photos[indexPath.row]
-        if qqqq {
-            cell.sizeLabel.text = "ready"
-        } else {
-            cell.sizeLabel.text = ""
-        }
+//
+        cell.update(for: selectionState)
+//        switch selectionState {
+//        case .selecting:
+//            cell.sizeLabel.text = "selecting"
+//        case .ended:
+//            if cell.isSelected {
+//                cell.sizeLabel.text = "ready"
+//            } else {
+//                cell.sizeLabel.text = ""
+//            }
+//        }
         
         URLSession.shared.dataTask(with: item.thumbnailUrl) { data, response, error in
             guard
@@ -97,62 +109,117 @@ extension PhotosController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? PhotoCell else {
-            assertionFailure()
-            return
-        }
+//        guard let cell = cell as? PhotoCell else {
+//            assertionFailure()
+//            return
+//        }
         //photoLoadingManager.end(cell: cell, at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print(indexPath)
-        
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
-//            assertionFailure()
-//            return
-//        }
-        
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-        if selectedCount == 5 {
-            qqqq = true
-            
-            collectionView.visibleCells
-                .compactMap({ $0 as? PhotoCell })
-                .forEach({ $0.sizeLabel.text = "ready" })
-        } else {
-            qqqq = false
-            
-            collectionView.visibleCells
-                .compactMap({ $0 as? PhotoCell })
-                .forEach({ $0.sizeLabel.text = "" })
-        }
         
+        if selectedCount == 5 {
+            
+            selectionState = .ended
+            
+            let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
+            cells.forEach({ $0.update(for: selectionState) })
+        } else {
+            selectionState = .selecting
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
+                assertionFailure()
+                return
+            }
+            
+            cell.update(for: selectionState)
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        selection()
+        
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-        if selectedCount == 5 {
-            qqqq = true
-            
-            collectionView.visibleCells
-                .compactMap({ $0 as? PhotoCell })
-                .forEach({ $0.sizeLabel.text = "ready" })
+        
+        selectionState = .selecting
+        
+        if selectedCount == 5 - 1 {
+            let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
+            cells.forEach({ $0.update(for: selectionState) })
         } else {
-            qqqq = false
+            guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
+                assertionFailure()
+                return
+            }
             
-            collectionView.visibleCells
-                .compactMap({ $0 as? PhotoCell })
-                .forEach({ $0.sizeLabel.text = "" })
+            cell.update(for: selectionState)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-        return selectedCount < 5
+        switch selectionState {
+        case .selecting:
+            return true
+        case .ended:
+            return false
+        }
+//        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+//        return selectedCount < 5
 //        if selectedCount == 5 {
 //            return false
 //        }
+    }
+    
+    private func selection() {
+        
+        //        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
+        //            assertionFailure()
+        //            return
+        //        }
+        
+        guard let indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems else {
+            assertionFailure()
+            return
+        }
+        
+        
+        
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
+        
+        let selectedCount = indexPathsForSelectedItems.count
+        if selectedCount == 5 {
+            selectionState = .ended
+            
+            
+            //            collectionView.visibleCells
+            //                .compactMap({ $0 as? PhotoCell })
+//            cells.forEach({ cell in
+//                if cell.isSelected {
+//                    cell.sizeLabel.text = "ready"
+//                } else {
+//                    cell.sizeLabel.text = ""
+//                }
+//            })
+        } else {
+            selectionState = .selecting
+            //            collectionView.visibleCells
+            //                .compactMap({ $0 as? PhotoCell })
+            //                .forEach({ $0.sizeLabel.text = "" })
+            
+//            cells.forEach({ cell in
+//                if cell.isSelected {
+//                    cell.sizeLabel.text = "ready"
+//                } else {
+//                    cell.sizeLabel.text = "selecting"
+//                }
+//            })
+        }
+        cells.forEach({ $0.update(for: selectionState) })
+        //        collectionView.performBatchUpdates({
+        //            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        //        }, completion: nil)
     }
 }
 
@@ -286,6 +353,21 @@ final class PhotoCell: UICollectionViewCell {
                 layer.borderWidth = 0
             }
         }
+    }
+    
+    func update(for selectionState: PhotosController.SelectionState) {
+        
+        if self.isSelected {
+            self.sizeLabel.text = "ready"
+        } else {
+            switch selectionState {
+            case .selecting:
+                self.sizeLabel.text = "selecting"
+            case .ended:
+                self.sizeLabel.text = ""
+            }
+        }
+        
     }
 }
 
