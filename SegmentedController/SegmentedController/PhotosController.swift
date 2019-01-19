@@ -117,9 +117,6 @@ final class PhotosController: UIViewController {
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    var isLoadingMore = false
-    var isLoadingMoreFinished = false
-    
     func getInfinityView() -> UIView {
         let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
         let activity = UIActivityIndicatorView(frame: rect)
@@ -128,12 +125,12 @@ final class PhotosController: UIViewController {
         return activity
     }
     
-    let selectingLimit = 5
-    
-    
+    private let selectingLimit = 5
     private var page = 0
     private let size = 1000
     private let photoService = PhotoService()
+    private var isLoadingMore = false
+    private var isLoadingMoreFinished = false
     
     private func loadMore() {
         if isLoadingMore, isLoadingMoreFinished {
@@ -144,7 +141,7 @@ final class PhotosController: UIViewController {
         isLoadingMore = true
 
         self.photoService.loadPhotos(page: page, size: size, handler: { photos in
-            
+
             let indexPathes = (self.photos.count ..< self.photos.count + photos.count).map({ IndexPath(item: $0, section: 0) })
             self.photos.append(contentsOf: photos)
             
@@ -177,24 +174,13 @@ extension PhotosController: UICollectionViewDataSource {
 extension PhotosController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
         guard let cell = cell as? PhotoCell else {
             assertionFailure()
             return
         }
+        
         let item = photos[indexPath.row]
-//
         cell.update(for: selectionState)
-//        switch selectionState {
-//        case .selecting:
-//            cell.sizeLabel.text = "selecting"
-//        case .ended:
-//            if cell.isSelected {
-//                cell.sizeLabel.text = "ready"
-//            } else {
-//                cell.sizeLabel.text = ""
-//            }
-//        }
         
         URLSession.shared.dataTask(with: item.thumbnailUrl) { data, response, error in
             guard
@@ -206,7 +192,7 @@ extension PhotosController: UICollectionViewDelegate {
             DispatchQueue.main.async() {
                 cell.imageView.image = image
             }
-            }.resume()
+        }.resume()
         
         /// load more
         if !isLoadingMoreFinished, !isLoadingMore, indexPath.row == photos.count - 1 {
@@ -226,11 +212,10 @@ extension PhotosController: UICollectionViewDelegate {
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         
         if selectedCount == selectingLimit {
-            
             selectionState = .ended
-            
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
+            
         } else {
             selectionState = .selecting
             
@@ -238,17 +223,13 @@ extension PhotosController: UICollectionViewDelegate {
                 assertionFailure()
                 return
             }
-            
             cell.update(for: selectionState)
         }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        selection()
-        
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-        
         selectionState = .selecting
         
         if selectedCount == selectingLimit - 1 {
@@ -259,7 +240,6 @@ extension PhotosController: UICollectionViewDelegate {
                 assertionFailure()
                 return
             }
-            
             cell.update(for: selectionState)
         }
     }
@@ -271,61 +251,6 @@ extension PhotosController: UICollectionViewDelegate {
         case .ended:
             return false
         }
-//        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
-//        return selectedCount < 5
-//        if selectedCount == 5 {
-//            return false
-//        }
-    }
-    
-    private func selection() {
-        
-        //        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
-        //            assertionFailure()
-        //            return
-        //        }
-        
-        guard let indexPathsForSelectedItems = collectionView.indexPathsForSelectedItems else {
-            assertionFailure()
-            return
-        }
-        
-        
-        
-        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
-        
-        let selectedCount = indexPathsForSelectedItems.count
-        if selectedCount == 5 {
-            selectionState = .ended
-            
-            
-            //            collectionView.visibleCells
-            //                .compactMap({ $0 as? PhotoCell })
-//            cells.forEach({ cell in
-//                if cell.isSelected {
-//                    cell.sizeLabel.text = "ready"
-//                } else {
-//                    cell.sizeLabel.text = ""
-//                }
-//            })
-        } else {
-            selectionState = .selecting
-            //            collectionView.visibleCells
-            //                .compactMap({ $0 as? PhotoCell })
-            //                .forEach({ $0.sizeLabel.text = "" })
-            
-//            cells.forEach({ cell in
-//                if cell.isSelected {
-//                    cell.sizeLabel.text = "ready"
-//                } else {
-//                    cell.sizeLabel.text = "selecting"
-//                }
-//            })
-        }
-        cells.forEach({ $0.update(for: selectionState) })
-        //        collectionView.performBatchUpdates({
-        //            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-        //        }, completion: nil)
     }
 }
 
