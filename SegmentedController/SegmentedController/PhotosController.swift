@@ -241,13 +241,16 @@ extension PhotosController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        let isReachedLimit = (selectedCount == selectingLimit)
         
-        if selectedCount == selectingLimit {
+        if isReachedLimit {
+            /// update all
             selectionState = .ended
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
             
         } else {
+            /// update one
             selectionState = .selecting
             
             guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
@@ -256,17 +259,20 @@ extension PhotosController: UICollectionViewDelegate {
             }
             cell.update(for: selectionState)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         selectionState = .selecting
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        let isDeselectFromLimit = (selectedCount == selectingLimit - 1)
         
-        if selectedCount == selectingLimit - 1 {
+        if isDeselectFromLimit {
+            /// update all
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
+            
         } else {
+            /// update one
             guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
                 assertionFailure()
                 return
@@ -287,6 +293,7 @@ extension PhotosController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         
         if isLoadingMore {
+            // TODO: need to check for all iOS
             //return CGSize(width: collectionView.contentSize.width, height: 50)
             return CGSize(width: 0, height: 50)
         } else {
@@ -295,16 +302,6 @@ extension PhotosController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        //isLoadingMore
-//        if kind == UICollectionElementKindSectionFooter,
-//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath) as? CollectionViewSpinnerFooter
-//        {
-//            footerView.startSpinner()
-//            return footerView
-//        } else {
-//            assertionFailure("Unexpected element kind")
-//            return UICollectionReusableView()
-//        }
         
         if kind == UICollectionElementKindSectionFooter {
             return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
