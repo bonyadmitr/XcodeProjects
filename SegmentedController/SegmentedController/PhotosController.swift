@@ -199,6 +199,17 @@ extension PhotosController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionFooter {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
+        } else {
+            assertionFailure("Unexpected element kind")
+            return UICollectionReusableView()
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -237,6 +248,15 @@ extension PhotosController: UICollectionViewDelegate {
 //            return
 //        }
         //photoLoadingManager.end(cell: cell, at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        switch selectionState {
+        case .selecting:
+            return true
+        case .ended:
+            return false
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -280,14 +300,12 @@ extension PhotosController: UICollectionViewDelegate {
             cell.update(for: selectionState)
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        switch selectionState {
-        case .selecting:
-            return true
-        case .ended:
-            return false
-        }
+}
+
+extension PhotosController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width / 4 - 3
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -299,23 +317,6 @@ extension PhotosController: UICollectionViewDelegate {
         } else {
             return .zero
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if kind == UICollectionElementKindSectionFooter {
-            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
-        } else {
-            assertionFailure("Unexpected element kind")
-            return UICollectionReusableView()
-        }
-    }
-}
-
-extension PhotosController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 4 - 3
-        return CGSize(width: width, height: width)
     }
 }
 
