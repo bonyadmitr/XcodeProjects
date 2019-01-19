@@ -5,7 +5,14 @@ final class PhotoService {
     private var photos: [WebPhoto]?
     
     func loadPhotos(page: Int, size: Int, handler: @escaping ([WebPhoto]) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now()) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            
+            if page == 3 {
+                DispatchQueue.main.async {
+                    handler([])
+                }
+                return
+            }
             
             guard let photos = self.getPhotos() else {
                 DispatchQueue.main.async {
@@ -66,6 +73,7 @@ final class PhotosController: UIViewController {
     var selectionState = SelectionState.selecting
     
     private let cellId = String(describing: PhotoCell.self)
+    private let footerId = String(describing: CollectionViewSpinnerFooter.self)
     
     internal lazy var collectionView: UICollectionView = {
         let isIpad = UI_USER_INTERFACE_IDIOM() == .pad
@@ -79,6 +87,7 @@ final class PhotosController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(CollectionViewSpinnerFooter.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId)
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
         collectionView.allowsMultipleSelection = true
@@ -127,7 +136,7 @@ final class PhotosController: UIViewController {
     
     private let selectingLimit = 5
     private var page = 0
-    private let size = 1000
+    private let size = 32
     private let photoService = PhotoService()
     private var isLoadingMore = false
     private var isLoadingMoreFinished = false
@@ -153,6 +162,12 @@ final class PhotosController: UIViewController {
                 
                 if photos.count < self.size {
                     self.isLoadingMoreFinished = true
+                    
+                    self.collectionView.performBatchUpdates({
+                        self.collectionView.collectionViewLayout.invalidateLayout()
+                    }, completion: nil)
+                    
+                    //self.collectionView.collectionViewLayout.initialLayoutAttributesForAppearingSupplementaryElement(ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0))
                 }
             })
         })
@@ -251,6 +266,55 @@ extension PhotosController: UICollectionViewDelegate {
         case .ended:
             return false
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        
+        if isLoadingMore {
+            //return CGSize(width: collectionView.contentSize.width, height: 50)
+            return CGSize(width: 0, height: 50)
+        } else {
+            return .zero
+        }
+        
+//        let isLastSection = (section == allItems.count - 1)
+//
+//        let height: CGFloat
+//        if !isLastSection || (isPaginationDidEnd && (!isLocalPaginationOn && !isLocalFilesRequested)) {
+//            height = 0
+//        } else {
+//            height = 50
+//        }
+//        return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        //isLoadingMore
+//        if kind == UICollectionElementKindSectionFooter,
+//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath) as? CollectionViewSpinnerFooter
+//        {
+//            footerView.startSpinner()
+//            return footerView
+//        } else {
+//            assertionFailure("Unexpected element kind")
+//            return UICollectionReusableView()
+//        }
+        
+        if kind == UICollectionElementKindSectionFooter {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
+        } else {
+            assertionFailure("Unexpected element kind")
+            return UICollectionReusableView()
+        }
+    }
+    
+    func hideLoadingFooter() {
+        guard let footerView =
+            collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter else {
+                return
+        }
+        
+        footerView.stopSpinner()
     }
 }
 
@@ -424,5 +488,47 @@ extension WebPhoto: Equatable {
 extension WebPhoto: Hashable {
     var hashValue: Int {
         return thumbnailUrl.hashValue// + url.hashValue
+    }
+}
+
+final class CollectionViewSpinnerFooter: UICollectionReusableView {
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activity.startAnimating()
+        //activity.color = UIColor.red
+        return activity
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        backgroundColor = .white
+        addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        activityIndicator.center = center
+    }
+    
+    func startSpinner() {
+        activityIndicator.startAnimating()
+        isHidden = false
+    }
+    
+    func stopSpinner() {
+        activityIndicator.stopAnimating()
+        isHidden = true
     }
 }
