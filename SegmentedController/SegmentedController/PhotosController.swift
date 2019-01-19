@@ -1,5 +1,61 @@
 import UIKit
 
+final class PhotoService {
+    
+    private var photos: [WebPhoto]?
+    
+    func loadPhotos(page: Int, size: Int, handler: @escaping ([WebPhoto]) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now()) {
+            
+            guard let photos = self.getPhotos() else {
+                DispatchQueue.main.async {
+                    handler([])
+                }
+                return
+            }
+            
+            let result: [WebPhoto]
+            let offset = page * size
+            let photosLeft = photos.count - offset
+            
+            if photosLeft <= 0 {
+                result = []
+            } else {
+                
+                if photosLeft < size {
+                    result = Array(photos[offset ..< offset + photosLeft])
+                    self.photos = nil
+                } else {
+                    let pageLimit = (page + 1) * size
+                    result = Array(photos[offset ..< pageLimit])
+                }
+            }
+            
+            DispatchQueue.main.async {
+                handler(result)
+            }
+        }
+    }
+    
+    private func getPhotos() -> [WebPhoto]? {
+        if let photos = photos {
+            return photos
+        } else {
+            guard
+                let file = Bundle.main.url(forResource: "photos", withExtension: "json"),
+                let data = try? Data(contentsOf: file),
+                let photos = try? JSONDecoder().decode([WebPhoto].self, from: data)
+                else {
+                    assertionFailure()
+                    return nil
+            }
+            self.photos = photos
+            return photos
+        }
+
+    }
+}
+
 final class PhotosController: UIViewController {
     
     enum SelectionState {
@@ -38,9 +94,9 @@ final class PhotosController: UIViewController {
         collectionView.frame = view.bounds
         view.addSubview(collectionView)
         title = "Photos"
-        readJson()
         
-        collectionView.reloadData()
+        //readJson()
+        loadMore()
     }
     
     private func readJson() {
@@ -53,11 +109,56 @@ final class PhotosController: UIViewController {
                 return
         }
         self.photos = photos
+        collectionView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    var isLoadingMore = false
+    var isLoadingMoreFinished = false
+    
+    func getInfinityView() -> UIView {
+        let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
+        let activity = UIActivityIndicatorView(frame: rect)
+        activity.startAnimating()
+        activity.color = UIColor.red
+        return activity
+    }
+    
+    let selectingLimit = 5
+    
+    
+    private var page = 0
+    private let size = 1000
+    private let photoService = PhotoService()
+    
+    private func loadMore() {
+        if isLoadingMore, isLoadingMoreFinished {
+            assertionFailure()
+            return
+        }
+        
+        isLoadingMore = true
+
+        self.photoService.loadPhotos(page: page, size: size, handler: { photos in
+            
+            let indexPathes = (self.photos.count ..< self.photos.count + photos.count).map({ IndexPath(item: $0, section: 0) })
+            self.photos.append(contentsOf: photos)
+            
+            self.collectionView.performBatchUpdates({
+                self.collectionView.insertItems(at: indexPathes)
+            }, completion: { _ in
+                self.isLoadingMore = false
+                self.page += 1
+                
+                if photos.count < self.size {
+                    self.isLoadingMoreFinished = true
+                }
+            })
+        })
     }
 }
 
@@ -106,6 +207,11 @@ extension PhotosController: UICollectionViewDelegate {
                 cell.imageView.image = image
             }
             }.resume()
+        
+        /// load more
+        if !isLoadingMoreFinished, !isLoadingMore, indexPath.row == photos.count - 1 {
+            loadMore()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -119,7 +225,7 @@ extension PhotosController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
         
-        if selectedCount == 5 {
+        if selectedCount == selectingLimit {
             
             selectionState = .ended
             
@@ -145,7 +251,7 @@ extension PhotosController: UICollectionViewDelegate {
         
         selectionState = .selecting
         
-        if selectedCount == 5 - 1 {
+        if selectedCount == selectingLimit - 1 {
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
         } else {
@@ -233,6 +339,16 @@ extension PhotosController: UICollectionViewDelegateFlowLayout {
 extension PhotosController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //updateCachedAssetsFor
+        
+        
+//        let currentOffset = scrollView.contentOffset.y
+//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.height
+//        //let infinity = tableView.tableFooterView?.bounds.height ?? 0
+//        let deltaOffset = maximumOffset - currentOffset// - infinity
+//
+//        if deltaOffset <= 0 {
+//            loadMore()
+//        }
     }
 }
 
