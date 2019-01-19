@@ -70,12 +70,20 @@ final class PhotosController: UIViewController {
         case ended
     }
     
-    var selectionState = SelectionState.selecting
+    private let photoService = PhotoService()
+    private let paginationSize = 32
+    private var paginationPage = 0
+    private var isLoadingMore = false
+    private var isLoadingMoreFinished = false
     
+    private let selectingLimit = 5
+    private var selectionState = SelectionState.selecting
+    
+    private var photos = [WebPhoto]()
     private let cellId = String(describing: PhotoCell.self)
     private let footerId = String(describing: CollectionViewSpinnerFooter.self)
     
-    internal lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let isIpad = UI_USER_INTERFACE_IDIOM() == .pad
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = isIpad ? 10 : 1
@@ -87,15 +95,23 @@ final class PhotosController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(CollectionViewSpinnerFooter.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId)
+        collectionView.register(CollectionViewSpinnerFooter.self,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                withReuseIdentifier: footerId)
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
         collectionView.allowsMultipleSelection = true
         
+        let transparentGradientViewHeight: CGFloat = 100
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)
+        
         return collectionView
     }()
     
-    private var photos = [WebPhoto]()
+    
+    private lazy var loadingMoreFooterView: CollectionViewSpinnerFooter? = {
+        return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +122,12 @@ final class PhotosController: UIViewController {
         
         //readJson()
         loadMore()
+        collectionView.reloadData()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     private func readJson() {
@@ -118,28 +140,7 @@ final class PhotosController: UIViewController {
                 return
         }
         self.photos = photos
-        collectionView.reloadData()
     }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
-    func getInfinityView() -> UIView {
-        let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
-        let activity = UIActivityIndicatorView(frame: rect)
-        activity.startAnimating()
-        activity.color = UIColor.red
-        return activity
-    }
-    
-    private let selectingLimit = 5
-    private var page = 0
-    private let size = 32
-    private let photoService = PhotoService()
-    private var isLoadingMore = false
-    private var isLoadingMoreFinished = false
     
     private func loadMore() {
         if isLoadingMore, isLoadingMoreFinished {
@@ -149,28 +150,43 @@ final class PhotosController: UIViewController {
         
         isLoadingMore = true
 
-        self.photoService.loadPhotos(page: page, size: size, handler: { photos in
-
-            let indexPathes = (self.photos.count ..< self.photos.count + photos.count).map({ IndexPath(item: $0, section: 0) })
+        self.photoService.loadPhotos(page: paginationPage, size: paginationSize, handler: { photos in
+            let newItemsRange = self.photos.count ..< (self.photos.count + photos.count)
+            let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
             self.photos.append(contentsOf: photos)
             
             self.collectionView.performBatchUpdates({
-                self.collectionView.insertItems(at: indexPathes)
+                self.collectionView.insertItems(at: indexPathesForNewItems)
             }, completion: { _ in
                 self.isLoadingMore = false
-                self.page += 1
+                self.paginationPage += 1
+                let isLoadingMoreFinished = photos.count < self.paginationSize
                 
-                if photos.count < self.size {
+                if isLoadingMoreFinished {
                     self.isLoadingMoreFinished = true
                     
+                    /// to hide footer view by func referenceSizeForFooterInSection
                     self.collectionView.performBatchUpdates({
                         self.collectionView.collectionViewLayout.invalidateLayout()
                     }, completion: nil)
                     
-                    //self.collectionView.collectionViewLayout.initialLayoutAttributesForAppearingSupplementaryElement(ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0))
+                    /// just in case stop animation.
+                    /// don't forget to start animation if need (for pullToRefresh)
+                    self.loadingMoreFooterView?.stopSpinner()
                 }
             })
         })
+    }
+    
+    /// need cancel last request if pullToRequest before end
+    private func reloadData() {
+        self.loadingMoreFooterView?.startSpinner()
+        self.photos.removeAll()
+        collectionView.reloadData()
+        isLoadingMoreFinished = false
+        paginationPage = 0
+        /// call after resetting paginationPage
+        loadMore()
     }
 }
 
@@ -276,16 +292,6 @@ extension PhotosController: UICollectionViewDelegate {
         } else {
             return .zero
         }
-        
-//        let isLastSection = (section == allItems.count - 1)
-//
-//        let height: CGFloat
-//        if !isLastSection || (isPaginationDidEnd && (!isLocalPaginationOn && !isLocalFilesRequested)) {
-//            height = 0
-//        } else {
-//            height = 50
-//        }
-//        return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -307,15 +313,6 @@ extension PhotosController: UICollectionViewDelegate {
             return UICollectionReusableView()
         }
     }
-    
-    func hideLoadingFooter() {
-        guard let footerView =
-            collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter else {
-                return
-        }
-        
-        footerView.stopSpinner()
-    }
 }
 
 extension PhotosController: UICollectionViewDelegateFlowLayout {
@@ -328,16 +325,6 @@ extension PhotosController: UICollectionViewDelegateFlowLayout {
 extension PhotosController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //updateCachedAssetsFor
-        
-        
-//        let currentOffset = scrollView.contentOffset.y
-//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.height
-//        //let infinity = tableView.tableFooterView?.bounds.height ?? 0
-//        let deltaOffset = maximumOffset - currentOffset// - infinity
-//
-//        if deltaOffset <= 0 {
-//            loadMore()
-//        }
     }
 }
 
@@ -448,23 +435,13 @@ final class PhotoCell: UICollectionViewCell {
         sizeLabel.text = ""
     }
     
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-//                sizeLabel.text = "Selected"
-                layer.borderWidth = 3
-            } else {
-//                sizeLabel.text = ""
-                layer.borderWidth = 0
-            }
-        }
-    }
-    
     func update(for selectionState: PhotosController.SelectionState) {
         
         if self.isSelected {
             self.sizeLabel.text = "ready"
+            layer.borderWidth = 3
         } else {
+            layer.borderWidth = 0
             switch selectionState {
             case .selecting:
                 self.sizeLabel.text = "selecting"
@@ -496,6 +473,7 @@ final class CollectionViewSpinnerFooter: UICollectionReusableView {
     private let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activity.startAnimating()
+        activity.hidesWhenStopped = true
         //activity.color = UIColor.red
         return activity
     }()
@@ -529,6 +507,5 @@ final class CollectionViewSpinnerFooter: UICollectionReusableView {
     
     func stopSpinner() {
         activityIndicator.stopAnimating()
-        isHidden = true
     }
 }
