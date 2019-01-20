@@ -185,6 +185,7 @@ final class PhotosController: UIViewController {
         collectionView.reloadData()
         isLoadingMoreFinished = false
         paginationPage = 0
+        
         /// call after resetting paginationPage
         loadMore()
     }
@@ -264,13 +265,13 @@ extension PhotosController: UICollectionViewDelegate {
         let isReachedLimit = (selectedCount == selectingLimit)
         
         if isReachedLimit {
-            /// update all
+            /// update all cell
             selectionState = .ended
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
             
         } else {
-            /// update one
+            /// update one cell
             selectionState = .selecting
             
             guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
@@ -287,12 +288,12 @@ extension PhotosController: UICollectionViewDelegate {
         let isDeselectFromLimit = (selectedCount == selectingLimit - 1)
         
         if isDeselectFromLimit {
-            /// update all
+            /// update all cells
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
             
         } else {
-            /// update one
+            /// update one cell
             guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell else {
                 assertionFailure()
                 return
