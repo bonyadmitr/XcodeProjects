@@ -1,13 +1,4 @@
-//
-//  PhotoService.swift
-//  SegmentedController
-//
-//  Created by Bondar Yaroslav on 1/20/19.
-//  Copyright © 2019 Yaroslav Bondar. All rights reserved.
-//
-
 import Foundation
-
 
 final class PhotoService {
     
