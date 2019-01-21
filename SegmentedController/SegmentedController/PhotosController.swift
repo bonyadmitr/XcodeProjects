@@ -42,6 +42,8 @@ final class PhotosController: UIViewController {
         let transparentGradientViewHeight: CGFloat = 100
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)
         
+        collectionView.backgroundView = emptyMessageLabel
+        emptyMessageLabel.frame = collectionView.bounds
         return collectionView
     }()
     
@@ -50,14 +52,24 @@ final class PhotosController: UIViewController {
         return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter
     }()
     
+    private let emptyMessageLabel: UILabel = {
+        let label = UILabel()
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        //label.textColor
+        //label.font
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.frame = view.bounds
         view.addSubview(collectionView)
         title = "Photos"
         
         //readJson()
+        emptyMessageLabel.text = "Loading..."
         loadMore()
         collectionView.reloadData()
     }
@@ -92,6 +104,10 @@ final class PhotosController: UIViewController {
             let indexPathesForNewItems = newItemsRange.map({ IndexPath(item: $0, section: 0) })
             self.photos.append(contentsOf: photos)
             
+            if !photos.isEmpty {
+                self.collectionView.backgroundView = nil
+            }
+            
             self.collectionView.performBatchUpdates({
                 self.collectionView.insertItems(at: indexPathesForNewItems)
             }, completion: { _ in
@@ -110,6 +126,11 @@ final class PhotosController: UIViewController {
                     /// just in case stop animation.
                     /// don't forget to start animation if need (for pullToRefresh)
                     self.loadingMoreFooterView?.stopSpinner()
+                    
+                    /// if we don't have any item in collection
+                    if self.photos.isEmpty {
+                        self.emptyMessageLabel.text = "There is no photos"
+                    }
                 }
             })
         })
@@ -117,8 +138,11 @@ final class PhotosController: UIViewController {
     
     /// need cancel last request if pullToRequest before end
     private func reloadData() {
-        self.loadingMoreFooterView?.startSpinner()
-        self.photos.removeAll()
+        emptyMessageLabel.text = "Loading..."
+        collectionView.backgroundView = emptyMessageLabel
+        
+        loadingMoreFooterView?.startSpinner()
+        photos.removeAll()
         collectionView.reloadData()
         isLoadingMoreFinished = false
         paginationPage = 0
