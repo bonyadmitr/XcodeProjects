@@ -15,7 +15,7 @@
 		CE00B24621F4FBF200A5A696 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24521F4FBF200A5A696 /* PhotoCell.swift */; };
 		CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6B21EF040400BE352D /* TransparentGradientView.swift */; };
 		CE170F6E21EF072B00BE352D /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = CE170F6D21EF072B00BE352D /* photos.json */; };
-		CE170F7021F0B2EA00BE352D /* PhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6F21F0B2EA00BE352D /* PhotosController.swift */; };
+		CE170F7021F0B2EA00BE352D /* PhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		CE00B24521F4FBF200A5A696 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		CE170F6B21EF040400BE352D /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
 		CE170F6D21EF072B00BE352D /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
-		CE170F6F21F0B2EA00BE352D /* PhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosController.swift; sourceTree = "<group>"; };
+		CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 				C4D9C03F21EDD97A00693D94 /* AppDelegate.swift */,
 				C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */,
 				CE170F6B21EF040400BE352D /* TransparentGradientView.swift */,
-				CE170F6F21F0B2EA00BE352D /* PhotosController.swift */,
+				CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */,
 				CE00B24321F4FB9C00A5A696 /* PhotoService.swift */,
 				CE00B24521F4FBF200A5A696 /* PhotoCell.swift */,
 				C4D9C04121EDD97C00693D94 /* Assets.xcassets */,
@@ -150,7 +150,7 @@
 				CE00B24421F4FB9C00A5A696 /* PhotoService.swift in Sources */,
 				C4D9C04D21EDD99A00693D94 /* SegmentedController.swift in Sources */,
 				CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */,
-				CE170F7021F0B2EA00BE352D /* PhotosController.swift in Sources */,
+				CE170F7021F0B2EA00BE352D /* PhotoSelectionController.swift in Sources */,
 				CE00B24621F4FBF200A5A696 /* PhotoCell.swift in Sources */,
 				C4D9C04021EDD97A00693D94 /* AppDelegate.swift in Sources */,
 			);

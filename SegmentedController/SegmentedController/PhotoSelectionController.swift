@@ -1,6 +1,6 @@
 import UIKit
 
-final class PhotosController: UIViewController {
+final class PhotoSelectionController: UIViewController {
     
     enum SelectionState {
         case selecting
@@ -18,7 +18,7 @@ final class PhotosController: UIViewController {
     
     private var photos = [WebPhoto]()
     private let cellId = String(describing: PhotoCell.self)
-    private let footerId = String(describing: CollectionViewSpinnerFooter.self)
+    private let footerId = String(describing: CollectionSpinnerFooter.self)
     
     private lazy var collectionView: UICollectionView = {
         let isIpad = UI_USER_INTERFACE_IDIOM() == .pad
@@ -32,7 +32,7 @@ final class PhotosController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(CollectionViewSpinnerFooter.self,
+        collectionView.register(CollectionSpinnerFooter.self,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
                                 withReuseIdentifier: footerId)
         collectionView.backgroundColor = .white
@@ -47,8 +47,8 @@ final class PhotosController: UIViewController {
         return collectionView
     }()
     
-    private lazy var loadingMoreFooterView: CollectionViewSpinnerFooter? = {
-        return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter
+    private lazy var loadingMoreFooterView: CollectionSpinnerFooter? = {
+        return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionSpinnerFooter
     }()
     
     private let emptyMessageLabel: UILabel = {
@@ -152,7 +152,7 @@ final class PhotosController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension PhotosController: UICollectionViewDataSource {
+extension PhotoSelectionController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
@@ -173,7 +173,7 @@ extension PhotosController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-extension PhotosController: UICollectionViewDelegate {
+extension PhotoSelectionController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoCell else {
@@ -262,7 +262,7 @@ extension PhotosController: UICollectionViewDelegate {
     }
 }
 
-extension PhotosController: UICollectionViewDelegateFlowLayout {
+extension PhotoSelectionController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 4 - 3
         return CGSize(width: width, height: width)
@@ -280,7 +280,7 @@ extension PhotosController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PhotosController: UIScrollViewDelegate {
+extension PhotoSelectionController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //updateCachedAssetsFor
     }

@@ -83,7 +83,7 @@ final class PhotoCell: UICollectionViewCell {
         favoriteImageView.image = nil
     }
     
-    func update(for selectionState: PhotosController.SelectionState) {
+    func update(for selectionState: PhotoSelectionController.SelectionState) {
         if self.isSelected {
             selectionImageView.image = Constants.checkmarkFillImage
             selectionImageView.tintColor = UIColor.blue
@@ -102,7 +102,7 @@ final class PhotoCell: UICollectionViewCell {
     }
 }
 
-final class CollectionViewSpinnerFooter: UICollectionReusableView {
+final class CollectionSpinnerFooter: UICollectionReusableView {
     
     private let activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)

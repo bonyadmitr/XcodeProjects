@@ -3,7 +3,7 @@ import UIKit
 final class SegmentedController: UIViewController {
     
     private let topView = UIView()
-    private let contanerView = UIView()
+    private let containerView = UIView()
     let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
     
     private let segmentedControl: UISegmentedControl = {
@@ -12,7 +12,7 @@ final class SegmentedController: UIViewController {
         return segmentedControl
     }()
     
-    private var viewControllers: [UIViewController] = [PhotosController()]
+    private var viewControllers: [UIViewController] = [PhotoSelectionController()]
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -26,14 +26,14 @@ final class SegmentedController: UIViewController {
     
     private func setup() {
         topView.backgroundColor = .white
-        contanerView.backgroundColor = .white
+        containerView.backgroundColor = .white
         
         view.addSubview(topView)
         topView.addSubview(segmentedControl)
-        view.addSubview(contanerView)
+        view.addSubview(containerView)
         
         topView.translatesAutoresizingMaskIntoConstraints = false
-        contanerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         
         topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -46,10 +46,10 @@ final class SegmentedController: UIViewController {
         segmentedControl.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -edgeOffset).isActive = true
         segmentedControl.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
         
-        contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        contanerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        contanerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 //        NSLayoutConstraint.activate([
 //            contanerView.topAnchor.constraint(equalTo: topView.bottomAnchor),
 //            contanerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -114,9 +114,9 @@ final class SegmentedController: UIViewController {
     
     private func add(childController: UIViewController) {
         addChildViewController(childController)
-        childController.view.frame = contanerView.bounds
+        childController.view.frame = containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        contanerView.addSubview(childController.view)
+        containerView.addSubview(childController.view)
         childController.didMove(toParentViewController: self)
     }
 }
