@@ -47,7 +47,6 @@ final class PhotosController: UIViewController {
         return collectionView
     }()
     
-    
     private lazy var loadingMoreFooterView: CollectionViewSpinnerFooter? = {
         return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: 0)) as? CollectionViewSpinnerFooter
     }()
@@ -225,7 +224,7 @@ extension PhotosController: UICollectionViewDelegate {
         let isReachedLimit = (selectedCount == selectingLimit)
         
         if isReachedLimit {
-            /// update all cell
+            /// update all cells
             selectionState = .ended
             let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoCell })
             cells.forEach({ $0.update(for: selectionState) })
