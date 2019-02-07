@@ -14,20 +14,24 @@ final class BatteryManager: NSObject {
         return UIDevice.current.batteryLevel
     }
     
-    /// disable screen sleep
-    /// add in applicationDidBecomeActive
-    /// if isCharging {
-    ///     UIApplication.shared.isIdleTimerDisabled = true
-    /// }
+    /// connected for charging
     static var isCharging: Bool {
         return UIDevice.current.batteryState == .charging || UIDevice.current.batteryState == .full
     }
+    /// disable screen sleep when device is charging
+    //if isCharging {
+    //    UIApplication.shared.isIdleTimerDisabled = true
+    //}
+    
     
     override init() {
         super.init()
         
         /// Register for battery level and state change notifications.
         UIDevice.current.isBatteryMonitoringEnabled = true
+        
+        /// Notifications for battery level change are sent no more frequently than once per minute
+        /// https://developer.apple.com/documentation/uikit/uidevice/1620060-batteryleveldidchangenotificatio
         
         //        NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelChanged), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
         //        NotificationCenter.default.addObserver(self, selector: #selector(batteryStateChanged), name: UIDevice.batteryStateDidChangeNotification, object: nil)
