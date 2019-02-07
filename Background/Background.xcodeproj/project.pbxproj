@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CCAE3EBF1CE47BC1C4EE4A50 /* Pods_Background.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15546CB18F198BCD44BDEB9F /* Pods_Background.framework */; };
+		CE0EA644220C6AD2000EF616 /* BatteryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA643220C6AD2000EF616 /* BatteryManager.swift */; };
 		CEDDB6A12105F981002BEAF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */; };
 		CEDDB6A32105F981002BEAF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDDB6A22105F981002BEAF6 /* ViewController.swift */; };
 		CEDDB6A62105F981002BEAF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDB6A42105F981002BEAF6 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		15546CB18F198BCD44BDEB9F /* Pods_Background.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Background.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F57DE19E5F3D4D27CAEACA6 /* Pods-Background.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Background.release.xcconfig"; path = "Pods/Target Support Files/Pods-Background/Pods-Background.release.xcconfig"; sourceTree = "<group>"; };
 		7F94CC94D3043F9E70B16F40 /* Pods-Background.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Background.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Background/Pods-Background.debug.xcconfig"; sourceTree = "<group>"; };
+		CE0EA643220C6AD2000EF616 /* BatteryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryManager.swift; sourceTree = "<group>"; };
 		CEDDB69D2105F981002BEAF6 /* Background.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Background.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDB6A02105F981002BEAF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEDDB6A22105F981002BEAF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				CEDDB6B22105F9AD002BEAF6 /* BackgroundLocationManager.swift */,
 				CEF89B6A2106FF10002E6D84 /* BackgroundTaskManager.swift */,
+				CE0EA643220C6AD2000EF616 /* BatteryManager.swift */,
 				CEDDB6BD210612D9002BEAF6 /* EmailSender */,
 			);
 			path = Classes;
@@ -253,6 +256,7 @@
 				CEDDB6B32105F9AE002BEAF6 /* BackgroundLocationManager.swift in Sources */,
 				CEDDB6BA21060B2D002BEAF6 /* UIApplication+Controller.swift in Sources */,
 				CEDDB6B521060A8D002BEAF6 /* EmailSender.swift in Sources */,
+				CE0EA644220C6AD2000EF616 /* BatteryManager.swift in Sources */,
 				CEF89B6B2106FF10002E6D84 /* BackgroundTaskManager.swift in Sources */,
 				CEDDB6BC21060F73002BEAF6 /* Logger.swift in Sources */,
 				CEDDB6A32105F981002BEAF6 /* ViewController.swift in Sources */,
