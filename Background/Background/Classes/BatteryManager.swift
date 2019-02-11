@@ -30,7 +30,8 @@ final class BatteryManager: NSObject {
         /// Register for battery level and state change notifications.
         UIDevice.current.isBatteryMonitoringEnabled = true
         
-        /// Notifications for battery level change are sent no more frequently than once per minute
+        /// Notifications for battery level change are sent no more frequently than once per minute for BatteryLevel change.
+        /// Notifications for plug/unplug are without restrictions.
         /// https://developer.apple.com/documentation/uikit/uidevice/1620060-batteryleveldidchangenotificatio
         
         //        NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelChanged), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
