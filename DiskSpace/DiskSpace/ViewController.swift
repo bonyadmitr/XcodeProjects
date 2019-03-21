@@ -194,6 +194,32 @@ class ViewController: UIViewController {
         print("--- size:", self.freeSize - newFreeSize)
         self.freeSize = newFreeSize
         sizeLabel5.text = String(self.freeSize)
+        
+        
+        ///////////////////////////
+        
+        /// https://stackoverflow.com/a/32814710/5893286
+        let fileManager = FileManager.default
+        guard let documentsUrl =  fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
+            assertionFailure()
+            return
+        }
+        
+        // check if the url is a directory
+        if (try? documentsUrl.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true {
+            var folderSize = 0
+            print("count: ",FileManager.default.enumerator(at: documentsUrl, includingPropertiesForKeys: nil)!.allObjects.count)
+            (FileManager.default.enumerator(at: documentsUrl, includingPropertiesForKeys: nil)?.allObjects as? [URL])?.lazy.forEach {
+                //print("name:", $0.lastPathComponent)
+                folderSize += (try? $0.resourceValues(forKeys: [.totalFileAllocatedSizeKey]))?.totalFileAllocatedSize ?? 0
+            }
+            let  byteCountFormatter =  ByteCountFormatter()
+            byteCountFormatter.allowedUnits = .useMB
+            byteCountFormatter.countStyle = .file
+            let sizeToDisplay = byteCountFormatter.string(for: folderSize) ?? ""
+            print(sizeToDisplay)
+            print()
+        }
     }
     
     var freeSize: Int64 = 0
