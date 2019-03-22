@@ -122,9 +122,9 @@ class ViewController: UIViewController {
         /// В случае с volumeAvailableCapacityForImportantUsageKey нас не  пускает система в “защищенное” пространство
         // TODO: check vs .volumeAvailableCapacityKey, .volumeAvailableCapacityForOpportunisticUsageKey
         
-        let fileURL = URL(fileURLWithPath: Device.homeFolder)
+//        let fileURL = URL(fileURLWithPath: Device.homeFolder)
 //        let fileURL = URL(fileURLWithPath: "/")
-//        let fileURL = URL(fileURLWithPath: NSHomeDirectory())
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory())
         
         
         
@@ -133,7 +133,7 @@ class ViewController: UIViewController {
             let mb: Double = 1024
 //            let mb: Double = 1000
             
-            
+//            let allVolumeStorageCapacity = VolumeStorageCapacityAny.shared.allVolumeStorageCapacity()
             
             let values1 = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
             let size1 = Int64(values1?.volumeAvailableCapacity ?? 0)
@@ -144,7 +144,6 @@ class ViewController: UIViewController {
             let values2 = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
             let size2 = Int64(values2?.volumeAvailableCapacityForImportantUsage ?? 0)
             sizeLabel2.text = "\(size2)\n\(Double(size2)/mb/mb/mb)"
-            
             
             /// not working with fileURL "URL(fileURLWithPath: "/")"
             let values3 = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForOpportunisticUsageKey])
@@ -187,7 +186,7 @@ class ViewController: UIViewController {
 //        }
         
         /// iOS 9
-        let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: Device.homeFolder)
+        let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
         let freeSize = systemAttributes?[.systemFreeSize] as? NSNumber
         
         let newFreeSize = freeSize?.int64Value ?? 0
@@ -225,330 +224,3 @@ class ViewController: UIViewController {
     var freeSize: Int64 = 0
 }
 
-
-typealias AllVolumeStorageCapacity = (totalDiskSpace: Int64, freeDiskSpace: Int64, usedDiskSpace: Int64)
-
-protocol VolumeStorageCapacityProtocol {
-    func allVolumeStorageCapacity() -> AllVolumeStorageCapacity
-    func totalDiskSpace() -> Int64
-    func freeDiskSpace() -> Int64
-    func usedDiskSpace() -> Int64
-}
-
-final class VolumeStorageCapacityAny: VolumeStorageCapacityProtocol {
-    private let volumeStorageCapacity: VolumeStorageCapacityProtocol
-    
-    init() {
-        if #available(iOS 11.0, *) {
-            volumeStorageCapacity = VolumeStorageCapacityFromiOS11()
-        } else {
-            volumeStorageCapacity = VolumeStorageCapacityOld()
-        }
-    }
-    
-    func allVolumeStorageCapacity() -> AllVolumeStorageCapacity {
-        return volumeStorageCapacity.allVolumeStorageCapacity()
-    }
-    
-    func totalDiskSpace() -> Int64 {
-        return volumeStorageCapacity.totalDiskSpace()
-    }
-    
-    func freeDiskSpace() -> Int64 {
-        return volumeStorageCapacity.freeDiskSpace()
-    }
-    
-    func usedDiskSpace() -> Int64 {
-        return volumeStorageCapacity.usedDiskSpace()
-    }
-}
-
-final class VolumeStorageCapacityOld {
-    
-    private let homeDir = NSHomeDirectory()
-    
-    typealias FileSystemAttributes = [FileAttributeKey : Any]
-    
-    private func getSystemAttributes() -> FileSystemAttributes? {
-        return try? FileManager.default.attributesOfFileSystem(forPath: homeDir)
-    }
-    
-    private func getTotalSpaceSize(from systemAttributes: FileSystemAttributes?) -> Int64 {
-        let totalSpace = systemAttributes?[.systemSize] as? NSNumber
-        return totalSpace?.int64Value ?? 0
-    }
-    
-    private func getFreeSpaceSize(from systemAttributes: FileSystemAttributes?) -> Int64 {
-        let freeSpace = systemAttributes?[.systemFreeSize] as? NSNumber
-        return freeSpace?.int64Value ?? 0
-    }
-}
-extension VolumeStorageCapacityOld: VolumeStorageCapacityProtocol {
-    func allVolumeStorageCapacity() -> AllVolumeStorageCapacity {
-        let systemAttributes = getSystemAttributes()
-        let totalSpaceSize = getTotalSpaceSize(from: systemAttributes)
-        let freeSpaceSize = getFreeSpaceSize(from: systemAttributes)
-        
-        return (totalDiskSpace: totalSpaceSize,
-                freeDiskSpace: freeSpaceSize,
-                usedDiskSpace: totalSpaceSize - freeSpaceSize)
-    }
-    
-    func totalDiskSpace() -> Int64 {
-        let systemAttributes = getSystemAttributes()
-        return getTotalSpaceSize(from: systemAttributes)
-    }
-    
-    func freeDiskSpace() -> Int64 {
-        let systemAttributes = getSystemAttributes()
-        return getFreeSpaceSize(from: systemAttributes)
-    }
-    
-    func usedDiskSpace() -> Int64 {
-        let systemAttributes = getSystemAttributes()
-        let totalSpaceSize = getTotalSpaceSize(from: systemAttributes)
-        let freeSpaceSize = getFreeSpaceSize(from: systemAttributes)
-        
-        return totalSpaceSize - freeSpaceSize
-    }
-}
-
-@available(iOS 11.0, *)
-final class VolumeStorageCapacityFromiOS11 {
-    
-    private let homeURL = URL(fileURLWithPath: NSHomeDirectory())
-    
-    private func totalDiskSpace(from values: URLResourceValues?) -> Int64 {
-        return Int64(values?.volumeTotalCapacity ?? 0)
-    }
-    private func freeDiskSpace(from values: URLResourceValues?) -> Int64 {
-        return values?.volumeAvailableCapacityForImportantUsage ?? 0
-    }
-}
-
-@available(iOS 11.0, *)
-extension VolumeStorageCapacityFromiOS11: VolumeStorageCapacityProtocol {
-    func allVolumeStorageCapacity() -> AllVolumeStorageCapacity {
-        let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey,
-                                                           .volumeTotalCapacityKey])
-        let totalSpaceSize = totalDiskSpace(from: values)
-        let freeSpaceSize = freeDiskSpace(from: values)
-        
-        return (totalDiskSpace: totalSpaceSize,
-                freeDiskSpace: freeSpaceSize,
-                usedDiskSpace: totalSpaceSize - freeSpaceSize)
-    }
-    
-    func totalDiskSpace() -> Int64 {
-        let values = try? homeURL.resourceValues(forKeys: [.volumeTotalCapacityKey])
-        return totalDiskSpace(from: values)
-    }
-    
-    /// like system one
-    func freeDiskSpace() -> Int64 {
-        let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-        return freeDiskSpace(from: values)
-    }
-    
-    func usedDiskSpace() -> Int64 {
-        let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey,
-                                                           .volumeTotalCapacityKey])
-        let totalSpaceSize = totalDiskSpace(from: values)
-        let freeSpaceSize = freeDiskSpace(from: values)
-        
-        return totalSpaceSize - freeSpaceSize
-    }
-}
-
-//    func MBFormatter(_ bytes: Int64) -> String {
-//        let formatter = ByteCountFormatter()
-//        formatter.allowedUnits = ByteCountFormatter.Units.useMB
-//        formatter.countStyle = ByteCountFormatter.CountStyle.decimal
-//        formatter.includesUnit = false
-//        return formatter.string(fromByteCount: bytes) as String
-//    }
-//
-//    //MARK: Get String Value
-//    var totalDiskSpaceInGB:String {
-//        return ByteCountFormatter.string(fromByteCount: totalDiskSpaceInBytes(), countStyle: ByteCountFormatter.CountStyle.decimal)
-//    }
-//
-//    var freeDiskSpaceInGB:String {
-//        return ByteCountFormatter.string(fromByteCount: freeDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
-//    }
-//
-//    var usedDiskSpaceInGB:String {
-//        return ByteCountFormatter.string(fromByteCount: usedDiskSpaceInBytes, countStyle: ByteCountFormatter.CountStyle.decimal)
-//    }
-//
-//    var totalDiskSpaceInMB:String {
-//        return MBFormatter(totalDiskSpaceInBytes)
-//    }
-//
-//    var freeDiskSpaceInMB:String {
-//        return MBFormatter(freeDiskSpaceInBytes)
-//    }
-//
-//    var usedDiskSpaceInMB:String {
-//        return MBFormatter(usedDiskSpaceInBytes)
-//    }
-
-/// https://stackoverflow.com/a/47463829/5893286
-/// https://developer.apple.com/documentation/foundation/urlresourcekey/checking_volume_storage_capacity
-final class VolumeStorageCapacity: VolumeStorageCapacityProtocol {
-    
-    /// need only for iOS <= 10
-    private let homeDir: String
-    
-    /// need only for iOS 11
-    private let homeURL: URL
-    
-    init() {
-        homeDir = NSHomeDirectory()
-        homeURL = URL(fileURLWithPath: homeDir)
-    }
-    
-    func totalDiskSpace() -> Int64 {
-        if #available(iOS 11.0, *) {
-            let values = try? homeURL.resourceValues(forKeys: [.volumeTotalCapacityKey])
-            return Int64(values?.volumeTotalCapacity ?? 0)
-        } else {
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeDir)
-            let totalSpace = systemAttributes?[.systemSize] as? NSNumber
-            return totalSpace?.int64Value ?? 0
-        }
-    }
-    
-    /// like system one
-    func freeDiskSpace() -> Int64 {
-        if #available(iOS 11.0, *) {
-            let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
-            return Int64(values?.volumeAvailableCapacityForImportantUsage ?? 0)
-        } else {
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeDir)
-            let freeSpace = systemAttributes?[.systemFreeSize] as? NSNumber
-            return freeSpace?.int64Value ?? 0
-        }
-    }
-    
-    /// optmized version. not totalDiskSpace() - freeDiskSpace()
-    func usedDiskSpace() -> Int64 {
-        if #available(iOS 11.0, *) {
-            let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey,
-                                                               .volumeTotalCapacityKey])
-            let freeSpaceSize = values?.volumeAvailableCapacityForImportantUsage ?? 0
-            let totalSpaceSize = Int64(values?.volumeTotalCapacity ?? 0)
-            return totalSpaceSize - freeSpaceSize
-        } else {
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeDir)
-            
-            let freeSpace = systemAttributes?[.systemFreeSize] as? NSNumber
-            let totalSpace = systemAttributes?[.systemSize] as? NSNumber
-            
-            let freeSpaceSize = freeSpace?.int64Value ?? 0
-            let totalSpaceSize = totalSpace?.int64Value ?? 0
-            
-            return totalSpaceSize - freeSpaceSize
-        }
-    }
-    
-    func allVolumeStorageCapacity() -> AllVolumeStorageCapacity {
-        if #available(iOS 11.0, *) {
-            let values = try? homeURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey,
-                                                               .volumeTotalCapacityKey])
-            let totalSpaceSize = Int64(values?.volumeTotalCapacity ?? 0)
-            let freeSpaceSize = values?.volumeAvailableCapacityForImportantUsage ?? 0
-            let usedSpaseSize = totalSpaceSize - freeSpaceSize
-            
-            return (totalDiskSpace: totalSpaceSize,
-                    freeDiskSpace: freeSpaceSize,
-                    usedDiskSpace: usedSpaseSize)
-        } else {
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeDir)
-            
-            let totalSpace = systemAttributes?[.systemSize] as? NSNumber
-            let freeSpace = systemAttributes?[.systemFreeSize] as? NSNumber
-            
-            let totalSpaceSize = totalSpace?.int64Value ?? 0
-            let freeSpaceSize = freeSpace?.int64Value ?? 0
-            
-            let usedSpaseSize = totalSpaceSize - freeSpaceSize
-            
-            return (totalDiskSpace: totalSpaceSize,
-                    freeDiskSpace: freeSpaceSize,
-                    usedDiskSpace: usedSpaseSize)
-        }
-    }
-}
-
-//iOSComponents
-
-/// for disk space
-/// https://stackoverflow.com/questions/26198073/query-available-ios-disk-space-with-swift
-final class Device {
-    
-    static var homeFolder: String {
-        return NSHomeDirectory() as String
-//                return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last ?? ""
-    }
-    
-    /// Available vs Free
-    ///
-    /// iOS 10
-    /// iTunes: 10.57
-    /// iPhone settings 8.27
-    /// current var: 7.52
-    ///
-    /// iOS 9
-    /// iTunes: 4.79
-    /// iPhone settings 3.9
-    /// current var: 4.13
-    static var freeDiskSpace: Int64 {
-        if #available(iOS 11.0, *) {
-            let fileURL = URL(fileURLWithPath: homeFolder)
-            /// volumeAvailableCapacityKey - доступное место, тоже самое что файловый менеджер отдаст.
-            /// volumeAvailableCapacityForImportantUsageKey - всё свободное, с учётом возможности удаления кэша, временных файлов и т.д.
-            /// В случае с volumeAvailableCapacityForImportantUsageKey нас не  пускает система в “защищенное” пространство
-            // TODO: check vs .volumeAvailableCapacityKey, .volumeAvailableCapacityForOpportunisticUsageKey
-            let values = try? fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
-            return Int64(values?.volumeAvailableCapacity ?? 0)
-        } else {
-            let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeFolder)
-            let freeSize = systemAttributes?[.systemFreeSize] as? NSNumber
-            return freeSize?.int64Value ?? 0
-        }
-    }
-    
-    // TODO: need to compare with current method
-    //    func getFreeDiskspace() {
-    //        var totalSpace: UInt64 = 0
-    //        var totalFreeSpace: UInt64 = 0
-    //        var error: Error? = nil
-    //        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-    //        let dictionary = try? FileManager.default.attributesOfFileSystem(forPath: paths.last ?? "")
-    //
-    //        if (dictionary != nil) {
-    //            var fileSystemSizeInBytes = dictionary?[.systemSize] as? NSNumber
-    //            var freeFileSystemSizeInBytes = dictionary?[.systemFreeSize] as? NSNumber
-    //            totalSpace = UInt64(fileSystemSizeInBytes ?? 0)
-    //            totalFreeSpace = UInt64(freeFileSystemSizeInBytes ?? 0)
-    //            //            CS_Log_Info("Memory Capacity of %llu MiB with %llu MiB Free memory available.", ((totalSpace / 1024) / 1024), ((totalFreeSpace / 1024) / 1024))
-    //        } else {
-    //            //            CS_Log_Info("Error Obtaining System Memory Info: Domain = %@, Code = %ld", (error as NSError?)?.domain, Int(error.code))
-    //        }
-    //        let totalSpace1 = (totalSpace / 1024) / 1024
-    //        let totalFreeSpace2 = (totalFreeSpace / 1024) / 1024
-    //    }
-    
-    
-    
-    static var totalDiskSpace: Int64 {
-        let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: homeFolder)
-        let totalSpace = systemAttributes?[.systemSize] as? NSNumber
-        return totalSpace?.int64Value ?? 0
-    }
-    
-    static var usedDiskSpace: Int64 {
-        return totalDiskSpace - freeDiskSpace
-    }
-}
