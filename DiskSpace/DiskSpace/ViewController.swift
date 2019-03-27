@@ -41,7 +41,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func onRefresh(_ sender: UIBarButtonItem) {
-        updateSizes()
+//        updateSizes()
+        let vc = WebViewController(urlString: "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz", title: nil)
+                self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction private func onClear(_ sender: UIBarButtonItem) {
