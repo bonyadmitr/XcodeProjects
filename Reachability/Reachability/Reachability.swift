@@ -13,13 +13,18 @@ import Foundation
 
 public protocol ReachabilitySubscriber {
     /// called on private serial queue
+    /// for simulator:
+    /// - will NOT be called when connection appears
+    /// - will BE called when connection disappears
     func reachabilityChanged(_ reachability: Reachability)
 }
 
 // MARK: -
 
+/// must be named NetworkReachability
 /// https://stackoverflow.com/a/30743763/5893286
 /// https://github.com/ashleymills/Reachability.swift/blob/master/Sources/Reachability.swift
+/// https://github.com/Alamofire/Alamofire/blob/master/Source/NetworkReachabilityManager.swift
 public class Reachability {
     
     public enum Connection: CustomStringConvertible {
@@ -42,6 +47,7 @@ public class Reachability {
         case unableToStartDueSetDispatchQueue
     }
     
+    /// for simulator will be only WiFi
     public var connection: Connection
     
     private var notifierRunning = false
@@ -57,10 +63,11 @@ public class Reachability {
     }
     
     private func reachabilityChanged() {
-        self.connection = flags.connection
+        self.connection = flags.connection()
         self.multicastDelegate.invokeDelegates { $0.reachabilityChanged(self) }
     }
     
+    /// Reachability treats the 0.0.0.0 address as a special token that causes it to monitor the general routing status of the device, both IPv4 and IPv6.
     public convenience init() throws {
         /// #1
 //        var zeroAddress = sockaddr_in()
@@ -95,7 +102,8 @@ public class Reachability {
         var flags = SCNetworkReachabilityFlags()
         let isFlagsUpdated = SCNetworkReachabilityGetFlags(self.reachability, &flags)
         self.flags = flags
-        self.connection = flags.connection
+        /// flags didSet will not be called
+        self.connection = flags.connection()
         
         if !isFlagsUpdated {
             assertionFailure()
@@ -127,8 +135,7 @@ public extension Reachability {
             return
         }
         
-        /// will not be called for simulator when connection appears
-        let callback: SCNetworkReachabilityCallBack = { (reachability, flags, info) in
+        let callback: SCNetworkReachabilityCallBack = { _, flags, info in
             guard let info = info else {
                 assertionFailure()
                 return
@@ -170,70 +177,36 @@ extension SCNetworkReachabilityFlags {
     
     typealias Connection = Reachability.Connection
     
-    var connection: Connection {
-        guard isReachableFlagSet else { return .none }
+    func isNetworkReachable() -> Bool {
+        let isReachable = contains(.reachable)
+        let needsConnection = contains(.connectionRequired)
+        let canConnectAutomatically = contains(.connectionOnDemand) || contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !contains(.interventionRequired)
+        
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+    }
+    
+    func connection() -> Connection {
+        
+        guard isNetworkReachable() else {
+            return .none
+        }
         
         // If we're reachable, but not on an iOS device (i.e. simulator), we must be on WiFi
         #if targetEnvironment(simulator)
         return .wifi
         #else
         
-        var connection = Connection.none
-        
-        if !isConnectionRequiredFlagSet {
-            connection = .wifi
-        }
-        
-        if isConnectionOnTrafficOrDemandFlagSet {
-            if !isInterventionRequiredFlagSet {
-                connection = .wifi
-            }
-        }
-        
-        if isOnWWANFlagSet {
-            connection = .cellular
-        }
-        
-        return connection
+        return isCellular() ? .cellular :  .wifi
         #endif
     }
     
-    var isOnWWANFlagSet: Bool {
+    func isCellular() -> Bool {
         #if os(iOS)
         return contains(.isWWAN)
         #else
         return false
         #endif
-    }
-    var isReachableFlagSet: Bool {
-        return contains(.reachable)
-    }
-    var isConnectionRequiredFlagSet: Bool {
-        return contains(.connectionRequired)
-    }
-    var isInterventionRequiredFlagSet: Bool {
-        return contains(.interventionRequired)
-    }
-    var isConnectionOnTrafficFlagSet: Bool {
-        return contains(.connectionOnTraffic)
-    }
-    var isConnectionOnDemandFlagSet: Bool {
-        return contains(.connectionOnDemand)
-    }
-    var isConnectionOnTrafficOrDemandFlagSet: Bool {
-        return !intersection([.connectionOnTraffic, .connectionOnDemand]).isEmpty
-    }
-    var isTransientConnectionFlagSet: Bool {
-        return contains(.transientConnection)
-    }
-    var isLocalAddressFlagSet: Bool {
-        return contains(.isLocalAddress)
-    }
-    var isDirectFlagSet: Bool {
-        return contains(.isDirect)
-    }
-    var isConnectionRequiredAndTransientFlagSet: Bool {
-        return intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]
     }
 }
 
