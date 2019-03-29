@@ -8,11 +8,6 @@
 
 import Foundation
 
-import Foundation
-import SystemConfiguration
-
-/// https://stackoverflow.com/a/30743763/5893286
-/// https://github.com/ashleymills/Reachability.swift/blob/master/Sources/Reachability.swift
 import SystemConfiguration
 import Foundation
 
@@ -21,6 +16,10 @@ public protocol ReachabilitySubscriber {
     func reachabilityChanged(_ reachability: Reachability)
 }
 
+// MARK: -
+
+/// https://stackoverflow.com/a/30743763/5893286
+/// https://github.com/ashleymills/Reachability.swift/blob/master/Sources/Reachability.swift
 public class Reachability {
     
     public enum Connection: CustomStringConvertible {
@@ -109,6 +108,7 @@ public class Reachability {
     }
 }
 
+// MARK: - Delegate methods
 public extension Reachability {
     func register(_ delegate: ReachabilitySubscriber) {
         multicastDelegate.addDelegate(delegate)
@@ -118,6 +118,7 @@ public extension Reachability {
     }
 }
 
+// MARK: - Notifier methods
 public extension Reachability {
     
     func startNotifier() throws {
@@ -160,10 +161,12 @@ public extension Reachability {
     }
 }
 
+// MARK: - shared
 extension Reachability {
     static let shared = try? Reachability()
 }
 
+// MARK: - SCNetworkReachabilityFlags+Connection
 extension SCNetworkReachabilityFlags {
     
     typealias Connection = Reachability.Connection
@@ -235,11 +238,12 @@ extension SCNetworkReachabilityFlags {
     }
 }
 
+// MARK: -
 
 import Foundation
 
 /// https://github.com/jonasman/MulticastDelegate/blob/master/Sources/MulticastDelegate.swift
-final class MulticastDelegate<T> {
+private final class MulticastDelegate<T> {
     private let delegates = NSHashTable<AnyObject>.weakObjects()
 
     /// will not add two same objects
