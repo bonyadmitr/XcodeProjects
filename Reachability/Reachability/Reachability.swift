@@ -123,7 +123,7 @@ public extension Reachability {
     
     func startNotifier() throws {
         guard !notifierRunning else {
-            assertionFailure()
+            assertionFailure("don't need to start twice")
             return
         }
         
@@ -132,14 +132,12 @@ public extension Reachability {
                 assertionFailure()
                 return
             }
-            Unmanaged<Reachability>
-                .fromOpaque(info)
-                .takeUnretainedValue()
-                .flags = flags
+            Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue().flags = flags
         }
         
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
         context.info = UnsafeMutableRawPointer(Unmanaged<Reachability>.passUnretained(self).toOpaque())
+        
         if !SCNetworkReachabilitySetCallback(reachability, callback, &context) {
             stopNotifier()
             throw ReachabilityError.unableToStartDueSetCallback
