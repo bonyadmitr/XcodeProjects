@@ -180,8 +180,6 @@ extension NetworkReachability {
 // MARK: - SCNetworkReachabilityFlags+Connection
 extension SCNetworkReachabilityFlags {
     
-    typealias Connection = NetworkReachability.Connection
-    
     func isNetworkReachable() -> Bool {
         let isReachable = contains(.reachable)
         let needsConnection = contains(.connectionRequired)
@@ -191,20 +189,20 @@ extension SCNetworkReachabilityFlags {
         return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
     }
     
-    func connection() -> Connection {
+    func connection() -> NetworkReachability.Connection {
         guard isNetworkReachable() else {
             return .none
         }
         
-        // If we're reachable, but not on an iOS device (i.e. simulator), we must be on WiFi
+        /// If we're reachable, but not on a device (i.e. simulator), we must be on WiFi
         #if targetEnvironment(simulator)
         return .wifi
         #else
-        
         return isCellular() ? .cellular :  .wifi
         #endif
     }
     
+    /// iPhone and iPad can have cellular network
     func isCellular() -> Bool {
         #if os(iOS)
         return contains(.isWWAN)
