@@ -9,39 +9,40 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default
-            .addObserver(self,
-                         selector: #selector(statusManager),
-                         name: .flagsChanged,
-                         object: nil)
-        updateUserInterface()
+        setupReachability()
     }
     
-    func updateUserInterface() {
-        switch Network.reachability.status {
-        case .unreachable:
+    private func setupReachability() {
+        guard let reachability = Reachability.shared else  {
+            assertionFailure()
+            return
+        }
+        reachability.register(self)
+        updateUserInterface(for: reachability.connection)
+    }
+
+    private func updateUserInterface(for connection: Reachability.Connection) {
+        switch connection {
+        case .none:
             view.backgroundColor = .red
-        case .wwan:
-            view.backgroundColor = .yellow
         case .wifi:
             view.backgroundColor = .green
+        case .cellular:
+            view.backgroundColor = .yellow
         }
-        print("--- Reachability Summary")
-        print("Status:", Network.reachability.status)
-        print("Reachable:", Network.reachability.isReachable)
-        print("Wifi:", Network.reachability.isReachableViaWiFi)
+        print(connection)
     }
-    
-    @objc func statusManager(_ notification: Notification) {
-        DispatchQueue.main.async {
-            self.updateUserInterface()
-        }
-        
-    }
-
 }
 
+extension ViewController: ReachabilitySubscriber {
+    func reachabilityChanged(_ reachability: Reachability) {
+        DispatchQueue.main.async {
+            self.updateUserInterface(for: reachability.connection)
+        }
+
+    }
+}
