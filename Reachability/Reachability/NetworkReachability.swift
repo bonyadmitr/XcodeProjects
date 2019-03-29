@@ -1,33 +1,32 @@
 //
-//  Reachability.swift
-//  Reachability
+//  NetworkReachability.swift
+//  NetworkReachability
 //
 //  Created by Bondar Yaroslav on 3/29/19.
 //  Copyright © 2019 Bondar Yaroslav. All rights reserved.
 //
 
-import Foundation
-
 import SystemConfiguration
 import Foundation
 
-public protocol ReachabilitySubscriber {
+public protocol NetworkReachabilityListener {
     /// called on private serial queue
     /// for simulator:
     /// - will NOT be called when connection appears
     /// - will BE called when connection disappears
-    func reachabilityChanged(_ reachability: Reachability)
+    func networkReachability(_ networkReachability: NetworkReachability,
+                             changed connection: NetworkReachability.Connection)
 }
 
 // MARK: -
 
-/// must be named NetworkReachability
 /// https://stackoverflow.com/a/30743763/5893286
 /// https://github.com/ashleymills/Reachability.swift/blob/master/Sources/Reachability.swift
 /// https://github.com/Alamofire/Alamofire/blob/master/Source/NetworkReachabilityManager.swift
-public class Reachability {
+public class NetworkReachability {
     
     public enum Connection: CustomStringConvertible {
+        /// "wifi" must be named "ethernetOrWiFi"
         case none, wifi, cellular
         
         public var description: String {
@@ -39,21 +38,25 @@ public class Reachability {
         }
     }
     
-    // TODO: split in two errors
-    public enum ReachabilityError: Error {
-        case unableToInitDueSystemFramework
-        case unableToInitDueGetFlags
-        case unableToStartDueSetCallback
-        case unableToStartDueSetDispatchQueue
+    public enum InitErrors: Error {
+        case errorInSystemFramework
+        case unableToGetFlags
     }
     
-    /// for simulator will be only WiFi
+    public enum StartErrors: Error {
+        case unableToSetCallback
+        case unableToSetDispatchQueue
+    }
+    
+    /// working without startListening but only on init.
+    /// will be up to date after startListening.
+    /// for simulator will be only WiFi.
     public var connection: Connection
     
     private var notifierRunning = false
     private let reachability: SCNetworkReachability
     private let reachabilitySerialQueue = DispatchQueue(label: "reachability_private_serial_queue")
-    private let multicastDelegate = MulticastDelegate<ReachabilitySubscriber>()
+    private let multicastDelegate = MulticastDelegate<NetworkReachabilityListener>()
     
     private var flags: SCNetworkReachabilityFlags {
         didSet {
@@ -64,7 +67,7 @@ public class Reachability {
     
     private func reachabilityChanged() {
         self.connection = flags.connection()
-        self.multicastDelegate.invokeDelegates { $0.reachabilityChanged(self) }
+        self.multicastDelegate.invokeDelegates { $0.networkReachability(self, changed: self.connection) }
     }
     
     /// Reachability treats the 0.0.0.0 address as a special token that causes it to monitor the general routing status of the device, both IPv4 and IPv6.
@@ -84,14 +87,14 @@ public class Reachability {
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
         guard let reachability = SCNetworkReachabilityCreateWithAddress(nil, &zeroAddress) else {
-            throw ReachabilityError.unableToInitDueSystemFramework
+            throw InitErrors.errorInSystemFramework
         }
         try self.init(reachability: reachability)
     }
     
     public convenience init(hostname: String) throws {
         guard let reachability = SCNetworkReachabilityCreateWithName(nil, hostname) else {
-            throw ReachabilityError.unableToInitDueSystemFramework
+            throw InitErrors.errorInSystemFramework
         }
         try self.init(reachability: reachability)
     }
@@ -99,37 +102,39 @@ public class Reachability {
     init(reachability: SCNetworkReachability) throws {
         self.reachability = reachability
         
+        /// get flags
         var flags = SCNetworkReachabilityFlags()
         let isFlagsUpdated = SCNetworkReachabilityGetFlags(self.reachability, &flags)
         self.flags = flags
+        
         /// flags didSet will not be called
         self.connection = flags.connection()
         
         if !isFlagsUpdated {
             assertionFailure()
-            throw ReachabilityError.unableToInitDueGetFlags
+            throw InitErrors.unableToGetFlags
         }
     }
     
     deinit {
-        stopNotifier()
+        stopListening()
     }
 }
 
 // MARK: - Delegate methods
-public extension Reachability {
-    func register(_ delegate: ReachabilitySubscriber) {
+public extension NetworkReachability {
+    func register(_ delegate: NetworkReachabilityListener) {
         multicastDelegate.addDelegate(delegate)
     }
-    func unregister(_ delegate: ReachabilitySubscriber) {
+    func unregister(_ delegate: NetworkReachabilityListener) {
         multicastDelegate.removeDelegate(delegate)
     }
 }
 
 // MARK: - Notifier methods
-public extension Reachability {
+public extension NetworkReachability {
     
-    func startNotifier() throws {
+    func startListening() throws {
         guard !notifierRunning else {
             assertionFailure("don't need to start twice")
             return
@@ -140,26 +145,26 @@ public extension Reachability {
                 assertionFailure()
                 return
             }
-            Unmanaged<Reachability>.fromOpaque(info).takeUnretainedValue().flags = flags
+            Unmanaged<NetworkReachability>.fromOpaque(info).takeUnretainedValue().flags = flags
         }
         
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
-        context.info = UnsafeMutableRawPointer(Unmanaged<Reachability>.passUnretained(self).toOpaque())
+        context.info = UnsafeMutableRawPointer(Unmanaged<NetworkReachability>.passUnretained(self).toOpaque())
         
         if !SCNetworkReachabilitySetCallback(reachability, callback, &context) {
-            stopNotifier()
-            throw ReachabilityError.unableToStartDueSetCallback
+            stopListening()
+            throw StartErrors.unableToSetCallback
         }
         
         if !SCNetworkReachabilitySetDispatchQueue(reachability, reachabilitySerialQueue) {
-            stopNotifier()
-            throw ReachabilityError.unableToStartDueSetDispatchQueue
+            stopListening()
+            throw StartErrors.unableToSetDispatchQueue
         }
         
         notifierRunning = true
     }
     
-    func stopNotifier() {
+    func stopListening() {
         defer { notifierRunning = false }
         
         SCNetworkReachabilitySetCallback(reachability, nil, nil)
@@ -168,14 +173,14 @@ public extension Reachability {
 }
 
 // MARK: - shared
-extension Reachability {
-    static let shared = try? Reachability()
+extension NetworkReachability {
+    static let shared = try? NetworkReachability()
 }
 
 // MARK: - SCNetworkReachabilityFlags+Connection
 extension SCNetworkReachabilityFlags {
     
-    typealias Connection = Reachability.Connection
+    typealias Connection = NetworkReachability.Connection
     
     func isNetworkReachable() -> Bool {
         let isReachable = contains(.reachable)
@@ -187,7 +192,6 @@ extension SCNetworkReachabilityFlags {
     }
     
     func connection() -> Connection {
-        
         guard isNetworkReachable() else {
             return .none
         }

@@ -13,19 +13,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupReachability()
+        setupNetworkReachability()
     }
     
-    private func setupReachability() {
-        guard let reachability = Reachability.shared else  {
+    private func setupNetworkReachability() {
+        guard let networkReachability = NetworkReachability.shared else  {
             assertionFailure()
             return
         }
-        reachability.register(self)
-        updateUserInterface(for: reachability.connection)
+        networkReachability.register(self)
+        updateUserInterface(for: networkReachability.connection)
     }
 
-    private func updateUserInterface(for connection: Reachability.Connection) {
+    private func updateUserInterface(for connection: NetworkReachability.Connection) {
         switch connection {
         case .none:
             view.backgroundColor = .red
@@ -38,10 +38,11 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ReachabilitySubscriber {
-    func reachabilityChanged(_ reachability: Reachability) {
+extension ViewController: NetworkReachabilityListener {
+    func networkReachability(_ networkReachability: NetworkReachability,
+                             changed connection: NetworkReachability.Connection) {
         DispatchQueue.main.async {
-            self.updateUserInterface(for: reachability.connection)
+            self.updateUserInterface(for: connection)
         }
 
     }
