@@ -32,13 +32,15 @@ class ViewController: UIViewController {
         }
         print("--- Reachability Summary")
         print("Status:", Network.reachability.status)
-        print("HostName:", Network.reachability.hostname ?? "nil")
         print("Reachable:", Network.reachability.isReachable)
         print("Wifi:", Network.reachability.isReachableViaWiFi)
     }
     
     @objc func statusManager(_ notification: Notification) {
-        updateUserInterface()
+        DispatchQueue.main.async {
+            self.updateUserInterface()
+        }
+        
     }
 
 }
