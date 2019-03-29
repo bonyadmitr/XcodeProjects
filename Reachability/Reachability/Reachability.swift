@@ -16,13 +16,6 @@ import SystemConfiguration
 import SystemConfiguration
 import Foundation
 
-public enum ReachabilityError: Error {
-    case FailedToSystemFramework
-    case UnableToSetCallback
-    case UnableToSetDispatchQueue
-    case UnableToGetInitialFlags
-}
-
 public protocol ReachabilitySubscriber {
     /// called on private serial queue
     func reachabilityChanged(_ reachability: Reachability)
@@ -40,6 +33,14 @@ public class Reachability {
             case .none: return "No Connection"
             }
         }
+    }
+    
+    // TODO: split in two errors
+    public enum ReachabilityError: Error {
+        case unableToInitDueSystemFramework
+        case unableToInitDueGetFlags
+        case unableToStartDueSetCallback
+        case unableToStartDueSetDispatchQueue
     }
     
     public var connection: Connection
@@ -77,14 +78,14 @@ public class Reachability {
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
         guard let reachability = SCNetworkReachabilityCreateWithAddress(nil, &zeroAddress) else {
-            throw ReachabilityError.FailedToSystemFramework
+            throw ReachabilityError.unableToInitDueSystemFramework
         }
         try self.init(reachability: reachability)
     }
     
     public convenience init(hostname: String) throws {
         guard let reachability = SCNetworkReachabilityCreateWithName(nil, hostname) else {
-            throw ReachabilityError.FailedToSystemFramework
+            throw ReachabilityError.unableToInitDueSystemFramework
         }
         try self.init(reachability: reachability)
     }
@@ -99,7 +100,7 @@ public class Reachability {
         
         if !isFlagsUpdated {
             assertionFailure()
-            throw ReachabilityError.UnableToGetInitialFlags
+            throw ReachabilityError.unableToInitDueGetFlags
         }
     }
     
@@ -140,12 +141,12 @@ public extension Reachability {
         context.info = UnsafeMutableRawPointer(Unmanaged<Reachability>.passUnretained(self).toOpaque())
         if !SCNetworkReachabilitySetCallback(reachability, callback, &context) {
             stopNotifier()
-            throw ReachabilityError.UnableToSetCallback
+            throw ReachabilityError.unableToStartDueSetCallback
         }
         
         if !SCNetworkReachabilitySetDispatchQueue(reachability, reachabilitySerialQueue) {
             stopNotifier()
-            throw ReachabilityError.UnableToSetDispatchQueue
+            throw ReachabilityError.unableToStartDueSetDispatchQueue
         }
         
         notifierRunning = true
