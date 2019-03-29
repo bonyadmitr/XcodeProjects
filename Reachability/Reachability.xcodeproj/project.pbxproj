@@ -12,6 +12,7 @@
 		CE343634224DF11800AFAABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343632224DF11800AFAABB /* Main.storyboard */; };
 		CE343636224DF11900AFAABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE343635224DF11900AFAABB /* Assets.xcassets */; };
 		CE343639224DF11900AFAABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343637224DF11900AFAABB /* LaunchScreen.storyboard */; };
+		CE343641224DF12A00AFAABB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343640224DF12A00AFAABB /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE343635224DF11900AFAABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE343638224DF11900AFAABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE34363A224DF11900AFAABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE343640224DF12A00AFAABB /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				CE34362E224DF11800AFAABB /* AppDelegate.swift */,
 				CE343630224DF11800AFAABB /* ViewController.swift */,
+				CE343640224DF12A00AFAABB /* Reachability.swift */,
 				CE343632224DF11800AFAABB /* Main.storyboard */,
 				CE343635224DF11900AFAABB /* Assets.xcassets */,
 				CE343637224DF11900AFAABB /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				CE343631224DF11800AFAABB /* ViewController.swift in Sources */,
 				CE34362F224DF11800AFAABB /* AppDelegate.swift in Sources */,
+				CE343641224DF12A00AFAABB /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +287,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Reachability/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +306,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Reachability/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
