@@ -127,6 +127,7 @@ public extension Reachability {
             return
         }
         
+        /// will not be called for simulator when connection appears
         let callback: SCNetworkReachabilityCallBack = { (reachability, flags, info) in
             guard let info = info else {
                 assertionFailure()
