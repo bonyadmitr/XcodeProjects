@@ -1,10 +1,4 @@
-//
-//  NetworkReachability.swift
-//  NetworkReachability
-//
-//  Created by Bondar Yaroslav on 3/29/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
+#if !os(watchOS)
 
 import SystemConfiguration
 import Foundation
@@ -16,6 +10,11 @@ public protocol NetworkReachabilityListener {
     /// - will BE called when connection disappears
     func networkReachability(_ networkReachability: NetworkReachability,
                              changed connection: NetworkReachability.Connection)
+}
+
+// MARK: - shared
+extension NetworkReachability {
+    static let shared = NetworkReachability()
 }
 
 // MARK: -
@@ -38,68 +37,51 @@ public class NetworkReachability {
         }
     }
     
-    public enum InitErrors: Error {
-        case errorInSystemFramework
-        case unableToGetFlags
-    }
-    
-    public enum StartErrors: Error {
-        case unableToSetCallback
-        case unableToSetDispatchQueue
-    }
-    
     /// working without startListening but only on init.
     /// will be up to date after startListening.
     /// for simulator will be only WiFi.
     public var connection: Connection
     
-    private var notifierRunning = false
+    private var isListeningStarted = false
     private let reachability: SCNetworkReachability
-    private let reachabilitySerialQueue = DispatchQueue(label: "reachability_private_serial_queue")
+    private let listeningQueue = DispatchQueue(label: "reachability_private_serial_queue")
     private let multicastDelegate = MulticastDelegate<NetworkReachabilityListener>()
     
-    private var flags: SCNetworkReachabilityFlags {
-        didSet {
-            guard flags != oldValue else { return }
-            reachabilityChanged()
-        }
-    }
+    private var flags: SCNetworkReachabilityFlags
     
-    private func reachabilityChanged() {
-        self.connection = flags.connection()
-        self.multicastDelegate.invokeDelegates { $0.networkReachability(self, changed: self.connection) }
-    }
+    // MARK: - Init methods
     
     /// Reachability treats the 0.0.0.0 address as a special token that causes it to monitor the general routing status of the device, both IPv4 and IPv6.
-    public convenience init() throws {
+    public convenience init?() {
         /// #1
-//        var zeroAddress = sockaddr_in()
-//        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
-//        zeroAddress.sin_family = sa_family_t(AF_INET)
-//
-//        guard let reachability = withUnsafePointer(to: &zeroAddress, {
-//            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
-//                SCNetworkReachabilityCreateWithAddress(nil, $0)
-//            }}) else { return nil }
+        //var zeroAddress = sockaddr_in()
+        //zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        //zeroAddress.sin_family = sa_family_t(AF_INET)
+        //
+        //guard let reachability = withUnsafePointer(to: &zeroAddress, {
+        //    $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+        //        SCNetworkReachabilityCreateWithAddress(nil, $0)
+        //    }}) else { return nil }
         
         /// #2
         var zeroAddress = sockaddr()
         zeroAddress.sa_len = UInt8(MemoryLayout<sockaddr>.size)
         zeroAddress.sa_family = sa_family_t(AF_INET)
         guard let reachability = SCNetworkReachabilityCreateWithAddress(nil, &zeroAddress) else {
-            throw InitErrors.errorInSystemFramework
+            return nil
         }
-        try self.init(reachability: reachability)
+        
+        self.init(reachability: reachability)
     }
     
-    public convenience init(hostname: String) throws {
+    public convenience init?(hostname: String) {
         guard let reachability = SCNetworkReachabilityCreateWithName(nil, hostname) else {
-            throw InitErrors.errorInSystemFramework
+            return nil
         }
-        try self.init(reachability: reachability)
+        self.init(reachability: reachability)
     }
     
-    init(reachability: SCNetworkReachability) throws {
+    init?(reachability: SCNetworkReachability) {
         self.reachability = reachability
         
         /// get flags
@@ -112,7 +94,7 @@ public class NetworkReachability {
         
         if !isFlagsUpdated {
             assertionFailure()
-            throw InitErrors.unableToGetFlags
+            return nil
         }
     }
     
@@ -123,62 +105,70 @@ public class NetworkReachability {
 
 // MARK: - Delegate methods
 public extension NetworkReachability {
+    
     func register(_ delegate: NetworkReachabilityListener) {
         multicastDelegate.addDelegate(delegate)
     }
+    
+    /// don't need directly unregister objects.
+    /// call it when you need it directly.
     func unregister(_ delegate: NetworkReachabilityListener) {
         multicastDelegate.removeDelegate(delegate)
     }
 }
 
-// MARK: - Notifier methods
+// MARK: - Listening methods
 public extension NetworkReachability {
     
-    func startListening() throws {
-        guard !notifierRunning else {
+    @discardableResult
+    func startListening() -> Bool {
+        if isListeningStarted {
             assertionFailure("don't need to start twice")
-            return
-        }
-        
-        let callback: SCNetworkReachabilityCallBack = { _, flags, info in
-            guard let info = info else {
-                assertionFailure()
-                return
-            }
-            Unmanaged<NetworkReachability>.fromOpaque(info).takeUnretainedValue().flags = flags
+            return true
         }
         
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
+        /// #1
         context.info = UnsafeMutableRawPointer(Unmanaged<NetworkReachability>.passUnretained(self).toOpaque())
+        /// #2
+        //context.info = Unmanaged.passUnretained(self).toOpaque()
         
-        if !SCNetworkReachabilitySetCallback(reachability, callback, &context) {
-            stopListening()
-            throw StartErrors.unableToSetCallback
+        /// SystemConfiguration callback will be here
+        let callback: SCNetworkReachabilityCallBack = { _, flags, info in
+            guard let info = info else {
+                assertionFailure("SystemConfiguration bug")
+                return
+            }
+            Unmanaged<NetworkReachability>.fromOpaque(info).takeUnretainedValue().updateFlags(with: flags)
         }
         
-        if !SCNetworkReachabilitySetDispatchQueue(reachability, reachabilitySerialQueue) {
-            stopListening()
-            throw StartErrors.unableToSetDispatchQueue
-        }
+        let callbackEnabled = SCNetworkReachabilitySetCallback(reachability, callback, &context)
+        let queueEnabled = SCNetworkReachabilitySetDispatchQueue(reachability, listeningQueue)
         
-        notifierRunning = true
+        isListeningStarted = callbackEnabled && queueEnabled
+        return isListeningStarted
     }
     
     func stopListening() {
-        defer { notifierRunning = false }
-        
         SCNetworkReachabilitySetCallback(reachability, nil, nil)
         SCNetworkReachabilitySetDispatchQueue(reachability, nil)
+        isListeningStarted = false
+    }
+    
+    private func updateFlags(with flags: SCNetworkReachabilityFlags) {
+        guard self.flags != flags else { return }
+        self.flags = flags
+        reachabilityChanged()
+    }
+    
+    private func reachabilityChanged() {
+        self.connection = flags.connection()
+        self.multicastDelegate.invokeDelegates { $0.networkReachability(self, changed: self.connection) }
     }
 }
 
-// MARK: - shared
-extension NetworkReachability {
-    static let shared = try? NetworkReachability()
-}
-
 // MARK: - SCNetworkReachabilityFlags+Connection
-extension SCNetworkReachabilityFlags {
+private extension SCNetworkReachabilityFlags {
     
     func isNetworkReachable() -> Bool {
         let isReachable = contains(.reachable)
@@ -214,7 +204,7 @@ extension SCNetworkReachabilityFlags {
 
 // MARK: -
 
-import Foundation
+//import Foundation
 
 /// https://github.com/jonasman/MulticastDelegate/blob/master/Sources/MulticastDelegate.swift
 private final class MulticastDelegate<T> {
@@ -230,7 +220,7 @@ private final class MulticastDelegate<T> {
         delegates.remove(delegate as AnyObject)
     }
 
-    public func invokeDelegates(_ invocation: (T) -> ()) {
+    func invokeDelegates(_ invocation: (T) -> ()) {
         for delegate in delegates.allObjects {
             /// for performance can be used unsafe invocation(delegate as! T)
             if let delegate = delegate as? T {
@@ -241,3 +231,5 @@ private final class MulticastDelegate<T> {
         }
     }
 }
+
+#endif

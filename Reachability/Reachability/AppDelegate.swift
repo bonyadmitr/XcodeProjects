@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("on start:", NetworkReachability.shared?.connection ?? "nil")
         
-        try? NetworkReachability.shared?.startListening()
+        NetworkReachability.shared?.startListening()
         
         return true
     }
