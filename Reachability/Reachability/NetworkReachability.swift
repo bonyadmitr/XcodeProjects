@@ -15,6 +15,7 @@ public protocol NetworkReachabilityListener {
 // MARK: - shared
 extension NetworkReachability {
     static let shared = NetworkReachability()
+    //static let shared = NetworkReachability(hostname: "www.google.com")
 }
 
 // MARK: -
