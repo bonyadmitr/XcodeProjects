@@ -168,6 +168,49 @@ public extension NetworkReachability {
     }
 }
 
+// MARK: - checkInternet
+extension NetworkReachability {
+    
+    /// needs 3-4 kb of network for check
+    func checkInternetConnection(handler: @escaping (_ isReachable: Bool) -> Void) {
+        
+        /// for china use https://www.wechat.com or something else
+        guard let url = URL(string: "https://www.google.com") else {
+            assertionFailure()
+            return
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = 0.5
+        urlRequest.httpMethod = "HEAD"
+        //urlRequest.cachePolicy = .reloadRevalidatingCacheData
+        //urlRequest.cachePolicy = .reloadIgnoringLocalCacheData
+        
+        URLSession.shared.dataTask(with: urlRequest) { _, _, error in
+            
+            if let error = error as? URLError, error.code == .timedOut {
+                handler(false)
+            } else {
+                handler(true)
+            }
+            
+            //guard let error = error as? URLError else {
+            //    self.view.backgroundColor = .green
+            //    return
+            //}
+            //
+            //switch error.code {
+            //case .timedOut:
+            //    print("there is no INTERNET connection or it is very slow")
+            //case .notConnectedToInternet:
+            //    print("there is no NETWORK connection at all")
+            //default:
+            //    print(error.localizedDescription)
+            //}
+        }.resume()
+    }
+}
+
 // MARK: - SCNetworkReachabilityFlags+Connection
 private extension SCNetworkReachabilityFlags {
     
