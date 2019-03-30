@@ -52,11 +52,9 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: NetworkReachabilityListener {
-    func networkReachability(_ networkReachability: NetworkReachability,
-                             changed connection: NetworkReachability.Connection) {
+    func networkReachabilityChangedConnection(_ networkReachability: NetworkReachability) {
         DispatchQueue.main.async {
             self.updateUserInterface(for: networkReachability)
         }
-
     }
 }

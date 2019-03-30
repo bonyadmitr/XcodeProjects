@@ -8,8 +8,7 @@ public protocol NetworkReachabilityListener {
     /// for simulator:
     /// - will NOT be called when connection appears
     /// - will BE called when connection disappears
-    func networkReachability(_ networkReachability: NetworkReachability,
-                             changed connection: NetworkReachability.Connection)
+    func networkReachabilityChangedConnection(_ networkReachability: NetworkReachability)
 }
 
 // MARK: - shared
@@ -164,7 +163,7 @@ public extension NetworkReachability {
     
     private func reachabilityChanged() {
         self.connection = flags.connection()
-        self.multicastDelegate.invokeDelegates { $0.networkReachability(self, changed: self.connection) }
+        self.multicastDelegate.invokeDelegates { $0.networkReachabilityChangedConnection(self) }
     }
 }
 
