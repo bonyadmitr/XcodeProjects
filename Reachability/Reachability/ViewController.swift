@@ -10,10 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNetworkReachability()
+        if #available(iOS 12.0, *) {
+            _ = NetworkReachability2.shared
+        } else {
+            setupNetworkReachability()
+        }
     }
     
     private func setupNetworkReachability() {

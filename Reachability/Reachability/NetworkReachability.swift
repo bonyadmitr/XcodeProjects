@@ -234,3 +234,54 @@ private final class MulticastDelegate<T> {
 }
 
 #endif
+
+import Network
+
+/// https://stackoverflow.com/a/55039596/5893286
+/// https://developer.apple.com/documentation/network
+@available(iOS 12.0, *)
+class NetworkReachability2 {
+    
+    static let shared = NetworkReachability2()
+    
+    private let pathMonitor = NWPathMonitor()
+    //NWPathMonitor(requiredInterfaceType: .cellular)
+    
+    private var path: NWPath
+    
+//    func qqq(path: NWPath) -> Void {
+//
+//    }
+    
+//    private lazy var pathUpdateHandler: ((NWPath) -> Void) = { path in
+//        print(path)
+//    }
+    
+    private let listeningQueue = DispatchQueue(label: "reachability2_private_serial_queue")
+    
+    init() {
+        path = pathMonitor.currentPath
+        
+        pathMonitor.pathUpdateHandler = { [weak self] path in
+            self?.path = path
+            print("-", path.status)
+            
+//            switch path.status {
+//            case .satisfied:
+//                print("Connected")
+//            case .unsatisfied:
+//                print("unsatisfied")
+//            case .requiresConnection:
+//                print("requiresConnection")
+//            }
+            
+//            print("isExpensive", path.isExpensive)
+        }
+        
+        pathMonitor.start(queue: listeningQueue)
+    }
+    
+    func isNetworkAvailable() -> Bool {
+        return path.status == .satisfied
+    }
+}
