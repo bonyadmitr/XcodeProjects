@@ -4,14 +4,21 @@ extension TelephonyNetwork {
     static let shared = TelephonyNetwork()
 }
 
+/// !!! CTRadioAccessTechnologyDidChange called on every creation of CTTelephonyNetworkInfo
 final class TelephonyNetwork {
     
     enum CellularType {
         case none, g2, g3, g4, unknown
     }
     
-    private let netInfo = CTTelephonyNetworkInfo()
+    var cellularType: CellularType = .none
+    
+    private let networkInfo = CTTelephonyNetworkInfo()
     private var notificationToken: NSObjectProtocol?
+    
+    init() {
+        cellularType = cellularType(for: networkInfo.currentRadioAccessTechnology)
+    }
     
     deinit {
         stopListening()
@@ -29,7 +36,8 @@ final class TelephonyNetwork {
             guard let self = self else {
                 return
             }
-            print("Cellular changed:", self.checkCellularType())
+            self.cellularType = self.cellularType(for: notification.object as? String)
+            print("Cellular changed:", self.cellularType)
         }
     }
     
@@ -39,13 +47,13 @@ final class TelephonyNetwork {
         }
     }
     
-    func checkCellularType() -> CellularType {
+    private func cellularType(for technology: String?) -> CellularType {
         /// can be .none when changing to 2G
-        guard let currentTechnology = netInfo.currentRadioAccessTechnology else {
+        guard let technology = technology else {
             return .none
         }
         
-        switch currentTechnology {
+        switch technology {
         case CTRadioAccessTechnologyGPRS,
              CTRadioAccessTechnologyEdge,
              CTRadioAccessTechnologyCDMA1x:
