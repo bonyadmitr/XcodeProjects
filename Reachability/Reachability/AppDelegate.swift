@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("on start:", NetworkReachability.shared?.connection ?? "nil")
         NetworkReachability.shared?.startListening()
         
+        #if !targetEnvironment(simulator)
         TelephonyNetwork.shared.startListening()
+        #endif
+        
         
         return true
     }

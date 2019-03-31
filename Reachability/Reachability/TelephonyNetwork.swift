@@ -5,10 +5,28 @@ extension TelephonyNetwork {
 }
 
 /// !!! CTRadioAccessTechnologyDidChange called on every creation of CTTelephonyNetworkInfo
+/// will be a lot of errors on the simulator due creation of CTTelephonyNetworkInfo
+/// so use "#if !targetEnvironment(simulator) #endif"
 final class TelephonyNetwork {
     
-    enum CellularType {
+    /// can't be named cases like 3G or 4G due the language
+    enum CellularType: CustomStringConvertible {
         case none, g2, g3, g4, unknown
+        
+        var description: String {
+            switch self {
+            case .none:
+                return "No Connection"
+            case .g2:
+                return "2G"
+            case .g3:
+                return "3G"
+            case .g4:
+                return "4G"
+            case .unknown:
+                return "5G or Unknown"
+            }
+        }
     }
     
     var cellularType: CellularType = .none
