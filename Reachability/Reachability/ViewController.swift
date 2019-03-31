@@ -8,6 +8,7 @@
 
 import UIKit
 import Connectivity
+import CoreTelephony
 
 class ViewController: UIViewController {
     
@@ -33,24 +34,44 @@ class ViewController: UIViewController {
 //        connectivity.whenDisconnected = connectivityChanged
 //
 //        connectivity.startNotifier()
+        
+
+        
+    }
+    
+    enum CellularType {
+        case none, g2, g3, g4
+    }
+    
+    func checkCellularType() -> CellularType {
+        let netInfo = CTTelephonyNetworkInfo()
+        guard let currentTechnology = netInfo.currentRadioAccessTechnology else {
+            return .none
+        }
+        switch currentTechnology {
+        case CTRadioAccessTechnologyGPRS,
+             CTRadioAccessTechnologyEdge,
+             CTRadioAccessTechnologyCDMA1x:
+            return .g2
+        case CTRadioAccessTechnologyWCDMA,
+             CTRadioAccessTechnologyHSDPA,
+             CTRadioAccessTechnologyHSUPA,
+             CTRadioAccessTechnologyCDMAEVDORev0,
+             CTRadioAccessTechnologyCDMAEVDORevA,
+             CTRadioAccessTechnologyCDMAEVDORevB,
+             CTRadioAccessTechnologyeHRPD:
+            return .g3
+        case CTRadioAccessTechnologyLTE:
+            return .g4
+        default:
+            return .none
+        }
     }
     
     func updateConnectionStatus(_ status: ConnectivityStatus) {
         print(status)
         
         switch status {
-//        case .connected:
-//            view.backgroundColor = UIColor.cyan
-//        case .connectedViaWiFi:
-//            view.backgroundColor = .green
-//        case .connectedViaWiFiWithoutInternet:
-//            view.backgroundColor = .red
-//        case .connectedViaWWAN:
-//            view.backgroundColor = .green
-//        case .connectedViaWWANWithoutInternet:
-//            view.backgroundColor = .red
-//        case .notConnected:
-//            view.backgroundColor = .red
         case .connected:
             view.backgroundColor = .cyan
         case .connectedViaCellular:
@@ -64,7 +85,6 @@ class ViewController: UIViewController {
         case .notConnected:
             view.backgroundColor = .red
         }
-        
     }
 
     
@@ -96,6 +116,7 @@ class ViewController: UIViewController {
         }
         
         print(networkReachability.connection)
+        print(checkCellularType())
     }
 }
 
