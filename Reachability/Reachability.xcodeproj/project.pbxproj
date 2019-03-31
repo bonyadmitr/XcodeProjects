@@ -15,6 +15,7 @@
 		CE343639224DF11900AFAABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343637224DF11900AFAABB /* LaunchScreen.storyboard */; };
 		CE343641224DF12A00AFAABB /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343640224DF12A00AFAABB /* NetworkReachability.swift */; };
 		CE3436442250893400AFAABB /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3436432250893400AFAABB /* libresolv.9.tbd */; };
+		CE34364A2250C4D600AFAABB /* TelephonyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3436492250C4D600AFAABB /* TelephonyNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CE343640224DF12A00AFAABB /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		CE3436432250893400AFAABB /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CE34364622508A5500AFAABB /* Reachability-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reachability-Bridging-Header.h"; sourceTree = "<group>"; };
+		CE3436492250C4D600AFAABB /* TelephonyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelephonyNetwork.swift; sourceTree = "<group>"; };
 		F20FB627B23791D85D3D95C9 /* Pods-Reachability.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reachability.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reachability/Pods-Reachability.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +81,7 @@
 				CE34362E224DF11800AFAABB /* AppDelegate.swift */,
 				CE343630224DF11800AFAABB /* ViewController.swift */,
 				CE343640224DF12A00AFAABB /* NetworkReachability.swift */,
+				CE3436492250C4D600AFAABB /* TelephonyNetwork.swift */,
 				CE343632224DF11800AFAABB /* Main.storyboard */,
 				CE343635224DF11900AFAABB /* Assets.xcassets */,
 				CE343637224DF11900AFAABB /* LaunchScreen.storyboard */,
@@ -221,6 +224,7 @@
 				CE343631224DF11800AFAABB /* ViewController.swift in Sources */,
 				CE34362F224DF11800AFAABB /* AppDelegate.swift in Sources */,
 				CE343641224DF12A00AFAABB /* NetworkReachability.swift in Sources */,
+				CE34364A2250C4D600AFAABB /* TelephonyNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
