@@ -10,44 +10,51 @@ import UIKit
 import Connectivity
 import CoreTelephony
 
-class ViewController: UIViewController {
-    
-    /// https://stackoverflow.com/a/52625314/5893286
-    /// https://github.com/rwbutler/Connectivity
-    /// https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e
-    let connectivity: Connectivity = Connectivity()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if #available(iOS 12.0, *) {
-            _ = NetworkReachability2.shared
-        } else {
-            setupNetworkReachability()
-        }
-        
-//        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
-//            self?.updateConnectionStatus(connectivity.status)
-//        }
-//
-//        connectivity.whenConnected = connectivityChanged
-//        connectivity.whenDisconnected = connectivityChanged
-//
-//        connectivity.startNotifier()
-        
+extension TelephonyNetwork {
+    static let shared = TelephonyNetwork()
+}
 
-        
-    }
+final class TelephonyNetwork {
     
     enum CellularType {
-        case none, g2, g3, g4
+        case none, g2, g3, g4, unknown
+    }
+    
+    private let netInfo = CTTelephonyNetworkInfo()
+    private var notificationToken: NSObjectProtocol?
+    
+    deinit {
+        stopListening()
+    }
+    
+    func startListening() {
+        guard notificationToken == nil else {
+            assertionFailure("don't need to start twice")
+            return
+        }
+        
+        /// object can contains currentRadioAccessTechnology or nil
+        /// queue is CTTelephonyNetworkInfo(serial)
+        NotificationCenter.default.addObserver(forName: .CTRadioAccessTechnologyDidChange, object: nil, queue: nil) { [weak self] notification in
+            guard let self = self else {
+                return
+            }
+            print("Cellular changed:", self.checkCellularType())
+        }
+    }
+    
+    func stopListening() {
+        if let notificationToken = notificationToken {
+            NotificationCenter.default.removeObserver(notificationToken, name: .CTRadioAccessTechnologyDidChange, object: nil)
+        }
     }
     
     func checkCellularType() -> CellularType {
-        let netInfo = CTTelephonyNetworkInfo()
+        /// can be .none when changing to 2G
         guard let currentTechnology = netInfo.currentRadioAccessTechnology else {
             return .none
         }
+        
         switch currentTechnology {
         case CTRadioAccessTechnologyGPRS,
              CTRadioAccessTechnologyEdge,
@@ -64,8 +71,39 @@ class ViewController: UIViewController {
         case CTRadioAccessTechnologyLTE:
             return .g4
         default:
-            return .none
+            /// never called during the tests
+            /// can be called for new networks like 5G
+            return .unknown
         }
+    }
+}
+
+class ViewController: UIViewController {
+    
+    /// https://stackoverflow.com/a/52625314/5893286
+    /// https://github.com/rwbutler/Connectivity
+    /// https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e
+    let connectivity: Connectivity = Connectivity()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        TelephonyNetwork.shared.startListening()
+        
+        if #available(iOS 12.0, *) {
+            _ = NetworkReachability2.shared
+        } else {
+            setupNetworkReachability()
+        }
+        
+//        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
+//            self?.updateConnectionStatus(connectivity.status)
+//        }
+//
+//        connectivity.whenConnected = connectivityChanged
+//        connectivity.whenDisconnected = connectivityChanged
+//
+//        connectivity.startNotifier()
     }
     
     func updateConnectionStatus(_ status: ConnectivityStatus) {
@@ -116,7 +154,7 @@ class ViewController: UIViewController {
         }
         
         print(networkReachability.connection)
-        print(checkCellularType())
+//        print(TelephonyNetwork.shared.checkCellularType())
     }
 }
 
