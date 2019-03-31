@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B5852458F5FC975C20E7EBE /* Pods_Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 152BC078D71504BD2E28D506 /* Pods_Reachability.framework */; };
 		CE34362F224DF11800AFAABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34362E224DF11800AFAABB /* AppDelegate.swift */; };
 		CE343631224DF11800AFAABB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343630224DF11800AFAABB /* ViewController.swift */; };
 		CE343634224DF11800AFAABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343632224DF11800AFAABB /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		152BC078D71504BD2E28D506 /* Pods_Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B8863F77E25BDE90CBC4E9 /* Pods-Reachability.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reachability.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reachability/Pods-Reachability.release.xcconfig"; sourceTree = "<group>"; };
 		CE34362B224DF11800AFAABB /* Reachability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reachability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE34362E224DF11800AFAABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE343630224DF11800AFAABB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +30,7 @@
 		CE343640224DF12A00AFAABB /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		CE3436432250893400AFAABB /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		CE34364622508A5500AFAABB /* Reachability-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reachability-Bridging-Header.h"; sourceTree = "<group>"; };
+		F20FB627B23791D85D3D95C9 /* Pods-Reachability.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reachability.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reachability/Pods-Reachability.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,18 +39,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE3436442250893400AFAABB /* libresolv.9.tbd in Frameworks */,
+				3B5852458F5FC975C20E7EBE /* Pods_Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D83D98386640174056BE061 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F20FB627B23791D85D3D95C9 /* Pods-Reachability.debug.xcconfig */,
+				52B8863F77E25BDE90CBC4E9 /* Pods-Reachability.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CE343622224DF11800AFAABB = {
 			isa = PBXGroup;
 			children = (
 				CE34362D224DF11800AFAABB /* Reachability */,
 				CE34362C224DF11800AFAABB /* Products */,
 				CE3436422250893400AFAABB /* Frameworks */,
+				5D83D98386640174056BE061 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3436432250893400AFAABB /* libresolv.9.tbd */,
+				152BC078D71504BD2E28D506 /* Pods_Reachability.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE34363D224DF11900AFAABB /* Build configuration list for PBXNativeTarget "Reachability" */;
 			buildPhases = (
+				EA8ABB2AE2FC837A73880DF1 /* [CP] Check Pods Manifest.lock */,
 				CE343627224DF11800AFAABB /* Sources */,
 				CE343628224DF11800AFAABB /* Frameworks */,
 				CE343629224DF11800AFAABB /* Resources */,
+				E3DBDC0F568F205DB620278B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -147,6 +165,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E3DBDC0F568F205DB620278B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Reachability/Pods-Reachability-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Connectivity/Connectivity.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Connectivity.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reachability/Pods-Reachability-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA8ABB2AE2FC837A73880DF1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reachability-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE343627224DF11800AFAABB /* Sources */ = {
@@ -299,6 +364,7 @@
 		};
 		CE34363E224DF11900AFAABB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F20FB627B23791D85D3D95C9 /* Pods-Reachability.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -321,6 +387,7 @@
 		};
 		CE34363F224DF11900AFAABB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52B8863F77E25BDE90CBC4E9 /* Pods-Reachability.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

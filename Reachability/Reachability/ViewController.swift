@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Connectivity
 
 class ViewController: UIViewController {
+    
+    /// https://stackoverflow.com/a/52625314/5893286
+    /// https://github.com/rwbutler/Connectivity
+    /// https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e
+    let connectivity: Connectivity = Connectivity()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +24,49 @@ class ViewController: UIViewController {
         } else {
             setupNetworkReachability()
         }
+        
+//        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
+//            self?.updateConnectionStatus(connectivity.status)
+//        }
+//
+//        connectivity.whenConnected = connectivityChanged
+//        connectivity.whenDisconnected = connectivityChanged
+//
+//        connectivity.startNotifier()
     }
+    
+    func updateConnectionStatus(_ status: ConnectivityStatus) {
+        print(status)
+        
+        switch status {
+//        case .connected:
+//            view.backgroundColor = UIColor.cyan
+//        case .connectedViaWiFi:
+//            view.backgroundColor = .green
+//        case .connectedViaWiFiWithoutInternet:
+//            view.backgroundColor = .red
+//        case .connectedViaWWAN:
+//            view.backgroundColor = .green
+//        case .connectedViaWWANWithoutInternet:
+//            view.backgroundColor = .red
+//        case .notConnected:
+//            view.backgroundColor = .red
+        case .connected:
+            view.backgroundColor = .cyan
+        case .connectedViaCellular:
+            view.backgroundColor = .yellow
+        case .connectedViaCellularWithoutInternet:
+            view.backgroundColor = .red
+        case .connectedViaWiFi:
+            view.backgroundColor = .green
+        case .connectedViaWiFiWithoutInternet:
+            view.backgroundColor = .red
+        case .notConnected:
+            view.backgroundColor = .red
+        }
+        
+    }
+
     
     private func setupNetworkReachability() {
         guard let networkReachability = NetworkReachability.shared else  {
