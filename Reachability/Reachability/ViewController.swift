@@ -11,8 +11,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TelephonyNetwork.shared.startListening()
-        
         if #available(iOS 12.0, *) {
             _ = NetworkReachability2.shared
         } else {

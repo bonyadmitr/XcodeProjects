@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        print("on start:", NetworkReachability.shared?.connection ?? "nil")
-        
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
+        print("on start:", NetworkReachability.shared?.connection ?? "nil")
         NetworkReachability.shared?.startListening()
+        
+        TelephonyNetwork.shared.startListening()
         
         return true
     }
