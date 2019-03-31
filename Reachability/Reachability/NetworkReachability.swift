@@ -172,6 +172,10 @@ extension NetworkReachability {
     
     /// needs 3-4 kb of network for check
     func checkInternetConnection(handler: @escaping (_ isReachable: Bool) -> Void) {
+//        let servers = Resolver().getservers().map(Resolver.getnameinfo)
+//        print("- servers count: ", servers.count)
+//        let q = servers.first ?? "https://www.google.com"
+//        guard let url = URL(string: "https://\(q)") else {
         
         /// for china use https://www.wechat.com or something else
         guard let url = URL(string: "https://www.google.com") else {

@@ -13,6 +13,7 @@
 		CE343636224DF11900AFAABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE343635224DF11900AFAABB /* Assets.xcassets */; };
 		CE343639224DF11900AFAABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343637224DF11900AFAABB /* LaunchScreen.storyboard */; };
 		CE343641224DF12A00AFAABB /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343640224DF12A00AFAABB /* NetworkReachability.swift */; };
+		CE3436442250893400AFAABB /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3436432250893400AFAABB /* libresolv.9.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		CE343638224DF11900AFAABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE34363A224DF11900AFAABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE343640224DF12A00AFAABB /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		CE3436432250893400AFAABB /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
+		CE34364622508A5500AFAABB /* Reachability-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reachability-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3436442250893400AFAABB /* libresolv.9.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +46,7 @@
 			children = (
 				CE34362D224DF11800AFAABB /* Reachability */,
 				CE34362C224DF11800AFAABB /* Products */,
+				CE3436422250893400AFAABB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,8 +68,17 @@
 				CE343635224DF11900AFAABB /* Assets.xcassets */,
 				CE343637224DF11900AFAABB /* LaunchScreen.storyboard */,
 				CE34363A224DF11900AFAABB /* Info.plist */,
+				CE34364622508A5500AFAABB /* Reachability-Bridging-Header.h */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		CE3436422250893400AFAABB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE3436432250893400AFAABB /* libresolv.9.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +113,7 @@
 				TargetAttributes = {
 					CE34362A224DF11800AFAABB = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -286,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Reachability/Info.plist;
@@ -296,6 +312,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Reachability;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Reachability/Reachability-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -305,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = Reachability/Info.plist;
@@ -315,6 +334,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Reachability;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Reachability/Reachability-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
