@@ -71,6 +71,7 @@ final class TelephonyNetwork {
             return .none
         }
         
+        /// https://stackoverflow.com/a/44646476/5893286
         switch technology {
         case CTRadioAccessTechnologyGPRS,
              CTRadioAccessTechnologyEdge,
