@@ -178,7 +178,9 @@ extension NetworkReachability {
 //        guard let url = URL(string: "https://\(q)") else {
         
         /// for china use https://www.wechat.com or something else
-        guard let url = URL(string: "https://www.google.com") else {
+        //let urlString = "https://www.apple.com/library/test/success.html"
+        let urlString = "https://www.google.com"
+        guard let url = URL(string: urlString) else {
             assertionFailure()
             return
         }
