@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("on start:", NetworkReachability.shared?.connection ?? "nil")
         
+        UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        
         NetworkReachability.shared?.startListening()
         
         return true
