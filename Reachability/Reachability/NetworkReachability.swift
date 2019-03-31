@@ -156,7 +156,9 @@ public extension NetworkReachability {
     }
     
     private func updateFlags(with flags: SCNetworkReachabilityFlags) {
-        guard self.flags != flags else { return }
+        guard self.flags != flags else {
+            return
+        }
         self.flags = flags
         reachabilityChanged()
     }
@@ -186,7 +188,7 @@ extension NetworkReachability {
         }
         
         var urlRequest = URLRequest(url: url)
-        urlRequest.timeoutInterval = 0.5
+        urlRequest.timeoutInterval = 1
         urlRequest.httpMethod = "HEAD"
         //urlRequest.cachePolicy = .reloadRevalidatingCacheData
         //urlRequest.cachePolicy = .reloadIgnoringLocalCacheData
