@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TelephonyNetwork.shared.startListening()
         #endif
         
+//        InternetSpeed.shared.testDownloadSpeedWithTimout()
+        InternetSpeed2.shared.start()
         
         return true
     }
