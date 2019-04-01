@@ -259,13 +259,13 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     private var startTime: CFAbsoluteTime = 0
     
     func start() {
-        /// https://speed.hetzner.de/
+        /// big files but http
         /// http://speedtest.tele2.net/
-        
-        let url = URL(string: "http://speedtest.tele2.net/1GB.zip")!
-        
+        ///
+        /// https test files
+        /// https://speed.hetzner.de/
 //        let url = URL(string: "https://speed.hetzner.de/100MB.bin")!
-//        let url = URL(string: "https://speed.hetzner.de/1GB.bin")!
+        let url = URL(string: "https://speed.hetzner.de/1GB.bin")!
 //        let url = URL(string: "https://speed.hetzner.de/10GB.bin")!
         fetchFile(url: url)
     }
