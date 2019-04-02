@@ -256,7 +256,9 @@ extension InternetSpeed2 {
 
 final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     
+    /// not let due NSObject. setup in init
     private var session = URLSession.shared
+    
     private var dataTask: URLSessionDataTask?
     
     private var startTime: CFAbsoluteTime = 0
@@ -293,13 +295,18 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
         ///
         /// https test files
         /// https://speed.hetzner.de/
-//        let url = URL(string: "https://speed.hetzner.de/100MB.bin")!
-        let url = URL(string: "https://speed.hetzner.de/1GB.bin")!
-//        let url = URL(string: "https://speed.hetzner.de/10GB.bin")!
+        //let urlString = "https://speed.hetzner.de/100MB.bin"
+        let urlString = "https://speed.hetzner.de/1GB.bin"
+        //let urlString = "https://speed.hetzner.de/10GB.bin"
+        
+        guard let url = URL(string: urlString) else {
+            assertionFailure()
+            return
+        }
         fetchFile(url: url)
     }
     
-    func fetchFile(url: URL) {
+    private func fetchFile(url: URL) {
         dataTask = session.dataTask(with: URLRequest(url: url))
         dataTask?.resume()
         startTime = CFAbsoluteTimeGetCurrent()
@@ -330,7 +337,7 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
         
         let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
         let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
-        
+
 
         /// to clear terminal
         for _ in 1...19 {
