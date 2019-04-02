@@ -295,7 +295,7 @@ class NetworkReachability2 {
     static let shared = NetworkReachability2()
     
     private let pathMonitor = NWPathMonitor()
-    //NWPathMonitor(requiredInterfaceType: .cellular)
+    //private let pathMonitor = NWPathMonitor(requiredInterfaceType: .cellular)
     
     private var path: NWPath
     
@@ -307,23 +307,45 @@ class NetworkReachability2 {
 //        print(path)
 //    }
     
+    //var connection = Network.NWInterface.InterfaceType.other
+    var connection: NetworkReachability.Connection
+    
     private let listeningQueue = DispatchQueue(label: "reachability2_private_serial_queue")
     
     init() {
         path = pathMonitor.currentPath
+        connection = pathMonitor.currentPath.typeForiOS()
         
+        /// when changing from .unsatisfied to .satisfied can be called many times(I saw up to 3)
         pathMonitor.pathUpdateHandler = { [weak self] path in
+            /// "self.path" will never be equals "path",
+            /// so don't use "guard self?.path != path"
             self?.path = path
-            print("-", path.status)
+//            print("-", path.status)
             
+
+            let newConnection = path.typeForiOS()
+            guard self?.connection != newConnection else {
+                /// will be called if wifi in on and cellular turned off.
+                /// also when system calls pathUpdateHandler few times.
+                return
+            }
+            self?.connection = newConnection
+            print(newConnection)
+//            print("-12:", path.typeForiOS())
+            
+            /// on iOS device requiresConnection called when quckly turn on/off cellular internet usage
 //            switch path.status {
 //            case .satisfied:
-//                print("Connected")
+//                print("-12:", "Connected")
 //            case .unsatisfied:
-//                print("unsatisfied")
+//                print("-12:", "unsatisfied")
+//
 //            case .requiresConnection:
-//                print("requiresConnection")
+//                print("-12:", "requiresConnection")
 //            }
+//            print("-12:", path.availableInterfaces.compactMap { $0.type })
+//            print()
             
 //            print("isExpensive", path.isExpensive)
         }
@@ -333,5 +355,19 @@ class NetworkReachability2 {
     
     func isNetworkAvailable() -> Bool {
         return path.status == .satisfied
+    }
+}
+
+@available(iOS 12.0, *)
+extension NWPath {
+    func typeForiOS() -> NetworkReachability.Connection {
+        if availableInterfaces.contains(where: { $0.type == .wifi }) {
+            return .wifi
+        } else if availableInterfaces.contains(where: { $0.type == .cellular }) {
+            return .cellular
+        } else {
+//            assertionFailure("should never called. check connection status before check")
+            return .none
+        }
     }
 }
