@@ -256,7 +256,7 @@ extension InternetSpeed2 {
 
 class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     
-    private var startTime: CFAbsoluteTime = 0
+    
     
     func start() {
         /// big files but http
@@ -271,30 +271,41 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     }
     
     func fetchFile(url: URL) {
-//        progress.progress = 0.0
+        /// it will be copy of URLSessionConfiguration.default
         let configuration = URLSessionConfiguration.default
-        let mainQueue = OperationQueue.main
-        session = URLSession(configuration: configuration, delegate: self, delegateQueue: mainQueue)
+        
+        /// if delegateQueue: nil there will not be dispatch queue but operation queue with threads in background
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        
         dataTask = session?.dataTask(with: URLRequest(url: url))
         dataTask?.resume()
         startTime = CFAbsoluteTimeGetCurrent()
     }
     
-    var buffer: NSMutableData = NSMutableData()
-    var session: URLSession?
+    func cancel() {
+        dataTask?.cancel()
+    }
+    
+    private var startTime: CFAbsoluteTime = 0
+    private var buffer = NSMutableData()
+    private var session: URLSession?
     var dataTask: URLSessionDataTask?
-    var expectedContentLength: Int64 = 0
-    var totalLength: Int64 = 0
-    var totalLengthString = ""
+    private var expectedContentLength: Int64 = 0
+    private var totalLengthString = ""
+    
+
+    
+    private let dataFormatStyle = ByteCountFormatter.CountStyle.binary
+    
+    /// can be static values
+    private let minuteInSeconds: Double = 60
+    private let hourInSeconds: Double = 3600
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-//        formatter.allowedUnits = [.hour, .minute]
         formatter.unitsStyle = .short
         return formatter
     }()
-    
-    let dataFormatStyle = ByteCountFormatter.CountStyle.binary
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         buffer.append(data)
@@ -302,23 +313,21 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         let passedTime = timeNow - startTime
         
         let downloaded = Int64(buffer.length)
-        
-        // in mb/s
         let speed = Double(downloaded) / passedTime
         let leftTime = Double(expectedContentLength - downloaded) / speed
         
-        let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
-        let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
-        
-        if leftTime < 60 {
+        if leftTime < minuteInSeconds {
             timeFormatter.allowedUnits = [.second]
-        } else if leftTime < 3600 {
+        } else if leftTime < hourInSeconds {
             timeFormatter.allowedUnits = [.minute]
         } else {
             timeFormatter.allowedUnits = [.hour]
         }
         
         let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
+        
+        let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
+        let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
         
 
         /// to clear terminal
@@ -364,7 +373,7 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
 
 extension Double {
     /// Rounds the double to decimal places value
-    func rounded(toPlaces places:Int) -> Double {
+    func rounded(toPlaces places: Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
