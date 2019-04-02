@@ -254,9 +254,38 @@ extension InternetSpeed2 {
 }
 
 
-class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
+final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     
+    private var session = URLSession.shared
+    private var dataTask: URLSessionDataTask?
     
+    private var startTime: CFAbsoluteTime = 0
+    private var buffer = NSMutableData()
+    
+    private var expectedContentLength: Int64 = 0
+    private var totalLengthString = ""
+    
+    private let dataFormatStyle = ByteCountFormatter.CountStyle.binary
+    
+    /// can be static values
+    private let minuteInSeconds: Double = 60
+    private let hourInSeconds: Double = 3600
+    
+    private let timeFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        return formatter
+    }()
+    
+    private override init() {
+        super.init()
+        
+        /// it will be copy of URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.default
+        
+        /// if delegateQueue: nil there will not be dispatch queue but operation queue with threads in background
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+    }
     
     func start() {
         /// big files but http
@@ -271,13 +300,7 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     }
     
     func fetchFile(url: URL) {
-        /// it will be copy of URLSessionConfiguration.default
-        let configuration = URLSessionConfiguration.default
-        
-        /// if delegateQueue: nil there will not be dispatch queue but operation queue with threads in background
-        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-        
-        dataTask = session?.dataTask(with: URLRequest(url: url))
+        dataTask = session.dataTask(with: URLRequest(url: url))
         dataTask?.resume()
         startTime = CFAbsoluteTimeGetCurrent()
     }
@@ -285,27 +308,6 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     func cancel() {
         dataTask?.cancel()
     }
-    
-    private var startTime: CFAbsoluteTime = 0
-    private var buffer = NSMutableData()
-    private var session: URLSession?
-    var dataTask: URLSessionDataTask?
-    private var expectedContentLength: Int64 = 0
-    private var totalLengthString = ""
-    
-
-    
-    private let dataFormatStyle = ByteCountFormatter.CountStyle.binary
-    
-    /// can be static values
-    private let minuteInSeconds: Double = 60
-    private let hourInSeconds: Double = 3600
-    
-    private let timeFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .short
-        return formatter
-    }()
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         buffer.append(data)
@@ -338,24 +340,6 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         /// google download text example
         //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
         print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
-        
-        
-//        let downloaded = buffer.length / 1024 / 1024
-//
-//        // in mb/s
-//        let speed = Double(downloaded) / passedTime
-//        let leftTime = (Double(totalLength - Int64(downloaded)) / speed / 60).rounded(toPlaces: 2)
-////        let leftTime = (Double(expectedContentLength - Int64(buffer.length)) / 60).rounded(toPlaces: 2)
-////        let leftTime = (Double(expectedContentLength - Int64(buffer.length)) / speed).rounded()
-////        print(speed)
-//
-//        /// google download text example
-//        //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
-//        print("\(speed.rounded(toPlaces: 2)) MB/s, \(downloaded) MB of \(totalLength) MB, \(leftTime) mins left")
-        
-        
-//        let percentageDownloaded = Float(buffer.length) / Float(expectedContentLength)
-//        progress.progress =  percentageDownloaded
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
@@ -366,7 +350,6 @@ class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-//        progress.progress = 1.0
         print("finished")
     }
 }
