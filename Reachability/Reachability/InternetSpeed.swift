@@ -185,6 +185,8 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
         return formatter
     }()
     
+    private var isStarted = false
+    
     private override init() {
         super.init()
         
@@ -196,6 +198,11 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     }
     
     func start() {
+        guard !isStarted else {
+            assertionFailure("don't call twice")
+            return
+        }
+        isStarted = true
         /// big files but http
         /// http://speedtest.tele2.net/
         ///
@@ -264,6 +271,7 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         print("finished")
+        isStarted = false
     }
 }
 
