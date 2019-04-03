@@ -160,6 +160,8 @@ extension InternetSpeed2 {
 }
 
 
+// TODO: create callbacks or delegates
+// TODO: change to download task, not data task
 final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     
     /// not let due NSObject. setup in init
