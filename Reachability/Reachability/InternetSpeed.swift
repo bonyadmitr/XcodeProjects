@@ -161,7 +161,6 @@ extension InternetSpeed2 {
 
 
 // TODO: create callbacks or delegates
-// TODO: change to download task, not data task
 final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     
     /// not let due NSObject. setup in init
@@ -170,7 +169,7 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     private var dataTask: URLSessionTask?
     
     private var startTime: CFAbsoluteTime = 0
-    private var buffer = NSMutableData()
+    private var bufferSize: Int64 = 0
     
     private var expectedContentLength: Int64 = 0
     private var totalLengthString = ""
@@ -232,11 +231,11 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        buffer.append(data)
+        bufferSize += Int64(data.count)
         let timeNow = CFAbsoluteTimeGetCurrent()
         let passedTime = timeNow - startTime
         
-        let downloaded = Int64(buffer.length)
+        let downloaded = Int64(bufferSize)
         let speed = Double(downloaded) / passedTime
         let leftTime = Double(expectedContentLength - downloaded) / speed
         
