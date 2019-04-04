@@ -15,29 +15,95 @@ final class Router {
     func setup(appDelegate: AppDelegate) {
         let window = UIWindow()
         window.backgroundColor = UIColor.cyan
-//        window.rootViewController = StartController()
         window.makeKeyAndVisible()
         appDelegate.window = window
         self.window = window
     }
     
     func startWithMainApp() {
-        window.rootViewController = MainController()
+        window.rootViewController = factory.main()
     }
     
-    func startWithSplash() {
-        window.rootViewController = StartController()
+    func startWithLogin() {
+        window.rootViewController = factory.login()
+    }
+    
+    func openMain() {
+        startWithMainApp()
+    }
+    
+    func logout() {
+        // logout from all services
+        startWithLogin()
+    }
+}
+
+final class Factory {
+    func main() -> UIViewController {
+        return TabBarController()
+    }
+    
+    func login() -> UIViewController {
+        return LoginController()
+    }
+    
+    func vc1() -> UIViewController {
+        let vc = LabelController()
+        vc.label.text = "111"
+        vc.title = "111"
+        vc.view.backgroundColor = UIColor.magenta
+        return vc
+    }
+    
+    func vc2() -> UIViewController {
+        let vc = LabelController()
+        vc.label.text = "222"
+        vc.title = "222"
+        vc.view.backgroundColor = UIColor.cyan
+        return vc
+    }
+}
+
+final class TabBarController: UITabBarController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        viewControllers = [factory.vc1(), factory.vc2()]
     }
 }
 
 import UIKit
 
-final class StartController: LabelController {
+final class LoginController: LabelController {
+    
+    private let loginButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        label.text = "Start"
+        view.backgroundColor = UIColor.lightGray
+        label.text = "Login"
+        
+//        loginButton.setTitleColor(UIColor.blue, for: .normal)
+//        loginButton.backgroundColor = .red
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
+        
+        view.addSubview(loginButton)
+//        loginButton.frame = CGRect(x: 20, y: 20, width: view.bounds.width - 20 * 2, height: 44)
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        loginButton.sizeToFit()
+        loginButton.frame = CGRect(x: 20, y: 20, width: view.bounds.width - 20 * 2, height: 44)
+        
+    }
+    
+    @objc private func login() {
+        router.openMain()
     }
 }
 
@@ -77,6 +143,7 @@ class LabelController: UIViewController {
 }
 
 private let router = Router()
+private let factory = Factory()
 
 //extension UIViewController {
 //    var router: Router {
@@ -93,11 +160,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         router.setup(appDelegate: self)
         
-        let isLoggedIn = true
+        let isLoggedIn = false
         if isLoggedIn {
             router.startWithMainApp()
         } else {
-            router.startWithSplash()
+            router.startWithLogin()
         }
 
         return true
