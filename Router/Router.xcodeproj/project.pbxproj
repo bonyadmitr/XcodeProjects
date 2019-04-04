@@ -10,6 +10,9 @@
 		C49D511E2256842B00574106 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D511D2256842B00574106 /* AppDelegate.swift */; };
 		C49D51202256842C00574106 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49D511F2256842C00574106 /* Assets.xcassets */; };
 		C49D51232256842C00574106 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49D51212256842C00574106 /* LaunchScreen.storyboard */; };
+		C49D512B225691C600574106 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D512A225691C600574106 /* Router.swift */; };
+		C49D512D225691EA00574106 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D512C225691EA00574106 /* Factory.swift */; };
+		C49D512F2256920900574106 /* Controllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D512E2256920900574106 /* Controllers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +21,9 @@
 		C49D511F2256842C00574106 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C49D51222256842C00574106 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C49D51242256842C00574106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49D512A225691C600574106 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		C49D512C225691EA00574106 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		C49D512E2256920900574106 /* Controllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controllers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				C49D511D2256842B00574106 /* AppDelegate.swift */,
+				C49D512A225691C600574106 /* Router.swift */,
+				C49D512C225691EA00574106 /* Factory.swift */,
+				C49D512E2256920900574106 /* Controllers.swift */,
 				C49D511F2256842C00574106 /* Assets.xcassets */,
 				C49D51212256842C00574106 /* LaunchScreen.storyboard */,
 				C49D51242256842C00574106 /* Info.plist */,
@@ -128,7 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49D512B225691C600574106 /* Router.swift in Sources */,
 				C49D511E2256842B00574106 /* AppDelegate.swift in Sources */,
+				C49D512D225691EA00574106 /* Factory.swift in Sources */,
+				C49D512F2256920900574106 /* Controllers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
