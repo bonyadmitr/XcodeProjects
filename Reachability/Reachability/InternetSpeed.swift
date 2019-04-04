@@ -167,7 +167,7 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     /// not let due NSObject. setup in init
     private var session = URLSession.shared
     
-    private var dataTask: URLSessionDataTask?
+    private var dataTask: URLSessionTask?
     
     private var startTime: CFAbsoluteTime = 0
     private var buffer = NSMutableData()
@@ -277,10 +277,185 @@ final class InternetSpeed2: NSObject, URLSessionDelegate, URLSessionDataDelegate
     }
 }
 
-extension Double {
-    /// Rounds the double to decimal places value
-    func rounded(toPlaces places: Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
+//extension Double {
+//    /// Rounds the double to decimal places value
+//    func rounded(toPlaces places: Int) -> Double {
+//        let divisor = pow(10.0, Double(places))
+//        return (self * divisor).rounded() / divisor
+//    }
+//}
+
+extension InternetSpeed3 {
+    static let shared = InternetSpeed3()
+}
+
+final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {
+    
+    /// not let due NSObject. setup in init
+    private var session = URLSession.shared
+    
+    private var dataTask: URLSessionTask?
+    
+    private var startTime: CFAbsoluteTime = 0
+//    private var buffer = NSMutableData()
+    
+    private var expectedContentLength: Int64 = 0
+    private var totalLengthString = ""
+    
+    private let dataFormatStyle = ByteCountFormatter.CountStyle.binary
+    
+    /// can be static values
+    private let minuteInSeconds: Double = 60
+    private let hourInSeconds: Double = 3600
+    
+    private let timeFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        return formatter
+    }()
+    
+    private var isStarted = false
+    
+    private override init() {
+        super.init()
+        
+        /// it will be copy of URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.default
+        
+        /// if delegateQueue: nil there will not be dispatch queue but operation queue with threads in background
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
+    
+    func start() {
+        guard !isStarted else {
+            assertionFailure("don't call twice")
+            return
+        }
+        isStarted = true
+        /// big files but http
+        /// http://speedtest.tele2.net/
+        ///
+        /// https test files
+        /// https://speed.hetzner.de/
+        //let urlString = "https://speed.hetzner.de/100MB.bin"
+        let urlString = "https://speed.hetzner.de/1GB.bin"
+        //let urlString = "https://speed.hetzner.de/10GB.bin"
+        
+        guard let url = URL(string: urlString) else {
+            assertionFailure()
+            return
+        }
+        fetchFile(url: url)
+    }
+    
+    private func fetchFile(url: URL) {
+        //dataTask = session.dataTask(with: URLRequest(url: url))
+        dataTask = session.downloadTask(with: URLRequest(url: url))
+        dataTask?.resume()
+        startTime = CFAbsoluteTimeGetCurrent()
+    }
+    
+    func cancel() {
+        dataTask?.cancel()
+    }
+    
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+//        buffer.append(data)
+//        let timeNow = CFAbsoluteTimeGetCurrent()
+//        let passedTime = timeNow - startTime
+//
+//        let downloaded = Int64(buffer.length)
+//        let speed = Double(downloaded) / passedTime
+//        let leftTime = Double(expectedContentLength - downloaded) / speed
+//
+//        if leftTime < minuteInSeconds {
+//            timeFormatter.allowedUnits = [.second]
+//        } else if leftTime < hourInSeconds {
+//            timeFormatter.allowedUnits = [.minute]
+//        } else {
+//            timeFormatter.allowedUnits = [.hour]
+//        }
+//
+//        let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
+//
+//        let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
+//        let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
+//
+//
+//        /// to clear terminal
+//        for _ in 1...19 {
+//            print("\n")
+//        }
+//
+//        /// google download text example
+//        //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
+//        print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
+//    }
+    
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+//        expectedContentLength = response.expectedContentLength
+//
+//        totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
+//        completionHandler(URLSession.ResponseDisposition.allow)
+//    }
+//
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+//        print("finished")
+//        isStarted = false
+//    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("finished")
+        isStarted = false
+    }
+    
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+//                buffer.append(data)
+                let timeNow = CFAbsoluteTimeGetCurrent()
+                let passedTime = timeNow - startTime
+        
+                let downloaded = totalBytesWritten
+                let speed = Double(downloaded) / passedTime
+                let leftTime = Double(expectedContentLength - downloaded) / speed
+        
+                if leftTime < minuteInSeconds {
+                    timeFormatter.allowedUnits = [.second]
+                } else if leftTime < hourInSeconds {
+                    timeFormatter.allowedUnits = [.minute]
+                } else {
+                    timeFormatter.allowedUnits = [.hour]
+                }
+        
+                let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
+        
+                let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
+                let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
+        
+        
+                /// to clear terminal
+                for _ in 1...19 {
+                    print("\n")
+                }
+        
+                /// google download text example
+                //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
+                print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
+        
+        if expectedContentLength == 0 {
+            expectedContentLength = totalBytesExpectedToWrite
+            totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
+        }
+    }
+    
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        expectedContentLength = expectedTotalBytes
+        totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
+    }
+    
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+//        <#code#>
+//    }
 }
