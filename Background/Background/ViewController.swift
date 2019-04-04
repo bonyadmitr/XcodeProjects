@@ -11,6 +11,8 @@ import MapKit
 
 class ViewController: UIViewController {
 
+    let batteryManager = BatteryManager()
+    
     @IBOutlet private weak var mapView: MKMapView! {
         didSet {
             /// if set "Location When In Use Usage"
@@ -43,11 +45,14 @@ class ViewController: UIViewController {
 //            objects.append(MKMapView())
 //        }
 //        debugLog("500 MKMapView created, about 200mb of memory")
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         debugLog("ViewController viewDidAppear")
+        debugLog("BatteryManager state: \(BatteryManager.isCharging)")
     }
 
     

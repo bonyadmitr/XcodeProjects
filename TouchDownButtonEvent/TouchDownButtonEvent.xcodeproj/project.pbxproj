@@ -7,33 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4D9C04021EDD97A00693D94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C03F21EDD97A00693D94 /* AppDelegate.swift */; };
-		C4D9C04221EDD97C00693D94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D9C04121EDD97C00693D94 /* Assets.xcassets */; };
-		C4D9C04521EDD97C00693D94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D9C04321EDD97C00693D94 /* LaunchScreen.storyboard */; };
-		C4D9C04D21EDD99A00693D94 /* SegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */; };
-		CE00B24421F4FB9C00A5A696 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24321F4FB9C00A5A696 /* PhotoService.swift */; };
-		CE00B24621F4FBF200A5A696 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B24521F4FBF200A5A696 /* PhotoCell.swift */; };
-		CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6B21EF040400BE352D /* TransparentGradientView.swift */; };
-		CE170F6E21EF072B00BE352D /* photos.json in Resources */ = {isa = PBXBuildFile; fileRef = CE170F6D21EF072B00BE352D /* photos.json */; };
-		CE170F7021F0B2EA00BE352D /* PhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */; };
+		CEFC7562221A92F30006265F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7561221A92F30006265F /* AppDelegate.swift */; };
+		CEFC7564221A92F30006265F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFC7563221A92F30006265F /* ViewController.swift */; };
+		CEFC7567221A92F30006265F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFC7565221A92F30006265F /* Main.storyboard */; };
+		CEFC7569221A92F40006265F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFC7568221A92F40006265F /* Assets.xcassets */; };
+		CEFC756C221A92F40006265F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFC756A221A92F40006265F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C4D9C03C21EDD97A00693D94 /* SegmentedController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SegmentedController.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4D9C03F21EDD97A00693D94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C4D9C04121EDD97C00693D94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C4D9C04421EDD97C00693D94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C4D9C04621EDD97C00693D94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
-		CE00B24321F4FB9C00A5A696 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		CE00B24521F4FBF200A5A696 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
-		CE170F6B21EF040400BE352D /* TransparentGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentGradientView.swift; sourceTree = "<group>"; };
-		CE170F6D21EF072B00BE352D /* photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = photos.json; sourceTree = "<group>"; };
-		CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionController.swift; sourceTree = "<group>"; };
+		CEFC755E221A92F30006265F /* TouchDownButtonEvent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchDownButtonEvent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEFC7561221A92F30006265F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CEFC7563221A92F30006265F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEFC7566221A92F30006265F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CEFC7568221A92F40006265F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEFC756B221A92F40006265F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CEFC756D221A92F40006265F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C4D9C03921EDD97A00693D94 /* Frameworks */ = {
+		CEFC755B221A92F30006265F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,75 +35,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C4D9C03321EDD97A00693D94 = {
+		CEFC7555221A92F30006265F = {
 			isa = PBXGroup;
 			children = (
-				C4D9C03E21EDD97A00693D94 /* SegmentedController */,
-				C4D9C03D21EDD97A00693D94 /* Products */,
+				CEFC7560221A92F30006265F /* TouchDownButtonEvent */,
+				CEFC755F221A92F30006265F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C4D9C03D21EDD97A00693D94 /* Products */ = {
+		CEFC755F221A92F30006265F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C4D9C03C21EDD97A00693D94 /* SegmentedController.app */,
+				CEFC755E221A92F30006265F /* TouchDownButtonEvent.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C4D9C03E21EDD97A00693D94 /* SegmentedController */ = {
+		CEFC7560221A92F30006265F /* TouchDownButtonEvent */ = {
 			isa = PBXGroup;
 			children = (
-				CE170F6D21EF072B00BE352D /* photos.json */,
-				C4D9C03F21EDD97A00693D94 /* AppDelegate.swift */,
-				C4D9C04C21EDD99A00693D94 /* SegmentedController.swift */,
-				CE170F6B21EF040400BE352D /* TransparentGradientView.swift */,
-				CE170F6F21F0B2EA00BE352D /* PhotoSelectionController.swift */,
-				CE00B24321F4FB9C00A5A696 /* PhotoService.swift */,
-				CE00B24521F4FBF200A5A696 /* PhotoCell.swift */,
-				C4D9C04121EDD97C00693D94 /* Assets.xcassets */,
-				C4D9C04321EDD97C00693D94 /* LaunchScreen.storyboard */,
-				C4D9C04621EDD97C00693D94 /* Info.plist */,
+				CEFC7561221A92F30006265F /* AppDelegate.swift */,
+				CEFC7563221A92F30006265F /* ViewController.swift */,
+				CEFC7565221A92F30006265F /* Main.storyboard */,
+				CEFC7568221A92F40006265F /* Assets.xcassets */,
+				CEFC756A221A92F40006265F /* LaunchScreen.storyboard */,
+				CEFC756D221A92F40006265F /* Info.plist */,
 			);
-			path = SegmentedController;
+			path = TouchDownButtonEvent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C4D9C03B21EDD97A00693D94 /* SegmentedController */ = {
+		CEFC755D221A92F30006265F /* TouchDownButtonEvent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C4D9C04921EDD97C00693D94 /* Build configuration list for PBXNativeTarget "SegmentedController" */;
+			buildConfigurationList = CEFC7570221A92F40006265F /* Build configuration list for PBXNativeTarget "TouchDownButtonEvent" */;
 			buildPhases = (
-				C4D9C03821EDD97A00693D94 /* Sources */,
-				C4D9C03921EDD97A00693D94 /* Frameworks */,
-				C4D9C03A21EDD97A00693D94 /* Resources */,
+				CEFC755A221A92F30006265F /* Sources */,
+				CEFC755B221A92F30006265F /* Frameworks */,
+				CEFC755C221A92F30006265F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SegmentedController;
-			productName = SegmentedController;
-			productReference = C4D9C03C21EDD97A00693D94 /* SegmentedController.app */;
+			name = TouchDownButtonEvent;
+			productName = TouchDownButtonEvent;
+			productReference = CEFC755E221A92F30006265F /* TouchDownButtonEvent.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C4D9C03421EDD97A00693D94 /* Project object */ = {
+		CEFC7556221A92F30006265F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = "Yaroslav Bondar";
+				ORGANIZATIONNAME = "Bondar Yaroslav";
 				TargetAttributes = {
-					C4D9C03B21EDD97A00693D94 = {
+					CEFC755D221A92F30006265F = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = C4D9C03721EDD97A00693D94 /* Build configuration list for PBXProject "SegmentedController" */;
+			buildConfigurationList = CEFC7559221A92F30006265F /* Build configuration list for PBXProject "TouchDownButtonEvent" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -119,50 +107,54 @@
 				en,
 				Base,
 			);
-			mainGroup = C4D9C03321EDD97A00693D94;
-			productRefGroup = C4D9C03D21EDD97A00693D94 /* Products */;
+			mainGroup = CEFC7555221A92F30006265F;
+			productRefGroup = CEFC755F221A92F30006265F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C4D9C03B21EDD97A00693D94 /* SegmentedController */,
+				CEFC755D221A92F30006265F /* TouchDownButtonEvent */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C4D9C03A21EDD97A00693D94 /* Resources */ = {
+		CEFC755C221A92F30006265F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE170F6E21EF072B00BE352D /* photos.json in Resources */,
-				C4D9C04221EDD97C00693D94 /* Assets.xcassets in Resources */,
-				C4D9C04521EDD97C00693D94 /* LaunchScreen.storyboard in Resources */,
+				CEFC756C221A92F40006265F /* LaunchScreen.storyboard in Resources */,
+				CEFC7569221A92F40006265F /* Assets.xcassets in Resources */,
+				CEFC7567221A92F30006265F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C4D9C03821EDD97A00693D94 /* Sources */ = {
+		CEFC755A221A92F30006265F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE00B24421F4FB9C00A5A696 /* PhotoService.swift in Sources */,
-				C4D9C04D21EDD99A00693D94 /* SegmentedController.swift in Sources */,
-				CE170F6C21EF040400BE352D /* TransparentGradientView.swift in Sources */,
-				CE170F7021F0B2EA00BE352D /* PhotoSelectionController.swift in Sources */,
-				CE00B24621F4FBF200A5A696 /* PhotoCell.swift in Sources */,
-				C4D9C04021EDD97A00693D94 /* AppDelegate.swift in Sources */,
+				CEFC7564221A92F30006265F /* ViewController.swift in Sources */,
+				CEFC7562221A92F30006265F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C4D9C04321EDD97C00693D94 /* LaunchScreen.storyboard */ = {
+		CEFC7565221A92F30006265F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C4D9C04421EDD97C00693D94 /* Base */,
+				CEFC7566221A92F30006265F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CEFC756A221A92F40006265F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEFC756B221A92F40006265F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -170,7 +162,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C4D9C04721EDD97C00693D94 /* Debug */ = {
+		CEFC756E221A92F40006265F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -231,7 +223,7 @@
 			};
 			name = Debug;
 		};
-		C4D9C04821EDD97C00693D94 /* Release */ = {
+		CEFC756F221A92F40006265F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -286,38 +278,36 @@
 			};
 			name = Release;
 		};
-		C4D9C04A21EDD97C00693D94 /* Debug */ = {
+		CEFC7571221A92F40006265F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SegmentedController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_FILE = TouchDownButtonEvent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.SegmentedController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.TouchDownButtonEvent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		C4D9C04B21EDD97C00693D94 /* Release */ = {
+		CEFC7572221A92F40006265F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SegmentedController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				INFOPLIST_FILE = TouchDownButtonEvent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.SegmentedController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.TouchDownButtonEvent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -325,25 +315,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C4D9C03721EDD97A00693D94 /* Build configuration list for PBXProject "SegmentedController" */ = {
+		CEFC7559221A92F30006265F /* Build configuration list for PBXProject "TouchDownButtonEvent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C4D9C04721EDD97C00693D94 /* Debug */,
-				C4D9C04821EDD97C00693D94 /* Release */,
+				CEFC756E221A92F40006265F /* Debug */,
+				CEFC756F221A92F40006265F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C4D9C04921EDD97C00693D94 /* Build configuration list for PBXNativeTarget "SegmentedController" */ = {
+		CEFC7570221A92F40006265F /* Build configuration list for PBXNativeTarget "TouchDownButtonEvent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C4D9C04A21EDD97C00693D94 /* Debug */,
-				C4D9C04B21EDD97C00693D94 /* Release */,
+				CEFC7571221A92F40006265F /* Debug */,
+				CEFC7572221A92F40006265F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C4D9C03421EDD97A00693D94 /* Project object */;
+	rootObject = CEFC7556221A92F30006265F /* Project object */;
 }

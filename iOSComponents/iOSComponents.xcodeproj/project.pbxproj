@@ -65,7 +65,6 @@
 		66315A9C20AB6853009C19BE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8C20AB6852009C19BE /* LocationManager.swift */; };
 		66315A9E20AB6853009C19BE /* BrightnessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8E20AB6852009C19BE /* BrightnessManager.swift */; };
 		66315A9F20AB6853009C19BE /* TimeMeasurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315A8F20AB6852009C19BE /* TimeMeasurer.swift */; };
-		66315AD020B3226A009C19BE /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315ACE20B32269009C19BE /* BackButtonActions.swift */; };
 		66315AD120B3226A009C19BE /* StatusBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66315ACF20B32269009C19BE /* StatusBarActions.swift */; };
 		66315AD820B32386009C19BE /* UIView+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611AD3720AB5D2E00814113 /* UIView+Fonts.swift */; };
 		6650B00F20B49AAA00017AB1 /* TypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6650B00E20B49AAA00017AB1 /* TypeManager.swift */; };
@@ -98,6 +97,7 @@
 		CE2E2E1920C99754000F5817 /* UIImageView+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E1820C99753000F5817 /* UIImageView+Scale.swift */; };
 		CE2E2E1B20C99798000F5817 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E1A20C99798000F5817 /* UIImage+Size.swift */; };
 		CE2E2E1D20C997A6000F5817 /* CGSize+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E1C20C997A6000F5817 /* CGSize+Scale.swift */; };
+		CE3435E7224A519300AFAABB /* BackButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3435E6224A519300AFAABB /* BackButtonActions.swift */; };
 		CE46402620B68A0F00EFC1AE /* UINavigationController+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46402520B68A0F00EFC1AE /* UINavigationController+Push.swift */; };
 		CE5C3F8920C42D6A009D5291 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C3F8820C42D6A009D5291 /* UICollectionView+Layout.swift */; };
 		CE5C3F8B20C42D76009D5291 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C3F8A20C42D75009D5291 /* URL+Path.swift */; };
@@ -221,7 +221,6 @@
 		66315AA920ACA34E009C19BE /* DesignableCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableCheckbox.swift; sourceTree = "<group>"; };
 		66315AAA20ACA34E009C19BE /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
 		66315AAB20ACA34E009C19BE /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
-		66315ACE20B32269009C19BE /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonActions.swift; sourceTree = "<group>"; };
 		66315ACF20B32269009C19BE /* StatusBarActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarActions.swift; sourceTree = "<group>"; };
 		6650B00E20B49AAA00017AB1 /* TypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeManager.swift; sourceTree = "<group>"; };
 		6650B01820B49B5E00017AB1 /* ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -271,6 +270,7 @@
 		CE2E2E1820C99753000F5817 /* UIImageView+Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Scale.swift"; sourceTree = "<group>"; };
 		CE2E2E1A20C99798000F5817 /* UIImage+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		CE2E2E1C20C997A6000F5817 /* CGSize+Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Scale.swift"; sourceTree = "<group>"; };
+		CE3435E6224A519300AFAABB /* BackButtonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackButtonActions.swift; path = ../../../Settings/Settings/Protocols/BackButtonActions.swift; sourceTree = "<group>"; };
 		CE39615320C2AC3400D145E0 /* Alamofire+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+Response.swift"; sourceTree = "<group>"; };
 		CE39615420C2AC3400D145E0 /* Alamofire+Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+Request.swift"; sourceTree = "<group>"; };
 		CE46402320B6893800EFC1AE /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
@@ -517,7 +517,7 @@
 				CEDA2D392077A11700203036 /* MapToJSON.swift */,
 				66C9CBDB20A0DD4F001D56F1 /* ShareController.swift */,
 				66C9CBDD20A0DD79001D56F1 /* ShareData.swift */,
-				66315ACE20B32269009C19BE /* BackButtonActions.swift */,
+				CE3435E6224A519300AFAABB /* BackButtonActions.swift */,
 				66315ACF20B32269009C19BE /* StatusBarActions.swift */,
 			);
 			path = Protocols;
@@ -766,11 +766,11 @@
 				6611AC4E20AB59F600814113 /* SKProduct+Localized.swift.swift in Sources */,
 				66C9CBDC20A0DD4F001D56F1 /* ShareController.swift in Sources */,
 				6611AD9920AB606000814113 /* UICollectionView+Extensions.swift in Sources */,
+				CE3435E7224A519300AFAABB /* BackButtonActions.swift in Sources */,
 				6650B01920B49B5E00017AB1 /* ImageFormat.swift in Sources */,
 				6611ADA120AB606000814113 /* UIImage+HEIC.swift in Sources */,
 				668F918C20AB64C60002B3D3 /* Date+MilliSec.swift in Sources */,
 				668F916A20AB62D10002B3D3 /* Radians+Extensions.swift in Sources */,
-				66315AD020B3226A009C19BE /* BackButtonActions.swift in Sources */,
 				6611AD5C20AB5D3300814113 /* UIView+Parent.swift in Sources */,
 				665BB4192080064B0088AB25 /* UserDefaults+Subscript.swift in Sources */,
 				CE5C3F9520C42F14009D5291 /* NSFileCoordinator+Coordinate.swift in Sources */,

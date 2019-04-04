@@ -248,7 +248,9 @@ extension SettingsController: UITableViewDelegate {
         /// fill cell with texts
         self.tableView(tableView, willDisplay: cell, forRowAt: indexPath)
         
-        return cell.height()
+        let height = cell.height()
+        heightsCache[indexPath] = height
+        return height
     }
 }
 
