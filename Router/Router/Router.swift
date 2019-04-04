@@ -6,7 +6,6 @@ final class Router {
     
     func setup(appDelegate: AppDelegate) {
         let window = UIWindow()
-        window.backgroundColor = UIColor.cyan
         window.makeKeyAndVisible()
         appDelegate.window = window
         self.window = window
@@ -28,4 +27,25 @@ final class Router {
         // logout from all services
         startWithLogin()
     }
+    
+    @discardableResult
+    func show1() -> TabBarController? {
+        if let vc = window.rootViewController as? TabBarController {
+            vc.show1()
+            return vc
+        }
+        return nil
+    }
+    
+    func show2() {
+        if let vc = window.rootViewController as? TabBarController {
+            vc.show2()
+        }
+    }
+    
+//    func show1Action() {
+//        if let vc = window.rootViewController as? TabBarController {
+//            vc.show1()
+//        }
+//    }
 }
