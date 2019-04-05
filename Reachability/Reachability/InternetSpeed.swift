@@ -321,7 +321,13 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
         /// it will be copy of URLSessionConfiguration.default
         let configuration = URLSessionConfiguration.default
         if #available(iOS 11.0, *) {
-            configuration.waitsForConnectivity = false
+            /// default is false
+            ///
+            /// Background tasks such as DownloadTask always wait for connectivity and ignore waitsForConnectivity property of URLSessionConfiguration.
+            /// They also DON'T trigger urlSession(_:taskIsWaitingForConnectivity:) callback.
+            /// So there is no official way to listen for connectivity drop-out on download task.
+            /// https://stackoverflow.com/a/48216651/5893286
+            configuration.waitsForConnectivity = true
         }
         
         configuration.allowsCellularAccess = true
@@ -341,8 +347,8 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
         ///
         /// https test files
         /// https://speed.hetzner.de/
-        let urlString = "https://speed.hetzner.de/100MB.bin"
-//        let urlString = "https://speed.hetzner.de/1GB.bin"
+//        let urlString = "https://speed.hetzner.de/100MB.bin"
+        let urlString = "https://speed.hetzner.de/1GB.bin"
         //let urlString = "https://speed.hetzner.de/10GB.bin"
         
         guard let url = URL(string: urlString) else {
@@ -363,54 +369,7 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
         dataTask?.cancel()
     }
     
-//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-//        buffer.append(data)
-//        let timeNow = CFAbsoluteTimeGetCurrent()
-//        let passedTime = timeNow - startTime
-//
-//        let downloaded = Int64(buffer.length)
-//        let speed = Double(downloaded) / passedTime
-//        let leftTime = Double(expectedContentLength - downloaded) / speed
-//
-//        if leftTime < minuteInSeconds {
-//            timeFormatter.allowedUnits = [.second]
-//        } else if leftTime < hourInSeconds {
-//            timeFormatter.allowedUnits = [.minute]
-//        } else {
-//            timeFormatter.allowedUnits = [.hour]
-//        }
-//
-//        let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
-//
-//        let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
-//        let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
-//
-//
-//        /// to clear terminal
-//        for _ in 1...19 {
-//            print("\n")
-//        }
-//
-//        /// google download text example
-//        //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
-//        print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
-//    }
-    
-//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
-//        expectedContentLength = response.expectedContentLength
-//
-//        totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
-//        completionHandler(URLSession.ResponseDisposition.allow)
-//    }
-//
-//    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-//        print("finished")
-//        isStarted = false
-//    }
-    
-    
-    /// will be called before
-    /// "func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?)"
+    /// will be called before "func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?)"
     /// will NOT be called for error
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
 //        print("finished")
@@ -420,36 +379,36 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-//                buffer.append(data)
-                let timeNow = CFAbsoluteTimeGetCurrent()
-                let passedTime = timeNow - startTime
+        //                buffer.append(data)
+        let timeNow = CFAbsoluteTimeGetCurrent()
+        let passedTime = timeNow - startTime
         
-                let downloaded = totalBytesWritten
-                let speed = Double(downloaded) / passedTime
-                let leftTime = Double(expectedContentLength - downloaded) / speed
+        let downloaded = totalBytesWritten
+        let speed = Double(downloaded) / passedTime
+        let leftTime = Double(expectedContentLength - downloaded) / speed
         
-                if leftTime < minuteInSeconds {
-                    timeFormatter.allowedUnits = [.second]
-                } else if leftTime < hourInSeconds {
-                    timeFormatter.allowedUnits = [.minute]
-                } else {
-                    timeFormatter.allowedUnits = [.hour]
-                }
+        if leftTime < minuteInSeconds {
+            timeFormatter.allowedUnits = [.second]
+        } else if leftTime < hourInSeconds {
+            timeFormatter.allowedUnits = [.minute]
+        } else {
+            timeFormatter.allowedUnits = [.hour]
+        }
         
-                let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
+        let leftTimeString = timeFormatter.string(from: leftTime) ?? "..."
         
-                let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
-                let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
+        let speedString = ByteCountFormatter.string(fromByteCount: Int64(speed), countStyle: dataFormatStyle)
+        let downloadedString = ByteCountFormatter.string(fromByteCount: downloaded, countStyle: dataFormatStyle)
         
         
-                /// to clear terminal
-                for _ in 1...19 {
-                    print("\n")
-                }
+        /// to clear terminal
+        for _ in 1...19 {
+            print("\n")
+        }
         
-                /// google download text example
-                //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
-                print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
+        /// google download text example
+        //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
+        print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
         
         if expectedContentLength != totalBytesExpectedToWrite {
             expectedContentLength = totalBytesExpectedToWrite
@@ -458,7 +417,11 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        print("finished")
+        print("- finished")
         isStarted = false
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        
     }
 }
