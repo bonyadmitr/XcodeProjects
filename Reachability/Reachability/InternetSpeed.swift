@@ -320,6 +320,11 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
         
         /// it will be copy of URLSessionConfiguration.default
         let configuration = URLSessionConfiguration.default
+        if #available(iOS 11.0, *) {
+            configuration.waitsForConnectivity = false
+        }
+        
+        configuration.allowsCellularAccess = true
         
         /// if delegateQueue: nil there will not be dispatch queue but operation queue with threads in background
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
@@ -336,8 +341,8 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
         ///
         /// https test files
         /// https://speed.hetzner.de/
-        //let urlString = "https://speed.hetzner.de/100MB.bin"
-        let urlString = "https://speed.hetzner.de/1GB.bin"
+        let urlString = "https://speed.hetzner.de/100MB.bin"
+//        let urlString = "https://speed.hetzner.de/1GB.bin"
         //let urlString = "https://speed.hetzner.de/10GB.bin"
         
         guard let url = URL(string: urlString) else {
@@ -403,9 +408,13 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
 //        isStarted = false
 //    }
     
+    
+    /// will be called before
+    /// "func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?)"
+    /// will NOT be called for error
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        print("finished")
-        isStarted = false
+//        print("finished")
+//        isStarted = false
     }
     
     
@@ -442,19 +451,14 @@ final class InternetSpeed3: NSObject, URLSessionDelegate, URLSessionDownloadDele
                 //5.5 MB/s - 33.1 MB of 1,000 MB, 3 mins left
                 print("\(speedString)/s, \(downloadedString) of \(totalLengthString), \(leftTimeString) left")
         
-        if expectedContentLength == 0 {
+        if expectedContentLength != totalBytesExpectedToWrite {
             expectedContentLength = totalBytesExpectedToWrite
             totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
         }
     }
     
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-        expectedContentLength = expectedTotalBytes
-        totalLengthString = ByteCountFormatter.string(fromByteCount: expectedContentLength, countStyle: dataFormatStyle)
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        print("finished")
+        isStarted = false
     }
-    
-//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-//        <#code#>
-//    }
 }
