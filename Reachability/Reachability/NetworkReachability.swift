@@ -364,12 +364,11 @@ class NetworkReachability2 {
 @available(iOS 12.0, *)
 extension NWPath {
     func typeForiOS() -> NetworkReachability.Connection {
-        if availableInterfaces.contains(where: { $0.type == .wifi }) {
+        if usesInterfaceType(.wifi) {
             return .wifi
-        } else if availableInterfaces.contains(where: { $0.type == .cellular }) {
+        } else if usesInterfaceType(.cellular) {
             return .cellular
         } else {
-//            assertionFailure("should never called. check connection status before check")
             return .none
         }
     }

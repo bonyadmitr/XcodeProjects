@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        InternetSpeed.shared.testDownloadSpeedWithTimout()
 //        InternetSpeed2.shared.start()
-        InternetSpeed3.shared.start()
+//        InternetSpeed3.shared.start()
         
         return true
     }
