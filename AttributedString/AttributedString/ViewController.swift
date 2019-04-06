@@ -118,11 +118,11 @@ extension ViewController: TapableLabelDelegate {
             print("open privacyPolicy")
         default:
             assertionFailure("should never be called")
-            break
         }
     }
 }
 
+// MARK: - UITextViewDelegate
 extension ViewController: UITextViewDelegate {
     
     /// can be used this method. it will be called only for iOS 10+ if implemented both methods
