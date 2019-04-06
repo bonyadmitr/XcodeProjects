@@ -44,7 +44,10 @@ class ViewController: UIViewController {
         paragraphStyle.alignment = .right
         paragraphStyle.lineSpacing = 3
         
-        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
+//        let linkText1 = "consectetaur\u{a0}cillium"
+        let linkText1 = "consectetaur cillium"
+        
+        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, \(linkText1) adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
             [.font: UIFont.systemFont(ofSize: 16),
              .paragraphStyle: paragraphStyle,
              .foregroundColor: UIColor.darkGray])
@@ -57,7 +60,7 @@ class ViewController: UIViewController {
 //        let strTC = "terms and conditions"
 //        let strPP = "privacy policy"
         
-        let linkText1 = "consectetaur cillium"
+        
         let rangeLink1 = allText.mutableString.range(of: linkText1)
         allText.addAttributes(linkAttributes, range: rangeLink1)
 //        allText.addAttributes([.link: "some_url_1vfhvdhfhjsdjfhsdjhf"], range: rangeLink1)
@@ -67,123 +70,11 @@ class ViewController: UIViewController {
         someLabel.addLink(at: rangeLink1, withURL: "some_url_1")
         someLabel.delegate = self
     }
-    
-    @objc private func handleTapOnLabel(_ recognizer: UITapGestureRecognizer) {
-        guard let text = someLabel.attributedText?.string else {
-            return
-        }
-        
-        if let range = text.range(of: "consectetaur cillium"),
-            recognizer.didTapAttributedTextInLabel(label: someLabel, inRange: NSRange(range, in: text)) {
-//            goToTermsAndConditions()
-            print("1")
-        } else if let range = text.range(of: "minim veniam"),
-            recognizer.didTapAttributedTextInLabel(label: someLabel, inRange: NSRange(range, in: text)) {
-            print("2")
-//            goToPrivacyPolicy()
-        }
-    }
 }
 
 extension ViewController: TapableLabelDelegate {
     func tapableLabel(_ label: TapableLabel, didTapUrl url: String, atRange range: NSRange) {
         print("- taped at \(url)")
-    }
-}
-
-/// https://stackoverflow.com/a/47140975/5893286
-extension UITapGestureRecognizer {
-    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
-        guard let attrString = label.attributedText else {
-            return false
-        }
-        
-        let labelSize = label.bounds.size
-        let textContainer = NSTextContainer(size: labelSize)
-        textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = label.lineBreakMode
-        textContainer.maximumNumberOfLines = label.numberOfLines
-        
-        let layoutManager = NSLayoutManager()
-        layoutManager.addTextContainer(textContainer)
-        
-        let textStorage = NSTextStorage(attributedString: attrString)
-        textStorage.addLayoutManager(layoutManager)
-        
-        let locationOfTouchInLabel = self.location(in: label)
-//        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        
-//        textContainer.size = bounds.size
-                let indexOfCharacter = layoutManager.glyphIndex(for: locationOfTouchInLabel, in: textContainer)
-//        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouch, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-//        print("- indexOfCharacter", indexOfCharacter)
-//        for (urlString, range) in links {
-//            //if NSLocationInRange(indexOfCharacter, range), let url = URL(string: urlString) {
-//            if NSLocationInRange(indexOfCharacter, range) {
-//                delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
-//            }
-//        }
-        
-        let q = NSLocationInRange(indexOfCharacter, targetRange)
-        print(targetRange)
-        print(indexOfCharacter)
-        print()
-        return q
-        
-        
-        
-        
-//        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-//        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
-//        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-//        return NSLocationInRange(indexOfCharacter, targetRange)
-        return true
-    }
-}
-
-class AELinkedClickableUILabel: UILabel {
-    
-    typealias YourCompletion = () -> Void
-    
-    var linkedRange: NSRange!
-    var completion: YourCompletion?
-    
-    @objc func linkClicked(_ sender: UITapGestureRecognizer) {
-        
-        if let completionBlock = completion {
-            
-            let textView = UITextView(frame: self.frame)
-            textView.text = self.text
-            textView.attributedText = self.attributedText
-            let index = textView.layoutManager.characterIndex(for: sender.location(in: self),
-                                                              in: textView.textContainer,
-                                                              fractionOfDistanceBetweenInsertionPoints: nil)
-            
-            if linkedRange.lowerBound <= index && linkedRange.upperBound >= index {
-                
-                completionBlock()
-            }
-        }
-    }
-    
-    /**
-     *  This method will be used to set an attributed text specifying the linked text with a
-     *  handler when the link is clicked
-     */
-    public func setLinkedTextWithHandler(text:String, link: String, handler: @escaping ()->()) -> Bool {
-        
-        let attributextText = NSMutableAttributedString(string: text)
-        let foundRange = attributextText.mutableString.range(of: link)
-        
-        if foundRange.location != NSNotFound {
-            self.linkedRange = foundRange
-            self.completion = handler
-            attributextText.addAttribute(NSAttributedString.Key.link, value: text, range: foundRange)
-            self.isUserInteractionEnabled = true
-            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(linkClicked)))
-            return true
-        }
-        return false
     }
 }
 
@@ -303,26 +194,16 @@ public protocol TapableLabelDelegate: class {
 /// https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
     
-    private var links: [String: NSRange] = [:]
+    public weak var delegate: TapableLabelDelegate?
+    
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: .zero)
-    
-    private var textStorage = NSTextStorage() {
-        didSet {
-            textStorage.addLayoutManager(layoutManager)
-        }
-    }
-    
-    public weak var delegate: TapableLabelDelegate?
+    private var textStorage: NSTextStorage?
+    private var links: [String: NSRange] = [:]
     
     public override var attributedText: NSAttributedString? {
         didSet {
-            if let attributedText = attributedText {
-                textStorage = NSTextStorage(attributedString: attributedText)
-            } else {
-                textStorage = NSTextStorage()
-                links = [:]
-            }
+            setupTextStorage()
         }
     }
     
@@ -338,6 +219,18 @@ public class TapableLabel: UILabel {
         }
     }
     
+    /// #1
+    public override var bounds: CGRect {
+        didSet {
+            textContainer.size = bounds.size
+        }
+    }
+    /// #2
+    //public override func layoutSubviews() {
+    //    super.layoutSubviews()
+    //    textContainer.size = bounds.size
+    //}
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -348,16 +241,59 @@ public class TapableLabel: UILabel {
         setup()
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        textContainer.size = bounds.size
+    private func setup() {
+        isUserInteractionEnabled = true
+        
+        textContainer.lineFragmentPadding = 0
+        textContainer.lineBreakMode = lineBreakMode
+        textContainer.maximumNumberOfLines  = numberOfLines
+        
+        layoutManager.addTextContainer(textContainer)
     }
     
-    /// addLinks
-    ///
-    /// - Parameters:
-    ///   - text: text of link
-    ///   - url: link url string
+    private func setupTextStorage() {
+        let textStorage: NSTextStorage
+        if let attributedText = attributedText {
+            textStorage = NSTextStorage(attributedString: attributedText)
+        } else {
+            textStorage = NSTextStorage()
+        }
+        textStorage.addLayoutManager(layoutManager)
+        self.textStorage = textStorage
+    }
+    
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        guard let touchLocation = touches.first?.location(in: self) else {
+            assertionFailure()
+            return
+        }
+        
+        // TODO: check
+        if textContainer.size != bounds.size {
+            assertionFailure()
+            textContainer.size = bounds.size
+        }
+        
+        /// #1
+        let indexOfCharacter = layoutManager.glyphIndex(for: touchLocation, in: textContainer)
+        /// #2
+        //let indexOfCharacter = layoutManager.characterIndex(for: touchLocation, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        for (urlString, range) in links {
+            if NSLocationInRange(indexOfCharacter, range) {
+                delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
+            }
+        }
+    }
+    
+    // MARK: - public
+    
+    public func addLink(at range: NSRange, withURL url: String) {
+        links[url] = range
+    }
+    
     public func addLink(_ text: String, withURL url: String) {
         guard let theText = attributedText?.string as NSString? else {
             assertionFailure("system bug")
@@ -373,32 +309,4 @@ public class TapableLabel: UILabel {
         
         links[url] = range
     }
-    
-    public func addLink(at range: NSRange, withURL url: String) {
-        links[url] = range
-    }
-    
-    private func setup() {
-        isUserInteractionEnabled = true
-        layoutManager.addTextContainer(textContainer)
-        textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = lineBreakMode
-        textContainer.maximumNumberOfLines  = numberOfLines
-    }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let locationOfTouch = touches.first?.location(in: self) else {
-            return
-        }
-        
-        textContainer.size = bounds.size
-//        let indexOfCharacter = layoutManager.glyphIndex(for: locationOfTouch, in: textContainer)
-        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouch, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        print("- indexOfCharacter", indexOfCharacter)
-        for (urlString, range) in links {
-            //if NSLocationInRange(indexOfCharacter, range), let url = URL(string: urlString) {
-            if NSLocationInRange(indexOfCharacter, range) {
-                delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
-            }
-        }
-    }}
+}
