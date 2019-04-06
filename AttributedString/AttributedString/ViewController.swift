@@ -351,6 +351,7 @@ public class TapableLabel: UILabel {
         animateLinkBackIfNeed()
         
         guard let touchLocation = touches.first?.location(in: self) else {
+            assertionFailure("touch will be always inside self")
             return
         }
         
@@ -373,9 +374,9 @@ public class TapableLabel: UILabel {
     }
     
     private func animateLinkBackIfNeed() {
-        if self.backupAttributedText != nil {
-            self.attributedText = self.backupAttributedText
-            self.backupAttributedText = nil
+        if backupAttributedText != nil {
+            attributedText = backupAttributedText
+            backupAttributedText = nil
             isLinkHighlighted = false
         }
     }
