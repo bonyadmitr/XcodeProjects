@@ -41,16 +41,20 @@ class ViewController: UIViewController {
 //        etkTextView.attributedText = baseText
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .right
+        paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 3
         
 //        let linkText1 = "consectetaur\u{a0}cillium"
-        let linkText1 = "consectetaur cillium"
+        let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
+//        let linkText1 = "consectetaur cillium"
+        
         
         let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, \(linkText1) adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
             [.font: UIFont.systemFont(ofSize: 16),
              .paragraphStyle: paragraphStyle,
              .foregroundColor: UIColor.darkGray])
+        
+        
         
         /// without "rawValue" in NSUnderlineStyle.single.rawValue will be crash
         /// don't use NSUnderlineStyle.single without rawValue
@@ -64,6 +68,7 @@ class ViewController: UIViewController {
         let rangeLink1 = allText.mutableString.range(of: linkText1)
         allText.addAttributes(linkAttributes, range: rangeLink1)
 //        allText.addAttributes([.link: "some_url_1vfhvdhfhjsdjfhsdjhf"], range: rangeLink1)
+        
         someLabel.attributedText = allText
         
 //        someLabel.addLink(linkText1, withURL: "some_url_1")
