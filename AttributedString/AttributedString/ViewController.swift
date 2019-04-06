@@ -201,6 +201,9 @@ public class TapableLabel: UILabel {
     private var textStorage: NSTextStorage?
     private var links: [String: NSRange] = [:]
     
+    private var isLinkHighlighted = false
+    private var backupAttributedText: NSAttributedString?
+    
     public override var attributedText: NSAttributedString? {
         didSet {
             setupTextStorage()
@@ -262,8 +265,34 @@ public class TapableLabel: UILabel {
         self.textStorage = textStorage
     }
     
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        guard let touchLocation = touches.first?.location(in: self) else {
+            assertionFailure()
+            return
+        }
+        animateLink(for: touchLocation)
+    }
+    
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
+        guard let touchLocation = touches.first?.location(in: self) else {
+            assertionFailure()
+            return
+        }
+        animateLink(for: touchLocation)
+    }
+    
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        animateLinkBackIfNeed()
+    }
+    
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        animateLinkBackIfNeed()
         
         guard let touchLocation = touches.first?.location(in: self) else {
             assertionFailure()
@@ -284,6 +313,37 @@ public class TapableLabel: UILabel {
         for (urlString, range) in links {
             if NSLocationInRange(indexOfCharacter, range) {
                 delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
+            }
+        }
+    }
+    
+    private func animateLinkBackIfNeed() {
+        if self.backupAttributedText != nil {
+            self.attributedText = self.backupAttributedText
+            self.backupAttributedText = nil
+            isLinkHighlighted = false
+        }
+    }
+    
+    private func animateLink(for touchLocation: CGPoint) {
+        let indexOfCharacter = layoutManager.glyphIndex(for: touchLocation, in: textContainer)
+        
+        for (_, range) in links {
+            if NSLocationInRange(indexOfCharacter, range) {
+                guard !isLinkHighlighted else {
+                    return
+                }
+                self.backupAttributedText = self.attributedText
+                let attributedString = NSMutableAttributedString(attributedString: self.attributedText!)
+                attributedString.addAttributes([.foregroundColor: UIColor.red], range: range)
+                
+                /// can be animated
+                /// UIView.transition(with: self, duration: 0.1, options: .transitionCrossDissolve, animations: {
+                self.attributedText = attributedString
+                isLinkHighlighted = true
+                
+            } else {
+                animateLinkBackIfNeed()
             }
         }
     }
