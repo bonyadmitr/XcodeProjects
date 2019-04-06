@@ -69,6 +69,8 @@ class ViewController: UIViewController {
             someLabel.addLink(at: range, withURL: url)
         }
         
+        /// for can use any stringID in urls.
+        /// don't forget to check them in TapableLabelDelegate "... didTapUrl" func
         setLinkAttributes(for: termsAndConditionsText, url: termsAndConditionsText)
         setLinkAttributes(for: privacyPolicyText, url: privacyPolicyText)
         
