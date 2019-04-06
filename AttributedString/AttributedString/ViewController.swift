@@ -11,10 +11,8 @@ class ViewController: UIViewController {
         
     }
     
-    //        let linkText1 = "consectetaur\u{a0}cillium"
-    //        let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
-    private let termsAndConditionsText = "terms and conditions"
-    private let privacyPolicyText = "privacy policy"
+    private let termsAndConditionsUrl = "terms_and_conditions"
+    private let privacyPolicyUrl = "privacy_policy"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +48,16 @@ class ViewController: UIViewController {
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 3
         
-        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, \(termsAndConditionsText) adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \(privacyPolicyText) Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
+        let localizedFullText = "Lorem ipsum dolor sit er elit lamet, %1$@ adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. %2$@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
+        
+        //let linkText1 = "consectetaur\u{a0}cillium"
+        //let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
+        let termsAndConditionsText = "terms and conditions"
+        let privacyPolicyText = "privacy policy"
+        
+        let fullText = String(format: localizedFullText, arguments: [termsAndConditionsText, privacyPolicyText])
+        
+        let attributedFullText = NSMutableAttributedString(string: fullText, attributes:
             [.font: UIFont.systemFont(ofSize: 16),
              .paragraphStyle: paragraphStyle,
              .foregroundColor: UIColor.darkGray])
@@ -60,35 +67,35 @@ class ViewController: UIViewController {
         
         /// without "rawValue" in NSUnderlineStyle.single.rawValue will be crash
         /// don't use NSUnderlineStyle.single without rawValue
-        let linkAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: UIColor.blue,
+        let linkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.blue,
                                                              .underlineStyle: NSUnderlineStyle.single.rawValue]
         
         func setLinkAttributes(for text: String, url: String) {
-            let range = allText.mutableString.range(of: text)
-            allText.addAttributes(linkAttributes, range: range)
+            let range = attributedFullText.mutableString.range(of: text)
+            attributedFullText.addAttributes(linkAttributes, range: range)
             someLabel.addLink(at: range, withURL: url)
         }
         
         /// for can use any stringID in urls.
-        /// don't forget to check them in TapableLabelDelegate "... didTapUrl" func
-        setLinkAttributes(for: termsAndConditionsText, url: termsAndConditionsText)
-        setLinkAttributes(for: privacyPolicyText, url: privacyPolicyText)
+        /// don't forget to check them in TapableLabelDelegate "... didTapAt" func
+        setLinkAttributes(for: termsAndConditionsText, url: termsAndConditionsUrl)
+        setLinkAttributes(for: privacyPolicyText, url: privacyPolicyUrl)
         
-        someLabel.attributedText = allText
+        someLabel.attributedText = attributedFullText
         someLabel.delegate = self
     }
 }
 
 // MARK: - TapableLabelDelegate
 extension ViewController: TapableLabelDelegate {
-    func tapableLabel(_ label: TapableLabel, didTapUrl url: String, atRange range: NSRange) {
+    func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange) {
         switch url {
-        case termsAndConditionsText:
+        case termsAndConditionsUrl:
             print("open termsAndConditions")
-        case privacyPolicyText:
+        case privacyPolicyUrl:
             print("open privacyPolicy")
         default:
-            assertionFailure()
+            assertionFailure("should never be called")
             break
         }
     }
@@ -204,7 +211,7 @@ public class LinkLabel: UILabel {
 import UIKit
 
 public protocol TapableLabelDelegate: class {
-    func tapableLabel(_ label: TapableLabel, didTapUrl url: String, atRange range: NSRange)
+    func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange)
 }
 
 /// https://stackoverflow.com/a/53407849/5893286
@@ -328,7 +335,7 @@ public class TapableLabel: UILabel {
         
         for (urlString, range) in rangesByLinkUrls {
             if NSLocationInRange(indexOfCharacter, range) {
-                delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
+                delegate?.tapableLabel(self, didTapAt: urlString, in: range)
             }
         }
     }
