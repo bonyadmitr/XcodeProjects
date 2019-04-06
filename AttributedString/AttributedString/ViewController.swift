@@ -17,8 +17,6 @@ class ViewController: UIViewController {
         }
     }
     
-//    @IBOutlet private weak var someLabel: UILabel!
-//    @IBOutlet private weak var someLabel: LinkLabel!
     @IBOutlet private weak var someLabel: TapableLabel!
     
     @IBAction private func someButton(_ sender: UIBarButtonItem) {
@@ -31,15 +29,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// don't use label textAlignment, use NSMutableParagraphStyle in attributes of NSMutableAttributedString
+        /// don't use label textAlignment, link detectors will be broken.
+        /// use NSMutableParagraphStyle in attributes of NSMutableAttributedString.
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        paragraphStyle.lineSpacing = 3
+        paragraphStyle.lineSpacing = 1
         
         let localizedFullText = "Lorem ipsum dolor sit er elit lamet, %1$@ adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. %2$@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
         
-        //let linkText1 = "consectetaur\u{a0}cillium"
-        //let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
+        /// use "\u{a0}" instead of " "(space) if you don't want line breaks in the links
+        //let privacyPolicyText = "privacy\u{a0}policy"
+        //let privacyPolicyText = "privacy policy".replacingOccurrences(of: " ", with: "\u{a0}")
+        
         let termsAndConditionsText = "terms and conditions"
         let privacyPolicyText = "privacy policy"
         
@@ -136,6 +137,8 @@ extension ViewController: UITextViewDelegate {
         default:
             assertionFailure("should never be called")
         }
+        
+        /// if "return true" will be warning in console "Could not find any actions for..."
         return false
     }
 }
