@@ -143,113 +143,6 @@ extension ViewController: UITextViewDelegate {
     }
 }
 
-/**
-You must set fonts in your NSAttributedStrings
-You can only use NSAttributedStrings!
-You must ensure your links cannot wrap (use non breaking spaces: "\u{a0}")
-You cannot change the lineBreakMode or numberOfLines after setting the text
-You create links by adding attributes with .link keys
-
-*/
-/// https://stackoverflow.com/a/47192154/5893286
-public class LinkLabel: UILabel {
-    
-    private var storage: NSTextStorage?
-    private let textContainer = NSTextContainer()
-    private let layoutManager = NSLayoutManager()
-    private var selectedBackgroundView = UIView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        textContainer.lineFragmentPadding = 0
-        layoutManager.addTextContainer(textContainer)
-        textContainer.layoutManager = layoutManager
-        isUserInteractionEnabled = true
-        selectedBackgroundView.isHidden = true
-        selectedBackgroundView.backgroundColor = UIColor(white: 0, alpha: 0.3333)
-        selectedBackgroundView.layer.cornerRadius = 4
-        addSubview(selectedBackgroundView)
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        textContainer.size = frame.size
-    }
-    
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        setLink(for: touches)
-    }
-    
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        setLink(for: touches)
-    }
-    
-    private func setLink(for touches: Set<UITouch>) {
-        if let pt = touches.first?.location(in: self), let (characterRange, _) = link(at: pt) {
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: characterRange, actualCharacterRange: nil)
-            selectedBackgroundView.frame = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer).insetBy(dx: -3, dy: -3)
-            selectedBackgroundView.isHidden = false
-        } else {
-            selectedBackgroundView.isHidden = true
-        }
-    }
-    
-    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        selectedBackgroundView.isHidden = true
-    }
-    
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        selectedBackgroundView.isHidden = true
-        
-        if let pt = touches.first?.location(in: self), let (_, url) = link(at: pt) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
-    }
-    
-    private func link(at point: CGPoint) -> (NSRange, URL)? {
-        let touchedGlyph = layoutManager.glyphIndex(for: point, in: textContainer)
-        let touchedChar = layoutManager.characterIndexForGlyph(at: touchedGlyph)
-        var range = NSRange()
-        let attrs = attributedText!.attributes(at: touchedChar, effectiveRange: &range)
-        if let urlstr = attrs[.link] as? String {
-            return (range, URL(string: urlstr)!)
-        } else {
-            return nil
-        }
-    }
-    
-    public override var attributedText: NSAttributedString? {
-        didSet {
-            textContainer.maximumNumberOfLines = numberOfLines
-            textContainer.lineBreakMode = lineBreakMode
-            if let txt = attributedText {
-                let storage = NSTextStorage(attributedString: txt)
-                storage.addLayoutManager(layoutManager)
-                self.storage = storage
-                layoutManager.textStorage = storage
-                textContainer.size = frame.size
-            }
-        }
-    }
-}
-
 import UIKit
 
 public protocol TapableLabelDelegate: class {
@@ -333,22 +226,22 @@ public class TapableLabel: UILabel {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        animateLink(for: touches)
+        highlightLinkIfNeed(for: touches)
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        animateLink(for: touches)
+        highlightLinkIfNeed(for: touches)
     }
     
     public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        animateLinkBackIfNeed()
+        unhighlightLinkIfNeed()
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        animateLinkBackIfNeed()
+        unhighlightLinkIfNeed()
         
         guard let touchLocation = touches.first?.location(in: self) else {
             assertionFailure("touch will be always inside self")
@@ -373,7 +266,7 @@ public class TapableLabel: UILabel {
         }
     }
     
-    private func animateLinkBackIfNeed() {
+    private func unhighlightLinkIfNeed() {
         if backupAttributedText != nil {
             attributedText = backupAttributedText
             backupAttributedText = nil
@@ -384,7 +277,7 @@ public class TapableLabel: UILabel {
     /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
     public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
     
-    private func animateLink(for touches: Set<UITouch>) {
+    private func highlightLinkIfNeed(for touches: Set<UITouch>) {
         
         guard let touchLocation = touches.first?.location(in: self) else {
             assertionFailure("touch will be always inside self")
@@ -396,7 +289,7 @@ public class TapableLabel: UILabel {
         guard let touchedRangeByLinkUrl = rangesByLinkUrls.first (where: { (_, range) in
             NSLocationInRange(indexOfCharacter, range)
         }) else {
-            animateLinkBackIfNeed()
+            unhighlightLinkIfNeed()
             return
         }
         
