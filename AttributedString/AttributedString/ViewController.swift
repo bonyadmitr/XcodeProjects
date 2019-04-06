@@ -17,6 +17,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var htmlTextView: UITextView! {
+        willSet {
+            newValue.isEditable = false
+            newValue.delaysContentTouches = false
+            newValue.dataDetectorTypes = .link
+        }
+    }
+    
     @IBOutlet private weak var someLabel: TapableLabel!
     
     @IBAction private func someButton(_ sender: UIBarButtonItem) {
@@ -29,6 +37,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupLabelAndTextViewByAttributedText()
+        setupHtmlTextView()
+    }
+    
+    private func setupLabelAndTextViewByAttributedText() {
         /// don't use label textAlignment, link detectors will be broken.
         /// use NSMutableParagraphStyle in attributes of NSMutableAttributedString.
         let paragraphStyle = NSMutableParagraphStyle()
@@ -106,6 +119,26 @@ class ViewController: UIViewController {
         /// or try (didn't tested): https://stackoverflow.com/a/50772325/5893286
         someTextView.delegate = self
     }
+    
+    private func setupHtmlTextView() {
+        
+        /// https://stackoverflow.com/q/50969015/5893286
+        let htmlString = "<body style='padding-left:50px'><h1>Hello World</h1><div><a href=https://apple.com/offer/samsung-faq/>Click Here</a></div><p>This is a sample text</p><pre>This is also sample pre text</pre></body>"
+        
+        guard let data = htmlString.data(using: .utf8) else {
+            assertionFailure()
+            return
+        }
+        do {
+            let attributedString = try NSAttributedString(data: data, options:
+                [.documentType: NSAttributedString.DocumentType.html,
+                 .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            
+            htmlTextView.attributedText = attributedString
+        } catch {
+            assertionFailure()
+        }
+    }
 }
 
 // MARK: - TapableLabelDelegate
@@ -152,6 +185,9 @@ public protocol TapableLabelDelegate: class {
 /// question: https://stackoverflow.com/q/1256887/5893286
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
+    
+    /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
+    public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
     
     public weak var delegate: TapableLabelDelegate?
     
@@ -273,9 +309,6 @@ public class TapableLabel: UILabel {
             isLinkHighlighted = false
         }
     }
-    
-    /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
-    public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
     
     private func highlightLinkIfNeed(for touches: Set<UITouch>) {
         
