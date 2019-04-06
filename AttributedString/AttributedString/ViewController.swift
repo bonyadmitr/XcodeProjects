@@ -2,7 +2,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var someTextView: UITextView!
+    @IBOutlet weak var someTextView: UITextView! {
+        willSet {
+            newValue.isEditable = false
+            newValue.isScrollEnabled = false
+            newValue.delaysContentTouches = false
+            newValue.dataDetectorTypes = .link
+            
+            /// don't need, but maybe will increase performance
+            newValue.showsVerticalScrollIndicator = false
+            newValue.showsHorizontalScrollIndicator = false
+            newValue.alwaysBounceVertical = false
+            newValue.alwaysBounceHorizontal = false
+        }
+    }
+    
 //    @IBOutlet private weak var someLabel: UILabel!
 //    @IBOutlet private weak var someLabel: LinkLabel!
     @IBOutlet private weak var someLabel: TapableLabel!
@@ -16,32 +30,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        someLabel.isUserInteractionEnabled = true
-//        someLabel.lineBreakMode = .byWordWrapping
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnLabel))
-//        someLabel.addGestureRecognizer(tapGesture)
-        
-        
-        
-        
-//        etkTextView.linkTextAttributes = [
-//            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-//            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-//            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
-//        ]
-//
-//        let baseText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
-//                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-//                                                              .foregroundColor: ColorConstants.darkText])
-//
-//        let rangeLink1 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-//        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-//
-//        let rangeLink2 = baseText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-//        baseText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
-//
-//        etkTextView.attributedText = baseText
         
         /// don't use label textAlignment, use NSMutableParagraphStyle in attributes of NSMutableAttributedString
         let paragraphStyle = NSMutableParagraphStyle()
@@ -60,7 +48,7 @@ class ViewController: UIViewController {
         let attributedFullText = NSMutableAttributedString(string: fullText, attributes:
             [.font: UIFont.systemFont(ofSize: 16),
              .paragraphStyle: paragraphStyle,
-             .foregroundColor: UIColor.darkGray])
+             .foregroundColor: UIColor.black])
         
         /// default
         someLabel.highlightedLinkAttributes = [.foregroundColor: UIColor.purple]
@@ -83,6 +71,39 @@ class ViewController: UIViewController {
         
         someLabel.attributedText = attributedFullText
         someLabel.delegate = self
+        
+        
+        
+        
+        
+        // MARK: - Additional setup for UITextView
+        
+        /// need only for UITextView to detect links
+        func setLinkAttributes2(for text: String, url: String) {
+            let range = attributedFullText.mutableString.range(of: text)
+            attributedFullText.addAttributes([.link: url], range: range)
+        }
+        
+        setLinkAttributes2(for: termsAndConditionsText, url: termsAndConditionsUrl)
+        setLinkAttributes2(for: privacyPolicyText, url: privacyPolicyUrl)
+        
+        someTextView.attributedText = attributedFullText
+        
+        /// "attributedFullText.addAttributes(linkAttributes, range: range)" will not work for UITextView
+        /// use only ".linkTextAttributes"
+        someTextView.linkTextAttributes = linkAttributes
+        
+        /// there is small delay for UITextView touch on links.
+        /// also links can be long touched and dragged.
+        ///
+        /// action called on touch in event.
+        /// cannot be cancled.
+        /// there is the rounded background highlight of link on touch.
+        ///
+        /// any text is selectable by default.
+        /// to disable read: https://stackoverflow.com/q/27988279/5893286
+        /// or try (didn't tested): https://stackoverflow.com/a/50772325/5893286
+        someTextView.delegate = self
     }
 }
 
@@ -98,6 +119,24 @@ extension ViewController: TapableLabelDelegate {
             assertionFailure("should never be called")
             break
         }
+    }
+}
+
+extension ViewController: UITextViewDelegate {
+    
+    /// can be used this method. it will be called only for iOS 10+ if implemented both methods
+    //@available(iOS 10.0, *)
+    //func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        switch URL.absoluteString {
+        case termsAndConditionsUrl:
+            print("textView open termsAndConditions")
+        case privacyPolicyUrl:
+            print("textView open privacyPolicy")
+        default:
+            assertionFailure("should never be called")
+        }
+        return false
     }
 }
 
