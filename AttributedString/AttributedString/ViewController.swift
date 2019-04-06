@@ -3,8 +3,9 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var someTextView: UITextView!
-    @IBOutlet private weak var someLabel: LinkLabel!
-//    @IBOutlet private weak var someLabel: TapableLabel!
+//    @IBOutlet private weak var someLabel: UILabel!
+//    @IBOutlet private weak var someLabel: LinkLabel!
+    @IBOutlet private weak var someLabel: TapableLabel!
     
     @IBAction private func someButton(_ sender: UIBarButtonItem) {
         
@@ -14,6 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        someLabel.isUserInteractionEnabled = true
+//        someLabel.lineBreakMode = .byWordWrapping
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnLabel))
 //        someLabel.addGestureRecognizer(tapGesture)
         
@@ -38,37 +40,32 @@ class ViewController: UIViewController {
 //
 //        etkTextView.attributedText = baseText
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .right
+        paragraphStyle.lineSpacing = 3
         
-//        private func getParagraphStyle() -> NSMutableParagraphStyle {
-//            let paragraphStyle = NSMutableParagraphStyle()
-//            paragraphStyle.lineSpacing = 2
-//            paragraphStyle.alignment = .center
-//            return paragraphStyle
-//        }
-        
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.lineSpacing = 3
-//        errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
-        
-        
-        
-        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.")
+        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
+            [.font: UIFont.systemFont(ofSize: 16),
+             .paragraphStyle: paragraphStyle,
+             .foregroundColor: UIColor.darkGray])
         
         /// without "rawValue" in NSUnderlineStyle.single.rawValue will be crash
         /// don't use NSUnderlineStyle.single without rawValue
-        let linkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.red,
-                                                             .underlineStyle: NSUnderlineStyle.single.rawValue,
-                                                             .font: UIFont.systemFont(ofSize: 14)]
+        let linkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.blue,
+                                                             .underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+//        let strTC = "terms and conditions"
+//        let strPP = "privacy policy"
         
         let linkText1 = "consectetaur cillium"
         let rangeLink1 = allText.mutableString.range(of: linkText1)
         allText.addAttributes(linkAttributes, range: rangeLink1)
-        allText.addAttributes([.link: "some_url_1vfhvdhfhjsdjfhsdjhf"], range: rangeLink1)
+//        allText.addAttributes([.link: "some_url_1vfhvdhfhjsdjfhsdjhf"], range: rangeLink1)
         someLabel.attributedText = allText
         
-        //someLabel.addLink(linkText1, withURL: "some_url_1")
-//        someLabel.addLink(at: rangeLink1, withURL: "some_url_1")
-//        someLabel.delegate = self
+//        someLabel.addLink(linkText1, withURL: "some_url_1")
+        someLabel.addLink(at: rangeLink1, withURL: "some_url_1")
+        someLabel.delegate = self
     }
     
     @objc private func handleTapOnLabel(_ recognizer: UITapGestureRecognizer) {
@@ -101,25 +98,46 @@ extension UITapGestureRecognizer {
             return false
         }
         
-        let layoutManager = NSLayoutManager()
-        let textContainer = NSTextContainer(size: .zero)
-        let textStorage = NSTextStorage(attributedString: attrString)
-        
-        layoutManager.addTextContainer(textContainer)
-        textStorage.addLayoutManager(layoutManager)
-        
+        let labelSize = label.bounds.size
+        let textContainer = NSTextContainer(size: labelSize)
         textContainer.lineFragmentPadding = 0
         textContainer.lineBreakMode = label.lineBreakMode
         textContainer.maximumNumberOfLines = label.numberOfLines
-        let labelSize = label.bounds.size
-        textContainer.size = labelSize
+        
+        let layoutManager = NSLayoutManager()
+        layoutManager.addTextContainer(textContainer)
+        
+        let textStorage = NSTextStorage(attributedString: attrString)
+        textStorage.addLayoutManager(layoutManager)
         
         let locationOfTouchInLabel = self.location(in: label)
-        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
-        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        return NSLocationInRange(indexOfCharacter, targetRange)
+//        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        
+//        textContainer.size = bounds.size
+                let indexOfCharacter = layoutManager.glyphIndex(for: locationOfTouchInLabel, in: textContainer)
+//        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouch, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+//        print("- indexOfCharacter", indexOfCharacter)
+//        for (urlString, range) in links {
+//            //if NSLocationInRange(indexOfCharacter, range), let url = URL(string: urlString) {
+//            if NSLocationInRange(indexOfCharacter, range) {
+//                delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
+//            }
+//        }
+        
+        let q = NSLocationInRange(indexOfCharacter, targetRange)
+        print(targetRange)
+        print(indexOfCharacter)
+        print()
+        return q
+        
+        
+        
+        
+//        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+//        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+//        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+//        return NSLocationInRange(indexOfCharacter, targetRange)
+        return true
     }
 }
 
@@ -216,33 +234,6 @@ public class LinkLabel: UILabel {
         setLink(for: touches)
     }
     
-    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
-        guard let attrString = label.attributedText else {
-            return false
-        }
-        
-        let layoutManager = NSLayoutManager()
-        let textContainer = NSTextContainer(size: .zero)
-        let textStorage = NSTextStorage(attributedString: attrString)
-        
-        layoutManager.addTextContainer(textContainer)
-        textStorage.addLayoutManager(layoutManager)
-        
-        textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = label.lineBreakMode
-        textContainer.maximumNumberOfLines = label.numberOfLines
-        let labelSize = label.bounds.size
-        textContainer.size = labelSize
-        
-//        let locationOfTouchInLabel = self.location(in: label)
-//        let textBoundingBox = layoutManager.usedRect(for: textContainer)
-//        let textContainerOffset = CGPoint(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-//        let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
-//        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-//        return NSLocationInRange(indexOfCharacter, targetRange)
-        return true
-    }
-    
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         setLink(for: touches)
@@ -250,12 +241,9 @@ public class LinkLabel: UILabel {
     
     private func setLink(for touches: Set<UITouch>) {
         if let pt = touches.first?.location(in: self), let (characterRange, _) = link(at: pt) {
-            didTapAttributedTextInLabel(label: self, inRange: characterRange)
-            
-            
-//            let glyphRange = layoutManager.glyphRange(forCharacterRange: characterRange, actualCharacterRange: nil)
-//            selectedBackgroundView.frame = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer).insetBy(dx: -3, dy: -3)
-//            selectedBackgroundView.isHidden = false
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: characterRange, actualCharacterRange: nil)
+            selectedBackgroundView.frame = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer).insetBy(dx: -3, dy: -3)
+            selectedBackgroundView.isHidden = false
         } else {
             selectedBackgroundView.isHidden = true
         }
