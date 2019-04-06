@@ -11,6 +11,11 @@ class ViewController: UIViewController {
         
     }
     
+    //        let linkText1 = "consectetaur\u{a0}cillium"
+    //        let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
+    private let termsAndConditionsText = "terms and conditions"
+    private let privacyPolicyText = "privacy policy"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,46 +45,50 @@ class ViewController: UIViewController {
 //
 //        etkTextView.attributedText = baseText
         
+        /// don't use label textAlignment, use NSMutableParagraphStyle in attributes of NSMutableAttributedString
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 3
         
-//        let linkText1 = "consectetaur\u{a0}cillium"
-        let linkText1 = "consectetaur cillium".replacingOccurrences(of: " ", with: "\u{a0}")
-//        let linkText1 = "consectetaur cillium"
-        
-        
-        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, \(linkText1) adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
+        let allText = NSMutableAttributedString(string: "Lorem ipsum dolor sit er elit lamet, \(termsAndConditionsText) adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \(privacyPolicyText) Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", attributes:
             [.font: UIFont.systemFont(ofSize: 16),
              .paragraphStyle: paragraphStyle,
              .foregroundColor: UIColor.darkGray])
         
-        
+        /// default
+        someLabel.highlightedLinkAttributes = [.foregroundColor: UIColor.purple]
         
         /// without "rawValue" in NSUnderlineStyle.single.rawValue will be crash
         /// don't use NSUnderlineStyle.single without rawValue
-        let linkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.blue,
+        let linkAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: UIColor.blue,
                                                              .underlineStyle: NSUnderlineStyle.single.rawValue]
         
-//        let strTC = "terms and conditions"
-//        let strPP = "privacy policy"
+        func setLinkAttributes(for text: String, url: String) {
+            let range = allText.mutableString.range(of: text)
+            allText.addAttributes(linkAttributes, range: range)
+            someLabel.addLink(at: range, withURL: url)
+        }
         
-        
-        let rangeLink1 = allText.mutableString.range(of: linkText1)
-        allText.addAttributes(linkAttributes, range: rangeLink1)
-//        allText.addAttributes([.link: "some_url_1vfhvdhfhjsdjfhsdjhf"], range: rangeLink1)
+        setLinkAttributes(for: termsAndConditionsText, url: termsAndConditionsText)
+        setLinkAttributes(for: privacyPolicyText, url: privacyPolicyText)
         
         someLabel.attributedText = allText
-        
-//        someLabel.addLink(linkText1, withURL: "some_url_1")
-        someLabel.addLink(at: rangeLink1, withURL: "some_url_1")
         someLabel.delegate = self
     }
 }
 
+// MARK: - TapableLabelDelegate
 extension ViewController: TapableLabelDelegate {
     func tapableLabel(_ label: TapableLabel, didTapUrl url: String, atRange range: NSRange) {
-        print("- taped at \(url)")
+        switch url {
+        case termsAndConditionsText:
+            print("open termsAndConditions")
+        case privacyPolicyText:
+            print("open privacyPolicy")
+        default:
+            assertionFailure()
+            break
+        }
     }
 }
 
@@ -204,7 +213,7 @@ public class TapableLabel: UILabel {
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: .zero)
     private var textStorage: NSTextStorage?
-    private var links: [String: NSRange] = [:]
+    private var rangesByLinkUrls: [String: NSRange] = [:]
     
     private var isLinkHighlighted = false
     private var backupAttributedText: NSAttributedString?
@@ -315,7 +324,7 @@ public class TapableLabel: UILabel {
         /// #2
         //let indexOfCharacter = layoutManager.characterIndex(for: touchLocation, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         
-        for (urlString, range) in links {
+        for (urlString, range) in rangesByLinkUrls {
             if NSLocationInRange(indexOfCharacter, range) {
                 delegate?.tapableLabel(self, didTapUrl: urlString, atRange: range)
             }
@@ -330,33 +339,40 @@ public class TapableLabel: UILabel {
         }
     }
     
+    /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
+    public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
+    
     private func animateLink(for touchLocation: CGPoint) {
         let indexOfCharacter = layoutManager.glyphIndex(for: touchLocation, in: textContainer)
         
-        for (_, range) in links {
-            if NSLocationInRange(indexOfCharacter, range) {
-                guard !isLinkHighlighted else {
-                    return
-                }
-                self.backupAttributedText = self.attributedText
-                let attributedString = NSMutableAttributedString(attributedString: self.attributedText!)
-                attributedString.addAttributes([.foregroundColor: UIColor.red], range: range)
-                
-                /// can be animated
-                /// UIView.transition(with: self, duration: 0.1, options: .transitionCrossDissolve, animations: {
-                self.attributedText = attributedString
-                isLinkHighlighted = true
-                
-            } else {
-                animateLinkBackIfNeed()
-            }
+        guard let touchedRangeByLinkUrl = rangesByLinkUrls.first (where: { (_, range) in
+            NSLocationInRange(indexOfCharacter, range)
+        }) else {
+            animateLinkBackIfNeed()
+            return
         }
+        
+        guard !isLinkHighlighted else {
+            return
+        }
+        
+        let touchedRange = touchedRangeByLinkUrl.value
+        self.backupAttributedText = self.attributedText
+        
+        let attributedString = NSMutableAttributedString(attributedString: self.attributedText!)
+        attributedString.addAttributes(highlightedLinkAttributes, range: touchedRange)
+        
+        /// can be animated
+        /// UIView.transition(with: self, duration: 0.1, options: .transitionCrossDissolve, animations: {
+        self.attributedText = attributedString
+        
+        isLinkHighlighted = true
     }
     
     // MARK: - public
     
     public func addLink(at range: NSRange, withURL url: String) {
-        links[url] = range
+        rangesByLinkUrls[url] = range
     }
     
     public func addLink(_ text: String, withURL url: String) {
@@ -372,6 +388,6 @@ public class TapableLabel: UILabel {
             return
         }
         
-        links[url] = range
+        rangesByLinkUrls[url] = range
     }
 }
