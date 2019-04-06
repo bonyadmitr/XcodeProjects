@@ -183,6 +183,10 @@ public protocol TapableLabelDelegate: class {
 }
 
 // TODO: add background highlight like UITextView click with line breaks
+/// check links and hebrew project (CoreText)
+/// https://stackoverflow.com/questions/21443625/core-text-calculate-letter-frame-in-ios/21497660#21497660
+/// https://stackoverflow.com/questions/21764316/using-nslayoutmanager-to-calculate-frames-for-each-glyph
+
 /// question: https://stackoverflow.com/q/1256887/5893286
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
