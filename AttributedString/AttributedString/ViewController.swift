@@ -182,6 +182,7 @@ public protocol TapableLabelDelegate: class {
     func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange)
 }
 
+// TODO: add background highlight like UITextView click with line breaks
 /// question: https://stackoverflow.com/q/1256887/5893286
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
@@ -284,7 +285,7 @@ public class TapableLabel: UILabel {
             return
         }
         
-        // TODO: check
+        // TODO: check. delete if never called
         if textContainer.size != bounds.size {
             assertionFailure()
             textContainer.size = bounds.size
