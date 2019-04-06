@@ -256,7 +256,8 @@ public protocol TapableLabelDelegate: class {
     func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange)
 }
 
-/// https://stackoverflow.com/a/53407849/5893286
+/// question: https://stackoverflow.com/q/1256887/5893286
+/// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
     
     public weak var delegate: TapableLabelDelegate?
@@ -332,22 +333,12 @@ public class TapableLabel: UILabel {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        guard let touchLocation = touches.first?.location(in: self) else {
-            assertionFailure()
-            return
-        }
-        animateLink(for: touchLocation)
+        animateLink(for: touches)
     }
     
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        
-        guard let touchLocation = touches.first?.location(in: self) else {
-            assertionFailure()
-            return
-        }
-        animateLink(for: touchLocation)
+        animateLink(for: touches)
     }
     
     public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -360,7 +351,6 @@ public class TapableLabel: UILabel {
         animateLinkBackIfNeed()
         
         guard let touchLocation = touches.first?.location(in: self) else {
-            assertionFailure()
             return
         }
         
@@ -393,7 +383,13 @@ public class TapableLabel: UILabel {
     /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
     public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
     
-    private func animateLink(for touchLocation: CGPoint) {
+    private func animateLink(for touches: Set<UITouch>) {
+        
+        guard let touchLocation = touches.first?.location(in: self) else {
+            assertionFailure("touch will be always inside self")
+            return
+        }
+        
         let indexOfCharacter = layoutManager.glyphIndex(for: touchLocation, in: textContainer)
         
         guard let touchedRangeByLinkUrl = rangesByLinkUrls.first (where: { (_, range) in
