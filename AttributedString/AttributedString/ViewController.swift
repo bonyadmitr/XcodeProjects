@@ -202,6 +202,7 @@ extension TapableLabel {
         /// another solution is create fullText in DispatchQueue.main.async too.
         /// seems like it is a bug.
         /// tested on iOS 12.
+        /// seems the same bug https://github.com/Cocoanetics/DTCoreText/issues/620
         DispatchQueue.main.sync { [weak self] in
             self?.attributedText = fullText
         }
