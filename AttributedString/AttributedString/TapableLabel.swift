@@ -178,6 +178,11 @@ public class TapableLabel: UILabel {
         self.attributedText = attributedString
         
         isLinkHighlighted = true
+        
+        if #available(iOS 10.0, *) {
+            let generator = UISelectionFeedbackGenerator()
+            generator.selectionChanged()
+        }
     }
     
     // MARK: - public
