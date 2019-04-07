@@ -12,6 +12,7 @@
 		CE21E403225A4C540083F456 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE21E401225A4C530083F456 /* Main.storyboard */; };
 		CE21E405225A4C550083F456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE21E404225A4C550083F456 /* Assets.xcassets */; };
 		CE21E408225A4C550083F456 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE21E406225A4C550083F456 /* LaunchScreen.storyboard */; };
+		CE729277225A517D007CB895 /* SnowflakeEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE729276225A517D007CB895 /* SnowflakeEmitter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE21E404225A4C550083F456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE21E407225A4C550083F456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE21E409225A4C550083F456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE729276225A517D007CB895 /* SnowflakeEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowflakeEmitter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				CE21E3FD225A4C530083F456 /* AppDelegate.swift */,
 				CE21E3FF225A4C530083F456 /* ViewController.swift */,
+				CE729276225A517D007CB895 /* SnowflakeEmitter.swift */,
 				CE21E401225A4C530083F456 /* Main.storyboard */,
 				CE21E404225A4C550083F456 /* Assets.xcassets */,
 				CE21E406225A4C550083F456 /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				CE21E400225A4C530083F456 /* ViewController.swift in Sources */,
 				CE21E3FE225A4C530083F456 /* AppDelegate.swift in Sources */,
+				CE729277225A517D007CB895 /* SnowflakeEmitter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
