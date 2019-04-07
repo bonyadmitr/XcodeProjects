@@ -8,6 +8,9 @@ import MetalKit
 class ViewController: UIViewController {}
 
 /// http://metalbyexample.com/up-and-running-1/
+/// https://www.raywenderlich.com/7475-metal-tutorial-getting-started
+/// https://github.com/BradLarson/GPUImage3
+/// https://weblog.jamisbuck.org/2016/2/27/bloom-effect-in-metal.html
 final class MetalView: UIView {
     
     override class var layerClass: AnyClass {
@@ -89,7 +92,6 @@ final class MetalView: UIView {
 //
 //    var timer: CADisplayLink!
 //
-//    /// https://www.raywenderlich.com/7475-metal-tutorial-getting-started
 //    private let metalLayer: CAMetalLayer = {
 //        let metalLayer = CAMetalLayer()
 //        metalLayer.device = sharedMetalRenderingDevice.device
