@@ -13,8 +13,8 @@ public protocol TapableLabelDelegate: class {
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TapableLabel: UILabel {
     
-    /// defailt is [NSAttributedString.Key.foregroundColor: UIColor.purple]
-    public var highlightedLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.purple]
+    /// defailt is [.foregroundColor: UIColor.purple]
+    public var highlightedLinkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.purple]
     
     public weak var delegate: TapableLabelDelegate?
     
