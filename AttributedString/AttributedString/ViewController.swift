@@ -125,18 +125,18 @@ class ViewController: UIViewController {
     }
     
     private func setupHtmlTextView() {
-        
-        /// https://stackoverflow.com/q/50969015/5893286
-        let htmlString = "<body style='padding-left:50px'><h1>Hello World</h1><div><a href=https://apple.com/offer/samsung-faq/>Click Here</a></div><p>This is a sample text</p><pre>This is also sample pre text</pre></body>"
-        
-        guard let data = htmlString.data(using: .utf8) else {
-            assertionFailure()
-            return
-        }
-        
-        /// fixed black screen
-        /// and error "AttributedString called within transaction"
         DispatchQueue.global().async {
+            /// https://stackoverflow.com/q/50969015/5893286
+            let htmlString = "<body style='padding-left:50px'><h1>Hello World</h1><div><a href=https://apple.com/offer/samsung-faq/>Click Here</a></div><p>This is a sample text</p><pre>This is also sample pre text</pre></body>"
+            
+            guard let data = htmlString.data(using: .utf8) else {
+                assertionFailure()
+                return
+            }
+            
+            /// fixed black screen
+            /// and error "AttributedString called within transaction"
+            
             do {
                 let attributedString = try NSAttributedString(data: data, options:
                     [.documentType: NSAttributedString.DocumentType.html,
