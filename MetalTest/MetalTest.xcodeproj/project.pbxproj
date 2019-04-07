@@ -12,6 +12,7 @@
 		CE72928A225A525B007CB895 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE729288225A525B007CB895 /* Main.storyboard */; };
 		CE72928C225A525C007CB895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE72928B225A525C007CB895 /* Assets.xcassets */; };
 		CE72928F225A525C007CB895 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE72928D225A525C007CB895 /* LaunchScreen.storyboard */; };
+		CE729297225A5F26007CB895 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = CE729296225A5F26007CB895 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE72928B225A525C007CB895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE72928E225A525C007CB895 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE729290225A525C007CB895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE729296225A5F26007CB895 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		CE729283225A525B007CB895 /* MetalTest */ = {
 			isa = PBXGroup;
 			children = (
+				CE729296225A5F26007CB895 /* Shaders.metal */,
 				CE729284225A525B007CB895 /* AppDelegate.swift */,
 				CE729286225A525B007CB895 /* ViewController.swift */,
 				CE729288225A525B007CB895 /* Main.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE729297225A5F26007CB895 /* Shaders.metal in Sources */,
 				CE729287225A525B007CB895 /* ViewController.swift in Sources */,
 				CE729285225A525B007CB895 /* AppDelegate.swift in Sources */,
 			);
@@ -283,6 +287,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = MetalTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -301,6 +306,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = MetalTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
