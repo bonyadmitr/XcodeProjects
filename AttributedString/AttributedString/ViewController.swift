@@ -198,7 +198,10 @@ extension TapableLabel {
             addLink(at: range, withURL: url)
         }
         
-        /// with async will not update label by highlighting
+        /// with async will not update label by highlighting.
+        /// another solution is create fullText in DispatchQueue.main.async too.
+        /// seems like it is a bug.
+        /// tested on iOS 12.
         DispatchQueue.main.sync { [weak self] in
             self?.attributedText = fullText
         }
