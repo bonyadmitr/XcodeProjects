@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Metal
+//  MetalTest
 //
 //  Created by Bondar Yaroslav on 4/7/19.
 //  Copyright © 2019 Bondar Yaroslav. All rights reserved.

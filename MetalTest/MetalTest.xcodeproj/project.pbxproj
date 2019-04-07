@@ -7,27 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE21E3FE225A4C530083F456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21E3FD225A4C530083F456 /* AppDelegate.swift */; };
-		CE21E400225A4C530083F456 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21E3FF225A4C530083F456 /* ViewController.swift */; };
-		CE21E403225A4C540083F456 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE21E401225A4C530083F456 /* Main.storyboard */; };
-		CE21E405225A4C550083F456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE21E404225A4C550083F456 /* Assets.xcassets */; };
-		CE21E408225A4C550083F456 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE21E406225A4C550083F456 /* LaunchScreen.storyboard */; };
-		CE729277225A517D007CB895 /* SnowflakeEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE729276225A517D007CB895 /* SnowflakeEmitter.swift */; };
+		CE729285225A525B007CB895 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE729284225A525B007CB895 /* AppDelegate.swift */; };
+		CE729287225A525B007CB895 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE729286225A525B007CB895 /* ViewController.swift */; };
+		CE72928A225A525B007CB895 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE729288225A525B007CB895 /* Main.storyboard */; };
+		CE72928C225A525C007CB895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE72928B225A525C007CB895 /* Assets.xcassets */; };
+		CE72928F225A525C007CB895 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE72928D225A525C007CB895 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE21E3FA225A4C530083F456 /* Metal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metal.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE21E3FD225A4C530083F456 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE21E3FF225A4C530083F456 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE21E402225A4C530083F456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CE21E404225A4C550083F456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CE21E407225A4C550083F456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CE21E409225A4C550083F456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE729276225A517D007CB895 /* SnowflakeEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowflakeEmitter.swift; sourceTree = "<group>"; };
+		CE729281225A525B007CB895 /* MetalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE729284225A525B007CB895 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE729286225A525B007CB895 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE729289225A525B007CB895 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE72928B225A525C007CB895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE72928E225A525C007CB895 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CE729290225A525C007CB895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CE21E3F7225A4C530083F456 /* Frameworks */ = {
+		CE72927E225A525B007CB895 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +35,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE21E3F1225A4C530083F456 = {
+		CE729278225A525B007CB895 = {
 			isa = PBXGroup;
 			children = (
-				CE21E3FC225A4C530083F456 /* Metal */,
-				CE21E3FB225A4C530083F456 /* Products */,
+				CE729283225A525B007CB895 /* MetalTest */,
+				CE729282225A525B007CB895 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CE21E3FB225A4C530083F456 /* Products */ = {
+		CE729282225A525B007CB895 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE21E3FA225A4C530083F456 /* Metal.app */,
+				CE729281225A525B007CB895 /* MetalTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CE21E3FC225A4C530083F456 /* Metal */ = {
+		CE729283225A525B007CB895 /* MetalTest */ = {
 			isa = PBXGroup;
 			children = (
-				CE21E3FD225A4C530083F456 /* AppDelegate.swift */,
-				CE21E3FF225A4C530083F456 /* ViewController.swift */,
-				CE729276225A517D007CB895 /* SnowflakeEmitter.swift */,
-				CE21E401225A4C530083F456 /* Main.storyboard */,
-				CE21E404225A4C550083F456 /* Assets.xcassets */,
-				CE21E406225A4C550083F456 /* LaunchScreen.storyboard */,
-				CE21E409225A4C550083F456 /* Info.plist */,
+				CE729284225A525B007CB895 /* AppDelegate.swift */,
+				CE729286225A525B007CB895 /* ViewController.swift */,
+				CE729288225A525B007CB895 /* Main.storyboard */,
+				CE72928B225A525C007CB895 /* Assets.xcassets */,
+				CE72928D225A525C007CB895 /* LaunchScreen.storyboard */,
+				CE729290225A525C007CB895 /* Info.plist */,
 			);
-			path = Metal;
+			path = MetalTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CE21E3F9225A4C530083F456 /* Metal */ = {
+		CE729280225A525B007CB895 /* MetalTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE21E40C225A4C550083F456 /* Build configuration list for PBXNativeTarget "Metal" */;
+			buildConfigurationList = CE729293225A525C007CB895 /* Build configuration list for PBXNativeTarget "MetalTest" */;
 			buildPhases = (
-				CE21E3F6225A4C530083F456 /* Sources */,
-				CE21E3F7225A4C530083F456 /* Frameworks */,
-				CE21E3F8225A4C530083F456 /* Resources */,
+				CE72927D225A525B007CB895 /* Sources */,
+				CE72927E225A525B007CB895 /* Frameworks */,
+				CE72927F225A525B007CB895 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Metal;
-			productName = Metal;
-			productReference = CE21E3FA225A4C530083F456 /* Metal.app */;
+			name = MetalTest;
+			productName = MetalTest;
+			productReference = CE729281225A525B007CB895 /* MetalTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CE21E3F2225A4C530083F456 /* Project object */ = {
+		CE729279225A525B007CB895 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Bondar Yaroslav";
 				TargetAttributes = {
-					CE21E3F9225A4C530083F456 = {
+					CE729280225A525B007CB895 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = CE21E3F5225A4C530083F456 /* Build configuration list for PBXProject "Metal" */;
+			buildConfigurationList = CE72927C225A525B007CB895 /* Build configuration list for PBXProject "MetalTest" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +107,54 @@
 				en,
 				Base,
 			);
-			mainGroup = CE21E3F1225A4C530083F456;
-			productRefGroup = CE21E3FB225A4C530083F456 /* Products */;
+			mainGroup = CE729278225A525B007CB895;
+			productRefGroup = CE729282225A525B007CB895 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CE21E3F9225A4C530083F456 /* Metal */,
+				CE729280225A525B007CB895 /* MetalTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CE21E3F8225A4C530083F456 /* Resources */ = {
+		CE72927F225A525B007CB895 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE21E408225A4C550083F456 /* LaunchScreen.storyboard in Resources */,
-				CE21E405225A4C550083F456 /* Assets.xcassets in Resources */,
-				CE21E403225A4C540083F456 /* Main.storyboard in Resources */,
+				CE72928F225A525C007CB895 /* LaunchScreen.storyboard in Resources */,
+				CE72928C225A525C007CB895 /* Assets.xcassets in Resources */,
+				CE72928A225A525B007CB895 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CE21E3F6225A4C530083F456 /* Sources */ = {
+		CE72927D225A525B007CB895 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE21E400225A4C530083F456 /* ViewController.swift in Sources */,
-				CE21E3FE225A4C530083F456 /* AppDelegate.swift in Sources */,
-				CE729277225A517D007CB895 /* SnowflakeEmitter.swift in Sources */,
+				CE729287225A525B007CB895 /* ViewController.swift in Sources */,
+				CE729285225A525B007CB895 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CE21E401225A4C530083F456 /* Main.storyboard */ = {
+		CE729288225A525B007CB895 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CE21E402225A4C530083F456 /* Base */,
+				CE729289225A525B007CB895 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		CE21E406225A4C550083F456 /* LaunchScreen.storyboard */ = {
+		CE72928D225A525C007CB895 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CE21E407225A4C550083F456 /* Base */,
+				CE72928E225A525C007CB895 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +162,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CE21E40A225A4C550083F456 /* Debug */ = {
+		CE729291225A525C007CB895 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -227,7 +223,7 @@
 			};
 			name = Debug;
 		};
-		CE21E40B225A4C550083F456 /* Release */ = {
+		CE729292225A525C007CB895 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -282,36 +278,36 @@
 			};
 			name = Release;
 		};
-		CE21E40D225A4C550083F456 /* Debug */ = {
+		CE729294225A525C007CB895 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Metal/Info.plist;
+				INFOPLIST_FILE = MetalTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.Metal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.MetalTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		CE21E40E225A4C550083F456 /* Release */ = {
+		CE729295225A525C007CB895 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Metal/Info.plist;
+				INFOPLIST_FILE = MetalTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.Metal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.MetalTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,25 +317,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CE21E3F5225A4C530083F456 /* Build configuration list for PBXProject "Metal" */ = {
+		CE72927C225A525B007CB895 /* Build configuration list for PBXProject "MetalTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE21E40A225A4C550083F456 /* Debug */,
-				CE21E40B225A4C550083F456 /* Release */,
+				CE729291225A525C007CB895 /* Debug */,
+				CE729292225A525C007CB895 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE21E40C225A4C550083F456 /* Build configuration list for PBXNativeTarget "Metal" */ = {
+		CE729293225A525C007CB895 /* Build configuration list for PBXNativeTarget "MetalTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE21E40D225A4C550083F456 /* Debug */,
-				CE21E40E225A4C550083F456 /* Release */,
+				CE729294225A525C007CB895 /* Debug */,
+				CE729295225A525C007CB895 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = CE21E3F2225A4C530083F456 /* Project object */;
+	rootObject = CE729279225A525B007CB895 /* Project object */;
 }
