@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE21E3F02259C6D90083F456 /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21E3EF2259C6D90083F456 /* TapableLabel.swift */; };
 		CE343611224BBBEA00AFAABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343610224BBBEA00AFAABB /* AppDelegate.swift */; };
 		CE343613224BBBEA00AFAABB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343612224BBBEA00AFAABB /* ViewController.swift */; };
 		CE343616224BBBEA00AFAABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE343614224BBBEA00AFAABB /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE21E3EF2259C6D90083F456 /* TapableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 		CE34360D224BBBEA00AFAABB /* AttributedString.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttributedString.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE343610224BBBEA00AFAABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE343612224BBBEA00AFAABB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				CE343610224BBBEA00AFAABB /* AppDelegate.swift */,
 				CE343612224BBBEA00AFAABB /* ViewController.swift */,
+				CE21E3EF2259C6D90083F456 /* TapableLabel.swift */,
 				CE343614224BBBEA00AFAABB /* Main.storyboard */,
 				CE343617224BBBEB00AFAABB /* Assets.xcassets */,
 				CE343619224BBBEB00AFAABB /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE21E3F02259C6D90083F456 /* TapableLabel.swift in Sources */,
 				CE343613224BBBEA00AFAABB /* ViewController.swift in Sources */,
 				CE343611224BBBEA00AFAABB /* AppDelegate.swift in Sources */,
 			);
