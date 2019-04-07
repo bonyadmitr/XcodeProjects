@@ -9,6 +9,10 @@ class ViewController: UIViewController {
             newValue.delaysContentTouches = false
             newValue.dataDetectorTypes = .link
             
+            /// https://stackoverflow.com/a/42333832/5893286
+            newValue.textContainerInset = .zero
+            newValue.textContainer.lineFragmentPadding = 0
+            
             /// don't need, but maybe will increase performance
             newValue.showsVerticalScrollIndicator = false
             newValue.showsHorizontalScrollIndicator = false
@@ -37,7 +41,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLabelAndTextViewByAttributedText()
+        DispatchQueue.global().async { [weak self] in
+            self?.setupLabelAndTextViewByAttributedText()
+        }
+        
         setupHtmlTextView()
     }
     
@@ -64,26 +71,19 @@ class ViewController: UIViewController {
              .paragraphStyle: paragraphStyle,
              .foregroundColor: UIColor.black])
         
-        /// default
-        someLabel.highlightedLinkAttributes = [.foregroundColor: UIColor.purple]
-        
         /// without "rawValue" in NSUnderlineStyle.single.rawValue will be crash
         /// don't use NSUnderlineStyle.single without rawValue
         let linkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.blue,
                                                              .underlineStyle: NSUnderlineStyle.single.rawValue]
         
-        func setLinkAttributes(for text: String, url: String) {
-            let range = attributedFullText.mutableString.range(of: text)
-            attributedFullText.addAttributes(linkAttributes, range: range)
-            someLabel.addLink(at: range, withURL: url)
-        }
-        
         /// for can use any stringID in urls.
         /// don't forget to check them in TapableLabelDelegate "... didTapAt" func
-        setLinkAttributes(for: termsAndConditionsText, url: termsAndConditionsUrl)
-        setLinkAttributes(for: privacyPolicyText, url: privacyPolicyUrl)
+        someLabel.setup(fullText: attributedFullText,
+                        urlsByLinks: [termsAndConditionsText: termsAndConditionsUrl,
+                                      privacyPolicyText: privacyPolicyUrl],
+                        linkAttributes: linkAttributes,
+                        highlightedLinkAttributes: [.foregroundColor: UIColor.purple]) /// default
         
-        someLabel.attributedText = attributedFullText
         someLabel.delegate = self
         
         
@@ -101,23 +101,25 @@ class ViewController: UIViewController {
         setLinkAttributes2(for: termsAndConditionsText, url: termsAndConditionsUrl)
         setLinkAttributes2(for: privacyPolicyText, url: privacyPolicyUrl)
         
-        someTextView.attributedText = attributedFullText
-        
-        /// "attributedFullText.addAttributes(linkAttributes, range: range)" will not work for UITextView
-        /// use only ".linkTextAttributes"
-        someTextView.linkTextAttributes = linkAttributes
-        
-        /// there is small delay for UITextView touch on links.
-        /// also links can be long touched and dragged.
-        ///
-        /// action called on touch in event.
-        /// cannot be cancled.
-        /// there is the rounded background highlight of link on touch.
-        ///
-        /// any text is selectable by default.
-        /// to disable read: https://stackoverflow.com/q/27988279/5893286
-        /// or try (didn't tested): https://stackoverflow.com/a/50772325/5893286
-        someTextView.delegate = self
+        DispatchQueue.main.async { [weak self] in
+            self?.someTextView.attributedText = attributedFullText
+            
+            /// "attributedFullText.addAttributes(linkAttributes, range: range)" will not work for UITextView
+            /// use only ".linkTextAttributes"
+            self?.someTextView.linkTextAttributes = linkAttributes
+            
+            /// there is small delay for UITextView touch on links.
+            /// also links can be long touched and dragged.
+            ///
+            /// action called on touch in event.
+            /// cannot be cancled.
+            /// there is the rounded background highlight of link on touch.
+            ///
+            /// any text is selectable by default.
+            /// to disable read: https://stackoverflow.com/q/27988279/5893286
+            /// or try (didn't tested): https://stackoverflow.com/a/50772325/5893286
+            self?.someTextView.delegate = self
+        }
     }
     
     private func setupHtmlTextView() {
@@ -129,15 +131,26 @@ class ViewController: UIViewController {
             assertionFailure()
             return
         }
-        do {
-            let attributedString = try NSAttributedString(data: data, options:
-                [.documentType: NSAttributedString.DocumentType.html,
-                 .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-            
-            htmlTextView.attributedText = attributedString
-        } catch {
-            assertionFailure()
+        
+        /// fixed black screen
+        /// and error "AttributedString called within transaction"
+        DispatchQueue.global().async {
+            do {
+                let attributedString = try NSAttributedString(data: data, options:
+                    [.documentType: NSAttributedString.DocumentType.html,
+                     .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                
+                DispatchQueue.main.async {
+                    self.htmlTextView.attributedText = attributedString
+                }
+            } catch {
+                assertionFailure()
+            }
         }
+        
+            
+            
+
     }
 }
 
@@ -173,5 +186,31 @@ extension ViewController: UITextViewDelegate {
         
         /// if "return true" will be warning in console "Could not find any actions for..."
         return false
+    }
+}
+
+extension TapableLabel {
+    func setup(fullText: NSMutableAttributedString,
+               urlsByLinks: [String: String],
+               linkAttributes: [NSAttributedString.Key: Any],
+               highlightedLinkAttributes: [NSAttributedString.Key: Any]? = nil)
+    {
+        func setLinkAttributes(for text: String, url: String) {
+            let range = fullText.mutableString.range(of: text)
+            fullText.addAttributes(linkAttributes, range: range)
+            addLink(at: range, withURL: url)
+        }
+        
+        for (link, url) in urlsByLinks {
+            setLinkAttributes(for: link, url: url)
+        }
+        
+        if let highlightedLinkAttributes = highlightedLinkAttributes {
+            self.highlightedLinkAttributes = highlightedLinkAttributes
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.attributedText = fullText
+        }
     }
 }
