@@ -147,10 +147,6 @@ class ViewController: UIViewController {
                 assertionFailure()
             }
         }
-        
-            
-            
-
     }
 }
 
@@ -195,14 +191,11 @@ extension TapableLabel {
                linkAttributes: [NSAttributedString.Key: Any],
                highlightedLinkAttributes: [NSAttributedString.Key: Any]? = nil)
     {
-        func setLinkAttributes(for text: String, url: String) {
-            let range = fullText.mutableString.range(of: text)
-            fullText.addAttributes(linkAttributes, range: range)
-            addLink(at: range, withURL: url)
-        }
         
         for (link, url) in urlsByLinks {
-            setLinkAttributes(for: link, url: url)
+            let range = fullText.mutableString.range(of: link)
+            fullText.addAttributes(linkAttributes, range: range)
+            addLink(at: range, withURL: url)
         }
         
         if let highlightedLinkAttributes = highlightedLinkAttributes {
