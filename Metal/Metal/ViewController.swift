@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private let snowEmitterLayer = Emitter.getLayerWith(cells: [Emitter.getCell2(), Emitter.getCell1()], width: 100)
+    private let snowEmitterLayer = SnowflakeEmitter.snowflakeLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,16 +15,15 @@ class ViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         snowEmitterLayer.frame = view.bounds
-        snowEmitterLayer.frame.origin.x += 100
         snowEmitterLayer.emitterSize.width = view.bounds.width
+        snowEmitterLayer.emitterPosition.x = view.bounds.width / 3
     }
 }
 
-struct Emitter {
+struct SnowflakeEmitter {
     
-    static func getCell1() -> CAEmitterCell {
-        //        let cell = CAEmitterCell()
-        ////        cell.contents = #imageLiteral(resourceName: "im_snowflake").mask(with: UIColor.white)?.cgImage
+    static func snowflakeCell() -> CAEmitterCell {
+        let cell = CAEmitterCell()
         //        cell.birthRate = 1
         //        cell.lifetime = 30
         //        cell.velocity = 25
@@ -35,22 +34,7 @@ struct Emitter {
         //        cell.scaleRange = 0.03
         //        cell.spin = 0.8
         //        cell.spinRange = 0.3
-        
-        /**
-         contents: CGImage, используемый для показа одной снежинки (как вы помните, это одно из тех изображений, которые я создал самостоятельно);
-         emissionRange: угол в радианах, определяющий конус, внутри которого будут появляться частицы (я выбрал угол PI, чтобы частицы были видны на всём экране);
-         lifetime: определяет время жизни одной частицы;
-         birthRate: определяет количество частиц, испускаемых каждую секунду;
-         scale и scaleRange: влияет на размер частиц, где значение 1.0 — максимальный размер; интервал определяет отклонения в размерах между созданными частицами, что позволяет излучать частицы случайных размеров;
-         velocity и velocityRange: влияет на скорость появления частиц; отклоняется случайно в рамках значения, указанного в velocityRange;
-         spin и spinRange: влияют на скорость вращения, измеряемого в радианах в секунду, и случайное отклонение в рамках значения, указанного в spinRange;
-         yAcceleration и xAcceleration: это два компонента вектора ускорения, применённого к эмиттеру.
-         */
-        let cell = CAEmitterCell()
-        
-        cell.contents = UIImage.circle(diameter: 5, color: .white).cgImage
         cell.velocity = 30.0
-        
         cell.emissionRange = .pi
         cell.lifetime = 20.0
         cell.birthRate = 30
@@ -61,50 +45,30 @@ struct Emitter {
         cell.spinRange = 1.0
         cell.yAcceleration = 30.0
         cell.xAcceleration = 5.0
-        
         return cell
     }
     
-    static func getCell2() -> CAEmitterCell {
-        let cell = CAEmitterCell()
-        
-        let image = UIImage.circle(diameter: 5, color: .white).blured(radius: 10)
-        cell.contents = image?.cgImage
-        cell.velocity = 40.0
-        
-        cell.emissionRange = .pi
-        cell.lifetime = 20.0
-        cell.birthRate = 30
-        cell.scale = 0.15
-        cell.scaleRange = 0.6
-        cell.velocityRange = 20
-        cell.spin = -0.5
-        cell.spinRange = 1.0
-        cell.yAcceleration = 30.0
-        cell.xAcceleration = 5.0
-        
-        return cell
-    }
-    
-    static func getLayerWith(cells: [CAEmitterCell], width: CGFloat) -> CAEmitterLayer {
+    static func snowflakeLayer() -> CAEmitterLayer {
         let emitter = CAEmitterLayer()
-        //        emitter.emitterShape = kCAEmitterLayerLine
-        emitter.emitterCells = cells
-        emitter.emitterSize = CGSize(width: width, height: 1)
-        emitter.emitterPosition = CGPoint(x: width / 2, y: -10)
+        
+        let snowflakeImage = UIImage.circle(diameter: 5, color: .white)
+        
+        let frontCell = snowflakeCell()
+        frontCell.contents = snowflakeImage.cgImage
+        
+        let backCell = snowflakeCell()
+        backCell.contents = snowflakeImage.blured(radius: 10)?.cgImage
+        
+        emitter.emitterCells = [frontCell, backCell]
+        //emitter.emitterSize = CGSize(width: 1, height: 1)
+        emitter.emitterPosition = CGPoint(x: 0, y: -10)
         
         /// https://habr.com/ru/company/badoo/blog/446938/
-        /// определяет форму слоя. я использовал линию, что позволило снежинкам появляться вдоль всего экрана
         emitter.emitterShape = .line
-        
-        /// является частью CAMediaTiming-протокола и представляет собой время начала анимации слоя относительно анимаций родительского слоя
         emitter.beginTime = CACurrentMediaTime()
-        
-        /// также является частью CAMediaTiming-протокола и, по сути, представляет собой перемотку анимации вперёд на заданное время относительно её начала. Я указал значение в 10 секунд, что привело к тому, что в момент начала анимации снежинки уже покрывали экран целиком, и это именно то, чего мы хотели (если бы я указал значение в 0 секунд, то снежинки начали бы появляться сверху и покрыли экран целиком только спустя какое-то время)
         emitter.timeOffset = 10.0
         return emitter
     }
-    
 }
 
 /// https://stackoverflow.com/a/40561499/5893286
