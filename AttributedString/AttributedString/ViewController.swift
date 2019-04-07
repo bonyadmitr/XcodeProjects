@@ -81,8 +81,10 @@ class ViewController: UIViewController {
         someLabel.setup(fullText: attributedFullText,
                         urlsByLinks: [termsAndConditionsText: termsAndConditionsUrl,
                                       privacyPolicyText: privacyPolicyUrl],
-                        linkAttributes: linkAttributes,
-                        highlightedLinkAttributes: [.foregroundColor: UIColor.purple]) /// default
+                        linkAttributes: linkAttributes)
+        
+        /// default
+        //someLabel.highlightedLinkAttributes = [.foregroundColor: UIColor.purple]
         
         someLabel.delegate = self
         
@@ -188,9 +190,7 @@ extension ViewController: UITextViewDelegate {
 extension TapableLabel {
     func setup(fullText: NSMutableAttributedString,
                urlsByLinks: [String: String],
-               linkAttributes: [NSAttributedString.Key: Any],
-               highlightedLinkAttributes: [NSAttributedString.Key: Any]? = nil)
-    {
+               linkAttributes: [NSAttributedString.Key: Any]) {
         
         for (link, url) in urlsByLinks {
             let range = fullText.mutableString.range(of: link)
@@ -198,11 +198,8 @@ extension TapableLabel {
             addLink(at: range, withURL: url)
         }
         
-        if let highlightedLinkAttributes = highlightedLinkAttributes {
-            self.highlightedLinkAttributes = highlightedLinkAttributes
-        }
-        
-        DispatchQueue.main.async { [weak self] in
+        /// with async will not update label by highlighting
+        DispatchQueue.main.sync { [weak self] in
             self?.attributedText = fullText
         }
     }
