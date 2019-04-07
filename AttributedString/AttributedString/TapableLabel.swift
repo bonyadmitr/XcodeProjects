@@ -162,10 +162,15 @@ public class TapableLabel: UILabel {
             return
         }
         
+        guard let attributedText = attributedText else {
+            assertionFailure("you should setup attributedText")
+            return
+        }
+        
         let touchedRange = touchedRangeByLinkUrl.value
         self.backupAttributedText = self.attributedText
         
-        let attributedString = NSMutableAttributedString(attributedString: self.attributedText!)
+        let attributedString = NSMutableAttributedString(attributedString: attributedText)
         attributedString.addAttributes(highlightedLinkAttributes, range: touchedRange)
         
         /// can be animated
