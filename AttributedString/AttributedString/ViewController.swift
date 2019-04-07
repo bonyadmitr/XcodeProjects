@@ -303,6 +303,11 @@ public class TapableLabel: UILabel {
         for (urlString, range) in rangesByLinkUrls {
             if NSLocationInRange(indexOfCharacter, range) {
                 delegate?.tapableLabel(self, didTapAt: urlString, in: range)
+                
+                if #available(iOS 10.0, *) {
+                    let generator = UIImpactFeedbackGenerator(style: .light)
+                    generator.impactOccurred()
+                }
             }
         }
     }
