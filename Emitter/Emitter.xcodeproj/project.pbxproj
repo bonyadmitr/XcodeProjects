@@ -13,6 +13,7 @@
 		CE7292AC225A6ACD007CB895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7292AB225A6ACD007CB895 /* Assets.xcassets */; };
 		CE7292AF225A6ACD007CB895 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7292AD225A6ACD007CB895 /* LaunchScreen.storyboard */; };
 		CE7292B7225B05C3007CB895 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7292B6225B05C3007CB895 /* SAConfettiView.swift */; };
+		CE7292B9225B0744007CB895 /* SnowflakeEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7292B8225B0744007CB895 /* SnowflakeEmitter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CE7292AE225A6ACD007CB895 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE7292B0225A6ACD007CB895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7292B6225B05C3007CB895 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
+		CE7292B8225B0744007CB895 /* SnowflakeEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowflakeEmitter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CE7292A4225A6ACC007CB895 /* AppDelegate.swift */,
 				CE7292A6225A6ACC007CB895 /* ViewController.swift */,
 				CE7292B6225B05C3007CB895 /* SAConfettiView.swift */,
+				CE7292B8225B0744007CB895 /* SnowflakeEmitter.swift */,
 				CE7292A8225A6ACC007CB895 /* Main.storyboard */,
 				CE7292AB225A6ACD007CB895 /* Assets.xcassets */,
 				CE7292AD225A6ACD007CB895 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7292A7225A6ACC007CB895 /* ViewController.swift in Sources */,
+				CE7292B9225B0744007CB895 /* SnowflakeEmitter.swift in Sources */,
 				CE7292A5225A6ACC007CB895 /* AppDelegate.swift in Sources */,
 				CE7292B7225B05C3007CB895 /* SAConfettiView.swift in Sources */,
 			);
