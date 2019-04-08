@@ -7,6 +7,19 @@ import MetalKit
 
 class ViewController: UIViewController {}
 
+/// for macOS
+/// http://metalkit.org/
+/// https://github.com/MetalKit/metal
+/// https://github.com/MetalKit/metal/blob/master/ch08/chapter08.playground/Sources/MetalView.swift
+///
+/// game https://github.com/hollance/pumpkin
+///
+/// MTKView, Camera, MetalKit
+/// https://navoshta.com/metal-camera-part-1-camera-session/
+/// https://www.raywenderlich.com/5493-metal-rendering-pipeline-tutorial
+/// https://www.clientresourcesinc.com/2018/07/27/rendering-graphics-with-metalkit-swift-4-part-2/
+/// https://stackoverflow.com/questions/33844130/take-a-snapshot-of-current-screen-with-metal-in-swift
+///
 /// http://metalbyexample.com/up-and-running-1/
 /// https://www.raywenderlich.com/7475-metal-tutorial-getting-started
 /// https://github.com/BradLarson/GPUImage3
