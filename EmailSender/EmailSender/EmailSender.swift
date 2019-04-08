@@ -40,6 +40,10 @@ open class EmailSender: NSObject {
         }
         mailto += "body=\(message)"
         
+        /// #2
+        /// https://stackoverflow.com/a/54267099/5893286
+        /// let coded = "mailto:\(email)?subject=\(subject)&body=\(bodyText)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         guard let coded = mailto.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
