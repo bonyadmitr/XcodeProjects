@@ -1,11 +1,23 @@
 import UIKit
 
-/// https://github.com/tomsoft1/StackBluriOS
-/// https://github.com/leonardosul/Swift-Stack-Blur
-/// https://github.com/globchastyy/SwiftUIImageEffects/blob/master/Source/UIImageEffects.swift
-/// https://github.com/0xxd0/BlurEffect/blob/master/Sources/Box.swift
+final class ConfettiViewController: UIViewController {
+    
+    private lazy var confettiView = SAConfettiView(frame: view.bounds)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.insertSubview(confettiView, at: 0)
+        confettiView.startConfetti()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        confettiView.frame = view.bounds
+    }
+}
 
-class ViewController: UIViewController {
+final class SnowViewController: UIViewController {
 
     private let snowEmitterLayer = SnowflakeEmitter.snowflakeLayer()
 
@@ -97,6 +109,11 @@ extension UIImage {
         return img
     }
     
+    
+    /// https://github.com/tomsoft1/StackBluriOS
+    /// https://github.com/leonardosul/Swift-Stack-Blur
+    /// https://github.com/globchastyy/SwiftUIImageEffects/blob/master/Source/UIImageEffects.swift
+    /// https://github.com/0xxd0/BlurEffect/blob/master/Sources/Box.swift
     func blured(radius: CGFloat) -> UIImage? {
         let context = CIContext()
         guard let filter = CIFilter(name: "CIGaussianBlur") else {

@@ -12,6 +12,7 @@
 		CE7292AA225A6ACC007CB895 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7292A8225A6ACC007CB895 /* Main.storyboard */; };
 		CE7292AC225A6ACD007CB895 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7292AB225A6ACD007CB895 /* Assets.xcassets */; };
 		CE7292AF225A6ACD007CB895 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7292AD225A6ACD007CB895 /* LaunchScreen.storyboard */; };
+		CE7292B7225B05C3007CB895 /* SAConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7292B6225B05C3007CB895 /* SAConfettiView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE7292AB225A6ACD007CB895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE7292AE225A6ACD007CB895 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE7292B0225A6ACD007CB895 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE7292B6225B05C3007CB895 /* SAConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConfettiView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				CE7292A4225A6ACC007CB895 /* AppDelegate.swift */,
 				CE7292A6225A6ACC007CB895 /* ViewController.swift */,
+				CE7292B6225B05C3007CB895 /* SAConfettiView.swift */,
 				CE7292A8225A6ACC007CB895 /* Main.storyboard */,
 				CE7292AB225A6ACD007CB895 /* Assets.xcassets */,
 				CE7292AD225A6ACD007CB895 /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				CE7292A7225A6ACC007CB895 /* ViewController.swift in Sources */,
 				CE7292A5225A6ACC007CB895 /* AppDelegate.swift in Sources */,
+				CE7292B7225B05C3007CB895 /* SAConfettiView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
