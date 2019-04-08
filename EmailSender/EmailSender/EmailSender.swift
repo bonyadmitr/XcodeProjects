@@ -46,10 +46,13 @@ open class EmailSender: NSObject {
         UIApplication.shared.open(scheme: coded)
     }
     
-    private var completion: EmailSenderCompletionStatusHandler?
+    fileprivate var completion: EmailSenderCompletionStatusHandler?
     
     /// open MFMailComposeViewController with filled fields
     /// faild on simulator with 'viewServiceDidTerminateWithError: Error'
+    ///
+    /// not possible to show keyboard when mail composer opens (tried subviews)
+    /// https://stackoverflow.com/a/5074882/5893286
     open func send(message: String,
                    subject: String? = nil,
                    to emails: [String],
