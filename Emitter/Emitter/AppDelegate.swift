@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Reachability
+//  Emitter
 //
-//  Created by Bondar Yaroslav on 3/29/19.
+//  Created by Bondar Yaroslav on 4/7/19.
 //  Copyright © 2019 Bondar Yaroslav. All rights reserved.
 //
 
@@ -15,20 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-        
-        print("on start:", NetworkReachability.shared?.connection ?? "nil")
-        NetworkReachability.shared?.startListening()
-        
-        #if !targetEnvironment(simulator)
-        TelephonyNetwork.shared.startListening()
-        #endif
-        
-//        InternetSpeed.shared.testDownloadSpeedWithTimout()
-//        InternetSpeed2.shared.start()
-//        InternetSpeed3.shared.start()
-        
+        // Override point for customization after application launch.
         return true
     }
 

@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     @IBAction func actionSendInAppButton(_ sender: UIButton) {
         EmailSender.shared.send(message: message,
                                 subject: subject,
-                                to: emails)
+                                to: emails,
+                                presentIn: self)
     }
     
     @IBAction func actionSendFromMailButton(_ sender: UIButton) {

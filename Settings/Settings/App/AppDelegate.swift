@@ -41,6 +41,7 @@ import UIKit
 //cell height. iOS 10, iPhone 5. steps: settings screen - scroll to bottom - landscape - portrait
 
 // FIXME: window tintColor for standart controllers
+// TODO: remove storyboard
 // TODO: clear appDelegate
 // TODO: check all present on iPad (share app)
 // TODO: Copyable version label

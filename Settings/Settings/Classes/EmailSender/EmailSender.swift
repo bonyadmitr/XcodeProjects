@@ -74,6 +74,9 @@ open class EmailSender: NSObject {
         vc.present(mailVC, animated: true, completion: nil)
     }
     
+    /// not recommened to open MFMailComposeViewController with empty body bcz users can send a lot of empty mails.
+    /// preferd open mail app or create pre-mail screen to fill MFMailComposeViewController
+    ///
     /// get configured MFMailComposeViewController
     private func getMailVC(with message: String,
                            subject: String?,

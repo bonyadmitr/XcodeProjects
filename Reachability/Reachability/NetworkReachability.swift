@@ -287,8 +287,11 @@ private final class MulticastDelegate<T> {
 
 import Network
 
+/// https://developer.apple.com/videos/play/wwdc2018/715/
 /// https://stackoverflow.com/a/55039596/5893286
 /// https://developer.apple.com/documentation/network
+/// https://github.com/apple/swift/tree/master/stdlib/public/Darwin/Network
+/// https://gitlab.atvg-studios.at/third-party/swift/blob/13f5118a92fd0e764864f20b458fc99f17352486/test/stdlib/Network.swift
 @available(iOS 12.0, *)
 class NetworkReachability2 {
     
@@ -321,7 +324,7 @@ class NetworkReachability2 {
             /// "self.path" will never be equals "path",
             /// so don't use "guard self?.path != path"
             self?.path = path
-//            print("-", path.status)
+            print("-", path.status)
             
 
             let newConnection = path.typeForiOS()
@@ -361,12 +364,11 @@ class NetworkReachability2 {
 @available(iOS 12.0, *)
 extension NWPath {
     func typeForiOS() -> NetworkReachability.Connection {
-        if availableInterfaces.contains(where: { $0.type == .wifi }) {
+        if usesInterfaceType(.wifi) {
             return .wifi
-        } else if availableInterfaces.contains(where: { $0.type == .cellular }) {
+        } else if usesInterfaceType(.cellular) {
             return .cellular
         } else {
-//            assertionFailure("should never called. check connection status before check")
             return .none
         }
     }

@@ -40,16 +40,23 @@ open class EmailSender: NSObject {
         }
         mailto += "body=\(message)"
         
+        /// #2
+        /// https://stackoverflow.com/a/54267099/5893286
+        /// let coded = "mailto:\(email)?subject=\(subject)&body=\(bodyText)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         guard let coded = mailto.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
         UIApplication.shared.open(scheme: coded)
     }
     
-    private var completion: EmailSenderCompletionStatusHandler?
+    fileprivate var completion: EmailSenderCompletionStatusHandler?
     
     /// open MFMailComposeViewController with filled fields
     /// faild on simulator with 'viewServiceDidTerminateWithError: Error'
+    ///
+    /// not possible to show keyboard when mail composer opens (tried subviews)
+    /// https://stackoverflow.com/a/5074882/5893286
     open func send(message: String,
                    subject: String? = nil,
                    to emails: [String],
@@ -65,6 +72,9 @@ open class EmailSender: NSObject {
         vc.present(mailVC, animated: true, completion: nil)
     }
     
+    /// not recommened to open MFMailComposeViewController with empty body bcz users can send a lot of empty mails.
+    /// preferd open mail app or create pre-mail screen to fill MFMailComposeViewController
+    ///
     /// get configured MFMailComposeViewController
     private func getMailVC(with message: String,
                            subject: String?,
