@@ -90,14 +90,14 @@ extension CoreDataStack {
             do {
                 /// very long operation: 10 seconds for 10_000 objects
                 
-                try [PHItemDB.self]
-                    .map { deleteRequest(for: $0) }
-                    .forEach { fetchRequest in
-                        let models = try context.fetch(fetchRequest)
-                        models.forEach { context.delete($0) }
-                }
-                try context.save()
-                completion?(.saved)
+//                try [PHItemDB.self]
+//                    .map { deleteRequest(for: $0) }
+//                    .forEach { fetchRequest in
+//                        let models = try context.fetch(fetchRequest)
+//                        models.forEach { context.delete($0) }
+//                }
+//                try context.save()
+//                completion?(.saved)
             } catch {
                 assertionFailure(error.localizedDescription)
                 context.rollback()
