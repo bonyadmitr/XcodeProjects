@@ -26,6 +26,8 @@ final class LampsListController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
+        
+        CSVParser().start()
     }
 }
 
@@ -33,16 +35,74 @@ final class CSVParser {
     
     
     func start() {
-        //http://lamptest.ru/led.csv
+        guard
+            let url = URL(string: "http://lamptest.ru/led.csv"),
+            let data = try? Data(contentsOf: url),
+            let dataString = String(data: data, encoding: .windowsCP1251)
+        else {
+            assertionFailure()
+            return
+        }
+
+//        var convertedString: NSString?
+//        let aa = NSString.stringEncoding(for: data, encodingOptions: nil, convertedString: &convertedString, usedLossyConversion: nil)
+
+        let csvTable = self.csv(data: dataString)
+
+        let names = ["no", "brand", "model", "power_l", "matt", "dim", "color_l", "lm_l", "eq_l", "ra_l", "u", "life", "war", "prod", "d", "h", "w", "barcode", "base", "shape", "type", "type2", "url", "shop", "rub", "usd", "reserve1", "reserve2", "p", "pf", "lm", "color", "cri", "r9", "Rf", "Rg", "flicker", "angle", "switch", "umin", "drv", "tmax", "date", "instruments", "add2", "add3", "add4", "add5", "cqs", "eq", "rating", "act", "lamp_image", "lamp_desc"]
+
+        guard csvTable.first == names else {
+            assertionFailure()
+            return
+        }
+        
+//        let url = URL(string: "http://lamptest.ru/led.csv")!
+//
+//        let task = URLSession.shared.downloadTask(with: url) { fileUrl, response, error in
+//            guard let fileUrl = fileUrl, let dataString = try? String(contentsOf: fileUrl, encoding: .windowsCP1251) else {
+//                return
+//            }
+//            let q = self.csv(data: dataString)
+//        }
+//
+////        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+////            guard let data = data, let dataString = String(data: data, encoding: .windowsCP1251) else {
+////                return
+////            }
+////            let q = self.csv(data: dataString)
+////        }
+//
+//        /// keep reference to observation
+//        /// https://stackoverflow.com/a/54204979
+//        if #available(iOS 11.0, *) {
+//            observation = task.progress.observe(\.fractionCompleted) { [weak self] progress, _ in
+//                print(progress.fractionCompleted)
+//                if progress.isFinished {
+//                    /// observation?.invalidate() will be called automatically when an NSKeyValueObservation is deinited
+//                    self?.observation = nil
+//                    print("finished")
+//                }
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//
+//        task.resume()
+        
+
         
 //        var data = readDataFromCSV(fileName: kCSVFileName, fileType: kCSVFileExtension)
 //        data = cleanRows(file: data)
 //        let csvRows = csv(data: data)
 //        print(csvRows[1][1])
     }
+    private var observation: NSKeyValueObservation?
     
     /// https://stackoverflow.com/a/43295363
     func csv(data: String) -> [[String]] {
+        var data = data.replacingOccurrences(of: "\r", with: "\n")
+        data = data.replacingOccurrences(of: "\n\n", with: "\n")
+        
         var result: [[String]] = []
         let rows = data.components(separatedBy: "\n")
         for row in rows {
