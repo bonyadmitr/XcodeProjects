@@ -35,6 +35,7 @@ final class CSVParser {
     
     
     func start() {
+        /// https://habr.com/ru/company/lamptest/blog/444288/
         guard
             let url = URL(string: "http://lamptest.ru/led.csv"),
             let data = try? Data(contentsOf: url),
