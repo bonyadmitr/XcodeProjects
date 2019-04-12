@@ -130,6 +130,7 @@ final class CSVParser {
     }
     private var observation: NSKeyValueObservation?
     
+    /// https://www.google.com/search?q=csv+encoding+swift&oq=csv+encoding+swift&aqs=chrome..69i57.4067j0j7&sourceid=chrome&ie=UTF-8
     /// https://stackoverflow.com/a/43295363
     func csv(data: String) -> [[String]] {
         var data = data.replacingOccurrences(of: "\r", with: "\n")
