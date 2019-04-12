@@ -39,10 +39,10 @@ class TodayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOSApplicationExtension 10.0, *) {
-            extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-//            widgetActiveDisplayModeDidChange(.compact, withMaximumSize: CGSize(width: 500, height: 100))
-        }
+//        if #available(iOSApplicationExtension 10.0, *) {
+//            extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+////            widgetActiveDisplayModeDidChange(.compact, withMaximumSize: CGSize(width: 500, height: 100))
+//        }
 //        preferredContentSize.height = 100
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
@@ -50,9 +50,15 @@ class TodayViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changedSomeTextField), name: UserDefaults.didChangeNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+
+    }
+
     
     
-    func changedSomeTextField(_ notification: Notification) {
+    @objc func changedSomeTextField(_ notification: Notification) {
         someLabel.text = SharedUserDefaults.shared.someText
     }
     
@@ -63,9 +69,25 @@ class TodayViewController: UIViewController {
     func updateWidget() {
         SharedUserDefaults.shared.shownCounter += 1
         shownLabel.text = String(SharedUserDefaults.shared.shownCounter)
+
+//        let q = SharedUserDefaults.shared.shownCounter % 2 == 1
+//        UIView.animate(withDuration: 0.3) {
+//            self.someLabel.isHidden = q
+//            /// https://stackoverflow.com/a/46412621/5893286
+//            self.view.layoutIfNeeded()
+//        }
+        
+        let q = SystemUtils.isDeviceLocked()
+//        let q = SharedUserDefaults.shared.shownCounter % 2 == 1
+        print("q", q)
+        UIView.animate(withDuration: 0.3) {
+            self.someLabel.isHidden = q
+            /// https://stackoverflow.com/a/46412621/5893286
+            self.view.layoutIfNeeded()
+        }
     }
     
-    func updateCounter() {
+    @objc func updateCounter() {
         timerCounter += 1
         timerLabel.text = String(timerCounter)
     }

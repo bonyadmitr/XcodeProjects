@@ -15,8 +15,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         someLabel.text = String(SharedUserDefaults.shared.shownCounter)
     }
+
     
     @IBAction func changedSomeTextField(_ sender: UITextField) {
         SharedUserDefaults.shared.someText = sender.text
