@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class ViewController: UIViewController {
     
@@ -66,7 +67,52 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func restartApp(_ sender: UIButton) {
-        UIApplication.shared.restart()
+//        UIApplication.shared.restart()
+        requestAuthorization()
+
+    }
+    
+    private func deleteLocalPhotos() {
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        let assets = [fetchResult.object(at: 0), fetchResult.object(at: 1)]
+        
+        let completion = { (success: Bool, error: Error?) -> Void in
+            if success {
+                print("deleted asset")
+            } else if let error = error as NSError? {
+                if error.code == -1 {
+                    /// Не удалось завершить операцию. (Cocoa, ошибка -1)
+                    print("pressed Don't Allow")
+                } else {
+                    print("can't remove asset: \(error.localizedDescription)")
+                }
+            } else {
+                //print(CustomErrors.unknown())
+            }
+        }
+        
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(assets as NSArray)
+        }, completionHandler: completion)
+    }
+    
+    private func requestAuthorization() {
+        PHPhotoLibrary.requestAuthorization() { status in
+            switch status {
+            case .authorized:
+//                handler(.success)
+                self.deleteLocalPhotos()
+            case .denied, .restricted:
+//                handler(.denied)
+                break
+            case .notDetermined:
+                break
+                /// won't happen but still
+//                handler(.denied)
+            }
+        }
     }
 }
 
