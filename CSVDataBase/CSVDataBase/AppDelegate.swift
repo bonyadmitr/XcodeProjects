@@ -34,7 +34,21 @@ final class LampsListController: UIViewController {
 final class CSVParser {
     
     
-    func start() {
+    func loadCSV() -> String {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            assertionFailure()
+            return ""
+        }
+        
+        let fileName = "led.csv"
+        let fileURL = documentDirectory.appendingPathComponent(fileName)
+        
+        /// try to load from cache
+        if let dataString = try? String(contentsOf: fileURL, encoding: .windowsCP1251) {
+            return dataString
+        }
+        
+        /// load from server
         /// https://habr.com/ru/company/lamptest/blog/444288/
         guard
             let url = URL(string: "http://lamptest.ru/led.csv"),
@@ -42,8 +56,25 @@ final class CSVParser {
             let dataString = String(data: data, encoding: .windowsCP1251)
         else {
             assertionFailure()
-            return
+            return ""
         }
+        
+        /// save to cache
+        do {
+            try dataString.write(to: fileURL, atomically: false, encoding: .windowsCP1251)
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+        
+        return dataString
+    }
+    
+    func start() {
+
+        let dataString = loadCSV()
+        
+        
+
 
 //        var convertedString: NSString?
 //        let aa = NSString.stringEncoding(for: data, encodingOptions: nil, convertedString: &convertedString, usedLossyConversion: nil)
