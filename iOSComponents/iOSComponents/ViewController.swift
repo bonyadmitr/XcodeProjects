@@ -23,14 +23,27 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         
-        Result.success(())
-        let q = Result<Void>.failure(unknownError).error?.localizedDescription
-        print(q)
+//        Result.success(())
+//        let q = Result<Void>.failure(unknownError).error?.localizedDescription
+//        print(q)
         
         
         print(Formatters.bytes(from: Device.totalDiskSpace))
         print(Formatters.bytes(from: Device.freeDiskSpace))
         print(Formatters.bytes(from: Device.usedDiskSpace))
+        
+        
+        
+        
+        view.layer.cornerRadius = 40
+        
+        /// apple's corner radius
+        /// https://github.com/lapfelix/UIView-SmoothCorners/blob/master/SmoothView.swift
+        let path = UIBezierPath(roundedRect: view.layer.bounds,
+                                cornerRadius: view.layer.cornerRadius)
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        view.layer.mask = mask
     }
     
     @IBAction private func onCheckmarkAlertSheet(_ sender: UIButton) {
