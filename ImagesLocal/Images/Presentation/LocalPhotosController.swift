@@ -62,7 +62,7 @@ final class LocalPhotosController: UIViewController {
     /// Determine the size of the thumbnails to request from the PHCachingImageManager
     private func updateItemSize() {
         let size = saveAndGetItemSize(for: collectionView)
-        let scale = UIScreen.main.scale
+        let scale: CGFloat = 2 //UIScreen.main.scale
         photoManager.photoSize = CGSize(width: size.width * scale, height: size.height * scale)
     }
     

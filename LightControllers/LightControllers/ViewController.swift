@@ -29,7 +29,9 @@ class ViewController: UIViewController, KeyboardHandler {
         
         /// #1
         scrollViewBottomConstraint.constant = keyboardFrame.size.height
-        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
         
         /// #2
         //scrollView.contentInset.bottom = keyboardFrame.size.height
@@ -38,9 +40,53 @@ class ViewController: UIViewController, KeyboardHandler {
     @objc private func keyboardWillHideNotification(notification: NSNotification) {
         /// #1
         scrollViewBottomConstraint.constant = 0
-        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
         
         /// #2
         //scrollView.contentInset = .zero
     }
 }
+
+final class AdvancedScrollView: UIScrollView {
+    func scrollToView(_ view: UIView) {
+        let rect = convert(view.frame, to: self)
+        scrollRectToVisible(rect, animated: true)
+    }
+    
+    func scrollToViews(_ views: [UIView]) {
+        if views.isEmpty {
+            return
+        }
+        
+        let rects: [CGRect] = views.map { convert($0.frame, to: self) }
+        
+        /// check for isEmpty is above
+        let firstRect = rects[0]
+        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
+        
+        scrollRectToVisible(unionRect, animated: true)
+    }
+}
+
+//extension UIScrollView {
+//    func scroll(to view: UIView) {
+//        let rect = convert(view.frame, to: self)
+//        scrollRectToVisible(rect, animated: true)
+//    }
+//
+//    func scroll(to views: [UIView]) {
+//        if views.isEmpty {
+//            return
+//        }
+//
+//        let rects: [CGRect] = views.map { convert($0.frame, to: self) }
+//
+//        /// check for isEmpty is above
+//        let firstRect = rects[0]
+//        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
+//
+//        scrollRectToVisible(unionRect, animated: true)
+//    }
+//}

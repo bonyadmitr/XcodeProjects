@@ -15,7 +15,7 @@ class SharedUserDefaults {
     
     static let shared = SharedUserDefaults()
     
-    let userDefaults = UserDefaults(suiteName: "group.com.by.TodayExtensionTest")!
+    let userDefaults = UserDefaults(suiteName: "group.by.TodayExtensionTest111q")!
     
     var shownCounter: Int {
         get { return userDefaults.integer(forKey: "shownCounter") }

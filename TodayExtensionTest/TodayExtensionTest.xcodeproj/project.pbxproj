@@ -20,6 +20,8 @@
 		666867A21E9A621A00E38DC5 /* SharedUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666867A11E9A621A00E38DC5 /* SharedUserDefaults.swift */; };
 		666867A31E9A622600E38DC5 /* SharedUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666867A11E9A621A00E38DC5 /* SharedUserDefaults.swift */; };
 		666867AA1E9B848D00E38DC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666867771E9A312C00E38DC5 /* Assets.xcassets */; };
+		CE85CFE52260BE5C009E4D11 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CFE42260BE5C009E4D11 /* SystemUtils.swift */; };
+		CE85CFE72260BF58009E4D11 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85CFE42260BE5C009E4D11 /* SystemUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 		6668679F1E9A5EC000E38DC5 /* TodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidget.entitlements; sourceTree = "<group>"; };
 		666867A01E9A5F0100E38DC5 /* TodayExtensionTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtensionTest.entitlements; sourceTree = "<group>"; };
 		666867A11E9A621A00E38DC5 /* SharedUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUserDefaults.swift; sourceTree = "<group>"; };
+		CE85CFE42260BE5C009E4D11 /* SystemUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +140,6 @@
 				666867741E9A312C00E38DC5 /* Main.storyboard */,
 				666867721E9A312C00E38DC5 /* ViewController.swift */,
 			);
-			name = Presentation;
 			path = Presentation;
 			sourceTree = "<group>";
 		};
@@ -150,7 +152,6 @@
 				6668677C1E9A312C00E38DC5 /* Info.plist */,
 				666867A01E9A5F0100E38DC5 /* TodayExtensionTest.entitlements */,
 			);
-			name = App;
 			path = App;
 			sourceTree = "<group>";
 		};
@@ -160,7 +161,6 @@
 				6668678D1E9A31A200E38DC5 /* MainInterface.storyboard */,
 				6668678B1E9A31A200E38DC5 /* TodayViewController.swift */,
 			);
-			name = Presentation;
 			path = Presentation;
 			sourceTree = "<group>";
 		};
@@ -168,8 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				666867A11E9A621A00E38DC5 /* SharedUserDefaults.swift */,
+				CE85CFE42260BE5C009E4D11 /* SystemUtils.swift */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -178,7 +178,6 @@
 			children = (
 				6668679A1E9A38A400E38DC5 /* NSExtensionContext+URL.swift */,
 			);
-			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -188,7 +187,6 @@
 				6668679F1E9A5EC000E38DC5 /* TodayWidget.entitlements */,
 				666867901E9A31A200E38DC5 /* Info.plist */,
 			);
-			name = App;
 			path = App;
 			sourceTree = "<group>";
 		};
@@ -243,7 +241,7 @@
 				TargetAttributes = {
 					6668676C1E9A312C00E38DC5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 227NMT55ZD;
+						DevelopmentTeam = 52L6T7H6QG;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -253,7 +251,7 @@
 					};
 					666867851E9A31A200E38DC5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 227NMT55ZD;
+						DevelopmentTeam = 52L6T7H6QG;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -311,6 +309,7 @@
 			files = (
 				666867731E9A312C00E38DC5 /* ViewController.swift in Sources */,
 				666867A21E9A621A00E38DC5 /* SharedUserDefaults.swift in Sources */,
+				CE85CFE52260BE5C009E4D11 /* SystemUtils.swift in Sources */,
 				666867711E9A312C00E38DC5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +320,7 @@
 			files = (
 				6668679B1E9A38A400E38DC5 /* NSExtensionContext+URL.swift in Sources */,
 				666867A31E9A622600E38DC5 /* SharedUserDefaults.swift in Sources */,
+				CE85CFE72260BF58009E4D11 /* SystemUtils.swift in Sources */,
 				6668678C1E9A31A200E38DC5 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,13 +466,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TodayExtensionTest/App/TodayExtensionTest.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = TodayExtensionTest/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest;
+				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest111q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -483,13 +483,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TodayExtensionTest/App/TodayExtensionTest.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = TodayExtensionTest/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest;
+				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest111q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -497,14 +497,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/App/TodayWidget.entitlements;
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = TodayWidget/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest.TodayWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest111q.TodayWidget111q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -512,14 +512,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TodayWidget/App/TodayWidget.entitlements;
-				DEVELOPMENT_TEAM = 227NMT55ZD;
+				DEVELOPMENT_TEAM = 52L6T7H6QG;
 				INFOPLIST_FILE = TodayWidget/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest.TodayWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.TodayExtensionTest111q.TodayWidget111q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -542,6 +542,7 @@
 				666867811E9A312C00E38DC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		666867941E9A31A200E38DC5 /* Build configuration list for PBXNativeTarget "TodayWidget" */ = {
 			isa = XCConfigurationList;
@@ -550,6 +551,7 @@
 				666867961E9A31A200E38DC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

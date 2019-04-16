@@ -23,14 +23,16 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         
-        Result.success(())
-        let q = Result<Void>.failure(unknownError).error?.localizedDescription
-        print(q)
+//        Result.success(())
+//        let q = Result<Void>.failure(unknownError).error?.localizedDescription
+//        print(q)
         
         
         print(Formatters.bytes(from: Device.totalDiskSpace))
         print(Formatters.bytes(from: Device.freeDiskSpace))
         print(Formatters.bytes(from: Device.usedDiskSpace))
+        
+        view.layer.cornerRadius = 40
     }
     
     @IBAction private func onCheckmarkAlertSheet(_ sender: UIButton) {
