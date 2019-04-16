@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+// TODO: UISearchController with fetchedResultsController with cacheName
+// do we need to delete cache in this case?
+// TODO: animated search
+// https://gist.github.com/stephanecopin/fbeca87e2f66e522ffd6b197955d5f49
 class TableController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
@@ -38,6 +42,7 @@ class TableController: UIViewController {
         tableView.reloadData()
     }
     
+    /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
