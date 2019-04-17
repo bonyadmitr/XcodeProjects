@@ -5,6 +5,7 @@ final class ViewController: UIViewController {
     private let keyboardStateListener = KeyboardStateListener()
     
     @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var someTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +26,41 @@ extension ViewController: KeyboardHelperDelegate {
 //        state.animate {
 //            self.scrollView.contentInset.bottom = coveredHeight
 //        }
+        
+//        self.scrollView.frame.size.height -= coveredHeight
         self.scrollView.contentInset.bottom = coveredHeight
+        self.scrollView.scrollIndicatorInsets.bottom = coveredHeight
+        
+//        let scrollPoint = CGPoint(x: 0, y: someTextField.frame.origin.y - coveredHeight + 16)
+//        scrollView.setContentOffset(scrollPoint, animated: true)
+        
+//        self.scrollView.contentOffset = CGPoint(x: 0, y: 1000)
+//        self.scrollView.scroll(to: self.someTextField)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            self.scrollView.scroll(to: self.someTextField)
+//        }
+    }
+    func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardDidShowWithState state: KeyboardState) {
+//        let coveredHeight = state.keyboardHeightForView(scrollView)
+        //        state.animate {
+        //            self.scrollView.contentInset.bottom = coveredHeight
+        //        }
+        
+//        self.scrollView.contentInset.bottom = coveredHeight
+//        self.scrollView.scrollIndicatorInsets.bottom = coveredHeight
+        
+//                let scrollPoint = CGPoint(x: 0, y: someTextField.frame.origin.y - coveredHeight + 16)
+//                scrollView.setContentOffset(scrollPoint, animated: true)
+        
+//        self.scrollView.scroll(to: self.someTextField)
     }
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillHideWithState state: KeyboardState) {
 //        state.animate {
 //            self.scrollView.contentInset.bottom = 0
 //        }
         scrollView.contentInset.bottom = 0
+        scrollView.scrollIndicatorInsets.bottom = 0
     }
 }
 
@@ -50,13 +79,60 @@ private extension UIView {
     }
 }
 
+//final class AdvancedScrollView: UIScrollView {
+//    func scrollToView(_ view: UIView) {
+//        let rect = convert(view.frame, to: self)
+//        scrollRectToVisible(rect, animated: true)
+//    }
+//
+//    func scrollToViews(_ views: [UIView]) {
+//        if views.isEmpty {
+//            return
+//        }
+//
+//        let rects: [CGRect] = views.map { convert($0.frame, to: self) }
+//
+//        /// check for isEmpty is above
+//        let firstRect = rects[0]
+//        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
+//
+//        scrollRectToVisible(unionRect, animated: true)
+//    }
+//}
+
+extension UIScrollView {
+    func scroll(to view: UIView) {
+        let rect = convert(view.frame.offsetBy(dx: 0, dy: 8), to: self)
+        scrollRectToVisible(rect, animated: true)
+    }
+
+    func scroll(to views: [UIView]) {
+        if views.isEmpty {
+            return
+        }
+
+        let rects: [CGRect] = views.map { convert($0.frame, to: self) }
+
+        /// check for isEmpty is above
+        let firstRect = rects[0]
+        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
+
+        scrollRectToVisible(unionRect, animated: true)
+    }
+}
+
+
 
 
 
 
 protocol KeyboardHelperDelegate: AnyObject {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState)
+    func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardDidShowWithState state: KeyboardState)
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillHideWithState state: KeyboardState)
+}
+extension KeyboardHelperDelegate {
+    func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardDidShowWithState state: KeyboardState) {}
 }
 
 final class KeyboardStateListener: NSObject {
@@ -76,6 +152,10 @@ final class KeyboardStateListener: NSObject {
                                                name: UIWindow.keyboardWillShowNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidShowNotification),
+                                               name: UIWindow.keyboardDidShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillHideNotification),
                                                name: UIWindow.keyboardWillHideNotification,
                                                object: nil)
@@ -88,30 +168,11 @@ final class KeyboardStateListener: NSObject {
     @objc func keyboardWillShowNotification(_ notification: Notification) {
         let keyboardState = KeyboardState(notification.userInfo)
         delegate?.keyboardHelper(self, keyboardWillShowWithState: keyboardState)
-//        let q: TimeInterval = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.3
-//
-//        if let frameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            let frame = frameValue.cgRectValue
-//            keyboardVisibleHeight = frame.size.height
-//        }
-//
-//        self.updateConstant()
-//        switch (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber, userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber) {
-//        case let (.some(duration), .some(curve)):
-//
-//            let options = UIView.AnimationOptions(rawValue: curve.uintValue)
-//
-//            UIView.animate(
-//                withDuration: TimeInterval(duration.doubleValue),
-//                delay: 0,
-//                options: options,
-//                animations: {
-//                    UIApplication.shared.keyWindow?.layoutIfNeeded()
-//            }, completion: nil)
-//        default:
-//
-//            break
-//        }
+    }
+    
+    @objc func keyboardDidShowNotification(_ notification: Notification) {
+        let keyboardState = KeyboardState(notification.userInfo)
+        delegate?.keyboardHelper(self, keyboardDidShowWithState: keyboardState)
     }
     
     @objc func keyboardWillHideNotification(_ notification: NSNotification) {
@@ -119,64 +180,6 @@ final class KeyboardStateListener: NSObject {
         delegate?.keyboardHelper(self, keyboardWillHideWithState: keyboardState)
     }
 }
-
-//public struct KeyboardState2 {
-//    let animationDuration: TimeInterval
-//    let animationCurve: UIView.AnimationCurve
-//    private let keyboardFrame: CGRect
-//
-//    init(_ userInfo: [AnyHashable: Any]) {
-//        animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
-//        // HACK: UIViewAnimationCurve doesn't expose the keyboard animation used (curveValue = 7),
-//        // so UIViewAnimationCurve(rawValue: curveValue) returns nil. As a workaround, get a
-//        // reference to an EaseIn curve, then change the underlying pointer data with that ref.
-//        var curve = UIView.AnimationCurve.easeIn
-//        if let curveValue = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int {
-//            let w = curveValue << 16
-//            NSNumber(value: curveValue as Int).getValue(&curve)
-//        }
-//
-//        let animationCurve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! Int
-//        let animationOptions = animationCurve << 16
-//        let qq = UIView.AnimationOptions(rawValue: UInt(animationOptions))
-//
-//        var animationCurve2 = UIView.AnimationOptions.curveEaseInOut
-//        (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.getValue(&animationCurve2)
-//
-//
-//
-////        let animationCurve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! Int
-////        let animationOptions = animationCurve << 16
-//
-//        self.animationCurve = curve
-//
-//        if let keyboardFrameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            keyboardFrame = keyboardFrameValue.cgRectValue
-//        } else {
-//            keyboardFrame = .zero
-//        }
-//    }
-//
-//    /// Return the height of the keyboard that overlaps with the specified view. This is more
-//    /// accurate than simply using the height of UIKeyboardFrameBeginUserInfoKey since for example
-//    /// on iPad the overlap may be partial or if an external keyboard is attached, the intersection
-//    /// height will be zero. (Even if the height of the *invisible* keyboard will look normal!)
-//    public func intersectionHeightForView(_ view: UIView) -> CGFloat {
-//        let convertedKeyboardFrame = view.convert(keyboardFrame, from: nil)
-//        let intersection = convertedKeyboardFrame.intersection(view.bounds)
-//        return intersection.size.height
-//    }
-//
-//    func animate(_ block: @escaping () -> Void) {
-//        let options = UIView.AnimationOptions(rawValue: UInt(animationCurve.rawValue))
-//        UIView.animate(
-//            withDuration: animationDuration,
-//            delay: 0,
-//            options: options,
-//            animations: block,
-//            completion: nil)
-//    }
-//}
 
 public struct KeyboardState {
     let animationDuration: TimeInterval

@@ -30,12 +30,22 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gAM-9o-cjx">
+                                                <rect key="frame" x="16" y="16" width="288" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="I4j-mE-JSq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gAM-9o-cjx" secondAttribute="bottom" constant="16" id="2HK-7Z-MG1"/>
+                                            <constraint firstItem="gAM-9o-cjx" firstAttribute="top" secondItem="svV-eg-qfJ" secondAttribute="top" constant="16" id="8gw-Fd-1N0"/>
+                                            <constraint firstAttribute="trailing" secondItem="gAM-9o-cjx" secondAttribute="trailing" constant="16" id="Al6-1S-Glf"/>
                                             <constraint firstItem="I4j-mE-JSq" firstAttribute="leading" secondItem="svV-eg-qfJ" secondAttribute="leading" constant="16" id="Zpo-uK-Mo9"/>
                                             <constraint firstAttribute="trailing" secondItem="I4j-mE-JSq" secondAttribute="trailing" constant="16" id="djK-PT-V2x"/>
                                             <constraint firstAttribute="bottom" secondItem="I4j-mE-JSq" secondAttribute="bottom" constant="16" id="sTG-VT-zbA"/>
+                                            <constraint firstItem="gAM-9o-cjx" firstAttribute="leading" secondItem="svV-eg-qfJ" secondAttribute="leading" constant="16" id="yLr-TJ-4dw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -60,6 +70,7 @@
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="Wlf-gu-L32" id="6HA-mz-9u8"/>
+                        <outlet property="someTextField" destination="I4j-mE-JSq" id="ytl-n2-qDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
