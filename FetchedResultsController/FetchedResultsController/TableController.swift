@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+// TODO: UISearchController with fetchedResultsController with cacheName
+// do we need to delete cache in this case?
+// TODO: animated search
+// https://gist.github.com/stephanecopin/fbeca87e2f66e522ffd6b197955d5f49
 class TableController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
@@ -23,12 +27,51 @@ class TableController: UIViewController {
     /// The NSSortDescriptor must be the first descriptor in the array passed to the fetch request.
     private lazy var fetchedResultsController = EventDB.fetchedResultsController()
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSearchController()
         fetchedResultsController.delegate = self
+        performFetch()
+    }
+    
+    private func performFetch() {
         try? fetchedResultsController.performFetch()
         tableView.reloadData()
+    }
+    
+    /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+        
+        if #available(iOS 11.0, *) {
+            // For iOS 11 and later, place the search bar in the navigation bar.
+            navigationItem.searchController = searchController
+            
+            // Make the search bar always visible.
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            // For iOS 10 and earlier, place the search controller's search bar in the table view's header.
+            tableView.tableHeaderView = searchController.searchBar
+        }
+        
+        //searchController.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false // The default is true.
+        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+        
+        /** Search presents a view controller by applying normal view controller presentation semantics.
+         This means that the presentation moves up the view controller hierarchy until it finds the root
+         view controller or one that defines a presentation context.
+         */
+        
+        /** Specify that this view controller determines how the search controller is presented.
+         The search controller should be presented modally and match the physical size of this view controller.
+         */
+        definesPresentationContext = true
+
     }
     
     @IBAction private func addEvent(_ sender: UIBarButtonItem) {
@@ -51,13 +94,13 @@ extension TableController: UITableViewDataSource {
 
 extension TableController: UITableViewDelegate {
     
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return fetchedResultsController.sectionIndexTitles
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
-    }
+//    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return fetchedResultsController.sectionIndexTitles
+//    }
+//
+//    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+//        return fetchedResultsController.section(forSectionIndexTitle: title, at: index)
+//    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? EventCell else {
@@ -130,5 +173,36 @@ extension TableController: NSFetchedResultsControllerDelegate {
                 tableView.moveRow(at: indexPath, to: newIndexPath)
             }
         }
+    }
+}
+
+extension TableController: UISearchBarDelegate {
+    /// default for iOS 12
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+//extension TableController: UISearchControllerDelegate {}
+
+extension TableController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let searchText = searchController.searchBar.text else {
+            assertionFailure()
+            return
+        }
+        
+        let predicate: NSPredicate?
+        if searchText.isEmpty {
+            /// pass reference to default predicate in fetchedResultsController.fetchRequest
+            predicate = nil
+        } else {
+            predicate = NSPredicate(format: "(\(#keyPath(EventDB.title)) contains[cd] %@)", searchText)
+            //predicate = NSPredicate(format: "(\(#keyPath(EventDB.title)) contains[cd] %@) || (\(#keyPath(EventDB.date)) contains[cd] %@)", searchText, searchText)
+        }
+        
+        fetchedResultsController.fetchRequest.predicate = predicate
+        performFetch()
     }
 }
