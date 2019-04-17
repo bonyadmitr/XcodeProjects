@@ -70,6 +70,7 @@
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="Wlf-gu-L32" id="6HA-mz-9u8"/>
+                        <outlet property="scrollViewBottomConstraint" destination="I7E-LO-lP2" id="0B2-Gr-y4e"/>
                         <outlet property="someTextField" destination="I4j-mE-JSq" id="ytl-n2-qDf"/>
                     </connections>
                 </viewController>

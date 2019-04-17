@@ -6,12 +6,20 @@ final class ViewController: UIViewController {
     
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var someTextField: UITextField!
+    @IBOutlet private weak var scrollViewBottomConstraint: NSLayoutConstraint!
+    
+    /// same as scrollViewBottomConstraint
+    private lazy var scrollViewBottomConstraint2: NSLayoutConstraint? = {
+        return self.view.constraints.first {
+            //return $0.secondAttribute == .bottom && $0.secondItem === scrollView// && $0.firstAttribute == .bottom
+            return $0.secondAttribute == .bottom && $0.secondItem is UIScrollView
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         keyboardStateListener.delegate = self
-        
         
         scrollView.subviews.first?.backgroundColor = UIColor.lightGray
         scrollView.backgroundColor = UIColor.lightGray
@@ -28,8 +36,20 @@ extension ViewController: KeyboardHelperDelegate {
 //        }
         
 //        self.scrollView.frame.size.height -= coveredHeight
-        self.scrollView.contentInset.bottom = coveredHeight
-        self.scrollView.scrollIndicatorInsets.bottom = coveredHeight
+        
+//        scrollViewBottomConstraint.constant = coveredHeight
+        scrollViewBottomConstraint2?.constant = coveredHeight
+        UIView.animate(withDuration: state.animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+        
+        
+//        self.scrollView.contentInset.bottom = coveredHeight
+//        self.scrollView.scrollIndicatorInsets.bottom = coveredHeight
+        
+        
+        
+        
         
 //        let scrollPoint = CGPoint(x: 0, y: someTextField.frame.origin.y - coveredHeight + 16)
 //        scrollView.setContentOffset(scrollPoint, animated: true)
@@ -59,8 +79,15 @@ extension ViewController: KeyboardHelperDelegate {
 //        state.animate {
 //            self.scrollView.contentInset.bottom = 0
 //        }
-        scrollView.contentInset.bottom = 0
-        scrollView.scrollIndicatorInsets.bottom = 0
+        
+//        scrollView.contentInset.bottom = 0
+//        scrollView.scrollIndicatorInsets.bottom = 0
+        
+//        scrollViewBottomConstraint.constant = 0
+        scrollViewBottomConstraint2?.constant = 0
+        UIView.animate(withDuration: state.animationDuration) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
