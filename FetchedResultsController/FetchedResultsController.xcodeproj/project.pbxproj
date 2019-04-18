@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C418DB7E22683B0C00EDD92F /* ExpressionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418DB7D22683B0C00EDD92F /* ExpressionTableController.swift */; };
 		CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */; };
 		CEA2D3BB2150D69D007E82C0 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2D3BA2150D69D007E82C0 /* TableController.swift */; };
 		CEA2D3BE2150D69D007E82C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA2D3BC2150D69D007E82C0 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C418DB7D22683B0C00EDD92F /* ExpressionTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionTableController.swift; sourceTree = "<group>"; };
 		CEA2D3B52150D69D007E82C0 /* FetchedResultsController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchedResultsController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA2D3B82150D69D007E82C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEA2D3BA2150D69D007E82C0 /* TableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				CECF6A312150F3EB00FEF0E6 /* App */,
 				CEA2D3DB2150D7B4007E82C0 /* CoreDataStack */,
 				CEA2D3BC2150D69D007E82C0 /* Main.storyboard */,
+				C418DB7D22683B0C00EDD92F /* ExpressionTableController.swift */,
 				CEA2D3BA2150D69D007E82C0 /* TableController.swift */,
 				CEF38E002151163700755145 /* TableAZController.swift */,
 				CECF6A2B2150DDAF00FEF0E6 /* CollectionController.swift */,
@@ -258,6 +261,7 @@
 				CEA2D3E12150D7B4007E82C0 /* CoreDataStack.swift in Sources */,
 				CEA2D3BB2150D69D007E82C0 /* TableController.swift in Sources */,
 				CEA2D3B92150D69D007E82C0 /* AppDelegate.swift in Sources */,
+				C418DB7E22683B0C00EDD92F /* ExpressionTableController.swift in Sources */,
 				CEF38E012151163700755145 /* TableAZController.swift in Sources */,
 				CEF38DFF2150FA2F00755145 /* EventDB+New.swift in Sources */,
 				CECF6A2C2150DDAF00FEF0E6 /* CollectionController.swift in Sources */,
