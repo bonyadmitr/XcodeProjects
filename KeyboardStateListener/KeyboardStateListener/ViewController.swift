@@ -4,7 +4,6 @@ final class SomeScrollingController: ScrollController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addTapGestureToHideKeyboard()
         view.backgroundColor = UIColor.lightGray
         backgroundColor = UIColor.lightGray
         
@@ -36,54 +35,18 @@ final class SomeScrollingController: ScrollController {
 }
 
 /// there is a bug on keyboardWillHideWithState with black background on the simulator only
-class ScrollController: UIViewController {
-    
-    let contentView = UIView()
-    
-    var backgroundColor: UIColor? {
-        get {
-            return view.backgroundColor
-        }
-        set {
-            view.backgroundColor = newValue
-            contentView.backgroundColor = newValue
-        }
-    }
-    
-    private lazy var scrollView: UIScrollView = {
-        if let view = self.view as? UIScrollView {
-            return view
-        } else {
-            assertionFailure("override func loadView")
-            return UIScrollView()
-        }
-    }()
-    
+class KeyboardScrollController: ScrollController {
     private let keyboardStateListener = KeyboardStateListener()
-    
-    override func loadView() {
-        view = UIScrollView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupContentView()
-        backgroundColor = UIColor.white
-        view.isOpaque = true
-        
         keyboardStateListener.delegate = self
-    }
-    
-    private func setupContentView() {
-        view.addSubview(contentView)
-        contentView.frame = view.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentView.isOpaque = true
+        view.addTapGestureToHideKeyboard()
     }
 }
 
-extension ScrollController: KeyboardHelperDelegate {
+extension KeyboardScrollController: KeyboardHelperDelegate {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
         let coveredHeight = state.keyboardHeightForView(view)
         
@@ -98,6 +61,50 @@ extension ScrollController: KeyboardHelperDelegate {
         state.animate {
             self.view.layoutIfNeeded()
         }
+    }
+}
+
+class ScrollController: UIViewController {
+    
+    let contentView = UIView()
+    
+    var backgroundColor: UIColor? {
+        get {
+            return view.backgroundColor
+        }
+        set {
+            view.backgroundColor = newValue
+            contentView.backgroundColor = newValue
+        }
+    }
+    
+    /// scrollView == self.view
+    private lazy var scrollView: UIScrollView = {
+        if let view = self.view as? UIScrollView {
+            return view
+        } else {
+            assertionFailure("override func loadView")
+            return UIScrollView()
+        }
+    }()
+    
+    override func loadView() {
+        view = UIScrollView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupContentView()
+        backgroundColor = UIColor.white
+        view.isOpaque = true
+    }
+    
+    private func setupContentView() {
+        view.addSubview(contentView)
+        contentView.frame = view.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.isOpaque = true
     }
 }
 
