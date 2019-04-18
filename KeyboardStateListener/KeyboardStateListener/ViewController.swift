@@ -1,10 +1,10 @@
 import UIKit
 
 final class SomeScrollingController: ScrollController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.lightGray
         backgroundColor = UIColor.lightGray
         
         let edgeInset: CGFloat = 16
@@ -96,8 +96,8 @@ class ScrollController: UIViewController {
         super.viewDidLoad()
         
         setupContentView()
-        backgroundColor = UIColor.white
         view.isOpaque = true
+        backgroundColor = UIColor.white
     }
     
     private func setupContentView() {
