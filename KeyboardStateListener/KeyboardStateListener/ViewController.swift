@@ -1,5 +1,93 @@
 import UIKit
 
+final class ScrollController: UIViewController {
+    
+    override func loadView() {
+        view = UIScrollView()
+    }
+    
+//    private lazy var vcView: UIScrollView = {
+//        if let view = self.view as? UIScrollView {
+//            return view
+//        } else {
+//            assertionFailure("override func loadView")
+//            return UIScrollView()
+//        }
+//    }()
+    
+    private let keyboardStateListener = KeyboardStateListener()
+    let contentView = UIView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addTapGestureToHideKeyboard()
+        setupContentView()
+//        view.backgroundColor = UIColor.lightGray
+        backgroundColor = UIColor.lightGray
+        keyboardStateListener.delegate = self
+        
+        let edgeInset: CGFloat = 16
+        
+        let topTextField = UITextField()
+        topTextField.borderStyle = .roundedRect
+        
+        topTextField.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(topTextField)
+        
+        topTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: edgeInset).isActive = true
+        topTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -edgeInset).isActive = true
+        topTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: edgeInset).isActive = true
+        
+        
+        let bottomTextField = UITextField()
+        bottomTextField.borderStyle = .roundedRect
+
+        bottomTextField.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(bottomTextField)
+
+        bottomTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: edgeInset).isActive = true
+        bottomTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -edgeInset).isActive = true
+        bottomTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -edgeInset).isActive = true
+
+        bottomTextField.topAnchor.constraint(greaterThanOrEqualTo: topTextField.bottomAnchor, constant: -edgeInset).isActive = true
+    }
+    
+    private func setupContentView() {
+        view.addSubview(contentView)
+        contentView.frame = view.frame
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    var backgroundColor: UIColor? {
+        get {
+            return view.backgroundColor
+        }
+        set {
+            view.backgroundColor = newValue
+            contentView.backgroundColor = newValue
+        }
+    }
+}
+
+extension ScrollController: KeyboardHelperDelegate {
+    func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
+        let coveredHeight = state.keyboardHeightForView(view)
+        
+        self.view.frame.size.height -= coveredHeight
+        state.animate {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillHideWithState state: KeyboardState) {
+        self.view.frame.size.height = UIScreen.main.bounds.size.height
+        state.animate {
+            self.view.layoutIfNeeded()
+        }
+    }
+}
+
 final class ViewController: UIViewController {
 
     private let keyboardStateListener = KeyboardStateListener()
