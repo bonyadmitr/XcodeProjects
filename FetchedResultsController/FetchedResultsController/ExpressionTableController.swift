@@ -1,6 +1,8 @@
 import UIKit
 import CoreData
 
+/// 'NSFetchedResultsController does not support both change tracking and fetch request's with NSDictionaryResultType'
+//fetchedResultsController.delegate = self
 final class ExpressionTableController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -44,7 +46,6 @@ final class ExpressionTableController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// 'NSFetchedResultsController does not support both change tracking and fetch request's with NSDictionaryResultType'
         //fetchedResultsController.delegate = self
         performFetch()
     }
