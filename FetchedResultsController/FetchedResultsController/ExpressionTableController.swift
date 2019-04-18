@@ -19,8 +19,10 @@ final class ExpressionTableController: UIViewController {
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1]
         
-        
-        
+        /// http://macbug.ru/cocoa/coredatafetch
+        /// https://developer.apple.com/documentation/foundation/nsexpression/1413747-init
+        /// http://www.cimgf.com/2015/06/25/core-data-and-aggregate-fetches-in-swift/
+        /// https://habr.com/ru/post/265319/
         let keyPathExpression = NSExpression(forKeyPath: #keyPath(EventDB.date))
         let minExpression = NSExpression(forFunction: "max:", arguments: [keyPathExpression])
         
