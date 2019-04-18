@@ -1,31 +1,12 @@
 import UIKit
 
-final class ScrollController: UIViewController {
-    
-    override func loadView() {
-        view = UIScrollView()
-    }
-    
-//    private lazy var vcView: UIScrollView = {
-//        if let view = self.view as? UIScrollView {
-//            return view
-//        } else {
-//            assertionFailure("override func loadView")
-//            return UIScrollView()
-//        }
-//    }()
-    
-    private let keyboardStateListener = KeyboardStateListener()
-    let contentView = UIView()
-    
+final class SomeScrollingController: ScrollController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addTapGestureToHideKeyboard()
-        setupContentView()
-//        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = UIColor.lightGray
         backgroundColor = UIColor.lightGray
-        keyboardStateListener.delegate = self
         
         let edgeInset: CGFloat = 16
         
@@ -42,22 +23,22 @@ final class ScrollController: UIViewController {
         
         let bottomTextField = UITextField()
         bottomTextField.borderStyle = .roundedRect
-
+        
         bottomTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(bottomTextField)
-
+        
         bottomTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: edgeInset).isActive = true
         bottomTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -edgeInset).isActive = true
         bottomTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -edgeInset).isActive = true
-
+        
         bottomTextField.topAnchor.constraint(greaterThanOrEqualTo: topTextField.bottomAnchor, constant: -edgeInset).isActive = true
     }
+}
+
+/// there is a bug on keyboardWillHideWithState with black background on the simulator only
+class ScrollController: UIViewController {
     
-    private func setupContentView() {
-        view.addSubview(contentView)
-        contentView.frame = view.frame
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
+    let contentView = UIView()
     
     var backgroundColor: UIColor? {
         get {
@@ -67,6 +48,38 @@ final class ScrollController: UIViewController {
             view.backgroundColor = newValue
             contentView.backgroundColor = newValue
         }
+    }
+    
+    private lazy var scrollView: UIScrollView = {
+        if let view = self.view as? UIScrollView {
+            return view
+        } else {
+            assertionFailure("override func loadView")
+            return UIScrollView()
+        }
+    }()
+    
+    private let keyboardStateListener = KeyboardStateListener()
+    
+    override func loadView() {
+        view = UIScrollView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupContentView()
+        backgroundColor = UIColor.white
+        view.isOpaque = true
+        
+        keyboardStateListener.delegate = self
+    }
+    
+    private func setupContentView() {
+        view.addSubview(contentView)
+        contentView.frame = view.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentView.isOpaque = true
     }
 }
 
