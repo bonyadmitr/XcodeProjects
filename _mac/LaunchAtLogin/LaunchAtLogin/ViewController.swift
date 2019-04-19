@@ -25,6 +25,16 @@ class ViewController: NSViewController {
 
 }
 
+
+/// new tutorials
+/// https://stackoverflow.com/questions/35339277/make-swift-cocoa-app-launch-on-startup-on-os-x-10-11
+///
+/// https://github.com/sindresorhus/LaunchAtLogin
+/// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLogin/LaunchAtLogin.swift
+/// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLoginHelper/main.swift
+
+
+/// https://github.com/ptsochantaris/trailer/blob/master/Trailer/StartupLaunch.swift
 final class StartupLaunch: NSObject {
     
     class var isAppLoginItem: Bool {
