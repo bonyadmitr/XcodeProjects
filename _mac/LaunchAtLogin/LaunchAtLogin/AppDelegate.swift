@@ -7,32 +7,80 @@
 //
 
 import Cocoa
+import ServiceManagement
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+//extension Notification.Name {
+//    static let killLauncher = Notification.Name("killLauncher")
+//}
+//
+//@NSApplicationMain
+//class AppDelegate: NSObject, NSApplicationDelegate {
+//
+//    @IBAction func startAtLogin(_ sender: NSMenuItem) {
+//
+//        if sender.state == .on {
+//            sender.state = .off
+//
+//            SMLoginItemSetEnabled("com.by.LaunchAtLogin" as CFString, true)
+//
+////            StartupLaunch.setLaunchOnLogin(false)
+//        } else {
+//            sender.state = .on
+////            StartupLaunch.setLaunchOnLogin(true)
+//        }
+//
+////        toggleLaunchAtStartup()
+//        print(StartupLaunch.isAppLoginItem)
+//    }
+//
+//    func applicationDidFinishLaunching(_ aNotification: Notification) {
+//
+//        let launcherAppId = "com.by.LaunchAtLoginLauncher"
+//        let runningApps = NSWorkspace.shared.runningApplications
+//        let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
+//
+//        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+//
+//        if isRunning {
+//            DistributedNotificationCenter.default().post(name: .killLauncher,
+//                                                         object: Bundle.main.bundleIdentifier ?? "")
+//        }
+//
+//    }
+//
+//    func applicationWillTerminate(_ aNotification: Notification) {
+//        // Insert code here to tear down your application
+//    }
+//
+//
+//}
 
-    @IBAction func startAtLogin(_ sender: NSMenuItem) {
-        
-        if sender.state == .on {
-            sender.state = .off
-            StartupLaunch.setLaunchOnLogin(false)
-        } else {
-            sender.state = .on
-            StartupLaunch.setLaunchOnLogin(true)
-        }
-        
-//        toggleLaunchAtStartup()
-        print(StartupLaunch.isAppLoginItem)
-    }
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
 
 
+import Cocoa
+import ServiceManagement
+
+extension Notification.Name {
+    static let killLauncher = Notification.Name("killLauncher")
 }
 
+@NSApplicationMain
+class AppDelegate: NSObject {}
+
+
+extension AppDelegate: NSApplicationDelegate {
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+        let launcherAppId = "com.by.LaunchAtLoginLauncher"
+        let runningApps = NSWorkspace.shared.runningApplications
+        let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
+        
+        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+        
+        if isRunning {
+            DistributedNotificationCenter.default().post(name: .killLauncher,
+                                                         object: Bundle.main.bundleIdentifier!)
+        }
+    }
+}
