@@ -364,6 +364,9 @@ public struct KeyboardState {
     /// height will be zero. (Even if the height of the *invisible* keyboard will look normal!)
     ///
     /// also https://stackoverflow.com/a/32319698/5893286
+    ///
+    /// for more options see
+    /// https://github.com/IdleHandsApps/IHKeyboardAvoiding/blob/master/Sources/KeyboardAvoiding.swift
     func keyboardHeightForView(_ view: UIView) -> CGFloat {
         let convertedKeyboardFrame = view.convert(keyboardFrame, from: nil)
         let intersection = convertedKeyboardFrame.intersection(view.bounds)
