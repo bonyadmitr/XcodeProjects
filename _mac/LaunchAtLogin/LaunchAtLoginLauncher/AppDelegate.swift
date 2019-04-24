@@ -77,31 +77,44 @@ extension AppDelegate: NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let mainAppIdentifier = "com.by.LaunchAtLogin"
-        let runningApps = NSWorkspace.shared.runningApplications
-        let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
+//        let mainAppIdentifier = "com.by.LaunchAtLogin"
+//        let runningApps = NSWorkspace.shared.runningApplications
+//        let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
+//
+//        if !isRunning {
+//            DistributedNotificationCenter.default().addObserver(self,
+//                                                                selector: #selector(self.terminate),
+//                                                                name: .killLauncher,
+//                                                                object: mainAppIdentifier)
+//
+//            let path = Bundle.main.bundlePath as NSString
+//            var components = path.pathComponents
+//            components.removeLast()
+//            components.removeLast()
+//            components.removeLast()
+//            components.append("MacOS")
+//            components.append("MainApplication") //main app name
+//
+//            let newPath = NSString.path(withComponents: components)
+//
+//            NSWorkspace.shared.launchApplication(newPath)
+//        }
+//        else {
+//            self.terminate()
+//        }
         
-        if !isRunning {
-            DistributedNotificationCenter.default().addObserver(self,
-                                                                selector: #selector(self.terminate),
-                                                                name: .killLauncher,
-                                                                object: mainAppIdentifier)
-            
-            let path = Bundle.main.bundlePath as NSString
-            var components = path.pathComponents
-            components.removeLast()
-            components.removeLast()
-            components.removeLast()
-            components.append("MacOS")
-            components.append("MainApplication") //main app name
-            
-            let newPath = NSString.path(withComponents: components)
-            
-            NSWorkspace.shared.launchApplication(newPath)
+        let mainBundleId = "com.by.LaunchAtLogin"
+        
+        // Ensure the app is not already running
+        guard NSRunningApplication.runningApplications(withBundleIdentifier: mainBundleId).isEmpty else {
+            NSApp.terminate(nil)
+            return
         }
-        else {
-            self.terminate()
-        }
+        
+        let pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
+        let mainPath = NSString.path(withComponents: Array(pathComponents[0...(pathComponents.count - 5)]))
+        NSWorkspace.shared.launchApplication(mainPath)
+        NSApp.terminate(nil)
     }
 }
 
