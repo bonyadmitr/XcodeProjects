@@ -116,14 +116,26 @@ extension ViewController: UICollectionViewDataSource {
 //        let next = UnicodeScalar(w.value + UInt32(indexPath.row))!
 //        cell.label.text = String(next)
         
-        cell.label.text = game.gameModels[indexPath.row].emojy
+//        cell.label.text = game.gameModels[indexPath.row].emojy
         return cell
     }
 }
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! GameCell
+        cell.isShown = !cell.isShown
         
+        let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
+        UIView.transition(with: cell, duration: 0.5, options: [q, .showHideTransitionViews], animations: {
+            
+            if cell.isShown {
+                cell.label.text = self.game.gameModels[indexPath.row].emojy
+            } else {
+                cell.label.text = ""
+            }
+            
+        }, completion: nil)
     }
 }
 
@@ -160,10 +172,30 @@ final class GameCell: UICollectionViewCell {
     
     // MARK: - Methods
 //    func showCard(_ show: Bool, animted: Bool) {
+    func toggle() {
 //        frontImageView.isHidden = false
 //        backImageView.isHidden = false
-//        shown = show
-//
+        isShown = !isShown
+
+        if isShown {
+            UIView.transition(with: label, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: nil, completion: nil)
+//            UIView.transition(
+//                from: label,
+//                to: label,
+//                duration: 0.5,
+//                options: [.transitionFlipFromRight, .showHideTransitionViews],
+//                completion: { nil)
+        } else {
+            UIView.transition(with: label, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: nil, completion: nil)
+//            UIView.transition(
+//                from: frontImageView,
+//                to: backImageView,
+//                duration: 0.5,
+//                options: [.transitionFlipFromRight, .showHideTransitionViews],
+//                completion:  { (finished: Bool) -> () in
+//            })
+        }
+        
 //        if animted {
 //            if show {
 //                UIView.transition(
@@ -191,7 +223,7 @@ final class GameCell: UICollectionViewCell {
 //                frontImageView.isHidden = true
 //            }
 //        }
-//    }
+    }
 }
 
 final class Emoji {
