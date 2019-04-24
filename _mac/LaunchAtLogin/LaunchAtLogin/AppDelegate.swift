@@ -72,6 +72,9 @@ extension AppDelegate: NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
+        // TODO: test
+        /// https://stackoverflow.com/a/44069825/5893286
+        
         let launcherAppId = "com.by.LaunchAtLoginLauncher"
         SMLoginItemSetEnabled(launcherAppId as CFString, true)
         
