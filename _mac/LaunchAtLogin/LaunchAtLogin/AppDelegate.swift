@@ -72,15 +72,20 @@ extension AppDelegate: NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        let launcherAppId = "com.by.LaunchAtLoginLauncher"
-        let runningApps = NSWorkspace.shared.runningApplications
-        let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
+        // TODO: test
+        /// https://stackoverflow.com/a/44069825/5893286
         
+        let launcherAppId = "com.by.LaunchAtLoginLauncher"
         SMLoginItemSetEnabled(launcherAppId as CFString, true)
         
-        if isRunning {
-            DistributedNotificationCenter.default().post(name: .killLauncher,
-                                                         object: Bundle.main.bundleIdentifier!)
-        }
+//        let runningApps = NSWorkspace.shared.runningApplications
+//        let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
+//
+//        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+//
+//        if isRunning {
+//            DistributedNotificationCenter.default().post(name: .killLauncher,
+//                                                         object: Bundle.main.bundleIdentifier!)
+//        }
     }
 }
