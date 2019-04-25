@@ -1,14 +1,6 @@
-//
-//  ViewController.swift
-//  ConcentrationGame
-//
-//  Created by Bondar Yaroslav on 4/23/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import UIKit
 
-final class Game {
+final class ConcentrationGame {
     
     var raws: Int = 0
     var collumns: Int = 0
@@ -62,9 +54,9 @@ extension GameModel: Equatable {
     }
 }
 
-class ViewController: UIViewController {
+final class GameController: UIViewController {
 
-    let game = Game()
+    private let game = ConcentrationGame()
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
@@ -104,7 +96,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension GameController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return game.raws * game.collumns
     }
@@ -121,7 +113,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension GameController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! GameCell
         cell.isShown = !cell.isShown
