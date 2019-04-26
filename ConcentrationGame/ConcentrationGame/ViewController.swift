@@ -1,5 +1,12 @@
 import UIKit
 
+enum ConcentrationState {
+    case start
+    case wrongPaire
+    case selection
+    case finished
+}
+
 final class ConcentrationGame {
     
     var raws: Int = 0
@@ -35,12 +42,16 @@ final class ConcentrationGame {
         
         assert(gameModels.count == totalCells)
     }
+    
+    var openedCount = 0
+    var isFinished = false
 }
 
 final class GameModel {
     let id: String
     let emojy: String
     var isOpened = false
+    var isAlwayesOpened = false
     
     init(id: String, emojy: String) {
         self.id = id
@@ -93,7 +104,11 @@ final class GameController: UIViewController {
         collectionView.reloadData()
     }
 
-
+    var lastSelectedIndexPath: IndexPath?
+    
+    
+    var closeIndexPath1: IndexPath?
+    var closeIndexPath2: IndexPath?
 }
 
 extension GameController: UICollectionViewDataSource {
@@ -115,19 +130,65 @@ extension GameController: UICollectionViewDataSource {
 
 extension GameController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GameCell
-        cell.isShown = !cell.isShown
         
-        let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
-        UIView.transition(with: cell, duration: 0.5, options: [q, .showHideTransitionViews], animations: {
+        if game.isFinished {
+            return
+        }
+        
+        if lastSelectedIndexPath == indexPath {
+            return
+        }
+        
+        let selectedModel = game.gameModels[indexPath.row]
+        if selectedModel.isAlwayesOpened {
+            return
+        }
+        
+        if let closeIndexPath1 = closeIndexPath1, let closeIndexPath2 = closeIndexPath2 {
+            self.closeIndexPath1 = nil
+            self.closeIndexPath2 = nil
+            let cell1 = collectionView.cellForItem(at: closeIndexPath1) as! GameCell
+            let cell2 = collectionView.cellForItem(at: closeIndexPath2) as! GameCell
+            cell1.close()
+            cell2.close()
+        }
+        
+        if let lastSelectedIndexPath = lastSelectedIndexPath {
+            let lastSelectedModel = game.gameModels[lastSelectedIndexPath.row]
             
-            if cell.isShown {
-                cell.label.text = self.game.gameModels[indexPath.row].emojy
+            if selectedModel == lastSelectedModel {
+                selectedModel.isAlwayesOpened = true
+                lastSelectedModel.isAlwayesOpened = true
+                game.openedCount += 2
+                
+                if game.openedCount == game.gameModels.count {
+                    game.isFinished = true
+                    print("- finished")
+                }
+                
             } else {
-                cell.label.text = ""
+                closeIndexPath1 = indexPath
+                closeIndexPath2 = lastSelectedIndexPath
             }
             
+            self.lastSelectedIndexPath = nil
+        } else {
+            self.lastSelectedIndexPath = indexPath
+        }
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! GameCell
+        UIView.transition(with: cell, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
+            cell.label.text = self.game.gameModels[indexPath.row].emojy
         }, completion: nil)
+        
+//        let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
+//        UIView.transition(with: cell, duration: 0.5, options: [q, .showHideTransitionViews], animations: {
+//            if cell.isShown {
+//                cell.label.text = self.game.gameModels[indexPath.row].emojy
+//            } else {
+//                cell.label.text = ""
+//            }
+//        }, completion: nil)
     }
 }
 
@@ -151,6 +212,10 @@ final class GameCell: UICollectionViewCell {
         label.textAlignment = .center
         label.backgroundColor = UIColor.white
         label.isOpaque = true
+//        label.numberOfLines = 1
+//        label.lineBreakMode = .byWordWrapping
+//        label.adjustsFontSizeToFitWidth = true
+//        label.minimumScaleFactor = 0.1
         addSubview(label)
     }
     
@@ -158,6 +223,12 @@ final class GameCell: UICollectionViewCell {
         super.layoutSubviews()
         
         label.frame = bounds
+    }
+    
+    func close() {
+        UIView.transition(with: self, duration: 0.5, options: [.transitionFlipFromLeft, .showHideTransitionViews], animations: {
+            self.label.text = ""
+        }, completion: nil)
     }
     
     var isShown: Bool = false
