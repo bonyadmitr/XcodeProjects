@@ -7,6 +7,10 @@ enum ConcentrationState {
     case finished
 }
 
+/// for novice
+/// https://habr.com/ru/company/skillbox/blog/447598/
+/// https://github.com/Xiomara7/Memory
+
 final class ConcentrationGame {
     
     var raws: Int = 0
@@ -208,8 +212,8 @@ final class GameCell: UICollectionViewCell {
     }
     
     private func setup() {
-        //label.font = UIFont.systemFont(ofSize: 130)
-        label.font = UIFont.systemFont(ofSize: 90)
+//        label.font = UIFont.systemFont(ofSize: 70) //5se
+//        label.font = UIFont.systemFont(ofSize: 90) //6+
         label.textAlignment = .center
         label.backgroundColor = UIColor.white
         label.isOpaque = true
@@ -223,7 +227,10 @@ final class GameCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        label.frame = bounds
+        if label.frame != bounds {
+            label.frame = bounds
+            label.font = label.font.withSize(bounds.height * 0.9)
+        }
     }
     
     func close() {
