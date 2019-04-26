@@ -13,7 +13,6 @@ final class ConcentrationGame {
     var collumns: Int = 0
     
     var gameModels = [GameModel]()
-    var showedModels = [GameModel]()
     
     func start(raws: Int, collumns: Int) {
         self.raws = raws
@@ -36,7 +35,9 @@ final class ConcentrationGame {
         
         assert(emojies.count == createCellsCount)
         
-        gameModels = emojies.map { GameModel(id: UUID().uuidString, emojy: $0) }
+        gameModels = emojies.enumerated().map { GameModel(id: $0.offset, emojy: $0.element) }
+        //gameModels = emojies.map { GameModel(id: UUID().uuidString, emojy: $0) }
+        
         gameModels += gameModels
         gameModels.shuffle()
         
@@ -48,12 +49,12 @@ final class ConcentrationGame {
 }
 
 final class GameModel {
-    let id: String
+    let id: Int
     let emojy: String
     var isOpened = false
     var isAlwayesOpened = false
     
-    init(id: String, emojy: String) {
+    init(id: Int, emojy: String) {
         self.id = id
         self.emojy = emojy
     }
