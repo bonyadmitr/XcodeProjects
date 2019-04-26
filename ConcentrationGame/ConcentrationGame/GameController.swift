@@ -1,78 +1,10 @@
 import UIKit
 
-enum ConcentrationState {
-    case start
-    case wrongPaire
-    case selection
-    case finished
-}
-
-/// for novice
-/// https://habr.com/ru/company/skillbox/blog/447598/
-/// https://github.com/Xiomara7/Memory
-
-final class ConcentrationGame {
-    
-    var raws: Int = 0
-    var collumns: Int = 0
-    
-    var gameModels = [GameModel]()
-    
-    func start(raws: Int, collumns: Int) {
-        self.raws = raws
-        self.collumns = collumns
-        
-        let totalCells = raws * collumns
-        if totalCells % 2 == 1 {
-            assertionFailure()
-            return
-        }
-        let createCellsCount = totalCells / 2
-        
-        var emojies = [String]()
-        while emojies.count < createCellsCount {
-            let randomEmojy = Emoji.shared.emojiCategories["people"]!.randomElement()!
-            if !emojies.contains(randomEmojy) {
-                emojies.append(randomEmojy)
-            }
-        }
-        
-        assert(emojies.count == createCellsCount)
-        
-        gameModels = emojies.enumerated().map { GameModel(id: $0.offset, emojy: $0.element) }
-        //gameModels = emojies.map { GameModel(id: UUID().uuidString, emojy: $0) }
-        
-        gameModels += gameModels
-        gameModels.shuffle()
-        
-        assert(gameModels.count == totalCells)
-    }
-    
-    var openedCount = 0
-    var isFinished = false
-}
-
-final class GameModel {
-    let id: Int
-    let emojy: String
-    var isOpened = false
-    var isAlwayesOpened = false
-    
-    init(id: Int, emojy: String) {
-        self.id = id
-        self.emojy = emojy
-    }
-}
-
-extension GameModel: Equatable {
-    static func == (lhs: GameModel, rhs: GameModel) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
 final class GameController: UIViewController {
 
-    private let game = ConcentrationGame()
+    private let game = Game()
+    
+    private let gameCellId = "GameCell"
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
@@ -89,8 +21,7 @@ final class GameController: UIViewController {
                 layout.minimumLineSpacing = padding
             }
             
-            
-            newValue.register(GameCell.self, forCellWithReuseIdentifier: "GameCell")
+            newValue.register(GameCell.self, forCellWithReuseIdentifier: gameCellId)
             newValue.dataSource = self
             newValue.delegate = self
             
@@ -122,13 +53,7 @@ extension GameController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCell", for: indexPath) as? GameCell else {
-            assertionFailure()
-            return UICollectionViewCell()
-        }
-        
-//        cell.label.text = game.gameModels[indexPath.row].emojy
-        return cell
+        return collectionView.dequeueReusableCell(withReuseIdentifier: gameCellId, for: indexPath)
     }
 }
 
@@ -180,7 +105,11 @@ extension GameController: UICollectionViewDelegate {
             self.lastSelectedIndexPath = indexPath
         }
         
-        let cell = collectionView.cellForItem(at: indexPath) as! GameCell
+        guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+            assertionFailure()
+            return
+        }
+        
         UIView.transition(with: cell, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
             cell.label.text = self.game.gameModels[indexPath.row].emojy
         }, completion: nil)

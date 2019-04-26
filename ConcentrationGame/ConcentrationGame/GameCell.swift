@@ -33,7 +33,7 @@ final class GameCell: UICollectionViewCell {
         
         if label.frame != bounds {
             label.frame = bounds
-            label.font = label.font.withSize(bounds.height * 0.9)
+            label.font = label.font.withSize(bounds.height * 0.8)
         }
     }
     
