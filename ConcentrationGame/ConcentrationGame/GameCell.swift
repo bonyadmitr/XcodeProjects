@@ -37,6 +37,13 @@ final class GameCell: UICollectionViewCell {
         }
     }
     
+    func open(with text: String) {
+        //let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
+        UIView.transition(with: self, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
+            self.label.text = text
+        }, completion: nil)
+    }
+    
     func close() {
         UIView.transition(with: self, duration: 0.5, options: [.transitionFlipFromLeft, .showHideTransitionViews], animations: {
             self.label.text = ""

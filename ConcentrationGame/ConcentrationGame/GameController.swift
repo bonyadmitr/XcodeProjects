@@ -115,18 +115,7 @@ extension GameController: UICollectionViewDelegate {
             return
         }
         
-        UIView.transition(with: cell, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
-            cell.label.text = self.game.gameModels[indexPath.row].emojy
-        }, completion: nil)
-        
-//        let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
-//        UIView.transition(with: cell, duration: 0.5, options: [q, .showHideTransitionViews], animations: {
-//            if cell.isShown {
-//                cell.label.text = self.game.gameModels[indexPath.row].emojy
-//            } else {
-//                cell.label.text = ""
-//            }
-//        }, completion: nil)
+        cell.open(with: game.gameModels[indexPath.row].emojy)
     }
 }
 
