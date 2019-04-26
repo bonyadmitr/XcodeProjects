@@ -13,6 +13,7 @@
 		CE6A4C24226F04BB00406A6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6A4C23226F04BB00406A6D /* Assets.xcassets */; };
 		CE6A4C27226F04BB00406A6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6A4C25226F04BB00406A6D /* LaunchScreen.storyboard */; };
 		CE6A4C4D2273423E00406A6D /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A4C4C2273423E00406A6D /* GameCell.swift */; };
+		CE6A4C4F227342E900406A6D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A4C4E227342E900406A6D /* Emoji.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CE6A4C26226F04BB00406A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6A4C28226F04BB00406A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE6A4C4C2273423E00406A6D /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		CE6A4C4E227342E900406A6D /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CE6A4C1C226F04BA00406A6D /* AppDelegate.swift */,
 				CE6A4C1E226F04BA00406A6D /* GameController.swift */,
 				CE6A4C4C2273423E00406A6D /* GameCell.swift */,
+				CE6A4C4E227342E900406A6D /* Emoji.swift */,
 				CE6A4C20226F04BA00406A6D /* Main.storyboard */,
 				CE6A4C23226F04BB00406A6D /* Assets.xcassets */,
 				CE6A4C25226F04BB00406A6D /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				CE6A4C1F226F04BA00406A6D /* GameController.swift in Sources */,
 				CE6A4C1D226F04BA00406A6D /* AppDelegate.swift in Sources */,
+				CE6A4C4F227342E900406A6D /* Emoji.swift in Sources */,
 				CE6A4C4D2273423E00406A6D /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
