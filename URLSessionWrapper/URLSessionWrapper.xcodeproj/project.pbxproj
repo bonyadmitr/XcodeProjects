@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4C8C05E227210F700C5BDC0 /* APISerivice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8C05D227210F700C5BDC0 /* APISerivice.swift */; };
 		CE2E2E0E20C85D52000F5817 /* URLConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E0D20C85D52000F5817 /* URLConvertible.swift */; };
 		CE2E2E1020C85DDB000F5817 /* URLTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E0F20C85DDB000F5817 /* URLTask.swift */; };
 		CE2E2E1220C85FE1000F5817 /* URLSessionWrapperErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2E1120C85FE1000F5817 /* URLSessionWrapperErrors.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4C8C05D227210F700C5BDC0 /* APISerivice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISerivice.swift; sourceTree = "<group>"; };
 		CE2E2E0D20C85D52000F5817 /* URLConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConvertible.swift; sourceTree = "<group>"; };
 		CE2E2E0F20C85DDB000F5817 /* URLTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTask.swift; sourceTree = "<group>"; };
 		CE2E2E1120C85FE1000F5817 /* URLSessionWrapperErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionWrapperErrors.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				CEE78A7520C7918700AAAD8A /* AppDelegate.swift */,
 				CEE78A7720C7918700AAAD8A /* ViewController.swift */,
+				C4C8C05D227210F700C5BDC0 /* APISerivice.swift */,
 				CE2E2E1520C86010000F5817 /* URLSessionWrapper */,
 				CEE78A7920C7918700AAAD8A /* Main.storyboard */,
 				CEE78A7C20C7918800AAAD8A /* Assets.xcassets */,
@@ -167,6 +170,7 @@
 				CEE78A8820C791A000AAAD8A /* URLSessionWrapper.swift in Sources */,
 				CE2E2E1020C85DDB000F5817 /* URLTask.swift in Sources */,
 				CE2E2E1220C85FE1000F5817 /* URLSessionWrapperErrors.swift in Sources */,
+				C4C8C05E227210F700C5BDC0 /* APISerivice.swift in Sources */,
 				CE2E2E1420C85FF7000F5817 /* Result.swift in Sources */,
 				CE2E2E0E20C85D52000F5817 /* URLConvertible.swift in Sources */,
 			);
