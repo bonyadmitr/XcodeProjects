@@ -76,8 +76,13 @@ extension GameController: UICollectionViewDelegate {
         if let closeIndexPath1 = closeIndexPath1, let closeIndexPath2 = closeIndexPath2 {
             self.closeIndexPath1 = nil
             self.closeIndexPath2 = nil
-            let cell1 = collectionView.cellForItem(at: closeIndexPath1) as! GameCell
-            let cell2 = collectionView.cellForItem(at: closeIndexPath2) as! GameCell
+            
+            guard let cell1 = collectionView.cellForItem(at: closeIndexPath1) as? GameCell,
+                let cell2 = collectionView.cellForItem(at: closeIndexPath2) as? GameCell else {
+                assertionFailure()
+                return
+            }
+            
             cell1.close()
             cell2.close()
         }
