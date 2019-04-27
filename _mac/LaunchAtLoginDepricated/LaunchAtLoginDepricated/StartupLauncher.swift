@@ -35,7 +35,7 @@ final class StartupLauncher {
         })
     }
     
-    func setLogin(login: Bool) {
+    func setAppAsLoginItem(_ login: Bool) {
         guard let loginItems = loginItems() else {
             assertionFailure()
             return
@@ -61,7 +61,7 @@ final class StartupLauncher {
     }
     
     func toggle() {
-        setLogin(login: !isAppLoginItem())
+        setAppAsLoginItem(!isAppLoginItem())
     }
     
     var isLaunchAtLogin: Bool {
@@ -69,7 +69,7 @@ final class StartupLauncher {
             return isAppLoginItem()
         }
         set {
-            setLogin(login: newValue)
+            setAppAsLoginItem(newValue)
         }
     }
 }
