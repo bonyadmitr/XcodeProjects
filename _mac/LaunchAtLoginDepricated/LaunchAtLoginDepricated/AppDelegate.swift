@@ -14,8 +14,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var launchAtLoginMenuItem: NSMenuItem!
     
     @IBAction func onLaunchAtLoginMenuItem(_ sender: NSMenuItem) {
-        print(StartupLauncher.shared.isLaunchAtLogin)
-        StartupLauncher.shared.toggle()
+        
+        print(LaunchAtLogin.isEnabled)
+        LaunchAtLogin.toggle()
+        
+        //print(StartupLauncher.shared.isLaunchAtLogin)
+        //StartupLauncher.shared.toggle()
+        
         updateButton()
     }
     
@@ -24,7 +29,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func updateButton() {
-        let isLaunchAtLogin = StartupLauncher.shared.isLaunchAtLogin
+        let isLaunchAtLogin = LaunchAtLogin.isEnabled
+        //let isLaunchAtLogin = StartupLauncher.shared.isLaunchAtLogin
+        
         let state: NSControl.StateValue = isLaunchAtLogin ? .on : .off
         launchAtLoginMenuItem.state = state
         print(isLaunchAtLogin)

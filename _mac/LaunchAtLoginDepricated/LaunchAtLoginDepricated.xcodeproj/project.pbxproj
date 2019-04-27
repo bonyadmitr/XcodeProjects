@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE0F0327227401FC00E69145 /* StartupLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F0326227401FC00E69145 /* StartupLauncher.swift */; };
+		CE0F0329227404D300E69145 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F0328227404D300E69145 /* LaunchAtLogin.swift */; };
 		CED1A58322735EBA00218585 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1A58222735EBA00218585 /* AppDelegate.swift */; };
 		CED1A58522735EBA00218585 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1A58422735EBA00218585 /* ViewController.swift */; };
 		CED1A58722735EBB00218585 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED1A58622735EBB00218585 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		CE0F0326227401FC00E69145 /* StartupLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupLauncher.swift; sourceTree = "<group>"; };
+		CE0F0328227404D300E69145 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		CED1A57F22735EBA00218585 /* LaunchAtLoginDepricated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaunchAtLoginDepricated.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED1A58222735EBA00218585 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED1A58422735EBA00218585 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				CED1A58222735EBA00218585 /* AppDelegate.swift */,
 				CED1A58422735EBA00218585 /* ViewController.swift */,
 				CE0F0326227401FC00E69145 /* StartupLauncher.swift */,
+				CE0F0328227404D300E69145 /* LaunchAtLogin.swift */,
 				CED1A58622735EBB00218585 /* Assets.xcassets */,
 				CED1A58822735EBB00218585 /* Main.storyboard */,
 				CED1A58B22735EBB00218585 /* Info.plist */,
@@ -139,6 +142,7 @@
 				CED1A58522735EBA00218585 /* ViewController.swift in Sources */,
 				CED1A58322735EBA00218585 /* AppDelegate.swift in Sources */,
 				CE0F0327227401FC00E69145 /* StartupLauncher.swift in Sources */,
+				CE0F0329227404D300E69145 /* LaunchAtLogin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

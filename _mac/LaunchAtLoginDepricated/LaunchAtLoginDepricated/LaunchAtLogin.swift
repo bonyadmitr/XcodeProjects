@@ -1,30 +1,49 @@
 import Foundation
 
-final class StartupLauncher {
+/// https://github.com/sindresorhus/LaunchAtLogin
+/// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLogin/LaunchAtLogin.swift
+/// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLoginHelper/main.swift
+///
+/// https://github.com/KrauseFx/overkill-for-mac/blob/master/Overkill/LaunchStarter.swift
+/// https://github.com/ptsochantaris/trailer/blob/master/Trailer/StartupLaunch.swift
+///
+/// https://snippets.aktagon.com/snippets/362-how-to-set-an-application-to-load-at-login-with-cocoa-and-objective-c
+enum LaunchAtLogin {
     
-    static let shared = StartupLauncher()
+    static var isEnabled: Bool {
+        get {
+            return isAppLoginItem()
+        }
+        set {
+            setAppAsLoginItem(newValue)
+        }
+    }
     
-    private let appUrl = URL(fileURLWithPath: Bundle.main.bundlePath)
+    static func toggle() {
+        setAppAsLoginItem(!isAppLoginItem())
+    }
     
-    private let loginItemRef: LSSharedFileList = {
+    private static let appUrl = URL(fileURLWithPath: Bundle.main.bundlePath)
+    
+    private static let loginItemRef: LSSharedFileList = {
         return LSSharedFileListCreate(nil,
                                       kLSSharedFileListSessionLoginItems.takeRetainedValue(),
                                       nil).takeRetainedValue() as LSSharedFileList
     }()
     
-    private func loginItems() -> [LSSharedFileListItem]? {
+    private static func loginItems() -> [LSSharedFileListItem]? {
         return LSSharedFileListCopySnapshot(loginItemRef,
                                             nil).takeRetainedValue() as? [LSSharedFileListItem]
     }
     
-    private func appItem(from loginItems: [LSSharedFileListItem]) -> LSSharedFileListItem? {
+    private static func appItem(from loginItems: [LSSharedFileListItem]) -> LSSharedFileListItem? {
         return loginItems.first(where: { item in
             let itemUrl = LSSharedFileListItemCopyResolvedURL(item, 0, nil).takeRetainedValue() as URL
             return itemUrl == appUrl
         })
     }
     
-    func setAppAsLoginItem(_ login: Bool) {
+    static func setAppAsLoginItem(_ login: Bool) {
         guard let loginItems = loginItems() else {
             assertionFailure()
             return
@@ -41,24 +60,11 @@ final class StartupLauncher {
         }
     }
     
-    func isAppLoginItem() -> Bool {
+    private static func isAppLoginItem() -> Bool {
         guard let loginItems = loginItems() else {
             assertionFailure()
             return false
         }
         return appItem(from: loginItems) != nil
-    }
-    
-    func toggle() {
-        setAppAsLoginItem(!isAppLoginItem())
-    }
-    
-    var isLaunchAtLogin: Bool {
-        get {
-            return isAppLoginItem()
-        }
-        set {
-            setAppAsLoginItem(newValue)
-        }
     }
 }
