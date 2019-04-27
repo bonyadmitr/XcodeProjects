@@ -66,14 +66,14 @@ extension Notification.Name {
 }
 
 @NSApplicationMain
-class AppDelegate: NSObject {
+class AppDelegateHelper: NSObject {
     
     @objc func terminate() {
         NSApp.terminate(nil)
     }
 }
 
-extension AppDelegate: NSApplicationDelegate {
+extension AppDelegateHelper: NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -106,15 +106,29 @@ extension AppDelegate: NSApplicationDelegate {
         let mainBundleId = "com.by.LaunchAtLogin"
         
         // Ensure the app is not already running
-        guard NSRunningApplication.runningApplications(withBundleIdentifier: mainBundleId).isEmpty else {
-            NSApp.terminate(nil)
-            return
+//        guard NSRunningApplication.runningApplications(withBundleIdentifier: mainBundleId).isEmpty else {
+//            NSApp.terminate(nil)
+//            return
+//        }
+//
+//        let pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
+//        let mainPath = NSString.path(withComponents: Array(pathComponents[0...(pathComponents.count - 5)]))
+//        NSWorkspace.shared.launchApplication(mainPath)
+//        NSApp.terminate(nil)
+        
+        let runningApps = NSWorkspace.shared.runningApplications
+        let isRunning = runningApps.contains {
+            $0.bundleIdentifier == mainBundleId
         }
         
-        let pathComponents = (Bundle.main.bundlePath as NSString).pathComponents
-        let mainPath = NSString.path(withComponents: Array(pathComponents[0...(pathComponents.count - 5)]))
-        NSWorkspace.shared.launchApplication(mainPath)
-        NSApp.terminate(nil)
+        if !isRunning {
+            /// Contents/Library/LoginItems
+            var path = Bundle.main.bundlePath as NSString
+            for _ in 1...4 {
+                path = path.deletingLastPathComponent as NSString
+            }
+            NSWorkspace.shared.launchApplication(path as String)
+        }
     }
 }
 

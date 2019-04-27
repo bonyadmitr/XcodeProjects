@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import LaunchAtLogin
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -16,13 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        /// https://github.com/sindresorhus/LaunchAtLogin
-        print(LaunchAtLogin.isEnabled)
-        //=> false
-        
-        LaunchAtLogin.isEnabled = true
-        
-        print(LaunchAtLogin.isEnabled)
+
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

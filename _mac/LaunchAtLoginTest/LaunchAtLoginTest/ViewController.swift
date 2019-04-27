@@ -7,21 +7,26 @@
 //
 
 import Cocoa
+import LaunchAtLogin
 
 class ViewController: NSViewController {
-
+    
+    let helperBundleName = "com.by.LaunchAtLoginHelper"
+    
+    @IBOutlet weak var autoLaunchCheckbox: NSButton!
+    
+    @IBAction func toggleAutoLaunch(_ sender: NSButton) {
+        let isAuto = sender.state == .on
+        LaunchAtLogin.isEnabled = isAuto
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        print(LaunchAtLogin.isEnabled)
+        
+        let foundHelper = LaunchAtLogin.isEnabled
+        
+        autoLaunchCheckbox.state = foundHelper ? .on : .off
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
-
