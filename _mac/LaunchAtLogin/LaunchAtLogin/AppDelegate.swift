@@ -128,3 +128,5 @@ extension AppDelegate: NSApplicationDelegate {
 /// https://github.com/sindresorhus/LaunchAtLogin
 /// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLogin/LaunchAtLogin.swift
 /// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLoginHelper/main.swift
+///
+/// https://medium.com/@hoishing/adding-login-items-for-macos-7d76458f6495
