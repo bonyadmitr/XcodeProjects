@@ -40,11 +40,23 @@ final class GameController: UIViewController {
         collectionView.reloadData()
     }
 
-    var lastSelectedIndexPath: IndexPath?
+    private var lastSelectedIndexPath: IndexPath?
     
+    private var indexPathesToClose = [IndexPath]()
     
-    var closeIndexPath1: IndexPath?
-    var closeIndexPath2: IndexPath?
+    /// close wrong cards
+    private func closeCellsIfNeed() {
+        if !indexPathesToClose.isEmpty {
+            indexPathesToClose.forEach { indexPath in
+                guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+                    assertionFailure()
+                    return
+                }
+                cell.close()
+            }
+            indexPathesToClose.removeAll()
+        }
+    }
 }
 
 extension GameController: UICollectionViewDataSource {
@@ -73,19 +85,7 @@ extension GameController: UICollectionViewDelegate {
             return
         }
         
-        if let closeIndexPath1 = closeIndexPath1, let closeIndexPath2 = closeIndexPath2 {
-            self.closeIndexPath1 = nil
-            self.closeIndexPath2 = nil
-            
-            guard let cell1 = collectionView.cellForItem(at: closeIndexPath1) as? GameCell,
-                let cell2 = collectionView.cellForItem(at: closeIndexPath2) as? GameCell else {
-                assertionFailure()
-                return
-            }
-            
-            cell1.close()
-            cell2.close()
-        }
+        closeCellsIfNeed()
         
         if let lastSelectedIndexPath = lastSelectedIndexPath {
             let lastSelectedModel = game.gameModels[lastSelectedIndexPath.row]
@@ -101,8 +101,7 @@ extension GameController: UICollectionViewDelegate {
                 }
                 
             } else {
-                closeIndexPath1 = indexPath
-                closeIndexPath2 = lastSelectedIndexPath
+                indexPathesToClose += [indexPath, lastSelectedIndexPath]
             }
             
             self.lastSelectedIndexPath = nil
