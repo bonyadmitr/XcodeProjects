@@ -76,6 +76,7 @@ extension GameController: GameDelegate {
     func closeCells(at indexPathes: [IndexPath]) {
         indexPathes.forEach { indexPath in
             guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+                /// cell is not visible or GameCell
                 return
             }
             cell.close()
@@ -84,6 +85,7 @@ extension GameController: GameDelegate {
     
     func openCell(at indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+            /// cell is not visible or GameCell
             return
         }
         cell.open()
