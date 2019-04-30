@@ -26,16 +26,17 @@ final class Game {
     
     var gameModels = [GameModel]()
     
-    func start(raws: Int, collumns: Int) {
+    func start(raws: Int, collumns: Int, equalNumber: Int) {
         self.raws = raws
         self.collumns = collumns
+        self.equalNumber = equalNumber
         
         let totalCells = raws * collumns
-        if totalCells % 2 == 1 {
+        if totalCells % equalNumber == 1 {
             assertionFailure("should be even number of cards")
             return
         }
-        let createCellsCount = totalCells / 2
+        let createCellsCount = totalCells / equalNumber
         
         var emojies = [String]()
         while emojies.count < createCellsCount {
@@ -50,10 +51,14 @@ final class Game {
         
         assert(emojies.count == createCellsCount)
         
-        gameModels = emojies.enumerated().map { GameModel(id: $0.offset, emojy: $0.element) }
-        //gameModels = emojies.map { GameModel(id: UUID().uuidString, emojy: $0) }
+        let gameModelsToCopy = emojies.enumerated().map { GameModel(id: $0.offset, emojy: $0.element) }
+        gameModels = gameModelsToCopy
         
-        gameModels += gameModels
+        for _ in 2...equalNumber {
+            gameModels += gameModelsToCopy.map { $0.copy() }
+        }
+        
+        
         gameModels.shuffle()
         
         assert(gameModels.count == totalCells)
@@ -62,18 +67,28 @@ final class Game {
     var openedCount = 0
     var isFinished = false
     
+    var equalNumber = 3
     
-    private var lastSelectedIndexPath: IndexPath?
+    private var indexPathsToClose = [IndexPath]()
     
-    private var indexPathesToClose = [IndexPath]()
+    var needToClose = false
     
-    /// close wrong cards
     private func closeCellsIfNeed() {
-        if !indexPathesToClose.isEmpty {
-            delegate?.closeCells(at: indexPathesToClose)
-            indexPathesToClose.removeAll()
-//            indexPathesToClose.forEach({ gameModels[$0.item].isAlwayesOpened = false })
+        
+        guard needToClose else {
+            return
         }
+        
+        needToClose = false
+        
+        indexPathsToClose.forEach {
+            assert(gameModels[$0.item].isAlwayesOpened == true)
+            gameModels[$0.item].isAlwayesOpened = false
+        }
+        
+        delegate?.closeCells(at: indexPathsToClose)
+        openedCount -= indexPathsToClose.count
+        indexPathsToClose.removeAll()
     }
     
     func didSelectItem(at indexPath: IndexPath) {
@@ -82,43 +97,39 @@ final class Game {
             return
         }
         
-        if lastSelectedIndexPath == indexPath {
+        let selectedModel = gameModels[indexPath.row]
+        
+        if selectedModel.isAlwayesOpened {
             return
         }
         
-        let selectedModel = gameModels[indexPath.row]
-        if selectedModel.isAlwayesOpened {
+        selectedModel.isAlwayesOpened = true
+        openedCount += 1
+        delegate?.openCell(at: indexPath)
+        
+        if openedCount == gameModels.count {
+            isFinished = true
+            delegate?.gameDidFinished()
             return
         }
         
         closeCellsIfNeed()
         
-        if let lastSelectedIndexPath = lastSelectedIndexPath {
+        if let lastSelectedIndexPath = indexPathsToClose.last {
             let lastSelectedModel = gameModels[lastSelectedIndexPath.row]
             
-            if selectedModel == lastSelectedModel {
-                selectedModel.isAlwayesOpened = true
-                lastSelectedModel.isAlwayesOpened = true
-                openedCount += 2
-                
-                if openedCount == gameModels.count {
-                    isFinished = true
-                    delegate?.gameDidFinished()
-                }
-                
+            if selectedModel != lastSelectedModel {
+                needToClose = true
+                indexPathsToClose.append(indexPath)
+            } else if indexPathsToClose.count == equalNumber - 1 {
+//                assert(indexPathsToClose.count == equaleNumber - 1)
+                indexPathsToClose.removeAll()
             } else {
-                indexPathesToClose += [indexPath, lastSelectedIndexPath]
+                indexPathsToClose.append(indexPath)
             }
-            
-//            selectedModel.isAlwayesOpened = true
-//            lastSelectedModel.isAlwayesOpened = true
-            
-            self.lastSelectedIndexPath = nil
         } else {
-            self.lastSelectedIndexPath = indexPath
+            indexPathsToClose.append(indexPath)
         }
-        
-        delegate?.openCell(at: indexPath)
     }
 }
 
@@ -130,6 +141,10 @@ final class GameModel {
     init(id: Int, emojy: String) {
         self.id = id
         self.emojy = emojy
+    }
+    
+    func copy() -> GameModel {
+        return GameModel(id: id, emojy: emojy)
     }
 }
 

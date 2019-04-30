@@ -38,8 +38,10 @@ final class GameCell: UICollectionViewCell {
         }
     }
     
-    func update(for isOpened: Bool) {
-        if isOpened {
+    func setup(for gameModel: GameModel) {
+        text = gameModel.emojy
+        
+        if gameModel.isAlwayesOpened {
             label.text = text
         } else {
             label.text = ""

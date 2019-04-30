@@ -1,7 +1,7 @@
 import Foundation
 
 //        let w = UnicodeScalar("👻")
-//        let next = UnicodeScalar(w.value + UInt32(indexPath.row))!
+//        let next = UnicodeScalar(w.value + UInt32(indexPath.item))!
 //        cell.label.text = String(next)
 
 final class Emoji {

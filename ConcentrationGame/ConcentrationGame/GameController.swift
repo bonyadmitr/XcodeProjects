@@ -29,14 +29,14 @@ final class GameController: UIViewController {
         }
     }
     
-    let numberOfRaws = 4
-    let numberOfCollumns = 4
+    let numberOfRaws = 5
+    let numberOfCollumns = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         game.delegate = self
-        game.start(raws: numberOfRaws, collumns: numberOfCollumns)
+        game.start(raws: numberOfRaws, collumns: numberOfCollumns, equalNumber: 3)
         // TODO: update lauout
         collectionView.reloadData()
     }
@@ -62,9 +62,8 @@ extension GameController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
-        let model = game.gameModels[indexPath.row]
-        cell.text = model.emojy
-        cell.update(for: model.isAlwayesOpened)
+        let model = game.gameModels[indexPath.item]
+        cell.setup(for: model)
     }
 }
 
@@ -77,7 +76,6 @@ extension GameController: GameDelegate {
     func closeCells(at indexPathes: [IndexPath]) {
         indexPathes.forEach { indexPath in
             guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
-                assertionFailure()
                 return
             }
             cell.close()
@@ -86,7 +84,6 @@ extension GameController: GameDelegate {
     
     func openCell(at indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
-            assertionFailure()
             return
         }
         cell.open()
