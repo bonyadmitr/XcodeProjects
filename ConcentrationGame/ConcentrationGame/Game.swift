@@ -72,6 +72,7 @@ final class Game {
         if !indexPathesToClose.isEmpty {
             delegate?.closeCells(at: indexPathesToClose)
             indexPathesToClose.removeAll()
+//            indexPathesToClose.forEach({ gameModels[$0.item].isAlwayesOpened = false })
         }
     }
     
@@ -109,6 +110,9 @@ final class Game {
                 indexPathesToClose += [indexPath, lastSelectedIndexPath]
             }
             
+//            selectedModel.isAlwayesOpened = true
+//            lastSelectedModel.isAlwayesOpened = true
+            
             self.lastSelectedIndexPath = nil
         } else {
             self.lastSelectedIndexPath = indexPath
@@ -121,7 +125,6 @@ final class Game {
 final class GameModel {
     let id: Int
     let emojy: String
-    var isOpened = false
     var isAlwayesOpened = false
     
     init(id: Int, emojy: String) {

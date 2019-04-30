@@ -56,6 +56,16 @@ extension GameController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         game.didSelectItem(at: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? GameCell else {
+            assertionFailure()
+            return
+        }
+        let model = game.gameModels[indexPath.row]
+        cell.text = model.emojy
+        cell.update(for: model.isAlwayesOpened)
+    }
 }
 
 extension GameController: GameDelegate {
@@ -79,7 +89,6 @@ extension GameController: GameDelegate {
             assertionFailure()
             return
         }
-        
-        cell.open(with: game.gameModels[indexPath.row].emojy)
+        cell.open()
     }
 }

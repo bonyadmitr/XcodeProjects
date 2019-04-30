@@ -3,6 +3,7 @@ import UIKit
 final class GameCell: UICollectionViewCell {
     
     let label = UILabel()
+    var text = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,10 +38,18 @@ final class GameCell: UICollectionViewCell {
         }
     }
     
-    func open(with text: String) {
+    func update(for isOpened: Bool) {
+        if isOpened {
+            label.text = text
+        } else {
+            label.text = ""
+        }
+    }
+    
+    func open() {
         //let q: UIView.AnimationOptions = cell.isShown ? .transitionFlipFromRight : .transitionFlipFromLeft
         UIView.transition(with: self, duration: 0.5, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
-            self.label.text = text
+            self.label.text = self.text
         }, completion: nil)
     }
     
