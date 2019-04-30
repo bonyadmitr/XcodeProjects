@@ -11,7 +11,15 @@ import Foundation
 /// https://habr.com/ru/company/skillbox/blog/447598/
 /// https://github.com/Xiomara7/Memory
 
+protocol GameDelegate: class {
+    func closeCells(at indexPathes: [IndexPath])
+    func openCell(at indexPath: IndexPath)
+    func gameDidFinished()
+}
+
 final class Game {
+    
+    weak var delegate: GameDelegate?
     
     var raws: Int = 0
     var collumns: Int = 0
@@ -53,6 +61,61 @@ final class Game {
     
     var openedCount = 0
     var isFinished = false
+    
+    
+    private var lastSelectedIndexPath: IndexPath?
+    
+    private var indexPathesToClose = [IndexPath]()
+    
+    /// close wrong cards
+    private func closeCellsIfNeed() {
+        if !indexPathesToClose.isEmpty {
+            delegate?.closeCells(at: indexPathesToClose)
+            indexPathesToClose.removeAll()
+        }
+    }
+    
+    func didSelectItem(at indexPath: IndexPath) {
+        
+        if isFinished {
+            return
+        }
+        
+        if lastSelectedIndexPath == indexPath {
+            return
+        }
+        
+        let selectedModel = gameModels[indexPath.row]
+        if selectedModel.isAlwayesOpened {
+            return
+        }
+        
+        closeCellsIfNeed()
+        
+        if let lastSelectedIndexPath = lastSelectedIndexPath {
+            let lastSelectedModel = gameModels[lastSelectedIndexPath.row]
+            
+            if selectedModel == lastSelectedModel {
+                selectedModel.isAlwayesOpened = true
+                lastSelectedModel.isAlwayesOpened = true
+                openedCount += 2
+                
+                if openedCount == gameModels.count {
+                    isFinished = true
+                    delegate?.gameDidFinished()
+                }
+                
+            } else {
+                indexPathesToClose += [indexPath, lastSelectedIndexPath]
+            }
+            
+            self.lastSelectedIndexPath = nil
+        } else {
+            self.lastSelectedIndexPath = indexPath
+        }
+        
+        delegate?.openCell(at: indexPath)
+    }
 }
 
 final class GameModel {

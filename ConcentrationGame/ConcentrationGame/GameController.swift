@@ -35,27 +35,10 @@ final class GameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        game.delegate = self
         game.start(raws: numberOfRaws, collumns: numberOfCollumns)
         // TODO: update lauout
         collectionView.reloadData()
-    }
-
-    private var lastSelectedIndexPath: IndexPath?
-    
-    private var indexPathesToClose = [IndexPath]()
-    
-    /// close wrong cards
-    private func closeCellsIfNeed() {
-        if !indexPathesToClose.isEmpty {
-            indexPathesToClose.forEach { indexPath in
-                guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
-                    assertionFailure()
-                    return
-                }
-                cell.close()
-            }
-            indexPathesToClose.removeAll()
-        }
     }
 }
 
@@ -71,44 +54,27 @@ extension GameController: UICollectionViewDataSource {
 
 extension GameController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if game.isFinished {
-            return
-        }
-        
-        if lastSelectedIndexPath == indexPath {
-            return
-        }
-        
-        let selectedModel = game.gameModels[indexPath.row]
-        if selectedModel.isAlwayesOpened {
-            return
-        }
-        
-        closeCellsIfNeed()
-        
-        if let lastSelectedIndexPath = lastSelectedIndexPath {
-            let lastSelectedModel = game.gameModels[lastSelectedIndexPath.row]
-            
-            if selectedModel == lastSelectedModel {
-                selectedModel.isAlwayesOpened = true
-                lastSelectedModel.isAlwayesOpened = true
-                game.openedCount += 2
-                
-                if game.openedCount == game.gameModels.count {
-                    game.isFinished = true
-                    print("- finished")
-                }
-                
-            } else {
-                indexPathesToClose += [indexPath, lastSelectedIndexPath]
+        game.didSelectItem(at: indexPath)
+    }
+}
+
+extension GameController: GameDelegate {
+    func gameDidFinished() {
+        print("- finished")
+        UIAlertView(title: "Finished", message: nil, delegate: nil, cancelButtonTitle: "OK").show()
+    }
+    
+    func closeCells(at indexPathes: [IndexPath]) {
+        indexPathes.forEach { indexPath in
+            guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+                assertionFailure()
+                return
             }
-            
-            self.lastSelectedIndexPath = nil
-        } else {
-            self.lastSelectedIndexPath = indexPath
+            cell.close()
         }
-        
+    }
+    
+    func openCell(at indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
             assertionFailure()
             return
@@ -117,12 +83,3 @@ extension GameController: UICollectionViewDelegate {
         cell.open(with: game.gameModels[indexPath.row].emojy)
     }
 }
-
-
-//extension ViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        (collectionView.bounds.width - CGFloat(numberOfCollumns - 1) * 1) / CGFloat(numberOfCollumns)
-//        return CGSize(width: 100, height: 100)
-//    }
-//}
