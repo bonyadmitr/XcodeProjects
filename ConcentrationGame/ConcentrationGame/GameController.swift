@@ -8,24 +8,28 @@ final class GameController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            let viewWidth = UIScreen.main.bounds.width
-            
-            let columns: CGFloat = CGFloat(numberOfCollumns)
-            let padding: CGFloat = 1
-            let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-            let itemSize = CGSize(width: itemWidth, height: itemWidth)
-            
-            if let layout = newValue.collectionViewLayout as? UICollectionViewFlowLayout {
-                layout.itemSize = itemSize
-                layout.minimumInteritemSpacing = padding
-                layout.minimumLineSpacing = padding
-            }
+            updateLayout(for: newValue)
             
             newValue.register(GameCell.self, forCellWithReuseIdentifier: gameCellId)
             newValue.dataSource = self
             newValue.delegate = self
             
             newValue.backgroundColor = UIColor.lightGray
+        }
+    }
+    
+    private func updateLayout(for collectionView: UICollectionView) {
+        let viewWidth = UIScreen.main.bounds.width
+        
+        let columns: CGFloat = CGFloat(numberOfCollumns)
+        let padding: CGFloat = 1
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = itemSize
+            layout.minimumInteritemSpacing = padding
+            layout.minimumLineSpacing = padding
         }
     }
     
@@ -39,6 +43,12 @@ final class GameController: UIViewController {
         game.start(raws: numberOfRaws, collumns: numberOfCollumns, equalNumber: 3)
         // TODO: update lauout
         collectionView.reloadData()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateLayout(for: collectionView)
+//            collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
