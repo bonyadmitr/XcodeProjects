@@ -15,15 +15,28 @@ final class GameSettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rawsStepper.value = 4
-        collumnsStepper.value = 4
-        equalsStepper.value = 2
-        
-        rawsCountLabel.text = String(rawsStepper.value)
-        collumnsCountLabel.text = String(collumnsStepper.value)
-        equalsCountLabel.text = String(equalsStepper.value)
-        
+        initialSetup()
         check()
+    }
+    
+    private func initialSetup() {
+        rawsStepper.minimumValue = 1
+        collumnsStepper.minimumValue = 1
+        equalsStepper.minimumValue = 1
+        
+        collumnsStepper.maximumValue = 10
+        
+        let raws = 4
+        let collumns = 4
+        let equalNumber = 2
+        
+        rawsStepper.value = Double(raws)
+        collumnsStepper.value = Double(collumns)
+        equalsStepper.value = Double(equalNumber)
+        
+        rawsCountLabel.text = String(raws)
+        collumnsCountLabel.text = String(collumns)
+        equalsCountLabel.text = String(equalNumber)
     }
     
     @IBAction func onStartBarButton(_ sender: UIBarButtonItem) {
@@ -44,17 +57,17 @@ final class GameSettingsController: UIViewController {
     
     
     @IBAction private func onRawsStepper(_ sender: UIStepper) {
-        rawsCountLabel.text = String(sender.value)
+        rawsCountLabel.text = String(Int(sender.value))
         check()
     }
     
     @IBAction private func onCollumnsStepper(_ sender: UIStepper) {
-        collumnsCountLabel.text = String(sender.value)
+        collumnsCountLabel.text = String(Int(sender.value))
         check()
     }
     
     @IBAction private func onEqualsStepper(_ sender: UIStepper) {
-        equalsCountLabel.text = String(sender.value)
+        equalsCountLabel.text = String(Int(sender.value))
         check()
     }
     
