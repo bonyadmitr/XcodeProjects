@@ -80,7 +80,7 @@ final class Game {
         assert(gameModels.count == totalCells)
     }
 
-    
+    /// close wrong selected cards
     private func closeCellsIfNeed() {
         
         guard needToClose else {
@@ -96,6 +96,8 @@ final class Game {
         
         delegate?.closeCells(at: indexPathsToClose)
         openedCount -= indexPathsToClose.count
+        
+        assert(!indexPathsToClose.isEmpty)
         indexPathsToClose.removeAll()
     }
     
