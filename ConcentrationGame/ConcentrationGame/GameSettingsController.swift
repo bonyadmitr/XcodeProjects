@@ -2,15 +2,15 @@ import UIKit
 
 final class GameSettingsController: UIViewController {
     
-    @IBOutlet private weak var rawsStepper: UIStepper!
-    @IBOutlet private weak var collumnsStepper: UIStepper!
-    @IBOutlet private weak var equalsStepper: UIStepper!
-    
     @IBOutlet private weak var rawsCountLabel: UILabel!
     @IBOutlet private weak var collumnsCountLabel: UILabel!
     @IBOutlet private weak var equalsCountLabel: UILabel!
     
-    @IBOutlet weak var startBarButton: UIBarButtonItem!
+    @IBOutlet private weak var rawsStepper: UIStepper!
+    @IBOutlet private weak var collumnsStepper: UIStepper!
+    @IBOutlet private weak var equalsStepper: UIStepper!
+    
+    @IBOutlet private weak var startBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +22,10 @@ final class GameSettingsController: UIViewController {
     private func initialSetup() {
         rawsStepper.minimumValue = 1
         collumnsStepper.minimumValue = 1
-        equalsStepper.minimumValue = 1
+        equalsStepper.minimumValue = 2
         
         collumnsStepper.maximumValue = 10
+        equalsStepper.maximumValue = 10
         
         let raws = 4
         let collumns = 4
