@@ -10,14 +10,11 @@ final class GameController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let newValue = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         newValue.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        
         newValue.register(GameCell.self, forCellWithReuseIdentifier: gameCellId)
         newValue.dataSource = self
         newValue.delegate = self
-        
         newValue.backgroundColor = UIColor.lightGray
-//        newValue.alwaysBounceVertical = true
-//        newValue.allowsMultipleSelection = true
+        
         updateLayout(for: newValue)
         return newValue
     }()

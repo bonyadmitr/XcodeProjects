@@ -27,10 +27,20 @@ final class Game {
     
     weak var delegate: GameDelegate?
     
-    var raws: Int = 0
-    var collumns: Int = 0
-    
     var gameModels = [GameModel]()
+    
+    private(set) var raws: Int = 0
+    private(set) var collumns: Int = 0
+    
+    
+    private var openedCount = 0
+    private var isFinished = false
+    
+    private var equalNumber = 3
+    
+    private var indexPathsToClose = [IndexPath]()
+    
+    private var needToClose = false
     
     func start(raws: Int, collumns: Int, equalNumber: Int) {
         self.raws = raws
@@ -69,15 +79,7 @@ final class Game {
         
         assert(gameModels.count == totalCells)
     }
-    
-    var openedCount = 0
-    var isFinished = false
-    
-    var equalNumber = 3
-    
-    private var indexPathsToClose = [IndexPath]()
-    
-    var needToClose = false
+
     
     private func closeCellsIfNeed() {
         
@@ -128,7 +130,6 @@ final class Game {
                 needToClose = true
                 indexPathsToClose.append(indexPath)
             } else if indexPathsToClose.count == equalNumber - 1 {
-//                assert(indexPathsToClose.count == equaleNumber - 1)
                 indexPathsToClose.removeAll()
             } else {
                 indexPathsToClose.append(indexPath)
@@ -136,26 +137,5 @@ final class Game {
         } else {
             indexPathsToClose.append(indexPath)
         }
-    }
-}
-
-final class GameModel {
-    let id: Int
-    let emojy: String
-    var isAlwayesOpened = false
-    
-    init(id: Int, emojy: String) {
-        self.id = id
-        self.emojy = emojy
-    }
-    
-    func copy() -> GameModel {
-        return GameModel(id: id, emojy: emojy)
-    }
-}
-
-extension GameModel: Equatable {
-    static func == (lhs: GameModel, rhs: GameModel) -> Bool {
-        return lhs.id == rhs.id
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE1B5D8A227AC59500B89DA0 /* GameSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5D89227AC59500B89DA0 /* GameSettingsController.swift */; };
+		CE1B5D8C227AEC4B00B89DA0 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1B5D8B227AEC4B00B89DA0 /* GameModel.swift */; };
 		CE6A4C1D226F04BA00406A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A4C1C226F04BA00406A6D /* AppDelegate.swift */; };
 		CE6A4C1F226F04BA00406A6D /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A4C1E226F04BA00406A6D /* GameController.swift */; };
 		CE6A4C22226F04BA00406A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6A4C20226F04BA00406A6D /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		CE1B5D89227AC59500B89DA0 /* GameSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingsController.swift; sourceTree = "<group>"; };
+		CE1B5D8B227AEC4B00B89DA0 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		CE6A4C19226F04BA00406A6D /* ConcentrationGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConcentrationGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6A4C1C226F04BA00406A6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE6A4C1E226F04BA00406A6D /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
@@ -64,9 +66,10 @@
 			children = (
 				CE6A4C1C226F04BA00406A6D /* AppDelegate.swift */,
 				CE1B5D89227AC59500B89DA0 /* GameSettingsController.swift */,
+				CE6A4C4C2273423E00406A6D /* GameCell.swift */,
 				CE6A4C1E226F04BA00406A6D /* GameController.swift */,
 				CE6A4C50227344C900406A6D /* Game.swift */,
-				CE6A4C4C2273423E00406A6D /* GameCell.swift */,
+				CE1B5D8B227AEC4B00B89DA0 /* GameModel.swift */,
 				CE6A4C4E227342E900406A6D /* Emoji.swift */,
 				CE6A4C20226F04BA00406A6D /* Main.storyboard */,
 				CE6A4C23226F04BB00406A6D /* Assets.xcassets */,
@@ -152,6 +155,7 @@
 				CE1B5D8A227AC59500B89DA0 /* GameSettingsController.swift in Sources */,
 				CE6A4C1D226F04BA00406A6D /* AppDelegate.swift in Sources */,
 				CE6A4C4F227342E900406A6D /* Emoji.swift in Sources */,
+				CE1B5D8C227AEC4B00B89DA0 /* GameModel.swift in Sources */,
 				CE6A4C4D2273423E00406A6D /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
