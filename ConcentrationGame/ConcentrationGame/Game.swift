@@ -123,17 +123,26 @@ final class Game {
         
         closeCellsIfNeed()
         
+        /// check second+ selected model
         if let lastSelectedIndexPath = indexPathsToClose.last {
+            
             let lastSelectedModel = gameModels[lastSelectedIndexPath.row]
             
+            /// wrong card selected
             if selectedModel != lastSelectedModel {
                 needToClose = true
                 indexPathsToClose.append(indexPath)
+                
+            /// we found all equal models
             } else if indexPathsToClose.count == equalNumber - 1 {
                 indexPathsToClose.removeAll()
+                
+            /// we found next equal model (for 'equalNumber' >= 3)
             } else {
                 indexPathsToClose.append(indexPath)
             }
+            
+        /// first model selected
         } else {
             indexPathsToClose.append(indexPath)
         }
