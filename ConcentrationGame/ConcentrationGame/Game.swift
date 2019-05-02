@@ -17,6 +17,12 @@ protocol GameDelegate: class {
     func gameDidFinished()
 }
 
+extension Game {
+    static func isAvailableToStartWith(raws: Int, collumns: Int, equalNumber: Int) -> Bool {
+        return (raws * collumns) % equalNumber == 0
+    }
+}
+
 final class Game {
     
     weak var delegate: GameDelegate?

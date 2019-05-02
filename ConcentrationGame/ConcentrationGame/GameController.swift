@@ -6,17 +6,21 @@ final class GameController: UIViewController {
     
     private let gameCellId = "GameCell"
     
-    @IBOutlet private weak var collectionView: UICollectionView! {
-        willSet {
-            updateLayout(for: newValue)
-            
-            newValue.register(GameCell.self, forCellWithReuseIdentifier: gameCellId)
-            newValue.dataSource = self
-            newValue.delegate = self
-            
-            newValue.backgroundColor = UIColor.lightGray
-        }
-    }
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let newValue = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        newValue.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+        newValue.register(GameCell.self, forCellWithReuseIdentifier: gameCellId)
+        newValue.dataSource = self
+        newValue.delegate = self
+        
+        newValue.backgroundColor = UIColor.lightGray
+//        newValue.alwaysBounceVertical = true
+//        newValue.allowsMultipleSelection = true
+        updateLayout(for: newValue)
+        return newValue
+    }()
     
     private func updateLayout(for collectionView: UICollectionView) {
         let viewWidth = UIScreen.main.bounds.width
@@ -33,14 +37,17 @@ final class GameController: UIViewController {
         }
     }
     
-    let numberOfRaws = 5
-    let numberOfCollumns = 3
+    var numberOfRaws = 4
+    var numberOfCollumns = 4
+    var equalNumber = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(collectionView)
+        
         game.delegate = self
-        game.start(raws: numberOfRaws, collumns: numberOfCollumns, equalNumber: 3)
+        game.start(raws: numberOfRaws, collumns: numberOfCollumns, equalNumber: equalNumber)
         // TODO: update lauout
         collectionView.reloadData()
     }
