@@ -9,17 +9,22 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         activateProximitySensor()
     }
+    
+    /// https://developer.apple.com/documentation/uikit/uidevice/1620017-isproximitymonitoringenabled
+    func isProximityMonitoringAvailable() -> Bool {
+        UIDevice.current.isProximityMonitoringEnabled = true
+        let isAvailable = UIDevice.current.isProximityMonitoringEnabled
+        UIDevice.current.isProximityMonitoringEnabled = false
+        return isAvailable
+    }
 
-     private func activateProximitySensor() {
+    /// not working in lanscape
+    /// https://stackoverflow.com/a/8677732/5893286
+    ///
+    private func activateProximitySensor() {
         UIDevice.current.isProximityMonitoringEnabled = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(proximityChanged), name: UIDevice.proximityStateDidChangeNotification, object: nil)
-//        let device = UIDevice.currentDevice()
-//        device.proximityMonitoringEnabled = true
-//        if device.proximityMonitoringEnabled {
-//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "proximityChanged:", name: "UIDeviceProximityStateDidChangeNotification", object: device)
-//
-//        }
     }
 
     @objc private func proximityChanged() {
@@ -42,6 +47,7 @@ final class ViewController: UIViewController {
                 device.torchMode = .off
             }
             
+            /// real toggle
 //            if device.torchMode == .on {
 //                device.torchMode = .off
 //            } else {
