@@ -17,6 +17,7 @@ final class GameSettingsController: UIViewController {
         
         initialSetup()
         check()
+        openGame(animated: false)
     }
     
     private func initialSetup() {
@@ -40,8 +41,16 @@ final class GameSettingsController: UIViewController {
         equalsCountLabel.text = String(equalNumber)
     }
     
-    @IBAction func onStartBarButton(_ sender: UIBarButtonItem) {
+    private func check() {
+        let raws = Int(rawsStepper.value)
+        let collumns = Int(collumnsStepper.value)
+        let equalNumber = Int(equalsStepper.value)
         
+        let isAvailableGame = Game.isAvailableToStartWith(raws: raws, collumns: collumns, equalNumber: equalNumber)
+        startBarButton.isEnabled = isAvailableGame
+    }
+    
+    private func openGame(animated: Bool) {
         let raws = Int(rawsStepper.value)
         let collumns = Int(collumnsStepper.value)
         let equalNumber = Int(equalsStepper.value)
@@ -53,9 +62,12 @@ final class GameSettingsController: UIViewController {
         vc.numberOfRaws = raws
         vc.numberOfCollumns = collumns
         vc.equalNumber = equalNumber
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: animated)
     }
     
+    @IBAction func onStartBarButton(_ sender: UIBarButtonItem) {
+        openGame(animated: true)
+    }
     
     @IBAction private func onRawsStepper(_ sender: UIStepper) {
         rawsCountLabel.text = String(Int(sender.value))
@@ -70,14 +82,5 @@ final class GameSettingsController: UIViewController {
     @IBAction private func onEqualsStepper(_ sender: UIStepper) {
         equalsCountLabel.text = String(Int(sender.value))
         check()
-    }
-    
-    private func check() {
-        let raws = Int(rawsStepper.value)
-        let collumns = Int(collumnsStepper.value)
-        let equalNumber = Int(equalsStepper.value)
-        
-        let isAvailableGame = Game.isAvailableToStartWith(raws: raws, collumns: collumns, equalNumber: equalNumber)
-        startBarButton.isEnabled = isAvailableGame
     }
 }
