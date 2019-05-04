@@ -1,11 +1,7 @@
 import Foundation
 
-//enum ConcentrationState {
-//    case start
-//    case wrongPaire
-//    case selection
-//    case finished
-//}
+// TODO: currentEmojiCategory selection
+// TODO: guard in isAvailableToStartWith for currentEmojiCategory
 
 /// for novice
 /// https://habr.com/ru/company/skillbox/blog/447598/
