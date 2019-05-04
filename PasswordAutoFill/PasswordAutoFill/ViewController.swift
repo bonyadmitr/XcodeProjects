@@ -2,16 +2,20 @@ import UIKit
 
 /// https://developer.apple.com/videos/play/wwdc2018/204/
 ///
-/// rus (!!! Capabilities > Associated Domains and AutoFill Credential Provider)
+/// rus
 /// https://habr.com/ru/post/438580/
 ///
-/// docs
+/// docs:
 /// https://developer.apple.com/documentation/security/password_autofill/
 /// https://developer.apple.com/documentation/security/password_autofill/enabling_password_autofill_on_a_text_input_view
 /// https://developer.apple.com/documentation/security/password_autofill/customizing_password_autofill_rules
 ///
+/// errors:
+/// !!! Capabilities > Associated Domains and AutoFill Credential Provider
 /// Cannot show Automatic Strong Passwords for app bundleID: com.by.PasswordAutoFill due to error: iCloud Keychain is disabled
 /// Cannot show Automatic Strong Passwords for app bundleID: com.by.PasswordAutoFill due to error: Cannot save passwords for this app. Make sure you have set up Associated Domains for your app and AutoFill Passwords is enabled in Settings
+///
+/// using:
 /// Settings > Passwords & Accounts > Autofill Passwords
 /// Settings > Passwords & Accounts > iCloud > Keychain on
 /// https://www.digitaltrends.com/mobile/how-to-use-passwords-and-accounts-in-ios-12/
@@ -62,8 +66,10 @@ final class ViewController: UIViewController {
     //confirmNewPasswordTextField
     @IBOutlet private weak var newPasswordTextField: UITextField! {
         willSet {
+            newValue.placeholder = "newPasswordTextField"
+            newValue.isSecureTextEntry = true
+            
             if #available(iOS 12.0, *) {
-                newValue.placeholder = "newPasswordTextField"
                 newValue.textContentType = .newPassword
                 
                 newValue.passwordRules = UITextInputPasswordRules(descriptor: "required: upper; required: lower; required: digit; allowed: [-().&@?'#,/&quot;+]; max-consecutive: 2; minlength: 8; maxlength: 16;")
@@ -74,6 +80,8 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var repeatPasswordTextField: UITextField! {
         willSet {
             newValue.placeholder = "repeatPasswordTextField"
+            newValue.isSecureTextEntry = true
+            
             if #available(iOS 12.0, *) {
                 newValue.textContentType = .newPassword
                 
