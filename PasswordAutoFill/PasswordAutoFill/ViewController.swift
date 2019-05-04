@@ -2,6 +2,9 @@ import UIKit
 
 /// https://developer.apple.com/videos/play/wwdc2018/204/
 ///
+/// rus (!!! Capabilities > Associated Domains and AutoFill Credential Provider)
+/// https://habr.com/ru/post/438580/
+///
 /// docs
 /// https://developer.apple.com/documentation/security/password_autofill/
 /// https://developer.apple.com/documentation/security/password_autofill/enabling_password_autofill_on_a_text_input_view
