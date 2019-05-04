@@ -68,12 +68,7 @@ final class ViewController: UIViewController {
         willSet {
             newValue.placeholder = "newPasswordTextField"
             newValue.isSecureTextEntry = true
-            
-            if #available(iOS 12.0, *) {
-                newValue.textContentType = .newPassword
-                
-                newValue.passwordRules = UITextInputPasswordRules(descriptor: "required: upper; required: lower; required: digit; allowed: [-().&@?'#,/&quot;+]; max-consecutive: 2; minlength: 8; maxlength: 16;")
-            }
+            setupNewPasswordRules(for: newValue)
         }
     }
     
@@ -81,12 +76,7 @@ final class ViewController: UIViewController {
         willSet {
             newValue.placeholder = "repeatPasswordTextField"
             newValue.isSecureTextEntry = true
-            
-            if #available(iOS 12.0, *) {
-                newValue.textContentType = .newPassword
-                
-                newValue.passwordRules = UITextInputPasswordRules(descriptor: "required: upper; required: lower; required: digit; allowed: [-().&@?'#,/&quot;+]; max-consecutive: 2; minlength: 8; maxlength: 16;")
-            }
+            setupNewPasswordRules(for: newValue)
         }
     }
     
@@ -96,6 +86,14 @@ final class ViewController: UIViewController {
             if #available(iOS 12.0, *) {
                 newValue.textContentType = .oneTimeCode
             }
+        }
+    }
+    
+    private func setupNewPasswordRules(for textField: UITextField) {
+        if #available(iOS 12.0, *) {
+            textField.textContentType = .newPassword
+            
+            textField.passwordRules = UITextInputPasswordRules(descriptor: "required: upper; required: lower; required: digit; allowed: [-().&@?'#,/&quot;+]; max-consecutive: 2; minlength: 8; maxlength: 16;")
         }
     }
     
