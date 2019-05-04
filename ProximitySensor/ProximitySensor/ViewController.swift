@@ -7,7 +7,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activateProximitySensor()
+        activateProximitySensor(isOn: true)
     }
     
     /// https://developer.apple.com/documentation/uikit/uidevice/1620017-isproximitymonitoringenabled
@@ -18,13 +18,21 @@ final class ViewController: UIViewController {
         return isAvailable
     }
 
-    /// not working in lanscape
+    /// Notifications not working in lanscape
     /// https://stackoverflow.com/a/8677732/5893286
     ///
-    private func activateProximitySensor() {
-        UIDevice.current.isProximityMonitoringEnabled = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(proximityChanged), name: UIDevice.proximityStateDidChangeNotification, object: nil)
+    private func activateProximitySensor(isOn: Bool) {
+        UIDevice.current.isProximityMonitoringEnabled = isOn
+        if isOn {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(proximityChanged),
+                                                   name: UIDevice.proximityStateDidChangeNotification,
+                                                   object: nil)
+        } else {
+            NotificationCenter.default.removeObserver(self,
+                                                      name: UIDevice.proximityStateDidChangeNotification,
+                                                      object: nil)
+        }
     }
 
     @objc private func proximityChanged() {
