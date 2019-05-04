@@ -76,6 +76,8 @@ final class ViewController: UIViewController {
             newValue.placeholder = "repeatPasswordTextField"
             if #available(iOS 12.0, *) {
                 newValue.textContentType = .newPassword
+                
+                newValue.passwordRules = UITextInputPasswordRules(descriptor: "required: upper; required: lower; required: digit; allowed: [-().&@?'#,/&quot;+]; max-consecutive: 2; minlength: 8; maxlength: 16;")
             }
         }
     }
