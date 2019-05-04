@@ -42,6 +42,10 @@ final class Game {
     
     private var needToClose = false
     
+    private func currentEmojiCategory() -> [String]? {
+        return Emoji.shared.emojiCategories["people"]
+    }
+    
     func start(raws: Int, collumns: Int, equalNumber: Int) {
         self.raws = raws
         self.collumns = collumns
@@ -54,9 +58,16 @@ final class Game {
         }
         let createCellsCount = totalCells / equalNumber
         
+        guard let emojiCategory = currentEmojiCategory() else {
+            assertionFailure()
+            return
+        }
+        
+        assert(emojiCategory.count >= totalCells)
+        
         var emojies = [String]()
         while emojies.count < createCellsCount {
-            guard let randomEmojy = Emoji.shared.emojiCategories["people"]?.randomElement() else {
+            guard let randomEmojy = emojiCategory.randomElement() else {
                 assertionFailure()
                 return
             }
