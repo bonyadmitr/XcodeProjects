@@ -74,13 +74,14 @@ final class Game {
         
         assert(emojies.count == createCellsCount)
         
+        /// create gameModels
         let gameModelsToCopy = emojies.enumerated().map { GameModel(id: $0.offset, emojy: $0.element) }
         gameModels = gameModelsToCopy
         
+        /// copy gameModels
         for _ in 2...equalNumber {
             gameModels += gameModelsToCopy.map { $0.copy() }
         }
-        
         
         gameModels.shuffle()
         
@@ -105,6 +106,7 @@ final class Game {
         openedCount -= indexPathsToClose.count
         
         assert(!indexPathsToClose.isEmpty)
+        /// call at the end
         indexPathsToClose.removeAll()
     }
     
