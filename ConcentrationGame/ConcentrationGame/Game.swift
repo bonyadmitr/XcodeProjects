@@ -2,6 +2,8 @@ import Foundation
 
 // TODO: currentEmojiCategory selection
 // TODO: guard in isAvailableToStartWith for currentEmojiCategory
+// TODO: game timer
+// TODO: option open all cards for some seconds at the beginning
 
 /// for novice
 /// https://habr.com/ru/company/skillbox/blog/447598/
