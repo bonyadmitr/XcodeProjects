@@ -84,7 +84,10 @@ extension GameController: UICollectionViewDelegate {
 extension GameController: GameDelegate {
     func gameDidFinished() {
         print("- finished")
-        UIAlertView(title: "Finished", message: nil, delegate: nil, cancelButtonTitle: "OK").show()
+        
+        let vc = UIAlertController(title: "Finished", message: nil, preferredStyle: .alert)
+        vc.addAction(.init(title: "OK", style: .cancel, handler: nil))
+        present(vc, animated: true, completion: nil)
     }
     
     func closeCells(at indexPathes: [IndexPath]) {
