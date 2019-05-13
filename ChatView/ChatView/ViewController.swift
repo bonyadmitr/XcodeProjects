@@ -2,6 +2,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    /// needs if "becomeFirstResponder()" is not used
 //    override var canBecomeFirstResponder: Bool {
 //        return view.canBecomeFirstResponder
 //    }
@@ -31,8 +32,10 @@ final class ChatView: UIView {
         addTapGestureToHideKeyboard()
     }
     
-    private let toolBar2: UIToolbar = {
-        let textView = UITextView()
+    let textView = UITextView()
+    
+    private lazy var toolBar2: UIToolbar = {
+        
         let textBarItem = UIBarButtonItem(customView: textView)
         
         let toolBar = UIToolbar()
@@ -68,7 +71,13 @@ final class ChatView: UIView {
     }
     
     private func addTapGestureToHideKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
+        tapGesture.cancelsTouchesInView = false
         addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func onTapGesture() {
+        /// don't use "endEditing(true)" bcz it will close inputAccessoryView
+        textView.resignFirstResponder()
     }
 }
