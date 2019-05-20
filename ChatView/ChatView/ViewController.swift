@@ -30,24 +30,39 @@ final class ChatView: UIView {
     
     private func setup() {
         addTapGestureToHideKeyboard()
+        
+        /// 271 is keyboard height with suggestions
+        customInputView.frame = CGRect(x: 0, y: 0, width: 0, height: 271)
     }
     
     let textView = UITextView()
     
     private lazy var toolBar2: UIToolbar = {
-        
+        textView.frame.size.width = 100
         let textBarItem = UIBarButtonItem(customView: textView)
+        let switchKeyboardBarItem = UIBarButtonItem(title: "K", style: .plain, target: self, action: #selector(switchKeyboard))
         
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
         toolBar.isTranslucent = false
         toolBar.sizeToFit()
         toolBar.isUserInteractionEnabled = true
-        toolBar.setItems([textBarItem], animated: false)
+        toolBar.items = [switchKeyboardBarItem, textBarItem]
         //toolBar.barTintColor = #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
         
         return toolBar
     }()
+    
+    private let customInputView = UIDatePicker()
+    
+    @objc private func switchKeyboard() {
+        if textView.inputView == nil {
+            textView.inputView = customInputView
+        } else {
+            textView.inputView = nil
+        }
+        textView.reloadInputViews()
+    }
     
     override var canBecomeFirstResponder: Bool {
         return viewHasPerformedSubviewLayoutAtLeastOnce
