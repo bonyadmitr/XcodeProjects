@@ -98,6 +98,10 @@ final class CollectionController: UIViewController {
                                  height: collectionView.frame.height)
     }
     
+    deinit {
+        scrollBarEazy.freeScrollView()
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()

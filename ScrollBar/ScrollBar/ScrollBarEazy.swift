@@ -10,7 +10,7 @@ import UIKit
 
 final class ScrollBarEazy: UIView {
     
-    private weak var scrollView: UIScrollView?
+    private var scrollView: UIScrollView?
     
     private lazy var handleView: UIView = {
         let handleImage = UIImage.verticalCapsuleImage(withWidth: handleWidth)
@@ -63,7 +63,7 @@ final class ScrollBarEazy: UIView {
     }
     
     func observe(scrollView: UIScrollView) {
-        restore(scrollView: self.scrollView)
+        freeScrollView()
         self.scrollView = scrollView
         config(scrollView: scrollView)
     }
@@ -78,17 +78,14 @@ final class ScrollBarEazy: UIView {
         scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: [.new], context: nil)
     }
     
-    private func restore(scrollView: UIScrollView?) {
+    /// https://stackoverflow.com/a/51800670/5893286
+    func freeScrollView() {
         guard let scrollView = scrollView else {
             return
         }
-//        scrollView.showsVerticalScrollIndicator = true
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
         scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
-    }
-    
-    deinit {
-        restore(scrollView: scrollView)
+        self.scrollView = nil
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -113,7 +110,10 @@ final class ScrollBarEazy: UIView {
         }
         set {
             let newHeight = newValue.height - (insets.top + insets.bottom) 
-            super.frame = CGRect(x: newValue.origin.x, y: newValue.origin.y + insets.top, width: newValue.width, height: newHeight)
+            super.frame = CGRect(x: newValue.origin.x,
+                                 y: newValue.origin.y + insets.top,
+                                 width: newValue.width,
+                                 height: newHeight)
         }
     }
     
