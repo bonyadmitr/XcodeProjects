@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: memory leak with "target: self"
 class ViewController: UIViewController {
 
     let performanceManager = PerformanceManager()
@@ -26,33 +27,69 @@ class ViewController: UIViewController {
 final class PerformanceManager {
     
     private lazy var displaylink: CADisplayLink = {
-        let displaylink = CADisplayLink(target: self, selector: #selector(step))
+        let displaylink = CADisplayLink(target: self, selector: #selector(displaylinkTick))
         displaylink.add(to: .current, forMode: .default)
         //displaylink.isPaused = true
         return displaylink
     }()
+    
+    var lastTimestamp: CFTimeInterval = 0
     
     func start() {
 //        if #available(iOS 10.0, *) {
 //            displaylink.preferredFramesPerSecond = 30
 //        }
         //displaylink.frameInterval = 30
-        displaylink.isPaused = false
+//        displaylink.isPaused = false
+        _ = displaylink
     }
     
-    @objc private func step(displaylink: CADisplayLink) {
+    private let maxNumberOfFrames: Double = 120
+    private let kFramesPerSecond: Double = 60
+    
+    @objc private func displaylinkTick(_ displaylink: CADisplayLink) {
 //        print(displaylink.timestamp)
+        
         if #available(iOS 10.0, *) {
             /// https://developer.apple.com/documentation/quartzcore/cadisplaylink
+            /// displaylink.targetTimestamp - displaylink.timestamp = 0.016 for 60 fps
+            assert(displaylink.targetTimestamp - displaylink.timestamp != 0)
             let actualFramesPerSecond = 1 / (displaylink.targetTimestamp - displaylink.timestamp)
             print(actualFramesPerSecond)
-            print(cpuUsage())
-            print(memoryUsage() / 1024 / 1024)
-            print(memoryTotal() / 1024 / 1024)
         } else {
-            // Fallback on earlier versions
+            
+            /// only for first run
+            if lastTimestamp == 0 {
+                lastTimestamp = displaylink.timestamp
+                return
+            }
+            
+            assert(lastTimestamp != 0)
+            assert(displaylink.timestamp - lastTimestamp != 0)
+            
+            /// will not be called for first displaylinkTick
+            let frameNumber = 1 / (displaylink.timestamp - lastTimestamp)
+            print(frameNumber)
+            
+            /// save lastTimestamp for next displaylinkTick after calculation frameNumber
+            lastTimestamp = displaylink.timestamp
         }
         
+
+
+        
+        //            print(cpuUsage())
+        //            print(memoryUsage() / 1024 / 1024)
+        //            print(memoryTotal() / 1024 / 1024)
+
+        
+    }
+    
+    /// you cannot do this in deinit
+    /// https://stackoverflow.com/a/47369566/5893286
+    func stop() {
+        //displaylink.isPaused = true
+        displaylink.invalidate()
     }
     
     func cpuUsage() -> Double {
