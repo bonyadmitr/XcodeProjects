@@ -29,12 +29,6 @@ final class ViewController: UIViewController {
     }
 }
 
-enum Formatters {
-    static func bytesInGB(_ bytes: Int64) -> String {
-        return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .binary)
-    }
-}
-
 // TODO: add guard var isStarted
 
 /// for 120fps add CADisableMinimumFrameDuration YES in Info.plist
@@ -107,10 +101,6 @@ final class PerformanceManager {
         print()
         print(String(format: "FPS: %.1f%", framesPerSecond))
         print(String(format: "CPU: %.1f%%", cpuUsage()))
-        
-//        let memoryUsageString = Formatters.bytesInGB(Int64(memoryUsage()))
-//        let memoryTotalString = Formatters.bytesInGB(Int64(memoryTotal()))
-//        print("\(memoryUsageString) of \(memoryTotalString)")
         
         let bytesInMegabyte = 1024.0 * 1024.0
         let usedMemory = Double(memoryUsage()) / bytesInMegabyte
