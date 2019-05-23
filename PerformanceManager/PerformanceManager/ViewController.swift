@@ -26,6 +26,12 @@ final class ViewController: UIViewController {
     }
 }
 
+enum Formatters {
+    static func bytesInGB(_ bytes: Int64) -> String {
+        return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .binary)
+    }
+}
+
 /// for 120fps add CADisableMinimumFrameDuration YES in Info.plist
 /// https://developer.apple.com/library/archive/technotes/tn2460/_index.html
 ///
@@ -89,10 +95,20 @@ final class PerformanceManager {
             lastTimestamp = displayLink.timestamp
         }
         
+        print()
         print(framesPerSecond)
-        //            print(cpuUsage())
-        //            print(memoryUsage() / 1024 / 1024)
-        //            print(memoryTotal() / 1024 / 1024)
+        print(cpuUsage())
+        
+        let memoryUsageString = Formatters.bytesInGB(Int64(memoryUsage()))
+        let memoryTotalString = Formatters.bytesInGB(Int64(memoryTotal()))
+        print("\(memoryUsageString) of \(memoryTotalString)")
+
+        
+        
+//        let bytesInMegabyte = 1024.0 * 1024.0
+//        let usedMemory = Double(report.memoryUsage.used) / bytesInMegabyte
+//        let totalMemory = Double(report.memoryUsage.total) / bytesInMegabyte
+//        let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
     }
     
     /// you cannot do this in deinit of PerformanceManager
@@ -139,18 +155,36 @@ final class PerformanceManager {
     }
     
     func memoryUsage() -> UInt64 {
-        var taskInfo = mach_task_basic_info()
-        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+        // TODO: check
+        /// memory usage not equal Xcode Debug Gauge
+//        var taskInfo = mach_task_basic_info()
+//        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+//        let result: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
+//            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+//                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+//            }
+//        }
+//
+//        var used: UInt64 = 0
+//        if result == KERN_SUCCESS {
+//            used = UInt64(taskInfo.resident_size)
+//        }
+        
+        /// resident_size does not get accurate memory, and the correct way is to use phys_footprint, which can be proved from the source codes of WebKit and XNU.
+        /// https://github.com/WebKit/webkit/blob/master/Source/WTF/wtf/cocoa/MemoryFootprintCocoa.cpp
+        var taskInfo = task_vm_info_data_t()
+        var count = mach_msg_type_number_t(MemoryLayout<task_vm_info>.size) / 4
         let result: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
             $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
-                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+                task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count)
             }
         }
         
         var used: UInt64 = 0
         if result == KERN_SUCCESS {
-            used = UInt64(taskInfo.resident_size)
+            used = UInt64(taskInfo.phys_footprint)
         }
+        
         return used
     }
     
