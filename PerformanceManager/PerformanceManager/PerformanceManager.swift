@@ -19,7 +19,6 @@ final class PerformanceManager {
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
     
-    
     /// can be used in init, not in start()
     /// displayLink.isPaused = true
     func start() {
@@ -132,7 +131,7 @@ final class PerformanceManager {
     }
     
     func memoryUsage() -> UInt64 {
-        // TODO: check
+        // TODO: check on device
         /// memory usage not equal Xcode Debug Gauge
         //        var taskInfo = mach_task_basic_info()
         //        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
@@ -169,7 +168,3 @@ final class PerformanceManager {
         return ProcessInfo.processInfo.physicalMemory
     }
 }
-
-//import QuartzCore
-
-public typealias MemoryUsage = (used: UInt64, total: UInt64)
