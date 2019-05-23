@@ -31,6 +31,13 @@ final class ViewController: UIViewController {
 
 // TODO: add guard var isStarted
 
+// TODO: check for background
+//DispatchQueue.global().async {
+//    self.displaylink = CADisplayLink(target: self, selector: #selector(self.linkTriggered))
+//    self.displaylink.add(to: .current, forMode: .default)
+//    RunLoop.current.run()
+//}
+
 /// for 120fps add CADisableMinimumFrameDuration YES in Info.plist
 /// https://developer.apple.com/library/archive/technotes/tn2460/_index.html
 ///
