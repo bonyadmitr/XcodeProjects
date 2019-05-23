@@ -33,6 +33,7 @@ class TableController: UIViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            //tableView.keyboardDismissMode = .onDrag
         }
     }
     
@@ -208,6 +209,7 @@ extension TableController: UISearchBarDelegate {
         
         switch sortOrder {
         case .dateNameUp:
+            // TODO: reuse with fetchedResultsController
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
             let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: false)
             sortDescriptors = [sortDescriptor1, sortDescriptor2]
