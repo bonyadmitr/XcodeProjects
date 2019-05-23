@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: window
+// https://github.com/dani-gavrilov/GDPerformanceView-Swift/blob/master/GDPerformanceView-Swift/GDPerformanceMonitoring/PerformanceView.swift
+
 final class ViewController: UIViewController {
 
     private let performanceManager = PerformanceManager()
@@ -39,10 +42,6 @@ enum Formatters {
 // TODO: add guard var isStarted
 final class PerformanceManager {
     
-    deinit {
-        print("deinit PerformanceManager")
-    }
-    
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
     
@@ -57,14 +56,16 @@ final class PerformanceManager {
         /// displayLink.duration will not change for preferredFramesPerSecond less then maximum for your device
         /// with default preferredFramesPerSecond displayLink.duration = displayLink.targetTimestamp - displayLink.timestamp = 0.166 for 60 fps
         ///
-        /// if #available(iOS 10.3, *) {
-        /// UIScreen.main.maximumFramesPerSecond
-//        let preferredFramesPerSecond = 30
-//        if #available(iOS 10.0, *) {
-//            displayLink.preferredFramesPerSecond = preferredFramesPerSecond
-//        } else {
-//            displayLink.frameInterval = preferredFramesPerSecond
-//        }
+        //if #available(iOS 10.3, *) {
+        //    print(UIScreen.main.maximumFramesPerSecond)
+        //}
+        
+        //let preferredFramesPerSecond = 30
+        //if #available(iOS 10.0, *) {
+        //    displayLink.preferredFramesPerSecond = preferredFramesPerSecond
+        //} else {
+        //    displayLink.frameInterval = preferredFramesPerSecond
+        //}
     }
     
     @objc private func displayLinkTick(_ displayLink: CADisplayLink) {
@@ -76,6 +77,10 @@ final class PerformanceManager {
             /// displayLink.targetTimestamp - displayLink.timestamp = 0.0166 for 60 fps
             assert(displayLink.targetTimestamp - displayLink.timestamp != 0)
             framesPerSecond = 1 / (displayLink.targetTimestamp - displayLink.timestamp)
+            
+            /// https://medium.com/@dmitryivanov_54099/cadisplaylink-and-its-applications-bfafb760d738
+            /// https://github.com/DmIvanov/Animations/blob/master/Animations/AnimationView.swift
+            assert(displayLink.targetTimestamp > CACurrentMediaTime(), "took longer than 1 frame")
         } else {
         
             /// only for first displayLinkTick
@@ -106,7 +111,7 @@ final class PerformanceManager {
         let bytesInMegabyte = 1024.0 * 1024.0
         let usedMemory = Double(memoryUsage()) / bytesInMegabyte
         let totalMemory = Double(memoryTotal()) / bytesInMegabyte
-        let memory = String(format: "%.1f of %.0f MB", usedMemory, totalMemory)
+        let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
         print(memory)
     }
     
