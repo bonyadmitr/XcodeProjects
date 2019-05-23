@@ -14,7 +14,21 @@ import CoreData
 // TODO: animated search
 // https://gist.github.com/stephanecopin/fbeca87e2f66e522ffd6b197955d5f49
 class TableController: UIViewController {
-
+    
+    private enum SortOptions: Int, CaseIterable {
+        case dateNameUp = 0
+        case dateNameDown
+        
+        var title: String {
+            switch self {
+            case .dateNameUp:
+                return "Date/Name up"
+            case .dateNameDown:
+                return "Date/Name down"
+            }
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -71,7 +85,8 @@ class TableController: UIViewController {
          The search controller should be presented modally and match the physical size of this view controller.
          */
         definesPresentationContext = true
-
+        
+        searchController.searchBar.scopeButtonTitles = SortOptions.allCases.map { $0.title }
     }
     
     @IBAction private func addEvent(_ sender: UIBarButtonItem) {
@@ -180,6 +195,29 @@ extension TableController: UISearchBarDelegate {
     /// default for iOS 12
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        let sortDescriptors: [NSSortDescriptor]
+        switch selectedScope {
+        case 0:
+            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
+            let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: false)
+            sortDescriptors = [sortDescriptor1, sortDescriptor2]
+
+        case 1:
+            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: true)
+            let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: true)
+            sortDescriptors = [sortDescriptor1, sortDescriptor2]
+
+        default:
+            assertionFailure()
+            return
+        }
+        
+        fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
+        performFetch()
     }
 }
 
