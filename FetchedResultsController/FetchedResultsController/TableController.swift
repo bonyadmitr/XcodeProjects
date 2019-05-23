@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+// TODO: test frc updated for search and sorting
+// https://stackoverflow.com/a/3696104
+
 // TODO: UISearchController with fetchedResultsController with cacheName
 // do we need to delete cache in this case?
 // TODO: animated search
