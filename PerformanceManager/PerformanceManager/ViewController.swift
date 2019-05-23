@@ -96,19 +96,18 @@ final class PerformanceManager {
         }
         
         print()
-        print(framesPerSecond)
-        print(cpuUsage())
+        print(String(format: "FPS: %.1f%", framesPerSecond))
+        print(String(format: "CPU: %.1f%%", cpuUsage()))
         
-        let memoryUsageString = Formatters.bytesInGB(Int64(memoryUsage()))
-        let memoryTotalString = Formatters.bytesInGB(Int64(memoryTotal()))
-        print("\(memoryUsageString) of \(memoryTotalString)")
-
+//        let memoryUsageString = Formatters.bytesInGB(Int64(memoryUsage()))
+//        let memoryTotalString = Formatters.bytesInGB(Int64(memoryTotal()))
+//        print("\(memoryUsageString) of \(memoryTotalString)")
         
-        
-//        let bytesInMegabyte = 1024.0 * 1024.0
-//        let usedMemory = Double(report.memoryUsage.used) / bytesInMegabyte
-//        let totalMemory = Double(report.memoryUsage.total) / bytesInMegabyte
-//        let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
+        let bytesInMegabyte = 1024.0 * 1024.0
+        let usedMemory = Double(memoryUsage()) / bytesInMegabyte
+        let totalMemory = Double(memoryTotal()) / bytesInMegabyte
+        let memory = String(format: "%.1f of %.0f MB", usedMemory, totalMemory)
+        print(memory)
     }
     
     /// you cannot do this in deinit of PerformanceManager
