@@ -35,16 +35,20 @@ enum Formatters {
     }
 }
 
+// TODO: add guard var isStarted
+
 /// for 120fps add CADisableMinimumFrameDuration YES in Info.plist
 /// https://developer.apple.com/library/archive/technotes/tn2460/_index.html
 ///
-/// don't fogget to call func stop()
-// TODO: add guard var isStarted
+/// don't fogget to call func stop() in owner deinit
 final class PerformanceManager {
     
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
     
+    
+    /// can be used in init, not in start()
+    /// displayLink.isPaused = true
     func start() {
         lastTimestamp = 0
         let displayLink = CADisplayLink(target: self, selector: #selector(displayLinkTick))
