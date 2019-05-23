@@ -26,70 +26,66 @@ class ViewController: UIViewController {
 
 final class PerformanceManager {
     
-    private lazy var displaylink: CADisplayLink = {
-        let displaylink = CADisplayLink(target: self, selector: #selector(displaylinkTick))
-        displaylink.add(to: .current, forMode: .default)
-        //displaylink.isPaused = true
-        return displaylink
-    }()
-    
-    var lastTimestamp: CFTimeInterval = 0
+    private var displayLink: CADisplayLink?
+    private var lastTimestamp: CFTimeInterval = 0
     
     func start() {
+        lastTimestamp = 0
+        let displayLink = CADisplayLink(target: self, selector: #selector(displayLinkTick))
+        displayLink.add(to: .current, forMode: .default)
+        self.displayLink = displayLink
+        
+        
+        /// displayLink.duration will not change for preferredFramesPerSecond less then maximum for your device
+        /// with default preferredFramesPerSecond displayLink.duration = displayLink.targetTimestamp - displayLink.timestamp = 0.166 for 60 fps
+        ///
+        /// if #available(iOS 10.3, *) {
+        /// UIScreen.main.maximumFramesPerSecond
+//        let preferredFramesPerSecond = 30
 //        if #available(iOS 10.0, *) {
-//            displaylink.preferredFramesPerSecond = 30
+//            displayLink.preferredFramesPerSecond = preferredFramesPerSecond
+//        } else {
+//            displayLink.frameInterval = preferredFramesPerSecond
 //        }
-        //displaylink.frameInterval = 30
-//        displaylink.isPaused = false
-        _ = displaylink
     }
     
-    private let maxNumberOfFrames: Double = 120
-    private let kFramesPerSecond: Double = 60
-    
-    @objc private func displaylinkTick(_ displaylink: CADisplayLink) {
-//        print(displaylink.timestamp)
+    @objc private func displayLinkTick(_ displayLink: CADisplayLink) {
         
         if #available(iOS 10.0, *) {
-            /// https://developer.apple.com/documentation/quartzcore/cadisplaylink
-            /// displaylink.targetTimestamp - displaylink.timestamp = 0.016 for 60 fps
-            assert(displaylink.targetTimestamp - displaylink.timestamp != 0)
-            let actualFramesPerSecond = 1 / (displaylink.targetTimestamp - displaylink.timestamp)
+            /// https://developer.apple.com/documentation/quartzcore/cadisplayLink
+            /// displayLink.targetTimestamp - displayLink.timestamp = 0.0166 for 60 fps
+            assert(displayLink.targetTimestamp - displayLink.timestamp != 0)
+            let actualFramesPerSecond = 1 / (displayLink.targetTimestamp - displayLink.timestamp)
             print(actualFramesPerSecond)
         } else {
-            
-            /// only for first run
+        
+            /// only for first displayLinkTick
             if lastTimestamp == 0 {
-                lastTimestamp = displaylink.timestamp
+                lastTimestamp = displayLink.timestamp
                 return
             }
             
             assert(lastTimestamp != 0)
-            assert(displaylink.timestamp - lastTimestamp != 0)
+            assert(displayLink.timestamp - lastTimestamp != 0)
             
-            /// will not be called for first displaylinkTick
-            let frameNumber = 1 / (displaylink.timestamp - lastTimestamp)
+            /// will not be called for first displayLinkTick
+            let frameNumber = 1 / (displayLink.timestamp - lastTimestamp)
             print(frameNumber)
             
-            /// save lastTimestamp for next displaylinkTick after calculation frameNumber
-            lastTimestamp = displaylink.timestamp
+            /// save lastTimestamp for next displayLinkTick after calculation frameNumber
+            lastTimestamp = displayLink.timestamp
         }
-        
-
-
         
         //            print(cpuUsage())
         //            print(memoryUsage() / 1024 / 1024)
         //            print(memoryTotal() / 1024 / 1024)
-
-        
     }
     
     /// you cannot do this in deinit
     /// https://stackoverflow.com/a/47369566/5893286
     func stop() {
-        //displaylink.isPaused = true
-        displaylink.invalidate()
+        //displayLink.isPaused = true
+        displayLink?.invalidate()
     }
     
     func cpuUsage() -> Double {
