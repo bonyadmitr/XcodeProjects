@@ -15,7 +15,7 @@ import CoreData
 // https://gist.github.com/stephanecopin/fbeca87e2f66e522ffd6b197955d5f49
 class TableController: UIViewController {
     
-    private enum SortOptions: Int, CaseIterable {
+    private enum SortOrder: Int, CaseIterable {
         case dateNameUp = 0
         case dateNameDown
         
@@ -86,7 +86,7 @@ class TableController: UIViewController {
          */
         definesPresentationContext = true
         
-        searchController.searchBar.scopeButtonTitles = SortOptions.allCases.map { $0.title }
+        searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
     }
     
     @IBAction private func addEvent(_ sender: UIBarButtonItem) {
@@ -199,21 +199,23 @@ extension TableController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
+        guard let sortOrder = SortOrder(rawValue: selectedScope) else {
+            assertionFailure()
+            return
+        }
+        
         let sortDescriptors: [NSSortDescriptor]
-        switch selectedScope {
-        case 0:
+        
+        switch sortOrder {
+        case .dateNameUp:
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: false)
             let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: false)
             sortDescriptors = [sortDescriptor1, sortDescriptor2]
 
-        case 1:
+        case .dateNameDown:
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(EventDB.date), ascending: true)
             let sortDescriptor2 = NSSortDescriptor(key: #keyPath(EventDB.title), ascending: true)
             sortDescriptors = [sortDescriptor1, sortDescriptor2]
-
-        default:
-            assertionFailure()
-            return
         }
         
         fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
