@@ -8,10 +8,9 @@
 
 import UIKit
 
-// TODO: memory leak with "target: self"
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
-    let performanceManager = PerformanceManager()
+    private let performanceManager = PerformanceManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +19,23 @@ class ViewController: UIViewController {
         
         performanceManager.start()
     }
-
-
+    
+    deinit {
+        print("deinit ViewController")
+        performanceManager.stop()
+    }
 }
 
+/// for 120fps add CADisableMinimumFrameDuration YES in Info.plist
+/// https://developer.apple.com/library/archive/technotes/tn2460/_index.html
+///
+/// don't fogget to call func stop()
+// TODO: add guard var isStarted
 final class PerformanceManager {
+    
+    deinit {
+        print("deinit PerformanceManager")
+    }
     
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
@@ -35,7 +46,8 @@ final class PerformanceManager {
         displayLink.add(to: .current, forMode: .default)
         self.displayLink = displayLink
         
-        
+        /// https://dmtopolog.com/cadisplaylink-and-its-applications/
+        ///
         /// displayLink.duration will not change for preferredFramesPerSecond less then maximum for your device
         /// with default preferredFramesPerSecond displayLink.duration = displayLink.targetTimestamp - displayLink.timestamp = 0.166 for 60 fps
         ///
@@ -51,15 +63,17 @@ final class PerformanceManager {
     
     @objc private func displayLinkTick(_ displayLink: CADisplayLink) {
         
+        let framesPerSecond: Double
+        
         if #available(iOS 10.0, *) {
             /// https://developer.apple.com/documentation/quartzcore/cadisplayLink
             /// displayLink.targetTimestamp - displayLink.timestamp = 0.0166 for 60 fps
             assert(displayLink.targetTimestamp - displayLink.timestamp != 0)
-            let actualFramesPerSecond = 1 / (displayLink.targetTimestamp - displayLink.timestamp)
-            print(actualFramesPerSecond)
+            framesPerSecond = 1 / (displayLink.targetTimestamp - displayLink.timestamp)
         } else {
         
             /// only for first displayLinkTick
+            /// https://gist.github.com/ibireme/8398714c741fc2097604
             if lastTimestamp == 0 {
                 lastTimestamp = displayLink.timestamp
                 return
@@ -69,25 +83,26 @@ final class PerformanceManager {
             assert(displayLink.timestamp - lastTimestamp != 0)
             
             /// will not be called for first displayLinkTick
-            let frameNumber = 1 / (displayLink.timestamp - lastTimestamp)
-            print(frameNumber)
+            framesPerSecond = 1 / (displayLink.timestamp - lastTimestamp)
             
             /// save lastTimestamp for next displayLinkTick after calculation frameNumber
             lastTimestamp = displayLink.timestamp
         }
         
+        print(framesPerSecond)
         //            print(cpuUsage())
         //            print(memoryUsage() / 1024 / 1024)
         //            print(memoryTotal() / 1024 / 1024)
     }
     
-    /// you cannot do this in deinit
+    /// you cannot do this in deinit of PerformanceManager
     /// https://stackoverflow.com/a/47369566/5893286
     func stop() {
         //displayLink.isPaused = true
         displayLink?.invalidate()
     }
     
+    /// https://github.com/dani-gavrilov/GDPerformanceView-Swift/blob/master/GDPerformanceView-Swift/GDPerformanceMonitoring/Performance%D0%A1alculator.swift
     func cpuUsage() -> Double {
         var totalUsageOfCPU: Double = 0.0
         var threadsList = UnsafeMutablePointer(mutating: [thread_act_t]())

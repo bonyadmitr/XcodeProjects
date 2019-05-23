@@ -15,7 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        let vc = UIViewController()
+        window?.rootViewController = vc
+        window?.rootViewController?.view.backgroundColor = UIColor.cyan
+        
+        window?.rootViewController?.present(ViewController(), animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            vc.dismiss(animated: true, completion: nil)
+        }
+        
         return true
     }
 
