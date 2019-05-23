@@ -56,6 +56,7 @@ final class PerformanceManager {
             
             /// https://medium.com/@dmitryivanov_54099/cadisplaylink-and-its-applications-bfafb760d738
             /// https://github.com/DmIvanov/Animations/blob/master/Animations/AnimationView.swift
+            /// on simulator sometimes rises assert up
             #if DEBUG
             //assert(displayLink.targetTimestamp > CACurrentMediaTime(), "took longer than 1 frame")
             if displayLink.targetTimestamp <= CACurrentMediaTime() {
