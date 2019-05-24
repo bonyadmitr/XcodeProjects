@@ -22,6 +22,7 @@ final class PerformanceManager {
     
     weak var deleagte: PerformanceManagerDelegate?
     
+    /// can be static
     let memoryTotal = ProcessInfo.processInfo.physicalMemory
     
     private var displayLink: CADisplayLink?
@@ -102,6 +103,7 @@ final class PerformanceManager {
     }
     
     /// https://github.com/dani-gavrilov/GDPerformanceView-Swift/blob/master/GDPerformanceView-Swift/GDPerformanceMonitoring/Performance%D0%A1alculator.swift
+    /// can be static
     func cpuUsage() -> Double {
         var totalUsageOfCPU: Double = 0.0
         var threadsList = UnsafeMutablePointer(mutating: [thread_act_t]())
@@ -137,6 +139,7 @@ final class PerformanceManager {
         return totalUsageOfCPU
     }
     
+    /// can be static
     func memoryUsage() -> UInt64 {
         // TODO: check on device
         /// memory usage not equal Xcode Debug Gauge
