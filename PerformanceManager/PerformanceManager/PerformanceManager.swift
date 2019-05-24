@@ -1,6 +1,10 @@
 import Foundation
 import QuartzCore.CADisplayLink
 
+protocol PerformanceManagerDelegate: class {
+    func performanceManager(_ performanceManager: PerformanceManager, didTickFPS framesPerSecond: Double)
+}
+
 // TODO: add guard var isStarted
 
 // TODO: check for background
@@ -15,6 +19,10 @@ import QuartzCore.CADisplayLink
 ///
 /// don't fogget to call func stop() in owner deinit
 final class PerformanceManager {
+    
+    weak var deleagte: PerformanceManagerDelegate?
+    
+    let memoryTotal = ProcessInfo.processInfo.physicalMemory
     
     private var displayLink: CADisplayLink?
     private var lastTimestamp: CFTimeInterval = 0
@@ -83,15 +91,7 @@ final class PerformanceManager {
             lastTimestamp = displayLink.timestamp
         }
         
-        print()
-        print(String(format: "FPS: %.1f%", framesPerSecond))
-        print(String(format: "CPU: %.1f%%", cpuUsage()))
-        
-        let bytesInMegabyte = 1024.0 * 1024.0
-        let usedMemory = Double(memoryUsage()) / bytesInMegabyte
-        let totalMemory = Double(memoryTotal()) / bytesInMegabyte
-        let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
-        print(memory)
+        deleagte?.performanceManager(self, didTickFPS: framesPerSecond)
     }
     
     /// you cannot do this in deinit of PerformanceManager
@@ -169,9 +169,5 @@ final class PerformanceManager {
         }
         
         return used
-    }
-    
-    func memoryTotal() -> UInt64 {
-        return ProcessInfo.processInfo.physicalMemory
     }
 }
