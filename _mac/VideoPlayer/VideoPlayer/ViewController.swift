@@ -11,11 +11,14 @@ import AVFoundation
 
 //import AVKit
 
+
+/// iOS: Video freezes when entering landscape in the simulator for plus models (I do not know about actual plus devices)
+/// https://github.com/maknapp/vlckitSwiftSample
+///
 import VLCKit
 
 class ViewController: NSViewController {
-
-    /// iOS: Video freezes when entering landscape in the simulator for plus models (I do not know about actual plus devices)
+    
     var vlcMediaPlayer = VLCMediaPlayer()
 //    var overlayVC : PlayerOverlayVC!
 //    var movieView: UIView!
