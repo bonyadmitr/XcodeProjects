@@ -15,6 +15,7 @@ import VLCKit
 
 class ViewController: NSViewController {
 
+    /// iOS: Video freezes when entering landscape in the simulator for plus models (I do not know about actual plus devices)
     var vlcMediaPlayer = VLCMediaPlayer()
 //    var overlayVC : PlayerOverlayVC!
 //    var movieView: UIView!
@@ -55,7 +56,7 @@ class ViewController: NSViewController {
         
         vlcMediaPlayer.media = media
         
-        //vlcMediaPlayer.delegate = self
+        vlcMediaPlayer.delegate = self
         vlcMediaPlayer.drawable = self.view
         
         //self.view.addSubview(self.movieView)
@@ -198,6 +199,11 @@ class ViewController: NSViewController {
 
 extension ViewController: VLCMediaPlayerDelegate {
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-//        vlcMediaPlayer.state
+        guard let player = aNotification.object as? VLCMediaPlayer else {
+            assertionFailure()
+            return
+        }
+        assert(player == vlcMediaPlayer)
+        print(player.state.rawValue)
     }
 }
