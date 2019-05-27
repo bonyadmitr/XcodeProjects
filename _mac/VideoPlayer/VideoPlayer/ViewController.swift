@@ -19,9 +19,10 @@ import VLCKit
 
 class ViewController: NSViewController {
     
-    var vlcMediaPlayer = VLCMediaPlayer()
+    private let vlcMediaPlayer = VLCMediaPlayer()
 //    var overlayVC : PlayerOverlayVC!
-    let playerView = NSView()
+    //private let videoView = NSView()
+    private let videoView = VLCVideoView()
 //    var url : URL!
 
     
@@ -61,10 +62,14 @@ class ViewController: NSViewController {
         
         vlcMediaPlayer.delegate = self
         
-        playerView.frame = view.bounds
-        playerView.autoresizingMask = [.height, .width]
-        view.addSubview(playerView)
-        vlcMediaPlayer.drawable = playerView
+        videoView.frame = view.bounds
+        videoView.autoresizingMask = [.height, .width]
+        videoView.fillScreen = true
+        view.addSubview(videoView)
+        vlcMediaPlayer.drawable = videoView
+        
+        /// enable debug logging from libvlc
+        //vlcMediaPlayer.libraryInstance.debugLogging = true
         
         //self.view.addSubview(self.movieView)
         
