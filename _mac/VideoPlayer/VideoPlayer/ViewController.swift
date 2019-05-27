@@ -55,6 +55,8 @@ class ViewController: NSViewController {
         }
         
         let playerItem = AVPlayerItem(url: url)
+//        if playerItem.canPlayFastForward {
+//        }
         player.replaceCurrentItem(with: playerItem)
 
         // MARK: - video layer
@@ -64,10 +66,10 @@ class ViewController: NSViewController {
         /// https://developer.apple.com/documentation/avfoundation/media_assets_playback_and_editing/creating_a_basic_video_player_macos
         let playerView = AVPlayerView()
         playerView.player = player
-        playerView.showsFullScreenToggleButton = true
-        playerView.showsSharingServiceButton = true
+//        playerView.showsFullScreenToggleButton = true
+//        playerView.showsSharingServiceButton = true
         
-        /// replace buttons
+        /// replace buttons. only for "controlsStyle = .floating"
         //playerView.showsFrameSteppingButtons = true
         
         playerView.controlsStyle = .floating
