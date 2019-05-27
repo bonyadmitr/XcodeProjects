@@ -21,7 +21,7 @@ class ViewController: NSViewController {
     
     var vlcMediaPlayer = VLCMediaPlayer()
 //    var overlayVC : PlayerOverlayVC!
-//    var movieView: UIView!
+    let playerView = NSView()
 //    var url : URL!
 
     
@@ -60,7 +60,11 @@ class ViewController: NSViewController {
         vlcMediaPlayer.media = media
         
         vlcMediaPlayer.delegate = self
-        vlcMediaPlayer.drawable = self.view
+        
+        playerView.frame = view.bounds
+        playerView.autoresizingMask = [.height, .width]
+        view.addSubview(playerView)
+        vlcMediaPlayer.drawable = playerView
         
         //self.view.addSubview(self.movieView)
         
