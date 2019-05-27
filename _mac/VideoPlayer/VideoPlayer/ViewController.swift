@@ -64,6 +64,14 @@ class ViewController: NSViewController {
         /// https://developer.apple.com/documentation/avfoundation/media_assets_playback_and_editing/creating_a_basic_video_player_macos
         let playerView = AVPlayerView()
         playerView.player = player
+        playerView.showsFullScreenToggleButton = true
+        playerView.showsSharingServiceButton = true
+        
+        /// replace buttons
+        //playerView.showsFrameSteppingButtons = true
+        
+        playerView.controlsStyle = .floating
+        
         playerView.frame = view.bounds
         playerView.autoresizingMask = [.height, .width]
         view.addSubview(playerView)
