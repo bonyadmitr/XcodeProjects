@@ -11,6 +11,7 @@
 		CE807491229BCA2D00132E6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE807490229BCA2D00132E6D /* ViewController.swift */; };
 		CE807493229BCA2F00132E6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE807492229BCA2F00132E6D /* Assets.xcassets */; };
 		CE807496229BCA2F00132E6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE807494229BCA2F00132E6D /* Main.storyboard */; };
+		CE8074A1229BE2DB00132E6D /* video_test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CE8074A0229BE2D300132E6D /* video_test.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		CE807495229BCA2F00132E6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE807497229BCA2F00132E6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE807498229BCA2F00132E6D /* VideoPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VideoPlayer.entitlements; sourceTree = "<group>"; };
+		CE8074A0229BE2D300132E6D /* video_test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video_test.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		CE80748D229BCA2D00132E6D /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				CE8074A0229BE2D300132E6D /* video_test.mp4 */,
 				CE80748E229BCA2D00132E6D /* AppDelegate.swift */,
 				CE807490229BCA2D00132E6D /* ViewController.swift */,
 				CE807492229BCA2F00132E6D /* Assets.xcassets */,
@@ -95,6 +98,11 @@
 				TargetAttributes = {
 					CE80748A229BCA2D00132E6D = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -121,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8074A1229BE2DB00132E6D /* video_test.mp4 in Resources */,
 				CE807493229BCA2F00132E6D /* Assets.xcassets in Resources */,
 				CE807496229BCA2F00132E6D /* Main.storyboard in Resources */,
 			);
