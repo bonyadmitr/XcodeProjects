@@ -64,7 +64,14 @@ class ViewController: NSViewController {
         
         videoView.frame = view.bounds
         videoView.autoresizingMask = [.height, .width]
+        
+        /// https://code.videolan.org/videolan/VLCKit/issues/82
         videoView.fillScreen = true
+        
+        
+
+        
+        
         view.addSubview(videoView)
         vlcMediaPlayer.drawable = videoView
         
@@ -78,12 +85,41 @@ class ViewController: NSViewController {
         
 //        print("-", media.state.rawValue)
 //        self.vlcMediaPlayer.position = 0.5
+        //print(vlcMediaPlayer.videoAspectRatio)
         vlcMediaPlayer.play()
         
+
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            
+            
+            guard let tracksInformation = media.tracksInformation as? [NSDictionary] else {
+                assertionFailure()
+                return
+            }
+            
+            guard let videoTrack = tracksInformation.first(where: { dict in
+                dict[VLCMediaTracksInformationType] as? String == VLCMediaTracksInformationTypeVideo
+            }) else {
+                assertionFailure()
+                return
+            }
+            
+            guard let width = videoTrack[VLCMediaTracksInformationVideoWidth] as? Int,
+                let height = videoTrack[VLCMediaTracksInformationVideoHeight] as? Int else {
+                assertionFailure()
+                return
+            }
+            
+            
+            /// 2073600
+            //VLCMediaTracksInformationSourceAspectRatio
+            
 //            print("-", media.state.rawValue)
             self.vlcMediaPlayer.position = 0.5
             //self.vlcMediaPlayer.pause()
+            
+            
         }
 
 //        let range = Float(truncating: self.vlcMediaPlayer.media.length.value)/100
