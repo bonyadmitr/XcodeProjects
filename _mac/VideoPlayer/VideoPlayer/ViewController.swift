@@ -9,6 +9,8 @@
 import Cocoa
 import AVFoundation
 
+import AVKit
+
 class ViewController: NSViewController {
 
     private var player: AVPlayer!
@@ -18,6 +20,7 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         
+        
         // MARK: - setup item
         
         guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
@@ -25,7 +28,7 @@ class ViewController: NSViewController {
             return
         }
         
-        //let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing 01.mkv")
+//        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
         let filePath = downloadsDirectoryUrl.appendingPathComponent("test/video_test.mp4").path
         
 //        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
@@ -39,10 +42,9 @@ class ViewController: NSViewController {
 //        }
         let url = URL(fileURLWithPath: filePath)
         
-        
         // MARK: - setup player
-        //let player = AVPlayer()
-        let player = AVPlayer(url: url)
+        let player = AVPlayer()
+//        let player = AVPlayer(url: url)
         player.volume = 1
         self.player = player
         
@@ -50,20 +52,27 @@ class ViewController: NSViewController {
             player.automaticallyWaitsToMinimizeStalling = false
         }
         
-//        let playerItem = AVPlayerItem(url: url)
-//        player.replaceCurrentItem(with: playerItem)
+        let playerItem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: playerItem)
 
         // MARK: - video layer
         /// to activate view.layer
         view.wantsLayer = true
         
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = view.bounds
-        playerLayer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
-        playerLayer.backgroundColor = NSColor.blue.cgColor
+        /// https://developer.apple.com/documentation/avfoundation/media_assets_playback_and_editing/creating_a_basic_video_player_macos
+        let playerView = AVPlayerView()
+        playerView.player = player
+        playerView.frame = view.bounds
+        playerView.autoresizingMask = [.height, .width]
+        view.addSubview(playerView)
         
-        view.layer?.addSublayer(playerLayer)
-        self.playerLayer = playerLayer
+//        let playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.frame = view.bounds
+//        playerLayer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
+//        playerLayer.backgroundColor = NSColor.blue.cgColor
+//
+//        view.layer?.addSublayer(playerLayer)
+//        self.playerLayer = playerLayer
         
         // MARK: - play
         if #available(OSX 10.12, *), #available(iOS 10.0, *) {
