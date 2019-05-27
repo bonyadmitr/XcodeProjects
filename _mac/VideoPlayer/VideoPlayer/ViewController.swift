@@ -9,90 +9,163 @@
 import Cocoa
 import AVFoundation
 
-import AVKit
+//import AVKit
+
+import VLCKit
 
 class ViewController: NSViewController {
 
-    private var player: AVPlayer!
-    private var playerLayer: AVPlayerLayer!
+    var vlcMediaPlayer = VLCMediaPlayer()
+//    var overlayVC : PlayerOverlayVC!
+//    var movieView: UIView!
+//    var url : URL!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        
-        // MARK: - setup item
         
         guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
             assertionFailure()
             return
         }
-        
+
 //        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
-        let filePath = downloadsDirectoryUrl.appendingPathComponent("test/video_test.mp4").path
-        
+        let filePath = downloadsDirectoryUrl.appendingPathComponent("06. Аквамен (2013) [IMAX] BDRip 1080p [HEVC] 10 bit.mkv").path
+
         /// don't fogget to add to "Copy Bundle Resources"
         /// https://stackoverflow.com/a/43129166/5893286
 //        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
 //            assertionFailure()
 //            return
 //        }
-        
+
 //        guard let url = URL(fileURLWithPath: filePath.path) else {
 //            assertionFailure()
 //            return
 //        }
         let url = URL(fileURLWithPath: filePath)
         
-        // MARK: - setup player
-        let player = AVPlayer()
-//        let player = AVPlayer(url: url)
-        player.volume = 1
-        self.player = player
+        let media = VLCMedia(url: url)
         
-        if #available(OSX 10.12, *), #available(iOS 10.0, *) {
-            player.automaticallyWaitsToMinimizeStalling = false
+        // Set media options
+        // https://wiki.videolan.org/VLC_command-line_help
+        //media.addOptions([
+        //    "network-caching": 300
+        //])
+        
+        vlcMediaPlayer.media = media
+        
+        //vlcMediaPlayer.delegate = self
+        vlcMediaPlayer.drawable = self.view
+        
+        //self.view.addSubview(self.movieView)
+        
+//        let currrentDuration: Float = 10
+        
+        
+//        print("-", media.state.rawValue)
+//        self.vlcMediaPlayer.position = 0.5
+        vlcMediaPlayer.play()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+//            print("-", media.state.rawValue)
+            self.vlcMediaPlayer.position = 0.5
+            //self.vlcMediaPlayer.pause()
         }
-        
-        let playerItem = AVPlayerItem(url: url)
-//        if playerItem.canPlayFastForward {
-//        }
-        player.replaceCurrentItem(with: playerItem)
 
-        // MARK: - video layer
-        /// to activate view.layer
-        view.wantsLayer = true
+//        let range = Float(truncating: self.vlcMediaPlayer.media.length.value)/100
+//        let perCent = (Float(currrentDuration) / range)
+//        self.vlcMediaPlayer.position = Float (perCent)
         
-        /// https://developer.apple.com/documentation/avfoundation/media_assets_playback_and_editing/creating_a_basic_video_player_macos
-        let playerView = AVPlayerView()
-        playerView.player = player
-//        playerView.showsFullScreenToggleButton = true
-//        playerView.showsSharingServiceButton = true
         
-        /// replace buttons. only for "controlsStyle = .floating"
-        //playerView.showsFrameSteppingButtons = true
-        
-        playerView.controlsStyle = .floating
-        
-        playerView.frame = view.bounds
-        playerView.autoresizingMask = [.height, .width]
-        view.addSubview(playerView)
-        
-//        let playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.frame = view.bounds
-//        playerLayer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
-//        playerLayer.backgroundColor = NSColor.blue.cgColor
-//
-//        view.layer?.addSublayer(playerLayer)
-//        self.playerLayer = playerLayer
-        
-        // MARK: - play
-        if #available(OSX 10.12, *), #available(iOS 10.0, *) {
-            player.playImmediately(atRate: 1)
-        } else {
-            player.play()
-        }
     }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+    }
+    
+    
+//    private var player: AVPlayer!
+//    private var playerLayer: AVPlayerLayer!
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//
+//
+//        // MARK: - setup item
+//
+//        guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
+//            assertionFailure()
+//            return
+//        }
+//
+////        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
+//        let filePath = downloadsDirectoryUrl.appendingPathComponent("JFK.DirCut.1991_HDRip__[scarabey.org].avi").path
+//
+//        /// don't fogget to add to "Copy Bundle Resources"
+//        /// https://stackoverflow.com/a/43129166/5893286
+////        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
+////            assertionFailure()
+////            return
+////        }
+//
+////        guard let url = URL(fileURLWithPath: filePath.path) else {
+////            assertionFailure()
+////            return
+////        }
+//        let url = URL(fileURLWithPath: filePath)
+//
+//        // MARK: - setup player
+//        let player = AVPlayer()
+////        let player = AVPlayer(url: url)
+//        player.volume = 1
+//        self.player = player
+//
+//        if #available(OSX 10.12, *), #available(iOS 10.0, *) {
+//            player.automaticallyWaitsToMinimizeStalling = false
+//        }
+//
+//        let playerItem = AVPlayerItem(url: url)
+////        if playerItem.canPlayFastForward {
+////        }
+//        player.replaceCurrentItem(with: playerItem)
+//
+//        // MARK: - video layer
+//        /// to activate view.layer
+//        view.wantsLayer = true
+//
+//        /// https://developer.apple.com/documentation/avfoundation/media_assets_playback_and_editing/creating_a_basic_video_player_macos
+//        let playerView = AVPlayerView()
+//        playerView.player = player
+////        playerView.showsFullScreenToggleButton = true
+////        playerView.showsSharingServiceButton = true
+//
+//        /// replace buttons. only for "controlsStyle = .floating"
+//        //playerView.showsFrameSteppingButtons = true
+//
+//        playerView.controlsStyle = .floating
+//
+//        playerView.frame = view.bounds
+//        playerView.autoresizingMask = [.height, .width]
+//        view.addSubview(playerView)
+//
+////        let playerLayer = AVPlayerLayer(player: player)
+////        playerLayer.frame = view.bounds
+////        playerLayer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
+////        playerLayer.backgroundColor = NSColor.blue.cgColor
+////
+////        view.layer?.addSublayer(playerLayer)
+////        self.playerLayer = playerLayer
+//
+//        // MARK: - play
+//        if #available(OSX 10.12, *), #available(iOS 10.0, *) {
+//            player.playImmediately(atRate: 1)
+//        } else {
+//            player.play()
+//        }
+//    }
     
 //    override func updateViewConstraints() {
 //        super.updateViewConstraints()
@@ -114,12 +187,17 @@ class ViewController: NSViewController {
 //        playerLayer.frame = view.bounds
 //    }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
+//    override var representedObject: Any? {
+//        didSet {
+//        // Update the view, if already loaded.
+//        }
+//    }
+//
 
 }
 
+extension ViewController: VLCMediaPlayerDelegate {
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+//        vlcMediaPlayer.state
+    }
+}
