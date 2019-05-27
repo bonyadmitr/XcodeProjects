@@ -31,6 +31,8 @@ class ViewController: NSViewController {
 //        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
         let filePath = downloadsDirectoryUrl.appendingPathComponent("test/video_test.mp4").path
         
+        /// don't fogget to add to "Copy Bundle Resources"
+        /// https://stackoverflow.com/a/43129166/5893286
 //        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
 //            assertionFailure()
 //            return
