@@ -34,8 +34,8 @@ class ViewController: NSViewController {
             return
         }
 
-//        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
-        let filePath = downloadsDirectoryUrl.appendingPathComponent("06. Аквамен (2013) [IMAX] BDRip 1080p [HEVC] 10 bit.mkv").path
+        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
+//        let filePath = downloadsDirectoryUrl.appendingPathComponent("06. Аквамен (2013) [IMAX] BDRip 1080p [HEVC] 10 bit.mkv").path
 
         /// don't fogget to add to "Copy Bundle Resources"
         /// https://stackoverflow.com/a/43129166/5893286
@@ -92,7 +92,6 @@ class ViewController: NSViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             
-            
             guard let tracksInformation = media.tracksInformation as? [NSDictionary] else {
                 assertionFailure()
                 return
@@ -111,6 +110,14 @@ class ViewController: NSViewController {
                 return
             }
             
+            print(tracksInformation)
+//            self.view.window?.aspectRatio = .init(width: width, height: height)
+//            self.view.window?.titlebarAppearsTransparent = true
+//            self.view.window?.styleMask.insert(.fullSizeContentView)
+            
+            // TODO: update window size
+            self.view.window?.contentAspectRatio = .init(width: width, height: height)
+
             
             /// 2073600
             //VLCMediaTracksInformationSourceAspectRatio
@@ -252,6 +259,6 @@ extension ViewController: VLCMediaPlayerDelegate {
             return
         }
         assert(player == vlcMediaPlayer)
-        print(player.state.rawValue)
+        print("player state changed to:", player.state.rawValue)
     }
 }
