@@ -21,10 +21,7 @@ class ViewController: NSViewController {
     
     private let vlcMediaPlayer = VLCMediaPlayer()
 //    var overlayVC : PlayerOverlayVC!
-    //private let videoView = NSView()
-    private let videoView = VLCVideoView()
-//    var url : URL!
-
+    private let videoView = NSView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,33 +59,20 @@ class ViewController: NSViewController {
         
         vlcMediaPlayer.delegate = self
         
-        videoView.frame = view.bounds
-        videoView.autoresizingMask = [.height, .width]
         
         /// https://code.videolan.org/videolan/VLCKit/issues/82
-        videoView.fillScreen = true
+        /// for VLCVideoView
+        //videoView.fillScreen = true
         
-        
-
-        
-        
+        videoView.frame = view.bounds
+        videoView.autoresizingMask = [.height, .width]
         view.addSubview(videoView)
         vlcMediaPlayer.drawable = videoView
         
         /// enable debug logging from libvlc
         //vlcMediaPlayer.libraryInstance.debugLogging = true
         
-        //self.view.addSubview(self.movieView)
-        
-//        let currrentDuration: Float = 10
-        
-        
-//        print("-", media.state.rawValue)
-//        self.vlcMediaPlayer.position = 0.5
-        //print(vlcMediaPlayer.videoAspectRatio)
         vlcMediaPlayer.play()
-        
-
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             
