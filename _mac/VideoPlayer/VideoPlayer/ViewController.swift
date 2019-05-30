@@ -33,7 +33,60 @@ final class VideoPlayerView: NSView {
     }
     
     private func setup() {
+        loadFile()
+        setupMediaPlayer()
+        vlcMediaPlayer.play()
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            
+            guard let tracksInformation = self.vlcMediaPlayer.media.tracksInformation as? [NSDictionary] else {
+                assertionFailure()
+                return
+            }
+            
+            guard let videoTrack = tracksInformation.first(where: { dict in
+                dict[VLCMediaTracksInformationType] as? String == VLCMediaTracksInformationTypeVideo
+            }) else {
+                assertionFailure()
+                return
+            }
+            
+            guard
+                let width = videoTrack[VLCMediaTracksInformationVideoWidth] as? Int,
+                let height = videoTrack[VLCMediaTracksInformationVideoHeight] as? Int
+            else {
+                assertionFailure()
+                return
+            }
+            
+            print(tracksInformation)
+            //            self.view.window?.aspectRatio = .init(width: width, height: height)
+            //            self.view.window?.titlebarAppearsTransparent = true
+            //            self.view.window?.styleMask.insert(.fullSizeContentView)
+            
+            // TODO: update window size
+            self.window?.contentAspectRatio = .init(width: width, height: height)
+            
+            
+            /// 2073600
+            //VLCMediaTracksInformationSourceAspectRatio
+            
+            //            print("-", media.state.rawValue)
+            self.vlcMediaPlayer.position = 0.5
+            //self.vlcMediaPlayer.pause()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.setupVideoView()
+            }
+        }
+        
+        //        let range = Float(truncating: self.vlcMediaPlayer.media.length.value)/100
+        //        let perCent = (Float(currrentDuration) / range)
+        //        self.vlcMediaPlayer.position = Float (perCent)
+        
+    }
+    
+    private func loadFile() {
         guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
             assertionFailure()
             return
@@ -64,9 +117,9 @@ final class VideoPlayerView: NSView {
         //])
         
         vlcMediaPlayer.media = media
-        vlcMediaPlayer.delegate = self
-        
-        
+    }
+    
+    private func setupVideoView() {
         /// https://code.videolan.org/videolan/VLCKit/issues/82
         /// for VLCVideoView but it is not working
         //videoView.fillScreen = true
@@ -74,56 +127,14 @@ final class VideoPlayerView: NSView {
         videoView.frame = bounds
         videoView.autoresizingMask = [.height, .width]
         addSubview(videoView)
-        vlcMediaPlayer.drawable = videoView
-        
+    }
+    
+    private func setupMediaPlayer() {
         /// enable debug logging from libvlc
         //vlcMediaPlayer.libraryInstance.debugLogging = true
         
-        vlcMediaPlayer.play()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            
-            guard let tracksInformation = media.tracksInformation as? [NSDictionary] else {
-                assertionFailure()
-                return
-            }
-            
-            guard let videoTrack = tracksInformation.first(where: { dict in
-                dict[VLCMediaTracksInformationType] as? String == VLCMediaTracksInformationTypeVideo
-            }) else {
-                assertionFailure()
-                return
-            }
-            
-            guard let width = videoTrack[VLCMediaTracksInformationVideoWidth] as? Int,
-                let height = videoTrack[VLCMediaTracksInformationVideoHeight] as? Int else {
-                    assertionFailure()
-                    return
-            }
-            
-            print(tracksInformation)
-            //            self.view.window?.aspectRatio = .init(width: width, height: height)
-            //            self.view.window?.titlebarAppearsTransparent = true
-            //            self.view.window?.styleMask.insert(.fullSizeContentView)
-            
-            // TODO: update window size
-            self.window?.contentAspectRatio = .init(width: width, height: height)
-            
-            
-            /// 2073600
-            //VLCMediaTracksInformationSourceAspectRatio
-            
-            //            print("-", media.state.rawValue)
-            self.vlcMediaPlayer.position = 0.5
-            //self.vlcMediaPlayer.pause()
-            
-            self.vlcMediaPlayer.play()
-        }
-        
-        //        let range = Float(truncating: self.vlcMediaPlayer.media.length.value)/100
-        //        let perCent = (Float(currrentDuration) / range)
-        //        self.vlcMediaPlayer.position = Float (perCent)
-        
+        vlcMediaPlayer.delegate = self
+        vlcMediaPlayer.drawable = videoView
     }
 }
 
@@ -136,6 +147,8 @@ extension VideoPlayerView: VLCMediaPlayerDelegate {
         assert(player == vlcMediaPlayer)
         print("player state changed to:", player.state.rawValue)
     }
+    
+    
 }
 
 
