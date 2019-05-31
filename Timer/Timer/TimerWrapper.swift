@@ -8,6 +8,17 @@
 
 import Foundation
 
+/**
+ DispatchSourceTimer
+ https://medium.com/@vladislavzhukov/swift-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D0%B5%D0%BC-%D1%81-dispatchsourcetimer-dc4e0875ba2
+ https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9
+ https://www.cocoawithlove.com/blog/2016/07/30/timer-problems.html
+ https://developer.apple.com/documentation/dispatch/dispatchsourcetimer/2920395-schedule
+ 
+ Timer
+ https://developer.apple.com/library/archive/documentation/Performance/Conceptual/EnergyGuide-iOS/MinimizeTimerUse.html
+ https://medium.com/@danielemargutti/the-secret-world-of-nstimer-708f508c9eb
+*/
 
 typealias StepHandler = () -> Void
 typealias VoidHandler = () -> Void
