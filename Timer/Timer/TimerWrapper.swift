@@ -16,6 +16,7 @@ import Foundation
  https://developer.apple.com/documentation/dispatch/dispatchsourcetimer/2920395-schedule
  
  Timer
+ A general guideline is to set the tolerance to at least ten percent of the interval for a repeating timer, as in the examples above. Even a small amount of tolerance has a significant positive impact on the energy usage of your app.
  https://developer.apple.com/library/archive/documentation/Performance/Conceptual/EnergyGuide-iOS/MinimizeTimerUse.html
  https://medium.com/@danielemargutti/the-secret-world-of-nstimer-708f508c9eb
 */
