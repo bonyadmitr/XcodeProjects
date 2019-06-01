@@ -35,6 +35,10 @@ final class VideoPlayerView: NSView {
     private func setup() {
         loadFile()
         setupMediaPlayer()
+        launchMediaPlayer()
+    }
+    
+    private func launchMediaPlayer() {
         vlcMediaPlayer.play()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
