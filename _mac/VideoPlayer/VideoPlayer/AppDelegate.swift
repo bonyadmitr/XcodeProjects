@@ -11,6 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    private var mainWindowController: NSWindowController?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
@@ -26,7 +28,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainWindowController.window?.makeKeyAndOrderFront(nil)
         
         /// to fix frame of closed window
-        //mainWindow.window?.setFrame(NSRect(x: 0, y: 0, width: 100, height: 100), display: true)
+        mainWindowController.window?.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
+        mainWindowController.window?.center()
+        
+        /// without reference it will be deinited
+        self.mainWindowController = mainWindowController
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

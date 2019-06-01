@@ -140,6 +140,11 @@ final class VideoPlayerView: NSView {
         vlcMediaPlayer.delegate = self
         vlcMediaPlayer.drawable = videoView
     }
+    
+    deinit {
+        /// stop player before deinit. otherwise will be crash
+        vlcMediaPlayer.stop()
+    }
 }
 
 extension VideoPlayerView: VLCMediaPlayerDelegate {
