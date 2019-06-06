@@ -52,6 +52,9 @@ final class ViewController: UIViewController {
 
 import UIKit
 
+// TODO: frame edge cases
+// TODO: create new logic to render one time and only move view
+/// https://github.com/damidund/Magnifying-Glass-Effect
 final class MagnifyView: UIView {
     
     var viewToMagnify: UIView!
