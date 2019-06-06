@@ -10,7 +10,7 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    private let magnifyView = MagnifyView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    private let magnifyView = MagnifyView(frame: .init(x: 0, y: 0, width: 100, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,9 @@ final class ViewController: UIViewController {
         magnifyView.viewToMagnify = self.view
         magnifyView.zoom = 4.0
         magnifyView.yOffset = 60
+        
+        /// use "MagnifyView(frame" or "frame.size"
+        //magnifyView.frame.size = .init(width: 100, height: 100)
         
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
@@ -31,10 +34,14 @@ final class ViewController: UIViewController {
         view.addSubview(label)
     }
     
+    /// can be used UIPanGestureRecognizer
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let point = touches.first?.location(in: self.view)
+        guard let point = touches.first?.location(in: self.view) else {
+            assertionFailure()
+            return
+        }
         
-        magnifyView.setTouchPoint(pt: point!)
+        magnifyView.touchPoint = point
         view.window?.addSubview(magnifyView)
         //self.view.addSubview(magnifyView)
     }
@@ -44,8 +51,11 @@ final class ViewController: UIViewController {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let point = touches.first?.location(in: self.view)
-        magnifyView.setTouchPoint(pt: point!)
+        guard let point = touches.first?.location(in: self.view) else {
+            assertionFailure()
+            return
+        }
+        magnifyView.touchPoint = point
     }
 }
 
@@ -57,8 +67,14 @@ import UIKit
 /// https://github.com/damidund/Magnifying-Glass-Effect
 final class MagnifyView: UIView {
     
-    var viewToMagnify: UIView!
-    private var touchPoint: CGPoint!
+    var viewToMagnify: UIView?
+    
+    var touchPoint: CGPoint = .zero {
+        didSet {
+            center = CGPoint(x: touchPoint.x, y: touchPoint.y - yOffset)
+            setNeedsDisplay()
+        }
+    }
     
     var zoom: CGFloat = 2
     var yOffset: CGFloat = 60
@@ -82,12 +98,6 @@ final class MagnifyView: UIView {
         layer.cornerRadius = bounds.height * 0.5
     }
     
-    func setTouchPoint(pt: CGPoint) {
-        touchPoint = pt
-        center = CGPoint(x: pt.x, y: pt.y - yOffset)
-        setNeedsDisplay()
-    }
-    
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else {
             assertionFailure()
@@ -96,7 +106,6 @@ final class MagnifyView: UIView {
         context.translateBy(x: 1 * frame.width * 0.5, y: 1 * frame.height * 0.5)
         context.scaleBy(x: zoom, y: zoom)
         context.translateBy(x: -1 * touchPoint.x, y: -1 * touchPoint.y)
-        viewToMagnify.layer.render(in: context)
+        viewToMagnify?.layer.render(in: context)
     }
-    
 }
