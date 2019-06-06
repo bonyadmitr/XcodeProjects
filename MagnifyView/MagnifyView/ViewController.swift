@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
         
         magnifyView.layer.borderColor = UIColor.lightGray.cgColor
         magnifyView.layer.borderWidth = 3
-        magnifyView.viewToMagnify = self.view
+        magnifyView.viewToMagnify = view
         magnifyView.zoom = 4.0
         magnifyView.yOffset = 60
         
@@ -33,9 +33,15 @@ final class ViewController: UIViewController {
         label.text = "some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test. some test."
         view.addSubview(label)
     }
+}
+
+// MARK: - touches
+/// can be used UIPanGestureRecognizer
+extension ViewController {
     
-    /// can be used UIPanGestureRecognizer
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
         guard let point = touches.first?.location(in: self.view) else {
             assertionFailure()
             return
@@ -46,16 +52,26 @@ final class ViewController: UIViewController {
         //self.view.addSubview(magnifyView)
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        magnifyView.removeFromSuperview()
-    }
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
         guard let point = touches.first?.location(in: self.view) else {
             assertionFailure()
             return
         }
         magnifyView.touchPoint = point
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        magnifyView.removeFromSuperview()
+    }
+    
+    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        
+        magnifyView.removeFromSuperview()
     }
 }
 
