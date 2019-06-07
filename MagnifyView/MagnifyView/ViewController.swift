@@ -84,6 +84,10 @@ extension ViewController {
 
 import UIKit
 
+/// normal debug warnings:
+/// Unable to look up screen scale
+/// Unexpected physical screen orientation
+///
 // TODO: frame edge cases
 // TODO: create new logic to render one time and only move view
 /// https://github.com/damidund/Magnifying-Glass-Effect
