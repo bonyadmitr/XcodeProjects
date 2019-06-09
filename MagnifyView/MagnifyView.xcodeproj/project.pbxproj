@@ -12,6 +12,7 @@
 		CE47AED122A94BDC006B527F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE47AECF22A94BDC006B527F /* Main.storyboard */; };
 		CE47AED322A94BDE006B527F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE47AED222A94BDE006B527F /* Assets.xcassets */; };
 		CE47AED622A94BDE006B527F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE47AED422A94BDE006B527F /* LaunchScreen.storyboard */; };
+		CE47AEDE22A962F8006B527F /* MagnifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47AEDD22A962F8006B527F /* MagnifyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE47AED222A94BDE006B527F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE47AED522A94BDE006B527F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE47AED722A94BDE006B527F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE47AEDD22A962F8006B527F /* MagnifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnifyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +56,9 @@
 		CE47AECA22A94BDC006B527F /* MagnifyView */ = {
 			isa = PBXGroup;
 			children = (
-				CE47AECB22A94BDC006B527F /* AppDelegate.swift */,
 				CE47AECD22A94BDC006B527F /* ViewController.swift */,
+				CE47AEDD22A962F8006B527F /* MagnifyView.swift */,
+				CE47AECB22A94BDC006B527F /* AppDelegate.swift */,
 				CE47AECF22A94BDC006B527F /* Main.storyboard */,
 				CE47AED222A94BDE006B527F /* Assets.xcassets */,
 				CE47AED422A94BDE006B527F /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE47AEDE22A962F8006B527F /* MagnifyView.swift in Sources */,
 				CE47AECE22A94BDC006B527F /* ViewController.swift in Sources */,
 				CE47AECC22A94BDC006B527F /* AppDelegate.swift in Sources */,
 			);
