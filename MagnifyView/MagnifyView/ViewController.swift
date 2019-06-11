@@ -19,7 +19,10 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         addLabel()
-        
+        addMagnifyGesture()
+    }
+    
+    private func addMagnifyGesture() {
         /// UIPanGestureRecognizer + UITapGestureRecognizer not working for touch down event
         /// https://stackoverflow.com/a/18061848/5893286
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(onMagnifyGesture))
