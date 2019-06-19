@@ -14,7 +14,7 @@ final class DispatchOperation {
     
     func cancel() {
         item?.cancel()
-        item = nil
+//        item = nil
     }
     
     var isCanceled: Bool {
@@ -36,48 +36,59 @@ class ViewController: UIViewController {
 
     let queue = DispatchQueue(label: "123", attributes: .concurrent)
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
-    let s = DispatchSemaphore(value: 8)
+    let s = DispatchSemaphore(value: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        for i in 1...100 {
+        DispatchQueue.global().async {
             
-            let q = DispatchOperation { item in
-                
-                if item.isCanceled {
-                    self.s.signal()
-                    return
-                }
-                
-                print("start", i)
-                
-                DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-                    if item.isCanceled {
-                        self.s.signal()
-                        return
-                    }
-                    print("finish", i)
-                    self.s.signal()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    item.cancel()
-                }
-            }
-            
-            //        queue.async(execute: q.item!)
-            
-            queue.async {
+            for i in 1...100 {
                 self.s.wait()
                 
-                q.item!.perform()
-            }
+                let q = DispatchOperation { item in
+                    print("start", i)
+                    
+                    if item.isCanceled {
+                        self.s.signal()
+                        print("cancel-1", i)
+                        return
+                    }
+                    
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+                        if item.isCanceled {
+                            print("cancel-2", i)
+                            self.s.signal()
+                            return
+                        }
+                        print("finish", i)
+                        self.s.signal()
+                    }
+                    
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                        item.cancel()
+                    }
+                }
+                
+                
+                
+                
+                self.queue.sync(execute: q.item!)
+//                DispatchQueue.global().sync(execute: q.item!)
+//                q.item?.perform()
+                
+                //            queue.async {
+                //                self.s.wait()
+                //                q.item!.perform()
+                //            }
+                
+                //            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                //                q.cancel()
+                //            }
             
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                q.cancel()
-//            }
+        }
+        
+
             
         }
         
