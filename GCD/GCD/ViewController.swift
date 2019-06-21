@@ -84,7 +84,7 @@ class ViewController: UIViewController {
     }
     
     func test() {
-        var array = Array(repeating: 0, count: 10_000_000)
+        var array = Array(repeating: 0, count: 1_000_000)
         
         DispatchQueue.concurrentPerform(iterations: array.count) { i in
             array[i] = i
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         
         let date2 = Date()
         let count2 = array.countFilter(where: { $0 > 50_000 })
-        print("finish countConcurrent", count2, -date2.timeIntervalSinceNow)
+        print("finish countFilter", count2, -date2.timeIntervalSinceNow)
         
         let date3 = Date()
         let count3 = array.countConcurrent(where: { $0 > 50_000 })
