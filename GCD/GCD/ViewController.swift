@@ -45,31 +45,31 @@ class ViewController: UIViewController {
         
 //        q1()
         
-        let q1 = testConcurrentInitDefault()
-        let q2 = testConcurrentInitSeparate()
-        print(q1 == q2)
-//        print()
+        let array1 = testConcurrentInitDefault()
+        let array2 = testConcurrentInitSeparate()
+        print(array1 == array2)
     }
     
     func testConcurrentInitDefault()  -> [Int] {
         var array = Array(repeating: 0, count: 1_000_000)
         
-        let date1 = Date()
+        let date = Date()
         DispatchQueue.concurrentPerform(iterations: array.count) { i in
             array[i] = i
         }
-        print("finish date1", -date1.timeIntervalSinceNow)
+        print("finish", -date.timeIntervalSinceNow)
         
         return array
     }
     
+    /// https://stackoverflow.com/q/41215048/5893286
     func testConcurrentInitSeparate() -> [Int] {
         var array = Array(repeating: 0, count: 1_000_000)
         
         let N = array.count
         let n = 128
         
-        let date1 = Date()
+        let date = Date()
         DispatchQueue.concurrentPerform(iterations: array.count) { i in
             array[i] = i
         }
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             array[i] = i
         }
         
-        print("finish date1", -date1.timeIntervalSinceNow)
+        print("finish", -date.timeIntervalSinceNow)
         
         return array
     }
