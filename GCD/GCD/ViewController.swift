@@ -32,6 +32,15 @@ final class DispatchOperation {
     
 }
 
+/// https://developer.apple.com/swift/blog/?id=4
+@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+func dispatchAssert(condition: @autoclosure () -> DispatchPredicate) {
+    #if DEBUG
+    dispatchPrecondition(condition: condition())
+    #endif
+}
+
+
 class ViewController: UIViewController {
 
     let queue = DispatchQueue(label: "123", attributes: .concurrent)
@@ -44,6 +53,16 @@ class ViewController: UIViewController {
 //        globalTestCountWhere()
         
 //        q1()
+        
+//        let dispatchKey = DispatchSpecificKey<Void>()
+//        DispatchQueue.main.setSpecific(key: dispatchKey, value: ())
+//
+//        if DispatchQueue.getSpecific(key: dispatchKey) == nil {
+//
+//        }
+        
+//        dispatchPrecondition(condition: .onQueue(.main))
+        dispatchAssert(condition: .onQueue(.main))
         
         let array1 = testConcurrentInitDefault()
         let array2 = testConcurrentInitSeparate()
