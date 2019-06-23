@@ -45,48 +45,48 @@ class ViewController: UIViewController {
         
 //        q1()
         
-//        let q1 = testInit1()
-//        let q2 = testInit2()
-//        print(q1 == q2)
+        let q1 = testConcurrentInitDefault()
+        let q2 = testConcurrentInitSeparate()
+        print(q1 == q2)
 //        print()
     }
     
-    func testInit1()  -> [Int] {
-        var array1 = Array<Int>.init(repeating: 0, count: 100_000_000)
+    func testConcurrentInitDefault()  -> [Int] {
+        var array = Array(repeating: 0, count: 1_000_000)
         
         let date1 = Date()
-        DispatchQueue.concurrentPerform(iterations: array1.count) { i in
-            array1[i] = i
+        DispatchQueue.concurrentPerform(iterations: array.count) { i in
+            array[i] = i
         }
         print("finish date1", -date1.timeIntervalSinceNow)
         
-        return array1
+        return array
     }
     
-    func testInit2() -> [Int] {
-        var array1 = Array<Int>.init(repeating: 0, count: 100_000_000)
+    func testConcurrentInitSeparate() -> [Int] {
+        var array = Array(repeating: 0, count: 1_000_000)
         
-        let N = array1.count
+        let N = array.count
         let n = 128
         
         let date1 = Date()
-        DispatchQueue.concurrentPerform(iterations: array1.count) { i in
-            array1[i] = i
+        DispatchQueue.concurrentPerform(iterations: array.count) { i in
+            array[i] = i
         }
         
         DispatchQueue.concurrentPerform(iterations: N/n) { k in
             for i in (k * n)..<((k + 1) * n) {
-                array1[i] = i
+                array[i] = i
             }
         }
         
         for i in (N - (N % n))..<N {
-            array1[i] = i
+            array[i] = i
         }
         
         print("finish date1", -date1.timeIntervalSinceNow)
         
-        return array1
+        return array
     }
 
     
