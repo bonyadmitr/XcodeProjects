@@ -15,6 +15,8 @@ extension Collection {
 }
 
 extension Array {
+    
+    @available(iOS 10.0, *)
     func countConcurrent(where predicate: (Element) -> Bool) -> Int {
         var count = 0
         

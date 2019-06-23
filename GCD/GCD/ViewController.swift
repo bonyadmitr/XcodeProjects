@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Foundation
+
 final class DispatchOperation {
     
     var item: DispatchWorkItem?
@@ -35,9 +37,20 @@ final class DispatchOperation {
 /// https://developer.apple.com/swift/blog/?id=4
 @available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 func dispatchAssert(condition: @autoclosure () -> DispatchPredicate) {
+    //if #available(iOS 10.0, *) {}
     #if DEBUG
     dispatchPrecondition(condition: condition())
     #endif
+}
+
+@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+func assertMainQueue() {
+    dispatchAssert(condition: .onQueue(.main))
+}
+
+@available(OSX 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+func assertBackgroundQueue() {
+    dispatchAssert(condition: .notOnQueue(.main))
 }
 
 
@@ -63,6 +76,11 @@ class ViewController: UIViewController {
         
 //        dispatchPrecondition(condition: .onQueue(.main))
         dispatchAssert(condition: .onQueue(.main))
+        assertMainQueue()
+        
+        DispatchQueue.global().async {
+            assertBackgroundQueue()
+        }
         
         let array1 = testConcurrentInitDefault()
         let array2 = testConcurrentInitSeparate()
