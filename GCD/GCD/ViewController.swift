@@ -53,9 +53,12 @@ func assertBackgroundQueue() {
     dispatchAssert(condition: .notOnQueue(.main))
 }
 
-
 class ViewController: UIViewController {
 
+//    lazy var label = UILabel {
+//        $0.text = ""
+//    }
+    
     let queue = DispatchQueue(label: "123", attributes: .concurrent)
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     let s = DispatchSemaphore(value: 3)
@@ -67,19 +70,30 @@ class ViewController: UIViewController {
         
 //        q1()
         
-//        let dispatchKey = DispatchSpecificKey<Void>()
-//        DispatchQueue.main.setSpecific(key: dispatchKey, value: ())
-//
-//        if DispatchQueue.getSpecific(key: dispatchKey) == nil {
-//
-//        }
-        
 //        dispatchPrecondition(condition: .onQueue(.main))
         dispatchAssert(condition: .onQueue(.main))
         assertMainQueue()
         
         DispatchQueue.global().async {
             assertBackgroundQueue()
+        }
+        
+        /// can be used for iOS 9
+        DispatchQueue.setupMainQueue()
+        assert(DispatchQueue.isMainQueue)
+        
+        let customQueue = DispatchQueue(label: "label")
+        
+        #if DEBUG
+        let dispatchKey = DispatchSpecificKey<Void>()
+        customQueue.setSpecific(key: dispatchKey, value: ())
+        #endif
+        
+        customQueue.async {
+            #if DEBUG
+            let isCustomQueue = DispatchQueue.getSpecific(key: dispatchKey) != nil
+            assert(isCustomQueue)
+            #endif
         }
         
         let array1 = testConcurrentInitDefault()
