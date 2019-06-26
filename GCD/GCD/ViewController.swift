@@ -53,6 +53,22 @@ func assertBackgroundQueue() {
     dispatchAssert(condition: .notOnQueue(.main))
 }
 
+enum Benchmark {
+    static func one(block: () -> Void) -> TimeInterval {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        block()
+        let endTime = CFAbsoluteTimeGetCurrent()
+        let totalTime = endTime - startTime
+        return totalTime
+    }
+    
+    static func average(iterations: Int = 10, block: () -> Void) -> (average: TimeInterval, all: [TimeInterval]) {
+        let iterationsResults: [TimeInterval] = (0..<iterations).map { _ in one(block: block) }
+        let accumulatedResult = iterationsResults.reduce(0, +) / TimeInterval(iterations)
+        return (accumulatedResult, iterationsResults)
+    }
+}
+
 class ViewController: UIViewController {
 
 //    lazy var label = UILabel {
@@ -63,8 +79,80 @@ class ViewController: UIViewController {
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     let s = DispatchSemaphore(value: 3)
     
+    private func testDispatchSpecificKey() {
+        /// Different instances of DispatchSpecificKey share the same pointer
+        /// http://tom.lokhorst.eu/2018/02/leaky-abstractions-in-swift-with-dispatchqueue
+        while true {
+            let key = DispatchSpecificKey<Int>()
+            let p = Unmanaged.passUnretained(key).toOpaque()
+            print("Address: \(p)")
+            
+            if let value = DispatchQueue.main.getSpecific(key: key) {
+                print("Error, already set value: \(value)")
+                exit(1)
+            } else {
+                DispatchQueue.main.setSpecific(key: key, value: 42)
+                print("OK")
+                sleep(1)
+            }
+            
+            /// fix
+            DispatchQueue.main.setSpecific(key: key, value: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .medium
+//        dateFormatter.timeStyle = .none
+//        dateFormatter.locale = Locale(identifier: "en_US")
+//
+//
+//        let benchmark1 = Benchmark.average(iterations: 100) {
+//            _ = dateFormatter.string(from: Date())
+//        }
+//        print(benchmark1.average)
+//
+//        print()
+//
+//        let benchmark2 = Benchmark.average(iterations: 100) {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateStyle = .medium
+//            dateFormatter.timeStyle = .none
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            _ = dateFormatter.string(from: Date())
+//        }
+//        print(benchmark2.average)
+//
+//
+//        print(
+//            benchmark1.average > benchmark2.average
+//        )
+        
+        
+        
+        var array = Array(repeating: 0, count: 1_000_000)
+        
+        DispatchQueue.concurrentPerform(iterations: array.count) { i in
+            array[i] = i
+        }
+        
+        print(
+            "Benchmark countLoop:\n",
+            Benchmark.average {
+                _ = array.countLoop(where: { $0 > 50_000 })
+            }.average
+        )
+        
+        print(
+            "Benchmark countConcurrent:\n",
+            Benchmark.average {
+                _ = array.countConcurrent(where: { $0 > 50_000 })
+            }.average
+        )
+        
 
 //        globalTestCountWhere()
         
