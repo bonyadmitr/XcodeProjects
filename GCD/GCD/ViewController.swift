@@ -68,56 +68,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .medium
-//        dateFormatter.timeStyle = .none
-//        dateFormatter.locale = Locale(identifier: "en_US")
-//
-//
-//        let benchmark1 = Benchmark.average(iterations: 100) {
-//            _ = dateFormatter.string(from: Date())
-//        }
-//        print(benchmark1.average)
-//
-//        print()
-//
-//        let benchmark2 = Benchmark.average(iterations: 100) {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateStyle = .medium
-//            dateFormatter.timeStyle = .none
-//            dateFormatter.locale = Locale(identifier: "en_US")
-//            _ = dateFormatter.string(from: Date())
-//        }
-//        print(benchmark2.average)
-//
-//
-//        print(
-//            benchmark1.average > benchmark2.average
-//        )
         
-        
-        
-        var array = Array(repeating: 0, count: 1_000_000)
-        
-        DispatchQueue.concurrentPerform(iterations: array.count) { i in
-            array[i] = i
-        }
-        
-        print(
-            "Benchmark countLoop:\n",
-            Benchmark.average {
-                _ = array.countLoop(where: { $0 > 50_000 })
-            }.average
-        )
-        
-        print(
-            "Benchmark countConcurrent:\n",
-            Benchmark.average {
-                _ = array.countConcurrent(where: { $0 > 50_000 })
-            }.average
-        )
-        
+        testBenchmarkDateFormatter()
+        testBenchmarkCountWhere()
 
 //        globalTestCountWhere()
         
@@ -152,6 +105,56 @@ class ViewController: UIViewController {
         let array1 = testConcurrentInitDefault()
         let array2 = testConcurrentInitSeparate()
         print(array1 == array2)
+    }
+    
+    func testBenchmarkDateFormatter() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US")
+        
+        let benchmark1 = Benchmark.average(iterations: 1000) {
+            _ = dateFormatter.string(from: Date())
+        }
+        print(benchmark1.average)
+        
+        print()
+        
+        let benchmark2 = Benchmark.average(iterations: 1000) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Locale(identifier: "en_US")
+            _ = dateFormatter.string(from: Date())
+        }
+        print(benchmark2.average)
+        
+        print(
+            benchmark1.average > benchmark2.average
+        )
+    }
+    
+    func testBenchmarkCountWhere() {
+        var array = Array(repeating: 0, count: 1_000_000)
+        
+        DispatchQueue.concurrentPerform(iterations: array.count) { i in
+            array[i] = i
+        }
+        
+        print(
+            "Benchmark countLoop:\n",
+            Benchmark.average {
+                _ = array.countLoop(where: { $0 > 50_000 })
+            }.average
+        )
+        
+        print(
+            "Benchmark countConcurrent:\n",
+            Benchmark.average {
+                _ = array.countConcurrent(where: { $0 > 50_000 })
+            }.average
+        )
     }
     
     func testConcurrentInitDefault()  -> [Int] {
