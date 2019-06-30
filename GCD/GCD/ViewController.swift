@@ -69,14 +69,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testBenchmarkDateFormatter()
-        testBenchmarkCountWhere()
+        q1()
+        
+//        testBenchmarkDateFormatter()
+//        testBenchmarkCountWhere()
 
+//        testDispatchAssert()
+        
 //        globalTestCountWhere()
         
-//        q1()
-        
-//        dispatchPrecondition(condition: .onQueue(.main))
+//        let array1 = testConcurrentInitDefault()
+//        let array2 = testConcurrentInitSeparate()
+//        print(array1 == array2)
+    }
+    
+    func testDispatchAssert() {
+        //dispatchPrecondition(condition: .onQueue(.main))
         dispatchAssert(condition: .onQueue(.main))
         assertMainQueue()
         
@@ -101,10 +109,6 @@ class ViewController: UIViewController {
             assert(isCustomQueue)
             #endif
         }
-        
-        let array1 = testConcurrentInitDefault()
-        let array2 = testConcurrentInitSeparate()
-        print(array1 == array2)
     }
     
     func testBenchmarkDateFormatter() {
