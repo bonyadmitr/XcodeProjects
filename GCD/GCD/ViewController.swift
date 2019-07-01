@@ -44,6 +44,25 @@ class ViewController: UIViewController {
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     let s = DispatchSemaphore(value: 3)
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        q1()
+        
+//        testBenchmarkDateFormatter()
+//        testBenchmarkCountWhere()
+
+//        testDispatchAssert()
+        
+//        globalTestCountWhere()
+        
+        let array1 = testConcurrentInitDefault()
+        let array2 = testConcurrentInitSeparate()
+        let array3 = testInitDefault()
+        print(array1 == array2)
+        print(array1 == array3)
+    }
+    
     private func testDispatchSpecificKey() {
         /// Different instances of DispatchSpecificKey share the same pointer
         /// http://tom.lokhorst.eu/2018/02/leaky-abstractions-in-swift-with-dispatchqueue
@@ -64,23 +83,6 @@ class ViewController: UIViewController {
             /// fix
             DispatchQueue.main.setSpecific(key: key, value: nil)
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        q1()
-        
-//        testBenchmarkDateFormatter()
-//        testBenchmarkCountWhere()
-
-//        testDispatchAssert()
-        
-//        globalTestCountWhere()
-        
-//        let array1 = testConcurrentInitDefault()
-//        let array2 = testConcurrentInitSeparate()
-//        print(array1 == array2)
     }
     
     func testDispatchAssert() {
@@ -199,7 +201,19 @@ class ViewController: UIViewController {
         
         return array
     }
-
+    
+    func testInitDefault()  -> [Int] {
+        let n = 1_000_000
+        var array = Array(repeating: 0, count: n)
+        
+        let date = Date()
+        for i in 0..<n {
+            array[i] = i
+        }
+        print("finish", -date.timeIntervalSinceNow)
+        
+        return array
+    }
     
     func q1() {
         
