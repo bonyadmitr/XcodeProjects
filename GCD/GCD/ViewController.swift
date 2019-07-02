@@ -56,12 +56,70 @@ class ViewController: UIViewController {
         
 //        globalTestCountWhere()
         
-        let array1 = testConcurrentInitDefault()
-        let array2 = testConcurrentInitSeparate()
-        let array3 = testInitDefault()
-        print(array1 == array2)
-        print(array1 == array3)
+//        let array1 = testConcurrentInitDefault()
+//        let array2 = testConcurrentInitSeparate()
+//        let array3 = testInitDefault()
+//        print(array1 == array2)
+//        print(array1 == array3)
     }
+    
+    func q1() {
+        
+        DispatchQueue.global().async {
+            
+            for i in 1...100 {
+                self.s.wait()
+                
+                let q = DispatchOperation { item in
+                    print("start", i)
+                    
+                    if item.isCanceled {
+                        self.s.signal()
+                        print("cancel-1", i)
+                        return
+                    }
+                    
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+                        if item.isCanceled {
+                            print("cancel-2", i)
+                            self.s.signal()
+                            return
+                        }
+                        print("finish", i)
+                        self.s.signal()
+                    }
+                    
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                        item.cancel()
+                    }
+                }
+                
+                
+                
+                
+                self.queue.sync(execute: q.item!)
+                //                DispatchQueue.global().sync(execute: q.item!)
+                //                q.item?.perform()
+                
+                //            queue.async {
+                //                self.s.wait()
+                //                q.item!.perform()
+                //            }
+                
+                //            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                //                q.cancel()
+                //            }
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+    }
+
     
     private func testDispatchSpecificKey() {
         /// Different instances of DispatchSpecificKey share the same pointer
@@ -214,63 +272,4 @@ class ViewController: UIViewController {
         
         return array
     }
-    
-    func q1() {
-        
-        DispatchQueue.global().async {
-            
-            for i in 1...100 {
-                self.s.wait()
-                
-                let q = DispatchOperation { item in
-                    print("start", i)
-                    
-                    if item.isCanceled {
-                        self.s.signal()
-                        print("cancel-1", i)
-                        return
-                    }
-                    
-                    DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-                        if item.isCanceled {
-                            print("cancel-2", i)
-                            self.s.signal()
-                            return
-                        }
-                        print("finish", i)
-                        self.s.signal()
-                    }
-                    
-                    DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-                        item.cancel()
-                    }
-                }
-                
-                
-                
-                
-                self.queue.sync(execute: q.item!)
-                //                DispatchQueue.global().sync(execute: q.item!)
-                //                q.item?.perform()
-                
-                //            queue.async {
-                //                self.s.wait()
-                //                q.item!.perform()
-                //            }
-                
-                //            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                //                q.cancel()
-                //            }
-                
-            }
-            
-            
-            
-        }
-        
-        
-        
-    }
-
 }
-
