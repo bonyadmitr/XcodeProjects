@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        q1()
+        q1()
         
 //        testBenchmarkDateFormatter()
 //        testBenchmarkCountWhere()
@@ -78,6 +78,19 @@ class ViewController: UIViewController {
                         print("cancel-1", i)
                         return
                     }
+                    
+                    func delayCheckIsCanceled() {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.3) {
+                            if item.isCanceled {
+                                print("checkIsCanceled", i)
+                                self.s.signal()
+                            } else {
+                                delayCheckIsCanceled()
+                            }
+                        }
+                    }
+                    
+                    delayCheckIsCanceled()
                     
                     DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
                         if item.isCanceled {
