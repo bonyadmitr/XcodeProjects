@@ -42,36 +42,46 @@ final class SystemVolumeManager {
     }
     
     weak var delegate: SystemVolumeManagerDelegate?
-    private var systemVolumeObserver: NSObjectProtocol!
+    private var systemVolumeObserver: NSObjectProtocol?
     
-    required init() {
+    init() {
         slider = SystemVolumeManager.volumeSlider
         addSystemVolumeObserver()
     }
     
     private func addSystemVolumeObserver() {
-        systemVolumeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil, queue: nil)
+        let notification = NSNotification.Name(rawValue: "AVSystemController_SystemVolumeDidChangeNotification")
+        systemVolumeObserver = NotificationCenter.default.addObserver(forName: notification, object: nil, queue: nil)
         { [weak self] notification in
             
-            guard let strongSelf = self,
+            guard
+                let self = self,
                 let userInfo = notification.userInfo,
-                let newValue = userInfo["AVSystemController_AudioVolumeNotificationParameter"] as? Float,
-                strongSelf.value != newValue
-                else { return }
+                let newValue = userInfo["AVSystemController_AudioVolumeNotificationParameter"] as? Float
+            else {
+                assertionFailure()
+                return
+            }
             
-            strongSelf.value = newValue
-            strongSelf.delegate?.systemVolumeSliderDidChange(value: newValue)
+            if self.value != newValue {
+                self.value = newValue
+                self.delegate?.systemVolumeSliderDidChange(value: newValue)
+            }
         }
     }
     
     deinit {
+        guard let systemVolumeObserver = systemVolumeObserver else {
+            assertionFailure()
+            return
+        }
         NotificationCenter.default.removeObserver(systemVolumeObserver)
     }
     
     /// can't be use in as instance method bcz of "self"
     private static var volumeSlider: UISlider {
         guard let slider = MPVolumeView().subviews.first as? UISlider else {
-            print("SystemVolumeManager error: something went wrong with system volume slider")
+            assertionFailure("SystemVolumeManager error: something went wrong with system volume slider")
             return UISlider()
         }
         return slider
@@ -80,14 +90,14 @@ final class SystemVolumeManager {
     /// need for bar methods
     /// value of one bar
     /// can be set to public
-    fileprivate let oneBarValue: Float = 0.0625 // = 1/16
+    private let oneBarValue: Float = 0.0625 // = 1/16
     
     /// max number of bars = 16
     /// maybe need to add
     //let maxBarsNumber = 16
     
     /// need for muting methods
-    fileprivate var savedValue: Float?
+    private var savedValue: Float?
 }
 
 // MARK: - Bars
@@ -172,14 +182,14 @@ extension SystemVolumeManager {
 }
 
 // MARK: - VolumeView extensions
-extension UIView {
-    fileprivate func addVolumeView() {
+private extension UIView {
+    func addVolumeView() {
         /// also can be set alpha to 0.00001
         let rect = CGRect(x: -20000, y: -20000, width: 0, height: 0)
         let volumeView = MPVolumeView(frame: rect)
         insertSubview(volumeView, at: 0)
     }
-    fileprivate func removeVolumeView() {
+    func removeVolumeView() {
         let volumeView = subviews.first { $0 is MPVolumeView}
         volumeView?.removeFromSuperview()
     }
