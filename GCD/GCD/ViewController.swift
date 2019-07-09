@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     let queue = DispatchQueue(label: "123", attributes: .concurrent)
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
-    let s = DispatchSemaphore(value: 3)
+    let semaphoreForQueue = DispatchSemaphore(value: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,13 +68,13 @@ class ViewController: UIViewController {
         DispatchQueue.global().async {
             
             for i in 1...100 {
-                self.s.wait()
+                self.semaphoreForQueue.wait()
                 
                 let q = DispatchOperation { item in
                     print("start", i)
                     
                     if item.isCanceled {
-                        self.s.signal()
+                        self.semaphoreForQueue.signal()
                         print("cancel-1", i)
                         return
                     }
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.3) {
                             if item.isCanceled {
                                 print("checkIsCanceled", i)
-                                self.s.signal()
+                                self.semaphoreForQueue.signal()
                             } else {
                                 delayCheckIsCanceled()
                             }
@@ -95,11 +95,11 @@ class ViewController: UIViewController {
                     DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
                         if item.isCanceled {
                             print("cancel-2", i)
-                            self.s.signal()
+                            self.semaphoreForQueue.signal()
                             return
                         }
                         print("finish", i)
-                        self.s.signal()
+                        self.semaphoreForQueue.signal()
                     }
                     
                     DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
