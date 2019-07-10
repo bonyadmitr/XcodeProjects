@@ -47,7 +47,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        q1()
+//        q1()
+        
+//        groupBySemaphore()
+//        groupByDispatchGroupWithQueueAsyncGroup()
+        groupByDispatchGroupDefault()
         
 //        testBenchmarkDateFormatter()
 //        testBenchmarkCountWhere()
@@ -133,6 +137,64 @@ class ViewController: UIViewController {
         
     }
 
+    /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
+    func groupBySemaphore() {
+        let semaphore = DispatchSemaphore(value: 0)
+        let queue = DispatchQueue.global()
+        let n = 9
+        let range = 0..<n
+        
+        for i in range {
+            queue.async {
+                print("run \(i)")
+                sleep(UInt32.random(in: 1...3))
+                //sleep(2)
+                semaphore.signal()
+            }
+        }
+        print("wait")
+        for i in range {
+            semaphore.wait()
+            print("completed \(i)")
+        }
+        print("done")
+    }
+    
+    func groupByDispatchGroupWithQueueAsyncGroup() {
+        let queue = DispatchQueue.global()
+        let group = DispatchGroup()
+        let n = 9
+        
+        for i in 0..<n {
+            queue.async(group: group) {
+                print("\(i): Running async task...")
+                sleep(UInt32.random(in: 1...3))
+                //sleep(2)
+                print("\(i): Async task completed")
+            }
+        }
+        group.wait()
+        print("done")
+    }
+    
+    func groupByDispatchGroupDefault() {
+        let queue = DispatchQueue.global()
+        let group = DispatchGroup()
+        let n = 9
+        
+        for i in 0..<n {
+            group.enter()
+            queue.async {
+                print("\(i): Running async task...")
+                sleep(UInt32.random(in: 1...3))
+                //sleep(2)
+                print("\(i): Async task completed")
+                group.leave()
+            }
+        }
+        group.wait()
+        print("done")
+    }
     
     private func testDispatchSpecificKey() {
         /// Different instances of DispatchSpecificKey share the same pointer
