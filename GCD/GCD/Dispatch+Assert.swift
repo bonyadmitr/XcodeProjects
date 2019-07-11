@@ -10,6 +10,12 @@ func dispatchAssert(condition: @autoclosure () -> DispatchPredicate) {
 }
 
 func assertMainQueue() {
+    /// for iOS 9
+    /// or #1:
+    /// assert(Thread.isMainThread)
+    ///
+    /// or #2:
+    /// assert(DispatchQueue.currentQueueLabel == DispatchQueue.main.label)
     dispatchAssert(condition: .onQueue(.main))
 }
 
