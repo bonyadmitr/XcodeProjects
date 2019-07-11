@@ -52,6 +52,9 @@ class ViewController: UIViewController {
 //        testDeadlockMain1()
 //        testDeadlockMain2()
         
+//        testRaceCondition1()
+//        testRaceCondition2()
+        
 //        q1()
         
 //        groupBySemaphore()
@@ -140,6 +143,40 @@ class ViewController: UIViewController {
         
         
         
+    }
+    
+    // MARK: - Race condition
+    /// solve by mutex
+    
+    func testRaceCondition1() {
+        var count = 0
+        let targetCount = 1000
+        
+        DispatchQueue.concurrentPerform(iterations: targetCount) { _ in
+            count += 1
+        }
+        
+        print("- count: \(count)")
+        assert(count == targetCount)
+    }
+    
+    func testRaceCondition2() {
+        var count = 0
+        let targetCount = 10000
+        let group = DispatchGroup()
+        let queue = DispatchQueue.global()
+        
+        for _ in 1...targetCount {
+            group.enter()
+            queue.async() {
+                count += 1
+                group.leave()
+            }
+        }
+        
+        group.wait()
+        print("- count: \(count)")
+        assert(count == targetCount)
     }
     
     // MARK: - anti-patterns
