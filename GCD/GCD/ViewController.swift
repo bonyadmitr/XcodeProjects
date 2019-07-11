@@ -34,6 +34,81 @@ final class DispatchOperation {
     
 }
 
+/// https://medium.com/@dmytro.anokhin/concurrency-in-swift-reader-writer-lock-4f255ae73422
+/**
+ concurrentQueue.async(flags: .barrier)
+ // .barrier flag ensures that within the queue all reading is done
+ // before the below writing is performed and
+ // pending readings start after below writing is performed https://medium.com/@oyalhi/dispatch-barriers-in-swift-3-6c4a295215d6
+ 
+ 
+ Барьерная часть (flags: .barrier) означает, что замыкание не будет выполнено до тех пор, пока каждое замыкание в очереди не закончит свое выполнение. Другие замыкания будут размещены после барьерного и выполняться после того, как выполнится барьерное.
+ 
+ Барьеры GCD делают одну интересную вещь — они ожидают момента, когда очередь будет полностью пуста, перед тем как выполнить свое замыкание Как только барьер начинает выполнять свое замыкание, он обеспечивает, чтобы очередь не выполняла никакие другие замыкания в течение этого времени и по существу работает как синхронная функция. Как только замыкание с барьером заканчивается, очередь возвращается к своей обычной работе, обеспечивая гарантию того, что никакая запись не будет проводиться одновременно с чтением или другой записью.
+ 
+ 
+ 
+ 
+ SynchronizedArray
+ //http://basememara.com/creating-thread-safe-arrays-in-swift/
+ //https://gist.github.com/basememara/afaae5310a6a6b97bdcdbe4c2fdcd0c6
+
+ */
+final class SafeString {
+    
+    private let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
+    
+    private var str = String()
+    
+    var value: String {
+        get {
+            var tempString = String()
+            queue.sync {
+                tempString = str
+            }
+            return tempString
+        }
+        set {
+            // Write with .barrier
+            // This can be performed synchronously or asynchronously not to block calling thread.
+            queue.async(flags: .barrier) {
+                self.str = newValue
+            }
+        }
+    }
+}
+
+public class ThreadSafeString {
+    private var internalString = ""
+    let isolationQueue = DispatchQueue(label:"com.bestkora.isolation",
+                                       attributes: .concurrent)
+    
+    public func addString(string: String) {
+        isolationQueue.async(flags: .barrier) {
+            self.internalString = self.internalString + string
+        }
+    }
+    public func setString(string: String) {
+        isolationQueue.async(flags: .barrier) {
+            self.internalString = string
+        }
+    }
+    
+    public init (_ string: String){
+        isolationQueue.async(flags: .barrier) {
+            self.internalString = string
+        }
+    }
+    
+    public var text: String {
+        var result = ""
+        isolationQueue.sync {
+            result = self.internalString
+        }
+        return result
+    }
+}
+
 /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
 class ViewController: UIViewController {
 
@@ -41,12 +116,61 @@ class ViewController: UIViewController {
 //        $0.text = ""
 //    }
     
-    let queue = DispatchQueue(label: "123", attributes: .concurrent)
+    let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     let semaphoreForQueue = DispatchSemaphore(value: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //let safeString = SafeString()
+        let safeString = ThreadSafeString("")
+
+        for i in 1...100 {
+            DispatchQueue.global().async {
+//            DispatchQueue.global().async {
+//                safeString.value = strI
+                let strI = "\(i)"
+                safeString.setString(string: strI)
+                let q = safeString.text
+                
+                //safeString.value = strI
+                //let q = safeString.value
+                
+                print(q)
+                //assert(q == strI)
+            }
+        }
+        
+//
+//        safeString.value = "1"
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        safeString.value = "2"
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        print("safeString: \(safeString.value)")
+//        safeString.value = "3"
+        
+        
         
 //        testDeadlockQueue()
 //        testDeadlockMain1()
