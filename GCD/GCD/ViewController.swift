@@ -183,7 +183,8 @@ class ViewController: UIViewController {
     
     func testDeadlockQueue() {
         let queue = DispatchQueue(label: "queue line \(#line)")
-        queue.sync {
+        //queue.sync {
+        queue.async {
             
             /// Calling this function and targeting the current queue results in deadlock
             /// https://developer.apple.com/documentation/dispatch/dispatchqueue/1452870-sync
