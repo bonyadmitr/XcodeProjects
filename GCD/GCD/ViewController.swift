@@ -48,7 +48,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        q1()
+//        testDeadlockQueue()
+//        testDeadlockMain1()
+//        testDeadlockMain2()
+        
+//        q1()
         
 //        groupBySemaphore()
 //        groupByDispatchGroupWithQueueAsyncGroup()
@@ -136,6 +140,36 @@ class ViewController: UIViewController {
         
         
         
+    }
+    
+    // MARK: - anti-patterns
+    
+    func testDeadlockQueue() {
+        let queue = DispatchQueue(label: "queue line \(#line)")
+        queue.sync {
+            
+            /// Calling this function and targeting the current queue results in deadlock
+            /// https://developer.apple.com/documentation/dispatch/dispatchqueue/1452870-sync
+            queue.sync {
+                /// this won't be executed -> deadlock!
+                /// app will crash
+            }
+        }
+    }
+    
+    func testDeadlockMain1() {
+        /// Calling this function and targeting the current queue results in deadlock
+        /// app will crash
+        DispatchQueue.main.sync {}
+    }
+    
+    func testDeadlockMain2() {
+        /// What you are trying to do here is to launch the main thread synchronously from a background thread before it exits. This is a logical error.
+        /// https://stackoverflow.com/questions/49258413/dispatchqueue-crashing-with-main-sync-in-swift?rq=1
+        /// app will crash
+        DispatchQueue.global().sync {
+            DispatchQueue.main.sync {}
+        }
     }
     
     // MARK: - groups
