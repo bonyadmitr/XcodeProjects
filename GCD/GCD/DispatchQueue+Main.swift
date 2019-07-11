@@ -45,3 +45,50 @@ extension DispatchQueue {
         DispatchQueue.main.asyncAfter(deadline: .now() + time, execute: handler)
     }
 }
+
+
+
+
+/// https://gist.github.com/sgr-ksmt/4880c5df5aeec9e558622cd6d5b477cb
+/// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
+extension DispatchQueue {
+    class func mainSyncSafe(execute work: () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.sync(execute: work)
+        }
+    }
+    
+    class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
+        if Thread.isMainThread {
+            return try work()
+        } else {
+            return try DispatchQueue.main.sync(execute: work)
+        }
+    }
+    
+//    let x = DispatchQueue.main.sync {
+//        return 10
+//    }
+    class func syncSafe<T>(_ work: () -> T) -> T {
+        if Thread.isMainThread {
+            return work()
+        } else {
+            return DispatchQueue.main.sync {
+                return work()
+            }
+        }
+    }
+
+}
+
+
+
+/// com.apple.main-thread
+//assert(DispatchQueue.currentQueueLabel == DispatchQueue.main.label)
+extension DispatchQueue {
+    static var currentQueueLabel: String? {
+        return String(validatingUTF8: __dispatch_queue_get_label(nil))
+    }
+}
