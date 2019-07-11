@@ -138,6 +138,8 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: - groups
+    
     func someLongTask(for i: Int) {
         print("\(i): Running async task...")
         sleep(UInt32.random(in: 1...3))
@@ -202,6 +204,8 @@ class ViewController: UIViewController {
         print("done")
     }
     
+    // MARK: - tests Dispatch
+    
     private func testDispatchSpecificKey() {
         /// Different instances of DispatchSpecificKey share the same pointer
         /// http://tom.lokhorst.eu/2018/02/leaky-abstractions-in-swift-with-dispatchqueue
@@ -252,6 +256,8 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - tests Benchmark
+    
     func testBenchmarkDateFormatter() {
         
         let dateFormatter = DateFormatter()
@@ -301,6 +307,8 @@ class ViewController: UIViewController {
             }.average
         )
     }
+    
+    // MARK: - tests ConcurrentInit
     
     func testConcurrentInitDefault()  -> [Int] {
         var array = Array(repeating: 0, count: 1_000_000)
