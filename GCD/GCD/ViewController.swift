@@ -34,6 +34,7 @@ final class DispatchOperation {
     
 }
 
+/// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
 class ViewController: UIViewController {
 
 //    lazy var label = UILabel {
@@ -47,11 +48,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        q1()
+        q1()
         
 //        groupBySemaphore()
 //        groupByDispatchGroupWithQueueAsyncGroup()
-        groupByDispatchGroupDefault()
+//        groupByDispatchGroupDefault()
         
 //        testBenchmarkDateFormatter()
 //        testBenchmarkCountWhere()
@@ -84,7 +85,7 @@ class ViewController: UIViewController {
                     }
                     
                     func delayCheckIsCanceled() {
-                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.3) {
+                        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.3) {
                             if item.isCanceled {
                                 print("checkIsCanceled", i)
                                 self.semaphoreForQueue.signal()
@@ -136,6 +137,13 @@ class ViewController: UIViewController {
         
         
     }
+    
+    func someLongTask(for i: Int) {
+        print("\(i): Running async task...")
+        sleep(UInt32.random(in: 1...3))
+        //sleep(2)
+        print("\(i): Async task completed")
+    }
 
     /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
     func groupBySemaphore() {
@@ -146,17 +154,21 @@ class ViewController: UIViewController {
         
         for i in range {
             queue.async {
-                print("run \(i)")
-                sleep(UInt32.random(in: 1...3))
-                //sleep(2)
+                self.someLongTask(for: i)
                 semaphore.signal()
             }
         }
-        print("wait")
-        for i in range {
-            semaphore.wait()
-            print("completed \(i)")
-        }
+        
+        /// or #1
+        range.forEach { _ in semaphore.wait() }
+        
+        /// or #2
+        //for i in range {
+        //    semaphore.wait()
+        //    /// !!! NOTE: it will not be the same `i` as above
+        //    print("completed \(i)")
+        //}
+        
         print("done")
     }
     
@@ -167,10 +179,7 @@ class ViewController: UIViewController {
         
         for i in 0..<n {
             queue.async(group: group) {
-                print("\(i): Running async task...")
-                sleep(UInt32.random(in: 1...3))
-                //sleep(2)
-                print("\(i): Async task completed")
+                self.someLongTask(for: i)
             }
         }
         group.wait()
@@ -185,10 +194,7 @@ class ViewController: UIViewController {
         for i in 0..<n {
             group.enter()
             queue.async {
-                print("\(i): Running async task...")
-                sleep(UInt32.random(in: 1...3))
-                //sleep(2)
-                print("\(i): Async task completed")
+                self.someLongTask(for: i)
                 group.leave()
             }
         }
