@@ -74,6 +74,7 @@ final class SafeString {
     }
 }
 
+/// https://github.com/BestKora/GCD-Swift3/blob/master/GCDPlayground.playground/Sources/Queues.swift
 public class ThreadSafeString {
     private var internalString = ""
     let isolationQueue = DispatchQueue(label:"com.bestkora.isolation",
@@ -119,16 +120,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let safeString = SafeString()
-        let safeString = ThreadSafeString("")
+        let safeString = SafeString()
+//        let safeString = ThreadSafeString("")
 
         for i in 1...100 {
             DispatchQueue.global().async {
 //            DispatchQueue.global().async {
-//                safeString.value = strI
                 let strI = "\(i)"
-                safeString.setString(string: strI)
-                let q = safeString.text
+                safeString.value = strI
+                let q = safeString.value
+                
+//                safeString.setString(string: strI)
+//                let q = safeString.text
                 
                 //safeString.value = strI
                 //let q = safeString.value
