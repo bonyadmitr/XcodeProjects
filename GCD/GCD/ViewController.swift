@@ -128,20 +128,21 @@ final class AreaSelectionView: UIView {
     }()
     
     private let dashAnimation: CABasicAnimation = {
-        let oneSectionLength = Double(lineDashPattern.reduce(0, + ))
+        assert(lineDashPattern.count % 2 == 0, "for normal animation, must be even number of elements in the array")
+        
         /// 26.6 = (15+5) / 0.75
         /// 0.75 is nice duration for lineDashPattern = [15, 5]
         let animationSpeedNormalizationValue: Double = 26.6
         
-        assert(lineDashPattern.count % 2 == 0, "for normal animation, must be even number of elements in the array")
+        /// dashes + empty spaces
+        let oneSectionLength = Double(lineDashPattern.reduce(0, + ))
         
         var dashAnimation = CABasicAnimation()
         dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
-        /// controlls animation speed
-        /// by longer dashes it be faster
-        dashAnimation.duration = oneSectionLength / animationSpeedNormalizationValue
         dashAnimation.fromValue = 0.0
         dashAnimation.toValue = oneSectionLength
+        /// controls animation speed. by longer dashes it be faster
+        dashAnimation.duration = oneSectionLength / animationSpeedNormalizationValue
         dashAnimation.repeatCount = .infinity
         return dashAnimation
     }()
