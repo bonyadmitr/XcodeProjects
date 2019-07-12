@@ -106,6 +106,72 @@ public class ThreadSafeString {
     }
 }
 
+/// https://stackoverflow.com/a/42722478/5893286
+final class AreaSelectionView: UIView {
+    
+    var startPoint: CGPoint!
+    var shapeLayer: CAShapeLayer!
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        guard let point = touches.first?.location(in: self) else {
+            assertionFailure()
+            return
+        }
+        
+        self.startPoint = point
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.lineWidth = 1.0
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.lineDashPattern = [10,5]
+        self.layer.addSublayer(shapeLayer)
+        
+        var dashAnimation = CABasicAnimation()
+        dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
+        dashAnimation.duration = 0.75
+        dashAnimation.fromValue = 0.0
+        dashAnimation.toValue = 15.0
+        dashAnimation.repeatCount = .infinity
+        shapeLayer.add(dashAnimation, forKey: "linePhase")
+        
+
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        
+        guard let point = touches.first?.location(in: self) else {
+            assertionFailure()
+            return
+        }
+        
+        let path = CGMutablePath()
+        path.move(to: self.startPoint)
+        path.addLine(to: CGPoint(x: self.startPoint.x, y: point.y))
+        path.addLine(to: point)
+        path.addLine(to: CGPoint(x: point.x, y: self.startPoint.y))
+        path.closeSubpath()
+        self.shapeLayer.path = path
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        self.shapeLayer.removeFromSuperlayer()
+        self.shapeLayer = nil
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        
+        self.shapeLayer.removeFromSuperlayer()
+        self.shapeLayer = nil
+    }
+}
+
 /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
 class ViewController: UIViewController {
 
@@ -119,6 +185,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let areaSelectionView = AreaSelectionView()
+        areaSelectionView.frame = view.frame
+        areaSelectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(areaSelectionView)
         
         let safeString = SafeString()
 //        let safeString = ThreadSafeString("")
