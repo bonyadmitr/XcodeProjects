@@ -39,20 +39,16 @@ final class DispatchOperation {
  concurrentQueue.async(flags: .barrier)
  // .barrier flag ensures that within the queue all reading is done
  // before the below writing is performed and
- // pending readings start after below writing is performed https://medium.com/@oyalhi/dispatch-barriers-in-swift-3-6c4a295215d6
- 
+ // pending readings start after below writing is performed
+ https://medium.com/@oyalhi/dispatch-barriers-in-swift-3-6c4a295215d6
  
  Барьерная часть (flags: .barrier) означает, что замыкание не будет выполнено до тех пор, пока каждое замыкание в очереди не закончит свое выполнение. Другие замыкания будут размещены после барьерного и выполняться после того, как выполнится барьерное.
  
  Барьеры GCD делают одну интересную вещь — они ожидают момента, когда очередь будет полностью пуста, перед тем как выполнить свое замыкание Как только барьер начинает выполнять свое замыкание, он обеспечивает, чтобы очередь не выполняла никакие другие замыкания в течение этого времени и по существу работает как синхронная функция. Как только замыкание с барьером заканчивается, очередь возвращается к своей обычной работе, обеспечивая гарантию того, что никакая запись не будет проводиться одновременно с чтением или другой записью.
  
- 
- 
- 
  SynchronizedArray
  //http://basememara.com/creating-thread-safe-arrays-in-swift/
  //https://gist.github.com/basememara/afaae5310a6a6b97bdcdbe4c2fdcd0c6
-
  */
 final class SafeString {
     
