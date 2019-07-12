@@ -109,12 +109,17 @@ public class ThreadSafeString {
 /// https://stackoverflow.com/a/42722478/5893286
 final class AreaSelectionView: UIView {
     
+    /// for normal animation, must be even number of elements in the array
+    private static let lineDashPattern = [15, 5]
+    
     private var startPoint: CGPoint?
     
     private let shapeLayer: CAShapeLayer = {
         let shapeLayer = CAShapeLayer()
         shapeLayer.lineWidth = 1.0
-        shapeLayer.lineDashPattern = [10, 5]
+        /// line dash length
+        /// needs adapt with "dashAnimation". done by constatnt "lineDashPattern" + reduce
+        shapeLayer.lineDashPattern = lineDashPattern as [NSNumber]
         /// line dash color
         shapeLayer.strokeColor = UIColor.black.cgColor
         /// inner rect color
@@ -123,11 +128,20 @@ final class AreaSelectionView: UIView {
     }()
     
     private let dashAnimation: CABasicAnimation = {
+        let oneSectionLength = Double(lineDashPattern.reduce(0, + ))
+        /// 26.6 = (15+5) / 0.75
+        /// 0.75 is nice duration for lineDashPattern = [15, 5]
+        let animationSpeedNormalizationValue: Double = 26.6
+        
+        assert(lineDashPattern.count % 2 == 0, "for normal animation, must be even number of elements in the array")
+        
         var dashAnimation = CABasicAnimation()
         dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
-        dashAnimation.duration = 0.75
+        /// controlls animation speed
+        /// by longer dashes it be faster
+        dashAnimation.duration = oneSectionLength / animationSpeedNormalizationValue
         dashAnimation.fromValue = 0.0
-        dashAnimation.toValue = 15.0
+        dashAnimation.toValue = oneSectionLength
         dashAnimation.repeatCount = .infinity
         return dashAnimation
     }()
