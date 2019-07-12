@@ -84,11 +84,28 @@ extension DispatchQueue {
 }
 
 
-
+/**
+ #if DEBUG
+ let contextQueue = DispatchQueue.currentQueueLabelAsserted
+ #endif
+ 
+ #if DEBUG
+ let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
+ assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
+ #endif
+ */
 /// com.apple.main-thread
 //assert(DispatchQueue.currentQueueLabel == DispatchQueue.main.label)
 extension DispatchQueue {
     static var currentQueueLabel: String? {
         return String(validatingUTF8: __dispatch_queue_get_label(nil))
+    }
+    
+    static var currentQueueLabelAsserted: String {
+        guard let currentQueueLabel = currentQueueLabel else {
+            assertionFailure("something went wrong with: \(__dispatch_queue_get_label(nil))")
+            return ""
+        }
+        return currentQueueLabel
     }
 }
