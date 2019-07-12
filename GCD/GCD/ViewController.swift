@@ -109,66 +109,79 @@ public class ThreadSafeString {
 /// https://stackoverflow.com/a/42722478/5893286
 final class AreaSelectionView: UIView {
     
-    var startPoint: CGPoint!
-    var shapeLayer: CAShapeLayer!
+    private var startPoint: CGPoint?
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        guard let point = touches.first?.location(in: self) else {
-            assertionFailure()
-            return
-        }
-        
-        self.startPoint = point
-        
-        shapeLayer = CAShapeLayer()
+    private let shapeLayer: CAShapeLayer = {
+        let shapeLayer = CAShapeLayer()
         shapeLayer.lineWidth = 1.0
-        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.lineDashPattern = [10, 5]
+        /// line dash color
         shapeLayer.strokeColor = UIColor.black.cgColor
-        shapeLayer.lineDashPattern = [10,5]
-        self.layer.addSublayer(shapeLayer)
-        
+        /// inner rect color
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        return shapeLayer
+    }()
+    
+    private let dashAnimation: CABasicAnimation = {
         var dashAnimation = CABasicAnimation()
         dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
         dashAnimation.duration = 0.75
         dashAnimation.fromValue = 0.0
         dashAnimation.toValue = 15.0
         dashAnimation.repeatCount = .infinity
-        shapeLayer.add(dashAnimation, forKey: "linePhase")
+        return dashAnimation
+    }()
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
-
+        guard let point = touches.first?.location(in: self) else {
+            assertionFailure("\(touches.count)")
+            return
+        }
+        
+        self.startPoint = point
+        self.layer.addSublayer(self.shapeLayer)
+        
+        /// "removeAnimation" doesn't need bcz it was removed by "removeFromSuperlayer"
+        self.shapeLayer.add(self.dashAnimation, forKey: "linePhase")
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
         guard let point = touches.first?.location(in: self) else {
-            assertionFailure()
+            assertionFailure("\(touches.count)")
+            return
+        }
+        
+        guard let startPoint = self.startPoint else {
+            assertionFailure("startPoint should be set in touchesBegan")
             return
         }
         
         let path = CGMutablePath()
-        path.move(to: self.startPoint)
-        path.addLine(to: CGPoint(x: self.startPoint.x, y: point.y))
+        path.move(to: startPoint)
+        path.addLine(to: CGPoint(x: startPoint.x, y: point.y))
         path.addLine(to: point)
-        path.addLine(to: CGPoint(x: point.x, y: self.startPoint.y))
+        path.addLine(to: CGPoint(x: point.x, y: startPoint.y))
         path.closeSubpath()
         self.shapeLayer.path = path
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        self.shapeLayer.removeFromSuperlayer()
-        self.shapeLayer = nil
+        endTouches()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        
+        endTouches()
+    }
+    
+    private func endTouches() {
         self.shapeLayer.removeFromSuperlayer()
-        self.shapeLayer = nil
+        self.shapeLayer.path = nil
     }
 }
 
