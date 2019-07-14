@@ -147,8 +147,24 @@ final class AreaSelectionView: UIView {
         return dashAnimation
     }()
     
+    private var runLoop: CFRunLoop?
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        
+        /// Store a reference to the current run loop
+        //        runLoop = CFRunLoopGetCurrent()
+        //        assert(runLoop == CFRunLoopGetMain(), "it must be main RunLoop")
+//        print(RunLoop.current.currentMode!.rawValue)
+//
+//        CFRunLoopStop(CFRunLoopGetCurrent())
+//        //        RunLoop.Mode.tracking
+//        //        CFRunLoopRunInMode(CFRunLoopMode.commonModes!, 10, false)
+//        let q = RunLoop.current.run(mode: .common, before: Date.distantFuture)
+        let isStartedInTrackingMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+        assert(isStartedInTrackingMode)
+        print(RunLoop.current.currentMode!.rawValue)
+        
         
         guard let point = touches.first?.location(in: self) else {
             assertionFailure("\(touches.count)")
@@ -164,6 +180,8 @@ final class AreaSelectionView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
+        
+//        print(RunLoop.current.currentMode!.rawValue)
         
         guard let point = touches.first?.location(in: self) else {
             assertionFailure("\(touches.count)")
@@ -197,6 +215,20 @@ final class AreaSelectionView: UIView {
     private func endTouches() {
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer.path = nil
+        print(RunLoop.current.currentMode!.rawValue)
+        // Stop the saved run loop
+//        guard let runLoop = self.runLoop else {
+//            assertionFailure()
+//            return
+//        }
+//        CFRunLoopStop(runLoop)
+        
+//        CFRunLoopStop(CFRunLoopGetCurrent())
+        
+//        let isStartedInTrackingMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
+//        assert(isStartedInTrackingMode)
+        
+        //CFRunLoopRun()
     }
 }
 
@@ -219,26 +251,78 @@ class ViewController: UIViewController {
         areaSelectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(areaSelectionView)
         
-        let safeString = SafeString()
-//        let safeString = ThreadSafeString("")
-
-        for i in 1...100 {
-            DispatchQueue.global().async {
-//            DispatchQueue.global().async {
-                let strI = "\(i)"
-                safeString.value = strI
-                let q = safeString.value
-                
-//                safeString.setString(string: strI)
-//                let q = safeString.text
-                
-                //safeString.value = strI
-                //let q = safeString.value
-                
-                print(q)
-                //assert(q == strI)
+        
+        print(RunLoop.current.currentMode!.rawValue)
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            
+            sleep(1)
+            
+            func someSleep() {
+                print("someSleep start")
+                sleep(2)
+                print("someSleep end")
             }
+            
+//            DispatchQueue.main.async {
+//                someSleep()
+//            }
+            
+            /// https://youtu.be/wA_392H7JeU
+            /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html
+            /// https://developer.apple.com/library/archive/documentation/General/Conceptual/ConcurrencyProgrammingGuide/Introduction/Introduction.html
+            ///
+            /// https://stackoverflow.com/questions/43825263/how-to-exit-a-runloop
+            /// https://stackoverflow.com/a/4260609/5893286
+            /// https://github.com/ReactiveX/RxSwift/blob/master/RxBlocking/RunLoopLock.swift
+//            CFRunLoopPerformBlock(CFRunLoopGetMain(), CFRunLoopMode.defaultMode.rawValue) {
+//                someSleep()
+//            }
+            
+            
+//            CFRunLoopStop(CFRunLoopGetMain())
+//            RunLoop.current
+            //RunLoop.Mode.tracking
+            
+            RunLoop.main.perform(inModes: [.tracking]) {
+                someSleep()
+                
+                RunLoop.main.perform(inModes: [.tracking]) {
+                    someSleep()
+                }
+            }
+            
+//            RunLoop.main.perform(inModes: [.default]) {
+//                someSleep()
+//            }
+            
+            
         }
+        
+        
+        
+
+        
+//        let safeString = SafeString()
+////        let safeString = ThreadSafeString("")
+//
+//        for i in 1...100 {
+//            DispatchQueue.global().async {
+////            DispatchQueue.global().async {
+//                let strI = "\(i)"
+//                safeString.value = strI
+//                let q = safeString.value
+//
+////                safeString.setString(string: strI)
+////                let q = safeString.text
+//
+//                //safeString.value = strI
+//                //let q = safeString.value
+//
+//                print(q)
+//                //assert(q == strI)
+//            }
+//        }
         
 //
 //        safeString.value = "1"
