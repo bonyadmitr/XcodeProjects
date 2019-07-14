@@ -152,19 +152,8 @@ final class AreaSelectionView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        /// Store a reference to the current run loop
-        //        runLoop = CFRunLoopGetCurrent()
-        //        assert(runLoop == CFRunLoopGetMain(), "it must be main RunLoop")
-//        print(RunLoop.current.currentMode!.rawValue)
-//
-//        CFRunLoopStop(CFRunLoopGetCurrent())
-//        //        RunLoop.Mode.tracking
-//        //        CFRunLoopRunInMode(CFRunLoopMode.commonModes!, 10, false)
-//        let q = RunLoop.current.run(mode: .common, before: Date.distantFuture)
-        let isStartedInTrackingMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
-        assert(isStartedInTrackingMode)
-        print(RunLoop.current.currentMode!.rawValue)
-        
+        let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+        assert(isChangedRunLoopMode)
         
         guard let point = touches.first?.location(in: self) else {
             assertionFailure("\(touches.count)")
@@ -180,8 +169,6 @@ final class AreaSelectionView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        
-//        print(RunLoop.current.currentMode!.rawValue)
         
         guard let point = touches.first?.location(in: self) else {
             assertionFailure("\(touches.count)")
@@ -215,20 +202,15 @@ final class AreaSelectionView: UIView {
     private func endTouches() {
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer.path = nil
-        print(RunLoop.current.currentMode!.rawValue)
-        // Stop the saved run loop
-//        guard let runLoop = self.runLoop else {
-//            assertionFailure()
-//            return
+        
+//        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
+//        assert(isChangedRunLoopMode)
+//
+//        print("--- !!! 1")
+//        RunLoop.main.perform(inModes: [.tracking]) {
+//            sleep(2)
+//            print("--- !!! 2")
 //        }
-//        CFRunLoopStop(runLoop)
-        
-//        CFRunLoopStop(CFRunLoopGetCurrent())
-        
-//        let isStartedInTrackingMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
-//        assert(isStartedInTrackingMode)
-        
-        //CFRunLoopRun()
     }
 }
 
@@ -250,9 +232,6 @@ class ViewController: UIViewController {
         areaSelectionView.frame = view.frame
         areaSelectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(areaSelectionView)
-        
-        
-        print(RunLoop.current.currentMode!.rawValue)
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             
@@ -279,24 +258,38 @@ class ViewController: UIViewController {
 //                someSleep()
 //            }
             
-            
-//            CFRunLoopStop(CFRunLoopGetMain())
-//            RunLoop.current
-            //RunLoop.Mode.tracking
-            
             RunLoop.main.perform(inModes: [.tracking]) {
                 someSleep()
-                
-                RunLoop.main.perform(inModes: [.tracking]) {
-                    someSleep()
-                }
             }
             
-//            RunLoop.main.perform(inModes: [.default]) {
-//                someSleep()
-//            }
             
+//            CFRunLoopStop(CFRunLoopGetMain())
+//            print(RunLoop.current.currentMode!.rawValue)
+            // Stop the saved run loop
+            //        guard let runLoop = self.runLoop else {
+            //            assertionFailure()
+            //            return
+            //        }
+            //        CFRunLoopStop(runLoop)
             
+            //        CFRunLoopStop(CFRunLoopGetCurrent())
+            
+            //        let isStartedInTrackingMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
+            //        assert(isStartedInTrackingMode)
+            
+            //CFRunLoopRun()
+            
+            /// Store a reference to the current run loop
+            //        runLoop = CFRunLoopGetCurrent()
+            //        assert(runLoop == CFRunLoopGetMain(), "it must be main RunLoop")
+            //        print(RunLoop.current.currentMode!.rawValue)
+            //
+            //        CFRunLoopStop(CFRunLoopGetCurrent())
+            //        //        RunLoop.Mode.tracking
+            //        //        CFRunLoopRunInMode(CFRunLoopMode.commonModes!, 10, false)
+            //        let q = RunLoop.current.run(mode: .common, before: Date.distantFuture)
+//            let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+//            assert(isChangedRunLoopMode)
         }
         
         
