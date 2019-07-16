@@ -152,6 +152,7 @@ final class AreaSelectionView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
+        
         let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
         assert(isChangedRunLoopMode)
         
@@ -203,8 +204,8 @@ final class AreaSelectionView: UIView {
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer.path = nil
         
-//        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
-//        assert(isChangedRunLoopMode)
+        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
+        assert(isChangedRunLoopMode)
 //
 //        print("--- !!! 1")
 //        RunLoop.main.perform(inModes: [.tracking]) {
@@ -233,6 +234,30 @@ class ViewController: UIViewController {
         areaSelectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(areaSelectionView)
         
+        let timer = Timer(timeInterval: 2, repeats: true) { (_) in
+            //print("- someSleep start")
+            print(RunLoop.current.currentMode!.rawValue)
+            sleep(1)
+            print("someSleep end")
+        }
+        
+        RunLoop.main.add(timer, forMode: .default)
+        
+//        func q() {
+//            RunLoop.main.perform(inModes: [.default]) {
+//                print("- someSleep start")
+//                print("", RunLoop.current.currentMode!.rawValue)
+//                sleep(1)
+//                print("someSleep end")
+//                DispatchQueue.global().asyncAfter(deadline: .now() + 1, execute: {
+//                    q()
+//                })
+//
+//            }
+//        }
+//
+//        q()
+        
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             
             sleep(1)
@@ -259,7 +284,7 @@ class ViewController: UIViewController {
 //            }
             
             RunLoop.main.perform(inModes: [.tracking]) {
-                someSleep()
+//                someSleep()
             }
             
             
