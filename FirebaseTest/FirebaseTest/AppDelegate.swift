@@ -12,6 +12,18 @@ import FirebaseAnalytics
 import Fabric
 import Crashlytics
 
+func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
+    let fileName = (file as NSString).lastPathComponent
+    crashlyticsLogs("\(fileName) \(line) \(functionName)")
+}
+
+/// https://firebase.google.com/docs/crashlytics/customize-crash-reports
+///
+/// don't call before "Fabric.with([Crashlytics.self])"
+func crashlyticsLogs(_ string: String) {
+    CLSLogv("%@", getVaList([string]))
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,8 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         /// https://fabric.io/kits/ios/crashlytics/install
+        ///
+        /// Turn off automatic collection with a new key to your Info.plist file
+        /// Key: firebase_crashlytics_collection_enabled, Value: false
+        /// Enable collection for selected users by initializing Crashlytics at runtime
         Fabric.with([Crashlytics.self])
         
+        crashlyticsLogs("app start")
+        crashlyticsLogsLine()
         
         return true
     }
