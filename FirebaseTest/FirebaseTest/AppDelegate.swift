@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(error.localizedDescription)
 //        }
         
-        /// https://firebase.google.com/docs/database/ios/read-and-write
+        /// https://firebase.google.com/docs/firestore/quickstart
         let db = Firestore.firestore()
         
         db.collection("users").getDocuments() { (querySnapshot, err) in
@@ -85,6 +85,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             } else {
                 assertionFailure()
+            }
+        }
+        
+        var ref: DocumentReference? = nil
+        ref = db.collection("users").addDocument(data: [
+            "id": 2,
+            "name": "some name of user"
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
             }
         }
 
