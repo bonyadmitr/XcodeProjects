@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAnalytics
 import Fabric
 import Crashlytics
+import FirebaseDatabase
 
 func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
     let fileName = (file as NSString).lastPathComponent
@@ -43,6 +44,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         crashlyticsLogs("app start")
         crashlyticsLogsLine()
+        
+        /// https://firebase.google.com/docs/database/ios/read-and-write
+//        var ref: DatabaseReference!
+//
+//        ref = Database.database().reference()
+//
+//        let userID = "qwe"
+//        let newName = "some name"
+//
+//        /// rewrite all fields
+//        //ref.child("users").child(userID).setValue(["username": newName])
+//
+//        /// update one field
+//        //ref.child("users/\(userID)/name").setValue(newName)
+//
+//        ref.coll
+//        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+//            // Get user value
+//            let all = snapshot.value as? [String: Any]
+//            print(all)
+////            let username = value?["username"] as? String ?? ""
+////            let user = User(username: username)
+//
+//            // ...
+//        }) { (error) in
+//            print(error.localizedDescription)
+//        }
+        
+        /// https://firebase.google.com/docs/database/ios/read-and-write
+        let db = Firestore.firestore()
+        
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else if let querySnapshot = querySnapshot {
+                
+                let users = querySnapshot.documents.map { $0.data() }
+                print(users)
+                
+            } else {
+                assertionFailure()
+            }
+        }
+
+
+        
         
         return true
     }

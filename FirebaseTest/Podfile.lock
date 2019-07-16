@@ -1,12 +1,26 @@
 PODS:
+  - BoringSSL-GRPC (0.0.2):
+    - BoringSSL-GRPC/Implementation (= 0.0.2)
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Implementation (0.0.2):
+    - BoringSSL-GRPC/Interface (= 0.0.2)
+  - BoringSSL-GRPC/Interface (0.0.2)
   - Crashlytics (3.13.4):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
+  - Firebase/Analytics (5.20.2):
+    - Firebase/Core
   - Firebase/Core (5.20.2):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.8.1)
   - Firebase/CoreOnly (5.20.2):
     - FirebaseCore (= 5.4.1)
+  - Firebase/Database (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.1)
+  - Firebase/Firestore (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (= 1.2.1)
   - FirebaseAnalytics (5.8.1):
     - FirebaseCore (~> 5.4)
     - FirebaseInstanceID (~> 3.8)
@@ -16,9 +30,29 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (5.4.1):
     - GoogleUtilities/Environment (~> 5.2)
     - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - leveldb-library (~> 1.18)
+  - FirebaseFirestore (1.2.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - FirebaseFirestore/abseil-cpp (= 1.2.1)
+    - "gRPC-C++ (= 0.0.6)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.901)
+    - Protobuf (~> 3.1)
+  - FirebaseFirestore/abseil-cpp (1.2.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - "gRPC-C++ (= 0.0.6)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.901)
+    - Protobuf (~> 3.1)
   - FirebaseInstanceID (3.8.1):
     - FirebaseCore (~> 5.2)
     - GoogleUtilities/Environment (~> 5.2)
@@ -47,40 +81,77 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.8.0):
     - GoogleUtilities/Logger
+  - "gRPC-C++ (0.0.6)":
+    - "gRPC-C++/Implementation (= 0.0.6)"
+    - "gRPC-C++/Interface (= 0.0.6)"
+  - "gRPC-C++/Implementation (0.0.6)":
+    - "gRPC-C++/Interface (= 0.0.6)"
+    - gRPC-Core (= 1.17.0)
+    - nanopb (~> 0.3)
+  - "gRPC-C++/Interface (0.0.6)"
+  - gRPC-Core (1.17.0):
+    - gRPC-Core/Implementation (= 1.17.0)
+    - gRPC-Core/Interface (= 1.17.0)
+  - gRPC-Core/Implementation (1.17.0):
+    - BoringSSL-GRPC (= 0.0.2)
+    - gRPC-Core/Interface (= 1.17.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.17.0)
+  - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Protobuf (3.9.0)
 
 DEPENDENCIES:
   - Crashlytics (~> 3.13.4)
   - Fabric (~> 1.10.2)
+  - Firebase/Analytics
   - Firebase/Core
+  - Firebase/Database
+  - Firebase/Firestore
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BoringSSL-GRPC
     - Crashlytics
     - Fabric
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseFirestore
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleUtilities
+    - "gRPC-C++"
+    - gRPC-Core
+    - leveldb-library
     - nanopb
+    - Protobuf
 
 SPEC CHECKSUMS:
+  BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseDatabase: 2c15b0ea6f2c6eb5e57413f9d6340f1e50b81ae3
+  FirebaseFirestore: faca891c0f0d1d6c10c793473e2f6a29d75014b5
   FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
+  "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
+  gRPC-Core: 4028031ed2c5267cca0d846c876d8046b1ecb9b6
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
 
-PODFILE CHECKSUM: 38a145ce3aeabfa27c71f9c901b8675e683dba36
+PODFILE CHECKSUM: 1ddab7843cab04e87ad164d1cb20f50737977eb3
 
 COCOAPODS: 1.5.3
