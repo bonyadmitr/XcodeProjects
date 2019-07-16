@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'FirebaseTest' do
+
+  pod 'Firebase/Core'
+
+end
