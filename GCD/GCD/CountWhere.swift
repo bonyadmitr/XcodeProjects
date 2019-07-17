@@ -36,6 +36,17 @@ extension Array {
 }
 
 
+/**
+ Первый прогон
+ finish count(where 29.021828055381775
+ finish countFILTER(where 31.501862049102783
+ finish countConcurrent(where 22.39603304862976
+ 
+ второй
+ finish count(where 28.15902888774872
+ finish countFILTER(where 31.33501398563385
+ finish countConcurrent(where 22.139133095741272
+ */
 func globalTestCountWhere() {
     var array = Array(repeating: 0, count: 1_000_000)
     
