@@ -152,10 +152,6 @@ final class AreaSelectionView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        
-        let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
-        assert(isChangedRunLoopMode)
-        
         guard let point = touches.first?.location(in: self) else {
             assertionFailure("\(touches.count)")
             return
@@ -166,6 +162,10 @@ final class AreaSelectionView: UIView {
         
         /// "removeAnimation" doesn't need bcz it was removed by "removeFromSuperlayer"
         self.shapeLayer.add(self.dashAnimation, forKey: "linePhase")
+        
+        //RunLoop.current.acceptInput(forMode: .tracking, before: Date.distantFuture)
+        let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+        assert(isChangedRunLoopMode)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -235,13 +235,19 @@ class ViewController: UIViewController {
         view.addSubview(areaSelectionView)
         
         let timer = Timer(timeInterval: 2, repeats: true) { (_) in
-            //print("- someSleep start")
             print(RunLoop.current.currentMode!.rawValue)
             sleep(1)
-            print("someSleep end")
+            print("sleep end")
         }
         
         RunLoop.main.add(timer, forMode: .default)
+        
+        let timerTracking = Timer(timeInterval: 1, repeats: true) { (_) in
+            print("tracking")
+            print(RunLoop.current.currentMode!.rawValue)
+        }
+        
+        RunLoop.main.add(timerTracking, forMode: .tracking)
         
 //        func q() {
 //            RunLoop.main.perform(inModes: [.default]) {
@@ -258,16 +264,16 @@ class ViewController: UIViewController {
 //
 //        q()
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            
-            sleep(1)
-            
-            func someSleep() {
-                print("someSleep start")
-                sleep(2)
-                print("someSleep end")
-            }
-            
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//
+//            sleep(1)
+//
+//            func someSleep() {
+//                print("someSleep start")
+//                sleep(2)
+//                print("someSleep end")
+//            }
+        
 //            DispatchQueue.main.async {
 //                someSleep()
 //            }
@@ -283,9 +289,9 @@ class ViewController: UIViewController {
 //                someSleep()
 //            }
             
-            RunLoop.main.perform(inModes: [.tracking]) {
+//            RunLoop.main.perform(inModes: [.tracking]) {
 //                someSleep()
-            }
+//            }
             
             
 //            CFRunLoopStop(CFRunLoopGetMain())
@@ -315,7 +321,9 @@ class ViewController: UIViewController {
             //        let q = RunLoop.current.run(mode: .common, before: Date.distantFuture)
 //            let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
 //            assert(isChangedRunLoopMode)
-        }
+        
+        
+//        }
         
         
         
