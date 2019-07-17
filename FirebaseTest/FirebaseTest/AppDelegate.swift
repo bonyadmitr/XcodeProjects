@@ -27,13 +27,29 @@ func crashlyticsLogs(_ string: String) {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
+    private func configureFirebase() {
+        let fileName: String
+//        #if DEBUG
+//        fileName = "GoogleService-Info-debug"
+//        #else
+        fileName = "GoogleService-Info"
+//        #endif
+        
+        if let filePath = Bundle.main.path(forResource: fileName, ofType: "plist"),
+            let options = FirebaseOptions(contentsOfFile: filePath) {
+            FirebaseApp.configure(options: options)
+        } else {
+            assertionFailure("threre is no file: \(fileName) or problem with FirebaseOptions")
+            FirebaseApp.configure()
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
+        configureFirebase()
         
         /// https://fabric.io/kits/ios/crashlytics/install
         ///
