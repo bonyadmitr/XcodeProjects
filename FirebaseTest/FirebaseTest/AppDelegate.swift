@@ -46,17 +46,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
     }
+    
+    func log(event: String) {
+        
+        /// check token
+        let loginStatus = false
+        
+        let dynamicParameters: [String: Any] = [
+            "loginStatus": String(loginStatus)
+        ]
+        
+        /// dynamicParameters's value will be used when there is a conflict with the keys
+        /// https://stackoverflow.com/a/50532046/5893286
+        let parameters = staticParameters.merging(dynamicParameters) { $1 }
+
+        Analytics.logEvent(event, parameters: parameters)
+    }
+    
+    let staticParameters: [String: Any] = {
+        guard
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        else {
+            assertionFailure()
+            return [:]
+        }
+        
+        let appVersion = "\(version) (\(build))"
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        let loginStatus = false
+        
+        let parameters: [String: Any] = [
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "loginStatus": String(loginStatus)
+        ]
+        return parameters
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         configureFirebase()
+        
+
         
         /// https://fabric.io/kits/ios/crashlytics/install
         ///
         /// Turn off automatic collection with a new key to your Info.plist file
         /// Key: firebase_crashlytics_collection_enabled, Value: false
         /// Enable collection for selected users by initializing Crashlytics at runtime
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         
         crashlyticsLogs("app start")
         crashlyticsLogsLine()
