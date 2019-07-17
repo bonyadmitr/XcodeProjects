@@ -88,17 +88,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        var ref: DocumentReference? = nil
-        ref = db.collection("users").addDocument(data: [
-            "id": 2,
-            "name": "some name of user"
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("users").addDocument(data: [
+//            "id": 2,
+//            "name": "some name of user"
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
 
 
         
