@@ -82,7 +82,7 @@ final class AnalyticsService {
     /// The name must start with an Alphabetic character.
     /// Should contain 1 to 40 AlphaNumeric characters or underscores.
     func log(event: String) {
-        assert(!event.isEmpty && event.count > 40, "Should contain 1 to 40 alphanumeric characters or underscores")
+        assert(!event.isEmpty && event.count <= 40, "Should contain 1 to 40 alphanumeric characters or underscores")
         assert(type(of: self).isAvalableEventName(event), "Analytics.logEvent doc")
         
         /// check token
