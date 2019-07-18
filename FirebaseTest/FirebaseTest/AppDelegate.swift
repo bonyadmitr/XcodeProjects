@@ -54,8 +54,49 @@ final class AnalyticsService {
         return parameters
     }()
     
+    
+    /**
+     for assert Analytics.logEvent
+     
+     Should contain 1 to 40 alphanumeric characters or underscores.
+     The name must start with an alphabetic character.
+     
+     #1 best result for 5 checks was 0.0010449886322021484
+     
+         private static let eventNameAllowedSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789_")
+         static func isAvalableEventName2(_ eventName: String) -> Bool {
+             return eventName.unicodeScalars.allSatisfy { eventNameAllowedSet.contains($0) }
+         }
+     
+     #2 best result for 5 checks was 0.0009319782257080078
+    */
+    private static func isAvalableEventName(_ eventName: String) -> Bool {
+        
+        if eventName.isEmpty {
+            return false
+        }
+        
+        /// The name must start with an alphabetic character
+        if let firstChar = eventName.first, !(firstChar >= "a" && firstChar <= "z") && !(firstChar >= "A" && firstChar <= "Z") {
+            return false
+        }
+        
+        ///Should contain AlphaNumeric characters or underscores.
+        for char in eventName {
+            if !(char >= "a" && char <= "z") && !(char >= "A" && char <= "Z") && !(char == "_") && !(char >= "0" && char <= "9") {
+                return false
+            }
+        }
+        return true
+    }
+    
+    // TODO: AnalyticsEventLogin
+    /// The name must start with an Alphabetic character.
+    /// Should contain 1 to 40 AlphaNumeric characters or underscores.
     func log(event: String) {
-        assert(event.count <= 40, "Analytics.logEvent doc")
+        assert(!event.isEmpty && event.count > 40, "Should contain 1 to 40 alphanumeric characters or underscores")
+        assert(type(of: self).isAvalableEventName(event), "Analytics.logEvent doc")
+        
         /// check token
         let loginStatus = false
         
@@ -66,8 +107,18 @@ final class AnalyticsService {
         /// dynamicParameters's value will be used when there is a conflict with the keys
         /// https://stackoverflow.com/a/50532046/5893286
         let parameters = staticParameters.merging(dynamicParameters) { $1 }
-        assert(parameters.count <= 40, "Analytics.logEvent doc")
-        assert((parameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil), "Analytics.logEvent doc")
+        
+        //assert(parameters.count <= 40, "Analytics.logEvent doc")
+        assert((parameters.keys.first(where: { $0.count > 40 }) == nil),
+               "Parameter names can be up to 40 characters long. unavailabel keys: \(parameters.keys.filter({ $0.count > 40 }))")
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((parameters.keys.first(where: { !type(of: self).isAvalableEventName($0) }) == nil),
+               "unavailabel keys: \(parameters.keys.filter({ !type(of: self).isAvalableEventName($0) }))" )
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((parameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil),
+               "parameter values can be up to 100 characters long. unavailabel values: \(parameters.values.compactMap({ $0 as? String}).filter( { $0.count > 100 }))")
         
         privateQueue.async {
             Analytics.logEvent(event, parameters: parameters)
