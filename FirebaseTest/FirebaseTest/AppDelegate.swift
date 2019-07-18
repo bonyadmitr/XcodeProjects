@@ -67,6 +67,7 @@ final class AnalyticsService {
         /// https://stackoverflow.com/a/50532046/5893286
         let parameters = staticParameters.merging(dynamicParameters) { $1 }
         assert(parameters.count <= 40, "Analytics.logEvent doc")
+        assert((parameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil), "Analytics.logEvent doc")
         
         privateQueue.async {
             Analytics.logEvent(event, parameters: parameters)
@@ -110,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configureFirebase()
         
-        AnalyticsService.shared.log(event: "app start")
+        AnalyticsService.shared.log(event: "app_start")
         
         /// https://fabric.io/kits/ios/crashlytics/install
         ///
@@ -119,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// Enable collection for selected users by initializing Crashlytics at runtime
 //        Fabric.with([Crashlytics.self])
         
-        crashlyticsLogs("app start")
+        crashlyticsLogs("app_start")
         crashlyticsLogsLine()
         
         /// https://firebase.google.com/docs/database/ios/read-and-write
