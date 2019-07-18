@@ -19,9 +19,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         crashlyticsLogsLine()
-        AnalyticsService.shared.log(event: "ViewController")
+        AnalyticsService.shared.log(event: "ViewController_viewDidLoad")
         addButton()
         recordError()
+        
+        let vc = UIViewController()
+        vc.view.backgroundColor = .blue
+        tabBarController?.viewControllers?.append(vc)
     }
     
     private func addButton() {
@@ -56,11 +60,16 @@ class ViewController: UIViewController {
     @objc func crashButtonTapped(_ sender: AnyObject) {
         crashlyticsLogsLine()
         AnalyticsService.shared.log(event: "crashButtonTapped")
+        
+        let vc = UIViewController()
+        vc.view.backgroundColor = .red
+        navigationController?.pushViewController(vc, animated: true)
         //Crashlytics.sharedInstance().crash()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AnalyticsService.shared.setScreenName()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        AnalyticsService.shared.setScreenName()
+//    }
 }
