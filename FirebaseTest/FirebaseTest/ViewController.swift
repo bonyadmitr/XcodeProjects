@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 import Crashlytics
 
 /// To enable debug logging set the following application argument: -FIRAnalyticsDebugEnabled
@@ -50,7 +49,7 @@ class ViewController: UIViewController {
                                            "SomeKey": -333,
                                            "SomeKey2": "-333s"]
             let error = NSError(domain: "NSSomeErrorDomain", code: -10001, userInfo: userInfo)
-            Crashlytics.sharedInstance().recordError(error)
+            crashlyticsLogError(error)
             //assertionFailure(error.localizedDescription)
             return
         }

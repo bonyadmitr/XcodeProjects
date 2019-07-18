@@ -13,6 +13,11 @@ import Fabric
 import Crashlytics
 import FirebaseDatabase
 
+// TODO: NSError only or Error too
+func crashlyticsLogError(_ error: NSError) {
+    Crashlytics.sharedInstance().recordError(error)
+}
+
 func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
     let fileName = (file as NSString).lastPathComponent
     crashlyticsLogs("\(fileName) \(line) \(functionName)")
