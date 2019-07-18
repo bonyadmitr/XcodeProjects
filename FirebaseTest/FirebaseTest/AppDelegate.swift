@@ -42,7 +42,7 @@ final class AnalyticsService {
             return [:]
         }
         
-        let appVersion = "\(version) (\(build))"
+        let appVersion = "\(version)-\(build)"
         let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
         let loginStatus = false
         
@@ -80,8 +80,15 @@ final class AnalyticsService {
     func setScreenName(file: String = #file) {
         assert(Thread.isMainThread, "setScreenName doc")
         /// ViewController.swift
+        
+        /// will not work at all with "FirebaseScreenReportingEnabled NO"
         let fileName = (file as NSString).lastPathComponent
         Analytics.setScreenName(fileName, screenClass: nil)
+//        Analytics.setScreenName(nil, screenClass: nil)
+        /// will not work at all. will not add parameters. DON'T USE IT
+        /// log(event: "screen_view")
+        
+//        log(event: "screen_view_")
     }
 }
 
