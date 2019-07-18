@@ -27,6 +27,18 @@ final class AnalyticsService {
             "deviceId": deviceId,
             "loginStatus": String(loginStatus)
         ]
+        
+        assert((parameters.keys.first(where: { $0.count > 40 }) == nil),
+               "Parameter names can be up to 40 characters long. unavailabel keys: \(parameters.keys.filter({ $0.count > 40 }))")
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((parameters.keys.first(where: { !isAvalableEventName($0) }) == nil),
+               "unavailabel keys: \(parameters.keys.filter({ !isAvalableEventName($0) }))" )
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((parameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil),
+               "parameter values can be up to 100 characters long. unavailabel values: \(parameters.values.compactMap({ $0 as? String}).filter( { $0.count > 100 }))")
+        
         return parameters
     }()
     
@@ -66,7 +78,7 @@ final class AnalyticsService {
         return true
     }
     
-    // TODO: AnalyticsEventLogin
+    // TODO: AnalyticsEventLogin const
     /// The name must start with an Alphabetic character.
     /// Should contain 1 to 40 AlphaNumeric characters or underscores.
     func log(event: String) {
@@ -80,21 +92,21 @@ final class AnalyticsService {
             "loginStatus": String(loginStatus)
         ]
         
+        assert((dynamicParameters.keys.first(where: { $0.count > 40 }) == nil),
+               "Parameter names can be up to 40 characters long. unavailabel keys: \(dynamicParameters.keys.filter({ $0.count > 40 }))")
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((dynamicParameters.keys.first(where: { !type(of: self).isAvalableEventName($0) }) == nil),
+               "unavailabel keys: \(dynamicParameters.keys.filter({ !type(of: self).isAvalableEventName($0) }))" )
+        
+        /// if you don't like scary operations add "#if DEBUG" and move code to constants
+        assert((dynamicParameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil),
+               "parameter values can be up to 100 characters long. unavailabel values: \(dynamicParameters.values.compactMap({ $0 as? String}).filter( { $0.count > 100 }))")
+        
+        
         /// dynamicParameters's value will be used when there is a conflict with the keys
         /// https://stackoverflow.com/a/50532046/5893286
         let parameters = staticParameters.merging(dynamicParameters) { $1 }
-        
-        //assert(parameters.count <= 40, "Analytics.logEvent doc")
-        assert((parameters.keys.first(where: { $0.count > 40 }) == nil),
-               "Parameter names can be up to 40 characters long. unavailabel keys: \(parameters.keys.filter({ $0.count > 40 }))")
-        
-        /// if you don't like scary operations add "#if DEBUG" and move code to constants
-        assert((parameters.keys.first(where: { !type(of: self).isAvalableEventName($0) }) == nil),
-               "unavailabel keys: \(parameters.keys.filter({ !type(of: self).isAvalableEventName($0) }))" )
-        
-        /// if you don't like scary operations add "#if DEBUG" and move code to constants
-        assert((parameters.values.compactMap({ $0 as? String}).first(where: { $0.count > 100 }) == nil),
-               "parameter values can be up to 100 characters long. unavailabel values: \(parameters.values.compactMap({ $0 as? String}).filter( { $0.count > 100 }))")
         
         privateQueue.async {
             Analytics.logEvent(event, parameters: parameters)
