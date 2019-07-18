@@ -13,9 +13,9 @@ final class AnalyticsService {
         guard
             let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
             let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-            else {
-                assertionFailure()
-                return [:]
+        else {
+            assertionFailure()
+            return [:]
         }
         
         let appVersion = "\(version)-\(build)"
