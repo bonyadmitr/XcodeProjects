@@ -7,11 +7,13 @@
 //
 
 import UIKit
-import Firebase
+
+import FirebaseCore
+import FirebaseFirestore
 import FirebaseAnalytics
+
 import Fabric
 import Crashlytics
-import FirebaseDatabase
 
 // TODO: NSError only or Error too
 func crashlyticsLogError(_ error: NSError) {
