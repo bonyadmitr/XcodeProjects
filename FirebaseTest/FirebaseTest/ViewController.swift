@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         crashlyticsLogsLine()
+        AnalyticsService.shared.log(event: "ViewController")
         addButton()
         recordError()
     }
@@ -54,18 +55,12 @@ class ViewController: UIViewController {
     
     @objc func crashButtonTapped(_ sender: AnyObject) {
         crashlyticsLogsLine()
-        Crashlytics.sharedInstance().crash()
+        AnalyticsService.shared.log(event: "crashButtonTapped")
+        //Crashlytics.sharedInstance().crash()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        /// To disable screen reporting, set the flag FirebaseScreenReportingEnabled to NO (boolean) in the Info.plist
-        ///
-        /// setScreenName:screenClass: must be called after a view controller has appeared
-        let screenClass = String(describing: ViewController.self)
-        Analytics.setScreenName(screenClass + "Name", screenClass: screenClass)
+        AnalyticsService.shared.setScreenName()
     }
-
 }
-

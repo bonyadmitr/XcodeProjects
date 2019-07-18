@@ -25,6 +25,65 @@ func crashlyticsLogs(_ string: String) {
     CLSLogv("%@", getVaList([string]))
 }
 
+extension AnalyticsService {
+    static let shared = AnalyticsService()
+}
+
+final class AnalyticsService {
+    
+    private let privateQueue = DispatchQueue(label: "\((#file as NSString).lastPathComponent): \(#line)")
+    
+    private let staticParameters: [String: Any] = {
+        guard
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        else {
+            assertionFailure()
+            return [:]
+        }
+        
+        let appVersion = "\(version) (\(build))"
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        let loginStatus = false
+        
+        let parameters: [String: Any] = [
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "loginStatus": String(loginStatus)
+        ]
+        return parameters
+    }()
+    
+    func log(event: String) {
+        assert(event.count <= 40, "Analytics.logEvent doc")
+        /// check token
+        let loginStatus = false
+        
+        let dynamicParameters: [String: Any] = [
+            "loginStatus": String(loginStatus)
+        ]
+        
+        /// dynamicParameters's value will be used when there is a conflict with the keys
+        /// https://stackoverflow.com/a/50532046/5893286
+        let parameters = staticParameters.merging(dynamicParameters) { $1 }
+        assert(parameters.count <= 40, "Analytics.logEvent doc")
+        
+        privateQueue.async {
+            Analytics.logEvent(event, parameters: parameters)
+        }
+    }
+    
+    /// To disable screen reporting, set the flag FirebaseScreenReportingEnabled to NO (boolean) in the Info.plist
+    ///
+    /// setScreenName:screenClass: must be called after a view controller has appeared
+    func setScreenName(file: String = #file) {
+        assert(Thread.isMainThread, "setScreenName doc")
+        /// ViewController.swift
+        let fileName = (file as NSString).lastPathComponent
+        Analytics.setScreenName(fileName, screenClass: nil)
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -46,49 +105,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
     }
-    
-    func log(event: String) {
-        
-        /// check token
-        let loginStatus = false
-        
-        let dynamicParameters: [String: Any] = [
-            "loginStatus": String(loginStatus)
-        ]
-        
-        /// dynamicParameters's value will be used when there is a conflict with the keys
-        /// https://stackoverflow.com/a/50532046/5893286
-        let parameters = staticParameters.merging(dynamicParameters) { $1 }
-
-        Analytics.logEvent(event, parameters: parameters)
-    }
-    
-    let staticParameters: [String: Any] = {
-        guard
-            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-            let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        else {
-            assertionFailure()
-            return [:]
-        }
-        
-        let appVersion = "\(version) (\(build))"
-        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
-        let loginStatus = false
-        
-        let parameters: [String: Any] = [
-            "appVersion": appVersion,
-            "deviceId": deviceId,
-            "loginStatus": String(loginStatus)
-        ]
-        return parameters
-    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         configureFirebase()
         
-
+        AnalyticsService.shared.log(event: "app start")
         
         /// https://fabric.io/kits/ios/crashlytics/install
         ///
