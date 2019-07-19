@@ -16,10 +16,12 @@ import Fabric
 import Crashlytics
 
 func log(_ text: String) {
+    /// add log to file
     crashlyticsLogs(text)
 }
 
 func logLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
+    /// add log to file
     crashlyticsLogsLine(file: file, line: line, functionName: functionName)
 }
 
