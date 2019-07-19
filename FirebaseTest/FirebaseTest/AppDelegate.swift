@@ -8,23 +8,21 @@
 
 import UIKit
 
-import FirebaseCore
-
+/// need only for line: Fabric.with([Crashlytics.self])
 import Fabric
 import Crashlytics
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+import FirebaseCore
+
+final class FirebaseSerivce {
     
-    var window: UIWindow?
-    
-    private func configureFirebase() {
+    func configureFirebase() {
         let fileName: String
-//        #if DEBUG
-//        fileName = "GoogleService-Info-debug"
-//        #else
+        //        #if DEBUG
+        //        fileName = "GoogleService-Info-debug"
+        //        #else
         fileName = "GoogleService-Info"
-//        #endif
+        //        #endif
         
         if let filePath = Bundle.main.path(forResource: fileName, ofType: "plist"),
             let options = FirebaseOptions(contentsOfFile: filePath) {
@@ -34,10 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
     }
+}
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        configureFirebase()
+        FirebaseSerivce().configureFirebase()
         
         AnalyticsService.shared.log(event: "app_start")
         
