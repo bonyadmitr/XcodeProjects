@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        crashlyticsLogsLine()
+        logLine()
         AnalyticsService.shared.log(event: "ViewController_viewDidLoad")
         addButton()
         recordError()
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     @objc func crashButtonTapped(_ sender: AnyObject) {
-        crashlyticsLogsLine()
+        logLine()
         AnalyticsService.shared.log(event: "crashButtonTapped")
         
         let vc = UIViewController()

@@ -15,6 +15,14 @@ import FirebaseAnalytics
 import Fabric
 import Crashlytics
 
+func log(_ text: String) {
+    crashlyticsLogs(text)
+}
+
+func logLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
+    crashlyticsLogsLine(file: file, line: line, functionName: functionName)
+}
+
 // TODO: NSError only or Error too
 func crashlyticsLogError(_ error: NSError) {
     Crashlytics.sharedInstance().recordError(error)
@@ -67,8 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// Enable collection for selected users by initializing Crashlytics at runtime
 //        Fabric.with([Crashlytics.self])
         
-        crashlyticsLogs("app_start")
-        crashlyticsLogsLine()
+        log("app_start")
+        logLine()
         
         /// https://firebase.google.com/docs/database/ios/read-and-write
 //        var ref: DatabaseReference!
