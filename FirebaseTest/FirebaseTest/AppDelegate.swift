@@ -25,8 +25,13 @@ func logLine(file: String = #file, line: UInt = #line, functionName: String = #f
     crashlyticsLogsLine(file: file, line: line, functionName: functionName)
 }
 
+func logError(_ error: NSError) {
+    /// add log to file
+    Crashlytics.sharedInstance().recordError(error)
+}
+
 // TODO: NSError only or Error too
-func crashlyticsLogError(_ error: NSError) {
+private func crashlyticsLogError(_ error: NSError) {
     Crashlytics.sharedInstance().recordError(error)
 }
 

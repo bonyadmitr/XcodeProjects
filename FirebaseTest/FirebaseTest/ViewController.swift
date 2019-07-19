@@ -49,7 +49,7 @@ class ViewController: UIViewController {
                                            "SomeKey": -333,
                                            "SomeKey2": "-333s"]
             let error = NSError(domain: "NSSomeErrorDomain", code: -10001, userInfo: userInfo)
-            crashlyticsLogError(error)
+            logError(error)
             //assertionFailure(error.localizedDescription)
             return
         }
