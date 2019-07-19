@@ -30,7 +30,7 @@ func crashlyticsLogError(_ error: NSError) {
     Crashlytics.sharedInstance().recordError(error)
 }
 
-func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
+private func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName: String = #function) {
     let fileName = (file as NSString).lastPathComponent
     crashlyticsLogs("\(fileName) \(line) \(functionName)")
 }
@@ -38,7 +38,7 @@ func crashlyticsLogsLine(file: String = #file, line: UInt = #line, functionName:
 /// https://firebase.google.com/docs/crashlytics/customize-crash-reports
 ///
 /// don't call before "Fabric.with([Crashlytics.self])"
-func crashlyticsLogs(_ string: String) {
+private func crashlyticsLogs(_ string: String) {
     CLSLogv("%@", getVaList([string]))
 }
 
