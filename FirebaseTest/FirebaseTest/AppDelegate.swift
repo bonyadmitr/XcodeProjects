@@ -10,10 +10,72 @@ import UIKit
 
 import FirebaseCore
 import FirebaseFirestore
-import FirebaseAnalytics
 
 import Fabric
 import Crashlytics
+
+final class FirestoreService {
+    
+    /// https://firebase.google.com/docs/firestore/quickstart
+    let db = Firestore.firestore()
+    
+    func getUsers() {
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else if let querySnapshot = querySnapshot {
+                
+                let users = querySnapshot.documents.map { $0.data() }
+                print(users)
+                
+            } else {
+                assertionFailure()
+            }
+        }
+        
+        
+        /// https://firebase.google.com/docs/database/ios/read-and-write
+        //        var ref: DatabaseReference!
+        //
+        //        ref = Database.database().reference()
+        //
+        //        let userID = "qwe"
+        //        let newName = "some name"
+        //
+        //        /// rewrite all fields
+        //        //ref.child("users").child(userID).setValue(["username": newName])
+        //
+        //        /// update one field
+        //        //ref.child("users/\(userID)/name").setValue(newName)
+        //
+        //        ref.coll
+        //        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+        //            // Get user value
+        //            let all = snapshot.value as? [String: Any]
+        //            print(all)
+        ////            let username = value?["username"] as? String ?? ""
+        ////            let user = User(username: username)
+        //
+        //            // ...
+        //        }) { (error) in
+        //            print(error.localizedDescription)
+        //        }
+    }
+    
+    func createNewUser() {
+        var ref: DocumentReference? = nil
+        ref = db.collection("users").addDocument(data: [
+            "id": 2,
+            "name": "some name of user"
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,64 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         log("app_start")
         logLine()
-        
-        /// https://firebase.google.com/docs/database/ios/read-and-write
-//        var ref: DatabaseReference!
-//
-//        ref = Database.database().reference()
-//
-//        let userID = "qwe"
-//        let newName = "some name"
-//
-//        /// rewrite all fields
-//        //ref.child("users").child(userID).setValue(["username": newName])
-//
-//        /// update one field
-//        //ref.child("users/\(userID)/name").setValue(newName)
-//
-//        ref.coll
-//        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-//            // Get user value
-//            let all = snapshot.value as? [String: Any]
-//            print(all)
-////            let username = value?["username"] as? String ?? ""
-////            let user = User(username: username)
-//
-//            // ...
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
-        
-        /// https://firebase.google.com/docs/firestore/quickstart
-        let db = Firestore.firestore()
-        
-        db.collection("users").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else if let querySnapshot = querySnapshot {
-                
-                let users = querySnapshot.documents.map { $0.data() }
-                print(users)
-                
-            } else {
-                assertionFailure()
-            }
-        }
-        
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("users").addDocument(data: [
-//            "id": 2,
-//            "name": "some name of user"
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-
-
-        
         
         return true
     }
