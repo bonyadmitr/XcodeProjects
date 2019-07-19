@@ -18,6 +18,7 @@
 		CEE5E1A722E1DD3B00B54D40 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1A622E1DD3B00B54D40 /* Logger.swift */; };
 		CEE5E1A922E1F50300B54D40 /* FIRDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1A822E1F50300B54D40 /* FIRDatabaseService.swift */; };
 		CEE5E1AB22E1F52800B54D40 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1AA22E1F52800B54D40 /* FirestoreService.swift */; };
+		CEE5E1AD22E1F63C00B54D40 /* FirebaseSerivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1AC22E1F63C00B54D40 /* FirebaseSerivce.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CEE5E1A622E1DD3B00B54D40 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CEE5E1A822E1F50300B54D40 /* FIRDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRDatabaseService.swift; sourceTree = "<group>"; };
 		CEE5E1AA22E1F52800B54D40 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		CEE5E1AC22E1F63C00B54D40 /* FirebaseSerivce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSerivce.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				CEE5E1A422E09EEE00B54D40 /* AnalyticsService.swift */,
 				CEE5E1A822E1F50300B54D40 /* FIRDatabaseService.swift */,
 				CEE5E1AA22E1F52800B54D40 /* FirestoreService.swift */,
+				CEE5E1AC22E1F63C00B54D40 /* FirebaseSerivce.swift */,
 				CEE5E1A622E1DD3B00B54D40 /* Logger.swift */,
 				C4E02F8122DE3F770012CF0C /* Main.storyboard */,
 				C4E02F8422DE3F780012CF0C /* Assets.xcassets */,
@@ -259,6 +262,7 @@
 				CEE5E1AB22E1F52800B54D40 /* FirestoreService.swift in Sources */,
 				CEE5E1A922E1F50300B54D40 /* FIRDatabaseService.swift in Sources */,
 				C4E02F7E22DE3F770012CF0C /* AppDelegate.swift in Sources */,
+				CEE5E1AD22E1F63C00B54D40 /* FirebaseSerivce.swift in Sources */,
 				CEE5E1A522E09EEE00B54D40 /* AnalyticsService.swift in Sources */,
 				CEE5E1A722E1DD3B00B54D40 /* Logger.swift in Sources */,
 			);
