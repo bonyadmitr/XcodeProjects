@@ -19,10 +19,10 @@ class SDWebImageController: UIViewController {
     }
     
     lazy var urls: [URL] = {
-        return (1...1000)
+        return (1...150)
             .map { "https://placehold.it/1200x1200&text=\($0)"}
             ///"https://dummyimage.com/600x40\(indexPath.row)/000/fff"
-            .flatMap { URL(string: $0) }
+            .compactMap { URL(string: $0) }
     }()
     
     @IBAction func actionClearBarButton(_ sender: UIBarButtonItem) {
@@ -39,6 +39,9 @@ extension SDWebImageController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+//        cell.imageImageView.sd_setIndicatorStyle(.white)
+//        cell.imageImageView.sd_addActivityIndicator()
+//        cell.imageImageView.sd_setImage(with: urls[indexPath.row])
         return cell
     }
 }
@@ -53,10 +56,10 @@ extension SDWebImageController: UICollectionViewDelegate {
         cell.imageImageView.sd_setImage(with: urls[indexPath.row])
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        let cell = cell as! ImageCell
-//        cell.imageImageView.sd_cancelCurrentImageLoad()
-//    }
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! ImageCell
+        cell.imageImageView.sd_cancelCurrentImageLoad()
+    }
 }
 
 extension SDWebImageController: UICollectionViewDelegateFlowLayout {
