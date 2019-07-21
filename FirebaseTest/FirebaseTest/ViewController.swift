@@ -43,12 +43,13 @@ class ViewController: UIViewController {
         someOptional = nil
         
         guard let someOptional2 = someOptional else {
+            /// "Data contained within the userInfo object are converted to key-value pairs and displayed in the keys/logs section within an individual issue."
             let userInfo: [String: Any] = [NSLocalizedDescriptionKey: "guard let unwrap",
                                            NSLocalizedFailureReasonErrorKey: "unwrap someOptional",
                                            NSLocalizedRecoverySuggestionErrorKey: "someOptional should not be nil",
                                            "SomeKey": -333,
                                            "SomeKey2": "-333s"]
-            let error = NSError(domain: "NSSomeErrorDomain", code: -10001, userInfo: userInfo)
+            let error = NSError(domain: "someOptional", code: -10001, userInfo: userInfo)
             logError(error)
             //assertionFailure(error.localizedDescription)
             return
