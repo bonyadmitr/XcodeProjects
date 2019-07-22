@@ -45,10 +45,10 @@ class ViewController: UIViewController {
     }
     
     lazy var urls: [URL] = {        
-        return (1...1000)
+        return (1...150)
             .map { "https://placehold.it/1200x1200&text=\($0)"}
             ///"https://dummyimage.com/600x40\(indexPath.row)/000/fff"
-            .flatMap { URL(string: $0) }
+            .compactMap { URL(string: $0) }
     }()
     
     let processor = OverlayImageProcessor(overlay: UIColor.red) >> RoundCornerImageProcessor(cornerRadius: 30)
@@ -60,16 +60,17 @@ extension ViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+        cell.imageImageView.kf.setImage(with: urls[indexPath.row], placeholder: cell.activityPlaceholder, options: [.transition(.fade(0.3)), .processor(processor)])
         return cell
     }
 }
 extension ViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cell = cell as! ImageCell
+//        let cell = cell as! ImageCell
         
         /// 1 indicator
-        cell.imageImageView.kf.setImage(with: urls[indexPath.row], placeholder: cell.activityPlaceholder, options: [.transition(.fade(0.3)), .processor(processor)])
+//        cell.imageImageView.kf.setImage(with: urls[indexPath.row], placeholder: cell.activityPlaceholder, options: [.transition(.fade(0.3)), .processor(processor)])
         
         /// 2 indicator
 //        cell.imageImageView.kf.indicatorType = .custom(indicator: MyIndicator())
