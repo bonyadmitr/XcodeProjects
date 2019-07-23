@@ -15,13 +15,17 @@ final class CodeDetector {
     
     /// native
     func readQR(from image: UIImage) -> String? {
-        if let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]), /// nil in simulator, A7 core +
+        if let detector = CIDetector(ofType: CIDetectorTypeQRCode,
+                                     context: nil,
+                                     options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]),
             let ciImage = CIImage(image: image),
             let features = detector.features(in: ciImage) as? [CIQRCodeFeature]
         {
             return features.first?.messageString
+        } else {
+            assertionFailure("nil in simulator, A7 core +")
+            return nil
         }
-        return nil
     }
     
     func readAnyCode(from image: UIImage) -> String? {
