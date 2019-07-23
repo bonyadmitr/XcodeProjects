@@ -30,5 +30,14 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testDeallocation() {
+        assertDeallocation { () -> UIViewController in
+            return ViewController()
+//            let bucket = Bucket()
+//            let viewModel = OwnedBucketViewModel(bucket: bucket)
+//            return OwnedBucketViewController(viewModel: viewModel)
+        }
+    }
 
 }

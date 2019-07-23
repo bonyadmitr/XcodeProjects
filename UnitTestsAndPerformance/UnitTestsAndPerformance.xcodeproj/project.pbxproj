@@ -13,6 +13,7 @@
 		C4D61CA722E75BC70057F618 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D61CA622E75BC70057F618 /* Assets.xcassets */; };
 		C4D61CAA22E75BC70057F618 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4D61CA822E75BC70057F618 /* LaunchScreen.storyboard */; };
 		C4D61CB522E75BC70057F618 /* UnitTestsAndPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D61CB422E75BC70057F618 /* UnitTestsAndPerformanceTests.swift */; };
+		C4D61CC022E760FC0057F618 /* XCTestCase+Deallocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D61CBF22E760FC0057F618 /* XCTestCase+Deallocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		C4D61CB022E75BC70057F618 /* UnitTestsAndPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestsAndPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D61CB422E75BC70057F618 /* UnitTestsAndPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestsAndPerformanceTests.swift; sourceTree = "<group>"; };
 		C4D61CB622E75BC70057F618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4D61CBF22E760FC0057F618 /* XCTestCase+Deallocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Deallocation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				C4D61CB422E75BC70057F618 /* UnitTestsAndPerformanceTests.swift */,
+				C4D61CBF22E760FC0057F618 /* XCTestCase+Deallocation.swift */,
 				C4D61CB622E75BC70057F618 /* Info.plist */,
 			);
 			path = UnitTestsAndPerformanceTests;
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4D61CB522E75BC70057F618 /* UnitTestsAndPerformanceTests.swift in Sources */,
+				C4D61CC022E760FC0057F618 /* XCTestCase+Deallocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
