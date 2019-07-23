@@ -174,6 +174,7 @@ class ViewController: UIViewController {
 //        testDeadlockQueue()
 //        testDeadlockMain1()
 //        testDeadlockMain2()
+//        testDeadlockQueue4()
         
 //        testRaceCondition1()
 //        testRaceCondition2()
@@ -330,6 +331,27 @@ class ViewController: UIViewController {
         /// app will crash
         DispatchQueue.global().sync {
             DispatchQueue.main.sync {}
+        }
+    }
+    
+    /// https://github.com/AgranatMarkit/YouCanHaveFunWithConcurrentQueue
+    func testDeadlockQueue4() {
+        let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
+        for i in 1...10000 {
+            queue.async {
+                
+                for j in 1...10 {
+                    queue.sync {
+                        print("\(i)-\(j)")
+                    }
+                }
+
+            }
+        }
+
+        /// this won't be executed
+        queue.asyncAfter(deadline: .now() + 3) {
+            print("!!!!!!!!!!!!!!!!! testDeadlockQueue4")
         }
     }
     
