@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4D61CC222E7893F0057F618 /* ASLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D61CC122E7893F0057F618 /* ASLabel.swift */; };
 		CE21E3F02259C6D90083F456 /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21E3EF2259C6D90083F456 /* TapableLabel.swift */; };
 		CE343611224BBBEA00AFAABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343610224BBBEA00AFAABB /* AppDelegate.swift */; };
 		CE343613224BBBEA00AFAABB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE343612224BBBEA00AFAABB /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4D61CC122E7893F0057F618 /* ASLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLabel.swift; sourceTree = "<group>"; };
 		CE21E3EF2259C6D90083F456 /* TapableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 		CE34360D224BBBEA00AFAABB /* AttributedString.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttributedString.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE343610224BBBEA00AFAABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				CE343610224BBBEA00AFAABB /* AppDelegate.swift */,
 				CE343612224BBBEA00AFAABB /* ViewController.swift */,
 				CE21E3EF2259C6D90083F456 /* TapableLabel.swift */,
+				C4D61CC122E7893F0057F618 /* ASLabel.swift */,
 				CE343614224BBBEA00AFAABB /* Main.storyboard */,
 				CE343617224BBBEB00AFAABB /* Assets.xcassets */,
 				CE343619224BBBEB00AFAABB /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4D61CC222E7893F0057F618 /* ASLabel.swift in Sources */,
 				CE21E3F02259C6D90083F456 /* TapableLabel.swift in Sources */,
 				CE343613224BBBEA00AFAABB /* ViewController.swift in Sources */,
 				CE343611224BBBEA00AFAABB /* AppDelegate.swift in Sources */,
