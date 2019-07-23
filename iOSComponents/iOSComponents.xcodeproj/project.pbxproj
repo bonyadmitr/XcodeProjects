@@ -126,6 +126,7 @@
 		CEDA2D3A2077A11700203036 /* MapToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D392077A11700203036 /* MapToJSON.swift */; };
 		CEDA2D3E2077D95F00203036 /* Equatable+Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */; };
 		CEDA2D402077DB5200203036 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA2D3F2077DB5200203036 /* Formatters.swift */; };
+		CEE5E1AF22E5A5F200B54D40 /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1AE22E5A5F200B54D40 /* ResizableTextView.swift */; };
 		CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */; };
 		CEEB7B1B20AAC7860070FDC2 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */; };
 		CEEB7B2020AAC8410070FDC2 /* UITextField+Extnesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7B1F20AAC8410070FDC2 /* UITextField+Extnesions.swift */; };
@@ -305,6 +306,7 @@
 		CEDA2D392077A11700203036 /* MapToJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapToJSON.swift; sourceTree = "<group>"; };
 		CEDA2D3D2077D95F00203036 /* Equatable+Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+Toggle.swift"; sourceTree = "<group>"; };
 		CEDA2D3F2077DB5200203036 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		CEE5E1AE22E5A5F200B54D40 /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		CEEB7B1820AAC7310070FDC2 /* UIButton+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Image.swift"; sourceTree = "<group>"; };
 		CEEB7B1A20AAC7860070FDC2 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
 		CEEB7B1F20AAC8410070FDC2 /* UITextField+Extnesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extnesions.swift"; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				CE966CE72130222100901295 /* TapGestureRecognizerWithClosure.swift */,
 				CE966CF32133D4F400901295 /* GoogleStaticMapsWrapper.swift */,
 				CE85D0712264A06D009E4D11 /* AppleCornerRadiusView.swift */,
+				CEE5E1AE22E5A5F200B54D40 /* ResizableTextView.swift */,
 				66315AA020ACA31B009C19BE /* old files */,
 			);
 			path = Classes;
@@ -781,6 +784,7 @@
 				CE966CE6212E946B00901295 /* PreviewController.swift in Sources */,
 				6611ADA520AB606000814113 /* UIImage+Bytes.swift in Sources */,
 				6611AC2E20AB572A00814113 /* UIViewController+Present.swift in Sources */,
+				CEE5E1AF22E5A5F200B54D40 /* ResizableTextView.swift in Sources */,
 				6611AC5E20AB59F600814113 /* UIImageView+Properties.swift in Sources */,
 				CE966CE82130222100901295 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CEEB7B1920AAC7310070FDC2 /* UIButton+Image.swift in Sources */,
