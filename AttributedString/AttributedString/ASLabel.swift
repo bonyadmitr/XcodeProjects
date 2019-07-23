@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+/// https://www.youtube.com/watch?v=SDsUdAHBiZA
+/// https://github.com/sanllier/ASLabel
 class ASLabel: UIView {
     
     // MARK: - Public Properties
