@@ -66,6 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
         
         /// to fix frame of closed window
         window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)

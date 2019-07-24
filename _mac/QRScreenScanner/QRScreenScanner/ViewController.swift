@@ -17,7 +17,39 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        //[arrayController addObserver:self forKeyPath:@"selectionIndexes" options:0 context:&kvoContext];
+        
+        /// NSDictionary
+        let s1: [String: Any] = ["date": 111, "value": "qqweqwe"]
+        let s2: [String: Any] = ["date": 222, "value": "573457yufguy"]
+        
+        
+        historyArrayController.addObserver(self, forKeyPath: #keyPath(NSArrayController.selectionIndexes), options: [], context: nil)
+        historyArrayController.content = [s1, s2]
+    }
+    
+    deinit {
+        historyArrayController.removeObserver(self, forKeyPath: #keyPath(NSArrayController.selectionIndexes))
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch keyPath {
+        case #keyPath(NSArrayController.selectionIndexes):
+            updateUIWithSelection()
+            
+        default:
+            assertionFailure()
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    private func updateUIWithSelection() {
+        guard let selectedObjects = historyArrayController.selectedObjects as? [[String: Any]] else {
+            assertionFailure()
+            return
+        }
+        print(selectedObjects)
     }
 
 //    override var representedObject: Any? {
