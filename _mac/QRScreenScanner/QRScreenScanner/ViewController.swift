@@ -12,7 +12,8 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var screenImageView: NSImageView!
     
-    @IBOutlet var historyArrayController: NSArrayController!
+    /// required NSTableView cell-based content mode in IB
+    @IBOutlet private var historyArrayController: NSArrayController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
