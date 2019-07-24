@@ -12,48 +12,50 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var screenImageView: NSImageView!
     
+    @IBOutlet var historyArrayController: NSArrayController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
+//    override var representedObject: Any? {
+//        didSet {
+//        // Update the view, if already loaded.
+//        }
+//    }
 
-    @IBAction private  func captureScreen(_ sender: NSButton) {
-        let window = view.window!
-        
-        window.orderOut(self)
-        //window.close()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            
-            guard let img = CGDisplayCreateImage(CGMainDisplayID()) else {
-                assertionFailure()
-                return
-            }
-            
-            
-            self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
-            
-            window.makeKeyAndOrderFront(nil)
-            /// addition if need
-            //NSApp.activate(ignoringOtherApps: true)
-            /// not work
-            //window.orderBack(self)
-            
-            print(
-                CodeDetector.shared.readQR(from: img)
-            )
-        }
-        
-
-        
-    }
+//    @IBAction private  func captureScreen(_ sender: NSButton) {
+//        let window = view.window!
+//
+//        window.orderOut(self)
+//        //window.close()
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+//
+//            guard let img = CGDisplayCreateImage(CGMainDisplayID()) else {
+//                assertionFailure()
+//                return
+//            }
+//
+//
+//            self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
+//
+//            window.makeKeyAndOrderFront(nil)
+//            /// addition if need
+//            //NSApp.activate(ignoringOtherApps: true)
+//            /// not work
+//            //window.orderBack(self)
+//
+//            print(
+//                CodeDetector.shared.readQR(from: img)
+//            )
+//        }
+//
+//
+//
+//    }
     
 }
 
