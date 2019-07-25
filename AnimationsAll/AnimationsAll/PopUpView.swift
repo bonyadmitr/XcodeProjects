@@ -71,7 +71,7 @@ open class PopUpView: UIView {
         }
     }
     
-    open func hidePopUp() {
+    @objc open func hidePopUp() {
         self.alpha = 1
         self.backgroundView.alpha = 1
         self.transform = CGAffineTransform.identity
