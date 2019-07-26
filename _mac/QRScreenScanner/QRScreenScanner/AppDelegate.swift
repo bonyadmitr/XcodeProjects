@@ -28,6 +28,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    private lazy var window: NSWindow? = {
+        /// if you have error "doesn't contain a view controller with identifier" save storyboard manually cmd+s
+        let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
+        let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
+        
+        guard let mainWindowController = mainStoryboard.instantiateController(withIdentifier: windowIdentifier) as? NSWindowController else {
+            assertionFailure()
+            return nil
+        }
+        
+        /// instead of "nil" can be "self"
+        mainWindowController.showWindow(nil)
+        
+        return mainWindowController.window
+    }()
 
     @objc private func clickStatusItem() {
         
@@ -45,22 +61,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //window.orderBack(self)
         
         print(
-            CodeDetector.shared.readQR(from: img)
+            CodeDetector.shared.readQR(from: img),
+            Date()
         )
         
-        /// if you have error "doesn't contain a view controller with identifier" save storyboard manually cmd+s
-        let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
-        let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
-        
-        guard let mainWindowController = mainStoryboard.instantiateController(withIdentifier: windowIdentifier) as? NSWindowController else {
-            assertionFailure()
-            return
-        }
-        
-        /// instead of "nil" can be "self"
-        mainWindowController.showWindow(nil)
-        
-        guard let window = mainWindowController.window else {
+        guard let window = self.window else {
             assertionFailure()
             return
         }
@@ -69,8 +74,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
         
         /// to fix frame of closed window
-        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
-        window.center()
+//        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
+//        window.center()
         
         /// without reference it will be deinited
 //        self.mainWindowController = mainWindowController
