@@ -39,6 +39,7 @@ class ViewController: NSViewController {
         addTableViewByBinding()
     }
     
+    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
@@ -64,6 +65,7 @@ class ViewController: NSViewController {
     }
     
     /// https://www.raywenderlich.com/2814-how-to-use-cocoa-bindings-and-core-data-in-a-mac-app
+    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaBindings/Concepts/WhatAreBindings.html
     private func addTableViewByBinding() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
