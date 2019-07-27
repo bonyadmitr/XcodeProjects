@@ -40,6 +40,7 @@ class ViewController: NSViewController {
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html
+    /// https://www.raywenderlich.com/830-macos-nstableview-tutorial
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
