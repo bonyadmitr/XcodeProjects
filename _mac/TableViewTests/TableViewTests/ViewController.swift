@@ -63,6 +63,7 @@ class ViewController: NSViewController {
         view.addSubview(tableContainer)
     }
     
+    /// https://www.raywenderlich.com/2814-how-to-use-cocoa-bindings-and-core-data-in-a-mac-app
     private func addTableViewByBinding() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
@@ -81,7 +82,8 @@ class ViewController: NSViewController {
         tableView.addTableColumn(column1)
         
         let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
-        column2.width = view.frame.width - 100
+        let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
+        column2.width = view.frame.width - allWithoutLastColumnsWidth
         column2.title = TableColumns.value.title
         column2.bind(.value,
                      to: arrayController,
