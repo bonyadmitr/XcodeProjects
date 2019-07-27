@@ -32,6 +32,9 @@ class ViewController: NSViewController {
         [TableColumns.date.rawValue: 5, TableColumns.value.rawValue: "ffds"],
     ]
     
+    /// need for func addTableViewByBinding()
+    private lazy var arrayController = NSArrayController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -78,7 +81,6 @@ class ViewController: NSViewController {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
         
-        let arrayController = NSArrayController(content: tableDataSource)
         arrayController.content = tableDataSource
         
         let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.date.rawValue))
@@ -101,11 +103,38 @@ class ViewController: NSViewController {
                      options: nil)
         tableView.addTableColumn(column2)
         
+        arrayController.addObserver(self, forKeyPath: #keyPath(NSArrayController.selectionIndexes), options: [], context: nil)
+        tableView.allowsEmptySelection = true
+        tableView.allowsMultipleSelection = true
+        
         let tableContainer = NSScrollView(frame: view.bounds)
         tableContainer.autoresizingMask = [.width, .height]
         tableContainer.documentView = tableView
         tableContainer.hasVerticalScroller = true
         view.addSubview(tableContainer)
+    }
+    
+    
+    /// need for func addTableViewByBinding()
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch keyPath {
+        case #keyPath(NSArrayController.selectionIndexes):
+            updateUIWithSelection()
+            
+        default:
+            assertionFailure()
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
+    }
+    
+    /// need for func addTableViewByBinding()
+    private func updateUIWithSelection() {
+        guard let selectedObjects = arrayController.selectedObjects as? [[String: Any]] else {
+            assertionFailure()
+            return
+        }
+        print(selectedObjects)
     }
 }
 
