@@ -24,7 +24,7 @@ class ViewController: NSViewController {
         }
     }
     
-    private let tableDataSource: [[String: Any]] = [
+    private var tableDataSource: [[String: Any]] = [
         [TableColumns.date.rawValue: 1, TableColumns.value.rawValue: "qqqqqqq"],
         [TableColumns.date.rawValue: 2, TableColumns.value.rawValue: "aaaaaa"],
         [TableColumns.date.rawValue: 3, TableColumns.value.rawValue: "erwerwe"],
@@ -35,8 +35,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        addTableView()
-        addTableViewByBinding()
+        addTableView()
+//        addTableViewByBinding()
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html
@@ -56,6 +56,11 @@ class ViewController: NSViewController {
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
+        let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: true)
+        let valueSortDescriptor = NSSortDescriptor(key: TableColumns.value.rawValue, ascending: true)
+        tableView.sortDescriptors = [dateSortDescriptor, valueSortDescriptor]
+        column1.sortDescriptorPrototype = dateSortDescriptor
+        column2.sortDescriptorPrototype = valueSortDescriptor
         
         let tableContainer = NSScrollView(frame: view.bounds)
         tableContainer.autoresizingMask = [.width, .height]
@@ -143,5 +148,26 @@ extension ViewController: NSTableViewDataSource {
 }
 
 extension ViewController: NSTableViewDelegate {
-    
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
+        tableView.reloadData()
+    }
 }
+
+extension MutableCollection where Self : RandomAccessCollection {
+    /// Sort `self` in-place using criteria stored in a NSSortDescriptors array
+    public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
+        sort { by:
+            for sortDesc in theSortDescs {
+                switch sortDesc.compare($0, to: $1) {
+                case .orderedAscending: return true
+                case .orderedDescending: return false
+                case .orderedSame: continue
+                }
+            }
+            return false
+        }
+        
+    }
+}
+
