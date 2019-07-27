@@ -9,7 +9,29 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
+    enum TableColumns: String {
+        case date
+        case value
+        
+        var title: String {
+            switch self {
+            case .date:
+                return "Date"
+            case .value:
+                return "Value"
+            }
+        }
+    }
+    
+    private let tableDataSource: [[String: Any]] = [
+        [TableColumns.date.rawValue: 1, TableColumns.value.rawValue: "qqqqqqq"],
+        [TableColumns.date.rawValue: 2, TableColumns.value.rawValue: "aaaaaa"],
+        [TableColumns.date.rawValue: 3, TableColumns.value.rawValue: "erwerwe"],
+        [TableColumns.date.rawValue: 4, TableColumns.value.rawValue: "asdasdasdasd"],
+        [TableColumns.date.rawValue: 5, TableColumns.value.rawValue: "ffds"],
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,14 +44,14 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "date"))
+        let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.date.rawValue))
         column1.width = 100
-        column1.title = "Date"
+        column1.title = TableColumns.date.title
         tableView.addTableColumn(column1)
         
-        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "value"))
+        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
         column2.width = view.frame.width - 100
-        column2.title = "Value"
+        column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
         
@@ -43,25 +65,26 @@ class ViewController: NSViewController {
 
 extension ViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 100
+        return tableDataSource.count
     }
     
     /// NSTableView set content Mode
     /// https://stackoverflow.com/q/19218807/5893286
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        guard let columnIdentifier = tableColumn?.identifier.rawValue else {
-            assertionFailure()
+        guard
+            let columnIdentifier = tableColumn?.identifier.rawValue,
+            let columnType = TableColumns(rawValue: columnIdentifier)
+        else {
+            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
             return nil
         }
         
-        switch columnIdentifier {
-        case "date" :
-            return "date \(row)"
-        case "value":
-            return "value \(row)"
-        default:
-            assertionFailure()
-            return nil
+        switch columnType {
+            
+        case .date:
+            return tableDataSource[row][TableColumns.date.rawValue]
+        case .value:
+            return tableDataSource[row][TableColumns.value.rawValue]
         }
     }
     
