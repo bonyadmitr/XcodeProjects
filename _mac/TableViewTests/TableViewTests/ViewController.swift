@@ -13,41 +13,32 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addTableView()
+    }
+    
+    private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
         tableView.dataSource = self
         tableView.delegate = self
         
+        let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "date"))
+        column1.width = 100
+        column1.title = "Date"
+        tableView.addTableColumn(column1)
+        
+        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "value"))
+        column2.width = view.frame.width - 100
+        column2.title = "Value"
+        tableView.addTableColumn(column2)
+        
+        
         let tableContainer = NSScrollView(frame: view.bounds)
         tableContainer.autoresizingMask = [.width, .height]
         tableContainer.documentView = tableView
         tableContainer.hasVerticalScroller = true
-        
-        
-        let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "date"))
-        column1.width = 100
-        column1.title = "Date"
-        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "value"))
-        column2.width = view.frame.width - 100
-        column2.title = "Value"
-        
-        tableView.addTableColumn(column1)
-        tableView.addTableColumn(column2)
-        
         view.addSubview(tableContainer)
-//        tableView
-        
-        
-        
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
 
 extension ViewController: NSTableViewDataSource {
