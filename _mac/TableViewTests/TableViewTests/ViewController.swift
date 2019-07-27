@@ -140,12 +140,6 @@ class ViewController: NSViewController {
     }
 }
 
-extension NSArrayController {
-    static func keyPath(for keyPath: String) -> String {
-        return "\(#keyPath(NSArrayController.arrangedObjects)).\(keyPath)"
-    }
-}
-
 extension ViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return tableDataSource.count
@@ -187,6 +181,7 @@ extension ViewController: NSTableViewDelegate {
     }
 }
 
+/// https://stackoverflow.com/a/42313342/5893286
 extension MutableCollection where Self : RandomAccessCollection {
     /// Sort `self` in-place using criteria stored in a NSSortDescriptors array
     public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
@@ -200,7 +195,11 @@ extension MutableCollection where Self : RandomAccessCollection {
             }
             return false
         }
-        
     }
 }
 
+extension NSArrayController {
+    static func keyPath(for keyPath: String) -> String {
+        return "\(#keyPath(NSArrayController.arrangedObjects)).\(keyPath)"
+    }
+}
