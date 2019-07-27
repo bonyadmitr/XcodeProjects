@@ -60,6 +60,7 @@ class ViewController: NSViewController {
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
+        /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
         let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: true)
         let valueSortDescriptor = NSSortDescriptor(key: TableColumns.value.rawValue, ascending: true)
         tableView.sortDescriptors = [dateSortDescriptor, valueSortDescriptor]
