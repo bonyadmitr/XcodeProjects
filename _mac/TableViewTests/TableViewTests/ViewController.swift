@@ -35,8 +35,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addTableView()
-//        addTableViewByBinding()
+//        addTableView()
+        addTableViewByBinding()
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html
@@ -72,6 +72,8 @@ class ViewController: NSViewController {
     
     /// https://www.raywenderlich.com/2814-how-to-use-cocoa-bindings-and-core-data-in-a-mac-app
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaBindings/Concepts/WhatAreBindings.html
+    ///
+    /// not added tableView.sortDescriptors, there is no arrow on any column, but sorting is working itself.
     private func addTableViewByBinding() {
         /// https://stackoverflow.com/a/27747282/5893286
         let tableView = NSTableView(frame: view.bounds)
@@ -98,7 +100,6 @@ class ViewController: NSViewController {
                      withKeyPath: NSArrayController.keyPath(for: TableColumns.value.rawValue),
                      options: nil)
         tableView.addTableColumn(column2)
-        
         
         let tableContainer = NSScrollView(frame: view.bounds)
         tableContainer.autoresizingMask = [.width, .height]
