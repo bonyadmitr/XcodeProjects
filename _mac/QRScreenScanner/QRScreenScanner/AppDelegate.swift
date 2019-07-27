@@ -10,19 +10,26 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
+    /// https://habr.com/ru/post/447754/
     /// NSStatusItem.variableLength
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    private let statusItem: NSStatusItem = {
+        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         
         guard let button = statusItem.button else {
             assertionFailure("system error. try statusItem.title")
-            return
+            return statusItem
         }
         button.title = "QR"
         //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
         button.action = #selector(clickStatusItem)
+        
+        return statusItem
+    }()
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
