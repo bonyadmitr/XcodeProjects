@@ -33,13 +33,20 @@ class ViewController: NSViewController {
     ]
     
     /// need for func addTableViewByBinding()
-    private lazy var arrayController = NSArrayController()
+    ///
+    /// required NSTableView cell-based content mode in IB
+    /// https://www.youtube.com/watch?v=qypMqkT20LU
+    private let arrayController = NSArrayController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //        addTableView()
         addTableViewByBinding()
+    }
+    
+    deinit {
+        arrayController.removeObserver(self, forKeyPath: #keyPath(NSArrayController.selectionIndexes))
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/PopulatingView-TablesProgrammatically/PopulatingView-TablesProgrammatically.html
