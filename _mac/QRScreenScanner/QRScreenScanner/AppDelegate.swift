@@ -67,10 +67,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// not work
         //window.orderBack(self)
         
-        print(
-            CodeDetector.shared.readQR(from: img),
-            Date()
-        )
+        
+//        "historyDataSource"
+        
+        for qrValue in CodeDetector.shared.readQR(from: img) {
+            let newItem: HistoryDataSource = [TableColumns.date.rawValue: Date(),
+                                              TableColumns.value.rawValue: qrValue]
+            
+            let tableDataSource: [HistoryDataSource]
+            if var tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
+                tableDataSourceOld.append(newItem)
+                tableDataSource = tableDataSourceOld
+            } else {
+                tableDataSource = [newItem]
+            }
+            UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
+            
+        }
+        
+        
         
         guard let window = self.window else {
             assertionFailure()
