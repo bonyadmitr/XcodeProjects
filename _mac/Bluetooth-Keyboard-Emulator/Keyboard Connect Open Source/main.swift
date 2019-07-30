@@ -8,6 +8,8 @@
 
 import Cocoa
 
+/// fork for swift 3
+/// https://github.com/bpfoley/Bluetooth-Keyboard-Emulator/tree/swift3
 func main(arguments: [String]) {
     let application = NSApplication.shared
     let delegate = AppDelegate()
@@ -25,11 +27,11 @@ func main(arguments: [String]) {
     application.run()
 }
 
-//main(arguments: CommandLine.arguments)
+main(arguments: CommandLine.arguments)
 
-let appDelegate = AppDelegate()
-NSApplication.shared.delegate = appDelegate
-NSApp.run()
+//let appDelegate = AppDelegate()
+//NSApplication.shared.delegate = appDelegate
+//NSApp.run()
 
 /// https://stackoverflow.com/q/42875741
 //let app = NSApplication.shared
