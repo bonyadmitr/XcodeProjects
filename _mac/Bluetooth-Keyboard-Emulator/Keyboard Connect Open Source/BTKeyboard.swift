@@ -113,19 +113,25 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         deviceWrapper.device = device
         self.curDevice = deviceWrapper
 
-        let isOpenProcessStarted = device.openL2CAPChannelSync(&deviceWrapper.controlChannel,
+        let isOpenedForControl = device.openL2CAPChannelSync(&deviceWrapper.controlChannel,
                                                                withPSM: BTChannels.Control, delegate: self)
-        guard isOpenProcessStarted == kIOReturnSuccess else {
+        guard isOpenedForControl == kIOReturnSuccess else {
             assertionFailure()
             return didfail
         }
 
         defer {
-            if didfail { deviceWrapper.controlChannel?.close() }
+            if didfail {
+                deviceWrapper.controlChannel?.close()
+            }
         }
+        
+        let isOpenedForInterrupt = device.openL2CAPChannelSync(&deviceWrapper.interruptChannel, withPSM: BTChannels.Interrupt, delegate: self)
 
-        guard device.openL2CAPChannelSync(&deviceWrapper.interruptChannel, withPSM: BTChannels.Interrupt, delegate: self) == kIOReturnSuccess else
-        { return didfail }
+        guard isOpenedForInterrupt == kIOReturnSuccess else {
+            assertionFailure()
+            return didfail
+        }
 
         didfail = false
         return didfail
