@@ -88,12 +88,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func askPermissions() {
         let alert = NSAlert()
-        alert.messageText = "Enable Maxxxro"
-        alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
+        let appName = "Keyboard Connect Open Source"
+        alert.messageText = "Enable \(appName)"
+        alert.informativeText = "Once you have enabled \"\(appName)\" in System Preferences, click OK."
         alert.addButton(withTitle: "Retry")
-        alert.runModal()
-//        let result = alert.runModal()
-//        let isButtonPressed = (result == .alertFirstButtonReturn)
+        alert.addButton(withTitle: "Quit")
+        
+        let result = alert.runModal()
+        let isQuitButtonPressed = (result == .alertSecondButtonReturn)
+        
+        if isQuitButtonPressed {
+            NSApp.terminate(self)
+        }
     }
     
     private func start() {
