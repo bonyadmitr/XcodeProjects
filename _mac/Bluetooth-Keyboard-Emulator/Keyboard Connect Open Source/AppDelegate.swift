@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        askPermissions()
+        startOrAskPermissions()
         
         /// "System Preferences - Security & Privacy - Privacy - Accessibility".
 //        if !AXIsProcessTrusted() {
@@ -51,35 +51,55 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        start()
     }
     
+    private let permissionManager = PermissionManager()
     
-    private func askPermissions() {
+    private func startOrAskPermissions() {
         /// https://stackoverflow.com/a/36260107
-        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
-        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
+//        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
+//        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
         
-        guard accessibilityEnabled else {
-            
-            let alert = NSAlert()
-            alert.messageText = "Enable Maxxxro"
-            alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
-            alert.addButton(withTitle: "Retry")
-            
-            let result = alert.runModal()
-            let isButtonPressed = (result == .alertFirstButtonReturn)
-            
-            /// if none buttons added
-            //let isButtonPressed = (result.rawValue == 0)
-            
-            if isButtonPressed {
-                start()
-            } else {
-                askPermissions()
-            }
-            
-            return
+        if permissionManager.isAccessibilityAvailable() {
+            start()
+        } else {
+            askPermissions()
+            startOrAskPermissions()
         }
-        
-        start()
+//
+//
+//
+//        guard permissionManager.isAccessibilityAvailable() else {
+//
+//            let alert = NSAlert()
+//            alert.messageText = "Enable Maxxxro"
+//            alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
+//            alert.addButton(withTitle: "Retry")
+//
+//            let result = alert.runModal()
+//            let isButtonPressed = (result == .alertFirstButtonReturn)
+//
+//            /// if none buttons added
+//            //let isButtonPressed = (result.rawValue == 0)
+//
+//            if isButtonPressed {
+//                start()
+//            } else {
+//                askPermissions()
+//            }
+//
+//            return
+//        }
+//
+//        start()
+    }
+    
+    func askPermissions() {
+        let alert = NSAlert()
+        alert.messageText = "Enable Maxxxro"
+        alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
+        alert.addButton(withTitle: "Retry")
+        alert.runModal()
+//        let result = alert.runModal()
+//        let isButtonPressed = (result == .alertFirstButtonReturn)
     }
     
     private func start() {
@@ -117,5 +137,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     deinit {
         print("-- deinit")
+    }
+}
+
+final class PermissionManager {
+//    static let shared = PermissionManager()
+    
+    let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
+    
+    func isAccessibilityAvailable() -> Bool {
+        return AXIsProcessTrustedWithOptions(options)
     }
 }
