@@ -36,9 +36,9 @@ func myCGEventCallback(proxy : CGEventTapProxy,
     return Unmanaged.passUnretained(event)
 }
 
-var btKey: BTKeyboard?
-
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    private var btKey: BTKeyboard?
 
     func applicationDidBecomeActive(_ notification: Notification) {
         btKey = BTKeyboard()
@@ -53,12 +53,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMask |= (1 << CGEventMask(CGEventType.keyDown.rawValue))
         eventMask |= (1 << CGEventMask(CGEventType.flagsChanged.rawValue))
 
-        if let eventTap = CGEvent.tapCreate(tap:.cgSessionEventTap,
-                                            place:.headInsertEventTap,
-                                            options:CGEventTapOptions.defaultTap,
-                                            eventsOfInterest:eventMask,
-                                            callback:myCGEventCallback,
-                                            userInfo:&btKey) {
+        if let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
+                                            place: .headInsertEventTap,
+                                            options: .defaultTap,
+                                            eventsOfInterest: eventMask,
+                                            callback: myCGEventCallback,
+                                            userInfo: &btKey) {
             let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
             CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, CFRunLoopMode.commonModes)
             CGEvent.tapEnable(tap: eventTap, enable: true)
