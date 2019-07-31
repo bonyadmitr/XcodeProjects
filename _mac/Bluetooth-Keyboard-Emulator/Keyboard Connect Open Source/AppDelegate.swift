@@ -82,6 +82,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    /// https://macosxautomation.com/system-prefs-links.html
+    /// https://stackoverflow.com/a/6658201
     func openSecurityPane() {
         let prefpaneUrl = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
         NSWorkspace.shared.open(prefpaneUrl)
