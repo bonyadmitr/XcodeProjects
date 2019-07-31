@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func clickStatusItem() {
         
-        guard let img = CGDisplayCreateImage(CGMainDisplayID()) else {
+        guard let img = ScreenshotMaker.mainScreenScreenshot() else {
             assertionFailure()
             return
         }
@@ -116,3 +116,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+final class ScreenshotMaker {
+    
+    static func mainScreenScreenshot() -> CGImage? {
+        return CGDisplayCreateImage(CGMainDisplayID())
+    }
+}
