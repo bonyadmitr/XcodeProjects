@@ -107,6 +107,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         }
     }
 
+    // TODO: kAXMovedNotification
     private func setupDevice(_ device: IOBluetoothDevice) -> Bool {
         var didfail = true
         var deviceWrapper = BTDevice()
@@ -118,8 +119,6 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                                                                delegate: self)
         
         guard isOpenedForControl == kIOReturnSuccess else {
-            
-            
             /// failed -536870195
             if isOpenedForControl != kIOReturnNotOpen {
                 assertionFailure("\(isOpenedForControl)")
