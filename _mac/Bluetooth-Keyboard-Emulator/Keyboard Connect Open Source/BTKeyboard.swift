@@ -93,7 +93,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                       withPSM: BTChannels.Control,
                       direction: kIOBluetoothUserNotificationChannelDirectionIncoming) != nil else
         {
-            print("failed to register: \(BTChannels.Control)")
+            assertionFailure("failed to register: \(BTChannels.Control)")
             return
         }
         guard IOBluetoothL2CAPChannel
@@ -102,19 +102,23 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                       withPSM: BTChannels.Interrupt,
                       direction: kIOBluetoothUserNotificationChannelDirectionIncoming) != nil else
         {
-            print("failed to register: \(BTChannels.Interrupt)")
+            assertionFailure("failed to register: \(BTChannels.Interrupt)")
             return
         }
     }
 
-    func setupDevice(device: IOBluetoothDevice) -> Bool {
+    private func setupDevice(_ device: IOBluetoothDevice) -> Bool {
         var didfail = true
         var deviceWrapper = BTDevice()
         deviceWrapper.device = device
         self.curDevice = deviceWrapper
 
-        guard device.openL2CAPChannelSync(&deviceWrapper.controlChannel, withPSM: BTChannels.Control, delegate: self) == kIOReturnSuccess else
-        { return didfail }
+        let isOpenProcessStarted = device.openL2CAPChannelSync(&deviceWrapper.controlChannel,
+                                                               withPSM: BTChannels.Control, delegate: self)
+        guard isOpenProcessStarted == kIOReturnSuccess else {
+            assertionFailure()
+            return didfail
+        }
 
         defer {
             if didfail { deviceWrapper.controlChannel?.close() }
@@ -230,7 +234,8 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
     }
 
     @objc func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
-        if !setupDevice(device: channel.device) {
+        if !setupDevice(channel.device) {
+            assertionFailure()
             return
         }
         
