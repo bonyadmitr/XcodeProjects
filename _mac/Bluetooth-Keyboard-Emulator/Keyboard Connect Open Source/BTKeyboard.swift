@@ -76,8 +76,14 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         bluetoothHost.setClassOfDevice(0x002540, forTimeInterval: 60)
 
         // Bluetooth SDP Service
-        let dictPath = Bundle.main.path(forResource:"SerialPortDictionary", ofType: "plist")
-        let sdpDict = NSDictionary.init(contentsOfFile: dictPath!)! as Dictionary<NSObject, AnyObject>
+        guard
+            let dictPath = Bundle.main.path(forResource: "SerialPortDictionary", ofType: "plist"),
+            let sdpDict = NSDictionary(contentsOfFile: dictPath) as? [AnyHashable: Any]
+        else {
+            assertionFailure()
+            return
+        }
+        
         service = IOBluetoothSDPServiceRecord.publishedServiceRecord(with: sdpDict)
 
         // Open Channels for Incoming Connections
