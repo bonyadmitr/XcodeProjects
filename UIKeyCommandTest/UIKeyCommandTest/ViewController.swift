@@ -42,7 +42,7 @@ class ViewController: UIViewController {
 //    }
 }
 
-
+/// https://www.avanderlee.com/swift/uikeycommand-keyboard-shortcuts/
 extension UINavigationController {
     
     /*
@@ -58,8 +58,4 @@ extension UINavigationController {
         print("- backCommand")
         popViewController(animated: true)
     }
-    
-//    override open var canBecomeFirstResponder: Bool {
-//        return true
-//    }
 }
