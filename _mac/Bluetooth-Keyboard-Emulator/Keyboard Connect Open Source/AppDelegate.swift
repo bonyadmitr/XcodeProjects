@@ -36,57 +36,25 @@ func myCGEventCallback(proxy : CGEventTapProxy,
     return Unmanaged.passUnretained(event)
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
     
+    private let permissionManager = PermissionManager()
     private var btKey: BTKeyboard?
-
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         startOrAskPermissions()
     }
     
-    private let permissionManager = PermissionManager()
-    
     private func startOrAskPermissions() {
-        /// https://stackoverflow.com/a/36260107
-//        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
-//        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
-        
         if permissionManager.isAccessibilityAvailable() {
             start()
         } else {
             askPermissions()
             startOrAskPermissions()
         }
-//
-//
-//
-//        guard permissionManager.isAccessibilityAvailable() else {
-//
-//            let alert = NSAlert()
-//            alert.messageText = "Enable Maxxxro"
-//            alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
-//            alert.addButton(withTitle: "Retry")
-//
-//            let result = alert.runModal()
-//            let isButtonPressed = (result == .alertFirstButtonReturn)
-//
-//            /// if none buttons added
-//            //let isButtonPressed = (result.rawValue == 0)
-//
-//            if isButtonPressed {
-//                start()
-//            } else {
-//                askPermissions()
-//            }
-//
-//            return
-//        }
-//
-//        start()
     }
     
-    func askPermissions() {
+    private func askPermissions() {
         let alert = NSAlert()
         let appName = "Keyboard Connect Open Source"
         alert.messageText = "Enable \(appName)"
@@ -151,6 +119,7 @@ final class PermissionManager {
         //return AXIsProcessTrusted()
         
         /// open system alert to the settings
+        /// https://stackoverflow.com/a/36260107
         return AXIsProcessTrustedWithOptions(options)
     }
 }
