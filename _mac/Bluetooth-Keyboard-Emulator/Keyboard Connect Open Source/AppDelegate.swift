@@ -40,20 +40,58 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var btKey: BTKeyboard?
 
-    func applicationDidBecomeActive(_ notification: Notification) {
-        btKey = BTKeyboard()
-
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        askPermissions()
+        
         /// "System Preferences - Security & Privacy - Privacy - Accessibility".
-        if !AXIsProcessTrusted() {
-            print("Enable accessibility setting to read keyboard events.")
+//        if !AXIsProcessTrusted() {
+//            print("Enable accessibility setting to read keyboard events.")
+//        }
+//        start()
+    }
+    
+    
+    private func askPermissions() {
+        /// https://stackoverflow.com/a/36260107
+        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
+        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
+        
+        guard accessibilityEnabled else {
+            
+            let alert = NSAlert()
+            alert.messageText = "Enable Maxxxro"
+            alert.informativeText = "Once you have enabled \"Keyboard Connect Open Source\" in System Preferences, click OK."
+            alert.addButton(withTitle: "Retry")
+            
+            let result = alert.runModal()
+            let isButtonPressed = (result == .alertFirstButtonReturn)
+            
+            /// if none buttons added
+            //let isButtonPressed = (result.rawValue == 0)
+            
+            if isButtonPressed {
+                start()
+            } else {
+                askPermissions()
+            }
+            
+            return
         }
-
+        
+        start()
+    }
+    
+    private func start() {
+        
+        btKey = BTKeyboard()
+        
         // capture all key events
         var eventMask: CGEventMask = 0
         eventMask |= (1 << CGEventMask(CGEventType.keyUp.rawValue))
         eventMask |= (1 << CGEventMask(CGEventType.keyDown.rawValue))
         eventMask |= (1 << CGEventMask(CGEventType.flagsChanged.rawValue))
-
+        
         if let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
                                             place: .headInsertEventTap,
                                             options: .defaultTap,
@@ -67,6 +105,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             //assertionFailure()
         }
+    }
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
