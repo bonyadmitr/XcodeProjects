@@ -116,6 +116,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+/**
+ RogueMacApp
+ https://github.com/MalwareSec/RogueMacApp + all connected monitors
+ http://distributeddigital.io/RogueApp.html
+ 
+ problem wth fast user switch
+ https://stackoverflow.com/questions/31475656/issues-with-screen-capture-on-os-x-cgdisplaycreateimage
+ 
+ isRunningScreensaver
+ https://github.com/nst/ScreenTime/blob/master/ScreenTime/ScreenShooter.swift
+ 
+ all connected monitors
+ https://stackoverflow.com/questions/39691106/programmatically-screenshot-swift-3-macos
+ 
+ Screenshot + screen video + example
+ https://github.com/nirix/swift-screencapture
+
+ all windows screenshots. from apple. (project needs update to run)
+ https://developer.apple.com/library/archive/samplecode/SonOfGrab/Introduction/Intro.html
+ */
 final class ScreenshotMaker {
     
     static func mainScreenScreenshot() -> CGImage? {
