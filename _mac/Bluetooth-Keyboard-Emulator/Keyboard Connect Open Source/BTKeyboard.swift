@@ -114,9 +114,19 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         self.curDevice = deviceWrapper
 
         let isOpenedForControl = device.openL2CAPChannelSync(&deviceWrapper.controlChannel,
-                                                               withPSM: BTChannels.Control, delegate: self)
+                                                               withPSM: BTChannels.Control,
+                                                               delegate: self)
+        
         guard isOpenedForControl == kIOReturnSuccess else {
-//            assertionFailure("\(isOpenedForControl)")
+            
+            
+            /// failed -536870195
+            if isOpenedForControl != kIOReturnNotOpen {
+                assertionFailure("\(isOpenedForControl)")
+            } else {
+                print("- isOpenedForControl failed with: \(isOpenedForControl)")
+            }
+            
             return didfail
         }
 
@@ -126,7 +136,9 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
             }
         }
         
-        let isOpenedForInterrupt = device.openL2CAPChannelSync(&deviceWrapper.interruptChannel, withPSM: BTChannels.Interrupt, delegate: self)
+        let isOpenedForInterrupt = device.openL2CAPChannelSync(&deviceWrapper.interruptChannel,
+                                                               withPSM: BTChannels.Interrupt,
+                                                               delegate: self)
 
         guard isOpenedForInterrupt == kIOReturnSuccess else {
             assertionFailure("\(isOpenedForInterrupt)")
@@ -256,6 +268,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         case BTChannels.Interrupt:
             curDevice?.interruptChannel = channel
         default:
+            print("failed channel.psm \(channel.psm)")
             return
 //            assertionFailure()
         }
