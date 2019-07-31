@@ -46,7 +46,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     private func startOrAskPermissions() {
-        if permissionManager.isAccessibilityAvailable() {
+        if permissionManager.isAccessibilityAvailableWithoutAlert() {
             start()
         } else {
             askPermissions()
@@ -60,14 +60,53 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         alert.messageText = "Enable \(appName)"
         alert.informativeText = "Once you have enabled \"\(appName)\" in System Preferences, click OK."
         alert.addButton(withTitle: "Retry")
+        alert.addButton(withTitle: "Open System Preference")
         alert.addButton(withTitle: "Quit")
         
         let result = alert.runModal()
-        let isQuitButtonPressed = (result == .alertSecondButtonReturn)
+//        let isQuitButtonPressed = (result == .alertSecondButtonReturn)
+//
+//        if isQuitButtonPressed {
+//            NSApp.terminate(self)
+//        }
         
-        if isQuitButtonPressed {
+        switch result {
+        case .alertFirstButtonReturn:
+            break
+        case .alertSecondButtonReturn:
+            openSecurityPane()
+        case .alertThirdButtonReturn:
             NSApp.terminate(self)
+        default:
+            assertionFailure()
         }
+    }
+    
+    func openSecurityPane() {
+        let prefpaneUrl = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
+        NSWorkspace.shared.open(prefpaneUrl)
+
+        // openURL 使うのが最も簡単だが、アクセシビリティの項目まで選択された状態で開くことができない
+//        NSWorkspace.shared.open( NSURL.fileURL(withPath: "/System/Library/PreferencePanes/Security.prefPane") )
+        
+        // ScriptingBridge を使い、表示したいところまで自動で移動させる
+        // open System Preference -> Security and Privacy -> Accessibility
+//        let prefs = SBApplication.applicationWithBundleIdentifier("com.apple.systempreferences")! as! SBSystemPreferencesApplication
+//        prefs.activate()
+//        for pane_ in prefs.panes! {
+//            let pane = pane_ as! SBSystemPreferencesPane
+//            if pane.id == "com.apple.preference.security" {
+//                for anchor_ in pane.anchors! {
+//                    let anchor = anchor_ as! SBSystemPreferencesAnchor
+//                    if anchor.name == "Privacy_Accessibility" {
+//                        println(pane, anchor)
+//                        anchor.reveal!()
+//                        break
+//                    }
+//                }
+//                break
+//            }
+//        }
     }
     
     private func start() {
@@ -121,5 +160,10 @@ final class PermissionManager {
         /// open system alert to the settings
         /// https://stackoverflow.com/a/36260107
         return AXIsProcessTrustedWithOptions(options)
+    }
+    
+    func isAccessibilityAvailableWithoutAlert() -> Bool {
+        /// will not open system alert
+        return AXIsProcessTrusted()
     }
 }
