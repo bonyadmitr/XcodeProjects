@@ -43,12 +43,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         startOrAskPermissions()
-        
-        /// "System Preferences - Security & Privacy - Privacy - Accessibility".
-//        if !AXIsProcessTrusted() {
-//            print("Enable accessibility setting to read keyboard events.")
-//        }
-//        start()
     }
     
     private let permissionManager = PermissionManager()
@@ -145,7 +139,12 @@ final class PermissionManager {
     
     let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
     
+    /// "System Preferences - Security & Privacy - Privacy - Accessibility".
     func isAccessibilityAvailable() -> Bool {
+        /// will not open system alert
+        //return AXIsProcessTrusted()
+        
+        /// open system alert to the settings
         return AXIsProcessTrustedWithOptions(options)
     }
 }
