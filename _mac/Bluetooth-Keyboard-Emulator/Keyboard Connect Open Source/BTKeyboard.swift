@@ -116,7 +116,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         let isOpenedForControl = device.openL2CAPChannelSync(&deviceWrapper.controlChannel,
                                                                withPSM: BTChannels.Control, delegate: self)
         guard isOpenedForControl == kIOReturnSuccess else {
-            assertionFailure()
+//            assertionFailure("\(isOpenedForControl)")
             return didfail
         }
 
@@ -129,7 +129,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         let isOpenedForInterrupt = device.openL2CAPChannelSync(&deviceWrapper.interruptChannel, withPSM: BTChannels.Interrupt, delegate: self)
 
         guard isOpenedForInterrupt == kIOReturnSuccess else {
-            assertionFailure()
+            assertionFailure("\(isOpenedForInterrupt)")
             return didfail
         }
 
@@ -141,13 +141,13 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         let oPtr = OpaquePointer(bytes)
         let ioError = channel.writeAsync(UnsafeMutablePointer<UInt8>(oPtr), length: UInt16(bytes.count), refcon: nil)
         if ioError != kIOReturnSuccess {
-            print("Buff Data Failed \(channel.psm)")
+            assertionFailure("Buff Data Failed \(channel.psm)")
         }
     }
 
     func sendHandshake(channel: IOBluetoothL2CAPChannel, _ status: BTHandshake) {
         guard channel.psm == BTChannels.Control else {
-            print("Passing wrong channel to handshake")
+            assertionFailure("Passing wrong channel to handshake")
             return
         }
         sendBytes(channel: channel, [0x0 | status.rawValue])
@@ -218,11 +218,15 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         let data = UnsafeBufferPointer<UInt8>(start: uPtr, count:dataLength)
 
         if channel.psm == BTChannels.Control {
-            guard data.count > 0 else
-            { return }
+            guard data.count > 0 else {
+                assertionFailure()
+                return
+            }
 
-            guard let messageType = BTMessageType(rawValue: data[0] >> 4) else
-            { return }
+            guard let messageType = BTMessageType(rawValue: data[0] >> 4) else {
+                assertionFailure()
+                return
+            }
 
             switch messageType {
             case .Handshake:
@@ -235,35 +239,35 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                 sendHandshake(channel: channel, .Successful)
             default:
                 return
+//                assertionFailure()
             }
         }
     }
 
     @objc func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
         if !setupDevice(channel.device) {
-            assertionFailure()
+//            assertionFailure()
             return
         }
         
         switch channel.psm {
         case BTChannels.Control:
             curDevice?.controlChannel = channel
-            break
         case BTChannels.Interrupt:
             curDevice?.interruptChannel = channel
-            break
         default:
             return
+//            assertionFailure()
         }
     }
 
-    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
-
-    }
-
-    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
-
-    }
+//    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
+//
+//    }
+//
+//    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
+//
+//    }
 
     @objc func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
         channel.setDelegate(self)
