@@ -43,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidBecomeActive(_ notification: Notification) {
         btKey = BTKeyboard()
 
+        /// "System Preferences - Security & Privacy - Privacy - Accessibility".
         if !AXIsProcessTrusted() {
             print("Enable accessibility setting to read keyboard events.")
         }
@@ -60,8 +61,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                             callback: myCGEventCallback,
                                             userInfo: &btKey) {
             let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
-            CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, CFRunLoopMode.commonModes)
+            CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
             CGEvent.tapEnable(tap: eventTap, enable: true)
+            //CFRunLoopRun()
+        } else {
+            //assertionFailure()
         }
     }
 
