@@ -288,6 +288,8 @@ final class ScreenManager {
     }
     
     static func configureDisplay(handler: (_ displayConfig: CGDisplayConfigRef?) -> Void) {
+        //let config = UnsafeMutablePointer<CGDisplayConfigRef?>.allocate(capacity: 1)
+        //config.pointee
         var displayConfig: CGDisplayConfigRef?
         CGBeginDisplayConfiguration(&displayConfig).handleError()
         assert(displayConfig != nil)
