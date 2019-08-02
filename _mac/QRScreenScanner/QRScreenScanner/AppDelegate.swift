@@ -28,8 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        ScreenManager.shared.disableHardwareMirroring()
+        ScreenManager.disableHardwareMirroring()
         ScreenManager.allDisplayImages()
+        ScreenManager.toggleMirroring()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -156,6 +157,12 @@ final class ScreenManager {
         return .success(displayCount)
     }
     
+    static func displayCount2() -> UInt32 {
+        var displayCount: UInt32 = 0
+        CGGetActiveDisplayList(0, nil, &displayCount).handleError()
+        return displayCount
+    }
+    
     static func displayIds(for displayCount: UInt32) -> CGResult<[CGDirectDisplayID]> {
         /// https://stackoverflow.com/a/41585973/5893286
         let allocatedDisplayCount = Int(displayCount)
@@ -168,6 +175,14 @@ final class ScreenManager {
         }
         
         return .success(displaysIds)
+    }
+    
+    static func displayIds2(for displayCount: UInt32) -> [CGDirectDisplayID] {
+        /// https://stackoverflow.com/a/41585973/5893286
+        let allocatedDisplayCount = Int(displayCount)
+        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
+        CGGetActiveDisplayList(displayCount, &displaysIds, nil).handleError()
+        return displaysIds
     }
     
     /// reed doc of CGGetActiveDisplayList
@@ -233,93 +248,44 @@ final class ScreenManager {
 ////        }
 //    }
     
+    /// designed for hardware mirroring with > 1 display
+    /// should be no penalty for running with only 1 display, using either hardware or software mirroring drivers
+    /// but not tested
     /// https://stackoverflow.com/a/41585973/5893286
-    @discardableResult
-    func disableHardwareMirroring() -> CGError {
-        // designed for hardware mirroring with > 1 display
-        // should be no penalty for running with only 1 display, using either hardware or software mirroring drivers
-        // but not tested
-        
-//        func handle(_ error: CGError) -> CGError {
-//            assert(error == .success, "reason: \(self)")
-//            return self
-//        }
-        var configRef: CGDisplayConfigRef?
-        
-        // start the configuration
-        CGBeginDisplayConfiguration(&configRef).require()
-        
-        // only interested in the main display
-        // kCGNullDirectDisplay parameter disables hardware mirroring
-        CGConfigureDisplayMirrorOfDisplay(configRef, CGMainDisplayID(), kCGNullDirectDisplay)
-        
-        // may not be permanent between boots using Playgroud, but is in an application
-        return CGCompleteDisplayConfiguration(configRef, .permanently).require()
+    static func disableHardwareMirroring() {
+        configureDisplay { configRef in
+            // only interested in the main display
+            // kCGNullDirectDisplay parameter disables hardware mirroring
+            CGConfigureDisplayMirrorOfDisplay(configRef, CGMainDisplayID(), kCGNullDirectDisplay).handleError()
+        }
     }
     
     /// https://stackoverflow.com/a/41585973/5893286
     static func toggleMirroring() {
-//        var displayCount:UInt32 = 0
-//        var activeCount:UInt32 = 0      //used as a parameter, but value is ignored
-//        //var onlineCount:UInt32 = 0    //not used
-//
-//        //get count of active displays (by passing nil to CGGetActiveDisplayList
-//        postError(CGGetActiveDisplayList(0, nil, &displayCount))
-//
-//        if displayCount == 1 {
-//            // either it's hardware mirroring or who cares?
-//            disableHardwareMirroring()
-//            return
-//        }
-//
-//        // allocate space for list of displays
-//        // tried to use ContiguousArray, but CGGetActiveDisplayList requires Array<CGDirectDisplayID> parameter
-//        // ContiguousArrays cannot be typecast to Arrays (at least not easily)
-//
-//        var displayIDList = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: Int(displayCount))
-//
-//        // fill the list
-//        postError(CGGetActiveDisplayList(displayCount, &(displayIDList), &activeCount))
+        let displayCount = displayCount2()
         
-        switch displayCount() {
-        case .success(let displayCount):
-            
-            switch displayIds(for: displayCount) {
-            case .success(let displayIds):
-                let mainDisplayId = CGMainDisplayID()
-                
-                // determine if mirroring is active (only relevant for software mirroring)
-                // hack to convert from boolean_t (aka UInt32) to swift's bool
-                let isDisplayedMirrored = CGDisplayIsInMirrorSet(mainDisplayId) != 0
-                
-                // set master based on current mirroring state
-                // if mirroring, master = null, if not, master = main display
-                let masterDisplayId = isDisplayedMirrored ? kCGNullDirectDisplay : mainDisplayId
-                
-                configureDisplay { configRef in
-                    displayIds
-                        .filter { $0 != mainDisplayId }
-                        .forEach {
-                            let directDisplay = CGDirectDisplayID($0)
-                            CGConfigureDisplayMirrorOfDisplay(configRef, directDisplay, masterDisplayId).handleError()
-                    }
-                }
-                
-            case .failure(let error):
-                assertionFailure("CGGetActiveDisplayList failed: \(error)")
-                return
-            }
-            
-        case .failure(let error):
-            assertionFailure("CGGetActiveDisplayList failed: \(error)")
+        if displayCount == 1 {
+            // either it's hardware mirroring or who cares?
+            disableHardwareMirroring()
             return
         }
         
+        let displayIds = displayIds2(for: displayCount)
+        let mainDisplayId = CGMainDisplayID()
         
-
+        // determine if mirroring is active (only relevant for software mirroring)
+        // hack to convert from boolean_t (aka UInt32) to swift's bool
+        let isDisplayedMirrored = CGDisplayIsInMirrorSet(mainDisplayId) != 0
         
-        // The first entry in the list of active displays is the main display. In case of mirroring, the first entry is the largest drawable display or, if all are the same size, the display with the greatest pixel depth.
-        // The "Permanently" option might not survive reboot when run from playground, but does when run in an application
+        // set master based on current mirroring state
+        // if mirroring, master = null, if not, master = main display
+        let masterDisplayId = isDisplayedMirrored ? kCGNullDirectDisplay : mainDisplayId
+        
+        configureDisplay { configRef in
+            displayIds
+                .filter { $0 != mainDisplayId }
+                .forEach { CGConfigureDisplayMirrorOfDisplay(configRef, $0, masterDisplayId).handleError() }
+        }
     }
     
     static func configureDisplay(handler: (_ configRef: CGDisplayConfigRef?) -> Void) {
@@ -327,6 +293,10 @@ final class ScreenManager {
         CGBeginDisplayConfiguration(&configRef).handleError()
         assert(configRef != nil)
         handler(configRef)
+        
+        // The first entry in the list of active displays is the main display. In case of mirroring, the first entry is the largest drawable display or, if all are the same size, the display with the greatest pixel depth.
+        // The "Permanently" option might not survive reboot when run from playground, but does when run in an application
+        // may not be permanent between boots using Playgroud, but is in an application
         CGCompleteDisplayConfiguration (configRef,.permanently).handleError()
     }
     
