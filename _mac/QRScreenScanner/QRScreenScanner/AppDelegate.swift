@@ -66,25 +66,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// not work
         //window.orderBack(self)
         
-        
-//        "historyDataSource"
-        
-        for qrValue in CodeDetector.shared.readQR(from: img) {
-            let newItem: HistoryDataSource = [TableColumns.date.rawValue: Date(),
-                                              TableColumns.value.rawValue: qrValue]
-            
-            let tableDataSource: [HistoryDataSource]
-            if var tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
-                tableDataSourceOld.append(newItem)
-                tableDataSource = tableDataSourceOld
-            } else {
-                tableDataSource = [newItem]
-            }
-            UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
-            
-        }
-        
-        
+        let qrValues = CodeDetector.shared.readQR(from: img)
+        saveQRValues(qrValues)
         
         guard let window = self.window else {
             assertionFailure()
@@ -100,6 +83,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         /// without reference it will be deinited
 //        self.mainWindowController = mainWindowController
+    }
+    
+    private func saveQRValues(_ qrValues: [String]) {
+        let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
+            [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]
+        }
+        let tableDataSource: [HistoryDataSource]
+        if let tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
+            tableDataSource = tableDataSourceOld + qrDataSources
+        } else {
+            tableDataSource = qrDataSources
+        }
+        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
     }
     
     /// to open app after close button click we only hide it
