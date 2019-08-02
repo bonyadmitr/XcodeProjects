@@ -147,7 +147,7 @@ final class ScreenManager {
     }
     
     static func displayCount() -> CGResult<UInt32> {
-        var displayCount: UInt32 = 0;
+        var displayCount: UInt32 = 0
         let getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
         
         guard getDisplayListResult == .success else {
@@ -193,7 +193,7 @@ final class ScreenManager {
     /// reed doc of CGGetActiveDisplayList
     static func allDisplayImages2() -> [CGImage] {
         
-        var displayCount: UInt32 = 0;
+        var displayCount: UInt32 = 0
         var getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
         
         guard getDisplayListResult == .success  else {
