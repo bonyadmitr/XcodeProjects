@@ -296,7 +296,9 @@ final class ScreenManager {
         // The first entry in the list of active displays is the main display. In case of mirroring, the first entry is the largest drawable display or, if all are the same size, the display with the greatest pixel depth.
         // The "Permanently" option might not survive reboot when run from playground, but does when run in an application
         // may not be permanent between boots using Playgroud, but is in an application
-        CGCompleteDisplayConfiguration(displayConfig,.permanently).handleError()
+        if CGCompleteDisplayConfiguration(displayConfig, .permanently).require() != .success {
+            CGCancelDisplayConfiguration(displayConfig)
+        }
     }
     
     @discardableResult
