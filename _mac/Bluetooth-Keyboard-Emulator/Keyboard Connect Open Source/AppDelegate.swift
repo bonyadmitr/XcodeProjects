@@ -149,6 +149,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+/// AXObserverAddNotification
+/// https://stackoverflow.com/questions/853833/how-can-my-app-detect-a-change-to-another-apps-window
+///
 final class PermissionManager {
 //    static let shared = PermissionManager()
     

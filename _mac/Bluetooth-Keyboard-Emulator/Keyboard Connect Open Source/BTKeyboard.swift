@@ -152,7 +152,8 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         let oPtr = OpaquePointer(bytes)
         let ioError = channel.writeAsync(UnsafeMutablePointer<UInt8>(oPtr), length: UInt16(bytes.count), refcon: nil)
         if ioError != kIOReturnSuccess {
-            assertionFailure("Buff Data Failed \(channel.psm)")
+            /// 19 was one.
+            print("Buff Data Failed \(channel.psm)")
         }
     }
 
