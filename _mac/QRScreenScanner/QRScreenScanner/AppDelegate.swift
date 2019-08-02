@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        ScreenManager.allScreensImages()
+        ScreenManager.allDisplayImages()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -146,8 +146,52 @@ final class ScreenManager {
         return CGDisplayCreateImage(CGMainDisplayID())
     }
     
+    static func displayCount() -> CGResult<UInt32> {
+        var displayCount: UInt32 = 0;
+        let getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
+        
+        guard getDisplayListResult == .success else {
+            assertionFailure("CGGetActiveDisplayList failed: \(getDisplayListResult)")
+            return .failure(getDisplayListResult)
+        }
+        return .success(displayCount)
+    }
+    
+    static func displayIds(for displayCount: UInt32) -> CGResult<[CGDirectDisplayID]> {
+        /// https://stackoverflow.com/a/41585973/5893286
+        let allocatedDisplayCount = Int(displayCount)
+        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
+        let getDisplayListResult = CGGetActiveDisplayList(displayCount, &displaysIds, nil)
+        
+        guard getDisplayListResult == .success  else {
+            assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
+            return .failure(getDisplayListResult)
+        }
+        
+        return .success(displaysIds)
+    }
+    
     /// reed doc of CGGetActiveDisplayList
-    static func allScreensImages2() -> [CGImage] {
+    static func allDisplayImages() -> [CGImage] {
+        switch displayCount() {
+        case .success(let displayCount):
+            
+            switch displayIds(for: displayCount) {
+            case .success(let displayIds):
+                return displayIds.compactMap { CGDisplayCreateImage($0) }
+            case .failure(let error):
+                assertionFailure("CGGetActiveDisplayList failed: \(error)")
+                return []
+            }
+            
+        case .failure(let error):
+            assertionFailure("CGGetActiveDisplayList failed: \(error)")
+            return []
+        }
+    }
+    
+    /// reed doc of CGGetActiveDisplayList
+    static func allDisplayImages2() -> [CGImage] {
         
         var displayCount: UInt32 = 0;
         var getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
@@ -184,7 +228,7 @@ final class ScreenManager {
     }
     
     @discardableResult
-    func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
+    static func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
         /// or #1
         //let bitmapRep = NSBitmapImageRep(cgImage: image)
         //guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
@@ -208,49 +252,4 @@ final class ScreenManager {
         CGImageDestinationAddImage(destination, image, nil)
         return CGImageDestinationFinalize(destination)
     }
-    
-    static func displayCount() -> CGResult<UInt32> {
-        var displayCount: UInt32 = 0;
-        let getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
-        
-        guard getDisplayListResult == .success else {
-            assertionFailure("CGGetActiveDisplayList failed: \(getDisplayListResult)")
-            return .failure(getDisplayListResult)
-        }
-        return .success(displayCount)
-    }
-    
-    static func displayIds(for displayCount: UInt32) -> CGResult<[CGDirectDisplayID]> {
-        /// https://stackoverflow.com/a/41585973/5893286
-        let allocatedDisplayCount = Int(displayCount)
-        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
-        let getDisplayListResult = CGGetActiveDisplayList(displayCount, &displaysIds, nil)
-        
-        guard getDisplayListResult == .success  else {
-            assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
-            return .failure(getDisplayListResult)
-        }
-        
-        return .success(displaysIds)
-    }
-    
-    /// reed doc of CGGetActiveDisplayList
-    static func allScreensImages() -> [CGImage] {
-        switch displayCount() {
-        case .success(let displayCount):
-            
-            switch displayIds(for: displayCount) {
-            case .success(let displayIds):
-                return displayIds.compactMap { CGDisplayCreateImage($0) }
-            case .failure(let error):
-                assertionFailure("CGGetActiveDisplayList failed: \(error)")
-                return []
-            }
-            
-        case .failure(let error):
-            assertionFailure("CGGetActiveDisplayList failed: \(error)")
-            return []
-        }
-    }
-    
 }
