@@ -249,3 +249,28 @@ final class ScreenManager {
         return CGImageDestinationFinalize(destination)
     }
 }
+
+extension NSImage {
+    
+    /// https://stackoverflow.com/a/44010348/5893286
+    func bitmapImageRepresentation(colorSpaceName: String) -> NSBitmapImageRep? {
+        let width = self.size.width
+        let height = self.size.height
+        
+        if width < 1 || height < 1 {
+            return nil
+        }
+        
+        if let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(width), pixelsHigh: Int(height), bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: NSColorSpaceName(rawValue: colorSpaceName), bytesPerRow: Int(width) * 4, bitsPerPixel: 32)
+        {
+            let ctx = NSGraphicsContext.init(bitmapImageRep: rep)
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current = ctx
+            self.draw(at: NSZeroPoint, from: NSZeroRect, operation: NSCompositingOperation.copy, fraction: 1.0)
+            ctx?.flushGraphics()
+            NSGraphicsContext.restoreGraphicsState()
+            return rep
+        }
+        return nil
+    }
+}
