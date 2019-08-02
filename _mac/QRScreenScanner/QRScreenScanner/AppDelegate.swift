@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        ScreenshotMaker.screens()
+        ScreenshotMaker.allScreensImages()
 
     }
 
@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func clickStatusItem() {
         
-        guard let img = ScreenshotMaker.mainScreenScreenshot() else {
+        guard let img = ScreenshotMaker.mainScreenImage() else {
             assertionFailure()
             return
         }
@@ -138,46 +138,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
  */
 final class ScreenshotMaker {
     
-    static func mainScreenScreenshot() -> CGImage? {
+    static func mainScreenImage() -> CGImage? {
         return CGDisplayCreateImage(CGMainDisplayID())
     }
     
-    static func screens() {
+    /// reed doc of CGGetActiveDisplayList
+    static func allScreensImages() -> [CGImage] {
         
         var displayCount: UInt32 = 0;
-        var getActiveDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
+        var getDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
         
-        guard getActiveDisplayListResult == .success  else {
-            assertionFailure("CGGetActiveDisplayList failed: \(getActiveDisplayListResult)")
-            return
+        guard getDisplayListResult == .success  else {
+            assertionFailure("CGGetActiveDisplayList failed: \(getDisplayListResult)")
+            return []
         }
         
         let allocatedDisplayCount = Int(displayCount)
-        let displaysIds = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: allocatedDisplayCount)
         
-        getActiveDisplayListResult = CGGetActiveDisplayList(displayCount, displaysIds, &displayCount)
-        
-        guard getActiveDisplayListResult == .success  else {
-            assertionFailure("CGGetActiveDisplayList 2 failed: \(getActiveDisplayListResult)")
-            return
+        /// #1
+        /// https://stackoverflow.com/a/41585973/5893286
+        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
+        getDisplayListResult = CGGetActiveDisplayList(displayCount, &displaysIds, &displayCount)
+
+        guard getDisplayListResult == .success  else {
+            assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
+            return []
         }
+
+        return displaysIds.compactMap { CGDisplayCreateImage($0) }
         
-        for i in 0..<allocatedDisplayCount {
-            let displayId = displaysIds[i]
-            let displayImage = CGDisplayCreateImage(displayId)
-            print()
-//            let unixTimestamp = CreateTimeStamp()
-//            let fileUrl = URL(fileURLWithPath: folderName + "\(unixTimestamp)" + "_" + "\(i)" + ".jpg", isDirectory: true)
-//            let screenShot:CGImage = CGDisplayCreateImage(activeDisplays[Int(i-1)])!
-//            let bitmapRep = NSBitmapImageRep(cgImage: screenShot)
-//            let jpegData = bitmapRep.representation(using: NSBitmapImageFileType.JPEG, properties: [:])!
-//
-//
-//            do {
-//                try jpegData.write(to: fileUrl, options: .atomic)
-//            }
-//            catch {print("error: \(error)")}
-        }
+        /// #2
+        //let displaysIds = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: allocatedDisplayCount)
+        //getDisplayListResult = CGGetActiveDisplayList(displayCount, displaysIds, &displayCount)
+        //
+        //guard getDisplayListResult == .success  else {
+        //    assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
+        //    return []
+        //}
+        //
+        //return (0..<allocatedDisplayCount).compactMap { CGDisplayCreateImage(displaysIds[$0]) }
     }
     
     @discardableResult func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
