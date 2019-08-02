@@ -155,44 +155,46 @@ final class ScreenshotMaker {
         
         let allocatedDisplayCount = Int(displayCount)
         
-        /// #1
+        /// or #1
         /// https://stackoverflow.com/a/41585973/5893286
-        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
-        getDisplayListResult = CGGetActiveDisplayList(displayCount, &displaysIds, &displayCount)
-
+//        var displaysIds = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: allocatedDisplayCount)
+//        getDisplayListResult = CGGetActiveDisplayList(displayCount, &displaysIds, &displayCount)
+//
+//        guard getDisplayListResult == .success  else {
+//            assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
+//            return []
+//        }
+//
+//        return displaysIds.compactMap { CGDisplayCreateImage($0) }
+        
+        /// or #2
+        let displaysIds = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: allocatedDisplayCount)
+        getDisplayListResult = CGGetActiveDisplayList(displayCount, displaysIds, &displayCount)
+        
         guard getDisplayListResult == .success  else {
             assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
             return []
         }
-
-        return displaysIds.compactMap { CGDisplayCreateImage($0) }
         
-        /// #2
-        //let displaysIds = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: allocatedDisplayCount)
-        //getDisplayListResult = CGGetActiveDisplayList(displayCount, displaysIds, &displayCount)
-        //
-        //guard getDisplayListResult == .success  else {
-        //    assertionFailure("CGGetActiveDisplayList 2 failed: \(getDisplayListResult)")
-        //    return []
-        //}
-        //
-        //return (0..<allocatedDisplayCount).compactMap { CGDisplayCreateImage(displaysIds[$0]) }
+        return (0..<allocatedDisplayCount).compactMap { CGDisplayCreateImage(displaysIds[$0]) }
     }
     
     @discardableResult func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
-//        let bitmapRep = NSBitmapImageRep(cgImage: image)
-//        guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
-//            assertionFailure()
-//            return false
-//        }
-//        do {
-//            try jpegData.write(to: destinationURL, options: .atomic)
-//            return true
-//        } catch {
-//            assertionFailure(error.localizedDescription)
-//            return false
-//        }
+        /// or #1
+        //let bitmapRep = NSBitmapImageRep(cgImage: image)
+        //guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
+        //    assertionFailure()
+        //    return false
+        //}
+        //do {
+        //    try jpegData.write(to: destinationURL, options: .atomic)
+        //    return true
+        //} catch {
+        //    assertionFailure(error.localizedDescription)
+        //    return false
+        //}
         
+        /// or #2
         /// https://stackoverflow.com/a/40371604/5893286
         guard let destination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypePNG, 1, nil) else {
             assertionFailure(destinationURL.absoluteString)
