@@ -253,10 +253,10 @@ final class ScreenManager {
     /// but not tested
     /// https://stackoverflow.com/a/41585973/5893286
     static func disableHardwareMirroring() {
-        configureDisplay { configRef in
+        configureDisplay { displayConfig in
             // only interested in the main display
             // kCGNullDirectDisplay parameter disables hardware mirroring
-            CGConfigureDisplayMirrorOfDisplay(configRef, CGMainDisplayID(), kCGNullDirectDisplay).handleError()
+            CGConfigureDisplayMirrorOfDisplay(displayConfig, CGMainDisplayID(), kCGNullDirectDisplay).handleError()
         }
     }
     
@@ -270,7 +270,6 @@ final class ScreenManager {
             return
         }
         
-        let displayIds = displayIds2(for: displayCount)
         let mainDisplayId = CGMainDisplayID()
         
         // determine if mirroring is active (only relevant for software mirroring)
@@ -281,23 +280,23 @@ final class ScreenManager {
         // if mirroring, master = null, if not, master = main display
         let masterDisplayId = isDisplayedMirrored ? kCGNullDirectDisplay : mainDisplayId
         
-        configureDisplay { configRef in
-            displayIds
+        configureDisplay { displayConfig in
+            displayIds2(for: displayCount)
                 .filter { $0 != mainDisplayId }
-                .forEach { CGConfigureDisplayMirrorOfDisplay(configRef, $0, masterDisplayId).handleError() }
+                .forEach { CGConfigureDisplayMirrorOfDisplay(displayConfig, $0, masterDisplayId).handleError() }
         }
     }
     
-    static func configureDisplay(handler: (_ configRef: CGDisplayConfigRef?) -> Void) {
-        var configRef: CGDisplayConfigRef?
-        CGBeginDisplayConfiguration(&configRef).handleError()
-        assert(configRef != nil)
-        handler(configRef)
+    static func configureDisplay(handler: (_ displayConfig: CGDisplayConfigRef?) -> Void) {
+        var displayConfig: CGDisplayConfigRef?
+        CGBeginDisplayConfiguration(&displayConfig).handleError()
+        assert(displayConfig != nil)
+        handler(displayConfig)
         
         // The first entry in the list of active displays is the main display. In case of mirroring, the first entry is the largest drawable display or, if all are the same size, the display with the greatest pixel depth.
         // The "Permanently" option might not survive reboot when run from playground, but does when run in an application
         // may not be permanent between boots using Playgroud, but is in an application
-        CGCompleteDisplayConfiguration (configRef,.permanently).handleError()
+        CGCompleteDisplayConfiguration(displayConfig,.permanently).handleError()
     }
     
     @discardableResult
