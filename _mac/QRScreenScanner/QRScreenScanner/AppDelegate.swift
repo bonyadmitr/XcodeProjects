@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+        ScreenshotMaker.screens()
 
     }
 
@@ -140,5 +140,66 @@ final class ScreenshotMaker {
     
     static func mainScreenScreenshot() -> CGImage? {
         return CGDisplayCreateImage(CGMainDisplayID())
+    }
+    
+    static func screens() {
+        
+        var displayCount: UInt32 = 0;
+        var getActiveDisplayListResult = CGGetActiveDisplayList(0, nil, &displayCount)
+        
+        guard getActiveDisplayListResult == .success  else {
+            assertionFailure("CGGetActiveDisplayList failed: \(getActiveDisplayListResult)")
+            return
+        }
+        
+        let allocatedDisplayCount = Int(displayCount)
+        let displaysIds = UnsafeMutablePointer<CGDirectDisplayID>.allocate(capacity: allocatedDisplayCount)
+        
+        getActiveDisplayListResult = CGGetActiveDisplayList(displayCount, displaysIds, &displayCount)
+        
+        guard getActiveDisplayListResult == .success  else {
+            assertionFailure("CGGetActiveDisplayList 2 failed: \(getActiveDisplayListResult)")
+            return
+        }
+        
+        for i in 0..<allocatedDisplayCount {
+            let displayId = displaysIds[i]
+            let displayImage = CGDisplayCreateImage(displayId)
+            print()
+//            let unixTimestamp = CreateTimeStamp()
+//            let fileUrl = URL(fileURLWithPath: folderName + "\(unixTimestamp)" + "_" + "\(i)" + ".jpg", isDirectory: true)
+//            let screenShot:CGImage = CGDisplayCreateImage(activeDisplays[Int(i-1)])!
+//            let bitmapRep = NSBitmapImageRep(cgImage: screenShot)
+//            let jpegData = bitmapRep.representation(using: NSBitmapImageFileType.JPEG, properties: [:])!
+//
+//
+//            do {
+//                try jpegData.write(to: fileUrl, options: .atomic)
+//            }
+//            catch {print("error: \(error)")}
+        }
+    }
+    
+    @discardableResult func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
+//        let bitmapRep = NSBitmapImageRep(cgImage: image)
+//        guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
+//            assertionFailure()
+//            return false
+//        }
+//        do {
+//            try jpegData.write(to: destinationURL, options: .atomic)
+//            return true
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//            return false
+//        }
+        
+        /// https://stackoverflow.com/a/40371604/5893286
+        guard let destination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypePNG, 1, nil) else {
+            assertionFailure(destinationURL.absoluteString)
+            return false
+        }
+        CGImageDestinationAddImage(destination, image, nil)
+        return CGImageDestinationFinalize(destination)
     }
 }
