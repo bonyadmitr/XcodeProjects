@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        ScreenManager.shared.disableHardwareMirroring()
         ScreenManager.allDisplayImages()
     }
 
@@ -133,6 +134,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
  */
 final class ScreenManager {
     
+    static let shared = ScreenManager()
+    
     enum CGResult<T> {
         case success(T)
         case failure(CGError)
@@ -221,6 +224,80 @@ final class ScreenManager {
         }
         
         return (0..<allocatedDisplayCount).compactMap { CGDisplayCreateImage(displaysIds[$0]) }
+    }
+    
+    func postError(_ error : CGError){
+        if error != CGError.success {
+            print("got an error")
+        }
+    }
+    
+    func disableHardwareMirroring(){
+        // designed for hardware mirroring with > 1 display
+        // should be no penalty for running with only 1 display, using either hardware or software mirroring drivers
+        // but not tested
+        
+        // start the configuration
+        var configRef:CGDisplayConfigRef? = nil
+        postError(CGBeginDisplayConfiguration(&configRef))
+        
+        // only interested in the main display
+        // kCGNullDirectDisplay parameter disables hardware mirroring
+        CGConfigureDisplayMirrorOfDisplay(configRef, CGMainDisplayID(), kCGNullDirectDisplay)
+        
+        // may not be permanent between boots using Playgroud, but is in an application
+        postError(CGCompleteDisplayConfiguration (configRef,CGConfigureOption.permanently))
+    }
+    
+    /// https://stackoverflow.com/a/41585973/5893286
+    func toggleMirroring(){
+        var displayCount:UInt32 = 0
+        var activeCount:UInt32 = 0      //used as a parameter, but value is ignored
+        //var onlineCount:UInt32 = 0    //not used
+        
+        //get count of active displays (by passing nil to CGGetActiveDisplayList
+        postError(CGGetActiveDisplayList(0, nil, &displayCount))
+        
+        if displayCount == 1 {
+            // either it's hardware mirroring or who cares?
+            disableHardwareMirroring()
+            return
+        }
+        
+        // allocate space for list of displays
+        // tried to use ContiguousArray, but CGGetActiveDisplayList requires Array<CGDirectDisplayID> parameter
+        // ContiguousArrays cannot be typecast to Arrays (at least not easily)
+        
+        var displayIDList = Array<CGDirectDisplayID>(repeating: kCGNullDirectDisplay, count: Int(displayCount))
+        
+        // fill the list
+        postError(CGGetActiveDisplayList(displayCount, &(displayIDList), &activeCount))
+        
+        
+        // determine if mirroring is active (only relevant for software mirroring)
+        // hack to convert from boolean_t (aka UInt32) to swift's bool
+        let displaysMirrored = CGDisplayIsInMirrorSet(CGMainDisplayID()) != 0
+        
+        // set master based on current mirroring state
+        // if mirroring, master = null, if not, master = main display
+        let master = (true == displaysMirrored) ? kCGNullDirectDisplay : CGMainDisplayID()
+        
+        // start the configuration
+        var configRef:CGDisplayConfigRef? = nil
+        
+        postError(CGBeginDisplayConfiguration(&configRef))
+        
+        for i in 0..<Int(displayCount) {
+            let currentDisplay = CGDirectDisplayID(displayIDList[i])
+            if CGMainDisplayID() != currentDisplay {
+                CGConfigureDisplayMirrorOfDisplay(configRef, currentDisplay, master)
+            }
+        }
+        
+        postError(CGCompleteDisplayConfiguration (configRef,CGConfigureOption.permanently))
+        
+        // The first entry in the list of active displays is the main display. In case of mirroring, the first entry is the largest drawable display or, if all are the same size, the display with the greatest pixel depth.
+        // The "Permanently" option might not survive reboot when run from playground, but does when run in an application
     }
     
     @discardableResult
