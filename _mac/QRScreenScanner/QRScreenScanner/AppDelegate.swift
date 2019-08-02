@@ -232,21 +232,34 @@ final class ScreenManager {
         }
     }
     
-    func disableHardwareMirroring(){
+    /// https://stackoverflow.com/a/41585973/5893286
+    @discardableResult
+    func disableHardwareMirroring() -> CGError {
         // designed for hardware mirroring with > 1 display
         // should be no penalty for running with only 1 display, using either hardware or software mirroring drivers
         // but not tested
         
         // start the configuration
-        var configRef:CGDisplayConfigRef? = nil
-        postError(CGBeginDisplayConfiguration(&configRef))
+        var displayConfigRef: CGDisplayConfigRef?
+        let beginDisplayConfigurationResult = CGBeginDisplayConfiguration(&displayConfigRef)
+        
+        guard beginDisplayConfigurationResult == .success, let configRef = displayConfigRef else {
+            assertionFailure("CGBeginDisplayConfiguration failed: \(beginDisplayConfigurationResult)")
+            return beginDisplayConfigurationResult
+        }
         
         // only interested in the main display
         // kCGNullDirectDisplay parameter disables hardware mirroring
         CGConfigureDisplayMirrorOfDisplay(configRef, CGMainDisplayID(), kCGNullDirectDisplay)
         
         // may not be permanent between boots using Playgroud, but is in an application
-        postError(CGCompleteDisplayConfiguration (configRef,CGConfigureOption.permanently))
+        let completeDisplayConfigurationResult = CGCompleteDisplayConfiguration(configRef, .permanently)
+        guard completeDisplayConfigurationResult == .success else {
+            assertionFailure("CGCompleteDisplayConfiguration failed: \(completeDisplayConfigurationResult)")
+            return beginDisplayConfigurationResult
+        }
+        
+        return .success
     }
     
     /// https://stackoverflow.com/a/41585973/5893286
