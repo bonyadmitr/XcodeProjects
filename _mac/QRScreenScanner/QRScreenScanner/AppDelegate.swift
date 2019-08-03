@@ -260,6 +260,12 @@ final class ScreenManager {
         }
     }
     
+    // determine if mirroring is active (only relevant for software mirroring)
+    // hack to convert from boolean_t (aka UInt32) to swift's bool
+    static func isDisplayedMirrored() -> Bool {
+        return CGDisplayIsInMirrorSet(CGMainDisplayID()) > 0
+    }
+    
     /// https://stackoverflow.com/a/41585973/5893286
     static func toggleMirroring() {
         let displayCount = displayCount2()
@@ -272,13 +278,9 @@ final class ScreenManager {
         
         let mainDisplayId = CGMainDisplayID()
         
-        // determine if mirroring is active (only relevant for software mirroring)
-        // hack to convert from boolean_t (aka UInt32) to swift's bool
-        let isDisplayedMirrored = CGDisplayIsInMirrorSet(mainDisplayId) != 0
-        
         // set master based on current mirroring state
         // if mirroring, master = null, if not, master = main display
-        let masterDisplayId = isDisplayedMirrored ? kCGNullDirectDisplay : mainDisplayId
+        let masterDisplayId = isDisplayedMirrored() ? kCGNullDirectDisplay : mainDisplayId
         
         configureDisplay { displayConfig in
             displayIds2(for: displayCount)
