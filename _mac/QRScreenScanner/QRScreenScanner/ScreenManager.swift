@@ -10,6 +10,12 @@ import Foundation
 
 
 /**
+ get display info. DisplayUtil + DisplayInfo
+ https://github.com/th507/screen-resolution-switcher/blob/master/scres.swift
+ 
+ HardwareMirroring
+ https://stackoverflow.com/a/41585973/5893286
+ 
  RogueMacApp
  https://github.com/MalwareSec/RogueMacApp + all connected monitors
  http://distributeddigital.io/RogueApp.html
