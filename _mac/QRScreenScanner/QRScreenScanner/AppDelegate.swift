@@ -31,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ScreenManager.disableHardwareMirroring()
 //        ScreenManager.allDisplayImages()
 //        ScreenManager.toggleMirroring()
+        showWindow()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -67,6 +68,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let qrValues = ScreenManager.allDisplayImages2()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
+        showWindow()
+    }
+    
+    private func showWindow() {
         
         guard let window = self.window else {
             assertionFailure()
@@ -77,11 +82,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
         
         /// to fix frame of closed window
-//        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
-//        window.center()
+        //        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
+        //        window.center()
         
         /// without reference it will be deinited
-//        self.mainWindowController = mainWindowController
+        //        self.mainWindowController = mainWindowController
     }
     
     private func saveQRValues(_ qrValues: [String]) {
