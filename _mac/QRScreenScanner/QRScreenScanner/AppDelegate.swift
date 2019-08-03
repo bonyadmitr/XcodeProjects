@@ -28,9 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        ScreenManager.disableHardwareMirroring()
-        ScreenManager.allDisplayImages()
-        ScreenManager.toggleMirroring()
+//        ScreenManager.disableHardwareMirroring()
+//        ScreenManager.allDisplayImages()
+//        ScreenManager.toggleMirroring()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -55,11 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func clickStatusItem() {
         
-        guard let img = ScreenManager.mainScreenImage() else {
-            assertionFailure()
-            return
-        }
-        
 //        self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
 //
 //        window.makeKeyAndOrderFront(nil)
@@ -68,7 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// not work
         //window.orderBack(self)
         
-        let qrValues = CodeDetector.shared.readQR(from: img)
+        
+        let qrValues = ScreenManager.allDisplayImages2()
+            .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         
         guard let window = self.window else {
