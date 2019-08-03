@@ -17,6 +17,10 @@ import Foundation
 // TODO: test HardwareMirroring
 
 /**
+ 
+ apple example. all windows screenshots. (project needs update to run)
+ https://developer.apple.com/library/archive/samplecode/SonOfGrab/Introduction/Intro.html
+ 
  apple doc
  https://developer.apple.com/documentation/coregraphics/quartz_window_services
  
@@ -39,8 +43,8 @@ import Foundation
  Screenshot + screen video + example
  https://github.com/nirix/swift-screencapture
  
- all windows screenshots. from apple. (project needs update to run)
- https://developer.apple.com/library/archive/samplecode/SonOfGrab/Introduction/Intro.html
+ working with CGWindow
+ //https://stackoverflow.com/a/48030215/5893286
  */
 final class ScreenManager {
     
@@ -240,15 +244,13 @@ final class ScreenManager {
         return CGImageDestinationFinalize(destination)
     }
     
+    /// https://stackoverflow.com/a/30337008/5893286
+    static func windowsInfo() -> [[String : Any]] {
+        return CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] ?? []
+    }
+    
     static func getWindowsImages() -> [CGImage] {
-        
-        /// https://stackoverflow.com/a/30337008/5893286
-        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
-            assertionFailure()
-            return []
-        }
-        
-        return windowsInfo
+        return windowsInfo()
             .filter {
                 if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
                     let height = boundsDict["Height"]
@@ -264,51 +266,26 @@ final class ScreenManager {
                                         .optionIncludingWindow,
                                         $0,
                                         [.boundsIgnoreFraming,
-                                         .shouldBeOpaque,
+                                         //.shouldBeOpaque,
                                          .nominalResolution])
         }
         
         // TODO: filter window
         //import AppKit
         //kCGWindowOwnerPID
-        //https://stackoverflow.com/a/48030215/5893286
         //let q = NSWorkspace.shared.runningApplications.first(where: { $0.bundleIdentifier == "" })?.processIdentifier
     }
     
     static func combineWindowsByName() -> [String: CGImage] {
-        
-        /// https://stackoverflow.com/a/30337008/5893286
-        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
-            assertionFailure()
-            return [:]
-        }
-        
-        return Dictionary(grouping: windowsInfo) {
+        return Dictionary(grouping: windowsInfo()) {
             return $0[kCGWindowOwnerName as String] as? String ?? "unknown"
         }.compactMapValues { infoArray -> [UInt] in
             infoArray.compactMap { $0[kCGWindowNumber as String] as? UInt }
         }.compactMapValues { windowIds -> CGImage? in
             CGImage(windowListFromArrayScreenBounds: .null,
                     windowArray: cfarray(from: windowIds),
-                    imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
+                    imageOption: [.boundsIgnoreFraming, .nominalResolution])
         }
-    }
-    
-    static func combineWindows(for appName: String) -> CGImage? {
-        
-        /// https://stackoverflow.com/a/30337008/5893286
-        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
-            assertionFailure()
-            return nil
-        }
-        
-        let windowIds = windowsInfo
-            .filter { $0[kCGWindowOwnerName as String] as? String == appName }
-            .compactMap { $0[kCGWindowNumber as String] as? UInt }
-        
-        return CGImage(windowListFromArrayScreenBounds: .null,
-                       windowArray: cfarray(from: windowIds),
-                       imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
     }
     
     /// https://stackoverflow.com/a/46652374/5893286
@@ -320,18 +297,10 @@ final class ScreenManager {
         return CFArrayCreate(kCFAllocatorDefault, pointer, array.count, nil)
     }
     
-    
     /// at https://stackoverflow.com/a/8657973/5893286 said that it isn't possible, but i got it
     /// filter small windows
     static func getHiddenWindowsImages() -> [CGImage] {
-        
-        /// https://stackoverflow.com/a/30337008/5893286
-        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
-            assertionFailure()
-            return []
-        }
-        
-        return windowsInfo
+        return windowsInfo()
             .filter {
                 if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
                     let height = boundsDict["Height"]
@@ -343,6 +312,7 @@ final class ScreenManager {
             }.compactMap {
                 $0[kCGWindowNumber as String] as? UInt
             }.compactMap { id -> CFArray in
+                ///reused code: cfarray(from: [id])
                 let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
                 pointer.pointee = UnsafeRawPointer(bitPattern: id)
                 return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
