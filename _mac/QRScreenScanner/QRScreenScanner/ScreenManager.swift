@@ -294,6 +294,8 @@ final class ScreenManager {
     }
     
     
+    /// at https://stackoverflow.com/a/8657973/5893286 said that it isn't possible, but i got it
+    /// filter small images
     static func getHiddenWindowsImages() -> [CGImage] {
         
         /// https://stackoverflow.com/a/30337008/5893286
@@ -303,12 +305,21 @@ final class ScreenManager {
         }
         
         return windowsInfo
-            .compactMap { $0[kCGWindowNumber as String] as? UInt }
-            .compactMap ({ id -> CFArray in
+            .filter {
+                if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
+                    let height = boundsDict["Height"]
+                {
+                    /// 40 is magic number to filter small windows like App Menu (Height = 22)
+                    return height > 40
+                }
+                return false
+            }.compactMap {
+                $0[kCGWindowNumber as String] as? UInt
+            }.compactMap { id -> CFArray in
                 let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
                 pointer.pointee = UnsafeRawPointer(bitPattern: id)
                 return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
-            }).compactMap {
+            }.compactMap {
                 CGImage(windowListFromArrayScreenBounds: .null, windowArray: $0,
                         imageOption: [.boundsIgnoreFraming, .nominalResolution])
         }
