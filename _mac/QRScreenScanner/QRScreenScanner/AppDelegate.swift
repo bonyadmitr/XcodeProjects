@@ -34,8 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // TODO: groupedWindows
         // TODO: visibleWindowsImages, remove get
-//        let window = ScreenManager.combineWindows(for: "Google Chrome")
-//        let w = ScreenManager.combineWindowsByName()
+//        let window = ScreenManager.compositedWindow(for: "Google Chrome")
+//        let w = ScreenManager.compositedWindowsByName()
         //let e = ScreenManager.windowsByName()
         //ScreenManager.getWindowsImages()
         showWindow()
