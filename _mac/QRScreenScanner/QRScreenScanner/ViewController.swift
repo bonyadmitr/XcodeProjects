@@ -90,7 +90,7 @@ class ViewController: NSViewController {
         
         /// call before tableView.addTableColumn
         let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
-        /// 6 is magic number.
+        /// 3 or 6 is magic number. + 1 for new column
         let separatorsWidth = CGFloat((tableView.tableColumns.count + 1) * 3) // 6
         
         let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
