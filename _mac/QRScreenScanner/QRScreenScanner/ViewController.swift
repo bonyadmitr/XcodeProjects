@@ -100,6 +100,10 @@ class ViewController: NSViewController {
         tableView.addTableColumn(column2)
         
         
+        /// first add all columns programmatically and then setup autosave
+        tableView.autosaveName = "historyTableView"
+        tableView.autosaveTableColumns = true
+        
         /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
         let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: false)
         let valueSortDescriptor = NSSortDescriptor(key: TableColumns.value.rawValue, ascending: true)
