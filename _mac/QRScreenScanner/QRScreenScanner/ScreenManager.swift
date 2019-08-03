@@ -232,6 +232,32 @@ final class ScreenManager {
         CGImageDestinationAddImage(destination, image, nil)
         return CGImageDestinationFinalize(destination)
     }
+    
+    static func getWindowList() {
+        
+        /// https://stackoverflow.com/a/30337008/5893286
+        guard let windowsInfo = CGWindowListCopyWindowInfo([.excludeDesktopElements, .optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else {
+            assertionFailure()
+            return
+        }
+        
+        
+        // This just invokes the API as you would if you wanted to grab a screen shot. The equivalent using the UI would be to
+        // enable all windows, turn off "Fit Image Tightly", and then select all windows in the list.
+        let images = windowsInfo
+            .compactMap { $0[kCGWindowNumber as String] as? CGWindowID }
+            .compactMap {
+                CGWindowListCreateImage(.null,
+                                        .optionIncludingWindow,
+                                        $0,
+                                        [.boundsIgnoreFraming,
+                                         .shouldBeOpaque,
+                                         .nominalResolution])
+        }
+        
+        
+
+    }
 }
 
 //import Cocoa

@@ -32,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ScreenManager.allDisplayImages()
 //        ScreenManager.toggleMirroring()
         showWindow()
+        ScreenManager.getWindowList()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
