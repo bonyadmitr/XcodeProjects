@@ -8,11 +8,15 @@
 
 import Foundation
 
+// TODO: get display info. DisplayUtil + DisplayInfo
+// https://github.com/th507/screen-resolution-switcher/blob/master/scres.swift
+
+// TODO: get pixel
+// https://gist.github.com/antimatter15/dc809b81abea21a69f2798ff5d24ca4f
+
+// TODO: test HardwareMirroring
 
 /**
- get display info. DisplayUtil + DisplayInfo
- https://github.com/th507/screen-resolution-switcher/blob/master/scres.swift
- 
  HardwareMirroring
  https://stackoverflow.com/a/41585973/5893286
  
