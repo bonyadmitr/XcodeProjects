@@ -31,8 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ScreenManager.disableHardwareMirroring()
 //        ScreenManager.allDisplayImages()
 //        ScreenManager.toggleMirroring()
+        
+        //ScreenManager.getWindowsImages()
         showWindow()
-        ScreenManager.getWindowList()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -65,8 +66,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// not work
         //window.orderBack(self)
         
-        
-        let qrValues = ScreenManager.allDisplayImages2()
+        //let qrValues = ScreenManager.allDisplayImages2()
+        let qrValues = ScreenManager.getWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         showWindow()
