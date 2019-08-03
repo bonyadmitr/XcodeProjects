@@ -259,8 +259,11 @@ final class ScreenManager {
                                          .nominalResolution])
         }
         
-        
-
+        // TODO: filter window
+        //import AppKit
+        //kCGWindowOwnerPID
+        //https://stackoverflow.com/a/48030215/5893286
+        //let q = NSWorkspace.shared.runningApplications.first(where: { $0.bundleIdentifier == "" })?.processIdentifier
     }
 }
 
