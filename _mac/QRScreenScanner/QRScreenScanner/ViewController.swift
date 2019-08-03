@@ -86,13 +86,14 @@ class ViewController: NSViewController {
 //        checkBox.title = ""
 ////        checkBox.alignment = .right
 //        column1.dataCell = checkBox
-        
-        
         tableView.addTableColumn(column1)
         
         let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
+        
+        /// call before tableView.addTableColumn
         let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
         column2.width = view.bounds.width - allWithoutLastColumnsWidth - 6
+        
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
