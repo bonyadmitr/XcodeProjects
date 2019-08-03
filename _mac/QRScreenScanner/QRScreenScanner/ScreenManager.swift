@@ -249,7 +249,7 @@ final class ScreenManager {
         return CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] ?? []
     }
     
-    static func getWindowsImages() -> [CGImage] {
+    static func visibleWindowsImages() -> [CGImage] {
         return windowsInfo()
             .filter {
                 if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
