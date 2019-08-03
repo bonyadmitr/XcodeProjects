@@ -32,6 +32,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        ScreenManager.allDisplayImages()
 //        ScreenManager.toggleMirroring()
         
+        // TODO: groupedWindows
+        // TODO: visibleWindowsImages, remove get
+//        let window = ScreenManager.combineWindows(for: "Google Chrome")
+//        let w = ScreenManager.combineWindowsByName()
+        //let e = ScreenManager.windowsByName()
         //ScreenManager.getWindowsImages()
         showWindow()
     }
