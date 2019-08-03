@@ -31,11 +31,10 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reloadDataSource()
-        
         UserDefaults.standard.addObserver(self, forKeyPath: "historyDataSource", options: .new, context: nil)
         
         addTableView()
+        reloadDataSource()
     }
     
     deinit {
@@ -46,6 +45,7 @@ class ViewController: NSViewController {
         if let tableDataSource = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
             self.tableDataSource = tableDataSource
         }
+        tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
         tableView.reloadData()
     }
     
@@ -69,13 +69,30 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        /// https://stackoverflow.com/a/30262248/5893286
+//        tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+//        tableView.sizeLastColumnToFit()
+        
         let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.date.rawValue))
+        column1.isEditable = false
         column1.width = 100
+        column1.minWidth = 50
+        column1.maxWidth = 200
+//        column1.resizingMask = .autoresizingMask
         column1.title = TableColumns.date.title
+        
+//        let checkBox = NSButtonCell()
+//        checkBox.setButtonType(.switch)
+//        checkBox.title = ""
+////        checkBox.alignment = .right
+//        column1.dataCell = checkBox
+        
+        
         tableView.addTableColumn(column1)
         
         let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
-        column2.width = view.frame.width - 100
+        let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
+        column2.width = view.bounds.width - allWithoutLastColumnsWidth - 6
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
@@ -163,10 +180,6 @@ extension ViewController: NSTableViewDataSource {
             return tableDataSource[row][TableColumns.value.rawValue]
         }
     }
-    
-    //    func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-    //        <#code#>
-    //    }
     
     //    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     //        return nil
