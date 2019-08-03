@@ -288,6 +288,42 @@ final class ScreenManager {
         }
     }
     
+    static func windowsByName() -> [String: [CGImage]] {
+        let systemWindows = ["Notification Center", "TISwitcher", "Legacy Color Picker Extensions", "Dock", "Window Server", ]
+        
+        let windowsInfo = self.windowsInfo()
+            .filter { /// filter system windows
+                if let appName = $0[kCGWindowOwnerName as String] as? String {
+                    return !systemWindows.contains(appName)
+                }
+                return true
+            }.filter { /// filter small windows
+                if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
+                    let height = boundsDict["Height"]
+                {
+                    /// 22 is App Menu height
+                    // TODO: need to check on other resolution
+                    // TODO: https://stackoverflow.com/a/30311638/5893286
+                    return height > 22
+                }
+                return false
+        }
+        return Dictionary(grouping: windowsInfo) {
+            return $0[kCGWindowOwnerName as String] as? String ?? "unknown"
+        }.compactMapValues { infoArray -> [UInt] in
+            infoArray.compactMap { $0[kCGWindowNumber as String] as? UInt }
+        }.compactMapValues { windowIds -> [CGImage] in
+            windowIds
+                .compactMap {
+                    cfarray(from: [$0])
+                }.compactMap {
+                    CGImage(windowListFromArrayScreenBounds: .null,
+                            windowArray: $0,
+                            imageOption: [.boundsIgnoreFraming, .nominalResolution])
+            }
+        }
+    }
+    
     static func combineWindows(for appName: String) -> CGImage? {
         let windowIds = windowsInfo()
             .filter { $0[kCGWindowOwnerName as String] as? String == appName }
