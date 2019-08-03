@@ -288,6 +288,16 @@ final class ScreenManager {
         }
     }
     
+    static func combineWindows(for appName: String) -> CGImage? {
+        let windowIds = windowsInfo()
+            .filter { $0[kCGWindowOwnerName as String] as? String == appName }
+            .compactMap { $0[kCGWindowNumber as String] as? UInt }
+        
+        return CGImage(windowListFromArrayScreenBounds: .null,
+                       windowArray: cfarray(from: windowIds),
+                       imageOption: [.boundsIgnoreFraming, .nominalResolution])
+    }
+    
     /// https://stackoverflow.com/a/46652374/5893286
     static private func cfarray(from array: [UInt]) -> CFArray {
         let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: array.count)
