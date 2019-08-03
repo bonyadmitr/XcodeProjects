@@ -84,6 +84,7 @@ class ViewController: NSViewController {
     /// https://www.raywenderlich.com/2814-how-to-use-cocoa-bindings-and-core-data-in-a-mac-app
     /// https://www.raywenderlich.com/921-cocoa-bindings-on-macos
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaBindings/Concepts/WhatAreBindings.html
+    /// http://www.knowstack.com/swift-create-nstableview-programatically/
     ///
     /// not added tableView.sortDescriptors, there is no arrow on any column, but sorting is working itself.
     private func addTableViewByBinding() {
