@@ -247,43 +247,25 @@ final class ScreenManager {
             assertionFailure()
             return []
         }
-//        kCGWindowListOptionIncludingWindow
         
-        //Dictionary(grouping
-        // && $0[kCGWindowName as String] as? String == "QR Code Generator"
-        let googleChromeWindowIds = windowsInfo
-            .filter({ $0[kCGWindowOwnerName as String] as? String == "Google Chrome" })
-            .compactMap { $0[kCGWindowNumber as String] as? CGWindowID }
-        
-        /// https://stackoverflow.com/a/46652374/5893286
-        let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: googleChromeWindowIds.count)
-        for (index, window) in googleChromeWindowIds.enumerated() {
-            pointer[index] = UnsafeRawPointer(bitPattern: UInt(window))
-        }
-        let array: CFArray = CFArrayCreate(kCFAllocatorDefault, pointer, googleChromeWindowIds.count, nil)
-        
-//        let googleChromeImage: CGImage? = nil
-        let googleChromeImage = CGImage(windowListFromArrayScreenBounds: .null, windowArray: array,
-                imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
-        
-        // This just invokes the API as you would if you wanted to grab a screen shot. The equivalent using the UI would be to
-        // enable all windows, turn off "Fit Image Tightly", and then select all windows in the list.
-        let images = windowsInfo
-            .compactMap { $0[kCGWindowNumber as String] as? CGWindowID }
-            .compactMap {
-                CGImage(windowListFromArrayScreenBounds: .null, windowArray: [$0] as CFArray,
-                        imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
-//                CGWindowListCreateImage(.null,
-//                                        .optionIncludingWindow,
-//                                        $0,
-//                                        [.boundsIgnoreFraming,
-//                                         .shouldBeOpaque,
-//                                         .nominalResolution])
-        }
-        if let googleChromeImage = googleChromeImage {
-            return [googleChromeImage] + images
-        } else {
-            return images
+        return windowsInfo
+            .filter {
+                if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
+                    let height = boundsDict["Height"]
+                {
+                    /// 40 is magic number to filter small windows like App Menu (Height = 22)
+                    return height > 40
+                }
+                return false
+            }.compactMap {
+                $0[kCGWindowNumber as String] as? CGWindowID
+            }.compactMap {
+                CGWindowListCreateImage(.null,
+                                        .optionIncludingWindow,
+                                        $0,
+                                        [.boundsIgnoreFraming,
+                                         .shouldBeOpaque,
+                                         .nominalResolution])
         }
         
         // TODO: filter window
@@ -293,9 +275,54 @@ final class ScreenManager {
         //let q = NSWorkspace.shared.runningApplications.first(where: { $0.bundleIdentifier == "" })?.processIdentifier
     }
     
+    static func combineWindowsByName() -> [String: CGImage] {
+        
+        /// https://stackoverflow.com/a/30337008/5893286
+        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
+            assertionFailure()
+            return [:]
+        }
+        
+        return Dictionary(grouping: windowsInfo) {
+            return $0[kCGWindowOwnerName as String] as? String ?? "unknown"
+        }.compactMapValues { infoArray -> [UInt] in
+            infoArray.compactMap { $0[kCGWindowNumber as String] as? UInt }
+        }.compactMapValues { windowIds -> CGImage? in
+            CGImage(windowListFromArrayScreenBounds: .null,
+                    windowArray: cfarray(from: windowIds),
+                    imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
+        }
+    }
+    
+    static func combineWindows(for appName: String) -> CGImage? {
+        
+        /// https://stackoverflow.com/a/30337008/5893286
+        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
+            assertionFailure()
+            return nil
+        }
+        
+        let windowIds = windowsInfo
+            .filter { $0[kCGWindowOwnerName as String] as? String == appName }
+            .compactMap { $0[kCGWindowNumber as String] as? UInt }
+        
+        return CGImage(windowListFromArrayScreenBounds: .null,
+                       windowArray: cfarray(from: windowIds),
+                       imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
+    }
+    
+    /// https://stackoverflow.com/a/46652374/5893286
+    static private func cfarray(from array: [UInt]) -> CFArray {
+        let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: array.count)
+        for (index, item) in array.enumerated() {
+            pointer[index] = UnsafeRawPointer(bitPattern: item)
+        }
+        return CFArrayCreate(kCFAllocatorDefault, pointer, array.count, nil)
+    }
+    
     
     /// at https://stackoverflow.com/a/8657973/5893286 said that it isn't possible, but i got it
-    /// filter small images
+    /// filter small windows
     static func getHiddenWindowsImages() -> [CGImage] {
         
         /// https://stackoverflow.com/a/30337008/5893286
