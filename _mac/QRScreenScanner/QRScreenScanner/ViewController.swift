@@ -94,6 +94,7 @@ class ViewController: NSViewController {
         let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
         column2.width = view.bounds.width - allWithoutLastColumnsWidth - 6
         
+        column2.isEditable = false
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
@@ -194,8 +195,9 @@ extension ViewController: NSTableViewDelegate {
     }
 }
 
-/// https://stackoverflow.com/a/42313342/5893286
 extension MutableCollection where Self : RandomAccessCollection {
+    
+    /// https://stackoverflow.com/a/42313342/5893286
     /// Sort `self` in-place using criteria stored in a NSSortDescriptors array
     public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
         sort { by:
@@ -210,6 +212,18 @@ extension MutableCollection where Self : RandomAccessCollection {
         }
     }
 }
+
+//extension Array {
+//
+//    /// https://stackoverflow.com/a/34973936/5893286
+//    public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
+//        if let tempArray = (self as NSArray).sortedArray(using: theSortDescs) as? [Element] {
+//            self = tempArray
+//        } else {
+//            assertionFailure()
+//        }
+//    }
+//}
 
 final class CodeDetector {
     
