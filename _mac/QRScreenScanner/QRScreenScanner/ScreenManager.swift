@@ -17,6 +17,9 @@ import Foundation
 // TODO: test HardwareMirroring
 
 /**
+ apple doc
+ https://developer.apple.com/documentation/coregraphics/quartz_window_services
+ 
  HardwareMirroring
  https://stackoverflow.com/a/41585973/5893286
  
@@ -255,7 +258,7 @@ final class ScreenManager {
                                         .optionIncludingWindow,
                                         $0,
                                         [.boundsIgnoreFraming,
-                                         .shouldBeOpaque,
+//                                         .shouldBeOpaque,
                                          .nominalResolution])
         }
         
