@@ -88,15 +88,17 @@ class ViewController: NSViewController {
 //        column1.dataCell = checkBox
         tableView.addTableColumn(column1)
         
-        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
-        
         /// call before tableView.addTableColumn
         let allWithoutLastColumnsWidth: CGFloat = tableView.tableColumns.reduce(0, { $0 + $1.width })
-        column2.width = view.bounds.width - allWithoutLastColumnsWidth - 6
+        /// 6 is magic number.
+        let separatorsWidth = CGFloat((tableView.tableColumns.count + 1) * 3) // 6
         
+        let column2 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.value.rawValue))
+        column2.width = view.bounds.width - allWithoutLastColumnsWidth - separatorsWidth
         column2.isEditable = false
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
+        
         
         /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
         let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: false)
