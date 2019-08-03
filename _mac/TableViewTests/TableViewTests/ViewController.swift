@@ -8,6 +8,8 @@
 
 import Cocoa
 
+// TODO: check
+// https://gist.github.com/sooop/3c964900d429516ba48bd75050d0de0a
 class ViewController: NSViewController {
     
     enum TableColumns: String {
