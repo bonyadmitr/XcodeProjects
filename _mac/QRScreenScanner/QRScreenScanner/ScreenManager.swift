@@ -243,23 +243,47 @@ final class ScreenManager {
     static func getWindowsImages() -> [CGImage] {
         
         /// https://stackoverflow.com/a/30337008/5893286
-        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] else {
+        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
             assertionFailure()
             return []
         }
+//        kCGWindowListOptionIncludingWindow
         
+        //Dictionary(grouping
+        // && $0[kCGWindowName as String] as? String == "QR Code Generator"
+        let googleChromeWindowIds = windowsInfo
+            .filter({ $0[kCGWindowOwnerName as String] as? String == "Google Chrome" })
+            .compactMap { $0[kCGWindowNumber as String] as? CGWindowID }
+        
+        /// https://stackoverflow.com/a/46652374/5893286
+        let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: googleChromeWindowIds.count)
+        for (index, window) in googleChromeWindowIds.enumerated() {
+            pointer[index] = UnsafeRawPointer(bitPattern: UInt(window))
+        }
+        let array: CFArray = CFArrayCreate(kCFAllocatorDefault, pointer, googleChromeWindowIds.count, nil)
+        
+//        let googleChromeImage: CGImage? = nil
+        let googleChromeImage = CGImage(windowListFromArrayScreenBounds: .null, windowArray: array,
+                imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
         
         // This just invokes the API as you would if you wanted to grab a screen shot. The equivalent using the UI would be to
         // enable all windows, turn off "Fit Image Tightly", and then select all windows in the list.
-        return windowsInfo
+        let images = windowsInfo
             .compactMap { $0[kCGWindowNumber as String] as? CGWindowID }
             .compactMap {
-                CGWindowListCreateImage(.null,
-                                        .optionIncludingWindow,
-                                        $0,
-                                        [.boundsIgnoreFraming,
+                CGImage(windowListFromArrayScreenBounds: .null, windowArray: [$0] as CFArray,
+                        imageOption: [.boundsIgnoreFraming, .shouldBeOpaque, .nominalResolution])
+//                CGWindowListCreateImage(.null,
+//                                        .optionIncludingWindow,
+//                                        $0,
+//                                        [.boundsIgnoreFraming,
 //                                         .shouldBeOpaque,
-                                         .nominalResolution])
+//                                         .nominalResolution])
+        }
+        if let googleChromeImage = googleChromeImage {
+            return [googleChromeImage] + images
+        } else {
+            return images
         }
         
         // TODO: filter window
@@ -267,6 +291,28 @@ final class ScreenManager {
         //kCGWindowOwnerPID
         //https://stackoverflow.com/a/48030215/5893286
         //let q = NSWorkspace.shared.runningApplications.first(where: { $0.bundleIdentifier == "" })?.processIdentifier
+    }
+    
+    
+    static func getHiddenWindowsImages() -> [CGImage] {
+        
+        /// https://stackoverflow.com/a/30337008/5893286
+        guard let windowsInfo = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] else {
+            assertionFailure()
+            return []
+        }
+        
+        return windowsInfo
+            .compactMap { $0[kCGWindowNumber as String] as? UInt }
+            .compactMap ({ id -> CFArray in
+                let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
+                pointer.pointee = UnsafeRawPointer(bitPattern: id)
+                return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
+            }).compactMap {
+                CGImage(windowListFromArrayScreenBounds: .null, windowArray: $0,
+                        imageOption: [.boundsIgnoreFraming, .nominalResolution])
+        }
+        
     }
 }
 

@@ -67,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //window.orderBack(self)
         
         //let qrValues = ScreenManager.allDisplayImages2()
-        let qrValues = ScreenManager.getWindowsImages()
+        let qrValues = ScreenManager.getHiddenWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         showWindow()
