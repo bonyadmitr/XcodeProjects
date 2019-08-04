@@ -8,32 +8,32 @@
 
 import Cocoa
 
-final class MainMenuManger {
+final class MainMenuManager {
     
-    static let shared = MainMenuManger()
+    static let shared = MainMenuManager()
     
     func setupMenu() {
-        let applicationSubmenu = NSMenu(title: "Application")
-        //applicationSubmenu.autoenablesItems = false
+        let appMenu = NSMenu(title: "App")
+        //appMenu.autoenablesItems = false
         
-        applicationSubmenu.addItem(withTitle: "About",
-                                   action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
-                                   keyEquivalent: "a")
+        appMenu.addItem(withTitle: "About",
+                        action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
+                        keyEquivalent: "a")
         
-        applicationSubmenu.addItem(withTitle: "Quit",
-                                   action: #selector(NSApplication.terminate(_:)),
-                                   keyEquivalent: "q")
+        appMenu.addItem(withTitle: "Quit",
+                        action: #selector(NSApplication.terminate(_:)),
+                        keyEquivalent: "q")
         
 //        let aboutMenuItem = NSMenuItem(title: "About 2", action: #selector(about), keyEquivalent: "z")
 //        aboutMenuItem.target = self
-//        applicationSubmenu.addItem(aboutMenuItem)
+//        appMenu.addItem(aboutMenuItem)
         
-//        applicationSubmenu.addItem(withTitle: "About 2",
-//                                   action: #selector(about),
-//                                   keyEquivalent: "z").target = self
+//        appMenu.addItem(withTitle: "About 2",
+//                        action: #selector(about),
+//                        keyEquivalent: "z").target = self
         
         let mainMenu = NSMenu(title: "MainMenu")
-        mainMenu.addSubmenu(menu: applicationSubmenu)
+        mainMenu.addSubmenu(menu: appMenu)
         
         //let editMenu = mainMenu.addSubmenu(title: "Edit")
         
@@ -79,7 +79,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         //let e = ScreenManager.windowsByName()
         //ScreenManager.visibleWindowsImages()
         
-        MainMenuManger.shared.setupMenu()
+        MainMenuManager.shared.setupMenu()
         showWindow()
         statusItem = createStatusItem()
     }
