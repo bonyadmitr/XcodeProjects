@@ -65,9 +65,75 @@ extension NSMenu {
     }
 }
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+//private var statusItem: NSStatusItem?
+
+final class StatusManager {
     
-    private var statusItem: NSStatusItem?
+    static let shared = StatusManager()
+    
+    private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    
+    func setupStatusItem() {
+//        statusItem = createStatusItem()
+        guard let button = statusItem.button else {
+            assertionFailure("system error. try statusItem.title")
+            return
+        }
+        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
+        button.title = "QR"
+        button.action = #selector(clickStatusItem)
+        button.target = self
+    }
+    
+    /// without storyboard can be create by lazy var + `_ = statusItem`.
+    /// otherwise will be errors "0 is not a valid connection ID".
+    /// https://habr.com/ru/post/447754/
+//    func createStatusItem() -> NSStatusItem {
+//        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+//
+//        guard let button = statusItem.button else {
+//            assertionFailure("system error. try statusItem.title")
+//            return statusItem
+//        }
+//        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
+//        button.title = "QR"
+//        button.action = #selector(clickStatusItem)
+//        button.target = self
+//        return statusItem
+//    }
+    
+    @objc private func clickStatusItem() {
+        
+        //        self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
+        //
+        //        window.makeKeyAndOrderFront(nil)
+        /// addition if need
+        //NSApp.activate(ignoringOtherApps: true)
+        /// not work
+        //window.orderBack(self)
+        
+        //let qrValues = ScreenManager.allDisplayImages2()
+        let qrValues = ScreenManager.getHiddenWindowsImages()
+            .flatMap { CodeDetector.shared.readQR(from: $0) }
+        saveQRValues(qrValues)
+//        showWindow()
+    }
+    
+    private func saveQRValues(_ qrValues: [String]) {
+        let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
+            [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]
+        }
+        let tableDataSource: [HistoryDataSource]
+        if let tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
+            tableDataSource = tableDataSourceOld + qrDataSources
+        } else {
+            tableDataSource = qrDataSources
+        }
+        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
+    }
+}
+
+final class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 //        ScreenManager.disableHardwareMirroring()
@@ -81,7 +147,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         MainMenuManager.shared.setupMenu()
         showWindow()
-        statusItem = createStatusItem()
+        StatusManager.shared.setupStatusItem()
     }
     
 //    private func setupMenu() {
@@ -95,22 +161,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 //        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
 //        NSApp.mainMenu = mainMenu
 //    }
-    
-    /// without storyboard can be create by lazy var + `_ = statusItem`.
-    /// otherwise will be errors "0 is not a valid connection ID".
-    /// https://habr.com/ru/post/447754/
-    private func createStatusItem() -> NSStatusItem {
-        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-
-        guard let button = statusItem.button else {
-            assertionFailure("system error. try statusItem.title")
-            return statusItem
-        }
-        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-        button.title = "QR"
-        button.action = #selector(clickStatusItem)
-        return statusItem
-    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
@@ -134,23 +184,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         return window
     }()
-
-    @objc private func clickStatusItem() {
-        
-//        self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
-//
-//        window.makeKeyAndOrderFront(nil)
-        /// addition if need
-        //NSApp.activate(ignoringOtherApps: true)
-        /// not work
-        //window.orderBack(self)
-        
-        //let qrValues = ScreenManager.allDisplayImages2()
-        let qrValues = ScreenManager.getHiddenWindowsImages()
-            .flatMap { CodeDetector.shared.readQR(from: $0) }
-        saveQRValues(qrValues)
-        showWindow()
-    }
     
     private func showWindow() {
         
@@ -168,19 +201,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         /// without reference it will be deinited
         //        self.mainWindowController = mainWindowController
-    }
-    
-    private func saveQRValues(_ qrValues: [String]) {
-        let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
-            [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]
-        }
-        let tableDataSource: [HistoryDataSource]
-        if let tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
-            tableDataSource = tableDataSourceOld + qrDataSources
-        } else {
-            tableDataSource = qrDataSources
-        }
-        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
     }
     
     /// to open app after close button click we only hide it
