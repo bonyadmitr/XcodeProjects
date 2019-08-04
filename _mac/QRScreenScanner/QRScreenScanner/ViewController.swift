@@ -236,6 +236,7 @@ extension MutableCollection where Self : RandomAccessCollection {
 //    }
 //}
 
+@available(OSX 10.10, *)
 final class CodeDetector {
     
     static let shared = CodeDetector()

@@ -49,8 +49,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             assertionFailure("system error. try statusItem.title")
             return statusItem
         }
-        button.title = "QR"
         //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
+        button.title = "QR"
         button.action = #selector(clickStatusItem)
         return statusItem
     }
