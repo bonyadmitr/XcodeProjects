@@ -8,13 +8,23 @@
 
 import Cocoa
 
-final class MainMenuManager {
+final class MenuManager {
     
-    static let shared = MainMenuManager()
+    static let shared = MenuManager()
+    
+    private let mainMenu = NSMenu(title: "MainMenu")
     
     func setupMenu() {
+        addAppMenu()
+        //testMenu()
+        
+        /// call
+        NSApp.mainMenu = mainMenu
+    }
+    
+    /// add App Menu first
+    private func addAppMenu() {
         let appMenu = NSMenu(title: "App")
-        //appMenu.autoenablesItems = false
         
         appMenu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
@@ -24,26 +34,24 @@ final class MainMenuManager {
                         action: #selector(NSApplication.terminate(_:)),
                         keyEquivalent: "q")
         
-//        let aboutMenuItem = NSMenuItem(title: "About 2", action: #selector(about), keyEquivalent: "z")
-//        aboutMenuItem.target = self
-//        appMenu.addItem(aboutMenuItem)
-        
-//        appMenu.addItem(withTitle: "About 2",
-//                        action: #selector(about),
-//                        keyEquivalent: "z").target = self
-        
-        let mainMenu = NSMenu(title: "MainMenu")
         mainMenu.addSubmenu(menu: appMenu)
-        
-        //let editMenu = mainMenu.addSubmenu(title: "Edit")
-        
-        NSApp.mainMenu = mainMenu
     }
     
+//    private func testMenu() {
+//        let editMenu = mainMenu.createSubmenu(title: "Edit")
+//        //editMenu.autoenablesItems = false
+//
+//        let aboutMenuItem = NSMenuItem(title: "About 1", action: #selector(about), keyEquivalent: "z")
+//        aboutMenuItem.target = self
+//        editMenu.addItem(aboutMenuItem)
+//
+//        editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
+//    }
+//
 //    @objc private func quit() {
 //        NSApp.terminate(nil)
 //    }
-
+//
 //    @objc private func about() {
 //        NSApp.orderFrontStandardAboutPanel(self)
 //    }
@@ -51,8 +59,9 @@ final class MainMenuManager {
 
 extension NSMenu {
     
-    /// for title "Edit" will add emojy menuItem. it bcz of `addItem(withTitle: "Edit"`
-    func addSubmenu(title: String) -> NSMenu {
+    /// for title "Edit" will add emojy menuItem. it bcz of `addItem(withTitle: "Edit"`.
+    /// setSubmenu must be called before `NSApp.mainMenu = mainMenu` to add emojy menuItem.
+    func createSubmenu(title: String) -> NSMenu {
         let menu = NSMenu(title: title)
         let menuItem = addItem(withTitle: title, action: nil, keyEquivalent: "")
         setSubmenu(menu, for: menuItem)
@@ -72,7 +81,7 @@ final class App {
     static let shared = App()
     
     let statusManager = StatusManager()
-    let menuManager = MainMenuManager()
+    let menuManager = MenuManager()
     
     private lazy var window: NSWindow = {
         let window = NSWindow(contentViewController: ViewController())
