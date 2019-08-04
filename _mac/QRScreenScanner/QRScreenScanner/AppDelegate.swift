@@ -39,7 +39,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.mainMenu = mainMenu
     }
     
-    /// can be create by lazy var + `_ = statusItem`
+    /// without storyboard can be create by lazy var + `_ = statusItem`.
+    /// otherwise will be errors "0 is not a valid connection ID".
     /// https://habr.com/ru/post/447754/
     private func createStatusItem() -> NSStatusItem {
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
