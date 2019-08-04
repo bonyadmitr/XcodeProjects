@@ -8,7 +8,6 @@
 
 import Cocoa
 
-/// NSMenu(title: "Edit") will have emojy menuItem
 final class MainMenuManger {
     
     static let shared = MainMenuManger()
@@ -34,11 +33,9 @@ final class MainMenuManger {
 //                                   keyEquivalent: "z").target = self
         
         let mainMenu = NSMenu(title: "MainMenu")
-//        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
-//        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
         mainMenu.addSubmenu(menu: applicationSubmenu)
         
-        let editMenu = mainMenu.addSubmenu(title: "Edit")
+        //let editMenu = mainMenu.addSubmenu(title: "Edit")
         
         NSApp.mainMenu = mainMenu
     }
@@ -53,6 +50,8 @@ final class MainMenuManger {
 }
 
 extension NSMenu {
+    
+    /// for title "Edit" will add emojy menuItem. it bcz of `addItem(withTitle: "Edit"`
     func addSubmenu(title: String) -> NSMenu {
         let menu = NSMenu(title: title)
         let menuItem = addItem(withTitle: title, action: nil, keyEquivalent: "")
