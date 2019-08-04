@@ -37,6 +37,11 @@ class ViewController: NSViewController {
         reloadDataSource()
     }
     
+    override func loadView() {
+        let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
+        view = NSView(frame: frame)
+    }
+    
     deinit {
         UserDefaults.standard.removeObserver(self, forKeyPath: "historyDataSource")
     }

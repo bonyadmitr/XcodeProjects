@@ -8,25 +8,10 @@
 
 import Cocoa
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
     
-    /// https://habr.com/ru/post/447754/
-    /// NSStatusItem.variableLength
-    private let statusItem: NSStatusItem = {
-        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        
-        guard let button = statusItem.button else {
-            assertionFailure("system error. try statusItem.title")
-            return statusItem
-        }
-        button.title = "QR"
-        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-        button.action = #selector(clickStatusItem)
-        
-        return statusItem
-    }()
-
+    private var statusItem: NSStatusItem?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 //        ScreenManager.disableHardwareMirroring()
 //        ScreenManager.allDisplayImages()
@@ -36,7 +21,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        let w = ScreenManager.compositedWindowsByName()
         //let e = ScreenManager.windowsByName()
         //ScreenManager.visibleWindowsImages()
+        
+        setupMenu()
         showWindow()
+        statusItem = createStatusItem()
+    }
+    
+    private func setupMenu() {
+        let mainMenu = NSMenu(title: "MainMenu")
+        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
+        let applicationSubmenu = NSMenu(title: "Application")
+        let quitMenuItem = applicationSubmenu.addItem(withTitle: "Quit",
+                                                      action: #selector(NSApplication.terminate),
+                                                      keyEquivalent: "q")
+        quitMenuItem.target = NSApp
+        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
+        NSApp.mainMenu = mainMenu
+    }
+    
+    /// can be create by lazy var + `_ = statusItem`
+    /// https://habr.com/ru/post/447754/
+    private func createStatusItem() -> NSStatusItem {
+        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+
+        guard let button = statusItem.button else {
+            assertionFailure("system error. try statusItem.title")
+            return statusItem
+        }
+        button.title = "QR"
+        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
+        button.action = #selector(clickStatusItem)
+        return statusItem
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -45,18 +60,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private lazy var window: NSWindow? = {
         /// if you have error "doesn't contain a view controller with identifier" save storyboard manually cmd+s
-        let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
-        let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
-        
-        guard let mainWindowController = mainStoryboard.instantiateController(withIdentifier: windowIdentifier) as? NSWindowController else {
-            assertionFailure()
-            return nil
-        }
-        
-        /// instead of "nil" can be "self"
-        mainWindowController.showWindow(nil)
-        
-        return mainWindowController.window
+//        let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
+//        let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
+//
+//        guard let mainWindowController = mainStoryboard.instantiateController(withIdentifier: windowIdentifier) as? NSWindowController else {
+//            assertionFailure()
+//            return nil
+//        }
+//
+//        /// instead of "nil" can be "self"
+//        mainWindowController.showWindow(nil)
+//
+//        return mainWindowController.window
+        let window = NSWindow(contentViewController: ViewController())
+        window.center()
+        return window
     }()
 
     @objc private func clickStatusItem() {

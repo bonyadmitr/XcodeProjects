@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
+		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
-		CEE5E1C422E6DEAB00B54D40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C222E6DEAB00B54D40 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CEE5E1C322E6DEAB00B54D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEE5E1C522E6DEAC00B54D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QRScreenScanner.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,10 +56,10 @@
 			isa = PBXGroup;
 			children = (
 				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
+				CEAD356B22F6AB34002CC59E /* main.swift */,
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
 				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
-				CEE5E1C222E6DEAB00B54D40 /* Main.storyboard */,
 				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
 				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
 			);
@@ -125,7 +125,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */,
-				CEE5E1C422E6DEAB00B54D40 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,22 +137,12 @@
 			files = (
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
+				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CEE5E1C222E6DEAB00B54D40 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEE5E1C322E6DEAB00B54D40 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEE5E1C722E6DEAC00B54D40 /* Debug */ = {
