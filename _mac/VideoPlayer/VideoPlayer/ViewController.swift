@@ -91,20 +91,20 @@ final class VideoPlayerView: NSView {
     }
     
     private func loadFile() {
-        guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
-            assertionFailure()
-            return
-        }
+//        guard let downloadsDirectoryUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
+//            assertionFailure()
+//            return
+//        }
         
-        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
+//        let filePath = downloadsDirectoryUrl.appendingPathComponent("Hellsing/Hellsing_01.mkv").path
         //        let filePath = downloadsDirectoryUrl.appendingPathComponent("06. Аквамен (2013) [IMAX] BDRip 1080p [HEVC] 10 bit.mkv").path
         
         /// don't fogget to add to "Copy Bundle Resources"
         /// https://stackoverflow.com/a/43129166/5893286
-        //        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
-        //            assertionFailure()
-        //            return
-        //        }
+        guard let filePath = Bundle.main.path(forResource: "video_test.mp4", ofType: nil) else {
+            assertionFailure()
+            return
+        }
         
         //        guard let url = URL(fileURLWithPath: filePath.path) else {
         //            assertionFailure()

@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
+        /// if you have error "doesn't contain a view controller with identifier" save storyboard manually cmd+s
         let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
         let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
         
@@ -25,11 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         /// instead of "nil" can be "self"
         mainWindowController.showWindow(nil)
-        mainWindowController.window?.makeKeyAndOrderFront(nil)
+        
+        let window = mainWindowController.window
+        window?.makeKeyAndOrderFront(nil)
         
         /// to fix frame of closed window
-        mainWindowController.window?.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
-        mainWindowController.window?.center()
+        window?.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
+        window?.center()
         
         /// without reference it will be deinited
         self.mainWindowController = mainWindowController
