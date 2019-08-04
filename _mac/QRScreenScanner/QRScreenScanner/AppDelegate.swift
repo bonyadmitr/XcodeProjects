@@ -67,6 +67,48 @@ extension NSMenu {
 
 //private var statusItem: NSStatusItem?
 
+final class App {
+    
+    static let shared = App()
+    
+    let statusManager = StatusManager()
+    let menuManager = MainMenuManager()
+    
+    private lazy var window: NSWindow = {
+        let window = NSWindow(contentViewController: ViewController())
+        window.center()
+        return window
+    }()
+    
+    func start() {
+        //        ScreenManager.disableHardwareMirroring()
+        //        ScreenManager.allDisplayImages()
+        //        ScreenManager.toggleMirroring()
+        
+        //        let window = ScreenManager.compositedWindow(for: "Google Chrome")
+        //        let w = ScreenManager.compositedWindowsByName()
+        //let e = ScreenManager.windowsByName()
+        //ScreenManager.visibleWindowsImages()
+        
+        
+        menuManager.setupMenu()
+        statusManager.setupStatusItem()
+        showWindow()
+    }
+    
+    func showWindow() {
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+        
+        /// to fix frame of closed window
+        //        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
+        //        window.center()
+        
+        /// without reference it will be deinited
+        //        self.mainWindowController = mainWindowController
+    }
+}
+
 final class StatusManager {
     
     static let shared = StatusManager()
@@ -116,7 +158,7 @@ final class StatusManager {
         let qrValues = ScreenManager.getHiddenWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
-//        showWindow()
+        App.shared.showWindow()
     }
     
     private func saveQRValues(_ qrValues: [String]) {
@@ -136,72 +178,10 @@ final class StatusManager {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-//        ScreenManager.disableHardwareMirroring()
-//        ScreenManager.allDisplayImages()
-//        ScreenManager.toggleMirroring()
-        
-//        let window = ScreenManager.compositedWindow(for: "Google Chrome")
-//        let w = ScreenManager.compositedWindowsByName()
-        //let e = ScreenManager.windowsByName()
-        //ScreenManager.visibleWindowsImages()
-        
-        MainMenuManager.shared.setupMenu()
-        showWindow()
-        StatusManager.shared.setupStatusItem()
+        App.shared.start()
     }
-    
-//    private func setupMenu() {
-//        let mainMenu = NSMenu(title: "MainMenu")
-//        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
-//        let applicationSubmenu = NSMenu(title: "Application")
-//        let quitMenuItem = applicationSubmenu.addItem(withTitle: "Quit",
-//                                                      action: #selector(NSApplication.terminate),
-//                                                      keyEquivalent: "q")
-//        quitMenuItem.target = NSApp
-//        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
-//        NSApp.mainMenu = mainMenu
-//    }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-    
-    private lazy var window: NSWindow? = {
-        /// if you have error "doesn't contain a view controller with identifier" save storyboard manually cmd+s
-//        let mainStoryboard = NSStoryboard(name: "Main", bundle: nil)
-//        let windowIdentifier = NSStoryboard.SceneIdentifier("MainWindow")
-//
-//        guard let mainWindowController = mainStoryboard.instantiateController(withIdentifier: windowIdentifier) as? NSWindowController else {
-//            assertionFailure()
-//            return nil
-//        }
-//
-//        /// instead of "nil" can be "self"
-//        mainWindowController.showWindow(nil)
-//
-//        return mainWindowController.window
-        let window = NSWindow(contentViewController: ViewController())
-        window.center()
-        return window
-    }()
-    
-    private func showWindow() {
-        
-        guard let window = self.window else {
-            assertionFailure()
-            return
-        }
-        
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-        
-        /// to fix frame of closed window
-        //        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
-        //        window.center()
-        
-        /// without reference it will be deinited
-        //        self.mainWindowController = mainWindowController
-    }
+    func applicationWillTerminate(_ aNotification: Notification) {}
     
     /// to open app after close button click we only hide it
     /// https://stackoverflow.com/a/43332520
