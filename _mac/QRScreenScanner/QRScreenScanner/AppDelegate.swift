@@ -8,6 +8,64 @@
 
 import Cocoa
 
+/// NSMenu(title: "Edit") will have emojy menuItem
+final class MainMenuManger {
+    
+    static let shared = MainMenuManger()
+    
+    func setupMenu() {
+        let applicationSubmenu = NSMenu(title: "Application")
+        //applicationSubmenu.autoenablesItems = false
+        
+        applicationSubmenu.addItem(withTitle: "About",
+                                   action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
+                                   keyEquivalent: "a")
+        
+        applicationSubmenu.addItem(withTitle: "Quit",
+                                   action: #selector(NSApplication.terminate(_:)),
+                                   keyEquivalent: "q")
+        
+//        let aboutMenuItem = NSMenuItem(title: "About 2", action: #selector(about), keyEquivalent: "z")
+//        aboutMenuItem.target = self
+//        applicationSubmenu.addItem(aboutMenuItem)
+        
+//        applicationSubmenu.addItem(withTitle: "About 2",
+//                                   action: #selector(about),
+//                                   keyEquivalent: "z").target = self
+        
+        let mainMenu = NSMenu(title: "MainMenu")
+//        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
+//        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
+        mainMenu.addSubmenu(menu: applicationSubmenu)
+        
+        let editMenu = mainMenu.addSubmenu(title: "Edit")
+        
+        NSApp.mainMenu = mainMenu
+    }
+    
+//    @objc private func quit() {
+//        NSApp.terminate(nil)
+//    }
+
+//    @objc private func about() {
+//        NSApp.orderFrontStandardAboutPanel(self)
+//    }
+}
+
+extension NSMenu {
+    func addSubmenu(title: String) -> NSMenu {
+        let menu = NSMenu(title: title)
+        let menuItem = addItem(withTitle: title, action: nil, keyEquivalent: "")
+        setSubmenu(menu, for: menuItem)
+        return menu
+    }
+    
+    func addSubmenu(menu: NSMenu) {
+        let menuItem = addItem(withTitle: menu.title, action: nil, keyEquivalent: "")
+        setSubmenu(menu, for: menuItem)
+    }
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var statusItem: NSStatusItem?
@@ -22,22 +80,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         //let e = ScreenManager.windowsByName()
         //ScreenManager.visibleWindowsImages()
         
-        setupMenu()
+        MainMenuManger.shared.setupMenu()
         showWindow()
         statusItem = createStatusItem()
     }
     
-    private func setupMenu() {
-        let mainMenu = NSMenu(title: "MainMenu")
-        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
-        let applicationSubmenu = NSMenu(title: "Application")
-        let quitMenuItem = applicationSubmenu.addItem(withTitle: "Quit",
-                                                      action: #selector(NSApplication.terminate),
-                                                      keyEquivalent: "q")
-        quitMenuItem.target = NSApp
-        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
-        NSApp.mainMenu = mainMenu
-    }
+//    private func setupMenu() {
+//        let mainMenu = NSMenu(title: "MainMenu")
+//        let applicationMenuItem = mainMenu.addItem(withTitle: "Application", action: nil, keyEquivalent: "")
+//        let applicationSubmenu = NSMenu(title: "Application")
+//        let quitMenuItem = applicationSubmenu.addItem(withTitle: "Quit",
+//                                                      action: #selector(NSApplication.terminate),
+//                                                      keyEquivalent: "q")
+//        quitMenuItem.target = NSApp
+//        mainMenu.setSubmenu(applicationSubmenu, for: applicationMenuItem)
+//        NSApp.mainMenu = mainMenu
+//    }
     
     /// without storyboard can be create by lazy var + `_ = statusItem`.
     /// otherwise will be errors "0 is not a valid connection ID".
