@@ -104,9 +104,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             default:
                 break
             }
-            
+
             return Unmanaged.passUnretained(cgEvent)
         }
+        
+//        func cgEventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
+//
+//            if [.keyDown , .keyUp].contains(type) {
+//                var keyCode = event.getIntegerValueField(.keyboardEventKeycode)
+//                if keyCode == 0 {
+//                    keyCode = 6
+//                } else if keyCode == 6 {
+//                    keyCode = 0
+//                }
+//                event.setIntegerValueField(.keyboardEventKeycode, value: keyCode)
+//            }
+//            return Unmanaged.passRetained(event)
+//        }
         
         /// https://stackoverflow.com/a/31898592
         let eventMask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
