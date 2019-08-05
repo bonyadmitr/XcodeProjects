@@ -73,7 +73,9 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         // Minor Device Class - Keyboard
         // Major Device Class - Peripheral
         // Limited Discoverable Mode
-        bluetoothHost.setClassOfDevice(0x002540, forTimeInterval: 60)
+        /// search 0x002540 in http://domoticx.com/bluetooth-class-of-device-lijst-cod/
+        let appleWirelessKeyboard: BluetoothClassOfDevice = 0x002540
+        bluetoothHost.setClassOfDevice(appleWirelessKeyboard, forTimeInterval: 60)
 
         // Bluetooth SDP Service
         guard
