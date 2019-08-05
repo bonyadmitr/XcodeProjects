@@ -10,32 +10,6 @@ import AppKit
 import Foundation
 import IOBluetooth
 
-func myCGEventCallback(proxy : CGEventTapProxy,
-                       type : CGEventType,
-                       event : CGEvent,
-                       refcon : UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-
-    let oPtr = OpaquePointer(refcon)
-    let btPtr = UnsafeMutablePointer<BTKeyboard>(oPtr)
-    let btKey = btPtr?.pointee
-    switch type {
-    case .keyUp:
-        if let nsEvent = NSEvent(cgEvent: event) {
-            btKey?.sendKey(vkeyCode: -1, nsEvent.modifierFlags.rawValue)
-        }
-        break
-    case .keyDown:
-        if let nsEvent = NSEvent(cgEvent: event) {
-            btKey?.sendKey(vkeyCode: Int(nsEvent.keyCode), nsEvent.modifierFlags.rawValue)
-        }
-        break
-    default:
-        break
-    }
-
-    return Unmanaged.passUnretained(event)
-}
-
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     private let permissionManager = PermissionManager()
@@ -115,6 +89,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         btKey = BTKeyboard()
         
+        let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
+            let opaquePointer = OpaquePointer(rawPointer)
+            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
+                assertionFailure()
+                return nil
+            }
+            let btKey = btPtr.pointee
+            switch eventType {
+            case .keyUp:
+                btKey.sendKey(vkeyCode: -1, event.modifierFlags.rawValue)
+            case .keyDown:
+                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags.rawValue)
+            default:
+                break
+            }
+            
+            return Unmanaged.passUnretained(cgEvent)
+        }
+        
         // capture all key events
         var eventMask: CGEventMask = 0
         eventMask |= (1 << CGEventMask(CGEventType.keyUp.rawValue))
@@ -125,7 +118,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                             place: .headInsertEventTap,
                                             options: .defaultTap,
                                             eventsOfInterest: eventMask,
-                                            callback: myCGEventCallback,
+                                            callback: cgEventCallback,
                                             userInfo: &btKey) {
             let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
             CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
