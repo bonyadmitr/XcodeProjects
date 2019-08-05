@@ -5,6 +5,9 @@ import Cocoa
 // TODO: https://stackoverflow.com/a/50832237/5893286 + https://stackoverflow.com/a/4686782/5893286
 // TODO: https://developer.apple.com/library/archive/technotes/tn2083/_index.html
 
+// TODO: fix horizonal scroll
+// TODO: saving window size
+
 final class App {
     
     static let shared = App()
