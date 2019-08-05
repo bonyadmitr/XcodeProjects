@@ -10,7 +10,7 @@ import Cocoa
 
 final class MenuManager {
     
-    static let shared = MenuManager()
+    //static let shared = MenuManager()
     
     private let mainMenu = NSMenu(title: "MainMenu")
     
@@ -74,8 +74,6 @@ extension NSMenu {
     }
 }
 
-//private var statusItem: NSStatusItem?
-
 final class App {
     
     static let shared = App()
@@ -83,7 +81,7 @@ final class App {
     let statusManager = StatusManager()
     let menuManager = MenuManager()
     
-    private lazy var window: NSWindow = {
+    private let window: NSWindow = {
         let window = NSWindow(contentViewController: ViewController())
         window.center()
         return window
@@ -108,24 +106,19 @@ final class App {
     func showWindow() {
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
-        
-        /// to fix frame of closed window
-        //        window.setFrame(NSRect(x: 0, y: 0, width: 400, height: 300), display: true)
-        //        window.center()
-        
-        /// without reference it will be deinited
-        //        self.mainWindowController = mainWindowController
     }
 }
 
 final class StatusManager {
     
-    static let shared = StatusManager()
+    //static let shared = StatusManager()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
+    /// without storyboard can be create by lazy var + `_ = statusItem`.
+    /// otherwise will be errors "0 is not a valid connection ID".
+    /// https://habr.com/ru/post/447754/
     func setupStatusItem() {
-//        statusItem = createStatusItem()
         guard let button = statusItem.button else {
             assertionFailure("system error. try statusItem.title")
             return
@@ -136,35 +129,9 @@ final class StatusManager {
         button.target = self
     }
     
-    /// without storyboard can be create by lazy var + `_ = statusItem`.
-    /// otherwise will be errors "0 is not a valid connection ID".
-    /// https://habr.com/ru/post/447754/
-//    func createStatusItem() -> NSStatusItem {
-//        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-//
-//        guard let button = statusItem.button else {
-//            assertionFailure("system error. try statusItem.title")
-//            return statusItem
-//        }
-//        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-//        button.title = "QR"
-//        button.action = #selector(clickStatusItem)
-//        button.target = self
-//        return statusItem
-//    }
-    
     @objc private func clickStatusItem() {
-        
-        //        self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
-        //
-        //        window.makeKeyAndOrderFront(nil)
-        /// addition if need
-        //NSApp.activate(ignoringOtherApps: true)
-        /// not work
-        //window.orderBack(self)
-        
-        //let qrValues = ScreenManager.allDisplayImages2()
-        let qrValues = ScreenManager.getHiddenWindowsImages()
+        let qrValues = ScreenManager
+            .getHiddenWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         App.shared.showWindow()
@@ -196,9 +163,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// https://stackoverflow.com/a/43332520
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if !flag {
-            for window in sender.windows {
-                window.makeKeyAndOrderFront(self)
-            }
+            sender.windows.forEach { $0.makeKeyAndOrderFront(self) }
         }
         
         return true
