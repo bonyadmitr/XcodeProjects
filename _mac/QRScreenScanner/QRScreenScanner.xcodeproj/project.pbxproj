@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
 		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
+		CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356D22F80247002CC59E /* MenuManager.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* Begin PBXFileReference section */
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CEAD356D22F80247002CC59E /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,10 +57,11 @@
 		CEE5E1BB22E6DEAA00B54D40 /* QRScreenScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
 				CEAD356B22F6AB34002CC59E /* main.swift */,
+				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
+				CEAD356D22F80247002CC59E /* MenuManager.swift */,
 				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
 				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
 				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
