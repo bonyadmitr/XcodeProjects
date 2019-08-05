@@ -161,6 +161,17 @@ final class ScreenManager {
     ////        }
     //    }
     
+    /// https://stackoverflow.com/a/41585973/5893286
+    static func toggleMirroring() {
+        isDisplayedMirrored() ? disableHardwareMirroring() : enableHardwareMirroring()
+    }
+    
+    // determine if mirroring is active (only relevant for software mirroring)
+    // hack to convert from boolean_t (aka UInt32) to swift's bool
+    static func isDisplayedMirrored() -> Bool {
+        return CGDisplayIsInMirrorSet(CGMainDisplayID()) > 0
+    }
+    
     /// designed for hardware mirroring with > 1 display
     /// should be no penalty for running with only 1 display, using either hardware or software mirroring drivers
     /// but not tested
@@ -173,32 +184,17 @@ final class ScreenManager {
         }
     }
     
-    // determine if mirroring is active (only relevant for software mirroring)
-    // hack to convert from boolean_t (aka UInt32) to swift's bool
-    static func isDisplayedMirrored() -> Bool {
-        return CGDisplayIsInMirrorSet(CGMainDisplayID()) > 0
-    }
-    
-    /// https://stackoverflow.com/a/41585973/5893286
-    static func toggleMirroring() {
+    static func enableHardwareMirroring() {
         let displayCount = displayCount2()
-        
-        if displayCount == 1 {
-            // either it's hardware mirroring or who cares?
-            disableHardwareMirroring()
-            return
-        }
+        assert(displayCount > 1)
+        //assert(isDisplayedMirrored() == false)
         
         let mainDisplayId = CGMainDisplayID()
-        
-        // set master based on current mirroring state
-        // if mirroring, master = null, if not, master = main display
-        let masterDisplayId = isDisplayedMirrored() ? kCGNullDirectDisplay : mainDisplayId
         
         configureDisplay { displayConfig in
             displayIds2(for: displayCount)
                 .filter { $0 != mainDisplayId }
-                .forEach { CGConfigureDisplayMirrorOfDisplay(displayConfig, $0, masterDisplayId).handleError() }
+                .forEach { CGConfigureDisplayMirrorOfDisplay(displayConfig, $0, mainDisplayId).handleError() }
         }
     }
     
