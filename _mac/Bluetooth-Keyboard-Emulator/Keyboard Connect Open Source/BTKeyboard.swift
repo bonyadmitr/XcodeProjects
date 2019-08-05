@@ -41,7 +41,7 @@ struct BTChannels {
     static let Interrupt = BluetoothL2CAPPSM(kBluetoothL2CAPPSMHIDInterrupt)
 }
 
-private class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
+private final class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
     var callback: ((_ device: IOBluetoothDevice?, _ status: IOReturn) -> Void)? = nil
     @objc func connectionComplete(_ device: IOBluetoothDevice, status: IOReturn) {
         if let callback = self.callback {
@@ -52,13 +52,14 @@ private class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
     @objc func sdpQueryComplete(_ device: IOBluetoothDevice!, status: IOReturn) {}
 }
 
-class BTDevice {
+final class BTDevice {
     var device: IOBluetoothDevice?
     var interruptChannel: IOBluetoothL2CAPChannel?
     var controlChannel: IOBluetoothL2CAPChannel?
 }
 
-class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
+/// https://github.com/ArthurYidi/Bluetooth-Keyboard-Emulator
+final class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
     var curDevice: BTDevice?
     var service: IOBluetoothSDPServiceRecord?
 
