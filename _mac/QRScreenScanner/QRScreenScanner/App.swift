@@ -48,6 +48,7 @@ final class App {
     }
 }
 
+/// https://stackoverflow.com/a/55883314/5893286
 final class ToolbarManager: NSObject {
     private let toolbar = NSToolbar(identifier: .main)
     
@@ -60,6 +61,8 @@ final class ToolbarManager: NSObject {
     }
     
     private func setup() {
+        toolbar.allowsUserCustomization = true
+        toolbar.displayMode = .default
         toolbar.delegate = self
         if #available(OSX 10.14, *) {
             toolbar.centeredItemIdentifier = .screenOption
