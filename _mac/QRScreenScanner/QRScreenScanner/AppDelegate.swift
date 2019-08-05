@@ -12,23 +12,24 @@ final class MenuManager {
     
     //static let shared = MenuManager()
     
-    private let mainMenu = NSMenu(title: "MainMenu")
+    private let mainMenu = NSMenu(title: "Main")
     
-    func setupMenu() {
+    func setup() {
+        /// first menu is hidden under app name
         addAppMenu()
+        
         //testMenu()
         
-        /// call
+        /// call the last to add system hidden items like emojy
         NSApp.mainMenu = mainMenu
     }
     
-    /// add App Menu first
     private func addAppMenu() {
         let appMenu = NSMenu(title: "App")
         
         appMenu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
-                        keyEquivalent: "a")
+                        keyEquivalent: "a")//.target = NSApp
         
         appMenu.addItem(withTitle: "Quit",
                         action: #selector(NSApplication.terminate(_:)),
@@ -78,7 +79,7 @@ final class App {
     
     static let shared = App()
     
-    let statusManager = StatusManager()
+    let statusItemManager = StatusItemManager()
     let menuManager = MenuManager()
     
     private let window: NSWindow = {
@@ -98,8 +99,8 @@ final class App {
         //ScreenManager.visibleWindowsImages()
         
         
-        menuManager.setupMenu()
-        statusManager.setupStatusItem()
+        menuManager.setup()
+        statusItemManager.setup()
         showWindow()
     }
     
@@ -109,16 +110,16 @@ final class App {
     }
 }
 
-final class StatusManager {
+final class StatusItemManager {
     
-    //static let shared = StatusManager()
+    //static let shared = StatusItemManager()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
     /// without storyboard can be create by lazy var + `_ = statusItem`.
     /// otherwise will be errors "0 is not a valid connection ID".
     /// https://habr.com/ru/post/447754/
-    func setupStatusItem() {
+    func setup() {
         guard let button = statusItem.button else {
             assertionFailure("system error. try statusItem.title")
             return
