@@ -11,6 +11,7 @@
 		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
 		CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356D22F80247002CC59E /* MenuManager.swift */; };
 		CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356F22F80273002CC59E /* StatusItemManager.swift */; };
+		CEAD357222F8029B002CC59E /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357122F8029B002CC59E /* App.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEAD356D22F80247002CC59E /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CEAD356F22F80273002CC59E /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
+		CEAD357122F8029B002CC59E /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				CEAD356B22F6AB34002CC59E /* main.swift */,
 				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
+				CEAD357122F8029B002CC59E /* App.swift */,
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
@@ -146,6 +149,7 @@
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
+				CEAD357222F8029B002CC59E /* App.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
