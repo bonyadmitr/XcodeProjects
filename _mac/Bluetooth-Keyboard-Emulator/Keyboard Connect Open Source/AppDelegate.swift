@@ -108,25 +108,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return Unmanaged.passUnretained(cgEvent)
         }
         
-        // capture all key events
-        var eventMask: CGEventMask = 0
-        eventMask |= (1 << CGEventMask(CGEventType.keyUp.rawValue))
-        eventMask |= (1 << CGEventMask(CGEventType.keyDown.rawValue))
-        eventMask |= (1 << CGEventMask(CGEventType.flagsChanged.rawValue))
+        /// https://stackoverflow.com/a/31898592
+        let eventMask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
         
-        if let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
+        // capture all key events
+//        var eventMask: CGEventMask = 0
+//        eventMask |= (1 << CGEventMask(CGEventType.keyUp.rawValue))
+//        eventMask |= (1 << CGEventMask(CGEventType.keyDown.rawValue))
+//        eventMask |= (1 << CGEventMask(CGEventType.flagsChanged.rawValue))
+        
+        guard let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
                                             place: .headInsertEventTap,
                                             options: .defaultTap,
                                             eventsOfInterest: eventMask,
                                             callback: cgEventCallback,
-                                            userInfo: &btKey) {
-            let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
-            CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
-            CGEvent.tapEnable(tap: eventTap, enable: true)
-            //CFRunLoopRun()
-        } else {
+                                            userInfo: &btKey)
+        else {
             //assertionFailure()
+            return
         }
+        
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap, enable: true)
+        //CFRunLoopRun()
     }
     
     func applicationDidBecomeActive(_ notification: Notification) {
