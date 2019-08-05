@@ -8,6 +8,10 @@
 
 import Cocoa
 
+// TODO: https://stackoverflow.com/a/9220857/5893286
+// TODO: https://stackoverflow.com/a/50832237/5893286 + https://stackoverflow.com/a/4686782/5893286
+// TODO: https://developer.apple.com/library/archive/technotes/tn2083/_index.html
+
 final class MenuManager {
     
     //static let shared = MenuManager()
