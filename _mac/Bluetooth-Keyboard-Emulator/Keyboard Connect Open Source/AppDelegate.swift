@@ -96,6 +96,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 return Unmanaged.passUnretained(cgEvent)
             }
             
+            /// https://stackoverflow.com/a/44507450
             if eventType == .keyDown {
                 let flags = cgEvent.flags
                 var msg = ""
