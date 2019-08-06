@@ -41,7 +41,7 @@ struct BTChannels {
     static let Interrupt = BluetoothL2CAPPSM(kBluetoothL2CAPPSMHIDInterrupt)
 }
 
-private class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
+private final class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
     var callback: ((_ device: IOBluetoothDevice?, _ status: IOReturn) -> Void)? = nil
     @objc func connectionComplete(_ device: IOBluetoothDevice, status: IOReturn) {
         if let callback = self.callback {
@@ -52,13 +52,14 @@ private class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
     @objc func sdpQueryComplete(_ device: IOBluetoothDevice!, status: IOReturn) {}
 }
 
-class BTDevice {
+final class BTDevice {
     var device: IOBluetoothDevice?
     var interruptChannel: IOBluetoothL2CAPChannel?
     var controlChannel: IOBluetoothL2CAPChannel?
 }
 
-class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
+/// https://github.com/ArthurYidi/Bluetooth-Keyboard-Emulator
+final class BTKeyboard {
     var curDevice: BTDevice?
     var service: IOBluetoothSDPServiceRecord?
 
@@ -73,7 +74,9 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         // Minor Device Class - Keyboard
         // Major Device Class - Peripheral
         // Limited Discoverable Mode
-        bluetoothHost.setClassOfDevice(0x002540, forTimeInterval: 60)
+        /// search 0x002540 in http://domoticx.com/bluetooth-class-of-device-lijst-cod/
+        let appleWirelessKeyboard: BluetoothClassOfDevice = 0x002540
+        bluetoothHost.setClassOfDevice(appleWirelessKeyboard, forTimeInterval: 60)
 
         // Bluetooth SDP Service
         guard
@@ -105,6 +108,10 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
             assertionFailure("failed to register: \(BTChannels.Interrupt)")
             return
         }
+    }
+    
+    @objc private func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
+        channel.setDelegate(self)
     }
 
     // TODO: kAXMovedNotification
@@ -157,7 +164,7 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         }
     }
 
-    func sendHandshake(channel: IOBluetoothL2CAPChannel, _ status: BTHandshake) {
+    private func sendHandshake(channel: IOBluetoothL2CAPChannel, _ status: BTHandshake) {
         guard channel.psm == BTChannels.Control else {
             assertionFailure("Passing wrong channel to handshake")
             return
@@ -165,14 +172,14 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         sendBytes(channel: channel, [0x0 | status.rawValue])
     }
 
-    func sendData(bytes: [UInt8]) {
+    private func sendData(bytes: [UInt8]) {
         if let interruptChannel = curDevice?.interruptChannel {
             sendBytes(channel: interruptChannel, bytes)
         }
     }
 
 
-    func hidReport(keyCode: UInt8, _ modifier: UInt8) -> [UInt8] {
+    private func hidReport(keyCode: UInt8, _ modifier: UInt8) -> [UInt8] {
         let bytes: [UInt8] = [
             0xA1,      // 0 DATA | INPUT (HIDP Bluetooth)
 
@@ -198,22 +205,21 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
      - vkeyCode: virtual keycode provided by NSEvent
      - modifierRawValue: raw modifier provided by NSEvent
      */
-    func sendKey(vkeyCode: Int, _ modifierRawValue: UInt) {
+    func sendKey(vkeyCode: Int, _ modifierFlags: NSEvent.ModifierFlags) {
         let keyCode = UInt8(virtualKeyCodeToHIDKeyCode(vKeyCode: vkeyCode))
 
-        let vmodifier = NSEvent.ModifierFlags(rawValue: modifierRawValue)
         var modifier: UInt8 = 0
 
-        if vmodifier.contains(NSEvent.ModifierFlags.command) {
+        if modifierFlags.contains(.command) {
             modifier |= (1 << 3)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.option) {
+        if modifierFlags.contains(.option) {
             modifier |= (1 << 2)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.shift) {
+        if modifierFlags.contains(.shift) {
             modifier |= (1 << 1)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.control) {
+        if modifierFlags.contains(.control) {
             modifier |= 1
         }
 
@@ -223,23 +229,26 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
     func terminate() {
         curDevice?.device?.closeConnection()
     }
+}
 
-    @objc func l2capChannelData(_ channel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutableRawPointer, length dataLength: Int) {
+extension BTKeyboard: IOBluetoothL2CAPChannelDelegate {
+    
+    func l2capChannelData(_ channel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutableRawPointer, length dataLength: Int) {
         let oPtr = OpaquePointer(dataPointer)
         let uPtr = UnsafeMutablePointer<UInt8>(oPtr)
         let data = UnsafeBufferPointer<UInt8>(start: uPtr, count:dataLength)
-
+        
         if channel.psm == BTChannels.Control {
             guard data.count > 0 else {
                 assertionFailure()
                 return
             }
-
+            
             guard let messageType = BTMessageType(rawValue: data[0] >> 4) else {
                 assertionFailure()
                 return
             }
-
+            
             switch messageType {
             case .Handshake:
                 return
@@ -251,14 +260,14 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                 sendHandshake(channel: channel, .Successful)
             default:
                 return
-//                assertionFailure()
+                //                assertionFailure()
             }
         }
     }
-
-    @objc func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
+    
+    func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
         if !setupDevice(channel.device) {
-//            assertionFailure()
+            //            assertionFailure()
             return
         }
         
@@ -270,19 +279,15 @@ class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         default:
             print("failed channel.psm \(channel.psm)")
             return
-//            assertionFailure()
+            //            assertionFailure()
         }
     }
-
-//    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
-//
-//    }
-//
-//    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
-//
-//    }
-
-    @objc func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
-        channel.setDelegate(self)
-    }
+    
+    //    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
+    //
+    //    }
+    //
+    //    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
+    //
+    //    }
 }

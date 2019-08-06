@@ -10,32 +10,6 @@ import AppKit
 import Foundation
 import IOBluetooth
 
-func myCGEventCallback(proxy : CGEventTapProxy,
-                       type : CGEventType,
-                       event : CGEvent,
-                       refcon : UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-
-    let oPtr = OpaquePointer(refcon)
-    let btPtr = UnsafeMutablePointer<BTKeyboard>(oPtr)
-    let btKey = btPtr?.pointee
-    switch type {
-    case .keyUp:
-        if let nsEvent = NSEvent(cgEvent: event) {
-            btKey?.sendKey(vkeyCode: -1, nsEvent.modifierFlags.rawValue)
-        }
-        break
-    case .keyDown:
-        if let nsEvent = NSEvent(cgEvent: event) {
-            btKey?.sendKey(vkeyCode: Int(nsEvent.keyCode), nsEvent.modifierFlags.rawValue)
-        }
-        break
-    default:
-        break
-    }
-
-    return Unmanaged.passUnretained(event)
-}
-
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     private let permissionManager = PermissionManager()
@@ -88,6 +62,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let prefpaneUrl = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
         NSWorkspace.shared.open(prefpaneUrl)
 
+        /// https://github.com/cho45/KeyCast/blob/master/KeyCast/Accessibility.swift
         // openURL 使うのが最も簡単だが、アクセシビリティの項目まで選択された状態で開くことができない
 //        NSWorkspace.shared.open( NSURL.fileURL(withPath: "/System/Library/PreferencePanes/Security.prefPane") )
         
@@ -115,25 +90,44 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         btKey = BTKeyboard()
         
-        // capture all key events
-        var eventMask: CGEventMask = 0
-        eventMask |= (1 << CGEventMask(CGEventType.keyUp.rawValue))
-        eventMask |= (1 << CGEventMask(CGEventType.keyDown.rawValue))
-        eventMask |= (1 << CGEventMask(CGEventType.flagsChanged.rawValue))
+        let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
+            let opaquePointer = OpaquePointer(rawPointer)
+            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
+                assertionFailure()
+                return nil
+            }
+            let btKey = btPtr.pointee
+            switch eventType {
+            case .keyUp:
+                btKey.sendKey(vkeyCode: -1, event.modifierFlags)
+            case .keyDown:
+                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
+            default:
+                break
+            }
+
+            return Unmanaged.passUnretained(cgEvent)
+        }
         
-        if let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
+        /// https://stackoverflow.com/a/31898592
+        let eventMask: CGEventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        
+        guard let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
                                             place: .headInsertEventTap,
                                             options: .defaultTap,
                                             eventsOfInterest: eventMask,
-                                            callback: myCGEventCallback,
-                                            userInfo: &btKey) {
-            let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
-            CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
-            CGEvent.tapEnable(tap: eventTap, enable: true)
-            //CFRunLoopRun()
-        } else {
-            //assertionFailure()
+                                            callback: cgEventCallback,
+                                            userInfo: &btKey)
+        else {
+            assertionFailure("called without Accessibility permission. search AXIsProcessTrustedWithOptions")
+            return
         }
+        
+        
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap, enable: true)
+        //CFRunLoopRun()
     }
     
     func applicationDidBecomeActive(_ notification: Notification) {
@@ -155,8 +149,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 final class PermissionManager {
 //    static let shared = PermissionManager()
     
-    let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
-    
     /// "System Preferences - Security & Privacy - Privacy - Accessibility".
     func isAccessibilityAvailable() -> Bool {
         /// will not open system alert
@@ -164,11 +156,17 @@ final class PermissionManager {
         
         /// open system alert to the settings
         /// https://stackoverflow.com/a/36260107
+        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
         return AXIsProcessTrustedWithOptions(options)
     }
     
     func isAccessibilityAvailableWithoutAlert() -> Bool {
         /// will not open system alert
+        /// or #1
         return AXIsProcessTrusted()
+        
+        /// or #2
+        //let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): false] as CFDictionary
+        //return AXIsProcessTrustedWithOptions(options)
     }
 }
