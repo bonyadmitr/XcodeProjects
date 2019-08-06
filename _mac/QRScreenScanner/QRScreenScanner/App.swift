@@ -145,6 +145,10 @@ extension NSButton {
     }
 }
 
+/// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
+///
+/// new api
+/// https://github.com/peteog/Samples/blob/master/macOS/NSToolbarSegments/NSToolbarSegments/MainWindowController.swift
 final class ToolbarItemGroup: NSToolbarItemGroup {
     
     /// same that items target
