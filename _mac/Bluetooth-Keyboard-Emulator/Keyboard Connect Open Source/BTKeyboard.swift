@@ -11,23 +11,23 @@ import Foundation
 import IOBluetooth
 
 enum BTMessageType: UInt8 {
-    case Handshake = 0,
-         HIDControl
-    case GetReport = 4,
-         SetReport,
-         GetProtocol,
-         SetProtocol
-    case Data = 0xA
+    case handshake = 0,
+         hidControl
+    case getReport = 4,
+         setReport,
+         getProtocol,
+         setProtocol
+    case data = 0xA
 }
 
 enum BTHandshake: UInt8 {
-    case Successful = 0,
-         NotReady,
-         ErrInvalidReport,
-         ErrUnsupportedRequest,
-         ErrInvalidParameter
-    case ErrUnknown = 0xE
-    case ErrFatal = 0xF
+    case successful = 0,
+         notReady,
+         errorInvalidReport,
+         errorUnsupportedRequest,
+         errorInvalidParameter
+    case errorUnknown = 0xE
+    case errorFatal = 0xF
 }
 
 enum BTHIDControl: UInt8 {
@@ -48,8 +48,8 @@ private final class CallbackWrapper: IOBluetoothDeviceAsyncCallbacks {
             callback(device, status)
         }
     }
-    @objc func remoteNameRequestComplete(_ device: IOBluetoothDevice!, status: IOReturn) {}
-    @objc func sdpQueryComplete(_ device: IOBluetoothDevice!, status: IOReturn) {}
+    @objc func remoteNameRequestComplete(_ device: IOBluetoothDevice?, status: IOReturn) {}
+    @objc func sdpQueryComplete(_ device: IOBluetoothDevice?, status: IOReturn) {}
 }
 
 final class BTDevice {
@@ -156,9 +156,10 @@ final class BTKeyboard {
     }
 
     private func sendBytes(channel: IOBluetoothL2CAPChannel, _ bytes: [UInt8]) {
-        let oPtr = OpaquePointer(bytes)
-        let ioError = channel.writeAsync(UnsafeMutablePointer<UInt8>(oPtr), length: UInt16(bytes.count), refcon: nil)
-        if ioError != kIOReturnSuccess {
+        let opaquePointer = OpaquePointer(bytes)
+        let unsafePointer = UnsafeMutablePointer<UInt8>(opaquePointer)
+        let ioResult = channel.writeAsync(unsafePointer, length: UInt16(bytes.count), refcon: nil)
+        if ioResult != kIOReturnSuccess {
             /// 19 was one.
             print("Buff Data Failed \(channel.psm)")
         }
@@ -234,34 +235,36 @@ final class BTKeyboard {
 extension BTKeyboard: IOBluetoothL2CAPChannelDelegate {
     
     func l2capChannelData(_ channel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutableRawPointer, length dataLength: Int) {
-        let oPtr = OpaquePointer(dataPointer)
-        let uPtr = UnsafeMutablePointer<UInt8>(oPtr)
-        let data = UnsafeBufferPointer<UInt8>(start: uPtr, count:dataLength)
+        let opaquePointer = OpaquePointer(dataPointer)
+        let unsafePointer = UnsafeMutablePointer<UInt8>(opaquePointer)
+        let data = UnsafeBufferPointer<UInt8>(start: unsafePointer, count: dataLength)
         
-        if channel.psm == BTChannels.Control {
-            guard data.count > 0 else {
-                assertionFailure()
-                return
-            }
-            
-            guard let messageType = BTMessageType(rawValue: data[0] >> 4) else {
-                assertionFailure()
-                return
-            }
-            
-            switch messageType {
-            case .Handshake:
-                return
-            case .HIDControl:
-                channel.device.closeConnection()
-            case .SetReport:
-                sendHandshake(channel: channel, .Successful)
-            case .SetProtocol:
-                sendHandshake(channel: channel, .Successful)
-            default:
-                return
-                //                assertionFailure()
-            }
+        guard channel.psm == BTChannels.Control else {
+            return
+        }
+        
+        guard !data.isEmpty else {
+            assertionFailure()
+            return
+        }
+        
+        guard let messageType = BTMessageType(rawValue: data[0] >> 4) else {
+            assertionFailure()
+            return
+        }
+        
+        switch messageType {
+        case .handshake:
+            return
+        case .hidControl:
+            channel.device.closeConnection()
+        case .setReport:
+            sendHandshake(channel: channel, .successful)
+        case .setProtocol:
+            sendHandshake(channel: channel, .successful)
+        default:
+            //assertionFailure()
+            break
         }
     }
     
