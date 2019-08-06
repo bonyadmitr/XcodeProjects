@@ -92,6 +92,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
             
+            guard NSApp.isActive else {
+                return Unmanaged.passUnretained(cgEvent)
+            }
+            
             if eventType == .keyDown {
                 let flags = cgEvent.flags
                 var msg = ""
@@ -126,6 +130,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 assertionFailure()
                 return nil
             }
+            
             let btKey = btPtr.pointee
             switch eventType {
             case .keyUp:
@@ -135,7 +140,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             default:
                 break
             }
-            
 
             if eventType == .keyDown {
                 if cgEvent.flags.contains(.maskCommand) {
