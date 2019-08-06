@@ -59,7 +59,7 @@ final class BTDevice {
 }
 
 /// https://github.com/ArthurYidi/Bluetooth-Keyboard-Emulator
-final class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
+final class BTKeyboard {
     var curDevice: BTDevice?
     var service: IOBluetoothSDPServiceRecord?
 
@@ -227,22 +227,29 @@ final class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         curDevice?.device?.closeConnection()
     }
 
-    @objc func l2capChannelData(_ channel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutableRawPointer, length dataLength: Int) {
+    @objc func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
+        channel.setDelegate(self)
+    }
+}
+
+extension BTKeyboard: IOBluetoothL2CAPChannelDelegate {
+    
+    func l2capChannelData(_ channel: IOBluetoothL2CAPChannel!, data dataPointer: UnsafeMutableRawPointer, length dataLength: Int) {
         let oPtr = OpaquePointer(dataPointer)
         let uPtr = UnsafeMutablePointer<UInt8>(oPtr)
         let data = UnsafeBufferPointer<UInt8>(start: uPtr, count:dataLength)
-
+        
         if channel.psm == BTChannels.Control {
             guard data.count > 0 else {
                 assertionFailure()
                 return
             }
-
+            
             guard let messageType = BTMessageType(rawValue: data[0] >> 4) else {
                 assertionFailure()
                 return
             }
-
+            
             switch messageType {
             case .Handshake:
                 return
@@ -254,14 +261,14 @@ final class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
                 sendHandshake(channel: channel, .Successful)
             default:
                 return
-//                assertionFailure()
+                //                assertionFailure()
             }
         }
     }
-
-    @objc func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
+    
+    func l2capChannelOpenComplete(_ channel: IOBluetoothL2CAPChannel!, status error: IOReturn) {
         if !setupDevice(channel.device) {
-//            assertionFailure()
+            //            assertionFailure()
             return
         }
         
@@ -273,19 +280,15 @@ final class BTKeyboard: IOBluetoothL2CAPChannelDelegate {
         default:
             print("failed channel.psm \(channel.psm)")
             return
-//            assertionFailure()
+            //            assertionFailure()
         }
     }
-
-//    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
-//
-//    }
-//
-//    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
-//
-//    }
-
-    @objc func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
-        channel.setDelegate(self)
-    }
+    
+    //    @objc func l2capChannelClosed(_ channel: IOBluetoothL2CAPChannel!) {
+    //
+    //    }
+    //
+    //    @objc func l2capChannelWriteComplete(_ channel: IOBluetoothL2CAPChannel!, refcon: UnsafeMutableRawPointer, status error: IOReturn) {
+    //
+    //    }
 }
