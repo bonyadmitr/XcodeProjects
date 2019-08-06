@@ -109,6 +109,10 @@ final class BTKeyboard {
             return
         }
     }
+    
+    @objc private func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
+        channel.setDelegate(self)
+    }
 
     // TODO: kAXMovedNotification
     private func setupDevice(_ device: IOBluetoothDevice) -> Bool {
@@ -160,7 +164,7 @@ final class BTKeyboard {
         }
     }
 
-    func sendHandshake(channel: IOBluetoothL2CAPChannel, _ status: BTHandshake) {
+    private func sendHandshake(channel: IOBluetoothL2CAPChannel, _ status: BTHandshake) {
         guard channel.psm == BTChannels.Control else {
             assertionFailure("Passing wrong channel to handshake")
             return
@@ -168,14 +172,14 @@ final class BTKeyboard {
         sendBytes(channel: channel, [0x0 | status.rawValue])
     }
 
-    func sendData(bytes: [UInt8]) {
+    private func sendData(bytes: [UInt8]) {
         if let interruptChannel = curDevice?.interruptChannel {
             sendBytes(channel: interruptChannel, bytes)
         }
     }
 
 
-    func hidReport(keyCode: UInt8, _ modifier: UInt8) -> [UInt8] {
+    private func hidReport(keyCode: UInt8, _ modifier: UInt8) -> [UInt8] {
         let bytes: [UInt8] = [
             0xA1,      // 0 DATA | INPUT (HIDP Bluetooth)
 
@@ -225,10 +229,6 @@ final class BTKeyboard {
 
     func terminate() {
         curDevice?.device?.closeConnection()
-    }
-
-    @objc func newL2CAPChannelOpened(notification: IOBluetoothUserNotification, channel: IOBluetoothL2CAPChannel) {
-        channel.setDelegate(self)
     }
 }
 
