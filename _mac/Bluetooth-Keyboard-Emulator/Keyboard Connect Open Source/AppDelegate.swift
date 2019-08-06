@@ -62,6 +62,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let prefpaneUrl = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
         NSWorkspace.shared.open(prefpaneUrl)
 
+        /// https://github.com/cho45/KeyCast/blob/master/KeyCast/Accessibility.swift
         // openURL 使うのが最も簡単だが、アクセシビリティの項目まで選択された状態で開くことができない
 //        NSWorkspace.shared.open( NSURL.fileURL(withPath: "/System/Library/PreferencePanes/Security.prefPane") )
         
