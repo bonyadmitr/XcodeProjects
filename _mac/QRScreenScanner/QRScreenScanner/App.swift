@@ -102,15 +102,7 @@ final class ToolbarManager: NSObject {
     
     func windowsItem() -> NSToolbarItem {
         let image = NSImage(named: NSImage.quickLookTemplateName)!
-        let button: NSButton
-        if #available(OSX 10.12, *) {
-            button = NSButton(image: image, target: self, action: #selector(screenshotAction))
-        } else {
-            button = NSButton()
-            button.image = image
-            button.target = self
-            button.action = #selector(windowsAction)
-        }
+        let button = NSButton(image: image, target: self, action: #selector(screenshotAction))
 
         button.title = ""
         button.imageScaling = .scaleProportionallyDown
@@ -136,6 +128,20 @@ final class ToolbarManager: NSObject {
         let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
         return itemGroup
+    }
+}
+
+
+extension NSButton {
+    convenience init(image: NSImage, target: AnyObject?, action: Selector?) {
+        if #available(OSX 10.12, *) {
+            self.init(image: image, target: target, action: action)
+        } else {
+            self.init()
+            self.image = image
+            self.target = target
+            self.action = action
+        }
     }
 }
 
