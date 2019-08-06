@@ -62,6 +62,9 @@ final class ToolbarManager: NSObject {
         toolbar.allowsUserCustomization = true
         toolbar.displayMode = .iconAndLabel
         toolbar.delegate = self
+        
+        // TODO: toolbar.autosavesConfiguration = true
+        
         if #available(OSX 10.14, *) {
             toolbar.centeredItemIdentifier = .screenOption
         } else {
@@ -142,6 +145,7 @@ extension NSButton {
     }
 }
 
+// TODO: without "itemsWidth". fit width for any localization
 /// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
 ///
 /// new api
