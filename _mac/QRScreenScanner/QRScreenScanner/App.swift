@@ -76,42 +76,33 @@ final class ToolbarManager: NSObject {
     }
     
     func screenshotItem() -> NSToolbarItem {
-        let item = NSToolbarItem(itemIdentifier: .screenshot)
-        item.label = "Screenshot"
-        item.paletteLabel = "Screenshot"
-//        item.menuFormRepresentation = menuItem // Need this for text-only to work
-//        item.tag = tag.rawValue
-        
-        
-//        let button = NSButton(image: NSImage(named: NSImage.quickLookTemplateName)!, target: self, action: #selector(screenshotAction))
-        let button = NSButton()
-        //button.frame
-        button.image = NSImage(named: NSImage.quickLookTemplateName)!
-        button.target = self
-        button.action = #selector(screenshotAction)
-//        button.widthAnchor.constraint(equalToConstant: width).isActive = true
-//        button.heightAnchor.constraint(equalToConstant: height).isActive = true
-        button.title = ""
-        button.imageScaling = .scaleProportionallyDown
-        button.bezelStyle = .texturedRounded
-//        button.tag = tag.rawValue
-        button.focusRingType = .none
-        item.view = button
-        return item
-    }
-    
-    func windowsItem() -> NSToolbarItem {
-        let image = NSImage(named: NSImage.quickLookTemplateName)!
+        let image = NSImage(named: NSImage.flowViewTemplateName)
         let button = NSButton(image: image, target: self, action: #selector(screenshotAction))
-
+        
         button.title = ""
         button.imageScaling = .scaleProportionallyDown
         button.bezelStyle = .texturedRounded
         button.focusRingType = .none
         
         let item = NSToolbarItem(itemIdentifier: .windows)
+        item.label = "Screenshot"
+        item.paletteLabel = "Screenshot"
+        item.view = button
+        return item
+    }
+    
+    func windowsItem() -> NSToolbarItem {
+        let image = NSImage(named: NSImage.iconViewTemplateName)
+        let button = NSButton(image: image, target: self, action: #selector(windowsAction))
+
+//        button.title = ""
+//        button.imageScaling = .scaleProportionallyDown
+        //button.bezelStyle = .texturedRounded
+        //button.focusRingType = .none
+        
+        let item = NSToolbarItem(itemIdentifier: .windows)
         item.label = "Windows"
-        item.paletteLabel = "Windows"
+        item.paletteLabel = "Windows palette"
         item.view = button
         return item
     }
@@ -133,15 +124,19 @@ final class ToolbarManager: NSObject {
 
 
 extension NSButton {
-    convenience init(image: NSImage, target: AnyObject?, action: Selector?) {
-        if #available(OSX 10.12, *) {
-            self.init(image: image, target: target, action: action)
-        } else {
-            self.init()
-            self.image = image
-            self.target = target
-            self.action = action
-        }
+    convenience init(image: NSImage?, target: AnyObject?, action: Selector?) {
+        self.init()
+        self.image = image
+        self.target = target
+        self.action = action
+//        if #available(OSX 10.12, *) {
+//            self.init(image: image ?? NSImage(), target: target as Any, action: action)
+//        } else {
+//            self.init()
+//            self.image = image
+//            self.target = target
+//            self.action = action
+//        }
     }
 }
 
