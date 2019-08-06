@@ -91,6 +91,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         btKey = BTKeyboard()
         
         let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
+            
+            if eventType == .keyDown {
+                let flags = cgEvent.flags
+                var msg = ""
+                
+                if flags.contains(.maskAlphaShift) {
+                    msg+="caps+"
+                }
+                if flags.contains(.maskShift) {
+                    msg+="shift+"
+                }
+                if flags.contains(.maskControl) {
+                    msg+="control+"
+                }
+                if flags.contains(.maskAlternate) {
+                    msg+="option+"
+                }
+                if flags.contains(.maskCommand) {
+                    msg += "command+"
+                }
+                if flags.contains(.maskSecondaryFn) {
+                    msg += "function+"
+                }
+                
+                if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
+                    msg += chars
+                    print(msg)
+                }
+            }
+            
             let opaquePointer = OpaquePointer(rawPointer)
             guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
                 assertionFailure()
@@ -105,8 +135,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             default:
                 break
             }
+            
 
-            return Unmanaged.passUnretained(cgEvent)
+            if eventType == .keyDown {
+                if cgEvent.flags.contains(.maskCommand) {
+                    var char = UniChar()
+                    var length = 0
+                    cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
+                    
+                    if char == 113 {
+                        btKey.terminate()
+                        NSApp.terminate(nil)
+                        //return Unmanaged.passUnretained(cgEvent)
+                    }
+                    
+                }
+            }
+            
+            return nil
+            //return Unmanaged.passUnretained(cgEvent)
         }
         
         /// https://stackoverflow.com/a/31898592
@@ -133,8 +180,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidBecomeActive(_ notification: Notification) {
 
     }
+    
+//    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+//        print("ShouldTerminate")
+//        return .terminateNow
+//    }
 
     func applicationWillTerminate(aNotification: NSNotification) {
+        print("WillTerminate")
         btKey?.terminate()
     }
     
