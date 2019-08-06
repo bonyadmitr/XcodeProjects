@@ -101,27 +101,25 @@ final class ToolbarManager: NSObject {
     }
     
     func windowsItem() -> NSToolbarItem {
-        let item = NSToolbarItem(itemIdentifier: .windows)
-        item.label = "Windows"
-        item.paletteLabel = "Windows"
-        
-        //        item.menuFormRepresentation = menuItem // Need this for text-only to work
-        //        item.tag = tag.rawValue
-        
-        
-        //        let button = NSButton(image: NSImage(named: NSImage.quickLookTemplateName)!, target: self, action: #selector(screenshotAction))
-        let button = NSButton()
-        //button.frame
-        button.image = NSImage(named: NSImage.columnViewTemplateName)!
-        button.target = self
-        button.action = #selector(windowsAction)
-        //        button.widthAnchor.constraint(equalToConstant: width).isActive = true
-        //        button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        let image = NSImage(named: NSImage.quickLookTemplateName)!
+        let button: NSButton
+        if #available(OSX 10.12, *) {
+            button = NSButton(image: image, target: self, action: #selector(screenshotAction))
+        } else {
+            button = NSButton()
+            button.image = image
+            button.target = self
+            button.action = #selector(windowsAction)
+        }
+
         button.title = ""
         button.imageScaling = .scaleProportionallyDown
         button.bezelStyle = .texturedRounded
-        //        button.tag = tag.rawValue
         button.focusRingType = .none
+        
+        let item = NSToolbarItem(itemIdentifier: .windows)
+        item.label = "Windows"
+        item.paletteLabel = "Windows"
         item.view = button
         return item
     }
@@ -134,77 +132,9 @@ final class ToolbarManager: NSObject {
         print("windowsAction")
     }
     
-//    @objc private func segmentAction(sender: NSSegmentedControl) {
-//
-//        print("segmentAction", sender.selectedSegment)
-//    }
-    
-    @objc private func groupAction(sender: NSToolbarItemGroup) {
-        print("groupAction")
-    }
-    
     func segmentedControl() -> NSToolbarItemGroup {
-//        let itemGroup = NSToolbarItemGroup(itemIdentifier: .screenOption)
-//        itemGroup.subitems = [screenshotItem(), windowsItem()]
-//        itemGroup.label = "Scan Option"
-//        return itemGroup
-        
-//
-//        let control = NSSegmentedControl()//(frame: NSRect(x: 0, y: 0, width: 100, height: 40))
-//        //control.selectedSegment = 0
-//        control.segmentStyle = .texturedSquare
-////        if #available(OSX 10.10.3, *) {
-//            control.trackingMode = .momentary
-////        }
-//        let items = [screenshotItem(), windowsItem()]
-//        control.segmentCount = items.count
-//        control.focusRingType = .none
-////        control.tag = tag.rawValue
-//
-//        control.action = #selector(segmentAction)
-//        control.target = self
-//
-//
-//        for (iSeg, segment) in items.enumerated() {
-////            control.action = segment.action // button & container send to separate handlers
-////            control.target = segment.target
-//            control.setImage(segment.image, forSegment: iSeg)
-//            control.setImageScaling(.scaleProportionallyDown, forSegment: iSeg)
-//            control.setWidth(70, forSegment: iSeg)
-//            //control.setTag(segment.tag.rawValue, forSegment: iSeg)
-//        }
-//
-////        var items = [NSToolbarItem]()
-////        var iSeg = 0
-////        for segment in group {
-////            let item = NSToolbarItem(itemIdentifier: segment.identifier)
-////            items.append(item)
-////            item.label = segment.label
-////            item.tag = segment.tag.rawValue
-////            item.action = action
-////            item.target = target
-////            control.action = segment.action // button & container send to separate handlers
-////            control.target = segment.target
-////            control.setImage(segment.image, forSegment: iSeg)
-////            control.setImageScaling(.scaleProportionallyDown, forSegment: iSeg)
-////            control.setWidth(segment.width, forSegment: iSeg)
-////            control.setTag(segment.tag.rawValue, forSegment: iSeg)
-////            iSeg += 1
-////        }
-//
-//        let itemGroup = NSToolbarItemGroup(itemIdentifier: .screenOption)
-//        itemGroup.paletteLabel = "screen option"
-//        itemGroup.subitems = items
-//        itemGroup.view = control
-//
-//        /// overite NSSegmentedControl action
-////        itemGroup.action = nil//#selector(groupAction)
-////        itemGroup.target = nil//self
-//
-//
-        
         let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem()], itemsWidth: 70)
-        itemGroup.actionTarget = self
+        itemGroup.actionsTarget = self
         return itemGroup
     }
 }
@@ -213,7 +143,7 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
     
     /// same that items target
     /// self.target will be overwrite by control.target after "view = control"
-    var actionTarget: AnyObject?
+    var actionsTarget: AnyObject?
     
     convenience init(itemIdentifier: NSToolbarItem.Identifier, items: [NSToolbarItem], itemsWidth: CGFloat) {
         self.init(itemIdentifier: itemIdentifier)
@@ -244,9 +174,9 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
         guard
             let item = subitems[safe: sender.selectedSegment],
             let action = item.action,
-            let actionTarget = actionTarget
+            let actionTarget = actionsTarget
         else {
-            assertionFailure("Selected \(sender.selectedSegment) in \(subitems.count), target \(String(describing: self.actionTarget))")
+            assertionFailure("Selected \(sender.selectedSegment) in \(subitems.count), target \(String(describing: self.actionsTarget))")
             return
         }
         
