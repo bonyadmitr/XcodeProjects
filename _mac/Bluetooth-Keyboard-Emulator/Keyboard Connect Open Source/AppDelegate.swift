@@ -122,6 +122,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
+        
         let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
         CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: eventTap, enable: true)
@@ -147,8 +148,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 final class PermissionManager {
 //    static let shared = PermissionManager()
     
-    let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
-    
     /// "System Preferences - Security & Privacy - Privacy - Accessibility".
     func isAccessibilityAvailable() -> Bool {
         /// will not open system alert
@@ -156,11 +155,17 @@ final class PermissionManager {
         
         /// open system alert to the settings
         /// https://stackoverflow.com/a/36260107
+        let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
         return AXIsProcessTrustedWithOptions(options)
     }
     
     func isAccessibilityAvailableWithoutAlert() -> Bool {
         /// will not open system alert
+        /// or #1
         return AXIsProcessTrusted()
+        
+        /// or #2
+        //let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): false] as CFDictionary
+        //return AXIsProcessTrustedWithOptions(options)
     }
 }
