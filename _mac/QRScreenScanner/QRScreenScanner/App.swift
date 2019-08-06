@@ -76,19 +76,11 @@ final class ToolbarManager: NSObject {
     }
     
     func screenshotItem() -> NSToolbarItem {
-        let image = NSImage(named: NSImage.flowViewTemplateName)
-        let button = NSButton(image: image, target: self, action: #selector(screenshotAction))
-        
-        button.title = ""
-        button.imageScaling = .scaleProportionallyDown
-        button.bezelStyle = .texturedRounded
-        button.focusRingType = .none
-        
-        let item = NSToolbarItem(itemIdentifier: .windows)
-        item.label = "Screenshot"
-        item.paletteLabel = "Screenshot"
-        item.view = button
-        return item
+        return NSToolbarItem(itemIdentifier: .screenshot,
+                             label: "Screenshot",
+                             image: NSImage(named: NSImage.flowViewTemplateName),
+                             target: self,
+                             action: #selector(screenshotAction))
     }
     
     func windowsItem() -> NSToolbarItem {
@@ -120,7 +112,7 @@ extension NSToolbarItem {
                      image: NSImage?,
                      target: AnyObject?,
                      action: Selector)
-    {    
+    {
         let button = NSButton(image: image, target: target, action: action)
         button.title = ""
         //button.imageScaling = .scaleProportionallyDown
