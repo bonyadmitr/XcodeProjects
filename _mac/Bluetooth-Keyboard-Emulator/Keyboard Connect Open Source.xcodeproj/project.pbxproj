@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		228F34691DA3016200F264A0 /* BTKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F34681DA3016200F264A0 /* BTKeyboard.swift */; };
 		228F346B1DA302F600F264A0 /* SerialPortDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228F346A1DA302F600F264A0 /* SerialPortDictionary.plist */; };
-		228F346D1DA310BD00F264A0 /* HIDReportDescriptor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 228F346C1DA310BD00F264A0 /* HIDReportDescriptor.txt */; };
 		228F346F1DA3132100F264A0 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F346E1DA3132100F264A0 /* KeyCodes.swift */; };
 		228F34731DA32B0900F264A0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F34721DA32B0900F264A0 /* main.swift */; };
 		228F34751DA32FE200F264A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F34741DA32FE200F264A0 /* AppDelegate.swift */; };
@@ -127,7 +126,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				228F346B1DA302F600F264A0 /* SerialPortDictionary.plist in Resources */,
-				228F346D1DA310BD00F264A0 /* HIDReportDescriptor.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
