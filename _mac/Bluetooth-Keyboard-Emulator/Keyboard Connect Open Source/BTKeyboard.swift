@@ -211,16 +211,16 @@ final class BTKeyboard {
         let vmodifier = NSEvent.ModifierFlags(rawValue: modifierRawValue)
         var modifier: UInt8 = 0
 
-        if vmodifier.contains(NSEvent.ModifierFlags.command) {
+        if vmodifier.contains(.command) {
             modifier |= (1 << 3)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.option) {
+        if vmodifier.contains(.option) {
             modifier |= (1 << 2)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.shift) {
+        if vmodifier.contains(.shift) {
             modifier |= (1 << 1)
         }
-        if vmodifier.contains(NSEvent.ModifierFlags.control) {
+        if vmodifier.contains(.control) {
             modifier |= 1
         }
 
