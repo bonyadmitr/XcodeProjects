@@ -131,6 +131,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 return nil
             }
             
+            //print(event.keyCode, cgEvent.getIntegerValueField(.keyboardEventKeycode))
+            //print(event.modifierFlags.rawValue, cgEvent.flags.rawValue)
+            
             let btKey = btPtr.pointee
             switch eventType {
             case .keyUp:
