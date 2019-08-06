@@ -50,10 +50,8 @@ final class App {
 
 /// https://stackoverflow.com/a/55883314/5893286
 final class ToolbarManager: NSObject {
-    private let toolbar = NSToolbar(identifier: .main)
     
-    let titles = ["Screenshot all displays", "All windows"]
-    var selectedIndex = 0
+    private let toolbar = NSToolbar(identifier: .main)
     
     override init() {
         super.init()
@@ -256,25 +254,7 @@ extension ToolbarManager: NSToolbarDelegate {
             assertionFailure()
         }
         
-//        if itemIdentifier == .screenOption {
-////            NSToolbarItemGroup(itemIdentifier: <#T##NSToolbarItem.Identifier#>)
-////            let group = NSToolbarItemGroup(itemIdentifier: .screenOptionItem,
-////                                           titles: titles,
-////                                           selectionMode: .selectOne,
-////                                           labels: nil,
-////                                           target: self,
-////                                           action: #selector(toolbarItemGroupSelectionChanged(_:)))
-//            let group = NSToolbarItemGroup(itemIdentifier: .screenOption)
-////            group.setSelected(true, at: 0)
-//            return group
-//        }
-        
         return nil
-    }
-    
-    // MARK: - Actions
-    @objc private func toolbarItemGroupSelectionChanged(_ sender: NSToolbarItemGroup) {
-//        selectedIndex = sender.selectedIndex
     }
 }
 
