@@ -194,6 +194,37 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
     }
 }
 
+//final class ToolbarItemGroup2: NSToolbarItemGroup {
+//
+//    let control = NSSegmentedControl()
+//
+//    var selectedSegment: Int {
+//        get { return control.selectedSegment }
+//        set { control.selectedSegment = newValue }
+//    }
+//
+//    convenience init(itemIdentifier: NSToolbarItem.Identifier, images: [NSImage], labels: [String], itemsWidth: CGFloat) {
+//        self.init(itemIdentifier: itemIdentifier)
+//        control.trackingMode = .momentary
+//        control.segmentStyle = .texturedSquare
+//        control.focusRingType = .none
+//        control.segmentCount = images.count
+////        control.target = self
+////        control.action = #selector(segmentAction)
+//
+//        for (i, image) in images.enumerated() {
+//            control.setImage(image, forSegment: i)
+//            control.setImageScaling(.scaleProportionallyDown, forSegment: i)
+//            control.setLabel(labels[i], forSegment: i)
+//            control.setWidth(itemsWidth, forSegment: i)
+//        }
+//
+//        view = control
+////        subitems = items
+//    }
+//}
+
+
 extension Collection {
     /// Returns the element at the specified index iff it is within bounds, otherwise nil.
     subscript (safe index: Index) -> Element? {
