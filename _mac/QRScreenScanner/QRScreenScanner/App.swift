@@ -92,19 +92,11 @@ final class ToolbarManager: NSObject {
     }
     
     func windowsItem() -> NSToolbarItem {
-        let image = NSImage(named: NSImage.iconViewTemplateName)
-        let button = NSButton(image: image, target: self, action: #selector(windowsAction))
-
-//        button.title = ""
-//        button.imageScaling = .scaleProportionallyDown
-        //button.bezelStyle = .texturedRounded
-        //button.focusRingType = .none
-        
-        let item = NSToolbarItem(itemIdentifier: .windows)
-        item.label = "Windows"
-        item.paletteLabel = "Windows palette"
-        item.view = button
-        return item
+        return NSToolbarItem(itemIdentifier: .windows,
+                                 label: "Windows",
+                                 image: NSImage(named: NSImage.iconViewTemplateName),
+                                 target: self,
+                                 action: #selector(windowsAction))
     }
     
     @objc private func screenshotAction() {
@@ -119,6 +111,26 @@ final class ToolbarManager: NSObject {
         let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
         return itemGroup
+    }
+}
+
+extension NSToolbarItem {
+    convenience init(itemIdentifier: NSToolbarItem.Identifier,
+                     label: String,
+                     image: NSImage?,
+                     target: AnyObject?,
+                     action: Selector)
+    {    
+        let button = NSButton(image: image, target: target, action: action)
+        button.title = ""
+        //button.imageScaling = .scaleProportionallyDown
+        //button.bezelStyle = .texturedRounded
+        //button.focusRingType = .none
+        
+        self.init(itemIdentifier: itemIdentifier)
+        self.label = label
+        self.paletteLabel = label
+        self.view = button
     }
 }
 
