@@ -205,22 +205,21 @@ final class BTKeyboard {
      - vkeyCode: virtual keycode provided by NSEvent
      - modifierRawValue: raw modifier provided by NSEvent
      */
-    func sendKey(vkeyCode: Int, _ modifierRawValue: UInt) {
+    func sendKey(vkeyCode: Int, _ modifierFlags: NSEvent.ModifierFlags) {
         let keyCode = UInt8(virtualKeyCodeToHIDKeyCode(vKeyCode: vkeyCode))
 
-        let vmodifier = NSEvent.ModifierFlags(rawValue: modifierRawValue)
         var modifier: UInt8 = 0
 
-        if vmodifier.contains(.command) {
+        if modifierFlags.contains(.command) {
             modifier |= (1 << 3)
         }
-        if vmodifier.contains(.option) {
+        if modifierFlags.contains(.option) {
             modifier |= (1 << 2)
         }
-        if vmodifier.contains(.shift) {
+        if modifierFlags.contains(.shift) {
             modifier |= (1 << 1)
         }
-        if vmodifier.contains(.control) {
+        if modifierFlags.contains(.control) {
             modifier |= 1
         }
 

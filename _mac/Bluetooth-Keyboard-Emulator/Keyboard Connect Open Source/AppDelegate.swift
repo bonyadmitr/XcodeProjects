@@ -99,9 +99,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             let btKey = btPtr.pointee
             switch eventType {
             case .keyUp:
-                btKey.sendKey(vkeyCode: -1, event.modifierFlags.rawValue)
+                btKey.sendKey(vkeyCode: -1, event.modifierFlags)
             case .keyDown:
-                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags.rawValue)
+                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
             default:
                 break
             }
