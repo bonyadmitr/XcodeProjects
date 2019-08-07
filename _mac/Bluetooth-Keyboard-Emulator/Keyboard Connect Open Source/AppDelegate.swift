@@ -93,6 +93,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
             
             guard NSApp.isActive else {
+                
+                /// https://stackoverflow.com/a/5785895
+                /// 0x0b is the virtual keycode for "b"
+                /// 0x09 is the virtual keycode for "v"
+                //if cgEvent.getIntegerValueField(.keyboardEventKeycode) == 0x0B {
+                //    cgEvent.setIntegerValueField(.keyboardEventKeycode, value: 0x09)
+                //}
+                
                 return Unmanaged.passUnretained(cgEvent)
             }
             
