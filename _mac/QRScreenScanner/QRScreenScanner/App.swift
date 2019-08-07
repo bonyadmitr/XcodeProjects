@@ -59,17 +59,13 @@ final class ToolbarManager: NSObject {
     }
     
     private func setup() {
+        toolbar.delegate = self
+        toolbar.autosavesConfiguration = true
         toolbar.allowsUserCustomization = true
         toolbar.displayMode = .iconAndLabel
-        toolbar.delegate = self
         
-        // TODO: toolbar.autosavesConfiguration = true
-        
-        if #available(OSX 10.14, *) {
-            toolbar.centeredItemIdentifier = .screenOption
-        } else {
-            // Fallback on earlier versions
-        }
+        //if #available(OSX 10.14, *) {
+        //toolbar.centeredItemIdentifier = .screenOption
     }
     
     func addToWindow(_ window: NSWindow) {
@@ -190,11 +186,11 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
 extension ToolbarManager: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.screenOption]
+        return [.flexibleSpace, .screenOption, .flexibleSpace]
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.screenOption]
+        return [.screenOption, .screenshot, .windows, .space, .flexibleSpace]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
