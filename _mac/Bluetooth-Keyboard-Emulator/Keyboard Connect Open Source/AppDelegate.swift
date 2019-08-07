@@ -120,6 +120,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     msg += "function+"
                 }
                 
+                assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
                 if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
                     msg += chars
                     print(msg)
