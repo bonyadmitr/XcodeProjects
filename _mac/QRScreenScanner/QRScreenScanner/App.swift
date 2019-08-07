@@ -48,7 +48,16 @@ final class App {
     }
 }
 
+
+// TODO: without "itemsWidth". fit width for any localization
+/// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
+///
+/// new api
+/// https://github.com/peteog/Samples/blob/master/macOS/NSToolbarSegments/NSToolbarSegments/MainWindowController.swift
+///
 /// https://stackoverflow.com/a/55883314/5893286
+///
+/// after adding items in edit mode there will be layout error "Unable to simultaneously satisfy constraints"
 final class ToolbarManager: NSObject {
     
     private let toolbar = NSToolbar(identifier: .main)
@@ -103,11 +112,6 @@ final class ToolbarManager: NSObject {
     }
 }
 
-// TODO: without "itemsWidth". fit width for any localization
-/// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
-///
-/// new api
-/// https://github.com/peteog/Samples/blob/master/macOS/NSToolbarSegments/NSToolbarSegments/MainWindowController.swift
 final class ToolbarItemGroup: NSToolbarItemGroup {
     
     /// same that items target
