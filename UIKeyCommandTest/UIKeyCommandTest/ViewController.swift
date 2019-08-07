@@ -8,15 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
+    private let textView = UITextView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let textView = UITextView(frame: view.bounds)
+        textView.frame = view.bounds
         textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         textView.backgroundColor = .lightGray
-        textView.becomeFirstResponder()
         view.addSubview(textView)
         
         
@@ -32,9 +33,15 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    override open var keyCommands: [UIKeyCommand]? {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        textView.becomeFirstResponder()
+    }
+
+    
+    override var keyCommands: [UIKeyCommand]? {
         /// with only modifierFlags .shift will prevent selection in text enter views (UITextField, UITextView)
-        return [UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [.shift, .command], action: #selector(push), discoverabilityTitle: "Back")]
+        return [UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [.control, .command], action: #selector(push), discoverabilityTitle: "Back")]
     }
     
 //    @objc private func backCommand() {
@@ -51,7 +58,7 @@ extension UINavigationController {
      */
     override open var keyCommands: [UIKeyCommand]? {
         guard viewControllers.count > 1 else { return [] }
-        return [UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [.shift, .command], action: #selector(backCommand), discoverabilityTitle: "Back")]
+        return [UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [.control, .command], action: #selector(backCommand), discoverabilityTitle: "Back")]
     }
     
     @objc private func backCommand() {
