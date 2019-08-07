@@ -107,44 +107,6 @@ final class ToolbarManager: NSObject {
     }
 }
 
-extension NSToolbarItem {
-    convenience init(itemIdentifier: NSToolbarItem.Identifier,
-                     label: String,
-                     image: NSImage?,
-                     target: AnyObject?,
-                     action: Selector)
-    {
-        let button = NSButton(image: image, target: target, action: action)
-        button.title = ""
-        //button.imageScaling = .scaleProportionallyDown
-        //button.bezelStyle = .texturedRounded
-        //button.focusRingType = .none
-        
-        self.init(itemIdentifier: itemIdentifier)
-        self.label = label
-        self.paletteLabel = label
-        self.view = button
-    }
-}
-
-
-extension NSButton {
-    convenience init(image: NSImage?, target: AnyObject?, action: Selector?) {
-        self.init()
-        self.image = image
-        self.target = target
-        self.action = action
-//        if #available(OSX 10.12, *) {
-//            self.init(image: image ?? NSImage(), target: target as Any, action: action)
-//        } else {
-//            self.init()
-//            self.image = image
-//            self.target = target
-//            self.action = action
-//        }
-    }
-}
-
 // TODO: without "itemsWidth". fit width for any localization
 /// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
 ///
@@ -225,16 +187,6 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
 //    }
 //}
 
-
-extension Collection {
-    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
-    subscript (safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-
-
-
 extension ToolbarManager: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
@@ -262,12 +214,12 @@ extension ToolbarManager: NSToolbarDelegate {
     }
 }
 
-extension NSToolbarItem.Identifier {
+private extension NSToolbarItem.Identifier {
     static let screenOption = NSToolbarItem.Identifier("screenOption")
     static let screenshot = NSToolbarItem.Identifier("screenshot")
     static let windows = NSToolbarItem.Identifier("windows")
 }
 
-extension NSToolbar.Identifier {
+private extension NSToolbar.Identifier {
     static let main = "Main"
 }
