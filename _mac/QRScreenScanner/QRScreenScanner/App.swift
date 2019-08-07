@@ -101,11 +101,11 @@ final class ToolbarManager: NSObject {
     }
     
     @objc private func screenshotAction() {
-        print("screenshotAction")
+        QRService.scanDisplays()
     }
     
     @objc private func windowsAction() {
-        print("windowsAction")
+        QRService.scanWindows()
     }
     
     func segmentedControl() -> NSToolbarItemGroup {
