@@ -57,6 +57,9 @@ final class App {
 ///
 /// https://stackoverflow.com/a/55883314/5893286
 ///
+/// system images
+/// https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/system-icons/
+///
 /// after adding items in edit mode there will be layout error "Unable to simultaneously satisfy constraints"
 final class ToolbarManager: NSObject {
     
