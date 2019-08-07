@@ -9,9 +9,9 @@ extension NSToolbarItem {
     {
         let button = NSButton(image: image, target: target, action: action)
         button.title = ""
-        //button.imageScaling = .scaleProportionallyDown
-        //button.bezelStyle = .texturedRounded
-        //button.focusRingType = .none
+        button.imageScaling = .scaleProportionallyDown
+        button.bezelStyle = .texturedRounded
+        button.focusRingType = .none
         
         self.init(itemIdentifier: itemIdentifier)
         self.label = label
