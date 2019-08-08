@@ -86,6 +86,14 @@ class ViewController: NSViewController {
         //        button.setButtonType(.momentaryPushIn)
         button.bezelStyle = .circular
         button.title = ""
+//        button.bezelStyle = .circular
+//        button.title = ""
+        
+        //            print(button.tag)
+//        button.tag = row
+        //            print(button.tag)
+        button.action = #selector(actionButtonCell)
+        button.target = self
         
         let column3 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.action.rawValue))
         column3.dataCell = button
@@ -187,27 +195,27 @@ extension ViewController: NSTableViewDataSource {
     
     /// NSTableView set content Mode
     /// https://stackoverflow.com/q/19218807/5893286
-//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-//        guard
-//            let columnIdentifier = tableColumn?.identifier.rawValue,
-//            let columnType = TableColumns(rawValue: columnIdentifier)
-//        else {
-//            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
-//            return nil
-//        }
-//
-//        switch columnType {
-//        case .date:
-//            guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
-//                assertionFailure()
-//                return nil
-//            }
-//
-//            return dateFormatter.string(from: date)
-//        case .value:
-//            return tableDataSource[row][TableColumns.value.rawValue]
-//        case .action:
-//
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        guard
+            let columnIdentifier = tableColumn?.identifier.rawValue,
+            let columnType = TableColumns(rawValue: columnIdentifier)
+        else {
+            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
+            return nil
+        }
+
+        switch columnType {
+        case .date:
+            guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
+                assertionFailure()
+                return nil
+            }
+
+            return dateFormatter.string(from: date)
+        case .value:
+            return tableDataSource[row][TableColumns.value.rawValue]
+        case .action:
+            
 //            let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
 //            //        button.setButtonType(.momentaryPushIn)
 //            button.bezelStyle = .circular
@@ -218,63 +226,35 @@ extension ViewController: NSTableViewDataSource {
 ////            print(button.tag)
 //            button.action = #selector(actionButtonCell)
 //            button.target = self
-//
-//            return button
-//        }
-//    }
-    
-    func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        guard
-            let columnIdentifier = tableColumn?.identifier.rawValue,
-            let columnType = TableColumns(rawValue: columnIdentifier)
-        else {
-//            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
+
             return nil
-        }
-        
-        switch columnType {
-        case .date:
-            guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
-                assertionFailure()
-                return nil
-            }
-            
-            let text = dateFormatter.string(from: date)
-            let cell = NSTextFieldCell(textCell: text)
-            return cell
-        case .value:
-            let text = tableDataSource[row][TableColumns.value.rawValue] as! String
-            let cell = NSTextFieldCell(textCell: text)
-            return cell
-        case .action:
-            let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
-            //        button.setButtonType(.momentaryPushIn)
-            button.bezelStyle = .circular
-            button.title = ""
-            
-            print(button.tag)
-            button.tag = row
-            print(button.tag)
-            button.action = #selector(actionButtonCell)
-            button.target = self
-            
-            return button
         }
     }
     
     @objc private func actionButtonCell(_ button: NSButtonCell) {
-        print(button.tag)
-        guard let text = tableDataSource[button.tag][TableColumns.value.rawValue] as? String else {
+        print(tableView.selectedRow)
+        
+        guard let text = tableDataSource[tableView.selectedRow][TableColumns.value.rawValue] as? String else {
             assertionFailure()
             return
         }
         
+        if let url = URL(string: text) {
+            NSWorkspace.shared.open(url)
+        } else if let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://www.google.com/search?q=\(q)") {
+            NSWorkspace.shared.open(url)
+        } else {
+//            NSAlert
+        }
+//        NSWorkspace.shared.open(url)
+//        NSWorkspace.shared.open([url],
+//                                withAppBundleIdentifier: "com.apple.Safari",
+//                                options: [],
+//                                additionalEventParamDescriptor: nil,
+//                                launchIdentifiers: nil)
+        
         print(text)
     }
-    
-    //    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    //        return nil
-    //    }
 }
 
 extension ViewController: NSTableViewDelegate {
