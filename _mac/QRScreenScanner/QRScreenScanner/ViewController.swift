@@ -27,6 +27,13 @@ enum TableColumns: String {
     }
 }
 
+// TODO: handler delete button
+// TODO: add delete all button
+// TODO: Multiline text
+// TODO: Quick Alert nothing found
+// TODO: Add contact from qr
+// TODO: Icon
+// TODO: Status icon
 class ViewController: NSViewController {
     
     private var tableDataSource = [HistoryDataSource]()
