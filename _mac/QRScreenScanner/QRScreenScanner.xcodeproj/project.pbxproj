@@ -50,6 +50,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEAD357B22FBF1F9002CC59E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD357322F9C2BE002CC59E /* NSButton+Init.swift */,
+				CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */,
+				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CEAD357C22FBF220002CC59E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD356B22F6AB34002CC59E /* main.swift */,
+				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
+				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
+				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
+				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		CEE5E1B022E6DEAA00B54D40 = {
 			isa = PBXGroup;
 			children = (
@@ -69,20 +91,14 @@
 		CEE5E1BB22E6DEAA00B54D40 /* QRScreenScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CEAD356B22F6AB34002CC59E /* main.swift */,
-				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
 				CEAD357122F8029B002CC59E /* App.swift */,
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
 				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
 				CEAD357922FABDDA002CC59E /* QRService.swift */,
-				CEAD357322F9C2BE002CC59E /* NSButton+Init.swift */,
-				CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */,
-				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
-				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
-				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
-				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
+				CEAD357B22FBF1F9002CC59E /* Extensions */,
+				CEAD357C22FBF220002CC59E /* Main */,
 			);
 			path = QRScreenScanner;
 			sourceTree = "<group>";
@@ -295,7 +311,7 @@
 				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = QRScreenScanner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -314,7 +330,7 @@
 				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = QRScreenScanner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
