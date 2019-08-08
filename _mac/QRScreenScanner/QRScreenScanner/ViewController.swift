@@ -77,6 +77,7 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        /// https://stackoverflow.com/a/55495391/5893286
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Copy", action: #selector(tableViewCopyItemClicked), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Delete", action: #selector(tableViewDeleteItemClicked), keyEquivalent: ""))
@@ -207,6 +208,7 @@ extension ViewController: NSTableViewDataSource {
         }
         
         // TODO: test set declareTypes one time
+        /// https://stackoverflow.com/a/34902953/5893286
         //NSPasteboard.general.clearContents()
         NSPasteboard.general.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
         NSPasteboard.general.setString(text, forType: NSPasteboard.PasteboardType.string)
