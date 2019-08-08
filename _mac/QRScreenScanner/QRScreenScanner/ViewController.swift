@@ -77,6 +77,11 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        let menu = NSMenu()
+        menu.addItem(NSMenuItem(title: "Copy", action: #selector(tableViewCopyItemClicked), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Delete", action: #selector(tableViewDeleteItemClicked), keyEquivalent: ""))
+        tableView.menu = menu
+        
         /// https://stackoverflow.com/a/30262248/5893286
 //        tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
 //        tableView.sizeLastColumnToFit()
@@ -188,6 +193,34 @@ extension ViewController: NSTableViewDataSource {
             alert.messageText = "Unable to open \(text)"
             alert.runModal()
         }
+    }
+    
+    @objc private func tableViewCopyItemClicked(_ sender: AnyObject) {
+        
+        guard tableView.clickedRow >= 0 else {
+            return
+        }
+        
+        guard let text = tableDataSource[tableView.clickedRow][TableColumns.value.rawValue] as? String else {
+            assertionFailure()
+            return
+        }
+        
+        // TODO: test set declareTypes one time
+        //NSPasteboard.general.clearContents()
+        NSPasteboard.general.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+        NSPasteboard.general.setString(text, forType: NSPasteboard.PasteboardType.string)
+    }
+    
+    @objc private func tableViewDeleteItemClicked(_ sender: AnyObject) {
+        
+        guard tableView.clickedRow >= 0 else {
+            return
+        }
+        
+        tableDataSource.remove(at: tableView.clickedRow)
+        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
+        tableView.reloadData()
     }
 }
 
