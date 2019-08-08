@@ -83,15 +83,9 @@ class ViewController: NSViewController {
         
         
         let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
-        //        button.setButtonType(.momentaryPushIn)
+        //button.setButtonType(.momentaryPushIn)
         button.bezelStyle = .circular
         button.title = ""
-//        button.bezelStyle = .circular
-//        button.title = ""
-        
-        //            print(button.tag)
-//        button.tag = row
-        //            print(button.tag)
         button.action = #selector(actionButtonCell)
         button.target = self
         
@@ -106,14 +100,7 @@ class ViewController: NSViewController {
         column1.width = 100
         column1.minWidth = 50
         column1.maxWidth = 200
-//        column1.resizingMask = .autoresizingMask
         column1.title = TableColumns.date.title
-        
-//        let checkBox = NSButtonCell()
-//        checkBox.setButtonType(.switch)
-//        checkBox.title = ""
-////        checkBox.alignment = .right
-//        column1.dataCell = checkBox
         tableView.addTableColumn(column1)
         
         /// call before tableView.addTableColumn
@@ -127,11 +114,9 @@ class ViewController: NSViewController {
         column2.title = TableColumns.value.title
         tableView.addTableColumn(column2)
         
-        
-        
         /// first add all columns programmatically and then setup autosave
-//        tableView.autosaveName = "historyTableView"
-//        tableView.autosaveTableColumns = true
+        tableView.autosaveName = "historyTableView"
+        tableView.autosaveTableColumns = true
         
         /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
         let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: false)
@@ -146,39 +131,6 @@ class ViewController: NSViewController {
         tableContainer.hasVerticalScroller = true
         view.addSubview(tableContainer)
     }
-    
-    
-
-//    @IBAction private  func captureScreen(_ sender: NSButton) {
-//        let window = view.window!
-//
-//        window.orderOut(self)
-//        //window.close()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-//
-//            guard let img = CGDisplayCreateImage(CGMainDisplayID()) else {
-//                assertionFailure()
-//                return
-//            }
-//
-//
-//            self.screenImageView.image = NSImage(cgImage: img, size: .init(width: img.width, height: img.height))
-//
-//            window.makeKeyAndOrderFront(nil)
-//            /// addition if need
-//            //NSApp.activate(ignoringOtherApps: true)
-//            /// not work
-//            //window.orderBack(self)
-//
-//            print(
-//                CodeDetector.shared.readQR(from: img)
-//            )
-//        }
-//
-//
-//
-//    }
     
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -215,18 +167,6 @@ extension ViewController: NSTableViewDataSource {
         case .value:
             return tableDataSource[row][TableColumns.value.rawValue]
         case .action:
-            
-//            let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
-//            //        button.setButtonType(.momentaryPushIn)
-//            button.bezelStyle = .circular
-//            button.title = ""
-//
-////            print(button.tag)
-//            button.tag = row
-////            print(button.tag)
-//            button.action = #selector(actionButtonCell)
-//            button.target = self
-
             return nil
         }
     }
@@ -244,16 +184,10 @@ extension ViewController: NSTableViewDataSource {
         } else if let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://www.google.com/search?q=\(q)") {
             NSWorkspace.shared.open(url)
         } else {
-//            NSAlert
+            let alert = NSAlert()
+            alert.messageText = "Unable to open \(text)"
+            alert.runModal()
         }
-//        NSWorkspace.shared.open(url)
-//        NSWorkspace.shared.open([url],
-//                                withAppBundleIdentifier: "com.apple.Safari",
-//                                options: [],
-//                                additionalEventParamDescriptor: nil,
-//                                launchIdentifiers: nil)
-        
-        print(text)
     }
 }
 
