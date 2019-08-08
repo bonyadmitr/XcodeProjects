@@ -9,19 +9,21 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
+    private let bluetoothManager = BluetoothManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        bluetoothManager.start()
+        
+        //UUID().uuidString
+//        "7D985539-2133-44E6-AD37-67E62CA3CD97"
+//        "BAB12052-9934-4D29-8858-E2DEAC3E28BD"
+        
+        
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
+    
 }
 
+let peripheralName = "peripheral mac"
