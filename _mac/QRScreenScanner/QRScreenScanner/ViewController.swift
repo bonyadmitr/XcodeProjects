@@ -27,6 +27,9 @@ enum TableColumns: String {
     }
 }
 
+// TODO: window setup + title
+// TODO: clear controller
+
 // TODO: handler delete button
 // TODO: add delete all button
 // TODO: Multiline text
