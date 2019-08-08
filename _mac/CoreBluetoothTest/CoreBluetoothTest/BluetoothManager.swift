@@ -23,14 +23,14 @@ final class BluetoothManager: NSObject {
     }
     
     func send(text: String) {
-//        guard let data = text.data(using: .utf8) else {
-//            assertionFailure()
-//            return
-//        }
-//        availablePeripheral.forEach { $0.writeValue(data, for: CBCharacteristic, type: .withResponse)}
+        //        guard let data = text.data(using: .utf8) else {
+        //            assertionFailure()
+        //            return
+        //        }
+        //        availablePeripheral.forEach { $0.writeValue(data, for: CBCharacteristic, type: .withResponse)}
         
         /// https://stackoverflow.com/a/28256568
-//        availablePeripheral.forEach { $0.setNotifyValue(true, for: CBCharacteristic)}
+        //        availablePeripheral.forEach { $0.setNotifyValue(true, for: CBCharacteristic)}
     }
 }
 
@@ -66,9 +66,9 @@ extension BluetoothManager: CBPeripheralManagerDelegate {
         peripheralManager.startAdvertising(advertisingData)
     }
     
-//    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-//
-//    }
+    //    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+    //
+    //    }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         requests
@@ -134,12 +134,12 @@ extension BluetoothManager: CBPeripheralDelegate {
             return
         }
         //CBATTError.Code.init(rawValue: <#T##Int#>)
-        service.characteristics?
-            .filter { $0.uuid == userInfoCharacteristicUUID }
-            .forEach {
-                peripheral.readValue(for: $0)
-                //peripheral.setNotifyValue(true, for: $0)
-        }
+        //        service.characteristics?
+        //            .filter { $0.uuid == userInfoCharacteristicUUID }
+        //            .forEach {
+        //                peripheral.readValue(for: $0)
+        //                //peripheral.setNotifyValue(true, for: $0)
+        //        }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -152,5 +152,9 @@ extension BluetoothManager: CBPeripheralDelegate {
             return
         }
         print(text)
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        print("didModifyServices invalidatedServices")
     }
 }

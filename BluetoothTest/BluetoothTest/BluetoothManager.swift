@@ -13,6 +13,7 @@ final class BluetoothManager: NSObject {
     
     private lazy var peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     private lazy var centralManager = CBCentralManager(delegate: self, queue: nil)
+    //private lazy var centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionRestoreIdentifierKey: "restoreKey"])
     
     private var availablePeripheral = [CBPeripheral]()
     
@@ -21,8 +22,15 @@ final class BluetoothManager: NSObject {
         _ = centralManager
     }
     
-    func send(text: String, peripheral: CBPeripheral) {
+    func send(text: String) {
+        //        guard let data = text.data(using: .utf8) else {
+        //            assertionFailure()
+        //            return
+        //        }
+        //        availablePeripheral.forEach { $0.writeValue(data, for: CBCharacteristic, type: .withResponse)}
         
+        /// https://stackoverflow.com/a/28256568
+        //        availablePeripheral.forEach { $0.setNotifyValue(true, for: CBCharacteristic)}
     }
 }
 
@@ -58,9 +66,9 @@ extension BluetoothManager: CBPeripheralManagerDelegate {
         peripheralManager.startAdvertising(advertisingData)
     }
     
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        
-    }
+    //    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+    //
+    //    }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         requests
@@ -77,11 +85,6 @@ extension BluetoothManager: CBPeripheralManagerDelegate {
                 print(text)
         }
     }
-    
-    /// background mode
-//    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-//
-//    }
 }
 
 extension BluetoothManager: CBCentralManagerDelegate {
@@ -113,6 +116,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
         peripheral.discoverServices([serviceUUID])
     }
     
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        availablePeripheral.removeAll(where: { $0 == peripheral })
+    }
 }
 
 extension BluetoothManager: CBPeripheralDelegate {
@@ -123,15 +129,32 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        service.characteristics?
-            .filter { $0.uuid == userInfoCharacteristicUUID }
-            .forEach { peripheral.readValue(for: $0) }
+        if let error = error as NSError? {
+            print(error.description)
+            return
+        }
+        //CBATTError.Code.init(rawValue: <#T##Int#>)
+//        service.characteristics?
+//            .filter { $0.uuid == userInfoCharacteristicUUID }
+//            .forEach {
+//                peripheral.readValue(for: $0)
+//                //peripheral.setNotifyValue(true, for: $0)
+//        }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let error = error as NSError? {
+            print(error.description)
+            return
+        }
+        
         guard let data = characteristic.value, let text = String(data: data, encoding: .utf8) else {
             return
         }
         print(text)
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        print("didModifyServices invalidatedServices")
     }
 }
