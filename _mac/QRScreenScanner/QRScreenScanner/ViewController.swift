@@ -13,6 +13,7 @@ typealias HistoryDataSource = [String: Any]
 enum TableColumns: String {
     case date
     case value
+    case action
     
     var title: String {
         switch self {
@@ -20,6 +21,8 @@ enum TableColumns: String {
             return " Date"
         case .value:
             return " Value"
+        case .action:
+            return " Action"
         }
     }
 }
@@ -78,6 +81,18 @@ class ViewController: NSViewController {
 //        tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
 //        tableView.sizeLastColumnToFit()
         
+        
+        let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
+        //        button.setButtonType(.momentaryPushIn)
+        button.bezelStyle = .circular
+        button.title = ""
+        
+        let column3 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.action.rawValue))
+        column3.dataCell = button
+        column3.width = 40
+        column3.title = TableColumns.action.title
+        tableView.addTableColumn(column3)
+        
         let column1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: TableColumns.date.rawValue))
         column1.isEditable = false
         column1.width = 100
@@ -105,9 +120,10 @@ class ViewController: NSViewController {
         tableView.addTableColumn(column2)
         
         
+        
         /// first add all columns programmatically and then setup autosave
-        tableView.autosaveName = "historyTableView"
-        tableView.autosaveTableColumns = true
+//        tableView.autosaveName = "historyTableView"
+//        tableView.autosaveTableColumns = true
         
         /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
         let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: false)
@@ -171,27 +187,89 @@ extension ViewController: NSTableViewDataSource {
     
     /// NSTableView set content Mode
     /// https://stackoverflow.com/q/19218807/5893286
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+//    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+//        guard
+//            let columnIdentifier = tableColumn?.identifier.rawValue,
+//            let columnType = TableColumns(rawValue: columnIdentifier)
+//        else {
+//            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
+//            return nil
+//        }
+//
+//        switch columnType {
+//        case .date:
+//            guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
+//                assertionFailure()
+//                return nil
+//            }
+//
+//            return dateFormatter.string(from: date)
+//        case .value:
+//            return tableDataSource[row][TableColumns.value.rawValue]
+//        case .action:
+//
+//            let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
+//            //        button.setButtonType(.momentaryPushIn)
+//            button.bezelStyle = .circular
+//            button.title = ""
+//
+////            print(button.tag)
+//            button.tag = row
+////            print(button.tag)
+//            button.action = #selector(actionButtonCell)
+//            button.target = self
+//
+//            return button
+//        }
+//    }
+    
+    func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
         guard
             let columnIdentifier = tableColumn?.identifier.rawValue,
             let columnType = TableColumns(rawValue: columnIdentifier)
         else {
-            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
+//            assertionFailure(tableColumn?.identifier.rawValue ?? "tableColumn nil")
             return nil
         }
         
         switch columnType {
-            
         case .date:
             guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
                 assertionFailure()
                 return nil
             }
             
-            return dateFormatter.string(from: date)
+            let text = dateFormatter.string(from: date)
+            let cell = NSTextFieldCell(textCell: text)
+            return cell
         case .value:
-            return tableDataSource[row][TableColumns.value.rawValue]
+            let text = tableDataSource[row][TableColumns.value.rawValue] as! String
+            let cell = NSTextFieldCell(textCell: text)
+            return cell
+        case .action:
+            let button = NSButtonCell(imageCell: NSImage(named: NSImage.revealFreestandingTemplateName))
+            //        button.setButtonType(.momentaryPushIn)
+            button.bezelStyle = .circular
+            button.title = ""
+            
+            print(button.tag)
+            button.tag = row
+            print(button.tag)
+            button.action = #selector(actionButtonCell)
+            button.target = self
+            
+            return button
         }
+    }
+    
+    @objc private func actionButtonCell(_ button: NSButtonCell) {
+        print(button.tag)
+        guard let text = tableDataSource[button.tag][TableColumns.value.rawValue] as? String else {
+            assertionFailure()
+            return
+        }
+        
+        print(text)
     }
     
     //    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
