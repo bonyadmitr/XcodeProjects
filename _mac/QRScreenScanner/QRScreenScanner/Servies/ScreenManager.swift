@@ -214,32 +214,33 @@ final class ScreenManager {
         }
     }
     
-    @discardableResult
-    static func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
-        /// or #1
-        //let bitmapRep = NSBitmapImageRep(cgImage: image)
-        //guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
-        //    assertionFailure()
-        //    return false
-        //}
-        //do {
-        //    try jpegData.write(to: destinationURL, options: .atomic)
-        //    return true
-        //} catch {
-        //    assertionFailure(error.localizedDescription)
-        //    return false
-        //}
-        
-        /// or #2
-        /// https://stackoverflow.com/a/40371604/5893286
-        guard let destination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypePNG, 1, nil) else {
-            assertionFailure(destinationURL.absoluteString)
-            return false
-        }
-        CGImageDestinationAddImage(destination, image, nil)
-        return CGImageDestinationFinalize(destination)
-    }
 }
+
+//@discardableResult
+//func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
+//    /// or #1
+//    //let bitmapRep = NSBitmapImageRep(cgImage: image)
+//    //guard let jpegData = bitmapRep.representation(using: .png, properties: [:]) else {
+//    //    assertionFailure()
+//    //    return false
+//    //}
+//    //do {
+//    //    try jpegData.write(to: destinationURL, options: .atomic)
+//    //    return true
+//    //} catch {
+//    //    assertionFailure(error.localizedDescription)
+//    //    return false
+//    //}
+//
+//    /// or #2
+//    /// https://stackoverflow.com/a/40371604/5893286
+//    guard let destination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypePNG, 1, nil) else {
+//        assertionFailure(destinationURL.absoluteString)
+//        return false
+//    }
+//    CGImageDestinationAddImage(destination, image, nil)
+//    return CGImageDestinationFinalize(destination)
+//}
 
 //import Cocoa
 //extension NSImage {
