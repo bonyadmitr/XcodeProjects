@@ -18,6 +18,14 @@ final class QRService {
         App.shared.showWindow()
     }
     
+    static func scanBrowser() {
+        if let windowImage = SystemWindowsManager.compositedWindowForBundleId(System.defalutBrowserBundleId()) {
+            let qrValues = CodeDetector.shared.readQR(from: windowImage)
+            saveQRValues(qrValues)
+            App.shared.showWindow()
+        }
+    }
+    
     private static func saveQRValues(_ qrValues: [String]) {
         let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
             [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]

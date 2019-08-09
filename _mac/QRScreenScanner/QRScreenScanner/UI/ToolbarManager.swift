@@ -4,6 +4,7 @@ private extension NSToolbarItem.Identifier {
     static let screenOption = NSToolbarItem.Identifier("screenOption")
     static let screenshot = NSToolbarItem.Identifier("screenshot")
     static let windows = NSToolbarItem.Identifier("windows")
+    static let browser = NSToolbarItem.Identifier("browser")
 }
 
 private extension NSToolbar.Identifier {
@@ -62,6 +63,14 @@ final class ToolbarManager: NSObject {
                              action: #selector(windowsAction))
     }
     
+    func browserItem() -> NSToolbarItem {
+        return NSToolbarItem(itemIdentifier: .windows,
+                             label: "Browser",
+                             image: NSImage(named: NSImage.networkName),
+                             target: self,
+                             action: #selector(windowsAction))
+    }
+    
     @objc private func screenshotAction() {
         QRService.scanDisplays()
     }
@@ -70,8 +79,12 @@ final class ToolbarManager: NSObject {
         QRService.scanWindows()
     }
     
+    @objc private func browserAction() {
+        QRService.scanBrowser()
+    }
+    
     func segmentedControl() -> NSToolbarItemGroup {
-        let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem()], itemsWidth: 70)
+        let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem(), browserItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
         return itemGroup
     }
@@ -96,6 +109,8 @@ extension ToolbarManager: NSToolbarDelegate {
             return windowsItem()
         case .screenOption:
             return segmentedControl()
+        case .browser:
+            return browserItem()
         default:
             assertionFailure()
         }
