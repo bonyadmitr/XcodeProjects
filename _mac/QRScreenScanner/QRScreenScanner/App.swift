@@ -354,7 +354,7 @@ struct System {
     /// https://stackoverflow.com/a/931277/5893286
     static func allBrowsersBundleIds() -> [String] {
         /// addition "com.apple.Notes", there is no "org.mozilla.firefox"
-        //return (LSCopyAllRoleHandlersForContentType("public.html" as CFString, .viewer)?.takeRetainedValue() as? [String]).assert(or: [])
+        //return (LSCopyAllRoleHandlersForContentType(kUTTypeHTML, .viewer)?.takeRetainedValue() as? [String]).assert(or: [])
         /// addition "com.rockysandstudio.MKPlayer"
         return (LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue() as? [String]).assert(or: [])
     }
