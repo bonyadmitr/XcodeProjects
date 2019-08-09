@@ -19,6 +19,7 @@
 		CEAD357E22FDCAD2002CC59E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357D22FDCAD2002CC59E /* System.swift */; };
 		CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */; };
 		CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */; };
+		CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		CEAD357D22FDCAD2002CC59E /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarManager.swift; sourceTree = "<group>"; };
 		CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItemGroup.swift; sourceTree = "<group>"; };
+		CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWindowsManager.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
+				CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */,
 				CEAD357922FABDDA002CC59E /* QRService.swift */,
 				CEAD357D22FDCAD2002CC59E /* System.swift */,
 			);
@@ -208,6 +211,7 @@
 				CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */,
 				CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */,
 				CEAD357422F9C2BE002CC59E /* NSButton+Init.swift in Sources */,
+				CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
 				CEAD357E22FDCAD2002CC59E /* System.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,

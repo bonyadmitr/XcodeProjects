@@ -3,7 +3,7 @@ import Foundation
 final class QRService {
     
     static func scanWindows() {
-        let qrValues = ScreenManager
+        let qrValues = SystemWindowsManager
             .getHiddenWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
