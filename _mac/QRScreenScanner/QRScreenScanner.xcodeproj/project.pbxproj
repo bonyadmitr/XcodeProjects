@@ -17,6 +17,7 @@
 		CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357722F9C2F8002CC59E /* Array+Safe.swift */; };
 		CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357922FABDDA002CC59E /* QRService.swift */; };
 		CEAD357E22FDCAD2002CC59E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357D22FDCAD2002CC59E /* System.swift */; };
+		CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		CEAD357722F9C2F8002CC59E /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		CEAD357922FABDDA002CC59E /* QRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRService.swift; sourceTree = "<group>"; };
 		CEAD357D22FDCAD2002CC59E /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarManager.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
+				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
 				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
 				CEAD357922FABDDA002CC59E /* QRService.swift */,
 				CEAD357D22FDCAD2002CC59E /* System.swift */,
@@ -185,6 +188,7 @@
 				CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */,
 				CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */,
 				CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */,
+				CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */,
 				CEAD357222F8029B002CC59E /* App.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
