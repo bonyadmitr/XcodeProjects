@@ -76,6 +76,27 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		CEAD358122FDCB35002CC59E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
+				CEAD356D22F80247002CC59E /* MenuManager.swift */,
+				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
+				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CEAD358222FDCB84002CC59E /* Servies */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
+				CEAD357922FABDDA002CC59E /* QRService.swift */,
+				CEAD357D22FDCAD2002CC59E /* System.swift */,
+			);
+			path = Servies;
+			sourceTree = "<group>";
+		};
 		CEE5E1B022E6DEAA00B54D40 = {
 			isa = PBXGroup;
 			children = (
@@ -96,13 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				CEAD357122F8029B002CC59E /* App.swift */,
-				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
-				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
-				CEAD356D22F80247002CC59E /* MenuManager.swift */,
-				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
-				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
-				CEAD357922FABDDA002CC59E /* QRService.swift */,
-				CEAD357D22FDCAD2002CC59E /* System.swift */,
+				CEAD358122FDCB35002CC59E /* UI */,
+				CEAD358222FDCB84002CC59E /* Servies */,
 				CEAD357B22FBF1F9002CC59E /* Extensions */,
 				CEAD357C22FBF220002CC59E /* Main */,
 			);
