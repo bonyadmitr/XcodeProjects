@@ -41,6 +41,8 @@ enum LaunchAtLogin {
     
     private static func appItem(from loginItems: [LSSharedFileListItem]) -> LSSharedFileListItem? {
         return loginItems.first(where: { item in
+            //let resolutionFlags = UInt32(kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes)
+            //let itemUrl = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, nil).takeRetainedValue() as URL
             let itemUrl = LSSharedFileListItemCopyResolvedURL(item, 0, nil).takeRetainedValue() as URL
             return itemUrl == appUrl
         })
