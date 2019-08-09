@@ -7,9 +7,9 @@ import Foundation
 //    let totalMemory = Double(System.memoryTotal) / bytesInMegabyte
 //
 //    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { t in
-//        let usedMemory = Double(System.memoryUsage()) / bytesInMegabyte
+//        let usedMemory = Double(System.App.memoryUsage()) / bytesInMegabyte
 //        let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
-//        print(String(format: "CPU: %.1f%%", System.cpuUsage()))
+//        print(String(format: "CPU: %.1f%%", System.App.cpuUsage()))
 //        print(memory)
 //        print()
 //    }
@@ -61,6 +61,7 @@ enum System {
     
     enum App {
         
+        /// app cpu usage
         static func cpuUsage() -> Double {
             var totalUsageOfCPU: Double = 0.0
             var threadsList = UnsafeMutablePointer(mutating: [thread_act_t]())
@@ -96,7 +97,7 @@ enum System {
             return totalUsageOfCPU
         }
         
-        /// can be static
+        /// app memoty usage
         static func memoryUsage() -> UInt64 {
             
             
