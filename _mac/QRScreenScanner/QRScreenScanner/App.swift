@@ -311,6 +311,8 @@ struct System {
     
     /// can be static
     static func memoryUsage() -> UInt64 {
+        
+        
         // TODO: check on device
         /// memory usage not equal Xcode Debug Gauge
         //        var taskInfo = mach_task_basic_info()
@@ -342,5 +344,30 @@ struct System {
         }
         
         return used
+    }
+    
+    static func defalutBrowserBundleId() -> String {
+        return (LSCopyDefaultHandlerForURLScheme("https" as CFString)?.takeRetainedValue() as String?)
+            .assert(or: "")
+    }
+    
+    /// https://stackoverflow.com/a/931277/5893286
+    static func allBrowsersBundleIds() -> [String] {
+        /// addition "com.apple.Notes", there is no "org.mozilla.firefox"
+        //return (LSCopyAllRoleHandlersForContentType("public.html" as CFString, .viewer)?.takeRetainedValue() as? [String]).assert(or: [])
+        /// addition "com.rockysandstudio.MKPlayer"
+        return (LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue() as? [String]).assert(or: [])
+    }
+}
+
+extension Optional {
+    func assert(or defaultValue: Wrapped) -> Wrapped {
+        switch self {
+        case .none:
+            assertionFailure()
+            return defaultValue
+        case .some(let value):
+            return value
+        }
     }
 }
