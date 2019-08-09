@@ -15,8 +15,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func onLaunchAtLoginMenuItem(_ sender: NSMenuItem) {
         
-        print(LaunchAtLogin.isEnabled)
+        print("was: \(LaunchAtLogin.isEnabled)")
         LaunchAtLogin.toggle()
+        print("now: \(LaunchAtLogin.isEnabled)")
         
         //print(StartupLauncher.shared.isLaunchAtLogin)
         //StartupLauncher.shared.toggle()
@@ -34,7 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let state: NSControl.StateValue = isLaunchAtLogin ? .on : .off
         launchAtLoginMenuItem.state = state
-        print(isLaunchAtLogin)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
