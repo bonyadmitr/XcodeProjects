@@ -1,4 +1,5 @@
 import Foundation
+import AppKit.NSWorkspace
 
 final class SystemWindowsManager {
     
@@ -27,11 +28,6 @@ final class SystemWindowsManager {
                                          //.shouldBeOpaque,
                                             .nominalResolution])
         }
-        
-        // TODO: filter window
-        //import AppKit
-        //kCGWindowOwnerPID
-        //let q = NSWorkspace.shared.runningApplications.first(where: { $0.bundleIdentifier == "" })?.processIdentifier
     }
     
     static func compositedWindowsByName() -> [String: CGImage] {
@@ -125,5 +121,22 @@ final class SystemWindowsManager {
                         imageOption: [.boundsIgnoreFraming, .nominalResolution])
         }
         
+    }
+    
+    static func compositedWindowForBundleId(_ bundleId: String) -> CGImage? {
+        let processId = processIdentifier(for: bundleId)
+        let windowIds = windowsInfo()
+            .filter { $0[kCGWindowOwnerPID as String] as? Int32 == processId }
+            .compactMap { $0[kCGWindowNumber as String] as? UInt }
+        
+        return CGImage(windowListFromArrayScreenBounds: .null,
+                       windowArray: cfarray(from: windowIds),
+                       imageOption: [.boundsIgnoreFraming, .nominalResolution])
+    }
+    
+    static func processIdentifier(for bundleId: String) -> pid_t? {
+        /// caseInsensitiveCompare need for: "com.google.chrome" vs "com.google.Chrome"
+        return NSWorkspace.shared.runningApplications
+            .first { $0.bundleIdentifier?.caseInsensitiveCompare(bundleId) == .orderedSame }?.processIdentifier
     }
 }
