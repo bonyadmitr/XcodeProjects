@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
+		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
 		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
 		CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356D22F80247002CC59E /* MenuManager.swift */; };
 		CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356F22F80273002CC59E /* StatusItemManager.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
 		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEAD356D22F80247002CC59E /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CEAD356F22F80273002CC59E /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
 				CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */,
+				CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */,
 				CEAD357922FABDDA002CC59E /* QRService.swift */,
 				CEAD357D22FDCAD2002CC59E /* System.swift */,
 			);
@@ -221,6 +224,7 @@
 				CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */,
 				CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */,
 				CEAD357222F8029B002CC59E /* App.swift in Sources */,
+				CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */,
 				CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
