@@ -206,16 +206,3 @@ final class ScreenManager {
 //        return nil
 //    }
 //}
-
-extension CGError {
-    
-    @discardableResult
-    func require() -> CGError {
-        assert(self == .success, "reason: \(self)")
-        return self
-    }
-    
-    func handleError() {
-        assert(self == .success, "reason: \(self)")
-    }
-}
