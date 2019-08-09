@@ -32,7 +32,6 @@ final class App {
         //let e = ScreenManager.windowsByName()
         //ScreenManager.visibleWindowsImages()
         
-        
         menuManager.setup()
         statusItemManager.setup()
         showWindow()
@@ -225,4 +224,33 @@ private extension NSToolbarItem.Identifier {
 
 private extension NSToolbar.Identifier {
     static let main = "Main"
+}
+
+struct System {
+    
+    static let osVersion: String = {
+        let os = ProcessInfo.processInfo.operatingSystemVersion
+        return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
+    }()
+    
+    static let hardwareModel: String = {
+        var size = 0
+        sysctlbyname("hw.model", nil, &size, nil, 0)
+        var model = [CChar](repeating: 0, count: size)
+        sysctlbyname("hw.model", &model, &size, nil, 0)
+        return String(cString: model)
+    }()
+    
+    /// sysctl machdep.cpu
+    /// "machdep.cpu" not working
+    /// http://support.moonpoint.com/os/os-x/machdep_cpu.php
+    ///
+    /// https://stackoverflow.com/a/7379560/5893286
+    static let cpuMainInfo: String = {
+        var size = 0
+        sysctlbyname("machdep.cpu.brand_string", nil, &size, nil, 0)
+        var model = [CChar](repeating: 0, count: size)
+        sysctlbyname("machdep.cpu.brand_string", &model, &size, nil, 0)
+        return String(cString: model)
+    }()
 }
