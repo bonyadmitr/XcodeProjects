@@ -346,6 +346,7 @@ struct System {
         return used
     }
     
+    /// doc https://developer.apple.com/documentation/coreservices/launch_services
     static func defalutBrowserBundleId() -> String {
         return (LSCopyDefaultHandlerForURLScheme("https" as CFString)?.takeRetainedValue() as String?)
             .assert(or: "")
