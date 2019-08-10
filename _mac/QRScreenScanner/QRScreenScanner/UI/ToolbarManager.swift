@@ -48,7 +48,7 @@ final class ToolbarManager: NSObject {
         window.toolbar = toolbar
     }
     
-    func screenshotItem() -> NSToolbarItem {
+    private func screenshotItem() -> NSToolbarItem {
         return NSToolbarItem(itemIdentifier: .screenshot,
                              label: "Screenshot",
                              image: NSImage(named: NSImage.flowViewTemplateName),
@@ -56,7 +56,7 @@ final class ToolbarManager: NSObject {
                              action: #selector(screenshotAction))
     }
     
-    func windowsItem() -> NSToolbarItem {
+    private func windowsItem() -> NSToolbarItem {
         return NSToolbarItem(itemIdentifier: .windows,
                              label: "Windows",
                              image: NSImage(named: NSImage.iconViewTemplateName),
@@ -64,7 +64,7 @@ final class ToolbarManager: NSObject {
                              action: #selector(windowsAction))
     }
     
-    func browserItem() -> NSToolbarItem {
+    private func browserItem() -> NSToolbarItem {
         return NSToolbarItem(itemIdentifier: .browser,
                              label: "Browser",
                              image: NSImage(named: NSImage.networkName),
@@ -72,7 +72,7 @@ final class ToolbarManager: NSObject {
                              action: #selector(browserAction))
     }
     
-    func deleteAllItem() -> NSToolbarItem {
+    private func deleteAllItem() -> NSToolbarItem {
         return NSToolbarItem(itemIdentifier: .deleteAll,
                              label: "DeleteAll",
                              image: NSImage(named: NSImage.trashFullName),
@@ -97,7 +97,7 @@ final class ToolbarManager: NSObject {
         //UserDefaults.standard.set([], forKey: "historyDataSource")
     }
     
-    func segmentedControl() -> NSToolbarItemGroup {
+    private func segmentedControl() -> NSToolbarItemGroup {
         let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem(), browserItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
         return itemGroup
