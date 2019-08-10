@@ -24,7 +24,7 @@ final class App {
                               defer: true)
         //let window = NSWindow(contentViewController: ViewController())
         //window.setInCenterOfScreen()
-        //window.title = App.name
+        window.title = App.name
         window.contentViewController = vc
         window.center()
         return window
@@ -49,5 +49,40 @@ final class App {
     func showWindow() {
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
+extension App {
+    static let id = Bundle.main.bundleIdentifier.assert(or: "")
+    static let name = (Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String).assert(or: "")
+    static let version = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String).assert(or: "")
+    static let build = (Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String).assert(or: "")
+    static let versionWithBuild = "\(version) (\(build))"
+    
+    static func openSubmitFeedbackPage() {
+        let feedbackBody =
+        """
+        qwe
+        <!--
+        Provide your feedback here. Include as many details as possible.
+        You can also email me at bonyadmitr@gmail.com
+        -->
+        
+        ---
+        \(App.name) \(App.versionWithBuild)
+        macOS \(System.osVersion)
+        \(System.hardwareModel)
+        """
+        
+        guard
+            let encodedBody = feedbackBody.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            /// can be added title: "&title=\(title)"
+            let url = URL(string: "https://github.com/bonyadmitr/XcodeProjects/issues/new?body=\(encodedBody)")
+        else {
+            assertionFailure()
+            return
+        }
+        
+        NSWorkspace.shared.open(url)
     }
 }
