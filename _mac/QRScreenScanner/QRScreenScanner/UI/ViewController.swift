@@ -32,10 +32,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
-        
-//        addTableView()
+        addTableView()
         
 //        if #available(OSX 10.13, *) {
 //            let q = DropView(frame: view.bounds)

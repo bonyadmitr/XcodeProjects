@@ -280,6 +280,10 @@ class DropView2: NSView {
 //        return false
     }
     
+//    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+//        return true
+//    }
+    
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         isReceivingDrag = false
         
@@ -288,6 +292,11 @@ class DropView2: NSView {
 //        else {
 //            return false
 //        }
+        
+        /// Convert the window-based coordinate to a view-relative coordinate
+        /// start from left-bottom corner
+        //let point = convert(sender.draggingLocation, from: nil)
+        //print(point)
         
         guard let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
             assertionFailure()
