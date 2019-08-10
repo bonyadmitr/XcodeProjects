@@ -123,6 +123,7 @@ final class SystemWindowsManager {
         
     }
     
+    /// https://stackoverflow.com/a/48030215/5893286
     static func compositedWindowForBundleId(_ bundleId: String) -> CGImage? {
         let processId = processIdentifier(for: bundleId)
         let windowIds = windowsInfo()
