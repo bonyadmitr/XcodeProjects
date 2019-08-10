@@ -8,61 +8,24 @@
 
 import Cocoa
 
-/// @objc and NSObject needs for NSSortDescriptor
-final class History: NSObject, Codable {
-    @objc let date: Date
-    @objc let value: String
-    
-    init(date: Date, value: String) {
-        self.date = date
-        self.value = value
-    }
-}
-
-final class HistoryDataSource {
-    
-    static let shared = HistoryDataSource()
-    
-    /// https://stackoverflow.com/a/48053492/5893286
-    var history: [History] {
-        get {
-            if let storedObject: Data = UserDefaults.standard.data(forKey: "historyDataSource"),
-                let storedPlayer = try? PropertyListDecoder().decode([History].self, from: storedObject) {
-                return storedPlayer
-            }
-            return []
-        }
-        set {
-            guard let data = try? PropertyListEncoder().encode(newValue) else {
-                assertionFailure()
-                return
-            }
-            UserDefaults.standard.set(data, forKey: "historyDataSource")
-            didChanged?(newValue)
-        }
-    }
-    
-    var didChanged: (([History]) -> Void)?
-}
-
-enum TableColumns: String {
-    case date
-    case value
-    case action
-    
-    var title: String {
-        switch self {
-        case .date:
-            return " Date"
-        case .value:
-            return " Value"
-        case .action:
-            return " Action"
-        }
-    }
-}
-
 class ViewController: NSViewController {
+    
+    enum TableColumns: String {
+        case date
+        case value
+        case action
+        
+        var title: String {
+            switch self {
+            case .date:
+                return " Date"
+            case .value:
+                return " Value"
+            case .action:
+                return " Action"
+            }
+        }
+    }
     
     private var tableDataSource = [History]()
     

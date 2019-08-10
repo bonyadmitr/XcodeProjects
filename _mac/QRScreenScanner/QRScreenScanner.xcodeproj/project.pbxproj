@@ -22,6 +22,8 @@
 		CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */; };
 		CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */; };
 		CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */; };
+		CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */; };
+		CED1771722FECE52001F3CBE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1771622FECE52001F3CBE /* History.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 		CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarManager.swift; sourceTree = "<group>"; };
 		CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItemGroup.swift; sourceTree = "<group>"; };
 		CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWindowsManager.swift; sourceTree = "<group>"; };
+		CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataSource.swift; sourceTree = "<group>"; };
+		CED1771622FECE52001F3CBE /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
+				CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */,
+				CED1771622FECE52001F3CBE /* History.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
 				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
 				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
@@ -216,6 +222,7 @@
 			files = (
 				CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */,
 				CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */,
+				CED1771722FECE52001F3CBE /* History.swift in Sources */,
 				CEAD357422F9C2BE002CC59E /* NSButton+Init.swift in Sources */,
 				CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
@@ -223,6 +230,7 @@
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
 				CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */,
+				CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */,
 				CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */,
 				CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */,
 				CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */,
