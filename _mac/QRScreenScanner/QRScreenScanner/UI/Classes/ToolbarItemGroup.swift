@@ -36,9 +36,9 @@ final class ToolbarItemGroup: NSToolbarItemGroup {
             let item = subitems[safe: sender.selectedSegment],
             let action = item.action,
             let actionTarget = actionsTarget
-            else {
-                assertionFailure("Selected \(sender.selectedSegment) in \(subitems.count), target \(String(describing: self.actionsTarget))")
-                return
+        else {
+            assertionFailure("Selected \(sender.selectedSegment) in \(subitems.count), target \(String(describing: self.actionsTarget))")
+            return
         }
         
         NSApp.sendAction(action, to: actionTarget, from: nil)

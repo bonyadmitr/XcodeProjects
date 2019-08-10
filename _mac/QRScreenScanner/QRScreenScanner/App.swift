@@ -22,8 +22,6 @@ final class App {
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered,
                               defer: true)
-        //let window = NSWindow(contentViewController: ViewController())
-        //window.setInCenterOfScreen()
         window.title = App.name
         window.contentViewController = vc
         window.center()
@@ -31,15 +29,6 @@ final class App {
     }()
     
     func start() {
-        //        ScreenManager.disableHardwareMirroring()
-        //        ScreenManager.allDisplayImages()
-        //        ScreenManager.toggleMirroring()
-        
-        //        let window = ScreenManager.compositedWindow(for: "Google Chrome")
-        //        let w = ScreenManager.compositedWindowsByName()
-        //let e = ScreenManager.windowsByName()
-        //ScreenManager.visibleWindowsImages()
-        
         menuManager.setup()
         statusItemManager.setup()
         toolbarManager.addToWindow(window)

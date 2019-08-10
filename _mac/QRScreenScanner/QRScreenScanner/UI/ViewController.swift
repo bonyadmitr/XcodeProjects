@@ -197,7 +197,9 @@ extension ViewController: NSTableViewDataSource {
         
         if let url = URL(string: text) {
             NSWorkspace.shared.open(url)
-        } else if let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://www.google.com/search?q=\(q)") {
+        } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
+        {
             NSWorkspace.shared.open(url)
         } else {
             let alert = NSAlert()
