@@ -32,7 +32,17 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addTableView()
+
+        
+        
+//        addTableView()
+        
+//        if #available(OSX 10.13, *) {
+//            let q = DropView(frame: view.bounds)
+//            q.autoresizingMask = [.width, .height]
+//            view.addSubview(q)
+//        }
+        
         
         tableDataSource = HistoryDataSource.shared.history
         reloadDataSource()
@@ -48,7 +58,16 @@ class ViewController: NSViewController {
     
     override func loadView() {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
-        view = NSView(frame: frame)
+        if #available(OSX 10.13, *) {
+            let view = DropView2(frame: frame)
+            view.setup(ext: ["jpg", "jpeg", "bmp", "png", "gif"]) { filePath in
+                print(filePath)
+            }
+            
+            self.view = view
+        } else {
+            view = NSView(frame: frame)
+        }
     }
     
     private func reloadDataSource() {
@@ -63,6 +82,7 @@ class ViewController: NSViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
+//        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
         /// https://stackoverflow.com/a/55495391/5893286
         let menu = NSMenu()
@@ -208,6 +228,39 @@ extension ViewController: NSTableViewDataSource {
 extension ViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         reloadDataSource()
+    }
+    
+//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+//        return nil
+//    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        
+        guard let board = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+            let path = board.firstObject as? String
+        else {
+            return []
+        }
+        
+        let suffix = URL(fileURLWithPath: path).pathExtension
+        for ext in ["jpg", "jpeg", "bmp", "png", "gif"] {
+            if ext.lowercased() == suffix {
+                return .copy
+            }
+        }
+        return []
+    }
+    
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        
+        guard let pasteboard = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+            let path = pasteboard[0] as? String
+            else { return false }
+        
+        //GET YOUR FILE PATH !!!
+        print("FilePath: \(path)")
+        
+        return true
     }
 }
 
