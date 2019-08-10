@@ -176,7 +176,6 @@ class DropView: NSView {
 
 extension NSPasteboard.PasteboardType {
     
-    /// NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
     /// https://stackoverflow.com/a/46514780/5893286
     static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = {
         //return NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
@@ -218,7 +217,6 @@ class DropView2: NSView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-        //super.draw(dirtyRect)
         if isReceivingDrag {
             NSColor.selectedControlColor.set()
             let path = NSBezierPath(rect: bounds)
@@ -231,22 +229,16 @@ class DropView2: NSView {
         let isAllowed = isAllowedExtension(in: sender)
         isReceivingDrag = isAllowed
         return isAllowed ? .copy : NSDragOperation()//[]
-//        if isAllowedExtension(in: sender) {
-//            return .copy
-//        } else {
-//            //return []
-//            return NSDragOperation()
-//        }
     }
     
     fileprivate func isAllowedExtension(in sender: NSDraggingInfo) -> Bool {
-        /// https://stackoverflow.com/a/51344295/5893286
+        /// readObjects https://stackoverflow.com/a/51344295/5893286
         guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
             return false
         }
         let dropFileExtensions = dropUrls.map { $0.pathExtension }
         
-        /// if one file is allowed, will allow drop
+        /// or #1. if one file is allowed, will allow drop
         for fileExtension in dropFileExtensions {
             if allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
                 return true
@@ -254,32 +246,13 @@ class DropView2: NSView {
         }
         return false
         
-        /// if one file is not allowed, will not allow drop
+        /// or #2. if one file is not allowed, will not allow drop
         //for fileExtension in fileExtensions {
         //    if !allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
         //        return false
         //    }
         //}
         //return true
-        
-        
-        
-//        guard let board = drag.draggingPasteboard.propertyList(forType: .backwardsCompatibleFileURL) as? NSArray,
-//            let path = board.firstObject as? String
-//            else {
-//                return false
-//        }
-//        let suffix = URL(fileURLWithPath: path).pathExtension
-        
-//        for ext in self.expectedExt {
-//            if ext.caseInsensitiveCompare(suffix) == .orderedSame {
-//                return true
-//            }
-////            if ext.lowercased() == suffix.lowercased() {
-////                return true
-////            }
-//        }
-//        return false
     }
     
 //    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
@@ -287,14 +260,6 @@ class DropView2: NSView {
 //    }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        isReceivingDrag = false
-        
-//        guard let pasteboard = sender.draggingPasteboard.propertyList(forType: .backwardsCompatibleFileURL) as? NSArray,
-//            let path = pasteboard[0] as? String
-//        else {
-//            return false
-//        }
-        
         /// Convert the window-based coordinate to a view-relative coordinate
         /// start from left-bottom corner
         //let point = convert(sender.draggingLocation, from: nil)
@@ -314,7 +279,10 @@ class DropView2: NSView {
         return true
     }
     
-    override func draggingExited(_ sender: NSDraggingInfo?) {
+//    override func draggingExited(_ sender: NSDraggingInfo?) {
+//    }
+    
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         isReceivingDrag = false
     }
 }
