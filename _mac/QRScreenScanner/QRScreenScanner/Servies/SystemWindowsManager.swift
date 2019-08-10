@@ -127,7 +127,15 @@ final class SystemWindowsManager {
         let processId = processIdentifier(for: bundleId)
         let windowIds = windowsInfo()
             .filter { $0[kCGWindowOwnerPID as String] as? Int32 == processId }
-            .compactMap { $0[kCGWindowNumber as String] as? UInt }
+            .filter {
+                if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
+                    let height = boundsDict["Height"]
+                {
+                    /// 40 is magic number to filter small windows like App Menu (Height = 22)
+                    return height > 40
+                }
+                return false
+            }.compactMap { $0[kCGWindowNumber as String] as? UInt }
         
         return CGImage(windowListFromArrayScreenBounds: .null,
                        windowArray: cfarray(from: windowIds),
