@@ -92,6 +92,10 @@ extension App {
 
 import Cocoa
 
+/// https://stackoverflow.com/a/34278766/5893286
+/// https://stackoverflow.com/a/45518276/5893286
+/// https://www.raywenderlich.com/1016-drag-and-drop-tutorial-for-macos
+/// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DragandDrop/Tasks/DraggingFiles.html
 //@available(OSX 10.13, *)
 class DropView: NSView {
     
