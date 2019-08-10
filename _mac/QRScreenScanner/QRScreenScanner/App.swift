@@ -6,7 +6,6 @@ import Cocoa
 // TODO: https://developer.apple.com/library/archive/technotes/tn2083/_index.html
 
 // TODO: add delete all button
-// TODO: block next clicks on toolBarItem
 // TODO: drag and drop image
 // TODO: multi selection + action
 // TODO: feedback button

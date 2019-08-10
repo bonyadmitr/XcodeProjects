@@ -85,6 +85,11 @@ final class ToolbarManager: NSObject {
     }
     
     @objc private func windowsAction() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(windowsActionDelayed), object: nil)
+        perform(#selector(windowsActionDelayed), with: nil, afterDelay: 0.1)
+    }
+    
+    @objc private func windowsActionDelayed() {
         QRService.scanWindows()
     }
     
@@ -106,7 +111,7 @@ final class ToolbarManager: NSObject {
 extension ToolbarManager: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.flexibleSpace, .scanOptions, .flexibleSpace, .deleteAll]
+        return [.space, .flexibleSpace, .scanOptions, .flexibleSpace, .deleteAll]
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
