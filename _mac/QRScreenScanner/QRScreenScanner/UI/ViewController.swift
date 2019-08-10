@@ -57,8 +57,20 @@ class ViewController: NSViewController {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
         if #available(OSX 10.13, *) {
             let view = DropView(frame: frame)
-            view.setup(ext: ["jpg", "jpeg", "bmp", "png", "gif"]) { filePath in
-                print(filePath)
+            view.setup(ext: ["jpg", "jpeg", "bmp", "png", "gif"]) { filePaths in
+                
+                DispatchQueue.global().async {
+                    let qrDataSources = filePaths
+                        .compactMap { FileManager.default.contents(atPath: $0) }
+                        .compactMap { NSImage(data: $0) }
+                        .flatMap { CodeDetector.shared.readQR(from: $0) }
+                        .map { qrValue -> History in
+                            History(date: Date(), value: qrValue)
+                    }
+                    DispatchQueue.main.async {
+                        HistoryDataSource.shared.history += qrDataSources
+                    }
+                }
             }
             
             self.view = view
