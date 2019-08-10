@@ -93,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
-				CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */,
-				CED1771622FECE52001F3CBE /* History.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
 				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
 				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
@@ -123,6 +121,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		CED1771822FEEA47001F3CBE /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */,
+				CED1771622FECE52001F3CBE /* History.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
 		CEE5E1B022E6DEAA00B54D40 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +152,7 @@
 				CEAD357122F8029B002CC59E /* App.swift */,
 				CEAD357C22FBF220002CC59E /* Main */,
 				CEAD358122FDCB35002CC59E /* UI */,
+				CED1771822FEEA47001F3CBE /* Logic */,
 				CEAD358222FDCB84002CC59E /* Servies */,
 				CEAD357B22FBF1F9002CC59E /* Extensions */,
 			);
