@@ -97,7 +97,7 @@ extension ToolbarManager: NSToolbarDelegate {
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.screenOption, .screenshot, .windows, .space, .flexibleSpace]
+        return [.screenOption, .screenshot, .windows, .browser, .space, .flexibleSpace]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
