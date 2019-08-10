@@ -93,7 +93,7 @@ final class ToolbarManager: NSObject {
     }
     
     @objc private func deleteAllAction() {
-        HistoryModel.shared.historyDataSource = []
+        HistoryDataSource.shared.history = []
     }
     
     private func scanOptionsItem() -> NSToolbarItemGroup {

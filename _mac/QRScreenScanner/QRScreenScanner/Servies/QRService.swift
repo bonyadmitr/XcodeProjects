@@ -30,6 +30,6 @@ final class QRService {
         let qrDataSources = qrValues.map { qrValue -> History in
             History(date: Date(), value: qrValue)
         }
-        HistoryModel.shared.historyDataSource += qrDataSources
+        HistoryDataSource.shared.history += qrDataSources
     }
 }

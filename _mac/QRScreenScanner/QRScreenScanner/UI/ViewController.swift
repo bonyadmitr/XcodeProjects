@@ -19,12 +19,12 @@ final class History: NSObject, Codable {
     }
 }
 
-final class HistoryModel {
+final class HistoryDataSource {
     
-    static let shared = HistoryModel()
+    static let shared = HistoryDataSource()
     
     /// https://stackoverflow.com/a/48053492/5893286
-    var historyDataSource: [History] {
+    var history: [History] {
         get {
             if let storedObject: Data = UserDefaults.standard.data(forKey: "historyDataSource"),
                 let storedPlayer = try? PropertyListDecoder().decode([History].self, from: storedObject) {
@@ -44,8 +44,6 @@ final class HistoryModel {
     
     var didChanged: (([History]) -> Void)?
 }
-
-//typealias HistoryDataSource = [String: Any]
 
 enum TableColumns: String {
     case date
@@ -73,10 +71,10 @@ class ViewController: NSViewController {
         
         addTableView()
         
-        tableDataSource = HistoryModel.shared.historyDataSource
+        tableDataSource = HistoryDataSource.shared.history
         reloadDataSource()
         
-        HistoryModel.shared.didChanged = { [weak self] newHistoryDataSource in
+        HistoryDataSource.shared.didChanged = { [weak self] newHistoryDataSource in
             guard let self = self else {
                 return
             }
@@ -239,7 +237,7 @@ extension ViewController: NSTableViewDataSource {
         }
         
         tableDataSource.remove(at: tableView.clickedRow)
-        HistoryModel.shared.historyDataSource = tableDataSource
+        HistoryDataSource.shared.history = tableDataSource
         tableView.reloadData()
     }
 }
