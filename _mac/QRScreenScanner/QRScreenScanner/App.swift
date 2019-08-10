@@ -96,101 +96,7 @@ import Cocoa
 /// https://stackoverflow.com/a/45518276/5893286
 /// https://www.raywenderlich.com/1016-drag-and-drop-tutorial-for-macos
 /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DragandDrop/Tasks/DraggingFiles.html
-//@available(OSX 10.13, *)
 class DropView: NSView {
-    
-//    var filePath: String?
-    let expectedExt = ["jpg", "jpeg", "bmp", "png", "gif"]  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
-    
-    private let fileUrlType = NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
-    
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    private func setup() {
-//        self.wantsLayer = true
-//        self.layer?.backgroundColor = NSColor.gray.cgColor
-        
-        registerForDraggedTypes([fileUrlType])
-//        registerForDraggedTypes([.URL, .fileURL])
-    }
-    
-//    override func draw(_ dirtyRect: NSRect) {
-//        super.draw(dirtyRect)
-//        // Drawing code here.
-//    }
-    
-    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        if checkExtension(sender) == true {
-//            self.layer?.backgroundColor = NSColor.blue.cgColor
-            return .copy
-        } else {
-            return []//NSDragOperation()
-        }
-    }
-    
-    fileprivate func checkExtension(_ drag: NSDraggingInfo) -> Bool {
-        
-        guard let board = drag.draggingPasteboard.propertyList(forType: fileUrlType) as? NSArray,
-            let path = board.firstObject as? String
-        else {
-            return false
-        }
-        
-        let suffix = URL(fileURLWithPath: path).pathExtension
-        for ext in self.expectedExt {
-            if ext.lowercased() == suffix.lowercased() {
-                return true
-            }
-        }
-        return false
-    }
-    
-//    override func draggingExited(_ sender: NSDraggingInfo?) {
-//        self.layer?.backgroundColor = NSColor.gray.cgColor
-//    }
-//
-//    override func draggingEnded(_ sender: NSDraggingInfo) {
-//        self.layer?.backgroundColor = NSColor.gray.cgColor
-//    }
-    
-    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        guard let paths = sender.draggingPasteboard.propertyList(forType: fileUrlType) as? [String] else {
-            return false
-        }
-        
-        //GET YOUR FILE PATH !!!
-//        self.filePath = path
-        print(paths)
-        
-        return true
-    }
-}
-
-extension NSPasteboard.PasteboardType {
-    
-    /// https://stackoverflow.com/a/46514780/5893286
-    static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = {
-        //return NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
-        if #available(OSX 10.13, *) {
-            return NSPasteboard.PasteboardType.fileURL
-//            return NSPasteboard.PasteboardType.URL
-        } else {
-//            return NSPasteboard.PasteboardType(kUTTypeURL as String)
-            return NSPasteboard.PasteboardType(kUTTypeFileURL as String)
-        }
-    }()
-    
-}
-
-class DropView2: NSView {
     
     private var allowedExtensions = [String]()
     
@@ -285,4 +191,20 @@ class DropView2: NSView {
     override func draggingEnded(_ sender: NSDraggingInfo) {
         isReceivingDrag = false
     }
+}
+
+extension NSPasteboard.PasteboardType {
+    
+    /// https://stackoverflow.com/a/46514780/5893286
+    static let backwardsCompatibleFileURL: NSPasteboard.PasteboardType = {
+        //return NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
+        if #available(OSX 10.13, *) {
+            return .fileURL
+            //return .URL
+        } else {
+            return NSPasteboard.PasteboardType(kUTTypeFileURL as String)
+            //return NSPasteboard.PasteboardType(kUTTypeURL as String)
+        }
+    }()
+    
 }
