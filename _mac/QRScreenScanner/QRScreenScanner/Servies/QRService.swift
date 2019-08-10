@@ -27,8 +27,8 @@ final class QRService {
     }
     
     private static func saveQRValues(_ qrValues: [String]) {
-        let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
-            [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]
+        let qrDataSources = qrValues.map { qrValue -> History in
+            History(date: Date(), value: qrValue)
         }
         HistoryModel.shared.historyDataSource += qrDataSources
     }

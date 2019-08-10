@@ -8,24 +8,44 @@
 
 import Cocoa
 
+/// @objc and NSObject needs for NSSortDescriptor
+final class History: NSObject, Codable {
+    @objc let date: Date
+    @objc let value: String
+    
+    init(date: Date, value: String) {
+        self.date = date
+        self.value = value
+    }
+}
+
 final class HistoryModel {
     
     static let shared = HistoryModel()
     
-    var historyDataSource: [HistoryDataSource] {
+    /// https://stackoverflow.com/a/48053492/5893286
+    var historyDataSource: [History] {
         get {
-            return UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] ?? []
+            if let storedObject: Data = UserDefaults.standard.data(forKey: "historyDataSource"),
+                let storedPlayer = try? PropertyListDecoder().decode([History].self, from: storedObject) {
+                return storedPlayer
+            }
+            return []
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "historyDataSource")
+            guard let data = try? PropertyListEncoder().encode(newValue) else {
+                assertionFailure()
+                return
+            }
+            UserDefaults.standard.set(data, forKey: "historyDataSource")
             didChanged?(newValue)
         }
     }
     
-    var didChanged: (([HistoryDataSource]) -> Void)?
+    var didChanged: (([History]) -> Void)?
 }
 
-typealias HistoryDataSource = [String: Any]
+//typealias HistoryDataSource = [String: Any]
 
 enum TableColumns: String {
     case date
@@ -46,7 +66,7 @@ enum TableColumns: String {
 
 class ViewController: NSViewController {
     
-    private var tableDataSource = [HistoryDataSource]()
+    private var tableDataSource = [History]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,8 +151,8 @@ class ViewController: NSViewController {
         tableView.autosaveTableColumns = true
         
         /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TableView/SortingTableViews/SortingTableViews.html
-        let dateSortDescriptor = NSSortDescriptor(key: TableColumns.date.rawValue, ascending: false)
-        let valueSortDescriptor = NSSortDescriptor(key: TableColumns.value.rawValue, ascending: true)
+        let dateSortDescriptor = NSSortDescriptor(key: #keyPath(History.date), ascending: false)
+        let valueSortDescriptor = NSSortDescriptor(key: #keyPath(History.value), ascending: true)
         tableView.sortDescriptors = [dateSortDescriptor, valueSortDescriptor]
         column1.sortDescriptorPrototype = dateSortDescriptor
         column2.sortDescriptorPrototype = valueSortDescriptor
@@ -170,14 +190,10 @@ extension ViewController: NSTableViewDataSource {
 
         switch columnType {
         case .date:
-            guard let date = tableDataSource[row][TableColumns.date.rawValue] as? Date else {
-                assertionFailure()
-                return nil
-            }
-
+            let date = tableDataSource[row].date
             return dateFormatter.string(from: date)
         case .value:
-            return tableDataSource[row][TableColumns.value.rawValue]
+            return tableDataSource[row].value
         case .action:
             return nil
         }
@@ -186,10 +202,7 @@ extension ViewController: NSTableViewDataSource {
     @objc private func actionButtonCell(_ button: NSButtonCell) {
         print(tableView.selectedRow)
         
-        guard let text = tableDataSource[tableView.selectedRow][TableColumns.value.rawValue] as? String else {
-            assertionFailure()
-            return
-        }
+        let text = tableDataSource[tableView.selectedRow].value
         
         if let url = URL(string: text) {
             NSWorkspace.shared.open(url)
@@ -210,10 +223,7 @@ extension ViewController: NSTableViewDataSource {
             return
         }
         
-        guard let text = tableDataSource[tableView.clickedRow][TableColumns.value.rawValue] as? String else {
-            assertionFailure()
-            return
-        }
+        let text = tableDataSource[tableView.selectedRow].value
         
         // TODO: test set declareTypes one time
         /// https://stackoverflow.com/a/34902953/5893286
