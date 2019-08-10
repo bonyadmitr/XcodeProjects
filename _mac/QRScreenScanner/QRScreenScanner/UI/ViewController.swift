@@ -211,7 +211,7 @@ extension ViewController: NSTableViewDelegate {
     }
 }
 
-extension MutableCollection where Self : RandomAccessCollection {
+extension MutableCollection where Self: RandomAccessCollection, Element: NSObject {
     
     /// https://stackoverflow.com/a/42313342/5893286
     /// Sort `self` in-place using criteria stored in a NSSortDescriptors array
