@@ -30,12 +30,6 @@ final class QRService {
         let qrDataSources = qrValues.map { qrValue -> HistoryDataSource in
             [TableColumns.date.rawValue: Date(),TableColumns.value.rawValue: qrValue]
         }
-        let tableDataSource: [HistoryDataSource]
-        if let tableDataSourceOld = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
-            tableDataSource = tableDataSourceOld + qrDataSources
-        } else {
-            tableDataSource = qrDataSources
-        }
-        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
+        HistoryModel.shared.historyDataSource += qrDataSources
     }
 }

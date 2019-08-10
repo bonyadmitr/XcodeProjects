@@ -8,6 +8,23 @@
 
 import Cocoa
 
+final class HistoryModel {
+    
+    static let shared = HistoryModel()
+    
+    var historyDataSource: [HistoryDataSource] {
+        get {
+            return UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "historyDataSource")
+            didChanged?(newValue)
+        }
+    }
+    
+    var didChanged: (([HistoryDataSource]) -> Void)?
+}
+
 typealias HistoryDataSource = [String: Any]
 
 enum TableColumns: String {
@@ -34,10 +51,18 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.addObserver(self, forKeyPath: "historyDataSource", options: .new, context: nil)
-        
         addTableView()
+        
+        tableDataSource = HistoryModel.shared.historyDataSource
         reloadDataSource()
+        
+        HistoryModel.shared.didChanged = { [weak self] newHistoryDataSource in
+            guard let self = self else {
+                return
+            }
+            self.tableDataSource = newHistoryDataSource
+            self.reloadDataSource()
+        }
     }
     
     override func loadView() {
@@ -45,26 +70,9 @@ class ViewController: NSViewController {
         view = NSView(frame: frame)
     }
     
-    deinit {
-        UserDefaults.standard.removeObserver(self, forKeyPath: "historyDataSource")
-    }
-    
     private func reloadDataSource() {
-        tableDataSource = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] ?? []
         tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
         tableView.reloadData()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?,
-                               of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
-                               context: UnsafeMutableRawPointer?) {
-        switch keyPath {
-        case "historyDataSource":
-            reloadDataSource()
-        default:
-            assertionFailure()
-        }
     }
     
     private let tableView = NSTableView()
@@ -221,15 +229,14 @@ extension ViewController: NSTableViewDataSource {
         }
         
         tableDataSource.remove(at: tableView.clickedRow)
-        UserDefaults.standard.set(tableDataSource, forKey: "historyDataSource")
+        HistoryModel.shared.historyDataSource = tableDataSource
         tableView.reloadData()
     }
 }
 
 extension ViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-        tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
-        tableView.reloadData()
+        reloadDataSource()
     }
 }
 
