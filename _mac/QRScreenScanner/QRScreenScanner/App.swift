@@ -8,6 +8,17 @@ import Cocoa
 // TODO: fix horizonal scroll
 // TODO: saving window size
 
+
+// TODO: block next clicks on toolBarItem
+// TODO: drag and drop image
+// TODO: multi selection + action
+// TODO: feedback button
+
+// TODO: view bases tableview
+// TODO: delete button in table
+// TODO: multiline text
+
+
 final class App {
     
     static let shared = App()
