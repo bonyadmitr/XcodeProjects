@@ -5,6 +5,7 @@ private extension NSToolbarItem.Identifier {
     static let screenshot = NSToolbarItem.Identifier("screenshot")
     static let windows = NSToolbarItem.Identifier("windows")
     static let browser = NSToolbarItem.Identifier("browser")
+    static let deleteAll = NSToolbarItem.Identifier("deleteAll")
 }
 
 private extension NSToolbar.Identifier {
@@ -64,11 +65,19 @@ final class ToolbarManager: NSObject {
     }
     
     func browserItem() -> NSToolbarItem {
-        return NSToolbarItem(itemIdentifier: .windows,
+        return NSToolbarItem(itemIdentifier: .browser,
                              label: "Browser",
                              image: NSImage(named: NSImage.networkName),
                              target: self,
-                             action: #selector(windowsAction))
+                             action: #selector(browserAction))
+    }
+    
+    func deleteAllItem() -> NSToolbarItem {
+        return NSToolbarItem(itemIdentifier: .deleteAll,
+                             label: "DeleteAll",
+                             image: NSImage(named: NSImage.trashFullName),
+                             target: self,
+                             action: #selector(deleteAllAction))
     }
     
     @objc private func screenshotAction() {
@@ -83,6 +92,11 @@ final class ToolbarManager: NSObject {
         QRService.scanBrowser()
     }
     
+    @objc private func deleteAllAction() {
+        UserDefaults.standard.removeObject(forKey: "historyDataSource")
+        //UserDefaults.standard.set([], forKey: "historyDataSource")
+    }
+    
     func segmentedControl() -> NSToolbarItemGroup {
         let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem(), browserItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
@@ -93,11 +107,11 @@ final class ToolbarManager: NSObject {
 extension ToolbarManager: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.flexibleSpace, .screenOption, .flexibleSpace]
+        return [.flexibleSpace, .screenOption, .flexibleSpace, .deleteAll]
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.screenOption, .screenshot, .windows, .browser, .space, .flexibleSpace]
+        return [.screenOption, .screenshot, .windows, .browser, .deleteAll, .space, .flexibleSpace]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
@@ -111,6 +125,8 @@ extension ToolbarManager: NSToolbarDelegate {
             return segmentedControl()
         case .browser:
             return browserItem()
+        case .deleteAll:
+            return deleteAllItem()
         default:
             assertionFailure()
         }

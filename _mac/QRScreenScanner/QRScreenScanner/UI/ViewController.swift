@@ -50,9 +50,7 @@ class ViewController: NSViewController {
     }
     
     private func reloadDataSource() {
-        if let tableDataSource = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] {
-            self.tableDataSource = tableDataSource
-        }
+        tableDataSource = UserDefaults.standard.array(forKey: "historyDataSource") as? [HistoryDataSource] ?? []
         tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
         tableView.reloadData()
     }
