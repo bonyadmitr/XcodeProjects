@@ -102,6 +102,8 @@ class DropView: NSView {
 //    var filePath: String?
     let expectedExt = ["jpg", "jpeg", "bmp", "png", "gif"]  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
     
+    private let fileUrlType = NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")
+    
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         setup()
@@ -116,7 +118,7 @@ class DropView: NSView {
 //        self.wantsLayer = true
 //        self.layer?.backgroundColor = NSColor.gray.cgColor
         
-        registerForDraggedTypes([.backwardsCompatibleFileURL])
+        registerForDraggedTypes([fileUrlType])
 //        registerForDraggedTypes([.URL, .fileURL])
     }
     
@@ -136,15 +138,15 @@ class DropView: NSView {
     
     fileprivate func checkExtension(_ drag: NSDraggingInfo) -> Bool {
         
-        guard let board = drag.draggingPasteboard.propertyList(forType: .backwardsCompatibleFileURL) as? NSArray,
+        guard let board = drag.draggingPasteboard.propertyList(forType: fileUrlType) as? NSArray,
             let path = board.firstObject as? String
         else {
             return false
         }
-    
+        
         let suffix = URL(fileURLWithPath: path).pathExtension
         for ext in self.expectedExt {
-            if ext.lowercased() == suffix {
+            if ext.lowercased() == suffix.lowercased() {
                 return true
             }
         }
@@ -160,13 +162,13 @@ class DropView: NSView {
 //    }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        guard let pasteboard = sender.draggingPasteboard.propertyList(forType: .backwardsCompatibleFileURL) as? NSArray,
-            let path = pasteboard[0] as? String
-            else { return false }
+        guard let paths = sender.draggingPasteboard.propertyList(forType: fileUrlType) as? [String] else {
+            return false
+        }
         
         //GET YOUR FILE PATH !!!
 //        self.filePath = path
-        print("FilePath: \(path)")
+        print(paths)
         
         return true
     }
