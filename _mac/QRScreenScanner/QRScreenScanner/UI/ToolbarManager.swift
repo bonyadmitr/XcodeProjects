@@ -1,10 +1,10 @@
 import Cocoa
 
 private extension NSToolbarItem.Identifier {
-    static let screenOption = NSToolbarItem.Identifier("screenOption")
-    static let screenshot = NSToolbarItem.Identifier("screenshot")
-    static let windows = NSToolbarItem.Identifier("windows")
-    static let browser = NSToolbarItem.Identifier("browser")
+    static let scanOptions = NSToolbarItem.Identifier("scanOptions")
+    static let scanScreenshot = NSToolbarItem.Identifier("scanScreenshot")
+    static let scanWindows = NSToolbarItem.Identifier("scanWindows")
+    static let scanBrowser = NSToolbarItem.Identifier("scanBrowser")
     static let deleteAll = NSToolbarItem.Identifier("deleteAll")
 }
 
@@ -49,7 +49,7 @@ final class ToolbarManager: NSObject {
     }
     
     private func screenshotItem() -> NSToolbarItem {
-        return NSToolbarItem(itemIdentifier: .screenshot,
+        return NSToolbarItem(itemIdentifier: .scanScreenshot,
                              label: "Screenshot",
                              image: NSImage(named: NSImage.flowViewTemplateName),
                              target: self,
@@ -57,7 +57,7 @@ final class ToolbarManager: NSObject {
     }
     
     private func windowsItem() -> NSToolbarItem {
-        return NSToolbarItem(itemIdentifier: .windows,
+        return NSToolbarItem(itemIdentifier: .scanWindows,
                              label: "Windows",
                              image: NSImage(named: NSImage.iconViewTemplateName),
                              target: self,
@@ -65,7 +65,7 @@ final class ToolbarManager: NSObject {
     }
     
     private func browserItem() -> NSToolbarItem {
-        return NSToolbarItem(itemIdentifier: .browser,
+        return NSToolbarItem(itemIdentifier: .scanBrowser,
                              label: "Browser",
                              image: NSImage(named: NSImage.networkName),
                              target: self,
@@ -97,8 +97,8 @@ final class ToolbarManager: NSObject {
         //UserDefaults.standard.set([], forKey: "historyDataSource")
     }
     
-    private func segmentedControl() -> NSToolbarItemGroup {
-        let itemGroup = ToolbarItemGroup(itemIdentifier: .screenOption, items: [screenshotItem(), windowsItem(), browserItem()], itemsWidth: 70)
+    private func scanOptionsItem() -> NSToolbarItemGroup {
+        let itemGroup = ToolbarItemGroup(itemIdentifier: .scanOptions, items: [screenshotItem(), windowsItem(), browserItem()], itemsWidth: 70)
         itemGroup.actionsTarget = self
         return itemGroup
     }
@@ -107,23 +107,23 @@ final class ToolbarManager: NSObject {
 extension ToolbarManager: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.flexibleSpace, .screenOption, .flexibleSpace, .deleteAll]
+        return [.flexibleSpace, .scanOptions, .flexibleSpace, .deleteAll]
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [.screenOption, .screenshot, .windows, .browser, .deleteAll, .space, .flexibleSpace]
+        return [.scanOptions, .scanScreenshot, .scanWindows, .scanBrowser, .deleteAll, .space, .flexibleSpace]
     }
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         
         switch itemIdentifier {
-        case .screenshot:
+        case .scanScreenshot:
             return screenshotItem()
-        case .windows:
+        case .scanWindows:
             return windowsItem()
-        case .screenOption:
-            return segmentedControl()
-        case .browser:
+        case .scanOptions:
+            return scanOptionsItem()
+        case .scanBrowser:
             return browserItem()
         case .deleteAll:
             return deleteAllItem()
