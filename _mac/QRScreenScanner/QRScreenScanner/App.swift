@@ -17,7 +17,15 @@ final class App {
     let toolbarManager = ToolbarManager()
     
     private let window: NSWindow = {
-        let window = NSWindow(contentViewController: ViewController())
+        let vc = ViewController()
+        let window = NSWindow(contentRect: vc.view.frame,
+                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                              backing: .buffered,
+                              defer: true)
+        //let window = NSWindow(contentViewController: ViewController())
+        //window.setInCenterOfScreen()
+        //window.title = App.name
+        window.contentViewController = vc
         window.center()
         return window
     }()
@@ -34,12 +42,9 @@ final class App {
         
         menuManager.setup()
         statusItemManager.setup()
-        showWindow()
-        
         toolbarManager.addToWindow(window)
+        showWindow()
     }
-    
-    
     
     func showWindow() {
         window.makeKeyAndOrderFront(nil)
