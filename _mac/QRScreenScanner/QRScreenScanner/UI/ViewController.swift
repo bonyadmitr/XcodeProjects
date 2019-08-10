@@ -27,16 +27,6 @@ enum TableColumns: String {
     }
 }
 
-// TODO: window setup + title
-// TODO: clear controller
-
-// TODO: handler delete button
-// TODO: add delete all button
-// TODO: Multiline text
-// TODO: Quick Alert nothing found
-// TODO: Add contact from qr
-// TODO: Icon
-// TODO: Status icon
 class ViewController: NSViewController {
     
     private var tableDataSource = [HistoryDataSource]()

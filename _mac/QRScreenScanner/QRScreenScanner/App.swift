@@ -8,7 +8,7 @@ import Cocoa
 // TODO: fix horizonal scroll
 // TODO: saving window size
 
-
+// TODO: add delete all button
 // TODO: block next clicks on toolBarItem
 // TODO: drag and drop image
 // TODO: multi selection + action
@@ -18,6 +18,12 @@ import Cocoa
 // TODO: delete button in table
 // TODO: multiline text
 
+// TODO: clear controller
+
+// TODO: Quick Alert nothing found
+// TODO: Add contact from qr
+// TODO: Icon
+// TODO: Status icon
 
 final class App {
     
