@@ -98,10 +98,13 @@ import Cocoa
 /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DragandDrop/Tasks/DraggingFiles.html
 class DropView: NSView {
     
-    private var fileTypes = [String]()
+    /// "fileTypes" should be set before using "filteringOptions"
+    private lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: fileTypes]
     
+    private var fileTypes = [String]()
     private var handler: ((_ paths: [String]) -> Void)?
     
+    /// call before using Drag&Drop
     func setup(fileTypes: [String], handler: @escaping (_ paths: [String]) -> Void) {
         self.fileTypes = fileTypes
         self.handler = handler
@@ -132,81 +135,29 @@ class DropView: NSView {
     }
     
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        let isAllowed = isAllowedExtension(in: sender)
+        let isAllowed = isAllowedDraging(in: sender)
         isReceivingDrag = isAllowed
-        return isAllowed ? .copy : NSDragOperation()//[]
+        return isAllowed ? .copy : NSDragOperation()
     }
     
-    private lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: fileTypes]
-    
-    fileprivate func isAllowedExtension(in sender: NSDraggingInfo) -> Bool {
+    fileprivate func isAllowedDraging(in sender: NSDraggingInfo) -> Bool {
         return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self], options: filteringOptions)
-        
-//        var canAccept = false
-//
-//        //2.
-//        let pasteBoard = sender.draggingPasteboard
-//        //let q = NSURL(from: pasteBoard)
-//        //3.
-//        if pasteBoard.canReadObject(forClasses: [NSURL.self], options: filteringOptions) {
-//            canAccept = true
-//        }
-////        else if let types = pasteBoard.types, nonURLTypes.intersection(types).count > 0 {
-////            canAccept = true
-////        }
-//        return canAccept
-        
-        
-        /// readObjects https://stackoverflow.com/a/51344295/5893286
-//        guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
-//            return false
-//        }
-//        let dropFileExtensions = dropUrls.map { $0.pathExtension }
-//
-//        /// or #1. if one file is allowed, will allow drop
-//        for fileExtension in dropFileExtensions {
-//            if allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
-//                return true
-//            }
-//        }
-//        return false
-        
-        /// or #2. if one file is not allowed, will not allow drop
-        //for fileExtension in fileExtensions {
-        //    if !allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
-        //        return false
-        //    }
-        //}
-        //return true
     }
     
     override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        return isAllowedExtension(in: sender)
+        return isAllowedDraging(in: sender)
     }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        /// Convert the window-based coordinate to a view-relative coordinate
-        /// start from left-bottom corner
-        //let point = convert(sender.draggingLocation, from: nil)
-        //print(point)
-        
         guard let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: filteringOptions) as? [URL] else {
             assertionFailure()
             return false
         }
-        assert(!urls.isEmpty, "one url must exists here")
+        assert(!urls.isEmpty, "one url must exists here. urls filtered by isAllowedDraging")
         let paths = urls.map { $0.path }
-//            .filter { url in
-//                fileTypes.contains(where: {
-//                    $0.caseInsensitiveCompare(url.pathExtension) == .orderedSame
-//                })
-//            }.map { $0.path }
         handler?(paths)
         return true
     }
-    
-//    override func draggingExited(_ sender: NSDraggingInfo?) {
-//    }
     
     override func draggingEnded(_ sender: NSDraggingInfo) {
         isReceivingDrag = false
