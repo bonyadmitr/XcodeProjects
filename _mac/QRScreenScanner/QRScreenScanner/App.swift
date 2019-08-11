@@ -137,20 +137,39 @@ class DropView: NSView {
         return isAllowed ? .copy : NSDragOperation()//[]
     }
     
+    private let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: NSImage.imageTypes]
+    
     fileprivate func isAllowedExtension(in sender: NSDraggingInfo) -> Bool {
-        /// readObjects https://stackoverflow.com/a/51344295/5893286
-        guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
-            return false
-        }
-        let dropFileExtensions = dropUrls.map { $0.pathExtension }
+        return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self], options: filteringOptions)
         
-        /// or #1. if one file is allowed, will allow drop
-        for fileExtension in dropFileExtensions {
-            if allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
-                return true
-            }
-        }
-        return false
+//        var canAccept = false
+//
+//        //2.
+//        let pasteBoard = sender.draggingPasteboard
+//        //let q = NSURL(from: pasteBoard)
+//        //3.
+//        if pasteBoard.canReadObject(forClasses: [NSURL.self], options: filteringOptions) {
+//            canAccept = true
+//        }
+////        else if let types = pasteBoard.types, nonURLTypes.intersection(types).count > 0 {
+////            canAccept = true
+////        }
+//        return canAccept
+        
+        
+        /// readObjects https://stackoverflow.com/a/51344295/5893286
+//        guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
+//            return false
+//        }
+//        let dropFileExtensions = dropUrls.map { $0.pathExtension }
+//
+//        /// or #1. if one file is allowed, will allow drop
+//        for fileExtension in dropFileExtensions {
+//            if allowedExtensions.contains(where: { $0.caseInsensitiveCompare(fileExtension) == .orderedSame }) {
+//                return true
+//            }
+//        }
+//        return false
         
         /// or #2. if one file is not allowed, will not allow drop
         //for fileExtension in fileExtensions {
@@ -175,6 +194,7 @@ class DropView: NSView {
             assertionFailure()
             return false
         }
+        assert(!urls.isEmpty, "one url must exists here")
         let paths = urls
             .filter { url in
                 allowedExtensions.contains(where: {
