@@ -296,7 +296,6 @@ final class CodeDetector {
     
     static let shared = CodeDetector()
     
-    /// native
     func readQR(from image: NSImage) -> [String] {
         guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
             assertionFailure("cgImage convert problem")
@@ -307,8 +306,8 @@ final class CodeDetector {
     
     func readQR(from image: CGImage) -> [String] {
         guard let detector = CIDetector(ofType: CIDetectorTypeQRCode,
-                                     context: nil,
-                                     options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+                                        context: nil,
+                                        options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
         else {
             assertionFailure("nil in simulator, A7 core +")
             return []
@@ -321,6 +320,6 @@ final class CodeDetector {
             return []
         }
         
-        return features.compactMap({$0.messageString})
+        return features.compactMap { $0.messageString }
     }
 }
