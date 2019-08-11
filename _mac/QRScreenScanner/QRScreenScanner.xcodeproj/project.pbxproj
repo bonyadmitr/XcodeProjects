@@ -10,6 +10,7 @@
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
 		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
 		CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336722FDCF5100984201 /* CGError+Assert.swift */; };
+		CE958DBB230039BB00869FAF /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE958DBA230039BB00869FAF /* DropView.swift */; };
 		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
 		CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356D22F80247002CC59E /* MenuManager.swift */; };
 		CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356F22F80273002CC59E /* StatusItemManager.swift */; };
@@ -33,6 +34,7 @@
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
 		CE92336722FDCF5100984201 /* CGError+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGError+Assert.swift"; sourceTree = "<group>"; };
+		CE958DBA230039BB00869FAF /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEAD356D22F80247002CC59E /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CEAD356F22F80273002CC59E /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */,
+				CE958DBA230039BB00869FAF /* DropView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				CEAD357E22FDCAD2002CC59E /* System.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
+				CE958DBB230039BB00869FAF /* DropView.swift in Sources */,
 				CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */,
 				CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */,
 				CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */,
