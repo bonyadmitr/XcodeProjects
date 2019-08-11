@@ -35,9 +35,12 @@ class ViewController: NSViewController {
         addTableView()
         
 //        if #available(OSX 10.13, *) {
-//            let q = DropView(frame: view.bounds)
-//            q.autoresizingMask = [.width, .height]
-//            view.addSubview(q)
+//            let dropView = DropView(frame: view.bounds)
+//            dropView.setup(isSubview: true, fileTypes: NSImage.imageTypes) { filePaths in
+//                QRService.scanFiles(at: filePaths)
+//            }
+//            dropView.autoresizingMask = [.width, .height]
+//            view.addSubview(dropView)
 //        }
         
         
@@ -55,12 +58,14 @@ class ViewController: NSViewController {
     
     override func loadView() {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
+        //        view = NSView(frame: frame)
+        
         if #available(OSX 10.13, *) {
             let view = DropView(frame: frame)
-            view.setup(fileTypes: NSImage.imageTypes) { filePaths in
+            view.setup(isSubview: false, fileTypes: NSImage.imageTypes) { filePaths in
                 QRService.scanFiles(at: filePaths)
             }
-            
+
             self.view = view
         } else {
             view = NSView(frame: frame)

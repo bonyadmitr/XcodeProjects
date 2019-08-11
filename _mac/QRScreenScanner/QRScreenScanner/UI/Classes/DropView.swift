@@ -9,11 +9,13 @@ class DropView: NSView {
     /// "fileTypes" should be set before using "filteringOptions"
     private lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: fileTypes]
     
+    private var isSubview = true
     private var fileTypes = [String]()
     private var handler: ((_ paths: [String]) -> Void)?
     
     /// call before using Drag&Drop
-    func setup(fileTypes: [String], handler: @escaping (_ paths: [String]) -> Void) {
+    func setup(isSubview: Bool, fileTypes: [String], handler: @escaping (_ paths: [String]) -> Void) {
+        self.isSubview = isSubview
         self.fileTypes = fileTypes
         self.handler = handler
         startDraggind()
@@ -31,6 +33,12 @@ class DropView: NSView {
         didSet {
             needsDisplay = true
         }
+    }
+    
+    //we override hitTest so that this view which sits at the top of the view hierachy
+    //appears transparent to mouse clicks
+    override func hitTest(_ aPoint: NSPoint) -> NSView? {
+        return isSubview ? nil : super.hitTest(aPoint)
     }
     
     override func draw(_ dirtyRect: NSRect) {
