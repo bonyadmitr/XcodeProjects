@@ -57,7 +57,7 @@ class ViewController: NSViewController {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
         if #available(OSX 10.13, *) {
             let view = DropView(frame: frame)
-            view.setup(ext: ["jpg", "jpeg", "bmp", "png", "gif"]) { filePaths in
+            view.setup(fileTypes: NSImage.imageTypes) { filePaths in
                 QRService.scanFiles(at: filePaths)
             }
             

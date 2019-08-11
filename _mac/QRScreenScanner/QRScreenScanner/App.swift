@@ -98,12 +98,12 @@ import Cocoa
 /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DragandDrop/Tasks/DraggingFiles.html
 class DropView: NSView {
     
-    private var allowedExtensions = [String]()
+    private var fileTypes = [String]()
     
     private var handler: ((_ paths: [String]) -> Void)?
     
-    func setup(ext: [String], handler: @escaping (_ paths: [String]) -> Void) {
-        self.allowedExtensions = ext
+    func setup(fileTypes: [String], handler: @escaping (_ paths: [String]) -> Void) {
+        self.fileTypes = fileTypes
         self.handler = handler
         startDraggind()
     }
@@ -137,7 +137,7 @@ class DropView: NSView {
         return isAllowed ? .copy : NSDragOperation()//[]
     }
     
-    private let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: NSImage.imageTypes]
+    private lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: fileTypes]
     
     fileprivate func isAllowedExtension(in sender: NSDraggingInfo) -> Bool {
         return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self], options: filteringOptions)
@@ -180,9 +180,9 @@ class DropView: NSView {
         //return true
     }
     
-//    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-//        return true
-//    }
+    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        return isAllowedExtension(in: sender)
+    }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         /// Convert the window-based coordinate to a view-relative coordinate
@@ -190,17 +190,17 @@ class DropView: NSView {
         //let point = convert(sender.draggingLocation, from: nil)
         //print(point)
         
-        guard let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
+        guard let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: filteringOptions) as? [URL] else {
             assertionFailure()
             return false
         }
         assert(!urls.isEmpty, "one url must exists here")
-        let paths = urls
-            .filter { url in
-                allowedExtensions.contains(where: {
-                    $0.caseInsensitiveCompare(url.pathExtension) == .orderedSame
-                })
-            }.map { $0.path }
+        let paths = urls.map { $0.path }
+//            .filter { url in
+//                fileTypes.contains(where: {
+//                    $0.caseInsensitiveCompare(url.pathExtension) == .orderedSame
+//                })
+//            }.map { $0.path }
         handler?(paths)
         return true
     }
