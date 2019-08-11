@@ -27,60 +27,30 @@ class ViewController: NSViewController {
         }
     }
     
+    private let tableView = NSTableView()
     private var tableDataSource = [History]()
+    
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
+    
+    override func loadView() {
+        let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
+        view = NSView(frame: frame)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addTableView()
+        setupHistoryDataSource()
         
-        /// call the last to add on the top
+        /// call the last to add view on the top
         addDropView()
-        
-        tableDataSource = HistoryDataSource.shared.history
-        reloadDataSource()
-        
-        HistoryDataSource.shared.didChanged = { [weak self] newHistoryDataSource in
-            guard let self = self else {
-                return
-            }
-            self.tableDataSource = newHistoryDataSource
-            self.reloadDataSource()
-        }
     }
-    
-    /// call the last to add on the top
-    private func addDropView() {
-        let dropView = DropView(frame: view.bounds)
-        dropView.setup(isSubview: true, fileTypes: NSImage.imageTypes) { filePaths in
-            QRService.scanFiles(at: filePaths)
-        }
-        dropView.autoresizingMask = [.width, .height]
-        view.addSubview(dropView)
-    }
-    
-    override func loadView() {
-        let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
-        view = NSView(frame: frame)
-        
-//        if #available(OSX 10.13, *) {
-//            let view = DropView(frame: frame)
-//            view.setup(isSubview: false, fileTypes: NSImage.imageTypes) { filePaths in
-//                QRService.scanFiles(at: filePaths)
-//            }
-//
-//            self.view = view
-//        } else {
-//            view = NSView(frame: frame)
-//        }
-    }
-    
-    private func reloadDataSource() {
-        tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
-        tableView.reloadData()
-    }
-    
-    private let tableView = NSTableView()
     
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
@@ -150,12 +120,34 @@ class ViewController: NSViewController {
         view.addSubview(tableContainer)
     }
     
-    private let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-        return dateFormatter
-    }()
+    private func setupHistoryDataSource() {
+        tableDataSource = HistoryDataSource.shared.history
+        reloadDataSource()
+        
+        /// subscribe on changes
+        HistoryDataSource.shared.didChanged = { [weak self] newHistoryDataSource in
+            guard let self = self else {
+                return
+            }
+            self.tableDataSource = newHistoryDataSource
+            self.reloadDataSource()
+        }
+    }
+    
+    private func reloadDataSource() {
+        tableDataSource.sort(sortDescriptors: tableView.sortDescriptors)
+        tableView.reloadData()
+    }
+    
+    /// call the last to add view on the top
+    private func addDropView() {
+        let dropView = DropView(frame: view.bounds)
+        dropView.setup(isSubview: true, fileTypes: NSImage.imageTypes) { filePaths in
+            QRService.scanFiles(at: filePaths)
+        }
+        dropView.autoresizingMask = [.width, .height]
+        view.addSubview(dropView)
+    }
 }
 
 extension ViewController: NSTableViewDataSource {
