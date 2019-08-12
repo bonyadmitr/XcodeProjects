@@ -75,6 +75,10 @@ class DropView: NSView {
         return true
     }
     
+    override func draggingExited(_ sender: NSDraggingInfo?) {
+        isReceivingDrag = false
+    }
+    
     override func draggingEnded(_ sender: NSDraggingInfo) {
         isReceivingDrag = false
     }
