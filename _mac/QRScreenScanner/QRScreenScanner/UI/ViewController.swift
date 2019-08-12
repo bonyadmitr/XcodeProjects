@@ -27,7 +27,7 @@ class ViewController: NSViewController {
         }
     }
     
-    private let tableView = NSTableView()
+    private let tableView = CustomTableView()
     private var tableDataSource = [History]()
     
     private let dateFormatter: DateFormatter = {
@@ -367,5 +367,18 @@ final class CodeDetector {
         }
         
         return features.compactMap { $0.messageString }
+    }
+}
+
+final class CustomTableView: NSTableView {
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let location = convert(event.locationInWindow, from: nil)
+        let selectedRow = row(at: location)
+        
+        if selectedRow == -1 {
+            return nil
+        } else {
+            return super.menu(for: event)
+        }
     }
 }
