@@ -57,6 +57,7 @@ class ViewController: NSViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsMultipleSelection = true
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
         /// https://stackoverflow.com/a/55495391/5893286
@@ -198,16 +199,24 @@ extension ViewController: NSTableViewDataSource {
     @objc private func tableViewCopyItemClicked(_ sender: AnyObject) {
         
         guard tableView.clickedRow >= 0 else {
+            assertionFailure("should be never call")
             return
         }
         
-        let text = tableDataSource[tableView.selectedRow].value
+        let copiedText: String
+        if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+            copiedText = tableView.selectedRowIndexes
+                .compactMap { tableDataSource[$0].value }
+                .joined(separator: "\n")
+        } else {
+            copiedText = tableDataSource[tableView.clickedRow].value
+        }
         
         // TODO: test set declareTypes one time
         /// https://stackoverflow.com/a/34902953/5893286
         //NSPasteboard.general.clearContents()
         NSPasteboard.general.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-        NSPasteboard.general.setString(text, forType: NSPasteboard.PasteboardType.string)
+        NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
     }
     
     @objc private func tableViewDeleteItemClicked(_ sender: AnyObject) {
