@@ -52,6 +52,14 @@ class ViewController: NSViewController {
         addDropView()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        let deleteMenuItem = App.shared.menuManager.deleteMenuItem
+        deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
+        deleteMenuItem.target = self
+    }
+    
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
         tableView.frame = view.bounds
@@ -180,6 +188,11 @@ extension ViewController: NSTableViewDataSource {
     }
     
     @objc private func actionButtonCell() {
+        guard tableView.selectedRow >= 0 else {
+            print("double click in empty table")
+            return
+        }
+        
         let text = tableDataSource[tableView.selectedRow].value
         
         if let url = URL(string: text) {
@@ -218,19 +231,44 @@ extension ViewController: NSTableViewDataSource {
         NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
     }
     
-    @objc private func tableViewDeleteItemClicked(_ sender: AnyObject) {
+    @objc private func tableViewDeleteItemClicked() {
         
-        guard tableView.clickedRow >= 0 else {
+        //assert(tableView.clickedRow >= 0 || tableView.selectedRow >= 0)
+        guard tableView.clickedRow >= 0 || tableView.selectedRow >= 0 else {
             return
         }
         
-        tableDataSource.remove(at: tableView.clickedRow)
+        if tableView.clickedRow >= 0 {
+            if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+                tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
+                if tableView.selectedRowIndexes.count > 1 {
+                    tableView.deselectAll(nil)
+                }
+            } else if tableView.clickedRow >= 0 {
+                tableDataSource.remove(at: tableView.clickedRow)
+            }
+        } else {
+            tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
+            if tableView.selectedRowIndexes.count > 1 {
+                tableView.deselectAll(nil)
+            }
+        }
+        
+//        if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+//            tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
+//        } else if tableView.clickedRow >= 0 {
+//            tableDataSource.remove(at: tableView.clickedRow)
+//        }
+        
+//        tableDataSource.remove(at: tableView.clickedRow)
         HistoryDataSource.shared.history = tableDataSource
         tableView.reloadData()
     }
+    
 }
 
 extension ViewController: NSTableViewDelegate {
+    
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         reloadDataSource()
     }
