@@ -58,6 +58,7 @@ class ViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsMultipleSelection = true
+        tableView.doubleAction = #selector(actionButtonCell)
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
         /// https://stackoverflow.com/a/55495391/5893286
@@ -178,9 +179,7 @@ extension ViewController: NSTableViewDataSource {
         }
     }
     
-    @objc private func actionButtonCell(_ button: NSButtonCell) {
-        print(tableView.selectedRow)
-        
+    @objc private func actionButtonCell() {
         let text = tableDataSource[tableView.selectedRow].value
         
         if let url = URL(string: text) {
