@@ -64,6 +64,7 @@ extension Central: CBCentralManagerDelegate {
 
 extension Central: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        print("- didDiscoverServices")
         peripheral.services?
             .filter { $0.uuid == serviceUUID }
             //.compactMap { $0.characteristics }
@@ -74,9 +75,11 @@ extension Central: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         centralManager.cancelPeripheralConnection(peripheral)
         centralManager.stopScan()
+        print("stopScan")
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("- didDiscoverCharacteristicsFor")
         if let error = error as NSError? {
             print(error.description)
             return
@@ -92,6 +95,7 @@ extension Central: CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("- didUpdateValueFor")
         if let error = error as NSError? {
             print(error.description)
             return
@@ -109,9 +113,9 @@ extension Central: CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        print("didModifyServices invalidatedServices")
-    }
+//    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+//        print("didModifyServices invalidatedServices")
+//    }
 }
 
 
