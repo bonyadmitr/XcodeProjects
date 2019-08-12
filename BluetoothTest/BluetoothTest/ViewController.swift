@@ -11,14 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     private let bluetoothManager = BluetoothManager()
+    private let peripheral = Peripheral()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bluetoothManager.start()
+        //bluetoothManager.start()
+        peripheral.start()
     }
 
 
 }
 
-let peripheralName = "peripheral ios"
+let peripheralName = "Peripheral - iOS"
