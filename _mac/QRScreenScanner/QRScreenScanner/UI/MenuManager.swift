@@ -9,8 +9,7 @@ final class MenuManager {
     func setup() {
         /// first menu is hidden under app name
         addAppMenu()
-        
-        //testMenu()
+        addEditMenu()
         
         /// call the last to add system hidden items like emojy
         NSApp.mainMenu = mainMenu
@@ -30,17 +29,27 @@ final class MenuManager {
         mainMenu.addSubmenu(menu: appMenu)
     }
     
-    //    private func testMenu() {
-    //        let editMenu = mainMenu.createSubmenu(title: "Edit")
-    //        //editMenu.autoenablesItems = false
-    //
-    //        let aboutMenuItem = NSMenuItem(title: "About 1", action: #selector(about), keyEquivalent: "z")
-    //        aboutMenuItem.target = self
-    //        editMenu.addItem(aboutMenuItem)
-    //
-    //        editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
-    //    }
-    //
+    let deleteMenuItem = NSMenuItem()
+    
+    private func addEditMenu() {
+        let editMenu = NSMenu(title: "Edit")
+        //editMenu.autoenablesItems = false
+
+        let deleteKey = String(format: "%c", NSBackspaceCharacter)
+        //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
+        
+        deleteMenuItem.title = "Delete"
+        deleteMenuItem.keyEquivalent = deleteKey
+        deleteMenuItem.keyEquivalentModifierMask = .command
+//            aboutMenuItem.target = self
+//            aboutMenuItem.action =
+        editMenu.addItem(deleteMenuItem)
+
+//            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
+        
+        mainMenu.addSubmenu(menu: editMenu)
+    }
+    
     //    @objc private func quit() {
     //        NSApp.terminate(nil)
     //    }
