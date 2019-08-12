@@ -28,7 +28,8 @@ final class App {
     let menuManager = MenuManager()
     let toolbarManager = ToolbarManager()
     
-    private let window: NSWindow = {
+    /// if it is not lazy controller will be loaded immediately
+    private lazy var window: NSWindow = {
         let vc = ViewController()
         let window = NSWindow(contentRect: vc.view.frame,
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
