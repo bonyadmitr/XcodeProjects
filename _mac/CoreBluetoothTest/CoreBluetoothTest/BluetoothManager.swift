@@ -3,6 +3,7 @@ import CoreBluetooth
 private let serviceUUID = CBUUID(string: "A3E424F7-A3F2-4147-9EE2-3FD44656F29A")
 private let someInfoCharacteristicUUID = CBUUID(string: "7CB2A626-808B-498C-BA9C-89869CDF520E")
 
+/// https://leocardz.com/practical-corebluetooth-191472148c66
 /// https://github.com/LeonardoCardoso/BLE/blob/master/macOS/BLE/BluetoothManager.swift
 final class Central: NSObject {
     
@@ -44,6 +45,7 @@ extension Central: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        /// We must keep a reference to the new discovered peripheral, which means we must retain it.
         discoveredPeripherals.insert(peripheral)
         central.connect(peripheral, options: nil)
         print("found name: ", peripheral.name ?? "nil")
@@ -67,29 +69,34 @@ extension Central: CBPeripheralDelegate {
         print("- didDiscoverServices")
         peripheral.services?
             .filter { $0.uuid == serviceUUID }
-            //.compactMap { $0.characteristics }
             .forEach { peripheral.discoverCharacteristics([someInfoCharacteristicUUID], for: $0) }
     }
     
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        /// After we write data on peripheral, we disconnect it.
         centralManager.cancelPeripheralConnection(peripheral)
+        
+        /// we work once for peripheral
         centralManager.stopScan()
         print("stopScan")
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         print("- didDiscoverCharacteristicsFor")
+        
         if let error = error as NSError? {
             print(error.description)
             return
         }
         
-        //CBATTError.Code.init(rawValue: <#T##Int#>)
         service.characteristics?
             .filter { $0.uuid == someInfoCharacteristicUUID }
             .forEach {
+                // To read static values
                 //peripheral.readValue(for: $0)
+                
+                // To listen and read dynamic values
                 peripheral.setNotifyValue(true, for: $0)
         }
     }
@@ -101,21 +108,22 @@ extension Central: CBPeripheralDelegate {
             return
         }
         
-        /// read
+        /// we read
         if let data = characteristic.value, let text = String(data: data, encoding: .utf8){
             print(text)
         }
         
-        /// write
+        /// we write
         discoveredPeripherals.forEach { peripheral in
             let textToSend = "text from central".data(using: .utf8)!
             peripheral.writeValue(textToSend, for: characteristic, type: .withResponse)
         }
     }
     
-//    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-//        print("didModifyServices invalidatedServices")
-//    }
+    /// without it we have warning
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        print("didModifyServices invalidatedServices")
+    }
 }
 
 
@@ -243,6 +251,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("didDisconnectPeripheral")
         availablePeripheral.removeAll(where: { $0 == peripheral })
     }
 }
