@@ -51,7 +51,7 @@ extension Peripheral: CBPeripheralManagerDelegate {
     // Listen to dynamic values
     // Called when CBPeripheral .setNotifyValue(true, for: characteristic) is called from the central
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("didSubscribeTo characteristic")
+        print("found central")
         // Writing data to characteristics
         
 //            let dict: [String: String] = ["Hello": "Darkness"]
@@ -60,34 +60,38 @@ extension Peripheral: CBPeripheralManagerDelegate {
         
         let data = "hello from peripheral".data(using: .utf8)!
         peripheralManager.updateValue(data, for: someInfoCharacteristic, onSubscribedCentrals: [central])
+        print("sended text to central")
     }
     
     // Read static values
     // Called when CBPeripheral .readValue(for: characteristic) is called from the central
-    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        print("didReceiveRead request")
-        
-        if someInfoCharacteristic.uuid == request.characteristic.uuid {
-            print("Match characteristic for static reading")
-        }
-    }
+//    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
+//        print("didReceiveRead request")
+//
+//        if someInfoCharacteristic.uuid == request.characteristic.uuid {
+//            print("Match characteristic for static reading")
+//        }
+//    }
     
     // Called when receiving writing from Central.
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+        print("didReceive data from central")
         
         requests
             .filter { $0.characteristic.uuid == someInfoCharacteristicUUID }
             .forEach { request in
                 
+                // Send response to central if this writing request asks for response [.withResponse]
                 peripheralManager.respond(to: request, withResult: .success)
                 
-                print(request.characteristic.value ?? "nil")
-                print(request.value ?? "nil")
+                //assert(request.characteristic.value == nil)
+                
                 guard let data = request.value, let text = String(data: data, encoding: .utf8) else {
                     assertionFailure()
                     return
                 }
                 print(text)
+        }
     }
     
 }
