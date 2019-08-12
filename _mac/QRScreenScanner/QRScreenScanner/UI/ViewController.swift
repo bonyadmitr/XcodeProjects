@@ -388,7 +388,7 @@ final class CustomTableView: NSTableView {
         
         // TODO: clear from ViewController.tableViewDeleteItemClicked
         //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
-        if event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter) {
+        if event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter), selectedRow != -1 {
             NSApp.sendAction(#selector(ViewController.tableViewDeleteItemClicked), to: nil, from: self)
         }
     }
