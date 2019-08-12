@@ -11,11 +11,13 @@ import Cocoa
 class ViewController: NSViewController {
     
     private let bluetoothManager = BluetoothManager()
+    private let central = Central()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bluetoothManager.start()
+        central.start()
+        //bluetoothManager.start()
         
         //UUID().uuidString
 //        "7D985539-2133-44E6-AD37-67E62CA3CD97"
