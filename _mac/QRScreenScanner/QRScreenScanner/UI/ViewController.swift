@@ -232,7 +232,7 @@ extension ViewController: NSTableViewDataSource {
         NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
     }
     
-    @objc private func tableViewDeleteItemClicked() {
+    @objc func tableViewDeleteItemClicked() {
         
         //assert(tableView.clickedRow >= 0 || tableView.selectedRow >= 0)
         guard tableView.clickedRow >= 0 || tableView.selectedRow >= 0 else {
@@ -382,4 +382,15 @@ final class CustomTableView: NSTableView {
             return super.menu(for: event)
         }
     }
+    
+    override func keyDown(with event: NSEvent) {
+        super.keyDown(with: event)
+        
+        // TODO: clear from ViewController.tableViewDeleteItemClicked
+        //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
+        if event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter) {
+            NSApp.sendAction(#selector(ViewController.tableViewDeleteItemClicked), to: nil, from: self)
+        }
+    }
+    
 }
