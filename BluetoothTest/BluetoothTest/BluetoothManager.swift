@@ -3,6 +3,8 @@ import CoreBluetooth
 private let serviceUUID = CBUUID(string: "A3E424F7-A3F2-4147-9EE2-3FD44656F29A")
 private let someInfoCharacteristicUUID = CBUUID(string: "7CB2A626-808B-498C-BA9C-89869CDF520E")
 
+/// https://leocardz.com/practical-corebluetooth-191472148c66
+/// https://github.com/LeonardoCardoso/BLE/blob/master/iOS/BLE/BluetoothManager.swift
 final class Peripheral: NSObject {
     
     private let queue = DispatchQueue(label: "peripheral.queue")
