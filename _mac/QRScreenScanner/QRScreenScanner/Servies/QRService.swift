@@ -42,6 +42,19 @@ final class QRService {
         }
     }
     
+    static func scanImages(_ images: [NSImage]) {
+        DispatchQueue.global().async {
+            let qrDataSources = images
+                .flatMap { CodeDetector.shared.readQR(from: $0) }
+                .map { qrValue -> History in
+                    History(date: Date(), value: qrValue)
+            }
+            DispatchQueue.main.async {
+                HistoryDataSource.shared.history += qrDataSources
+            }
+        }
+    }
+    
     private static func saveQRValues(_ qrValues: [String]) {
         let qrDataSources = qrValues.map { qrValue -> History in
             History(date: Date(), value: qrValue)

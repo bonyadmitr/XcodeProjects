@@ -6,15 +6,17 @@ import Cocoa
 /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/DragandDrop/Tasks/DraggingFiles.html
 class DropView: NSView {
     
+    typealias DropViewHandler = (_ paths: [String], _ images: [NSImage]) -> Void
+    
     /// "fileTypes" should be set before using "filteringOptions"
     private lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: fileTypes]
     
     private var isSubview = true
     private var fileTypes = [String]()
-    private var handler: ((_ paths: [String]) -> Void)?
+    private var handler: DropViewHandler?
     
     /// call before using Drag&Drop
-    func setup(isSubview: Bool, fileTypes: [String], handler: @escaping (_ paths: [String]) -> Void) {
+    func setup(isSubview: Bool, fileTypes: [String], handler: @escaping DropViewHandler) {
         self.isSubview = isSubview
         self.fileTypes = fileTypes
         self.handler = handler
@@ -22,7 +24,7 @@ class DropView: NSView {
     }
     
     func startDraggind() {
-        registerForDraggedTypes([.backwardsCompatibleFileURL])
+        registerForDraggedTypes([.backwardsCompatibleFileURL, NSPasteboard.PasteboardType(kUTTypeImage as String)])
     }
     
     func stopDraggin() {
@@ -57,7 +59,7 @@ class DropView: NSView {
     }
     
     fileprivate func isAllowedDraging(in sender: NSDraggingInfo) -> Bool {
-        return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self], options: filteringOptions)
+        return sender.draggingPasteboard.canReadObject(forClasses: [NSURL.self, NSImage.self], options: filteringOptions)
     }
     
     override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
@@ -65,13 +67,19 @@ class DropView: NSView {
     }
     
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        guard let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: filteringOptions) as? [URL] else {
+        
+        guard
+            let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],
+                                                             options: filteringOptions) as? [URL],
+            let images = sender.draggingPasteboard.readObjects(forClasses: [NSImage.self],
+                                                               options: filteringOptions) as? [NSImage]
+        else {
             assertionFailure()
             return false
         }
-        assert(!urls.isEmpty, "one url must exists here. urls filtered by isAllowedDraging")
+        assert(!urls.isEmpty || !images.isEmpty, "one item must exists here. filtered by isAllowedDraging")
         let paths = urls.map { $0.path }
-        handler?(paths)
+        handler?(paths, images)
         return true
     }
     

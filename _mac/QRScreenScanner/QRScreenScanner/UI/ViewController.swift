@@ -152,8 +152,9 @@ class ViewController: NSViewController {
     /// call the last to add view on the top
     private func addDropView() {
         let dropView = DropView(frame: view.bounds)
-        dropView.setup(isSubview: true, fileTypes: NSImage.imageTypes) { filePaths in
+        dropView.setup(isSubview: true, fileTypes: NSImage.imageTypes) { filePaths, images in
             QRService.scanFiles(at: filePaths)
+            QRService.scanImages(images)
         }
         dropView.autoresizingMask = [.width, .height]
         view.addSubview(dropView)
