@@ -1,5 +1,7 @@
 import Foundation
 
+/// https://github.com/luosheng/OpenSim/blob/master/OpenSim/LaunchAtLoginHelper.swift
+///
 /// https://github.com/sindresorhus/LaunchAtLogin
 /// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLogin/LaunchAtLogin.swift
 /// https://github.com/sindresorhus/LaunchAtLogin/blob/master/LaunchAtLoginHelper/main.swift
@@ -26,6 +28,7 @@ enum LaunchAtLogin {
     private static let appUrl = URL(fileURLWithPath: Bundle.main.bundlePath)
     
     private static let loginItemRef: LSSharedFileList = {
+        //return LSSharedFileListCreate(CFAllocatorGetDefault().takeRetainedValue(),
         return LSSharedFileListCreate(nil,
                                       kLSSharedFileListSessionLoginItems.takeRetainedValue(),
                                       nil).takeRetainedValue() as LSSharedFileList
@@ -38,6 +41,8 @@ enum LaunchAtLogin {
     
     private static func appItem(from loginItems: [LSSharedFileListItem]) -> LSSharedFileListItem? {
         return loginItems.first(where: { item in
+            //let resolutionFlags = UInt32(kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes)
+            //let itemUrl = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, nil).takeRetainedValue() as URL
             let itemUrl = LSSharedFileListItemCopyResolvedURL(item, 0, nil).takeRetainedValue() as URL
             return itemUrl == appUrl
         })
@@ -50,6 +55,8 @@ enum LaunchAtLogin {
         }
         
         if login {
+            assert(appItem(from: loginItems) == nil, "don't turn on LaunchAtLogin if it is already on")
+            //LSSharedFileListInsertItemURL(loginItemRef, kLSSharedFileListItemBeforeFirst.takeUnretainedValue(), nil, nil, appUrl as CFURL, nil, nil)
             LSSharedFileListInsertItemURL(loginItemRef, loginItems.last, nil, nil, appUrl as CFURL, nil, nil)
         } else {
             guard let appItem = appItem(from: loginItems) else {

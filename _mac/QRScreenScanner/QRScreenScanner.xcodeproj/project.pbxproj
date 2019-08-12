@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
+		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
+		CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336722FDCF5100984201 /* CGError+Assert.swift */; };
+		CE958DBB230039BB00869FAF /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE958DBA230039BB00869FAF /* DropView.swift */; };
 		CEAD356C22F6AB34002CC59E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356B22F6AB34002CC59E /* main.swift */; };
 		CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356D22F80247002CC59E /* MenuManager.swift */; };
 		CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD356F22F80273002CC59E /* StatusItemManager.swift */; };
@@ -16,6 +19,12 @@
 		CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */; };
 		CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357722F9C2F8002CC59E /* Array+Safe.swift */; };
 		CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357922FABDDA002CC59E /* QRService.swift */; };
+		CEAD357E22FDCAD2002CC59E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357D22FDCAD2002CC59E /* System.swift */; };
+		CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */; };
+		CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */; };
+		CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */; };
+		CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */; };
+		CED1771722FECE52001F3CBE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1771622FECE52001F3CBE /* History.swift */; };
 		CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */; };
 		CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */; };
 		CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */; };
@@ -23,6 +32,9 @@
 
 /* Begin PBXFileReference section */
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
+		CE92336722FDCF5100984201 /* CGError+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGError+Assert.swift"; sourceTree = "<group>"; };
+		CE958DBA230039BB00869FAF /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		CEAD356B22F6AB34002CC59E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CEAD356D22F80247002CC59E /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		CEAD356F22F80273002CC59E /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
@@ -31,6 +43,12 @@
 		CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItem+Init.swift"; sourceTree = "<group>"; };
 		CEAD357722F9C2F8002CC59E /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		CEAD357922FABDDA002CC59E /* QRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRService.swift; sourceTree = "<group>"; };
+		CEAD357D22FDCAD2002CC59E /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarManager.swift; sourceTree = "<group>"; };
+		CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItemGroup.swift; sourceTree = "<group>"; };
+		CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWindowsManager.swift; sourceTree = "<group>"; };
+		CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataSource.swift; sourceTree = "<group>"; };
+		CED1771622FECE52001F3CBE /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		CEE5E1B922E6DEAA00B54D40 /* QRScreenScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRScreenScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +68,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEAD357B22FBF1F9002CC59E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD357322F9C2BE002CC59E /* NSButton+Init.swift */,
+				CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */,
+				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
+				CE92336722FDCF5100984201 /* CGError+Assert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CEAD357C22FBF220002CC59E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD356B22F6AB34002CC59E /* main.swift */,
+				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
+				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
+				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
+				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CEAD358122FDCB35002CC59E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
+				CEAD356D22F80247002CC59E /* MenuManager.swift */,
+				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
+				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
+				CEAD358522FDCBFF002CC59E /* Classes */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CEAD358222FDCB84002CC59E /* Servies */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
+				CEAD358622FDCD3D002CC59E /* SystemWindowsManager.swift */,
+				CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */,
+				CEAD357922FABDDA002CC59E /* QRService.swift */,
+				CEAD357D22FDCAD2002CC59E /* System.swift */,
+			);
+			path = Servies;
+			sourceTree = "<group>";
+		};
+		CEAD358522FDCBFF002CC59E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */,
+				CE958DBA230039BB00869FAF /* DropView.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		CED1771822FEEA47001F3CBE /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				CED1771422FECE3E001F3CBE /* HistoryDataSource.swift */,
+				CED1771622FECE52001F3CBE /* History.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
 		CEE5E1B022E6DEAA00B54D40 = {
 			isa = PBXGroup;
 			children = (
@@ -69,20 +152,12 @@
 		CEE5E1BB22E6DEAA00B54D40 /* QRScreenScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CEAD356B22F6AB34002CC59E /* main.swift */,
-				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
 				CEAD357122F8029B002CC59E /* App.swift */,
-				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
-				CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */,
-				CEAD356D22F80247002CC59E /* MenuManager.swift */,
-				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
-				CEAD357922FABDDA002CC59E /* QRService.swift */,
-				CEAD357322F9C2BE002CC59E /* NSButton+Init.swift */,
-				CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */,
-				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
-				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
-				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
-				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
+				CEAD357C22FBF220002CC59E /* Main */,
+				CEAD358122FDCB35002CC59E /* UI */,
+				CED1771822FEEA47001F3CBE /* Logic */,
+				CEAD358222FDCB84002CC59E /* Servies */,
+				CEAD357B22FBF1F9002CC59E /* Extensions */,
 			);
 			path = QRScreenScanner;
 			sourceTree = "<group>";
@@ -158,14 +233,23 @@
 			files = (
 				CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */,
 				CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */,
+				CED1771722FECE52001F3CBE /* History.swift in Sources */,
 				CEAD357422F9C2BE002CC59E /* NSButton+Init.swift in Sources */,
+				CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
+				CEAD357E22FDCAD2002CC59E /* System.swift in Sources */,
 				CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */,
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
+				CE958DBB230039BB00869FAF /* DropView.swift in Sources */,
+				CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */,
+				CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */,
 				CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */,
 				CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */,
 				CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */,
+				CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */,
 				CEAD357222F8029B002CC59E /* App.swift in Sources */,
+				CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */,
+				CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,10 +376,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/QRScreenScanner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Main/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = QRScreenScanner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -311,10 +395,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/QRScreenScanner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Main/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = QRScreenScanner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
