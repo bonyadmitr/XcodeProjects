@@ -67,7 +67,11 @@ class ViewController: NSViewController {
         tableView.delegate = self
         tableView.allowsMultipleSelection = true
         tableView.doubleAction = #selector(actionButtonCell)
+        tableView.setDelete(action: #selector(tableViewDeleteItemClicked), target: self)
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
+        
+        /// use zebra like row colors, like in finder
+        tableView.usesAlternatingRowBackgroundColors = true
         
         /// https://stackoverflow.com/a/55495391/5893286
         let menu = NSMenu()
@@ -232,7 +236,7 @@ extension ViewController: NSTableViewDataSource {
         NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
     }
     
-    @objc private func tableViewDeleteItemClicked() {
+    @objc func tableViewDeleteItemClicked() {
         
         //assert(tableView.clickedRow >= 0 || tableView.selectedRow >= 0)
         guard tableView.clickedRow >= 0 || tableView.selectedRow >= 0 else {
@@ -241,7 +245,7 @@ extension ViewController: NSTableViewDataSource {
         
         if tableView.clickedRow >= 0 {
             if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-                tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
+                tableView.selectedRowIndexes.reversed().forEach { tableDataSource.remove(at: $0) }
                 if tableView.selectedRowIndexes.count > 1 {
                     tableView.deselectAll(nil)
                 }
@@ -255,13 +259,6 @@ extension ViewController: NSTableViewDataSource {
             }
         }
         
-//        if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-//            tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
-//        } else if tableView.clickedRow >= 0 {
-//            tableDataSource.remove(at: tableView.clickedRow)
-//        }
-        
-//        tableDataSource.remove(at: tableView.clickedRow)
         HistoryDataSource.shared.history = tableDataSource
         tableView.reloadData()
     }
@@ -272,39 +269,6 @@ extension ViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         reloadDataSource()
-    }
-    
-//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-//        return nil
-//    }
-    
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        
-        guard let board = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
-            let path = board.firstObject as? String
-        else {
-            return []
-        }
-        
-        let suffix = URL(fileURLWithPath: path).pathExtension
-        for ext in ["jpg", "jpeg", "bmp", "png", "gif"] {
-            if ext.lowercased() == suffix {
-                return .copy
-            }
-        }
-        return []
-    }
-    
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        
-        guard let pasteboard = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
-            let path = pasteboard[0] as? String
-            else { return false }
-        
-        //GET YOUR FILE PATH !!!
-        print("FilePath: \(path)")
-        
-        return true
     }
 }
 
@@ -372,6 +336,15 @@ final class CodeDetector {
 }
 
 final class CustomTableView: NSTableView {
+    
+    private var deleteAction: Selector?
+    private var deleteTarget: Any?
+    
+    func setDelete(action: Selector?, target: Any?) {
+        self.deleteAction = action
+        self.deleteTarget = target
+    }
+    
     override func menu(for event: NSEvent) -> NSMenu? {
         let location = convert(event.locationInWindow, from: nil)
         let selectedRow = row(at: location)
@@ -382,4 +355,19 @@ final class CustomTableView: NSTableView {
             return super.menu(for: event)
         }
     }
+    
+    /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
+    override func keyDown(with event: NSEvent) {
+        //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
+        if let deleteAction = deleteAction,
+            event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter),
+            selectedRow != -1
+        {
+            NSApp.sendAction(deleteAction, to: deleteTarget, from: self)
+            /// super.keyDown(with: event) not called to disable error sound
+        } else {
+            super.keyDown(with: event)
+        }
+    }
+    
 }

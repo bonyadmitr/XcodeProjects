@@ -5,8 +5,8 @@ import Cocoa
 // TODO: https://stackoverflow.com/a/50832237/5893286 + https://stackoverflow.com/a/4686782/5893286
 // TODO: https://developer.apple.com/library/archive/technotes/tn2083/_index.html
 
-// TODO: drag and drop image
-// TODO: multi selection + action
+// TODO: menu for empty tableview
+// TODO: more actions in edit menu
 // TODO: feedback button
 
 // TODO: view bases tableview
