@@ -67,6 +67,7 @@ class ViewController: NSViewController {
         tableView.delegate = self
         tableView.allowsMultipleSelection = true
         tableView.doubleAction = #selector(actionButtonCell)
+        tableView.setDelete(action: #selector(tableViewDeleteItemClicked), target: self)
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
         /// https://stackoverflow.com/a/55495391/5893286
@@ -373,6 +374,14 @@ final class CodeDetector {
 
 final class CustomTableView: NSTableView {
     
+    private var deleteAction: Selector?
+    private var deleteTarget: Any?
+    
+    func setDelete(action: Selector?, target: Any?) {
+        self.deleteAction = action
+        self.deleteTarget = target
+    }
+    
     override func menu(for event: NSEvent) -> NSMenu? {
         let location = convert(event.locationInWindow, from: nil)
         let selectedRow = row(at: location)
@@ -386,12 +395,15 @@ final class CustomTableView: NSTableView {
     
     /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
     override func keyDown(with event: NSEvent) {
-        super.keyDown(with: event)
-        
-        // TODO: clear from ViewController.tableViewDeleteItemClicked
         //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
-        if event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter), selectedRow != -1 {
-            NSApp.sendAction(#selector(ViewController.tableViewDeleteItemClicked), to: nil, from: self)
+        if let deleteAction = deleteAction,
+            event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter),
+            selectedRow != -1
+        {
+            NSApp.sendAction(deleteAction, to: deleteTarget, from: self)
+            /// super.keyDown(with: event) not called to disable error sound
+        } else {
+            super.keyDown(with: event)
         }
     }
     
