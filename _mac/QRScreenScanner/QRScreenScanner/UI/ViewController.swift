@@ -372,6 +372,7 @@ final class CodeDetector {
 }
 
 final class CustomTableView: NSTableView {
+    
     override func menu(for event: NSEvent) -> NSMenu? {
         let location = convert(event.locationInWindow, from: nil)
         let selectedRow = row(at: location)
@@ -383,6 +384,7 @@ final class CustomTableView: NSTableView {
         }
     }
     
+    /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
     override func keyDown(with event: NSEvent) {
         super.keyDown(with: event)
         
