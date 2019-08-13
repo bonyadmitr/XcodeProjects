@@ -241,7 +241,7 @@ extension ViewController: NSTableViewDataSource {
         
         if tableView.clickedRow >= 0 {
             if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-                tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
+                tableView.selectedRowIndexes.reversed().forEach { tableDataSource.remove(at: $0) }
                 if tableView.selectedRowIndexes.count > 1 {
                     tableView.deselectAll(nil)
                 }
