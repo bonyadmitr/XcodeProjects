@@ -15,7 +15,10 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Backlight.shared.on()
+//        FnLock.singleton.run()
+        FnLock.singleton.toggleLed(state: true)
+        
+//        Backlight.shared.on()
     }
 
     override var representedObject: Any? {
@@ -76,8 +79,13 @@ class FnLock: NSObject {
         IOHIDManagerSetDeviceMatching(manager, keyboardDictionary)
         
         let matchingDevices = IOHIDManagerCopyDevices(manager) as! NSSet
+        let q = matchingDevices as! Set<IOHIDDevice>
         
-        return matchingDevices.anyObject() as! IOHIDDevice
+        // IOUSBHostHIDDevice, IOHIDUserDevice
+        let w = q.first { String(describing: $0).contains("IOUSBHostHIDDevice") }
+        
+        return w!
+        //return matchingDevices.anyObject() as! IOHIDDevice
     }
     
     func getLed() -> IOHIDElement {
@@ -91,7 +99,8 @@ class FnLock: NSObject {
     
     func toggleLed(state: Bool) {
         let value = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led!, 0, state ? 1 : 0)
-        IOHIDDeviceSetValue(keyboard!, led!, value)
+        let result = IOHIDDeviceSetValue(keyboard!, led!, value)
+        print("toggleLed", result == KERN_SUCCESS)
     }
     
     @objc func updateLed() {
