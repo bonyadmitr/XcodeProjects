@@ -3,12 +3,28 @@ import CoreBluetooth
 private let serviceUUID = CBUUID(string: "A3E424F7-A3F2-4147-9EE2-3FD44656F29A")
 private let someInfoCharacteristicUUID = CBUUID(string: "7CB2A626-808B-498C-BA9C-89869CDF520E")
 
+// TODO: send any data
+
+// TODO: check max
+/// У нас в характеристику можно записать всего какие-то 500 байтов, а на каких-то устройствах вообще 20
+/// https://stackoverflow.com/a/20321542
+
+// TODO: L2CAP
+/// https://habr.com/ru/company/raiffeisenbank/blog/452278/
+/// https://www.google.com/search?q=CoreBluetooth+L2CAP
+
+// TODO: distance calculation by RSSI
+/// https://stackoverflow.com/a/55526881
+
+// TODO: CBCentralManagerScanOptionAllowDuplicatesKey
+
 /// https://leocardz.com/practical-corebluetooth-191472148c66
 /// https://github.com/LeonardoCardoso/BLE/blob/master/macOS/BLE/BluetoothManager.swift
 final class Central: NSObject {
     
     private(set) lazy var centralManager: CBCentralManager = {
         var options: [String: Any] = [:]
+        /// Privacy Flag - Bluetooth Peripheral Usage Description
         //options[CBCentralManagerOptionRestoreIdentifierKey] = ""
         options[CBCentralManagerOptionShowPowerAlertKey] = false
         let manager: CBCentralManager = CBCentralManager(delegate: self, queue: self.queue, options: options)
