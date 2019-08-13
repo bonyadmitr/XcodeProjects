@@ -14,7 +14,11 @@ private let someInfoCharacteristicUUID = CBUUID(string: "7CB2A626-808B-498C-BA9C
 /// https://www.google.com/search?q=CoreBluetooth+L2CAP
 
 // TODO: distance calculation by RSSI
+/// RSSI stands for Received Signal Strength Indicator
 /// https://stackoverflow.com/a/55526881
+/// https://stackoverflow.com/a/18886603
+/// https://stackoverflow.com/a/13724027
+/// https://stackoverflow.com/a/45431617
 
 // TODO: CBCentralManagerScanOptionAllowDuplicatesKey
 
@@ -64,9 +68,12 @@ extension Central: CBCentralManagerDelegate {
         /// We must keep a reference to the new discovered peripheral, which means we must retain it.
         discoveredPeripherals.insert(peripheral)
         central.connect(peripheral, options: nil)
-        print("found name: ", peripheral.name ?? "nil")
-        //central.stopScan()
+        print("found name: ", peripheral.name ?? "nil", "RSSI:", RSSI)
         
+        if let power = advertisementData[CBAdvertisementDataTxPowerLevelKey] as? Double {
+            print("Distance is ", pow(10, ( (power - Double(truncating: RSSI)) / 20)) )
+        }
+
     }
     
     //    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -91,11 +98,11 @@ extension Central: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         /// After we write data on peripheral, we disconnect it.
-        centralManager.cancelPeripheralConnection(peripheral)
+//        centralManager.cancelPeripheralConnection(peripheral)
         
         /// we work once for peripheral
-        centralManager.stopScan()
-        print("stopScan")
+//        centralManager.stopScan()
+//        print("stopScan")
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -251,7 +258,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("found name: ", peripheral.name ?? "nil")
+        print("found name: ", peripheral.name ?? "nil", "RSSI:", RSSI)
         availablePeripheral.append(peripheral)
         //central.stopScan()
         central.connect(peripheral, options: nil)
