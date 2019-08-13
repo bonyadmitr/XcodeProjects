@@ -70,6 +70,9 @@ class ViewController: NSViewController {
         tableView.setDelete(action: #selector(tableViewDeleteItemClicked), target: self)
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
+        /// use zebra like row colors, like in finder
+        tableView.usesAlternatingRowBackgroundColors = true
+        
         /// https://stackoverflow.com/a/55495391/5893286
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Copy", action: #selector(tableViewCopyItemClicked), keyEquivalent: ""))
