@@ -1,5 +1,113 @@
 import CoreBluetooth
 
+private let serviceUUID = CBUUID(string: "A3E424F7-A3F2-4147-9EE2-3FD44656F29A")
+private let someInfoCharacteristicUUID = CBUUID(string: "7CB2A626-808B-498C-BA9C-89869CDF520E")
+
+/// https://leocardz.com/practical-corebluetooth-191472148c66
+/// https://github.com/LeonardoCardoso/BLE/blob/master/iOS/BLE/BluetoothManager.swift
+final class Peripheral: NSObject {
+    
+    private let queue = DispatchQueue(label: "peripheral.queue")
+    
+    private lazy var peripheralManager = CBPeripheralManager(delegate: self, queue: queue)
+    
+    let someInfoCharacteristic = CBMutableCharacteristic(type: someInfoCharacteristicUUID,
+                                                         properties: [.read, .notify, .writeWithoutResponse, .write],
+                                                         value: nil,
+                                                         permissions: [.readable, .writeable])
+    
+    func start() {
+        _ = peripheralManager
+    }
+}
+
+extension Peripheral: CBPeripheralManagerDelegate {
+    
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        guard peripheral.state == .poweredOn else {
+            assertionFailure("\(peripheral.state.rawValue)")
+            return
+        }
+        
+        let service = CBMutableService(type: serviceUUID, primary: true)
+        service.characteristics = [someInfoCharacteristic]
+        
+        peripheralManager.removeAllServices()
+        peripheralManager.add(service)
+    }
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
+        assert(service.uuid == serviceUUID)
+        let advertisingData: [String: Any] = [CBAdvertisementDataLocalNameKey: peripheralName,
+                                              CBAdvertisementDataServiceUUIDsKey: [serviceUUID]]
+        peripheralManager.stopAdvertising()
+        peripheralManager.startAdvertising(advertisingData)
+    }
+    
+    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
+        print("started search central...")
+    }
+    
+    
+    
+    // Listen to dynamic values
+    // Called when CBPeripheral .setNotifyValue(true, for: characteristic) is called from the central
+    func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
+        print("found central")
+        // Writing data to characteristics
+        
+//            let dict: [String: String] = ["Hello": "Darkness"]
+//            let data: Data = try PropertyListSerialization.data(fromPropertyList: dict, format: .binary, options: 0)
+//            self.peripheralManager?.updateValue(data, for: characterisctic, onSubscribedCentrals: [central])
+        
+        let data = "hello from peripheral".data(using: .utf8)!
+        peripheralManager.updateValue(data, for: someInfoCharacteristic, onSubscribedCentrals: [central])
+        print("sended text to central")
+    }
+    
+    // Read static values
+    // Called when CBPeripheral .readValue(for: characteristic) is called from the central
+//    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
+//        print("didReceiveRead request")
+//
+//        if someInfoCharacteristic.uuid == request.characteristic.uuid {
+//            print("Match characteristic for static reading")
+//        }
+//    }
+    
+    // Called when receiving writing from Central.
+    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+        print("didReceive data from central")
+        
+        requests
+            .filter { $0.characteristic.uuid == someInfoCharacteristicUUID }
+            .forEach { request in
+                
+                // Send response to central if this writing request asks for response [.withResponse]
+                peripheralManager.respond(to: request, withResult: .success)
+                
+                //assert(request.characteristic.value == nil)
+                
+                guard let data = request.value, let text = String(data: data, encoding: .utf8) else {
+                    assertionFailure()
+                    return
+                }
+                print(text)
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 /**
  https://habr.com/ru/company/raiffeisenbank/blog/452278/
  
