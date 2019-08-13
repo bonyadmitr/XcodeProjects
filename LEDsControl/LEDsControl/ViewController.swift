@@ -15,8 +15,12 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        FnLock.singleton.run()
-        FnLock.singleton.toggleLed(state: true)
+        FnLock.singleton.onStateChange = { res in
+            print("---", res)
+        }
+        FnLock.singleton.run()
+        
+//        FnLock.singleton.toggleLed(state: true)
         
 //        Backlight.shared.on()
     }
@@ -100,7 +104,7 @@ class FnLock: NSObject {
     func toggleLed(state: Bool) {
         let value = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led!, 0, state ? 1 : 0)
         let result = IOHIDDeviceSetValue(keyboard!, led!, value)
-        print("toggleLed", result == KERN_SUCCESS)
+        //print("toggleLed", result == KERN_SUCCESS)
     }
     
     @objc func updateLed() {
@@ -111,13 +115,13 @@ class FnLock: NSObject {
     
     @objc func run() {
         let ctx = unsafeBitCast(self, to: UnsafeMutableRawPointer.self)
-        
+
         IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
-        
+
         IOHIDDeviceRegisterInputValueCallback(keyboard!, { (context, result, sender, value) in
-            
+            print(arc4random())
             let fnLock = unsafeBitCast(context, to: FnLock.self)
-            
+
             let element = IOHIDValueGetElement(value)
             let elementValue = IOHIDValueGetIntegerValue(value)
             let usage = Int(IOHIDElementGetUsage(element))
@@ -127,12 +131,12 @@ class FnLock: NSObject {
                     fnLock.toggleLed(state: !fnLock.state)
                     fnLock.state = try getSetting()
                     saveState()
-                    fnLock.onStateChange!(fnLock.state)
+                    fnLock.onStateChange?(fnLock.state)
                 } catch {
                     NSLog("failed to change fn setting to %s %s", !fnLock.state)
                 }
             }
-            
+
         }, ctx)
         
         // TODO: I have no idea why someone switches caps lock led off while user is switching windows
