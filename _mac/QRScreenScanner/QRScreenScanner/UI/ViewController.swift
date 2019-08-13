@@ -256,13 +256,6 @@ extension ViewController: NSTableViewDataSource {
             }
         }
         
-//        if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-//            tableView.selectedRowIndexes.forEach { tableDataSource.remove(at: $0) }
-//        } else if tableView.clickedRow >= 0 {
-//            tableDataSource.remove(at: tableView.clickedRow)
-//        }
-        
-//        tableDataSource.remove(at: tableView.clickedRow)
         HistoryDataSource.shared.history = tableDataSource
         tableView.reloadData()
     }
@@ -273,39 +266,6 @@ extension ViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         reloadDataSource()
-    }
-    
-//    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-//        return nil
-//    }
-    
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        
-        guard let board = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
-            let path = board.firstObject as? String
-        else {
-            return []
-        }
-        
-        let suffix = URL(fileURLWithPath: path).pathExtension
-        for ext in ["jpg", "jpeg", "bmp", "png", "gif"] {
-            if ext.lowercased() == suffix {
-                return .copy
-            }
-        }
-        return []
-    }
-    
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        
-        guard let pasteboard = info.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
-            let path = pasteboard[0] as? String
-            else { return false }
-        
-        //GET YOUR FILE PATH !!!
-        print("FilePath: \(path)")
-        
-        return true
     }
 }
 
