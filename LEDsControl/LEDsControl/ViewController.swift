@@ -44,6 +44,14 @@ class ViewController: NSViewController {
 
 import Foundation
 
+/// https://github.com/vecmezoni/fnlock
+
+/// https://github.com/maxmouchet/LightKit
+///
+/// not working for macbook with touchbar or in High Sierra
+/// https://forums.developer.apple.com/thread/96414
+/// https://github.com/maxmouchet/LightKit/issues/1
+
 class Backlight {
     static let shared = Backlight()
     
