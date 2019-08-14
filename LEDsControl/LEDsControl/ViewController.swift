@@ -57,6 +57,9 @@ class FnLock: NSObject {
     
     let manager = try! FnLock.setupManager()
     
+    /// https://github.com/SkrewEverything/Swift-Keylogger/blob/master/Keylogger/Keylogger/Keylogger.swift
+    // kIOHIDDeviceUsagePageKey: kHIDPage_GenericDesktop
+    // kIOHIDDeviceUsageKey: kHIDUsage_GD_Keyboard
     let keyboardDictionary = [kIOHIDPrimaryUsageKey: kHIDUsage_GD_Keyboard] as CFDictionary
     let ledDictionary = [kIOHIDElementUsagePageKey: kHIDPage_LEDs, kIOHIDElementUsageKey: kHIDUsage_LED_CapsLock] as CFDictionary
     
@@ -79,6 +82,8 @@ class FnLock: NSObject {
         return manager
     }
     
+    /// There is a .entitlements file included in the XCode project and you need to add a row for com.apple.security.device.usb and set it to "YES" for a Cocoa project
+    /// https://stackoverflow.com/a/48070676
     func getKeyboard() -> IOHIDDevice {
         IOHIDManagerSetDeviceMatching(manager, keyboardDictionary)
         
@@ -131,7 +136,7 @@ class FnLock: NSObject {
                     fnLock.toggleLed(state: !fnLock.state)
                     fnLock.state = try getSetting()
                     saveState()
-                    fnLock.onStateChange?(fnLock.state)
+//                    fnLock.onStateChange?(fnLock.state)
                 } catch {
                     NSLog("failed to change fn setting to %s %s", !fnLock.state)
                 }
