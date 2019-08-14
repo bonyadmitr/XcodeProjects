@@ -156,17 +156,21 @@ class ViewController: NSViewController {
     }
     
     private func setupHistoryDataSource() {
-        tableDataSource = HistoryDataSource.shared.history
-        reloadDataSource()
+        self.updateTableView(with: HistoryDataSource.shared.history)
         
         /// subscribe on changes
         HistoryDataSource.shared.didChanged = { [weak self] newHistoryDataSource in
             guard let self = self else {
                 return
             }
-            self.tableDataSource = newHistoryDataSource
-            self.reloadDataSource()
+            self.updateTableView(with: newHistoryDataSource)
         }
+    }
+    
+    private func updateTableView(with newHistoryDataSource: [History]) {
+        tableDataSource = newHistoryDataSource
+        reloadDataSource()
+        updateStatusLabel()
     }
     
     private func reloadDataSource() {
@@ -293,6 +297,10 @@ extension ViewController: NSTableViewDelegate {
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
+        updateStatusLabel()
+    }
+    
+    private func updateStatusLabel() {
         let itemsSelected = tableView.selectedRowIndexes.count
         let text: String
         
