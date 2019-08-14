@@ -29,6 +29,8 @@ final class App {
     let toolbarManager = ToolbarManager()
     
     /// if it is not lazy controller will be loaded immediately
+    ///
+    /// window style https://lukakerr.github.io/swift/nswindow-styles
     private lazy var window: NSWindow = {
         let vc = ViewController()
         let window = NSWindow(contentRect: vc.view.frame,
