@@ -59,13 +59,14 @@ class ViewController: NSViewController {
 
 import AVFoundation
 
-open class ScreenRecorder: NSObject {
+/// https://github.com/nirix/swift-screencapture
+final class ScreenRecorder: NSObject {
     
-    let destination: URL
-    let session: AVCaptureSession
-    let movieFileOutput: AVCaptureMovieFileOutput
+    private let destination: URL
+    private let session: AVCaptureSession
+    private let movieFileOutput: AVCaptureMovieFileOutput
     
-    public init(destination: URL) {
+    init(destination: URL) {
         self.destination = destination
         
         
@@ -94,29 +95,19 @@ open class ScreenRecorder: NSObject {
         
     }
     
-    open func start() {
+    func start() {
         session.startRunning()
         movieFileOutput.startRecording(to: self.destination, recordingDelegate: self)
     }
     
-    open func stop() {
+    func stop() {
         movieFileOutput.stopRecording()
     }
 
 }
 
 extension ScreenRecorder: AVCaptureFileOutputRecordingDelegate {
-    
-//        open func capture(
-//            _ captureOutput: AVCaptureFileOutput!,
-//            didFinishRecordingToOutputFileAt outputFileURL: URL!,
-//            fromConnections connections: [Any]!,
-//            error: Error!
-//        ) {
-//            //
-//            session.stopRunning()
-//        }
-    public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         session.stopRunning()
     }
 }
