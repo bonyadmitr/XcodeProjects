@@ -9,44 +9,37 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
-//    private let backlight = Backlight.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FnLock.singleton.onStateChange = { res in
-            print("---", res)
-        }
-        FnLock.singleton.run()
+//        FnLock.singleton.onStateChange = { res in
+//            print("---", res)
+//        }
+//        FnLock.singleton.run()
         
 //        FnLock.singleton.toggleLed(state: true)
         
-//        Backlight.shared.on()
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+        
     }
 
     @IBAction func start(_ sender: Any) {
-//        Backlight.shared.on()
+        Backlight.shared.on()
 //        FnLock.singleton.run()
 //        backlight.on()
     }
     
     @IBAction func stop(_ sender: Any) {
-//        backlight.off()
+        Backlight.shared.off()
+        Backlight.shared.stopFlashing()
     }
     
     @IBAction func timer(_ sender: Any) {
-//        backlight.startFlashing(target: self, interval: Backlight.MediumFlashingInterval, selector: #selector(toggle))
+        Backlight.shared.startFlashing(target: self, interval: Backlight.MediumFlashingInterval, selector: #selector(toggle))
     }
     
     @objc private func toggle() {
-//        backlight.toggle()
+        Backlight.shared.toggle()
     }
 }
 
@@ -91,9 +84,10 @@ class FnLock: NSObject {
         let q = matchingDevices as! Set<IOHIDDevice>
         
         // IOUSBHostHIDDevice, IOHIDUserDevice
-        let w = q.first { String(describing: $0).contains("IOUSBHostHIDDevice") }
+        // mac2015 AppleUSBTopCaseHIDDriver
+        let w = q.first { String(describing: $0).contains("IOUSBHostHIDDevice") } ?? q.first!
         
-        return w!
+        return w
         //return matchingDevices.anyObject() as! IOHIDDevice
     }
     
@@ -239,7 +233,7 @@ import Foundation
 /// https://github.com/bhoeting/DiscoKeyboard
 /// https://github.com/maxmouchet/LightKit
 ///
-/// not working for macbook with touchbar or in High Sierra
+/// not working for macbook with touchbar
 /// https://forums.developer.apple.com/thread/96414
 /// https://github.com/maxmouchet/LightKit/issues/1
 
@@ -265,9 +259,11 @@ class Backlight {
         
         // Get the AppleLMUController (thing that accesses the light hardware)
         
-        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching(kIOHIDSystemClass))
-//        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault,
-//                                                        IOServiceMatching("AppleLMUController"))
+        /// NOT working for mac2015 when call on()
+//        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching(kIOHIDSystemClass))
+        
+        /// working for mac2015
+        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"))
         assert(serviceObject != 0, "Failed to get service object")
         
         // Open the AppleLMUController
