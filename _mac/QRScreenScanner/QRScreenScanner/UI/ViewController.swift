@@ -30,6 +30,14 @@ class ViewController: NSViewController {
     private let tableView = CustomTableView()
     private var tableDataSource = [History]()
     
+    private let statusLabel: NSTextField = {
+        let newValue = NSTextField()
+        newValue.isEditable = false
+        newValue.isSelectable = false
+        newValue.stringValue = "No data"
+        return newValue
+    }()
+    
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -127,11 +135,35 @@ class ViewController: NSViewController {
         column1.sortDescriptorPrototype = dateSortDescriptor
         column2.sortDescriptorPrototype = valueSortDescriptor
         
-        let tableContainer = NSScrollView(frame: view.bounds)
-        tableContainer.autoresizingMask = [.width, .height]
+        let tableContainer = NSScrollView()
+//        let tableContainer = NSScrollView(frame: view.bounds)
+//        tableContainer.autoresizingMask = [.width, .height]
         tableContainer.documentView = tableView
         tableContainer.hasVerticalScroller = true
-        view.addSubview(tableContainer)
+        
+        
+        let newValue = NSStackView(views: [tableContainer, statusLabel])
+        
+        /// call before setup constraints
+        view.addSubview(newValue)
+        
+        if #available(OSX 10.11, *) {
+            newValue.translatesAutoresizingMaskIntoConstraints = false
+            newValue.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            newValue.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            newValue.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            newValue.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        } else {
+            newValue.frame = view.bounds
+            newValue.autoresizingMask = [.width, .height]
+        }
+        newValue.spacing = 1
+        newValue.orientation = .vertical
+        newValue.alignment = .centerX
+        if #available(OSX 10.11, *) {
+            newValue.distribution = .fill
+        }
+        
     }
     
     private func setupHistoryDataSource() {
@@ -269,6 +301,21 @@ extension ViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
         reloadDataSource()
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let itemsSelected = tableView.selectedRowIndexes.count
+        let text: String
+        
+        if tableDataSource.isEmpty {
+            text = "No Items"
+        } else if itemsSelected == 0 {
+            text = "\(tableDataSource.count) items"
+        } else {
+            text = "\(itemsSelected) of \(tableDataSource.count) selected"
+        }
+        
+        statusLabel.stringValue = text
     }
 }
 
