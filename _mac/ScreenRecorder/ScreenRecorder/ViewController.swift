@@ -36,14 +36,37 @@ class ViewController: NSViewController {
         stopRecordingButton.isEnabled = false
         playRecordingButton.isEnabled = false
         
-        print(AVCaptureDevice.devices(for: .muxed))
-        Devices.enableDalDevices()
-        print(AVCaptureDevice.devices(for: .muxed))
-        NotificationCenter.default.addObserver(forName: .AVCaptureDeviceWasConnected, object: nil, queue: nil) { notification in
-            print(AVCaptureDevice.devices(for: .muxed))
-            print(notification)
-            print()
+        
+        if AVCaptureDevice.devices(for: .muxed).count == 0 {
+            NotificationCenter.default.addObserver(forName: .AVCaptureDeviceWasConnected, object: nil, queue: nil) { notification in
+                //print(AVCaptureDevice.devices(for: .muxed))
+                print(notification.object as! AVCaptureDevice)
+                print()
+                
+                self.addVideoHandler()
+            }
+        } else {
+            addVideoHandler()
         }
+        
+
+        
+        Devices.enableDalDevices()
+    }
+    
+    private func addVideoHandler() {
+        //            if self.screenRecorder.session.isRunning {
+        //                return
+        //            }
+        
+        //            self.playerView.isHidden = true
+        let previewLayer = AVCaptureVideoPreviewLayer(session: self.screenRecorder.session)
+        previewLayer.videoGravity = .resizeAspect
+        previewLayer.frame = self.playerView.bounds
+        self.playerView.wantsLayer = true
+        self.playerView.layer?.addSublayer(previewLayer)
+        
+        self.screenRecorder.session.startRunning()
     }
     
     @IBAction private func startRecording(_ sender: NSButton) {
@@ -78,7 +101,7 @@ import AVFoundation
 final class ScreenRecorder: NSObject {
     
     private let destination: URL
-    private let session: AVCaptureSession
+    let session: AVCaptureSession
     private let movieFileOutput: AVCaptureMovieFileOutput
     
     init(destination: URL) {
