@@ -136,34 +136,23 @@ class ViewController: NSViewController {
         column2.sortDescriptorPrototype = valueSortDescriptor
         
         let tableContainer = NSScrollView()
-//        let tableContainer = NSScrollView(frame: view.bounds)
-//        tableContainer.autoresizingMask = [.width, .height]
         tableContainer.documentView = tableView
         tableContainer.hasVerticalScroller = true
         
+        view.addSubview(tableContainer)
+        view.addSubview(statusLabel)
         
-        let newValue = NSStackView(views: [tableContainer, statusLabel])
+        //if #available(OSX 10.11, *) {
+        tableContainer.translatesAutoresizingMaskIntoConstraints = false
+        tableContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableContainer.bottomAnchor.constraint(equalTo: statusLabel.topAnchor).isActive = true
         
-        /// call before setup constraints
-        view.addSubview(newValue)
-        
-        if #available(OSX 10.11, *) {
-            newValue.translatesAutoresizingMaskIntoConstraints = false
-            newValue.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            newValue.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            newValue.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            newValue.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        } else {
-            newValue.frame = view.bounds
-            newValue.autoresizingMask = [.width, .height]
-        }
-        newValue.spacing = 1
-        newValue.orientation = .vertical
-        newValue.alignment = .centerX
-        if #available(OSX 10.11, *) {
-            newValue.distribution = .fill
-        }
-        
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        statusLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        statusLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     private func setupHistoryDataSource() {
