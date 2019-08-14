@@ -28,9 +28,22 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if FileManager.default.fileExists(atPath: videoDestination.path) {
+            try? FileManager.default.removeItem(atPath: videoDestination.path)
+        }
+        
         stopRecordingButton.isEnabled = false
-        playRecordingButton.isEnabled = FileManager.default.fileExists(atPath: videoDestination.path)
+        playRecordingButton.isEnabled = false
+        
+        print(AVCaptureDevice.devices(for: .muxed))
+        Devices.enableDalDevices()
+        print(AVCaptureDevice.devices(for: .muxed))
+        NotificationCenter.default.addObserver(forName: .AVCaptureDeviceWasConnected, object: nil, queue: nil) { notification in
+            print(AVCaptureDevice.devices(for: .muxed))
+            print(notification)
+            print()
+        }
     }
     
     @IBAction private func startRecording(_ sender: NSButton) {
@@ -59,6 +72,7 @@ class ViewController: NSViewController {
 
 import AVFoundation
 
+/// NSCameraUsageDescription
 /// https://github.com/nirix/swift-screencapture
 /// https://github.com/wulkano/Aperture
 final class ScreenRecorder: NSObject {
@@ -69,24 +83,46 @@ final class ScreenRecorder: NSObject {
     
     init(destination: URL) {
         self.destination = destination
+
         
+
         
-        let displayId = CGMainDisplayID()
-        
-        guard let input = AVCaptureScreenInput(displayID: displayId) else {
-            fatalError()
-            //            assertionFailure()
-            //            return
-        }
-        
-        session = AVCaptureSession()
+        let session = AVCaptureSession()
+        self.session = session
         session.sessionPreset = .high
         
-        if session.canAddInput(input) {
-            session.addInput(input)
-        } else {
-            assertionFailure()
-        }
+        //AVCaptureDevice.devices()
+//        Devices.enableDalDevices()
+
+        
+        print(AVCaptureDevice.devices(for: .muxed))
+        assert(Devices.ios().count == 1)
+        Devices.ios()
+            .compactMap { try? AVCaptureDeviceInput(device: $0) }
+            .filter { session.canAddInput($0) }
+            .forEach { session.addInput($0) }
+        
+        
+        /// CMIO_Unit_Input_Device.cpp:244:GetPropertyInfo CMIOUInputFromProcs::GetPropertyInfo() failed for id 1836411236, Error: -67456
+        /// StreamCopyBufferQueue got an error from the plug-in routine, Error: 1852797029
+        
+//        let q = AVCaptureDevice.default(for: .video)!
+//        let w = try! AVCaptureDeviceInput(device: q)
+//        if session.canAddInput(w) {
+//            session.addInput(w)
+//        }
+        
+        //        let displayId = CGMainDisplayID()
+        //        guard let input = AVCaptureScreenInput(displayID: displayId) else {
+        //            fatalError()
+        //            //            assertionFailure()
+        //            //            return
+        //        }
+//        if session.canAddInput(input) {
+//            session.addInput(input)
+//        } else {
+//            assertionFailure()
+//        }
         
         movieFileOutput = AVCaptureMovieFileOutput()
         
@@ -147,7 +183,7 @@ public struct Devices {
         }
     }
     
-    public static func ios() -> [[String: String]] {
+    public static func iosInfo() -> [[String: String]] {
         return AVCaptureDevice.devices(for: .muxed)
             .filter { $0.localizedName == "iPhone" || $0.localizedName == "iPad" }
             .map {
@@ -156,6 +192,11 @@ public struct Devices {
                     "id": $0.uniqueID
                 ]
         }
+    }
+    
+    public static func ios() -> [AVCaptureDevice] {
+        return AVCaptureDevice.devices(for: .muxed)
+            .filter { $0.localizedName.contains("iPhone") || $0.localizedName.contains("iPad") }
     }
     
     
