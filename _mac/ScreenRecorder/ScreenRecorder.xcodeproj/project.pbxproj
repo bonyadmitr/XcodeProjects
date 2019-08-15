@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE478ABA2305E47A00BAC937 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE478AB92305E47A00BAC937 /* ScreenRecorder.swift */; };
 		CEB53EE82304603D005350DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53EE72304603D005350DF /* AppDelegate.swift */; };
 		CEB53EEA2304603D005350DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB53EE92304603D005350DF /* ViewController.swift */; };
 		CEB53EEC2304603F005350DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB53EEB2304603F005350DF /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE478AB92305E47A00BAC937 /* ScreenRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		CEB53EE42304603D005350DF /* ScreenRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB53EE72304603D005350DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB53EE92304603D005350DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				CEB53EE72304603D005350DF /* AppDelegate.swift */,
 				CEB53EE92304603D005350DF /* ViewController.swift */,
+				CE478AB92305E47A00BAC937 /* ScreenRecorder.swift */,
 				CEB53EEB2304603F005350DF /* Assets.xcassets */,
 				CEB53EED2304603F005350DF /* Main.storyboard */,
 				CEB53EF02304603F005350DF /* Info.plist */,
@@ -140,6 +143,7 @@
 			files = (
 				CEB53EEA2304603D005350DF /* ViewController.swift in Sources */,
 				CEB53EE82304603D005350DF /* AppDelegate.swift in Sources */,
+				CE478ABA2305E47A00BAC937 /* ScreenRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
