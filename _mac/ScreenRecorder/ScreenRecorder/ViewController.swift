@@ -49,21 +49,26 @@ class ViewController: NSViewController {
             addVideoHandler()
         }
         
-
-        
         Devices.enableDalDevices()
     }
     
+    override func viewWillLayout() {
+        super.viewWillLayout()
+        self.previewLayer?.frame = self.playerView.bounds
+    }
+    
+    private var previewLayer: AVCaptureVideoPreviewLayer?
+    
     private func addVideoHandler() {
-        //            if self.screenRecorder.session.isRunning {
-        //                return
-        //            }
+        guard self.previewLayer == nil else {
+            return
+        }
         
-        //            self.playerView.isHidden = true
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.screenRecorder.session)
+        self.previewLayer = previewLayer
         previewLayer.videoGravity = .resizeAspect
         previewLayer.frame = self.playerView.bounds
-        self.playerView.wantsLayer = true
+        //self.playerView.wantsLayer = true
         self.playerView.layer?.addSublayer(previewLayer)
         
         self.screenRecorder.session.startRunning()
