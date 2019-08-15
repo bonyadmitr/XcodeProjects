@@ -39,6 +39,11 @@ final class App {
                               defer: true)
         window.title = App.name
         window.contentViewController = vc
+        
+        /// https://stackoverflow.com/a/42984241/5893286
+        /// when the window is the full size cost more memory
+        window.contentView?.wantsLayer = true
+        
         window.center()
         /// call it after .center()
         window.setFrameAutosaveName("MainWindow")
