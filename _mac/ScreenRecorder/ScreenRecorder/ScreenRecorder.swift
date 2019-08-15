@@ -5,12 +5,10 @@ import AVFoundation
 /// https://github.com/wulkano/Aperture
 final class ScreenRecorder: NSObject {
     
-    private let destination: URL
     let session: AVCaptureSession
     private let movieFileOutput: AVCaptureMovieFileOutput
     
-    init(destination: URL) {
-        self.destination = destination
+    override init() {
         
         let session = AVCaptureSession()
         self.session = session
@@ -60,11 +58,12 @@ final class ScreenRecorder: NSObject {
             session.addOutput(movieFileOutput)
         }
         
+        super.init()
     }
     
-    func start() {
+    func startRecording(to outputFileURL: URL) {
         session.startRunning()
-        movieFileOutput.startRecording(to: self.destination, recordingDelegate: self)
+        movieFileOutput.startRecording(to: outputFileURL, recordingDelegate: self)
     }
     
     func stop() {

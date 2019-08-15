@@ -23,8 +23,8 @@ class ViewController: NSViewController {
     @IBOutlet private weak var stopRecordingButton: NSButton!
     @IBOutlet private weak var playRecordingButton: NSButton!
 
-    
-    private lazy var screenRecorder = ScreenRecorder(destination: videoDestination)
+    private var previewLayer: AVCaptureVideoPreviewLayer?
+    private lazy var screenRecorder = ScreenRecorder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +60,6 @@ class ViewController: NSViewController {
         }
     }
     
-    private var previewLayer: AVCaptureVideoPreviewLayer?
-    
     private func addVideoHandler() {
         guard self.previewLayer == nil else {
             return
@@ -83,7 +81,7 @@ class ViewController: NSViewController {
         }
         startRecordingButton.isEnabled = false
         stopRecordingButton.isEnabled = true
-        screenRecorder.start()
+        screenRecorder.startRecording(to: videoDestination)
     }
     
     @IBAction private func stopRecording(_ sender: NSButton) {
