@@ -78,6 +78,9 @@ class ViewController: NSViewController {
     }
     
     @IBAction private func startRecording(_ sender: NSButton) {
+        if FileManager.default.fileExists(atPath: videoDestination.path) {
+            try? FileManager.default.removeItem(atPath: videoDestination.path)
+        }
         startRecordingButton.isEnabled = false
         stopRecordingButton.isEnabled = true
         screenRecorder.start()
@@ -88,11 +91,11 @@ class ViewController: NSViewController {
         stopRecordingButton.isEnabled = false
         playRecordingButton.isEnabled = true
         screenRecorder.stop()
-        
-        //assert(FileManager.default.fileExists(atPath: videoDestination.path))
+        playRecording(nil)
+        assert(FileManager.default.fileExists(atPath: videoDestination.path))
     }
     
-    @IBAction private func playRecording(_ sender: NSButton) {
+    @IBAction private func playRecording(_ sender: NSButton?) {
         assert(FileManager.default.fileExists(atPath: videoDestination.path))
         
         let player = AVPlayer(url: videoDestination)
