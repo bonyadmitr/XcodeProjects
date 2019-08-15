@@ -40,8 +40,8 @@ class ViewController: NSViewController {
         if AVCaptureDevice.devices(for: .muxed).count == 0 {
             NotificationCenter.default.addObserver(forName: .AVCaptureDeviceWasConnected, object: nil, queue: nil) { notification in
                 //print(AVCaptureDevice.devices(for: .muxed))
-                print(notification.object as! AVCaptureDevice)
-                print()
+                //print(notification.object as! AVCaptureDevice)
+                print("- new device")
                 
                 self.addVideoHandler()
             }
@@ -54,7 +54,10 @@ class ViewController: NSViewController {
     
     override func viewWillLayout() {
         super.viewWillLayout()
-        self.previewLayer?.frame = self.playerView.bounds
+        
+        CALayer.performWithoutAnimation() {
+            previewLayer?.frame = playerView.bounds
+        }
     }
     
     private var previewLayer: AVCaptureVideoPreviewLayer?
@@ -68,7 +71,7 @@ class ViewController: NSViewController {
         self.previewLayer = previewLayer
         previewLayer.videoGravity = .resizeAspect
         previewLayer.frame = self.playerView.bounds
-        //self.playerView.wantsLayer = true
+        self.playerView.wantsLayer = true
         self.playerView.layer?.addSublayer(previewLayer)
         
         self.screenRecorder.session.startRunning()
@@ -86,7 +89,7 @@ class ViewController: NSViewController {
         playRecordingButton.isEnabled = true
         screenRecorder.stop()
         
-        assert(FileManager.default.fileExists(atPath: videoDestination.path))
+        //assert(FileManager.default.fileExists(atPath: videoDestination.path))
     }
     
     @IBAction private func playRecording(_ sender: NSButton) {
@@ -97,6 +100,18 @@ class ViewController: NSViewController {
         player.play()
     }
 }
+
+extension CALayer {
+    
+    /// https://stackoverflow.com/a/33961937/5893286
+    static func performWithoutAnimation(_ actionsWithoutAnimation: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setValue(true, forKey: kCATransactionDisableActions)
+        actionsWithoutAnimation()
+        CATransaction.commit()
+    }
+}
+
 
 import AVFoundation
 
@@ -111,9 +126,6 @@ final class ScreenRecorder: NSObject {
     
     init(destination: URL) {
         self.destination = destination
-
-        
-
         
         let session = AVCaptureSession()
         self.session = session
@@ -126,11 +138,16 @@ final class ScreenRecorder: NSObject {
         print(AVCaptureDevice.devices(for: .muxed))
         assert(Devices.ios().count == 1)
         Devices.ios()
+            //.filter { $0.hasMediaType(.video) }
             .compactMap { try? AVCaptureDeviceInput(device: $0) }
             .filter { session.canAddInput($0) }
             .forEach { session.addInput($0) }
         
+//        NotificationCenter.default.addObserver(forName: .AVCaptureSessionRuntimeError, object: nil, queue: nil) { notification in
+//            print("- error session\n", notification)
+//        }
         
+        //AVCaptureSessionErrorKey.description
         /// CMIO_Unit_Input_Device.cpp:244:GetPropertyInfo CMIOUInputFromProcs::GetPropertyInfo() failed for id 1836411236, Error: -67456
         /// StreamCopyBufferQueue got an error from the plug-in routine, Error: 1852797029
         
