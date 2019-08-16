@@ -12,6 +12,7 @@
 		CE478AEB2306F36300BAC937 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE478AE92306F36300BAC937 /* Main.storyboard */; };
 		CE478AED2306F36400BAC937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE478AEC2306F36400BAC937 /* Assets.xcassets */; };
 		CE478AF02306F36500BAC937 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE478AEE2306F36500BAC937 /* LaunchScreen.storyboard */; };
+		CE478AF82307091D00BAC937 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE478AF72307091D00BAC937 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE478AEC2306F36400BAC937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE478AEF2306F36500BAC937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE478AF12306F36500BAC937 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE478AF72307091D00BAC937 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				CE478AE52306F36300BAC937 /* AppDelegate.swift */,
 				CE478AE72306F36300BAC937 /* ViewController.swift */,
+				CE478AF72307091D00BAC937 /* Localizable.strings */,
 				CE478AE92306F36300BAC937 /* Main.storyboard */,
 				CE478AEC2306F36400BAC937 /* Assets.xcassets */,
 				CE478AEE2306F36500BAC937 /* LaunchScreen.storyboard */,
@@ -123,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE478AF02306F36500BAC937 /* LaunchScreen.storyboard in Resources */,
+				CE478AF82307091D00BAC937 /* Localizable.strings in Resources */,
 				CE478AED2306F36400BAC937 /* Assets.xcassets in Resources */,
 				CE478AEB2306F36300BAC937 /* Main.storyboard in Resources */,
 			);

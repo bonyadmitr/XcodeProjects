@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3A-TE-EwS">
-                                <rect key="frame" x="75" y="131.5" width="170" height="237"/>
+                                <rect key="frame" x="75" y="107" width="170" height="286"/>
                                 <subviews>
                                     <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sometext Wi-Fi sometext" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL5-7h-9f3">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="41"/>
@@ -71,6 +71,16 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sometext Wi-Fi sometext" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7i-S1-VIi">
+                                        <rect key="frame" x="0.0" y="245" width="170" height="41"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="170" id="ETI-mD-Ohp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -87,6 +97,7 @@
                         <outlet property="label3" destination="EHX-lX-xYY" id="gTV-c0-9Z9"/>
                         <outlet property="label4" destination="wvw-W5-Abr" id="eYS-ar-6ty"/>
                         <outlet property="label5" destination="5kH-3v-jXu" id="svc-4g-GO3"/>
+                        <outlet property="label6" destination="g7i-S1-VIi" id="b3v-2h-yfb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qg0-87-ZSx" sceneMemberID="firstResponder"/>

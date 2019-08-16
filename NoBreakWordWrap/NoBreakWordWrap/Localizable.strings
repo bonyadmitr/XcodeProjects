@@ -1,0 +1,6 @@
+"sometext_wifi_param" = "sometext Wi%@Fi sometext";
+
+/// not working
+"sometext_wifi_sold1" = "sometext Wi\u{2011}Fi sometext";
+
+"sometext_wifi_sold2" = "sometext Wi‑Fi sometext";
