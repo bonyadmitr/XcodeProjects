@@ -25,6 +25,12 @@ class ViewController: UIViewController {
         /// NO-BREAK SPACE \u{00a0} " "
         /// NON-BREAKING HYPHEN \u{2011} "‑"
         
+        print(" " != " ")
+        print("-" == "-")
+        print("-" != "‑") // NON-BREAKING HYPHEN
+        print("-" != "–")
+        print("-" != "—")
+        
         label1.text = "sometext\u{00a0}Wi\u{2011}Fi sometext"
         label2.text = "sometext Wi\u{2011}Fi sometext"
         label3.text = "sometext Wi‑Fi sometext"
