@@ -20,6 +20,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /// https://en.wikipedia.org/wiki/Non-breaking_space
+        /// macOS Alt+Space: " " != " "
+        /// NO-BREAK SPACE \u{00a0} " "
+        /// NON-BREAKING HYPHEN \u{2011} "‑"
+        
         label1.text = "sometext\u{00a0}Wi\u{2011}Fi sometext"
         label2.text = "sometext Wi\u{2011}Fi sometext"
         label3.text = "sometext Wi‑Fi sometext"
