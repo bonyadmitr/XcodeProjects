@@ -67,7 +67,30 @@ final class StatusItemManager {
     
 }
 
-final class AudioManager {
+extension NSNotification.Name {
+    static let audioDevicesDidChange = NSNotification.Name(rawValue: "audioDevicesDidChange")
+//    static let audioOutputDeviceDidChange = NSNotification.Name(rawValue: "audioOutputDeviceDidChange")
+    static let audioInputDeviceDidChange = NSNotification.Name(rawValue: "audioInputDeviceDidChange")
+}
+
+enum AudioListener {
+    static var devices: AudioObjectPropertyListenerProc = { _, _, _, _ in
+        NotificationCenter.default.post(name: .audioDevicesDidChange, object: nil)
+        return 0
+    }
+    
+//    static var output: AudioObjectPropertyListenerProc = { _, _, _, _ in
+//        NotificationCenter.default.post(name: .audioOutputDeviceDidChange, object: nil)
+//        return 0
+//    }
+    
+    static var input: AudioObjectPropertyListenerProc = { _, _, _, _ in
+        NotificationCenter.default.post(name: .audioInputDeviceDidChange, object: nil)
+        return 0
+    }
+}
+
+final class AudioManager: NSObject {
     
     static let shared = AudioManager()
     
@@ -84,8 +107,22 @@ final class AudioManager {
     
     private var currentInputDeviceID = AudioObjectID(kAudioObjectUnknown)
     
-    init() {
+    override init() {
+        super.init()
+        
         setupCurrentInputDeviceID()
+        startListener()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: .audioDevicesDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: .audioInputDeviceDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func handleNotification(_ notification: Notification) {
+        print(isMuted())
     }
     
     private func setupCurrentInputDeviceID() {
@@ -114,20 +151,32 @@ final class AudioManager {
         return isSettable.boolValue
     }
     
-    private func get() {
-        var propertySize: UInt32 = 0
-        
-        // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
-        AudioObjectGetPropertyDataSize(systemID, &inputDeviceAddress, 0, nil, &propertySize).handleError()
-        
-        assert(propertySize == UInt32(MemoryLayout<UInt32>.size))
-        
-        let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
-        var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
-        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
-        
-        
-        
+//    private func get() {
+//        var propertySize: UInt32 = 0
+//
+//        // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
+//        AudioObjectGetPropertyDataSize(systemID, &inputDeviceAddress, 0, nil, &propertySize).handleError()
+//
+//        assert(propertySize == UInt32(MemoryLayout<UInt32>.size))
+//
+//        let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
+//        var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
+//        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
+//
+//
+//
+//    }
+    
+    // MARK: Public method
+    func startListener() {
+        //AudioObjectAddPropertyListenerBlock
+        AudioObjectAddPropertyListener(AudioObjectID(kAudioObjectSystemObject), &inputDeviceAddress, AudioListener.devices, nil)
+        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, AudioListener.input, nil)
+    }
+    
+    func stopListener() {
+        AudioObjectRemovePropertyListener(AudioObjectID(kAudioObjectSystemObject), &inputDeviceAddress, AudioListener.devices, nil)
+        AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, AudioListener.input, nil)
     }
 }
 
