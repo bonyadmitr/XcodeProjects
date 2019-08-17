@@ -144,7 +144,7 @@ extension FloatingPresentingController: UITableViewDelegate {
         
         switch raw {
         case .crashApp:
-            exit(0)
+            exit(EXIT_SUCCESS)
         case .moveToBackgroundAndCrash:
             isGoingToCrash = true
             UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
