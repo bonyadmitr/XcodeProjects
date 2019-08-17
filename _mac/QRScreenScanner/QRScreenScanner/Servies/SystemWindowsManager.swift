@@ -97,6 +97,13 @@ final class SystemWindowsManager {
         return CFArrayCreate(kCFAllocatorDefault, pointer, array.count, nil)
     }
     
+    static private func cfarray(from id: UInt) -> CFArray {
+        //return cfarray(from: [id])
+        let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
+        pointer.pointee = UnsafeRawPointer(bitPattern: id)
+        return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
+    }
+    
     /// at https://stackoverflow.com/a/8657973/5893286 said that it isn't possible, but i got it
     /// filter small windows
     static func getHiddenWindowsImages() -> [CGImage] {
@@ -111,11 +118,8 @@ final class SystemWindowsManager {
                 return false
             }.compactMap {
                 $0[kCGWindowNumber as String] as? UInt
-            }.compactMap { id -> CFArray in
-                ///reused code: cfarray(from: [id])
-                let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
-                pointer.pointee = UnsafeRawPointer(bitPattern: id)
-                return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
+            }.compactMap {
+                cfarray(from: $0)
             }.compactMap {
                 CGImage(windowListFromArrayScreenBounds: .null, windowArray: $0,
                         imageOption: [.boundsIgnoreFraming, .nominalResolution])
@@ -158,10 +162,8 @@ final class SystemWindowsManager {
                 return false
             }.compactMap {
                 $0[kCGWindowNumber as String] as? UInt
-            }.compactMap { id -> CFArray in
-                let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
-                pointer.pointee = UnsafeRawPointer(bitPattern: id)
-                return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
+            }.compactMap {
+                cfarray(from: $0)
             }.compactMap {
                 CGImage(windowListFromArrayScreenBounds: .null, windowArray: $0,
                         imageOption: [.boundsIgnoreFraming, .nominalResolution])
