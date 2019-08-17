@@ -20,9 +20,6 @@ import Cocoa
 // TODO: Icon
 // TODO: Status icon
 
-/// https://stackoverflow.com/a/12894388/5893286
-
-
 //window.isRestorable = true
 //window.restorationClass = WindowsManager.self //type(of: self)
 //window.identifier = NSUserInterfaceItemIdentifier(rawValue: "MainWindow") //String(describing: type(of: self))
@@ -40,6 +37,10 @@ import Cocoa
 //    }
 //}
 
+
+/// https://stackoverflow.com/a/12894388/5893286
+/// https://github.com/zcohan/RestorableWindowControllers
+/// https://github.com/michelf/sim-daltonism/blob/master/Mac%20App/FilterWindowManager.swift
 //extension WindowsManager: NSWindowRestoration {
 //    public static func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping (NSWindow?, Error?) -> Void) {
 //
