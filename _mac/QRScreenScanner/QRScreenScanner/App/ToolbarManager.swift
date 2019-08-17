@@ -157,38 +157,41 @@ extension NSSound.Name {
     static let tink      = NSSound.Name("Tink")
 }
 
-
-import AudioToolbox
-
+/// work in background
 extension NSSound {
+    
+    /// system error sound
     static func playError() {
-        /// system error sound
         /// or #1
         NSSound.beep()
-        
         /// or #2
         //NSSound(named: .funk)?.play()
-        
-        /// phone beep 1200 - 1211
-        //AudioServicesPlaySystemSound(1209)
-        
-        //        AudioServicesPlaySystemSound(1263)
-        //        AudioServicesPlaySystemSound(1264)
-        //        AudioServicesPlaySystemSound(1265)
-        
-        //30-40 phone busy
-        //1-30 finder sounds
-        
-        /// to test sounds in range
-        //        for i in 0...100 {
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
-        //                AudioServicesPlaySystemSound(SystemSoundID(0 + i))
-        //                print(i)
-        //            }
-        //        }
     }
     
     static func playSuccess() {
         NSSound(named: .glass)?.play()
     }
 }
+
+/// need for AudioServicesPlaySystemSound
+//import AudioToolbox
+
+//func playSound() {
+//    /// phone beep 1200 - 1211
+//    AudioServicesPlaySystemSound(1209)
+//
+//    //        AudioServicesPlaySystemSound(1263)
+//    //        AudioServicesPlaySystemSound(1264)
+//    //        AudioServicesPlaySystemSound(1265)
+//
+//    //30-40 phone busy
+//    //1-30 finder sounds
+//
+//    /// to test sounds in range
+//    //        for i in 0...100 {
+//    //            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+//    //                AudioServicesPlaySystemSound(SystemSoundID(0 + i))
+//    //                print(i)
+//    //            }
+//    //        }
+//}
