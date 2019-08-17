@@ -70,6 +70,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE080E662307CDB700527662 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD357122F8029B002CC59E /* App.swift */,
+				CE080E642307CCB400527662 /* WindowsManager.swift */,
+				CEAD356D22F80247002CC59E /* MenuManager.swift */,
+				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
+				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
+				CEAD356B22F6AB34002CC59E /* main.swift */,
+				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		CEAD357B22FBF1F9002CC59E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,26 +95,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		CEAD357C22FBF220002CC59E /* Main */ = {
+		CEAD357C22FBF220002CC59E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CEAD356B22F6AB34002CC59E /* main.swift */,
-				CEE5E1BC22E6DEAA00B54D40 /* AppDelegate.swift */,
 				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
 				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
 				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
 			);
-			path = Main;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CEAD358122FDCB35002CC59E /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
-				CE080E642307CCB400527662 /* WindowsManager.swift */,
-				CEAD356D22F80247002CC59E /* MenuManager.swift */,
-				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
-				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
 				CEAD358522FDCBFF002CC59E /* Classes */,
 			);
 			path = UI;
@@ -155,8 +163,8 @@
 		CEE5E1BB22E6DEAA00B54D40 /* QRScreenScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CEAD357122F8029B002CC59E /* App.swift */,
-				CEAD357C22FBF220002CC59E /* Main */,
+				CE080E662307CDB700527662 /* App */,
+				CEAD357C22FBF220002CC59E /* Resources */,
 				CEAD358122FDCB35002CC59E /* UI */,
 				CED1771822FEEA47001F3CBE /* Logic */,
 				CEAD358222FDCB84002CC59E /* Servies */,
@@ -380,10 +388,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Main/QRScreenScanner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Resources/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -399,10 +407,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Main/QRScreenScanner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = QRScreenScanner/Resources/QRScreenScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Main/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/QRScreenScanner/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
