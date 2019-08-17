@@ -20,11 +20,11 @@ final class QRService {
     }
     
     static func scanBrowser() {
-        if let windowImage = SystemWindowsManager.compositedWindowForBundleId(System.defalutBrowserBundleId()) {
-            let qrValues = CodeDetector.shared.readQR(from: windowImage)
-            saveQRValues(qrValues)
-            App.shared.showWindow()
-        }
+        let qrValues = SystemWindowsManager
+            .windowsForBundleId(System.defalutBrowserBundleId())
+            .flatMap { CodeDetector.shared.readQR(from: $0) }
+        saveQRValues(qrValues)
+        App.shared.showWindow()
     }
     
     static func scanFiles(at filePaths: [String]) {
