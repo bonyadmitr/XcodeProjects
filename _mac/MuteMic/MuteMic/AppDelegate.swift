@@ -12,9 +12,11 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItemManager = StatusItemManager()
+    let audioManager = AudioManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItemManager.setup()
+        audioManager.get2()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {}
@@ -55,13 +57,71 @@ final class StatusItemManager {
             return
         }
         
-        if event.modifierFlags.contains(.option) || event.type == .rightMouseUp {
+        if event.modifierFlags.contains([.option]) || event.type == .rightMouseUp {
             statusItem.popUpMenu(statusItemMenu)
         }
         
 //        if ((event.modifierFlags.rawValue & NSControlKeyMask) || (event.type == NSRightMouseUp))
     }
     
+}
+
+final class AudioManager {
+    
+    var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
+                                                        mScope: kAudioObjectPropertyScopeGlobal,
+                                                        mElement: kAudioObjectPropertyElementMaster)
+    
+    var mutePropertyAddress = AudioObjectPropertyAddress(mSelector: kAudioDevicePropertyMute,
+                                                         mScope: kAudioDevicePropertyScopeInput,
+                                                         mElement: kAudioObjectPropertyElementMaster)
+    
+    let systemID = AudioObjectID(kAudioObjectSystemObject)
+    var propertySize = UInt32(MemoryLayout<UInt32>.size)
+    
+    var currentID = AudioObjectID(kAudioObjectUnknown)
+    
+    private func setupCurrentId() {
+        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &currentID).handleError()
+    }
+    
+    func get2() {
+        setupCurrentId()
+        
+        var isMuted: DarwinBoolean = false
+        AudioObjectGetPropertyData(currentID, &mutePropertyAddress, 0, nil, &propertySize, &isMuted).handleError()
+        
+        print("- isMuted: \(isMuted)")
+        
+        var isSettable: DarwinBoolean = false
+        AudioObjectIsPropertySettable(currentID, &mutePropertyAddress, &isSettable).handleError()
+        
+        guard isSettable.boolValue else {
+            assertionFailure()
+            return
+        }
+        
+        var toggleMute: UInt32 = isMuted.boolValue ? 0 : 1
+        AudioObjectSetPropertyData(currentID, &mutePropertyAddress, 0, nil, propertySize, &toggleMute).handleError()
+    }
+    
+    func get() {
+        
+        
+        var propertySize: UInt32 = 0
+        
+        // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
+        AudioObjectGetPropertyDataSize(systemID, &inputDeviceAddress, 0, nil, &propertySize).handleError()
+        
+        assert(propertySize == UInt32(MemoryLayout<UInt32>.size))
+        
+        let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
+        var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
+        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
+
+        
+        
+    }
 }
 
 
@@ -142,5 +202,11 @@ func handle(_ errorCode: OSStatus) throws {
         print("- error code:", errorCode)
         //NSApplication.shared.presentError(error)
         //throw error
+    }
+}
+
+extension OSStatus {
+    func handleError() {
+        assert(self == kAudioHardwareNoError, "reason: \(self)")
     }
 }
