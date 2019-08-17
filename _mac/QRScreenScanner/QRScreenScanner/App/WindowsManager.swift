@@ -11,14 +11,8 @@ final class WindowsManager: NSObject {
     /// window style https://lukakerr.github.io/swift/nswindow-styles
     lazy var window: NSWindow = {
         let vc = ViewController()
-        //let window = NSWindow(contentViewController: vc)
-        let window = NSWindow(contentRect: vc.view.frame,
-                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
-                              backing: .buffered,
-                              defer: true)
-        window.contentViewController = vc
-        window.title = App.name //window.title = vc.title
-        window.isReleasedWhenClosed = false
+        let window = NSWindow(vc: vc)
+        window.title = App.name
         //window.animationBehavior = .utilityWindow
         
         /// https://stackoverflow.com/a/42984241/5893286
@@ -31,14 +25,30 @@ final class WindowsManager: NSObject {
         return window
     }()
     
-    func start() {
-        
-    }
-    
     func showWindow() {
         //window.orderFront(nil)
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
+private extension NSWindow {
+    
+    /// same as self.init(contentViewController: vc)
+    convenience init(vc: NSViewController) {
+        self.init(contentRect: vc.view.frame,
+                  styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                  backing: .buffered,
+                  defer: true)
+        contentViewController = vc
+        isReleasedWhenClosed = false
+        
+        /// or #1
+        //bind(.title, to: vc, withKeyPath: #keyPath(NSViewController.title), options: nil)
+        /// or #2
+        if let title = vc.title {
+            self.title = title
+        }
     }
 }
 
