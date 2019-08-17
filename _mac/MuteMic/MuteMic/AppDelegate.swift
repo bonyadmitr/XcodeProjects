@@ -11,18 +11,59 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    let statusItemManager = StatusItemManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        statusItemManager.setup()
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-
-
+    func applicationWillTerminate(_ aNotification: Notification) {}
 }
+
+import Cocoa
+
+final class StatusItemManager {
+    
+    //static let shared = StatusItemManager()
+    
+    private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    
+    private let statusItemMenu: NSMenu = {
+        let menu = NSMenu()
+        menu.addItem(withTitle: "qqq", action: nil, keyEquivalent: ",")
+        return menu
+    }()
+    
+    /// without storyboard can be create by lazy var + `_ = statusItem`.
+    /// otherwise will be errors "0 is not a valid connection ID".
+    /// https://habr.com/ru/post/447754/
+    func setup() {
+        guard let button = statusItem.button else {
+            assertionFailure("system error. try statusItem.title")
+            return
+        }
+        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
+        button.title = "Mic"
+        button.action = #selector(clickStatusItem)
+        button.target = self
+        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+    }
+    
+    @objc private func clickStatusItem() {
+        guard let event = NSApp.currentEvent else {
+            assertionFailure()
+            return
+        }
+        
+        if event.modifierFlags.contains(.option) || event.type == .rightMouseUp {
+            statusItem.popUpMenu(statusItemMenu)
+        }
+        
+//        if ((event.modifierFlags.rawValue & NSControlKeyMask) || (event.type == NSRightMouseUp))
+    }
+    
+}
+
 
 //import AudioToolbox
 import CoreAudio
