@@ -145,6 +145,7 @@ final class SystemWindowsManager {
     
     static func processIdentifier(for bundleId: String) -> pid_t? {
         /// caseInsensitiveCompare need for: "com.google.chrome" vs "com.google.Chrome"
+        /// memory leak .runningApplications https://stackoverflow.com/a/34971781/5893286
         return NSWorkspace.shared.runningApplications
             .first { $0.bundleIdentifier?.caseInsensitiveCompare(bundleId) == .orderedSame }?.processIdentifier
     }

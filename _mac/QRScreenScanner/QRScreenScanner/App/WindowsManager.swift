@@ -13,7 +13,9 @@ final class WindowsManager: NSObject {
         let vc = ViewController()
         let window = NSWindow(vc: vc)
         window.title = App.name
-        //window.animationBehavior = .utilityWindow
+        
+        /// animation not always work for start window
+        window.animationBehavior = .none
         
         /// https://stackoverflow.com/a/42984241/5893286
         /// when the window is the full size cost more memory
