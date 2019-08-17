@@ -85,24 +85,31 @@ final class AudioManager {
         AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &currentID).handleError()
     }
     
-    func get2() {
-        setupCurrentId()
-        
+    func isMuted() -> Bool {
         var isMuted: DarwinBoolean = false
         AudioObjectGetPropertyData(currentID, &mutePropertyAddress, 0, nil, &propertySize, &isMuted).handleError()
-        
-        print("- isMuted: \(isMuted)")
-        
+        return isMuted.boolValue
+    }
+    
+    func setMute(_ mute: Bool) {
+        var toggleMute: UInt32 = mute ? 1 : 0
+        AudioObjectSetPropertyData(currentID, &mutePropertyAddress, 0, nil, propertySize, &toggleMute).handleError()
+    }
+    
+    func toogleMute() {
+        assert(isMuteSettable())
+        setMute(!isMuted())
+    }
+    
+    func isMuteSettable() -> Bool {
         var isSettable: DarwinBoolean = false
         AudioObjectIsPropertySettable(currentID, &mutePropertyAddress, &isSettable).handleError()
-        
-        guard isSettable.boolValue else {
-            assertionFailure()
-            return
-        }
-        
-        var toggleMute: UInt32 = isMuted.boolValue ? 0 : 1
-        AudioObjectSetPropertyData(currentID, &mutePropertyAddress, 0, nil, propertySize, &toggleMute).handleError()
+        return isSettable.boolValue
+    }
+    
+    func get2() {
+        setupCurrentId()
+        toogleMute()
     }
     
     func get() {
