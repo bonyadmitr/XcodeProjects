@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE080E652307CCB400527662 /* WindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E642307CCB400527662 /* WindowsManager.swift */; };
+		CE080E682307CF3A00527662 /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E672307CF3A00527662 /* Optional+Assert.swift */; };
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
 		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
 		CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336722FDCF5100984201 /* CGError+Assert.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		CE080E642307CCB400527662 /* WindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsManager.swift; sourceTree = "<group>"; };
+		CE080E672307CF3A00527662 /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
 		CE92336722FDCF5100984201 /* CGError+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGError+Assert.swift"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				CEAD357522F9C2DA002CC59E /* NSToolbarItem+Init.swift */,
 				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
 				CE92336722FDCF5100984201 /* CGError+Assert.swift */,
+				CE080E672307CF3A00527662 /* Optional+Assert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				CEAD357022F80273002CC59E /* StatusItemManager.swift in Sources */,
 				CEAD356E22F80247002CC59E /* MenuManager.swift in Sources */,
 				CED1771722FECE52001F3CBE /* History.swift in Sources */,
+				CE080E682307CF3A00527662 /* Optional+Assert.swift in Sources */,
 				CEAD357422F9C2BE002CC59E /* NSButton+Init.swift in Sources */,
 				CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
