@@ -20,25 +20,61 @@ import Cocoa
 // TODO: Icon
 // TODO: Status icon
 
-final class App {
+/// https://stackoverflow.com/a/12894388/5893286
+
+
+//window.isRestorable = true
+//window.restorationClass = WindowsManager.self //type(of: self)
+//window.identifier = NSUserInterfaceItemIdentifier(rawValue: "MainWindow") //String(describing: type(of: self))
+
+//window.restoreState(with: state)
+
+//final class MainWindowController: NSWindowController {
+//    override func restoreState(with coder: NSCoder) {
+//    }
+//}
+//
+//final class MainWindow: NSWindow {
+//    override func restoreState(with coder: NSCoder) {
+//        //coder.encode(<#T##object: Any?##Any?#>, forKey: <#T##String#>)
+//    }
+//}
+
+//extension WindowsManager: NSWindowRestoration {
+//    public static func restoreWindow(withIdentifier identifier: NSUserInterfaceItemIdentifier, state: NSCoder, completionHandler: @escaping (NSWindow?, Error?) -> Void) {
+//
+//        //assert(String(describing: self) == identifierComponents.last, "unexpected restoration path: \(identifierComponents)")
+//
+//        if identifier.rawValue == "MainWindow" {
+//            let window = NSWindow()
+//            completionHandler(window, nil)
+//        } else {
+//            completionHandler(nil, nil)
+//        }
+//    }
+//}
+
+final class WindowsManager: NSObject {
     
-    static let shared = App()
-    
-    let statusItemManager = StatusItemManager()
-    let menuManager = MenuManager()
-    let toolbarManager = ToolbarManager()
+    override init() {
+        super.init()
+        print("- WindowsManager")
+    }
     
     /// if it is not lazy controller will be loaded immediately
     ///
     /// window style https://lukakerr.github.io/swift/nswindow-styles
-    private lazy var window: NSWindow = {
+    lazy var window: NSWindow = {
         let vc = ViewController()
+        //let window = NSWindow(contentViewController: vc)
         let window = NSWindow(contentRect: vc.view.frame,
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered,
                               defer: true)
-        window.title = App.name
         window.contentViewController = vc
+        window.title = App.name //window.title = vc.title
+        window.isReleasedWhenClosed = false
+        //window.animationBehavior = .utilityWindow
         
         /// https://stackoverflow.com/a/42984241/5893286
         /// when the window is the full size cost more memory
@@ -51,15 +87,68 @@ final class App {
     }()
     
     func start() {
+        
+    }
+    
+    func showWindow() {
+        //window.orderFront(nil)
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
+final class App {
+    
+    static let shared = App()
+    
+    let statusItemManager = StatusItemManager()
+    let menuManager = MenuManager()
+    let toolbarManager = ToolbarManager()
+    let windowsManager = WindowsManager()
+    
+    /// if it is not lazy controller will be loaded immediately
+    ///
+    /// window style https://lukakerr.github.io/swift/nswindow-styles
+//    private lazy var window: NSWindow = {
+//        let vc = ViewController()
+//        //let window = NSWindow(contentViewController: vc)
+//        let window = NSWindow(contentRect: vc.view.frame,
+//                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
+//                              backing: .buffered,
+//                              defer: true)
+//        window.contentViewController = vc
+//        window.title = App.name //window.title = vc.title
+//        window.isReleasedWhenClosed = false
+//
+//        window.isRestorable = true
+//        window.restorationClass = WindowsManager.self //type(of: self)
+//        window.identifier = NSUserInterfaceItemIdentifier(rawValue: "MainWindow") //String(describing: type(of: self))
+//        //window.animationBehavior = .utilityWindow
+//
+//        /// https://stackoverflow.com/a/42984241/5893286
+//        /// when the window is the full size cost more memory
+//        window.contentView?.wantsLayer = true
+//
+//        window.center()
+//        /// call it after .center()
+//        window.setFrameAutosaveName("MainWindow")
+//        return window
+//    }()
+    
+    func start() {
         menuManager.setup()
         statusItemManager.setup()
-        toolbarManager.addToWindow(window)
+        toolbarManager.addToWindow(windowsManager.window)
+//        windowsManager.showWindow()
         showWindow()
     }
     
     func showWindow() {
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
+        windowsManager.showWindow()
+        
+//        //window.orderFront(nil)
+//        window.makeKeyAndOrderFront(nil)
+//        NSApp.activate(ignoringOtherApps: true)
     }
 }
 
