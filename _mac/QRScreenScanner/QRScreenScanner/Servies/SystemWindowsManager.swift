@@ -143,6 +143,31 @@ final class SystemWindowsManager {
                        imageOption: [.boundsIgnoreFraming, .nominalResolution])
     }
     
+    static func windowsForBundleId(_ bundleId: String) -> [CGImage] {
+        let processId = processIdentifier(for: bundleId)
+        return windowsInfo()
+            .filter {
+                $0[kCGWindowOwnerPID as String] as? Int32 == processId
+            }.filter {
+                if let boundsDict = $0[kCGWindowBounds as String] as? [String: Int],
+                    let height = boundsDict["Height"]
+                {
+                    /// 62 is Google Chrome local search window height
+                    return height > 62
+                }
+                return false
+            }.compactMap {
+                $0[kCGWindowNumber as String] as? UInt
+            }.compactMap { id -> CFArray in
+                let pointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 1)
+                pointer.pointee = UnsafeRawPointer(bitPattern: id)
+                return CFArrayCreate(kCFAllocatorDefault, pointer, 1, nil)
+            }.compactMap {
+                CGImage(windowListFromArrayScreenBounds: .null, windowArray: $0,
+                        imageOption: [.boundsIgnoreFraming, .nominalResolution])
+        }
+    }
+    
     static func processIdentifier(for bundleId: String) -> pid_t? {
         /// caseInsensitiveCompare need for: "com.google.chrome" vs "com.google.Chrome"
         /// memory leak .runningApplications https://stackoverflow.com/a/34971781/5893286
