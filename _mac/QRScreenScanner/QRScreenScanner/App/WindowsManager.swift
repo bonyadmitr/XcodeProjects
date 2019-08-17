@@ -1,19 +1,10 @@
-//
-//  WindowsManager.swift
-//  QRScreenScanner
-//
-//  Created by Bondar Yaroslav on 8/17/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import Cocoa
 
 final class WindowsManager: NSObject {
     
-    override init() {
-        super.init()
-        print("- WindowsManager")
-    }
+//    override init() {
+//        super.init()
+//    }
     
     /// if it is not lazy controller will be loaded immediately
     ///
