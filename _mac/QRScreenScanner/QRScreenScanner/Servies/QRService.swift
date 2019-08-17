@@ -9,6 +9,7 @@ final class QRService {
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         App.shared.showWindow()
+        playSound(for: qrValues)
     }
     
     static func scanDisplays() {
@@ -17,6 +18,7 @@ final class QRService {
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         App.shared.showWindow()
+        playSound(for: qrValues)
     }
     
     static func scanBrowser() {
@@ -25,6 +27,7 @@ final class QRService {
             .flatMap { CodeDetector.shared.readQR(from: $0) }
         saveQRValues(qrValues)
         App.shared.showWindow()
+        playSound(for: qrValues)
     }
     
     static func scanFiles(at filePaths: [String]) {
@@ -38,6 +41,7 @@ final class QRService {
             }
             DispatchQueue.main.async {
                 HistoryDataSource.shared.history += qrDataSources
+                playSound(for: qrDataSources)
             }
         }
     }
@@ -51,6 +55,7 @@ final class QRService {
             }
             DispatchQueue.main.async {
                 HistoryDataSource.shared.history += qrDataSources
+                playSound(for: qrDataSources)
             }
         }
     }
@@ -60,5 +65,9 @@ final class QRService {
             History(date: Date(), value: qrValue)
         }
         HistoryDataSource.shared.history += qrDataSources
+    }
+    
+    private static func playSound(for qrValues: [Any]) {
+        qrValues.isEmpty ? NSSound.playError() : NSSound.playSuccess()
     }
 }
