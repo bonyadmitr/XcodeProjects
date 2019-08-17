@@ -156,3 +156,33 @@ extension NSSound.Name {
     static let submarine = NSSound.Name("Submarine")
     static let tink      = NSSound.Name("Tink")
 }
+
+
+import AudioToolbox
+
+extension NSSound {
+    static func playError() {
+        /// system error sound
+        NSSound.beep()
+        
+        //NSSound(named: .basso)?.play()
+        
+        /// phone beep 1200 - 1211
+        //AudioServicesPlaySystemSound(1209)
+        
+        //        AudioServicesPlaySystemSound(1263)
+        //        AudioServicesPlaySystemSound(1264)
+        //        AudioServicesPlaySystemSound(1265)
+        
+        //30-40 phone busy
+        //1-30 finder sounds
+        
+        /// to test sounds in range
+        //        for i in 0...100 {
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+        //                AudioServicesPlaySystemSound(SystemSoundID(0 + i))
+        //                print(i)
+        //            }
+        //        }
+    }
+}
