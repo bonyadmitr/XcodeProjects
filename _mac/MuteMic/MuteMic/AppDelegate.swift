@@ -12,11 +12,11 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let statusItemManager = StatusItemManager()
-    let audioManager = AudioManager()
+    let audioManager = AudioManager.shared
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItemManager.setup()
-        audioManager.get2()
+        audioManager.toogleMute()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {}
@@ -52,6 +52,7 @@ final class StatusItemManager {
     }
     
     @objc private func clickStatusItem() {
+        
         guard let event = NSApp.currentEvent else {
             assertionFailure()
             return
@@ -59,41 +60,47 @@ final class StatusItemManager {
         
         if event.modifierFlags.contains([.option]) || event.type == .rightMouseUp {
             statusItem.popUpMenu(statusItemMenu)
+        } else {
+            AudioManager.shared.toogleMute()
         }
-        
-//        if ((event.modifierFlags.rawValue & NSControlKeyMask) || (event.type == NSRightMouseUp))
     }
     
 }
 
 final class AudioManager {
     
-    var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
+    static let shared = AudioManager()
+    
+    private var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
                                                         mScope: kAudioObjectPropertyScopeGlobal,
                                                         mElement: kAudioObjectPropertyElementMaster)
     
-    var mutePropertyAddress = AudioObjectPropertyAddress(mSelector: kAudioDevicePropertyMute,
+    private var mutePropertyAddress = AudioObjectPropertyAddress(mSelector: kAudioDevicePropertyMute,
                                                          mScope: kAudioDevicePropertyScopeInput,
                                                          mElement: kAudioObjectPropertyElementMaster)
     
-    let systemID = AudioObjectID(kAudioObjectSystemObject)
-    var propertySize = UInt32(MemoryLayout<UInt32>.size)
+    private let systemID = AudioObjectID(kAudioObjectSystemObject)
+    private var size = UInt32(MemoryLayout<UInt32>.size)
     
-    var currentID = AudioObjectID(kAudioObjectUnknown)
+    private var currentInputDeviceID = AudioObjectID(kAudioObjectUnknown)
     
-    private func setupCurrentId() {
-        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &currentID).handleError()
+    init() {
+        setupCurrentInputDeviceID()
+    }
+    
+    private func setupCurrentInputDeviceID() {
+        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &size, &currentInputDeviceID).handleError()
     }
     
     func isMuted() -> Bool {
         var isMuted: DarwinBoolean = false
-        AudioObjectGetPropertyData(currentID, &mutePropertyAddress, 0, nil, &propertySize, &isMuted).handleError()
+        AudioObjectGetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, &size, &isMuted).handleError()
         return isMuted.boolValue
     }
     
     func setMute(_ mute: Bool) {
         var toggleMute: UInt32 = mute ? 1 : 0
-        AudioObjectSetPropertyData(currentID, &mutePropertyAddress, 0, nil, propertySize, &toggleMute).handleError()
+        AudioObjectSetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, size, &toggleMute).handleError()
     }
     
     func toogleMute() {
@@ -101,20 +108,13 @@ final class AudioManager {
         setMute(!isMuted())
     }
     
-    func isMuteSettable() -> Bool {
+    private func isMuteSettable() -> Bool {
         var isSettable: DarwinBoolean = false
-        AudioObjectIsPropertySettable(currentID, &mutePropertyAddress, &isSettable).handleError()
+        AudioObjectIsPropertySettable(currentInputDeviceID, &mutePropertyAddress, &isSettable).handleError()
         return isSettable.boolValue
     }
     
-    func get2() {
-        setupCurrentId()
-        toogleMute()
-    }
-    
-    func get() {
-        
-        
+    private func get() {
         var propertySize: UInt32 = 0
         
         // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
@@ -125,7 +125,7 @@ final class AudioManager {
         let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
         var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
         AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
-
+        
         
         
     }
