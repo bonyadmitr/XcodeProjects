@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE080E652307CCB400527662 /* WindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E642307CCB400527662 /* WindowsManager.swift */; };
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
 		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
 		CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336722FDCF5100984201 /* CGError+Assert.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE080E642307CCB400527662 /* WindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsManager.swift; sourceTree = "<group>"; };
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
 		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
 		CE92336722FDCF5100984201 /* CGError+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGError+Assert.swift"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				CEE5E1BE22E6DEAA00B54D40 /* ViewController.swift */,
+				CE080E642307CCB400527662 /* WindowsManager.swift */,
 				CEAD356D22F80247002CC59E /* MenuManager.swift */,
 				CEAD357F22FDCAFF002CC59E /* ToolbarManager.swift */,
 				CEAD356F22F80273002CC59E /* StatusItemManager.swift */,
@@ -249,6 +252,7 @@
 				CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */,
 				CEAD357222F8029B002CC59E /* App.swift in Sources */,
 				CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */,
+				CE080E652307CCB400527662 /* WindowsManager.swift in Sources */,
 				CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */,
 				CEE5E1BD22E6DEAA00B54D40 /* AppDelegate.swift in Sources */,
 			);
