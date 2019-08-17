@@ -163,9 +163,11 @@ import AudioToolbox
 extension NSSound {
     static func playError() {
         /// system error sound
+        /// or #1
         NSSound.beep()
         
-        //NSSound(named: .basso)?.play()
+        /// or #2
+        //NSSound(named: .funk)?.play()
         
         /// phone beep 1200 - 1211
         //AudioServicesPlaySystemSound(1209)
@@ -184,5 +186,9 @@ extension NSSound {
         //                print(i)
         //            }
         //        }
+    }
+    
+    static func playSuccess() {
+        NSSound(named: .glass)?.play()
     }
 }
