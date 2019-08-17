@@ -31,6 +31,9 @@ final class QRService {
     }
     
     static func scanFiles(at filePaths: [String]) {
+        if filePaths.isEmpty {
+            return
+        }
         DispatchQueue.global().async {
             let qrDataSources = filePaths
                 .compactMap { FileManager.default.contents(atPath: $0) }
@@ -47,6 +50,9 @@ final class QRService {
     }
     
     static func scanImages(_ images: [NSImage]) {
+        if images.isEmpty {
+            return
+        }
         DispatchQueue.global().async {
             let qrDataSources = images
                 .flatMap { CodeDetector.shared.readQR(from: $0) }
