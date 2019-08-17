@@ -29,49 +29,15 @@ final class App {
     let toolbarManager = ToolbarManager()
     let windowsManager = WindowsManager()
     
-    /// if it is not lazy controller will be loaded immediately
-    ///
-    /// window style https://lukakerr.github.io/swift/nswindow-styles
-//    private lazy var window: NSWindow = {
-//        let vc = ViewController()
-//        //let window = NSWindow(contentViewController: vc)
-//        let window = NSWindow(contentRect: vc.view.frame,
-//                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
-//                              backing: .buffered,
-//                              defer: true)
-//        window.contentViewController = vc
-//        window.title = App.name //window.title = vc.title
-//        window.isReleasedWhenClosed = false
-//
-//        window.isRestorable = true
-//        window.restorationClass = WindowsManager.self //type(of: self)
-//        window.identifier = NSUserInterfaceItemIdentifier(rawValue: "MainWindow") //String(describing: type(of: self))
-//        //window.animationBehavior = .utilityWindow
-//
-//        /// https://stackoverflow.com/a/42984241/5893286
-//        /// when the window is the full size cost more memory
-//        window.contentView?.wantsLayer = true
-//
-//        window.center()
-//        /// call it after .center()
-//        window.setFrameAutosaveName("MainWindow")
-//        return window
-//    }()
-    
     func start() {
         menuManager.setup()
         statusItemManager.setup()
         toolbarManager.addToWindow(windowsManager.window)
-//        windowsManager.showWindow()
         showWindow()
     }
     
     func showWindow() {
         windowsManager.showWindow()
-        
-//        //window.orderFront(nil)
-//        window.makeKeyAndOrderFront(nil)
-//        NSApp.activate(ignoringOtherApps: true)
     }
 }
 
