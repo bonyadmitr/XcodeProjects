@@ -16,7 +16,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItemManager.setup()
-        audioManager.toogleMute()
+        
+        statusItemManager.setImage(for: audioManager.isMuted())
+        audioManager.didChange = { [weak self] isMuted in
+            DispatchQueue.main.async {
+                self?.statusItemManager.setImage(for: isMuted)
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {}
@@ -45,10 +51,18 @@ final class StatusItemManager {
             return
         }
         //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-        button.title = "Mic"
+        //button.title = "Mic"
         button.action = #selector(clickStatusItem)
         button.target = self
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+    }
+    
+    private let micOnImage = NSImage(named: NSImage.Name("mic_on"))
+    private let micOffImage = NSImage(named: NSImage.Name("mic_off"))
+    
+    func setImage(for isMuted: Bool) {
+        let image = isMuted ? micOffImage : micOnImage
+        statusItem.button?.image = image
     }
     
     @objc private func clickStatusItem() {
@@ -88,6 +102,8 @@ enum AudioListener {
 final class AudioManager: NSObject {
     
     static let shared = AudioManager()
+    
+    var didChange: ((_ isMuted: Bool) -> Void)?
     
     private var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
                                                         mScope: kAudioObjectPropertyScopeGlobal,
@@ -214,7 +230,7 @@ final class AudioManager: NSObject {
             startListener()
             print("-",savedMute)
         case .audioInputDeviceDidChange:
-            print(isMuted())
+            didChange?(isMuted())
         default:
             assertionFailure()
         }
