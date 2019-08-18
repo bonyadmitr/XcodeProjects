@@ -23,6 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             DispatchQueue.main.async {
                 self?.statusItemManager.setImage(for: isMuted)
             }
+//            DispatchQueue.main.async {
+//                self.assertExec {
+//                    $0.statusItemManager.setImage(for: isMuted)
+//                }
+//            }
         }
     }
 
@@ -184,9 +189,9 @@ final class AudioManager {
 //        AudioObjectRemovePropertyListenerBlock(self.currentInputDeviceID, &self.mutePropertyAddress, nil, { _, _ in
 //            print("+ remove")
 //        }).handleError()
-        let selfPonter = Unmanaged.passUnretained(self).toOpaque()
-        AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPonter).handleError()
-        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
+        let selfPointer = Unmanaged.passUnretained(self).toOpaque()
+        AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPointer).handleError()
+        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPointer).handleError()
     }
     
     func stopListener() {
@@ -195,23 +200,19 @@ final class AudioManager {
         AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
     }
     
-    private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, ponter in
-        guard let selfPonter = ponter else {
-            assertionFailure()
-            return kAudioHardwareNoError
+    private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+        selfPointer.assertExecute {
+            let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
+            audioManager.deviceDidChange()
         }
-        let audioManager = Unmanaged<AudioManager>.fromOpaque(selfPonter).takeUnretainedValue()
-        audioManager.deviceDidChange()
         return kAudioHardwareNoError
     }
     
-    private var listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, ponter in
-        guard let selfPonter = ponter else {
-            assertionFailure()
-            return kAudioHardwareNoError
+    private var listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+        selfPointer.assertExecute {
+            let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
+            audioManager.muteDidChange()
         }
-        let audioManager = Unmanaged<AudioManager>.fromOpaque(selfPonter).takeUnretainedValue()
-        audioManager.muteDidChange()
         return kAudioHardwareNoError
     }
     
@@ -230,6 +231,27 @@ final class AudioManager {
     
     private func muteDidChange() {
         didChange?(isMuted())
+    }
+}
+
+extension Optional {
+    func assert(or defaultValue: Wrapped) -> Wrapped {
+        switch self {
+        case .none:
+            assertionFailure()
+            return defaultValue
+        case .some(let value):
+            return value
+        }
+    }
+    
+    func assertExecute(action: (Wrapped) -> Void) {
+        switch self {
+        case .none:
+            assertionFailure()
+        case .some(let value):
+            action(value)
+        }
     }
 }
 
