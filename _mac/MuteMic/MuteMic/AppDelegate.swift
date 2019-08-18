@@ -145,7 +145,10 @@ final class AudioManager {
     // MARK: - Listener
     
     private func startListener() {
+        /// https://stackoverflow.com/a/33310021/5893286
         let selfPointer = Unmanaged.passUnretained(self).toOpaque()
+        
+        /// can be used AudioObjectRemovePropertyListenerBlock
         AudioObjectAddPropertyListener(systemInputDeviceID, &defaultInputDevicePropertyAddress, defaultInputDeviceListener, selfPointer).handleError()
         AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, muteListener, selfPointer).handleError()
     }
