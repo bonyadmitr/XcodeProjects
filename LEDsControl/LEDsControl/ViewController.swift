@@ -10,9 +10,15 @@ import Cocoa
 
 class ViewController: NSViewController {
     
+    let q = LedManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+//        q.toggleLed()
+//        try! changeSetting(setting: true)
+//        saveState()
 //        FnLock.singleton.onStateChange = { res in
 //            print("---", res)
 //        }
@@ -44,6 +50,170 @@ class ViewController: NSViewController {
 }
 
 import IOKit.hid
+
+/// IOKit.hid wrapper https://github.com/Jman012/SwiftyHID
+
+final class LedManager {
+    
+    let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
+    let keyboard: IOHIDDevice
+    let led: IOHIDElement
+    
+    var q = true
+    
+    init() {
+        //setupManger()
+        IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone)).handleError()
+        
+        let keyboardDictionary = [kIOHIDPrimaryUsageKey: kHIDUsage_GD_Keyboard] as CFDictionary
+//        let keyboardDictionary: NSMutableDictionary = [
+//            kIOHIDDeviceUsageKey: kHIDUsage_GD_Keyboard,
+//            kIOHIDDeviceUsagePageKey: kHIDPage_GenericDesktop
+//        ]
+        
+        /// ---- getKeyboard
+        IOHIDManagerSetDeviceMatching(manager, keyboardDictionary)
+        let matchingDevices = IOHIDManagerCopyDevices(manager) as! Set<IOHIDDevice>
+        
+        // IOUSBHostHIDDevice, IOHIDUserDevice
+        // mac2015 AppleUSBTopCaseHIDDriver
+        keyboard = matchingDevices.first { String(describing: $0).contains("IOUSBHostHIDDevice") } ?? matchingDevices.first!
+        
+        
+        /// begin changes
+        IOHIDDeviceOpen(keyboard, IOOptionBits(kIOHIDOptionsTypeSeizeDevice)).handleError()
+        /// end changes
+        //IOHIDDeviceClose(keyboard, IOOptionBits(kIOHIDOptionsTypeSeizeDevice)).handleError()
+        
+        /// ---- led
+        let ledDictionary = [kIOHIDElementUsagePageKey: kHIDPage_LEDs, kIOHIDElementUsageKey: kHIDUsage_LED_CapsLock] as CFDictionary
+        let elements = IOHIDDeviceCopyMatchingElements(keyboard, ledDictionary, IOOptionBits(kIOHIDOptionsTypeNone)) as! [IOHIDElement]
+        
+        led = elements.first!
+        
+        let daemon = Thread(target: self, selector: #selector(start), object: nil)
+        daemon.start()
+    }
+    
+    @objc func start() {
+        //        let context = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque());
+        //
+        //        let keyboardCallback: IOHIDValueCallback = {(context, ioreturn, sender, value) in
+        //            let selfPtr = Unmanaged<LedManger>.fromOpaque(context!).takeUnretainedValue()
+        //            print("---")
+        //            //selfPtr.callback(ioreturn: ioreturn, sender: sender, value: value)
+        //        }
+        //
+        //        IOHIDManagerRegisterInputValueCallback(manager, keyboardCallback, context)
+        //        IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetMain(), CFRunLoopMode.defaultMode.rawValue)
+        
+//        toggleLed()
+        q = !isCapsLockOn()
+        
+        let ctx = unsafeBitCast(self, to: UnsafeMutableRawPointer.self)
+        IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
+
+        IOHIDDeviceRegisterInputValueCallback(keyboard, { (context, result, sender, value) in
+
+            let ledManger = unsafeBitCast(context, to: LedManager.self)
+
+            let element = IOHIDValueGetElement(value)
+            let elementValue = IOHIDValueGetIntegerValue(value)
+            let usage = Int(IOHIDElementGetUsage(element))
+            if usage == kHIDUsage_KeyboardCapsLock && elementValue == 0 {
+                ledManger.q.toggle()
+                ledManger.toggleLed(state: ledManger.q)
+                print("- \(elementValue)")
+            }
+        }, ctx)
+        
+//        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateLed), userInfo: nil, repeats: true)
+
+        RunLoop.current.run()
+    }
+    
+//    private func setupManger() {
+//        //let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
+//        IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone))
+//    }
+    
+    deinit {
+        //IOHIDManagerClose(manager, IOOptionBits(kIOHIDOptionsTypeNone)).handleError()
+    }
+    
+    func isCapsLockOn() -> Bool {
+        /// kCFAllocatorDefault == nil, read doc
+        let emptyValue = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led, 0, 0)
+        var unmanagedValue = Unmanaged.passUnretained(emptyValue)
+        
+        IOHIDDeviceGetValue(keyboard, led, &unmanagedValue).handleError()
+        
+        let elementValue = IOHIDValueGetIntegerValue(unmanagedValue.takeUnretainedValue())
+        return elementValue == 1
+    }
+    
+    func toggleLed() {
+        toggleLed(state: !isCapsLockOn())
+    }
+    
+    func toggleLed(state: Bool) {
+        let value = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led, 0, state ? 1 : 0)
+        IOHIDDeviceSetValue(keyboard, led, value).handleError()
+    }
+    
+//    func q() {
+//
+//        let hidManagerRef = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
+//        IOHIDManagerSetDeviceMatching(hidManagerRef, nil)
+//
+//        let hidManagerRet = IOHIDManagerOpen(hidManagerRef, IOOptionBits(kIOHIDOptionsTypeNone))
+//        if (hidManagerRet != kIOReturnSuccess) {
+//            print("Failed to open device manager")
+//            exit(1)
+//        }
+//
+//        let hidDeviceSet = IOHIDManagerCopyDevices(hidManagerRef)
+//        let hidDeviceNum = CFSetGetCount(hidDeviceSet)
+//
+//        print(String(format: "Found %X devices", hidDeviceNum))
+//
+//        CFSetApplyFunction(hidDeviceSet, { value, context in
+//            let hidDevice = Unmanaged<IOHIDDevice>.fromOpaque(value!).takeRetainedValue()
+//            print(hidDevice)
+//        }, nil)
+//
+//        IOHIDManagerClose(hidManagerRef, IOOptionBits(kIOHIDOptionsTypeNone))
+//    }
+
+    @objc func updateLed() {
+        if q {
+            toggleLed(state: q)
+        }
+    }
+}
+
+extension IOReturn {
+    func handleError() {
+        assert(self == kIOReturnSuccess, "reason: \(self)")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class FnLock: NSObject {
     static let singleton = FnLock()
@@ -80,12 +250,11 @@ class FnLock: NSObject {
     func getKeyboard() -> IOHIDDevice {
         IOHIDManagerSetDeviceMatching(manager, keyboardDictionary)
         
-        let matchingDevices = IOHIDManagerCopyDevices(manager) as! NSSet
-        let q = matchingDevices as! Set<IOHIDDevice>
+        let matchingDevices = IOHIDManagerCopyDevices(manager) as! Set<IOHIDDevice>
         
         // IOUSBHostHIDDevice, IOHIDUserDevice
         // mac2015 AppleUSBTopCaseHIDDriver
-        let w = q.first { String(describing: $0).contains("IOUSBHostHIDDevice") } ?? q.first!
+        let w = matchingDevices.first { String(describing: $0).contains("IOUSBHostHIDDevice") } ?? matchingDevices.first!
         
         return w
         //return matchingDevices.anyObject() as! IOHIDDevice
@@ -103,7 +272,7 @@ class FnLock: NSObject {
     func toggleLed(state: Bool) {
         let value = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led!, 0, state ? 1 : 0)
         let result = IOHIDDeviceSetValue(keyboard!, led!, value)
-        //print("toggleLed", result == KERN_SUCCESS)
+        assert(result == KERN_SUCCESS)
     }
     
     @objc func updateLed() {
@@ -116,7 +285,7 @@ class FnLock: NSObject {
         let ctx = unsafeBitCast(self, to: UnsafeMutableRawPointer.self)
 
         IOHIDManagerScheduleWithRunLoop(manager, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
-
+        
         IOHIDDeviceRegisterInputValueCallback(keyboard!, { (context, result, sender, value) in
             print(arc4random())
             let fnLock = unsafeBitCast(context, to: FnLock.self)
@@ -261,6 +430,8 @@ class Backlight {
         
         /// NOT working for mac2015 when call on()
 //        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching(kIOHIDSystemClass))
+        
+        // TODO: check "AppleHIDKeyboardEventDriverV2"
         
         /// working for mac2015
         let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"))
