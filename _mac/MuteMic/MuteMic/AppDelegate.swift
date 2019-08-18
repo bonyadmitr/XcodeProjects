@@ -255,12 +255,13 @@ extension Optional {
          }
     
     */
-    func assertExecute(_ action: (Wrapped) -> Void) {
+    // TODO: check with and without "rethrows"
+    func assertExecute(_ action: (Wrapped) throws -> Void) rethrows {
         switch self {
         case .none:
             assertionFailure()
         case .some(let value):
-            action(value)
+            try action(value)
         }
     }
 }
