@@ -16,10 +16,12 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         //q.reverseLed()
-        q.toggleLed()
+//        q.toggleLed()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.q.toggleLed()
+//            self.q.toggleLed()
+            
+            self.q.flashLed(duration: 0.3)
         }
         
 //        try! changeSetting(setting: true)
@@ -164,6 +166,14 @@ final class LedManager {
     /// reset after app changes
     func toggleLed() {
         toggleLed(state: !isCapsLockOn())
+    }
+    
+    func flashLed(duration: TimeInterval = 0.1) {
+        let state = isCapsLockOn()
+        toggleLed(state: !state)
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.toggleLed(state: state)
+        }
     }
     
     func toggleLed(state: Bool) {
