@@ -75,6 +75,9 @@ final class StatusItemManager {
     
 }
 
+/// mute touchBar https://github.com/CocoaHeadsBrasil/MuteUnmuteMic
+/// mute https://github.com/pixel-point/mute-me
+/// swift Audio https://github.com/Sunnyyoung/Suohai
 final class AudioManager {
     
     static let shared = AudioManager()
