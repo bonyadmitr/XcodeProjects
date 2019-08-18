@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusItemManager.setImage(for: audioManager.isMuted())
         audioManager.didChange = { [weak self] isMuted in
+            print(isMuted)
             DispatchQueue.main.async {
                 self?.statusItemManager.setImage(for: isMuted)
             }
@@ -99,7 +100,7 @@ enum AudioListener {
     }
 }
 
-final class AudioManager: NSObject {
+final class AudioManager {
     
     static let shared = AudioManager()
     
@@ -118,17 +119,15 @@ final class AudioManager: NSObject {
     
     private var currentInputDeviceID = AudioObjectID(kAudioObjectUnknown)
     
-    override init() {
-        super.init()
-        
+    init() {
         setupCurrentInputDeviceID()
         startListener()
-        subscribeListener()
+//        subscribeListener()
     }
     
     deinit {
         stopListener()
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupCurrentInputDeviceID() {
@@ -148,7 +147,7 @@ final class AudioManager: NSObject {
     }
     
     func toogleMute() {
-        assert(isMuteSettable())
+        //assert(isMuteSettable())
         setMute(!isMuted())
     }
     
@@ -187,54 +186,89 @@ final class AudioManager: NSObject {
 //        AudioObjectRemovePropertyListenerBlock(self.currentInputDeviceID, &self.mutePropertyAddress, nil, { _, _ in
 //            print("+ remove")
 //        }).handleError()
-        AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, nil).handleError()
-        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, nil).handleError()
+        let selfPonter = Unmanaged.passUnretained(self).toOpaque()
+        AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPonter).handleError()
+        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
     }
     
     func stopListener() {
+        let selfPonter = Unmanaged.passUnretained(self).toOpaque()
         AudioObjectRemovePropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, nil).handleError()
         AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, nil).handleError()
     }
     
-    private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, _ in
-        NotificationCenter.default.post(name: .audioDevicesDidChange, object: nil)
-        return kAudioHardwareNoError
-    }
-    
-    private var listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, _ in
-        NotificationCenter.default.post(name: .audioInputDeviceDidChange, object: nil)
-        return kAudioHardwareNoError
-    }
-    
-    private func subscribeListener() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNotification),
-                                               name: .audioDevicesDidChange,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNotification),
-                                               name: .audioInputDeviceDidChange,
-                                               object: nil)
-    }
-    
-    @objc private func handleNotification(_ notification: Notification) {
-        switch notification.name {
-        case .audioDevicesDidChange:
-            assert(currentInputDeviceID != kAudioObjectUnknown)
-            let savedMute = isMuted()
-            stopListener()
-            
-            setupCurrentInputDeviceID()
-            
-            setMute(savedMute)
-            startListener()
-            print("-",savedMute)
-        case .audioInputDeviceDidChange:
-            didChange?(isMuted())
-        default:
+    private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, r in
+        guard let pointer = r else {
             assertionFailure()
+            return kAudioHardwareNoError
         }
+        let audioManager = Unmanaged<AudioManager>.fromOpaque(pointer).takeUnretainedValue()
+        audioManager.deviceDidChange()
+        
+        //NotificationCenter.default.post(name: .audioDevicesDidChange, object: nil)
+        return kAudioHardwareNoError
     }
+    
+    private func deviceDidChange() {
+        assert(currentInputDeviceID != kAudioObjectUnknown)
+        let savedMute = isMuted()
+        stopListener()
+        
+        setupCurrentInputDeviceID()
+        
+        setMute(savedMute)
+        startListener()
+        print("-",savedMute)
+    }
+    
+    //private var listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, _ in
+    private var listenerBlockInput: AudioObjectPropertyListenerProc = { q, w, e, r in
+        guard let pointer = r else {
+            assertionFailure()
+            return kAudioHardwareNoError
+        }
+        let audioManager = Unmanaged<AudioManager>.fromOpaque(pointer).takeUnretainedValue()
+        audioManager.didChange?(audioManager.isMuted())
+        
+//        print(q)
+//        print(w)
+//        print(e.pointee)
+//        print(r)
+//        print("-------")
+        
+        //NotificationCenter.default.post(name: .audioInputDeviceDidChange, object: nil)
+        return kAudioHardwareNoError
+    }
+    
+//    private func subscribeListener() {
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(handleNotification),
+//                                               name: .audioDevicesDidChange,
+//                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(handleNotification),
+//                                               name: .audioInputDeviceDidChange,
+//                                               object: nil)
+//    }
+//
+//    @objc private func handleNotification(_ notification: Notification) {
+//        switch notification.name {
+//        case .audioDevicesDidChange:
+//            assert(currentInputDeviceID != kAudioObjectUnknown)
+//            let savedMute = isMuted()
+//            stopListener()
+//
+//            setupCurrentInputDeviceID()
+//
+//            setMute(savedMute)
+//            startListener()
+//            print("-",savedMute)
+//        case .audioInputDeviceDidChange:
+//            didChange?(isMuted())
+//        default:
+//            assertionFailure()
+//        }
+//    }
 }
 
 
