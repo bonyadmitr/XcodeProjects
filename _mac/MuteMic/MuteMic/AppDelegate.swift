@@ -8,6 +8,11 @@
 
 import Cocoa
 
+// TODO: clear file
+// TODO: clear storyboard
+// TODO: right click menu (statusItemMenu)
+// TODO: launch at login
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
