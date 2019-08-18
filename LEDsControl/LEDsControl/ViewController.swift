@@ -15,8 +15,13 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //q.reverseLed()
+        q.toggleLed()
         
-//        q.toggleLed()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.q.toggleLed()
+        }
+        
 //        try! changeSetting(setting: true)
 //        saveState()
 //        FnLock.singleton.onStateChange = { res in
@@ -90,7 +95,9 @@ final class LedManager {
         let elements = IOHIDDeviceCopyMatchingElements(keyboard, ledDictionary, IOOptionBits(kIOHIDOptionsTypeNone)) as! [IOHIDElement]
         
         led = elements.first!
-        
+    }
+    
+    func reverseLed() {
         let daemon = Thread(target: self, selector: #selector(start), object: nil)
         daemon.start()
     }
@@ -127,7 +134,9 @@ final class LedManager {
             }
         }, ctx)
         
-//        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateLed), userInfo: nil, repeats: true)
+        /// need to update led after app switching
+        /// there is bug after some switches
+        Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateLed), userInfo: nil, repeats: true)
 
         RunLoop.current.run()
     }
@@ -152,6 +161,7 @@ final class LedManager {
         return elementValue == 1
     }
     
+    /// reset after app changes
     func toggleLed() {
         toggleLed(state: !isCapsLockOn())
     }
