@@ -79,6 +79,7 @@ final class AudioManager {
     
     static let shared = AudioManager()
     
+    /// called in background twice!!
     var didChange: ((_ isMuted: Bool) -> Void)?
     
     private var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
@@ -170,6 +171,7 @@ final class AudioManager {
         AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
     }
     
+    /// doesn't called on headphone connection
     private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
         selfPointer.assertExecute {
             let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
