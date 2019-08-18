@@ -19,15 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         statusItemManager.setImage(for: audioManager.isMuted())
         audioManager.didChange = { [weak self] isMuted in
-            print(isMuted)
             DispatchQueue.main.async {
                 self?.statusItemManager.setImage(for: isMuted)
             }
-//            DispatchQueue.main.async {
-//                self.assertExec {
-//                    $0.statusItemManager.setImage(for: isMuted)
-//                }
-//            }
         }
     }
 
@@ -37,8 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 import Cocoa
 
 final class StatusItemManager {
-    
-    //static let shared = StatusItemManager()
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
@@ -81,24 +73,6 @@ final class StatusItemManager {
         }
     }
     
-}
-
-extension NSNotification.Name {
-    static let audioDevicesDidChange = NSNotification.Name(rawValue: "audioDevicesDidChange")
-//    static let audioOutputDeviceDidChange = NSNotification.Name(rawValue: "audioOutputDeviceDidChange")
-    static let audioInputDeviceDidChange = NSNotification.Name(rawValue: "audioInputDeviceDidChange")
-}
-
-enum AudioListener {
-    static var devices: AudioObjectPropertyListenerProc = { _, _, _, _ in
-        NotificationCenter.default.post(name: .audioDevicesDidChange, object: nil)
-        return 0
-    }
-    
-    static var input: AudioObjectPropertyListenerProc = { _, _, _, _ in
-        NotificationCenter.default.post(name: .audioInputDeviceDidChange, object: nil)
-        return 0
-    }
 }
 
 final class AudioManager {
