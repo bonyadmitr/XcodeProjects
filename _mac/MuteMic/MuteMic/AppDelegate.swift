@@ -241,7 +241,21 @@ extension Optional {
         }
     }
     
-    func assertExecute(action: (Wrapped) -> Void) {
+    /**
+     it is nonescaping, so there is no perfermance issue
+     
+         text.assertExecute { print($0) }
+     
+    vs
+     
+         if let text = text {
+             print(text)
+         } else {
+             assertionFailure()
+         }
+    
+    */
+    func assertExecute(_ action: (Wrapped) -> Void) {
         switch self {
         case .none:
             assertionFailure()
