@@ -52,15 +52,11 @@ final class StatusItemManager {
     /// otherwise will be errors "0 is not a valid connection ID".
     /// https://habr.com/ru/post/447754/
     func setup() {
-        guard let button = statusItem.button else {
-            assertionFailure("system error. try statusItem.title")
-            return
+        statusItem.button.assertExecute { button in
+            button.action = #selector(clickStatusItem)
+            button.target = self
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
-        //button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
-        //button.title = "Mic"
-        button.action = #selector(clickStatusItem)
-        button.target = self
-        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
     }
     
     private let micOnImage = NSImage(named: NSImage.Name("mic_on"))
@@ -68,7 +64,7 @@ final class StatusItemManager {
     
     func setImage(for isMuted: Bool) {
         let image = isMuted ? micOffImage : micOnImage
-        statusItem.button?.image = image
+        statusItem.button.assertExecute { $0.image = image }
     }
     
     @objc private func clickStatusItem() {
