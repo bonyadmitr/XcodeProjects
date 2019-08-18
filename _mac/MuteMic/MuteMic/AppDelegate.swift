@@ -9,7 +9,7 @@
 import Cocoa
 
 // TODO: clear file
-// TODO: clear storyboard
+// TODO: clear storyboard and window
 // TODO: right click menu (statusItemMenu)
 // TODO: launch at login
 
@@ -65,13 +65,16 @@ final class StatusItemManager {
     }
     
     @objc private func clickStatusItem() {
-        
         guard let event = NSApp.currentEvent else {
             assertionFailure()
             return
         }
         
-        if event.modifierFlags.contains([.option]) || event.type == .rightMouseUp {
+        /// .command is not called on NSStatusItem
+        if event.modifierFlags.contains([.option])
+            || event.modifierFlags.contains([.control])
+            || event.type == .rightMouseUp
+        {
             statusItem.popUpMenu(statusItemMenu)
         } else {
             AudioManager.shared.toogleMute()
@@ -139,48 +142,22 @@ final class AudioManager {
         return isSettable.boolValue
     }
     
-//    private func get() {
-//        var propertySize: UInt32 = 0
-//
-//        // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
-//        AudioObjectGetPropertyDataSize(systemID, &inputDeviceAddress, 0, nil, &propertySize).handleError()
-//
-//        assert(propertySize == UInt32(MemoryLayout<UInt32>.size))
-//
-//        let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
-//        var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
-//        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
-//
-//
-//
-//    }
-    
     // MARK: - Listener
     
-    func startListener() {
-//        AudioObjectAddPropertyListenerBlock(currentInputDeviceID, &mutePropertyAddress, nil) { (inNumberAddresses, inAddresses) in
-//            print("-", inNumberAddresses, inAddresses)
-//            print("--")
-//
-//
-//
-//        }.handleError()
-//        AudioObjectRemovePropertyListenerBlock(self.currentInputDeviceID, &self.mutePropertyAddress, nil, { _, _ in
-//            print("+ remove")
-//        }).handleError()
+    private func startListener() {
         let selfPointer = Unmanaged.passUnretained(self).toOpaque()
         AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPointer).handleError()
         AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPointer).handleError()
     }
     
-    func stopListener() {
+    private func stopListener() {
         let selfPonter = Unmanaged.passUnretained(self).toOpaque()
         AudioObjectRemovePropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPonter).handleError()
         AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
     }
     
     /// doesn't called on headphone connection
-    private var listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+    private let listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
         selfPointer.assertExecute {
             let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
             audioManager.deviceDidChange()
@@ -188,14 +165,13 @@ final class AudioManager {
         return kAudioHardwareNoError
     }
     
-    private var listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+    private let listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
         selfPointer.assertExecute {
             let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
             audioManager.muteDidChange()
         }
         return kAudioHardwareNoError
     }
-    
     
     private func deviceDidChange() {
         assert(currentInputDeviceID != kAudioObjectUnknown)
@@ -253,6 +229,23 @@ extension Optional {
 
 //import AudioToolbox
 import CoreAudio
+
+
+//    private func get() {
+//        var propertySize: UInt32 = 0
+//
+//        // Get the size of the property in the kAudioObjectSystemObject so we can make space to store it
+//        AudioObjectGetPropertyDataSize(systemID, &inputDeviceAddress, 0, nil, &propertySize).handleError()
+//
+//        assert(propertySize == UInt32(MemoryLayout<UInt32>.size))
+//
+//        let numberOfDevices = Int(propertySize) / MemoryLayout<AudioDeviceID>.size
+//        var deviceIDs = [AudioDeviceID](repeating: AudioDeviceID(), count: numberOfDevices)
+//        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &propertySize, &deviceIDs).handleError()
+//
+//
+//
+//    }
 
 /// big app https://github.com/kyleneideck/BackgroundMusic
 /// app https://github.com/mattingalls/Soundflower
