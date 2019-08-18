@@ -93,18 +93,18 @@ final class AudioManager {
     /// called in background twice!!
     var didChange: ((_ isMuted: Bool) -> Void)?
     
-    private var inputDeviceAddress = AudioObjectPropertyAddress(mSelector: kAudioHardwarePropertyDefaultInputDevice,
-                                                        mScope: kAudioObjectPropertyScopeGlobal,
-                                                        mElement: kAudioObjectPropertyElementMaster)
+    private var defaultInputDevicePropertyAddress = AudioObjectPropertyAddress(
+        mSelector: kAudioHardwarePropertyDefaultInputDevice,
+        mScope: kAudioObjectPropertyScopeGlobal,
+        mElement: kAudioObjectPropertyElementMaster)
     
     private var mutePropertyAddress = AudioObjectPropertyAddress(mSelector: kAudioDevicePropertyMute,
-                                                         mScope: kAudioDevicePropertyScopeInput,
-                                                         mElement: kAudioObjectPropertyElementMaster)
+                                                                 mScope: kAudioDevicePropertyScopeInput,
+                                                                 mElement: kAudioObjectPropertyElementMaster)
     
-    private let systemID = AudioObjectID(kAudioObjectSystemObject)
-    private var size = UInt32(MemoryLayout<UInt32>.size)
-    
+    private let systemInputDeviceID = AudioObjectID(kAudioObjectSystemObject)
     private var currentInputDeviceID = AudioObjectID(kAudioObjectUnknown)
+    private var propertySize = UInt32(MemoryLayout<UInt32>.size)
     
     init() {
         setupCurrentInputDeviceID()
@@ -116,19 +116,19 @@ final class AudioManager {
     }
     
     private func setupCurrentInputDeviceID() {
-        AudioObjectGetPropertyData(systemID, &inputDeviceAddress, 0, nil, &size, &currentInputDeviceID).handleError()
+        AudioObjectGetPropertyData(systemInputDeviceID, &defaultInputDevicePropertyAddress, 0, nil, &propertySize, &currentInputDeviceID).handleError()
         assert(currentInputDeviceID != kAudioObjectUnknown)
     }
     
     func isMuted() -> Bool {
         var isMuted: DarwinBoolean = false
-        AudioObjectGetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, &size, &isMuted).handleError()
+        AudioObjectGetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, &propertySize, &isMuted).handleError()
         return isMuted.boolValue
     }
     
     func setMute(_ mute: Bool) {
         var toggleMute: UInt32 = mute ? 1 : 0
-        AudioObjectSetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, size, &toggleMute).handleError()
+        AudioObjectSetPropertyData(currentInputDeviceID, &mutePropertyAddress, 0, nil, propertySize, &toggleMute).handleError()
     }
     
     func toogleMute() {
@@ -146,18 +146,18 @@ final class AudioManager {
     
     private func startListener() {
         let selfPointer = Unmanaged.passUnretained(self).toOpaque()
-        AudioObjectAddPropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPointer).handleError()
-        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPointer).handleError()
+        AudioObjectAddPropertyListener(systemInputDeviceID, &defaultInputDevicePropertyAddress, defaultInputDeviceListener, selfPointer).handleError()
+        AudioObjectAddPropertyListener(currentInputDeviceID, &mutePropertyAddress, muteListener, selfPointer).handleError()
     }
     
     private func stopListener() {
         let selfPonter = Unmanaged.passUnretained(self).toOpaque()
-        AudioObjectRemovePropertyListener(systemID, &inputDeviceAddress, listenerBlockDevices, selfPonter).handleError()
-        AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, listenerBlockInput, selfPonter).handleError()
+        AudioObjectRemovePropertyListener(systemInputDeviceID, &defaultInputDevicePropertyAddress, defaultInputDeviceListener, selfPonter).handleError()
+        AudioObjectRemovePropertyListener(currentInputDeviceID, &mutePropertyAddress, muteListener, selfPonter).handleError()
     }
     
     /// doesn't called on headphone connection
-    private let listenerBlockDevices: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+    private let defaultInputDeviceListener: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
         selfPointer.assertExecute {
             let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
             audioManager.deviceDidChange()
@@ -165,7 +165,7 @@ final class AudioManager {
         return kAudioHardwareNoError
     }
     
-    private let listenerBlockInput: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
+    private let muteListener: AudioObjectPropertyListenerProc = { _, _, _, selfPointer in
         selfPointer.assertExecute {
             let audioManager = Unmanaged<AudioManager>.fromOpaque($0).takeUnretainedValue()
             audioManager.muteDidChange()
