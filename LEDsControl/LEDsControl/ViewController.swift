@@ -58,6 +58,8 @@ class ViewController: NSViewController {
 import IOKit.hid
 import Carbon
 
+// TODO: flashLed number of times + defalut numbers for alerts
+
 /// IOKit.hid wrapper https://github.com/Jman012/SwiftyHID
 
 /// activateCapsLock https://github.com/superpanic/SuperCapsLock/blob/master/CapsLockLight/AppDelegate.swift
