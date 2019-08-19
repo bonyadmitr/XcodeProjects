@@ -20,8 +20,7 @@ class ViewController: NSViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 //            self.q.toggleLed()
-            
-            self.q.flashLed(duration: 0.3)
+            self.q.flashLed(duration: 0.1)
         }
         
 //        try! changeSetting(setting: true)
@@ -37,8 +36,7 @@ class ViewController: NSViewController {
     }
 
     @IBAction func start(_ sender: Any) {
-        q.toggleLed()
-//        Backlight.shared.on()
+        Backlight.shared.on()
 //        FnLock.singleton.run()
 //        backlight.on()
     }
@@ -62,6 +60,7 @@ import Carbon
 
 /// IOKit.hid wrapper https://github.com/Jman012/SwiftyHID
 
+/// activateCapsLock https://github.com/superpanic/SuperCapsLock/blob/master/CapsLockLight/AppDelegate.swift
 final class LedManager {
     
     let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
@@ -434,6 +433,8 @@ import Foundation
 /// not working for macbook with touchbar
 /// https://forums.developer.apple.com/thread/96414
 /// https://github.com/maxmouchet/LightKit/issues/1
+
+/// fade https://github.com/superpanic/SuperCapsLock/blob/master/CapsLockLight/KeyboardBacklight.swift
 class Backlight {
     static let shared = Backlight()
     
