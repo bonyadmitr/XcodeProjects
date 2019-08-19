@@ -196,19 +196,8 @@ final class EventHandler {
                 break
             }
             
-            if eventType == .keyDown {
-                if cgEvent.flags.contains(.maskCommand) {
-                    var char = UniChar()
-                    var length = 0
-                    cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
-                    
-                    if char == 113 {
-                        eventHandler.delegate?.quite()
-                        //return Unmanaged.passUnretained(cgEvent)
-                    }
-                    
-                }
-            }
+            /// call after all
+            eventHandler.handleQuite(eventType: eventType, cgEvent: cgEvent)
             
             /// to remove error sound pass nil
             return nil
@@ -257,6 +246,20 @@ final class EventHandler {
         
         let keyCode = UInt8(virtualKeyCodeToHIDKeyCode(vKeyCode: vkeyCode))
         delegate?.send(keyCode: keyCode, modifier: modifier)
+    }
+    
+    private func handleQuite(eventType: CGEventType, cgEvent: CGEvent) {
+        guard eventType == .keyDown, eventType == .keyDown else {
+            return
+        }
+        var char = UniChar()
+        var length = 0
+        cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
+        
+        /// 113 = q
+        if char == 113 {
+            delegate?.quite()
+        }
     }
     
     private func logKey(eventType: CGEventType, cgEvent: CGEvent) {
