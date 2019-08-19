@@ -187,15 +187,6 @@ final class EventHandler {
             let eventHandler = Unmanaged<EventHandler>.fromOpaque(rawPointer).takeUnretainedValue()
             eventHandler.logKey(eventType: eventType, cgEvent: cgEvent)
             
-//            let opaquePointer = OpaquePointer(rawPointer)
-//            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
-//                assertionFailure()
-//                return nil
-//            }
-            
-            //print(event.keyCode, cgEvent.getIntegerValueField(.keyboardEventKeycode))
-            //print(event.modifierFlags.rawValue, cgEvent.flags.rawValue)
-            
             switch eventType {
             case .keyUp:
                 eventHandler.sendKey(vkeyCode: -1, event.modifierFlags)
@@ -219,6 +210,7 @@ final class EventHandler {
                 }
             }
             
+            /// to remove error sound pass nil
             return nil
             //return Unmanaged.passUnretained(cgEvent)
         }
@@ -247,7 +239,7 @@ final class EventHandler {
         
     }
     
-    func sendKey(vkeyCode: Int, _ modifierFlags: NSEvent.ModifierFlags) {
+    private func sendKey(vkeyCode: Int, _ modifierFlags: NSEvent.ModifierFlags) {
         var modifier: UInt8 = 0
         
         if modifierFlags.contains(.command) {
