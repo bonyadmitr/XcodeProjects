@@ -193,7 +193,8 @@ final class EventHandler {
             case .keyDown:
                 eventHandler.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
             default:
-                break
+                assertionFailure("possible eventType set in 'let eventMask: CGEventMask'. this: \(eventType.rawValue)")
+                //break
             }
             
             /// call after all
@@ -205,7 +206,7 @@ final class EventHandler {
         }
         
         /// https://stackoverflow.com/a/31898592
-        let eventMask: CGEventMask = (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        let eventMask: CGEventMask = (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.keyDown.rawValue)// | (1 << CGEventType.flagsChanged.rawValue)
         
         let selfPointer = Unmanaged.passUnretained(self).toOpaque()
         
@@ -256,7 +257,7 @@ final class EventHandler {
         var length = 0
         cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
         
-        /// 113 = q
+        /// 113 = q or cmd+q
         if char == 113 {
             delegate?.quite()
         }
