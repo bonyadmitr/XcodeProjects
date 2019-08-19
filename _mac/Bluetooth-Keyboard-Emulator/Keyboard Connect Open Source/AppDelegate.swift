@@ -249,7 +249,7 @@ final class EventHandler {
     }
     
     private func handleQuite(eventType: CGEventType, cgEvent: CGEvent) {
-        guard eventType == .keyDown, eventType == .keyDown else {
+        guard eventType == .keyDown, cgEvent.flags.contains(.maskCommand) else {
             return
         }
         var char = UniChar()
