@@ -37,7 +37,8 @@ class ViewController: NSViewController {
     }
 
     @IBAction func start(_ sender: Any) {
-        Backlight.shared.on()
+        q.toggleLed()
+//        Backlight.shared.on()
 //        FnLock.singleton.run()
 //        backlight.on()
     }
@@ -57,6 +58,7 @@ class ViewController: NSViewController {
 }
 
 import IOKit.hid
+import Carbon
 
 /// IOKit.hid wrapper https://github.com/Jman012/SwiftyHID
 
@@ -163,8 +165,15 @@ final class LedManager {
         return elementValue == 1
     }
     
+    /// import Carbon
+    func isCapsLockOn2() -> Bool {
+        let eventModifier: UInt32 = GetCurrentKeyModifiers()
+        return eventModifier == 1024
+    }
+    
     /// reset after app changes
     func toggleLed() {
+        //print(isCapsLockOn(), isCapsLockOn2())
         toggleLed(state: !isCapsLockOn())
     }
     
@@ -425,7 +434,6 @@ import Foundation
 /// not working for macbook with touchbar
 /// https://forums.developer.apple.com/thread/96414
 /// https://github.com/maxmouchet/LightKit/issues/1
-
 class Backlight {
     static let shared = Backlight()
     
@@ -442,8 +450,6 @@ class Backlight {
     static let MinBrightness:UInt64 = 0x0
     static var MaxBrightness:UInt64 = 0xfff
     
-    
-    
     init() {
         
         // Get the AppleLMUController (thing that accesses the light hardware)
@@ -451,7 +457,9 @@ class Backlight {
         /// NOT working for mac2015 when call on()
 //        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching(kIOHIDSystemClass))
         
-        // TODO: check "AppleHIDKeyboardEventDriverV2"
+        /// not working "AppleHIDKeyboardEventDriverV2"
+        /// created but is not opening for mac with touchbar
+        //let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOUSBHostHIDDevice"))
         
         /// working for mac2015
         let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"))
