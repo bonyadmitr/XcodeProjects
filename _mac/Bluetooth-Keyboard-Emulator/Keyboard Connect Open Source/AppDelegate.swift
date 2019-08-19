@@ -86,112 +86,118 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 //        }
     }
     
+    let eventHandler = EventHandler()
+    
     private func start() {
         
         btKey = BTKeyboard()
         
-        let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
-            
-            guard NSApp.isActive else {
-                
-                /// https://stackoverflow.com/a/5785895
-                /// 0x0b is the virtual keycode for "b"
-                /// 0x09 is the virtual keycode for "v"
-                //if cgEvent.getIntegerValueField(.keyboardEventKeycode) == 0x0B {
-                //    cgEvent.setIntegerValueField(.keyboardEventKeycode, value: 0x09)
-                //}
-                
-                return Unmanaged.passUnretained(cgEvent)
-            }
-            
-            /// https://stackoverflow.com/a/44507450
-            if eventType == .keyDown {
-                let flags = cgEvent.flags
-                var msg = ""
-                
-                if flags.contains(.maskAlphaShift) {
-                    msg+="caps+"
-                }
-                if flags.contains(.maskShift) {
-                    msg+="shift+"
-                }
-                if flags.contains(.maskControl) {
-                    msg+="control+"
-                }
-                if flags.contains(.maskAlternate) {
-                    msg+="option+"
-                }
-                if flags.contains(.maskCommand) {
-                    msg += "command+"
-                }
-                if flags.contains(.maskSecondaryFn) {
-                    msg += "function+"
-                }
-                
-                assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
-                if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
-                    msg += chars
-                    print(msg)
-                }
-            }
-            
-            let opaquePointer = OpaquePointer(rawPointer)
-            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
-                assertionFailure()
-                return nil
-            }
-            
-            //print(event.keyCode, cgEvent.getIntegerValueField(.keyboardEventKeycode))
-            //print(event.modifierFlags.rawValue, cgEvent.flags.rawValue)
-            
-            let btKey = btPtr.pointee
-            switch eventType {
-            case .keyUp:
-                btKey.sendKey(vkeyCode: -1, event.modifierFlags)
-            case .keyDown:
-                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
-            default:
-                break
-            }
-
-            if eventType == .keyDown {
-                if cgEvent.flags.contains(.maskCommand) {
-                    var char = UniChar()
-                    var length = 0
-                    cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
-                    
-                    if char == 113 {
-                        btKey.terminate()
-                        NSApp.terminate(nil)
-                        //return Unmanaged.passUnretained(cgEvent)
-                    }
-                    
-                }
-            }
-            
-            return nil
-            //return Unmanaged.passUnretained(cgEvent)
-        }
-        
-        /// https://stackoverflow.com/a/31898592
-        let eventMask: CGEventMask = (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
-        
-        guard let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
-                                            place: .headInsertEventTap,
-                                            options: .defaultTap,
-                                            eventsOfInterest: eventMask,
-                                            callback: cgEventCallback,
-                                            userInfo: &btKey)
-        else {
-            assertionFailure("called without Accessibility permission. search AXIsProcessTrustedWithOptions")
-            return
-        }
-        
-        
-        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
-        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
-        CGEvent.tapEnable(tap: eventTap, enable: true)
-        //CFRunLoopRun()
+        eventHandler.delegate = self
+        eventHandler.start()
+//        return
+//
+//        let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
+//
+//            guard NSApp.isActive else {
+//
+//                /// https://stackoverflow.com/a/5785895
+//                /// 0x0b is the virtual keycode for "b"
+//                /// 0x09 is the virtual keycode for "v"
+//                //if cgEvent.getIntegerValueField(.keyboardEventKeycode) == 0x0B {
+//                //    cgEvent.setIntegerValueField(.keyboardEventKeycode, value: 0x09)
+//                //}
+//
+//                return Unmanaged.passUnretained(cgEvent)
+//            }
+//
+//            /// https://stackoverflow.com/a/44507450
+//            if eventType == .keyDown {
+//                let flags = cgEvent.flags
+//                var msg = ""
+//
+//                if flags.contains(.maskAlphaShift) {
+//                    msg+="caps+"
+//                }
+//                if flags.contains(.maskShift) {
+//                    msg+="shift+"
+//                }
+//                if flags.contains(.maskControl) {
+//                    msg+="control+"
+//                }
+//                if flags.contains(.maskAlternate) {
+//                    msg+="option+"
+//                }
+//                if flags.contains(.maskCommand) {
+//                    msg += "command+"
+//                }
+//                if flags.contains(.maskSecondaryFn) {
+//                    msg += "function+"
+//                }
+//
+//                assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
+//                if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
+//                    msg += chars
+//                    print(msg)
+//                }
+//            }
+//
+//            let opaquePointer = OpaquePointer(rawPointer)
+//            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
+//                assertionFailure()
+//                return nil
+//            }
+//
+//            //print(event.keyCode, cgEvent.getIntegerValueField(.keyboardEventKeycode))
+//            //print(event.modifierFlags.rawValue, cgEvent.flags.rawValue)
+//
+//            let btKey = btPtr.pointee
+//            switch eventType {
+//            case .keyUp:
+//                btKey.sendKey(vkeyCode: -1, event.modifierFlags)
+//            case .keyDown:
+//                btKey.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
+//            default:
+//                break
+//            }
+//
+//            if eventType == .keyDown {
+//                if cgEvent.flags.contains(.maskCommand) {
+//                    var char = UniChar()
+//                    var length = 0
+//                    cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
+//
+//                    if char == 113 {
+//                        btKey.terminate()
+//                        NSApp.terminate(nil)
+//                        //return Unmanaged.passUnretained(cgEvent)
+//                    }
+//
+//                }
+//            }
+//
+//            return nil
+//            //return Unmanaged.passUnretained(cgEvent)
+//        }
+//
+//        /// https://stackoverflow.com/a/31898592
+//        let eventMask: CGEventMask = (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+//
+//        guard let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
+//                                            place: .headInsertEventTap,
+//                                            options: .defaultTap,
+//                                            eventsOfInterest: eventMask,
+//                                            callback: cgEventCallback,
+//                                            userInfo: &btKey)
+//        else {
+//            assertionFailure("called without Accessibility permission. search AXIsProcessTrustedWithOptions")
+//            return
+//        }
+//
+//
+//        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+//        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+//        CGEvent.tapEnable(tap: eventTap, enable: true)
+//        //CFRunLoopRun()
     }
     
     func applicationDidBecomeActive(_ notification: Notification) {
@@ -238,5 +244,162 @@ final class PermissionManager {
         /// or #2
         //let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): false] as CFDictionary
         //return AXIsProcessTrustedWithOptions(options)
+    }
+}
+
+extension AppDelegate: EventHandlerDelegate {
+    func send(keyCode: UInt8, modifier: UInt8) {
+        btKey?.sendKey(keyCode: keyCode, modifier: modifier)
+    }
+    
+    func quite() {
+        btKey?.terminate()
+        NSApp.terminate(nil)
+    }
+    
+    
+}
+
+protocol EventHandlerDelegate: class {
+    func send(keyCode: UInt8, modifier: UInt8)
+    func quite()
+}
+
+final class EventHandler {
+    
+    weak var delegate: EventHandlerDelegate?
+    
+    func start() {
+        
+        let cgEventCallback: CGEventTapCallBack = { _, eventType, cgEvent, rawPointer in
+            
+            guard NSApp.isActive else {
+                
+                /// https://stackoverflow.com/a/5785895
+                /// 0x0b is the virtual keycode for "b"
+                /// 0x09 is the virtual keycode for "v"
+                //if cgEvent.getIntegerValueField(.keyboardEventKeycode) == 0x0B {
+                //    cgEvent.setIntegerValueField(.keyboardEventKeycode, value: 0x09)
+                //}
+                
+                return Unmanaged.passUnretained(cgEvent)
+            }
+            
+            /// https://stackoverflow.com/a/44507450
+            if eventType == .keyDown {
+                let flags = cgEvent.flags
+                var msg = ""
+                
+                if flags.contains(.maskAlphaShift) {
+                    msg+="caps+"
+                }
+                if flags.contains(.maskShift) {
+                    msg+="shift+"
+                }
+                if flags.contains(.maskControl) {
+                    msg+="control+"
+                }
+                if flags.contains(.maskAlternate) {
+                    msg+="option+"
+                }
+                if flags.contains(.maskCommand) {
+                    msg += "command+"
+                }
+                if flags.contains(.maskSecondaryFn) {
+                    msg += "function+"
+                }
+                
+                assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
+                if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
+                    msg += chars
+                    print(msg)
+                }
+            }
+            
+            guard let rawPointer = rawPointer, let event = NSEvent(cgEvent: cgEvent) else {
+                assertionFailure()
+                return nil
+            }
+            
+            let eventHandler = Unmanaged<EventHandler>.fromOpaque(rawPointer).takeUnretainedValue()
+            
+//            let opaquePointer = OpaquePointer(rawPointer)
+//            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
+//                assertionFailure()
+//                return nil
+//            }
+            
+            //print(event.keyCode, cgEvent.getIntegerValueField(.keyboardEventKeycode))
+            //print(event.modifierFlags.rawValue, cgEvent.flags.rawValue)
+            
+            switch eventType {
+            case .keyUp:
+                eventHandler.sendKey(vkeyCode: -1, event.modifierFlags)
+            case .keyDown:
+                eventHandler.sendKey(vkeyCode: Int(event.keyCode), event.modifierFlags)
+            default:
+                break
+            }
+            
+            if eventType == .keyDown {
+                if cgEvent.flags.contains(.maskCommand) {
+                    var char = UniChar()
+                    var length = 0
+                    cgEvent.keyboardGetUnicodeString(maxStringLength: 1, actualStringLength: &length, unicodeString: &char)
+                    
+                    if char == 113 {
+                        eventHandler.delegate?.quite()
+                        //return Unmanaged.passUnretained(cgEvent)
+                    }
+                    
+                }
+            }
+            
+            return nil
+            //return Unmanaged.passUnretained(cgEvent)
+        }
+        
+        /// https://stackoverflow.com/a/31898592
+        let eventMask: CGEventMask = (1 << CGEventType.keyUp.rawValue) | (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        
+        let selfPointer = Unmanaged.passUnretained(self).toOpaque()
+        
+        guard let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap,
+                                               place: .headInsertEventTap,
+                                               options: .defaultTap,
+                                               eventsOfInterest: eventMask,
+                                               callback: cgEventCallback,
+                                               userInfo: selfPointer)
+            else {
+                assertionFailure("called without Accessibility permission. search AXIsProcessTrustedWithOptions")
+                return
+        }
+        
+        
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap, enable: true)
+        //CFRunLoopRun()
+        
+    }
+    
+    func sendKey(vkeyCode: Int, _ modifierFlags: NSEvent.ModifierFlags) {
+        var modifier: UInt8 = 0
+        
+        if modifierFlags.contains(.command) {
+            modifier |= (1 << 3)
+        }
+        if modifierFlags.contains(.option) {
+            modifier |= (1 << 2)
+        }
+        if modifierFlags.contains(.shift) {
+            modifier |= (1 << 1)
+        }
+        if modifierFlags.contains(.control) {
+            modifier |= 1
+        }
+        
+        let keyCode = UInt8(virtualKeyCodeToHIDKeyCode(vKeyCode: vkeyCode))
+        delegate?.send(keyCode: keyCode, modifier: modifier)
     }
 }
