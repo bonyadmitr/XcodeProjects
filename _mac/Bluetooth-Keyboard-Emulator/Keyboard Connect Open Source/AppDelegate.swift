@@ -178,44 +178,14 @@ final class EventHandler {
                 
                 return Unmanaged.passUnretained(cgEvent)
             }
-            
-            /// https://stackoverflow.com/a/44507450
-            if eventType == .keyDown {
-                let flags = cgEvent.flags
-                var msg = ""
-                
-                if flags.contains(.maskAlphaShift) {
-                    msg+="caps+"
-                }
-                if flags.contains(.maskShift) {
-                    msg+="shift+"
-                }
-                if flags.contains(.maskControl) {
-                    msg+="control+"
-                }
-                if flags.contains(.maskAlternate) {
-                    msg+="option+"
-                }
-                if flags.contains(.maskCommand) {
-                    msg += "command+"
-                }
-                if flags.contains(.maskSecondaryFn) {
-                    msg += "function+"
-                }
-                
-                assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
-                if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
-                    msg += chars
-                    print(msg)
-                }
-            }
-            
+
             guard let rawPointer = rawPointer, let event = NSEvent(cgEvent: cgEvent) else {
                 assertionFailure()
                 return nil
             }
             
             let eventHandler = Unmanaged<EventHandler>.fromOpaque(rawPointer).takeUnretainedValue()
+            eventHandler.logKey(eventType: eventType, cgEvent: cgEvent)
             
 //            let opaquePointer = OpaquePointer(rawPointer)
 //            guard let btPtr = UnsafeMutablePointer<BTKeyboard>(opaquePointer), let event = NSEvent(cgEvent: cgEvent) else {
@@ -295,5 +265,39 @@ final class EventHandler {
         
         let keyCode = UInt8(virtualKeyCodeToHIDKeyCode(vKeyCode: vkeyCode))
         delegate?.send(keyCode: keyCode, modifier: modifier)
+    }
+    
+    private func logKey(eventType: CGEventType, cgEvent: CGEvent) {
+        
+        /// https://stackoverflow.com/a/44507450
+        if eventType == .keyDown {
+            let flags = cgEvent.flags
+            var msg = ""
+            
+            if flags.contains(.maskAlphaShift) {
+                msg+="caps+"
+            }
+            if flags.contains(.maskShift) {
+                msg+="shift+"
+            }
+            if flags.contains(.maskControl) {
+                msg+="control+"
+            }
+            if flags.contains(.maskAlternate) {
+                msg+="option+"
+            }
+            if flags.contains(.maskCommand) {
+                msg += "command+"
+            }
+            if flags.contains(.maskSecondaryFn) {
+                msg += "function+"
+            }
+            
+            assert(eventType != .flagsChanged, "NSEvent.charactersIgnoringModifiers will crash on .flagsChanged")
+            if let event = NSEvent(cgEvent: cgEvent), let chars = event.charactersIgnoringModifiers {
+                msg += chars
+                print(msg)
+            }
+        }
     }
 }
