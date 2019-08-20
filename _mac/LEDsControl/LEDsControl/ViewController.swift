@@ -16,12 +16,12 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         //q.reverseLed()
-//        q.toggleLed()
+        q.toggleLed()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.q.toggleLed()
-            self.q.flashLed(duration: 0.1)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+////            self.q.toggleLed()
+//            self.q.flashLed(duration: 0.1)
+//        }
         
 //        try! changeSetting(setting: true)
 //        saveState()
@@ -100,6 +100,7 @@ final class LedManager {
         let elements = IOHIDDeviceCopyMatchingElements(keyboard, ledDictionary, IOOptionBits(kIOHIDOptionsTypeNone)) as! [IOHIDElement]
         
         led = elements.first!
+//        observe()
     }
     
     func reverseLed() {
@@ -134,7 +135,7 @@ final class LedManager {
             let usage = Int(IOHIDElementGetUsage(element))
             if usage == kHIDUsage_KeyboardCapsLock && elementValue == 0 {
                 ledManger.q.toggle()
-                ledManger.toggleLed(state: ledManger.q)
+                ledManger.changeStateTo(state: ledManger.q)
                 print("- \(elementValue)")
             }
         }, ctx)
@@ -144,6 +145,39 @@ final class LedManager {
         Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateLed), userInfo: nil, repeats: true)
 
         RunLoop.current.run()
+    }
+    
+    /// not finished
+    private func observe() {
+        isLed = isCapsLockOn()
+        _ = NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: .main) { notification in
+            guard
+                let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
+                let id = app.bundleIdentifier ?? app.executableURL?.lastPathComponent
+            else {
+                assertionFailure()
+                return
+            }
+            
+            print(app, id)
+            
+            print(self.isLed)
+            
+            /// working through one time
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
+                self.changeStateTo(state: self.isLed)
+            })
+            
+            /// sometimes need more than 0.1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                self.changeStateTo(state: self.isLed)
+            })
+//            DispatchQueue.main.async {
+//                self.changeStateTo(state: self.isLed)
+//            }
+//            self.changeStateTo(state: self.isLed)
+        }
+//                NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(activeAppDidChange(notification:)), name: NSWorkspace.didActivateApplicationNotification, object: nil)
     }
     
 //    private func setupManger() {
@@ -175,18 +209,22 @@ final class LedManager {
     /// reset after app changes
     func toggleLed() {
         //print(isCapsLockOn(), isCapsLockOn2())
-        toggleLed(state: !isCapsLockOn())
+        let state = isCapsLockOn()
+        isLed = !state
+        changeStateTo(state: !state)
     }
+    
+    private var isLed = false
     
     func flashLed(duration: TimeInterval = 0.1) {
         let state = isCapsLockOn()
-        toggleLed(state: !state)
+        changeStateTo(state: !state)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.toggleLed(state: state)
+            self.changeStateTo(state: state)
         }
     }
     
-    func toggleLed(state: Bool) {
+    func changeStateTo(state: Bool) {
         let value = IOHIDValueCreateWithIntegerValue(kCFAllocatorDefault, led, 0, state ? 1 : 0)
         IOHIDDeviceSetValue(keyboard, led, value).handleError()
     }
@@ -217,7 +255,7 @@ final class LedManager {
 
     @objc func updateLed() {
         if q {
-            toggleLed(state: q)
+            changeStateTo(state: q)
         }
     }
 }
