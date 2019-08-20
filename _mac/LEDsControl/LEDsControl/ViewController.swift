@@ -57,12 +57,12 @@ class ViewController: NSViewController {
     //let timeUpdate: TimeInterval = 1/60 /// = 0.016
     let timeUpdate: TimeInterval = 0.05
     
-    let lowerLimit: Float = -40.0
-    let scale: Float = 10.0
+    let lowerLimit: Float = -80.0
+    let scale: Float = 1.0
     
     let meterTable = MeterTable(minDecibels: -80)!
     
-    var lastMeter: Float = 0
+    var lastMeter: Float = -160
     
     private func update() {
         guard player.isPlaying else {
@@ -78,27 +78,47 @@ class ViewController: NSViewController {
         
         //let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.peakPower(forChannel: $1) }) / Float(player.numberOfChannels)
         let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.averagePower(forChannel: $1) }) / Float(player.numberOfChannels)
-        
 //        print(power)
-        let meter = meterTable.ValueAt(power)
-        print(meter)
         
-        if lastMeter < meter {
+        if lastMeter < power {
             //self.q.flashLed(duration: timeUpdate)
             q.changeStateTo(state: true)
         } else {
             q.changeStateTo(state: false)
         }
-        lastMeter = meter
+        lastMeter = power
+        
+        
+//        let meter = meterTable.ValueAt(power)
+//        print(meter)
+//
+//        if lastMeter < meter {
+//            //self.q.flashLed(duration: timeUpdate)
+//            q.changeStateTo(state: true)
+//        } else {
+//            q.changeStateTo(state: false)
+//        }
+//        lastMeter = meter
         
         
         
-        
+        /// https://stackoverflow.com/a/43179340
 //        if power > lowerLimit {
 //            // proportion will have a value between 0 and scale
 //
 //            let proportion = -scale * (power - lowerLimit) / lowerLimit
-//            print(power, proportion)
+//            //print(power, proportion)
+//            //print(meter, proportion)
+//            print(proportion)
+//
+//
+////            if lastMeter < proportion {
+////                //self.q.flashLed(duration: timeUpdate)
+////                q.changeStateTo(state: true)
+////            } else {
+////                q.changeStateTo(state: false)
+////            }
+////            lastMeter = proportion
 //        }
         
     }
