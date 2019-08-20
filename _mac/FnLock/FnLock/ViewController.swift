@@ -23,6 +23,10 @@ class ViewController: NSViewController {
 
 /// not working in sandbox
 /// System Preferences will be updated after relaunch of it
+///
+/// https://github.com/vecmezoni/fnlock
+/// https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
+/// usefull app, associated by apps https://github.com/Pyroh/Fluor
 final class FnLock {
     
     static let shared = FnLock()
