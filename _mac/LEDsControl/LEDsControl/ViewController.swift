@@ -7,16 +7,34 @@
 //
 
 import Cocoa
+import AVFoundation
 
 class ViewController: NSViewController {
     
     let q = LedManager()
     
+    var player: AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //q.reverseLed()
-        q.toggleLed()
+//        q.toggleLed()
+        
+        //let str = "https://cdn4.sefon.me/api/mp3_download/direct/101513/Tzy6ebvb2eCNhNWCIDFtVf5Z3nhUcz6zsVLJ38ogpao8GH7HDVedvESEBrB96km3/"
+//        let str = "https://www.kozco.com/tech/piano2-CoolEdit.mp3"
+        let str = "https://cdn1.sefon.me/api/mp3_download/direct/101521/jDRBnIPGxj-A5CEUO0PDZ2vtr22B6rMfdBIjzpehCjs8GH7HDVedvESEBrB96km3/"
+        
+        let url = URL(string: str)!
+        let data = try! Data(contentsOf: url)
+        player = try! AVAudioPlayer(data: data)
+        player.isMeteringEnabled = true
+        player.prepareToPlay()
+        player.play()
+        
+        Timer.scheduledTimer(withTimeInterval: timeUpdate, repeats: true) { timer in
+            self.update()
+        }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 ////            self.q.toggleLed()
@@ -32,6 +50,56 @@ class ViewController: NSViewController {
         
 //        FnLock.singleton.toggleLed(state: true)
         
+        
+    }
+    
+    
+    //let timeUpdate: TimeInterval = 1/60 /// = 0.016
+    let timeUpdate: TimeInterval = 0.05
+    
+    let lowerLimit: Float = -40.0
+    let scale: Float = 10.0
+    
+    let meterTable = MeterTable(minDecibels: -80)!
+    
+    var lastMeter: Float = 0
+    
+    private func update() {
+        guard player.isPlaying else {
+            return
+        }
+        
+        player.updateMeters()
+        
+//        print(player.numberOfChannels, player.averagePower(forChannel: 0), player.averagePower(forChannel: 1))
+//        print()
+        
+        
+        
+        //let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.peakPower(forChannel: $1) }) / Float(player.numberOfChannels)
+        let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.averagePower(forChannel: $1) }) / Float(player.numberOfChannels)
+        
+//        print(power)
+        let meter = meterTable.ValueAt(power)
+        print(meter)
+        
+        if lastMeter < meter {
+            //self.q.flashLed(duration: timeUpdate)
+            q.changeStateTo(state: true)
+        } else {
+            q.changeStateTo(state: false)
+        }
+        lastMeter = meter
+        
+        
+        
+        
+//        if power > lowerLimit {
+//            // proportion will have a value between 0 and scale
+//
+//            let proportion = -scale * (power - lowerLimit) / lowerLimit
+//            print(power, proportion)
+//        }
         
     }
 
@@ -54,6 +122,61 @@ class ViewController: NSViewController {
         Backlight.shared.toggle()
     }
 }
+
+/// https://github.com/ooper-shlab/avTouch1.4.3-Swift/blob/master/MeterTable.swift
+class MeterTable {
+    
+    func ValueAt(_ inDecibels: Float) -> Float {
+        if inDecibels < mMinDecibels  {
+            return 0.0
+        }
+        if inDecibels >= 0.0 {
+            return 1.0
+        }
+        let index = Int(inDecibels * mScaleFactor)
+        return mTable[index]
+    }
+    private var mMinDecibels: Float
+    private var mDecibelResolution: Float
+    private var mScaleFactor: Float
+    private var mTable: [Float] = []
+    
+    private final class func DbToAmp(_ inDb: Double) -> Double {
+        return pow(10.0, 0.05 * inDb)
+    }
+    
+    // MeterTable constructor arguments:
+    // inNumUISteps - the number of steps in the UI element that will be drawn.
+    //                    This could be a height in pixels or number of bars in an LED style display.
+    // inTableSize - The size of the table. The table needs to be large enough that there are no large gaps in the response.
+    // inMinDecibels - the decibel value of the minimum displayed amplitude.
+    // inRoot - this controls the curvature of the response. 2.0 is square root, 3.0 is cube root. But inRoot doesn't have to be integer valued, it could be 1.8 or 2.5, etc.
+    init?(minDecibels inMinDecibels: Float = -80.0, tableSize inTableSize: Int = 400, root inRoot: Float = 2.0) {
+        mMinDecibels = inMinDecibels
+        mDecibelResolution = mMinDecibels / Float(inTableSize - 1)
+        mScaleFactor = 1.0 / mDecibelResolution
+        if inMinDecibels >= 0.0 {
+            print("MeterTable inMinDecibels must be negative", terminator: "")
+            return nil
+        }
+        
+        mTable = Array(repeating: 0.0, count: inTableSize)
+        
+        let minAmp = MeterTable.DbToAmp(Double(inMinDecibels))
+        let ampRange = 1.0 - minAmp
+        let invAmpRange = 1.0 / ampRange
+        
+        let rroot = 1.0 / Double(inRoot)
+        for i in 0..<inTableSize {
+            let decibels = Double(i) * Double(mDecibelResolution)
+            let amp = MeterTable.DbToAmp(decibels)
+            let adjAmp = (amp - minAmp) * Double(invAmpRange)
+            mTable[i] = Float(pow(adjAmp, rroot))
+        }
+    }
+    
+}
+
 
 import IOKit.hid
 import Carbon
