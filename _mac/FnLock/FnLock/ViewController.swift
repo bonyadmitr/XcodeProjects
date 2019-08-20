@@ -12,8 +12,11 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        FnLock.shared.changeSetting(setting: true)
+        
+        let q = FnLock.shared.getSetting()
+        print(q)
+        FnLock.shared.changeSetting(setting: !q)
+        print(FnLock.shared.getSetting())
     }
 
     override var representedObject: Any? {
@@ -39,41 +42,18 @@ final class FnLock {
     
     func changeSetting(setting: Bool) {
         var enabled = setting ? UInt32(0) : UInt32(1)
-        
-        var connect: io_connect_t = 0
-        
-        guard IOServiceOpen(service, mach_task_self_, UInt32(kIOHIDParamConnectType), &connect).asseredSuccess() else {
-            return
-        }
-        
-        /// failed in sandbox here
-        guard IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1) == kIOReturnSuccess else {
-            return
-        }
-        
-        guard IOServiceClose(connect) == kIOReturnSuccess else {
-            return
+        IOServiceConfig { connect in
+            IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1).handleError()
         }
     }
     
-    func getSetting() -> Bool? {
-        var connect: io_connect_t = 0
-        
-        guard IOServiceOpen(service, mach_task_self_, UInt32(kIOHIDParamConnectType), &connect).asseredSuccess() else {
-            return nil
-        }
-        
+    func getSetting() -> Bool {
         var value = UInt32(0)
         var actualSize = UInt32(0)
         
-        guard IOHIDGetParameter(connect, kIOHIDFKeyModeKey as CFString, 1, &value, &actualSize).asseredSuccess() else {
-            return nil
+        IOServiceConfig { connect in
+            IOHIDGetParameter(connect, kIOHIDFKeyModeKey as CFString, 1, &value, &actualSize).handleError()
         }
-        
-        guard IOServiceClose(connect).asseredSuccess() else {
-            return nil
-        }
-        
         return value == 0
     }
     
@@ -81,6 +61,15 @@ final class FnLock {
         CFPreferencesSetAppValue("fnState" as CFString, kCFBooleanFalse, "com.apple.keyboard" as CFString)
         CFPreferencesAppSynchronize("com.apple.keyboard" as CFString)
         CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName.init(rawValue: "com.apple.keyboard.fnstatedidchange" as CFString), nil, nil, true)
+    }
+    
+    func IOServiceConfig(_ action: (io_connect_t) -> Void) {
+        var connect: io_connect_t = 0
+        guard IOServiceOpen(service, mach_task_self_, UInt32(kIOHIDParamConnectType), &connect).asseredSuccess() else {
+            return
+        }
+        action(connect)
+        IOServiceClose(connect).handleError()
     }
 }
 
