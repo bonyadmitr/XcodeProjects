@@ -48,10 +48,19 @@ final class FnLock {
             return value == 0
         }
         set {
+            /// dirty test
+            #if DEBUG
+            let isFnActiveTest = self.isFnActive
+            #endif
+            
             var enabled: UInt32 = newValue ? 0 : 1
             IOServiceConfig { connect in
                 IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1).handleError()
             }
+            
+            #if DEBUG
+            assert(isFnActiveTest == !self.isFnActive, "state is not changed")
+            #endif
         }
     }
     
