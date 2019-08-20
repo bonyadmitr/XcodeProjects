@@ -55,6 +55,7 @@ final class FnLock {
             
             var enabled: UInt32 = newValue ? 0 : 1
             IOServiceConfig { connect in
+                /// in sandbox crash here
                 IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1).handleError()
             }
             
