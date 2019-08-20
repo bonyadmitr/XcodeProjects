@@ -13,10 +13,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let q = FnLock.shared.getSetting()
-        print(q)
-        FnLock.shared.changeSetting(setting: !q)
-        print(FnLock.shared.getSetting())
+        FnLock.shared.toggle()
     }
 
     override var representedObject: Any? {
@@ -40,28 +37,27 @@ final class FnLock {
         service = IOServiceGetMatchingService(kIOMasterPortDefault, classToMatch)
     }
     
-    func changeSetting(setting: Bool) {
-        var enabled: UInt32 = setting ? 0 : 1
-        IOServiceConfig { connect in
-            IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1).handleError()
+    var isFnActive: Bool {
+        get {
+            var value: UInt32 = 0
+            var actualSize: IOByteCount = 0
+            
+            IOServiceConfig { connect in
+                IOHIDGetParameter(connect, kIOHIDFKeyModeKey as CFString, 1, &value, &actualSize).handleError()
+            }
+            return value == 0
+        }
+        set {
+            var enabled: UInt32 = newValue ? 0 : 1
+            IOServiceConfig { connect in
+                IOHIDSetParameter(connect, kIOHIDFKeyModeKey as CFString, &enabled, 1).handleError()
+            }
         }
     }
     
-    func getSetting() -> Bool {
-        var value: UInt32 = 0
-        var actualSize: IOByteCount = 0
-        
-        IOServiceConfig { connect in
-            IOHIDGetParameter(connect, kIOHIDFKeyModeKey as CFString, 1, &value, &actualSize).handleError()
-        }
-        return value == 0
+    func toggle() {
+        isFnActive.toggle()
     }
-    
-//    func saveState() {
-//        CFPreferencesSetAppValue("fnState" as CFString, kCFBooleanFalse, "com.apple.keyboard" as CFString)
-//        CFPreferencesAppSynchronize("com.apple.keyboard" as CFString)
-//        CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName.init(rawValue: "com.apple.keyboard.fnstatedidchange" as CFString), nil, nil, true)
-//    }
     
     private func IOServiceConfig(_ action: (io_connect_t) -> Void) {
         var connect: io_connect_t = 0
@@ -71,6 +67,12 @@ final class FnLock {
         action(connect)
         IOServiceClose(connect).handleError()
     }
+    
+    //    func saveState() {
+    //        CFPreferencesSetAppValue("fnState" as CFString, kCFBooleanFalse, "com.apple.keyboard" as CFString)
+    //        CFPreferencesAppSynchronize("com.apple.keyboard" as CFString)
+    //        CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName.init(rawValue: "com.apple.keyboard.fnstatedidchange" as CFString), nil, nil, true)
+    //    }
 }
 
 extension kern_return_t {
