@@ -68,6 +68,10 @@ class ViewController: NSViewController {
     
     var lastMeter: Float = -160
     
+    /// Audio Meter for AVPlayer
+    /// https://github.com/naotokui/AVPlayerAudioMeter
+    /// https://github.com/akhilcb/ACBAVPlayerExtension
+    /// https://stackoverflow.com/a/40198405
     private func update() {
         guard player.isPlaying else {
             return
