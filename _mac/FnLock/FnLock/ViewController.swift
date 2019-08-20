@@ -27,6 +27,7 @@ class ViewController: NSViewController {
 /// https://github.com/vecmezoni/fnlock
 /// https://github.com/Pyroh/Fluor/blob/master/Fluor/utils.m
 /// usefull app, associated by apps https://github.com/Pyroh/Fluor
+/// apple script https://github.com/jakubroztocil/macos-fn-toggle
 final class FnLock {
     
     static let shared = FnLock()
