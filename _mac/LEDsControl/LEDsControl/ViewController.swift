@@ -71,56 +71,41 @@ class ViewController: NSViewController {
         
         player.updateMeters()
         
-//        print(player.numberOfChannels, player.averagePower(forChannel: 0), player.averagePower(forChannel: 1))
-//        print()
-        
-        
-        
         //let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.peakPower(forChannel: $1) }) / Float(player.numberOfChannels)
         let power: Float = (0..<player.numberOfChannels).reduce(0, { $0 + player.averagePower(forChannel: $1) }) / Float(player.numberOfChannels)
+//        print(player.numberOfChannels, player.averagePower(forChannel: 0), player.averagePower(forChannel: 1))
 //        print(power)
         
-        if lastMeter < power {
-            //self.q.flashLed(duration: timeUpdate)
-            q.changeStateTo(state: true)
-        } else {
-            q.changeStateTo(state: false)
-        }
-        lastMeter = power
+        updateLed(for: power)
         
         
 //        let meter = meterTable.ValueAt(power)
 //        print(meter)
-//
-//        if lastMeter < meter {
-//            //self.q.flashLed(duration: timeUpdate)
-//            q.changeStateTo(state: true)
-//        } else {
-//            q.changeStateTo(state: false)
-//        }
-//        lastMeter = meter
-        
+//        updateLed(for: meter)
         
         
         /// https://stackoverflow.com/a/43179340
 //        if power > lowerLimit {
-//            // proportion will have a value between 0 and scale
-//
+        
+            /// proportion will have a value between 0 and scale
 //            let proportion = -scale * (power - lowerLimit) / lowerLimit
 //            //print(power, proportion)
 //            //print(meter, proportion)
 //            print(proportion)
 //
-//
-////            if lastMeter < proportion {
-////                //self.q.flashLed(duration: timeUpdate)
-////                q.changeStateTo(state: true)
-////            } else {
-////                q.changeStateTo(state: false)
-////            }
-////            lastMeter = proportion
+//            updateLed(for: proportion)
 //        }
         
+    }
+    
+    private func updateLed(for value: Float) {
+        if lastMeter < value {
+            //self.q.flashLed(duration: timeUpdate)
+            q.changeStateTo(state: true)
+        } else {
+            q.changeStateTo(state: false)
+        }
+        lastMeter = value
     }
 
     @IBAction func start(_ sender: Any) {
