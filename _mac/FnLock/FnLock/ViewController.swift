@@ -15,17 +15,10 @@ class ViewController: NSViewController {
         
         FnLock.shared.toggle()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
 
 /// not working in sandbox
+/// System Preferences will be updated after relaunch of it
 final class FnLock {
     
     static let shared = FnLock()
@@ -77,12 +70,6 @@ final class FnLock {
         action(connect)
         IOServiceClose(connect).handleError()
     }
-    
-    //    func saveState() {
-    //        CFPreferencesSetAppValue("fnState" as CFString, kCFBooleanFalse, "com.apple.keyboard" as CFString)
-    //        CFPreferencesAppSynchronize("com.apple.keyboard" as CFString)
-    //        CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName.init(rawValue: "com.apple.keyboard.fnstatedidchange" as CFString), nil, nil, true)
-    //    }
 }
 
 extension kern_return_t {
@@ -95,3 +82,13 @@ extension kern_return_t {
         return self == kIOReturnSuccess
     }
 }
+
+
+/// should change UI in System Preferences --> Keyboard --> Use F1..., but it not working.
+/// System Preferences will be updated after relaunch of it
+//private func saveState(isEnabled: Bool) {
+//    let setValue = isEnabled ? kCFBooleanTrue : kCFBooleanFalse
+//    CFPreferencesSetAppValue("fnState" as CFString, setValue, "com.apple.keyboard" as CFString)
+//    CFPreferencesAppSynchronize("com.apple.keyboard" as CFString)
+//    CFNotificationCenterPostNotification(CFNotificationCenterGetDistributedCenter(), CFNotificationName.init(rawValue: "com.apple.keyboard.fnstatedidchange" as CFString), nil, nil, true)
+//}
