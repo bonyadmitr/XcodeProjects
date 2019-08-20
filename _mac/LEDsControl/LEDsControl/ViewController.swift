@@ -80,11 +80,13 @@ class ViewController: NSViewController {
 //        print(player.numberOfChannels, player.averagePower(forChannel: 0), player.averagePower(forChannel: 1))
 //        print(power)
         
+        /// or #1
         updateLed(for: power)
         
         
 //        let meter = meterTable.ValueAt(power)
 //        print(meter)
+        /// or #2
 //        updateLed(for: meter)
         
         
@@ -97,6 +99,7 @@ class ViewController: NSViewController {
 //            //print(meter, proportion)
 //            print(proportion)
 //
+            /// or #3
 //            updateLed(for: proportion)
 //        }
         
