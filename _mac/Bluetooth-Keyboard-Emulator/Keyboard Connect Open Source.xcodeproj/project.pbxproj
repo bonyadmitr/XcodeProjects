@@ -12,6 +12,8 @@
 		228F346F1DA3132100F264A0 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F346E1DA3132100F264A0 /* KeyCodes.swift */; };
 		228F34731DA32B0900F264A0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F34721DA32B0900F264A0 /* main.swift */; };
 		228F34751DA32FE200F264A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F34741DA32FE200F264A0 /* AppDelegate.swift */; };
+		C4B68A47230AFB1B00AFD4BA /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B68A46230AFB1B00AFD4BA /* EventHandler.swift */; };
+		C4B68A49230AFB7100AFD4BA /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B68A48230AFB7100AFD4BA /* PermissionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		228F34721DA32B0900F264A0 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		228F34741DA32FE200F264A0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228F34761DA3304C00F264A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4B68A46230AFB1B00AFD4BA /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
+		C4B68A48230AFB7100AFD4BA /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			children = (
 				228F34721DA32B0900F264A0 /* main.swift */,
 				228F34741DA32FE200F264A0 /* AppDelegate.swift */,
+				C4B68A48230AFB7100AFD4BA /* PermissionManager.swift */,
+				C4B68A46230AFB1B00AFD4BA /* EventHandler.swift */,
 				228F34681DA3016200F264A0 /* BTKeyboard.swift */,
 				228F346E1DA3132100F264A0 /* KeyCodes.swift */,
 				228F346A1DA302F600F264A0 /* SerialPortDictionary.plist */,
@@ -138,8 +144,10 @@
 			files = (
 				228F34751DA32FE200F264A0 /* AppDelegate.swift in Sources */,
 				228F346F1DA3132100F264A0 /* KeyCodes.swift in Sources */,
+				C4B68A49230AFB7100AFD4BA /* PermissionManager.swift in Sources */,
 				228F34691DA3016200F264A0 /* BTKeyboard.swift in Sources */,
 				228F34731DA32B0900F264A0 /* main.swift in Sources */,
+				C4B68A47230AFB1B00AFD4BA /* EventHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

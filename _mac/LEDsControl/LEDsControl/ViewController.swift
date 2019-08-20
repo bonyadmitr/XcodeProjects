@@ -20,8 +20,7 @@ class ViewController: NSViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 //            self.q.toggleLed()
-            
-            self.q.flashLed(duration: 0.3)
+            self.q.flashLed(duration: 0.1)
         }
         
 //        try! changeSetting(setting: true)
@@ -57,9 +56,13 @@ class ViewController: NSViewController {
 }
 
 import IOKit.hid
+import Carbon
+
+// TODO: flashLed number of times + defalut numbers for alerts
 
 /// IOKit.hid wrapper https://github.com/Jman012/SwiftyHID
 
+/// activateCapsLock https://github.com/superpanic/SuperCapsLock/blob/master/CapsLockLight/AppDelegate.swift
 final class LedManager {
     
     let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
@@ -163,8 +166,15 @@ final class LedManager {
         return elementValue == 1
     }
     
+    /// import Carbon
+    func isCapsLockOn2() -> Bool {
+        let eventModifier: UInt32 = GetCurrentKeyModifiers()
+        return eventModifier == 1024
+    }
+    
     /// reset after app changes
     func toggleLed() {
+        //print(isCapsLockOn(), isCapsLockOn2())
         toggleLed(state: !isCapsLockOn())
     }
     
@@ -426,6 +436,7 @@ import Foundation
 /// https://forums.developer.apple.com/thread/96414
 /// https://github.com/maxmouchet/LightKit/issues/1
 
+/// fade https://github.com/superpanic/SuperCapsLock/blob/master/CapsLockLight/KeyboardBacklight.swift
 class Backlight {
     static let shared = Backlight()
     
@@ -442,8 +453,6 @@ class Backlight {
     static let MinBrightness:UInt64 = 0x0
     static var MaxBrightness:UInt64 = 0xfff
     
-    
-    
     init() {
         
         // Get the AppleLMUController (thing that accesses the light hardware)
@@ -451,7 +460,9 @@ class Backlight {
         /// NOT working for mac2015 when call on()
 //        let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching(kIOHIDSystemClass))
         
-        // TODO: check "AppleHIDKeyboardEventDriverV2"
+        /// not working "AppleHIDKeyboardEventDriverV2"
+        /// created but is not opening for mac with touchbar
+        //let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOUSBHostHIDDevice"))
         
         /// working for mac2015
         let serviceObject = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("AppleLMUController"))
