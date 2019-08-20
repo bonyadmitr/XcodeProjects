@@ -8,6 +8,10 @@
 
 import Cocoa
 
+// TODO: add status button
+// TODO: clear class
+// TODO: clear from storyboard
+
 class ViewController: NSViewController {
 
     override func viewDidLoad() {
