@@ -13,10 +13,9 @@ import Cocoa
 // TODO: right click menu (statusItemMenu)
 // TODO: launch at login
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
-    let statusItemManager = StatusItemManager()
+    lazy var statusItemManager = StatusItemManager()
     let audioManager = MuteMicManager.shared
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
