@@ -42,7 +42,7 @@ final class StatusItemManager {
         {
             statusItem.popUpMenu(statusItemMenu)
         } else {
-            AudioManager.shared.toogleMute()
+            MuteMicManager.shared.toogleMute()
         }
     }
     
