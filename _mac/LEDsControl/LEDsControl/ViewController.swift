@@ -457,10 +457,7 @@ class Backlight {
     static var MaxBrightness:UInt64 = 0xfff
     
     init() {
-        if System.is2016orMore {
-            assertionFailure()
-            return
-        }
+        assert(!System.is2016orMore, "not working for macbook 2016+. check System.is2016orMore before call")
         
         // Get the AppleLMUController (thing that accesses the light hardware)
         
