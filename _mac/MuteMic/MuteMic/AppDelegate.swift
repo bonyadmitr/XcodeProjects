@@ -83,6 +83,7 @@ final class StatusItemManager {
     
 }
 
+/// can be handled in system "Audio MIDI Setup.app"
 /// mute touchBar https://github.com/CocoaHeadsBrasil/MuteUnmuteMic
 /// mute https://github.com/pixel-point/mute-me
 /// swift Audio https://github.com/Sunnyyoung/Suohai
