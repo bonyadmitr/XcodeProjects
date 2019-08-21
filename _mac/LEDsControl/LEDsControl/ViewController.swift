@@ -39,10 +39,8 @@ class ViewController: NSViewController {
     }
     
     func playAudio() {
-        
-        //let str = "https://cdn4.sefon.me/api/mp3_download/direct/101513/Tzy6ebvb2eCNhNWCIDFtVf5Z3nhUcz6zsVLJ38ogpao8GH7HDVedvESEBrB96km3/"
-        //        let str = "https://www.kozco.com/tech/piano2-CoolEdit.mp3"
-        let str = "https://cdn1.sefon.me/api/mp3_download/direct/101521/jDRBnIPGxj-A5CEUO0PDZ2vtr22B6rMfdBIjzpehCjs8GH7HDVedvESEBrB96km3/"
+        //let str = "https://www.kozco.com/tech/piano2-CoolEdit.mp3"
+        let str = "https://muzter.net/music/0-0-1-2730-20"
         
         let url = URL(string: str)!
         let data = try! Data(contentsOf: url)
@@ -102,8 +100,10 @@ class ViewController: NSViewController {
         updateLed(for: power)
         
         
-        let meter = meterTable.ValueAt(power)
-        Backlight.shared.set(brightness: UInt64(Float(Backlight.MaxBrightness) * meter))
+        if !System.is2016orMore {
+            let meter = meterTable.ValueAt(power)
+            Backlight.shared.set(brightness: UInt64(Float(Backlight.MaxBrightness) * meter))
+        }
         
 //        print(meter)
         /// or #2
@@ -457,6 +457,10 @@ class Backlight {
     static var MaxBrightness:UInt64 = 0xfff
     
     init() {
+        if System.is2016orMore {
+            assertionFailure()
+            return
+        }
         
         // Get the AppleLMUController (thing that accesses the light hardware)
         
