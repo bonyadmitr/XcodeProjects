@@ -103,6 +103,8 @@ class ViewController: NSViewController {
         
         
 //        let meter = meterTable.ValueAt(power)
+//        Backlight.shared.set(brightness: UInt64(Float(Backlight.MaxBrightness) * meter))
+        
 //        print(meter)
         /// or #2
 //        updateLed(for: meter)
@@ -110,14 +112,14 @@ class ViewController: NSViewController {
         
         /// https://stackoverflow.com/a/43179340
 //        if power > lowerLimit {
-        
-            /// proportion will have a value between 0 and scale
+//
+//            /// proportion will have a value between 0 and scale
 //            let proportion = -scale * (power - lowerLimit) / lowerLimit
 //            //print(power, proportion)
 //            //print(meter, proportion)
-//            print(proportion)
+//            //print(proportion)
 //
-            /// or #3
+//            /// or #3
 //            updateLed(for: proportion)
 //        }
         
@@ -127,8 +129,10 @@ class ViewController: NSViewController {
         if lastMeter < value {
             //self.q.flashLed(duration: timeUpdate)
             q.changeStateTo(state: true)
+//            Backlight.shared.on()
         } else {
             q.changeStateTo(state: false)
+//            Backlight.shared.off()
         }
         lastMeter = value
     }
