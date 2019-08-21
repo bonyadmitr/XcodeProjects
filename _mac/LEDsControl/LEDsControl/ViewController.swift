@@ -519,33 +519,8 @@ class Backlight {
         isOn = false
     }
     
-    /// "MacBookPro11,4" for MacBook Pro 15" Mid-2015
-    /// "MacBookPro13,1" for MacBook Pro 13" Late 2016
-    private let hardwareModel: String = {
-        var size = 0
-        sysctlbyname("hw.model", nil, &size, nil, 0)
-        var model = [CChar](repeating: 0, count: size)
-        sysctlbyname("hw.model", &model, &size, nil, 0)
-        return String(cString: model)
-    }()
-    
-    private lazy var is2016orMore: Bool = {
-        /// "MacBookPro".count
-        let modelStartOffset = 10
-        let startIndex = hardwareModel.index(hardwareModel.startIndex, offsetBy: modelStartOffset)
-        let endIndex = hardwareModel.index(startIndex, offsetBy: 2)
-        let model = hardwareModel[startIndex..<endIndex]
-        
-        if let modelNumber = Int(model) {
-            return modelNumber >= 13
-        } else {
-            assertionFailure("unknown model")
-            return false
-        }
-    }()
-    
     func set(brightness: UInt64) {
-        if is2016orMore {
+        if System.is2016orMore {
             return
         }
         
@@ -576,4 +551,32 @@ class Backlight {
         Backlight.MaxBrightness = UInt64(vale * 16)
     }
     
+}
+
+enum System {
+    
+    /// "MacBookPro11,4" for MacBook Pro 15" Mid-2015
+    /// "MacBookPro13,1" for MacBook Pro 13" Late 2016
+    static let hardwareModel: String = {
+        var size = 0
+        sysctlbyname("hw.model", nil, &size, nil, 0)
+        var model = [CChar](repeating: 0, count: size)
+        sysctlbyname("hw.model", &model, &size, nil, 0)
+        return String(cString: model)
+    }()
+    
+    static let is2016orMore: Bool = {
+        /// "MacBookPro".count
+        let modelStartOffset = 10
+        let startIndex = hardwareModel.index(hardwareModel.startIndex, offsetBy: modelStartOffset)
+        let endIndex = hardwareModel.index(startIndex, offsetBy: 2)
+        let model = hardwareModel[startIndex..<endIndex]
+        
+        if let modelNumber = Int(model) {
+            return modelNumber >= 13
+        } else {
+            assertionFailure("unknown model")
+            return false
+        }
+    }()
 }
