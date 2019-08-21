@@ -1,5 +1,11 @@
 import CoreAudio
 
+/// big app https://github.com/kyleneideck/BackgroundMusic
+/// app https://github.com/mattingalls/Soundflower
+/// depricated volume https://github.com/drudge/MacDroidNotifier/blob/master/SoundVolume.m
+/// swift sample https://stackoverflow.com/a/38982906/5893286
+/// mute micro https://github.com/pixel-point/mute-me/blob/master/Mute%20Me%20Now/AppDelegate.m
+
 /// can be handled in system "Audio MIDI Setup.app"
 /// mute touchBar https://github.com/CocoaHeadsBrasil/MuteUnmuteMic
 /// mute https://github.com/pixel-point/mute-me
@@ -108,5 +114,11 @@ final class MuteMicManager {
     
     private func muteDidChange() {
         didChange?(isMuted())
+    }
+}
+
+extension OSStatus {
+    func handleError() {
+        assert(self == kAudioHardwareNoError, "reason: \(self)")
     }
 }
