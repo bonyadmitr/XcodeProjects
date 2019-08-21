@@ -22,6 +22,8 @@ enum System {
         return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
     }()
     
+    /// "MacBookPro11,4" for MacBook Pro 15" Mid-2015
+    /// "MacBookPro13,1" for MacBook Pro 13" Late 2016
     static let hardwareModel: String = {
         var size = 0
         sysctlbyname("hw.model", nil, &size, nil, 0)
