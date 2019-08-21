@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C45AB91A230DC40D004A8C1D /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AB919230DC40D004A8C1D /* StatusItemManager.swift */; };
 		CE080E772308934C00527662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E762308934C00527662 /* AppDelegate.swift */; };
 		CE080E792308934C00527662 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E782308934C00527662 /* ViewController.swift */; };
 		CE080E7B2308934D00527662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE080E7A2308934D00527662 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C45AB919230DC40D004A8C1D /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
 		CE080E732308934C00527662 /* MuteMic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuteMic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE080E762308934C00527662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE080E782308934C00527662 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				CE080E762308934C00527662 /* AppDelegate.swift */,
+				C45AB919230DC40D004A8C1D /* StatusItemManager.swift */,
 				CE080E782308934C00527662 /* ViewController.swift */,
 				CE080E7A2308934D00527662 /* Assets.xcassets */,
 				CE080E7C2308934D00527662 /* Main.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45AB91A230DC40D004A8C1D /* StatusItemManager.swift in Sources */,
 				CE080E792308934C00527662 /* ViewController.swift in Sources */,
 				CE080E772308934C00527662 /* AppDelegate.swift in Sources */,
 			);
