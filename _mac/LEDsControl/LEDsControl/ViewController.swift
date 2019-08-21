@@ -72,10 +72,14 @@ class ViewController: NSViewController {
      !!all https://github.com/serhii-londar/open-source-mac-os-apps#audio
      some https://github.com/topics/audio-visualizer?l=swift
      from the input device to the output https://github.com/jasminlapalme/caplaythrough-swift
-     https://github.com/mattingalls/Soundflower
      https://github.com/syedhali/EZAudio
      https://github.com/AudioKit/AudioKit
      https://github.com/maculateConception/aural-player
+     
+     
+     using https://www.youtube.com/watch?v=dNYZOaf3Gvs
+     https://github.com/mattingalls/Soundflower
+     https://apple.stackexchange.com/q/221980
     */
     
     /// Audio Meter for AVPlayer
