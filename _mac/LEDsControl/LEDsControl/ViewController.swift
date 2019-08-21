@@ -568,9 +568,12 @@ enum System {
     static let is2016orMore: Bool = {
         /// "MacBookPro".count
         let modelStartOffset = 10
+        assert(modelStartOffset == "MacBookPro".count)
+        
         let startIndex = hardwareModel.index(hardwareModel.startIndex, offsetBy: modelStartOffset)
         let endIndex = hardwareModel.index(startIndex, offsetBy: 2)
         let model = hardwareModel[startIndex..<endIndex]
+        assert(!model.isEmpty)
         
         if let modelNumber = Int(model) {
             return modelNumber >= 13
