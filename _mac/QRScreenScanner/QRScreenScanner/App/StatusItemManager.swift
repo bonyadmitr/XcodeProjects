@@ -1,5 +1,6 @@
 import Cocoa
 
+/// NSStatusBar.system should be called after applicationDidFinishLaunching. use lazy init.
 final class StatusItemManager {
     
     //static let shared = StatusItemManager()

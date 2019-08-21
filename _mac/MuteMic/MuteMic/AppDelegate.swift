@@ -14,8 +14,10 @@ import Cocoa
 // TODO: launch at login
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
+    /// NSStatusBar.system should be called after applicationDidFinishLaunching. use lazy init.
     lazy var statusItemManager = StatusItemManager()
+    
     let audioManager = MuteMicManager.shared
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
