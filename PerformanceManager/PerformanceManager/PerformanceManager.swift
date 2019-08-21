@@ -104,7 +104,8 @@ final class PerformanceManager {
     
     /// https://github.com/dani-gavrilov/GDPerformanceView-Swift/blob/master/GDPerformanceView-Swift/GDPerformanceMonitoring/Performance%D0%A1alculator.swift
     /// can be static
-    func cpuUsage() -> Double {
+    /// app usage, not system
+    func appCpuUsage() -> Double {
         var totalUsageOfCPU: Double = 0.0
         var threadsList = UnsafeMutablePointer(mutating: [thread_act_t]())
         var threadsCount = mach_msg_type_number_t(0)
@@ -139,8 +140,8 @@ final class PerformanceManager {
         return totalUsageOfCPU
     }
     
-    /// can be static
-    func memoryUsage() -> UInt64 {
+    /// app usage, not system
+    func appMemoryUsage() -> UInt64 {
         // TODO: check on device
         /// memory usage not equal Xcode Debug Gauge
         //        var taskInfo = mach_task_basic_info()

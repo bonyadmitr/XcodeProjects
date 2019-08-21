@@ -37,9 +37,9 @@ extension ViewController: PerformanceManagerDelegate {
         
         print()
         print(String(format: "FPS: %.1f%", framesPerSecond))
-        print(String(format: "CPU: %.1f%%", performanceManager.cpuUsage()))
+        print(String(format: "CPU: %.1f%%", performanceManager.appCpuUsage()))
         
-        let usedMemory = Double(performanceManager.memoryUsage()) / bytesInMegabyte
+        let usedMemory = Double(performanceManager.appMemoryUsage()) / bytesInMegabyte
         let memory = String(format: "%.1f of %.0f MB used", usedMemory, totalMemory)
         print(memory)
     }
