@@ -29,6 +29,9 @@ private class PhonebookEntryClass {
     }
 }
 
+
+/// !!! don't create XCTestCase subclass private!!! Otherwise tests rhombus<✓> will be ignored
+/// !!! Edit scheme... - Test (Left side bar) - Info (Top tab/segment) - Build Configuration - (set) Release
 final class ClassVsStructTests: XCTestCase {
     
     override func setUp() {
