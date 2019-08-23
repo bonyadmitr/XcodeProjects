@@ -6,7 +6,7 @@ final class StatusItemManager {
     
     private let statusItemMenu: NSMenu = {
         let menu = NSMenu()
-        menu.addItem(withTitle: "qqq", action: nil, keyEquivalent: ",")
+        menu.addItem(withTitle: "Quite", action: #selector(NSApp.terminate), keyEquivalent: "q")
         return menu
     }()
     
