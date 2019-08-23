@@ -29,6 +29,9 @@ private class PhonebookEntryClass {
     }
 }
 
+/// do we need add "*.xcbaseline" to .gitignore?
+/// if no, lets use time baselines for iPhone 6 Plus 12.2.
+/// but it will changed for every new xcode/device model/device version
 
 /// !!! don't create XCTestCase subclass private!!! Otherwise tests rhombus<✓> will be ignored
 /// !!! Edit scheme... - Test (Left side bar) - Info (Top tab/segment) - Build Configuration - (set) Release
