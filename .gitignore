@@ -8,6 +8,9 @@
 xcuserdata/
 *.xcuserstate
 
+# XCTest
+*.xcbaseline
+
 # AppCode
 .idea/
 
