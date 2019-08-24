@@ -35,6 +35,9 @@ private class PhonebookEntryClass {
 
 /// !!! don't create XCTestCase subclass private!!! Otherwise tests rhombus<✓> will be ignored
 /// !!! Edit scheme... - Test (Left side bar) - Info (Top tab/segment) - Build Configuration - (set) Release
+
+/// https://medium.com/better-programming/9-ways-to-boost-your-swift-code-performance-56e0986dd9ec
+/// https://github.com/apple/swift/blob/master/docs/OptimizationTips.rst
 final class ClassVsStructTests: XCTestCase {
     
     override func setUp() {
@@ -82,6 +85,22 @@ final class ClassVsStructTests: XCTestCase {
         self.measure {
             _ = (1...1000000).map { PhonebookEntryClass(i: $0) }
         }
+        
     }
     
+    func testContiguousArrayStruct() {
+        self.measure {
+            var array = ContiguousArray<PhonebookEntry>()
+            (1...1000000).forEach { array.append(PhonebookEntry(i: $0)) }
+        }
+    }
+    
+    /// If you need an array of reference types and the array does not need to be bridged to NSArray, use ContiguousArray instead of Array (use ContiguousArray for classes)
+    /// https://developer.apple.com/documentation/swift/contiguousarray
+    func testContiguousArrayClass() {
+        self.measure {
+            var array = ContiguousArray<PhonebookEntryClass>()
+            (1...1000000).forEach { array.append(PhonebookEntryClass(i: $0)) }
+        }
+    }
 }
