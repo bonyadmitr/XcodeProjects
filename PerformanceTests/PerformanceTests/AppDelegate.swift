@@ -15,7 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        /// https://stackoverflow.com/a/37289770/5893286
+        if ProcessInfo.processInfo.arguments.contains("UITests") {
+            UIApplication.shared.keyWindow?.layer.speed = 100
+        }
+        
         return true
     }
 
