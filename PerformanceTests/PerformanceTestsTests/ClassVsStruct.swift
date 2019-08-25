@@ -36,6 +36,8 @@ private class PhonebookEntryClass {
 /// !!! don't create XCTestCase subclass private!!! Otherwise tests rhombus<✓> will be ignored
 /// !!! Edit scheme... - Test (Left side bar) - Info (Top tab/segment) - Build Configuration - (set) Release
 
+///Parallel Testing https://www.zachsim.one/blog/2018/6/15/parallel-testing-in-xcode-10
+
 /// https://medium.com/better-programming/9-ways-to-boost-your-swift-code-performance-56e0986dd9ec
 /// https://github.com/apple/swift/blob/master/docs/OptimizationTips.rst
 final class ClassVsStructTests: XCTestCase {
