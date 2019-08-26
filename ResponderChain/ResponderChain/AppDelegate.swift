@@ -12,10 +12,32 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        print("-", #line, #function, type(of: self))
+        return super.canPerformAction(action, withSender: sender)
+    }
+    
+    override func target(forAction action: Selector, withSender sender: Any?) -> Any? {
+        print("-", #line, #function, type(of: self))
+        return super.target(forAction: action, withSender: sender)
+    }
 
+    @objc func actionButton() {
+        print("- Button", #line, #function, type(of: self))
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let window = SomeWindow()
+        window.rootViewController = ViewController()
+        window.makeKeyAndVisible()
+        self.window = window
+//        print(responderChain())
+//        print(window.responderChain())
+        
+        //UIApplication.shared.sendAction(#selector(actionButton), to: nil, from: self, for: nil)
+        
         return true
     }
 
