@@ -27,14 +27,43 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
 //    }
     
     func testDeallocation1() {
-        assertDeallocation { () -> UIViewController in
+        assertDeallocationPresentedVC { () -> UIViewController in
             let vc = ViewController()
             vc.isRetained = false
             return vc
         }
     }
-
+    
+    /// it must fail only for example. can be create bool return and check it. !!!
     func testDeallocation2() {
+        assertDeallocationPresentedVC {
+            let vc = ViewController()
+            vc.isRetained = true
+            return vc
+        }
+    }
+    
+    func testDeallocation3() {
+        
+        assertDeallocation {
+            let book = Book()
+            let page = Page(book: book)
+            book.add(page)
+            return book
+        }
+        
+        assertDeallocation {
+            let some1 = SomeClass()
+            let some2 = SomeClass()
+            some1.some = some2
+            some2.some = some1
+            return some1
+        }
+        
+        assertDeallocation {
+            return ClosureClass()
+        }
+        
         assertDeallocation {
             let vc = ViewController()
             vc.isRetained = true
@@ -42,3 +71,46 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
         }
     }
 }
+
+final class SomeClass {
+    weak var some: AnyObject?
+}
+
+final class ClosureClass {
+    var handler: (() -> Void)?
+    
+    init() {
+        handler = { [weak self] in
+            self?.someFunc()
+        }
+        
+        //handler = someFunc
+        
+//        handler = {
+//            self.someFunc()
+//        }
+    }
+    
+    func someFunc() {
+        print("-")
+    }
+}
+
+
+/// https://medium.com/mackmobile/avoiding-retain-cycles-in-swift-7b08d50fe3ef
+class Book {
+    private var pages = [Page]()
+    
+    func add(_ page : Page) {
+        pages.append(page)
+    }
+}
+
+class Page {
+    private weak var book : Book?
+    
+    required init(book : Book) {
+        self.book = book
+    }
+}
+
