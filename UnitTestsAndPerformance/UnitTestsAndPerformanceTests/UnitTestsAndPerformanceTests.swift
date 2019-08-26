@@ -61,7 +61,7 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
         }
         
         assertDeallocation {
-            return WWW()
+            return ClosureClass()
         }
         
         assertDeallocation {
@@ -76,22 +76,22 @@ final class SomeClass {
     weak var some: AnyObject?
 }
 
-final class WWW {
-    var w: (() -> Void)?
+final class ClosureClass {
+    var handler: (() -> Void)?
     
     init() {
-        //w = ww
-        
-        w = {
-            self.ww()
+        handler = { [weak self] in
+            self?.someFunc()
         }
         
-        w = { [weak self] in
-            self?.ww()
-        }
+        //handler = someFunc
+        
+//        handler = {
+//            self.someFunc()
+//        }
     }
     
-    func ww() {
+    func someFunc() {
         print("-")
     }
 }
