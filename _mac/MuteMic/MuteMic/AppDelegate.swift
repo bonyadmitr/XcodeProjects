@@ -1,18 +1,6 @@
-//
-//  AppDelegate.swift
-//  MuteMic
-//
-//  Created by Bondar Yaroslav on 8/17/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import Cocoa
 
-// TODO: clear file
-// TODO: clear storyboard and window
-// TODO: right click menu (statusItemMenu)
-// TODO: launch at login
-
+/// Created on 8/17/19
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// NSStatusBar.system should be called after applicationDidFinishLaunching. use lazy init.
