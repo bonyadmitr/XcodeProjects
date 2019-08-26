@@ -28,10 +28,35 @@ class ViewController: UIViewController {
         
         print(view.responderChain())
         
+//        UIApplication.shared.sendAction(#selector(actionButton), to: nil, from: self, for: nil)
+//        performSelector(inBackground: #selector(actionButton), with: nil)
+        //perform(#selector(actionButton), with: nil, afterDelay: 2)
+        
+        //performSelector(inBackground: NSSelectorFromString("actionButton"), with: nil)
+        
+        /// #selector(actionButton(sender:event:)).description
+        /// https://stackoverflow.com/a/52012908/5893286
+        print(
+            Selector(("actionButtonWithSender:event:")) == NSSelectorFromString("actionButtonWithSender:event:")
+        )
+        
+//        performSelector(inBackground:NSSelectorFromString("actionButton"), with: nil)
+//        performSelector(inBackground: #selector(actionButton), with: nil)
+        
+//        performSelector(onMainThread: #selector(actionButton), with: nil, waitUntilDone: false)
+//        perform(#selector(actionButton), with: self, afterDelay: 0)
+        
+        /// call class func
+        //ViewController.perform(#selector(actionButton), with: self, afterDelay: 0)
+        
         button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
 //        button.addTarget(self, action: #selector(actionButton(sender:event:)), for: .touchUpInside)
 //        button.addTarget(self, action: Selector("actionButtonWithSender:event:"), for: .touchUpInside)
 //        button.addTarget(self, action: NSSelectorFromString("actionButtonWithSender:event:"), for: .touchUpInside)
+        
+        //нажатия обработалось UIViewController-ом, но UIKit сначала отправил запрос к UIView так как он был first responder. У него не было нужного метода, поэтому UIKit перенаправил действия на следующего UIResponder-а в связном списке кем являлся UIViewController у которого был нужный метод
+//        button.addTarget(nil, action: #selector(SomeWindow.actionButton), for: .touchUpInside)
+//                button.addTarget(nil, action: Selector("actionButton"), for: .touchUpInside)
     }
     
     @objc func actionButton() {
