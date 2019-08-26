@@ -3,10 +3,23 @@ import XCTest
 /// https://www.avanderlee.com/swift/memory-leaks-unit-tests/
 extension XCTestCase {
     
+    func assertDeallocation(file: StaticString = #file, line: UInt = #line, _ constructor: () -> AnyObject) {
+        weak var mayBeLeakingRef: AnyObject?
+        
+        let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should drain")
+        autoreleasepool {
+            mayBeLeakingRef = constructor()
+            autoreleasepoolExpectation.fulfill()
+        }
+        
+        wait(for: [autoreleasepoolExpectation], timeout: 10.0)
+        XCTAssertNil(mayBeLeakingRef, file: file, line: line)
+    }
+    
     /// Verifies whether the given constructed UIViewController gets deallocated after being presented and dismissed.
     ///
     /// - Parameter testingViewController: The view controller constructor to use for creating the view controller.
-    func assertDeallocation(of testedViewController: () -> UIViewController) {
+    func assertDeallocationPresentedVC(file: StaticString = #file, line: UInt = #line, of testedViewController: () -> UIViewController) {
         weak var weakReferenceViewController: UIViewController?
         
         let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should drain")
@@ -22,7 +35,7 @@ extension XCTestCase {
             /// Present and dismiss the view after which the view controller should be released.
             rootViewController.present(testedViewController(), animated: false, completion: {
                 weakReferenceViewController = rootViewController.presentedViewController
-                XCTAssertNotNil(weakReferenceViewController)
+                XCTAssertNotNil(weakReferenceViewController, file: file, line: line)
                 
                 rootViewController.dismiss(animated: false, completion: {
                     autoreleasepoolExpectation.fulfill()
@@ -32,7 +45,7 @@ extension XCTestCase {
         
         wait(for: [autoreleasepoolExpectation], timeout: 10.0)
         
-        XCTAssertNil(weakReferenceViewController)
+        XCTAssertNil(weakReferenceViewController, file: file, line: line)
         //wait(for: weakReferenceViewController == nil, timeout: 3.0, description: "The view controller should be deallocated since no strong reference points to it.")
     }
     

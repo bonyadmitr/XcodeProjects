@@ -27,7 +27,7 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
 //    }
     
     func testDeallocation1() {
-        assertDeallocation { () -> UIViewController in
+        assertDeallocationPresentedVC { () -> UIViewController in
             let vc = ViewController()
             vc.isRetained = false
             return vc
@@ -35,10 +35,74 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
     }
 
     func testDeallocation2() {
-        assertDeallocation {
+        assertDeallocationPresentedVC {
             let vc = ViewController()
             vc.isRetained = true
             return vc
         }
     }
+    
+    func testDeallocation3() {
+        
+        assertDeallocation({
+            let book = Book()
+            let page = Page(book: book)
+            book.add(page)
+            return book
+        })
+        
+        assertDeallocation({
+            let q1 = SomeClass()
+            let q2 = SomeClass()
+            q1.some = q2
+            q2.some = q1
+            return q1
+        })
+        
+        assertDeallocation({
+            return WWW()
+        })
+    }
 }
+
+final class SomeClass {
+    weak var some: AnyObject?
+}
+
+final class WWW {
+    var w: (() -> Void)?
+    
+    init() {
+        //w = ww
+        
+        w = {
+            self.ww()
+        }
+        
+        w = { [weak self] in
+            self?.ww()
+        }
+    }
+    
+    func ww() {
+        print("-")
+    }
+}
+
+
+class Book {
+    private var pages = [Page]()
+    
+    func add(_ page : Page) {
+        pages.append(page)
+    }
+}
+
+class Page {
+    private weak var book : Book?
+    
+    required init(book : Book) {
+        self.book = book
+    }
+}
+
