@@ -97,6 +97,7 @@ final class ClosureClass {
 }
 
 
+/// https://medium.com/mackmobile/avoiding-retain-cycles-in-swift-7b08d50fe3ef
 class Book {
     private var pages = [Page]()
     
