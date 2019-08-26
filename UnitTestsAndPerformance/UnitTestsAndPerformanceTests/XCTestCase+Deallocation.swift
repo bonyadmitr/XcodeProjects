@@ -3,6 +3,8 @@ import XCTest
 /// https://www.avanderlee.com/swift/memory-leaks-unit-tests/
 extension XCTestCase {
     
+    static let autoreleasepoolExpectationtTmeout: TimeInterval = 3
+    
     func assertDeallocation(file: StaticString = #file, line: UInt = #line, _ constructor: () -> AnyObject) {
         weak var mayBeLeakingRef: AnyObject?
         
@@ -12,7 +14,7 @@ extension XCTestCase {
             autoreleasepoolExpectation.fulfill()
         }
         
-        wait(for: [autoreleasepoolExpectation], timeout: 10.0)
+        wait(for: [autoreleasepoolExpectation], timeout: XCTestCase.autoreleasepoolExpectationtTmeout)
         XCTAssertNil(mayBeLeakingRef, file: file, line: line)
     }
     
@@ -43,7 +45,7 @@ extension XCTestCase {
             })
         }
         
-        wait(for: [autoreleasepoolExpectation], timeout: 10.0)
+        wait(for: [autoreleasepoolExpectation], timeout: XCTestCase.autoreleasepoolExpectationtTmeout)
         
         XCTAssertNil(weakReferenceViewController, file: file, line: line)
         //wait(for: weakReferenceViewController == nil, timeout: 3.0, description: "The view controller should be deallocated since no strong reference points to it.")
