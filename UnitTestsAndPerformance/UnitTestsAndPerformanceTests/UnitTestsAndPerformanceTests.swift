@@ -33,7 +33,8 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
             return vc
         }
     }
-
+    
+    /// it must fail only for example. can be create bool return and check it. !!!
     func testDeallocation2() {
         assertDeallocationPresentedVC {
             let vc = ViewController()
@@ -44,24 +45,30 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
     
     func testDeallocation3() {
         
-        assertDeallocation({
+        assertDeallocation {
             let book = Book()
             let page = Page(book: book)
             book.add(page)
             return book
-        })
+        }
         
-        assertDeallocation({
-            let q1 = SomeClass()
-            let q2 = SomeClass()
-            q1.some = q2
-            q2.some = q1
-            return q1
-        })
+        assertDeallocation {
+            let some1 = SomeClass()
+            let some2 = SomeClass()
+            some1.some = some2
+            some2.some = some1
+            return some1
+        }
         
-        assertDeallocation({
+        assertDeallocation {
             return WWW()
-        })
+        }
+        
+        assertDeallocation {
+            let vc = ViewController()
+            vc.isRetained = true
+            return vc
+        }
     }
 }
 
