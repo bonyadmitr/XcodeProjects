@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// https://habr.com/en/post/464463/
+/// https://swiftrocks.com/understanding-the-ios-responder-chain.html
+
 class ViewController: UIViewController {
     
     override func loadView() {
