@@ -20,7 +20,7 @@ final class MenuManager {
         
         appMenu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
-                        keyEquivalent: "a")//.target = NSApp
+                        keyEquivalent: "a").keyEquivalentModifierMask = [.option, .shift]
         
         appMenu.addItem(withTitle: "Quit",
                         action: #selector(NSApplication.terminate(_:)),
@@ -30,6 +30,7 @@ final class MenuManager {
     }
     
     let deleteMenuItem = NSMenuItem()
+    let selectAllMenuItem = NSMenuItem()
     
     private func addEditMenu() {
         let editMenu = NSMenu(title: "Edit")
@@ -44,6 +45,12 @@ final class MenuManager {
 //            aboutMenuItem.target = self
 //            aboutMenuItem.action =
         editMenu.addItem(deleteMenuItem)
+        
+        
+        selectAllMenuItem.title = "Select all"
+        selectAllMenuItem.keyEquivalent = "a"
+        selectAllMenuItem.keyEquivalentModifierMask = .command
+        editMenu.addItem(selectAllMenuItem)
 
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         

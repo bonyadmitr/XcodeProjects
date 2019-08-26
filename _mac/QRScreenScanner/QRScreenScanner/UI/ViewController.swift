@@ -66,6 +66,10 @@ class ViewController: NSViewController {
         let deleteMenuItem = App.shared.menuManager.deleteMenuItem
         deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
         deleteMenuItem.target = self
+        
+        let selectAllMenuItem = App.shared.menuManager.selectAllMenuItem
+        selectAllMenuItem.action = #selector(NSTableView.selectAll)
+        selectAllMenuItem.target = tableView
     }
     
     private func addTableView() {
@@ -288,6 +292,9 @@ extension ViewController: NSTableViewDataSource {
         tableView.reloadData()
     }
     
+    @objc private func tableViewSelectAll() {
+//        tableView.selectAll(nil)
+    }
 }
 
 extension ViewController: NSTableViewDelegate {
