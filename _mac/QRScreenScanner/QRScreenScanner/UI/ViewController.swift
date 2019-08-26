@@ -274,7 +274,7 @@ extension ViewController: NSTableViewDataSource {
         
         if tableView.clickedRow >= 0 {
             if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-                tableView.selectedRowIndexes.reversed().forEach { tableDataSource.remove(at: $0) }
+                tableDataSource.remove(at: tableView.selectedRowIndexes)
                 if tableView.selectedRowIndexes.count > 1 {
                     tableView.deselectAll(nil)
                 }
@@ -282,7 +282,7 @@ extension ViewController: NSTableViewDataSource {
                 tableDataSource.remove(at: tableView.clickedRow)
             }
         } else {
-            tableView.selectedRowIndexes.reversed().forEach { tableDataSource.remove(at: $0) }
+            tableDataSource.remove(at: tableView.selectedRowIndexes)
             if tableView.selectedRowIndexes.count > 1 {
                 tableView.deselectAll(nil)
             }
@@ -340,6 +340,22 @@ extension MutableCollection where Self: RandomAccessCollection, Element: NSObjec
         }
     }
 }
+
+extension RangeReplaceableCollection where Self: MutableCollection, Index == Int {
+    
+    mutating func remove(at indexes: IndexSet) {
+        guard var i = indexes.first, i < count else { return }
+        var j = index(after: i)
+        var k = indexes.integerGreaterThan(i) ?? endIndex
+        while j != endIndex {
+            if k != j { swapAt(i, j); formIndex(after: &i) }
+            else { k = indexes.integerGreaterThan(k) ?? endIndex }
+            formIndex(after: &j)
+        }
+        removeSubrange(i...)
+    }
+}
+
 
 //extension Array {
 //
