@@ -414,6 +414,7 @@ final class CustomTableView: NSTableView {
         self.deleteTarget = target
     }
     
+    /// https://stackoverflow.com/a/42489007
     override func menu(for event: NSEvent) -> NSMenu? {
         let location = convert(event.locationInWindow, from: nil)
         let selectedRow = row(at: location)
