@@ -343,6 +343,8 @@ extension MutableCollection where Self: RandomAccessCollection, Element: NSObjec
 
 extension RangeReplaceableCollection where Self: MutableCollection, Index == Int {
     
+    /// source https://stackoverflow.com/a/50835467
+    /// test https://github.com/mattneub/RemoveTest
     mutating func remove(at indexes: IndexSet) {
         guard var i = indexes.first, i < count else { return }
         var j = index(after: i)
