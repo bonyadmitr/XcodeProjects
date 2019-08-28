@@ -272,7 +272,7 @@ extension ViewController: NSTableViewDataSource {
         
         // TODO: test set declareTypes one time
         /// https://stackoverflow.com/a/34902953/5893286
-        //NSPasteboard.general.clearContents()
+        NSPasteboard.general.clearContents()
         NSPasteboard.general.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
         NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
     }
