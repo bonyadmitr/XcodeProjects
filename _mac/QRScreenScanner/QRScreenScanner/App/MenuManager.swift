@@ -50,7 +50,16 @@ final class MenuManager {
         selectAllMenuItem.title = "Select all"
         selectAllMenuItem.keyEquivalent = "a"
         selectAllMenuItem.keyEquivalentModifierMask = .command
+        selectAllMenuItem.action = #selector(NSTableView.selectAll)
         editMenu.addItem(selectAllMenuItem)
+        
+        let copyAllMenuItem = NSMenuItem()
+        copyAllMenuItem.title = "Copy"
+        copyAllMenuItem.keyEquivalent = "c"
+        
+        copyAllMenuItem.action = NSSelectorFromString("copy:")//#selector(ViewController.copy1)
+        //copyAllMenuItem.keyEquivalentModifierMask = .command
+        editMenu.addItem(copyAllMenuItem)
 
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         

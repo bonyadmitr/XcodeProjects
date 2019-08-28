@@ -63,14 +63,22 @@ class ViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
+        //NSApp.keyWindow?.firstResponder
+        
         let deleteMenuItem = App.shared.menuManager.deleteMenuItem
         deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
         deleteMenuItem.target = self
         
-        let selectAllMenuItem = App.shared.menuManager.selectAllMenuItem
-        selectAllMenuItem.action = #selector(NSTableView.selectAll)
-        selectAllMenuItem.target = tableView
+//        let selectAllMenuItem = App.shared.menuManager.selectAllMenuItem
+//        selectAllMenuItem.action = #selector(NSTableView.selectAll)
+//        selectAllMenuItem.target = tableView
+        
+//        becomeFirstResponder()
     }
+    
+//    @objc func copy1() {
+//
+//    }
     
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
@@ -80,6 +88,7 @@ class ViewController: NSViewController {
         tableView.allowsMultipleSelection = true
         tableView.doubleAction = #selector(actionButtonCell)
         tableView.setDelete(action: #selector(tableViewDeleteItemClicked), target: self)
+        tableView.customDelegate = self
 //        tableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")])
         
         /// use zebra like row colors, like in finder
@@ -242,21 +251,24 @@ extension ViewController: NSTableViewDataSource {
         }
     }
     
-    @objc private func tableViewCopyItemClicked(_ sender: AnyObject) {
-        
-        guard tableView.clickedRow >= 0 else {
-            assertionFailure("should be never call")
-            return
-        }
-        
+    @objc private func tableViewCopyItemClicked(_ sender: AnyObject?) {
         let copiedText: String
-        if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+        
+        if tableView.clickedRow >= 0 {
+            if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+                copiedText = tableView.selectedRowIndexes
+                    .compactMap { tableDataSource[$0].value }
+                    .joined(separator: "\n")
+            } else {
+                copiedText = tableDataSource[tableView.clickedRow].value
+            }
+            
+        } else {
             copiedText = tableView.selectedRowIndexes
                 .compactMap { tableDataSource[$0].value }
                 .joined(separator: "\n")
-        } else {
-            copiedText = tableDataSource[tableView.clickedRow].value
         }
+
         
         // TODO: test set declareTypes one time
         /// https://stackoverflow.com/a/34902953/5893286
@@ -321,6 +333,20 @@ extension ViewController: NSTableViewDelegate {
         
         statusLabel.stringValue = text
     }
+}
+
+extension ViewController: CustomTableViewDelegate {
+    func didCopy() {
+        tableViewCopyItemClicked(nil)
+        //        guard let selectedItems = messageArrayController.selectedObjects as? [NSPasteboardWriting], !selectedItems.isEmpty else {
+        //            return
+        //        }
+        //
+        //        let pasteboard = NSPasteboard.general
+        //        pasteboard.clearContents()
+        //        pasteboard.writeObjects(selectedItems)
+    }
+    
 }
 
 extension MutableCollection where Self: RandomAccessCollection, Element: NSObject {
@@ -404,10 +430,17 @@ final class CodeDetector {
     }
 }
 
+protocol CustomTableViewDelegate: class {
+    func didCopy()
+//    func didDelete()
+}
+
 final class CustomTableView: NSTableView {
     
     private var deleteAction: Selector?
     private var deleteTarget: Any?
+    
+    var customDelegate: CustomTableViewDelegate?
     
     func setDelete(action: Selector?, target: Any?) {
         self.deleteAction = action
@@ -440,4 +473,15 @@ final class CustomTableView: NSTableView {
         }
     }
     
+    @objc func copy(_ sender: AnyObject?) {
+        customDelegate?.didCopy()
+    }
+    
+    override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        print(item)
+        if item.action == #selector(copy(_:)) {
+            return !selectedRowIndexes.isEmpty
+        }
+        return super.validateUserInterfaceItem(item)
+    }
 }
