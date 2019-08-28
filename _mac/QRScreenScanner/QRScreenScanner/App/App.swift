@@ -5,6 +5,7 @@ import Cocoa
 // TODO: https://stackoverflow.com/a/50832237/5893286 + https://stackoverflow.com/a/4686782/5893286
 // TODO: https://developer.apple.com/library/archive/technotes/tn2083/_index.html
 
+// TODO: handle cmd+h and cmd+m for window
 // TODO: menu for empty tableview
 // TODO: more actions in edit menu
 // TODO: feedback button
