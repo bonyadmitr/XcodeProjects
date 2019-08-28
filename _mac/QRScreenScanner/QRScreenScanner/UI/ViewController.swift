@@ -467,7 +467,7 @@ final class CustomTableView: NSTableView {
     override func keyDown(with event: NSEvent) {
         
         guard let character = event.charactersIgnoringModifiers?.first?.unicodeScalars.first, let customDelegate = customDelegate else {
-            assertionFailure()
+            assertionFailure("\(event.charactersIgnoringModifiers ?? "nil"), \(self.customDelegate == nil)")
             super.keyDown(with: event)
             return
         }
