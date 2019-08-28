@@ -10,6 +10,7 @@ final class MenuManager {
         /// first menu is hidden under app name
         addAppMenu()
         addEditMenu()
+        addWindowMenu()
         
         /// call the last to add system hidden items like emojy
         NSApp.mainMenu = mainMenu
@@ -50,7 +51,7 @@ final class MenuManager {
         selectAllMenuItem.title = "Select all"
         selectAllMenuItem.keyEquivalent = "a"
         selectAllMenuItem.keyEquivalentModifierMask = .command
-        selectAllMenuItem.action = #selector(NSTableView.selectAll)
+        selectAllMenuItem.action = #selector(NSTableView.selectAll(_:))
         editMenu.addItem(selectAllMenuItem)
         
         let copyAllMenuItem = NSMenuItem()
@@ -64,6 +65,23 @@ final class MenuManager {
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         
         mainMenu.addSubmenu(menu: editMenu)
+    }
+    
+    private func addWindowMenu() {
+        let windowMenu = NSMenu(title: "Window")
+        
+        windowMenu.addItem(withTitle: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
+//        let minimizeMenuItem = NSMenuItem(title: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
+//        minimizeMenuItem.keyEquivalent = "m"
+        //minimizeMenuItem.keyEquivalentModifierMask = .command
+//        minimizeMenuItem.action = #selector(NSWindow.miniaturize(_:))
+//        windowMenu.addItem(minimizeMenuItem)
+        
+        windowMenu.addItem(withTitle: "Zoom", action: #selector(NSWindow.zoom(_:)), keyEquivalent: "")
+        //windowMenu.addItem(withTitle: "Hide", action: #selector(NSWindow.orderOut(_:)), keyEquivalent: "h")
+        windowMenu.addItem(withTitle: "Hide", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
+        
+        mainMenu.addSubmenu(menu: windowMenu)
     }
     
     //    @objc private func quit() {
