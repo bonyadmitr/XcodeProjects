@@ -279,8 +279,9 @@ extension ViewController: NSTableViewDataSource {
     
     @objc func tableViewDeleteItemClicked() {
         
-        //assert(tableView.clickedRow >= 0 || tableView.selectedRow >= 0)
-        guard tableView.clickedRow >= 0 || tableView.selectedRow >= 0 else {
+        let isSomethingSelected = tableView.clickedRow >= 0 || tableView.selectedRow >= 0
+        guard isSomethingSelected else {
+            NSSound.playError()
             return
         }
         
