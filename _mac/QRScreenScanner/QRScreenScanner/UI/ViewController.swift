@@ -347,6 +347,9 @@ extension ViewController: CustomTableViewDelegate {
         //        pasteboard.writeObjects(selectedItems)
     }
     
+    func didDelete() {
+        tableViewDeleteItemClicked()
+    }
 }
 
 extension MutableCollection where Self: RandomAccessCollection, Element: NSObject {
@@ -432,7 +435,7 @@ final class CodeDetector {
 
 protocol CustomTableViewDelegate: class {
     func didCopy()
-//    func didDelete()
+    func didDelete()
 }
 
 final class CustomTableView: NSTableView {
@@ -461,16 +464,34 @@ final class CustomTableView: NSTableView {
     
     /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
     override func keyDown(with event: NSEvent) {
-        //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
-        if let deleteAction = deleteAction,
-            event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter),
-            selectedRow != -1
+        
+        guard let character = event.charactersIgnoringModifiers?.first?.unicodeScalars.first, let customDelegate = customDelegate else {
+            assertionFailure()
+            super.keyDown(with: event)
+            return
+        }
+        
+        if character == UnicodeScalar(NSDeleteCharacter)
+            || character == UnicodeScalar(NSBackspaceCharacter)
+            || character == UnicodeScalar(NSDeleteFunctionKey) // fn+delete
+            || character == UnicodeScalar(NSDeleteCharFunctionKey)
         {
-            NSApp.sendAction(deleteAction, to: deleteTarget, from: self)
-            /// super.keyDown(with: event) not called to disable error sound
+            customDelegate.didDelete()
         } else {
             super.keyDown(with: event)
         }
+        
+        //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
+            
+//        if let deleteAction = deleteAction,
+//            event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter),
+//            selectedRow != -1
+//        {
+//            NSApp.sendAction(deleteAction, to: deleteTarget, from: self)
+//            /// super.keyDown(with: event) not called to disable error sound
+//        } else {
+//            super.keyDown(with: event)
+//        }
     }
     
     @objc func copy(_ sender: AnyObject?) {
