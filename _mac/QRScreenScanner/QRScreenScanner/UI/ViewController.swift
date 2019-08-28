@@ -464,6 +464,7 @@ final class CustomTableView: NSTableView {
     }
     
     /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
+    /// https://github.com/bazelbuild/tulsi/blob/master/src/Tulsi/OptionsEditorController.swift
     override func keyDown(with event: NSEvent) {
         
         guard let character = event.charactersIgnoringModifiers?.first?.unicodeScalars.first, let customDelegate = customDelegate else {
@@ -499,6 +500,7 @@ final class CustomTableView: NSTableView {
         customDelegate?.didCopy()
     }
     
+    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/EnablingMenuItems.html
     override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
         print(item)
         if item.action == #selector(copy(_:)) {
