@@ -239,37 +239,8 @@ extension ViewController: NSTableViewDataSource {
         
         let text = tableDataSource[tableView.selectedRow].value
         
-        if let url = URL(string: text) {
-            
-            //LSFindApplicationForInfo
-            var errorOutput: Unmanaged<CFError>? = nil
-            
-            // TODO: App.id
-            let array = (LSCopyApplicationURLsForBundleIdentifier(System.defalutBrowserBundleId() as CFString, &errorOutput)?.takeRetainedValue() as? [URL]).assert(or: [])
-//            if let error = errorOutput?.takeRetainedValue() {
-//
-//            }
-            var canAccept: DarwinBoolean = false
-            let result = LSCanURLAcceptURL(url as CFURL, array.first! as CFURL, .viewer, .acceptDefault, &canAccept)
-            guard result == noErr else {
-                assertionFailure()
-                return
-            }
-            
-            if canAccept.boolValue {
-                print(NSWorkspace.shared.open(url))
-            } else {
-                if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-                    let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
-                {
-                    NSWorkspace.shared.open(url)
-                }
-            }
-            
-//             LSCanURLAcceptURL(<#T##inItemURL: CFURL##CFURL#>, <#T##inTargetURL: CFURL##CFURL#>, kLSRolesViewer, kLSAcceptDefault, &canAccept)
-//            NSWorkspace.shared.open(<#T##url: URL##URL#>, options: <#T##NSWorkspace.LaunchOptions#>, configuration: <#T##[NSWorkspace.LaunchConfigurationKey : Any]#>)
-            
-//            print(NSWorkspace.shared.open(url))
+        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
+            NSWorkspace.shared.open(url)
         } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
         {
