@@ -444,7 +444,7 @@ final class CustomTableView: NSTableView {
     private var deleteAction: Selector?
     private var deleteTarget: Any?
     
-    var customDelegate: CustomTableViewDelegate?
+    var customDelegate: (CustomTableViewDelegate & QLPreviewPanelDataSource)?
     
     func setDelete(action: Selector?, target: Any?) {
         self.deleteAction = action
@@ -475,6 +475,7 @@ final class CustomTableView: NSTableView {
         
         /// to prevent open https://www.orange.es/ by space key
         if character == " " {
+            togglePreviewPanel()
             return
         }
         
@@ -513,4 +514,82 @@ final class CustomTableView: NSTableView {
         }
         return super.validateUserInterfaceItem(item)
     }
+    
+    private func togglePreviewPanel() {
+        if QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible {
+            QLPreviewPanel.shared().orderOut(nil)
+        } else {
+            if dataSource?.numberOfRows?(in: self) == 0 {
+                return
+            }
+//            if selectedRowIndexes.isEmpty {
+//                return
+//            }
+            QLPreviewPanel.shared().makeKeyAndOrderFront(nil)
+        }
+    }
+    
+    override func acceptsPreviewPanelControl(_: QLPreviewPanel!) -> Bool {
+        return true
+    }
+    
+    override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
+        panel.delegate = self
+        panel.dataSource = customDelegate
+    }
+    
+    override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
+//        panel.dataSource = nil
+//        panel.delegate = nil
+    }
 }
+
+extension ViewController: QLPreviewPanelDataSource {
+    func numberOfPreviewItems(in _: QLPreviewPanel!) -> Int {
+        return 1//tableDataSource.count //dataSource?.numberOfRows?(in: self) ?? 0
+    }
+    
+    func previewPanel(_: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+        //let text = tableDataSource[index].value
+        let text = tableDataSource[tableView.selectedRow].value
+        
+        if let url = NSURL(string: text) {
+            return url
+        } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let url = NSURL(string: "https://www.google.com/search?q=\(encodedText)")
+        {
+            return url
+        } else {
+            return nil
+        }
+        //return //activeObjects[index] as? DirectoryEntry
+    }
+}
+
+extension CustomTableView: QLPreviewPanelDelegate {
+    func previewPanel(_: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
+        guard event.type == .keyDown else { return false }
+        keyDown(with: event)
+        return true
+    }
+    
+//    func previewPanel(_: QLPreviewPanel!, sourceFrameOnScreenFor _: QLPreviewItem!) -> NSRect {
+//        guard let cell = outlineView.view(atColumn: outlineView.selectedColumn,
+//                                          row: outlineView.selectedRow,
+//                                          makeIfNecessary: false) as? NSTableCellView
+//            else { return .zero }
+//        let cellRectOnWindow = cell.convert(cell.imageView?.frame ?? .zero, to: nil)
+//        guard view.frame.contains(cellRectOnWindow) else { return .zero }
+//        return cell.window!.convertToScreen(cellRectOnWindow)
+//    }
+    
+//    func previewPanel(_: QLPreviewPanel!,
+//                      transitionImageFor item: QLPreviewItem!,
+//                      contentRect _: UnsafeMutablePointer<NSRect>!) -> Any! {
+//        guard let entry = item as? DirectoryEntry else { return nil }
+//        return entry.image
+//    }
+}
+
+
+import Quartz
