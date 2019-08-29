@@ -46,6 +46,13 @@ final class CustomTableView: NSTableView {
             return
         }
         
+//        switch event.keyCode {
+//        case 49: // Space
+//            togglePreviewPanel()
+//        case 123, 124, 125, 126: // Left, Right, Up, Down
+//            outlineView.keyDown(with: event)
+//            QLPreviewPanel.shared().reloadData()
+        
         if character == UnicodeScalar(NSDeleteCharacter)
             || character == UnicodeScalar(NSBackspaceCharacter)
             || character == UnicodeScalar(NSDeleteFunctionKey) // fn+delete
@@ -100,14 +107,19 @@ final class CustomTableView: NSTableView {
         return true
     }
     
+    var previewPanel: QLPreviewPanel?
+
+    
     override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
         panel.delegate = self
         panel.dataSource = customDelegate
+        previewPanel = panel
     }
     
     override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
-        //        panel.dataSource = nil
-        //        panel.delegate = nil
+        previewPanel = nil
+        panel.dataSource = nil
+        panel.delegate = nil
     }
 }
 

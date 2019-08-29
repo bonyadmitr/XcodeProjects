@@ -364,12 +364,12 @@ extension ViewController: QLPreviewPanelDataSource {
         //let text = tableDataSource[index].value
         let text = tableDataSource[tableView.selectedRow].value
         
-        if let url = NSURL(string: text) {
-            return url
+        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
+            return url as QLPreviewItem
         } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let url = NSURL(string: "https://www.google.com/search?q=\(encodedText)")
+            let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
         {
-            return url
+            return url as QLPreviewItem
         } else {
             return nil
         }
