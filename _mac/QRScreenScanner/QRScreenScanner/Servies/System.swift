@@ -61,6 +61,8 @@ enum System {
         return (LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue() as? [String]).assert(or: [])
     }
     
+    /// https://github.com/paiv/default-browser
+    /// https://github.com/devandsev/MacBrowserChooser/blob/develop/MacBrowserChooser/Source/Services/SystemBrowserService.swift
     //System.defalutBrowserBundleId()
     //App.id
     static func canOpen(url: URL, by appId: String) -> Bool {
