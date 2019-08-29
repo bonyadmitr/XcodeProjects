@@ -1,5 +1,4 @@
 import Cocoa
-import Quartz.QuickLookUI
 
 protocol CustomTableViewDelegate: class {
     func didCopy()
@@ -11,7 +10,8 @@ final class CustomTableView: NSTableView {
     private var deleteAction: Selector?
     private var deleteTarget: Any?
     
-    var customDelegate: (CustomTableViewDelegate & QLPreviewPanelDataSource)?
+    var customDelegate: CustomTableViewDelegate?
+//    var customDelegate: (CustomTableViewDelegate & QLPreviewPanelDataSource)?
     
     func setDelete(action: Selector?, target: Any?) {
         self.deleteAction = action
@@ -42,7 +42,7 @@ final class CustomTableView: NSTableView {
         
         /// to prevent open https://www.orange.es/ by space key
         if character == " " {
-            togglePreviewPanel()
+//            togglePreviewPanel()
             return
         }
         
@@ -89,65 +89,66 @@ final class CustomTableView: NSTableView {
         return super.validateUserInterfaceItem(item)
     }
     
-    private func togglePreviewPanel() {
-        if QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible {
-            QLPreviewPanel.shared().orderOut(nil)
-        } else {
-            if dataSource?.numberOfRows?(in: self) == 0 {
-                return
-            }
-            //            if selectedRowIndexes.isEmpty {
-            //                return
-            //            }
-            QLPreviewPanel.shared().makeKeyAndOrderFront(nil)
-        }
-    }
-    
-    override func acceptsPreviewPanelControl(_: QLPreviewPanel!) -> Bool {
-        return true
-    }
-    
-    var previewPanel: QLPreviewPanel?
-
-    
-    override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
-        panel.delegate = self
-        panel.dataSource = customDelegate
-        previewPanel = panel
-    }
-    
-    override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
-        previewPanel = nil
-        panel.dataSource = nil
-        panel.delegate = nil
-    }
+//    private func togglePreviewPanel() {
+//        if QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible {
+//            QLPreviewPanel.shared().orderOut(nil)
+//        } else {
+//            if dataSource?.numberOfRows?(in: self) == 0 {
+//                return
+//            }
+//            //            if selectedRowIndexes.isEmpty {
+//            //                return
+//            //            }
+//            QLPreviewPanel.shared().makeKeyAndOrderFront(nil)
+//        }
+//    }
+//
+//    override func acceptsPreviewPanelControl(_: QLPreviewPanel!) -> Bool {
+//        return true
+//    }
+//
+//    var previewPanel: QLPreviewPanel?
+//
+//
+//    override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
+//        panel.delegate = self
+//        panel.dataSource = customDelegate
+//        previewPanel = panel
+//    }
+//
+//    override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
+//        previewPanel = nil
+//        panel.dataSource = nil
+//        panel.delegate = nil
+//    }
 }
 
-extension CustomTableView: QLPreviewPanelDelegate {
-    func previewPanel(_: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
-        guard event.type == .keyDown else { return false }
-        keyDown(with: event)
-        return true
-    }
-    
-    /// sourceFrameOnScreenFor https://github.com/GiorgiaAuroraAdorni/dct2-compression/blob/master/FasterThanLightFourierTransform/FasterThanLightFourierTransform/ImageView.swift
-    /// keyDown https://github.com/maku693/RightSide/blob/master/RightSide/ViewController.swift
-    /// search https://github.com/search?l=Swift&p=2&q=QLPreviewPanel&type=Code
-    
-    //    func previewPanel(_: QLPreviewPanel!, sourceFrameOnScreenFor _: QLPreviewItem!) -> NSRect {
-    //        guard let cell = outlineView.view(atColumn: outlineView.selectedColumn,
-    //                                          row: outlineView.selectedRow,
-    //                                          makeIfNecessary: false) as? NSTableCellView
-    //            else { return .zero }
-    //        let cellRectOnWindow = cell.convert(cell.imageView?.frame ?? .zero, to: nil)
-    //        guard view.frame.contains(cellRectOnWindow) else { return .zero }
-    //        return cell.window!.convertToScreen(cellRectOnWindow)
-    //    }
-    
-    //    func previewPanel(_: QLPreviewPanel!,
-    //                      transitionImageFor item: QLPreviewItem!,
-    //                      contentRect _: UnsafeMutablePointer<NSRect>!) -> Any! {
-    //        guard let entry = item as? DirectoryEntry else { return nil }
-    //        return entry.image
-    //    }
-}
+//extension CustomTableView: QLPreviewPanelDelegate {
+//    func previewPanel(_: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
+//        guard event.type == .keyDown else { return false }
+//        keyDown(with: event)
+//        return true
+//    }
+//
+//    /// import Quartz.QuickLookUI
+//    /// sourceFrameOnScreenFor https://github.com/GiorgiaAuroraAdorni/dct2-compression/blob/master/FasterThanLightFourierTransform/FasterThanLightFourierTransform/ImageView.swift
+//    /// keyDown https://github.com/maku693/RightSide/blob/master/RightSide/ViewController.swift
+//    /// search https://github.com/search?l=Swift&p=2&q=QLPreviewPanel&type=Code
+//
+//    //    func previewPanel(_: QLPreviewPanel!, sourceFrameOnScreenFor _: QLPreviewItem!) -> NSRect {
+//    //        guard let cell = outlineView.view(atColumn: outlineView.selectedColumn,
+//    //                                          row: outlineView.selectedRow,
+//    //                                          makeIfNecessary: false) as? NSTableCellView
+//    //            else { return .zero }
+//    //        let cellRectOnWindow = cell.convert(cell.imageView?.frame ?? .zero, to: nil)
+//    //        guard view.frame.contains(cellRectOnWindow) else { return .zero }
+//    //        return cell.window!.convertToScreen(cellRectOnWindow)
+//    //    }
+//
+//    //    func previewPanel(_: QLPreviewPanel!,
+//    //                      transitionImageFor item: QLPreviewItem!,
+//    //                      contentRect _: UnsafeMutablePointer<NSRect>!) -> Any! {
+//    //        guard let entry = item as? DirectoryEntry else { return nil }
+//    //        return entry.image
+//    //    }
+//}

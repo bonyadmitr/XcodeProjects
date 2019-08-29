@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Quartz.QuickLookUI
 
 class ViewController: NSViewController {
     
@@ -355,24 +354,24 @@ extension ViewController: CustomTableViewDelegate {
 }
 
 /// needs import Quartz.QuickLookUI
-extension ViewController: QLPreviewPanelDataSource {
-    func numberOfPreviewItems(in _: QLPreviewPanel!) -> Int {
-        return 1//tableDataSource.count //dataSource?.numberOfRows?(in: self) ?? 0
-    }
-    
-    func previewPanel(_: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-        //let text = tableDataSource[index].value
-        let text = tableDataSource[tableView.selectedRow].value
-        
-        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
-            return url as QLPreviewItem
-        } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
-        {
-            return url as QLPreviewItem
-        } else {
-            return nil
-        }
-        //return //activeObjects[index] as? DirectoryEntry
-    }
-}
+//extension ViewController: QLPreviewPanelDataSource {
+//    func numberOfPreviewItems(in _: QLPreviewPanel!) -> Int {
+//        return 1//tableDataSource.count //dataSource?.numberOfRows?(in: self) ?? 0
+//    }
+//
+//    func previewPanel(_: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+//        //let text = tableDataSource[index].value
+//        let text = tableDataSource[tableView.selectedRow].value
+//
+//        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
+//            return url as QLPreviewItem
+//        } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+//            let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
+//        {
+//            return url as QLPreviewItem
+//        } else {
+//            return nil
+//        }
+//        //return //activeObjects[index] as? DirectoryEntry
+//    }
+//}
