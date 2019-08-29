@@ -473,6 +473,11 @@ final class CustomTableView: NSTableView {
             return
         }
         
+        /// to prevent open https://www.orange.es/ by space key
+        if character == " " {
+            return
+        }
+        
         if character == UnicodeScalar(NSDeleteCharacter)
             || character == UnicodeScalar(NSBackspaceCharacter)
             || character == UnicodeScalar(NSDeleteFunctionKey) // fn+delete
