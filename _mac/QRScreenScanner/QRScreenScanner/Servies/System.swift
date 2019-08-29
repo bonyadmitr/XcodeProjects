@@ -60,6 +60,31 @@ enum System {
         /// addition "com.rockysandstudio.MKPlayer"
         return (LSCopyAllHandlersForURLScheme("https" as CFString)?.takeRetainedValue() as? [String]).assert(or: [])
     }
+    
+    //System.defalutBrowserBundleId()
+    //App.id
+    static func canOpen(url: URL, by appId: String) -> Bool {
+        var errorOutput: Unmanaged<CFError>? = nil
+        
+        guard
+            let appUrls = (LSCopyApplicationURLsForBundleIdentifier(appId as CFString, &errorOutput)?.takeRetainedValue() as? [URL]),
+            let appUrl = appUrls.first
+        else {
+            return false
+        }
+        
+        var canAccept: DarwinBoolean = false
+        let result = LSCanURLAcceptURL(url as CFURL, appUrl as CFURL, .viewer, .acceptDefault, &canAccept)
+        guard result == noErr else {
+            assertionFailure("status: \(result)")
+            return false
+        }
+        if let error = errorOutput?.takeRetainedValue() {
+            assertionFailure(error.localizedDescription)
+            return false
+        }
+        return canAccept.boolValue
+    }
 }
 
 enum AppInfo {
