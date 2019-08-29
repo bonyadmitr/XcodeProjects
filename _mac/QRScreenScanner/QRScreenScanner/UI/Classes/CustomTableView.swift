@@ -130,6 +130,10 @@ extension CustomTableView: QLPreviewPanelDelegate {
         return true
     }
     
+    /// sourceFrameOnScreenFor https://github.com/GiorgiaAuroraAdorni/dct2-compression/blob/master/FasterThanLightFourierTransform/FasterThanLightFourierTransform/ImageView.swift
+    /// keyDown https://github.com/maku693/RightSide/blob/master/RightSide/ViewController.swift
+    /// search https://github.com/search?l=Swift&p=2&q=QLPreviewPanel&type=Code
+    
     //    func previewPanel(_: QLPreviewPanel!, sourceFrameOnScreenFor _: QLPreviewItem!) -> NSRect {
     //        guard let cell = outlineView.view(atColumn: outlineView.selectedColumn,
     //                                          row: outlineView.selectedRow,
