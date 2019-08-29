@@ -5,6 +5,7 @@ protocol CustomTableViewDelegate: class {
     func didDelete()
 }
 
+// TODO: handle enter button 
 final class CustomTableView: NSTableView {
     
     private var deleteAction: Selector?
