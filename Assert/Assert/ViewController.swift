@@ -43,5 +43,17 @@ final class ViewController: UIViewController {
         print(unwrapedText)
         
         text.assertExecute { print($0) }
+        
+        if let unwrapedText2 = text {
+            print(unwrapedText2)
+        } else {
+            assertionFailure()
+        }
+        
+        guard let unwrapedText2 = text else {
+            assertionFailure()
+            return
+        }
+        print(unwrapedText2)
     }
 }
