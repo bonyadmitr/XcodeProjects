@@ -7,12 +7,21 @@ final class MainApplication: UIApplication {
     }
 }
 
+let bundle = Bundle(identifier: "com.by.Some1")!
+
+//Settings.bundle
+//print(Bundle.allBundles)
+//print(Bundle.main.bundlePath)
+//print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
+//print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first)
+//exit(0)
+
 //if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
 //    print("version is : \(version)")
 //}
 
 //let bundle = Bundle.main
-let bundle = Bundle(identifier: "com.by.InfoPlistSecure")!
+//let bundle = Bundle(identifier: "com.by.InfoPlistSecure")!
 
 func getInfoDictionary() -> [String: AnyObject]? {
     guard let infoDictPath = bundle.path(forResource: "Info", ofType: "plist") else { return nil }
@@ -41,9 +50,19 @@ do  {
 print(Bundle.main.unload())
 print(Bundle.main.load())
 
+print(bundle.unload())
+print(bundle.load())
+
 /// doesn't changes on first start
 /// only after app relaunch
 if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
+    print("version is : \(version)")
+}
+
+/// not working too.
+/// used cached bundle
+let bundle2 = Bundle(identifier: "com.by.InfoPlistSecure")!
+if let version = bundle2.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
     print("version is : \(version)")
 }
 
