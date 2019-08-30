@@ -34,7 +34,9 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
         }
     }
     
-    /// it must fail only for example. can be create bool return and check it. !!!
+    // TODO: create bool return and check Deallocation.
+    // TODO: assertDeallocation for array
+    /// This one must fail
     func testDeallocation2() {
         assertDeallocationPresentedVC {
             let vc = ViewController()
