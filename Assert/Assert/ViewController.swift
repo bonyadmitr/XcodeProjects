@@ -7,7 +7,7 @@ final class ViewController: UIViewController {
         
         testDispatchAssert()
         testOptionalAssert()
-        
+        testAssert()
         
         view.backgroundColor = .lightGray
         print("- viewDidLoad")
@@ -34,11 +34,11 @@ final class ViewController: UIViewController {
         if let unwrapedText2 = text {
             print(unwrapedText2)
         } else {
-            assertionFailure()
+            assertionFailure("shouldn't be executed")
         }
         
         guard let unwrapedText2 = text else {
-            assertionFailure()
+            assertionFailure("shouldn't be executed")
             return
         }
         print(unwrapedText2)
@@ -47,5 +47,11 @@ final class ViewController: UIViewController {
         print(unwrapedText)
         
         text.assertExecute { print($0) }
+    }
+    
+    private func testAssert() {
+        var array = [0, 1]
+        array.append(2)
+        assert(array.count == 3, "must contain 3 items")
     }
 }
