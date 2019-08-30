@@ -8,18 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         testDispatchAssert()
         
+        
+        
         view.backgroundColor = .lightGray
         print("- viewDidLoad")
     }
-
-    func testDispatchAssert() {
+    
+    private func testDispatchAssert() {
         
         if #available(iOS 10.0, *) {
             dispatchAssert(condition: .onQueue(.main))
@@ -33,5 +35,5 @@ class ViewController: UIViewController {
             assertBackgroundThread()
         }
     }
+    
 }
-
