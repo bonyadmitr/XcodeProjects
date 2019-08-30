@@ -15,14 +15,23 @@ class ViewController: UIViewController {
         view.backgroundColor = .lightGray
         
         let label = UILabel()
-        label.center = view.center
+        label.numberOfLines = 0
         view.addSubview(label)
         
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
             label.text = "\(version)"
-            label.sizeToFit()
             print("version is : \(version)")
         }
+        
+        if let key = Bundle.main.object(forInfoDictionaryKey: "SomeAnalyticsKey") {
+            label.text! += "\nkey : \(key)"
+            print("key : \(key)")
+        } else {
+            print("- SomeAnalyticsKey is not set")
+        }
+        
+        label.sizeToFit()
+        label.center = view.center
     }
 
 

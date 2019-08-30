@@ -7,7 +7,7 @@ final class MainApplication: UIApplication {
     }
 }
 
-let bundle = Bundle(identifier: "com.by.Some1")!
+//let bundle = Bundle(identifier: "com.by.Some1")!
 
 /// not working
 //let bundle = Bundle.allFrameworks.first(where: { $0.bundleIdentifier == "com.by.Some1"})!
@@ -25,7 +25,7 @@ let bundle = Bundle(identifier: "com.by.Some1")!
 //}
 
 //let bundle = Bundle.main
-//let bundle = Bundle(identifier: "com.by.InfoPlistSecure")!
+let bundle = Bundle(identifier: "com.by.InfoPlistSecure")!
 
 func getInfoDictionary() -> [String: AnyObject]? {
     guard let infoDictPath = bundle.path(forResource: "Info", ofType: "plist") else { return nil }
@@ -35,6 +35,7 @@ func getInfoDictionary() -> [String: AnyObject]? {
 var dict = getInfoDictionary()!
 dict["CFBundleShortVersionString"] = "1.1.1" as AnyObject
 dict["CFBundleName"] = "from_main" as AnyObject
+dict["SomeAnalyticsKey"] = "SomeApiKey" as AnyObject
 
 
 let filepath = bundle.path(forResource: "info", ofType: "plist")
