@@ -71,15 +71,8 @@ final class MenuManager {
         let windowMenu = NSMenu(title: "Window")
         
         windowMenu.addItem(withTitle: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
-//        let minimizeMenuItem = NSMenuItem(title: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
-//        minimizeMenuItem.keyEquivalent = "m"
-        //minimizeMenuItem.keyEquivalentModifierMask = .command
-//        minimizeMenuItem.action = #selector(NSWindow.miniaturize(_:))
-//        windowMenu.addItem(minimizeMenuItem)
-        
         windowMenu.addItem(withTitle: "Zoom", action: #selector(NSWindow.zoom(_:)), keyEquivalent: "")
-        //windowMenu.addItem(withTitle: "Hide", action: #selector(NSWindow.orderOut(_:)), keyEquivalent: "h")
-        windowMenu.addItem(withTitle: "Hide", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
+        windowMenu.addItem(withTitle: "Hide all", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
         
         mainMenu.addSubmenu(menu: windowMenu)
     }

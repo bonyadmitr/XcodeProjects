@@ -238,7 +238,7 @@ extension ViewController: NSTableViewDataSource {
         
         let text = tableDataSource[tableView.selectedRow].value
         
-        if let url = URL(string: text) {
+        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
             NSWorkspace.shared.open(url)
         } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
@@ -353,159 +353,25 @@ extension ViewController: CustomTableViewDelegate {
     }
 }
 
-extension MutableCollection where Self: RandomAccessCollection, Element: NSObject {
-    
-    /// https://stackoverflow.com/a/42313342/5893286
-    /// Sort `self` in-place using criteria stored in a NSSortDescriptors array
-    public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
-        sort { by:
-            for sortDesc in theSortDescs {
-                switch sortDesc.compare($0, to: $1) {
-                case .orderedAscending: return true
-                case .orderedDescending: return false
-                case .orderedSame: continue
-                }
-            }
-            return false
-        }
-    }
-}
-
-extension RangeReplaceableCollection where Self: MutableCollection, Index == Int {
-    
-    /// source https://stackoverflow.com/a/50835467
-    /// test https://github.com/mattneub/RemoveTest
-    mutating func remove(at indexes: IndexSet) {
-        guard var i = indexes.first, i < count else { return }
-        var j = index(after: i)
-        var k = indexes.integerGreaterThan(i) ?? endIndex
-        while j != endIndex {
-            if k != j { swapAt(i, j); formIndex(after: &i) }
-            else { k = indexes.integerGreaterThan(k) ?? endIndex }
-            formIndex(after: &j)
-        }
-        removeSubrange(i...)
-    }
-}
-
-
-//extension Array {
+/// needs import Quartz.QuickLookUI
+//extension ViewController: QLPreviewPanelDataSource {
+//    func numberOfPreviewItems(in _: QLPreviewPanel!) -> Int {
+//        return 1//tableDataSource.count //dataSource?.numberOfRows?(in: self) ?? 0
+//    }
 //
-//    /// https://stackoverflow.com/a/34973936/5893286
-//    public mutating func sort(sortDescriptors theSortDescs: [NSSortDescriptor]) {
-//        if let tempArray = (self as NSArray).sortedArray(using: theSortDescs) as? [Element] {
-//            self = tempArray
+//    func previewPanel(_: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+//        //let text = tableDataSource[index].value
+//        let text = tableDataSource[tableView.selectedRow].value
+//
+//        if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
+//            return url as QLPreviewItem
+//        } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+//            let url = URL(string: "https://www.google.com/search?q=\(encodedText)")
+//        {
+//            return url as QLPreviewItem
 //        } else {
-//            assertionFailure()
+//            return nil
 //        }
+//        //return //activeObjects[index] as? DirectoryEntry
 //    }
 //}
-
-@available(OSX 10.10, *)
-final class CodeDetector {
-    
-    static let shared = CodeDetector()
-    
-    func readQR(from image: NSImage) -> [String] {
-        guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
-            assertionFailure("cgImage convert problem")
-            return []
-        }
-        return readQR(from: cgImage)
-    }
-    
-    func readQR(from image: CGImage) -> [String] {
-        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode,
-                                        context: nil,
-                                        options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
-        else {
-            assertionFailure("nil in simulator, A7 core +")
-            return []
-        }
-        
-        let ciImage = CIImage(cgImage: image)
-        
-        guard let features = detector.features(in: ciImage) as? [CIQRCodeFeature] else {
-            assertionFailure("CIDetector(ofType is different")
-            return []
-        }
-        
-        return features.compactMap { $0.messageString }
-    }
-}
-
-protocol CustomTableViewDelegate: class {
-    func didCopy()
-    func didDelete()
-}
-
-final class CustomTableView: NSTableView {
-    
-    private var deleteAction: Selector?
-    private var deleteTarget: Any?
-    
-    var customDelegate: CustomTableViewDelegate?
-    
-    func setDelete(action: Selector?, target: Any?) {
-        self.deleteAction = action
-        self.deleteTarget = target
-    }
-    
-    /// https://stackoverflow.com/a/42489007
-    override func menu(for event: NSEvent) -> NSMenu? {
-        let location = convert(event.locationInWindow, from: nil)
-        let selectedRow = row(at: location)
-        
-        if selectedRow == -1 {
-            return nil
-        } else {
-            return super.menu(for: event)
-        }
-    }
-    
-    /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
-    /// https://github.com/bazelbuild/tulsi/blob/master/src/Tulsi/OptionsEditorController.swift
-    override func keyDown(with event: NSEvent) {
-        
-        guard let character = event.charactersIgnoringModifiers?.first?.unicodeScalars.first, let customDelegate = customDelegate else {
-            assertionFailure("\(event.charactersIgnoringModifiers ?? "nil"), \(self.customDelegate == nil)")
-            super.keyDown(with: event)
-            return
-        }
-        
-        if character == UnicodeScalar(NSDeleteCharacter)
-            || character == UnicodeScalar(NSBackspaceCharacter)
-            || character == UnicodeScalar(NSDeleteFunctionKey) // fn+delete
-            || character == UnicodeScalar(NSDeleteCharFunctionKey)
-        {
-            customDelegate.didDelete()
-        } else {
-            super.keyDown(with: event)
-        }
-        
-        //if event.charactersIgnoringModifiers?.first == Character(UnicodeScalar(NSDeleteCharacter)!) {
-            
-//        if let deleteAction = deleteAction,
-//            event.charactersIgnoringModifiers == String(format: "%c", NSDeleteCharacter),
-//            selectedRow != -1
-//        {
-//            NSApp.sendAction(deleteAction, to: deleteTarget, from: self)
-//            /// super.keyDown(with: event) not called to disable error sound
-//        } else {
-//            super.keyDown(with: event)
-//        }
-    }
-    
-    @objc func copy(_ sender: AnyObject?) {
-        customDelegate?.didCopy()
-    }
-    
-    /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/EnablingMenuItems.html
-    override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        print(item)
-        if item.action == #selector(copy(_:)) {
-            return !selectedRowIndexes.isEmpty
-        }
-        return super.validateUserInterfaceItem(item)
-    }
-}

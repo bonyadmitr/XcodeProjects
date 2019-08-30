@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4A5A6AC2317830C0082A7F5 /* CodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A5A6AB2317830C0082A7F5 /* CodeDetector.swift */; };
+		C4A5A6AE231783600082A7F5 /* Collection+Extnesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A5A6AD231783600082A7F5 /* Collection+Extnesions.swift */; };
+		C4A5A6B02317838D0082A7F5 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A5A6AF2317838D0082A7F5 /* CustomTableView.swift */; };
 		CE080E652307CCB400527662 /* WindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E642307CCB400527662 /* WindowsManager.swift */; };
 		CE080E682307CF3A00527662 /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E672307CF3A00527662 /* Optional+Assert.swift */; };
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4A5A6AB2317830C0082A7F5 /* CodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetector.swift; sourceTree = "<group>"; };
+		C4A5A6AD231783600082A7F5 /* Collection+Extnesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extnesions.swift"; sourceTree = "<group>"; };
+		C4A5A6AF2317838D0082A7F5 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		CE080E642307CCB400527662 /* WindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsManager.swift; sourceTree = "<group>"; };
 		CE080E672307CF3A00527662 /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 				CEAD357722F9C2F8002CC59E /* Array+Safe.swift */,
 				CE92336722FDCF5100984201 /* CGError+Assert.swift */,
 				CE080E672307CF3A00527662 /* Optional+Assert.swift */,
+				C4A5A6AD231783600082A7F5 /* Collection+Extnesions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 				CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */,
 				CEAD357922FABDDA002CC59E /* QRService.swift */,
 				CEAD357D22FDCAD2002CC59E /* System.swift */,
+				C4A5A6AB2317830C0082A7F5 /* CodeDetector.swift */,
 			);
 			path = Servies;
 			sourceTree = "<group>";
@@ -134,6 +142,7 @@
 			children = (
 				CEAD358322FDCBD7002CC59E /* ToolbarItemGroup.swift */,
 				CE958DBA230039BB00869FAF /* DropView.swift */,
+				C4A5A6AF2317838D0082A7F5 /* CustomTableView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -250,6 +259,7 @@
 				CED1771722FECE52001F3CBE /* History.swift in Sources */,
 				CE080E682307CF3A00527662 /* Optional+Assert.swift in Sources */,
 				CEAD357422F9C2BE002CC59E /* NSButton+Init.swift in Sources */,
+				C4A5A6AC2317830C0082A7F5 /* CodeDetector.swift in Sources */,
 				CEAD358722FDCD3D002CC59E /* SystemWindowsManager.swift in Sources */,
 				CEE5E1BF22E6DEAA00B54D40 /* ViewController.swift in Sources */,
 				CEAD357E22FDCAD2002CC59E /* System.swift in Sources */,
@@ -257,12 +267,14 @@
 				CEAD356C22F6AB34002CC59E /* main.swift in Sources */,
 				CE958DBB230039BB00869FAF /* DropView.swift in Sources */,
 				CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */,
+				C4A5A6AE231783600082A7F5 /* Collection+Extnesions.swift in Sources */,
 				CED1771522FECE3E001F3CBE /* HistoryDataSource.swift in Sources */,
 				CEAD357A22FABDDA002CC59E /* QRService.swift in Sources */,
 				CEAD357822F9C2F8002CC59E /* Array+Safe.swift in Sources */,
 				CEAD357622F9C2DA002CC59E /* NSToolbarItem+Init.swift in Sources */,
 				CEAD358022FDCAFF002CC59E /* ToolbarManager.swift in Sources */,
 				CEAD357222F8029B002CC59E /* App.swift in Sources */,
+				C4A5A6B02317838D0082A7F5 /* CustomTableView.swift in Sources */,
 				CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */,
 				CE080E652307CCB400527662 /* WindowsManager.swift in Sources */,
 				CEAD358422FDCBD7002CC59E /* ToolbarItemGroup.swift in Sources */,
