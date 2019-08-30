@@ -1,15 +1,6 @@
 import Foundation
 
 extension Optional {
-    func assert(or defaultValue: Wrapped, file: String = #file, line: Int = #line) -> Wrapped {
-        switch self {
-        case .none:
-            assertionFailure("\((file as NSString).lastPathComponent):\(line) is nil")
-            return defaultValue
-        case .some(let value):
-            return value
-        }
-    }
     
     /**
      it is nonescaping, so there is no perfermance issue
@@ -32,6 +23,16 @@ extension Optional {
             assertionFailure("\((file as NSString).lastPathComponent):\(line) is nil")
         case .some(let value):
             try action(value)
+        }
+    }
+    
+    func assert(or defaultValue: Wrapped, file: String = #file, line: Int = #line) -> Wrapped {
+        switch self {
+        case .none:
+            assertionFailure("\((file as NSString).lastPathComponent):\(line) is nil")
+            return defaultValue
+        case .some(let value):
+            return value
         }
     }
 }

@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Assert
-//
-//  Created by Bondar Yaroslav on 8/30/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import UIKit
 
 final class ViewController: UIViewController {
@@ -39,11 +31,6 @@ final class ViewController: UIViewController {
     private func testOptionalAssert() {
         let text: String? = "some"
         
-        let unwrapedText = text.assert(or: "")
-        print(unwrapedText)
-        
-        text.assertExecute { print($0) }
-        
         if let unwrapedText2 = text {
             print(unwrapedText2)
         } else {
@@ -55,5 +42,10 @@ final class ViewController: UIViewController {
             return
         }
         print(unwrapedText2)
+        
+        let unwrapedText = text.assert(or: "")
+        print(unwrapedText)
+        
+        text.assertExecute { print($0) }
     }
 }
