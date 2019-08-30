@@ -14,18 +14,18 @@ extension Optional {
     /**
      it is nonescaping, so there is no perfermance issue
      
-     text.assertExecute { print($0) }
+         text.assertExecute { print($0) }
      
      vs
      
-     if let text = text {
-     print(text)
-     } else {
-     assertionFailure()
-     }
+         if let text = text {
+             print(text)
+         } else {
+             assertionFailure()
+         }
+
      
      */
-    // TODO: check with and without "rethrows"
     func assertExecute(file: String = #file, line: Int = #line, _ action: (Wrapped) throws -> Void) rethrows {
         switch self {
         case .none:
