@@ -33,6 +33,8 @@ func getInfoDictionary() -> [String: AnyObject]? {
 }
 
 var dict = getInfoDictionary()!
+
+/// not working for first start
 dict["CFBundleShortVersionString"] = "1.1.1" as AnyObject
 dict["CFBundleName"] = "from_main" as AnyObject
 dict["SomeAnalyticsKey"] = "SomeApiKey" as AnyObject

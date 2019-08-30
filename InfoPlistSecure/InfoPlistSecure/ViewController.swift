@@ -23,6 +23,7 @@ class ViewController: UIViewController {
             print("version is : \(version)")
         }
         
+        /// not working for first start
         if let key = Bundle.main.object(forInfoDictionaryKey: "SomeAnalyticsKey") {
             label.text! += "\nkey : \(key)"
             print("key : \(key)")
