@@ -4,7 +4,9 @@ import XCTest
 /// https://www.bignerdranch.com/blog/creating-a-custom-xctest-assertion/
 /// https://medium.com/@amlcurran/custom-assertions-in-swift-3b91b413665e
 
-/// test Memory leaks https://www.avanderlee.com/swift/memory-leaks-unit-tests/
+/// test Memory leaks
+/// https://www.avanderlee.com/swift/memory-leaks-unit-tests/
+/// https://github.com/leandromperez/specleaks/blob/master/SpecLeaks/Classes/AnalyzeLeak.swift
 extension XCTestCase {
     
     static let autoreleasepoolExpectationtTmeout: TimeInterval = 3
