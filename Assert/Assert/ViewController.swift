@@ -12,9 +12,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        testDispatchAssert()
+        
+        view.backgroundColor = .lightGray
+        print("- viewDidLoad")
     }
 
-
+    func testDispatchAssert() {
+        
+        if #available(iOS 10.0, *) {
+            dispatchAssert(condition: .onQueue(.main))
+        }
+        
+        assertMainQueue()
+        
+        DispatchQueue.global().async {
+            assertBackgroundQueue()
+        }
+    }
 }
 
