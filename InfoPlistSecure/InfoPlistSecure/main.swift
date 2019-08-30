@@ -41,7 +41,8 @@ do  {
 print(Bundle.main.unload())
 print(Bundle.main.load())
 
-//Bundle.main = Bundle(path: "")
+/// doesn't changes on first start
+/// only after app relaunch
 if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") {
     print("version is : \(version)")
 }
