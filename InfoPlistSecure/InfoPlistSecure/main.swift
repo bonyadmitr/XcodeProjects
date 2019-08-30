@@ -9,8 +9,12 @@ final class MainApplication: UIApplication {
 
 let bundle = Bundle(identifier: "com.by.Some1")!
 
-//Settings.bundle
+/// not working
+//let bundle = Bundle.allFrameworks.first(where: { $0.bundleIdentifier == "com.by.Some1"})!
+
+/// shows that Bundle.main is loaded already
 //print(Bundle.allBundles)
+
 //print(Bundle.main.bundlePath)
 //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first)
 //print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first)
