@@ -13,6 +13,7 @@
 		CE5C8416231947EA00FA24FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8415231947EA00FA24FF /* Assets.xcassets */; };
 		CE5C8419231947EA00FA24FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8417231947EA00FA24FF /* LaunchScreen.storyboard */; };
 		CE5C84212319483100FA24FF /* Dispatch+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C84202319483100FA24FF /* Dispatch+Assert.swift */; };
+		CE5C842323194D8B00FA24FF /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C842223194D8B00FA24FF /* Optional+Assert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CE5C8418231947EA00FA24FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE5C841A231947EA00FA24FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5C84202319483100FA24FF /* Dispatch+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch+Assert.swift"; sourceTree = "<group>"; };
+		CE5C842223194D8B00FA24FF /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CE5C840E231947E800FA24FF /* AppDelegate.swift */,
 				CE5C8410231947E800FA24FF /* ViewController.swift */,
 				CE5C84202319483100FA24FF /* Dispatch+Assert.swift */,
+				CE5C842223194D8B00FA24FF /* Optional+Assert.swift */,
 				CE5C8412231947E800FA24FF /* Main.storyboard */,
 				CE5C8415231947EA00FA24FF /* Assets.xcassets */,
 				CE5C8417231947EA00FA24FF /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				CE5C84212319483100FA24FF /* Dispatch+Assert.swift in Sources */,
 				CE5C8411231947E800FA24FF /* ViewController.swift in Sources */,
 				CE5C840F231947E800FA24FF /* AppDelegate.swift in Sources */,
+				CE5C842323194D8B00FA24FF /* Optional+Assert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
