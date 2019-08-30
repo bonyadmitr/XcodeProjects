@@ -30,3 +30,12 @@ func assertBackgroundQueue() {
         assert(!Thread.isMainThread)
     }
 }
+
+/// https://github.com/dmardas1/MyTelegramSwift/blob/master/TGUIKit/TGUIKit/UIUtils.swift
+func assertBackgroundThread(_ file: String = #file, line: Int = #line) {
+    assert(!Thread.isMainThread, "\(file):\(line) running on main thread")
+}
+
+func assertMainThread(_ file: String = #file, line: Int = #line) {
+    assert(Thread.isMainThread, "\(file):\(line) running on background thread")
+}

@@ -26,9 +26,11 @@ class ViewController: UIViewController {
         }
         
         assertMainQueue()
+        assertMainThread()
         
         DispatchQueue.global().async {
             assertBackgroundQueue()
+            assertBackgroundThread()
         }
     }
 }
