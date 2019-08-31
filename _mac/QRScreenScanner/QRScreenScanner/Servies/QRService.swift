@@ -1,9 +1,33 @@
 import Foundation
 import AppKit.NSImage
 
-final class QRService {
+final class QRService: NSObject {
     
-    static func scanWindows() {
+    static var item: DispatchWorkItem?
+    
+    static func scanWindowsDelayed() {
+        /// or #1
+        /// DispatchWorkItem cancel https://stackoverflow.com/a/38372384/5893286
+        item?.cancel()
+        
+        let item = DispatchWorkItem {
+            if self.item?.isCancelled == true {
+                /// not called for REPLACED item (item = DispatchWorkItem.init)
+                assertionFailure("- canceled")
+                return
+            }
+            scanWindows()
+        }
+        self.item = item
+        /// 0.1 is too fast for .asyncAfter
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: item)
+        
+        /// or #2
+//        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(scanWindows), object: nil)
+//        perform(#selector(scanWindows), with: nil, afterDelay: 0.1)
+    }
+    
+    @objc static func scanWindows() {
         let qrValues = SystemWindowsManager
             .getHiddenWindowsImages()
             .flatMap { CodeDetector.shared.readQR(from: $0) }
