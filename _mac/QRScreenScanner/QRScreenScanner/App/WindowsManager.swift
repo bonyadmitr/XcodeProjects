@@ -9,9 +9,9 @@ final class WindowsManager: NSObject {
     /// if it is not lazy controller will be loaded immediately
     ///
     /// window style https://lukakerr.github.io/swift/nswindow-styles
-    lazy var window: NSWindow = {
+    lazy var window: Window = {
         let vc = ViewController()
-        let window = NSWindow(vc: vc)
+        let window = Window(vc: vc)
         window.title = App.name
         
         /// animation not always work for start window
@@ -24,6 +24,8 @@ final class WindowsManager: NSObject {
         window.center()
         /// call it after .center()
         window.setFrameAutosaveName("MainWindow")
+        
+        window.delegate = self
         return window
     }()
     
@@ -33,6 +35,138 @@ final class WindowsManager: NSObject {
         NSApp.activate(ignoringOtherApps: true)
     }
 }
+
+extension WindowsManager: NSWindowDelegate {
+    func window(_ window: NSWindow, willPositionSheet sheet: NSWindow, using rect: NSRect) -> NSRect {
+        
+        if let window = window as? Window,
+            window.hideToolbarCustomizationPaletteItems,
+            sheet.className == "NSToolbarConfigPanel"
+        {
+            removeSizeAndDisplayMode(in: sheet)
+        }
+        
+        return rect
+    }
+    
+    /// problem https://stackoverflow.com/a/16027120/5893286
+    //func window(_ window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplication.PresentationOptions = []) -> NSApplication.PresentationOptions {
+    //    return [.fullScreen, .autoHideDock, .autoHideMenuBar, .autoHideToolbar]
+    //}
+    
+    /// inspire by https://stackoverflow.com/a/39647181/5893286
+    func removeSizeAndDisplayMode(in sheet: NSWindow) {
+        
+        sheet.contentView?.subviews.first?.subviews
+            .first { $0 is NSStackView }?
+            .subviews.first { $0 is NSStackView }?
+            .isHidden = true
+        
+        // TODO: find out macOS version where window contains NSStackView
+        //guard let views = sheet.contentView?.subviews else {
+        //    assertionFailure()
+        //    return
+        //}
+        //
+        //// Hide Small Size Option
+        //views
+        //    .compactMap { $0 as? NSButton }
+        //    .first { button -> Bool in
+        //        guard let buttonTypeValue = button.cell?.value(forKey: "buttonType") as? UInt,
+        //            let buttonType = NSButton.ButtonType(rawValue: buttonTypeValue)
+        //            else { return false }
+        //        return buttonType == .switch
+        //    }?.isHidden = true
+        //
+        //// Hide Display Mode Option
+        //views.first { $0.subviews.count == 2 }?.isHidden = true
+        //
+        //sheet.contentView?.needsDisplay = true
+    }
+}
+
+final class Window: NSWindow {
+    
+    private var savedToolbarMenuItems = [NSMenuItem]()
+    
+    private lazy var customizationPaletteItems = [NSMenuItem(title: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")]
+    
+    private var toolbarMenuItems: NSMenu?
+    
+    /// set after window.toolbar set.
+    /// inspire by https://stackoverflow.com/a/39647181/5893286
+    var hideToolbarCustomizationPaletteItems = false {
+        didSet {
+            assert(toolbar != nil, "toolbar should be set")
+            
+            if hideToolbarCustomizationPaletteItems {
+                removeIconCustomization()
+            } else {
+                restoreMenu()
+            }
+        }
+    }
+    
+    override var toolbar: NSToolbar? {
+        didSet {
+            guard let contextMenu = contentView?.superview?.menu else {
+                assertionFailure()
+                return
+            }
+            
+            toolbarMenuItems = contextMenu
+            savedToolbarMenuItems = contextMenu.items
+            
+            //customizationPaletteItem = NSMenuItem(title
+            
+            //customizationPaletteItem = contextMenu.items.last
+            
+            //customizationPaletteItem = contextMenu.items.first(where: { $0.action == #selector(NSWindow.runToolbarCustomizationPalette(_:)) })
+        }
+    }
+    
+    /// call after window.toolbar set.
+    private func removeIconCustomization() {
+        assert(toolbar != nil, "toolbar should be set")
+        
+//        guard let contextMenu = contentView?.superview?.menu else {
+//            assertionFailure()
+//            return
+//        }
+        
+//        savedToolbarMenuItems = contextMenu.items
+        
+        /// or #1
+        //let customizationPaletteItem = NSMenuItem(title: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
+        
+        /// or #2
+        //        guard
+        //            let customizationPaletteItem = contextMenu.items.first(where: { $0.action == #selector(NSWindow.runToolbarCustomizationPalette(_:)) })
+        //        else {
+        //            assertionFailure()
+        //            return
+        //        }
+        
+        /// or #a
+//        contextMenu.items = [customizationPaletteItem]
+        
+        //contentView?.superview?.menu?.items = [customizationPaletteItem]
+        toolbarMenuItems?.items = customizationPaletteItems
+        
+        /// or #b
+        //        contextMenu.items
+        //            .filter { $0.action != #selector(NSWindow.runToolbarCustomizationPalette(_:)) }
+        //            .forEach { contextMenu.removeItem($0) }
+    }
+    
+    /// call after window.toolbar set.
+    private func restoreMenu() {
+        assert(toolbar != nil, "toolbar should be set")
+        //contentView?.superview?.menu?.items = savedToolbarMenuItems
+        toolbarMenuItems?.items = savedToolbarMenuItems
+    }
+}
+
 
 private extension NSWindow {
     
