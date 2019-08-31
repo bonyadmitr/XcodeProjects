@@ -38,6 +38,10 @@ final class App {
         menuManager.setup()
         statusItemManager.setup()
         toolbarManager.addToWindow(windowsManager.window)
+        
+        /// set after window.toolbar set.
+        windowsManager.window.hideToolbarCustomizationPaletteItems = true
+        
         showWindow()
     }
     
@@ -53,10 +57,11 @@ extension App {
     static let build = (Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String).assert(or: "")
     static let versionWithBuild = "\(version) (\(build))"
     
+    private static let githubProjectPath = "https://github.com/bonyadmitr/XcodeProjects/"
+    
     static func openSubmitFeedbackPage() {
         let feedbackBody =
         """
-        qwe
         <!--
         Provide your feedback here. Include as many details as possible.
         You can also email me at bonyadmitr@gmail.com
@@ -71,7 +76,7 @@ extension App {
         guard
             let encodedBody = feedbackBody.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             /// can be added title: "&title=\(title)"
-            let url = URL(string: "https://github.com/bonyadmitr/XcodeProjects/issues/new?body=\(encodedBody)")
+            let url = URL(string: "\(githubProjectPath)issues/new?body=\(encodedBody)")
         else {
             assertionFailure()
             return
@@ -79,4 +84,32 @@ extension App {
         
         NSWorkspace.shared.open(url)
     }
+    
+    static func openReleaseNotes() {
+        guard let url = URL(string: "\(githubProjectPath)releases") else {
+            assertionFailure()
+            return
+        }
+        NSWorkspace.shared.open(url)
+    }
+    
+    /// Feedback and Bugs
+    static func openIssues() {
+        guard let url = URL(string: "\(githubProjectPath)issues") else {
+            assertionFailure()
+            return
+        }
+        
+        NSWorkspace.shared.open(url)
+    }
+    
+    static func openDocumentation() {
+        guard let url = URL(string: "\(githubProjectPath)wiki") else {
+            assertionFailure()
+            return
+        }
+        
+        NSWorkspace.shared.open(url)
+    }
+    
 }
