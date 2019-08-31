@@ -46,6 +46,45 @@ final class ToolbarManager: NSObject {
     
     func addToWindow(_ window: NSWindow) {
         window.toolbar = toolbar
+//        removeIconCustomization(for: window)
+    }
+    
+    private var savedToolbarMenuItems = [NSMenuItem]()
+    
+    /// call after window.toolbar set.
+    /// code https://stackoverflow.com/a/39647181/5893286
+    private func removeIconCustomization(for window: NSWindow) {
+        
+        guard let contextMenu = window.contentView?.superview?.menu else {
+            assertionFailure()
+            return
+        }
+        
+        savedToolbarMenuItems = contextMenu.items
+        
+        /// or #1
+        let customizationPaletteItem = NSMenuItem(title: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
+        
+        /// or #2
+//        guard
+//            let customizationPaletteItem = contextMenu.items.first(where: { $0.action == #selector(NSWindow.runToolbarCustomizationPalette(_:)) })
+//        else {
+//            assertionFailure()
+//            return
+//        }
+        
+        /// or #a
+        contextMenu.items = [customizationPaletteItem]
+        
+        /// or #b
+//        contextMenu.items
+//            .filter { $0.action != #selector(NSWindow.runToolbarCustomizationPalette(_:)) }
+//            .forEach { contextMenu.removeItem($0) }
+    }
+    
+    /// call after window.toolbar set.
+    private func restoreMenu() {
+        App.shared.windowsManager.window.contentView?.superview?.menu?.items = savedToolbarMenuItems
     }
     
     private func screenshotItem() -> NSToolbarItem {
