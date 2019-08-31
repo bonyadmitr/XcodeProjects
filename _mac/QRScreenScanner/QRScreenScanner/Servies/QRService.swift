@@ -54,6 +54,30 @@ final class QRService: NSObject {
         playSound(for: qrValues)
     }
     
+    // TODO: optmized code for qrDataSourcesFiles
+    ///  created no guard playError if there is at least one qrValue
+    static func scan(filesAt filePaths: [String], images: [NSImage]) {
+        DispatchQueue.global().async {
+            let qrDataSourcesFiles = filePaths
+                .compactMap { FileManager.default.contents(atPath: $0) }
+                .compactMap { NSImage(data: $0) }
+                .flatMap { CodeDetector.shared.readQR(from: $0) }
+                .map { qrValue -> History in
+                    History(date: Date(), value: qrValue)
+            }
+            let qrDataSourcesImages = images
+                .flatMap { CodeDetector.shared.readQR(from: $0) }
+                .map { qrValue -> History in
+                    History(date: Date(), value: qrValue)
+            }
+            let qrDataSources = qrDataSourcesFiles + qrDataSourcesImages
+            DispatchQueue.main.async {
+                HistoryDataSource.shared.history += qrDataSources
+                playSound(for: qrDataSources)
+            }
+        }
+    }
+    
     static func scanFiles(at filePaths: [String]) {
         if filePaths.isEmpty {
             return
