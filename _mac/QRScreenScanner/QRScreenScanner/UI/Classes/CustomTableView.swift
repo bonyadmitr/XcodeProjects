@@ -1,6 +1,7 @@
 import Cocoa
 
 protocol CustomTableViewDelegate: class {
+    func didCut()
     func didCopy()
     func didDelete()
     func didEnter()
@@ -85,18 +86,31 @@ final class CustomTableView: NSTableView {
         //        }
     }
     
+    /// NSTextView.cut(_:)
+    @objc private func cut(_ sender: Any?) {
+        customDelegate?.didCut()
+    }
+    
     /// NSTextView.copy(_:)
-    @objc private func copy(_ sender: AnyObject?) {
+    @objc private func copy(_ sender: Any?) {
         customDelegate?.didCopy()
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/EnablingMenuItems.html
     override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
         //print(item)
-        if item.action == #selector(NSTextView.copy(_:)) {
+        
+        switch item.action {
+        case #selector(copy(_:)), #selector(cut(_:)):
             return !selectedRowIndexes.isEmpty
+        default:
+            return super.validateUserInterfaceItem(item)
         }
-        return super.validateUserInterfaceItem(item)
+        
+//        if item.action == #selector(copy(_:)) {
+//            return !selectedRowIndexes.isEmpty
+//        }
+//        return super.validateUserInterfaceItem(item)
     }
     
 //    private func togglePreviewPanel() {

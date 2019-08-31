@@ -110,7 +110,7 @@ final class MenuManager {
         //copyAllMenuItem.keyEquivalentModifierMask = .command
 //        menu.addItem(copyAllMenuItem)
         
-//        menu.addItem(withTitle: "Cut", action: #selector(NSTextView.cut(_:)), keyEquivalent: "x")
+        menu.addItem(withTitle: "Cut", action: #selector(NSTextView.cut(_:)), keyEquivalent: "x")
         menu.addItem(withTitle: "Copy", action: #selector(NSTextView.copy(_:)), keyEquivalent: "c")
 //        menu.addItem(withTitle: "Past", action: #selector(NSTextView.paste(_:)), keyEquivalent: "v")
         

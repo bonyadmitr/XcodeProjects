@@ -337,6 +337,11 @@ extension ViewController: NSTableViewDelegate {
 }
 
 extension ViewController: CustomTableViewDelegate {
+    func didCut() {
+        tableViewCopyItemClicked(nil)
+        tableViewDeleteItemClicked()
+    }
+    
     func didEnter() {
         actionButtonCell()
     }
