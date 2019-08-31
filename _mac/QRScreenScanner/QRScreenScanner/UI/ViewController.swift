@@ -278,8 +278,13 @@ extension ViewController: NSTableViewDataSource {
         // TODO: test set declareTypes one time
         /// https://stackoverflow.com/a/34902953/5893286
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-        NSPasteboard.general.setString(copiedText, forType: NSPasteboard.PasteboardType.string)
+        
+        /// doc: This method is the equivalent of invoking clearContents()...
+        NSPasteboard.general.declareTypes([.string], owner: nil)
+        
+        NSPasteboard.general.setString(copiedText, forType: .string)
+        
+        //NSPasteboard.general.writeObjects([copiedText as NSPasteboardWriting])
     }
     
     @objc func tableViewDeleteItemClicked() {
