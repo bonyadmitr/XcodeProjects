@@ -173,9 +173,9 @@ private extension NSWindow {
     /// same as self.init(contentViewController: vc)
     convenience init(vc: NSViewController) {
         self.init(contentRect: vc.view.frame,
-                  styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                  styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                   backing: .buffered,
-                  defer: true)
+                  defer: false)
         contentViewController = vc
         isReleasedWhenClosed = false
         
