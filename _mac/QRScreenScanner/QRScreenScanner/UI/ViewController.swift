@@ -231,13 +231,18 @@ extension ViewController: NSTableViewDataSource {
     }
     
     @objc private func actionButtonCell() {
+        
         guard tableView.selectedRow >= 0 else {
             print("double click in empty table")
             return
         }
         
-        let text = tableDataSource[tableView.selectedRow].value
-        
+        tableView.selectedRowIndexes
+            .compactMap { tableDataSource[$0].value }
+            .forEach { openInBrowser(text: $0) }
+    }
+    
+    private func openInBrowser(text: String) {
         if (text.hasPrefix("http://") || text.hasPrefix("https://")), let url = URL(string: text) {
             NSWorkspace.shared.open(url)
         } else if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
