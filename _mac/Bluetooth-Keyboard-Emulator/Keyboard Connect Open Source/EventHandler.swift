@@ -5,6 +5,7 @@ protocol EventHandlerDelegate: class {
     func quite()
 }
 
+/// modifierFlags switch https://stackoverflow.com/a/32447474/5893286
 final class EventHandler {
     
     weak var delegate: EventHandlerDelegate?

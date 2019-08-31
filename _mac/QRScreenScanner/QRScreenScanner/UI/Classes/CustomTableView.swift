@@ -32,8 +32,8 @@ final class CustomTableView: NSTableView {
         }
     }
     
-    /// https://www.corbinstreehouse.com/blog/2014/04/implementing-delete-in-an-nstableview/
-    /// https://github.com/bazelbuild/tulsi/blob/master/src/Tulsi/OptionsEditorController.swift
+    /// modifierFlags switch https://stackoverflow.com/a/32447474/5893286
+    /// NSDeleteCharacter https://github.com/bazelbuild/tulsi/blob/master/src/Tulsi/OptionsEditorController.swift
     override func keyDown(with event: NSEvent) {
         
         guard let character = event.charactersIgnoringModifiers?.first?.unicodeScalars.first, let customDelegate = customDelegate else {
