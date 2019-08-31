@@ -11,44 +11,45 @@ final class MenuManager {
         addAppMenu()
         addEditMenu()
         addWindowMenu()
+        addHelpMenu()
         
         /// call the last to add system hidden items like emojy
         NSApp.mainMenu = mainMenu
     }
     
     private func addAppMenu() {
-        let appMenu = NSMenu(title: "App")
+        let menu = NSMenu(title: "App")
         
         
-        appMenu.addItem(withTitle: "About",
+        menu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
                         keyEquivalent: "a")
             .keyEquivalentModifierMask = [.option, .shift]
         
-        appMenu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem.separator())
         
         //appMenu.addItem(withTitle: "Hide \(App.name)", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
         
-        appMenu.addItem(withTitle: "Hide Others",
+        menu.addItem(withTitle: "Hide Others",
                         action: #selector(NSApp.hideOtherApplications(_:)),
                         keyEquivalent: "")
             .keyEquivalentModifierMask = [.option, .command]
         
-        appMenu.addItem(withTitle: "Show all", action: #selector(NSApp.unhideAllApplications(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "Show all", action: #selector(NSApp.unhideAllApplications(_:)), keyEquivalent: "")
         
-        appMenu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem.separator())
         
-        appMenu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         
         
-        mainMenu.addSubmenu(menu: appMenu)
+        mainMenu.addSubmenu(menu: menu)
     }
     
     let deleteMenuItem = NSMenuItem()
     let selectAllMenuItem = NSMenuItem()
     
     private func addEditMenu() {
-        let editMenu = NSMenu(title: "Edit")
+        let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
 
         let deleteKey = String(format: "%c", NSBackspaceCharacter)
@@ -59,14 +60,14 @@ final class MenuManager {
         deleteMenuItem.keyEquivalentModifierMask = .command
 //            aboutMenuItem.target = self
 //            aboutMenuItem.action =
-        editMenu.addItem(deleteMenuItem)
+        menu.addItem(deleteMenuItem)
         
         
         selectAllMenuItem.title = "Select all"
         selectAllMenuItem.keyEquivalent = "a"
         selectAllMenuItem.keyEquivalentModifierMask = .command
         selectAllMenuItem.action = #selector(NSTableView.selectAll(_:))
-        editMenu.addItem(selectAllMenuItem)
+        menu.addItem(selectAllMenuItem)
         
         let copyAllMenuItem = NSMenuItem()
         copyAllMenuItem.title = "Copy"
@@ -74,21 +75,65 @@ final class MenuManager {
         
         copyAllMenuItem.action = NSSelectorFromString("copy:")//#selector(ViewController.copy1)
         //copyAllMenuItem.keyEquivalentModifierMask = .command
-        editMenu.addItem(copyAllMenuItem)
+        menu.addItem(copyAllMenuItem)
 
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         
-        mainMenu.addSubmenu(menu: editMenu)
+        mainMenu.addSubmenu(menu: menu)
     }
     
     private func addWindowMenu() {
-        let windowMenu = NSMenu(title: "Window")
+        let menu = NSMenu(title: "Window")
         
-        windowMenu.addItem(withTitle: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
-        windowMenu.addItem(withTitle: "Zoom", action: #selector(NSWindow.zoom(_:)), keyEquivalent: "")
-        windowMenu.addItem(withTitle: "Hide all", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
         
-        mainMenu.addSubmenu(menu: windowMenu)
+        menu.addItem(withTitle: "Minimize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m")
+        
+        menu.addItem(withTitle: "Zoom", action: #selector(NSWindow.zoom(_:)), keyEquivalent: "")
+        
+        menu.addItem(withTitle: "Hide all", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
+        
+        menu.addItem(withTitle: "Enter full screen", action: #selector(NSWindow.toggleFullScreen(_:)), keyEquivalent: "f")
+            .keyEquivalentModifierMask = [.control, .command]
+        
+        menu.addItem(withTitle: "Customize toolbar...", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
+        
+        
+        mainMenu.addSubmenu(menu: menu)
+    }
+    
+    private func addHelpMenu() {
+        let menu = NSMenu(title: "Help")
+        
+        
+        menu.addItem(withTitle: "Documentation", action: #selector(openDocumentation), keyEquivalent: "").target = self
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        menu.addItem(withTitle: "Release Notes", action: #selector(openReleaseNotes), keyEquivalent: "").target = self
+        
+        menu.addItem(withTitle: "Feedback and Bugs", action: #selector(openIssues), keyEquivalent: "").target = self
+        
+        /// "Submit feedback..."
+        menu.addItem(withTitle: "Report an Issue", action: #selector(openSubmitFeedbackPage), keyEquivalent: "").target = self
+        
+        
+        mainMenu.addSubmenu(menu: menu)
+    }
+    
+    @objc private func openSubmitFeedbackPage() {
+        App.openSubmitFeedbackPage()
+    }
+    
+    @objc private func openReleaseNotes() {
+        App.openReleaseNotes()
+    }
+    
+    @objc private func openIssues() {
+        App.openIssues()
+    }
+    
+    @objc private func openDocumentation() {
+        App.openDocumentation()
     }
     
     //    @objc private func quit() {
