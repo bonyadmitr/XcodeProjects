@@ -40,7 +40,7 @@ final class App {
         toolbarManager.addToWindow(windowsManager.window)
         
         /// set after window.toolbar set.
-        windowsManager.window.hideToolbarCustomizationPaletteItems = true
+        //windowsManager.window.hideToolbarCustomizationPaletteItems = true
         
         showWindow()
     }

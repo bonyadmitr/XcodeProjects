@@ -3,6 +3,7 @@ import Cocoa
 protocol CustomTableViewDelegate: class {
     func didCopy()
     func didDelete()
+    func didEnter()
 }
 
 // TODO: handle enter button 
@@ -44,6 +45,13 @@ final class CustomTableView: NSTableView {
         /// to prevent open https://www.orange.es/ by space key
         if character == " " {
 //            togglePreviewPanel()
+            return
+        }
+        
+        /// Enter key
+        //if event.keyCode == 36 {
+        if character == "\r" {
+            customDelegate.didEnter()
             return
         }
         

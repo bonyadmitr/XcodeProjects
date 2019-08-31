@@ -337,6 +337,10 @@ extension ViewController: NSTableViewDelegate {
 }
 
 extension ViewController: CustomTableViewDelegate {
+    func didEnter() {
+        actionButtonCell()
+    }
+    
     func didCopy() {
         tableViewCopyItemClicked(nil)
         //        guard let selectedItems = messageArrayController.selectedObjects as? [NSPasteboardWriting], !selectedItems.isEmpty else {
