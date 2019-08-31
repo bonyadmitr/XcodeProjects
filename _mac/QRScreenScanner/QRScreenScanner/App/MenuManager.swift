@@ -19,13 +19,27 @@ final class MenuManager {
     private func addAppMenu() {
         let appMenu = NSMenu(title: "App")
         
+        
         appMenu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
-                        keyEquivalent: "a").keyEquivalentModifierMask = [.option, .shift]
+                        keyEquivalent: "a")
+            .keyEquivalentModifierMask = [.option, .shift]
         
-        appMenu.addItem(withTitle: "Quit",
-                        action: #selector(NSApplication.terminate(_:)),
-                        keyEquivalent: "q")
+        appMenu.addItem(NSMenuItem.separator())
+        
+        //appMenu.addItem(withTitle: "Hide \(App.name)", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
+        
+        appMenu.addItem(withTitle: "Hide Others",
+                        action: #selector(NSApp.hideOtherApplications(_:)),
+                        keyEquivalent: "")
+            .keyEquivalentModifierMask = [.option, .command]
+        
+        appMenu.addItem(withTitle: "Show all", action: #selector(NSApp.unhideAllApplications(_:)), keyEquivalent: "")
+        
+        appMenu.addItem(NSMenuItem.separator())
+        
+        appMenu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        
         
         mainMenu.addSubmenu(menu: appMenu)
     }
