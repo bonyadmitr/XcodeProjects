@@ -9,6 +9,7 @@ final class MenuManager {
     func setup() {
         /// first menu is hidden under app name
         addAppMenu()
+        addFileMenu()
         addEditMenu()
         addWindowMenu()
         addHelpMenu()
@@ -40,6 +41,33 @@ final class MenuManager {
         menu.addItem(NSMenuItem.separator())
         
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        
+        
+        mainMenu.addSubmenu(menu: menu)
+    }
+        
+    private func addFileMenu() {
+        let menu = NSMenu(title: "File")
+        
+        
+        menu.addItem(withTitle: "Open…", action: #selector(NSDocumentController.openDocument(_:)), keyEquivalent: "o")
+        
+        let openRecentMenu = NSMenu(title: "Open Recent")
+        
+        openRecentMenu.addItem(NSMenuItem.separator())
+        
+        openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
+        
+        menu.addSubmenu(menu: openRecentMenu)
+        
+        
+        
+        //        menu.addItem(withTitle: "Release Notes", action: #selector(openReleaseNotes), keyEquivalent: "").target = self
+        //
+        //        menu.addItem(withTitle: "Feedback and Bugs", action: #selector(openIssues), keyEquivalent: "").target = self
+        //
+        //        /// "Submit feedback..."
+        //        menu.addItem(withTitle: "Report an Issue", action: #selector(openSubmitFeedbackPage), keyEquivalent: "").target = self
         
         
         mainMenu.addSubmenu(menu: menu)
