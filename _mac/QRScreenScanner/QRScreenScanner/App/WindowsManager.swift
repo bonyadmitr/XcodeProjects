@@ -87,6 +87,32 @@ extension WindowsManager: NSWindowDelegate {
 
 final class Window: NSWindow {
     
+    @objc private func openDocument(_ sender: Any?) {
+        
+        /// code https://stackoverflow.com/a/57391724/5893286
+        let openPanel = NSOpenPanel()
+        openPanel.canChooseFiles = true
+        openPanel.allowsMultipleSelection = true
+        openPanel.canChooseDirectories = false
+        openPanel.canCreateDirectories = false
+        openPanel.allowedFileTypes = NSImage.imageTypes
+        
+        /// not shown in NSOpenPanel
+        //openPanel.title = "Select an image"
+        
+        openPanel.beginSheetModal(for: self) { response in
+            
+            /// same: response.rawValue == NSFileHandlingPanelOKButton
+            if response == .OK {
+                let filePaths = openPanel.urls.compactMap { $0.path }
+                QRService.scanFiles(at: filePaths)
+            }
+            
+            //openPanel.close()
+        }
+
+    }
+    
     private var savedToolbarMenuItems = [NSMenuItem]()
     
     private lazy var customizationPaletteItems = [NSMenuItem(title: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")]
