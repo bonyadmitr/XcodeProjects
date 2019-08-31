@@ -22,7 +22,12 @@ final class StatusItemManager {
     }
     
     @objc private func clickStatusItem() {
-        QRService.scanWindows()
+        QRService.scanWindowsDelayed()
+//        windowsAction()
     }
 
+//    @objc private func windowsAction() {
+//        NSObject.cancelPreviousPerformRequests(withTarget: QRService.self, selector: #selector(QRService.scanWindows), object: nil)
+//        QRService.perform(#selector(QRService.scanWindows), with: nil, afterDelay: 0.1)
+//    }
 }
