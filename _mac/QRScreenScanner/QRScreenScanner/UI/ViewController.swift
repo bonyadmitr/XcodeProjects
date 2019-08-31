@@ -342,6 +342,77 @@ extension ViewController: NSTableViewDelegate {
 }
 
 extension ViewController: CustomTableViewDelegate {
+    func didPaste() {
+        
+        /// from finder
+//        Optional([[__C.NSPasteboardType(_rawValue: public.file-url), __C.NSPasteboardType(_rawValue: com.apple.icns), __C.NSPasteboardType(_rawValue: public.utf16-external-plain-text), __C.NSPasteboardType(_rawValue: public.utf8-plain-text)]])
+        
+        /// google chrome, copy image
+//["public.tiff", "public.html"]
+        // copy address, copy link
+//        public.utf8-plain-text
+        
+        /// safari
+//Optional([["public.tiff", "dyn.ah62d4rv4gu8zs3pcnzme2641rf4guzdmsv0gn64uqm10c6xenv61a3k", "dyn.ah62d4rv4gu8yc6durvwwaznwmuuha2pxsvw0e55bsmwca7d3sbwu", "public.url", "public.url-name", "public.utf8-plain-text", "com.apple.flat-rtfd", "com.apple.webarchive"]])
+        // copy address, copy link
+//        ["dyn.ah62d4rv4gu8zs3pcnzme2641rf4guzdmsv0gn64uqm10c6xenv61a3k", "dyn.ah62d4rv4gu8yc6durvwwaznwmuuha2pxsvw0e55bsmwca7d3sbwu", "public.url", "public.url-name", "public.utf8-plain-text"]
+        
+        
+        /// finder
+//        - 0 : "public.file-url"
+//        - 1 : "com.apple.icns"
+//        - 2 : "public.utf16-external-plain-text"
+//        - 3 : "public.utf8-plain-text"
+        
+        //NSPasteboard.general.data(forType: .fileURL)
+//        let data = NSPasteboard.general.data(forType: .backwardsCompatibleFileURL)!
+//        print( String(data: data, encoding: .utf8) )
+        
+        //print(NSPasteboard.general.pasteboardItems?.compactMap { $0.types.compactMap{ $0.rawValue} })
+//        print(NSPasteboard.general.pasteboardItems?.compactMap { $0.types.compactMap{ $0.rawValue} })
+//
+//        guard let items = NSPasteboard.general.pasteboardItems else {
+//            return
+//        }
+//
+//        for item in items {
+//
+//        }
+//        NSPasteboard.general.readObjects(forClasses: <#T##[AnyClass]#>, options: <#T##[NSPasteboard.ReadingOptionKey : Any]?#>)
+        
+        let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes: NSImage.imageTypes]
+        
+        guard
+            let urls = NSPasteboard.general.readObjects(forClasses: [NSURL.self],
+                                                             options: filteringOptions) as? [URL],
+            let images = NSPasteboard.general.readObjects(forClasses: [NSImage.self],
+                                                               options: filteringOptions) as? [NSImage]
+        else {
+            assertionFailure()
+            return
+        }
+        
+        //"public.utf8-plain-text"
+        //NSPasteboard.PasteboardType(kUTTypeUTF8PlainText as String)
+        
+//        NSPasteboard.general.pasteboardItems!.first!.types
+//        NSPasteboard.general.pasteboardItems?.compactMap { $0.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text") ) }
+        //NSPasteboard.general.pasteboardItems!.first!.types.compactMap { $0.rawValue }
+        
+        //assert(!urls.isEmpty || !images.isEmpty, "one item must exists here. filtered by isAllowedDraging")
+        let filePaths = urls.map { $0.path }
+        //print(filePaths.count, images.count)
+        QRService.scan(filesAt: filePaths, images: images)
+//        QRService.scanFiles(at: filePaths)
+//        QRService.scanImages(images)
+        
+//        let urls = NSPasteboard.general.pasteboardItems?.compactMap { $0.string(forType: .backwardsCompatibleFileURL) }
+//        let urls2 = NSPasteboard.general.pasteboardItems?.compactMap { $0.data(forType: .tiff) }
+////        NSPasteboard.general.pasteboardItems?.compactMap { $0.string(forType: NSPasteboard.PasteboardType(kUTTypeImage as String)) }
+//        print(urls)
+//        print(urls2)
+    }
+    
     func didCut() {
         tableViewCopyItemClicked(nil)
         tableViewDeleteItemClicked()

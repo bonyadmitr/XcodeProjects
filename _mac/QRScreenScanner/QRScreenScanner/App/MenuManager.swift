@@ -112,7 +112,7 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Cut", action: #selector(NSTextView.cut(_:)), keyEquivalent: "x")
         menu.addItem(withTitle: "Copy", action: #selector(NSTextView.copy(_:)), keyEquivalent: "c")
-//        menu.addItem(withTitle: "Past", action: #selector(NSTextView.paste(_:)), keyEquivalent: "v")
+        menu.addItem(withTitle: "Paste", action: #selector(NSTextView.paste(_:)), keyEquivalent: "v")
         
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         
