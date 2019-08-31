@@ -87,6 +87,7 @@ extension WindowsManager: NSWindowDelegate {
 
 final class Window: NSWindow {
     
+    /// NSDocumentController.openDocument(_:)
     @objc private func openDocument(_ sender: Any?) {
         
         /// code https://stackoverflow.com/a/57391724/5893286
@@ -251,3 +252,13 @@ private extension NSWindow {
 //        }
 //    }
 //}
+
+extension NSSavePanel {
+    func beginSheetModal(for window: NSWindow?, completionHandler handler: @escaping (NSApplication.ModalResponse) -> Void) {
+        if let window = window {
+            beginSheetModal(for: window, completionHandler: handler)
+        } else {
+            begin(completionHandler: handler)
+        }
+    }
+}
