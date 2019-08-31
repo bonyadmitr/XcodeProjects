@@ -135,7 +135,7 @@ class DropViewByExtensions: NSView {
     
     fileprivate func isAllowedExtension(in sender: NSDraggingInfo) -> Bool {
         /// readObjects https://stackoverflow.com/a/51344295/5893286
-        guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self],options: nil) as? [URL] else {
+        guard let dropUrls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL] else {
             return false
         }
         let dropFileExtensions = dropUrls.map { $0.pathExtension }
@@ -198,6 +198,7 @@ extension NSPasteboard.PasteboardType {
             return .fileURL
             //return .URL
         } else {
+            /// kUTTypeFileURL == "public.file-url"
             return NSPasteboard.PasteboardType(kUTTypeFileURL as String)
             //return NSPasteboard.PasteboardType(kUTTypeURL as String)
         }
