@@ -85,14 +85,15 @@ final class CustomTableView: NSTableView {
         //        }
     }
     
-    @objc func copy(_ sender: AnyObject?) {
+    /// NSTextView.copy(_:)
+    @objc private func copy(_ sender: AnyObject?) {
         customDelegate?.didCopy()
     }
     
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/EnablingMenuItems.html
     override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        print(item)
-        if item.action == #selector(copy(_:)) {
+        //print(item)
+        if item.action == #selector(NSTextView.copy(_:)) {
             return !selectedRowIndexes.isEmpty
         }
         return super.validateUserInterfaceItem(item)
