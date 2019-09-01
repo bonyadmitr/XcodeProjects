@@ -102,12 +102,18 @@ final class CustomTableView: NSTableView {
         customDelegate?.didPaste()
     }
     
+    /// NSTextView.delete(_:)
+    @objc private func delete(_ sender: Any?) {
+        customDelegate?.didDelete()
+    }
+    
     /// https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MenuList/Articles/EnablingMenuItems.html
     override func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        //print(item)
         
         switch item.action {
-        case #selector(copy(_:)), #selector(cut(_:)):
+        case #selector(copy(_:)),
+             #selector(cut(_:)),
+             #selector(delete(_:)):
             return !selectedRowIndexes.isEmpty
         default:
             return super.validateUserInterfaceItem(item)

@@ -79,17 +79,25 @@ final class MenuManager {
     private func addEditMenu() {
         let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
+        
+        
+        menu.addItem(withTitle: "Undo", action: #selector(UndoManager.undo), keyEquivalent: "z")
+        
+        menu.addItem(withTitle: "Redo", action: #selector(UndoManager.redo), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
+        
+        // TODO: clear separator
+        menu.addItem(.separator())
 
         let deleteKey = String(format: "%c", NSBackspaceCharacter)
         //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
         
         
-        //menu.addItem(withTitle: "Delete", action: #selector(NSTextView.delete(_:)), keyEquivalent: deleteKey)
+        menu.addItem(withTitle: "Delete", action: #selector(NSTextView.delete(_:)), keyEquivalent: deleteKey)
         
-        deleteMenuItem.title = "Delete"
-        deleteMenuItem.keyEquivalent = deleteKey
-        deleteMenuItem.keyEquivalentModifierMask = .command
-        menu.addItem(deleteMenuItem)
+//        deleteMenuItem.title = "Delete"
+//        deleteMenuItem.keyEquivalent = deleteKey
+//        deleteMenuItem.keyEquivalentModifierMask = .command
+//        menu.addItem(deleteMenuItem)
         
 //        menu.addItem(withTitle: "Select all", action: #selector(NSTableView.selectAll(_:)), keyEquivalent: "a")
         selectAllMenuItem.title = "Select all"
