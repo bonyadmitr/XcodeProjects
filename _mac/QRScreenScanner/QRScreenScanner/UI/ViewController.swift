@@ -56,6 +56,10 @@ class ViewController: NSViewController {
         view = NSView(frame: frame)
     }
     
+    deinit {
+        undoManager?.removeAllActions(withTarget: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
