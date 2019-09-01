@@ -2,6 +2,10 @@ import Cocoa
 
 final class WindowsManager: NSObject {
     
+    /// UndoManager created in window automaticaly.
+    /// pass it in NSWindowDelegate windowWillReturnUndoManager
+    //private let undoManager = UndoManager()
+    
 //    override init() {
 //        super.init()
 //    }
@@ -37,6 +41,7 @@ final class WindowsManager: NSObject {
 }
 
 extension WindowsManager: NSWindowDelegate {
+    
     func window(_ window: NSWindow, willPositionSheet sheet: NSWindow, using rect: NSRect) -> NSRect {
         
         if let window = window as? Window,
@@ -48,6 +53,10 @@ extension WindowsManager: NSWindowDelegate {
         
         return rect
     }
+    
+    //func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
+    //    return undoManager
+    //}
     
     /// problem https://stackoverflow.com/a/16027120/5893286
     //func window(_ window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplication.PresentationOptions = []) -> NSApplication.PresentationOptions {
