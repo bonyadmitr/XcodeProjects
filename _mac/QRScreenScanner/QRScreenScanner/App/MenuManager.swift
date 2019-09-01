@@ -80,9 +80,9 @@ final class MenuManager {
         let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
         
-        menu.addItem(withTitle: "Undo", action: NSSelectorFromString("undo:"), keyEquivalent: "z")
+        menu.addItem(withTitle: "Undo", action: #selector(MenuItems.undo(_:)), keyEquivalent: "z")
 
-        menu.addItem(withTitle: "Redo", action: NSSelectorFromString("redo:"), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
+        menu.addItem(withTitle: "Redo", action: #selector(MenuItems.redo(_:)), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
         
         // TODO: clear separator
         menu.addItem(.separator())
@@ -203,5 +203,18 @@ extension NSMenu {
     func addSubmenu(menu: NSMenu) {
         let menuItem = addItem(withTitle: menu.title, action: nil, keyEquivalent: "")
         setSubmenu(menu, for: menuItem)
+    }
+}
+
+private final class MenuItems {
+
+    /// need instead of NSSelectorFromString("undo:")
+    @objc static func redo(_: Any?) {
+        assertionFailure("need instead of NSSelectorFromString(\"undo:\")")
+    }
+    
+    /// need instead of NSSelectorFromString("undo:")
+    @objc static func undo(_: Any?) {
+        assertionFailure("need instead of NSSelectorFromString(\"undo:\")")
     }
 }
