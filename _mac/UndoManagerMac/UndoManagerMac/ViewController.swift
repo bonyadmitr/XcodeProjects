@@ -57,4 +57,9 @@ class ViewController: NSViewController {
         some = value
     }
     
+    deinit {
+        /// doc https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UndoArchitecture/Articles/CleaningUndoStack.html
+        undoManager?.removeAllActions(withTarget: self)
+        //undoManager?.removeAllActions()
+    }
 }
