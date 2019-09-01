@@ -31,7 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
-/// need instead of NSSelectorFromString("undo:")
+/// needs instead of NSSelectorFromString("undo:")
+/// with '#selector(UndoManager.undo)' will not work undoManager.setActionName. it will be like any custom action
 @objc private protocol MenuItems {
     func redo(_: Any?)
     func undo(_: Any?)
