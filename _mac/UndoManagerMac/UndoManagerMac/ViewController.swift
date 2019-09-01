@@ -45,8 +45,9 @@ class ViewController: NSViewController {
         })
         
         /// automatically setActionName https://stackoverflow.com/a/7049345/5893286
-        undoManager?.setActionName("Delete")
+        undoManager?.setActionName("NewValue")
         
+        /// different names for undo/redo
         //if undoManager?.isUndoing == false {
         //    undoManager?.setActionName("Delete")
         //} else {
