@@ -45,12 +45,6 @@ class ViewController: NSViewController {
         return dateFormatter
     }()
     
-    /// example https://medium.com/cocoaacademymag/undomanager-in-swift-5-with-simple-example-8c791e231b87
-    /// example https://samwize.com/2019/02/16/undomanager/
-    /// big example https://www.raywenderlich.com/5229-undomanager-tutorial-how-to-implement-with-swift-value-types
-    /// simple example https://stackoverflow.com/a/32596899/5893286
-    /// doc https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UndoArchitecture/UndoArchitecture.html
-    
     override func loadView() {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
         view = NSView(frame: frame)
