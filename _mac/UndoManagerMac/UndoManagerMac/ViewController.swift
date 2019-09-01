@@ -39,11 +39,19 @@ class ViewController: NSViewController {
         //undoManager?.registerUndo(withTarget: self, selector: #selector(setObject(value:)), object: some)
         
         /// or #2
+        /// doc: 'this' in 'handler' - unowned reference to the target to prevent retain cycles
         undoManager?.registerUndo(withTarget: self, handler: { [old = some] this in
             this.setObject(value: old)
         })
         
+        /// automatically setActionName https://stackoverflow.com/a/7049345/5893286
         undoManager?.setActionName("Delete")
+        
+        //if undoManager?.isUndoing == false {
+        //    undoManager?.setActionName("Delete")
+        //} else {
+        //    undoManager?.setActionName("Restore")
+        //}
         
         some = value
     }
