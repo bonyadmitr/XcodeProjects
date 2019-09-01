@@ -45,6 +45,12 @@ class ViewController: NSViewController {
         return dateFormatter
     }()
     
+    private let _undoManager = UndoManager()
+    
+    override var undoManager: UndoManager? {
+        return _undoManager
+    }
+    
     override func loadView() {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
         view = NSView(frame: frame)
@@ -298,6 +304,7 @@ extension ViewController: NSTableViewDataSource {
         if tableView.clickedRow >= 0 {
             if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
                 tableDataSource.remove(at: tableView.selectedRowIndexes)
+                
                 if tableView.selectedRowIndexes.count > 1 {
                     tableView.deselectAll(nil)
                 }
@@ -305,11 +312,44 @@ extension ViewController: NSTableViewDataSource {
                 tableDataSource.remove(at: tableView.clickedRow)
             }
         } else {
+//            undoManager?.registerUndo(withTarget: self, handler: { [old = tableDataSource] self1 in
+//                self1.tableDataSource = old
+//                HistoryDataSource.shared.history = old
+//                self1.tableView.reloadData()
+//
+//                self1.undoManager?.registerUndo(withTarget: self, handler: { [old2 = old] self2 in
+//                    self2.tableDataSource = old2
+//                    HistoryDataSource.shared.history = old2
+//                    self2.tableView.reloadData()
+//                })
+//                self1.undoManager?.setActionName("Restore")
+//
+//            })
+//            undoManager?.setActionName("Delete")
+            
             tableDataSource.remove(at: tableView.selectedRowIndexes)
             if tableView.selectedRowIndexes.count > 1 {
                 tableView.deselectAll(nil)
             }
         }
+        
+        setupNewTableDataSource(tableDataSource)
+//        HistoryDataSource.shared.history = tableDataSource
+//        tableView.reloadData()
+    }
+    
+    private func setupNewTableDataSource(_ tableDataSource: [History]) {
+//        undoManager?.registerUndo(withTarget: self, handler: { [old2 = tableDataSource] self2 in
+//            self2.tableDataSource = old2
+//            HistoryDataSource.shared.history = old2
+//            self2.tableView.reloadData()
+//        })
+//        undoManager?.setActionName("Delete")
+        undoManager?.registerUndo(withTarget: self, handler: { [old = HistoryDataSource.shared.history] unownedSelf in
+            unownedSelf.setupNewTableDataSource(old)
+            unownedSelf.undoManager?.setActionName("Restore")
+        })
+        undoManager?.setActionName("Delete")
         
         HistoryDataSource.shared.history = tableDataSource
         tableView.reloadData()
@@ -441,6 +481,29 @@ extension ViewController: CustomTableViewDelegate {
     func didDelete() {
         tableViewDeleteItemClicked()
     }
+    
+    @objc private func undo() {
+        undoManager?.undo()
+    }
+    
+    @objc private func redo() {
+        undoManager?.redo()
+    }
+}
+
+extension ViewController: NSUserInterfaceValidations {
+    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        switch item.action {
+        case #selector(undo):
+            return undoManager?.canUndo == true
+        case #selector(redo):
+            return undoManager?.canRedo == true
+        default:
+            return false
+        }
+    }
+    
+    
 }
 
 /// needs import Quartz.QuickLookUI
