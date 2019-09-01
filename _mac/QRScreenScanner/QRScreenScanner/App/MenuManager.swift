@@ -218,3 +218,16 @@ private final class MenuItems {
         assertionFailure("need instead of NSSelectorFromString(\"undo:\")")
     }
 }
+
+/// set actions in IB and comment this extension
+//private extension NSResponder {
+//
+//    /// to fix IB bug. redo not showing in FirstResponder.
+//    @IBAction func redo(_: Any?) {
+//        assertionFailure()
+//    }
+//
+////    @IBAction func undo(_: Any?) {
+////        assertionFailure()
+////    }
+//}
