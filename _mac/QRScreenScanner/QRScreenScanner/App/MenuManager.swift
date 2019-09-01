@@ -80,10 +80,9 @@ final class MenuManager {
         let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
         
-        
-        menu.addItem(withTitle: "Undo", action: #selector(UndoManager.undo), keyEquivalent: "z")
-        
-        menu.addItem(withTitle: "Redo", action: #selector(UndoManager.redo), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
+        menu.addItem(withTitle: "Undo", action: NSSelectorFromString("undo:"), keyEquivalent: "z")
+
+        menu.addItem(withTitle: "Redo", action: NSSelectorFromString("redo:"), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
         
         // TODO: clear separator
         menu.addItem(.separator())

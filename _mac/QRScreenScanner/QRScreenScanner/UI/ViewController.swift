@@ -50,11 +50,6 @@ class ViewController: NSViewController {
     /// big example https://www.raywenderlich.com/5229-undomanager-tutorial-how-to-implement-with-swift-value-types
     /// simple example https://stackoverflow.com/a/32596899/5893286
     /// doc https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UndoArchitecture/UndoArchitecture.html
-    private let _undoManager = UndoManager()
-    
-    override var undoManager: UndoManager? {
-        return _undoManager
-    }
     
     override func loadView() {
         let frame = CGRect(x: 0, y: 0, width: 500, height: 300)
@@ -69,12 +64,15 @@ class ViewController: NSViewController {
         
         /// call the last to add view on the top
         addDropView()
+        
+        assert(NSApp.keyWindow == nil && undoManager == nil)
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        //NSApp.keyWindow?.firstResponder
+        /// NSApp.keyWindow != nil after window.makeKeyAndOrderFront
+        assert(NSApp.keyWindow != nil && undoManager != nil)
         
         let deleteMenuItem = App.shared.menuManager.deleteMenuItem
         deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
@@ -486,29 +484,6 @@ extension ViewController: CustomTableViewDelegate {
     func didDelete() {
         tableViewDeleteItemClicked()
     }
-    
-    @objc private func undo() {
-        undoManager?.undo()
-    }
-    
-    @objc private func redo() {
-        undoManager?.redo()
-    }
-}
-
-extension ViewController: NSUserInterfaceValidations {
-    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-        switch item.action {
-        case #selector(undo):
-            return undoManager?.canUndo == true
-        case #selector(redo):
-            return undoManager?.canRedo == true
-        default:
-            return false
-        }
-    }
-    
-    
 }
 
 /// needs import Quartz.QuickLookUI
