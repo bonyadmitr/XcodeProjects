@@ -206,17 +206,10 @@ extension NSMenu {
     }
 }
 
-private final class MenuItems {
-
-    /// need instead of NSSelectorFromString("undo:")
-    @objc static func redo(_: Any?) {
-        assertionFailure("need instead of NSSelectorFromString(\"undo:\")")
-    }
-    
-    /// need instead of NSSelectorFromString("undo:")
-    @objc static func undo(_: Any?) {
-        assertionFailure("need instead of NSSelectorFromString(\"undo:\")")
-    }
+/// need instead of NSSelectorFromString("undo:")
+@objc private protocol MenuItems {
+    func redo(_: Any?)
+    func undo(_: Any?)
 }
 
 /// set actions in IB and comment this extension
