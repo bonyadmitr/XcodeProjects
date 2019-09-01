@@ -212,10 +212,11 @@ extension NSMenu {
     func undo(_: Any?)
 }
 
-/// set actions in IB and comment this extension
+/// to fix IB bug. redo not showing in FirstResponder.
+/// if removed actions from undo/redo menu items.
+/// set actions in IB and comment this extension.
 //private extension NSResponder {
 //
-//    /// to fix IB bug. redo not showing in FirstResponder.
 //    @IBAction func redo(_: Any?) {
 //        assertionFailure()
 //    }

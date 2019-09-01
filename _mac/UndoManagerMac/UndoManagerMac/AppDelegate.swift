@@ -36,3 +36,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func redo(_: Any?)
     func undo(_: Any?)
 }
+
+/// to fix IB bug. redo not showing in FirstResponder.
+/// if removed actions from undo/redo menu items.
+/// set actions in IB and comment this extension.
+//private extension NSResponder {
+//
+//    @IBAction func redo(_: Any?) {
+//        assertionFailure()
+//    }
+//
+////    @IBAction func undo(_: Any?) {
+////        assertionFailure()
+////    }
+//}
