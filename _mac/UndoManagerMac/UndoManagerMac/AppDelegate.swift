@@ -19,8 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         editMenu.items.removeFirst()
         editMenu.items.removeFirst()
         
-        editMenu.insertItem(withTitle: "Undo", action: #selector(MenuItems.undo), keyEquivalent: "z", at: 0)
-        editMenu.insertItem(withTitle: "Redo", action: #selector(MenuItems.redo), keyEquivalent: "z", at: 1).keyEquivalentModifierMask = [.shift, .command]
+        editMenu.insertItem(withTitle: "Undo", action: #selector(EditMenuActions.undo), keyEquivalent: "z", at: 0)
+        editMenu.insertItem(withTitle: "Redo", action: #selector(EditMenuActions.redo), keyEquivalent: "z", at: 1).keyEquivalentModifierMask = [.shift, .command]
         
     }
 
@@ -39,7 +39,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 /// 
 /// needs instead of NSSelectorFromString("undo:")
 /// with '#selector(UndoManager.undo)' will not work undoManager.setActionName. it will be like any custom action
-@objc private protocol MenuItems {
+/// these aren't declared anywhere
+@objc private protocol EditMenuActions {
     func redo(_: Any?)
     func undo(_: Any?)
 }

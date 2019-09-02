@@ -93,9 +93,9 @@ final class MenuManager {
         let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
         
-        menu.addItem(withTitle: "Undo", action: #selector(MenuItems.undo(_:)), keyEquivalent: "z")
+        menu.addItem(withTitle: "Undo", action: #selector(EditMenuActions.undo(_:)), keyEquivalent: "z")
 
-        menu.addItem(withTitle: "Redo", action: #selector(MenuItems.redo(_:)), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
+        menu.addItem(withTitle: "Redo", action: #selector(EditMenuActions.redo(_:)), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
         
         // TODO: clear separator
         menu.addItem(.separator())
@@ -228,7 +228,8 @@ extension NSMenu {
 /// 
 /// needs instead of NSSelectorFromString("undo:")
 /// with '#selector(UndoManager.undo)' will not work undoManager.setActionName. it will be like any custom action
-@objc private protocol MenuItems {
+/// these aren't declared anywhere
+@objc private protocol EditMenuActions {
     func redo(_: Any?)
     func undo(_: Any?)
 }
