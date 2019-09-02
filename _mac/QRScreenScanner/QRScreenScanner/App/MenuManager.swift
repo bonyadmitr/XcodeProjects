@@ -79,13 +79,14 @@ final class MenuManager {
     let deleteMenuItem = NSMenuItem()
     let selectAllMenuItem = NSMenuItem()
     
+    /// instead of .keyEquivalentModifierMask = [.shift, .command] use Uppercase letter
     private func addEditMenu() {
         let menu = NSMenu(title: "Edit")
         //editMenu.autoenablesItems = false
         
         menu.addItem(withTitle: "Undo", action: #selector(EditMenuActions.undo(_:)), keyEquivalent: "z")
 
-        menu.addItem(withTitle: "Redo", action: #selector(EditMenuActions.redo(_:)), keyEquivalent: "z").keyEquivalentModifierMask = [.shift, .command]
+        menu.addItem(withTitle: "Redo", action: #selector(EditMenuActions.redo(_:)), keyEquivalent: "Z")
         
         // TODO: clear separator
         menu.addItem(.separator())
@@ -94,7 +95,7 @@ final class MenuManager {
         //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
         
         
-        menu.addItem(withTitle: "Delete", action: #selector(NSTextView.delete(_:)), keyEquivalent: deleteKey)
+        menu.addItem(withTitle: "Delete", action: #selector(NSText.delete(_:)), keyEquivalent: deleteKey)
         
 //        deleteMenuItem.title = "Delete"
 //        deleteMenuItem.keyEquivalent = deleteKey
@@ -105,7 +106,7 @@ final class MenuManager {
         selectAllMenuItem.title = "Select all"
         selectAllMenuItem.keyEquivalent = "a"
         selectAllMenuItem.keyEquivalentModifierMask = .command
-        selectAllMenuItem.action = #selector(NSTableView.selectAll(_:))
+        selectAllMenuItem.action = #selector(NSText.selectAll(_:))
         menu.addItem(selectAllMenuItem)
         
         
@@ -120,9 +121,9 @@ final class MenuManager {
         //copyAllMenuItem.keyEquivalentModifierMask = .command
 //        menu.addItem(copyAllMenuItem)
         
-        menu.addItem(withTitle: "Cut", action: #selector(NSTextView.cut(_:)), keyEquivalent: "x")
-        menu.addItem(withTitle: "Copy", action: #selector(NSTextView.copy(_:)), keyEquivalent: "c")
-        menu.addItem(withTitle: "Paste", action: #selector(NSTextView.paste(_:)), keyEquivalent: "v")
+        menu.addItem(withTitle: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x")
+        menu.addItem(withTitle: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c")
+        menu.addItem(withTitle: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v")
         
 //            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
         
