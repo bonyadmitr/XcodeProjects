@@ -143,7 +143,10 @@ final class MenuManager {
         menu.addItem(withTitle: "Enter full screen", action: #selector(NSWindow.toggleFullScreen(_:)), keyEquivalent: "f")
             .keyEquivalentModifierMask = [.control, .command]
         
-        menu.addItem(withTitle: "Customize toolbar...", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
+        menu.addItem(withTitle: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
+        
+        /// for automatic title change (Show/Hide) set "Show Toolbar" or "Hide Toolbar"
+        menu.addItem(withTitle: "Show Toolbar", action:#selector(NSWindow.toggleToolbarShown(_:)), keyEquivalent:"t").keyEquivalentModifierMask = [.command, .option]
         
         
         mainMenu.addSubmenu(menu: menu)
