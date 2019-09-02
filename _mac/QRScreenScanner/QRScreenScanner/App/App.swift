@@ -14,6 +14,10 @@ import Cocoa
 // TODO: more actions in edit menu
 // TODO: feedback button
 
+// TODO: about app. customization, hot keys
+// TODO: developer apps menu item and link in about app
+// TODO: others from Settings app
+
 // TODO: view bases tableview
 // TODO: delete button in table
 // TODO: multiline text
