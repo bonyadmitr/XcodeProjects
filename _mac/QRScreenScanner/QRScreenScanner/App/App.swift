@@ -114,4 +114,32 @@ extension App {
         NSWorkspace.shared.open(url)
     }
     
+    static func sendEmailFeedback() {
+        let message = """
+        
+        ---
+        \(App.name) \(App.versionWithBuild)
+        macOS \(System.osVersion)
+        \(System.hardwareModel)
+        """
+        
+        let devEmail = "zdaecq@gmail.com"
+        openEmail(message: message, subject: "\(name) feedback", to: [devEmail])
+    }
+    
+    /// Send email https://stackoverflow.com/a/46342268/5893286
+    /// Doc https://developer.apple.com/documentation/appkit/nssharingservice
+    /// Custom https://medium.com/@hawkfalcon/creating-a-custom-macos-sharing-service-in-swift-e7e0e46cbdd3
+    static func openEmail(message: String,
+                          subject: String,
+                          to emails: [String]) {
+        guard let service = NSSharingService(named: .composeEmail) else {
+            assertionFailure()
+            return
+        }
+        service.recipients = emails
+        service.subject = subject
+        service.perform(withItems: [message])
+        
+    }
 }

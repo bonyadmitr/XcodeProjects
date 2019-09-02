@@ -144,6 +144,8 @@ final class MenuManager {
         /// "Submit feedback..."
         menu.addItem(withTitle: "Report an Issue", action: #selector(openSubmitFeedbackPage), keyEquivalent: "").target = self
         
+        menu.addItem(withTitle: "Write E-mail", action: #selector(openEmail), keyEquivalent: "").target = self
+        
         
         mainMenu.addSubmenu(menu: menu)
     }
@@ -162,6 +164,10 @@ final class MenuManager {
     
     @objc private func openDocumentation() {
         App.openDocumentation()
+    }
+    
+    @objc private func openEmail() {
+        App.sendEmailFeedback()
     }
     
     //    @objc private func quit() {
