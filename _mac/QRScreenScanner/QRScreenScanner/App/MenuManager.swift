@@ -6,6 +6,9 @@ final class MenuManager {
     
     private let mainMenu = NSMenu(title: "Main")
     
+    /// swift menu https://github.com/LeafPlayer/Leaf/blob/7ded5d4676df4d1081c625cd951b63ceb699c20b/Leaf/MainMenu.swift
+    /// NiblessMenu swift project https://lapcatsoftware.com/articles/working-without-a-nib-part-10.html
+    /// links https://github.com/hammackj/niblesscocoa
     func setup() {
 
         /// first menu is hidden under app name
