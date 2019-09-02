@@ -10,8 +10,12 @@ import Cocoa
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func applicationWillFinishLaunching(_ notification: Notification) {
         App.shared.start()
+    }
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {}
@@ -23,6 +27,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             sender.windows.forEach { $0.makeKeyAndOrderFront(self) }
         }
         
+        return true
+    }
+    
+    /// doc: If the user started up the application by double-clicking a file, the delegate receives the application(_:openFile:) message before receiving applicationDidFinishLaunching(_:). (applicationWillFinishLaunching(_:) is sent before application(_:openFile:).)
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         return true
     }
 }

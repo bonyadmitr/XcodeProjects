@@ -7,6 +7,7 @@ final class MenuManager {
     private let mainMenu = NSMenu(title: "Main")
     
     func setup() {
+
         /// first menu is hidden under app name
         addAppMenu()
         addFileMenu()
@@ -52,12 +53,18 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Open…", action: #selector(NSDocumentController.openDocument(_:)), keyEquivalent: "o")
         
+        //ProcessInfo.processInfo.processName
+        //NSApp.setActivationPolicy(.regular)
         
-        let openRecentMenu = menu.createSubmenu(title: "Open Recent")
+        let openRecentMenu = NSMenu(title: "Open Recent")
         
-        openRecentMenu.addItem(NSMenuItem.separator())
+        openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
+        let menuItem = menu.addItem(withTitle: "Open Recent", action: nil, keyEquivalent: "")
+        menuItem.submenu = openRecentMenu
         
-        openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
+        /// don't need
+        //openRecentMenu.addItem(.separator())
+        //openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
         
         
         //        menu.addItem(withTitle: "Release Notes", action: #selector(openReleaseNotes), keyEquivalent: "").target = self

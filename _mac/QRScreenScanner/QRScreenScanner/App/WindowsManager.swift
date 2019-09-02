@@ -114,6 +114,9 @@ final class Window: NSWindow {
             
             /// same: response.rawValue == NSFileHandlingPanelOKButton
             if response == .OK {
+                openPanel.urls.forEach { NSDocumentController.shared.noteNewRecentDocumentURL($0) }
+                
+                //noteNewRecentDocumentURL(URL(fileURLWithPath: filePath))
                 let filePaths = openPanel.urls.compactMap { $0.path }
                 QRService.scanFiles(at: filePaths)
             }
