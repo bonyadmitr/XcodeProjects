@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  QRScreenScanner
-//
-//  Created by Bondar Yaroslav on 7/23/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import Cocoa
 
 class ViewController: NSViewController {
@@ -71,21 +63,7 @@ class ViewController: NSViewController {
         
         /// NSApp.keyWindow != nil after window.makeKeyAndOrderFront
         assert(NSApp.keyWindow != nil && undoManager != nil)
-        
-//        let deleteMenuItem = App.shared.menuManager.deleteMenuItem
-//        deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
-//        deleteMenuItem.target = self
-        
-//        let selectAllMenuItem = App.shared.menuManager.selectAllMenuItem
-//        selectAllMenuItem.action = #selector(NSTableView.selectAll)
-//        selectAllMenuItem.target = tableView
-        
-//        becomeFirstResponder()
     }
-    
-//    @objc func copy1() {
-//
-//    }
     
     private func addTableView() {
         /// https://stackoverflow.com/a/27747282/5893286
