@@ -34,6 +34,7 @@ final class App {
     let toolbarManager = ToolbarManager()
     let windowsManager = WindowsManager()
     
+    /// should be called before applicationDidFinishLaunching. (more at 'openRecentMenu')
     func start() {
         menuManager.setup()
         statusItemManager.setup()
