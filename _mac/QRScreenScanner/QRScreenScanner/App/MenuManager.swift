@@ -59,15 +59,11 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Open…", action: #selector(NSDocumentController.openDocument(_:)), keyEquivalent: "o")
         
-        //ProcessInfo.processInfo.processName
-        //NSApp.setActivationPolicy(.regular)
-        
-        let openRecentMenu = NSMenu(title: "Open Recent")
-        
         /// should be called before applicationDidFinishLaunching.
         /// call in main.swift or applicationWillFinishLaunching.
         /// post http://lapcatsoftware.com/blog/2007/07/10/working-without-a-nib-part-5-open-recent-menu/
         /// using https://buckleyisms.com/blog/using-the-open-recent-menu-in-cocoa-without-nsdocument/
+        let openRecentMenu = NSMenu(title: "Open Recent")
         openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
         let menuItem = menu.addItem(withTitle: "Open Recent", action: nil, keyEquivalent: "")
         menuItem.submenu = openRecentMenu
@@ -75,14 +71,6 @@ final class MenuManager {
         /// don't need for system openRecentMenu
         //openRecentMenu.addItem(.separator())
         //openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
-        
-        
-        //        menu.addItem(withTitle: "Release Notes", action: #selector(openReleaseNotes), keyEquivalent: "").target = self
-        //
-        //        menu.addItem(withTitle: "Feedback and Bugs", action: #selector(openIssues), keyEquivalent: "").target = self
-        //
-        //        /// "Submit feedback..."
-        //        menu.addItem(withTitle: "Report an Issue", action: #selector(openSubmitFeedbackPage), keyEquivalent: "").target = self
         
         
         mainMenu.addSubmenu(menu: menu)

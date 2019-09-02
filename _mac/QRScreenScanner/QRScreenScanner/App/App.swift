@@ -53,6 +53,7 @@ final class App {
 
 extension App {
     static let id = Bundle.main.bundleIdentifier.assert(or: "")
+    /// ProcessInfo.processInfo.processName
     static let name = (Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String).assert(or: "")
     static let version = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String).assert(or: "")
     static let build = (Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String).assert(or: "")

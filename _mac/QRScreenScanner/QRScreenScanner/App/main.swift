@@ -14,6 +14,7 @@ autoreleasepool {
     withExtendedLifetime(delegate, {
         let application = NSApplication.shared
         application.delegate = delegate
+        application.setActivationPolicy(.regular)
         application.run()
         application.delegate = nil
     })
