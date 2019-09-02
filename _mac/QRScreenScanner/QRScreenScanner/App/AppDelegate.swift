@@ -32,6 +32,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// doc: If the user started up the application by double-clicking a file, the delegate receives the application(_:openFile:) message before receiving applicationDidFinishLaunching(_:). (applicationWillFinishLaunching(_:) is sent before application(_:openFile:).)
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        QRService.scanFiles(at: [filename])
         return true
     }
 }
