@@ -72,9 +72,9 @@ class ViewController: NSViewController {
         /// NSApp.keyWindow != nil after window.makeKeyAndOrderFront
         assert(NSApp.keyWindow != nil && undoManager != nil)
         
-        let deleteMenuItem = App.shared.menuManager.deleteMenuItem
-        deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
-        deleteMenuItem.target = self
+//        let deleteMenuItem = App.shared.menuManager.deleteMenuItem
+//        deleteMenuItem.action = #selector(tableViewDeleteItemClicked)
+//        deleteMenuItem.target = self
         
 //        let selectAllMenuItem = App.shared.menuManager.selectAllMenuItem
 //        selectAllMenuItem.action = #selector(NSTableView.selectAll)

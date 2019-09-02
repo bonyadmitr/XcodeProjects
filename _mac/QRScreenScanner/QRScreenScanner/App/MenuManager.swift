@@ -12,6 +12,8 @@ final class MenuManager {
     /// objc menu https://github.com/lapcat/StopTheNews/blob/master/source/JJMainMenu.m
     /// links https://github.com/hammackj/niblesscocoa
     /// more at 'openRecentMenu'
+    ///
+    /// instead of .keyEquivalentModifierMask = [.shift, .command] use Uppercase letter
     func setup() {
 
         /// first menu is hidden under app name
@@ -76,13 +78,9 @@ final class MenuManager {
         mainMenu.addSubmenu(menu: menu)
     }
     
-    let deleteMenuItem = NSMenuItem()
-    let selectAllMenuItem = NSMenuItem()
-    
-    /// instead of .keyEquivalentModifierMask = [.shift, .command] use Uppercase letter
     private func addEditMenu() {
         let menu = NSMenu(title: "Edit")
-        //editMenu.autoenablesItems = false
+        
         
         menu.addItem(withTitle: "Undo", action: #selector(EditMenuActions.undo(_:)), keyEquivalent: "z")
 
@@ -90,42 +88,19 @@ final class MenuManager {
         
         // TODO: clear separator
         menu.addItem(.separator())
-
-        let deleteKey = String(format: "%c", NSBackspaceCharacter)
-        //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
-        
-        
-        menu.addItem(withTitle: "Delete", action: #selector(NSText.delete(_:)), keyEquivalent: deleteKey)
-        
-//        deleteMenuItem.title = "Delete"
-//        deleteMenuItem.keyEquivalent = deleteKey
-//        deleteMenuItem.keyEquivalentModifierMask = .command
-//        menu.addItem(deleteMenuItem)
-        
-//        menu.addItem(withTitle: "Select all", action: #selector(NSTableView.selectAll(_:)), keyEquivalent: "a")
-        selectAllMenuItem.title = "Select all"
-        selectAllMenuItem.keyEquivalent = "a"
-        selectAllMenuItem.keyEquivalentModifierMask = .command
-        selectAllMenuItem.action = #selector(NSText.selectAll(_:))
-        menu.addItem(selectAllMenuItem)
-        
-        
-        
-        
-        
-//        let copyAllMenuItem = NSMenuItem()
-//        copyAllMenuItem.title = "Copy"
-//        copyAllMenuItem.keyEquivalent = "c"
-        
-//        copyAllMenuItem.action = NSSelectorFromString("copy:")//#selector(ViewController.copy1)
-        //copyAllMenuItem.keyEquivalentModifierMask = .command
-//        menu.addItem(copyAllMenuItem)
         
         menu.addItem(withTitle: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x")
+        
         menu.addItem(withTitle: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c")
+        
         menu.addItem(withTitle: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v")
         
-//            editMenu.addItem(withTitle: "About 2", action: #selector(about), keyEquivalent: "x").target = self
+        //let deleteKey = String(format: "%c", NSBackspaceCharacter)
+        //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
+        menu.addItem(withTitle: "Delete", action: #selector(NSText.delete(_:)), keyEquivalent: "\u{8}")
+        
+        menu.addItem(withTitle: "Select all", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a")
+        
         
         mainMenu.addSubmenu(menu: menu)
     }
@@ -146,7 +121,8 @@ final class MenuManager {
         menu.addItem(withTitle: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
         
         /// for automatic title change (Show/Hide) set "Show Toolbar" or "Hide Toolbar"
-        menu.addItem(withTitle: "Show Toolbar", action:#selector(NSWindow.toggleToolbarShown(_:)), keyEquivalent:"t").keyEquivalentModifierMask = [.command, .option]
+        menu.addItem(withTitle: "Show Toolbar", action:#selector(NSWindow.toggleToolbarShown(_:)), keyEquivalent:"t")
+            .keyEquivalentModifierMask = [.command, .option]
         
         
         mainMenu.addSubmenu(menu: menu)
