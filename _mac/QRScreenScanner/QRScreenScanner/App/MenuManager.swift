@@ -6,7 +6,8 @@ final class MenuManager {
     
     private let mainMenu = NSMenu(title: "Main")
     
-    /// swift menu https://github.com/LeafPlayer/Leaf/blob/7ded5d4676df4d1081c625cd951b63ceb699c20b/Leaf/MainMenu.swift
+    /// swift menu project https://github.com/lapcat/NiblessMenu
+    /// swift menu code https://github.com/LeafPlayer/Leaf/blob/7ded5d4676df4d1081c625cd951b63ceb699c20b/Leaf/MainMenu.swift
     /// NiblessMenu swift project https://lapcatsoftware.com/articles/working-without-a-nib-part-10.html
     /// links https://github.com/hammackj/niblesscocoa
     func setup() {
@@ -63,6 +64,8 @@ final class MenuManager {
         
         /// should be called before applicationDidFinishLaunching.
         /// call in main.swift or applicationWillFinishLaunching.
+        /// post http://lapcatsoftware.com/blog/2007/07/10/working-without-a-nib-part-5-open-recent-menu/
+        /// гsing https://buckleyisms.com/blog/using-the-open-recent-menu-in-cocoa-without-nsdocument/
         openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
         let menuItem = menu.addItem(withTitle: "Open Recent", action: nil, keyEquivalent: "")
         menuItem.submenu = openRecentMenu
