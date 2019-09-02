@@ -52,14 +52,12 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Open…", action: #selector(NSDocumentController.openDocument(_:)), keyEquivalent: "o")
         
-        let openRecentMenu = NSMenu(title: "Open Recent")
+        
+        let openRecentMenu = menu.createSubmenu(title: "Open Recent")
         
         openRecentMenu.addItem(NSMenuItem.separator())
         
         openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
-        
-        menu.addSubmenu(menu: openRecentMenu)
-        
         
         
         //        menu.addItem(withTitle: "Release Notes", action: #selector(openReleaseNotes), keyEquivalent: "").target = self
