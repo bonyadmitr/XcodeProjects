@@ -58,11 +58,13 @@ final class MenuManager {
         
         let openRecentMenu = NSMenu(title: "Open Recent")
         
+        /// should be called bewfore applicationDidFinishLaunching.
+        /// call in main.swift or applicationWillFinishLaunching.
         openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
         let menuItem = menu.addItem(withTitle: "Open Recent", action: nil, keyEquivalent: "")
         menuItem.submenu = openRecentMenu
         
-        /// don't need
+        /// don't need for system openRecentMenu
         //openRecentMenu.addItem(.separator())
         //openRecentMenu.addItem(withTitle: "Clear Menu", action: #selector(NSDocumentController.clearRecentDocuments(_:)), keyEquivalent: "")
         
