@@ -95,9 +95,10 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v")
         
-        //let deleteKey = String(format: "%c", NSBackspaceCharacter)
-        //let deleteKey = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
-        menu.addItem(withTitle: "Delete", action: #selector(NSText.delete(_:)), keyEquivalent: "\u{8}")
+        //let backspaceChar = String(format: "%c", NSBackspaceCharacter)
+        //let backspaceChar = String(Character(UnicodeScalar(NSBackspaceCharacter)!))
+        let backspaceChar = "\u{8}"
+        menu.addItem(withTitle: "Delete", action: #selector(NSText.delete(_:)), keyEquivalent: backspaceChar)
         
         menu.addItem(withTitle: "Select all", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a")
         
