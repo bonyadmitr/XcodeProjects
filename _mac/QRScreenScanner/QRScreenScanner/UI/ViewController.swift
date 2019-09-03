@@ -55,14 +55,15 @@ class ViewController: NSViewController {
         /// call the last to add view on the top
         addDropView()
         
+        /// NSApp.keyWindow != nil after window.makeKeyAndOrderFront
+        /// NSApp.keyWindow == nil after Minimize out
         assert(NSApp.keyWindow == nil && undoManager == nil)
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        /// NSApp.keyWindow != nil after window.makeKeyAndOrderFront
-        assert(NSApp.keyWindow != nil && undoManager != nil)
+        assert(undoManager != nil)
     }
     
     private func addTableView() {
