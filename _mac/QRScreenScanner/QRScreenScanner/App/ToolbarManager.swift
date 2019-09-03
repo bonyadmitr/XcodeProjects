@@ -262,7 +262,7 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
     let touchBar: NSTouchBar? = {
         let touchBar = NSTouchBar()
         touchBar.customizationIdentifier = .main
-        touchBar.defaultItemIdentifiers = [.scanOptions]//, .flexibleSpace, .deleteAll, .otherItemsProxy]
+        touchBar.defaultItemIdentifiers = [.scanOptions, .flexibleSpace, .deleteAll, .otherItemsProxy]
         touchBar.customizationAllowedItemIdentifiers = [.scanOptions, .scanScreenshot, .scanWindows, .scanBrowser, .deleteAll, .fixedSpaceSmall, .fixedSpaceLarge, .flexibleSpace, .otherItemsProxy]
         return touchBar
     }()
@@ -292,6 +292,14 @@ extension TouchBarManager: NSTouchBarDelegate {
             scanOptionsItem.view = segmentControl
             
             return scanOptionsItem
+        case .deleteAll:
+            let button = NSButton(title: "Delete all",
+                                  //image: NSImage(named: NSImage.trashFullName)!,
+                                  target: self,
+                                  action: #selector(deleteAllAction))
+            let item = NSCustomTouchBarItem(identifier: .deleteAll)
+            item.view = button
+            return item
         default:
             assertionFailure()
             return nil
@@ -310,4 +318,9 @@ extension TouchBarManager: NSTouchBarDelegate {
             assertionFailure()
         }
     }
+    
+    @objc private func deleteAllAction() {
+        HistoryDataSource.shared.history = []
+    }
+    
 }
