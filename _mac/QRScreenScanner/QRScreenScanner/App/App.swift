@@ -48,6 +48,13 @@ final class App {
         //windowsManager.window.hideToolbarCustomizationPaletteItems = true
         
         showWindow()
+        
+        if #available(OSX 10.12.2, *) {
+            TouchBarManager.shared.setup()
+//            let touchBarManager = TouchBarManager()
+//            touchBarManager.setup()
+        }
+        
     }
     
     func showWindow() {

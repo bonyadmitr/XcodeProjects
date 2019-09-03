@@ -12,6 +12,21 @@ private extension NSToolbar.Identifier {
     static let main = "Main"
 }
 
+@available(OSX 10.12.2, *)
+private extension NSTouchBarItem.Identifier {
+    static let scanOptions = NSTouchBarItem.Identifier("scanOptions")
+    static let scanScreenshot = NSTouchBarItem.Identifier("scanScreenshot")
+    static let scanWindows = NSTouchBarItem.Identifier("scanWindows")
+    static let scanBrowser = NSTouchBarItem.Identifier("scanBrowser")
+    static let deleteAll = NSTouchBarItem.Identifier("deleteAll")
+}
+
+@available(OSX 10.12.2, *)
+private extension NSTouchBar.CustomizationIdentifier {
+    //static let main = "Main"
+    //static let touchBar = "com.ToolbarSample.touchBar"
+}
+
 
 // TODO: without "itemsWidth". fit width for any localization
 /// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
@@ -42,6 +57,9 @@ final class ToolbarManager: NSObject {
         
         //if #available(OSX 10.14, *) {
         //toolbar.centeredItemIdentifier = .screenOption
+        
+        
+
     }
     
     func addToWindow(_ window: NSWindow) {
@@ -234,3 +252,62 @@ extension NSSound {
 //    //            }
 //    //        }
 //}
+
+
+@available(OSX 10.12.2, *)
+final class TouchBarManager: NSObject, NSTouchBarProvider {
+    
+    static let shared = TouchBarManager()
+    
+    let touchBar: NSTouchBar? = {
+        let touchBar = NSTouchBar()
+        touchBar.customizationIdentifier = .main
+        touchBar.defaultItemIdentifiers = [.scanOptions]//, .flexibleSpace, .deleteAll, .otherItemsProxy]
+        touchBar.customizationAllowedItemIdentifiers = [.scanOptions, .scanScreenshot, .scanWindows, .scanBrowser, .deleteAll, .fixedSpaceSmall, .fixedSpaceLarge, .flexibleSpace, .otherItemsProxy]
+        return touchBar
+    }()
+    
+    func setup() {
+        touchBar?.delegate = self
+        NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        //            NSApp.touchBar
+    }
+    
+}
+
+@available(OSX 10.12.2, *)
+extension TouchBarManager: NSTouchBarDelegate {
+    
+    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        switch identifier {
+        case .scanOptions:
+            let scanOptionsItem = NSCustomTouchBarItem(identifier: identifier)
+            //scanOptionsItem.customizationLabel = NSLocalizedString("Scan options", comment: "")
+            
+            let segmentControl = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
+                                                    trackingMode: .momentary,
+                                                    target: self,
+                                                    action: #selector(scanOptionSelected))
+            
+            scanOptionsItem.view = segmentControl
+            
+            return scanOptionsItem
+        default:
+            assertionFailure()
+            return nil
+        }
+    }
+    
+    @objc private func scanOptionSelected(_ sender: NSSegmentedControl) {
+        switch sender.selectedSegment {
+        case 0:
+            QRService.scanDisplays()
+        case 1:
+            QRService.scanWindowsDelayed()
+        case 2:
+            QRService.scanBrowser()
+        default:
+            assertionFailure()
+        }
+    }
+}
