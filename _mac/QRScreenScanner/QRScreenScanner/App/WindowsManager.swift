@@ -96,6 +96,11 @@ extension WindowsManager: NSWindowDelegate {
 
 final class Window: NSWindow {
     
+    @available(OSX 10.12.2, *)
+    override func makeTouchBar() -> NSTouchBar? {
+        return TouchBarManager.shared.touchBar
+    }
+    
     /// NSDocumentController.openDocument(_:)
     @objc private func openDocument(_ sender: Any?) {
         
