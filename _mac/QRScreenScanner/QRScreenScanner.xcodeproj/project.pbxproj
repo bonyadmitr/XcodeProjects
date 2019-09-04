@@ -13,6 +13,7 @@
 		CE080E652307CCB400527662 /* WindowsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E642307CCB400527662 /* WindowsManager.swift */; };
 		CE080E682307CF3A00527662 /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080E672307CF3A00527662 /* Optional+Assert.swift */; };
 		CE1D44EF22F54BCE0085B968 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */; };
+		CE76467E231FA77600BE288E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CE76467D231FA77600BE288E /* Credits.rtf */; };
 		CE92336622FDCE8C00984201 /* DisplayConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */; };
 		CE92336822FDCF5100984201 /* CGError+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92336722FDCF5100984201 /* CGError+Assert.swift */; };
 		CE958DBB230039BB00869FAF /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE958DBA230039BB00869FAF /* DropView.swift */; };
@@ -42,6 +43,7 @@
 		CE080E642307CCB400527662 /* WindowsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowsManager.swift; sourceTree = "<group>"; };
 		CE080E672307CF3A00527662 /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
 		CE1D44EE22F54BCE0085B968 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		CE76467D231FA77600BE288E /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CE92336522FDCE8C00984201 /* DisplayConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConfigurator.swift; sourceTree = "<group>"; };
 		CE92336722FDCF5100984201 /* CGError+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGError+Assert.swift"; sourceTree = "<group>"; };
 		CE958DBA230039BB00869FAF /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				CEE5E1C022E6DEAB00B54D40 /* Assets.xcassets */,
 				CEE5E1C522E6DEAC00B54D40 /* Info.plist */,
 				CEE5E1C622E6DEAC00B54D40 /* QRScreenScanner.entitlements */,
+				CE76467D231FA77600BE288E /* Credits.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE5E1C122E6DEAB00B54D40 /* Assets.xcassets in Resources */,
+				CE76467E231FA77600BE288E /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
