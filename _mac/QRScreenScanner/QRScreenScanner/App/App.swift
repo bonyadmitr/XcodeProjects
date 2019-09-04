@@ -29,6 +29,8 @@ import Cocoa
 // TODO: Icon
 // TODO: Status icon
 
+// TODO: update code when app started with hidden toolBar. see toolbar didSet
+
 final class App {
     
     static let shared = App()

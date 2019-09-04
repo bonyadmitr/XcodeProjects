@@ -150,7 +150,8 @@ final class Window: NSWindow {
     override var toolbar: NSToolbar? {
         didSet {
             guard let contextMenu = contentView?.superview?.menu else {
-                assertionFailure()
+                print("- toolBar is hidden. hideToolbarCustomizationPaletteItems will not work !!!")
+                //assertionFailure()
                 return
             }
             
