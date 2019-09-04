@@ -30,7 +30,8 @@ final class MenuManager {
     private func addAppMenu() {
         let menu = NSMenu(title: "App")
         
-        
+        /// doc https://developer.apple.com/documentation/appkit/nsapplication/aboutpaneloptionkey/2869609-credits
+        /// Credits.rtf colors https://stackoverflow.com/a/56252527/5893286
         menu.addItem(withTitle: "About",
                         action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
                         keyEquivalent: "a")
