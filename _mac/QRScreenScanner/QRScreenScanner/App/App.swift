@@ -38,6 +38,8 @@ import Cocoa
 // TODO: NSToolbar.Identifier + NSTouchBar.CustomizationIdentifier (string ext)
 // TODO: clear sender.selectedSegment with NSSegmentedControl(labels
 
+// TODO: update code when app started with hidden toolBar. see toolbar didSet
+
 final class App {
     
     static let shared = App()
