@@ -148,7 +148,6 @@
 				CE3EB2F21FC7E88E000B70D6 /* Frameworks */,
 				CE3EB2F31FC7E88E000B70D6 /* Resources */,
 				8783372B9A8A89064450871E /* [CP] Embed Pods Frameworks */,
-				C48D3F4F36E4A3664E89901F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,7 +230,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QRScanner/Pods-QRScanner-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-QRScanner/Pods-QRScanner-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ZXingObjC/ZXingObjC.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -240,22 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QRScanner/Pods-QRScanner-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C48D3F4F36E4A3664E89901F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QRScanner/Pods-QRScanner-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QRScanner/Pods-QRScanner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

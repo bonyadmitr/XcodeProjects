@@ -22,8 +22,9 @@ class ImageController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        qrImageView.image = CodeGenerator.shared.generateBarcode(from: "hello")
-        //qrImageView.image = CodeGenerator.shared.convertTextToQRCode(text: "hello", size: qrImageView.bounds.size)
+        let barcodeImage = CodeGenerator.shared.generateBarcode(from: "hello")!
+        let qrcodeImage = CodeGenerator.shared.convertTextToQRCode(text: "hello", size: qrImageView.bounds.size, logo: barcodeImage)
+        qrImageView.image = qrcodeImage
     }
     
     @IBAction func actionTorchBarButton(_ sender: UIBarButtonItem) {

@@ -33,7 +33,7 @@ final class CodeGenerator {
     /// with improvements https://stackoverflow.com/a/43341528
     
     // TODO: remove "!"
-    func convertTextToQRCode(text: String, size: CGSize) -> UIImage {
+    func convertTextToQRCode(text: String, size: CGSize, logo: UIImage?) -> UIImage {
         
         let data = text.data(using: .isoLatin1, allowLossyConversion: false)
         
@@ -50,9 +50,15 @@ final class CodeGenerator {
         colorFilter.setValue(CIColor(color: UIColor.red), forKey: "inputColor0")
         colorFilter.setValue(CIColor(color: UIColor.blue), forKey: "inputColor1")
         
+        let result = colorFilter.outputImage!.transformed(by: .init(scaleX: 12, y: 12))
+        let qrcodeCIImage: CIImage
         
+        if let ciImageLogo = logo?.ciImage {
+            qrcodeCIImage = result.combined(with: ciImageLogo)!
+        } else {
+            qrcodeCIImage = result
+        }
         
-        let qrcodeCIImage = colorFilter.outputImage!
         
         let cgImage = CIContext().createCGImage(qrcodeCIImage, from: qrcodeCIImage.extent)!
         
@@ -76,7 +82,7 @@ final class CodeGenerator {
         
         if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            let transform = CGAffineTransform(scaleX: 1, y: 1)
             
             if let output = filter.outputImage?.transformed(by: transform) {
                 return UIImage(ciImage: output)
@@ -84,5 +90,31 @@ final class CodeGenerator {
         }
         
         return nil
+    }
+    
+    func combined(image: UIImage, with logo: UIImage) -> UIImage {
+        guard let ciImage = image.ciImage, let ciImageLogo = logo.ciImage else {
+            assertionFailure()
+            return image
+        }
+        let result = ciImage.combined(with: ciImageLogo)
+        return UIImage(ciImage: result!)
+    }
+}
+
+extension CIImage {
+    
+    /// code https://www.avanderlee.com/swift/qr-code-generation-swift/
+    /// Combines the current image with the given image centered.
+    func combined(with image: CIImage) -> CIImage? {
+        guard let combinedFilter = CIFilter(name: "CISourceOverCompositing") else {
+            assertionFailure()
+            return nil
+        }
+        let centerTransform = CGAffineTransform(translationX: extent.midX - (image.extent.size.width / 2),
+                                                y: extent.midY - (image.extent.size.height / 2))
+        combinedFilter.setValue(image.transformed(by: centerTransform), forKey: "inputImage")
+        combinedFilter.setValue(self, forKey: "inputBackgroundImage")
+        return combinedFilter.outputImage!
     }
 }
