@@ -22,7 +22,8 @@ import Cocoa
 // TODO: delete button in table
 // TODO: multiline text
 
-// TODO: clear controller
+// TODO: clear app (create more services)
+// TODO: undo all actions
 
 // TODO: Quick Alert nothing found
 // TODO: Add contact from qr
