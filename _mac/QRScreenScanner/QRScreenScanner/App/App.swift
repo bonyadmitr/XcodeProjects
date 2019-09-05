@@ -18,6 +18,7 @@ import Cocoa
 // TODO: developer apps menu item and link in about app
 // TODO: others from Settings app
 
+//tableview
 // TODO: view bases tableview
 // TODO: delete button in table
 // TODO: multiline text
@@ -28,6 +29,14 @@ import Cocoa
 // TODO: Add contact from qr
 // TODO: Icon
 // TODO: Status icon
+
+//TouchBar
+// TODO: Window makeTouchBar
+// TODO: menu item
+// TODO: other buttons
+// TODO: clear code
+// TODO: NSToolbar.Identifier + NSTouchBar.CustomizationIdentifier (string ext)
+// TODO: clear sender.selectedSegment with NSSegmentedControl(labels
 
 final class App {
     
