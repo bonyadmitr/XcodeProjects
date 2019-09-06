@@ -8,6 +8,10 @@
 
 import UIKit
 
+// TODO: correct transformed(by
+// TODO: clear "!"
+// TODO: clear code
+
 /// can be used ZXingObjC
 /// test for limits
 final class CodeGenerator {
@@ -32,7 +36,6 @@ final class CodeGenerator {
     /// https://github.com/aschuch/QRCode/blob/master/QRCode/QRCode.swift
     /// with improvements https://stackoverflow.com/a/43341528
     
-    // TODO: remove "!"
     func convertTextToQRCode(text: String, size: CGSize, logo: UIImage?) -> UIImage {
         
         let data = text.data(using: .isoLatin1, allowLossyConversion: false)
@@ -58,7 +61,6 @@ final class CodeGenerator {
         } else {
             qrcodeCIImage = result
         }
-        
         
         let cgImage = CIContext().createCGImage(qrcodeCIImage, from: qrcodeCIImage.extent)!
         
