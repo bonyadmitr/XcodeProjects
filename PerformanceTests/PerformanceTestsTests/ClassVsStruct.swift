@@ -105,4 +105,96 @@ final class ClassVsStructTests: XCTestCase {
             (1...1000000).forEach { array.append(PhonebookEntryClass(i: $0)) }
         }
     }
+    
+    func testFirstSubview1() {
+        
+        let array: [UISearchBar] = (1...1000).map { _ in
+            let searchBar = UISearchBar()
+            searchBar.showsCancelButton = true
+            return searchBar
+        }
+        
+        
+        self.measure {
+            array.forEach {
+                _ = $0.firstSubview(of: UIButton.self)!
+                _ = $0.firstSubview(of: UITextField.self)!
+            }
+            
+//            _ = searchBar.firstSubview(of: UIButton.self)!
+//            _ = searchBar.firstSubview(of: UITextField.self)!
+        }
+    }
+    
+    func testFirstSubview2() {
+//        let searchBar = UISearchBar()
+//        searchBar.showsCancelButton = true
+//
+//        self.measure {
+//            _ = searchBar.firstSubview2(of: UIButton.self)!
+//            _ = searchBar.firstSubview2(of: UITextField.self)!
+//        }
+        
+                let array: [UISearchBar] = (1...1000).map { _ in
+                    let searchBar = UISearchBar()
+                    searchBar.showsCancelButton = true
+                    return searchBar
+                }
+                
+                
+                self.measure {
+                    array.forEach {
+                        _ = $0.firstSubview2(of: UIButton.self)!
+                        _ = $0.firstSubview2(of: UITextField.self)!
+                    }
+                    
+        //            _ = searchBar.firstSubview(of: UIButton.self)!
+        //            _ = searchBar.firstSubview(of: UITextField.self)!
+                }
+    }
+}
+
+
+extension UIView {
+    func firstSubview<T: UIView>(of: T.Type) -> T? {
+        var viewWeAreLookingFor: T?
+        
+        func checkViewForType(_ view: UIView) {
+            guard viewWeAreLookingFor == nil else {
+                return
+            }
+            if let view = view as? T {
+                viewWeAreLookingFor = view
+                return
+            }
+            view.subviews.forEach {
+                checkViewForType($0)
+            }
+        }
+        subviews.forEach { checkViewForType($0) }
+        return viewWeAreLookingFor
+    }
+    
+    func firstSubview2<T: UIView>(of: T.Type) -> T? {
+        
+        func checkViewForType(_ inputView: UIView) -> T? {
+            if let view = inputView as? T {
+                return view
+            }
+            for view in inputView.subviews {
+                if let view2 = checkViewForType(view) {
+                    return view2
+                }
+            }
+            return nil
+        }
+        
+        for view in subviews {
+            if let view2 = checkViewForType(view) {
+                return view2
+            }
+        }
+        return nil
+    }
+
 }
