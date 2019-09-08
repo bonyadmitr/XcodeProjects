@@ -29,6 +29,9 @@ final class WindowsManager: NSObject {
         /// call it after .center()
         window.setFrameAutosaveName("MainWindow")
         
+        if #available(OSX 10.12, *) {
+            window.tabbingMode = .disallowed
+        }
         window.delegate = self
         return window
     }()
