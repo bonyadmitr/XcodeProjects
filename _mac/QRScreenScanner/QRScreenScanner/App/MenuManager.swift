@@ -24,11 +24,13 @@ final class MenuManager {
         addHelpMenu()
         
         /// call the last to add system hidden items like emojy
+        //mainMenu.setValue("NSMainMenu", forKey: "menuName")
         NSApp.mainMenu = mainMenu
     }
     
     private func addAppMenu() {
         let menu = NSMenu(title: "App")
+        //menu.setValue("NSAppleMenu", forKey: "menuName")
         
         /// doc https://developer.apple.com/documentation/appkit/nsapplication/aboutpaneloptionkey/2869609-credits
         /// Credits.rtf colors https://stackoverflow.com/a/56252527/5893286
@@ -38,6 +40,15 @@ final class MenuManager {
             .keyEquivalentModifierMask = [.option, .shift]
         
         menu.addItem(NSMenuItem.separator())
+        
+//        let servicesMenu = NSMenu(title: "Services")
+//        let servicesItem = menu.addItem(withTitle: "Services", action: nil, keyEquivalent: "")
+//        servicesItem.submenu = servicesMenu
+//
+//        /// same servicesMenu.setValue("NSServicesMenu", forKey: "menuName")
+//        NSApp.servicesMenu = servicesMenu
+//
+//        menu.addItem(NSMenuItem.separator())
         
         //appMenu.addItem(withTitle: "Hide \(App.name)", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
         
@@ -67,7 +78,8 @@ final class MenuManager {
         /// post http://lapcatsoftware.com/blog/2007/07/10/working-without-a-nib-part-5-open-recent-menu/
         /// using https://buckleyisms.com/blog/using-the-open-recent-menu-in-cocoa-without-nsdocument/
         let openRecentMenu = NSMenu(title: "Open Recent")
-        openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
+        openRecentMenu.setValue("NSRecentDocumentsMenu", forKey: "menuName")
+//        openRecentMenu.perform(NSSelectorFromString("_setMenuName:"), with: "NSRecentDocumentsMenu")
         let menuItem = menu.addItem(withTitle: "Open Recent", action: nil, keyEquivalent: "")
         menuItem.submenu = openRecentMenu
         
@@ -115,10 +127,10 @@ final class MenuManager {
         
         menu.addItem(withTitle: "Zoom", action: #selector(NSWindow.zoom(_:)), keyEquivalent: "")
         
-        menu.addItem(withTitle: "Hide all", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
-        
         menu.addItem(withTitle: "Enter full screen", action: #selector(NSWindow.toggleFullScreen(_:)), keyEquivalent: "f")
             .keyEquivalentModifierMask = [.control, .command]
+        
+        menu.addItem(NSMenuItem.separator())
         
         menu.addItem(withTitle: "Customize toolbar…", action: #selector(NSWindow.runToolbarCustomizationPalette(_:)), keyEquivalent: "")
         
@@ -126,13 +138,33 @@ final class MenuManager {
         menu.addItem(withTitle: "Show Toolbar", action:#selector(NSWindow.toggleToolbarShown(_:)), keyEquivalent:"t")
             .keyEquivalentModifierMask = [.command, .option]
         
+        //menu.perform(NSSelectorFromString("_setMenuName:"), with: "NSWindowsMenu")
+        NSApp.windowsMenu = menu
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        menu.addItem(withTitle: "Hide all", action: #selector(NSApp.hide(_:)), keyEquivalent: "h")
+        
         
         mainMenu.addSubmenu(menu: menu)
     }
     
     private func addHelpMenu() {
-        let menu = NSMenu(title: "Help")
+        /// adding menu with title "Help" adds Spotlight item
+        let menu = NSMenu(title: "Help1")
         
+        /// add Spotlight item.
+        /// set any menu to remove Spotlight item in "Help" menu
+//        NSApp.helpMenu = menu
+        
+        /// to remove Spotlight item in "Help" menu
+//        NSApp.helpMenu = NSMenu()
+        
+        /// not working.
+        /// NSApp.helpMenu doesn't set "menuName" of menu.
+//        menu.setValue("_NSHelpMenu", forKey: "menuName")
+//        menu.setValue("NSHelpMenu", forKey: "menuName")
+//        menu.perform(NSSelectorFromString("_setMenuName:"), with: "_NSHelpMenu")
         
         menu.addItem(withTitle: "Documentation", action: #selector(openDocumentation), keyEquivalent: "").target = self
         
