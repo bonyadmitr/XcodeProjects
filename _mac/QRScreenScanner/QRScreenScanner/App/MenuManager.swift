@@ -257,3 +257,25 @@ extension NSMenu {
 ////        assertionFailure()
 ////    }
 //}
+
+
+
+
+
+/// You can find "systemMenu" in source of Main.storyboard
+
+/// NSMainMenu
+//NSApp.menu!.value(forKey: "menuName")
+
+/// NSAppleMenu
+//NSApp.menu!.items[0].submenu!.value(forKey: "menuName")
+
+/// NSServicesMenu
+//NSApp.menu!.items[0].submenu!.items[4].submenu!.value(forKey: "menuName")
+
+/// NSFontMenu
+//NSApp.menu!.items[3].submenu!.items[0].submenu!.value(forKey: "menuName")
+
+/// _NSHelpMenu
+//NSApp.menu!.items[6].submenu!.value(forKey: "menuName")
+
