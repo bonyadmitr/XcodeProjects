@@ -12,6 +12,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillFinishLaunching(_ notification: Notification) {
         App.shared.start()
+        NSApp.registerUserInterfaceItemSearchHandler(self)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -34,5 +35,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func application(_ sender: NSApplication, openFile filename: String) -> Bool {
         QRService.scanFiles(at: [filename])
         return true
+    }
+}
+
+extension AppDelegate: NSUserInterfaceItemSearching {
+    
+    func searchForItems(withSearch searchString: String, resultLimit: Int, matchedItemHandler handleMatchedItems: @escaping ([Any]) -> Void) {
+        handleMatchedItems(["w1", "w2"])
+    }
+    
+    func localizedTitles(forItem item: Any) -> [String] {
+        return ["\(item) q", "\(item) w"]
+    }
+    
+    func performAction(forItem item: Any) {
+        print(item)
     }
 }
