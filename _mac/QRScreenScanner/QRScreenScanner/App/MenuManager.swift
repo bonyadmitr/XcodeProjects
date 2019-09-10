@@ -151,11 +151,11 @@ final class MenuManager {
     
     private func addHelpMenu() {
         /// adding menu with title "Help" adds Spotlight item
-        let menu = NSMenu(title: "Help1")
+        let menu = NSMenu(title: "Help")
         
         /// add Spotlight item.
         /// set any menu to remove Spotlight item in "Help" menu
-//        NSApp.helpMenu = menu
+        NSApp.helpMenu = menu
         
         /// to remove Spotlight item in "Help" menu
 //        NSApp.helpMenu = NSMenu()
