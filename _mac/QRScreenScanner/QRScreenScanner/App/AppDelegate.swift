@@ -44,6 +44,8 @@ extension AppDelegate: NSUserInterfaceItemSearching {
         handleMatchedItems(["w1", "w2"])
     }
     
+    /// result: array joined by " > ".
+    /// system uses to present item in submenu.
     func localizedTitles(forItem item: Any) -> [String] {
         return ["\(item) q", "\(item) w"]
     }
