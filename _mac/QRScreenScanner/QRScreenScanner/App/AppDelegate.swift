@@ -40,6 +40,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSUserInterfaceItemSearching {
     
+    /// doc: When gets called again, the client should cancel any previous searches in progress for better performance. If not Spotlight for Help will ignore the older results.
+    /// doc: Do not assume that this will be called from the main UI thread
     func searchForItems(withSearch searchString: String, resultLimit: Int, matchedItemHandler handleMatchedItems: @escaping ([Any]) -> Void) {
         handleMatchedItems(["w1", "w2"])
     }
