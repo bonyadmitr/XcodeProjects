@@ -53,6 +53,11 @@ extension AppDelegate: NSUserInterfaceItemSearching {
     }
     
     func performAction(forItem item: Any) {
-        print(item)
+        print("help action for \(item)")
+    }
+    
+    /// adds "Show All Help Topics" in search resluts
+    func showAllHelpTopics(forSearch searchString: String) {
+        print("help action showAllHelpTopics")
     }
 }
