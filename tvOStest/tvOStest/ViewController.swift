@@ -11,11 +11,20 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet private weak var testButton: UIButton!
+    @IBOutlet private weak var testTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "ViewController"
+        testTextField.delegate = self
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print(string)
+        return true
     }
 }
 
