@@ -290,18 +290,27 @@ extension TouchBarManager: NSTouchBarDelegate {
                                                     action: #selector(scanOptionSelected))
             
             scanOptionsItem.view = segmentControl
-            
             return scanOptionsItem
+            
+        case .scanScreenshot:
+            let button = NSButton(title: "Screenshot",
+                                  target: self,
+                                  action: #selector(screenshotAction))
+            let item = NSCustomTouchBarItem(identifier: identifier)
+            item.customizationLabel = "Scan screenshot"
+            item.view = button
+            return item
+            
         case .deleteAll:
             let button = NSButton(title: "Delete all",
                                   //image: NSImage(named: NSImage.trashFullName)!,
-                                  target: self,
-                                  action: #selector(deleteAllAction))
-            let item = NSCustomTouchBarItem(identifier: .deleteAll)
+                target: self,
+                action: #selector(deleteAllAction))
+            let item = NSCustomTouchBarItem(identifier: identifier)
             item.view = button
             return item
         default:
-            assertionFailure("unknown id: \(identifier.rawValue)")
+//            assertionFailure("unknown id: \(identifier.rawValue)")
             return nil
         }
     }
@@ -323,4 +332,7 @@ extension TouchBarManager: NSTouchBarDelegate {
         HistoryDataSource.shared.history = []
     }
     
+    @objc private func screenshotAction() {
+        HistoryDataSource.shared.history = []
+    }
 }
