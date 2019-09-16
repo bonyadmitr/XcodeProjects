@@ -138,6 +138,13 @@ final class MenuManager {
         menu.addItem(withTitle: "Show Toolbar", action:#selector(NSWindow.toggleToolbarShown(_:)), keyEquivalent:"t")
             .keyEquivalentModifierMask = [.command, .option]
         
+        if #available(OSX 10.12.2, *) {
+            menu.addItem(withTitle: "Customize Touch Bar…", action: #selector(NSApp.toggleTouchBarCustomizationPalette(_:)), keyEquivalent: "")
+            
+            //"Customize Control Strip…"
+            //toggleTouchBarControlStripCustomizationPalette:
+        }
+        
         //menu.perform(NSSelectorFromString("_setMenuName:"), with: "NSWindowsMenu")
         NSApp.windowsMenu = menu
         
