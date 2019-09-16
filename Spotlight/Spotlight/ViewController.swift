@@ -53,4 +53,22 @@ final class SpotlightManager {
         }
 
     }
+
+    
+    func delete() {
+        // delete all items
+        CSSearchableIndex.default().deleteAllSearchableItems { (error) in
+            
+        }
+        
+        // delete certain items by identifiers
+        CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: ["aviID"]) { (error) in
+            
+        }
+
+        // delete all items from specific domains
+        CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["contacts"]) { (error) in
+            
+        }
+    }
 }
