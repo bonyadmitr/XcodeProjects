@@ -279,9 +279,12 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
 extension TouchBarManager: NSTouchBarDelegate {
     
     func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        let item = NSCustomTouchBarItem(identifier: identifier)
+//        TouchBarItem
+        
         switch identifier {
         case .scanOptions:
-            let item = NSCustomTouchBarItem(identifier: identifier)
+            
             item.customizationLabel = "Scan options"
             
             let segmentControl = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
@@ -290,29 +293,27 @@ extension TouchBarManager: NSTouchBarDelegate {
                                                     action: #selector(scanOptionSelected))
             
             item.view = segmentControl
-            return item
             
         case .scanScreenshot:
             let button = NSButton(title: "Screenshot",
                                   target: self,
                                   action: #selector(screenshotAction))
-            let item = NSCustomTouchBarItem(identifier: identifier)
+            
             item.customizationLabel = "Scan screenshot"
             item.view = button
-            return item
             
         case .deleteAll:
             let button = NSButton(title: "Delete all",
                                   //image: NSImage(named: NSImage.trashFullName)!,
-                target: self,
-                action: #selector(deleteAllAction))
-            let item = NSCustomTouchBarItem(identifier: identifier)
+                                  target: self,
+                                  action: #selector(deleteAllAction))
             item.view = button
-            return item
         default:
 //            assertionFailure("unknown id: \(identifier.rawValue)")
             return nil
         }
+        
+        return item
     }
     
     @objc private func scanOptionSelected(_ sender: NSSegmentedControl) {
