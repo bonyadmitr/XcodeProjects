@@ -15,6 +15,7 @@
 		CE2579D9232F72B100E92DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2579D7232F72B100E92DA9 /* LaunchScreen.storyboard */; };
 		CE2579E7232FAA8200E92DA9 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2579E6232FAA8200E92DA9 /* IndexRequestHandler.swift */; };
 		CE2579EB232FAA8200E92DA9 /* SpotlightExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE2579F3232FAD0D00E92DA9 /* SpotlightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2579F2232FAD0D00E92DA9 /* SpotlightManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpotlightExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2579E6232FAA8200E92DA9 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
 		CE2579E8232FAA8200E92DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2579F2232FAD0D00E92DA9 /* SpotlightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				CE2579CC232F72B100E92DA9 /* AppDelegate.swift */,
 				CE2579CE232F72B100E92DA9 /* SceneDelegate.swift */,
 				CE2579D0232F72B100E92DA9 /* ViewController.swift */,
+				CE2579F2232FAD0D00E92DA9 /* SpotlightManager.swift */,
 				CE2579D2232F72B100E92DA9 /* Main.storyboard */,
 				CE2579D5232F72B100E92DA9 /* Assets.xcassets */,
 				CE2579D7232F72B100E92DA9 /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 			files = (
 				CE2579D1232F72B100E92DA9 /* ViewController.swift in Sources */,
 				CE2579CD232F72B100E92DA9 /* AppDelegate.swift in Sources */,
+				CE2579F3232FAD0D00E92DA9 /* SpotlightManager.swift in Sources */,
 				CE2579CF232F72B100E92DA9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
