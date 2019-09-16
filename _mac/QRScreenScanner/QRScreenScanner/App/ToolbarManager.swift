@@ -285,29 +285,27 @@ extension TouchBarManager: NSTouchBarDelegate {
         
         switch identifier {
         case .scanOptions:
-            let segmentControl = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
-                                                    trackingMode: .momentary,
-                                                    target: self,
-                                                    action: #selector(scanOptionSelected))
-            
-            item.view = segmentControl
             item.customizationLabel = "Scan options"
             
-        case .scanScreenshot:
-            let button = NSButton(title: "Screenshot",
-                                  target: self,
-                                  action: #selector(screenshotAction))
+            item.view = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
+                                           trackingMode: .momentary,
+                                           target: self,
+                                           action: #selector(scanOptionSelected))
             
-            item.view = button
+        case .scanScreenshot:
             item.customizationLabel = "Scan screenshot"
             
+            item.view = NSButton(title: "Screenshot",
+                                 target: self,
+                                 action: #selector(screenshotAction))
+            
         case .deleteAll:
-            let button = NSButton(title: "Delete all",
-                                  //image: NSImage(named: NSImage.trashFullName)!,
-                                  target: self,
-                                  action: #selector(deleteAllAction))
-            item.view = button
             item.customizationLabel = "Delete all"
+            
+            item.view = NSButton(title: "Delete all",
+                                 //image: NSImage(named: NSImage.trashFullName)!,
+                                 target: self,
+                                 action: #selector(deleteAllAction))
             
         default:
             break
