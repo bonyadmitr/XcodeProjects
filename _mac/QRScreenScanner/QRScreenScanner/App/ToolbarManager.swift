@@ -301,7 +301,7 @@ extension TouchBarManager: NSTouchBarDelegate {
             item.view = button
             return item
         default:
-            assertionFailure()
+            assertionFailure("unknown id: \(identifier.rawValue)")
             return nil
         }
     }
