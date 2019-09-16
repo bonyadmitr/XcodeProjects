@@ -279,6 +279,8 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
 extension TouchBarManager: NSTouchBarDelegate {
     
     func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        
+        /// not good solution bcz there are other NSTouchBarItems like NSPopoverTouchBarItem
         let item = NSCustomTouchBarItem(identifier: identifier)
         
         switch identifier {
