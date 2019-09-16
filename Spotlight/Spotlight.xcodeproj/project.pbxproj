@@ -13,7 +13,33 @@
 		CE2579D4232F72B100E92DA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2579D2232F72B100E92DA9 /* Main.storyboard */; };
 		CE2579D6232F72B100E92DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2579D5232F72B100E92DA9 /* Assets.xcassets */; };
 		CE2579D9232F72B100E92DA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2579D7232F72B100E92DA9 /* LaunchScreen.storyboard */; };
+		CE2579E7232FAA8200E92DA9 /* IndexRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2579E6232FAA8200E92DA9 /* IndexRequestHandler.swift */; };
+		CE2579EB232FAA8200E92DA9 /* SpotlightExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE2579E9232FAA8200E92DA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE2579C1232F72B000E92DA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE2579E3232FAA8200E92DA9;
+			remoteInfo = SpotlightExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE2579EF232FAA8200E92DA9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CE2579EB232FAA8200E92DA9 /* SpotlightExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE2579C9232F72B100E92DA9 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,10 +50,20 @@
 		CE2579D5232F72B100E92DA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE2579D8232F72B100E92DA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE2579DA232F72B100E92DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpotlightExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2579E6232FAA8200E92DA9 /* IndexRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRequestHandler.swift; sourceTree = "<group>"; };
+		CE2579E8232FAA8200E92DA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CE2579C6232F72B100E92DA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE2579E1232FAA8200E92DA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2579CB232F72B100E92DA9 /* Spotlight */,
+				CE2579E5232FAA8200E92DA9 /* SpotlightExtension */,
 				CE2579CA232F72B100E92DA9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2579C9232F72B100E92DA9 /* Spotlight.app */,
+				CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +105,15 @@
 			path = Spotlight;
 			sourceTree = "<group>";
 		};
+		CE2579E5232FAA8200E92DA9 /* SpotlightExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CE2579E6232FAA8200E92DA9 /* IndexRequestHandler.swift */,
+				CE2579E8232FAA8200E92DA9 /* Info.plist */,
+			);
+			path = SpotlightExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,15 +124,34 @@
 				CE2579C5232F72B100E92DA9 /* Sources */,
 				CE2579C6232F72B100E92DA9 /* Frameworks */,
 				CE2579C7232F72B100E92DA9 /* Resources */,
+				CE2579EF232FAA8200E92DA9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CE2579EA232FAA8200E92DA9 /* PBXTargetDependency */,
 			);
 			name = Spotlight;
 			productName = Spotlight;
 			productReference = CE2579C9232F72B100E92DA9 /* Spotlight.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CE2579E3232FAA8200E92DA9 /* SpotlightExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE2579EC232FAA8200E92DA9 /* Build configuration list for PBXNativeTarget "SpotlightExtension" */;
+			buildPhases = (
+				CE2579E0232FAA8200E92DA9 /* Sources */,
+				CE2579E1232FAA8200E92DA9 /* Frameworks */,
+				CE2579E2232FAA8200E92DA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpotlightExtension;
+			productName = SpotlightExtension;
+			productReference = CE2579E4232FAA8200E92DA9 /* SpotlightExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -98,6 +164,9 @@
 				ORGANIZATIONNAME = "Bondar Yaroslav";
 				TargetAttributes = {
 					CE2579C8232F72B100E92DA9 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					CE2579E3232FAA8200E92DA9 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -116,6 +185,7 @@
 			projectRoot = "";
 			targets = (
 				CE2579C8232F72B100E92DA9 /* Spotlight */,
+				CE2579E3232FAA8200E92DA9 /* SpotlightExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +198,13 @@
 				CE2579D9232F72B100E92DA9 /* LaunchScreen.storyboard in Resources */,
 				CE2579D6232F72B100E92DA9 /* Assets.xcassets in Resources */,
 				CE2579D4232F72B100E92DA9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE2579E2232FAA8200E92DA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +221,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE2579E0232FAA8200E92DA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2579E7232FAA8200E92DA9 /* IndexRequestHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE2579EA232FAA8200E92DA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE2579E3232FAA8200E92DA9 /* SpotlightExtension */;
+			targetProxy = CE2579E9232FAA8200E92DA9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE2579D2232F72B100E92DA9 /* Main.storyboard */ = {
@@ -283,6 +376,7 @@
 		CE2579DE232F72B100E92DA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Spotlight/Info.plist;
@@ -301,6 +395,7 @@
 		CE2579DF232F72B100E92DA9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Spotlight/Info.plist;
@@ -311,6 +406,42 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE2579ED232FAA8200E92DA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SpotlightExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.Spotlight.SpotlightExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE2579EE232FAA8200E92DA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SpotlightExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.Spotlight.SpotlightExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -333,6 +464,15 @@
 			buildConfigurations = (
 				CE2579DE232F72B100E92DA9 /* Debug */,
 				CE2579DF232F72B100E92DA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE2579EC232FAA8200E92DA9 /* Build configuration list for PBXNativeTarget "SpotlightExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE2579ED232FAA8200E92DA9 /* Debug */,
+				CE2579EE232FAA8200E92DA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
