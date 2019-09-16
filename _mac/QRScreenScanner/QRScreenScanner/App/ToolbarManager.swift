@@ -269,7 +269,7 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
     
     func setup() {
         touchBar?.delegate = self
-        NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        //NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
         //            NSApp.touchBar
     }
     
