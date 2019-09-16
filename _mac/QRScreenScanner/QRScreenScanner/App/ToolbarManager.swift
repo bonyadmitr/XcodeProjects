@@ -280,27 +280,24 @@ extension TouchBarManager: NSTouchBarDelegate {
     
     func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
         let item = NSCustomTouchBarItem(identifier: identifier)
-//        TouchBarItem
         
         switch identifier {
         case .scanOptions:
-            
-            item.customizationLabel = "Scan options"
-            
             let segmentControl = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
                                                     trackingMode: .momentary,
                                                     target: self,
                                                     action: #selector(scanOptionSelected))
             
             item.view = segmentControl
+            item.customizationLabel = "Scan options"
             
         case .scanScreenshot:
             let button = NSButton(title: "Screenshot",
                                   target: self,
                                   action: #selector(screenshotAction))
             
-            item.customizationLabel = "Scan screenshot"
             item.view = button
+            item.customizationLabel = "Scan screenshot"
             
         case .deleteAll:
             let button = NSButton(title: "Delete all",
@@ -308,9 +305,11 @@ extension TouchBarManager: NSTouchBarDelegate {
                                   target: self,
                                   action: #selector(deleteAllAction))
             item.view = button
+            item.customizationLabel = "Delete all"
+            
         default:
+            break
 //            assertionFailure("unknown id: \(identifier.rawValue)")
-            return nil
         }
         
         return item
