@@ -53,6 +53,31 @@ final class SpotlightManager {
         }
 
     }
+    
+    func addUserActivity() {
+        let userActivity = NSUserActivity(activityType: "com.searchtutorial.www")
+        userActivity.title = "Search Tutorial"
+        userActivity.isEligibleForSearch = true
+        userActivity.isEligibleForHandoff = true
+        if #available(iOS 12.0, *) {
+            userActivity.isEligibleForPrediction = true
+        }
+        
+        /// This means that this search result can appear for other users as well, even if they don’t have your app installed (!). So, never set this property to true, unless you are sure this is not private user content.
+        userActivity.isEligibleForPublicIndexing = true
+        
+        userActivity.keywords = ["search", "tutorial", "spotlight"]
+        userActivity.userInfo = ["id" : "tutorial123"]
+        
+        let attributed = CSSearchableItemAttributeSet(itemContentType: "Article")
+        attributed.title = "Search Tutorial"
+        attributed.emailAddresses = ["avixxx@gmail.com"]
+        attributed.contentDescription = "How to search your items with Core Spotlight"
+        
+        userActivity.contentAttributeSet = attributed
+        
+        userActivity.becomeCurrent()
+    }
 
     
     func delete() {
