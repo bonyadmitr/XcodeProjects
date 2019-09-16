@@ -268,7 +268,6 @@ extension NSMenu {
 
 
 
-
 /// You can find "systemMenu" in source of Main.storyboard
 
 /// NSMainMenu
@@ -285,5 +284,3 @@ extension NSMenu {
 
 /// _NSHelpMenu
 //NSApp.menu!.items[6].submenu!.value(forKey: "menuName")
-
-
