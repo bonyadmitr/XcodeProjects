@@ -281,16 +281,16 @@ extension TouchBarManager: NSTouchBarDelegate {
     func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
         switch identifier {
         case .scanOptions:
-            let scanOptionsItem = NSCustomTouchBarItem(identifier: identifier)
-            //scanOptionsItem.customizationLabel = NSLocalizedString("Scan options", comment: "")
+            let item = NSCustomTouchBarItem(identifier: identifier)
+            item.customizationLabel = "Scan options"
             
             let segmentControl = NSSegmentedControl(labels: ["Screenshot", "Windows", "Browser"],
                                                     trackingMode: .momentary,
                                                     target: self,
                                                     action: #selector(scanOptionSelected))
             
-            scanOptionsItem.view = segmentControl
-            return scanOptionsItem
+            item.view = segmentControl
+            return item
             
         case .scanScreenshot:
             let button = NSButton(title: "Screenshot",
