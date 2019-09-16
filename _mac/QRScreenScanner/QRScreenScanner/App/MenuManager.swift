@@ -141,8 +141,10 @@ final class MenuManager {
         if #available(OSX 10.12.2, *) {
             menu.addItem(withTitle: "Customize Touch Bar…", action: #selector(NSApp.toggleTouchBarCustomizationPalette(_:)), keyEquivalent: "")
             
+            
+            /// NSApp.menu!.items[3].submenu!.items[3].action
             //"Customize Control Strip…"
-            //toggleTouchBarControlStripCustomizationPalette:
+            //menu.addItem(withTitle: "Customize Control Strip…", action: Selector(("toggleTouchBarControlStripCustomizationPalette:")), keyEquivalent: "")
         }
         
         //menu.perform(NSSelectorFromString("_setMenuName:"), with: "NSWindowsMenu")
