@@ -63,6 +63,19 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
         return touchBar
     }()
     
+    /**
+     used private api
+     1. add TouchBar.h
+     2. add PROJECT_NAME-Bridging-Header.h with contens #import "TouchBar.h"
+     3. add $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks to Build Settings - Framework Search Paths
+     4. Build Phases - Link Binary With Libraries - add DFRFoundation.framework
+     (path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks/DFRFoundation.framework)
+     
+     private api https://stackoverflow.com/a/49826928
+     private api https://github.com/a2/touch-baer
+     https://github.com/Toxblh/MTMR
+     https://github.com/bikkelbroeders/TouchBarDemoApp
+     */
     private func setupControlStripPresence() {
         
         /// need?
