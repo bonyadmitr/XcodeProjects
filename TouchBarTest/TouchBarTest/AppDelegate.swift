@@ -38,6 +38,7 @@ import Cocoa
 
 @available(OSX 10.12.2, *)
 private extension NSTouchBarItem.Identifier {
+    static let system = NSTouchBarItem.Identifier("system")
     static let button = NSTouchBarItem.Identifier("button")
     static let segment = NSTouchBarItem.Identifier("segment")
 }
@@ -62,9 +63,23 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
         return touchBar
     }()
     
+    private func setupControlStripPresence() {
+        let item = NSCustomTouchBarItem(identifier: .system)
+        item.view = NSButton(title: "🐹",
+                             target: self,
+                             action: #selector(systemItemAction))
+        NSTouchBarItem.addSystemTrayItem(item)
+        DFRElementSetControlStripPresenceForIdentifier(.system, true)
+    }
+    
+    @objc private func systemItemAction() {
+        NSTouchBar.presentSystemModalTouchBar(touchBar, systemTrayItemIdentifier: .system)
+    }
+    
     func setup() {
         touchBar?.delegate = self
         NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        setupControlStripPresence()
         //            NSApp.touchBar
     }
     
