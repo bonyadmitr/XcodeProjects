@@ -64,6 +64,10 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
     }()
     
     private func setupControlStripPresence() {
+        
+        /// need?
+        //DFRSystemModalShowsCloseBoxWhenFrontMost(false)
+        
         let item = NSCustomTouchBarItem(identifier: .system)
         item.view = NSButton(title: "🐹",
                              target: self,
@@ -74,6 +78,11 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
     
     @objc private func systemItemAction() {
         NSTouchBar.presentSystemModalTouchBar(touchBar, systemTrayItemIdentifier: .system)
+//        if #available(macOS 10.14, *) {
+//            NSTouchBar.presentSystemModalTouchBar(touchBar, systemTrayItemIdentifier: .system)
+//        } else {
+//            NSTouchBar.presentSystemModalFunctionBar(touchBar, systemTrayItemIdentifier: .system)
+//        }
     }
     
     func setup() {
