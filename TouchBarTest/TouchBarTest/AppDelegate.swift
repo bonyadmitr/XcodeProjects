@@ -67,6 +67,7 @@ final class TouchBarManager: NSObject, NSTouchBarProvider {
      used private api
      1. add TouchBar.h
      2. add PROJECT_NAME-Bridging-Header.h with contens #import "TouchBar.h"
+        (add path in Build Settings - Objective-C Bridging Header)
      3. add $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks to Build Settings - Framework Search Paths
      4. Build Phases - Link Binary With Libraries - add DFRFoundation.framework
      (path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks/DFRFoundation.framework)
