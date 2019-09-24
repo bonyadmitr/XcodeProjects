@@ -11,6 +11,7 @@
 		C43CF87A2330A51F00D53E9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43CF8792330A51F00D53E9E /* Assets.xcassets */; };
 		C43CF87D2330A51F00D53E9E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C43CF87B2330A51F00D53E9E /* MainMenu.xib */; };
 		C48AD148233169C500C1EB95 /* DFRFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48AD147233169C500C1EB95 /* DFRFoundation.framework */; };
+		C48AD14A2331EBEE00C1EB95 /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48AD1492331EBED00C1EB95 /* MultitouchSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		C48AD1422331695600C1EB95 /* TouchBarTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TouchBarTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		C48AD1432331695700C1EB95 /* TouchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchBar.h; sourceTree = "<group>"; };
 		C48AD147233169C500C1EB95 /* DFRFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DFRFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks/DFRFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		C48AD1492331EBED00C1EB95 /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48AD14A2331EBEE00C1EB95 /* MultitouchSupport.framework in Frameworks */,
 				C48AD148233169C500C1EB95 /* DFRFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +74,7 @@
 		C48AD146233169C500C1EB95 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C48AD1492331EBED00C1EB95 /* MultitouchSupport.framework */,
 				C48AD147233169C500C1EB95 /* DFRFoundation.framework */,
 			);
 			name = Frameworks;
