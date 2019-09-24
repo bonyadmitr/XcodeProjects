@@ -1,3 +1,5 @@
+// required DFRFoundation.framework
+
 #import <AppKit/AppKit.h>
 
 extern void DFRElementSetControlStripPresenceForIdentifier(NSTouchBarItemIdentifier, BOOL);
