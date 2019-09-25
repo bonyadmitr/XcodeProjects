@@ -97,7 +97,8 @@ final class SpotifyAuthViewController: UIViewController {
     private let webView = WKWebView()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        //let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = view.bounds
         activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -119,7 +120,7 @@ final class SpotifyAuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        showSpinner()
+        
         view.addSubview(activityIndicator)
         removeCache()
         startActivity()
