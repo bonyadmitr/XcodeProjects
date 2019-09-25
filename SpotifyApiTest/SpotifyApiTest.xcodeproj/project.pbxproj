@@ -14,6 +14,7 @@
 		CEE22028233B88D3000C4BB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE22027233B88D3000C4BB4 /* Assets.xcassets */; };
 		CEE2202B233B88D3000C4BB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE22029233B88D3000C4BB4 /* LaunchScreen.storyboard */; };
 		CEE22033233B8B31000C4BB4 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE22032233B8B31000C4BB4 /* SpotifyiOS.framework */; };
+		CEE22038233BAE08000C4BB4 /* SpotifySDKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE22037233BAE08000C4BB4 /* SpotifySDKManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		CEE2202C233B88D3000C4BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE22032233B8B31000C4BB4 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		CEE22034233B8BD9000C4BB4 /* SpotifyApiTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpotifyApiTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		CEE22037233BAE08000C4BB4 /* SpotifySDKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				CEE2201E233B88D1000C4BB4 /* AppDelegate.swift */,
 				CEE22020233B88D1000C4BB4 /* SceneDelegate.swift */,
 				CEE22022233B88D1000C4BB4 /* ViewController.swift */,
+				CEE22037233BAE08000C4BB4 /* SpotifySDKManager.swift */,
 				CEE22024233B88D1000C4BB4 /* Main.storyboard */,
 				CEE22027233B88D3000C4BB4 /* Assets.xcassets */,
 				CEE22029233B88D3000C4BB4 /* LaunchScreen.storyboard */,
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE22023233B88D1000C4BB4 /* ViewController.swift in Sources */,
+				CEE22038233BAE08000C4BB4 /* SpotifySDKManager.swift in Sources */,
 				CEE2201F233B88D1000C4BB4 /* AppDelegate.swift in Sources */,
 				CEE22021233B88D1000C4BB4 /* SceneDelegate.swift in Sources */,
 			);
