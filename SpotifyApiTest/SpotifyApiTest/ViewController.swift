@@ -56,6 +56,7 @@ final class SpotifySDKManager: NSObject {
     }
     
     func handleRedirectUrl(url: URL) -> Bool {
+        // TODO: check redirect url (spotifyTest://spotify-login-callback)
         
         guard let urlComponents = URLComponents(string: url.absoluteString) else {
             assertionFailure()
