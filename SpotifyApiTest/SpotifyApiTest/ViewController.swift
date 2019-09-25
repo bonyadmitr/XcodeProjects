@@ -51,8 +51,24 @@ final class SpotifySDKManager: NSObject {
         } else if let controller = UIApplication.shared.keyWindow?.rootViewController {
             sessionManager.initiateSession(with: scope, options: .clientOnly, presenting: controller)
         } else {
-            assertionFailure("never should be called")
+            assertionFailure("should be never called")
         }
+    }
+    
+    func handleRedirectUrl(url: URL) -> Bool {
+        
+        guard let urlComponents = URLComponents(string: url.absoluteString) else {
+            assertionFailure()
+            return false
+        }
+        
+        if let code = urlComponents.queryItems?.first(where: { $0.name == "code"})?.value {
+            print("success with code: \(code)")
+        } else {
+            assertionFailure("should be never called")
+//            delegate?.showSpotifyAuthWebViewController()
+        }
+        return true
     }
 }
 

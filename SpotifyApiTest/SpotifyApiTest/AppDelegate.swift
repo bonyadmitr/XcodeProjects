@@ -32,6 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    /// iOS 9+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if SpotifySDKManager.shared.handleRedirectUrl(url: url) {
+            return true
+        }
+        return false
+    }
 }
 
