@@ -21,12 +21,12 @@ class ViewController: UIViewController {
 import UIKit
 import WebKit
 
-protocol SpotifyAuthViewControllerDelegate: class {
+protocol SpotifyWebViewAuthControllerDelegate: class {
     func spotifyAuthSuccess(with code: String)
     func spotifyAuthCancel()
 }
 
-final class SpotifyAuthViewController: UIViewController {
+final class SpotifyWebViewAuthController: UIViewController {
     
     private let webView = WKWebView()
     
@@ -39,7 +39,7 @@ final class SpotifyAuthViewController: UIViewController {
         return activityIndicator
     }()
     
-    weak var delegate: SpotifyAuthViewControllerDelegate?
+    weak var delegate: SpotifyWebViewAuthControllerDelegate?
     
     deinit {
         webView.navigationDelegate = nil
@@ -47,8 +47,8 @@ final class SpotifyAuthViewController: UIViewController {
     }
     
     override func loadView() {
-        webView.navigationDelegate = self
         view = webView
+        webView.navigationDelegate = self
         title = "Spotify login"
     }
     
@@ -100,7 +100,7 @@ final class SpotifyAuthViewController: UIViewController {
     }
 }
 
-extension SpotifyAuthViewController: WKNavigationDelegate {
+extension SpotifyWebViewAuthController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         stopActivity()
