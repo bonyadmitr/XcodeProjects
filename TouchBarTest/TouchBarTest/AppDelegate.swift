@@ -15,7 +15,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+//        0x200000001000000
+//        0x300000080500000
+        let actuatorRef = MTActuatorCreateFromDeviceID(0x300000080500000).takeRetainedValue()
+        let result = MTActuatorOpen(actuatorRef)
+        if result != kIOReturnSuccess {
+            print("private api not working")
+        }
         
+        
+        HapticFeedback.shared.tap(strong: 6)
         TouchBarManager.shared.setup()
         
     }
