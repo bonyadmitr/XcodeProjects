@@ -39,8 +39,9 @@ final class SpotifyWebViewAuthController: UIViewController {
         
         let clientID = "8ea6ec9161534d84be983e780390a6a7"
         
+        ///  don't fogget to use the same url on https://developer.spotify.com/dashboard/applications"
         let redirectUrl = "spotifytest://spotify-login-callback"
-        assert(redirectUrl == redirectUrl.lowercased(), "don't use CAPITAL letters in custom urls. it will be need in urls comparison")
+        assert(redirectUrl == redirectUrl.lowercased(), "don't use CAPITAL letters in custom urls. it will be need in urls comparison.")
         
         guard let url = URL(string: "https://accounts.spotify.com/authorize?client_id=\(clientID)&response_type=code&redirect_uri=\(redirectUrl)&scope=playlist-read-private") else {
             assertionFailure()
