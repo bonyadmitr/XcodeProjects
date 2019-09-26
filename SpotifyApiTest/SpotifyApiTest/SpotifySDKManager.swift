@@ -4,9 +4,6 @@ final class SpotifySDKManager: NSObject {
     
     static let shared = SpotifySDKManager()
     
-    /// get from https://developer.spotify.com/dashboard/applications
-    private let clientID = "8ea6ec9161534d84be983e780390a6a7"
-    
     private let redirectUrl: URL = {
         if let url = URL(string: "spotifyTest://spotify-login-callback") {
             return url
@@ -17,6 +14,9 @@ final class SpotifySDKManager: NSObject {
     }()
     
     private lazy var sessionManager: SPTSessionManager = {
+        /// get from https://developer.spotify.com/dashboard/applications
+        let clientID = "8ea6ec9161534d84be983e780390a6a7"
+        
         let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
         return SPTSessionManager(configuration: configuration, delegate: self)
     }()
