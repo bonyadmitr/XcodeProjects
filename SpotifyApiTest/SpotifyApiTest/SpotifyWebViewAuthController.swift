@@ -5,6 +5,10 @@ protocol SpotifyWebViewAuthControllerDelegate: class {
     func spotifyAuthCancel()
 }
 
+/// spotify apps settings https://developer.spotify.com/dashboard/applications
+/// iOS SDK https://developer.spotify.com/documentation/ios/quick-start/
+/// web api https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+/// scopes https://developer.spotify.com/documentation/general/guides/scopes/
 final class SpotifyWebViewAuthController: UIViewController {
     
     private let webView = WKWebView()
