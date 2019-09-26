@@ -1,7 +1,7 @@
 import WebKit
 
 protocol SpotifyWebViewAuthControllerDelegate: class {
-    func spotifyAuthSuccess(with code: String)
+    func spotifyAuthSuccess(with spotifyCode: String)
     func spotifyAuthCancel()
 }
 
@@ -36,25 +36,39 @@ final class SpotifyWebViewAuthController: UIViewController {
         
         view.addSubview(activityIndicator)
         removeCache()
+        
+        let clientID = "8ea6ec9161534d84be983e780390a6a7"
+        
+        let redirectUrl = "spotifytest://spotify-login-callback"
+        assert(redirectUrl == redirectUrl.lowercased(), "don't use CAPITAL letters in custom urls. it will be need in urls comparison")
+        
+        guard let url = URL(string: "https://accounts.spotify.com/authorize?client_id=\(clientID)&response_type=code&redirect_uri=\(redirectUrl)&scope=playlist-read-private") else {
+            assertionFailure()
+            return
+        }
+        
+        loadWebView(with: url)
         startActivity()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent {
+            delegate?.spotifyAuthCancel()
+        }
     }
     
     func loadWebView(with url: URL) {
         let request = URLRequest(url: url)
         webView.load(request)
     }
-    
-    private func handleBackButton() {
-        if isMovingFromParent {
-            delegate?.spotifyAuthCancel()
-        }
-    }
 
     private func removeCache() {
         let dataStore = WKWebsiteDataStore.default()
         dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             
-            // TODO: need to check
+            // TODO: needs to check
             dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(),
                                  for: records,
                                  completionHandler: {})
@@ -87,31 +101,38 @@ extension SpotifyWebViewAuthController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         stopActivity()
-        delegate?.spotifyAuthCancel()
+        //delegate?.spotifyAuthCancel()
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        guard let currentUrl = navigationAction.request.url else {
+        guard let webPageUrl = navigationAction.request.url else {
             decisionHandler(.cancel)
             return
         }
         
-        guard let queryItems = URLComponents(string: currentUrl.absoluteString)?.queryItems else {
-            assertionFailure()
-            return
-        }
-        
-        if let spotifyCode = queryItems.first(where: { $0.name == "code"})?.value {
-            print("success with code: \(spotifyCode)")
-            
-            delegate?.spotifyAuthSuccess(with: spotifyCode)
-            removeCache()
-            
-            decisionHandler(.cancel)
-        } else {
-            assertionFailure("should be never called")
+        guard let scheme = webPageUrl.scheme, let host = webPageUrl.host else {
             decisionHandler(.allow)
+            return
         }
+        
+        let currentUrl = "\(scheme)://\(host)"
+        let redirectUrl = "spotifytest://spotify-login-callback"
+        
+        guard
+            currentUrl == redirectUrl,
+            let queryItems = URLComponents(string: webPageUrl.absoluteString)?.queryItems,
+            let spotifyCode = queryItems.first(where: { $0.name == "code" })?.value
+        else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        //removeCache()
+        
+        /// can be .allow but we don't need loads somthing else
+        decisionHandler(.cancel)
+        
+        delegate?.spotifyAuthSuccess(with: spotifyCode)
     }
 }
