@@ -4,18 +4,17 @@ final class SpotifySDKManager: NSObject {
     
     static let shared = SpotifySDKManager()
     
-    private let redirectUrl: URL = {
-        if let url = URL(string: "spotifyTest://spotify-login-callback") {
-            return url
-        } else {
-            assertionFailure()
-            return URL(fileURLWithPath: "")
-        }
-    }()
-    
     private lazy var sessionManager: SPTSessionManager = {
         /// get from https://developer.spotify.com/dashboard/applications
         let clientID = "8ea6ec9161534d84be983e780390a6a7"
+        
+        let redirectUrl: URL
+        if let url = URL(string: "spotifyTest://spotify-login-callback") {
+            redirectUrl = url
+        } else {
+            assertionFailure()
+            redirectUrl = URL(fileURLWithPath: "")
+        }
         
         let configuration = SPTConfiguration(clientID: clientID, redirectURL: redirectUrl)
         return SPTSessionManager(configuration: configuration, delegate: self)
