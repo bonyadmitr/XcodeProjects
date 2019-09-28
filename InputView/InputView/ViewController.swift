@@ -13,9 +13,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addDatePickerView()
+        addKeyboardInputView()
+    }
+    
+    private func addDatePickerView() {
         let datePickerView = DatePickerView(frame: .init(x: 50, y: 100, width: 300, height: 100))
         datePickerView.backgroundColor = .systemTeal
         view.addSubview(datePickerView)
+    }
+    
+    private func addKeyboardInputView() {
         
         let toolBar: UIToolbar = {
             let toolBar = UIToolbar()
@@ -45,7 +53,7 @@ class ViewController: UIViewController {
         keyboardInputView.set(inputView: nil, inputAccessoryView: toolBar)
         view.addSubview(keyboardInputView)
     }
-
+    
 }
 
 final class DatePickerView: InputView {
