@@ -46,10 +46,6 @@ class InputView: UIView {
         addGestureRecognizer(tapGesture)
     }
     
-    @objc func closeInputView() {
-        resignFirstResponder()
-    }
-    
     @objc func openInputView() {
         assert(window != nil, "Never call becomeFirstResponder() on a view that is not part of an active view hierarchy")
         becomeFirstResponder()
@@ -87,7 +83,7 @@ final class DatePickerView: InputView {
         toolBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 44)
         
         toolBar.items = [.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-                         .init(title: "Done", style: .plain, target: self, action: #selector(closeInputView))]
+                         .init(title: "Done", style: .plain, target: self, action: #selector(resignFirstResponder))]
         
         /// update toolBar.frame.height to system one. defalut 44
         toolBar.sizeToFit()
