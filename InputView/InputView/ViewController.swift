@@ -111,6 +111,7 @@ final class DatePickerView: InputView {
     }()
 }
 
+// TODO: add another methods from UITextInputTraits
 final class KeyboardInputView: InputView, UITextInputTraits {
     
     var text = ""
