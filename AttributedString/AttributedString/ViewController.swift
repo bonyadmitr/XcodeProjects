@@ -138,6 +138,7 @@ class ViewController: UIViewController {
             /// and error "AttributedString called within transaction"
             
             do {
+                /// possible crash https://forums.developer.apple.com/thread/115405
                 let attributedString = try NSAttributedString(data: data, options:
                     [.documentType: NSAttributedString.DocumentType.html,
                      .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
