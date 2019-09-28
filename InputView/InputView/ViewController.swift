@@ -18,6 +18,7 @@ class ViewController: UIViewController {
 
 }
 
+/// can be used UIControl
 class InputView: UIView {
     
     private var customInputView: UIView?
