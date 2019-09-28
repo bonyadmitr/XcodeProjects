@@ -51,6 +51,7 @@ class InputView: UIView {
     }
     
     @objc func openInputView() {
+        assert(window != nil, "Never call becomeFirstResponder() on a view that is not part of an active view hierarchy")
         becomeFirstResponder()
     }
 }
