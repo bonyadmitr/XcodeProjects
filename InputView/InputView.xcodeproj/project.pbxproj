@@ -15,6 +15,7 @@
 		CEFF7B75233F4151007282B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFF7B73233F4151007282B0 /* LaunchScreen.storyboard */; };
 		CEFF7B7D233F4268007282B0 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF7B7C233F4268007282B0 /* InputView.swift */; };
 		CEFF7B7F233F4507007282B0 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF7B7E233F4507007282B0 /* DatePickerView.swift */; };
+		CEFF7B81233F4526007282B0 /* KeyboardInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF7B80233F4526007282B0 /* KeyboardInputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CEFF7B76233F4151007282B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFF7B7C233F4268007282B0 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		CEFF7B7E233F4507007282B0 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		CEFF7B80233F4526007282B0 /* KeyboardInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				CEFF7B6C233F4150007282B0 /* ViewController.swift */,
 				CEFF7B7C233F4268007282B0 /* InputView.swift */,
 				CEFF7B7E233F4507007282B0 /* DatePickerView.swift */,
+				CEFF7B80233F4526007282B0 /* KeyboardInputView.swift */,
 				CEFF7B6E233F4150007282B0 /* Main.storyboard */,
 				CEFF7B71233F4151007282B0 /* Assets.xcassets */,
 				CEFF7B73233F4151007282B0 /* LaunchScreen.storyboard */,
@@ -148,6 +151,7 @@
 				CEFF7B7F233F4507007282B0 /* DatePickerView.swift in Sources */,
 				CEFF7B7D233F4268007282B0 /* InputView.swift in Sources */,
 				CEFF7B69233F4150007282B0 /* AppDelegate.swift in Sources */,
+				CEFF7B81233F4526007282B0 /* KeyboardInputView.swift in Sources */,
 				CEFF7B6B233F4150007282B0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
