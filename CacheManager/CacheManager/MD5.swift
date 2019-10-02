@@ -1,10 +1,5 @@
 import Foundation
-
-/// in Bridging-Header.h need
-/// #import <CommonCrypto/CommonCrypto.h>
-//import CommonCrypto
 import CryptoKit
-
 
 /// code using CryptoKit https://stackoverflow.com/a/56578995/5893286
 final class MD5 {
@@ -44,6 +39,36 @@ extension String {
         return md5.hex.uppercased()
     }
 }
+
+/// in Bridging-Header.h needs:
+/// #import <CommonCrypto/CommonCrypto.h>
+///
+/// or can be used:
+/// import CommonCrypto
+///
+//final class MD5 {
+//
+//    lazy var hex = hash.map { String(format: "%02x", $0) }.joined()
+//    lazy var base64 = Data(bytes: hash).base64EncodedString()
+//
+//    private let hash: [UInt8]
+//
+//    init(data: Data) {
+//        self.hash = data.withUnsafeBytes { (bytes: UnsafePointer<Data>) -> [UInt8] in
+//            var hash: [UInt8] = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+//            CC_MD5(bytes, CC_LONG(data.count), &hash)
+//            return hash
+//        }
+//    }
+//
+//    convenience init?(string: String?) {
+//        guard let data = string?.data(using: .utf8) else {
+//            return nil
+//        }
+//        self.init(data: data)
+//    }
+//}
+
 
 //extension String {
 //    var md5: String {
