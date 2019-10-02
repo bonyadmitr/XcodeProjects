@@ -1,6 +1,8 @@
 import Foundation
 import CryptoKit
 
+// MARK: - NEW
+
 /// code using CryptoKit https://stackoverflow.com/a/56578995/5893286
 final class MD5 {
     
@@ -40,6 +42,10 @@ extension String {
     }
 }
 
+
+// MARK: - OLD
+
+
 /// in Bridging-Header.h needs:
 /// #import <CommonCrypto/CommonCrypto.h>
 ///
@@ -68,6 +74,10 @@ extension String {
 //        self.init(data: data)
 //    }
 //}
+
+
+// MARK: - Kingfisher
+/// source https://github.com/onevcat/Kingfisher/blob/master/Sources/Utility/String%2BMD5.swift
 
 
 //extension String {
