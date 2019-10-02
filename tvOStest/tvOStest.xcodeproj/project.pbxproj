@@ -15,6 +15,7 @@
 		CEEC43722112E87600D7D782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEC43702112E87600D7D782 /* Main.storyboard */; };
 		CEEC43742112E87700D7D782 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEC43732112E87700D7D782 /* Assets.xcassets */; };
 		CEEC437C2112F38500D7D782 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC437B2112F38500D7D782 /* SearchResultsViewController.swift */; };
+		CEFF7B83233F4C64007282B0 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF7B82233F4C63007282B0 /* CollectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CEEC43732112E87700D7D782 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEEC43752112E87700D7D782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEEC437B2112F38500D7D782 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		CEFF7B82233F4C63007282B0 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				CEEC436E2112E87600D7D782 /* ViewController.swift */,
 				CE9AFACB211D5ECF006AF836 /* TabBarController.swift */,
 				CE9AFACD211D5EF4006AF836 /* SearchController.swift */,
+				CEFF7B82233F4C63007282B0 /* CollectionController.swift */,
 				CEEC437B2112F38500D7D782 /* SearchResultsViewController.swift */,
 				CE739471211349300073DA4F /* UISearchController+Layout.swift */,
 			);
@@ -155,6 +158,7 @@
 				CE9AFACE211D5EF4006AF836 /* SearchController.swift in Sources */,
 				CEEC437C2112F38500D7D782 /* SearchResultsViewController.swift in Sources */,
 				CEEC436D2112E87600D7D782 /* AppDelegate.swift in Sources */,
+				CEFF7B83233F4C64007282B0 /* CollectionController.swift in Sources */,
 				CE9AFACC211D5ECF006AF836 /* TabBarController.swift in Sources */,
 				CE739472211349300073DA4F /* UISearchController+Layout.swift in Sources */,
 			);
