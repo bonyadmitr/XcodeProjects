@@ -250,6 +250,9 @@ extension NSSound {
 //}
 
 
+/// NSTouchBar apple tutorial https://developer.apple.com/documentation/appkit/touch_bar/integrating_a_toolbar_and_touch_bar_into_your_app
+/// NSTouchBar apple doc https://developer.apple.com/documentation/appkit/nstouchbar
+/// NSTouchBarItem apple doc https://developer.apple.com/documentation/appkit/nstouchbaritem
 @available(OSX 10.12.2, *)
 final class TouchBarManager: NSObject, NSTouchBarProvider {
     
