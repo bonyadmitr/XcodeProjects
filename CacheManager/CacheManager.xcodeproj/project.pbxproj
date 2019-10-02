@@ -14,6 +14,7 @@
 		CE080871234484C900F1944F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE080870234484C900F1944F /* Assets.xcassets */; };
 		CE080874234484C900F1944F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE080872234484C900F1944F /* LaunchScreen.storyboard */; };
 		CE08087C23448CDD00F1944F /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08087B23448CDD00F1944F /* MD5.swift */; };
+		CE08087E2344DEA400F1944F /* MemoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08087D2344DEA400F1944F /* MemoryStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE080873234484C900F1944F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE080875234484C900F1944F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE08087B23448CDD00F1944F /* MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		CE08087D2344DEA400F1944F /* MemoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				CE080869234484C800F1944F /* SceneDelegate.swift */,
 				CE08086B234484C800F1944F /* ViewController.swift */,
 				CE08087B23448CDD00F1944F /* MD5.swift */,
+				CE08087D2344DEA400F1944F /* MemoryStorage.swift */,
 				CE08086D234484C800F1944F /* Main.storyboard */,
 				CE080870234484C900F1944F /* Assets.xcassets */,
 				CE080872234484C900F1944F /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 				CE080868234484C800F1944F /* AppDelegate.swift in Sources */,
 				CE08087C23448CDD00F1944F /* MD5.swift in Sources */,
 				CE08086A234484C800F1944F /* SceneDelegate.swift in Sources */,
+				CE08087E2344DEA400F1944F /* MemoryStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
