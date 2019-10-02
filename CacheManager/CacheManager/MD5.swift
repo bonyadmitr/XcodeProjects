@@ -1,46 +1,60 @@
 import Foundation
 import CryptoKit
 
+// MARK: - Simple
+
+/// code using CryptoKit https://stackoverflow.com/a/56578995/5893286
+extension String {
+    var md5: String {
+        guard let data = data(using: .utf8) else {
+            assertionFailure("something wrong with string: \(self)")
+            return self
+        }
+        let digest = Insecure.MD5.hash(data: data)
+        return digest.map { String(format: "%02hhx", $0) }.joined()
+    }
+}
+
 // MARK: - NEW
 
 /// code using CryptoKit https://stackoverflow.com/a/56578995/5893286
-final class MD5 {
-    
-    lazy var hex = digest.map { String(format: "%02x", $0) }.joined()
-    lazy var base64 = Data(digest).base64EncodedString()
-    
-    private let digest: Insecure.MD5.Digest
-    
-    init(data: Data) {
-        digest = Insecure.MD5.hash(data: data)
-    }
-    
-    convenience init?(string: String?) {
-        guard let data = string?.data(using: .utf8) else {
-            return nil
-        }
-        self.init(data: data)
-    }
-}
-extension MD5 {
-    static func from(_ string: String) -> String {
-        guard let md5 = MD5(string: string) else {
-            assertionFailure()
-            return string
-        }
-        return md5.hex.uppercased()
-    }
-}
-
-extension String {
-    var md5: String {
-        guard let md5 = MD5(string: self) else {
-            assertionFailure()
-            return self
-        }
-        return md5.hex.uppercased()
-    }
-}
+//final class MD5 {
+//
+//    lazy var hex = digest.map { String(format: "%02x", $0) }.joined()
+//    lazy var base64 = Data(digest).base64EncodedString()
+//
+//    private let digest: Insecure.MD5.Digest
+//
+//    init(data: Data) {
+//        digest = Insecure.MD5.hash(data: data)
+//    }
+//
+//    convenience init?(string: String?) {
+//        guard let data = string?.data(using: .utf8) else {
+//            return nil
+//        }
+//        self.init(data: data)
+//    }
+//}
+//extension MD5 {
+//    static func from(_ string: String) -> String {
+//        guard let md5 = MD5(string: string) else {
+//            assertionFailure()
+//            return string
+//        }
+//        return md5.hex.uppercased()
+//    }
+//}
+//
+//extension String {
+//    var md5: String {
+//        guard let md5 = MD5(string: self) else {
+//            assertionFailure()
+//            return self
+//        }
+//        return md5.hex.uppercased()
+//    }
+//}
 
 
 // MARK: - OLD
