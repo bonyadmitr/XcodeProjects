@@ -239,6 +239,13 @@ extension ViewController: NSTableViewDataSource {
             let alert = NSAlert()
             alert.messageText = "Unable to open \(text)"
             alert.runModal()
+            
+            //let button = alert.addButton(withTitle: "OK")
+            //let disableDefalutButton = true
+            //if disableDefalutButton {
+            //    /// to remove blue button selection and hotkey by Enter key
+            //    button.keyEquivalent = ""
+            //}
         }
     }
     
