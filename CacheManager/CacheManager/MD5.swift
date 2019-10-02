@@ -26,14 +26,22 @@ final class MD5 {
     }
 }
 extension MD5 {
-    static func from(_ string: String) -> String? {
-        return MD5(string: string)?.hex.uppercased()
+    static func from(_ string: String) -> String {
+        guard let md5 = MD5(string: string) else {
+            assertionFailure()
+            return string
+        }
+        return md5.hex.uppercased()
     }
 }
 
 extension String {
-    var md5: String? {
-        return MD5(string: self)?.hex.uppercased()
+    var md5: String {
+        guard let md5 = MD5(string: self) else {
+            assertionFailure()
+            return self
+        }
+        return md5.hex.uppercased()
     }
 }
 
