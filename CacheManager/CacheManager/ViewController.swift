@@ -528,6 +528,16 @@ extension Date {
     }
 }
 
+// TODO: description
+enum DiskStorageErrors: LocalizedError {
+    case cannotCreateDirectory(path: String, error: Error)
+    case invalidURLResource(key: String, url: URL, error: Error)
+    case cannotLoadDataFromDisk(url: URL, error: Error)
+    case fileEnumeratorCreationFailed(url: URL)
+    case invalidFileEnumeratorContent(url: URL)
+    case cannotConvertToData(object: Any, error: Error)
+}
+
 
 /// Represents a set of conception related to storage which stores a certain type of value in disk.
 /// This is a namespace for the disk storage types. A `Backend` with a certain `Config` will be used to describe the
@@ -589,8 +599,7 @@ public enum DiskStorage {
                     withIntermediateDirectories: true,
                     attributes: nil)
             } catch {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .cannotCreateDirectory(path: path, error: error))
+                throw DiskStorageErrors.cannotCreateDirectory(path: path, error: error)
             }
         }
 
@@ -607,8 +616,7 @@ public enum DiskStorage {
             do {
                 data = try value.toData()
             } catch {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .cannotConvertToData(object: value, error: error))
+                throw DiskStorageErrors.cannotConvertToData(object: value, error: error)
             }
 
             let fileURL = cacheFileURL(forKey: key)
@@ -636,6 +644,7 @@ public enum DiskStorage {
             let fileManager = config.fileManager
             let fileURL = cacheFileURL(forKey: key)
             let filePath = fileURL.path
+            
             guard fileManager.fileExists(atPath: filePath) else {
                 return nil
             }
@@ -645,14 +654,15 @@ public enum DiskStorage {
                 let resourceKeys: Set<URLResourceKey> = [.contentModificationDateKey, .creationDateKey]
                 meta = try FileMeta(fileURL: fileURL, resourceKeys: resourceKeys)
             } catch {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .invalidURLResource(error: error, key: key, url: fileURL))
+                throw DiskStorageErrors.invalidURLResource(key: key, url: fileURL, error: error)
             }
 
             if meta.expired(referenceDate: referenceDate) {
                 return nil
             }
-            if !actuallyLoad { return T.empty }
+            if !actuallyLoad {
+                return T.empty
+            }
 
             do {
                 let data = try Data(contentsOf: fileURL)
@@ -660,24 +670,24 @@ public enum DiskStorage {
                 metaChangingQueue.async { meta.extendExpiration(with: fileManager, extendingExpiration: extendingExpiration) }
                 return obj
             } catch {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .cannotLoadDataFromDisk(url: fileURL, error: error))
+                throw DiskStorageErrors.cannotLoadDataFromDisk(url: fileURL, error: error)
             }
         }
 
-        func isCached(forKey key: String) -> Bool {
-            return isCached(forKey: key, referenceDate: Date())
-        }
+//        func isCached(forKey key: String) -> Bool {
+//            return isCached(forKey: key, referenceDate: Date())
+//        }
 
-        func isCached(forKey key: String, referenceDate: Date) -> Bool {
-            do {
-                guard let _ = try value(forKey: key, referenceDate: referenceDate, actuallyLoad: false, extendingExpiration: .none) else {
-                    return false
-                }
-                return true
-            } catch {
-                return false
-            }
+        func isCached(forKey key: String, referenceDate: Date = Date()) -> Bool {
+            return (try? value(forKey: key, referenceDate: referenceDate, actuallyLoad: false, extendingExpiration: .none)) != nil
+//            do {
+//                guard let _ = try value(forKey: key, referenceDate: referenceDate, actuallyLoad: false, extendingExpiration: .none) else {
+//                    return false
+//                }
+//                return true
+//            } catch {
+//                return false
+//            }
         }
 
         func remove(forKey key: String) throws {
@@ -734,13 +744,11 @@ public enum DiskStorage {
             guard let directoryEnumerator = fileManager.enumerator(
                 at: directoryURL, includingPropertiesForKeys: propertyKeys, options: .skipsHiddenFiles) else
             {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .fileEnumeratorCreationFailed(url: directoryURL))
+                throw DiskStorageErrors.fileEnumeratorCreationFailed(url: directoryURL)
             }
 
             guard let urls = directoryEnumerator.allObjects as? [URL] else {
-                throw someError
-                //throw KingfisherError.cacheError(reason: .invalidFileEnumeratorContent(url: directoryURL))
+                throw DiskStorageErrors.invalidFileEnumeratorContent(url: directoryURL)
             }
             return urls
         }
@@ -954,6 +962,3 @@ public protocol DataTransformable {
     static func fromData(_ data: Data) throws -> Self
     static var empty: Self { get }
 }
-
-
-let someError = NSError(domain: "", code: 0, userInfo: nil)
