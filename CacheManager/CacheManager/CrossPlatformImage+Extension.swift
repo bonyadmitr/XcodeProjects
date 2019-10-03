@@ -1,4 +1,18 @@
+#if os(macOS)
+import AppKit
+#else
 import UIKit
+//import MobileCoreServices
+#endif
+
+//#if !os(watchOS)
+//import CoreImage
+//#endif
+
+//import CoreGraphics
+//import ImageIO
+
+/// needs only for AVFileType.heic
 import AVFoundation
 
 extension CrossPlatformImage {
