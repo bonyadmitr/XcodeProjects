@@ -492,8 +492,11 @@ extension ImageFormat {
     }
     
     static func data(with image: CrossPlatformImage, original: Data?) -> Data? {
-        //return image.kf.data(format: original?.kf.imageFormat ?? .unknown)
-        return nil
+        if let original = original {
+            return image.data(format: get(from: original))
+        } else {
+            return image.data(format: .unknown)
+        }
     }
     
 
