@@ -95,8 +95,8 @@ class AppearanceConfigurator {
         UINavigationBar.appearance().barTintColor = Colors.main //bar's background
         UINavigationBar.appearance().tintColor = Colors.text1 //bar's buttons
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 12),
-            NSForegroundColorAttributeName: Colors.text1
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+            NSAttributedString.Key.foregroundColor: Colors.text1
         ]
 //
 //        /// shadow line off.
