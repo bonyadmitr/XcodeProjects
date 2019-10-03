@@ -249,15 +249,15 @@ extension CrossPlatformImage {
     }
     
     #if os(macOS)
-    func fixedForRetinaPixel(cgImage: CGImage, to size: CGSize) -> CrossPlatformImage {
-        
-        let image = CrossPlatformImage(cgImage: cgImage, size: base.size)
-        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
-        
-        return draw(to: self.size) { context in
-            image.draw(in: rect, from: .zero, operation: .copy, fraction: 1.0)
-        }
-    }
+//    func fixedForRetinaPixel(cgImage: CGImage, to size: CGSize) -> CrossPlatformImage {
+//        
+//        let image = CrossPlatformImage(cgImage: cgImage, size: base.size)
+//        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+//        
+//        return draw(to: self.size) { context in
+//            image.draw(in: rect, from: .zero, operation: .copy, fraction: 1.0)
+//        }
+//    }
     #endif
     
     static func image(cgImage: CGImage, scale: CGFloat, refImage: CrossPlatformImage?) -> CrossPlatformImage {
