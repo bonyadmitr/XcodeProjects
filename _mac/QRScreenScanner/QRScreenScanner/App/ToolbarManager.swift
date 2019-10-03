@@ -29,15 +29,11 @@ private extension NSTouchBar.CustomizationIdentifier {
 
 
 // TODO: without "itemsWidth". fit width for any localization
-/// https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
-///
-/// new api
-/// https://github.com/peteog/Samples/blob/master/macOS/NSToolbarSegments/NSToolbarSegments/MainWindowController.swift
-///
-/// https://stackoverflow.com/a/55883314/5893286
-///
-/// system images
-/// https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/system-icons/
+/// NSSegmentedControl https://christiantietze.de/posts/2018/11/reliable-nssegmentedcontrol-in-toolbar/
+/// new api https://github.com/peteog/Samples/blob/master/macOS/NSToolbarSegments/NSToolbarSegments/MainWindowController.swift
+/// a lot of code for toolBar https://stackoverflow.com/a/55883314/5893286
+/// system images https://developer.apple.com/design/human-interface-guidelines/macos/icons-and-images/system-icons/
+/// ValidatingToolbarItem https://github.com/peteog/Samples/blob/master/macOS/ToolbarState/ToolbarState/ViewController.swift
 ///
 /// after adding items in edit mode there will be layout error "Unable to simultaneously satisfy constraints"
 final class ToolbarManager: NSObject {
@@ -254,6 +250,9 @@ extension NSSound {
 //}
 
 
+/// NSTouchBar apple tutorial https://developer.apple.com/documentation/appkit/touch_bar/integrating_a_toolbar_and_touch_bar_into_your_app
+/// NSTouchBar apple doc https://developer.apple.com/documentation/appkit/nstouchbar
+/// NSTouchBarItem apple doc https://developer.apple.com/documentation/appkit/nstouchbaritem
 @available(OSX 10.12.2, *)
 final class TouchBarManager: NSObject, NSTouchBarProvider {
     
