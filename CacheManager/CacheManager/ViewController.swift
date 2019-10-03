@@ -127,13 +127,3 @@ extension Date {
         return Date(timeIntervalSince1970: ceil(timeIntervalSince1970))
     }
 }
-
-// TODO: description
-enum DiskStorageErrors: LocalizedError {
-    case cannotCreateDirectory(path: String, error: Error)
-    case invalidURLResource(key: String, url: URL, error: Error)
-    case cannotLoadDataFromDisk(url: URL, error: Error)
-    case fileEnumeratorCreationFailed(url: URL)
-    case invalidFileEnumeratorContent(url: URL)
-    case cannotConvertToData(object: Any, error: Error)
-}
