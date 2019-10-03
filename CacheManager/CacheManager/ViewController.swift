@@ -96,7 +96,7 @@ public enum ExpirationExtending {
 
 
 /// Constants for some time intervals
-struct TimeConstants {
+enum TimeConstants {
     static let secondsInOneMinute = 60
     static let minutesInOneHour = 60
     static let hoursInOneDay = 24
