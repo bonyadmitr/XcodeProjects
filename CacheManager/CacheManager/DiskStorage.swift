@@ -316,7 +316,7 @@ extension DiskStorage {
         let fileManager: FileManager
         let directory: URL?
 
-        var cachePathBlock: ((_ directory: URL, _ cacheName: String) -> URL)! = {
+        var cachePathBlock: ((_ directory: URL, _ cacheName: String) -> URL) = {
             (directory, cacheName) in
             return directory.appendingPathComponent(cacheName, isDirectory: true)
         }
@@ -587,11 +587,16 @@ extension CrossPlatformImage {
     public func data(format: ImageFormat) -> Data? {
         return autoreleasepool { () -> Data? in
             let data: Data?
+            
             switch format {
-            case .png: data = pngRepresentation()
-            case .jpg: data = jpegRepresentation(compressionQuality: 1.0)
-            case .heic: data = heicRepresentation(quality: 1.0)
-            case .unknown: data = normalized.pngRepresentation()
+            case .png:
+                data = pngRepresentation()
+            case .jpg:
+                data = jpegRepresentation(compressionQuality: 1.0)
+            case .heic:
+                data = heicRepresentation(quality: 1.0)
+            case .unknown:
+                data = normalized.pngRepresentation()
             }
             
             return data
@@ -599,15 +604,26 @@ extension CrossPlatformImage {
     }
     
     public var normalized: CrossPlatformImage {
+        
         // prevent animated image (GIF) lose it's images
         guard images == nil else {
-            return copy() as! CrossPlatformImage
+            if let copy = copy() as? CrossPlatformImage {
+                return copy
+            } else {
+                assertionFailure()
+                return CrossPlatformImage()
+            }
         }
+        
         // No need to do anything if already up
         guard imageOrientation != .up else {
-            return copy() as! CrossPlatformImage
+            if let copy = copy() as? CrossPlatformImage {
+                return copy
+            } else {
+                assertionFailure()
+                return CrossPlatformImage()
+            }
         }
-
         
         return draw(to: size, inverting: true, refImage: CrossPlatformImage()) {
             fixOrientation(in: $0)
@@ -634,6 +650,7 @@ extension CrossPlatformImage {
             break
         #if compiler(>=5)
         @unknown default:
+            assertionFailure()
             break
         #endif
         }
@@ -650,16 +667,23 @@ extension CrossPlatformImage {
             break
         #if compiler(>=5)
         @unknown default:
+            assertionFailure()
             break
         #endif
         }
 
         context.concatenate(transform)
+        
+        guard let cgImage = cgImage else {
+            assertionFailure()
+            return
+        }
+        
         switch orientation {
         case .left, .leftMirrored, .right, .rightMirrored:
-            context.draw(cgImage!, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
         default:
-            context.draw(cgImage!, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         }
     }
 }
