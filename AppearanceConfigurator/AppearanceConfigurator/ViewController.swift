@@ -404,6 +404,7 @@ final class AppearanceConfigurator {
                 window.addSubview($0)
             }
             
+            /// not working on simulator by traitCollectionDidChange
             UIView.transition(with: window,
                               duration: 0.25,
                               options: .transitionCrossDissolve,
