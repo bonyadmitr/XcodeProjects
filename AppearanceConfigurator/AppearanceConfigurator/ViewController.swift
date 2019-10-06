@@ -407,6 +407,8 @@ final class AppearanceConfigurator {
 
 extension UIApplication {
     func appWindows() -> [UIWindow] {
+        /// UIApplication.shared.windows contains 2 addition windows on system appearance chnage.
+        /// filter your main windows to prevent crash.
         return UIApplication.shared.windows.filter { $0 is AppearanceWindow }
     }
 }
