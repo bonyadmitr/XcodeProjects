@@ -362,8 +362,11 @@ extension AppearanceConfigurator {
     }
     
     func loadSavedTheme() -> Bool {
-        let themeSaveId = UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey) ?? type(of: self).themes[0].saveId
-        guard let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId }) else {
+        
+        guard
+            let themeSaveId = UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey),
+            let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId })
+        else {
             /// will be drop here at first launch
             //assertionFailure()
             return false
