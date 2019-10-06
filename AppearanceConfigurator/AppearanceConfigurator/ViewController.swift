@@ -37,11 +37,49 @@ class ViewController: UIViewController {
             })
         }
         
+        vc.addAction(.init(title: "System", style: .default) { _ in
+            AppearanceConfigurator.shared.useSystem()
+        })
+        
         vc.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
         
         present(vc, animated: true, completion: nil)
     }
     
+}
+
+final class AppearanceWindow: UIWindow {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        updateAppearance()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard AppearanceConfigurator.shared.isSystemUsing() else {
+            return
+        }
+        AppearanceConfigurator.shared.updateThemeForSystem()
+        print("- traitCollectionDidChange")
+    }
+}
+
+extension AppearanceWindow: AppearanceConfiguratable {
+    func updateAppearance() {
+        let userInterfaceStyle: UIUserInterfaceStyle = AppearanceConfigurator.shared.isSystemUsing() ? .unspecified : AppearanceConfigurator.shared.currentTheme.barStyle.userInterfaceStyle
+        overrideUserInterfaceStyle = userInterfaceStyle
+    }
 }
 
 import UIKit
@@ -163,7 +201,12 @@ final class AppearanceConfigurator {
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
         
         /// overrideUserInterfaceStyle  https://developer.apple.com/documentation/appkit/supporting_dark_mode_in_your_interface/choosing_a_specific_interface_style_for_your_ios_app
+        
+//        let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
+//        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
+        
         UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
+        
         
         /// need for translucent UINavigationBar
 //        window?.backgroundColor = theme.backgroundColor
@@ -388,8 +431,29 @@ extension AppearanceConfigurator {
     }
     
     func applyAndSaveCurrent(theme: AppearanceTheme) {
-        apply(theme: theme)
         saveCurrenThemet(theme)
+        apply(theme: theme)
+    }
+    
+    func isSystemUsing() -> Bool {
+        return UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey) == nil
+    }
+    
+    func useSystem() {
+        UserDefaults.standard.set(nil, forKey: type(of: self).saveThemeKey)
+        #if DEBUG
+        UserDefaults.standard.synchronize()
+        #endif
+        
+        updateThemeForSystem()
+    }
+    
+    func updateThemeForSystem() {
+        let themeNumber = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? 2 : 0
+        let theme = AppearanceConfigurator.themes[themeNumber]
+        AppearanceConfigurator.shared.apply(theme: theme)
+        
+        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = .unspecified }
     }
 }
 
