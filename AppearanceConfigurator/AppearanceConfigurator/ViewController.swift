@@ -355,6 +355,10 @@ extension AppearanceConfigurator {
     
     private func saveCurrenThemet(_ theme: AppearanceTheme) {
         UserDefaults.standard.set(theme.saveId, forKey: type(of: self).saveThemeKey)
+        
+        #if DEBUG
+        UserDefaults.standard.synchronize()
+        #endif
     }
     
     func loadSavedTheme() -> Bool {
