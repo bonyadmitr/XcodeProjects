@@ -195,8 +195,11 @@ final class AppearanceConfigurator {
         
         currentTheme = theme
         
-        AppearanceLabel.appearance().update = true
-        AppearanceView.appearance().update = true
+//        AppearanceLabel.appearance().update = true
+//        AppearanceView.appearance().update = true
+        
+        let views: [AppearanceConfiguratable] = [AppearanceLabel.appearance(), AppearanceView.appearance()]
+        views.forEach { $0.updateAppearance() }
         
         
 //        delegates.invoke { $0.didApplied(theme: theme) }
@@ -430,13 +433,20 @@ final class AppearanceLabel: UILabel {
     }
     
     private func setup() {
+        updateAppearance()
+    }
+    
+}
+
+extension AppearanceLabel: AppearanceConfiguratable {
+    func updateAppearance() {
         let theme = AppearanceConfigurator.shared.currentTheme
         
         backgroundColor = theme.backgroundColor
         textColor = theme.textColor
     }
-    
 }
+
 
 final class AppearanceView: UIView {
     
@@ -457,9 +467,20 @@ final class AppearanceView: UIView {
     }
     
     private func setup() {
-        let theme = AppearanceConfigurator.shared.currentTheme
-        
-        backgroundColor = theme.backgroundColor
+        updateAppearance()
     }
     
 }
+
+extension AppearanceView: AppearanceConfiguratable {
+    func updateAppearance() {
+        let theme = AppearanceConfigurator.shared.currentTheme
+        backgroundColor = theme.backgroundColor
+    }
+}
+
+protocol AppearanceConfiguratable {
+    func updateAppearance()
+}
+
+
