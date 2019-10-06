@@ -13,6 +13,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+//        overrideUserInterfaceStyle
+        
+//        UIScreen.main.traitCollection
+        
+        //let color = UIColor { traitCollection in
+        //    switch (traitCollection.userInterfaceStyle, traitCollection.accessibilityContrast) {
+        //    case (.dark, .high): return UIColor.red
+        //    case (.dark, _):     return UIColor.red
+        //    case (_, .high):     return UIColor.red
+        //    default:             return UIColor.red
+        //    }
+        //}
     }
 
     @IBAction func changeAppearance(_ sender: Any) {
