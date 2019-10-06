@@ -96,6 +96,15 @@ extension AppearanceStyle {
             return .white
         }
     }
+    
+    var userInterfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
 }
 
 
@@ -152,6 +161,9 @@ final class AppearanceConfigurator {
         /// need all windows for Floating window
         /// affects UIActivityViewController and MFMailComposeViewController buttons color
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
+        
+        
+        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
         
         /// need for translucent UINavigationBar
 //        window?.backgroundColor = theme.backgroundColor
