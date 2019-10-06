@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         
         for theme in AppearanceConfigurator.themes {
             vc.addAction(.init(title: theme.name, style: .default) { _ in
-                AppearanceConfigurator.shared.apply(theme: theme)
+                AppearanceConfigurator.shared.applyAndSaveCurrent(theme: theme)
             })
         }
         
@@ -194,6 +194,7 @@ final class AppearanceConfigurator {
 //        AboutHeader.appearance().color = theme.textColor
         
         currentTheme = theme
+    
         
 //        AppearanceLabel.appearance().update = true
 //        AppearanceView.appearance().update = true
@@ -343,14 +344,15 @@ extension AppearanceConfigurator {
         UserDefaults.standard.set(theme.saveId, forKey: type(of: self).saveThemeKey)
     }
     
-    func loadSavedTheme() {
+    func loadSavedTheme() -> Bool {
         let themeSaveId = UserDefaults.standard.string(forKey: AppearanceConfigurator.saveThemeKey) ?? type(of: self).themes[0].saveId
         guard let savedTheme = AppearanceConfigurator.themes.first(where: { $0.saveId == themeSaveId }) else {
             /// will be drop here at first launch
             //assertionFailure()
-            return
+            return false
         }
         apply(theme: savedTheme)
+        return true
     }
     
     func applyAndSaveCurrent(theme: AppearanceTheme) {
