@@ -162,7 +162,7 @@ final class AppearanceConfigurator {
         /// affects UIActivityViewController and MFMailComposeViewController buttons color
         UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
         
-        
+        /// overrideUserInterfaceStyle  https://developer.apple.com/documentation/appkit/supporting_dark_mode_in_your_interface/choosing_a_specific_interface_style_for_your_ios_app
         UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
         
         /// need for translucent UINavigationBar
