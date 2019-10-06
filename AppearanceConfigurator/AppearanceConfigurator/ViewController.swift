@@ -396,11 +396,19 @@ final class AppearanceConfigurator {
 //    }
     
     private func updateAppearance() {
+
         for window in UIApplication.shared.appWindows() {
+            
             window.subviews.forEach {
                 $0.removeFromSuperview()
                 window.addSubview($0)
             }
+            
+            UIView.transition(with: window,
+                              duration: 0.25,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         }
     }
 }
