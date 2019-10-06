@@ -198,14 +198,14 @@ final class AppearanceConfigurator {
     func apply(theme: AppearanceTheme) {
         /// need all windows for Floating window
         /// affects UIActivityViewController and MFMailComposeViewController buttons color
-        UIApplication.shared.windows.forEach { $0.tintColor = theme.windowTintColor }
+        UIApplication.shared.appWindows().forEach { $0.tintColor = theme.windowTintColor }
         
         /// overrideUserInterfaceStyle  https://developer.apple.com/documentation/appkit/supporting_dark_mode_in_your_interface/choosing_a_specific_interface_style_for_your_ios_app
         
 //        let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
-//        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
+//        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
         
-        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
+        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
         
         
         /// need for translucent UINavigationBar
@@ -396,12 +396,18 @@ final class AppearanceConfigurator {
 //    }
     
     private func updateAppearance() {
-        for window in UIApplication.shared.windows {
+        for window in UIApplication.shared.appWindows() {
             window.subviews.forEach {
                 $0.removeFromSuperview()
                 window.addSubview($0)
             }
         }
+    }
+}
+
+extension UIApplication {
+    func appWindows() -> [UIWindow] {
+        return UIApplication.shared.windows.filter { $0 is AppearanceWindow }
     }
 }
 
@@ -453,7 +459,7 @@ extension AppearanceConfigurator {
         let theme = AppearanceConfigurator.themes[themeNumber]
         AppearanceConfigurator.shared.apply(theme: theme)
         
-        UIApplication.shared.windows.forEach { $0.overrideUserInterfaceStyle = .unspecified }
+        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = .unspecified }
     }
 }
 
