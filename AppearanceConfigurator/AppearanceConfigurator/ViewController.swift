@@ -81,8 +81,11 @@ final class AppearanceWindow: UIWindow {
 
 extension AppearanceWindow: AppearanceConfiguratable {
     func updateAppearance() {
-        let userInterfaceStyle: UIUserInterfaceStyle = AppearanceConfigurator.shared.isSystemUsing() ? .unspecified : AppearanceConfigurator.shared.currentTheme.barStyle.userInterfaceStyle
+        let theme = AppearanceConfigurator.shared.currentTheme
+        let userInterfaceStyle: UIUserInterfaceStyle = AppearanceConfigurator.shared.isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
         overrideUserInterfaceStyle = userInterfaceStyle
+        
+        tintColor = theme.windowTintColor
     }
 }
 
