@@ -67,11 +67,15 @@ final class AppearanceWindow: UIWindow {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+            return
+        }
+        
         guard AppearanceConfigurator.shared.isSystemUsing() else {
             return
         }
-        AppearanceConfigurator.shared.updateThemeForSystem()
         print("- traitCollectionDidChange")
+        AppearanceConfigurator.shared.updateThemeForSystem()
     }
 }
 
@@ -202,10 +206,10 @@ final class AppearanceConfigurator {
         
         /// overrideUserInterfaceStyle  https://developer.apple.com/documentation/appkit/supporting_dark_mode_in_your_interface/choosing_a_specific_interface_style_for_your_ios_app
         
-//        let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
-//        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
+        let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
+        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
         
-        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
+//        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
         
         
         /// need for translucent UINavigationBar
@@ -470,7 +474,7 @@ extension AppearanceConfigurator {
         let theme = AppearanceConfigurator.themes[themeNumber]
         AppearanceConfigurator.shared.apply(theme: theme)
         
-        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = .unspecified }
+//        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = .unspecified }
     }
 }
 
