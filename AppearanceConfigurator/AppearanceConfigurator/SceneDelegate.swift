@@ -19,13 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        //guard let _ = (scene as? UIWindowScene) else { return }
-        
         
         if !AppearanceConfigurator.shared.loadSavedTheme() {
             AppearanceConfigurator.shared.updateThemeForSystem()
         }
         
+        /// UIScene programmatic https://medium.com/@ZkHaider/apples-new-uiscene-api-a-programmatic-approach-52d05e382cf2
         guard let windowScene = scene as? UIWindowScene else {
             assertionFailure()
             return
