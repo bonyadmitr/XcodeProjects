@@ -74,6 +74,11 @@ final class AppearanceWindow: UIWindow {
         guard AppearanceConfigurator.shared.isSystemUsing() else {
             return
         }
+        
+        /// there were a crash when press system back button to switch app.
+        /// there were recurve calls on:
+        /// UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = .unspecified }
+        
         print("- traitCollectionDidChange")
         AppearanceConfigurator.shared.updateThemeForSystem()
     }
