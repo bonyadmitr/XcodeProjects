@@ -67,8 +67,10 @@ final class AppearanceWindow: UIWindow {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
-            return
+        if #available(iOS 12.0, *) {
+            guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else {
+                return
+            }
         }
         
         guard AppearanceConfigurator.shared.isSystemUsing() else {
@@ -87,8 +89,11 @@ final class AppearanceWindow: UIWindow {
 extension AppearanceWindow: AppearanceConfiguratable {
     func updateAppearance() {
         let theme = AppearanceConfigurator.shared.currentTheme
-        let userInterfaceStyle: UIUserInterfaceStyle = AppearanceConfigurator.shared.isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
-        overrideUserInterfaceStyle = userInterfaceStyle
+        if #available(iOS 13.0, *) {
+            let userInterfaceStyle: UIUserInterfaceStyle = AppearanceConfigurator.shared.isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
+            overrideUserInterfaceStyle = userInterfaceStyle
+        }
+        
         
         tintColor = theme.windowTintColor
     }
@@ -110,6 +115,7 @@ enum AppearanceStyle {
     case light
     case dark
 }
+
 extension AppearanceStyle {
     var tabAndNavBars: UIBarStyle {
         switch self {
@@ -147,6 +153,7 @@ extension AppearanceStyle {
         }
     }
     
+    @available(iOS 12.0, *)
     var userInterfaceStyle: UIUserInterfaceStyle {
         switch self {
         case .light:
@@ -214,8 +221,11 @@ final class AppearanceConfigurator {
         
         /// overrideUserInterfaceStyle  https://developer.apple.com/documentation/appkit/supporting_dark_mode_in_your_interface/choosing_a_specific_interface_style_for_your_ios_app
         
-        let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
-        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
+        if #available(iOS 13.0, *) {
+            let userInterfaceStyle: UIUserInterfaceStyle = isSystemUsing() ? .unspecified : theme.barStyle.userInterfaceStyle
+            UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = userInterfaceStyle }
+        }
+        
         
 //        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = theme.barStyle.userInterfaceStyle }
         
@@ -281,7 +291,7 @@ final class AppearanceConfigurator {
         
         let views: [AppearanceConfiguratable] = [AppearanceLabel.appearance(), AppearanceView.appearance()]
         views.forEach { $0.updateAppearance() }
-        
+        AppearanceLabel.appearance().updateAppearance()
         
 //        delegates.invoke { $0.didApplied(theme: theme) }
         updateAppearance()
@@ -478,9 +488,14 @@ extension AppearanceConfigurator {
     }
     
     func updateThemeForSystem() {
-        let themeNumber = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? 2 : 0
-        let theme = AppearanceConfigurator.themes[themeNumber]
-        AppearanceConfigurator.shared.apply(theme: theme)
+        if #available(iOS 12.0, *) {
+            let themeNumber = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? 2 : 0
+            let theme = AppearanceConfigurator.themes[themeNumber]
+            AppearanceConfigurator.shared.apply(theme: theme)
+        } else {
+            let theme = AppearanceConfigurator.themes[0]
+            AppearanceConfigurator.shared.apply(theme: theme)
+        }
         
 //        UIApplication.shared.appWindows().forEach { $0.overrideUserInterfaceStyle = .unspecified }
     }
@@ -577,11 +592,11 @@ extension AppearanceLabel: AppearanceConfiguratable {
 
 final class AppearanceView: UIView {
     
-    var update = true {
-        didSet {
-            setup()
-        }
-    }
+//    var update = true {
+//        didSet {
+//            setup()
+//        }
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
