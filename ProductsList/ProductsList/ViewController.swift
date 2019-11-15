@@ -14,14 +14,21 @@ class ViewController: UIViewController {
     
     typealias Model = Product
     typealias Item = Model.Item
+    typealias Cell = ImageTextCell
     private let service = Model.Service()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        _ = dataSource
+        view.addSubview(collectionView)
         fetch()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateItemSize()
+    }
     
     #if targetEnvironment(macCatalyst)
     let padding: CGFloat = 16
@@ -51,7 +58,7 @@ class ViewController: UIViewController {
         #endif
         
         
-        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+        let itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = itemSize
@@ -60,13 +67,18 @@ class ViewController: UIViewController {
         }
     }
     
+    private let cellId = String(describing: Cell.self)
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.delegate = self
         collectionView.alwaysBounceVertical = true
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        
+        collectionView.register(UINib(nibName: String(describing: Cell.self), bundle: nil), forCellWithReuseIdentifier: cellId)
+//        collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
+        
         #if os(iOS)
         collectionView.backgroundColor = .systemBackground
         #endif
@@ -86,7 +98,7 @@ class ViewController: UIViewController {
     
     private var currentSnapshot: NSDiffableDataSourceSnapshot<String, Item> = {
         var snapshot = NSDiffableDataSourceSnapshot<String, Item>()
-        snapshot.appendSections(["Photo"])
+        snapshot.appendSections(["\(Model.self)"])
         return snapshot
     }()
     
@@ -97,7 +109,8 @@ class ViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<String, Item> = {
         return UICollectionViewDiffableDataSource<String, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCell else {
+            // TODO: check weak self
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as? Cell else {
                 assertionFailure()
                 return nil
             }
@@ -105,7 +118,7 @@ class ViewController: UIViewController {
             //cell.delegate = self
             //cell.indexPath = indexPath
             
-//            cell.setup(item: item)
+            cell.setup(for: item)
             return cell
         }
     }()
@@ -200,7 +213,7 @@ enum Product {
         let id: String
         let name: String
         let price: Int
-        let imageUrl: String
+        let imageUrl: URL
         
         enum CodingKeys: String, CodingKey {
             case id = "product_id"
