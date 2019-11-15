@@ -10,11 +10,12 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-class ViewController: UIViewController {
+final class ProductListView: UIView {
     
     typealias Model = Product
     typealias Item = Model.Item
     typealias Cell = ImageTextCell
+    
     
     #if targetEnvironment(macCatalyst)
     private let padding: CGFloat = 16
@@ -25,11 +26,10 @@ class ViewController: UIViewController {
     #endif
     
     private let cellId = String(describing: Cell.self)
-    private let service = Model.Service()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.delegate = self
         collectionView.alwaysBounceVertical = true
@@ -81,20 +81,27 @@ class ViewController: UIViewController {
         }
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        _ = dataSource
-        view.addSubview(collectionView)
-        fetch()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        _ = dataSource
+        addSubview(collectionView)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         updateItemSize()
     }
 
-    
     private func updateItemSize() {
         let viewWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         
@@ -122,19 +129,8 @@ class ViewController: UIViewController {
             layout.minimumLineSpacing = padding
         }
     }
-
-    private func fetch() {
-        service.all { [weak self] result in
-            switch result {
-            case .success(let items):
-                self?.handle(items: items)
-            case .failure(let error):
-                print(error.debugDescription)
-            }
-        }
-    }
     
-    private func handle(items: [Item]) {
+    func handle(items: [Item]) {
         DispatchQueue.main.async {
             self.currentSnapshot.appendItems(items)
             self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
@@ -143,7 +139,53 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UICollectionViewDelegate {
+class ViewController: UIViewController {
+    
+    typealias Model = Product
+    typealias Item = Model.Item
+    typealias View = ProductListView
+    
+    private let service = Model.Service()
+    
+    override func loadView() {
+        self.view = View()
+    }
+    
+    private lazy var vcView = view as! View
+//    private lazy var vcView: View = {
+//        return view as! View
+//        /// more safely
+//        //if let view = self.view as? View {
+//        //    return view
+//        //} else {
+//        //    assertionFailure("override func loadView")
+//        //    return View()
+//        //}
+//    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        /// to prevent call from background and crash "UI API called on a background thread"
+        _ = vcView
+        
+        fetch()
+    }
+
+    private func fetch() {
+        service.all { [weak self] result in
+            switch result {
+            case .success(let items):
+                self?.vcView.handle(items: items)
+            case .failure(let error):
+                print(error.debugDescription)
+            }
+        }
+    }
+    
+}
+
+extension ProductListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did select cell at \(indexPath.item)")
