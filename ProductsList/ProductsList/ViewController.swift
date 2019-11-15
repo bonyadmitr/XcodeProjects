@@ -19,22 +19,184 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        service.all { result in
+        fetch()
+    }
+    
+    
+    #if targetEnvironment(macCatalyst)
+    let padding: CGFloat = 16
+    #elseif os(iOS)
+    let padding: CGFloat = 1
+    #else /// tvOS
+    let padding: CGFloat = 32
+    #endif
+    
+    private func updateItemSize() {
+        let viewWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+        
+        #if targetEnvironment(macCatalyst)
+        /// resizing config
+        let resizeCellNorPadding = false
+        
+        let minimumItemSize: CGFloat = 150
+        let columns: CGFloat = resizeCellNorPadding ? floor(viewWidth / minimumItemSize) : floor(viewWidth) / minimumItemSize
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #elseif os(iOS)
+        let columns: CGFloat = 4
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #else /// tvOS
+        let columns: CGFloat = 5
+        // TODO: remove from here
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #endif
+        
+        
+        let itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = itemSize
+            layout.minimumInteritemSpacing = padding
+            layout.minimumLineSpacing = padding
+        }
+    }
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        #if os(iOS)
+        collectionView.backgroundColor = .systemBackground
+        #endif
+        collectionView.isOpaque = false
+        
+        
+        #if targetEnvironment(macCatalyst)
+        collectionView.contentInset = .init(top: padding, left: padding, bottom: padding, right: padding)
+        #elseif os(iOS)
+        collectionView.contentInset = .zero
+        #else /// tvOS
+        collectionView.contentInset = .init(top: padding, left: padding, bottom: padding, right: padding)
+        #endif
+        
+        return collectionView
+    }()
+    
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<String, Item> = {
+        var snapshot = NSDiffableDataSourceSnapshot<String, Item>()
+        snapshot.appendSections(["Photo"])
+        return snapshot
+    }()
+    
+    /// article https://medium.com/@jamesrochabrun/uicollectionviewdiffabledatasource-and-decodable-step-by-step-6b727dd2485
+    /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
+    /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
+    /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
+    private lazy var dataSource: UICollectionViewDiffableDataSource<String, Item> = {
+        return UICollectionViewDiffableDataSource<String, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCell else {
+                assertionFailure()
+                return nil
+            }
+            
+            //cell.delegate = self
+            //cell.indexPath = indexPath
+            
+//            cell.setup(item: item)
+            return cell
+        }
+    }()
+
+
+    private func fetch() {
+        
+        service.all { [weak self] result in
             switch result {
-            case .success(let list):
-                print(list)
+            case .success(let items):
+                self?.handle(items: items)
             case .failure(let error):
                 print(error.debugDescription)
             }
         }
     }
+    
+    private func handle(items: [Item]) {
+        DispatchQueue.main.async {
+            self.currentSnapshot.appendItems(items)
+            self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
+        }
+        
+    }
+}
 
+extension ViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("did select cell at \(indexPath.item)")
+        
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            assertionFailure()
+            return
+        }
+        
+        print(item)
+    }
     
 }
 
+import Kingfisher
+import UIKit
+
+final class PhotoCell: UICollectionViewCell {
+}
+//
+//    let imageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.contentMode = .scaleAspectFill
+//        //        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        //        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.backgroundColor = .lightGray
+//        imageView.isOpaque = true
+//        return imageView
+//    }()
+//
+//
+//    //titleLabel
+//    let sizeLabel: UILabel = {
+//        let label = UILabel()
+//        label.font = UIFont.preferredFont(forTextStyle: .body)
+//        label.textAlignment = .center
+//        //label.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+//        label.textColor = .white
+//        return label
+//    }()
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    private func setup() {
+//        addSubview(imageView)
+//
+//        addSubview(sizeLabel)
+//        assert(subviews.firstIndex(of: sizeLabel) ?? 0 > subviews.firstIndex(of: imageView) ?? 0)
+//    }
+//
+//}
+
+
 enum Product {
     
-    struct Item: Decodable {
+    struct Item: Decodable, Equatable, Hashable {
         let id: String
         let name: String
         let price: Int
@@ -45,6 +207,14 @@ enum Product {
             case name
             case price
             case imageUrl = "image"
+        }
+        
+        static func == (lhs: Item, rhs: Item) -> Bool {
+            return lhs.id == rhs.id
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            return hasher.combine(id)
         }
     }
     
