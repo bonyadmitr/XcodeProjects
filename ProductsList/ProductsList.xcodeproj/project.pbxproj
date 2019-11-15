@@ -17,6 +17,8 @@
 		CEF0FA5D237E887F007056AF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CEF0FA5C237E887F007056AF /* Kingfisher */; };
 		CEF0FA60237E8F9E007056AF /* ImageTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */; };
 		CEF0FA61237E8F9E007056AF /* ImageTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */; };
+		CEF0FA64237E9E80007056AF /* ProductDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA62237E9E80007056AF /* ProductDetailController.swift */; };
+		CEF0FA65237E9E80007056AF /* ProductDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0FA63237E9E80007056AF /* ProductDetailController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		CEF0FA57237E8698007056AF /* ProductsList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProductsList.entitlements; sourceTree = "<group>"; };
 		CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextCell.swift; sourceTree = "<group>"; };
 		CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTextCell.xib; sourceTree = "<group>"; };
+		CEF0FA62237E9E80007056AF /* ProductDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailController.swift; sourceTree = "<group>"; };
+		CEF0FA63237E9E80007056AF /* ProductDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
 				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
 				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
+				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
+				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
 				CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */,
 				CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */,
 				CEF0FA49237E8582007056AF /* Main.storyboard */,
@@ -146,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF0FA50237E8586007056AF /* LaunchScreen.storyboard in Resources */,
+				CEF0FA65237E9E80007056AF /* ProductDetailController.xib in Resources */,
 				CEF0FA4D237E8586007056AF /* Assets.xcassets in Resources */,
 				CEF0FA61237E8F9E007056AF /* ImageTextCell.xib in Resources */,
 				CEF0FA4B237E8582007056AF /* Main.storyboard in Resources */,
@@ -162,6 +169,7 @@
 				CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */,
 				CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */,
 				CEF0FA60237E8F9E007056AF /* ImageTextCell.swift in Sources */,
+				CEF0FA64237E9E80007056AF /* ProductDetailController.swift in Sources */,
 				CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

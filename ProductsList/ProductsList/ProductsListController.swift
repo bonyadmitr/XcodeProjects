@@ -165,6 +165,8 @@ final class ProductsListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Products"
+        
         /// to prevent call from background and crash "UI API called on a background thread"
         _ = vcView
         
@@ -196,7 +198,14 @@ extension ProductsListController: UICollectionViewDelegate {
             return
         }
         
-        print(item)
+        let detailVC = ProductDetailController()
+        detailVC.item = item
+        
+        #if os(tvOS)
+        present(detailVC, animated: true, completion: nil)
+        #else
+        navigationController?.pushViewController(detailVC, animated: true)
+        #endif
     }
     
 }
