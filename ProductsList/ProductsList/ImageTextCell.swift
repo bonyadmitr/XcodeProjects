@@ -21,17 +21,16 @@ final class ImageTextCell: UICollectionViewCell {
             newValue.isOpaque = true
             
             /// used color to show empty state bcz UIActivityIndicatorView is too expensive for performance
-            newValue.backgroundColor = .lightGray
+            newValue.backgroundColor = .systemBackground
         }
     }
-    
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .body)
             newValue.textAlignment = .center
-            newValue.backgroundColor = backgroundColor
+            newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1
         }
@@ -42,7 +41,7 @@ final class ImageTextCell: UICollectionViewCell {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .caption2)
             newValue.textAlignment = .center
-            newValue.backgroundColor = backgroundColor
+            newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1
         }
