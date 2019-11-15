@@ -173,6 +173,21 @@ final class ProductsListController: UIViewController {
         vcView.collectionView.delegate = self
         
         fetch()
+        
+        
+        
+        
+        
+        /// https://sarunw.com/posts/uinavigationbar-changes-in-ios13/
+        //let appearance = UINavigationBarAppearance()
+        //appearance.configureWithDefaultBackground()
+        //UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        ///  https://stackoverflow.com/a/25421617/5893286
+        //navigationController?.view.backgroundColor = .systemBackground
+        
+        /// in IB
+        //navigationController?.navigationBar.isTranslucent = false
     }
 
     private func fetch() {
