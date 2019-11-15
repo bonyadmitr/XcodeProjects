@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// Content View added for simplifying copying of all content and possible insets
 /// changed subtitleLabel content hugging priority and content compression resistance
@@ -46,5 +47,12 @@ final class ImageTextCell: UICollectionViewCell {
             newValue.numberOfLines = 1
         }
     }
-
+    
+    func setup(for item: Product.Item) {
+        titleLabel.text = item.name
+        subtitleLabel.text = "\(item.price)"
+        
+        imageView.kf.cancelDownloadTask()
+        imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+    }
 }
