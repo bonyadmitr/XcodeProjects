@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-final class ProductListView: UIView {
+final class ProductsListView: UIView {
     
     typealias Model = Product
     typealias Item = Model.Item
@@ -139,11 +139,11 @@ final class ProductListView: UIView {
     
 }
 
-class ViewController: UIViewController {
+final class ProductsListController: UIViewController {
     
     typealias Model = Product
     typealias Item = Model.Item
-    typealias View = ProductListView
+    typealias View = ProductsListView
     
     private let service = Model.Service()
     
@@ -185,7 +185,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ProductListView: UICollectionViewDelegate {
+extension ProductsListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did select cell at \(indexPath.item)")
