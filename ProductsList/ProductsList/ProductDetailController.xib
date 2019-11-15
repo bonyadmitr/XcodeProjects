@@ -31,11 +31,8 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xcA-Kn-tsd">
                                     <rect key="frame" x="16" y="16" width="288" height="355.5"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FJ2-xI-ee9">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="288" placeholderIntrinsicHeight="288" translatesAutoresizingMaskIntoConstraints="NO" id="FJ2-xI-ee9" customClass="ScaledHeightImageView" customModule="ProductsList" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="288"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="FJ2-xI-ee9" secondAttribute="height" multiplier="1:1" id="Qsg-M1-Czp"/>
-                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-kx-m0q">
                                             <rect key="frame" x="0.0" y="290" width="288" height="20.5"/>
