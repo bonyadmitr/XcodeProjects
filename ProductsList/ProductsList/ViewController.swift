@@ -15,59 +15,17 @@ class ViewController: UIViewController {
     typealias Model = Product
     typealias Item = Model.Item
     typealias Cell = ImageTextCell
-    private let service = Model.Service()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        _ = dataSource
-        view.addSubview(collectionView)
-        fetch()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        updateItemSize()
-    }
     
     #if targetEnvironment(macCatalyst)
-    let padding: CGFloat = 16
+    private let padding: CGFloat = 16
     #elseif os(iOS)
-    let padding: CGFloat = 1
+    private let padding: CGFloat = 1
     #else /// tvOS
-    let padding: CGFloat = 32
+    private let padding: CGFloat = 32
     #endif
     
-    private func updateItemSize() {
-        let viewWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
-        
-        #if targetEnvironment(macCatalyst)
-        /// resizing config
-        let resizeCellNorPadding = false
-        
-        let minimumItemSize: CGFloat = 150
-        let columns: CGFloat = resizeCellNorPadding ? floor(viewWidth / minimumItemSize) : floor(viewWidth) / minimumItemSize
-        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-        #elseif os(iOS)
-        let columns: CGFloat = 2
-        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-        #else /// tvOS
-        let columns: CGFloat = 5
-        // TODO: remove from here
-        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
-        #endif
-        
-        
-        let itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = itemSize
-            layout.minimumInteritemSpacing = padding
-            layout.minimumLineSpacing = padding
-        }
-    }
-    
     private let cellId = String(describing: Cell.self)
+    private let service = Model.Service()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -78,7 +36,7 @@ class ViewController: UIViewController {
         collectionView.isOpaque = true
         
         collectionView.register(UINib(nibName: String(describing: Cell.self), bundle: nil), forCellWithReuseIdentifier: cellId)
-//        collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
+        //collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
         
         #if os(iOS)
         collectionView.backgroundColor = .systemBackground
@@ -122,10 +80,50 @@ class ViewController: UIViewController {
             return cell
         }
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        _ = dataSource
+        view.addSubview(collectionView)
+        fetch()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateItemSize()
+    }
 
+    
+    private func updateItemSize() {
+        let viewWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+        
+        #if targetEnvironment(macCatalyst)
+        /// resizing config
+        let resizeCellNorPadding = false
+        
+        let minimumItemSize: CGFloat = 150
+        let columns: CGFloat = resizeCellNorPadding ? floor(viewWidth / minimumItemSize) : floor(viewWidth) / minimumItemSize
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #elseif os(iOS)
+        let columns: CGFloat = 2
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #else /// tvOS
+        let columns: CGFloat = 5
+        // TODO: remove from here
+        let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
+        #endif
+        
+        let itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = itemSize
+            layout.minimumInteritemSpacing = padding
+            layout.minimumLineSpacing = padding
+        }
+    }
 
     private func fetch() {
-        
         service.all { [weak self] result in
             switch result {
             case .success(let items):
@@ -141,8 +139,8 @@ class ViewController: UIViewController {
             self.currentSnapshot.appendItems(items)
             self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
         }
-        
     }
+    
 }
 
 extension ViewController: UICollectionViewDelegate {
