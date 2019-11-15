@@ -27,11 +27,10 @@ final class ProductsListView: UIView {
     
     private let cellId = String(describing: Cell.self)
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.delegate = self
         collectionView.alwaysBounceVertical = true
         collectionView.isOpaque = true
         
@@ -64,7 +63,7 @@ final class ProductsListView: UIView {
     /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
     /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
     /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
-    private lazy var dataSource: UICollectionViewDiffableDataSource<String, Item> = {
+    lazy var dataSource: UICollectionViewDiffableDataSource<String, Item> = {
         return UICollectionViewDiffableDataSource<String, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             // TODO: check weak self
@@ -169,6 +168,8 @@ final class ProductsListController: UIViewController {
         /// to prevent call from background and crash "UI API called on a background thread"
         _ = vcView
         
+        vcView.collectionView.delegate = self
+        
         fetch()
     }
 
@@ -185,12 +186,12 @@ final class ProductsListController: UIViewController {
     
 }
 
-extension ProductsListView: UICollectionViewDelegate {
+extension ProductsListController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did select cell at \(indexPath.item)")
         
-        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+        guard let item = vcView.dataSource.itemIdentifier(for: indexPath) else {
             assertionFailure()
             return
         }
