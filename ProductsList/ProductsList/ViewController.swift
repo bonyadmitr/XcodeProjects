@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         let columns: CGFloat = resizeCellNorPadding ? floor(viewWidth / minimumItemSize) : floor(viewWidth) / minimumItemSize
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         #elseif os(iOS)
-        let columns: CGFloat = 4
+        let columns: CGFloat = 2
         let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
         #else /// tvOS
         let columns: CGFloat = 5
@@ -75,6 +75,7 @@ class ViewController: UIViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.delegate = self
         collectionView.alwaysBounceVertical = true
+        collectionView.isOpaque = true
         
         collectionView.register(UINib(nibName: String(describing: Cell.self), bundle: nil), forCellWithReuseIdentifier: cellId)
 //        collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
@@ -82,7 +83,6 @@ class ViewController: UIViewController {
         #if os(iOS)
         collectionView.backgroundColor = .systemBackground
         #endif
-        collectionView.isOpaque = false
         
         
         #if targetEnvironment(macCatalyst)
