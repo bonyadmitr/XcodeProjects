@@ -92,6 +92,8 @@ final class ProductDetailController: UIViewController {
     
 }
 
+/// inspire by https://stackoverflow.com/a/50997110/5893286
+/// don't set height to the UIImageView in xib. set intrisic size by placeholder to remove layout errors
 final class ScaledHeightImageView: UIImageView {
     
     private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: 100)
