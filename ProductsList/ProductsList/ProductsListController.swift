@@ -105,6 +105,13 @@ Cleared code:
  constants (for magic numbers)
  willSet
  safe code (less '!')
+ 
+ There is no:
+ keychain
+ push notifications
+ Auth 2
+ keyaboard handlers
+ pagination
  */
 
 final class ProductsListView: UIView {
