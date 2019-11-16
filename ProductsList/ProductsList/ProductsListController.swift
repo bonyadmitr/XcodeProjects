@@ -55,6 +55,14 @@ import Kingfisher
  theme switching manualy
  localization (+ RTL)
  localization switching manualy
+ iMessage App
+ local notifications (to check updates)
+ app rater
+ passcode (+ TouchID and FaceID)
+ vibrations on touch
+ sounds on touch
+ tutorials spotlight
+ onboarding screens
  */
 
 final class ProductsListView: UIView {
