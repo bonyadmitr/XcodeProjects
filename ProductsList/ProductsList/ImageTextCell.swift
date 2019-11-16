@@ -53,5 +53,20 @@ final class ImageTextCell: UICollectionViewCell {
         
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+        
+        
+        //imageView.image = UIImage(systemName: "photo")
+        //KingfisherManager.shared.retrieveImage(with: item.imageUrl) { result in
+        //    switch result {
+        //    case .success(let source):
+        //        let image = source.image
+        //        self.imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
+        //        self.imageView.image = image
+        //    case .failure(let error):
+        //        print(error.debugDescription)
+        //    }
+        //}
+        
     }
+    
 }
