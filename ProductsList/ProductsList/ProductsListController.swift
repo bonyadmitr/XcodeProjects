@@ -38,6 +38,14 @@ import Kingfisher
  mb more asserts
  unit tests
  UI tests
+ DI
+ protocols for view-model
+ add ".xcconfig" files
+ several windows by SceneDelegate
+ logging
+ app extensions (widget(today), file provider(files))
+ background updates
+ share items
  */
 
 final class ProductsListView: UIView {
