@@ -96,6 +96,15 @@ import Kingfisher
  asserts
  UICollectionViewDiffableDataSource + NSDiffableDataSourceSnapshot
  - latest ios (13) for new API
+ 
+Cleared code:
+ private
+ let
+ names
+ headers
+ constants (for magic numbers)
+ willSet
+ safe code (less '!')
  */
 
 final class ProductsListView: UIView {
