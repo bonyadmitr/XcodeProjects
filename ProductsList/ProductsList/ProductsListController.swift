@@ -88,6 +88,14 @@ import Kingfisher
  landscape
  ScaledHeightImageView
  typealias
+ Alamofire helpers
+ Decodable helpers (FailableDecodable + keyPath)
+ image caching by Kingfisher
+ used xibs and code for layout (AutoLayout + mask)
+ scroll + no scroll layout (detail screen)
+ asserts
+ UICollectionViewDiffableDataSource + NSDiffableDataSourceSnapshot
+ - latest ios (13) for new API
  */
 
 final class ProductsListView: UIView {
