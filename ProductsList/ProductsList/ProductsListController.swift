@@ -10,6 +10,19 @@ import UIKit
 import Alamofire
 import Kingfisher
 
+// TODO: a lot of:
+/**
+ swiftlint
+ clear code
+ pull to refresh
+ activityIndicator for network
+ context menu (UIContextMenuInteractionDelegate)
+ cache by core data for offline using
+ debug floating window
+ demo mode without server + without internet (save some jsons to the bundle)
+ error presenting (mb ToastController later(+UIPresentationController) )
+ */
+
 final class ProductsListView: UIView {
     
     typealias Model = Product
