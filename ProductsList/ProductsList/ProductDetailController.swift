@@ -10,6 +10,11 @@ import UIKit
 
 final class ProductDetailController: UIViewController {
     
+    typealias Model = Product
+    typealias Item = Model.Item
+    
+    private let service = Model.Service()
+    
     @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var imageView: UIImageView! {
@@ -28,7 +33,7 @@ final class ProductDetailController: UIViewController {
         willSet {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .headline)
-            newValue.textAlignment = .center
+            //newValue.textAlignment = .center
             newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1
@@ -39,7 +44,7 @@ final class ProductDetailController: UIViewController {
         willSet {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .body)
-            newValue.textAlignment = .center
+            //newValue.textAlignment = .center
             newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1
@@ -49,15 +54,17 @@ final class ProductDetailController: UIViewController {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             /// newValue used for simplifying copying same settings
-            newValue.font = UIFont.preferredFont(forTextStyle: .caption2)
-            newValue.textAlignment = .center
+            newValue.font = UIFont.preferredFont(forTextStyle: .body)
+            //newValue.textAlignment = .left
             newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 0
+            newValue.text = ""
+            newValue.isHidden = true
         }
     }
     
-    var item: Product.Item?
+    var item: Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,17 +84,27 @@ final class ProductDetailController: UIViewController {
         setup(for: item)
     }
     
-    private func setup(for item: Product.Item) {
+    private func setup(for item: Item) {
         title = item.name
         
         nameLabel.text = item.name
-        priceLabel.text = "\(item.price)"
-        
-        // TODO: fill descriptionLabel
-        descriptionLabel.text = ""
+        priceLabel.text = "Price: \(item.price)"
         
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+        
+        service.detail(id: item.id) { [weak self] result in
+            switch result {
+            case .success(let detailedItem):
+                DispatchQueue.main.async {
+                    self?.descriptionLabel.isHidden = false
+                    self?.descriptionLabel.text = detailedItem.description
+                }
+                
+            case .failure(let error):
+                print(error.debugDescription)
+            }
+        }
     }
     
 }

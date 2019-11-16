@@ -296,12 +296,23 @@ enum Product {
         }
     }
     
+    struct DetailItem: Decodable {
+        let description: String
+    }
+    
     final class Service {
         func all(handler: @escaping (Result<[Item], Error>) -> Void) {
             Session.withoutAuth
                 .request(URLs.Products.all)
                 .customValidate()
                 .responseObject(keyPath: "products", completion: handler)
+        }
+        
+        func detail(id: String, handler: @escaping (Result<DetailItem, Error>) -> Void) {
+            Session.withoutAuth
+                .request(URLs.Products.detail(id: id))
+                .customValidate()
+                .responseObject(completion: handler)
         }
     }
 }
@@ -310,14 +321,14 @@ import Foundation
 
 enum URLs {
     
-    private static let basePath = "https://s3-eu-west-1.amazonaws.com/developer-application-test/"
+    private static let basePath = "https://s3-eu-west-1.amazonaws.com/developer-application-test"
     
     enum Products {
-        private static let base = basePath + "cart/"
+        private static let base = basePath + "/cart"
         
-        static let all = base + "list"
+        static let all = base + "/list"
         
-        static func detail(id: Int) -> String {
+        static func detail(id: String) -> String {
             return base + "/\(id)/detail"
         }
     }
@@ -460,7 +471,7 @@ extension DataRequest {
         print("- response:", responseData.response ?? "response nil")
         print("- data:", String(data: data, encoding: .utf8) ?? "failed data encoding")
         print("- error:", error.localizedDescription)
-        assertionFailure(error.debugDescription)
+        //assertionFailure(error.debugDescription)
     }
 }
 
