@@ -29,6 +29,15 @@ import Kingfisher
  layouts changing
  animated layout changing
  pass photo to detail screen
+ add main.swift
+ remove storyboard (save LaunchScreen only)
+ router for navigation (+ mb window manager)
+ tvOS support (didUpdateFocus, dark mode for tvOS)
+ shortcuts (UIKeyCommand)
+ app restoration
+ mb more asserts
+ unit tests
+ UI tests
  */
 
 final class ProductsListView: UIView {
