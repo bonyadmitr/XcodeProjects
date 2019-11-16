@@ -26,6 +26,9 @@ final class ProductDetailController: UIViewController {
             
             /// used color to show empty state bcz UIActivityIndicatorView is too expensive for performance
             newValue.backgroundColor = .systemBackground
+            
+            //newValue.clipsToBounds = true
+            newValue.kf.indicatorType = .activity
         }
     }
     
