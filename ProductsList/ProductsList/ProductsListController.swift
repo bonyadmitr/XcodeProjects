@@ -70,6 +70,15 @@ import Kingfisher
  external screen support
  Large Title nav bar
  translucent nav bar (+ fix all scrolls)
+ search
+ sorting
+ accessibility (voice, big fonts, mb colors)
+ mb something for NaturalLanguage + Create ML
+ image recognition
+ 
+ macCatalyst
+ macCatalyst Menu Bar
+ article https://www.zachsim.one/blog/2019/8/4/customising-the-menu-bar-of-a-catalyst-app-using-uimenubuilder
  */
 
 final class ProductsListView: UIView {
