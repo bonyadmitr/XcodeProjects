@@ -12,52 +12,62 @@ import Kingfisher
 
 // TODO: a lot of:
 /**
+ CODE (Developer or QA can see changes):
  swiftlint
  clear code
- pull to refresh
- activityIndicator for network
- context menu (UIContextMenuInteractionDelegate)
- cache by core data for offline using
  debug floating window
  demo mode without server + without internet (save some jsons to the bundle)
- error presenting (mb ToastController later(+UIPresentationController) )
- error handling (+ InternalError)
- list empty state
- split controller
- self sizing cells layout
- custom layout (for photos only + mb grid/list) (maybe by UICollectionViewCompositionalLayout)
- layouts changing
- animated layout changing
- pass photo to detail screen
  add main.swift
  remove storyboard (save LaunchScreen only)
  router for navigation (+ mb window manager)
- tvOS support (didUpdateFocus, dark mode for tvOS)
- shortcuts (UIKeyCommand)
- app restoration
  mb more asserts
  unit tests
  UI tests
  DI
  protocols for view-model
  add ".xcconfig" files
- several windows by SceneDelegate
  logging
+ mb any scripts or automatization (like fastlane, swiftgen, ...)
+ 
+ REQUIRED FEATURES (User can see changes):
+ pull to refresh
+ activityIndicator for network
+ context menu (UIContextMenuInteractionDelegate)
+ cache by core data for offline using
+ search
+ sorting
+ error presenting (mb ToastController later(+UIPresentationController) )
+ error handling (+ InternalError)
+ list empty state
+ split controller
+ pass photo to detail screen
+ app restoration
+ several windows by SceneDelegate
+ localization (+ RTL)
+ app rater
+ Large Title nav bar
+ accessibility (voice, big fonts, mb colors)
+ 
+ ADDITIONAL FEATURES:
+ self sizing cells layout
+ custom layout (for photos only + mb grid/list) (maybe by UICollectionViewCompositionalLayout)
+ layouts changing
+ animated layout changing
+ tvOS support (didUpdateFocus, dark mode for tvOS)
+ shortcuts (UIKeyCommand)
  app extensions (widget(today), file provider(files))
  background updates
  share items
  spotlight (CoreSpotlight)
  siri shotcuts
- any analitica
  crashlytics
+ any analitica
  settings screen (+ tab bar if need) (icon, version, feedback, app review...) (for more need to check Settings project)
  settings bundle
  theme switching manualy
- localization (+ RTL)
  localization switching manualy
  iMessage App
  local notifications (to check updates)
- app rater
  passcode (+ TouchID and FaceID)
  vibrations on touch
  sounds on touch
@@ -65,20 +75,13 @@ import Kingfisher
  onboarding screens
  check new updates
  "whats new" screen
- mb any scripts or automatization (like fastlane, swiftgen, ...)
  Parallax Effect with UIMotionEffect (for background)
  external screen support
- Large Title nav bar
  translucent nav bar (+ fix all scrolls)
- search
- sorting
- accessibility (voice, big fonts, mb colors)
  mb something for NaturalLanguage + Create ML
  image recognition
- 
  macCatalyst
- macCatalyst Menu Bar
- article https://www.zachsim.one/blog/2019/8/4/customising-the-menu-bar-of-a-catalyst-app-using-uimenubuilder
+ macCatalyst Menu Bar article https://www.zachsim.one/blog/2019/8/4/customising-the-menu-bar-of-a-catalyst-app-using-uimenubuilder
  
  DONE:
  swift package manager
@@ -97,7 +100,7 @@ import Kingfisher
  UICollectionViewDiffableDataSource + NSDiffableDataSourceSnapshot
  - latest ios (13) for new API
  
-Cleared code:
+ CLEARED CODE:
  private
  let
  names
@@ -106,7 +109,7 @@ Cleared code:
  willSet
  safe code (less '!')
  
- There is no:
+ THERE IS NO:
  keychain
  push notifications
  Auth 2
