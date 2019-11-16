@@ -46,6 +46,15 @@ import Kingfisher
  app extensions (widget(today), file provider(files))
  background updates
  share items
+ spotlight (CoreSpotlight)
+ siri shotcuts
+ any analitica
+ crashlytics
+ settings screen (+ tab bar if need) (icon, version, feedback, app review...) (for more need to check Settings project)
+ settings bundle
+ theme switching manualy
+ localization (+ RTL)
+ localization switching manualy
  */
 
 final class ProductsListView: UIView {
