@@ -21,6 +21,14 @@ import Kingfisher
  debug floating window
  demo mode without server + without internet (save some jsons to the bundle)
  error presenting (mb ToastController later(+UIPresentationController) )
+ error handling (+ InternalError)
+ list empty state
+ split controller
+ self sizing cells layout
+ custom layout (for photos only + mb grid/list) (maybe by UICollectionViewCompositionalLayout)
+ layouts changing
+ animated layout changing
+ pass photo to detail screen
  */
 
 final class ProductsListView: UIView {
