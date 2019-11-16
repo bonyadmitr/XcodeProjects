@@ -79,6 +79,15 @@ import Kingfisher
  macCatalyst
  macCatalyst Menu Bar
  article https://www.zachsim.one/blog/2019/8/4/customising-the-menu-bar-of-a-catalyst-app-using-uimenubuilder
+ 
+ DONE:
+ swift package manager
+ cleared MVC (by separate view, services)
+ items list
+ item detail
+ landscape
+ ScaledHeightImageView
+ typealias
  */
 
 final class ProductsListView: UIView {
