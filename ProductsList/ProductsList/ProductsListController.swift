@@ -63,6 +63,13 @@ import Kingfisher
  sounds on touch
  tutorials spotlight
  onboarding screens
+ check new updates
+ "whats new" screen
+ mb any scripts or automatization (like fastlane, swiftgen, ...)
+ Parallax Effect with UIMotionEffect (for background)
+ external screen support
+ Large Title nav bar
+ translucent nav bar (+ fix all scrolls)
  */
 
 final class ProductsListView: UIView {
