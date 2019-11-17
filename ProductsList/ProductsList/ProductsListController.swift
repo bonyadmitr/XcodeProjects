@@ -123,6 +123,14 @@ final class ProductsListView: UIView {
     typealias Item = Model.Item
     typealias Cell = ImageTextCell
     
+    var refreshData: ( (UIRefreshControl) -> Void )?
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let newValue = UIRefreshControl()
+        //newValue.tintColor = .white
+        newValue.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        return newValue
+    }()
     
     #if targetEnvironment(macCatalyst)
     private let padding: CGFloat = 16
@@ -157,6 +165,7 @@ final class ProductsListView: UIView {
         collectionView.contentInset = .init(top: padding, left: padding, bottom: padding, right: padding)
         #endif
         
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
     
@@ -186,7 +195,6 @@ final class ProductsListView: UIView {
             return cell
         }
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -243,6 +251,20 @@ final class ProductsListView: UIView {
         }
     }
     
+    func deleteAllItems() {
+        DispatchQueue.main.async {
+            self.currentSnapshot.deleteAllItems()
+            self.currentSnapshot.appendSections(["\(Model.self)"])
+            self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
+        }
+    }
+    
+    @objc private func pullToRefresh() {
+        // TODO: check call after first one (refreshControl.isRefreshing)
+        refreshData?(refreshControl)
+        refreshControl.endRefreshing()
+    }
+    
 }
 
 final class ProductsListController: UIViewController {
@@ -281,7 +303,24 @@ final class ProductsListController: UIViewController {
         
         fetch()
         
-        
+        vcView.refreshData = { [weak self] refreshControl in
+            print("refreshData")
+            guard let self = self else {
+                return
+            }
+            self.vcView.deleteAllItems()
+            self.service.all { [weak self] result in
+                switch result {
+                case .success(let items):
+                    self?.vcView.handle(items: items)
+                case .failure(let error):
+                    print(error.debugDescription)
+                }
+                DispatchQueue.main.async {
+                    refreshControl.endRefreshing()
+                }
+            }
+        }
         
         
         
