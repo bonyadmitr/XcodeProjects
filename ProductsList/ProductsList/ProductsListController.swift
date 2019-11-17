@@ -127,7 +127,7 @@ final class ProductsListView: UIView {
     
     private lazy var refreshControl: UIRefreshControl = {
         let newValue = UIRefreshControl()
-        //newValue.tintColor = .white
+        newValue.tintColor = .label
         newValue.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         return newValue
     }()
@@ -196,6 +196,15 @@ final class ProductsListView: UIView {
         }
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.frame = bounds
+        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        activityIndicator.color = .label
+        return activityIndicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -245,18 +254,14 @@ final class ProductsListView: UIView {
     }
     
     func handle(items: [Item]) {
-        DispatchQueue.main.async {
-            self.currentSnapshot.appendItems(items)
-            self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
-        }
+        currentSnapshot.appendItems(items)
+        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
     func deleteAllItems() {
-        DispatchQueue.main.async {
-            self.currentSnapshot.deleteAllItems()
-            self.currentSnapshot.appendSections(["\(Model.self)"])
-            self.dataSource.apply(self.currentSnapshot, animatingDifferences: true)
-        }
+        currentSnapshot.deleteAllItems()
+        currentSnapshot.appendSections(["\(Model.self)"])
+        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
     @objc private func pullToRefresh() {
@@ -305,18 +310,17 @@ final class ProductsListController: UIViewController {
         
         vcView.refreshData = { [weak self] refreshControl in
             print("refreshData")
-            guard let self = self else {
-                return
-            }
-            self.vcView.deleteAllItems()
-            self.service.all { [weak self] result in
-                switch result {
-                case .success(let items):
-                    self?.vcView.handle(items: items)
-                case .failure(let error):
-                    print(error.debugDescription)
-                }
+            // TODO: assert main
+            self?.vcView.deleteAllItems()
+            self?.service.all { [weak self] result in
                 DispatchQueue.main.async {
+                    switch result {
+                    case .success(let items):
+                        self?.vcView.handle(items: items)
+                    case .failure(let error):
+                        print(error.debugDescription)
+                    }
+                    
                     refreshControl.endRefreshing()
                 }
             }
@@ -337,12 +341,18 @@ final class ProductsListController: UIViewController {
     }
 
     private func fetch() {
+        vcView.activityIndicator.startAnimating()
+        
         service.all { [weak self] result in
-            switch result {
-            case .success(let items):
-                self?.vcView.handle(items: items)
-            case .failure(let error):
-                print(error.debugDescription)
+            DispatchQueue.main.async {
+                self?.vcView.activityIndicator.stopAnimating()
+                
+                switch result {
+                case .success(let items):
+                    self?.vcView.handle(items: items)
+                case .failure(let error):
+                    print(error.debugDescription)
+                }
             }
         }
     }
