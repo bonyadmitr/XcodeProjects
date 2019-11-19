@@ -39,6 +39,8 @@ import Kingfisher
  error presenting (mb ToastController later(+UIPresentationController) )
  error handling (+ InternalError)
  list empty state
+ internet restoration (wifi + mobile)
+ http requests canceling
  split controller
  pass photo to detail screen
  app restoration
