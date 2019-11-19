@@ -16,7 +16,7 @@ extension UITextField{
             fatalError("Swift extensions cannot add stored properties. Use for set only")
         }
         set {
-            let att = [NSForegroundColorAttributeName: newValue]
+            let att = [NSAttributedString.Key.foregroundColor: newValue]
             attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: att)
         }
     }
