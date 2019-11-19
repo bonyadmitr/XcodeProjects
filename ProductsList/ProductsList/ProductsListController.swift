@@ -117,6 +117,7 @@ import Kingfisher
  Auth 2
  keyaboard handlers
  pagination
+ sync background actions with server
  */
 
 final class ProductsListView: UIView {
