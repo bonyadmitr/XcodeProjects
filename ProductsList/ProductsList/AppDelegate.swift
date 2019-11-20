@@ -104,12 +104,10 @@ final class CoreDataStack {
         }
         
         container.loadPersistentStores { storeDescription, error in
-            //print("CoreData: Inited \(storeDescription)")
-            print("- CoreData: Inited")
             if let error = error {
-                assertionFailure(error.localizedDescription)
-                print("CoreData: Unresolved error \(error)")
-                return
+                assertionFailure(error.debugDescription)
+            } else {
+                print("- CoreData: Inited")
             }
         }
         return container
