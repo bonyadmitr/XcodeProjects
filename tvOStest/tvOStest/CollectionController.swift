@@ -37,6 +37,16 @@ final class ColCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        #if os(tvOS)
+        /// imageView focus https://stackoverflow.com/a/33866634/5893286
+        //imageView.masksFocusEffectToContents = true
+        imageView.adjustsImageWhenAncestorFocused = true
+        clipsToBounds = false
+        #else
+        imageView.clipsToBounds = true
+        clipsToBounds = true
+        #endif
+        
 //        someLabel.removeConstraints(someLabel.constraints)
         
 //        someLabel.translatesAutoresizingMaskIntoConstraints = false
