@@ -384,52 +384,6 @@ extension ProductsListController: UICollectionViewDelegate {
     
 }
 
-import Kingfisher
-import UIKit
-
-final class PhotoCell: UICollectionViewCell {
-}
-//
-//    let imageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleAspectFill
-//        //        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        //        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.backgroundColor = .lightGray
-//        imageView.isOpaque = true
-//        return imageView
-//    }()
-//
-//
-//    //titleLabel
-//    let sizeLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = UIFont.preferredFont(forTextStyle: .body)
-//        label.textAlignment = .center
-//        //label.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-//        label.textColor = .white
-//        return label
-//    }()
-//
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setup()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        setup()
-//    }
-//
-//    private func setup() {
-//        addSubview(imageView)
-//
-//        addSubview(sizeLabel)
-//        assert(subviews.firstIndex(of: sizeLabel) ?? 0 > subviews.firstIndex(of: imageView) ?? 0)
-//    }
-//
-//}
-
 /// there is no CustomDebugStringConvertible bcz of error:
 /// Extension of protocol 'Error' cannot have an inheritance clause
 extension Error {
