@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Kingfisher
+import CoreData
 
 // TODO: a lot of:
 /**
@@ -123,8 +124,11 @@ import Kingfisher
 final class ProductsListView: UIView {
     
     typealias Model = Product
-    typealias Item = Model.Item
+//    typealias Item = Model.Item
+    typealias Item = ProductItemDB
     typealias Cell = ImageTextCell
+    typealias SectionType = Int
+//    typealias ItemDB = ProductItemDB
     
     var refreshData: ( (UIRefreshControl) -> Void )?
     
@@ -172,9 +176,9 @@ final class ProductsListView: UIView {
         return collectionView
     }()
     
-    private var currentSnapshot: NSDiffableDataSourceSnapshot<String, Item> = {
-        var snapshot = NSDiffableDataSourceSnapshot<String, Item>()
-        snapshot.appendSections(["\(Model.self)"])
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<SectionType, Item> = {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
+        snapshot.appendSections([0])
         return snapshot
     }()
     
@@ -182,8 +186,8 @@ final class ProductsListView: UIView {
     /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
     /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
     /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
-    lazy var dataSource: UICollectionViewDiffableDataSource<String, Item> = {
-        return UICollectionViewDiffableDataSource<String, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+    lazy var dataSource: UICollectionViewDiffableDataSource<SectionType, Item> = {
+        return UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             // TODO: check weak self
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as? Cell else {
@@ -208,6 +212,21 @@ final class ProductsListView: UIView {
         return activityIndicator
     }()
     
+    private lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
+        let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(ProductItemDB.id), ascending: false)]
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fetchRequest.fetchBatchSize = 20
+        } else {
+            fetchRequest.fetchBatchSize = 10
+        }
+        
+        //fetchRequest.shouldRefreshRefetchedObjects = false
+        let context = CoreDataStack.shared.viewContext
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -221,6 +240,10 @@ final class ProductsListView: UIView {
     private func setup() {
         _ = dataSource
         addSubview(collectionView)
+        
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+        updateDataSource(animated: false)
     }
     
     override func layoutSubviews() {
@@ -256,14 +279,70 @@ final class ProductsListView: UIView {
         }
     }
     
-    func handle(items: [Item]) {
-        currentSnapshot.appendItems(items)
-        dataSource.apply(currentSnapshot, animatingDifferences: true)
+    func handle(items: [Product.Item]) {
+        
+        CoreDataStack.shared.performBackgroundTask { context in
+            
+            let newIds = items.map { $0.id }
+            
+            let propertyToFetch = #keyPath(Item.id)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
+            fetchRequest.predicate = NSPredicate(format: "\(propertyToFetch) IN %@", newIds)
+            fetchRequest.resultType = .dictionaryResultType
+            fetchRequest.propertiesToFetch = [propertyToFetch]
+            fetchRequest.includesSubentities = false
+            //                    fetchRequest.includesPropertyValues = false
+            //                    fetchRequest.includesPendingChanges = true
+            //                    fetchRequest.returnsObjectsAsFaults = false
+            //                    fetchRequest.returnsDistinctResults = true
+            
+            guard let existedItems = try? context.fetch(fetchRequest) as? [[String: String]] else {
+                assertionFailure()
+                return
+            }
+            
+            #if DEBUG
+            /// unsafe but will work like assert
+            let existedUUIDs = existedItems.map({ $0[propertyToFetch]! })
+            #else
+            let existedUUIDs = existedItems.compactMap({ $0[propertyToFetch] })
+            #endif
+            
+            assert(existedUUIDs.count == existedItems.count, "we fetch only \(propertyToFetch)")
+            
+            print("--- existedUUIDs count \(existedUUIDs.count)")
+            let newImages = items.filter { !existedUUIDs.contains($0.id) }
+            print("--- newImages count \(newImages.count)")
+            
+            /// save new items
+            
+            guard !newImages.isEmpty else {
+                print("there are no new items")
+                return
+            }
+            
+            for newItem in newImages {
+                let item = Item(context: context)
+                item.id = newItem.id
+                item.name = newItem.name
+                item.imageUrl = newItem.imageUrl
+                item.price = Int16(newItem.price)
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                assertionFailure(error.debugDescription)
+            }
+        }
+        
+//        currentSnapshot.appendItems(items)
+//        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
     func deleteAllItems() {
         currentSnapshot.deleteAllItems()
-        currentSnapshot.appendSections(["\(Model.self)"])
+        currentSnapshot.appendSections([0])
         dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
@@ -273,12 +352,28 @@ final class ProductsListView: UIView {
         refreshControl.endRefreshing()
     }
     
+    func updateDataSource(animated: Bool) {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
+        currentSnapshot = snapshot
+        dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+}
+
+extension ProductsListView: NSFetchedResultsControllerDelegate {
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateDataSource(animated: true)
+    }
+    
 }
 
 final class ProductsListController: UIViewController {
     
     typealias Model = Product
-    typealias Item = Model.Item
+//    typealias Item = Model.Item
+    typealias Item = ProductItemDB
     typealias View = ProductsListView
     
     private let service = Model.Service()
