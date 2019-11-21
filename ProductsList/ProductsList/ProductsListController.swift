@@ -279,11 +279,11 @@ final class ProductsListView: UIView {
         }
     }
     
-    func handle(items: [Product.Item]) {
+    func handle(items newItems: [Product.Item]) {
         
         CoreDataStack.shared.performBackgroundTask { context in
             
-            let newIds = items.map { $0.id }
+            let newIds = newItems.map { $0.id }
             let propertyToFetch = #keyPath(Item.id)
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
@@ -291,30 +291,30 @@ final class ProductsListView: UIView {
             fetchRequest.resultType = .dictionaryResultType
             fetchRequest.propertiesToFetch = [propertyToFetch]
             fetchRequest.includesSubentities = false
-            //                    fetchRequest.includesPropertyValues = false
-            //                    fetchRequest.includesPendingChanges = true
-            //                    fetchRequest.returnsObjectsAsFaults = false
-            //                    fetchRequest.returnsDistinctResults = true
+            //fetchRequest.includesPropertyValues = false
+            //fetchRequest.includesPendingChanges = true
+            //fetchRequest.returnsObjectsAsFaults = false
+            //fetchRequest.returnsDistinctResults = true
             
-            guard let existedIdsDict = try? context.fetch(fetchRequest) as? [[String: String]] else {
+            guard let existedDictIds = try? context.fetch(fetchRequest) as? [[String: String]] else {
                 assertionFailure("must be set 'fetchRequest.resultType = .dictionaryResultType'")
                 return
             }
             
-            let existedIds = existedIdsDict.compactMap({ $0[propertyToFetch] })
+            let existedIds = existedDictIds.compactMap { $0[propertyToFetch] }
             print("--- existed items count \(existedIds.count)")
-            assert(existedIds.count == existedIdsDict.count, "\(existedIds.count) != \(existedIdsDict.count)")
+            assert(existedIds.count == existedDictIds.count, "\(existedIds.count) != \(existedDictIds.count)")
             
-            let newImages = items.filter { !existedIds.contains($0.id) }
-            print("--- new items count \(newImages.count)")
+            let itemsToSave = newItems.filter { !existedIds.contains($0.id) }
+            print("--- items to save count \(itemsToSave.count)")
             
-            guard !newImages.isEmpty else {
-                print("there are no new items")
+            guard !itemsToSave.isEmpty else {
+                print("--- there are no new items")
                 return
             }
             
             /// save new items
-            for newItem in newImages {
+            for newItem in itemsToSave {
                 let item = Item(context: context)
                 item.id = newItem.id
                 item.name = newItem.name
@@ -328,9 +328,6 @@ final class ProductsListView: UIView {
                 assertionFailure(error.debugDescription)
             }
         }
-        
-//        currentSnapshot.appendItems(items)
-//        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
     
     func deleteAllItems() {
