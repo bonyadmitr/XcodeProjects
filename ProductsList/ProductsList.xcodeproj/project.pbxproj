@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C488467223870AA50090DF02 /* Alamofire+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467123870AA50090DF02 /* Alamofire+Extensions.swift */; };
+		C488467423870AD70090DF02 /* Alamofire+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467323870AD70090DF02 /* Alamofire+Custom.swift */; };
 		CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C488467123870AA50090DF02 /* Alamofire+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Extensions.swift"; sourceTree = "<group>"; };
+		C488467323870AD70090DF02 /* Alamofire+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Custom.swift"; sourceTree = "<group>"; };
 		CE8A8BCC238513BC0015F120 /* ProductsList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsList.xcdatamodel; sourceTree = "<group>"; };
 		CEF0FA40237E8582007056AF /* ProductsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF0FA43237E8582007056AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
 				CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */,
 				CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */,
+				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
+				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
 				CEF0FA49237E8582007056AF /* Main.storyboard */,
 				CEF0FA4C237E8586007056AF /* Assets.xcassets */,
 				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
@@ -170,11 +176,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */,
+				C488467223870AA50090DF02 /* Alamofire+Extensions.swift in Sources */,
 				CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */,
 				CEF0FA60237E8F9E007056AF /* ImageTextCell.swift in Sources */,
 				CEF0FA64237E9E80007056AF /* ProductDetailController.swift in Sources */,
 				CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */,
 				CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */,
+				C488467423870AD70090DF02 /* Alamofire+Custom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
