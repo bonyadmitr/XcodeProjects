@@ -476,25 +476,6 @@ enum Product {
     }
 }
 
-import Foundation
-
-enum URLs {
-    
-    private static let basePath = "https://s3-eu-west-1.amazonaws.com/developer-application-test"
-    
-    enum Products {
-        private static let base = basePath + "/cart"
-        
-        static let all = base + "/list"
-        
-        static func detail(id: String) -> String {
-            return base + "/\(id)/detail"
-        }
-    }
-    
-}
-
-
 /// there is no CustomDebugStringConvertible bcz of error:
 /// Extension of protocol 'Error' cannot have an inheritance clause
 extension Error {
