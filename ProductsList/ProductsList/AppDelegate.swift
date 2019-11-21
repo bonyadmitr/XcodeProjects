@@ -61,6 +61,11 @@ final class CoreDataStack {
         
         container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
         container.automaticallyMergesChangesFromParent()
+        
+        // TODO: check
+        // TODO: maybe should be in the "loadPersistentStores"
+        /// to avoid duplicating objects
+        //viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     
@@ -144,3 +149,20 @@ extension NSPersistentContainer {
         viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+protocol ClassName {
+    static func className() -> String
+    func className() -> String
+}
+
+extension ClassName {
+    static func className() -> String {
+        return String(describing: self.self)
+    }
+    
+    func className() -> String {
+        return String(describing: type(of: self))
+    }
+}
+
+extension NSObject: ClassName {}

@@ -11,7 +11,7 @@ import UIKit
 final class ProductDetailController: UIViewController {
     
     typealias Model = Product
-    typealias Item = Model.Item
+    typealias Item = ProductItemDB
     
     private let service = Model.Service()
     
@@ -96,7 +96,12 @@ final class ProductDetailController: UIViewController {
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
         
-        service.detail(id: item.id) { [weak self] result in
+        guard let id = item.id else {
+            assertionFailure()
+            return
+        }
+        
+        service.detail(id: id) { [weak self] result in
             switch result {
             case .success(let detailedItem):
                 DispatchQueue.main.async {

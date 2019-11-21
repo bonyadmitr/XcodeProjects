@@ -69,4 +69,11 @@ final class ImageTextCell: UICollectionViewCell {
         
     }
     
+    func setup(for item: ProductItemDB) {
+        titleLabel.text = item.name
+        subtitleLabel.text = "\(item.price)"
+        
+        imageView.kf.cancelDownloadTask()
+        imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+    }
 }
