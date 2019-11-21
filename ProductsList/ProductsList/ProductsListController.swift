@@ -284,8 +284,8 @@ final class ProductsListView: UIView {
         CoreDataStack.shared.performBackgroundTask { context in
             
             let newIds = items.map { $0.id }
-            
             let propertyToFetch = #keyPath(Item.id)
+            
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
             fetchRequest.predicate = NSPredicate(format: "\(propertyToFetch) IN %@", newIds)
             fetchRequest.resultType = .dictionaryResultType
@@ -296,31 +296,24 @@ final class ProductsListView: UIView {
             //                    fetchRequest.returnsObjectsAsFaults = false
             //                    fetchRequest.returnsDistinctResults = true
             
-            guard let existedItems = try? context.fetch(fetchRequest) as? [[String: String]] else {
-                assertionFailure()
+            guard let existedIdsDict = try? context.fetch(fetchRequest) as? [[String: String]] else {
+                assertionFailure("must be set 'fetchRequest.resultType = .dictionaryResultType'")
                 return
             }
             
-            #if DEBUG
-            /// unsafe but will work like assert
-            let existedUUIDs = existedItems.map({ $0[propertyToFetch]! })
-            #else
-            let existedUUIDs = existedItems.compactMap({ $0[propertyToFetch] })
-            #endif
+            let existedIds = existedIdsDict.compactMap({ $0[propertyToFetch] })
+            print("--- existed items count \(existedIds.count)")
+            assert(existedIds.count == existedIdsDict.count, "\(existedIds.count) != \(existedIdsDict.count)")
             
-            assert(existedUUIDs.count == existedItems.count, "we fetch only \(propertyToFetch)")
-            
-            print("--- existedUUIDs count \(existedUUIDs.count)")
-            let newImages = items.filter { !existedUUIDs.contains($0.id) }
-            print("--- newImages count \(newImages.count)")
-            
-            /// save new items
+            let newImages = items.filter { !existedIds.contains($0.id) }
+            print("--- new items count \(newImages.count)")
             
             guard !newImages.isEmpty else {
                 print("there are no new items")
                 return
             }
             
+            /// save new items
             for newItem in newImages {
                 let item = Item(context: context)
                 item.id = newItem.id
