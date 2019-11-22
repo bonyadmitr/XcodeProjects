@@ -1,6 +1,10 @@
 import UIKit
 import CoreData
 
+/// UICollectionViewDiffableDataSource + NSFetchedResultsController
+/// https://schiavo.me/2019/coredata-diffabledatasource/
+/// https://stackoverflow.com/q/58029290/5893286
+
 final class ProductsListView: UIView {
     
     typealias Model = Product
