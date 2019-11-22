@@ -29,6 +29,8 @@ import CoreData
  add ".xcconfig" files
  logging
  mb any scripts or automatization (like fastlane, swiftgen, ...)
+ kingfisher cache limit
+ CoreDataStack start guard
  
  REQUIRED FEATURES (User can see changes):
  pull to refresh
@@ -202,6 +204,7 @@ final class ProductsListController: UIViewController {
                 }
             }
         }
+        
     }
     
     private func handle(items newItems: [Product.Item]) {
