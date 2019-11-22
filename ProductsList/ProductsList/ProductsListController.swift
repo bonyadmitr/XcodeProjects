@@ -160,8 +160,7 @@ final class ProductsListController: UIViewController {
         
         vcView.refreshData = { [weak self] refreshControl in
             print("refreshData")
-            // TODO: assert main
-            self?.vcView.deleteAllItems()
+            
             self?.service.all { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
