@@ -10,6 +10,11 @@ extension Session {
     static let withoutAuth: Session = {
         let configuration = URLSessionConfiguration.default
         //configuration.httpAdditionalHeaders = Session.defaultCustomHTTPHeaders
+        
+        /// disable caching https://stackoverflow.com/a/42722401/5893286
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.urlCache = nil
+        
         return Session(configuration: configuration)
     }()
 }
