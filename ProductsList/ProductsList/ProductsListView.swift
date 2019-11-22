@@ -207,6 +207,22 @@ final class ProductsListView: UIView {
             } catch {
                 assertionFailure(error.debugDescription)
             }
+            
+            #if DEBUG
+            /// check saved items count
+            CoreDataStack.shared.performBackgroundTask { context in
+                let fetchRequestCount = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
+                fetchRequestCount.resultType = .countResultType
+                guard let savedItemsCount = (try? context.fetch(fetchRequestCount) as? [Int])?.first else {
+                    assertionFailure()
+                    return
+                }
+                print("--- saved items count:", savedItemsCount)
+                assert(existedIds.count + itemsToSave.count == savedItemsCount, "")
+            }
+
+            #endif
+
         }
     }
     
