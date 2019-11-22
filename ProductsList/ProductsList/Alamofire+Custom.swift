@@ -15,6 +15,9 @@ extension Session {
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         configuration.urlCache = nil
         
+        /// alamofider default: "Accept-Language", "Accept-Encoding", "User-Agent" ("ProductsList/1.0 (com.by.ProductsList; build:1; iOS 13.2.2) Alamofire/5.0.0-rc.2")
+        //configuration.httpAdditionalHeaders = HTTPHeaders.default.dictionary
+        
         return Session(configuration: configuration)
     }()
 }
