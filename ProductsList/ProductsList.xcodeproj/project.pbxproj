@@ -353,6 +353,7 @@
 				CODE_SIGN_ENTITLEMENTS = ProductsList/ProductsList.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				INFOPLIST_FILE = ProductsList/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -374,6 +375,7 @@
 				CODE_SIGN_ENTITLEMENTS = ProductsList/ProductsList.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				INFOPLIST_FILE = ProductsList/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
