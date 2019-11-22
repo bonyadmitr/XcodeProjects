@@ -8,8 +8,8 @@ extension DispatchQueue {
 extension Session {
     
     static let withoutAuth: Session = {
-        let configuration = URLSessionConfiguration.default
-        //configuration.httpAdditionalHeaders = Session.defaultCustomHTTPHeaders
+        /// privacy https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1410529-ephemeral
+        let configuration = URLSessionConfiguration.ephemeral
         
         /// disable caching https://stackoverflow.com/a/42722401/5893286
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
