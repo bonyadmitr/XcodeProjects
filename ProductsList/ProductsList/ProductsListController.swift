@@ -40,7 +40,7 @@ import CoreData
  error presenting (mb ToastController later(+UIPresentationController) )
  error handling (+ InternalError)
  list empty state
- internet restoration (wifi + mobile)
+ internet restoration (wifi + mobile) (list and detail requests, cells resetup with failed images)
  http requests canceling
  split controller
  pass photo to detail screen
