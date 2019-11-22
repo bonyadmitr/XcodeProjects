@@ -62,6 +62,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE8A8BCE2387BF530015F120 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0FA51237E8586007056AF /* Info.plist */,
+				CEF0FA4C237E8586007056AF /* Assets.xcassets */,
+				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
+				CEF0FA57237E8698007056AF /* ProductsList.entitlements */,
+				CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		CEF0FA37237E8582007056AF = {
 			isa = PBXGroup;
 			children = (
@@ -81,9 +93,9 @@
 		CEF0FA42237E8582007056AF /* ProductsList */ = {
 			isa = PBXGroup;
 			children = (
-				CEF0FA57237E8698007056AF /* ProductsList.entitlements */,
+				CE8A8BCE2387BF530015F120 /* App */,
+				CEF0FA49237E8582007056AF /* Main.storyboard */,
 				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
-				CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */,
 				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
 				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
 				C488467923870BAB0090DF02 /* ProductsListView.swift */,
@@ -95,10 +107,6 @@
 				C488467723870B4F0090DF02 /* Product.swift */,
 				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
 				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
-				CEF0FA49237E8582007056AF /* Main.storyboard */,
-				CEF0FA4C237E8586007056AF /* Assets.xcassets */,
-				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
-				CEF0FA51237E8586007056AF /* Info.plist */,
 			);
 			path = ProductsList;
 			sourceTree = "<group>";
@@ -342,7 +350,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				INFOPLIST_FILE = ProductsList/Info.plist;
+				INFOPLIST_FILE = ProductsList/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,7 +371,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				INFOPLIST_FILE = ProductsList/Info.plist;
+				INFOPLIST_FILE = ProductsList/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
