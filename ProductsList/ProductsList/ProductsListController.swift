@@ -33,10 +33,7 @@ import CoreData
  CoreDataStack start guard
  
  REQUIRED FEATURES (User can see changes):
- pull to refresh
- activityIndicator for network
  context menu (UIContextMenuInteractionDelegate)
- cache by core data for offline using
  search
  sorting
  error presenting (mb ToastController later(+UIPresentationController) )
@@ -104,6 +101,10 @@ import CoreData
  asserts
  UICollectionViewDiffableDataSource + NSDiffableDataSourceSnapshot
  - latest ios (13) for new API
+ URLSession cache disabled
+ pull to refresh
+ activityIndicator for network
+ cache by core data for offline using
  
  CLEARED CODE:
  private
