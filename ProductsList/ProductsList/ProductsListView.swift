@@ -1,6 +1,8 @@
 import UIKit
 import CoreData
 
+// TODO: UICollectionViewDiffableDataSourceReference vs UICollectionViewDiffableDataSource
+
 /// UICollectionViewDiffableDataSource + NSFetchedResultsController
 /// https://schiavo.me/2019/coredata-diffabledatasource/
 /// https://stackoverflow.com/q/58029290/5893286
