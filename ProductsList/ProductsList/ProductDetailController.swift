@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class ProductDetailController: UIViewController {
     
@@ -93,6 +94,11 @@ final class ProductDetailController: UIViewController {
         nameLabel.text = item.name
         priceLabel.text = "Price: \(item.price)"
         
+        if let description = item.detail {
+            descriptionLabel.isHidden = false
+            descriptionLabel.text = description
+        }
+        
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
         
@@ -104,10 +110,7 @@ final class ProductDetailController: UIViewController {
         service.detail(id: id) { [weak self] result in
             switch result {
             case .success(let detailedItem):
-                DispatchQueue.main.async {
-                    self?.descriptionLabel.isHidden = false
-                    self?.descriptionLabel.text = detailedItem.description
-                }
+                self?.handle(detailedItem: detailedItem)
                 
             case .failure(let error):
                 print(error.debugDescription)
@@ -115,6 +118,29 @@ final class ProductDetailController: UIViewController {
         }
     }
     
+    private func handle(detailedItem: Product.DetailItem) {
+        DispatchQueue.main.async {
+            self.descriptionLabel.isHidden = false
+            self.descriptionLabel.text = detailedItem.description
+        }
+        
+        /// save
+        
+        guard let item = item, let context = item.managedObjectContext else {
+            assertionFailure()
+            return
+        }
+        
+        context.perform {
+            item.detail = detailedItem.description
+            
+            do {
+                try context.save()
+            } catch {
+                assertionFailure(error.debugDescription)
+            }
+        }
+    }
 }
 
 /// inspire by https://stackoverflow.com/a/50997110/5893286
