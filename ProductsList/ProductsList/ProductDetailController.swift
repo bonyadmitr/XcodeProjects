@@ -15,6 +15,7 @@ final class ProductDetailController: UIViewController {
     typealias Item = ProductItemDB
     
     private let service = Model.Service()
+    private lazy var storage = Item.Storage()
     
     @IBOutlet private weak var scrollView: UIScrollView!
     
@@ -124,21 +125,6 @@ final class ProductDetailController: UIViewController {
             self.descriptionLabel.text = detailedItem.description
         }
         
-        /// save
-        
-        guard let item = item, let context = item.managedObjectContext else {
-            assertionFailure()
-            return
-        }
-        
-        context.perform {
-            item.detail = detailedItem.description
-            
-            do {
-                try context.save()
-            } catch {
-                assertionFailure(error.debugDescription)
-            }
-        }
+        storage.updateSaved(item: item, with: detailedItem)
     }
 }

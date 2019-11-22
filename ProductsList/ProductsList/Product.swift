@@ -44,4 +44,33 @@ enum Product {
                 .responseObject(completion: handler)
         }
     }
+    
+}
+
+import CoreData
+
+extension ProductItemDB {
+    
+    typealias Item = ProductItemDB
+    
+    final class Storage {
+        
+        func updateSaved(item: Item?, with detailedItem: Product.DetailItem) {
+            guard let item = item, let context = item.managedObjectContext else {
+                assertionFailure("there is no item")
+                return
+            }
+            
+            context.perform {
+                item.detail = detailedItem.description
+                
+                do {
+                    try context.save()
+                } catch {
+                    assertionFailure(error.debugDescription)
+                }
+            }
+        }
+    }
+    
 }
