@@ -166,7 +166,7 @@ final class ProductsListController: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let items):
-                        self?.vcView.handle(items: items)
+                        self?.handle(items: items)
                     case .failure(let error):
                         print(error.debugDescription)
                     }
@@ -175,8 +175,6 @@ final class ProductsListController: UIViewController {
                 }
             }
         }
-        
-        
         
         /// https://sarunw.com/posts/uinavigationbar-changes-in-ios13/
         //let appearance = UINavigationBarAppearance()
@@ -199,7 +197,7 @@ final class ProductsListController: UIViewController {
                 
                 switch result {
                 case .success(let items):
-                    self?.vcView.handle(items: items)
+                    self?.handle(items: items)
                 case .failure(let error):
                     print(error.debugDescription)
                 }
@@ -207,6 +205,72 @@ final class ProductsListController: UIViewController {
         }
     }
     
+    private func handle(items newItems: [Product.Item]) {
+        
+        CoreDataStack.shared.performBackgroundTask { context in
+            
+            let newIds = newItems.map { $0.id }
+            let propertyToFetch = #keyPath(Item.id)
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
+            fetchRequest.predicate = NSPredicate(format: "\(propertyToFetch) IN %@", newIds)
+            fetchRequest.resultType = .dictionaryResultType
+            fetchRequest.propertiesToFetch = [propertyToFetch]
+            fetchRequest.includesSubentities = false
+            //fetchRequest.includesPropertyValues = false
+            //fetchRequest.includesPendingChanges = true
+            //fetchRequest.returnsObjectsAsFaults = false
+            //fetchRequest.returnsDistinctResults = true
+            
+            guard let existedDictIds = try? context.fetch(fetchRequest) as? [[String: String]] else {
+                assertionFailure("must be set 'fetchRequest.resultType = .dictionaryResultType'")
+                return
+            }
+            
+            let existedIds = existedDictIds.compactMap { $0[propertyToFetch] }
+            print("--- existed items count \(existedIds.count)")
+            assert(existedIds.count == existedDictIds.count, "\(existedIds.count) != \(existedDictIds.count)")
+            
+            let itemsToSave = newItems.filter { !existedIds.contains($0.id) }
+            print("--- items to save count \(itemsToSave.count)")
+            
+            guard !itemsToSave.isEmpty else {
+                print("--- there are no new items")
+                return
+            }
+            
+            /// save new items
+            for newItem in itemsToSave {
+                let item = Item(context: context)
+                item.id = newItem.id
+                item.name = newItem.name
+                item.imageUrl = newItem.imageUrl
+                item.price = Int16(newItem.price)
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                assertionFailure(error.debugDescription)
+            }
+            
+            #if DEBUG
+            /// check saved items count
+            CoreDataStack.shared.performBackgroundTask { context in
+                let fetchRequestCount = NSFetchRequest<NSFetchRequestResult>(entityName: Item.className())
+                fetchRequestCount.resultType = .countResultType
+                guard let savedItemsCount = (try? context.fetch(fetchRequestCount) as? [Int])?.first else {
+                    assertionFailure()
+                    return
+                }
+                print("--- saved items count:", savedItemsCount)
+                assert(existedIds.count + itemsToSave.count == savedItemsCount, "")
+            }
+
+            #endif
+
+        }
+    }
 }
 
 extension ProductsListController: UICollectionViewDelegate {
