@@ -297,7 +297,7 @@ extension ProductsListController: UISearchResultsUpdating {
 
         let predicate: NSPredicate?
         if searchText.isEmpty {
-            /// pass reference to default predicate in fetchedResultsController.fetchRequest
+            // TODO: pass reference to default predicate in fetchedResultsController.fetchRequest
             predicate = nil
         } else {
             /// or #1
