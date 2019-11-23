@@ -34,8 +34,7 @@ import CoreData
  
  REQUIRED FEATURES (User can see changes):
  context menu (UIContextMenuInteractionDelegate)
- search
- sorting
+ save sorting on restart
  error presenting (mb ToastController later(+UIPresentationController) )
  error handling (+ InternalError)
  list empty state
@@ -105,6 +104,8 @@ import CoreData
  pull to refresh
  activityIndicator for network
  cache by core data for offline using
+ search
+ sorting
  
  CLEARED CODE:
  private
