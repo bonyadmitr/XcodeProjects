@@ -300,8 +300,8 @@ extension ProductsListController: UISearchResultsUpdating {
             /// pass reference to default predicate in fetchedResultsController.fetchRequest
             predicate = nil
         } else {
-            predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@)", searchText)
-            //predicate = NSPredicate(format: "(\(#keyPath(EventDB.title)) contains[cd] %@) || (\(#keyPath(EventDB.date)) contains[cd] %@)", searchText, searchText)
+//            predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@)", searchText)
+            predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@) || (\(#keyPath(Item.detail)) contains[cd] %@) || (\(#keyPath(Item.price)) contains[cd] %@)", searchText, searchText, searchText)
         }
 
         vcView.fetchedResultsController.fetchRequest.predicate = predicate
