@@ -300,11 +300,15 @@ extension ProductsListController: UISearchResultsUpdating {
             /// pass reference to default predicate in fetchedResultsController.fetchRequest
             predicate = nil
         } else {
+            /// or #1
             predicate = NSCompoundPredicate(type: .or, subpredicates: [
                 NSPredicate(format: "\(#keyPath(Item.name)) contains[cd] %@", searchText),
                 NSPredicate(format: "\(#keyPath(Item.detail)) contains[cd] %@", searchText),
                 NSPredicate(format: "\(#keyPath(Item.price)) contains[cd] %@", searchText)
             ])
+            /// or #2
+            /// more optimized, but unsafe due argList.
+            /// "OR" == "||" for NSPredicate.
             //predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@) || (\(#keyPath(Item.detail)) contains[cd] %@) || (\(#keyPath(Item.price)) contains[cd] %@)", searchText, searchText, searchText)
         }
 
