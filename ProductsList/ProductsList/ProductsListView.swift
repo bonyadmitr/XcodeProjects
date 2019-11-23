@@ -127,6 +127,15 @@ final class ProductsListView: UIView {
         _ = dataSource
         addSubview(collectionView)
         
+        /// removed collectionView.autoresizingMask if used constraints
+        //collectionView.translatesAutoresizingMaskIntoConstraints = false
+        //NSLayoutConstraint.activate([
+        //    collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+        //    collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+        //    collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+        //    collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        //])
+        
         fetchedResultsController.delegate = self
         performFetch()
     }
