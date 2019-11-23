@@ -98,7 +98,7 @@ final class ProductsListView: UIView {
         return activityIndicator
     }()
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
         let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(ProductItemDB.id), ascending: false)]
         
@@ -128,6 +128,10 @@ final class ProductsListView: UIView {
         addSubview(collectionView)
         
         fetchedResultsController.delegate = self
+        performFetch()
+    }
+    
+    func performFetch() {
         try? fetchedResultsController.performFetch()
         updateDataSource(animated: false)
     }

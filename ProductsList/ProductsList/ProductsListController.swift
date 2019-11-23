@@ -133,6 +133,7 @@ final class ProductsListController: UIViewController {
     
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func loadView() {
         self.view = View()
@@ -159,7 +160,7 @@ final class ProductsListController: UIViewController {
         _ = vcView
         
         vcView.collectionView.delegate = self
-        
+        setupSearchController()
         fetch()
         
         vcView.refreshData = { [weak self] refreshControl in
@@ -190,6 +191,39 @@ final class ProductsListController: UIViewController {
         /// in IB
         //navigationController?.navigationBar.isTranslucent = false
     }
+    
+    /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.autocapitalizationType = .none
+        
+        /// For iOS 11 and later, place the search bar in the navigation bar.
+        navigationItem.searchController = searchController
+        
+        /// Make the search bar always visible.
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        //searchController.delegate = self
+        
+        /// to present content in current controller (without it didSelectItemAt will not work)
+        searchController.obscuresBackgroundDuringPresentation = false
+        //searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+        
+        /** Search presents a view controller by applying normal view controller presentation semantics.
+         This means that the presentation moves up the view controller hierarchy until it finds the root
+         view controller or one that defines a presentation context.
+         */
+        
+        /** Specify that this view controller determines how the search controller is presented.
+         The search controller should be presented modally and match the physical size of this view controller.
+         */
+        definesPresentationContext = true
+        
+        /// to fix lauout on pop with active search
+        extendedLayoutIncludesOpaqueBars = true
+        
+        //searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
+    }
 
     private func fetch() {
         vcView.activityIndicator.startAnimating()
@@ -219,6 +253,9 @@ extension ProductsListController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("did select cell at \(indexPath.item)")
         
+        /// dismiss keyboard if search was used and pop back
+        //searchController.searchBar.resignFirstResponder()
+        
         guard let item = vcView.dataSource.itemIdentifier(for: indexPath) else {
             assertionFailure()
             return
@@ -235,6 +272,29 @@ extension ProductsListController: UICollectionViewDelegate {
     }
     
 }
+
+extension ProductsListController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let searchText = searchController.searchBar.text else {
+            assertionFailure()
+            return
+        }
+
+        let predicate: NSPredicate?
+        if searchText.isEmpty {
+            /// pass reference to default predicate in fetchedResultsController.fetchRequest
+            predicate = nil
+        } else {
+            predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@)", searchText)
+            //predicate = NSPredicate(format: "(\(#keyPath(EventDB.title)) contains[cd] %@) || (\(#keyPath(EventDB.date)) contains[cd] %@)", searchText, searchText)
+        }
+
+        vcView.fetchedResultsController.fetchRequest.predicate = predicate
+        vcView.performFetch()
+    }
+}
+
 
 /// there is no CustomDebugStringConvertible bcz of error:
 /// Extension of protocol 'Error' cannot have an inheritance clause
