@@ -131,6 +131,20 @@ final class ProductsListController: UIViewController {
     typealias Item = ProductItemDB
     typealias View = ProductsListView
     
+    private enum SortOrder: Int, CaseIterable {
+        case id = 0
+        case name
+        
+        var title: String {
+            switch self {
+            case .id:
+                return "Created Date"
+            case .name:
+                return "Name"
+            }
+        }
+    }
+    
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     private let searchController = UISearchController(searchResultsController: nil)
@@ -207,7 +221,7 @@ final class ProductsListController: UIViewController {
         
         /// to present content in current controller (without it didSelectItemAt will not work)
         searchController.obscuresBackgroundDuringPresentation = false
-        //searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         
         /** Search presents a view controller by applying normal view controller presentation semantics.
          This means that the presentation moves up the view controller hierarchy until it finds the root
@@ -222,7 +236,7 @@ final class ProductsListController: UIViewController {
         /// to fix lauout on pop with active search
         extendedLayoutIncludesOpaqueBars = true
         
-        //searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
+        searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
     }
 
     private func fetch() {
@@ -291,6 +305,39 @@ extension ProductsListController: UISearchResultsUpdating {
         }
 
         vcView.fetchedResultsController.fetchRequest.predicate = predicate
+        vcView.performFetch()
+    }
+}
+
+extension ProductsListController: UISearchBarDelegate {
+    
+    /// default for iOS 12
+    //func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    //    searchBar.resignFirstResponder()
+    //}
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        guard let sortOrder = SortOrder(rawValue: selectedScope) else {
+            assertionFailure()
+            return
+        }
+        
+        let sortDescriptors: [NSSortDescriptor]
+        
+        switch sortOrder {
+        case .id:
+            // TODO: reuse with fetchedResultsController
+            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
+            sortDescriptors = [sortDescriptor1]
+
+        case .name:
+            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.name), ascending: true)
+            let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
+            sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        }
+        
+        vcView.fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
         vcView.performFetch()
     }
 }
