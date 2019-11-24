@@ -97,6 +97,13 @@ final class ProductsListController: UIViewController {
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .none
+        searchController.searchBar.spellCheckingType = .no
+        searchController.searchBar.enablesReturnKeyAutomatically = true /// default true for searchBar
+        searchController.searchBar.smartQuotesType = .no
+        searchController.searchBar.smartDashesType = .no
+        
+        /// removes suggestions bar above keyboard
+        //searchController.searchBar.autocorrectionType = .yes /// default .no for searchBar
         
         /// For iOS 11 and later, place the search bar in the navigation bar.
         navigationItem.searchController = searchController
