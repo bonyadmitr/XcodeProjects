@@ -44,6 +44,7 @@ final class ProductsListView: UIView {
         
         collectionView.register(UINib(nibName: String(describing: Cell.self), bundle: nil), forCellWithReuseIdentifier: cellId)
         //collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         
         #if os(iOS)
         collectionView.backgroundColor = .systemBackground
@@ -100,7 +101,7 @@ final class ProductsListView: UIView {
     
     lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
         let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(ProductItemDB.id), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: false)]
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             fetchRequest.fetchBatchSize = 20
@@ -125,6 +126,24 @@ final class ProductsListView: UIView {
     
     private func setup() {
         _ = dataSource
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? TitleSupplementaryView else {
+                assertionFailure()
+                return UICollectionReusableView()
+            }
+            
+//            guard let item = self.dataSource.itemIdentifier(for: indexPath) else {
+//                assertionFailure()
+//                return view
+//            }
+//            self.dataSource.itemIdentifier(for: <#T##IndexPath#>)
+            
+            view.titleLabel.text = self.fetchedResultsController.sections?[indexPath.section].name
+            
+            return view
+        }
+        
         addSubview(collectionView)
         
         /// removed collectionView.autoresizingMask if used constraints
@@ -192,8 +211,24 @@ final class ProductsListView: UIView {
     
     func updateDataSource(animated: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
+        
+        if let sections = fetchedResultsController.sections {
+            let sectionsArray = (0..<sections.count).map { $0 }
+            snapshot.appendSections(sectionsArray)
+            
+            for (sectionIndex, section) in sections.enumerated() {
+                let items = (0..<section.numberOfObjects).map { itemIndex -> ProductItemDB in
+                    let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+                    return fetchedResultsController.object(at: indexPath)
+                }
+                snapshot.appendItems(items, toSection: sectionIndex)
+            }
+        }
+        
+        /// for one section
+        //snapshot.appendSections([0])
+        //snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
+        
         currentSnapshot = snapshot
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
