@@ -50,6 +50,16 @@ enum Product {
 import CoreData
 
 extension ProductItemDB {
+    @objc dynamic var section: String? {
+        if let char = name?.first {
+            return String(char)
+        }
+        return nil
+    }
+
+}
+
+extension ProductItemDB {
     
     typealias Item = ProductItemDB
     
