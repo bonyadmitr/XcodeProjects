@@ -133,12 +133,6 @@ final class ProductsListView: UIView {
                 return UICollectionReusableView()
             }
             
-//            guard let item = self.dataSource.itemIdentifier(for: indexPath) else {
-//                assertionFailure()
-//                return view
-//            }
-//            self.dataSource.itemIdentifier(for: <#T##IndexPath#>)
-            
             view.titleLabel.text = self.fetchedResultsController.sections?[indexPath.section].name
             
             return view
@@ -213,21 +207,26 @@ final class ProductsListView: UIView {
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
         
         if let sections = fetchedResultsController.sections {
-            let sectionsArray = (0..<sections.count).map { $0 }
-            snapshot.appendSections(sectionsArray)
             
-            for (sectionIndex, section) in sections.enumerated() {
-                let items = (0..<section.numberOfObjects).map { itemIndex -> ProductItemDB in
-                    let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
-                    return fetchedResultsController.object(at: indexPath)
+            /// simple snapshot for one section
+            if sections.count == 1 {
+                snapshot.appendSections([0])
+                snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
+            } else {
+                
+                let sectionsArray = (0..<sections.count).map { $0 }
+                snapshot.appendSections(sectionsArray)
+                
+                for (sectionIndex, section) in sections.enumerated() {
+                    let items = (0..<section.numberOfObjects).map { itemIndex -> ProductItemDB in
+                        let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+                        return fetchedResultsController.object(at: indexPath)
+                    }
+                    snapshot.appendItems(items, toSection: sectionIndex)
                 }
-                snapshot.appendItems(items, toSection: sectionIndex)
             }
+
         }
-        
-        /// for one section
-        //snapshot.appendSections([0])
-        //snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
         
         currentSnapshot = snapshot
         dataSource.apply(snapshot, animatingDifferences: animated)
