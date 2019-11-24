@@ -184,6 +184,8 @@ extension ProductsListController: UICollectionViewDelegate {
 extension ProductsListController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
+        // TODO: optimize for appear (searchController.isActive == true)
+        // TODO: optimize for disappear (called twice. searchController.isActive true and false on each call)
         guard let searchText = searchController.searchBar.text else {
             assertionFailure()
             return
