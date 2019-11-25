@@ -71,6 +71,7 @@
  translucent nav bar (+ fix all scrolls)
  mb something for NaturalLanguage + Create ML
  image recognition
+ handoff (opened detail)
  macCatalyst
  macCatalyst Menu Bar article https://www.zachsim.one/blog/2019/8/4/customising-the-menu-bar-of-a-catalyst-app-using-uimenubuilder
  
@@ -105,6 +106,7 @@
  constants (for magic numbers)
  willSet
  safe code (less '!')
+ there are a lot of commented code for comments or can be usefull in the future (like in the CoreDataStack)
  
  THERE IS NO:
  keychain
