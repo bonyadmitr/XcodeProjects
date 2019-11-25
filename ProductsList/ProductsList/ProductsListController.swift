@@ -202,6 +202,7 @@ extension ProductsListController: UISearchResultsUpdating {
         let predicate: NSPredicate?
         if searchText.isEmpty {
             
+            /// search become active or cancel without any text. don't need to do anything
             if vcView.fetchedResultsController.fetchRequest.predicate == nil {
                 return
             }
@@ -282,6 +283,11 @@ extension ProductsListController: UISearchBarDelegate {
                                                                      cacheName: nil)
         
         vcView.performFetch()
+        
+        /// there a lite animation(not good for me) on first scope change.
+        /// it is due to image placeholder.
+        /// simple(but not good) fix:
+        //vcView.performFetch()
         
         /// to change sorting only
         //vcView.fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
