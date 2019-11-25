@@ -43,16 +43,16 @@ final class CoreDataStack {
         container.performBackgroundTask(block)
     }
     
-    func recreateStore() {
-        container.recreateStore() { error in
-            if let error = error {
-                assertionFailure(error.debugDescription)
-            } else {
-                print("Core data store recreated")
-            }
-            
-        }
-    }
+//    func recreateStore() {
+//        container.recreateStore() { error in
+//            if let error = error {
+//                assertionFailure(error.debugDescription)
+//            } else {
+//                print("Core data store recreated")
+//            }
+//
+//        }
+//    }
     
     private static func persistentContainer(storeType: PersistentStoreType, modelName: String) -> NSPersistentContainer {
         let container = NSPersistentContainer(name: modelName)
@@ -154,34 +154,34 @@ final class CoreDataStack {
 //}
 
 extension NSPersistentContainer {
-    
-    func recreateStore(complition: @escaping (Error?) -> Void) {
-        do {
-            viewContext.reset()
-            for store in persistentStoreCoordinator.persistentStores {
-                if store.type == NSInMemoryStoreType {
-                    try persistentStoreCoordinator.remove(store)
-                } else if let url = store.url {
-                    try persistentStoreCoordinator.destroyPersistentStore(at: url, ofType: store.type, options: store.options)
-                }
-            }
-            loadPersistentStores { storeDescription, error in
-                if let error = error {
-                    assertionFailure(error.debugDescription)
-                    complition(error)
-                } else {
-                    complition(nil)
-                }
-            }
-        } catch {
-            assertionFailure(error.debugDescription)
-            complition(error)
-        }
-    }
-    
+
     func automaticallyMergesChangesFromParent() {
         viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+//    func recreateStore(complition: @escaping (Error?) -> Void) {
+//        do {
+//            viewContext.reset()
+//            for store in persistentStoreCoordinator.persistentStores {
+//                if store.type == NSInMemoryStoreType {
+//                    try persistentStoreCoordinator.remove(store)
+//                } else if let url = store.url {
+//                    try persistentStoreCoordinator.destroyPersistentStore(at: url, ofType: store.type, options: store.options)
+//                }
+//            }
+//            loadPersistentStores { storeDescription, error in
+//                if let error = error {
+//                    assertionFailure(error.debugDescription)
+//                    complition(error)
+//                } else {
+//                    complition(nil)
+//                }
+//            }
+//        } catch {
+//            assertionFailure(error.debugDescription)
+//            complition(error)
+//        }
+//    }
 }
 
 //typealias CoreDataSaveStatusHandler = (CoreDataSaveStatus) -> Void
