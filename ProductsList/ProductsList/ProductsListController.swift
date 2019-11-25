@@ -303,3 +303,22 @@ extension Error {
         return String(describing: self)
     }
 }
+
+protocol ErrorPresenter {
+    func showErrorAlert(with message: String)
+    func showErrorAlert(for error: Error)
+}
+extension ErrorPresenter where Self: UIViewController {
+    func showErrorAlert(with message: String) {
+        /// .actionSheet easier to close
+        let vc = UIAlertController(title: "Error", message: message, preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        vc.addAction(okAction)
+        present(vc, animated: false, completion: nil)
+    }
+    
+    func showErrorAlert(for error: Error) {
+        showErrorAlert(with: error.localizedDescription)
+        print(error.debugDescription)
+    }
+}
