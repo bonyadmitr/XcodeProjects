@@ -182,8 +182,12 @@ extension ProductsListController: UICollectionViewDelegate {
 }
 
 extension ProductsListController: UISearchResultsUpdating {
+    
+    /// called on UISearchController touch.
+    /// called twice on cancel. searchController.isActive == true and false on each call
     func updateSearchResults(for searchController: UISearchController) {
         
+        /// searchController.isActive == searchController.searchBar.isFirstResponder in this case
         if !searchController.isActive {
             return
         }
