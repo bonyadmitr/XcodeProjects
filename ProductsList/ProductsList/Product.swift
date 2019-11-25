@@ -65,7 +65,7 @@ extension ProductItemDB {
     
     final class Storage {
         
-        func save(items newItems: [Product.Item]) {
+        func save(items newItems: [Product.Item], completion: @escaping ErrorCompletion) {
             
             CoreDataStack.shared.performBackgroundTask { context in
                 
@@ -110,8 +110,10 @@ extension ProductItemDB {
                 
                 do {
                     try context.save()
+                    completion(nil)
                 } catch {
                     assertionFailure(error.debugDescription)
+                    completion(error)
                 }
                 
                 #if DEBUG

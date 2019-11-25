@@ -131,7 +131,7 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
                     self?.showErrorAlert(for: error)
                 } else {
                     // can be shown alert
-                    print("success")
+                    print("success. item updated")
                 }
             }
         }
