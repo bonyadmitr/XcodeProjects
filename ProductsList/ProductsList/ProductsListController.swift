@@ -236,49 +236,44 @@ extension ProductsListController: UISearchBarDelegate {
         }
         
         let sortDescriptors: [NSSortDescriptor]
+        let sectionNameKeyPath: String?
+        let headerSize: CGSize
         
         switch sortOrder {
         case .id:
-            (vcView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = .zero
+            headerSize = .zero
+            sectionNameKeyPath = nil
             
-            // TODO: reuse with fetchedResultsController
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
             sortDescriptors = [sortDescriptor1]
             
-            let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-            fetchRequest.sortDescriptors = sortDescriptors
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                fetchRequest.fetchBatchSize = 20
-            } else {
-                fetchRequest.fetchBatchSize = 10
-            }
-            
-            //fetchRequest.shouldRefreshRefetchedObjects = false
-            let context = CoreDataStack.shared.viewContext
-            vcView.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            
         case .name:
-            (vcView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize(width: 0, height: 44)
+            headerSize = CGSize(width: 0, height: 44)
+            sectionNameKeyPath = #keyPath(Item.section)
             
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.name), ascending: true)
             let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
             sortDescriptors = [sortDescriptor1, sortDescriptor2]
-            
-            let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-            fetchRequest.sortDescriptors = sortDescriptors
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                fetchRequest.fetchBatchSize = 20
-            } else {
-                fetchRequest.fetchBatchSize = 10
-            }
-            
-            //fetchRequest.shouldRefreshRefetchedObjects = false
-            let context = CoreDataStack.shared.viewContext
-            vcView.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: #keyPath(Item.section), cacheName: nil)
-            
         }
+        
+        (vcView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = headerSize
+        
+        // TODO: reuse with fetchedResultsController
+        let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fetchRequest.fetchBatchSize = 20
+        } else {
+            fetchRequest.fetchBatchSize = 10
+        }
+        
+        //fetchRequest.shouldRefreshRefetchedObjects = false
+        let context = CoreDataStack.shared.viewContext
+        vcView.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                     managedObjectContext: context,
+                                                                     sectionNameKeyPath: sectionNameKeyPath,
+                                                                     cacheName: nil)
         
         vcView.performFetch()
         
