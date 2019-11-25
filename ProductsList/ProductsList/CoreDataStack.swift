@@ -159,7 +159,7 @@ extension NSPersistentContainer {
         viewContext.automaticallyMergesChangesFromParent = true
     }
     
-//    func recreateStore(complition: @escaping (Error?) -> Void) {
+//    func recreateStore(completion: @escaping (Error?) -> Void) {
 //        do {
 //            viewContext.reset()
 //            for store in persistentStoreCoordinator.persistentStores {
@@ -172,14 +172,14 @@ extension NSPersistentContainer {
 //            loadPersistentStores { storeDescription, error in
 //                if let error = error {
 //                    assertionFailure(error.debugDescription)
-//                    complition(error)
+//                    completion(error)
 //                } else {
-//                    complition(nil)
+//                    completion(nil)
 //                }
 //            }
 //        } catch {
 //            assertionFailure(error.debugDescription)
-//            complition(error)
+//            completion(error)
 //        }
 //    }
 }
