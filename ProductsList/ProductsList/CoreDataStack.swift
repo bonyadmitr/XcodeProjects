@@ -80,6 +80,79 @@ final class CoreDataStack {
     }
 }
 
+//extension CoreDataStack {
+//
+//    /// working ONLY with NSSQLiteStoreType
+//    /// https://stackoverflow.com/a/50154532/5893286
+//    func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
+//        performBackgroundTask { context in
+//
+//            switch self.storeType {
+//            case .sqlite:
+//                do {
+//                    let objectIDs = try self.container.persistentStoreCoordinator.managedObjectModel.entities
+//                        .compactMap { self.batchDeleteRequest(for: $0) }
+//                        .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+//                        .compactMap { $0.result as? [NSManagedObjectID] }
+//                        .flatMap { $0 }
+//
+//                    /// long operation. need only to update NSFetchedResultsController.
+//                    /// for logout can be removed.
+//                    /// context.parent is nil iOS 10+ so used viewContext
+//                    let changes = [NSDeletedObjectsKey: objectIDs]
+//                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self.viewContext])
+//                    completion?(.saved)
+//
+//                } catch {
+//                    assertionFailure(error.localizedDescription)
+//                    context.rollback()
+//                    completion?(.rolledBack(error))
+//                }
+//
+//            case .memory:
+//                do {
+//                    /// very long operation: 10 seconds for 10_000 objects
+//                    try [ProductItemDB.self]
+//                        .map { self.deleteRequest(for: $0) }
+//                        .forEach { fetchRequest in
+//                            let models = try context.fetch(fetchRequest)
+//                            models.forEach { context.delete($0) }
+//                    }
+//                    try context.save()
+//                    completion?(.saved)
+//                } catch {
+//                    assertionFailure(error.localizedDescription)
+//                    context.rollback()
+//                    completion?(.rolledBack(error))
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private func batchDeleteRequest(for entity: NSEntityDescription) -> NSBatchDeleteRequest {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+//        fetchRequest.entity = entity
+//        fetchRequest.includesPropertyValues = false
+//        fetchRequest.returnsObjectsAsFaults = false
+//        fetchRequest.resultType = .managedObjectIDResultType
+//
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        deleteRequest.resultType = .resultTypeObjectIDs
+//        return deleteRequest
+//    }
+//
+//    private func deleteRequest<T: NSManagedObject>(for type: T.Type) -> NSFetchRequest<T> {
+//        let fetchRequest: NSFetchRequest<T> = NSFetchRequest(entityName: type.className())
+//        ///only fetch the managedObjectID
+//        fetchRequest.includesPropertyValues = false
+//        //fetchRequest.returnsObjectsAsFaults = false
+//        return fetchRequest
+//    }
+//}
+
 extension NSPersistentContainer {
     
     func recreateStore(complition: @escaping (Error?) -> Void) {
@@ -110,3 +183,11 @@ extension NSPersistentContainer {
         viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+//typealias CoreDataSaveStatusHandler = (CoreDataSaveStatus) -> Void
+//
+//enum CoreDataSaveStatus {
+//    case saved
+//    case hasNoChanges
+//    case rolledBack(Error)
+//}
