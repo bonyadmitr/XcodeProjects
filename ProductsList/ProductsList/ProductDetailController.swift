@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-final class ProductDetailController: UIViewController {
+final class ProductDetailController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
     typealias Item = ProductItemDB
@@ -114,7 +114,7 @@ final class ProductDetailController: UIViewController {
                 self?.handle(detailedItem: detailedItem)
                 
             case .failure(let error):
-                print(error.debugDescription)
+                self?.showErrorAlert(for: error)
             }
         }
     }
@@ -125,6 +125,15 @@ final class ProductDetailController: UIViewController {
             self.descriptionLabel.text = detailedItem.description
         }
         
-        storage.updateSaved(item: item, with: detailedItem)
+        storage.updateSaved(item: item, with: detailedItem) { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.showErrorAlert(for: error)
+                } else {
+                    // can be shown alert
+                    print("success")
+                }
+            }
+        }
     }
 }

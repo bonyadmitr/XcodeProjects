@@ -133,7 +133,7 @@ extension ProductItemDB {
             
         }
         
-        func updateSaved(item: Item?, with detailedItem: Product.DetailItem) {
+        func updateSaved(item: Item?, with detailedItem: Product.DetailItem, completion: @escaping ErrorCompletion) {
             guard let item = item, let context = item.managedObjectContext else {
                 assertionFailure("there is no item")
                 return
@@ -144,8 +144,10 @@ extension ProductItemDB {
                 
                 do {
                     try context.save()
+                    completion(nil)
                 } catch {
                     assertionFailure(error.debugDescription)
+                    completion(error)
                 }
             }
         }

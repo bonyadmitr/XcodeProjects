@@ -11,7 +11,7 @@ import Alamofire
 import Kingfisher
 import CoreData
 
-final class ProductsListController: UIViewController {
+final class ProductsListController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
 //    typealias Item = Model.Item
@@ -73,7 +73,7 @@ final class ProductsListController: UIViewController {
                     case .success(let items):
                         self?.handle(items: items)
                     case .failure(let error):
-                        print(error.debugDescription)
+                        self?.showErrorAlert(for: error)
                     }
                     
                     refreshControl.endRefreshing()
@@ -146,7 +146,7 @@ final class ProductsListController: UIViewController {
                 case .success(let items):
                     self?.handle(items: items)
                 case .failure(let error):
-                    print(error.debugDescription)
+                    self?.showErrorAlert(for: error)
                 }
             }
         }
@@ -322,3 +322,5 @@ extension ErrorPresenter where Self: UIViewController {
         print(error.debugDescription)
     }
 }
+
+typealias ErrorCompletion = (Error?) -> Void
