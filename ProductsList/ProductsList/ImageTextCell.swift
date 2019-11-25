@@ -47,27 +47,27 @@ final class ImageTextCell: UICollectionViewCell {
         }
     }
     
-    func setup(for item: Product.Item) {
-        titleLabel.text = item.name
-        subtitleLabel.text = "\(item.price)"
-        
-        imageView.kf.cancelDownloadTask()
-        imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
-        
-        
-        //imageView.image = UIImage(systemName: "photo")
-        //KingfisherManager.shared.retrieveImage(with: item.imageUrl) { result in
-        //    switch result {
-        //    case .success(let source):
-        //        let image = source.image
-        //        self.imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
-        //        self.imageView.image = image
-        //    case .failure(let error):
-        //        print(error.debugDescription)
-        //    }
-        //}
-        
-    }
+    //func setup(for item: Product.Item) {
+    //    titleLabel.text = item.name
+    //    subtitleLabel.text = "\(item.price)"
+    //
+    //    imageView.kf.cancelDownloadTask()
+    //    imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+    //
+    //
+    //    //imageView.image = UIImage(systemName: "photo")
+    //    //KingfisherManager.shared.retrieveImage(with: item.imageUrl) { result in
+    //    //    switch result {
+    //    //    case .success(let source):
+    //    //        let image = source.image
+    //    //        self.imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
+    //    //        self.imageView.image = image
+    //    //    case .failure(let error):
+    //    //        print(error.debugDescription)
+    //    //    }
+    //    //}
+    //
+    //}
     
     func setup(for item: ProductItemDB) {
         titleLabel.text = item.name
