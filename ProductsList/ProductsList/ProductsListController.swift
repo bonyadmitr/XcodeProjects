@@ -184,8 +184,10 @@ extension ProductsListController: UICollectionViewDelegate {
 extension ProductsListController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-        // TODO: optimize for appear (searchController.isActive == true)
-        // TODO: optimize for disappear (called twice. searchController.isActive true and false on each call)
+        if !searchController.isActive {
+            return
+        }
+        
         guard let searchText = searchController.searchBar.text else {
             assertionFailure()
             return
@@ -193,6 +195,11 @@ extension ProductsListController: UISearchResultsUpdating {
 
         let predicate: NSPredicate?
         if searchText.isEmpty {
+            
+            if vcView.fetchedResultsController.fetchRequest.predicate == nil {
+                return
+            }
+            
             // TODO: pass reference to default predicate in fetchedResultsController.fetchRequest
             predicate = nil
         } else {
