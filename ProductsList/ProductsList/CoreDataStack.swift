@@ -12,16 +12,13 @@ final class CoreDataStack {
     }
     
     let storeType: PersistentStoreType
-//    private let modelName: String
     private let container: NSPersistentContainer
     
-    /// oldAPI is iOS 9 api
     init(storeType: PersistentStoreType, modelName: String) {
         self.storeType = storeType
-//        self.modelName = modelName
         
         container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
-        container.automaticallyMergesChangesFromParent()
+        container.viewContext.automaticallyMergesChangesFromParent = true
         
         // TODO: check
         // TODO: maybe should be in the "loadPersistentStores"
@@ -42,17 +39,6 @@ final class CoreDataStack {
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         container.performBackgroundTask(block)
     }
-    
-//    func recreateStore() {
-//        container.recreateStore() { error in
-//            if let error = error {
-//                assertionFailure(error.debugDescription)
-//            } else {
-//                print("Core data store recreated")
-//            }
-//
-//        }
-//    }
     
     private static func persistentContainer(storeType: PersistentStoreType, modelName: String) -> NSPersistentContainer {
         let container = NSPersistentContainer(name: modelName)
@@ -78,6 +64,17 @@ final class CoreDataStack {
         }
         return container
     }
+      
+    //    func recreateStore() {
+    //        container.recreateStore() { error in
+    //            if let error = error {
+    //                assertionFailure(error.debugDescription)
+    //            } else {
+    //                print("Core data store recreated")
+    //            }
+    //
+    //        }
+    //    }
 }
 
 //extension CoreDataStack {
@@ -152,13 +149,13 @@ final class CoreDataStack {
 //        return fetchRequest
 //    }
 //}
-
-extension NSPersistentContainer {
-
-    func automaticallyMergesChangesFromParent() {
-        viewContext.automaticallyMergesChangesFromParent = true
-    }
-    
+//
+//extension NSPersistentContainer {
+//
+//    func automaticallyMergesChangesFromParent() {
+//        viewContext.automaticallyMergesChangesFromParent = true
+//    }
+//
 //    func recreateStore(completion: @escaping (Error?) -> Void) {
 //        do {
 //            viewContext.reset()
@@ -182,8 +179,8 @@ extension NSPersistentContainer {
 //            completion(error)
 //        }
 //    }
-}
-
+//}
+//
 //typealias CoreDataSaveStatusHandler = (CoreDataSaveStatus) -> Void
 //
 //enum CoreDataSaveStatus {
