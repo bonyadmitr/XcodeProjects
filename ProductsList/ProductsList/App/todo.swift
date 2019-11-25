@@ -95,8 +95,10 @@
  pull to refresh
  activityIndicator for network
  cache by core data for offline using
- search
- sorting
+ searchController
+ sorting by ScopeButtons
+ collection sections in sorting
+ 
  layout by three ways: frame (TitleSupplementaryView), autoresizingMask (ProductsListView), IB constraints (ImageTextCell)
  + commented code of anchor constraints (ProductsListView)
  
