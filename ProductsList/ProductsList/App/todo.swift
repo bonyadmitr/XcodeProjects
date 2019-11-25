@@ -97,6 +97,8 @@
  cache by core data for offline using
  search
  sorting
+ layout by three ways: frame (TitleSupplementaryView), autoresizingMask (ProductsListView), IB constraints (ImageTextCell)
+ + commented code of anchor constraints (ProductsListView)
  
  CLEARED CODE:
  private
