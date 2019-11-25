@@ -96,6 +96,8 @@ final class ProductsListController: UIViewController {
     /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
+        
+        searchController.searchBar.placeholder = "Search name/price/description"
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchBar.spellCheckingType = .no
         searchController.searchBar.enablesReturnKeyAutomatically = true /// default true for searchBar
@@ -193,10 +195,10 @@ extension ProductsListController: UISearchResultsUpdating {
         }
         
         guard let searchText = searchController.searchBar.text else {
-            assertionFailure()
+            assertionFailure("set empty string to the searchBar.text insead of nil")
             return
         }
-
+        
         let predicate: NSPredicate?
         if searchText.isEmpty {
             
