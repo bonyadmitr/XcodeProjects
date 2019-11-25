@@ -142,6 +142,11 @@ extension ProductItemDB {
             }
             
             context.perform {
+                guard item.detail != detailedItem.description else {
+                    print("nothing to update")
+                    return
+                }
+                
                 item.detail = detailedItem.description
                 
                 do {
