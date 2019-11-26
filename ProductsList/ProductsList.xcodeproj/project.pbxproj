@@ -80,6 +80,8 @@
 		CE8A8BCE2387BF530015F120 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
+				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
 				CEF0FA51237E8586007056AF /* Info.plist */,
 				CEF0FA4C237E8586007056AF /* Assets.xcassets */,
 				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
@@ -144,13 +146,29 @@
 		CEC94E10238D49B9000BBB80 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
-				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
-				CEC94E07238D4015000BBB80 /* Extensions.swift */,
+				CEC94E12238D49F7000BBB80 /* Extensions */,
+				CEC94E11238D49E1000BBB80 /* Protocols */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEC94E11238D49E1000BBB80 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
 				CE6B5959238833A100F32AB2 /* ClassNameable.swift */,
 				CEC94E05238D3F88000BBB80 /* ErrorPresenter.swift */,
 			);
-			path = Helpers;
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CEC94E12238D49F7000BBB80 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
+				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
+				CEC94E07238D4015000BBB80 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CEF0FA37237E8582007056AF = {
@@ -173,8 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				CE8A8BCE2387BF530015F120 /* App */,
-				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
-				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
 				CEC94E0E238D4992000BBB80 /* UI */,
 				CEC94E0F238D49A5000BBB80 /* Logic */,
 				CEC94E10238D49B9000BBB80 /* Helpers */,
