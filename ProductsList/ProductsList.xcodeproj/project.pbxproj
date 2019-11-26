@@ -95,9 +95,9 @@
 		CEC94E0B238D495F000BBB80 /* ProductDetailController */ = {
 			isa = PBXGroup;
 			children = (
-				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
-				CEC94E09238D454D000BBB80 /* ProductDetailView.swift */,
 				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
+				CEC94E09238D454D000BBB80 /* ProductDetailView.swift */,
+				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
 			);
 			path = ProductDetailController;
 			sourceTree = "<group>";
@@ -105,8 +105,8 @@
 		CEC94E0C238D496A000BBB80 /* ProductsListController */ = {
 			isa = PBXGroup;
 			children = (
-				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
 				C488467923870BAB0090DF02 /* ProductsListView.swift */,
+				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
 			);
 			path = ProductsListController;
 			sourceTree = "<group>";
