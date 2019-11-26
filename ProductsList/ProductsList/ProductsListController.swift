@@ -324,13 +324,17 @@ extension ErrorPresenter where Self: UIViewController {
         /// not .actionSheet bcz of https://stackoverflow.com/q/55372093/5893286
         let vc = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        vc.addAction(okAction)
+        //let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        //vc.addAction(okAction)
+        /// short way
+        vc.addAction(.init(title: "OK", style: .cancel, handler: nil))
         
         vc.popoverPresentationController?.sourceView = view
         //vc.popoverPresentationController?.sourceRect = view.frame
         vc.popoverPresentationController?.permittedArrowDirections = []
         
+        /// there is bug with refreshControl.endRefreshing() and UIAlertController
+        /// more info https://stackoverflow.com/q/41534375/5893286
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.present(vc, animated: true, completion: nil)
         }
