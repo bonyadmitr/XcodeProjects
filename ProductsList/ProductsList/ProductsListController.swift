@@ -154,7 +154,16 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     }
     
     private func handle(items newItems: [Product.Item]) {
-        storage.save(items: newItems)
+        storage.save(items: newItems) { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.showErrorAlert(for: error)
+                } else {
+                    // can be shown alert
+                    print("success. items saved")
+                }
+            }
+        }
     }
 }
 

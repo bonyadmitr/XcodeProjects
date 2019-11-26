@@ -25,7 +25,7 @@
  REQUIRED FEATURES (User can see changes):
  context menu (UIContextMenuInteractionDelegate)
  save sorting on restart
- error presenting (mb ToastController later(+UIPresentationController) )
+ error presenting (mb ToastController later(+UIPresentationController) or scrolling several errors)
  error handling (+ InternalError)
  list empty state
  internet restoration (wifi + mobile) (list and detail requests, cells resetup with failed images)
@@ -98,6 +98,7 @@
  searchController
  sorting by ScopeButtons
  collection sections in sorting
+ typealias for Model/Cell in view/vc
  
  layout by three ways: frame (TitleSupplementaryView), autoresizingMask (ProductsListView), IB constraints (ImageTextCell)
  + commented code of anchor constraints (ProductsListView)
