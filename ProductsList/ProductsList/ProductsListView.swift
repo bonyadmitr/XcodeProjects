@@ -101,7 +101,7 @@ final class ProductsListView: UIView {
     
     lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
         let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             fetchRequest.fetchBatchSize = 20

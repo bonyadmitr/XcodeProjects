@@ -251,7 +251,7 @@ extension ProductsListController: UISearchBarDelegate {
             headerSize = .zero
             sectionNameKeyPath = nil
             
-            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
+            let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.id), ascending: true)
             sortDescriptors = [sortDescriptor1]
             
         case .name:
@@ -259,7 +259,7 @@ extension ProductsListController: UISearchBarDelegate {
             sectionNameKeyPath = #keyPath(Item.section)
             
             let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.name), ascending: true)
-            let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: false)
+            let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: true)
             sortDescriptors = [sortDescriptor1, sortDescriptor2]
         }
         
@@ -324,3 +324,9 @@ extension ErrorPresenter where Self: UIViewController {
 }
 
 typealias ErrorCompletion = (Error?) -> Void
+
+extension Data {
+    var stringValue: String {
+        return String(data: self, encoding: .utf8) ?? String(describing: self)
+    }
+}

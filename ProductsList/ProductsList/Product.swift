@@ -4,7 +4,7 @@ import Alamofire
 enum Product {
     
     struct Item: Decodable, Equatable, Hashable {
-        let id: String
+        let id: Int64
         let name: String
         let price: Int
         let imageUrl: URL
@@ -14,6 +14,16 @@ enum Product {
             case name
             case price
             case imageUrl = "image"
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let idString = try container.decode(String.self, forKey: .id)
+             /// needs bcz we have "6_id_is_a_string"
+            id = (idString as NSString).longLongValue
+            name = try container.decode(String.self, forKey: .name)
+            price = try container.decode(Int.self, forKey: .price)
+            imageUrl = try container.decode(URL.self, forKey: .imageUrl)
         }
         
         static func == (lhs: Item, rhs: Item) -> Bool {
@@ -37,7 +47,7 @@ enum Product {
                 .responseObject(keyPath: "products", completion: handler)
         }
         
-        func detail(id: String, handler: @escaping (Result<DetailItem, Error>) -> Void) {
+        func detail(id: Int64, handler: @escaping (Result<DetailItem, Error>) -> Void) {
             Session.withoutAuth
                 .request(URLs.Products.detail(id: id))
                 .customValidate()
@@ -82,7 +92,7 @@ extension ProductItemDB {
                 //fetchRequest.returnsObjectsAsFaults = false
                 //fetchRequest.returnsDistinctResults = true
                 
-                guard let existedDictIds = try? context.fetch(fetchRequest) as? [[String: String]] else {
+                guard let existedDictIds = try? context.fetch(fetchRequest) as? [[String: Int64]] else {
                     assertionFailure("must be set 'fetchRequest.resultType = .dictionaryResultType'")
                     return
                 }

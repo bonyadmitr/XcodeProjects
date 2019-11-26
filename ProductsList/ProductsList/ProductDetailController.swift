@@ -103,10 +103,8 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
         imageView.kf.cancelDownloadTask()
         imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
         
-        guard let id = item.id else {
-            assertionFailure()
-            return
-        }
+        let id = item.id
+        assert(id != 0, "id should not be 0")
         
         service.detail(id: id) { [weak self] result in
             switch result {
