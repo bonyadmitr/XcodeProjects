@@ -180,8 +180,7 @@ extension ProductsListController: UICollectionViewDelegate {
             return
         }
         
-        let detailVC = ProductDetailController()
-        detailVC.item = item
+        let detailVC = ProductDetailController(item: item)
         
         #if os(tvOS)
         present(detailVC, animated: true, completion: nil)

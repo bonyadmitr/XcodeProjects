@@ -69,7 +69,18 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
         }
     }
     
-    var item: Item?
+    private let item: Item
+    
+    init(item: Item) {
+        self.item = item
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        assertionFailure("init from code only")
+        self.item = Item()
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,10 +93,6 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
 //            automaticallyAdjustsScrollViewInsets = false
 //        }
         
-        guard let item = item else {
-            assertionFailure()
-            return
-        }
         setup(for: item)
     }
     
