@@ -16,6 +16,7 @@
 		CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B5959238833A100F32AB2 /* ClassNameable.swift */; };
 		CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */; };
 		CE8A8BD02387F5DD0015F120 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */; };
+		CEC94E04238D105C000BBB80 /* ProductItemDB+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E03238D105C000BBB80 /* ProductItemDB+Extension.swift */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
 		CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA47237E8582007056AF /* ProductsListController.swift */; };
@@ -41,6 +42,7 @@
 		CE6B595D2389E91A00F32AB2 /* todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo.swift; sourceTree = "<group>"; };
 		CE8A8BCC238513BC0015F120 /* ProductsList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsList.xcdatamodel; sourceTree = "<group>"; };
 		CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CEC94E03238D105C000BBB80 /* ProductItemDB+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItemDB+Extension.swift"; sourceTree = "<group>"; };
 		CEF0FA40237E8582007056AF /* ProductsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF0FA43237E8582007056AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEF0FA45237E8582007056AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				C488467523870B2F0090DF02 /* URLs.swift */,
 				C488467723870B4F0090DF02 /* Product.swift */,
 				CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */,
+				CEC94E03238D105C000BBB80 /* ProductItemDB+Extension.swift */,
 				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
 				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
 				CE6B5959238833A100F32AB2 /* ClassNameable.swift */,
@@ -207,6 +210,7 @@
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
 				CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */,
 				C488467623870B2F0090DF02 /* URLs.swift in Sources */,
+				CEC94E04238D105C000BBB80 /* ProductItemDB+Extension.swift in Sources */,
 				CE8A8BD02387F5DD0015F120 /* CoreDataStack.swift in Sources */,
 				C488467223870AA50090DF02 /* Alamofire+Extensions.swift in Sources */,
 				CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */,
