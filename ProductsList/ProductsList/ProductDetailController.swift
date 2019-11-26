@@ -1,13 +1,4 @@
-//
-//  ProductDetailController.swift
-//  ProductsList
-//
-//  Created by Bondar Yaroslav on 11/15/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import UIKit
-import CoreData
 
 final class ProductDetailController: UIViewController, ErrorPresenter {
     
@@ -76,4 +67,5 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
             }
         }
     }
+    
 }
