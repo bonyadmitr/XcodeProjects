@@ -90,6 +90,69 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		CEC94E0B238D495F000BBB80 /* ProductDetailController */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
+				CEC94E09238D454D000BBB80 /* ProductDetailView.swift */,
+				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
+			);
+			path = ProductDetailController;
+			sourceTree = "<group>";
+		};
+		CEC94E0C238D496A000BBB80 /* ProductsListController */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
+				C488467923870BAB0090DF02 /* ProductsListView.swift */,
+			);
+			path = ProductsListController;
+			sourceTree = "<group>";
+		};
+		CEC94E0D238D497C000BBB80 /* ImageTextCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */,
+				CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */,
+			);
+			path = ImageTextCell;
+			sourceTree = "<group>";
+		};
+		CEC94E0E238D4992000BBB80 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0FA49237E8582007056AF /* Main.storyboard */,
+				CEC94E0C238D496A000BBB80 /* ProductsListController */,
+				CEC94E0B238D495F000BBB80 /* ProductDetailController */,
+				CEC94E0D238D497C000BBB80 /* ImageTextCell */,
+				CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		CEC94E0F238D49A5000BBB80 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				C488467523870B2F0090DF02 /* URLs.swift */,
+				C488467723870B4F0090DF02 /* Product.swift */,
+				CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */,
+				CEC94E03238D105C000BBB80 /* ProductItemDB+Extension.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		CEC94E10238D49B9000BBB80 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
+				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
+				CEC94E07238D4015000BBB80 /* Extensions.swift */,
+				CE6B5959238833A100F32AB2 /* ClassNameable.swift */,
+				CEC94E05238D3F88000BBB80 /* ErrorPresenter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		CEF0FA37237E8582007056AF = {
 			isa = PBXGroup;
 			children = (
@@ -110,26 +173,11 @@
 			isa = PBXGroup;
 			children = (
 				CE8A8BCE2387BF530015F120 /* App */,
-				CEF0FA49237E8582007056AF /* Main.storyboard */,
 				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
 				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
-				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
-				C488467923870BAB0090DF02 /* ProductsListView.swift */,
-				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
-				CEC94E09238D454D000BBB80 /* ProductDetailView.swift */,
-				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
-				CEF0FA5E237E8F9E007056AF /* ImageTextCell.swift */,
-				CEF0FA5F237E8F9E007056AF /* ImageTextCell.xib */,
-				CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */,
-				C488467523870B2F0090DF02 /* URLs.swift */,
-				C488467723870B4F0090DF02 /* Product.swift */,
-				CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */,
-				CEC94E05238D3F88000BBB80 /* ErrorPresenter.swift */,
-				CEC94E03238D105C000BBB80 /* ProductItemDB+Extension.swift */,
-				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
-				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
-				CE6B5959238833A100F32AB2 /* ClassNameable.swift */,
-				CEC94E07238D4015000BBB80 /* Extensions.swift */,
+				CEC94E0E238D4992000BBB80 /* UI */,
+				CEC94E0F238D49A5000BBB80 /* Logic */,
+				CEC94E10238D49B9000BBB80 /* Helpers */,
 			);
 			path = ProductsList;
 			sourceTree = "<group>";
