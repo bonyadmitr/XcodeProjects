@@ -66,17 +66,19 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         
         vcView.refreshData = { [weak self] refreshControl in
             print("refreshData")
+            //refreshControl.beginRefreshing()
             
             self?.service.all { [weak self] result in
                 DispatchQueue.main.async {
+                    assert(refreshControl.isRefreshing)
+                    refreshControl.endRefreshing()
+                    
                     switch result {
                     case .success(let items):
                         self?.handle(items: items)
                     case .failure(let error):
                         self?.showErrorAlert(for: error)
                     }
-                    
-                    refreshControl.endRefreshing()
                 }
             }
         }

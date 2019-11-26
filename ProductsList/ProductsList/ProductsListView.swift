@@ -198,9 +198,7 @@ final class ProductsListView: UIView {
     }
     
     @objc private func pullToRefresh() {
-        // TODO: check call after first one (refreshControl.isRefreshing)
         refreshData?(refreshControl)
-        refreshControl.endRefreshing()
     }
     
     func updateDataSource(animated: Bool) {
