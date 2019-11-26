@@ -319,12 +319,22 @@ protocol ErrorPresenter {
     func showErrorAlert(for error: Error)
 }
 extension ErrorPresenter where Self: UIViewController {
+    
     func showErrorAlert(with message: String) {
-        /// .actionSheet easier to close
-        let vc = UIAlertController(title: "Error", message: message, preferredStyle: .actionSheet)
+        /// not .actionSheet bcz of https://stackoverflow.com/q/55372093/5893286
+        let vc = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         vc.addAction(okAction)
-        present(vc, animated: false, completion: nil)
+        
+        vc.popoverPresentationController?.sourceView = view
+        //vc.popoverPresentationController?.sourceRect = view.frame
+        vc.popoverPresentationController?.permittedArrowDirections = []
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
     
     private func defalutHandler(error: Error) {
