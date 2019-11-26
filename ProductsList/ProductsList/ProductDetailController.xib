@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailController" customModule="ProductsList" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionLabel" destination="SAt-1X-N4N" id="iNV-15-bkb"/>
-                <outlet property="imageView" destination="FJ2-xI-ee9" id="eOu-Do-El1"/>
-                <outlet property="nameLabel" destination="sf4-kx-m0q" id="qqp-Ec-Md3"/>
-                <outlet property="priceLabel" destination="R3I-IZ-bRO" id="2q4-iC-HIh"/>
-                <outlet property="scrollView" destination="uq3-iu-i0d" id="2tZ-ir-Eul"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ProductDetailView" customModule="ProductsList" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -81,6 +76,12 @@
                 <constraint firstAttribute="bottom" secondItem="uq3-iu-i0d" secondAttribute="bottom" id="oAU-vr-qz4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="wpC-VZ-LIr"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="SAt-1X-N4N" id="K4T-hg-FzO"/>
+                <outlet property="imageView" destination="FJ2-xI-ee9" id="Ecy-8r-JBU"/>
+                <outlet property="nameLabel" destination="sf4-kx-m0q" id="uw6-jx-JAP"/>
+                <outlet property="priceLabel" destination="R3I-IZ-bRO" id="gvR-wr-ScF"/>
+            </connections>
             <point key="canvasLocation" x="139" y="137"/>
         </view>
     </objects>

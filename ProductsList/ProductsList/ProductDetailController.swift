@@ -9,15 +9,9 @@
 import UIKit
 import CoreData
 
-final class ProductDetailController: UIViewController, ErrorPresenter {
+final class ProductDetailView: UIView {
     
-    typealias Model = Product
     typealias Item = ProductItemDB
-    
-    private let service = Model.Service()
-    private lazy var storage = Item.Storage()
-    
-    @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var imageView: UIImageView! {
         willSet {
@@ -69,6 +63,36 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
         }
     }
     
+    func setup(for item: Item) {
+        nameLabel.text = item.name
+        priceLabel.text = "Price: \(item.price)"
+        
+        if let description = item.detail {
+            descriptionLabel.isHidden = false
+            descriptionLabel.text = description
+        }
+        
+        imageView.kf.cancelDownloadTask()
+        imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
+    }
+    
+    func setupDetail(from detailedItem: Product.DetailItem) {
+        descriptionLabel.isHidden = false
+        descriptionLabel.text = detailedItem.description
+    }
+}
+
+final class ProductDetailController: UIViewController, ErrorPresenter {
+    
+    typealias Model = Product
+    typealias Item = ProductItemDB
+    typealias View = ProductDetailView
+    
+    private let service = Model.Service()
+    private lazy var storage = Item.Storage()
+    
+    private lazy var vcView = view as! View
+    
     private let item: Item
     
     init(item: Item) {
@@ -85,50 +109,34 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        automaticallyAdjustsScrollViewInsets = true
-        
-//        if #available(iOS 11.0, *) {
-//            scrollView.contentInsetAdjustmentBehavior = .never
-//        } else {
-//            automaticallyAdjustsScrollViewInsets = false
-//        }
-        
         setup(for: item)
     }
     
     private func setup(for item: Item) {
         title = item.name
-        
-        nameLabel.text = item.name
-        priceLabel.text = "Price: \(item.price)"
-        
-        if let description = item.detail {
-            descriptionLabel.isHidden = false
-            descriptionLabel.text = description
-        }
-        
-        imageView.kf.cancelDownloadTask()
-        imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
-        
+        vcView.setup(for: item)
+        loadDetail(for: item)
+    }
+    
+    private func loadDetail(for item: Item) {
         let id = item.id
         assert(id != 0, "id should not be 0")
         
         service.detail(id: id) { [weak self] result in
-            switch result {
-            case .success(let detailedItem):
-                self?.handle(detailedItem: detailedItem)
-                
-            case .failure(let error):
-                self?.showErrorAlert(for: error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let detailedItem):
+                    self?.handle(detailedItem: detailedItem)
+                    
+                case .failure(let error):
+                    self?.showErrorAlert(for: error)
+                }
             }
         }
     }
     
     private func handle(detailedItem: Product.DetailItem) {
-        DispatchQueue.main.async {
-            self.descriptionLabel.isHidden = false
-            self.descriptionLabel.text = detailedItem.description
-        }
+        vcView.setupDetail(from: detailedItem)
         
         storage.updateSaved(item: item, with: detailedItem) { [weak self] error in
             DispatchQueue.main.async {
