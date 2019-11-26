@@ -3,6 +3,8 @@ import Alamofire
 
 enum Product {
     
+    // MARK: - Item
+    
     struct Item: Decodable, Equatable, Hashable {
         let id: Int64
         let name: String
@@ -35,9 +37,13 @@ enum Product {
         }
     }
     
+    // MARK: - DetailItem
+    
     struct DetailItem: Decodable {
         let description: String
     }
+    
+    // MARK: - Service
     
     final class Service {
         func all(handler: @escaping (Result<[Item], Error>) -> Void) {
