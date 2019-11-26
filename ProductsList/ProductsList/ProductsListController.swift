@@ -325,10 +325,40 @@ extension ErrorPresenter where Self: UIViewController {
         present(vc, animated: false, completion: nil)
     }
     
-    func showErrorAlert(for error: Error) {
+    private func defalutHandler(error: Error) {
         showErrorAlert(with: error.localizedDescription)
-        print(error.debugDescription)
     }
+    
+    func showErrorAlert(for error: Error) {
+        print(error.debugDescription)
+        
+        do {
+            try handleAlamofireError(error)
+        } catch {
+            defalutHandler(error: error)
+        }
+    }
+    
+    private func handleAlamofireError(_ error: Error) throws {
+        guard let afError = error as? AFError else {
+            throw error
+        }
+        
+        switch afError {
+        case .sessionTaskFailed(error: let sessionError):
+            
+            /// internet error
+            if let urlError = sessionError as? URLError {
+                showErrorAlert(with: urlError.localizedDescription)
+            } else {
+                defalutHandler(error: sessionError)
+            }
+            
+        default:
+            defalutHandler(error: afError)
+        }
+    }
+    
 }
 
 typealias ErrorCompletion = (Error?) -> Void
