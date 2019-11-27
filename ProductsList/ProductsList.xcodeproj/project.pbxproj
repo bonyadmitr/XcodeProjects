@@ -20,6 +20,7 @@
 		CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E05238D3F88000BBB80 /* ErrorPresenter.swift */; };
 		CEC94E08238D4015000BBB80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E07238D4015000BBB80 /* Extensions.swift */; };
 		CEC94E0A238D454D000BBB80 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E09238D454D000BBB80 /* ProductDetailView.swift */; };
+		CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
 		CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA47237E8582007056AF /* ProductsListController.swift */; };
@@ -48,6 +49,7 @@
 		CEC94E05238D3F88000BBB80 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		CEC94E07238D4015000BBB80 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEC94E09238D454D000BBB80 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		CEF0FA40237E8582007056AF /* ProductsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF0FA43237E8582007056AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEF0FA45237E8582007056AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				C488467123870AA50090DF02 /* Alamofire+Extensions.swift */,
 				C488467323870AD70090DF02 /* Alamofire+Custom.swift */,
+				CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */,
 				CEC94E07238D4015000BBB80 /* Extensions.swift */,
 			);
 			path = Extensions;
@@ -275,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */,
 				C488467A23870BAB0090DF02 /* ProductsListView.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
