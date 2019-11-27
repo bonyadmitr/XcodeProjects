@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 import CoreData
+import Kingfisher
 
 final class ProductsListController: UIViewController, ErrorPresenter {
     
@@ -294,7 +295,44 @@ extension ProductsListController: UISearchBarDelegate {
 
 extension ProductsListController: ImageTextCellDelegate {
     func photoCell(cell: ImageTextCellDelegate.Cell, didShare item: ImageTextCellDelegate.Cell.Item) {
-        print("share", item)
+        
+        guard let imageUrl = item.imageUrl, let itemName = item.name else {
+            assertionFailure("imageUrl and name must exist")
+            return
+        }
+        
+        var itemDescription = """
+        Name: \(itemName)
+        Price: \(item.price)
+        """
+        
+        if let itemDetail = item.detail {
+            itemDescription += "\nDescription: \(itemDetail)"
+        }
+        
+        /// can be used semaphore instead
+        func showShare(with items: [Any]) {
+            let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            
+            /// delay for close preview
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.presentIPadSafe(controller: activityVC)
+            }
+        }
+        
+        vcView.activityIndicator.startAnimating()
+        KingfisherManager.shared.retrieveImage(with: imageUrl) { [weak self] result in
+            self?.vcView.activityIndicator.stopAnimating()
+            
+            switch result {
+            case .success(let source):
+                showShare(with: [source.image, itemDescription])
+            case .failure(let error):
+                print("--- share error: \(error.debugDescription)")
+                showShare(with: [itemDescription])
+            }
+        }
+        
     }
     
     func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCellDelegate.Cell.Item) {
