@@ -11,7 +11,7 @@ final class CoreDataStack {
         case sqlite
     }
     
-    let storeType: PersistentStoreType
+    private let storeType: PersistentStoreType
     private let container: NSPersistentContainer
     
     init(storeType: PersistentStoreType, modelName: String) {
@@ -25,8 +25,6 @@ final class CoreDataStack {
         /// to avoid duplicating objects
         //viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
-    
-    
     
     func newBackgroundContext() -> NSManagedObjectContext {
         return container.newBackgroundContext()
