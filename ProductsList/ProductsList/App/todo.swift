@@ -11,6 +11,8 @@
  clear code
  debug floating window
  demo mode without server + without internet (save some jsons to the bundle)
+ (can be used json-server https://github.com/typicode/json-server
+ or new mocker https://habr.com/ru/company/surfstudio/blog/477506/)
  add main.swift
  remove storyboard (save LaunchScreen only)
  router for navigation (+ mb window manager)
@@ -30,11 +32,10 @@
  save sorting on restart
  error presenting (mb ToastController later(+UIPresentationController) or scrolling several errors)
  error handling (+ InternalError)
- list empty state
+ list empty state (+ maybe refresh button)
  internet restoration (wifi + mobile) (list and detail requests, cells resetup with failed images)
  http requests canceling
  split controller
- pass photo to detail screen
  app restoration
  several windows by SceneDelegate
  localization (+ RTL)
@@ -123,4 +124,5 @@
  keyaboard handlers
  pagination
  sync background actions with server
+ pass photo to detail screen (bcz there is no bigger image)
  */
