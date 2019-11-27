@@ -162,9 +162,9 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
             #endif
         }, actionProvider: { _ in //[weak self] systemActions in
             
-//            guard let self = self else {
-//                return nil
-//            }
+            //guard let self = self else {
+            //    return nil
+            //}
             
 
             
@@ -191,7 +191,7 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
         
         /// animation fix https://stackoverflow.com/a/57731149
         /// needs only to dismiss preview without open animation.
-//        animator.preferredCommitStyle = .dismiss
+        //animator.preferredCommitStyle = .dismiss
         
         guard
             let delegate = self.delegate,
@@ -202,30 +202,11 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
         }
         
         animator.addCompletion {
-            /// or #1
             if let vc = animator.previewViewController {
                 delegate.photoCellDidTapOnPreivew(previewController: vc, item: item)
-                //UIApplication.shared.topMostViewController()?.navigationController?.pushViewController(vc, animated: true)
-//                App.shared.window.rootViewController?.present(vc, animated: true, completion: nil)
             }
-            
-            /// or #2
-//            let vc = PreviewViewController(image: self.imageView.image)
-//            UIApplication.shared.topMostViewController()?.navigationController?.show(vc, sender: nil)
-            
-            
         }
     }
-    
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
-//                                previewForDismissingMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-//        configuration.identifier
-////        interaction.delegate.
-//        let vc = PreviewViewController(image: self.imageView.image)
-//        App.shared.window.rootViewController?.present(vc, animated: false, completion: nil)
-//        return UITargetedPreview(view: vc.view)
-////        return nil
-//    }
     
     /// not called for macCatalyst
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
