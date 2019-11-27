@@ -1,23 +1,33 @@
-//
-//  SceneDelegate.swift
-//  ProductsList
-//
-//  Created by Bondar Yaroslav on 11/15/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        /// SceneDelegate Without Storyboard (short and simple) https://samwize.com/2019/08/05/setup-scenedelegate-without-storyboard/
+        /// UIScene programmatic https://medium.com/@ZkHaider/apples-new-uiscene-api-a-programmatic-approach-52d05e382cf2
+        guard let windowScene = scene as? UIWindowScene else {
+            assertionFailure()
+            return
+        }
+        
+        /// or #1
+        //let window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        //window.windowScene = windowScene
+        
+        /// or #2
+        let window = UIWindow(windowScene: windowScene)
+        
+        let vc = ProductsListController()
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.navigationBar.isTranslucent = false
+        navVC.navigationBar.prefersLargeTitles = false
+        
+        window.rootViewController = navVC
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
