@@ -9,7 +9,7 @@ enum URLs {
         
         static let all = base + "/list"
         
-        static func detail(id: Int64) -> String {
+        static func detail(id: String) -> String {
             return base + "/\(id)/detail"
         }
     }

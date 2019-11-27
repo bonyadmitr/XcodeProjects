@@ -7,6 +7,7 @@ enum Product {
     
     struct Item: Decodable, Equatable, Hashable {
         let id: Int64
+        let originalId: String
         let name: String
         let price: Int
         let imageUrl: URL
@@ -20,9 +21,9 @@ enum Product {
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            let idString = try container.decode(String.self, forKey: .id)
+            originalId = try container.decode(String.self, forKey: .id)
              /// needs bcz we have "6_id_is_a_string"
-            id = (idString as NSString).longLongValue
+            id = (originalId as NSString).longLongValue
             name = try container.decode(String.self, forKey: .name)
             price = try container.decode(Int.self, forKey: .price)
             imageUrl = try container.decode(URL.self, forKey: .imageUrl)
@@ -53,7 +54,7 @@ enum Product {
                 .responseObject(keyPath: "products", completion: handler)
         }
         
-        func detail(id: Int64, handler: @escaping (Result<DetailItem, Error>) -> Void) {
+        func detail(id: String, handler: @escaping (Result<DetailItem, Error>) -> Void) {
             Session.withoutAuth
                 .request(URLs.Products.detail(id: id))
                 .customValidate()

@@ -37,8 +37,11 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
     }
     
     private func loadDetail(for item: Item) {
-        let id = item.id
-        assert(id != 0, "id should not be 0")
+        guard let id = item.originalId else {
+            assertionFailure()
+            showErrorAlert(with: "Something went wrong with server")
+            return
+        }
         
         service.detail(id: id) { [weak self] result in
             DispatchQueue.main.async {

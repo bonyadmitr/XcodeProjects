@@ -54,6 +54,7 @@ extension ProductItemDB {
                 for newItem in itemsToSave {
                     let item = Item(context: context)
                     item.id = newItem.id
+                    item.originalId = newItem.originalId
                     item.name = newItem.name
                     item.imageUrl = newItem.imageUrl
                     item.price = Int16(newItem.price)

@@ -5,9 +5,10 @@
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageUrl" attributeType="URI"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="originalId" optional="YES" attributeType="String"/>
         <attribute name="price" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="ProductItemDB" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="ProductItemDB" positionX="-63" positionY="-18" width="128" height="133"/>
     </elements>
 </model>
