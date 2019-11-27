@@ -100,6 +100,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     // MARK: State Restoration
     
+    /// apple example https://developer.apple.com/documentation/uikit/uiviewcontroller/restoring_your_app_s_state
+    /// several implementations of restoration https://stackoverflow.com/q/57129668
     // This is the NSUserActivity that will be used to restore state when the scene reconnects.
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         return scene.userActivity
