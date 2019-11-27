@@ -293,7 +293,11 @@ extension ProductsListController: UISearchBarDelegate {
 }
 
 extension ProductsListController: ImageTextCellDelegate {
-    func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCell.Item) {
+    func photoCell(cell: ImageTextCellDelegate.Cell, didShare item: ImageTextCellDelegate.Cell.Item) {
+        print("share", item)
+    }
+    
+    func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCellDelegate.Cell.Item) {
         print("open from preview: \(item.name ?? "nil")")
         navigationController?.pushViewController(previewController, animated: true)
     }

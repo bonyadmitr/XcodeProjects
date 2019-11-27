@@ -144,9 +144,8 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
                                 configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         
         guard
-//            let delegate = self.delegate,
-            let item = self.item,
-            let itemName = item.name
+            let delegate = self.delegate,
+            let item = self.item
         else {
             assertionFailure()
             return nil
@@ -160,27 +159,11 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
             #else
             return ProductDetailController(item: item)
             #endif
-        }, actionProvider: { _ in //[weak self] systemActions in
-            
-            //guard let self = self else {
-            //    return nil
-            //}
-            
-
-            
-            /// SF Symbols
-            // let share "square.and.arrow.up"
-            // The "title" will show up as an action for opening this menu
-            //let shareSubmenu = UIMenu(title: "Share...", children: [rename, delete])
-            
-            //let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, state: .off) { _ in
-            //    /// strong reference to item
-            //    delegate.photoCell(cell: self, didDelete: item, at: indexPath)
-            //}
-            
-            //UIBarButtonItem.SystemItem.trash
-            //UIMenuSystem.context
-            return UIMenu(title: itemName, image: nil, identifier: nil, options: [], children: [])
+        }, actionProvider: { systemActions in
+            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                delegate.photoCell(cell: self, didShare: item)
+            }
+            return UIMenu(title: "", children: [share])
         })
     }
     
@@ -232,8 +215,10 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
 #endif
 
 protocol ImageTextCellDelegate: class {
-    //func photoCell(cell: PhotoCell, didDelete item: RemoteItem, at indexPath: IndexPath)
-    func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCell.Item)
+    typealias Cell = ImageTextCell
+    
+    func photoCell(cell: Cell, didShare item: Cell.Item)
+    func photoCellDidTapOnPreivew(previewController: UIViewController, item: Cell.Item)
     
     func photoCellPreivewWillAppear()
     func photoCellPreivewDidAppear()
