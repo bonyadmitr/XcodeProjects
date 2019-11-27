@@ -9,7 +9,14 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     
-    private lazy var vcView = view as! View
+    private lazy var vcView: View = {
+        if let view = self.view as? View {
+            return view
+        } else {
+            assertionFailure("setup view in IB")
+            return View()
+        }
+    }()
     
     private let item: Item
     

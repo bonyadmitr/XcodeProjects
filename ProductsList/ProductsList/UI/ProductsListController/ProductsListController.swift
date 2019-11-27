@@ -32,17 +32,17 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         self.view = View()
     }
     
-    private lazy var vcView = view as! View
-//    private lazy var vcView: View = {
-//        return view as! View
-//        /// more safely
-//        //if let view = self.view as? View {
-//        //    return view
-//        //} else {
-//        //    assertionFailure("override func loadView")
-//        //    return View()
-//        //}
-//    }()
+    /// or #1 unsafe
+    //private lazy var vcView = view as! View
+    /// or #2 more safely
+    private lazy var vcView: View = {
+        if let view = self.view as? View {
+            return view
+        } else {
+            assertionFailure("override func loadView")
+            return View()
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
