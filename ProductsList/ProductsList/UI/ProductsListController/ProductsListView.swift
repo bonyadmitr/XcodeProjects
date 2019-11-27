@@ -41,10 +41,8 @@ final class ProductsListView: UIView {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.alwaysBounceVertical = true
         collectionView.isOpaque = true
-        
-        collectionView.register(UINib(nibName: String(describing: Cell.self), bundle: nil), forCellWithReuseIdentifier: cellId)
-        //collectionView.register(Cell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(TitleSupplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.registerNibCell(Cell.self)
+        collectionView.registerHeader(TitleSupplementaryView.self)
         
         #if os(iOS)
         collectionView.backgroundColor = .systemBackground
@@ -77,14 +75,11 @@ final class ProductsListView: UIView {
         return UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             // TODO: check weak self
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as? Cell else {
+            
+            guard let cell = collectionView.dequeue(cell: Cell.self, for: indexPath) else {
                 assertionFailure()
                 return nil
             }
-            
-            //cell.delegate = self
-            //cell.indexPath = indexPath
-            
             cell.setup(for: item)
             return cell
         }
@@ -128,7 +123,8 @@ final class ProductsListView: UIView {
         _ = dataSource
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
-            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? TitleSupplementaryView else {
+            
+            guard let view = collectionView.dequeue(supplementaryView: TitleSupplementaryView.self, kind: kind, for: indexPath) else {
                 assertionFailure()
                 return UICollectionReusableView()
             }
