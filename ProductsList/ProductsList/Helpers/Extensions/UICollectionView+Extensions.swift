@@ -1,19 +1,49 @@
 import UIKit
 
+// MARK: - register nib
+
 extension UICollectionView {
     
-    func register <T: UICollectionViewCell>(nibCell identifier: T.Type) {
+    func registerNibCell<T: UICollectionViewCell>(_ identifier: T.Type) {
         let identifierString = String(describing: identifier)
         let nib = UINib(nibName: identifierString, bundle: nil)
         register(nib, forCellWithReuseIdentifier: identifierString)
     }
     
-    func register <T: UICollectionReusableView>(nibSupplementaryView identifier: T.Type, kind: String) {
+    func registerNibHeader<T: UICollectionReusableView>(_ identifier: T.Type) {
+        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionHeader)
+    }
+    
+    func registerNibFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
+        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
+    }
+    
+    private func register<T: UICollectionReusableView>(nibSupplementaryView identifier: T.Type, kind: String) {
         let identifierString = String(describing: identifier)
         let nib = UINib(nibName: identifierString, bundle: nil)
         register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifierString)
     }
 }
+
+// MARK: - register cell
+
+extension UICollectionView {
+    
+    func registerHeader<T: UICollectionReusableView>(_ identifier: T.Type) {
+        register(supplementaryView: identifier, kind: UICollectionView.elementKindSectionHeader)
+    }
+    
+    func registerFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
+        register(supplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
+    }
+    
+    private func register<T: UICollectionReusableView>(supplementaryView identifier: T.Type, kind: String) {
+        let identifierString = String(describing: identifier)
+        register(identifier, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifierString)
+    }
+}
+
+// MARK: - dequeue
 
 extension UICollectionView {
     
