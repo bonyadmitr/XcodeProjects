@@ -23,7 +23,7 @@ final class ProductDetailView: UIView {
         willSet {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .headline)
-            //newValue.textAlignment = .center
+            newValue.textAlignment = .center
             newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1
@@ -34,7 +34,7 @@ final class ProductDetailView: UIView {
         willSet {
             /// newValue used for simplifying copying same settings
             newValue.font = UIFont.preferredFont(forTextStyle: .body)
-            //newValue.textAlignment = .center
+            newValue.textAlignment = .center
             newValue.backgroundColor = .systemBackground
             newValue.textColor = .label
             newValue.numberOfLines = 1

@@ -17,6 +17,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
 //    typealias Item = Model.Item
     typealias Item = ProductItemDB
     typealias View = ProductsListView
+    typealias Cell = ImageTextCell
     
     private enum SortOrder: Int, CaseIterable {
         case id = 0
@@ -191,6 +192,13 @@ extension ProductsListController: UICollectionViewDelegate {
         #endif
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? Cell else {
+            assertionFailure()
+            return
+        }
+        cell.delegate = self
+    }
 }
 
 extension ProductsListController: UISearchResultsUpdating {
@@ -303,4 +311,12 @@ extension ProductsListController: UISearchBarDelegate {
         //vcView.fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
         //vcView.performFetch()
     }
+}
+
+extension ProductsListController: ImageTextCellDelegate {
+    func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCell.Item) {
+        print("open from preview: \(item.name ?? "nil")")
+        navigationController?.pushViewController(previewController, animated: true)
+    }
+    
 }
