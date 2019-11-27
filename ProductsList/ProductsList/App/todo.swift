@@ -1,9 +1,12 @@
+/// Created by Bondar Yaroslav on 11/15/19.
 /// NOT in the project target.
 /// .swift due to comment syntax highlighting.
+
 
 // TODO: a lot of:
 /**
  CODE (Developer or QA can see changes):
+ newValue.isOpaque = true for all possible views
  swiftlint
  clear code
  debug floating window
