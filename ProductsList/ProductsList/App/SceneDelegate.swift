@@ -107,6 +107,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: - Handoff
     
+    /// old tutorial https://www.raywenderlich.com/2240-handoff-tutorial-getting-started#toc-anchor-009
+    /// apple doc https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/Handoff/AdoptingHandoff/AdoptingHandoff.html
+    /// using Handoff https://support.apple.com/en-us/HT209455
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         _ = configure(window: window, with: userActivity)
 //        if userActivity.userInfo?[ActivityVersionKey] as? String == ActivityVersionValue, let window = self.window {
