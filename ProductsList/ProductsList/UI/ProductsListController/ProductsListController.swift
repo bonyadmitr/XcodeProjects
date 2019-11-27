@@ -6,7 +6,6 @@ import CoreData
 final class ProductsListController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
-//    typealias Item = Model.Item
     typealias Item = ProductItemDB
     typealias View = ProductsListView
     typealias Cell = ImageTextCell
@@ -75,17 +74,6 @@ final class ProductsListController: UIViewController, ErrorPresenter {
                 }
             }
         }
-        
-        /// https://sarunw.com/posts/uinavigationbar-changes-in-ios13/
-        //let appearance = UINavigationBarAppearance()
-        //appearance.configureWithDefaultBackground()
-        //UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
-        ///  https://stackoverflow.com/a/25421617/5893286
-        //navigationController?.view.backgroundColor = .systemBackground
-        
-        /// in IB
-        //navigationController?.navigationBar.isTranslucent = false
     }
     
     /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
@@ -117,9 +105,8 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         /** Search presents a view controller by applying normal view controller presentation semantics.
          This means that the presentation moves up the view controller hierarchy until it finds the root
          view controller or one that defines a presentation context.
-         */
-        
-        /** Specify that this view controller determines how the search controller is presented.
+         
+        Specify that this view controller determines how the search controller is presented.
          The search controller should be presented modally and match the physical size of this view controller.
          */
         definesPresentationContext = true
@@ -154,7 +141,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
                 if let error = error {
                     self?.showErrorAlert(for: error)
                 } else {
-                    // can be shown alert
+                    /// can be shown alert
                     print("success. items saved")
                 }
             }
@@ -310,5 +297,4 @@ extension ProductsListController: ImageTextCellDelegate {
         print("open from preview: \(item.name ?? "nil")")
         navigationController?.pushViewController(previewController, animated: true)
     }
-    
 }
