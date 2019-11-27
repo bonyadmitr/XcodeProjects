@@ -153,6 +153,11 @@ extension ProductDetailController {
         let userActivity = NSUserActivity(activityType: ProductDetailController.activityType)
         userActivity.title = "Restore Item"
         applyUserActivityEntries(userActivity)
+        
+        /// to test handoff
+        userActivity.becomeCurrent()
+        self.userActivity = userActivity
+        
         return userActivity
     }
 
@@ -187,6 +192,10 @@ extension ProductDetailController {
 //            restoredEditState = editingState
 //        }
     }
+    
+//    func stopUserActivity() {
+//        userActivity?.invalidate()
+//    }
 }
 
 // MARK: - UIUserActivityRestoring

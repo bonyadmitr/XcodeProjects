@@ -53,7 +53,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {
         let detailViewController = ProductDetailController()
-        if let navigationController = window?.rootViewController as? UINavigationController {
+        if let navigationController = window?.rootViewController as? UINavigationController,
+            activity.activityType == ProductDetailController.activityType
+        {
             navigationController.pushViewController(detailViewController, animated: false)
             detailViewController.restoreUserActivityState(activity)
             return true
@@ -102,5 +104,30 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         return scene.userActivity
     }
+    
+    // MARK: - Handoff
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        _ = configure(window: window, with: userActivity)
+//        if userActivity.userInfo?[ActivityVersionKey] as? String == ActivityVersionValue, let window = self.window {
+//            window.rootViewController?.restoreUserActivityState(userActivity)
+//        }
+    }
+    
+    
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+        
+    }
+    
+    func scene(_ scene: UIScene, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+        
+    }
+    
+    func scene(_ scene: UIScene, didUpdate userActivity: NSUserActivity) {
+        userActivity.addUserInfoEntries(from: [ActivityVersionKey: ActivityVersionValue])
+    }
+    
+    let ActivityVersionKey = "shopsnap.version.key"
+    let ActivityVersionValue = "1.0"
 }
 
