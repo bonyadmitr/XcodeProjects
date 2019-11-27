@@ -63,3 +63,13 @@ extension ErrorPresenter where Self: UIViewController {
     }
     
 }
+
+extension UIViewController {
+    
+    func presentIPadSafe(controller: UIViewController) {
+        controller.popoverPresentationController?.sourceView = view
+        //controller.popoverPresentationController?.sourceRect = view.frame
+        controller.popoverPresentationController?.permittedArrowDirections = []
+        present(controller, animated: true, completion: nil)
+    }
+}
