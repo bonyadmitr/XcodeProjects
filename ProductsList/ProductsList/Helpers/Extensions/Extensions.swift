@@ -1,11 +1,3 @@
-//
-//  Extensions.swift
-//  ProductsList
-//
-//  Created by Bondar Yaroslav on 11/26/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
 import Foundation
 
 typealias ErrorCompletion = (Error?) -> Void
