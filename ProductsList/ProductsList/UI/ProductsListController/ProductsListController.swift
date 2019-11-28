@@ -321,7 +321,7 @@ extension ProductsListController: ImageTextCellDelegate {
         }
         
         /// instead of this func  semaphore can be used or copy/past
-        func showShare(with items: [Any]) -> UIActivityViewController {
+        func shareVC(with items: [Any]) -> UIActivityViewController {
             return UIActivityViewController(activityItems: items, applicationActivities: nil)
         }
         
@@ -331,12 +331,12 @@ extension ProductsListController: ImageTextCellDelegate {
             
             switch result {
             case .success(let source):
-                let vc = showShare(with: [source.image, itemDescription])
+                let vc = shareVC(with: [source.image, itemDescription])
                 completion(vc)
                 
             case .failure(let error):
                 print("--- share error: \(error.debugDescription)")
-                let vc = showShare(with: [itemDescription])
+                let vc = shareVC(with: [itemDescription])
                 completion(vc)
             }
         }
