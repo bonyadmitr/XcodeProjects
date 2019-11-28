@@ -4,13 +4,12 @@ import Kingfisher
 import CoreData
 import Kingfisher
 
-extension ProductsListController {
+private extension ProductsListController {
     
-    class Interactor {
+    private final class Interactor {
         
         //weak var controller: ProductsListController?
         
-        // TODO: send to any service
         func prepareControllerToShareItem(_ item: Item, completion: @escaping (UIViewController) -> Void) {
             guard let imageUrl = item.imageUrl, let itemName = item.name else {
                 assertionFailure("imageUrl and name must exist")
