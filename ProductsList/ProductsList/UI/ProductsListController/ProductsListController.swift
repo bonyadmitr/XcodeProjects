@@ -4,6 +4,51 @@ import Kingfisher
 import CoreData
 import Kingfisher
 
+extension ProductsListController {
+    
+    class Interactor {
+        
+        //weak var controller: ProductsListController?
+        
+        // TODO: send to any service
+        func prepareControllerToShareItem(_ item: Item, completion: @escaping (UIViewController) -> Void) {
+            guard let imageUrl = item.imageUrl, let itemName = item.name else {
+                assertionFailure("imageUrl and name must exist")
+                return
+            }
+            
+            var itemDescription = """
+            Name: \(itemName)
+            Price: \(item.price)
+            """
+            
+            if let itemDetail = item.detail {
+                itemDescription += "\nDescription: \(itemDetail)"
+            }
+            
+            /// instead of this func  semaphore can be used or copy/past
+            func shareVC(with items: [Any]) -> UIActivityViewController {
+                return UIActivityViewController(activityItems: items, applicationActivities: nil)
+            }
+            
+            
+            KingfisherManager.shared.retrieveImage(with: imageUrl) { result in
+                switch result {
+                case .success(let source):
+                    let vc = shareVC(with: [source.image, itemDescription])
+                    completion(vc)
+                    
+                case .failure(let error):
+                    print("--- share error: \(error.debugDescription)")
+                    let vc = shareVC(with: [itemDescription])
+                    completion(vc)
+                }
+            }
+        }
+    }
+    
+}
+
 final class ProductsListController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
@@ -28,6 +73,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     private let searchController = UISearchController(searchResultsController: nil)
+    private lazy var interactor = Interactor()
     
     override func loadView() {
         self.view = View()
@@ -296,48 +342,13 @@ extension ProductsListController: UISearchBarDelegate {
 extension ProductsListController: ImageTextCellDelegate {
     
     func photoCell(cell: ImageTextCellDelegate.Cell, didShare item: ImageTextCellDelegate.Cell.Item) {
-        prepareControllerToShareItem(item) { [weak self] activityVC in
+        vcView.activityIndicator.startAnimating()
+        
+        interactor.prepareControllerToShareItem(item) { [weak self] activityVC in
+            self?.vcView.activityIndicator.stopAnimating()
             /// delay for close preview
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self?.presentIPadSafe(controller: activityVC, sourceView: cell)
-            }
-        }
-    }
-    
-    // TODO: send to any service
-    private func prepareControllerToShareItem(_ item: Item, completion: @escaping (UIViewController) -> Void) {
-        guard let imageUrl = item.imageUrl, let itemName = item.name else {
-            assertionFailure("imageUrl and name must exist")
-            return
-        }
-        
-        var itemDescription = """
-        Name: \(itemName)
-        Price: \(item.price)
-        """
-        
-        if let itemDetail = item.detail {
-            itemDescription += "\nDescription: \(itemDetail)"
-        }
-        
-        /// instead of this func  semaphore can be used or copy/past
-        func shareVC(with items: [Any]) -> UIActivityViewController {
-            return UIActivityViewController(activityItems: items, applicationActivities: nil)
-        }
-        
-        vcView.activityIndicator.startAnimating()
-        KingfisherManager.shared.retrieveImage(with: imageUrl) { [weak self] result in
-            self?.vcView.activityIndicator.stopAnimating()
-            
-            switch result {
-            case .success(let source):
-                let vc = shareVC(with: [source.image, itemDescription])
-                completion(vc)
-                
-            case .failure(let error):
-                print("--- share error: \(error.debugDescription)")
-                let vc = shareVC(with: [itemDescription])
-                completion(vc)
             }
         }
     }
