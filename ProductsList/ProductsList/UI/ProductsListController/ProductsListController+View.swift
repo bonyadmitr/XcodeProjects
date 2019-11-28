@@ -9,7 +9,7 @@ import CoreData
 
 extension ProductsListController {
     
-    final class ProductsListView: UIView, NSFetchedResultsControllerDelegate {
+    final class View: UIView, NSFetchedResultsControllerDelegate {
         
         typealias Model = Product
     //    typealias Item = Model.Item

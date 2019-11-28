@@ -6,8 +6,8 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
     typealias Item = ProductItemDB
-    typealias View = ProductsListView
     typealias Cell = ImageTextCell
+    //typealias View = View
     
     private enum SortOrder: Int, CaseIterable {
         case id = 0

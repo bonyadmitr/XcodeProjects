@@ -11,7 +11,7 @@
 		C488467423870AD70090DF02 /* Alamofire+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467323870AD70090DF02 /* Alamofire+Custom.swift */; };
 		C488467623870B2F0090DF02 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467523870B2F0090DF02 /* URLs.swift */; };
 		C488467823870B4F0090DF02 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467723870B4F0090DF02 /* Product.swift */; };
-		C488467A23870BAB0090DF02 /* ProductsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467923870BAB0090DF02 /* ProductsListView.swift */; };
+		C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467923870BAB0090DF02 /* ProductsListController+View.swift */; };
 		C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */; };
 		CE6B595823881D5500F32AB2 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */; };
 		CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B5959238833A100F32AB2 /* ClassNameable.swift */; };
@@ -40,7 +40,7 @@
 		C488467323870AD70090DF02 /* Alamofire+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Custom.swift"; sourceTree = "<group>"; };
 		C488467523870B2F0090DF02 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		C488467723870B4F0090DF02 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		C488467923870BAB0090DF02 /* ProductsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListView.swift; sourceTree = "<group>"; };
+		C488467923870BAB0090DF02 /* ProductsListController+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+View.swift"; sourceTree = "<group>"; };
 		C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+Interactor.swift"; sourceTree = "<group>"; };
 		CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		CE6B5959238833A100F32AB2 /* ClassNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameable.swift; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		CEC94E0C238D496A000BBB80 /* ProductsListController */ = {
 			isa = PBXGroup;
 			children = (
-				C488467923870BAB0090DF02 /* ProductsListView.swift */,
 				CEF0FA47237E8582007056AF /* ProductsListController.swift */,
+				C488467923870BAB0090DF02 /* ProductsListController+View.swift */,
 				C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */,
 			);
 			path = ProductsListController;
@@ -282,7 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */,
-				C488467A23870BAB0090DF02 /* ProductsListView.swift in Sources */,
+				C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
 				C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */,
