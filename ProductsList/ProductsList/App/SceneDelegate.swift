@@ -6,6 +6,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().prefersLargeTitles = false
+        
         /// SceneDelegate Without Storyboard (short and simple) https://samwize.com/2019/08/05/setup-scenedelegate-without-storyboard/
         /// UIScene programmatic https://medium.com/@ZkHaider/apples-new-uiscene-api-a-programmatic-approach-52d05e382cf2
         guard let windowScene = scene as? UIWindowScene else {
@@ -24,8 +27,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let vc = ProductsListController()
         let navVC = UINavigationController(rootViewController: vc)
-        navVC.navigationBar.isTranslucent = false
-        navVC.navigationBar.prefersLargeTitles = false
         
         window.rootViewController = navVC
         window.makeKeyAndVisible()
