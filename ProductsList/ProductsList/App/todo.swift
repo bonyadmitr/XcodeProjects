@@ -26,6 +26,8 @@
  mb any scripts or automatization (like fastlane, swiftgen, ...)
  kingfisher cache limit
  CoreDataStack start guard
+ there is breaking constraint on system cell preview with UIAction. maybe there is a way to fix it
+ also cell preview not fit the text
  
  REQUIRED FEATURES (User can see changes):
  context menu (UIContextMenuInteractionDelegate)
