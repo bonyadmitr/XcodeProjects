@@ -19,7 +19,6 @@ final class CoreDataStack {
         
         container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
         container.viewContext.automaticallyMergesChangesFromParent = true
-        
         // TODO: check
         // TODO: maybe should be in the "loadPersistentStores"
         /// to avoid duplicating objects
@@ -36,6 +35,10 @@ final class CoreDataStack {
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         container.performBackgroundTask(block)
+    }
+    
+    func managedObjectID(for url: URL) -> NSManagedObjectID? {
+        return container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url)
     }
     
     private static func persistentContainer(storeType: PersistentStoreType, modelName: String) -> NSPersistentContainer {

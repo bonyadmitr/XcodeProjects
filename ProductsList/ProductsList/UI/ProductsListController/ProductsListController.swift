@@ -299,7 +299,7 @@ extension ProductsListController: ImageTextCellDelegate {
         prepareControllerToShareItem(item) { [weak self] activityVC in
             /// delay for close preview
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self?.presentIPadSafe(controller: activityVC)
+                self?.presentIPadSafe(controller: activityVC, sourceView: cell)
             }
         }
     }
