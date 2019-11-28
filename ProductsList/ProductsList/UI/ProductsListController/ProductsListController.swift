@@ -311,12 +311,12 @@ extension ProductsListController: ImageTextCellDelegate {
         }
         
         /// can be used semaphore instead
-        func showShare(with items: [Any]) {
+        func showShare(with items: [Any], sourceView: UIView?) {
             let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
             
             /// delay for close preview
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.presentIPadSafe(controller: activityVC)
+                self.presentIPadSafe(controller: activityVC, sourceView: sourceView)
             }
         }
         
@@ -326,10 +326,10 @@ extension ProductsListController: ImageTextCellDelegate {
             
             switch result {
             case .success(let source):
-                showShare(with: [source.image, itemDescription])
+                showShare(with: [source.image, itemDescription], sourceView: cell)
             case .failure(let error):
                 print("--- share error: \(error.debugDescription)")
-                showShare(with: [itemDescription])
+                showShare(with: [itemDescription], sourceView: cell)
             }
         }
         

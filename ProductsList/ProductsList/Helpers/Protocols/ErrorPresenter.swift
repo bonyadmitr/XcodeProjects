@@ -66,10 +66,14 @@ extension ErrorPresenter where Self: UIViewController {
 
 extension UIViewController {
     
-    func presentIPadSafe(controller: UIViewController) {
-        controller.popoverPresentationController?.sourceView = view
-        //controller.popoverPresentationController?.sourceRect = view.frame
-        controller.popoverPresentationController?.permittedArrowDirections = []
+    func presentIPadSafe(controller: UIViewController, sourceView: UIView?) {
+        guard let sourceView = sourceView ?? view else {
+            assertionFailure()
+            return
+        }
+        controller.popoverPresentationController?.sourceView = sourceView
+        controller.popoverPresentationController?.sourceRect = sourceView.frame
+        controller.popoverPresentationController?.permittedArrowDirections = .any
         present(controller, animated: true, completion: nil)
     }
 }
