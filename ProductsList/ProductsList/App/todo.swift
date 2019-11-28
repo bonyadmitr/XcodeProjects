@@ -128,4 +128,14 @@
  pagination
  sync background actions with server
  pass photo to detail screen (bcz there is no bigger image)
+ 
+ 
+ SOME COMMENTS:
+ it is possible to create namspace.
+ but will not be possible to use "extension ProductsListController: UICollectionViewDelegate"
+ //enum ProductsList {
+ //    final class Controller
+ //    final class View
+ //    final class Interactor
+ //}
  */
