@@ -157,13 +157,14 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
             /// viewDidLoad will not be called but controller will be created so pass nil.
             return nil
             #else
+            /// "return nil" will focus cell
             return ProductDetailController(item: item)
             #endif
         }, actionProvider: { systemActions in
-            let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+            let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
                 delegate.photoCell(cell: self, didShare: item)
             }
-            return UIMenu(title: "", children: [share])
+            return UIMenu(title: "", children: [shareAction])
         })
     }
     

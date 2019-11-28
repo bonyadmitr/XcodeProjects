@@ -294,8 +294,18 @@ extension ProductsListController: UISearchBarDelegate {
 }
 
 extension ProductsListController: ImageTextCellDelegate {
+    
     func photoCell(cell: ImageTextCellDelegate.Cell, didShare item: ImageTextCellDelegate.Cell.Item) {
-        
+        prepareControllerToShareItem(item) { [weak self] activityVC in
+            /// delay for close preview
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self?.presentIPadSafe(controller: activityVC)
+            }
+        }
+    }
+    
+    // TODO: send to any service
+    private func prepareControllerToShareItem(_ item: Item, completion: @escaping (UIViewController) -> Void) {
         guard let imageUrl = item.imageUrl, let itemName = item.name else {
             assertionFailure("imageUrl and name must exist")
             return
@@ -310,14 +320,9 @@ extension ProductsListController: ImageTextCellDelegate {
             itemDescription += "\nDescription: \(itemDetail)"
         }
         
-        /// can be used semaphore instead
-        func showShare(with items: [Any]) {
-            let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            
-            /// delay for close preview
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.presentIPadSafe(controller: activityVC)
-            }
+        /// instead of this func  semaphore can be used or copy/past
+        func showShare(with items: [Any]) -> UIActivityViewController {
+            return UIActivityViewController(activityItems: items, applicationActivities: nil)
         }
         
         vcView.activityIndicator.startAnimating()
@@ -326,13 +331,15 @@ extension ProductsListController: ImageTextCellDelegate {
             
             switch result {
             case .success(let source):
-                showShare(with: [source.image, itemDescription])
+                let vc = showShare(with: [source.image, itemDescription])
+                completion(vc)
+                
             case .failure(let error):
                 print("--- share error: \(error.debugDescription)")
-                showShare(with: [itemDescription])
+                let vc = showShare(with: [itemDescription])
+                completion(vc)
             }
         }
-        
     }
     
     func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCellDelegate.Cell.Item) {
