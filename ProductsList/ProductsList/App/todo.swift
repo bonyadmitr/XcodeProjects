@@ -6,6 +6,7 @@
 // TODO: a lot of:
 /**
  CODE (Developer or QA can see changes):
+ mb undomanager
  newValue.isOpaque = true for all possible views
  swiftlint
  clear code
