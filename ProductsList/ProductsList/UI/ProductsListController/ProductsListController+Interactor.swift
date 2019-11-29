@@ -22,25 +22,26 @@ extension ProductsListController {
                 itemDescription += "\nDescription: \(itemDetail)"
             }
             
-            /// instead of this func  semaphore can be used or copy/past
-            func shareVC(with items: [Any]) -> UIActivityViewController {
-                return UIActivityViewController(activityItems: items, applicationActivities: nil)
-            }
-            
-            
             KingfisherManager.shared.retrieveImage(with: imageUrl) { result in
                 switch result {
                 case .success(let source):
-                    let vc = shareVC(with: [source.image, itemDescription])
+                    let vc = UIActivityViewController.custom(with: [source.image, itemDescription])
                     completion(vc)
                     
                 case .failure(let error):
                     print("--- share error: \(error.debugDescription)")
-                    let vc = shareVC(with: [itemDescription])
+                    let vc = UIActivityViewController.custom(with: [itemDescription])
                     completion(vc)
                 }
             }
         }
+        
     }
     
+}
+
+extension UIActivityViewController {
+    static func custom(with activityItems: [Any]) -> UIActivityViewController {
+        return UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+    }
 }
