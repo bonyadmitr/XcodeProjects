@@ -13,6 +13,7 @@
 		C488467823870B4F0090DF02 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467723870B4F0090DF02 /* Product.swift */; };
 		C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467923870BAB0090DF02 /* ProductsListController+View.swift */; };
 		C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */; };
+		C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */; };
 		CE6B595823881D5500F32AB2 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */; };
 		CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B5959238833A100F32AB2 /* ClassNameable.swift */; };
 		CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 		C488467723870B4F0090DF02 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C488467923870BAB0090DF02 /* ProductsListController+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+View.swift"; sourceTree = "<group>"; };
 		C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+Interactor.swift"; sourceTree = "<group>"; };
+		C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
 		CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		CE6B5959238833A100F32AB2 /* ClassNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameable.swift; sourceTree = "<group>"; };
 		CE6B595D2389E91A00F32AB2 /* todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				CEC94E0B238D495F000BBB80 /* ProductDetailController */,
 				CEC94E0D238D497C000BBB80 /* ImageTextCell */,
 				CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */,
+				C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */,
 				C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
+				C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */,
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
 				C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */,
 				CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */,
