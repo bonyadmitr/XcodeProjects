@@ -59,8 +59,11 @@ final class CoreDataStack {
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 assertionFailure(error.debugDescription)
+            } else if let coreDataPath = storeDescription.url?.deletingLastPathComponent().path {
+                /// used to eazy copy/past to Finder - Go - Go to folder
+                print("- CoreData: Inited at \(coreDataPath))")
             } else {
-                print("- CoreData: Inited")
+                assertionFailure("should never be called")
             }
         }
         return container
