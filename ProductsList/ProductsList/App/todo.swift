@@ -11,9 +11,6 @@
  swiftlint
  clear code
  debug floating window
- demo mode without server + without internet (save some jsons to the bundle)
- (can be used json-server https://github.com/typicode/json-server
- or new mocker https://habr.com/ru/company/surfstudio/blog/477506/)
  add main.swift
  remove storyboard (save LaunchScreen only)
  router for navigation (+ mb window manager)
@@ -139,4 +136,10 @@
  //    final class View
  //    final class Interactor
  //}
+ 
+ demo mode without server + without internet (save some jsons to the bundle)
+ (can be used json-server https://github.com/typicode/json-server
+ or new mocker https://habr.com/ru/company/surfstudio/blog/477506/
+ or another way: https://infinum.com/the-capsized-eight/easy-way-to-implement-demo-mode-in-ios-apps
+ with https://github.com/AliSoftware/OHHTTPStubs)
  */
