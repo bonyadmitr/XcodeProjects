@@ -142,4 +142,9 @@
  or new mocker https://habr.com/ru/company/surfstudio/blog/477506/
  or another way: https://infinum.com/the-capsized-eight/easy-way-to-implement-demo-mode-in-ios-apps
  with https://github.com/AliSoftware/OHHTTPStubs)
+ 
+ custom schemes & universal links
+ + try tests by https://github.com/mattstanford/GhostHand
+ 
+ try local/push notifications test by https://medium.com/@mds6058/push-notification-ui-testing-41bf66bed3fa
  */
