@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 extension Event {
-    static func create(in managedObjectContext: NSManagedObjectContext){
+    static func create(in managedObjectContext: NSManagedObjectContext) -> Self {
         let newEvent = self.init(context: managedObjectContext)
         newEvent.timestamp = Date()
         
@@ -22,6 +22,7 @@ extension Event {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+        return newEvent
     }   
 }
 

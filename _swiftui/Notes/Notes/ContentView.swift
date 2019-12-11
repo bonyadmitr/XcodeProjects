@@ -17,24 +17,22 @@ private let dateFormatter: DateFormatter = {
 
 struct ContentView: View {
     @Environment(\.managedObjectContext)
-    var viewContext   
+    var viewContext
  
     var body: some View {
         NavigationView {
             MasterView()
-                .navigationBarTitle(Text("Master"))
+                .navigationBarTitle(Text("Notes"))
                 .navigationBarItems(
                     leading: EditButton(),
-                    trailing: Button(
-                        action: {
-                            withAnimation { Event.create(in: self.viewContext) }
+                    trailing:
+                        NavigationLink(destination: DetailView2(event: Event.create(in: self.viewContext))) {
+                            Image(systemName: "plus")
                         }
-                    ) { 
-                        Image(systemName: "plus")
-                    }
+
                 )
             Text("Detail view content goes here")
-                .navigationBarTitle(Text("Detail"))
+                .navigationBarTitle(Text("New note"))
         }.navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
 }
@@ -72,10 +70,39 @@ struct DetailView: View {
     }
 }
 
+struct DetailView2: View {
+    @State var noteBody = ""
+    @ObservedObject var event: Event
+
+    var body: some View {
+        
+        //TextField("Enter your name", text: $name)
+        TextView(text: $noteBody)
+        //Text("\(event.timestamp!, formatter: dateFormatter)")
+            .navigationBarTitle(Text("Detail"))
+        .onDisappear {
+            self.event.body = self.noteBody
+            try? self.event.managedObjectContext?.save()
+        }
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return ContentView().environment(\.managedObjectContext, context)
+    }
+}
+
+struct TextView: UIViewRepresentable {
+    @Binding var text: String
+
+    func makeUIView(context: Context) -> UITextView {
+        return UITextView()
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
     }
 }
