@@ -173,7 +173,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+                if let cell = tableView.cellForRow(at: indexPath!) {
+                    configureCell(cell, withEvent: anObject as! Event)
+                } else {
+                    print("--- somthing went wrong with updating")
+                    print("UITableView was told to layout its visible cells and other contents without being in the view hierarchy")
+            }
+                
             case .move:
                 configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
