@@ -26,20 +26,22 @@ class DetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         guard let detailItem = detailItem else {
-            assertionFailure()
+            print("on rotate")
             return
         }
         if detailItem.body != bodyTextView.text {
             detailItem.body = bodyTextView.text
             try? detailItem.managedObjectContext?.save()
-        } else {
+        } else if detailItem.body == "", bodyTextView.text == "" {
             detailItem.managedObjectContext?.delete(detailItem)
+        } else {
+            print("nothing to edit")
         }
     }
     
     private func configureView() {
-        if let detail = detailItem {
-            bodyTextView.text = detailItem?.body
+        if let detailItem = detailItem {
+            bodyTextView.text = detailItem.body
         }
     }
 
