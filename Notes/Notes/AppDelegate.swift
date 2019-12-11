@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
+    /// apple example https://developer.apple.com/documentation/coredata/synchronizing_a_local_store_to_the_cloud
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*
          The persistent container for the application. This implementation
