@@ -28,6 +28,7 @@
 		C4FDD1A623A16FA5008A0FBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4FDD1A923A16FA5008A0FBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4FDD1AB23A16FA5008A0FBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4FDD1B523A18A67008A0FBA /* Notes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notes.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 		C4FDD19723A16FA3008A0FBA /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				C4FDD1B523A18A67008A0FBA /* Notes.entitlements */,
 				C4FDD19823A16FA3008A0FBA /* AppDelegate.swift */,
 				C4FDD19D23A16FA3008A0FBA /* SceneDelegate.swift */,
 				C4FDD19F23A16FA3008A0FBA /* MasterViewController.swift */,
@@ -292,7 +294,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Notes/Notes.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				INFOPLIST_FILE = Notes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +305,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Notes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -309,7 +315,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Notes/Notes.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				INFOPLIST_FILE = Notes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -317,6 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.Notes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
