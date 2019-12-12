@@ -1,5 +1,7 @@
 import UIKit
 
+/// swift doc https://github.com/apple/swift-evolution/blob/master/proposals/0258-property-wrappers.md
+/// aricle https://www.vadimbulavin.com/swift-5-property-wrappers/
 protocol Stylable {
     associatedtype StyleType
     
