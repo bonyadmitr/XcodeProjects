@@ -4,21 +4,11 @@ import UIKit
 /// aricle https://www.vadimbulavin.com/swift-5-property-wrappers/
 protocol Stylable {
     associatedtype StyleType
-    
-    /// used different func style instead of  @discardableResult
     func setStyle(_ style: StyleType)
 }
-//extension Stylable where Self: UILabel {
-//    func setup() {
-//        font = UIFont.preferredFont(forTextStyle: .headline)
-//        textAlignment = .center
-//        backgroundColor = .systemBackground
-//        textColor = .label
-//        numberOfLines = 1
-//    }
-//}
 
 extension Stylable {
+    /// used different func style instead of @discardableResult for func setStyle
     func style(_ style: StyleType) -> Self {
         setStyle(style)
         return self
