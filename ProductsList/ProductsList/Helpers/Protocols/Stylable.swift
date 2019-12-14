@@ -64,6 +64,7 @@ extension UIImageView: Stylable {
     }
 }
 
+/// Property(IBOutlet) with a wrapper cannot also be weak 
 /// @Style(style: .subtitle)
 /// { willSet { newValue.setStyle(.title) } }
 @propertyWrapper
