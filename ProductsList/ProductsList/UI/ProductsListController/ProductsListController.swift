@@ -28,21 +28,23 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     private let searchController = UISearchController(searchResultsController: nil)
     private lazy var interactor = Interactor()
     
-    override func loadView() {
-        self.view = View()
-    }
-    
     /// or #1 unsafe
     //private lazy var vcView = view as! View
     /// or #2 more safely
-    private lazy var vcView: View = {
-        if let view = self.view as? View {
-            return view
-        } else {
-            assertionFailure("override func loadView")
-            return View()
-        }
-    }()
+    //private lazy var vcView: View = {
+    //    if let view = self.view as? View {
+    //        return view
+    //    } else {
+    //        assertionFailure("override func loadView")
+    //        return View()
+    //    }
+    //}()
+    /// or #3
+    private let vcView = View()
+    
+    override func loadView() {
+        view = vcView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
