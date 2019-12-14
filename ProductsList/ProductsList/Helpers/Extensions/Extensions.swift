@@ -15,3 +15,11 @@ extension Data {
         return String(data: self, encoding: .utf8) ?? String(describing: self)
     }
 }
+
+//extension Collection where Indices.Iterator.Element == Index {
+//
+//    /// article https://medium.com/flawless-app-stories/say-goodbye-to-index-out-of-range-swift-eca7c4c7b6ca
+//    subscript(safe index: Index) -> Iterator.Element? {
+//        return (startIndex <= index && index < endIndex) ? self[index] : nil
+//    }
+//}
