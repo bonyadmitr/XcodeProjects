@@ -35,28 +35,6 @@ final class ImageTextCell: UICollectionViewCell {
         addInteraction()
     }
     
-    //func setup(for item: Product.Item) {
-    //    titleLabel.text = item.name
-    //    subtitleLabel.text = "\(item.price)"
-    //
-    //    imageView.kf.cancelDownloadTask()
-    //    imageView.kf.setImage(with: item.imageUrl, placeholder: UIImage(systemName: "photo"))
-    //
-    //
-    //    //imageView.image = UIImage(systemName: "photo")
-    //    //KingfisherManager.shared.retrieveImage(with: item.imageUrl) { result in
-    //    //    switch result {
-    //    //    case .success(let source):
-    //    //        let image = source.image
-    //    //        self.imageView.contentMode = image.size.width < image.size.height ? .scaleAspectFill : .scaleAspectFit
-    //    //        self.imageView.image = image
-    //    //    case .failure(let error):
-    //    //        print(error.debugDescription)
-    //    //    }
-    //    //}
-    //
-    //}
-    
     private func addInteraction() {
         #if os(iOS)
         isUserInteractionEnabled = true
