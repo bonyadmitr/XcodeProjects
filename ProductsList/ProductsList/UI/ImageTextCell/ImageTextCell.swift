@@ -8,39 +8,14 @@ final class ImageTextCell: UICollectionViewCell {
     typealias Item = ProductItemDB
     typealias CellDelegate = ImageTextCellDelegate
     
-    @IBOutlet private weak var imageView: UIImageView! {
-        willSet {
-            /// newValue used for simplifying copying same settings
-            
-            newValue.contentMode = .scaleAspectFill
-            newValue.isOpaque = true
-            
-            /// used color to show empty state bcz UIActivityIndicatorView is too expensive for performance
-            newValue.backgroundColor = .systemBackground
-        }
-    }
+    @Style(style: .common)
+    @IBOutlet private var imageView: UIImageView!
     
-    @IBOutlet private weak var titleLabel: UILabel! {
-        willSet {
-            /// newValue used for simplifying copying same settings
-            newValue.font = UIFont.preferredFont(forTextStyle: .headline)
-            newValue.textAlignment = .center
-            newValue.backgroundColor = .systemBackground
-            newValue.textColor = .label
-            newValue.numberOfLines = 1
-        }
-    }
+    @Style(style: .title)
+    @IBOutlet private var titleLabel: UILabel!
     
-    @IBOutlet private weak var subtitleLabel: UILabel! {
-        willSet {
-            /// newValue used for simplifying copying same settings
-            newValue.font = UIFont.preferredFont(forTextStyle: .body)
-            newValue.textAlignment = .center
-            newValue.backgroundColor = .systemBackground
-            newValue.textColor = .label
-            newValue.numberOfLines = 1
-        }
-    }
+    @Style(style: .subtitle)
+    @IBOutlet private var subtitleLabel: UILabel!
     
     private var item: Item?
     private var isContextMenuDidAppear = false

@@ -51,11 +51,11 @@ extension UIImageView: Stylable {
         switch style {
         case .kf:
             kf.indicatorType = .activity
+            contentMode = .scaleAspectFit
         case .common:
-            //kf.indicatorType = .none
-            break
+            contentMode = .scaleAspectFill
         }
-        contentMode = .scaleAspectFit
+        
         isOpaque = true
         /// used color to show empty state bcz UIActivityIndicatorView is too expensive for performance
         backgroundColor = .systemBackground
