@@ -14,6 +14,7 @@
 		C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467923870BAB0090DF02 /* ProductsListController+View.swift */; };
 		C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */; };
 		C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */; };
+		CE2400E823A76E91001B6BC6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2400E723A76E91001B6BC6 /* Coordinator.swift */; };
 		CE6B595823881D5500F32AB2 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */; };
 		CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B5959238833A100F32AB2 /* ClassNameable.swift */; };
 		CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */; };
@@ -45,6 +46,7 @@
 		C488467923870BAB0090DF02 /* ProductsListController+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+View.swift"; sourceTree = "<group>"; };
 		C4938CB723902AD90014DE17 /* ProductsListController+Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+Interactor.swift"; sourceTree = "<group>"; };
 		C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
+		CE2400E723A76E91001B6BC6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		CE6B5959238833A100F32AB2 /* ClassNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameable.swift; sourceTree = "<group>"; };
 		CE6B595D2389E91A00F32AB2 /* todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				CEF0FA43237E8582007056AF /* AppDelegate.swift */,
 				CEF0FA45237E8582007056AF /* SceneDelegate.swift */,
+				CE2400E723A76E91001B6BC6 /* Coordinator.swift */,
 				CEF0FA51237E8586007056AF /* Info.plist */,
 				CEF0FA4C237E8586007056AF /* Assets.xcassets */,
 				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
@@ -304,6 +307,7 @@
 				CEF0FA60237E8F9E007056AF /* ImageTextCell.swift in Sources */,
 				CEF0FA64237E9E80007056AF /* ProductDetailController.swift in Sources */,
 				CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */,
+				CE2400E823A76E91001B6BC6 /* Coordinator.swift in Sources */,
 				C488467823870B4F0090DF02 /* Product.swift in Sources */,
 				CEC94E08238D4015000BBB80 /* Extensions.swift in Sources */,
 				CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */,
