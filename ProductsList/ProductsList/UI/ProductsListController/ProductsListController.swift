@@ -23,6 +23,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         }
     }
     
+    weak var coordinator: MainCoordinator?
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     private let searchController = UISearchController(searchResultsController: nil)
@@ -163,14 +164,7 @@ extension ProductsListController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
-        
-        let detailVC = ProductDetailController(item: item)
-        
-        #if os(tvOS)
-        present(detailVC, animated: true, completion: nil)
-        #else
-        navigationController?.pushViewController(detailVC, animated: true)
-        #endif
+        coordinator?.showDetail(item: item)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

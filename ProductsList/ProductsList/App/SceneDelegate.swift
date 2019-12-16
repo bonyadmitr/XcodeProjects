@@ -17,22 +17,51 @@ import UIKit
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    
+
     init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
+    func start() {
+        let vc = ProductsListController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: false)
+    }
+    
+    func showDetail(item: ProductsListController.View.Item) {
+        let detailCoordinator = DetailCoordinator(navigationController: navigationController, item: item)
+        detailCoordinator.start()
+        childCoordinators.append(detailCoordinator)
+    }
+}
+
+class DetailCoordinator: Coordinator {
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
+    
+    let item: ProductsListController.View.Item
+    
+    init(navigationController: UINavigationController, item: ProductsListController.View.Item) {
+        self.item = item
         self.navigationController = navigationController
     }
     
     func start() {
-        let vc = ProductsListController()
-        navigationController.pushViewController(vc, animated: false)
+        let detailVC = ProductDetailController(item: item)
+        
+        #if os(tvOS)
+        navigationController.present(detailVC, animated: true, completion: nil)
+        #else
+        navigationController.pushViewController(detailVC, animated: true)
+        #endif
     }
 }
-
 
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private var coordinator: Coordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -55,10 +84,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// or #2
         let window = UIWindow(windowScene: windowScene)
         
-        let vc = ProductsListController()
-        let navVC = UINavigationController(rootViewController: vc)
         
-        window.rootViewController = navVC
+        let navVC = UINavigationController()
+        let coordinator = MainCoordinator(navigationController: navVC)
+        coordinator.start()
+        self.coordinator = coordinator
+        
+//        let vc = ProductsListController()
+//        let navVC = UINavigationController(rootViewController: vc)
+        
+        window.rootViewController = coordinator.navigationController
         window.makeKeyAndVisible()
         
         // my strategy: each v.c. must have a restorationInfo property...
