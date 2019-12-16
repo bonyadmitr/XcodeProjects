@@ -5,6 +5,7 @@ import UIKit
 import UIKit
 
 /// aritcle https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps
+/// Advanced Coordinators in iOS https://www.youtube.com/watch?v=ueByb0MBMQ4
 protocol Coordinator: class {
     var childCoordinators: [Coordinator] { get set }
     var navigationController: UINavigationController { get set }
