@@ -12,8 +12,6 @@
  clear code
  debug floating window
  add main.swift
- remove storyboard (save LaunchScreen only)
- router for navigation (+ mb window manager)
  mb more asserts
  unit tests
  UI tests
@@ -104,6 +102,8 @@
  sorting by ScopeButtons
  collection sections in sorting
  typealias for Model/Cell in view/vc
+ remove storyboard (save LaunchScreen only)
+ router for navigation (+ mb window manager)
  
  layout by three ways: frame (TitleSupplementaryView), autoresizingMask (ProductsListView), IB constraints (ImageTextCell)
  + commented code of anchor constraints (ProductsListView)
