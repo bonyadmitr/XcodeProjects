@@ -4,8 +4,8 @@ import UIKit
 /// Advanced Coordinators in iOS https://www.youtube.com/watch?v=ueByb0MBMQ4
 protocol Coordinator: class {
     var childCoordinators: [Coordinator] { get set }
-    var navigationController: UINavigationController { get set }
-
+    var navigationController: UINavigationController { get }
+    
     func start()
 }
 
@@ -13,15 +13,15 @@ protocol Coordinator: class {
 final class MainCoordinator: NSObject, Coordinator {
     
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
-
+    let navigationController: UINavigationController
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         super.init()
         
         navigationController.delegate = self
     }
-
+    
     func start() {
         let vc = ProductsListController()
         vc.coordinator = self
@@ -34,17 +34,21 @@ final class MainCoordinator: NSObject, Coordinator {
         childCoordinators.append(detailCoordinator)
     }
     
-    func childDidFinish(_ child: Coordinator?) {
+    private func childDidFinish(_ child: Coordinator?) {
         guard let childIndex = childCoordinators.enumerated().first(where: { $0.element === child })?.offset else {
             assertionFailure("- \(child.debugDescription) not found in \(childCoordinators)")
             return
         }
         childCoordinators.remove(at: childIndex)
     }
+    
 }
 
 extension MainCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              didShow viewController: UIViewController,
+                              animated: Bool) {
         
         guard let fromVC = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return
@@ -64,7 +68,7 @@ extension MainCoordinator: UINavigationControllerDelegate {
 final class DetailCoordinator: Coordinator {
     
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
     
     private let item: ProductsListController.View.Item
     
@@ -83,5 +87,5 @@ final class DetailCoordinator: Coordinator {
         navigationController.pushViewController(detailVC, animated: true)
         #endif
     }
+    
 }
-
