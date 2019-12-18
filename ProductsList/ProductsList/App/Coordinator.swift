@@ -9,9 +9,9 @@ protocol Coordinator: class {
     func start()
 }
 
-import UIKit
-
-class MainCoordinator: NSObject, Coordinator {
+// MARK: - MainCoordinator
+final class MainCoordinator: NSObject, Coordinator {
+    
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
@@ -60,11 +60,13 @@ extension MainCoordinator: UINavigationControllerDelegate {
     }
 }
 
-class DetailCoordinator: Coordinator {
+// MARK: - DetailCoordinator
+final class DetailCoordinator: Coordinator {
+    
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
-    let item: ProductsListController.View.Item
+    private let item: ProductsListController.View.Item
     
     init(navigationController: UINavigationController, item: ProductsListController.View.Item) {
         self.item = item
