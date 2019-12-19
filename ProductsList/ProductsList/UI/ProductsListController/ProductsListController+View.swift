@@ -9,7 +9,134 @@ import CoreData
 
 extension ProductsListController {
     
-    final class View: UIView, NSFetchedResultsControllerDelegate {
+//    typealias Model = Product
+//    typealias Item = ProductItemDB
+//    typealias Cell = ImageTextCell
+    typealias SectionType = Int
+    
+    final class DataSource {
+        
+        typealias DataSourceType = UICollectionViewDiffableDataSource<SectionType, Item>
+//        typealias CellProvider = DataSourceType.CellProvider
+//        typealias SupplementaryViewProvider = DataSourceType.SupplementaryViewProvider
+        
+        private let collectionView: UICollectionView
+        
+        let dataSource: DataSourceType
+        var fetchedResultsController: NSFetchedResultsController<Item>
+        
+//        init(collectionView: UICollectionView,
+//             cellProvider: @escaping CellProvider,
+//             supplementaryViewProvider: @escaping SupplementaryViewProvider)
+        init(collectionView: UICollectionView, fetchedResultsController: NSFetchedResultsController<Item>) {
+            self.collectionView = collectionView
+            self.fetchedResultsController = fetchedResultsController
+            
+            /// article https://medium.com/@jamesrochabrun/uicollectionviewdiffabledatasource-and-decodable-step-by-step-6b727dd2485
+            /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
+            /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
+            /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
+            dataSource = UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+                
+                // TODO: check weak self
+                
+                guard let cell = collectionView.dequeue(cell: Cell.self, for: indexPath) else {
+                    assertionFailure()
+                    return UICollectionViewCell()
+                }
+                cell.setup(for: item)
+                return cell
+            }
+            
+            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView in
+                
+                guard let view = collectionView.dequeue(supplementaryView: TitleSupplementaryView.self, kind: kind, for: indexPath) else {
+                    assertionFailure()
+                    return UICollectionReusableView()
+                }
+                
+                view.titleLabel.text = self.fetchedResultsController.sections?[indexPath.section].name
+
+                return view
+            }
+            
+        }
+        
+//        private func setup() {
+//            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+//
+//                guard let view = collectionView.dequeue(supplementaryView: TitleSupplementaryView.self, kind: kind, for: indexPath) else {
+//                    assertionFailure()
+//                    return UICollectionReusableView()
+//                }
+//
+//                view.titleLabel.text = "\(indexPath)"//self.fetchedResultsController.sections?[indexPath.section].name
+//
+//                return view
+//            }
+//        }
+        
+//        private var currentSnapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
+//        private var currentSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> = {
+//            var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
+//            snapshot.appendSections([0])
+//            return snapshot
+//        }()
+        
+
+//        lazy var dataSource: UICollectionViewDiffableDataSource<SectionType, Item> = {
+//            return UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+//
+//                // TODO: check weak self
+//
+//                guard let cell = collectionView.dequeue(cell: Cell.self, for: indexPath) else {
+//                    assertionFailure()
+//                    return nil
+//                }
+//                cell.setup(for: item)
+//                return cell
+//            }
+//        }()
+        
+//        func updateDataSource(with snapshot: NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animated: Bool) {
+//            dataSource.apply(snapshot, animatingDifferences: animated)
+//        }
+        func updateDataSource(animated: Bool) {
+            var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
+            
+            if let sections = fetchedResultsController.sections {
+                
+                /// simple snapshot for one section
+                if sections.count == 1 {
+                    snapshot.appendSections([0])
+                    snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
+                } else {
+                    
+                    let sectionsArray = (0..<sections.count).map { $0 }
+                    snapshot.appendSections(sectionsArray)
+                    
+                    for (sectionIndex, section) in sections.enumerated() {
+                        let items = (0..<section.numberOfObjects).map { itemIndex -> Item in
+                            let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+                            return fetchedResultsController.object(at: indexPath)
+                        }
+                        snapshot.appendItems(items, toSection: sectionIndex)
+                    }
+                }
+                
+            }
+            
+            dataSource.apply(snapshot, animatingDifferences: animated)
+        }
+        
+        func deleteAllItems(animated: Bool) {
+            var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>() //dataSource.snapshot()
+            snapshot.appendSections([0])
+            dataSource.apply(snapshot, animatingDifferences: animated)
+        }
+    }
+    
+    final class View: UIView {
         
         typealias Model = Product
         typealias Item = ProductItemDB
@@ -48,7 +175,6 @@ extension ProductsListController {
             collectionView.backgroundColor = .systemBackground
             #endif
             
-            
             #if targetEnvironment(macCatalyst)
             collectionView.contentInset = .init(top: padding, left: padding, bottom: padding, right: padding)
             #elseif os(iOS)
@@ -61,30 +187,6 @@ extension ProductsListController {
             return collectionView
         }()
         
-        private var currentSnapshot: NSDiffableDataSourceSnapshot<SectionType, Item> = {
-            var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
-            snapshot.appendSections([0])
-            return snapshot
-        }()
-        
-        /// article https://medium.com/@jamesrochabrun/uicollectionviewdiffabledatasource-and-decodable-step-by-step-6b727dd2485
-        /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
-        /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
-        /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
-        lazy var dataSource: UICollectionViewDiffableDataSource<SectionType, Item> = {
-            return UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-                
-                // TODO: check weak self
-                
-                guard let cell = collectionView.dequeue(cell: Cell.self, for: indexPath) else {
-                    assertionFailure()
-                    return nil
-                }
-                cell.setup(for: item)
-                return cell
-            }
-        }()
-        
         lazy var activityIndicator: UIActivityIndicatorView = {
             let activityIndicator = UIActivityIndicatorView(style: .large)
             activityIndicator.hidesWhenStopped = true
@@ -92,21 +194,6 @@ extension ProductsListController {
             activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             activityIndicator.color = .label
             return activityIndicator
-        }()
-        
-        lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
-            let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                fetchRequest.fetchBatchSize = 20
-            } else {
-                fetchRequest.fetchBatchSize = 10
-            }
-            
-            //fetchRequest.shouldRefreshRefetchedObjects = false
-            let context = CoreDataStack.shared.viewContext
-            return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         }()
         
         override init(frame: CGRect) {
@@ -120,20 +207,6 @@ extension ProductsListController {
         }
         
         private func setup() {
-            _ = dataSource
-            
-            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
-                
-                guard let view = collectionView.dequeue(supplementaryView: TitleSupplementaryView.self, kind: kind, for: indexPath) else {
-                    assertionFailure()
-                    return UICollectionReusableView()
-                }
-                
-                view.titleLabel.text = self.fetchedResultsController.sections?[indexPath.section].name
-                
-                return view
-            }
-            
             addSubview(collectionView)
             
             /// removed collectionView.autoresizingMask if used constraints
@@ -144,14 +217,6 @@ extension ProductsListController {
             //    collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             //    collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
             //])
-            
-            fetchedResultsController.delegate = self
-            performFetch()
-        }
-        
-        func performFetch() {
-            try? fetchedResultsController.performFetch()
-            updateDataSource(animated: false)
         }
         
         override func layoutSubviews() {
@@ -161,11 +226,11 @@ extension ProductsListController {
 
         private func updateItemSize() {
             let viewWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
-            
+
             #if targetEnvironment(macCatalyst)
             /// resizing config
             let resizeCellNorPadding = false
-            
+
             let minimumItemSize: CGFloat = 150
             let columns: CGFloat = resizeCellNorPadding ? floor(viewWidth / minimumItemSize) : floor(viewWidth) / minimumItemSize
             let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
@@ -177,9 +242,9 @@ extension ProductsListController {
             // TODO: remove from here
             let itemWidth = floor((viewWidth - (columns - 1) * padding) / columns)
             #endif
-            
+
             let itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-            
+
             if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.itemSize = itemSize
                 layout.minimumInteritemSpacing = padding
@@ -187,49 +252,8 @@ extension ProductsListController {
             }
         }
         
-        func deleteAllItems() {
-            currentSnapshot.deleteAllItems()
-            currentSnapshot.appendSections([0])
-            dataSource.apply(currentSnapshot, animatingDifferences: true)
-        }
-        
         @objc private func pullToRefresh() {
             refreshData?(refreshControl)
-        }
-        
-        func updateDataSource(animated: Bool) {
-            var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
-            
-            if let sections = fetchedResultsController.sections {
-                
-                /// simple snapshot for one section
-                if sections.count == 1 {
-                    snapshot.appendSections([0])
-                    snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
-                } else {
-                    
-                    let sectionsArray = (0..<sections.count).map { $0 }
-                    snapshot.appendSections(sectionsArray)
-                    
-                    for (sectionIndex, section) in sections.enumerated() {
-                        let items = (0..<section.numberOfObjects).map { itemIndex -> ProductItemDB in
-                            let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
-                            return fetchedResultsController.object(at: indexPath)
-                        }
-                        snapshot.appendItems(items, toSection: sectionIndex)
-                    }
-                }
-
-            }
-            
-            currentSnapshot = snapshot
-            dataSource.apply(snapshot, animatingDifferences: animated)
-        }
-        
-        // MARK: - NSFetchedResultsControllerDelegate
-        
-        func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-            updateDataSource(animated: true)
         }
         
     }

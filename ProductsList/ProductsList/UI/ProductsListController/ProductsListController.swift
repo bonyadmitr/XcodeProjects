@@ -28,6 +28,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     private lazy var storage = Item.Storage()
     private let searchController = UISearchController(searchResultsController: nil)
     private lazy var interactor = Interactor()
+    private lazy var dataSource = DataSource(collectionView: vcView.collectionView, fetchedResultsController: fetchedResultsController)
     
     /// or #1 unsafe
     //private lazy var vcView = view as! View
@@ -119,6 +120,29 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         
         searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
     }
+    
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<ProductItemDB> = {
+        let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fetchRequest.fetchBatchSize = 20
+        } else {
+            fetchRequest.fetchBatchSize = 10
+        }
+        
+        //fetchRequest.shouldRefreshRefetchedObjects = false
+        let context = CoreDataStack.shared.viewContext
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }()
+    
+    
+    func performFetch() {
+        dataSource.fetchedResultsController = fetchedResultsController
+        try? fetchedResultsController.performFetch()
+        dataSource.updateDataSource(animated: false)
+    }
 
     private func fetch() {
         vcView.activityIndicator.startAnimating()
@@ -136,6 +160,9 @@ final class ProductsListController: UIViewController, ErrorPresenter {
             }
         }
         
+        
+        fetchedResultsController.delegate = self
+        performFetch()
     }
     
     private func handle(items newItems: [Product.Item]) {
@@ -150,6 +177,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
             }
         }
     }
+    
 }
 
 extension ProductsListController: UICollectionViewDelegate {
@@ -160,7 +188,7 @@ extension ProductsListController: UICollectionViewDelegate {
         /// dismiss keyboard if search was used and pop back
         //searchController.searchBar.resignFirstResponder()
         
-        guard let item = vcView.dataSource.itemIdentifier(for: indexPath) else {
+        guard let item = dataSource.dataSource.itemIdentifier(for: indexPath) else {
             assertionFailure()
             return
         }
@@ -196,7 +224,7 @@ extension ProductsListController: UISearchResultsUpdating {
         if searchText.isEmpty {
             
             /// search become active or cancel without any text. don't need to do anything
-            if vcView.fetchedResultsController.fetchRequest.predicate == nil {
+            if fetchedResultsController.fetchRequest.predicate == nil {
                 return
             }
             
@@ -215,8 +243,8 @@ extension ProductsListController: UISearchResultsUpdating {
             //predicate = NSPredicate(format: "(\(#keyPath(Item.name)) contains[cd] %@) || (\(#keyPath(Item.detail)) contains[cd] %@) || (\(#keyPath(Item.price)) contains[cd] %@)", searchText, searchText, searchText)
         }
 
-        vcView.fetchedResultsController.fetchRequest.predicate = predicate
-        vcView.performFetch()
+        fetchedResultsController.fetchRequest.predicate = predicate
+        performFetch()
     }
 }
 
@@ -270,12 +298,12 @@ extension ProductsListController: UISearchBarDelegate {
         
         //fetchRequest.shouldRefreshRefetchedObjects = false
         let context = CoreDataStack.shared.viewContext
-        vcView.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                      managedObjectContext: context,
                                                                      sectionNameKeyPath: sectionNameKeyPath,
                                                                      cacheName: nil)
         
-        vcView.performFetch()
+        performFetch()
         
         /// there a lite animation(not good for me) on first scope change.
         /// it is due to image placeholder.
@@ -305,5 +333,14 @@ extension ProductsListController: ImageTextCellDelegate {
     func photoCellDidTapOnPreivew(previewController: UIViewController, item: ImageTextCellDelegate.Cell.Item) {
         print("open from preview: \(item.name ?? "nil")")
         navigationController?.pushViewController(previewController, animated: true)
+    }
+}
+
+
+// MARK: - NSFetchedResultsControllerDelegate
+extension ProductsListController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        assert(fetchedResultsController == controller)
+        dataSource.updateDataSource(animated: true)
     }
 }
