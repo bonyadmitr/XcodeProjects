@@ -9,25 +9,16 @@ import CoreData
 
 extension ProductsListController {
     
-//    typealias Model = Product
-//    typealias Item = ProductItemDB
-//    typealias Cell = ImageTextCell
     typealias SectionType = Int
     
     final class DataSource {
         
         typealias DataSourceType = UICollectionViewDiffableDataSource<SectionType, Item>
-//        typealias CellProvider = DataSourceType.CellProvider
-//        typealias SupplementaryViewProvider = DataSourceType.SupplementaryViewProvider
         
         private let collectionView: UICollectionView
-        
         let dataSource: DataSourceType
         var fetchedResultsController: NSFetchedResultsController<Item>
         
-//        init(collectionView: UICollectionView,
-//             cellProvider: @escaping CellProvider,
-//             supplementaryViewProvider: @escaping SupplementaryViewProvider)
         init(collectionView: UICollectionView, fetchedResultsController: NSFetchedResultsController<Item>) {
             self.collectionView = collectionView
             self.fetchedResultsController = fetchedResultsController
@@ -62,45 +53,6 @@ extension ProductsListController {
             
         }
         
-//        private func setup() {
-//            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
-//
-//                guard let view = collectionView.dequeue(supplementaryView: TitleSupplementaryView.self, kind: kind, for: indexPath) else {
-//                    assertionFailure()
-//                    return UICollectionReusableView()
-//                }
-//
-//                view.titleLabel.text = "\(indexPath)"//self.fetchedResultsController.sections?[indexPath.section].name
-//
-//                return view
-//            }
-//        }
-        
-//        private var currentSnapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
-//        private var currentSnapshot: NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> = {
-//            var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
-//            snapshot.appendSections([0])
-//            return snapshot
-//        }()
-        
-
-//        lazy var dataSource: UICollectionViewDiffableDataSource<SectionType, Item> = {
-//            return UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
-//
-//                // TODO: check weak self
-//
-//                guard let cell = collectionView.dequeue(cell: Cell.self, for: indexPath) else {
-//                    assertionFailure()
-//                    return nil
-//                }
-//                cell.setup(for: item)
-//                return cell
-//            }
-//        }()
-        
-//        func updateDataSource(with snapshot: NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animated: Bool) {
-//            dataSource.apply(snapshot, animatingDifferences: animated)
-//        }
         func updateDataSource(animated: Bool) {
             var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>()
             
@@ -129,11 +81,11 @@ extension ProductsListController {
             dataSource.apply(snapshot, animatingDifferences: animated)
         }
         
-        func deleteAllItems(animated: Bool) {
-            var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>() //dataSource.snapshot()
-            snapshot.appendSections([0])
-            dataSource.apply(snapshot, animatingDifferences: animated)
-        }
+        //func deleteAllItems(animated: Bool) {
+        //    var snapshot = NSDiffableDataSourceSnapshot<SectionType, Item>() //dataSource.snapshot()
+        //    snapshot.appendSections([0])
+        //    dataSource.apply(snapshot, animatingDifferences: animated)
+        //}
     }
     
     final class View: UIView {
