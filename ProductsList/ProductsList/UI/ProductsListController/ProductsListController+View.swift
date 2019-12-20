@@ -9,8 +9,6 @@ import CoreData
 
 extension ProductsListController {
     
-    typealias SectionType = Int
-    
     final class DataSource {
         
         typealias DataSourceType = UICollectionViewDiffableDataSource<SectionType, Item>
@@ -89,11 +87,6 @@ extension ProductsListController {
     }
     
     final class View: UIView {
-        
-        typealias Model = Product
-        typealias Item = ProductItemDB
-        typealias Cell = ImageTextCell
-        typealias SectionType = Int
         
         var refreshData: ( (UIRefreshControl) -> Void )?
         

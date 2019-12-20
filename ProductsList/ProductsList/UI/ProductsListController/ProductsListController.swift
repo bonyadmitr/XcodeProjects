@@ -7,7 +7,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     typealias Model = Product
     typealias Item = ProductItemDB
     typealias Cell = ImageTextCell
-    //typealias View = View
+    typealias SectionType = Int
     
     private enum SortOrder: Int, CaseIterable {
         case id = 0
@@ -62,7 +62,6 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         
         vcView.refreshData = { [weak self] refreshControl in
             print("refreshData")
-            //refreshControl.beginRefreshing()
             
             self?.service.all { [weak self] result in
                 DispatchQueue.main.async {

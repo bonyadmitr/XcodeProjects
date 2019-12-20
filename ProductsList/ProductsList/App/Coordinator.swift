@@ -28,7 +28,7 @@ final class MainCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func showDetail(item: ProductsListController.View.Item) {
+    func showDetail(item: ProductsListController.Item) {
         let detailCoordinator = DetailCoordinator(navigationController: navigationController, item: item)
         detailCoordinator.start()
         childCoordinators.append(detailCoordinator)
@@ -70,9 +70,9 @@ final class DetailCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     let navigationController: UINavigationController
     
-    private let item: ProductsListController.View.Item
+    private let item: ProductsListController.Item
     
-    init(navigationController: UINavigationController, item: ProductsListController.View.Item) {
+    init(navigationController: UINavigationController, item: ProductsListController.Item) {
         self.item = item
         self.navigationController = navigationController
     }
