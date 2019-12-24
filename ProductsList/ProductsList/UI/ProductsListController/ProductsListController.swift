@@ -122,8 +122,6 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     
     func performFetch() {
         dataSource.performFetch()
-//        dataSource.fetchedResultsController = fetchedResultsController
-//        try? fetchedResultsController.performFetch()
         dataSource.updateDataSource(animated: false)
     }
 

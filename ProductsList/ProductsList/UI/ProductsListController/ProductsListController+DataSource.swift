@@ -9,12 +9,11 @@ extension ProductsListController {
         
         typealias DataSourceType = UICollectionViewDiffableDataSource<SectionType, Item>
         
-        private let collectionView: UICollectionView
         let dataSource: DataSourceType
-        //var fetchedResultsController: NSFetchedResultsController<Item>
         
+        private let collectionView: UICollectionView
         
-        lazy var fetchedResultsController: NSFetchedResultsController<Item> = {
+        private lazy var fetchedResultsController: NSFetchedResultsController<Item> = {
             let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
             
@@ -62,7 +61,6 @@ extension ProductsListController {
 
                 return view
             }
-            
             
         }
         
@@ -184,6 +182,5 @@ extension ProductsListController {
             updateDataSource(animated: true)
         }
     }
-
     
 }
