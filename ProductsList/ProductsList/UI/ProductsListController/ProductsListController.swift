@@ -2,6 +2,58 @@ import UIKit
 import Alamofire
 import CoreData
 
+final class SearchController: UISearchController {
+    
+    override init(searchResultsController: UIViewController?) {
+        super.init(searchResultsController: searchResultsController)
+        initialSetup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initialSetup()
+    }
+    
+    
+    private func initialSetup() {
+        //searchController.searchBar.placeholder = "Search name/price/description"
+        searchBar.autocapitalizationType = .none
+        searchBar.spellCheckingType = .no
+        searchBar.enablesReturnKeyAutomatically = true /// default true for searchBar
+        searchBar.smartQuotesType = .no
+        searchBar.smartDashesType = .no
+        
+        /// removes suggestions bar above keyboard
+        //searchBar.autocorrectionType = .yes /// default .no for searchBar
+        
+        //searchController.delegate = self
+        
+        /// to present content in current controller (without it didSelectItemAt will not work)
+        obscuresBackgroundDuringPresentation = false
+    }
+    
+    func setup(controller: UIViewController) {
+        
+        /** Search presents a view controller by applying normal view controller presentation semantics.
+         This means that the presentation moves up the view controller hierarchy until it finds the root
+         view controller or one that defines a presentation context.
+         
+        Specify that this view controller determines how the search controller is presented.
+         The search controller should be presented modally and match the physical size of this view controller.
+         */
+        controller.definesPresentationContext = true
+        
+        /// to fix lauout on pop with active search
+        controller.extendedLayoutIncludesOpaqueBars = true
+        
+        /// For iOS 11 and later, place the search bar in the navigation bar.
+        controller.navigationItem.searchController = self
+        
+        /// Make the search bar always visible.
+        controller.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+}
+
 final class ProductsListController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
@@ -26,7 +78,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     weak var coordinator: MainCoordinator?
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
-    private let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = SearchController(searchResultsController: nil)
     private lazy var interactor = Interactor()
     private lazy var dataSource = DataSource(collectionView: vcView.collectionView)
     
@@ -82,42 +134,12 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
-        
         searchController.searchBar.placeholder = "Search name/price/description"
-        searchController.searchBar.autocapitalizationType = .none
-        searchController.searchBar.spellCheckingType = .no
-        searchController.searchBar.enablesReturnKeyAutomatically = true /// default true for searchBar
-        searchController.searchBar.smartQuotesType = .no
-        searchController.searchBar.smartDashesType = .no
         
-        /// removes suggestions bar above keyboard
-        //searchController.searchBar.autocorrectionType = .yes /// default .no for searchBar
-        
-        /// For iOS 11 and later, place the search bar in the navigation bar.
-        navigationItem.searchController = searchController
-        
-        /// Make the search bar always visible.
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        //searchController.delegate = self
-        
-        /// to present content in current controller (without it didSelectItemAt will not work)
-        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
-        
-        /** Search presents a view controller by applying normal view controller presentation semantics.
-         This means that the presentation moves up the view controller hierarchy until it finds the root
-         view controller or one that defines a presentation context.
-         
-        Specify that this view controller determines how the search controller is presented.
-         The search controller should be presented modally and match the physical size of this view controller.
-         */
-        definesPresentationContext = true
-        
-        /// to fix lauout on pop with active search
-        extendedLayoutIncludesOpaqueBars = true
-        
         searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
+        
+        searchController.setup(controller: self)
     }    
     
     func performFetch() {
