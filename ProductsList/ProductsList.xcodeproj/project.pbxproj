@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4796B4A23B3910900EB6CA2 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4796B4923B3910900EB6CA2 /* SearchController.swift */; };
 		C488467223870AA50090DF02 /* Alamofire+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467123870AA50090DF02 /* Alamofire+Extensions.swift */; };
 		C488467423870AD70090DF02 /* Alamofire+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467323870AD70090DF02 /* Alamofire+Custom.swift */; };
 		C488467623870B2F0090DF02 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488467523870B2F0090DF02 /* URLs.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4796B4923B3910900EB6CA2 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		C488467123870AA50090DF02 /* Alamofire+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Extensions.swift"; sourceTree = "<group>"; };
 		C488467323870AD70090DF02 /* Alamofire+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Custom.swift"; sourceTree = "<group>"; };
 		C488467523870B2F0090DF02 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				CEC94E0D238D497C000BBB80 /* ImageTextCell */,
 				CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */,
 				C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */,
+				C4796B4923B3910900EB6CA2 /* SearchController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */,
+				C4796B4A23B3910900EB6CA2 /* SearchController.swift in Sources */,
 				C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
 				CEC73ACE23A37078000B4EEA /* Stylable.swift in Sources */,
