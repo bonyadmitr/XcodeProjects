@@ -66,6 +66,7 @@ extension ProductsListController {
         
         func performFetch() {
             try? fetchedResultsController.performFetch()
+            updateDataSource(animated: false)
         }
         
         func updateDataSource(animated: Bool) {
