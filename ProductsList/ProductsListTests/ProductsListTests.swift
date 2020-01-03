@@ -11,6 +11,8 @@ import XCTest
 import CoreData
 
 class ProductsListTests: XCTestCase {
+    
+    typealias Item = ProductItemDB
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -35,13 +37,13 @@ class ProductsListTests: XCTestCase {
         //}
     }
     
-    private func anyItem(for context: NSManagedObjectContext) -> ProductDetailController.Item {
-        let request: NSFetchRequest<ProductDetailController.Item> = ProductDetailController.Item.fetchRequest()
+    private func anyItem(for context: NSManagedObjectContext) -> Item {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
         return (try? request.execute().first) ?? newItem(for: context)
     }
     
-    private func newItem(for context: NSManagedObjectContext) -> ProductDetailController.Item {
-        let newItem = ProductDetailController.Item(context: context)
+    private func newItem(for context: NSManagedObjectContext) -> Item {
+        let newItem = Item(context: context)
         newItem.id = -1
         newItem.detail = "some detail"
         newItem.name = "some name"
