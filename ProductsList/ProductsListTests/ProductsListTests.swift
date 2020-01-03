@@ -24,6 +24,34 @@ class ProductsListTests: XCTestCase {
         assertDeallocationPresentedVC { ProductsListController() }
     }
     
+    func test_deallocation_ProductDetailController() {
+        let context = CoreDataStack.shared.viewContext
+        let item = anyItem(for: context)
+        
+        assertDeallocationPresentedVC { ProductDetailController(item: item) }
+        //assertDeallocationPresentedVC { () -> UIViewController in
+        //    let vc = ProductDetailController(item: item)
+        //    return vc
+        //}
+    }
+    
+    private func anyItem(for context: NSManagedObjectContext) -> ProductDetailController.Item {
+        let request: NSFetchRequest<ProductDetailController.Item> = ProductDetailController.Item.fetchRequest()
+        return (try? request.execute().first) ?? newItem(for: context)
+    }
+    
+    private func newItem(for context: NSManagedObjectContext) -> ProductDetailController.Item {
+        let newItem = ProductDetailController.Item(context: context)
+        newItem.id = -1
+        newItem.detail = "some detail"
+        newItem.name = "some name"
+        newItem.originalId = "-1"
+        newItem.price = -111
+        /// don't save temp item
+        //try? context.save()
+        return newItem
+    }
+    
 }
 
 // MARK: - XCTestCase+Deallocation
