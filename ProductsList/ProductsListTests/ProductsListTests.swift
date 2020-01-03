@@ -69,6 +69,7 @@ extension XCTestCase {
     
     static let autoreleasepoolExpectationtTmeout: TimeInterval = 3
     
+    /// can be used "constructor: @autoclosure () -> AnyObject) {"
     func assertDeallocation(file: StaticString = #file, line: UInt = #line, _ constructor: () -> AnyObject) {
         weak var mayBeLeakingRef: AnyObject?
         
