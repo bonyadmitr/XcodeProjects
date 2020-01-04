@@ -7,6 +7,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        // TODO: clear
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().prefersLargeTitles = false
         

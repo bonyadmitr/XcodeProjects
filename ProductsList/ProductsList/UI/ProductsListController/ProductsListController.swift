@@ -52,14 +52,25 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         super.viewDidLoad()
         
         title = "Products"
-        
-        /// to prevent call from background and crash "UI API called on a background thread"
-        _ = vcView
-        
         vcView.collectionView.delegate = self
-        setupSearchController()
-        fetch()
         
+        setupSearchController()
+        setupRefreshControll()
+        fetchRemote()
+    }
+    
+    /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search name/price/description"
+        
+        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
+        searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
+        
+        searchController.setup(controller: self)
+    }
+    
+    private func setupRefreshControll() {
         vcView.refreshData = { [weak self] refreshControl in
             print("refreshData")
             
@@ -77,25 +88,10 @@ final class ProductsListController: UIViewController, ErrorPresenter {
                 }
             }
         }
-    }
-    
-    /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search name/price/description"
         
-        searchController.searchBar.delegate = self // Monitor when the search button is tapped.
-        searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
-        
-        searchController.setup(controller: self)
-    }    
-    
-    func performFetch() {
-        dataSource.performFetch()
-        dataSource.updateDataSource(animated: false)
     }
 
-    private func fetch() {
+    private func fetchRemote() {
         vcView.activityIndicator.startAnimating()
         
         service.all { [weak self] result in
@@ -125,6 +121,11 @@ final class ProductsListController: UIViewController, ErrorPresenter {
                 }
             }
         }
+        
+    }
+    
+    private func performFetch() {
+        dataSource.performFetch()
     }
     
 }
