@@ -54,6 +54,18 @@ class ProductsListTests: XCTestCase {
         return newItem
     }
     
+    func test_deallocation_ProductService() {
+        assertDeallocation { Product.Service() }
+    }
+    
+    func test_deallocation_ItemStorage() {
+        assertDeallocation { Item.Storage() }
+    }
+    
+    func test_deallocation_CoreDataStack() {
+        assertDeallocation { CoreDataStack(storeType: .sqlite, modelName: "ProductsList") }
+    }
+    
 }
 
 // MARK: - XCTestCase+Deallocation
