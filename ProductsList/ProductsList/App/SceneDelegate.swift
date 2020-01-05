@@ -27,6 +27,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// or #2
         let window = UIWindow(windowScene: windowScene)
         
+        if UserDefaults.standard.bool(forKey: "DISABLE_ANIMATIONS") {
+           UIView.setAnimationsEnabled(false)
+           window.layer.speed = 100
+        }
+        
         
         let navVC = UINavigationController()
         let coordinator = MainCoordinator(navigationController: navVC)
