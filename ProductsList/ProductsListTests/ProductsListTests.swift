@@ -27,6 +27,9 @@ extension NibInit where Self: UIViewController {
 }
 
 
+extension ImageTextCell: NibInit {}
+
+
 class ProductsListTests: XCTestCase {
     
     typealias Item = ProductItemDB
@@ -77,6 +80,14 @@ class ProductsListTests: XCTestCase {
     
     func test_deallocation_ItemStorage() {
         assertDeallocation { Item.Storage() }
+    }
+    
+    func test_deallocation_Views() {
+        assertDeallocation { SearchController(searchResultsController: nil) }
+        assertDeallocation { TitleSupplementaryView() }
+        assertDeallocation { ScaledHeightImageView(frame: .zero) }
+        assertDeallocation { ImageTextCell.initFromNib() }
+        
     }
     
     func test_deallocation_CoreDataStack() {
