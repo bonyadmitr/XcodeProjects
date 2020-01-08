@@ -27,7 +27,9 @@ class ProductsListUITests: XCTestCase {
         // We send a command line argument to our app,
         // to enable it to reset its state
         //app.launchArguments.append("--uitesting")
-        app.launchArguments.append("DISABLE_ANIMATIONS")
+        
+        /// https://medium.com/flawless-app-stories/speeding-up-automated-tests-in-ios-fdf20080710e
+        app.launchArguments = ["-DISABLE_ANIMATIONS", "true"]
         
         app.launch()
     }
