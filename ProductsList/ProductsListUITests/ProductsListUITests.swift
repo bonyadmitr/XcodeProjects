@@ -62,6 +62,33 @@ class ProductsListUITests: XCTestCase {
         /// to handle possible crash
         /// can be put into "override func tearDown()"
         XCTAssertTrue(app.isEnabled)
+        
+    }
+    
+    func test_ProductDetailController_and_popBack() {
+        
+        let app = XCUIApplication()
+        let collectionView = app.collectionViews.firstMatch
+        
+        collectionView.swipeUp()
+        collectionView.swipeUp()
+        let cell = collectionView.cells.element(boundBy: 4)
+        cell.tap()
+        
+        /// back / pop
+        app.navigationBars.buttons.firstMatch.tap()
+        
+//        app.windows.element(boundBy:0).swipeLeft()
+        
+//        let element = app.scrollViews.children(matching: .other).element(boundBy: 0)
+//        element.swipeRight()
+        
+        /// wait popup close
+        sleep(1)
+        
+        /// to handle possible crash
+        /// can be put into "override func tearDown()"
+        XCTAssertTrue(app.isEnabled)
     }
 
 //    func testLaunchPerformance() {
