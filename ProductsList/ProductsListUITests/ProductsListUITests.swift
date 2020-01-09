@@ -34,7 +34,7 @@ final class ProductsListUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_previewDismiss() {
+    private func test_previewDismiss() {
         /// wait cells appear after network request
         //let cell = app.cells["IMG_0352.JPG"].firstMatch
         let cell = app.collectionViews.cells.firstMatch
@@ -61,7 +61,7 @@ final class ProductsListUITests: XCTestCase {
         
     }
     
-    func test_scrollList_and_select() {
+    private func test_scrollList_and_select() {
         let collectionView = app.collectionViews.firstMatch
         
         XCTContext.runActivity(named: "scroll") { _ in
@@ -77,7 +77,7 @@ final class ProductsListUITests: XCTestCase {
         checkApp()
     }
     
-    func test_ProductDetailController_and_PopBack() {
+    private func test_ProductDetailController_and_PopBack() {
         
         XCTContext.runActivity(named: "cell tap") { _ in
             let cell = app.collectionViews.cells.firstMatch
