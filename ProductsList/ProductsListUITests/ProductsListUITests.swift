@@ -8,6 +8,9 @@
 
 import XCTest
 
+/// extensions  https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElement.swift
+/// extensions https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElement%2BSwipe.swift
+
 /// launchArguments https://medium.com/flawless-app-stories/speeding-up-automated-tests-in-ios-fdf20080710e
 /// XCTContext.runActivity https://qualitytesting.tumblr.com/post/161515906184/easier-debugging-with-xctactivity-and
 class ProductsListUITests: XCTestCase {
