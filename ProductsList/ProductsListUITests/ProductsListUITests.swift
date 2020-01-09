@@ -1,11 +1,3 @@
-//
-//  ProductsListUITests.swift
-//  ProductsListUITests
-//
-//  Created by Bondar Yaroslav on 1/8/20.
-//  Copyright © 2020 Bondar Yaroslav. All rights reserved.
-//
-
 import XCTest
 
 /// extensions  https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElement.swift
@@ -13,9 +5,9 @@ import XCTest
 
 /// launchArguments https://medium.com/flawless-app-stories/speeding-up-automated-tests-in-ios-fdf20080710e
 /// XCTContext.runActivity https://qualitytesting.tumblr.com/post/161515906184/easier-debugging-with-xctactivity-and
-class ProductsListUITests: XCTestCase {
+final class ProductsListUITests: XCTestCase {
 
-    var app: XCUIApplication!
+    private var app: XCUIApplication!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
