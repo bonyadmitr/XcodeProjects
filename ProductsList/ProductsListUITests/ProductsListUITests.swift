@@ -105,7 +105,9 @@ final class ProductsListUITests: XCTestCase {
     
     func test_search() {
         let productsNavigationBar = app.navigationBars.firstMatch
-        productsNavigationBar.searchFields["Search name/price/description"].tap()
+        let searchBar = productsNavigationBar.searchFields.firstMatch
+        //productsNavigationBar.searchFields["Search name/price/description"]
+        searchBar.tap()
         
 //        let aKey = app.keys["a"]
 //        aKey.tap()
@@ -116,8 +118,7 @@ final class ProductsListUITests: XCTestCase {
 //
 //        let lKey = app.keys["l"]
 //        lKey.tap()
-        
-        productsNavigationBar.searchFields["Search name/price/description"].typeText("appl")
+        searchBar.typeText("appl")
         
         productsNavigationBar.buttons["Name"].tap()
         productsNavigationBar.buttons["Created Date"].tap()
