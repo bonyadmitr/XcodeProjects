@@ -16,11 +16,11 @@ final class ProductsListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    private func test_deallocation_ProductsListController() {
+    func test_deallocation_ProductsListController() {
         assertDeallocationPresentedVC { ProductsListController() }
     }
     
-    private func test_deallocation_ProductDetailController() {
+    func test_deallocation_ProductDetailController() {
         let context = CoreDataStack.shared.viewContext
         let item = anyItem(for: context)
         
@@ -31,15 +31,15 @@ final class ProductsListTests: XCTestCase {
         //}
     }
     
-    private func test_deallocation_ProductService() {
+    func test_deallocation_ProductService() {
         assertDeallocation { Product.Service() }
     }
     
-    private func test_deallocation_ItemStorage() {
+    func test_deallocation_ItemStorage() {
         assertDeallocation { Item.Storage() }
     }
     
-    private func test_deallocation_Views() {
+    func test_deallocation_Views() {
         assertDeallocation { SearchController(searchResultsController: nil) }
         assertDeallocation { TitleSupplementaryView() }
         assertDeallocation { ScaledHeightImageView(frame: .zero) }
@@ -47,7 +47,7 @@ final class ProductsListTests: XCTestCase {
         
     }
     
-    private func test_deallocation_CoreDataStack() {
+    func test_deallocation_CoreDataStack() {
         assertDeallocation { CoreDataStack(storeType: .sqlite, modelName: "ProductsList") }
     }
     

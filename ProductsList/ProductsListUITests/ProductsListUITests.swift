@@ -1,5 +1,7 @@
 import XCTest
 
+/// DON'T use "private" for test functions
+
 /// extensions  https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElement.swift
 /// extensions https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElement%2BSwipe.swift
 
@@ -34,7 +36,7 @@ final class ProductsListUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    private func test_previewDismiss() {
+    func test_previewDismiss() {
         /// wait cells appear after network request
         //let cell = app.cells["IMG_0352.JPG"].firstMatch
         let cell = app.collectionViews.cells.firstMatch
@@ -61,7 +63,7 @@ final class ProductsListUITests: XCTestCase {
         
     }
     
-    private func test_scrollList_and_select() {
+    func test_scrollList_and_select() {
         let collectionView = app.collectionViews.firstMatch
         
         XCTContext.runActivity(named: "scroll") { _ in
@@ -77,7 +79,7 @@ final class ProductsListUITests: XCTestCase {
         checkApp()
     }
     
-    private func test_ProductDetailController_and_PopBack() {
+    func test_ProductDetailController_and_PopBack() {
         
         XCTContext.runActivity(named: "cell tap") { _ in
             let cell = app.collectionViews.cells.firstMatch
@@ -103,7 +105,7 @@ final class ProductsListUITests: XCTestCase {
         checkApp()
     }
     
-    private func test_search() {
+    func test_search() {
         let productsNavigationBar = app.navigationBars.firstMatch
         let searchBar = productsNavigationBar.searchFields.firstMatch
         //productsNavigationBar.searchFields["Search name/price/description"]
@@ -128,7 +130,7 @@ final class ProductsListUITests: XCTestCase {
         checkApp()
     }
     
-    private func test_searchSorting() {
+    func test_searchSorting() {
         let productsNavigationBar = app.navigationBars.firstMatch
         let searchBar = productsNavigationBar.searchFields.firstMatch
         searchBar.tap()
@@ -143,7 +145,7 @@ final class ProductsListUITests: XCTestCase {
         checkApp()
     }
     
-    private func test_searchSortingScroll() {
+    func test_searchSortingScroll() {
         let productsNavigationBar = app.navigationBars.firstMatch
         let searchBar = productsNavigationBar.searchFields.firstMatch
         searchBar.tap()
