@@ -31,23 +31,6 @@ final class ProductsListTests: XCTestCase {
         //}
     }
     
-    private func anyItem(for context: NSManagedObjectContext) -> Item {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
-        return (try? request.execute().first) ?? newItem(for: context)
-    }
-    
-    private func newItem(for context: NSManagedObjectContext) -> Item {
-        let newItem = Item(context: context)
-        newItem.id = -1
-        newItem.detail = "some detail"
-        newItem.name = "some name"
-        newItem.originalId = "-1"
-        newItem.price = -111
-        /// don't save temp item
-        //try? context.save()
-        return newItem
-    }
-    
     private func test_deallocation_ProductService() {
         assertDeallocation { Product.Service() }
     }
@@ -68,4 +51,26 @@ final class ProductsListTests: XCTestCase {
         assertDeallocation { CoreDataStack(storeType: .sqlite, modelName: "ProductsList") }
     }
     
+}
+
+// MARK: - helpers
+
+extension ProductsListTests {
+    
+    private func anyItem(for context: NSManagedObjectContext) -> Item {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        return (try? request.execute().first) ?? newItem(for: context)
+    }
+    
+    private func newItem(for context: NSManagedObjectContext) -> Item {
+        let newItem = Item(context: context)
+        newItem.id = -1
+        newItem.detail = "some detail"
+        newItem.name = "some name"
+        newItem.originalId = "-1"
+        newItem.price = -111
+        /// don't save temp item
+        //try? context.save()
+        return newItem
+    }
 }
