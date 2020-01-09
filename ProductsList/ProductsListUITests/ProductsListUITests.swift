@@ -65,30 +65,38 @@ class ProductsListUITests: XCTestCase {
         
     }
     
-    func test_ProductDetailController_and_popBack() {
-        
-        let app = XCUIApplication()
+    func test_ProductDetailController_and_PopBack() {
         let collectionView = app.collectionViews.firstMatch
         
-        collectionView.swipeUp()
-        collectionView.swipeUp()
-        let cell = collectionView.cells.element(boundBy: 4)
-        cell.tap()
+        XCTContext.runActivity(named: "scroll") { _ in
+            collectionView.swipeUp()
+            collectionView.swipeUp()
+        }
+        
+        XCTContext.runActivity(named: "cell tap") { _ in
+            let cell = collectionView.cells.element(boundBy: 4)
+            cell.tap()
+        }
         
         /// back / pop
-        app.navigationBars.buttons.firstMatch.tap()
+        XCTContext.runActivity(named: "pop") { _ in
+            app.navigationBars.buttons.firstMatch.tap()
+                    
+            //        app.windows.element(boundBy:0).swipeLeft()
+
+            //        let element = app.scrollViews.children(matching: .other).element(boundBy: 0)
+            //        element.swipeRight()
+        }
         
-//        app.windows.element(boundBy:0).swipeLeft()
+        XCTContext.runActivity(named: "app.isEnabled") { _ in
+            /// wait popup close
+            sleep(1)
+
+            /// to handle possible crash
+            /// can be put into "override func tearDown()"
+            XCTAssertTrue(app.isEnabled)
+        }
         
-//        let element = app.scrollViews.children(matching: .other).element(boundBy: 0)
-//        element.swipeRight()
-        
-        /// wait popup close
-        sleep(1)
-        
-        /// to handle possible crash
-        /// can be put into "override func tearDown()"
-        XCTAssertTrue(app.isEnabled)
     }
 
 //    func testLaunchPerformance() {
