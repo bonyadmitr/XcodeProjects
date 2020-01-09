@@ -82,13 +82,7 @@ class ProductsListUITests: XCTestCase {
             cell.tap()
         }
         
-        XCTContext.runActivity(named: "app.isEnabled") { _ in
-            sleep(1)
-
-            /// to handle possible crash
-            /// can be put into "override func tearDown()"
-            XCTAssertTrue(app.isEnabled)
-        }
+        checkApp()
     }
     
     func test_ProductDetailController_and_PopBack() {
@@ -114,17 +108,27 @@ class ProductsListUITests: XCTestCase {
             }
         }
         
+        checkApp()
+        
+    }
+    
+    private func checkApp() {
         XCTContext.runActivity(named: "app.isEnabled") { _ in
-            /// wait popup close
             sleep(1)
 
             /// to handle possible crash
             /// can be put into "override func tearDown()"
             XCTAssertTrue(app.isEnabled)
         }
-        
     }
     
+    //private func tapAnyCell() {
+    //    XCTContext.runActivity(named: "cell tap") { _ in
+    //        let cell = app.collectionViews.cells.firstMatch
+    //        cell.tap()
+    //        sleep(1)
+    //    }
+    //}
     
     /// if there is no cell, it will fail on cell.tap()
     //private func waitAnyCell() -> XCUIElement {
@@ -134,14 +138,14 @@ class ProductsListUITests: XCTestCase {
     //    return cell
     //}
 
-//    func testLaunchPerformance() {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
+    //func testLaunchPerformance() {
+    //    if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+    //        // This measures how long it takes to launch your application.
+    //        measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+    //            XCUIApplication().launch()
+    //        }
+    //    }
+    //}
 }
 
 extension XCUIApplication {
