@@ -17,6 +17,7 @@
 		C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4938CB923902DCC0014DE17 /* TitleSupplementaryView.swift */; };
 		CE11B56C23C5A1DE00DCF599 /* NibInitiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B56B23C5A1DE00DCF599 /* NibInitiable.swift */; };
 		CE11B57423C5C4A100DCF599 /* ProductsListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B57323C5C4A100DCF599 /* ProductsListUITests.swift */; };
+		CE11B57C23C712D700DCF599 /* XCTestCase+Deallocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11B57B23C712D700DCF599 /* XCTestCase+Deallocation.swift */; };
 		CE2400E823A76E91001B6BC6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2400E723A76E91001B6BC6 /* Coordinator.swift */; };
 		CE4942FF23AFA351006CD3FF /* ProductsListController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4942FE23AFA351006CD3FF /* ProductsListController+DataSource.swift */; };
 		CE6B595823881D5500F32AB2 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */; };
@@ -73,6 +74,7 @@
 		CE11B57123C5C4A100DCF599 /* ProductsListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductsListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE11B57323C5C4A100DCF599 /* ProductsListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListUITests.swift; sourceTree = "<group>"; };
 		CE11B57523C5C4A100DCF599 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE11B57B23C712D700DCF599 /* XCTestCase+Deallocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Deallocation.swift"; sourceTree = "<group>"; };
 		CE2400E723A76E91001B6BC6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CE4942FE23AFA351006CD3FF /* ProductsListController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsListController+DataSource.swift"; sourceTree = "<group>"; };
 		CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC3219123BA3CBB00174C88 /* ProductsListTests.swift */,
+				CE11B57B23C712D700DCF599 /* XCTestCase+Deallocation.swift */,
 				CEC3219323BA3CBB00174C88 /* Info.plist */,
 			);
 			path = ProductsListTests;
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC3219223BA3CBB00174C88 /* ProductsListTests.swift in Sources */,
+				CE11B57C23C712D700DCF599 /* XCTestCase+Deallocation.swift in Sources */,
 				CE11B56C23C5A1DE00DCF599 /* NibInitiable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
