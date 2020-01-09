@@ -8,6 +8,8 @@
 
 import XCTest
 
+/// launchArguments https://medium.com/flawless-app-stories/speeding-up-automated-tests-in-ios-fdf20080710e
+/// XCTContext.runActivity https://qualitytesting.tumblr.com/post/161515906184/easier-debugging-with-xctactivity-and
 class ProductsListUITests: XCTestCase {
 
     var app: XCUIApplication!
@@ -28,7 +30,6 @@ class ProductsListUITests: XCTestCase {
         // to enable it to reset its state
         //app.launchArguments.append("--uitesting")
         
-        /// https://medium.com/flawless-app-stories/speeding-up-automated-tests-in-ios-fdf20080710e
         app.launchArguments = ["-DISABLE_ANIMATIONS", "true"]
         
         app.launch()
