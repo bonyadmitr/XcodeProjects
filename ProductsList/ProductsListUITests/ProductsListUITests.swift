@@ -133,11 +133,26 @@ final class ProductsListUITests: XCTestCase {
         let searchBar = productsNavigationBar.searchFields.firstMatch
         searchBar.tap()
         
+        productsNavigationBar.buttons["Created Date"].tap()
         productsNavigationBar.buttons["Name"].tap()
         productsNavigationBar.buttons["Created Date"].tap()
         app.collectionViews.cells.firstMatch.tap()
         app.swipeBack()
         productsNavigationBar.buttons["Cancel"].tap()
+        
+        checkApp()
+    }
+    
+    private func test_searchSortingScroll() {
+        let productsNavigationBar = app.navigationBars.firstMatch
+        let searchBar = productsNavigationBar.searchFields.firstMatch
+        searchBar.tap()
+        productsNavigationBar.buttons["Created Date"].tap()
+        
+        let collectionView = app.collectionViews.firstMatch
+        collectionView.swipeUp()
+        productsNavigationBar.buttons["Name"].tap()
+        collectionView.swipeUp()
         
         checkApp()
     }
