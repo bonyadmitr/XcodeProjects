@@ -124,6 +124,15 @@ class ProductsListUITests: XCTestCase {
         }
         
     }
+    
+    
+    /// if there is no cell, it will fail on cell.tap()
+    //private func waitAnyCell() -> XCUIElement {
+    //    let cell = app.collectionViews.cells.firstMatch
+    //    //let cell = app.collectionViews.cells.firstMatch.children(matching: .other).element
+    //    XCTAssertTrue(cell.waitForExistence(timeout: 2))
+    //    return cell
+    //}
 
 //    func testLaunchPerformance() {
 //        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
