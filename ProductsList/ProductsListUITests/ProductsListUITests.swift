@@ -66,7 +66,7 @@ class ProductsListUITests: XCTestCase {
         
     }
     
-    func test_ProductDetailController_and_PopBack() {
+    func test_scrollList_and_select() {
         let collectionView = app.collectionViews.firstMatch
         
         XCTContext.runActivity(named: "scroll") { _ in
@@ -76,6 +76,22 @@ class ProductsListUITests: XCTestCase {
         
         XCTContext.runActivity(named: "cell tap") { _ in
             let cell = collectionView.cells.element(boundBy: 4)
+            cell.tap()
+        }
+        
+        XCTContext.runActivity(named: "app.isEnabled") { _ in
+            sleep(1)
+
+            /// to handle possible crash
+            /// can be put into "override func tearDown()"
+            XCTAssertTrue(app.isEnabled)
+        }
+    }
+    
+    func test_ProductDetailController_and_PopBack() {
+        
+        XCTContext.runActivity(named: "cell tap") { _ in
+            let cell = app.collectionViews.cells.firstMatch
             cell.tap()
             sleep(1)
         }
