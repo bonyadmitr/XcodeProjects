@@ -1,18 +1,10 @@
-//
-//  ProductsListTests.swift
-//  ProductsListTests
-//
-//  Created by Bondar Yaroslav on 12/30/19.
-//  Copyright © 2019 Bondar Yaroslav. All rights reserved.
-//
-
-import XCTest
 @testable import ProductsList
+import XCTest
 import CoreData
 
 extension ImageTextCell: NibInitiable {}
 
-class ProductsListTests: XCTestCase {
+final class ProductsListTests: XCTestCase {
     
     typealias Item = ProductItemDB
 
