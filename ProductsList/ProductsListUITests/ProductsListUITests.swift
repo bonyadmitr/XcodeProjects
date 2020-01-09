@@ -101,7 +101,31 @@ final class ProductsListUITests: XCTestCase {
         }
         
         checkApp()
+    }
+    
+    func test_search() {
+        let productsNavigationBar = app.navigationBars.firstMatch
+        productsNavigationBar.searchFields["Search name/price/description"].tap()
         
+//        let aKey = app.keys["a"]
+//        aKey.tap()
+//
+//        let pKey = app.keys["p"]
+//        pKey.tap()
+//        pKey.tap()
+//
+//        let lKey = app.keys["l"]
+//        lKey.tap()
+        
+        productsNavigationBar.searchFields["Search name/price/description"].typeText("appl")
+        
+        productsNavigationBar.buttons["Name"].tap()
+        productsNavigationBar.buttons["Created Date"].tap()
+        app.collectionViews.cells.firstMatch.tap()
+        productsNavigationBar.buttons["Products"].tap()
+        productsNavigationBar.buttons["Cancel"].tap()
+        
+        //checkApp()
     }
     
     private func checkApp() {
