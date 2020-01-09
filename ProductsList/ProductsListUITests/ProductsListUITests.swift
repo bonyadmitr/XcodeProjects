@@ -88,6 +88,9 @@ class ProductsListUITests: XCTestCase {
             let backButton = app.navigationBars.buttons.firstMatch
             if backButton.isHittable {
                 backButton.tap()
+            } else {
+                /// close popup with error
+                app.buttons["OK"].tap()
             }
         }
         
