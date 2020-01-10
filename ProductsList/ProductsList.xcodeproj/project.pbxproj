@@ -331,6 +331,7 @@
 			buildPhases = (
 				CEF0FA3C237E8582007056AF /* Sources */,
 				CE5F131323C8541E00E7C61D /* Swiftlint */,
+				CE5F131423C85C7D00E7C61D /* unused */,
 				CEF0FA3D237E8582007056AF /* Frameworks */,
 				CEF0FA3E237E8582007056AF /* Resources */,
 			);
@@ -439,7 +440,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/bin/sh ./Scripts/swiftlint.sh\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#$SRCROOT/Scripts/swiftlint.sh\n/bin/sh ./Scripts/swiftlint.sh\n";
+		};
+		CE5F131423C85C7D00E7C61D /* unused */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = unused;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "## uncomment for manual checks\n#./Scripts/unused.rb xcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
