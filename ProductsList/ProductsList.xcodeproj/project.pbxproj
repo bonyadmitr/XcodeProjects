@@ -330,6 +330,7 @@
 			buildConfigurationList = CEF0FA54237E8586007056AF /* Build configuration list for PBXNativeTarget "ProductsList" */;
 			buildPhases = (
 				CEF0FA3C237E8582007056AF /* Sources */,
+				CE5F131323C8541E00E7C61D /* Swiftlint */,
 				CEF0FA3D237E8582007056AF /* Frameworks */,
 				CEF0FA3E237E8582007056AF /* Resources */,
 			);
@@ -420,6 +421,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE5F131323C8541E00E7C61D /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/bin/sh ./Scripts/swiftlint.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE11B56D23C5C4A100DCF599 /* Sources */ = {

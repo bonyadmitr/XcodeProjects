@@ -1,0 +1,366 @@
+## swiftlint.yml
+## https://github.com/realm/SwiftLint
+
+## Install
+## or #1
+## brew install swiftlint
+
+## Run Script Phase
+# if which swiftlint >/dev/null; then
+#   swiftlint
+# else
+#   echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+# fi
+
+## or #2
+## pod 'SwiftLint'
+
+## Run Script Phase
+# "${PODS_ROOT}/SwiftLint/swiftlint"
+
+
+
+#included:
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+- Pods
+- Carthage
+- fastlane
+- Scripts
+- R.generated.swift
+- todo.swift
+- Scripts
+#- Source/ExcludedFolder
+#- Source/ExcludedFile.swift
+
+disabled_rules:
+- opening_brace ## Opening braces should be preceded by a single space and on the same line as the declaration
+- nesting
+- trailing_whitespace
+- force_try ## Triggering: try! a()
+- force_cast ## Triggering: NSNumber() ↓as! Int
+- notification_center_detachment ## An object should only remove itself as an observer in deinit
+- superfluous_disable_command
+#- function_parameter_count
+- file_length ## Files should not span too many lines
+- force_unwrapping ## NSURL(string: str)↓!
+- prohibited_interface_builder ## Creating views using Interface Builder should be avoided
+- switch_case_on_newline ## Cases inside a switch should always be on a newline
+- identifier_name ## names should only contain alphanumeric characters and start with a lowercase character ...
+- todo ## TODOs and FIXMEs should be resolved
+
+## All ruels
+## https://github.com/realm/SwiftLint/blob/master/Rules.md
+opt_in_rules:
+# TODO: find all usefull default rules for guard
+## default
+# - unused_closure_parameter
+
+# - attributes
+- overridden_super_call ## Some overridden methods should always call super, NOT ALL
+
+- switch_case_on_newline
+- vertical_parameter_alignment ## Function parameters should be aligned vertically if they're in multiple lines in a declaration
+- vertical_parameter_alignment_on_call ## Function parameters should be aligned vertically if they're in multiple lines in a method call
+# - fatal_error_message
+# - empty_count ## not count > 0, use isEmpty(extension notEmpty)
+
+- array_init ## Prefer using Array(seq) over seq.map { $0 }
+- block_based_kvo ## Prefer the new block based KVO API
+- class_delegate_protocol ## Delegate protocols should be class-only
+- closure_parameter_position ## Closure parameters should be on the same line as opening brace
+- compiler_protocol_init ## Triggering: Set(arrayLiteral: 1, 2)
+# - conditional_returns_on_newline ## not { return }, use {\n return \n}
+- contains_over_first_not_nil ## Prefer contains over first(where:) != nil
+- control_statement ## Triggering: if (condition) {
+- convenience_type ## Types used for hosting only static members should be implemented as a caseless enum
+- custom_rules ## Create custom rules by providing a regex string
+- cyclomatic_complexity ## Complexity of function bodies should be limited
+- discarded_notification_center_observer ## notification using a block should be stored
+- discouraged_direct_init ## Discouraged direct initialization of types that can be harmful
+
+## or 1
+# - object_literal ## not UIImage(named: "qwe"), use #imageLiteral(resourceName: "im_cloud")
+## or 2
+# - discouraged_object_literal ## Prefer initializers over object literals
+
+- dynamic_inline ## Avoid using 'dynamic' and '@inline(__always)' together
+- empty_count ## Prefer checking isEmpty over comparing count to zero
+- empty_string ## Prefer checking isEmpty over comparing string to an empty string literal
+# - explicit_enum_raw_value ## Enums should be explicitly assigned their raw values
+- fallthrough ## Fallthrough should be avoided
+- fatal_error_message ## A fatalError call should have a message
+- first_where ## Prefer using .first(where:) over .filter { }.first in collections
+- for_where ## where clauses are preferred over a single if inside a for
+- function_body_length ## Functions bodies should not span too many lines
+- generic_type_name ## name should only contain alphanumeric characters, start with an uppercase character and span between 1 and 20 characters in length
+- implicit_getter ## Computed read-only properties and subscripts should avoid using the get keyword
+# - implicitly_unwrapped_optional ## Implicitly unwrapped optionals should be avoided when possible
+- large_tuple ## Tuples shouldn't have too many members. Create a custom type instead
+- line_length ## Lines should not span too many characters
+# - lower_acl_than_parent ## Ensure definitions have a lower access control level than their enclosing parent
+# - modifier_order ## Modifier order should be consistent
+- multiple_closures_with_trailing_closure ## Trailing closure syntax should not be used when passing more than one closure argument
+- nesting ## Types should be nested at most 1 level deep, and statements should be nested at most 5 levels deep
+## - override_in_extension ## Extensions shouldn't override declarations
+## - pattern_matching_keywords ## Combine multiple pattern matching bindings by moving keywords out of tuples
+# - private_action ## IBActions should be private
+# - private_outlet ## IBOutlets should be private to avoid leaking UIKit to higher layers
+- prohibited_super_call ## Some methods should not call super. Triggering: super.loadView()
+- redundant_string_enum_value ## String enum values can be omitted when they are equal to the enumcase name
+- shorthand_operator ## Prefer shorthand operators (+=, -=, *=, /=) over doing the operation and assigning
+- sorted_first_last ## Prefer using min() or max() over sorted().first or sorted().last
+- switch_case_alignment ## Case statements should vertically align with their enclosing switch statement, or indented if configured otherwise
+- syntactic_sugar ## Shorthand syntactic sugar should be used, i.e. [Int] instead of Array
+- toggle_bool ## Prefer someBool.toggle() over someBool = !someBool
+# - trailing_closure ## Trailing closure syntax should be used whenever possible
+# - unavailable_function ## Unimplemented functions should be marked as unavailable
+- unneeded_break_in_switch ## Avoid using unneeded break statements
+- unused_enumerated ## unused_enumerated
+- unused_optional_binding ## Prefer != nil over let _ =
+# - weak_delegate ## Delegates should be weak to avoid reference cycles
+
+
+
+
+## maybe
+## - multiline_arguments ## Arguments should be either on the same line, or one per line
+## - multiline_function_chains ## Chained function calls should be either on the same line, or one per line
+## - multiline_parameters ## Functions and methods parameters should be either on the same line, or one per line
+## - no_grouping_extension ## Extensions shouldn't be used to group code within the same source file
+
+### - explicit_acl ## All declarations should specify Access Control Level keywords explicitly
+### - explicit_top_level_acl ## Top-level declarations should specify Access Control Level keywords explicitly
+### - explicit_type_interface ## Properties should have a type interface. Triggering: var myVar = 0
+### - extension_access_modifier ## Prefer to use extension access modifiers
+### - missing_docs ## Declarations should be documented
+
+
+
+
+
+## autocorrection
+- implicit_return ## Prefer implicit returns in closures
+- explicit_init ## Type.init(1)
+- unneeded_parentheses_in_closure_argument ## { (result) in ...} Parentheses are not needed when declaring closure arguments
+- operator_usage_whitespace ## Triggering: 2+2, use 2 + 2. Operators should be surrounded by a single whitespace when they are being used
+# - closure_end_indentation ## Closure end should have the same indentation as the line that started it
+# - closing_brace ## Closing brace with closing parenthesis should not have any whitespaces in the middle
+- closure_spacing ## Closure expressions should have a single space inside each brace
+- colon ## Colons should be next to the identifier
+- comma ## There should be no space before and one after any comma
+- empty_enum_arguments ## Arguments can be omitted when matching enums with associated types if they are not used
+- empty_parameters ## Prefer () -> over Void ->
+- empty_parentheses_with_trailing_closure ## When using trailing closures, empty parentheses should be avoided after the method call
+# - explicit_self ## Instance variables and functions should be explicitly accessed with 'self.'
+- leading_whitespace ## Files should not contain leading whitespace
+- legacy_cggeometry_functions ## Triggering: CGRectGetWidth(rect)
+- legacy_constant ## Triggering: CGPointZero
+- legacy_constructor ## Triggering: CGPointMake(10, 10)
+- legacy_nsgeometry_functions ## Triggering: NSInsetRect(rect, 10, 5)
+# - literal_expression_end_indentation ## Array and dictionary literal end should have the same indentation as the line that started it
+- mark ## MARK comment should be in valid format. e.g. '// MARK: ...' or '// MARK: - ...'
+- operator_whitespace ## Operators should be surrounded by a single whitespace when defining them
+- private_over_fileprivate ## Prefer private over fileprivate declarations
+- protocol_property_accessors_order ## properties in protocols, the order of accessors should be get set
+- redundant_discardable_let ## Prefer _ = foo() over let _ = foo() when discarding a result from a function
+# - redundant_nil_coalescing ## nil coalescing operator is only evaluated if the lhs is nil, coalescing operator with nil as rhs is redundant
+- redundant_optional_initialization ## Initializing an optional variable with nil is redundant
+# - redundant_type_annotation ## Variables should not have redundant type annotation
+- redundant_void_return ## Returning Void in a function declaration is redundant
+- return_arrow_whitespace ## Return arrow and return type should be separated by a single space or on a separate line
+# - sorted_imports ## Imports should be sorted
+- statement_position ## Else and catch should be on the same line, one space after the previous declaration
+- trailing_comma ## Trailing commas in arrays and dictionaries should be avoided/enforced
+- trailing_newline ## Files should have a single trailing newline
+- trailing_semicolon ## Lines should not have trailing semicolons
+# - untyped_error_in_catch ## Unused parameter in a closure should be replaced with _
+# - unused_import ## All imported modules should be required to make the file compile
+- vertical_whitespace ## Limit vertical whitespace to a single empty line
+- void_return ## Prefer -> Void over -> ()
+
+
+
+
+## useless
+# - joined_default_parameter
+# - nimble_operator ## 50_000, 1_024
+
+## ???
+# - explicit_top_level_acl ## use public for
+# - explicit_type_interface ## not = "", use : String = ""
+# - extension_access_modifier ## use public for extensions
+# - number_separator #1_000
+# - private_outlet
+# - force_unwrapping
+# - first_where ## ???
+# - multiline_parameters ## ???
+# - nimble_operator ## ???
+
+## ---------- rules settings ----------
+
+line_length:
+  warning: 200
+  error: 480
+  ignores_comments: true
+
+vertical_whitespace:
+  max_empty_lines: 2
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+  #warning: 10
+  #error: 20
+
+function_body_length:
+  warning: 50
+  error: 100
+
+# identifier_name:
+#   validates_start_with_lowercase: true
+#   min_length:
+#     warning: 2
+#     error: 1
+#   # max_length:
+#   #   warning: 40
+#   #   error: 60
+#   # excluded:
+#   #   - id
+#   #   - URL
+#   # allowed_symbols: []
+
+# file_length:
+#   warning: 500
+#   error: 1200
+
+## opt_in
+attributes:
+  severity: warning
+  always_on_same_line:
+    - "@IBAction"
+    - "@NSManaged"
+    - "@objc"
+  #always_on_line_above: []
+
+## opt_in
+# private_outlet:
+#   allow_private_set: true
+
+
+
+## From TouchInstinct
+## https://github.com/TouchInstinct/code-quality-ios/blob/master/.swiftlint.yml
+
+custom_rules:
+  # uiwebview_disabled:
+  #   included: ".*.swift"
+  #   name: "UIWebView Usage Disabled"
+  #   regex: 'UIWebView'
+  #   message: "Do not use UIWebView. Use WKWebView Instead. https://developer.apple.com/reference/uikit/uiwebview"
+  #   severity: error
+
+  # native_print:
+  #   name: "print -> DDLog"
+  #   regex: '(print|NSLog)\('
+  #   message: "Please use CocoaLumberjack instead `print` and `NSlog`"
+  #   severity: error
+
+  # zero:
+  #   name: "Short .zero"
+  #   regex: '\(top: 0, left: 0, bottom: 0, right: 0\)'
+  #   message: "Please use short init `.zero`."
+  #   severity: error
+
+  private_variable:
+    name: "Private variable"
+    regex: '(?<!private\s)let\s\w*(:|(\s=))\sVariable'
+    message: "Please use (file)private with variable."
+    severity: error
+
+  let_variable:
+    name: "Let Variable"
+    regex: 'var\s\w*(:|(\s=))\sVariable'
+    message: "Please make variable using `let`."
+    severity: error
+
+  # marks_style:
+  #   name: "Marks"
+  #   regex: '// MARK: -?[a-zA-Z0-9]'
+  #   message: "Marks should follow the following structure: // MARK: - Comment."
+  #   severity: warning
+
+  # no_header_comments:
+  #   name: "Header Comments"
+  #   regex: '//\s*Created by.*\s*//\s*Copyright'
+  #   match_kinds:
+  #     - comment
+  #   message: "Template header comments should be removed."
+
+#  private_outlet:
+#    name: "Outlet"
+#    regex: '@IBOutlet(\sweak)?(\s(file)?private(\(set\))?)?\svar'
+#    message: "Please use some of `private` modifiers and make property it weak. Use pattern: `IBOutlet private weak var`."
+#    severity: error
+
+  # delegate:
+  #   name: "Delegate"
+  #   regex: '(?<!weak\s)var\s\w*(D|d)elegate\w*:'
+  #   message: "Please use `weak` for `delegate`. "
+  #   severity: error
+
+  unnecessary_type:
+   name: "Unnecessary Type"
+   regex: '[ @a-zA-Z]*(?:let|var)\s\w*: ([a-zA-Z0-9]*)\?? = \1'
+   message: "Type definition not needed"
+   severity: warning
+
+  unowned:
+    name: "Unowned"
+    regex: 'unowned'
+    message: "Please use `weak` instead. "
+    severity: error
+
+  # # Should be { braces_body } instead of {braces_body}
+  # spaces_around_braces:
+  #   included: ".*.swift"
+  #   name: "Spaces around the braces"
+  #   regex: '(([A-Za-z0-9])[\{\}])|([\{\}]([A-Za-z0-9]))'
+  #   message: "No spaces around the braces"
+  #   severity: error
+  #   match_kinds:
+  #   - attribute.builtin
+  #   - attribute.id
+  #   - buildconfig.id
+  #   - buildconfig.keyword
+  #   - identifier
+  #   - keyword
+  #   - objectliteral
+  #   - parameter
+  #   - placeholder
+  #   - typeidentifier
+
+  # inout_keyword:
+  #   name: "Inout"
+  #   regex: 'inout'
+  #   message: "Don't use inout arguments"
+  #   severity: error
+  #   match_kinds: keyword
+
+  # continue_keyword:
+  #   name: "Continue"
+  #   regex: 'continue'
+  #   message: "Don't use continue instruction"
+  #   severity: error
+  #   match_kinds: keyword
+
+  cyrillic_strings:
+    name: "Cyrillic strings"
+    regex: '[а-яА-Я]+'
+    message: "Localize or translate"
+    severity: error
+    match_kinds: string
+
+  # simple_ban:
+  #   name: "Simple type name"
+  #   regex: '(class|struct)(.)+[sS]imple(.)+{'
+  #   message: "Don't use 'simple' in type name, use 'default' or 'base' instead"
+  #   severity: warning
