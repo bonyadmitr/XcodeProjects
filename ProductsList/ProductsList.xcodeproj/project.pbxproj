@@ -34,6 +34,7 @@
 		CEC94E08238D4015000BBB80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E07238D4015000BBB80 /* Extensions.swift */; };
 		CEC94E0A238D454D000BBB80 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E09238D454D000BBB80 /* ProductDetailView.swift */; };
 		CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */; };
+		CEE88D4C23C876BF002B6C57 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE88D4B23C876BF002B6C57 /* Images.swift */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
 		CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA47237E8582007056AF /* ProductsListController.swift */; };
@@ -98,6 +99,7 @@
 		CEC94E07238D4015000BBB80 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEC94E09238D454D000BBB80 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		CEE88D4B23C876BF002B6C57 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEF0FA40237E8582007056AF /* ProductsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF0FA43237E8582007056AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEF0FA45237E8582007056AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */,
 				CE6B595D2389E91A00F32AB2 /* todo.swift */,
 				CE5F131C23C86E5F00E7C61D /* L10n.swift */,
+				CEE88D4B23C876BF002B6C57 /* Images.swift */,
 				CE5F131A23C86D2900E7C61D /* Localizable.strings */,
 			);
 			path = App;
@@ -337,6 +340,7 @@
 			buildConfigurationList = CEF0FA54237E8586007056AF /* Build configuration list for PBXNativeTarget "ProductsList" */;
 			buildPhases = (
 				CE5F131523C86B7E00E7C61D /* Swiftgen Strings */,
+				CEE88D4A23C8763C002B6C57 /* Swiftgen Images */,
 				CE5F131323C8541E00E7C61D /* Swiftlint */,
 				CE5F131423C85C7D00E7C61D /* Unused */,
 				CEF0FA3C237E8582007056AF /* Sources */,
@@ -488,6 +492,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ./Scripts/swiftgen_strings.sh\n";
 		};
+		CEE88D4A23C8763C002B6C57 /* Swiftgen Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftgen Images";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ./Scripts/swiftgen_images.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -518,6 +540,7 @@
 				C4796B4A23B3910900EB6CA2 /* SearchController.swift in Sources */,
 				C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
+				CEE88D4C23C876BF002B6C57 /* Images.swift in Sources */,
 				CEC73ACE23A37078000B4EEA /* Stylable.swift in Sources */,
 				C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */,
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
