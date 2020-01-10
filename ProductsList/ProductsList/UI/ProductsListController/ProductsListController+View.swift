@@ -8,9 +8,11 @@ import UIKit
 
 extension ProductsListController {
     
-    final class View: UIView {
+    final class View: UIView, KeyboardStateListenerDelegate {
         
         var refreshData: ( (UIRefreshControl) -> Void )?
+        
+        private let keyboardStateListener = KeyboardStateListener()
         
         private lazy var refreshControl: UIRefreshControl = {
             let newValue = UIRefreshControl()
@@ -73,7 +75,7 @@ extension ProductsListController {
         
         private func setup() {
             addSubview(collectionView)
-            
+            keyboardStateListener.delegate = self
             /// removed collectionView.autoresizingMask if used constraints
             //collectionView.translatesAutoresizingMaskIntoConstraints = false
             //NSLayoutConstraint.activate([
@@ -121,6 +123,22 @@ extension ProductsListController {
             refreshData?(refreshControl)
         }
         
+        // MARK: - KeyboardStateListenerDelegate
+        
+        func keyboardWillShow(state: KeyboardState) {
+            let coveredHeight = state.keyboardHeightForView(collectionView)
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: coveredHeight, right: 0)
+            collectionView.contentInset = insets
+            collectionView.scrollIndicatorInsets = insets
+        }
+        
+        func keyboardWillHide(state: KeyboardState) {
+            collectionView.contentInset = .zero
+            collectionView.scrollIndicatorInsets = .zero
+        }
+    }
+    
+}
 
 protocol KeyboardStateListenerDelegate: AnyObject {
     func keyboardWillShow(state: KeyboardState)
