@@ -9,7 +9,10 @@
 # fi
 
 if which swiftlint >/dev/null; then
-#    swiftlint
+    #swiftlint
+
+    # more options at https://docs.fastlane.tools/actions/swiftlint/
+    # + https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/swiftlint.rb
     swiftlint --config Scripts/.swiftlint.yml
 else
     echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
