@@ -9,18 +9,16 @@
  CODE (Developer or QA can see changes):
  mb undomanager
  newValue.isOpaque = true for all possible views
- swiftlint
+ 
  clear code
  debug floating window
  add main.swift
  mb more asserts
- unit tests
- UI tests
  DI
  protocols for view-model
  add ".xcconfig" files
  logging
- mb any scripts or automatization (like fastlane, swiftgen, ...)
+ fastlane
  kingfisher cache limit
  CoreDataStack start guard
  there is breaking constraint on system cell preview with UIAction. maybe there is a way to fix it
@@ -105,6 +103,10 @@
  typealias for Model/Cell in view/vc
  remove storyboard (save LaunchScreen only)
  router for navigation (+ mb window manager)
+ swiftlint
+ unit tests
+ UI tests
+ mb any scripts or automatization (like fastlane, swiftgen, ...)
  
  layout by three ways: frame (TitleSupplementaryView), autoresizingMask (ProductsListView), IB constraints (ImageTextCell)
  + commented code of anchor constraints (ProductsListView)
