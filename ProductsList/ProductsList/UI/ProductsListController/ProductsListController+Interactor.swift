@@ -25,12 +25,12 @@ extension ProductsListController {
             KingfisherManager.shared.retrieveImage(with: imageUrl) { result in
                 switch result {
                 case .success(let source):
-                    let vc = UIActivityViewController.custom(with: [source.image, itemDescription])
+                    let vc = UIActivityViewController(activityItems: [source.image, itemDescription])
                     completion(vc)
                     
                 case .failure(let error):
                     print("--- share error: \(error.debugDescription)")
-                    let vc = UIActivityViewController.custom(with: [itemDescription])
+                    let vc = UIActivityViewController(activityItems: [itemDescription])
                     completion(vc)
                 }
             }
@@ -40,8 +40,8 @@ extension ProductsListController {
     
 }
 
-extension UIActivityViewController {
-    static func custom(with activityItems: [Any]) -> UIActivityViewController {
-        return UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+private extension UIActivityViewController {
+    convenience init(activityItems: [Any]) {
+        self.init(activityItems: activityItems, applicationActivities: nil)
     }
 }
