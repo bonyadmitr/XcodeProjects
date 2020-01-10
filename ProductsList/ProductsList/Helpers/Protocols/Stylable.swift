@@ -88,12 +88,12 @@ struct Style<T: Stylable> {
 
 /// @Style2(style: .title)
 /// private let label2 = UILabel().style(.title)
-@propertyWrapper
-struct Style2<T: Stylable> {
-    let wrappedValue: T
-    
-    init(wrappedValue: T, style: T.StyleType) {
-        wrappedValue.setStyle(style)
-        self.wrappedValue = wrappedValue
-    }
-}
+//@propertyWrapper
+//struct Style2<T: Stylable> {
+//    let wrappedValue: T
+//
+//    init(wrappedValue: T, style: T.StyleType) {
+//        wrappedValue.setStyle(style)
+//        self.wrappedValue = wrappedValue
+//    }
+//}

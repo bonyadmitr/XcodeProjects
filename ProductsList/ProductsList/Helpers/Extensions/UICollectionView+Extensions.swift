@@ -10,13 +10,13 @@ extension UICollectionView {
         register(nib, forCellWithReuseIdentifier: identifierString)
     }
     
-    func registerNibHeader<T: UICollectionReusableView>(_ identifier: T.Type) {
-        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionHeader)
-    }
-    
-    func registerNibFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
-        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
-    }
+//    func registerNibHeader<T: UICollectionReusableView>(_ identifier: T.Type) {
+//        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionHeader)
+//    }
+//
+//    func registerNibFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
+//        register(nibSupplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
+//    }
     
     private func register<T: UICollectionReusableView>(nibSupplementaryView identifier: T.Type, kind: String) {
         let identifierString = String(describing: identifier)
@@ -33,9 +33,9 @@ extension UICollectionView {
         register(supplementaryView: identifier, kind: UICollectionView.elementKindSectionHeader)
     }
     
-    func registerFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
-        register(supplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
-    }
+//    func registerFooter<T: UICollectionReusableView>(_ identifier: T.Type) {
+//        register(supplementaryView: identifier, kind: UICollectionView.elementKindSectionFooter)
+//    }
     
     private func register<T: UICollectionReusableView>(supplementaryView identifier: T.Type, kind: String) {
         let identifierString = String(describing: identifier)

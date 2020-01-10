@@ -27,8 +27,6 @@ extension ProductsListController {
         private let padding: CGFloat = 32
         #endif
         
-        private let cellId = String(describing: Cell.self)
-        
         lazy var collectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)

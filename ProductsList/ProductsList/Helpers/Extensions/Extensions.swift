@@ -10,11 +10,11 @@ extension Error {
     }
 }
 
-extension Data {
-    var stringValue: String {
-        return String(data: self, encoding: .utf8) ?? String(describing: self)
-    }
-}
+//extension Data {
+//    var stringValue: String {
+//        return String(data: self, encoding: .utf8) ?? String(describing: self)
+//    }
+//}
 
 //extension Collection where Indices.Iterator.Element == Index {
 //
