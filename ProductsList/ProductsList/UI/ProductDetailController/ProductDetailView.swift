@@ -14,7 +14,11 @@ final class ProductDetailView: UIView {
     @IBOutlet private var priceLabel: UILabel!
     
     @Style(style: .subtitle)
-    @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet private var descriptionLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
     
     func setup(for item: Item) {
         nameLabel.text = item.name
