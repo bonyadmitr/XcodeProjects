@@ -34,7 +34,6 @@
 		CEC94E08238D4015000BBB80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E07238D4015000BBB80 /* Extensions.swift */; };
 		CEC94E0A238D454D000BBB80 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E09238D454D000BBB80 /* ProductDetailView.swift */; };
 		CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */; };
-		CEE88D4C23C876BF002B6C57 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE88D4B23C876BF002B6C57 /* Images.swift */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
 		CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA47237E8582007056AF /* ProductsListController.swift */; };
@@ -162,10 +161,10 @@
 				CEF0FA4E237E8586007056AF /* LaunchScreen.storyboard */,
 				CEF0FA57237E8698007056AF /* ProductsList.entitlements */,
 				CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */,
-				CE6B595D2389E91A00F32AB2 /* todo.swift */,
 				CE5F131C23C86E5F00E7C61D /* L10n.swift */,
-				CEE88D4B23C876BF002B6C57 /* Images.swift */,
 				CE5F131A23C86D2900E7C61D /* Localizable.strings */,
+				CEE88D4B23C876BF002B6C57 /* Images.swift */,
+				CE6B595D2389E91A00F32AB2 /* todo.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -540,7 +539,6 @@
 				C4796B4A23B3910900EB6CA2 /* SearchController.swift in Sources */,
 				C488467A23870BAB0090DF02 /* ProductsListController+View.swift in Sources */,
 				CEC94E06238D3F88000BBB80 /* ErrorPresenter.swift in Sources */,
-				CEE88D4C23C876BF002B6C57 /* Images.swift in Sources */,
 				CEC73ACE23A37078000B4EEA /* Stylable.swift in Sources */,
 				C4938CBA23902DCC0014DE17 /* TitleSupplementaryView.swift in Sources */,
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
