@@ -1,3 +1,4 @@
+// swiftlint:disable all
 /// Created by Bondar Yaroslav on 11/15/19.
 /// NOT in the project target.
 /// .swift due to comment syntax highlighting.
