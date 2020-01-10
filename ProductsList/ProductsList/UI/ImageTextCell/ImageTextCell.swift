@@ -71,7 +71,8 @@ final class ImageTextCell: UICollectionViewCell {
     }
 }
 
-/// without delegate can be used: func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
+/// without delegate can be used:
+/// func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
 #if os(iOS)
 /// rus tutorial https://habr.com/ru/company/apphud/blog/455854/
 /// eng tutorial https://kylebashour.com/posts/ios-13-context-menus
@@ -113,7 +114,7 @@ extension ImageTextCell: UIContextMenuInteractionDelegate {
             /// "return nil" will focus cell
             return ProductDetailController(item: item)
             #endif
-        }, actionProvider: { systemActions in
+        }, actionProvider: { _ in
             let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
                 delegate.photoCell(cell: self, didShare: item)
             }

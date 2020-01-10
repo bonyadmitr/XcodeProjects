@@ -149,4 +149,3 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let ActivityVersionKey = "shopsnap.version.key"
     let ActivityVersionValue = "1.0"
 }
-

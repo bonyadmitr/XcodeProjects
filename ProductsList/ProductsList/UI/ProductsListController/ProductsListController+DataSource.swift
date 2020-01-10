@@ -35,7 +35,7 @@ extension ProductsListController {
             /// project from article https://github.com/jamesrochabrun/UICollectionViewDiffableDataSource
             /// ru article https://dou.ua/lenta/articles/ui-collection-view-data-source/
             /// project from ru article https://github.com/IceFloe/UICollectionViewDiffableDataSource
-            dataSource = UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell in
+            dataSource = UICollectionViewDiffableDataSource<SectionType, Item>(collectionView: collectionView) { collectionView, indexPath, item -> UICollectionViewCell in
                 
                 // TODO: check weak self
                 
@@ -79,8 +79,7 @@ extension ProductsListController {
                     snapshot.appendSections([0])
                     snapshot.appendItems(fetchedResultsController.fetchedObjects ?? [])
                 } else {
-                    
-                    let sectionsArray = (0..<sections.count).map { $0 }
+                    let sectionsArray = Array(0..<sections.count)
                     snapshot.appendSections(sectionsArray)
                     
                     for (sectionIndex, section) in sections.enumerated() {
@@ -162,9 +161,9 @@ extension ProductsListController {
             //fetchRequest.shouldRefreshRefetchedObjects = false
             let context = CoreDataStack.shared.viewContext
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                         managedObjectContext: context,
-                                                                         sectionNameKeyPath: sectionNameKeyPath,
-                                                                         cacheName: nil)
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: sectionNameKeyPath,
+                                                                  cacheName: nil)
             
             /// to change sorting only
             //fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors

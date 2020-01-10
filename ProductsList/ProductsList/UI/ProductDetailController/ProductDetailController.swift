@@ -178,12 +178,7 @@ extension ProductDetailController {
             
 //        }
         
-        
-        
-        
-        
-        
-        
+
 //        let itemNotes = activityUserInfo[DetailViewController.activityNotesKey] as? String
 //        let itemIdentifier = activityUserInfo[DetailViewController.activityIdentifierKey] as? String
 //

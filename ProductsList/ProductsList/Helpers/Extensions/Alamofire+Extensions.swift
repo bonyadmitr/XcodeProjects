@@ -37,7 +37,7 @@ extension DataRequest {
             switch responseData.result {
             case .success(let data):
                 do {
-                    let array = (try JSONDecoder().decode([FailableDecodable<T>].self, from: data)).compactMap ({ $0.base })
+                    let array = (try JSONDecoder().decode([FailableDecodable<T>].self, from: data)).compactMap { $0.base }
                     completion(.success(array))
                 } catch {
                     //DecodingError
@@ -59,7 +59,7 @@ extension DataRequest {
             switch responseData.result {
             case .success(let data):
                 do {
-                    let array = (try JSONDecoder().decode([FailableDecodable<T>].self, from: data, keyPath: keyPath)).compactMap ({ $0.base })
+                    let array = (try JSONDecoder().decode([FailableDecodable<T>].self, from: data, keyPath: keyPath)).compactMap { $0.base }
                     completion(.success(array))
                 } catch {
                     //DecodingError
@@ -103,7 +103,7 @@ extension JSONDecoder {
 }
 
 /// source https://stackoverflow.com/a/46369152/5893286
-struct FailableDecodable<Base : Decodable> : Decodable {
+struct FailableDecodable<Base: Decodable>: Decodable {
     let base: Base?
     
     init(from decoder: Decoder) throws {
