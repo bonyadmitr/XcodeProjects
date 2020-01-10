@@ -16,9 +16,9 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         var title: String {
             switch self {
             case .id:
-                return "Created Date"
+                return L10n.createdDate
             case .name:
-                return "Name"
+                return L10n.name
             }
         }
     }
