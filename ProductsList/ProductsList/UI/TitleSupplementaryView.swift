@@ -26,6 +26,7 @@ final class TitleSupplementaryView: UICollectionReusableView {
     
     private func setup() {
         isOpaque = true
+        backgroundColor = .systemBackground
         addSubview(titleLabel)
     }
     
