@@ -1,2 +1,5 @@
 "created_date" = "Created Date";
 "name" = "Name";
+"ProductsList.title" = "Products";
+"ProductsList.searchBar_placeholder" = "Search name/price/description";
+

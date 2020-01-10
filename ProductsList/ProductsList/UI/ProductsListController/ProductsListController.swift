@@ -51,7 +51,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Products"
+        title = L10n.ProductsList.title
         vcView.collectionView.delegate = self
         
         setupSearchController()
@@ -62,7 +62,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     /// https://developer.apple.com/documentation/uikit/view_controllers/displaying_searchable_content_by_using_a_search_controller
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search name/price/description"
+        searchController.searchBar.placeholder = L10n.ProductsList.searchBarPlaceholder
         
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }

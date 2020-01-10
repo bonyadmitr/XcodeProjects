@@ -15,6 +15,13 @@ internal enum L10n {
   internal static let createdDate = L10n.tr("Localizable", "created_date")
   /// Name
   internal static let name = L10n.tr("Localizable", "name")
+
+  internal enum ProductsList {
+    /// Search name/price/description
+    internal static let searchBarPlaceholder = L10n.tr("Localizable", "ProductsList.searchBar_placeholder")
+    /// Products
+    internal static let title = L10n.tr("Localizable", "ProductsList.title")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
