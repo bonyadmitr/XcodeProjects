@@ -89,15 +89,6 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
 }
 
 
-
-
-
-
-
-
-
-
-
 // MARK: - NSUserActivity Support
 
 extension ProductDetailController {
@@ -243,19 +234,6 @@ extension ProductDetailController {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 import Foundation
