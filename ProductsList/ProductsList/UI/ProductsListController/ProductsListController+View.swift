@@ -130,6 +130,15 @@ extension ProductsListController {
             let insets = UIEdgeInsets(top: 0, left: 0, bottom: coveredHeight, right: 0)
             collectionView.contentInset = insets
             collectionView.scrollIndicatorInsets = insets
+            
+            let isAtBottom = collectionView.contentOffset.y + collectionView.bounds.height == collectionView.contentSize.height
+
+            if isAtBottom {
+                let newBottomContentOffset = CGPoint(x: 0, y: collectionView.contentOffset.y + coveredHeight)
+                state.animate {
+                    self.collectionView.contentOffset = newBottomContentOffset
+                }
+            }
         }
         
         func keyboardWillHide(state: KeyboardState) {
