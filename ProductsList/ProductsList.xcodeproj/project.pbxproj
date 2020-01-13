@@ -34,6 +34,7 @@
 		CEC94E08238D4015000BBB80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E07238D4015000BBB80 /* Extensions.swift */; };
 		CEC94E0A238D454D000BBB80 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E09238D454D000BBB80 /* ProductDetailView.swift */; };
 		CEC94E3E238E64F3000BBB80 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */; };
+		CEE88D6E23CC46F4002B6C57 /* KeyboardStateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE88D6D23CC46F4002B6C57 /* KeyboardStateListener.swift */; };
 		CEF0FA44237E8582007056AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA43237E8582007056AF /* AppDelegate.swift */; };
 		CEF0FA46237E8582007056AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA45237E8582007056AF /* SceneDelegate.swift */; };
 		CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0FA47237E8582007056AF /* ProductsListController.swift */; };
@@ -99,6 +100,7 @@
 		CEC94E09238D454D000BBB80 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		CEC94E3D238E64F3000BBB80 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		CEE88D4B23C876BF002B6C57 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		CEE88D6D23CC46F4002B6C57 /* KeyboardStateListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStateListener.swift; sourceTree = "<group>"; };
 		CEF0FA40237E8582007056AF /* ProductsList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF0FA43237E8582007056AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEF0FA45237E8582007056AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			children = (
 				CEC94E12238D49F7000BBB80 /* Extensions */,
 				CEC94E11238D49E1000BBB80 /* Protocols */,
+				CEE88D6D23CC46F4002B6C57 /* KeyboardStateListener.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */,
 				C4938CB823902AD90014DE17 /* ProductsListController+Interactor.swift in Sources */,
 				CEF0FA48237E8582007056AF /* ProductsListController.swift in Sources */,
+				CEE88D6E23CC46F4002B6C57 /* KeyboardStateListener.swift in Sources */,
 				C488467623870B2F0090DF02 /* URLs.swift in Sources */,
 				CE5F131D23C86E5F00E7C61D /* L10n.swift in Sources */,
 				CEC94E04238D105C000BBB80 /* ProductItemDB+Extension.swift in Sources */,
