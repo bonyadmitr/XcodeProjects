@@ -13,20 +13,7 @@ extension ProductsListController {
         
         private let collectionView: UICollectionView
         
-        private lazy var fetchedResultsController: NSFetchedResultsController<Item> = {
-            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                fetchRequest.fetchBatchSize = 20
-            } else {
-                fetchRequest.fetchBatchSize = 10
-            }
-            
-            //fetchRequest.shouldRefreshRefetchedObjects = false
-            let context = CoreDataStack.shared.viewContext
-            return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        }()
+        private lazy var fetchedResultsController: NSFetchedResultsController<Item> = SortOrder.id.fetchedResultsController
         
         init(collectionView: UICollectionView) {
             self.collectionView = collectionView
@@ -124,46 +111,8 @@ extension ProductsListController {
         }
         
         func update(with sortOrder: SortOrder) {
-            let sortDescriptors: [NSSortDescriptor]
-            let sectionNameKeyPath: String?
-            let headerSize: CGSize
-            
-            switch sortOrder {
-            case .id:
-                headerSize = .zero
-                sectionNameKeyPath = nil
-                
-                let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.id), ascending: true)
-                sortDescriptors = [sortDescriptor1]
-                
-            case .name:
-                headerSize = CGSize(width: 0, height: 44)
-                sectionNameKeyPath = #keyPath(Item.section)
-                
-                let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.name), ascending: true)
-                let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: true)
-                sortDescriptors = [sortDescriptor1, sortDescriptor2]
-            }
-            
-            // TODO: maybe needs refactor
-            (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = headerSize
-            
-            // TODO: reuse with fetchedResultsController
-            let fetchRequest: NSFetchRequest<ProductItemDB> = ProductItemDB.fetchRequest()
-            fetchRequest.sortDescriptors = sortDescriptors
-            
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                fetchRequest.fetchBatchSize = 20
-            } else {
-                fetchRequest.fetchBatchSize = 10
-            }
-            
-            //fetchRequest.shouldRefreshRefetchedObjects = false
-            let context = CoreDataStack.shared.viewContext
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: sectionNameKeyPath,
-                                                                  cacheName: nil)
+            (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = sortOrder.headerSize
+            fetchedResultsController = sortOrder.fetchedResultsController
             
             /// to change sorting only
             //fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors
