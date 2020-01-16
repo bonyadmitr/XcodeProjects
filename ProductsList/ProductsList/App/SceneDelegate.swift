@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class AppearanceConfigurator {
     
@@ -18,6 +19,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         _ = CoreDataStack.shared
         AppearanceConfigurator().apply()
+        
+        let bytesPower: UInt = 1024
+        let mb100 = 100 * bytesPower * bytesPower
+        KingfisherManager.shared.cache.diskStorage.config.sizeLimit = mb100
+        KingfisherManager.shared.cache.memoryStorage.config.totalCostLimit = Int(mb100)
         
         /// SceneDelegate Without Storyboard (short and simple) https://samwize.com/2019/08/05/setup-scenedelegate-without-storyboard/
         /// UIScene programmatic https://medium.com/@ZkHaider/apples-new-uiscene-api-a-programmatic-approach-52d05e382cf2
