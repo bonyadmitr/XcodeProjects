@@ -4,8 +4,9 @@ final class AppearanceConfigurator {
     
     func apply() {
         // TODO: clear
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().prefersLargeTitles = false
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.isTranslucent = false
+        navigationBar.prefersLargeTitles = false
     }
 }
 
