@@ -35,7 +35,7 @@ extension UILabel: Stylable {
         textAlignment = .center
         backgroundColor = .systemBackground
         textColor = .label
-        numberOfLines = 1
+        numberOfLines = 0
     }
 }
 
