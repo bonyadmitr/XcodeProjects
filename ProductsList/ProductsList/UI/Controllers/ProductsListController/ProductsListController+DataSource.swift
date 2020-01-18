@@ -13,7 +13,7 @@ extension ProductsListController {
         
         private let collectionView: UICollectionView
         
-        private lazy var fetchedResultsController: NSFetchedResultsController<Item> = SortOrder.id.fetchedResultsController
+        private lazy var fetchedResultsController: NSFetchedResultsController<Item> = SortOrderConfig.id.fetchedResultsController()
         
         init(collectionView: UICollectionView) {
             self.collectionView = collectionView
@@ -110,9 +110,9 @@ extension ProductsListController {
             fetchedResultsController.fetchRequest.predicate = predicate
         }
         
-        func update(with sortOrder: SortOrder) {
+        func update(with sortOrder: SortOrderConfig) {
             (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = sortOrder.headerSize
-            fetchedResultsController = sortOrder.fetchedResultsController
+            fetchedResultsController = sortOrder.fetchedResultsController()
             
             /// to change sorting only
             //fetchedResultsController.fetchRequest.sortDescriptors = sortDescriptors

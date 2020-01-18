@@ -50,7 +50,7 @@ final class ProductsListController: UIViewController, ErrorPresenter {
         searchController.searchBar.placeholder = L10n.ProductsList.searchBarPlaceholder
         
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
-        searchController.searchBar.scopeButtonTitles = SortOrder.allCases.map { $0.title }
+        searchController.searchBar.scopeButtonTitles = SortOrderConfig.all.map { $0.title }
         
         searchController.setup(controller: self)
     }
@@ -169,13 +169,13 @@ extension ProductsListController: UISearchBarDelegate {
     
     // TODO: clear code
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        guard let sortOrder = SortOrder(rawValue: selectedScope) else {
+        guard SortOrderConfig.all.count > selectedScope else {
             assertionFailure()
             return
         }
         
-        dataSource.update(with: sortOrder)
+        let sortOrderConfig = SortOrderConfig.all[selectedScope]
+        dataSource.update(with: sortOrderConfig)
         performFetch()
         
         /// there a lite animation(not good for me) on first scope change.
