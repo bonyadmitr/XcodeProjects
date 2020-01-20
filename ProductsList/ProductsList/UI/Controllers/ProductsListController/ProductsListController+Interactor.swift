@@ -42,68 +42,6 @@ extension ProductsListController {
         static let all: [SortOrderConfig] = [.id, .name]
     }
     
-//    enum SortOrder: Int, CaseIterable {
-//        case id = 0
-//        case name
-//
-//        var title: String {
-//            switch self {
-//            case .id:
-//                return L10n.createdDate
-//            case .name:
-//                return L10n.name
-//            }
-//        }
-//
-//        var sortDescriptors: [NSSortDescriptor] {
-//            switch self {
-//            case .id:
-//                return [NSSortDescriptor(key: #keyPath(Item.id), ascending: true)]
-//
-//            case .name:
-//                let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Item.name), ascending: true)
-//                let sortDescriptor2 = NSSortDescriptor(key: #keyPath(Item.id), ascending: true)
-//                return [sortDescriptor1, sortDescriptor2]
-//            }
-//        }
-//
-//        var sectionNameKeyPath: String? {
-//            switch self {
-//            case .id:
-//                return nil
-//            case .name:
-//                return #keyPath(Item.section)
-//            }
-//        }
-//
-//        var headerSize: CGSize {
-//            switch self {
-//            case .id:
-//                return .zero
-//            case .name:
-//                return CGSize(width: 0, height: 44)
-//            }
-//        }
-//
-//        var fetchedResultsController: NSFetchedResultsController<Item> {
-//            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-//            fetchRequest.sortDescriptors = sortDescriptors
-//
-//            if UIDevice.current.userInterfaceIdiom == .pad {
-//                fetchRequest.fetchBatchSize = 20
-//            } else {
-//                fetchRequest.fetchBatchSize = 10
-//            }
-//
-//            //fetchRequest.shouldRefreshRefetchedObjects = false
-//            let context = CoreDataStack.shared.viewContext
-//            return NSFetchedResultsController(fetchRequest: fetchRequest,
-//                                              managedObjectContext: context,
-//                                              sectionNameKeyPath: sectionNameKeyPath,
-//                                              cacheName: nil)
-//        }
-//    }
-    
     final class Interactor {
         
         //weak var controller: ProductsListController?
