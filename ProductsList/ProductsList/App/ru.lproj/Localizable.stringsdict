@@ -1,0 +1,31 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>found_items_count</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@found_items_count@</string>
+        <key>found_items_count</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>zero</key>
+            <string>ничего не нашлось</string>
+            <key>one</key>
+            <string>нашелся %d объект</string>
+            <key>two</key>
+            <string>нашлось %d объекта</string>
+            <key>few</key>
+            <string>нашлось %d объекта</string>
+            <key>many</key>
+            <string>нашлось %d объектов</string>
+            <key>other</key>
+            <string>нашлось %d объекта</string>
+        </dict>
+    </dict>
+</dict>
+</plist>

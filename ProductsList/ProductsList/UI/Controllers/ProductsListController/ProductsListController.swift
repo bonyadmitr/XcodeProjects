@@ -157,6 +157,9 @@ extension ProductsListController: UISearchResultsUpdating {
         
         dataSource.update(with: searchText)
         performFetch()
+        
+        let itemsString = NSLocalizedString("found_items_count", comment: "")
+        print(String.localizedStringWithFormat(itemsString, dataSource.dataSource.snapshot().numberOfItems))
     }
 }
 
