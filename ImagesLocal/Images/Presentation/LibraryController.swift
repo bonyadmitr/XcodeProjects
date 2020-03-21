@@ -187,4 +187,17 @@ extension PHAssetCollection {
         let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
         return result.count
     }
+    
+    static func fetchSmartAlbums(with types: [PHAssetCollectionSubtype]) -> [PHAssetCollection] {
+        let options = PHFetchOptions()
+        options.fetchLimit = 1
+        
+        return types.compactMap {
+            fetchAssetCollections(with: .smartAlbum, subtype: $0, options: options).firstObject
+        }
+    }
+    
+    static func fetchUserAlbums(with options: PHFetchOptions? = nil) -> PHFetchResult<PHAssetCollection> {
+        fetchAssetCollections(with: .album, subtype: .albumRegular, options: options)
+    }
 }
