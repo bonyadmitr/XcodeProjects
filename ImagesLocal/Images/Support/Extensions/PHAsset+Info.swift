@@ -10,6 +10,8 @@ import Photos
 
 extension PHAsset {
     
+    /// there is no PHImageFileURLKey in iOS 13.
+    /// more solutions at https://stackoverflow.com/q/57202965/5893286
     static func fileURL(from info: [AnyHashable : Any]?) -> URL? {
         return (info?["PHImageFileURLKey"] as? URL)
     }
