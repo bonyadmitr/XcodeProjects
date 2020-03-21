@@ -63,7 +63,7 @@ final class LibraryController: UIViewController {
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
         
         let userAlbumFetchOptions = PHFetchOptions()
-        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: "localizedTitle", ascending: true)]
+        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
         userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
         
         PHPhotoLibrary.shared().register(self)
