@@ -163,11 +163,10 @@ extension LibraryController: PHPhotoLibraryChangeObserver {
 extension PHAssetCollection {
     /// if mediaType set .unknown, means fetch all objects
     func fetchAssets(of mediaType: PHAssetMediaType) -> PHFetchResult<PHAsset> {
-        if mediaType == .unknown {
-            return PHAsset.fetchAssets(in: self, options: nil)
-        }
         let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", mediaType.rawValue)
+        fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
+        fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
         return PHAsset.fetchAssets(in: self, options: fetchOptions)
     }
 }
