@@ -41,7 +41,9 @@ final class LibraryController: UIViewController {
             }
         }
     }
-    var userCollections: PHFetchResult<PHCollection>!
+    
+    //var userCollections: PHFetchResult<PHCollection>!
+    var userCollections: PHFetchResult<PHAssetCollection>!
     
     var smartAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
     
@@ -61,7 +63,11 @@ final class LibraryController: UIViewController {
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-        userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
+        //userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
+        
+        let userAlbumFetchOptions = PHFetchOptions()
+        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: "localizedTitle", ascending: true)]
+        userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
         
         PHPhotoLibrary.shared().register(self)
         tableView.reloadData()
@@ -106,10 +112,11 @@ extension LibraryController: UITableViewDelegate {
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(smartAlbumsFetchAssets[indexPath.row].count)
         case .userCollections:
-            guard let collection = userCollections.object(at: indexPath.row) as? PHAssetCollection else {
-                assertionFailure()
-                return
-            }
+//            guard let collection = userCollections.object(at: indexPath.row) as? PHAssetCollection else {
+//                assertionFailure()
+//                return
+//            }
+            let collection = userCollections.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(collection.estimatedAssetCount)
         }
