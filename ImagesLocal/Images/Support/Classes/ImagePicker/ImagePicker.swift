@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 typealias ResponseImage = (_ image: UIImage) -> Void
 

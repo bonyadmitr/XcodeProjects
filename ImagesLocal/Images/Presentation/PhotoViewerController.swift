@@ -265,11 +265,11 @@ final class PhotoViewerController: UIViewController {
                 print(data.formattedSize)
                 print("- fileSize data:", data.count)
                 
-                if let fileName = PHAsset.filename(from: info) {
-                    print("- iOS fileName", fileName)
-                } else {
-                    assertionFailure()
-                }
+//                if let fileName = PHAsset.filename(from: info) {
+//                    print("- iOS fileName", fileName)
+//                } else {
+//                    assertionFailure()
+//                }
                 
                 let image = UIImage(data: data)
                 print("- UIImage size", image?.size ?? "nil")

@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 typealias ResponseVoid = (ResponseResult<Void>) -> Void
 typealias ResponseAsset = (ResponseResult<UIImage>) -> Void

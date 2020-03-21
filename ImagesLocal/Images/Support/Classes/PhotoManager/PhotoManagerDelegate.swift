@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 protocol PhotoManagerDelegate: class {
     func photoLibraryDidChange(with changes: PHFetchResultChangeDetails<PHAsset>, fetchResult: PHFetchResult<PHAsset>?)

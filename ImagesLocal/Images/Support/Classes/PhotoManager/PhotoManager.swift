@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 final class PhotoManager: NSObject {
     
