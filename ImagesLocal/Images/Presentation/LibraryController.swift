@@ -42,9 +42,7 @@ final class LibraryController: UIViewController {
         }
     }
     
-    //var userCollections: PHFetchResult<PHCollection>!
     var userCollections: PHFetchResult<PHAssetCollection>!
-    
     var smartAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
     
     override func viewDidLoad() {
@@ -63,7 +61,6 @@ final class LibraryController: UIViewController {
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-        //userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
         
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: "localizedTitle", ascending: true)]
@@ -112,10 +109,6 @@ extension LibraryController: UITableViewDelegate {
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(smartAlbumsFetchAssets[indexPath.row].count)
         case .userCollections:
-//            guard let collection = userCollections.object(at: indexPath.row) as? PHAssetCollection else {
-//                assertionFailure()
-//                return
-//            }
             let collection = userCollections.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(collection.estimatedAssetCount)
@@ -165,6 +158,7 @@ extension LibraryController: PHPhotoLibraryChangeObserver {
             }
         }
     }
+    
 }
 
 extension PHAssetCollection {
