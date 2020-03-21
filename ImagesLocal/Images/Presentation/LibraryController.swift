@@ -106,9 +106,12 @@ extension LibraryController: UITableViewDelegate {
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(smartAlbumsFetchAssets[indexPath.row].count)
         case .userCollections:
-            let collection = userCollections.object(at: indexPath.row)
+            guard let collection = userCollections.object(at: indexPath.row) as? PHAssetCollection else {
+                assertionFailure()
+                return
+            }
             cell.textLabel?.text = collection.localizedTitle
-            cell.detailTextLabel?.text = String(collection.accessibilityElementCount())
+            cell.detailTextLabel?.text = String(collection.estimatedAssetCount)
         }
     }
     
