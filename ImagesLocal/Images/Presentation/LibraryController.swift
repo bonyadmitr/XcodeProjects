@@ -172,3 +172,19 @@ extension PHAssetCollection {
     }
 }
 
+
+extension PHAssetCollection {
+    
+    var photosCount: Int {
+        /// source https://stackoverflow.com/a/47565215/5893286
+        let estimatedCount = estimatedAssetCount
+        if estimatedCount != NSNotFound {
+            return estimatedCount
+        }
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", PHAssetMediaType.image.rawValue)
+        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return result.count
+    }
+}
