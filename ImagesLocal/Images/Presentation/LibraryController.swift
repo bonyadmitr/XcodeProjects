@@ -65,6 +65,7 @@ final class LibraryController: UIViewController {
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
         userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+        //userCollections = PHCollectionList.fetchTopLevelUserCollections(with: userAlbumFetchOptions) as? PHFetchResult<PHAssetCollection>
         
         PHPhotoLibrary.shared().register(self)
         tableView.reloadData()
@@ -145,9 +146,9 @@ extension LibraryController: PHPhotoLibraryChangeObserver {
                     let fetchAssets = smartAlbumsFetchAssets[i]
                     if let changeDetails = changeInstance.changeDetails(for: fetchAssets) {
                         smartAlbumsFetchAssets[i] = changeDetails.fetchResultAfterChanges
-                        /// can be checked for changes and reload only one time
-                        tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
                     }
+                    /// can be checked for changes and reload if need
+                    tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
                 }
             }
             
