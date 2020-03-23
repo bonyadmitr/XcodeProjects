@@ -9,6 +9,92 @@
 import UIKit
 import Photos
 
+final class AlbumsDataSource: NSObject {
+    
+    var allPhotos: PHFetchResult<PHAsset>
+    var smartAlbums: PHFetchResult<PHAssetCollection>
+    var userCollections: PHFetchResult<PHAssetCollection>
+    
+    override init() {
+        
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
+        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        
+        let smartAlbumFetchOptions = PHFetchOptions()
+        smartAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: smartAlbumFetchOptions)
+        
+        let userAlbumFetchOptions = PHFetchOptions()
+        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
+        userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+        ///userCollections = PHCollectionList.fetchTopLevelUserCollections(with: userAlbumFetchOptions) as? PHFetchResult<PHAssetCollection>
+        
+        super.init()
+        
+        PHPhotoLibrary.shared().register(self)
+    }
+    
+    deinit {
+        PHPhotoLibrary.shared().unregisterChangeObserver(self)
+    }
+    
+}
+
+extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        
+        // Change notifications may be made on a background queue. Re-dispatch to the
+        // main queue before acting on the change as we'll be updating the UI.
+        DispatchQueue.main.sync {
+            /// Check each of the three top-level fetches for changes.
+            
+            /// allPhotos
+            if let changeDetails = changeInstance.changeDetails(for: allPhotos) {
+                allPhotos = changeDetails.fetchResultAfterChanges
+                //tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
+            }
+            
+            /// smartAlbums
+            if let changeDetails = changeInstance.changeDetails(for: smartAlbums) {
+                smartAlbums = changeDetails.fetchResultAfterChanges
+                //tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
+            }
+            
+            /// userCollections
+            if let changeDetails = changeInstance.changeDetails(for: userCollections) {
+                userCollections = changeDetails.fetchResultAfterChanges
+                //tableView.reloadSections(IndexSet(integer: Section.userCollections.rawValue), with: .automatic)
+            }
+        }
+        
+    }
+    
+    
+}
+
+final class AlbumsController: UIViewController {
+    
+    enum Section: Int {
+        case allPhotos = 0
+        case smartAlbums
+        case userCollections
+        
+        static let count = 3
+    }
+    
+    let sectionLocalizedTitles = ["", NSLocalizedString("Smart Albums", comment: ""), NSLocalizedString("Albums", comment: "")]
+    
+    let albumsDataSource = AlbumsDataSource()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+}
+
 final class LibraryController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -60,7 +146,13 @@ final class LibraryController: UIViewController {
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
-        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+        /// allPhotos collection
+        ///smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+        
+        let smartAlbumFetchOptions = PHFetchOptions()
+        /// not working https://stackoverflow.com/a/46665140/5893286
+        ///smartAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: smartAlbumFetchOptions)
         
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
