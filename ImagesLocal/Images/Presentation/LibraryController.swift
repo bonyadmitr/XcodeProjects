@@ -14,7 +14,6 @@ final class AlbumsDataSource: NSObject {
     var allPhotos: PHFetchResult<PHAsset>
     var smartAlbums: PHFetchResult<PHAssetCollection>
     var userCollections: PHFetchResult<PHAssetCollection>
-    var userCollections2: PHFetchResult<PHCollection>
     
     override init() {
         
@@ -29,14 +28,11 @@ final class AlbumsDataSource: NSObject {
         
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
-        //userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
         userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
         
-        userCollections2 = PHCollectionList.fetchTopLevelUserCollections(with: userAlbumFetchOptions)
-//        PHCollectionList
-//        let q: PHFetchResult<PHCollectionList> = PHCollectionList.fetchCollectionLists(with: .folder, subtype: .regularFolder, options: nil)
-//        PHCollectionList
-        
+        /// to fetch Folders as PHCollectionList
+        //PHCollectionList.fetchTopLevelUserCollections(with: nil)
         
         super.init()
         
@@ -129,7 +125,7 @@ extension AlbumsController: UITableViewDataSource {
         switch Section(rawValue: section)! {
         case .allPhotos: return 1
         case .smartAlbums: return albumsDataSource.smartAlbums.count
-        case .userCollections: return albumsDataSource.userCollections2.count
+        case .userCollections: return albumsDataSource.userCollections.count
         }
     }
     
@@ -153,17 +149,9 @@ extension AlbumsController: UITableViewDelegate {
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(collection.itemsCount)
         case .userCollections:
-            let collection = albumsDataSource.userCollections2.object(at: indexPath.row)
+            let collection = albumsDataSource.userCollections.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
-            
-            if collection.canContainAssets, let collection = collection as? PHAssetCollection {
-                cell.detailTextLabel?.text = String(collection.itemsCount)
-            } else if collection.canContainCollections, let collection = collection as? PHCollectionList {
-                cell.detailTextLabel?.text = "Folder type: \(collection.collectionListType.rawValue)"
-            } else {
-                assertionFailure()
-            }
-            
+            cell.detailTextLabel?.text = String(collection.itemsCount)
         }
     }
     
