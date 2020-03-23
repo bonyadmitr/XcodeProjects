@@ -14,6 +14,7 @@ final class AlbumsDataSource: NSObject {
     var allPhotos: PHFetchResult<PHAsset>
     var smartAlbums: PHFetchResult<PHAssetCollection>
     var userCollections: PHFetchResult<PHAssetCollection>
+    var userCollections2: PHFetchResult<PHCollection>
     
     override init() {
         
@@ -22,14 +23,20 @@ final class AlbumsDataSource: NSObject {
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
         let smartAlbumFetchOptions = PHFetchOptions()
-        smartAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        /// not working
+        //smartAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
         smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: smartAlbumFetchOptions)
         
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
-        userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        //userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
         userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
-        ///userCollections = PHCollectionList.fetchTopLevelUserCollections(with: userAlbumFetchOptions) as? PHFetchResult<PHAssetCollection>
+        
+        userCollections2 = PHCollectionList.fetchTopLevelUserCollections(with: userAlbumFetchOptions)
+//        PHCollectionList
+//        let q: PHFetchResult<PHCollectionList> = PHCollectionList.fetchCollectionLists(with: .folder, subtype: .regularFolder, options: nil)
+//        PHCollectionList
+        
         
         super.init()
         
@@ -88,12 +95,101 @@ final class AlbumsController: UIViewController {
     
     let albumsDataSource = AlbumsDataSource()
     
+    private let cellId = String(describing: DetailTableViewCell.self)
+    
+    private lazy var tableView: UITableView = {
+        //let newValue = UITableView(frame: view.bounds, style: .plain)
+        let newValue = UITableView(frame: view.bounds, style: .grouped)
+        
+        newValue.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        newValue.dataSource = self
+        newValue.delegate = self
+        //        let nib = UINib(nibName: cellId, bundle: nil)
+        //        newValue.register(nib, forCellReuseIdentifier: cellId)
+        newValue.register(DetailTableViewCell.self, forCellReuseIdentifier: cellId)
+        return newValue
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(tableView)
     }
     
 }
+
+
+extension AlbumsController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch Section(rawValue: section)! {
+        case .allPhotos: return 1
+        case .smartAlbums: return albumsDataSource.smartAlbums.count
+        case .userCollections: return albumsDataSource.userCollections2.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeue(reusable: DetailTableViewCell.self, for: indexPath)
+    }
+}
+
+extension AlbumsController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionLocalizedTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        switch Section(rawValue: indexPath.section)! {
+        case .allPhotos:
+            cell.textLabel?.text = NSLocalizedString("All Photos", comment: "")
+            cell.detailTextLabel?.text = String(albumsDataSource.allPhotos.count)
+        case .smartAlbums:
+            let collection = albumsDataSource.smartAlbums.object(at: indexPath.row)
+            cell.textLabel?.text = collection.localizedTitle
+            cell.detailTextLabel?.text = String(collection.itemsCount)
+        case .userCollections:
+            let collection = albumsDataSource.userCollections2.object(at: indexPath.row)
+            cell.textLabel?.text = collection.localizedTitle
+            
+            if collection.canContainAssets, let collection = collection as? PHAssetCollection {
+                cell.detailTextLabel?.text = String(collection.itemsCount)
+            } else if collection.canContainCollections, let collection = collection as? PHCollectionList {
+                cell.detailTextLabel?.text = "Folder type: \(collection.collectionListType.rawValue)"
+            } else {
+                assertionFailure()
+            }
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+    }
+}
+
+
+final class DetailTableViewCell: UITableViewCell {
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+
+
+
+
+
+
 
 final class LibraryController: UIViewController {
     
@@ -145,9 +241,6 @@ final class LibraryController: UIViewController {
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
-        
-        /// allPhotos collection
-        ///smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
         
         let smartAlbumFetchOptions = PHFetchOptions()
         /// not working https://stackoverflow.com/a/46665140/5893286
@@ -268,15 +361,16 @@ extension PHAssetCollection {
 
 extension PHAssetCollection {
     
-    var photosCount: Int {
+    var itemsCount: Int {
         /// source https://stackoverflow.com/a/47565215/5893286
+        /// wors only with user albums, not with smart ones
         let estimatedCount = estimatedAssetCount
         if estimatedCount != NSNotFound {
             return estimatedCount
         }
         
         let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", PHAssetMediaType.image.rawValue)
+        //fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", PHAssetMediaType.image.rawValue)
         let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
         return result.count
     }
