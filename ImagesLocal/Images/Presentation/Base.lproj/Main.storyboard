@@ -213,16 +213,32 @@
             </objects>
             <point key="canvasLocation" x="1879" y="-144"/>
         </scene>
+        <!--Albums Controller-->
+        <scene sceneID="mQQ-S5-Mjy">
+            <objects>
+                <viewController id="0gR-wk-3mY" customClass="AlbumsController" customModule="Images" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gI1-5A-9gA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="sfq-XK-APj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dx9-6d-iDM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1y-l8-Gvv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="-982"/>
+        </scene>
         <!--Library-->
         <scene sceneID="IVl-i4-CKD">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="JSz-2M-JRX" customClass="LibraryController" customModule="Images" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Agq-ml-F3N">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-qU-qZm">
-                                <rect key="frame" x="0.0" y="44" width="320" height="387"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UITableViewCell" textLabel="CD1-jh-1TO" detailTextLabel="6Fd-pY-EIJ" style="IBUITableViewCellStyleValue1" id="Cvy-Ic-VJA">
@@ -269,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWZ-Y3-77b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="-835"/>
+            <point key="canvasLocation" x="1607" y="-835"/>
         </scene>
         <!--Photos-->
         <scene sceneID="Fdj-RV-r5D">
@@ -278,7 +294,7 @@
                     <tabBarItem key="tabBarItem" title="Photos" id="uLg-6Q-Dak"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kww-Q9-Cgt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -297,12 +313,12 @@
                     <tabBarItem key="tabBarItem" title="Library" id="X0i-Ed-QUd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jsP-3D-pdr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="JSz-2M-JRX" kind="relationship" relationship="rootViewController" id="lmQ-vf-GM2"/>
+                        <segue destination="0gR-wk-3mY" kind="relationship" relationship="rootViewController" id="vQL-eK-rDz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-MW-3Ux" userLabel="First Responder" sceneMemberID="firstResponder"/>
