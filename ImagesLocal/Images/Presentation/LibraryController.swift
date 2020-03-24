@@ -179,28 +179,10 @@ extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
                 tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
             }
             
-            /// smartAlbums
-            
-            /// they are always the same and changeInstance.changeDetails(for: smartAlbums) == nil
-            //smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+            /// smartAlbums seems like don't have changes and changeInstance.changeDetails(for: smartAlbums) == nil so refetch all
+            smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
             updateSmartAlbumsFetchAssets()
             tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
-            
-//            if let changeDetails = changeInstance.changeDetails(for: smartAlbums) {
-//                smartAlbums = changeDetails.fetchResultAfterChanges
-//                updateSmartAlbumsFetchAssets()
-//                tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
-//            } else {
-//                /// update smartAlbums fetches
-//                for i in 0..<smartAlbums2.count {
-//                    let fetchAssets = smartAlbums2[i].fetchResult
-//                    if let changeDetails = changeInstance.changeDetails(for: fetchAssets) {
-//                        smartAlbums2[i].fetchResult = changeDetails.fetchResultAfterChanges
-//                    }
-//                    /// can be checked for changes and reload if need
-//                    tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
-//                }
-//            }
             
             /// userCollections
             if let changeDetails = changeInstance.changeDetails(for: userAlbums) {
