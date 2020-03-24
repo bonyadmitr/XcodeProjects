@@ -65,35 +65,8 @@ final class AlbumsDataSource: NSObject {
     private var userAlbums: PHFetchResult<PHAssetCollection>!
     
     override init() {
-        
-//        let allPhotosOptions = PHFetchOptions()
-//        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
-//        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
-//
-//        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-//
-//        let userAlbumFetchOptions = PHFetchOptions()
-//        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
-//
-//        /// use switch to eazy handle to cases
-//        switch fetchOption {
-//        case .all: break
-//        case .notEmpty:
-//            /// predicate with estimatedAssetCount not working for .smartAlbum
-//            userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
-//        }
-//
-//        userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
-//
-//        /// to fetch Folders as PHCollectionList
-//        //PHCollectionList.fetchTopLevelUserCollections(with: nil)
-        
-        
-        
         super.init()
-        
         fetchAll()
-        
         PHPhotoLibrary.shared().register(self)
     }
     
