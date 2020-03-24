@@ -11,9 +11,31 @@ import Photos
 
 final class AlbumsDataSource: NSObject {
     
+    enum FetchType {
+        case image
+        case video
+        case all
+        
+        var assetMediaType: PHAssetMediaType {
+            switch self {
+            case .image:
+                return .image
+            case .video:
+                return .video
+            case .all:
+                return .unknown
+            }
+        }
+    }
+    
+    var fetchType = FetchType.image
+    
     var allPhotos: PHFetchResult<PHAsset>
     var smartAlbums: PHFetchResult<PHAssetCollection>
-    var userCollections: PHFetchResult<PHAssetCollection>
+    var userAlbums: PHFetchResult<PHAssetCollection>
+    
+    var smartAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
+    var userAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
     
     override init() {
         
@@ -27,12 +49,15 @@ final class AlbumsDataSource: NSObject {
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
         /// predicate with estimatedAssetCount not working for .smartAlbum
         userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
-        userCollections = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+        userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
         
         /// to fetch Folders as PHCollectionList
         //PHCollectionList.fetchTopLevelUserCollections(with: nil)
         
         super.init()
+        
+        updateSmartAlbumsFetchAssets()
+        updateUserAlbumsFetchAssets()
         
         PHPhotoLibrary.shared().register(self)
     }
@@ -41,6 +66,25 @@ final class AlbumsDataSource: NSObject {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
+    private func updateSmartAlbumsFetchAssets() {
+        smartAlbumsFetchAssets.removeAll()
+        
+        smartAlbums.enumerateObjects { [weak self] collection, _, _ in
+            guard let self = self else { return }
+            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+            self.smartAlbumsFetchAssets.append(fetchAssets)
+        }
+    }
+    
+    private func updateUserAlbumsFetchAssets() {
+        userAlbumsFetchAssets.removeAll()
+        
+        userAlbums.enumerateObjects { [weak self] collection, _, _ in
+            guard let self = self else { return }
+            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+            self.userAlbumsFetchAssets.append(fetchAssets)
+        }
+    }
 }
 
 extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
@@ -60,12 +104,14 @@ extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
             /// smartAlbums
             if let changeDetails = changeInstance.changeDetails(for: smartAlbums) {
                 smartAlbums = changeDetails.fetchResultAfterChanges
+                updateSmartAlbumsFetchAssets()
                 //tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
             }
             
             /// userCollections
-            if let changeDetails = changeInstance.changeDetails(for: userCollections) {
-                userCollections = changeDetails.fetchResultAfterChanges
+            if let changeDetails = changeInstance.changeDetails(for: userAlbums) {
+                userAlbums = changeDetails.fetchResultAfterChanges
+                updateUserAlbumsFetchAssets()
                 //tableView.reloadSections(IndexSet(integer: Section.userCollections.rawValue), with: .automatic)
             }
         }
@@ -123,7 +169,7 @@ extension AlbumsController: UITableViewDataSource {
         switch Section(rawValue: section)! {
         case .allPhotos: return 1
         case .smartAlbums: return albumsDataSource.smartAlbums.count
-        case .userCollections: return albumsDataSource.userCollections.count
+        case .userCollections: return albumsDataSource.userAlbums.count
         }
     }
     
@@ -145,9 +191,9 @@ extension AlbumsController: UITableViewDelegate {
         case .smartAlbums:
             let collection = albumsDataSource.smartAlbums.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
-            cell.detailTextLabel?.text = String(collection.itemsCount)
+            cell.detailTextLabel?.text = String(albumsDataSource.smartAlbumsFetchAssets[indexPath.row].count)
         case .userCollections:
-            let collection = albumsDataSource.userCollections.object(at: indexPath.row)
+            let collection = albumsDataSource.userAlbums.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
             cell.detailTextLabel?.text = String(collection.itemsCount)
         }
@@ -338,6 +384,24 @@ extension PHAssetCollection {
     func fetchAssets(of mediaType: PHAssetMediaType) -> PHFetchResult<PHAsset> {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
+        fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
+        return PHAsset.fetchAssets(in: self, options: fetchOptions)
+    }
+    
+    func fetchPhotosAndVideo() -> PHFetchResult<PHAsset> {
+        let fetchOptions = PHFetchOptions()
+        let fetchKey = #keyPath(PHAsset.mediaType)
+        fetchOptions.predicate = NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
+        fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
+        return PHAsset.fetchAssets(in: self, options: fetchOptions)
+    }
+    
+    //return fetchAssets(predicate: predicate)
+    private func fetchAssets(predicate: NSPredicate) -> PHFetchResult<PHAsset> {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = predicate
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
         fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
         return PHAsset.fetchAssets(in: self, options: fetchOptions)
