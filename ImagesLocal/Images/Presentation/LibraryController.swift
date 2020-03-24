@@ -28,36 +28,56 @@ final class AlbumsDataSource: NSObject {
         }
     }
     
-    var fetchType = FetchType.image
+    enum FetchOption {
+        case all
+        case notEmpty
+    }
     
-    var allPhotos: PHFetchResult<PHAsset>
-    var smartAlbums: PHFetchResult<PHAssetCollection>
-    var userAlbums: PHFetchResult<PHAssetCollection>
+    var fetchType = FetchType.image
+    var fetchOption = FetchOption.all
+    
+    func chechFetch(type: FetchType, options: FetchOption) {
+        fetchType = type
+        fetchOption = options
+        fetchAll()
+    }
+    
+    var allPhotos: PHFetchResult<PHAsset>!
+    var smartAlbums: PHFetchResult<PHAssetCollection>!
+    var userAlbums: PHFetchResult<PHAssetCollection>!
     
     var smartAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
     var userAlbumsFetchAssets: [PHFetchResult<PHAsset>] = []
     
     override init() {
         
-        let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
-        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+//        let allPhotosOptions = PHFetchOptions()
+//        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
+//        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+//
+//        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+//
+//        let userAlbumFetchOptions = PHFetchOptions()
+//        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
+//
+//        /// use switch to eazy handle to cases
+//        switch fetchOption {
+//        case .all: break
+//        case .notEmpty:
+//            /// predicate with estimatedAssetCount not working for .smartAlbum
+//            userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+//        }
+//
+//        userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+//
+//        /// to fetch Folders as PHCollectionList
+//        //PHCollectionList.fetchTopLevelUserCollections(with: nil)
         
-        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
         
-        let userAlbumFetchOptions = PHFetchOptions()
-        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
-        /// predicate with estimatedAssetCount not working for .smartAlbum
-        userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
-        userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
-        
-        /// to fetch Folders as PHCollectionList
-        //PHCollectionList.fetchTopLevelUserCollections(with: nil)
         
         super.init()
         
-        updateSmartAlbumsFetchAssets()
-        updateUserAlbumsFetchAssets()
+        fetchAll()
         
         PHPhotoLibrary.shared().register(self)
     }
@@ -66,14 +86,75 @@ final class AlbumsDataSource: NSObject {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
+    func fetchAll() {
+        fetchAlbums()
+        updateSmartAlbumsFetchAssets()
+        updateUserAlbumsFetchAssets()
+    }
+    
+    private func fetchAlbums() {
+        let allPhotosOptions = PHFetchOptions()
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
+        allPhotosOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", fetchType.assetMediaType.rawValue)
+        allPhotosOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
+        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        
+        smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+        
+        let userAlbumFetchOptions = PHFetchOptions()
+        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
+        
+        /// use switch to eazy handle to cases
+        switch fetchOption {
+        case .all: break
+        case .notEmpty:
+            /// predicate with estimatedAssetCount not working for .smartAlbum
+            userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+        }
+        
+        userAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+        
+        /// to fetch Folders as PHCollectionList
+        //PHCollectionList.fetchTopLevelUserCollections(with: nil)
+    }
+    
     private func updateSmartAlbumsFetchAssets() {
         smartAlbumsFetchAssets.removeAll()
         
         smartAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
             let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
-            self.smartAlbumsFetchAssets.append(fetchAssets)
+            
+            if self.canBeAdded(fetchAssets: fetchAssets) {
+                self.smartAlbumsFetchAssets.append(fetchAssets)
+            }
+            
+//            switch self.fetchOption {
+//            case .all:
+//                self.smartAlbumsFetchAssets.append(fetchAssets)
+//            case .notEmpty:
+//                if fetchAssets.count > 0 {
+//                    self.smartAlbumsFetchAssets.append(fetchAssets)
+//                }
+//            }
+            
+            
         }
+    }
+    
+    private func canBeAdded(fetchAssets: PHFetchResult<PHAsset>) -> Bool {
+        return fetchOption == .all || fetchAssets.count > 0
+        
+//        switch fetchOption {
+//        case .all:
+//            return true
+//        case .notEmpty:
+//            if fetchAssets.count > 0 {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
     }
     
     private func updateUserAlbumsFetchAssets() {
@@ -82,7 +163,11 @@ final class AlbumsDataSource: NSObject {
         userAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
             let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
-            self.userAlbumsFetchAssets.append(fetchAssets)
+            
+            if self.canBeAdded(fetchAssets: fetchAssets) {
+                self.userAlbumsFetchAssets.append(fetchAssets)
+            }
+            
         }
     }
 }
@@ -168,8 +253,8 @@ extension AlbumsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
         case .allPhotos: return 1
-        case .smartAlbums: return albumsDataSource.smartAlbums.count
-        case .userCollections: return albumsDataSource.userAlbums.count
+        case .smartAlbums: return albumsDataSource.smartAlbumsFetchAssets.count
+        case .userCollections: return albumsDataSource.userAlbumsFetchAssets.count
         }
     }
     
@@ -195,7 +280,7 @@ extension AlbumsController: UITableViewDelegate {
         case .userCollections:
             let collection = albumsDataSource.userAlbums.object(at: indexPath.row)
             cell.textLabel?.text = collection.localizedTitle
-            cell.detailTextLabel?.text = String(collection.itemsCount)
+            cell.detailTextLabel?.text = String(albumsDataSource.userAlbumsFetchAssets[indexPath.row].count)
         }
     }
     
