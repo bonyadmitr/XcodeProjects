@@ -176,20 +176,22 @@ extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
             /// allPhotos
             if let changeDetails = changeInstance.changeDetails(for: allPhotos) {
                 allPhotos = changeDetails.fetchResultAfterChanges
-                tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
+//                tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
             }
             
             /// smartAlbums seems like don't have changes and changeInstance.changeDetails(for: smartAlbums) == nil so refetch all
             smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
             updateSmartAlbumsFetchAssets()
-            tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
+//            tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
             
             /// userCollections
             if let changeDetails = changeInstance.changeDetails(for: userAlbums) {
                 userAlbums = changeDetails.fetchResultAfterChanges
                 updateUserAlbumsFetchAssets()
-                tableView.reloadSections(IndexSet(integer: Section.userCollections.rawValue), with: .automatic)
+//                tableView.reloadSections(IndexSet(integer: Section.userCollections.rawValue), with: .automatic)
             }
+            
+            tableView.reloadData()
         }
         
     }
