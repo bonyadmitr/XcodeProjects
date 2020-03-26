@@ -91,15 +91,15 @@ final class AlbumsDataSource: NSObject {
         
         smartAlbumsFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
         
-        let userAlbumFetchOptions = PHFetchOptions()
-        userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
+        let userAlbumsFetchOptions = PHFetchOptions()
+        userAlbumsFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
         
         if fetchOption == .notEmpty {
             /// predicate with estimatedAssetCount not working for .smartAlbum
-            userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
+            userAlbumsFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
         }
         
-        userAlbumsFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumFetchOptions)
+        userAlbumsFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: userAlbumsFetchOptions)
         
         /// to fetch Folders as PHCollectionList
         //PHCollectionList.fetchTopLevelUserCollections(with: nil)
@@ -256,17 +256,16 @@ extension AlbumsController: UITableViewDelegate {
         case .allPhotos:
             cell.textLabel?.text = NSLocalizedString("All Photos", comment: "")
             cell.detailTextLabel?.text = String(albumsDataSource.allPhotos.count)
+            
         case .smartAlbums:
             let album = albumsDataSource.smartAlbums[indexPath.row]
             cell.textLabel?.text = album.assetCollection.localizedTitle
             cell.detailTextLabel?.text = String(album.fetchResult.count)
+            
         case .userCollections:
             let album = albumsDataSource.userAlbums[indexPath.row]
             cell.textLabel?.text = album.assetCollection.localizedTitle
             cell.detailTextLabel?.text = String(album.fetchResult.count)
-//            let collection = albumsDataSource.userAlbums.object(at: indexPath.row)
-//            cell.textLabel?.text = collection.localizedTitle
-//            cell.detailTextLabel?.text = String(albumsDataSource.userAlbumsFetchAssets[indexPath.row].count)
         }
     }
     
@@ -289,7 +288,6 @@ final class DetailTableViewCell: UITableViewCell {
 
 extension PHAssetCollection {
     
-    //return fetchAssets(predicate: predicate)
     func fetchAssets(predicate: NSPredicate?) -> PHFetchResult<PHAsset> {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
