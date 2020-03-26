@@ -9,14 +9,6 @@
 import UIKit
 import Photos
 
-enum Section: Int {
-    case allPhotos = 0
-    case smartAlbums
-    case userCollections
-    
-    static let count = 3
-}
-
 struct FetchedAlbum {
     let assetCollection: PHAssetCollection
     var fetchResult: PHFetchResult<PHAsset>
@@ -172,21 +164,20 @@ extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
             /// allPhotos
             if let changeDetails = changeInstance.changeDetails(for: allPhotos) {
                 allPhotos = changeDetails.fetchResultAfterChanges
-//                tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
             }
             
             /// smartAlbums seems like don't have changes and changeInstance.changeDetails(for: smartAlbums) == nil so refetch all
             smartAlbumsFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
             updateSmartAlbumsFetchAssets()
-//            tableView.reloadSections(IndexSet(integer: Section.smartAlbums.rawValue), with: .automatic)
             
             /// userCollections
             if let changeDetails = changeInstance.changeDetails(for: userAlbumsFetchResult) {
                 userAlbumsFetchResult = changeDetails.fetchResultAfterChanges
                 updateUserAlbumsFetchAssets()
-//                tableView.reloadSections(IndexSet(integer: Section.userCollections.rawValue), with: .automatic)
             }
             
+            /// can be used reloadSections for animation
+            ///tableView.reloadSections(IndexSet(integer: Section.allPhotos.rawValue), with: .automatic)
             tableView.reloadData()
         }
         
@@ -196,6 +187,14 @@ extension AlbumsDataSource: PHPhotoLibraryChangeObserver {
 }
 
 final class AlbumsController: UIViewController {
+    
+    enum Section: Int {
+        case allPhotos = 0
+        case smartAlbums
+        case userCollections
+        
+        static let count = 3
+    }
     
     let sectionLocalizedTitles = ["", NSLocalizedString("Smart Albums", comment: ""), NSLocalizedString("Albums", comment: "")]
     
