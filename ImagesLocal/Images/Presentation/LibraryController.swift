@@ -29,7 +29,8 @@ final class AlbumsDataSource: NSObject {
         case video
         case all
         
-        var assetMediaType: PHAssetMediaType {
+        // TODO: remove
+        private var assetMediaType: PHAssetMediaType {
             switch self {
             case .image:
                 return .image
@@ -39,6 +40,15 @@ final class AlbumsDataSource: NSObject {
                 return .unknown
             }
         }
+        
+        var predicate: NSPredicate? {
+            switch self {
+            case .image, .video:
+                return fetchMediaTypePredicate(mediaType: assetMediaType)
+            case .all:
+                return fetchPhotosVideosPredicate()
+            }
+        }
     }
     
     enum FetchOption {
@@ -46,7 +56,7 @@ final class AlbumsDataSource: NSObject {
         case notEmpty
     }
     
-    var fetchType = FetchType.video
+    var fetchType = FetchType.all
     var fetchOption = FetchOption.notEmpty
     
     var tableView: UITableView!
@@ -83,7 +93,7 @@ final class AlbumsDataSource: NSObject {
     private func fetchAlbums() {
         let allPhotosOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
-        allPhotosOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", fetchType.assetMediaType.rawValue)
+        allPhotosOptions.predicate = fetchType.predicate
         allPhotosOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
@@ -112,7 +122,8 @@ final class AlbumsDataSource: NSObject {
         
         smartAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
-            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+            //let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+            let fetchAssets = collection.fetchAssets(predicate: self.fetchType.predicate)
             
             if self.canBeAdded(fetchAssets: fetchAssets) {
 //                self.smartAlbumsFetchAssets.append(fetchAssets)
@@ -137,7 +148,8 @@ final class AlbumsDataSource: NSObject {
         
         userAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
-            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+//            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
+            let fetchAssets = collection.fetchAssets(predicate: self.fetchType.predicate)
             
             if self.canBeAdded(fetchAssets: fetchAssets) {
 //                self.userAlbumsFetchAssets.append(fetchAssets)
@@ -458,6 +470,15 @@ extension LibraryController: PHPhotoLibraryChangeObserver {
     
 }
 
+func fetchMediaTypePredicate(mediaType: PHAssetMediaType) -> NSPredicate {
+    return NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
+}
+
+func fetchPhotosVideosPredicate() -> NSPredicate {
+    let fetchKey = #keyPath(PHAsset.mediaType)
+    return NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+}
+
 extension PHAssetCollection {
     /// if mediaType set .unknown, means fetch all objects
     func fetchAssets(of mediaType: PHAssetMediaType) -> PHFetchResult<PHAsset> {
@@ -468,7 +489,7 @@ extension PHAssetCollection {
         return PHAsset.fetchAssets(in: self, options: fetchOptions)
     }
     
-    func fetchPhotosAndVideo() -> PHFetchResult<PHAsset> {
+    func fetchPhotosAndVideos() -> PHFetchResult<PHAsset> {
         let fetchOptions = PHFetchOptions()
         let fetchKey = #keyPath(PHAsset.mediaType)
         fetchOptions.predicate = NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
@@ -478,7 +499,7 @@ extension PHAssetCollection {
     }
     
     //return fetchAssets(predicate: predicate)
-    private func fetchAssets(predicate: NSPredicate) -> PHFetchResult<PHAsset> {
+    func fetchAssets(predicate: NSPredicate) -> PHFetchResult<PHAsset> {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
