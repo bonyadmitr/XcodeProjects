@@ -29,26 +29,25 @@ final class AlbumsDataSource: NSObject {
         case video
         case all
         
-        // TODO: remove
-        private var assetMediaType: PHAssetMediaType {
-            switch self {
-            case .image:
-                return .image
-            case .video:
-                return .video
-            case .all:
-                return .unknown
-            }
-        }
-        
         var predicate: NSPredicate? {
             switch self {
-            case .image, .video:
-                return fetchMediaTypePredicate(mediaType: assetMediaType)
+            case .image:
+                return fetchMediaTypePredicate(mediaType: .image)
+            case .video:
+                return fetchMediaTypePredicate(mediaType: .video)
             case .all:
                 return nil
                 //return fetchPhotosVideosPredicate()
             }
+        }
+        
+        private func fetchMediaTypePredicate(mediaType: PHAssetMediaType) -> NSPredicate {
+            return NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
+        }
+
+        private func fetchPhotosVideosPredicate() -> NSPredicate {
+            let fetchKey = #keyPath(PHAsset.mediaType)
+            return NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
         }
     }
     
@@ -469,15 +468,6 @@ extension LibraryController: PHPhotoLibraryChangeObserver {
         }
     }
     
-}
-
-func fetchMediaTypePredicate(mediaType: PHAssetMediaType) -> NSPredicate {
-    return NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
-}
-
-func fetchPhotosVideosPredicate() -> NSPredicate {
-    let fetchKey = #keyPath(PHAsset.mediaType)
-    return NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
 }
 
 extension PHAssetCollection {
