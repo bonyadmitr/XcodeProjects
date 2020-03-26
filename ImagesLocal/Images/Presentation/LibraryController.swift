@@ -117,44 +117,27 @@ final class AlbumsDataSource: NSObject {
     }
     
     private func updateSmartAlbumsFetchAssets() {
-//        smartAlbumsFetchAssets.removeAll()
         smartAlbums2.removeAll()
         
         smartAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
-            //let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
             let fetchAssets = collection.fetchAssets(predicate: self.fetchType.predicate)
             
             if self.canBeAdded(fetchAssets: fetchAssets) {
-//                self.smartAlbumsFetchAssets.append(fetchAssets)
-                self.smartAlbums2.append(FetchedAlbum(assetCollection: collection,
-                                                      fetchResult: fetchAssets))
+                self.smartAlbums2.append(FetchedAlbum(assetCollection: collection, fetchResult: fetchAssets))
             }
-            
-//            switch self.fetchOption {
-//            case .all:
-//                self.smartAlbumsFetchAssets.append(fetchAssets)
-//            case .notEmpty:
-//                if fetchAssets.count > 0 {
-//                    self.smartAlbumsFetchAssets.append(fetchAssets)
-//                }
-//            }
         }
     }
     
     private func updateUserAlbumsFetchAssets() {
-//        userAlbumsFetchAssets.removeAll()
         userAlbums2.removeAll()
         
         userAlbums.enumerateObjects { [weak self] collection, _, _ in
             guard let self = self else { return }
-//            let fetchAssets = collection.fetchAssets(of: self.fetchType.assetMediaType)
             let fetchAssets = collection.fetchAssets(predicate: self.fetchType.predicate)
             
             if self.canBeAdded(fetchAssets: fetchAssets) {
-//                self.userAlbumsFetchAssets.append(fetchAssets)
-                self.userAlbums2.append(FetchedAlbum(assetCollection: collection,
-                                                     fetchResult: fetchAssets))
+                self.userAlbums2.append(FetchedAlbum(assetCollection: collection, fetchResult: fetchAssets))
             }
             
         }
