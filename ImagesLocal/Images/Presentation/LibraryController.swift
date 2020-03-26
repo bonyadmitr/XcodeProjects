@@ -94,10 +94,7 @@ final class AlbumsDataSource: NSObject {
         let userAlbumFetchOptions = PHFetchOptions()
         userAlbumFetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAssetCollection.localizedTitle), ascending: true)]
         
-        /// use switch to eazy handle to cases
-        switch fetchOption {
-        case .all: break
-        case .notEmpty:
+        if fetchOption == .notEmpty {
             /// predicate with estimatedAssetCount not working for .smartAlbum
             userAlbumFetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAssetCollection.estimatedAssetCount)) > 0")
         }
