@@ -46,7 +46,8 @@ final class AlbumsDataSource: NSObject {
             case .image, .video:
                 return fetchMediaTypePredicate(mediaType: assetMediaType)
             case .all:
-                return fetchPhotosVideosPredicate()
+                return nil
+                //return fetchPhotosVideosPredicate()
             }
         }
     }
@@ -499,7 +500,7 @@ extension PHAssetCollection {
     }
     
     //return fetchAssets(predicate: predicate)
-    func fetchAssets(predicate: NSPredicate) -> PHFetchResult<PHAsset> {
+    func fetchAssets(predicate: NSPredicate?) -> PHFetchResult<PHAsset> {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
