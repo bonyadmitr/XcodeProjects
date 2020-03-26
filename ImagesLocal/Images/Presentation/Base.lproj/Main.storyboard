@@ -227,65 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1y-l8-Gvv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="-982"/>
-        </scene>
-        <!--Library-->
-        <scene sceneID="IVl-i4-CKD">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="JSz-2M-JRX" customClass="LibraryController" customModule="Images" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Agq-ml-F3N">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-qU-qZm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UITableViewCell" textLabel="CD1-jh-1TO" detailTextLabel="6Fd-pY-EIJ" style="IBUITableViewCellStyleValue1" id="Cvy-Ic-VJA">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cvy-Ic-VJA" id="Dbs-Yz-FOI">
-                                            <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CD1-jh-1TO">
-                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Fd-pY-EIJ">
-                                                    <rect key="frame" x="242" y="12" width="44" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="kUB-qU-qZm" firstAttribute="top" secondItem="eQo-Ue-1oi" secondAttribute="top" id="LhC-p1-QF3"/>
-                            <constraint firstItem="eQo-Ue-1oi" firstAttribute="trailing" secondItem="kUB-qU-qZm" secondAttribute="trailing" id="OE2-Q0-v46"/>
-                            <constraint firstItem="kUB-qU-qZm" firstAttribute="leading" secondItem="eQo-Ue-1oi" secondAttribute="leading" id="XNf-II-O1b"/>
-                            <constraint firstItem="eQo-Ue-1oi" firstAttribute="bottom" secondItem="kUB-qU-qZm" secondAttribute="bottom" id="lr9-vB-all"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="eQo-Ue-1oi"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <navigationItem key="navigationItem" title="Library" id="ZHg-CT-nyt"/>
-                    <connections>
-                        <outlet property="tableView" destination="kUB-qU-qZm" id="vhM-Iz-bdo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IWZ-Y3-77b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1607" y="-835"/>
+            <point key="canvasLocation" x="1144" y="-835"/>
         </scene>
         <!--Photos-->
         <scene sceneID="Fdj-RV-r5D">
