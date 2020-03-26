@@ -208,8 +208,13 @@ final class AlbumsController: UIViewController {
     private let cellId = String(describing: DetailTableViewCell.self)
     
     private lazy var tableView: UITableView = {
-        //let newValue = UITableView(frame: view.bounds, style: .plain)
-        let newValue = UITableView(frame: view.bounds, style: .grouped)
+        let newValue: UITableView
+        if #available(iOS 13.0, *) {
+            newValue = UITableView(frame: view.bounds, style: .insetGrouped)
+        } else {
+            //newValue = UITableView(frame: view.bounds, style: .plain)
+            newValue = UITableView(frame: view.bounds, style: .grouped)
+        }
         
         newValue.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         newValue.dataSource = self
