@@ -291,23 +291,6 @@ final class DetailTableViewCell: UITableViewCell {
 }
 
 extension PHAssetCollection {
-    /// if mediaType set .unknown, means fetch all objects
-    func fetchAssets(of mediaType: PHAssetMediaType) -> PHFetchResult<PHAsset> {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", mediaType.rawValue)
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
-        fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
-        return PHAsset.fetchAssets(in: self, options: fetchOptions)
-    }
-    
-    func fetchPhotosAndVideos() -> PHFetchResult<PHAsset> {
-        let fetchOptions = PHFetchOptions()
-        let fetchKey = #keyPath(PHAsset.mediaType)
-        fetchOptions.predicate = NSPredicate(format: "\(fetchKey) == %d || \(fetchKey) == %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
-        fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
-        return PHAsset.fetchAssets(in: self, options: fetchOptions)
-    }
     
     //return fetchAssets(predicate: predicate)
     func fetchAssets(predicate: NSPredicate?) -> PHFetchResult<PHAsset> {
@@ -320,22 +303,22 @@ extension PHAssetCollection {
 }
 
 
-extension PHAssetCollection {
-    
-    var itemsCount: Int {
-        /// source https://stackoverflow.com/a/47565215/5893286
-        /// wors only with user albums, not with smart ones
-        let estimatedCount = estimatedAssetCount
-        if estimatedCount != NSNotFound {
-            return estimatedCount
-        }
-        
-        let fetchOptions = PHFetchOptions()
-        //fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", PHAssetMediaType.image.rawValue)
-        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
-        return result.count
-    }
-    
+//extension PHAssetCollection {
+//    
+//    var itemsCount: Int {
+//        /// source https://stackoverflow.com/a/47565215/5893286
+//        /// wors only with user albums, not with smart ones
+//        let estimatedCount = estimatedAssetCount
+//        if estimatedCount != NSNotFound {
+//            return estimatedCount
+//        }
+//
+//        let fetchOptions = PHFetchOptions()
+//        //fetchOptions.predicate = NSPredicate(format: "\(#keyPath(PHAsset.mediaType)) == %d", PHAssetMediaType.image.rawValue)
+//        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
+//        return result.count
+//    }
+//
 //    static func fetchSmartAlbums(with types: [PHAssetCollectionSubtype]) -> [PHAssetCollection] {
 //        let options = PHFetchOptions()
 //        options.fetchLimit = 1
@@ -352,5 +335,5 @@ extension PHAssetCollection {
 //    func updated() -> PHAssetCollection {
 //        return PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [localIdentifier], options: nil).firstObject ?? self
 //    }
-    
-}
+//
+//}
