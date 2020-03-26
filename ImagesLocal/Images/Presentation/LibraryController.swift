@@ -83,10 +83,7 @@ final class AlbumsDataSource: NSObject {
     }
     
     private func fetchAlbums() {
-        let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: true)]
-        allPhotosOptions.predicate = fetchType.predicate
-        allPhotosOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
+        let allPhotosOptions = PHAsset.creationDateFetchOptions(predicate: fetchType.predicate)
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
         
         smartAlbumsFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
@@ -289,11 +286,19 @@ final class DetailTableViewCell: UITableViewCell {
 extension PHAssetCollection {
     
     func fetchAssets(predicate: NSPredicate?) -> PHFetchResult<PHAsset> {
+        let fetchOptions = PHAsset.creationDateFetchOptions(predicate: predicate)
+        return PHAsset.fetchAssets(in: self, options: fetchOptions)
+    }
+}
+
+extension PHAsset {
+    
+    static func creationDateFetchOptions(predicate: NSPredicate?) -> PHFetchOptions {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "\(#keyPath(PHAsset.creationDate))", ascending: false)]
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: #keyPath(PHAsset.creationDate), ascending: false)]
         fetchOptions.includeAssetSourceTypes = [.typeUserLibrary, .typeiTunesSynced, .typeCloudShared]
-        return PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return fetchOptions
     }
 }
 
