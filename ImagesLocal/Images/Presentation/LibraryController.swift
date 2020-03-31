@@ -11,7 +11,7 @@ import Photos
 
 final class AlbumsController: UIViewController {
     
-    enum Section: Int {
+    private enum Section: Int {
         case allPhotos = 0
         case smartAlbums
         case userCollections
@@ -19,9 +19,9 @@ final class AlbumsController: UIViewController {
         static let count = 3
     }
     
-    let sectionLocalizedTitles = ["", NSLocalizedString("Smart Albums", comment: ""), NSLocalizedString("Albums", comment: "")]
+    private let sectionLocalizedTitles = ["", NSLocalizedString("Smart Albums", comment: ""), NSLocalizedString("Albums", comment: "")]
     
-    let albumsDataSource = AlbumsDataSource()
+    private let albumsDataSource = AlbumsDataSource()
     
     private let cellId = String(describing: DetailTableViewCell.self)
     
@@ -73,6 +73,7 @@ extension AlbumsController: UITableViewDataSource {
 }
 
 extension AlbumsController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionLocalizedTitles[section]
     }
