@@ -40,8 +40,27 @@ enum CustomErrors: LocalizedError {
             return "Server error 02"
         }
     }
+    
 }
 
+protocol DebugDescriptable {
+    var debugDescription: String { get }
+}
+extension DebugDescriptable where Self: Error {
+    var debugDescription: String {
+        return localizedDescription
+    }
+}
+
+extension Error {
+    var debugDescription: String {
+        if let error = self as? DebugDescriptable {
+            return error.debugDescription
+        } else {
+            return String(describing: self)
+        }
+    }
+}
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
