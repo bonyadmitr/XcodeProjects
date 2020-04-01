@@ -12,27 +12,66 @@ enum URLs {
     static let countries = URL(string: "https://corona.lmao.ninja/countries")!
 }
 
+enum CustomErrors: LocalizedError {
+    case decode(Error)
+    case parse(Data)
+    case server
+    //case unknown
+    
+    var errorDescription: String? {
+        switch self {
+        case .decode(let error):
+            #if DEBUG
+            return error.localizedDescription
+            #else
+            return "Server error 01"
+            #endif
+            
+        case .parse(let data):
+            #if DEBUG
+            let response = String(data: data, encoding: .utf8) ?? ""
+            return "- Parse error data:\n\(response)"
+            #else
+            // TODO: localize error to user
+            return "server_error"
+            #endif
+            
+        case .server:
+            return "Server error 02"
+        }
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    }
+    
+    func countries(handler: @escaping (Result<[Country], Error>) -> Void) {
+        
         URLSession.shared.dataTask(with: URLs.countries) { data, response, error in
-            guard let data = data else { return }
-            do {
-                let decoder = JSONDecoder()
-                let gitData = try decoder.decode([Country].self, from: data)
-                print(gitData)
-                print()
+            if let error = error {
+                handler(.failure(error))
+            } else if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let objects = try decoder.decode([Country].self, from: data)
+                    handler(.success(objects))
+                    //                print(objects)
+                    //                print()
+                    
+                } catch {
+                    handler(.failure(error))
+                }
+            } else {
                 
-            } catch let err {
-                print("Err", err)
             }
 
         }.resume()
     }
-
-
 }
 
 import Foundation
