@@ -12,7 +12,7 @@ enum URLs {
     static let countries = URL(string: "https://corona.lmao.ninja/countries")!
 }
 
-enum CustomErrors: LocalizedError {
+enum CustomErrors: LocalizedError, DebugDescriptable {
     case decode(Error)
     case parse(Data)
     case server
@@ -22,7 +22,7 @@ enum CustomErrors: LocalizedError {
         switch self {
         case .decode(let error):
             #if DEBUG
-            return error.localizedDescription
+            return error.debugDescription
             #else
             return "Server error 01"
             #endif
@@ -61,6 +61,40 @@ extension Error {
         }
     }
 }
+
+extension Error {
+    
+    var isNetworkError: Bool {
+        ///This way we fix our 11 error(segmentation fault 11), when we are trying to downcast self to URLError
+        //        return self is URLError
+        return (self as NSError).domain == NSURLErrorDomain
+    }
+    
+    var urlErrorCode: URLError.Code {
+        ///This way we fix our 11 error(segmentation fault 11), when we are trying to downcast self to URLError
+        //        guard let urlError = self as? URLError else {
+        return URLError.Code(rawValue: (self as NSError).code)
+    }
+    
+    var description: String {
+        if isNetworkError {
+            switch urlErrorCode {
+            case .notConnectedToInternet, .networkConnectionLost:
+                return "TextConstants.errorConnectedToNetwork"
+            default:
+                return "TextConstants.errorBadConnection"
+            }
+        }
+        
+        
+        #if DEBUG
+        return debugDescription
+        #else
+        return localizedDescription
+        #endif
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
