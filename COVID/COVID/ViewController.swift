@@ -134,7 +134,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        countries { result in
+            switch result {
+            case .success(let countries):
+                print(countries)
+            case .failure(let error):
+                print(error.description)
+            }
+        }
     }
     
     func countries(handler: @escaping (Result<[Country], Error>) -> Void) {
