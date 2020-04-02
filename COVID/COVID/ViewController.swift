@@ -16,7 +16,7 @@ enum CustomErrors: LocalizedError, DebugDescriptable {
     case decode(Error)
     case parse(Data)
     case server
-    //case unknown
+    case unknown
     
     var errorDescription: String? {
         switch self {
@@ -38,6 +38,9 @@ enum CustomErrors: LocalizedError, DebugDescriptable {
             
         case .server:
             return "Server error 02"
+            
+        case .unknown:
+            return "Internal error"
         }
     }
     
@@ -161,7 +164,8 @@ class ViewController: UIViewController {
                     handler(.failure(error))
                 }
             } else {
-                
+                assertionFailure(response.debugDescription)
+                handler(.failure(CustomErrors.unknown))
             }
 
         }.resume()
