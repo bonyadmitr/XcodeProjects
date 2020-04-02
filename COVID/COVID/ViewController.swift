@@ -159,27 +159,7 @@ class ViewController: UIViewController {
     }
     
     func countries(handler: @escaping (Result<[Country], Error>) -> Void) {
-        
-        URLSession.shared.dataTask(with: URLs.countries) { data, response, error in
-            if let error = error {
-                handler(.failure(error))
-            } else if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let objects = try decoder.decode([Country].self, from: data)
-                    handler(.success(objects))
-                    //                print(objects)
-                    //                print()
-                    
-                } catch {
-                    handler(.failure(error))
-                }
-            } else {
-                assertionFailure(response.debugDescription)
-                handler(.failure(CustomErrors.unknown))
-            }
-
-        }.resume()
+        URLSession.shared.codableDataTask(with: URLs.countries, completionHandler: handler)
     }
     
     func globalInfo(handler: @escaping (Result<GlobalInfo, Error>) -> Void) {
