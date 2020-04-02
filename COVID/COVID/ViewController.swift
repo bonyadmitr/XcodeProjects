@@ -10,6 +10,7 @@ import UIKit
 
 enum URLs {
     static let countries = URL(string: "https://corona.lmao.ninja/countries")!
+    static let all = URL(string: "https://corona.lmao.ninja/all")!
 }
 
 enum CustomErrors: LocalizedError, DebugDescriptable {
@@ -137,14 +138,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        countries { result in
+//        countries { result in
+//            switch result {
+//            case .success(let countries):
+//                print(countries)
+//            case .failure(let error):
+//                print(error.description)
+//            }
+//        }
+        
+        globalInfo { result in
             switch result {
-            case .success(let countries):
-                print(countries)
+            case .success(let globalInfo):
+                print(globalInfo)
             case .failure(let error):
                 print(error.description)
             }
         }
+        
     }
     
     func countries(handler: @escaping (Result<[Country], Error>) -> Void) {
@@ -169,6 +180,39 @@ class ViewController: UIViewController {
             }
 
         }.resume()
+    }
+    
+    func globalInfo(handler: @escaping (Result<GlobalInfo, Error>) -> Void) {
+        URLSession.shared.codableDataTask(with: URLs.all, completionHandler: handler)
+    }
+    
+}
+
+extension URLSession {
+    
+    @discardableResult
+    func codableDataTask<T: Codable>(with url: URL, completionHandler: @escaping (Result<T, Error>) -> Void) -> URLSessionDataTask {
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let object = try decoder.decode(T.self, from: data)
+                    completionHandler(.success(object))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            } else {
+                assertionFailure(response.debugDescription)
+                completionHandler(.failure(CustomErrors.unknown))
+            }
+
+        }
+        
+        task.resume()
+        return task
     }
 }
 
@@ -196,4 +240,9 @@ struct CountryInfo: Codable {
         case id = "_id"
         case iso2, iso3, lat, long, flag
     }
+}
+
+struct GlobalInfo: Codable {
+    let cases, deaths, recovered, updated: Int
+    let active, affectedCountries: Int
 }
