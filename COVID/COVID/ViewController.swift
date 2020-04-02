@@ -9,8 +9,10 @@
 import UIKit
 
 enum URLs {
-    static let countries = URL(string: "https://corona.lmao.ninja/countries")!
-    static let all = URL(string: "https://corona.lmao.ninja/all")!
+    private static let baseUrl = URL(string: "https://corona.lmao.ninja")!
+    
+    static let countries = baseUrl.appendingPathComponent("countries")
+    static let all = baseUrl.appendingPathComponent("all")
 }
 
 enum CustomErrors: LocalizedError, DebugDescriptable {
