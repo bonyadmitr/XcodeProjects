@@ -16,6 +16,7 @@
 		CEFB349B2437051100AC7847 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB349A2437051100AC7847 /* AppConfigurator.swift */; };
 		CEFB349D2437053F00AC7847 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB349C2437053F00AC7847 /* CustomErrors.swift */; };
 		CEFB349F2437056500AC7847 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB349E2437056500AC7847 /* Extensions.swift */; };
+		CEFB34A12437059200AC7847 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A02437059200AC7847 /* URLs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CEFB349A2437051100AC7847 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
 		CEFB349C2437053F00AC7847 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		CEFB349E2437056500AC7847 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CEFB34A02437059200AC7847 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				CE56CE4724350C9B00405362 /* ViewController.swift */,
 				CEFB349C2437053F00AC7847 /* CustomErrors.swift */,
 				CEFB349E2437056500AC7847 /* Extensions.swift */,
+				CEFB34A02437059200AC7847 /* URLs.swift */,
 				CE56CE4924350C9B00405362 /* Main.storyboard */,
 				CE56CE4C24350C9D00405362 /* Assets.xcassets */,
 				CE56CE4E24350C9D00405362 /* LaunchScreen.storyboard */,
@@ -150,6 +153,7 @@
 				CEFB349B2437051100AC7847 /* AppConfigurator.swift in Sources */,
 				CEFB349F2437056500AC7847 /* Extensions.swift in Sources */,
 				CEFB349D2437053F00AC7847 /* CustomErrors.swift in Sources */,
+				CEFB34A12437059200AC7847 /* URLs.swift in Sources */,
 				CE56CE4824350C9B00405362 /* ViewController.swift in Sources */,
 				CE56CE4424350C9B00405362 /* AppDelegate.swift in Sources */,
 				CE56CE4624350C9B00405362 /* SceneDelegate.swift in Sources */,
