@@ -1,5 +1,6 @@
 import Foundation
 
+/// source https://github.com/novelcovid/api
 enum URLs {
     private static let baseUrl = URL(string: "https://corona.lmao.ninja")!
     
