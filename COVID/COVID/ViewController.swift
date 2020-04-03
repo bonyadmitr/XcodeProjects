@@ -288,6 +288,7 @@ class ViewController: UIViewController {
     private let globalInfoLabel: UILabel = {
         let label = UILabel()
         //label.textAlignment = .natural
+        label.text = "Loading..."
         label.numberOfLines = 0
         return label
     }()
@@ -295,29 +296,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        countries { result in
-//            switch result {
-//            case .success(let countries):
-//                print(countries)
-//            case .failure(let error):
-//                print(error.description)
-//            }
-//        }
+        view.backgroundColor = .systemBackground
         
         view.addSubview(globalInfoLabel)
         globalInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             globalInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             globalInfoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            globalInfoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16)
+            globalInfoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
         
-        let formater = DateFormatter()
-        formater.dateStyle = .short
-        formater.timeStyle = .short
-        #if DEBUG
-        formater.locale = Locale(identifier: "ru")
-        #endif
+
         
         
         globalInfo { [weak self] result in
@@ -329,9 +318,10 @@ class ViewController: UIViewController {
                     self?.globalInfoLabel.text = """
                     Total: \(globalInfo.cases)
                     Deaths: \(globalInfo.deaths)
+                    Active: \(globalInfo.active)
                     Recovered: \(globalInfo.recovered)
                     
-                    Date: \(formater.string(from: date)))
+                    Date: \(globalDateFormater.string(from: date))
                     """
                 }
                 
@@ -342,15 +332,22 @@ class ViewController: UIViewController {
         
     }
     
-    func countries(handler: @escaping (Result<[Country], Error>) -> Void) {
-        URLSession.shared.codableDataTask(with: URLs.countries, completionHandler: handler)
-    }
-    
     func globalInfo(handler: @escaping (Result<GlobalInfo, Error>) -> Void) {
         URLSession.shared.codableDataTask(with: URLs.all, completionHandler: handler)
     }
     
 }
+
+let globalDateFormater: DateFormatter = {
+    let formater = DateFormatter()
+    formater.dateStyle = .short
+    formater.timeStyle = .short
+    #if DEBUG
+    formater.locale = Locale(identifier: "ru")
+    #endif
+    return formater
+}()
+
 
 extension URLSession {
     
@@ -390,6 +387,25 @@ struct Country: Codable {
     let recovered, active, critical: Int
     let casesPerOneMillion, deathsPerOneMillion: Double?
     let updated: Int
+}
+extension Country: CustomStringConvertible {
+    var description: String {
+        let date = Date(timeIntervalSince1970: TimeInterval(updated / 1000))
+        
+        return """
+        Name: \(country)
+        Total: \(cases)
+        Deaths: \(deaths)
+        Active: \(active)
+        Recovered: \(recovered)
+        Critical: \(critical)
+        
+        Today Cases: \(todayCases)
+        Today Deaths: \(todayDeaths)
+        
+        Date: \(globalDateFormater.string(from: date))
+        """
+    }
 }
 
 // MARK: - CountryInfo
