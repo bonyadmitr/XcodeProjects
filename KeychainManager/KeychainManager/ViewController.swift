@@ -21,13 +21,12 @@ class ViewController: UIViewController {
         
         let value = "some 12".data(using: .utf8)!
         let key = "key1"
-        if let data = keychainManager.object(for: key), let str = String(data: data, encoding: .utf8) {
+        if let data = keychainManager.get(for: key), let str = String(data: data, encoding: .utf8) {
             print(str)
         }
         
-        keychainManager.save(key: key, data: value)
+        keychainManager.set(value, for: key)
     }
-
 
 }
 
@@ -40,7 +39,7 @@ final class KeychainManager {
     }
     
     @discardableResult
-    func save(key: String, data: Data) -> OSStatus {
+    func set(_ data: Data, for key: String) -> OSStatus {
         let query = [
             kSecClass as String: kSecClassGenericPassword as String,
             Keys.attrAccount : key,
@@ -68,7 +67,7 @@ final class KeychainManager {
         static let attrAccount = kSecAttrAccount as String
     }
     
-    func object(for key: String) -> Data? {
+    func get(for key: String) -> Data? {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount : key,
