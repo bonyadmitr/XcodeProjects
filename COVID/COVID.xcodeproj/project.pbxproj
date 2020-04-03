@@ -19,6 +19,7 @@
 		CEFB34A12437059200AC7847 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A02437059200AC7847 /* URLs.swift */; };
 		CEFB34A3243705D400AC7847 /* CountiesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A2243705D400AC7847 /* CountiesController.swift */; };
 		CEFB34A5243705FE00AC7847 /* CountyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A4243705FE00AC7847 /* CountyDetailController.swift */; };
+		CEFB34A72437063400AC7847 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A62437063400AC7847 /* Country.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CEFB34A02437059200AC7847 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		CEFB34A2243705D400AC7847 /* CountiesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountiesController.swift; sourceTree = "<group>"; };
 		CEFB34A4243705FE00AC7847 /* CountyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountyDetailController.swift; sourceTree = "<group>"; };
+		CEFB34A62437063400AC7847 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				CEFB349C2437053F00AC7847 /* CustomErrors.swift */,
 				CEFB349E2437056500AC7847 /* Extensions.swift */,
 				CEFB34A02437059200AC7847 /* URLs.swift */,
+				CEFB34A62437063400AC7847 /* Country.swift */,
 				CE56CE4924350C9B00405362 /* Main.storyboard */,
 				CE56CE4C24350C9D00405362 /* Assets.xcassets */,
 				CE56CE4E24350C9D00405362 /* LaunchScreen.storyboard */,
@@ -164,6 +167,7 @@
 				CEFB34A12437059200AC7847 /* URLs.swift in Sources */,
 				CE56CE4824350C9B00405362 /* ViewController.swift in Sources */,
 				CE56CE4424350C9B00405362 /* AppDelegate.swift in Sources */,
+				CEFB34A72437063400AC7847 /* Country.swift in Sources */,
 				CE56CE4624350C9B00405362 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
