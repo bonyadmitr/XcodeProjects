@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         
         
         print(keychainManager.allKeys())
+        print(keychainManager.clear())
         
         let value = "some 12".data(using: .utf8)!
         let key = "key1"
@@ -114,5 +115,17 @@ final class KeychainManager {
         }
         
         return []
+    }
+    
+    @discardableResult
+    func clear() -> Bool {
+      let query: [CFString: Any] = [kSecClass : kSecClassGenericPassword ]
+//      query = addAccessGroupWhenPresent(query)
+//      query = addSynchronizableIfRequired(query, addingItems: false)
+//      lastQueryParameters = query
+      
+      let lastResultCode = SecItemDelete(query as CFDictionary)
+      
+      return lastResultCode == errSecSuccess || lastResultCode == errSecItemNotFound
     }
 }
