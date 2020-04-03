@@ -90,4 +90,29 @@ final class KeychainManager {
         }
     }
     
+    func allKeys() -> [String] {
+        let query = [
+            kSecClass : kSecClassGenericPassword,
+            kSecReturnData : true,
+            kSecReturnAttributes: true,
+            kSecReturnRef: true,
+            kSecMatchLimit: kSecMatchLimitAll
+        ] as [CFString: Any]
+        
+        //      query = addAccessGroupWhenPresent(query)
+        //      query = addSynchronizableIfRequired(query, addingItems: false)
+        
+        var itemsQueries: AnyObject?
+        
+        let status = withUnsafeMutablePointer(to: &itemsQueries) {
+            SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
+        }
+        
+        if status == errSecSuccess {
+            return (itemsQueries as? [[CFString: Any]])?.compactMap {
+                $0[kSecAttrAccount] as? String } ?? []
+        }
+        
+        return []
+    }
 }
