@@ -18,6 +18,7 @@
 		CEFB349F2437056500AC7847 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB349E2437056500AC7847 /* Extensions.swift */; };
 		CEFB34A12437059200AC7847 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A02437059200AC7847 /* URLs.swift */; };
 		CEFB34A3243705D400AC7847 /* CountiesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A2243705D400AC7847 /* CountiesController.swift */; };
+		CEFB34A5243705FE00AC7847 /* CountyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB34A4243705FE00AC7847 /* CountyDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CEFB349E2437056500AC7847 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEFB34A02437059200AC7847 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		CEFB34A2243705D400AC7847 /* CountiesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountiesController.swift; sourceTree = "<group>"; };
+		CEFB34A4243705FE00AC7847 /* CountyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountyDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				CE56CE4524350C9B00405362 /* SceneDelegate.swift */,
 				CEFB349A2437051100AC7847 /* AppConfigurator.swift */,
 				CEFB34A2243705D400AC7847 /* CountiesController.swift */,
+				CEFB34A4243705FE00AC7847 /* CountyDetailController.swift */,
 				CE56CE4724350C9B00405362 /* ViewController.swift */,
 				CEFB349C2437053F00AC7847 /* CustomErrors.swift */,
 				CEFB349E2437056500AC7847 /* Extensions.swift */,
@@ -155,6 +158,7 @@
 			files = (
 				CEFB349B2437051100AC7847 /* AppConfigurator.swift in Sources */,
 				CEFB34A3243705D400AC7847 /* CountiesController.swift in Sources */,
+				CEFB34A5243705FE00AC7847 /* CountyDetailController.swift in Sources */,
 				CEFB349F2437056500AC7847 /* Extensions.swift in Sources */,
 				CEFB349D2437053F00AC7847 /* CustomErrors.swift in Sources */,
 				CEFB34A12437059200AC7847 /* URLs.swift in Sources */,
