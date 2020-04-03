@@ -136,7 +136,14 @@ extension Error {
 
 
 class ViewController: UIViewController {
-
+    
+    private let globalInfoLabel: UILabel = {
+        let label = UILabel()
+        //label.textAlignment = .natural
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -149,10 +156,37 @@ class ViewController: UIViewController {
 //            }
 //        }
         
-        globalInfo { result in
+        view.addSubview(globalInfoLabel)
+        globalInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            globalInfoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            globalInfoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            globalInfoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16)
+        ])
+        
+        let formater = DateFormatter()
+        formater.dateStyle = .short
+        formater.timeStyle = .short
+        #if DEBUG
+        formater.locale = Locale(identifier: "ru")
+        #endif
+        
+        
+        globalInfo { [weak self] result in
             switch result {
             case .success(let globalInfo):
-                print(globalInfo)
+                
+                let date = Date(timeIntervalSince1970: TimeInterval(globalInfo.updated / 1000))
+                DispatchQueue.main.async {
+                    self?.globalInfoLabel.text = """
+                    Total: \(globalInfo.cases)
+                    Deaths: \(globalInfo.deaths)
+                    Recovered: \(globalInfo.recovered)
+                    
+                    Date: \(formater.string(from: date)))
+                    """
+                }
+                
             case .failure(let error):
                 print(error.description)
             }
