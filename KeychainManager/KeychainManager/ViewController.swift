@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        keychainManager.accessGroup = ""
         
         print("all:", keychainManager.allKeys())
         //print(keychainManager.clear())
@@ -39,6 +40,8 @@ final class KeychainManager {
         case unhandledError(status: OSStatus)
     }
     
+    var accessGroup: String?
+    
     @discardableResult
     func set(_ data: Data, for key: String) -> OSStatus {
         var query = [
@@ -49,7 +52,10 @@ final class KeychainManager {
             /// return errSecParam
 //            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
         ] as [CFString: Any]
+        
 //        setAccess(to: &query)
+        setAccessGroupIfNeed(to: &query)
+        
         print("- delete status:", SecItemDelete(query as CFDictionary))
         //errSecItemNotFound
         // -25300
@@ -81,6 +87,7 @@ final class KeychainManager {
         ] as [CFString: Any]
         
 //        setAccess(to: &query)
+        setAccessGroupIfNeed(to: &query)
         
 //        var dataTypeRef: AnyObject?
 //        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
@@ -129,6 +136,13 @@ final class KeychainManager {
         query[kSecAttrAccessControl] = access
     }
     
+    private func setAccessGroupIfNeed(to query: inout [CFString: Any]) {
+        guard let accessGroup = accessGroup else {
+            return
+        }
+        query[kSecAttrAccessGroup] = accessGroup
+    }
+    
     func allKeys() -> [String] {
         var query = [
             kSecClass : kSecClassGenericPassword,
@@ -138,6 +152,7 @@ final class KeychainManager {
             kSecMatchLimit: kSecMatchLimitAll
         ] as [CFString: Any]
         
+        setAccessGroupIfNeed(to: &query)
 //        setAccess(to: &query)
         //      query = addAccessGroupWhenPresent(query)
         //      query = addSynchronizableIfRequired(query, addingItems: false)
@@ -162,7 +177,8 @@ final class KeychainManager {
         //      query = addAccessGroupWhenPresent(query)
         //      query = addSynchronizableIfRequired(query, addingItems: false)
         //      lastQueryParameters = query
-        setAccess(to: &query)
+        setAccessGroupIfNeed(to: &query)
+//        setAccess(to: &query)
         
         let lastResultCode = SecItemDelete(query as CFDictionary)
         
