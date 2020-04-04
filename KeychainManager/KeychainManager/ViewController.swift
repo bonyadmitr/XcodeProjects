@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        print(keychainManager.allKeys())
-        print(keychainManager.clear())
+        print("all:", keychainManager.allKeys())
+        //print(keychainManager.clear())
         
         let value = "some 12".data(using: .utf8)!
         let key = "key1"
@@ -40,21 +40,23 @@ final class KeychainManager {
     
     @discardableResult
     func set(_ data: Data, for key: String) -> OSStatus {
-        let query = [
-            kSecClass as String: kSecClassGenericPassword as String,
-            Keys.attrAccount : key,
-            kSecValueData as String: data,
-            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
-        ] as CFDictionary
-        
-        print(SecItemDelete(query))
+        var query = [
+            kSecClass: kSecClassGenericPassword as String,
+            kSecAttrAccount: key,
+            kSecValueData: data,
+            /// Doc: You don’t need to set the accessible attribute directly if you set it as part of the access control attribute instead
+            /// return errSecParam
+//            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
+        ] as [CFString: Any]
+        setAccess(to: &query)
+        print("- delete status:", SecItemDelete(query as CFDictionary))
         //errSecItemNotFound
         // -25300
         
-        let status = SecItemAdd(query, nil)
+        let status = SecItemAdd(query as CFDictionary, nil)
         //errSecDuplicateItem
         //-25299
-        print("- save(key \(status)")
+        print("- save(key status: \(status)")
         if status == errSecSuccess {
             
         } else {
@@ -63,19 +65,20 @@ final class KeychainManager {
         return status
     }
     
-    enum Keys {
-        static let attrAccount = kSecAttrAccount as String
-    }
+//    enum Keys {
+//        static let attrAccount = kSecAttrAccount as String
+//    }
     
     func get(for key: String) -> Data? {
-        let query = [
+        
+        var query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount : key,
             kSecReturnData : kCFBooleanTrue as Any,
             kSecMatchLimit : kSecMatchLimitOne,
-//            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
+            //kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
         ] as [CFString: Any]
-        
+//        setAccess(to: &query)
         var dataTypeRef: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
         //errSecSuccess
@@ -90,8 +93,33 @@ final class KeychainManager {
         }
     }
     
+    /// not saving for simulator
+    // TODO: test fo device
+    private func setAccess(to query: inout [CFString: Any]) {
+        
+        /// https://developer.apple.com/documentation/security/keychain_services/keychain_items/restricting_keychain_item_accessibility
+        var error: Unmanaged<CFError>?
+        
+        /// kCFAllocatorDefault == nil
+        guard let access = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                           kSecAttrAccessibleWhenUnlocked,
+                                                           SecAccessControlCreateFlags.biometryAny,
+                                                           &error)
+            else {
+                assertionFailure()
+                return
+        }
+        
+        if let error = error?.takeRetainedValue() {
+            debugPrint(error)
+            assertionFailure(error.localizedDescription)
+            return
+        }
+        query[kSecAttrAccessControl] = access
+    }
+    
     func allKeys() -> [String] {
-        let query = [
+        var query = [
             kSecClass : kSecClassGenericPassword,
             kSecReturnData : true,
             kSecReturnAttributes: true,
@@ -99,6 +127,7 @@ final class KeychainManager {
             kSecMatchLimit: kSecMatchLimitAll
         ] as [CFString: Any]
         
+        setAccess(to: &query)
         //      query = addAccessGroupWhenPresent(query)
         //      query = addSynchronizableIfRequired(query, addingItems: false)
         
@@ -118,13 +147,14 @@ final class KeychainManager {
     
     @discardableResult
     func clear() -> Bool {
-      let query: [CFString: Any] = [kSecClass : kSecClassGenericPassword ]
-//      query = addAccessGroupWhenPresent(query)
-//      query = addSynchronizableIfRequired(query, addingItems: false)
-//      lastQueryParameters = query
-      
-      let lastResultCode = SecItemDelete(query as CFDictionary)
-      
-      return lastResultCode == errSecSuccess || lastResultCode == errSecItemNotFound
+        var query: [CFString: Any] = [kSecClass : kSecClassGenericPassword ]
+        //      query = addAccessGroupWhenPresent(query)
+        //      query = addSynchronizableIfRequired(query, addingItems: false)
+        //      lastQueryParameters = query
+        setAccess(to: &query)
+        
+        let lastResultCode = SecItemDelete(query as CFDictionary)
+        
+        return lastResultCode == errSecSuccess || lastResultCode == errSecItemNotFound
     }
 }
