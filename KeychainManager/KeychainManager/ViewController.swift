@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keychainManager.accessGroup = ""
+        //keychainManager.accessGroup = ""
         
         print("all:", keychainManager.allKeys())
         //print(keychainManager.clear())
@@ -40,6 +40,7 @@ final class KeychainManager {
         case unhandledError(status: OSStatus)
     }
     
+    /// possible error -34018. nees keychain sharing in capabilities
     var accessGroup: String?
     
     @discardableResult
