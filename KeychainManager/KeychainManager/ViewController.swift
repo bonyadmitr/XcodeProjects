@@ -48,7 +48,7 @@ final class KeychainManager {
             /// return errSecParam
 //            kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
         ] as [CFString: Any]
-        setAccess(to: &query)
+//        setAccess(to: &query)
         print("- delete status:", SecItemDelete(query as CFDictionary))
         //errSecItemNotFound
         // -25300
@@ -78,15 +78,24 @@ final class KeychainManager {
             kSecMatchLimit : kSecMatchLimitOne,
             //kSecAttrAccessible: kSecAttrAccessibleAfterFirstUnlock
         ] as [CFString: Any]
+        
 //        setAccess(to: &query)
-        var dataTypeRef: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        
+//        var dataTypeRef: AnyObject?
+//        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        
+        var result: AnyObject?
+        
+        let status = withUnsafeMutablePointer(to: &result) {
+            SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
+        }
+        
         //errSecSuccess
         //noErr
         /// errSecSuccess == noErr
         
         if status == errSecSuccess {
-            return dataTypeRef as? Data
+            return result as? Data
         } else {
             print("- error object(for key \(status)")
             return nil
@@ -127,7 +136,7 @@ final class KeychainManager {
             kSecMatchLimit: kSecMatchLimitAll
         ] as [CFString: Any]
         
-        setAccess(to: &query)
+//        setAccess(to: &query)
         //      query = addAccessGroupWhenPresent(query)
         //      query = addSynchronizableIfRequired(query, addingItems: false)
         
