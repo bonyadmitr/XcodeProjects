@@ -43,6 +43,16 @@ final class KeychainManager {
     /// possible error -34018. nees keychain sharing in capabilities
     var accessGroup: String?
     
+    /**
+     
+    Specifies whether the items can be synchronized with other devices through iCloud. Setting this property to true will
+     add the item to other devices with the `set` method and obtain synchronizable items with the `get` command. Deleting synchronizable items will remove them from all devices. In order for keychain synchronization to work the user must enable "Keychain" in iCloud settings.
+     
+    Does not work on macOS.
+     
+    */
+    var isSynchronizable: Bool = false
+    
     @discardableResult
     func set(_ data: Data, for key: String) -> OSStatus {
         var query = [
@@ -56,6 +66,7 @@ final class KeychainManager {
         
 //        setAccess(to: &query)
         setAccessGroupIfNeed(to: &query)
+        setSynchronizableIfNeed(to: &query, addingItems: true)
         
         print("- delete status:", SecItemDelete(query as CFDictionary))
         //errSecItemNotFound
@@ -89,6 +100,7 @@ final class KeychainManager {
         
 //        setAccess(to: &query)
         setAccessGroupIfNeed(to: &query)
+        setSynchronizableIfNeed(to: &query, addingItems: false)
         
 //        var dataTypeRef: AnyObject?
 //        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
@@ -144,6 +156,21 @@ final class KeychainManager {
         query[kSecAttrAccessGroup] = accessGroup
     }
     
+     /**
+     Adds kSecAttrSynchronizable: kSecAttrSynchronizableAny` item to the dictionary when the `synchronizable` property is true.
+      
+      - parameter items: The dictionary where the kSecAttrSynchronizable items will be added when requested.
+      - parameter addingItems: Use `true` when the dictionary will be used with `SecItemAdd` method (adding a keychain item). For getting and deleting items, use `false`.
+      
+      - returns: the dictionary with kSecAttrSynchronizable item added if it was requested. Otherwise, it returns the original dictionary.
+     */
+    func setSynchronizableIfNeed(to query: inout [CFString: Any], addingItems: Bool) {
+        guard isSynchronizable else {
+            return
+        }
+        query[kSecAttrSynchronizable] = (addingItems == true) ? true : kSecAttrSynchronizableAny
+    }
+    
     func allKeys() -> [String] {
         var query = [
             kSecClass : kSecClassGenericPassword,
@@ -154,6 +181,8 @@ final class KeychainManager {
         ] as [CFString: Any]
         
         setAccessGroupIfNeed(to: &query)
+        setSynchronizableIfNeed(to: &query, addingItems: false)
+        
 //        setAccess(to: &query)
         //      query = addAccessGroupWhenPresent(query)
         //      query = addSynchronizableIfRequired(query, addingItems: false)
@@ -179,6 +208,7 @@ final class KeychainManager {
         //      query = addSynchronizableIfRequired(query, addingItems: false)
         //      lastQueryParameters = query
         setAccessGroupIfNeed(to: &query)
+        setSynchronizableIfNeed(to: &query, addingItems: false)
 //        setAccess(to: &query)
         
         let lastResultCode = SecItemDelete(query as CFDictionary)
