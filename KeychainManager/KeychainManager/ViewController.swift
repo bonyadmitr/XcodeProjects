@@ -30,6 +30,7 @@ class ViewController: UIViewController {
 
 }
 
+/// doc https://developer.apple.com/documentation/security/keychain_services/keychain_items/adding_a_password_to_the_keychain
 final class KeychainManager {
     
     enum KeychainError: Error {
@@ -86,6 +87,7 @@ final class KeychainManager {
         
         var result: AnyObject?
         
+        /// source https://stackoverflow.com/a/27721328/5893286
         let status = withUnsafeMutablePointer(to: &result) {
             SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
         }
