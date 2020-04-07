@@ -36,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        //45.bin
+        /// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
         
         
         
