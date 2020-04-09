@@ -154,8 +154,8 @@ final class BinaryCoder {
     
     func encode(_ encodingString: String, in encoding: String.Encoding) -> String? {
         return encodingString
-            .data(using: encoding, allowLossyConversion: false)
-            .map { $0.string(radix: 2) }
+            .data(using: encoding, allowLossyConversion: false)?
+            .binaryString()
     }
     
 }
