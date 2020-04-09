@@ -30,6 +30,17 @@ struct Char {
     let position: Int
 }
 
+extension String {
+    func leftPadding(toLength: Int, withPad padCharacter: Character) -> String {
+        if self.count > toLength {
+            return self
+        } else {
+            return String(repeatElement(padCharacter, count: toLength - self.count)) + self
+        }
+    }
+}
+
+
 extension Data {
     func string(radix: Int) -> String {
         return reduce("") { (str, byte) -> String in
