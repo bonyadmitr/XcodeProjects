@@ -32,6 +32,7 @@ class ViewController: UIViewController {
 }
 
 /// doc https://developer.apple.com/documentation/security/keychain_services/keychain_items/adding_a_password_to_the_keychain
+/// KeychainSwift source https://github.com/evgenyneu/keychain-swift/blob/master/Sources/KeychainSwift.swift
 final class KeychainManager {
     
     enum KeychainError: Error {
