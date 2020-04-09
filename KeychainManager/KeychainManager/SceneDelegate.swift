@@ -42,9 +42,15 @@ extension String {
 
 
 extension Data {
-    func string(radix: Int) -> String {
+    func binaryString() -> String {
+        return string(radix: 2, padTo: 8, separator: " ")
+    }
+    
+    func string(radix: Int, padTo toLength: Int, separator: String) -> String {
         return reduce("") { (str, byte) -> String in
             str + String(byte, radix: radix)
+                .leftPadding(toLength: toLength, withPad: "0")
+                .appending(separator)
         }
     }
 }
