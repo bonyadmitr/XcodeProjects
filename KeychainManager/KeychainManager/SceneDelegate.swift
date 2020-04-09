@@ -48,7 +48,7 @@ final class BinaryCoder {
         return String.Encoding(rawValue: koi8rtNSEncoding) // String.Encoding(rawValue: 2147486210)
     }()
     
-    var availableStringEncodings: [String.Encoding] {
+    static var availableStringEncodings: [String.Encoding] {
         return String.availableStringEncodings
     }
     
@@ -58,9 +58,7 @@ final class BinaryCoder {
     }
     
     func encodeInAll(_ encodingString: String) -> [String] {
-        return String
-            .availableStringEncodings
-            .compactMap { encode(encodingString, in: $0) }
+        return Self.availableStringEncodings.compactMap { encode(encodingString, in: $0) }
     }
     
     func encode(_ encodingString: String, in encoding: String.Encoding) -> String? {
