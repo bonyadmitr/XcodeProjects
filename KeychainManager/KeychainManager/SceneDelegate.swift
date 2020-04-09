@@ -60,8 +60,7 @@ final class BinaryCoder {
     func encodeInAll(_ encodingString: String) -> [String] {
         return String
             .availableStringEncodings
-            .compactMap { encodingString.data(using: $0, allowLossyConversion: false) }
-            .map { $0.string(radix: 2) }
+            .compactMap { encode(encodingString, in: $0) }
     }
     
     func encode(_ encodingString: String, in encoding: String.Encoding) -> String? {
