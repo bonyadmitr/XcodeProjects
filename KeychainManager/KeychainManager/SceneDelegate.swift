@@ -82,6 +82,10 @@ final class BinaryCoder {
         return String.availableStringEncodings
     }
     
+    func decodeFromAll(_ encodingString: String) -> [String] {
+        return Self.availableStringEncodings.compactMap { decode(encodingString, from: $0) }
+    }
+    
     func decode(_ decodingString: String, from encoding: String.Encoding) -> String? {
         let bytes = decodingString
             .split(by: 8)
