@@ -30,6 +30,14 @@ struct Char {
     let position: Int
 }
 
+extension Data {
+    func string(radix: Int) -> String {
+        return reduce("") { (str, byte) -> String in
+            str + String(byte, radix: radix)
+        }
+    }
+}
+
 final class BinaryCoder {
     
     lazy var koi8rtNSEncoding: String.Encoding = {
@@ -49,6 +57,13 @@ final class BinaryCoder {
         
         
         return ""
+    }
+    
+    func encodeInAll(_ encodingString: String) -> [String] {
+        return String
+            .availableStringEncodings
+            .compactMap { encodingString.data(using: $0, allowLossyConversion: false) }
+            .map { $0.string(radix: 2) }
     }
     
     func encode(_ encodingString: String) -> String {
