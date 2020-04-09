@@ -65,49 +65,66 @@ final class BinaryCoder {
         return String.availableStringEncodings
     }
     
-    func decode(_ decodingString: String) -> String {
-        
-        let unicodeRange = UnicodeScalar("а").value...UnicodeScalar("я").value
-        
-        let xx = unicodeRange.map({ Character(UnicodeScalar($0)!) })
-        
-        let chars = unicodeRange.enumerated().map { arg -> Char in
-            let unicode = UnicodeScalar(arg.element)!
-            //let unicodePosition = Int(unicode.value) % unicodeRange.count
-            return Char(unicodeScalar: unicode, character: Character(unicode), position: arg.offset)
-        }
-        
-        print(chars)
-        
-        chars.map({ $0.unicodeScalar.value % 32 })
-        
-        print(xx, String(xx))
-        
-        print(unicodeRange.count)
-        print(unicodeRange.map({ ( Character(UnicodeScalar($0)!)  , $0 % 33) }))
-        //        for value in zz.map({$0 % 33}) {
-        //            print(value)
-        //        }
-        
-        //print(q)
-        //print(q.count)
-        let w = decodingString.split(by: 8)
-        //.map({ String($0.reversed()) })
-        let e = w.map({ Int($0, radix: 2)! })
-        //.filter({ $0 <= 32})
-        //            .map({ $0 % 33 })
-        let r = e.map({ Character(UnicodeScalar($0)!) })
-        //print(w)
-        print(e, e.count)
-        print(r)
-        print("-|\n",String(r), "\n|-")
-        
-        //        let q = 0b00001110 00101101 00101111 00010100 00
-        //        Character("0b00001110")
-        //        let w = Character(UnicodeScalar(0b00001110))
-        //        print(q, w)
-        
-        return String(r)
+    func decode(_ decodingString: String, from encoding: String.Encoding) -> String? {
+        let bytes = decodingString
+            .split(by: 8)
+            .compactMap { UInt8($0, radix: 2)! }
+        return String(bytes: bytes, encoding: encoding)
+//
+//        let unicodeRange = UnicodeScalar("а").value...UnicodeScalar("я").value
+//
+//        let xx = unicodeRange.map({ Character(UnicodeScalar($0)!) })
+//
+//        let chars = unicodeRange.enumerated().map { arg -> Char in
+//            let unicode = UnicodeScalar(arg.element)!
+//            //let unicodePosition = Int(unicode.value) % unicodeRange.count
+//            return Char(unicodeScalar: unicode, character: Character(unicode), position: arg.offset)
+//        }
+//
+////        Data([0, 1, 1, 0, 0, 0, 0, 1].reversed())
+//        let bytes = "1100001".data(using: .unicode)!
+//
+//
+//        let q = Data([UInt8("1100001", radix: 2)!])
+//
+//        String(bytes: bytes, encoding: .unicode)
+//        //Self.koi8rtNSEncoding.
+//        print(chars)
+//        //let wwww: Unicode.ASCII.CodeUnit = 8
+//        //Data().sorted()
+//        //Unicode.ASCII.decode()
+//        //chars.map({ $0.unicodeScalar.value % 32 })
+//
+//        //Data(bytes: <#T##UnsafeRawPointer#>, count: <#T##Int#>)
+//
+//
+//        //        let q = 0b00001110 00101101 00101111 00010100 00
+//        //        Character("0b00001110")
+//        //        let w = Character(UnicodeScalar(0b00001110))
+//        //        print(q, w)
+//
+//        print(xx, String(xx))
+//
+//        print(unicodeRange.count)
+//        print(unicodeRange.map({ ( Character(UnicodeScalar($0)!)  , $0 % 33) }))
+//        //        for value in zz.map({$0 % 33}) {
+//        //            print(value)
+//        //        }
+//
+//        //print(q)
+//        //print(q.count)
+//        let w = decodingString.split(by: 8)
+//        //.map({ String($0.reversed()) })
+//        let e = w.map({ Int($0, radix: 2)! })
+//        //.filter({ $0 <= 32})
+//        //            .map({ $0 % 33 })
+//        let r = e.map({ Character(UnicodeScalar($0)!) })
+//        //print(w)
+//        print(e, e.count)
+//        print(r)
+//        print("-|\n",String(r), "\n|-")
+//
+//        return String(r)
     }
     
     func encodeInAll(_ encodingString: String) -> [String] {
@@ -144,13 +161,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 //"я вся горю"
                 
-                let q = "11010001 10001111 00100000 11010000 10110010 11010001 10000001 11010001 10001111 00100000 11010000 10110011 11010000 10111110 11010001 10000000 11010001 10001110"
-                    .replacingOccurrences(of: " ", with: "")
+                //let q = "11010001 10001111 00100000 11010000 10110010 11010001 10000001 11010001 10001111 00100000 11010000 10110011 11010000 10111110 11010001 10000000 11010001 10001110"
+                    
+        
+        
+        let q = "11010001 00100000 11010111 11010011 11010001 00100000 11000111 11001111 11010010 11000000"
+        let w = q.replacingOccurrences(of: " ", with: "")
         
         let encodingString = "я"
+        print("-|\n\(BinaryCoder().decode(w, from: BinaryCoder.koi8rtNSEncoding) ?? "nil")\n|-")
         print(
-            "-|\n \(BinaryCoder().decode(q)) \n|-",
-            "\n",
             BinaryCoder().encodeInAll(encodingString),
             "\n",
             BinaryCoder().encode(encodingString, in: BinaryCoder.koi8rtNSEncoding) ?? "nil"
