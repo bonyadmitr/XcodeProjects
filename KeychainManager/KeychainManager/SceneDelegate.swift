@@ -40,7 +40,18 @@ final class BinaryCoder {
         return String.Encoding(rawValue: koi8rtNSEncoding) // String.Encoding(rawValue: 2147486210)
     }()
     
-    func encode() {
+    var availableStringEncodings: [String.Encoding] {
+        return String.availableStringEncodings
+    }
+    
+    func decode(_ decodingString: String) -> String {
+        
+        
+        
+        return ""
+    }
+    
+    func encode(_ encodingString: String) -> String {
         
                 /// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
                 /// online Binary Converter https://www.rapidtables.com/convert/number/ascii-to-binary.html
@@ -145,6 +156,7 @@ final class BinaryCoder {
         //        let w = Character(UnicodeScalar(0b00001110))
         //        print(q, w)
         
+        return ""
     }
     
 }
@@ -155,7 +167,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        BinaryCoder().encode()
+        BinaryCoder().encode("")
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
