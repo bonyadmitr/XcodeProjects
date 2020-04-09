@@ -32,6 +32,14 @@ struct Char {
 
 final class BinaryCoder {
     
+    lazy var koi8rtNSEncoding: String.Encoding = {
+        let koi8rtCFEncoding = CFStringEncoding(CFStringEncodings.KOI8_R.rawValue)
+//        let name = CFStringGetNameOfEncoding(koi8rtCFEncoding)
+//        print("koi8rtNSEncoding name: \(name ?? "" as CFString)")
+        let koi8rtNSEncoding = CFStringConvertEncodingToNSStringEncoding(koi8rtCFEncoding)
+        return String.Encoding(rawValue: koi8rtNSEncoding) // String.Encoding(rawValue: 2147486210)
+    }()
+    
     func encode() {
         
                 /// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
@@ -87,11 +95,8 @@ final class BinaryCoder {
         //        CFStringGetListOfAvailableEncodings()
         //        kCFStringEncodingInvalidId
                 
-                let koi8rtCFEncoding = CFStringEncoding(CFStringEncodings.KOI8_R.rawValue)
-                let name = CFStringGetNameOfEncoding(koi8rtCFEncoding)
-                let koi8rtNSEncoding = CFStringConvertEncodingToNSStringEncoding(koi8rtCFEncoding)
-                let koi8rtEncoding = String.Encoding(rawValue: koi8rtNSEncoding) // String.Encoding(rawValue: 2147486210)
-                let qqq = input.data(using: koi8rtEncoding)!.reduce("") { (acc, byte) -> String in
+                
+                let qqq = input.data(using: koi8rtNSEncoding)!.reduce("") { (acc, byte) -> String in
                     acc + String(byte, radix: 2)
                 }
                 print("qqq", qqq)
