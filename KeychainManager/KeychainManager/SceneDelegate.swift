@@ -47,6 +47,10 @@ extension Data {
 //        CFStringGetSystemEncoding()
 //        CFStringGetListOfAvailableEncodings()
 //        kCFStringEncodingInvalidId
+
+/// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
+/// online Binary Converter https://www.rapidtables.com/convert/number/ascii-to-binary.html
+
 final class BinaryCoder {
     
     static let koi8rtNSEncoding: String.Encoding = {
@@ -63,7 +67,47 @@ final class BinaryCoder {
     
     func decode(_ decodingString: String) -> String {
         
-        return ""
+        let unicodeRange = UnicodeScalar("а").value...UnicodeScalar("я").value
+        
+        let xx = unicodeRange.map({ Character(UnicodeScalar($0)!) })
+        
+        let chars = unicodeRange.enumerated().map { arg -> Char in
+            let unicode = UnicodeScalar(arg.element)!
+            //let unicodePosition = Int(unicode.value) % unicodeRange.count
+            return Char(unicodeScalar: unicode, character: Character(unicode), position: arg.offset)
+        }
+        
+        print(chars)
+        
+        chars.map({ $0.unicodeScalar.value % 32 })
+        
+        print(xx, String(xx))
+        
+        print(unicodeRange.count)
+        print(unicodeRange.map({ ( Character(UnicodeScalar($0)!)  , $0 % 33) }))
+        //        for value in zz.map({$0 % 33}) {
+        //            print(value)
+        //        }
+        
+        //print(q)
+        //print(q.count)
+        let w = decodingString.split(by: 8)
+        //.map({ String($0.reversed()) })
+        let e = w.map({ Int($0, radix: 2)! })
+        //.filter({ $0 <= 32})
+        //            .map({ $0 % 33 })
+        let r = e.map({ Character(UnicodeScalar($0)!) })
+        //print(w)
+        print(e, e.count)
+        print(r)
+        print("-|\n",String(r), "\n|-")
+        
+        //        let q = 0b00001110 00101101 00101111 00010100 00
+        //        Character("0b00001110")
+        //        let w = Character(UnicodeScalar(0b00001110))
+        //        print(q, w)
+        
+        return String(r)
     }
     
     func encodeInAll(_ encodingString: String) -> [String] {
@@ -74,8 +118,18 @@ final class BinaryCoder {
         return encodingString
             .data(using: encoding, allowLossyConversion: false)
             .map { $0.string(radix: 2) }
-                /// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
-                /// online Binary Converter https://www.rapidtables.com/convert/number/ascii-to-binary.html
+    }
+    
+}
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    var window: UIWindow?
+
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        
                 
                 
                 
@@ -92,61 +146,11 @@ final class BinaryCoder {
                 
                 let q = "11010001 10001111 00100000 11010000 10110010 11010001 10000001 11010001 10001111 00100000 11010000 10110011 11010000 10111110 11010001 10000000 11010001 10001110"
                     .replacingOccurrences(of: " ", with: "")
-                
-                let unicodeRange = UnicodeScalar("а").value...UnicodeScalar("я").value
-                
-                let xx = unicodeRange.map({ Character(UnicodeScalar($0)!) })
-                
-                let chars = unicodeRange.enumerated().map { arg -> Char in
-                    let unicode = UnicodeScalar(arg.element)!
-                    //let unicodePosition = Int(unicode.value) % unicodeRange.count
-                    return Char(unicodeScalar: unicode, character: Character(unicode), position: arg.offset)
-                }
-                
-                print(chars)
-                
-                chars.map({ $0.unicodeScalar.value % 32 })
-                
-                print(xx, String(xx))
-                
-                print(unicodeRange.count)
-                print(unicodeRange.map({ ( Character(UnicodeScalar($0)!)  , $0 % 33) }))
-        //        for value in zz.map({$0 % 33}) {
-        //            print(value)
-        //        }
-                
-                //print(q)
-                //print(q.count)
-                let w = q.split(by: 8)
-                    //.map({ String($0.reversed()) })
-                let e = w.map({ Int($0, radix: 2)! })
-                    //.filter({ $0 <= 32})
-        //            .map({ $0 % 33 })
-                let r = e.map({ Character(UnicodeScalar($0)!) })
-                //print(w)
-                print(e, e.count)
-                print(r)
-                print("-|\n",String(r), "\n|-")
-                
-        //        let q = 0b00001110 00101101 00101111 00010100 00
-        //        Character("0b00001110")
-        //        let w = Character(UnicodeScalar(0b00001110))
-        //        print(q, w)
-        
-        return ""
-    }
-    
-}
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    var window: UIWindow?
-
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let encodingString = "я"
         print(
+            "-|\n \(BinaryCoder().decode(q)) \n|-",
+            "\n",
             BinaryCoder().encodeInAll(encodingString),
             "\n",
             BinaryCoder().encode(encodingString, in: BinaryCoder.koi8rtNSEncoding) ?? "nil"
