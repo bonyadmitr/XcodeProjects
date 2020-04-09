@@ -38,6 +38,15 @@ extension Data {
     }
 }
 
+/// String.availableStringEncodings.map { String.localizedName(of: $0) }
+/// String.localizedName(of: String.defaultCStringEncoding)
+///"".canBeConverted(to: .utf8)
+//        CFStringCreateWithCString(nil, "я", CFStringEncoding(CFStringEncodings.KOI8_R.rawValue))
+//        CFStringGetNameOfEncoding(<#T##encoding: CFStringEncoding##CFStringEncoding#>)
+//        CFStringIsEncodingAvailable(<#T##encoding: CFStringEncoding##CFStringEncoding#>)
+//        CFStringGetSystemEncoding()
+//        CFStringGetListOfAvailableEncodings()
+//        kCFStringEncodingInvalidId
 final class BinaryCoder {
     
     static let koi8rtNSEncoding: String.Encoding = {
@@ -80,50 +89,6 @@ final class BinaryCoder {
                 
                 
                 //"я вся горю"
-                
-                let input = "я"
-                
-                let datas = String.availableStringEncodings.compactMap {
-                    input.data(using: $0, allowLossyConversion: false)
-                }
-                
-                //Data("A".utf8)
-                
-                
-        //        datas.map {
-        //            let binary = String($0, radix: 2)
-        //            return repeatElement("0", count: 8-binary.count) + binary
-        //        }.joined()
-                
-                let strings = datas.map {
-                    $0.reduce("") { (str, byte) -> String in
-                        str + String(byte, radix: 2)
-                    }
-                }
-                print(strings)
-                
-                print(
-                    String.availableStringEncodings.map { String.localizedName(of: $0) }
-                )
-                print(
-                    String.localizedName(of: String.defaultCStringEncoding)
-                )
-                //"".canBeConverted(to: .utf8)
-                
-                //"я".data(using: .utf8)
-        //        CFStringCreateWithCString(nil, "я", CFStringEncoding(CFStringEncodings.KOI8_R.rawValue))
-        //        CFStringGetNameOfEncoding(<#T##encoding: CFStringEncoding##CFStringEncoding#>)
-        //        CFStringIsEncodingAvailable(<#T##encoding: CFStringEncoding##CFStringEncoding#>)
-        //        CFStringGetSystemEncoding()
-        //        CFStringGetListOfAvailableEncodings()
-        //        kCFStringEncodingInvalidId
-                
-                
-                let qqq = input.data(using: Self.koi8rtNSEncoding)!.reduce("") { (acc, byte) -> String in
-                    acc + String(byte, radix: 2)
-                }
-                print("qqq", qqq)
-                
                 
                 let q = "11010001 10001111 00100000 11010000 10110010 11010001 10000001 11010001 10001111 00100000 11010000 10110011 11010000 10111110 11010001 10000000 11010001 10001110"
                     .replacingOccurrences(of: " ", with: "")
