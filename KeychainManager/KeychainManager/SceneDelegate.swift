@@ -40,7 +40,7 @@ extension Data {
 
 final class BinaryCoder {
     
-    lazy var koi8rtNSEncoding: String.Encoding = {
+    static let koi8rtNSEncoding: String.Encoding = {
         let koi8rtCFEncoding = CFStringEncoding(CFStringEncodings.KOI8_R.rawValue)
 //        let name = CFStringGetNameOfEncoding(koi8rtCFEncoding)
 //        print("koi8rtNSEncoding name: \(name ?? "" as CFString)")
@@ -54,8 +54,6 @@ final class BinaryCoder {
     
     func decode(_ decodingString: String) -> String {
         
-        
-        
         return ""
     }
     
@@ -66,8 +64,10 @@ final class BinaryCoder {
             .map { $0.string(radix: 2) }
     }
     
-    func encode(_ encodingString: String) -> String {
-        
+    func encode(_ encodingString: String, in encoding: String.Encoding) -> String? {
+        return encodingString
+            .data(using: encoding, allowLossyConversion: false)
+            .map { $0.string(radix: 2) }
                 /// availableStringEncodings source https://github.com/jie-json/swift-corelibs-foundation-master/blob/9dcd02178d6516c137fc3970f87090904f334acd/Foundation/NSString.swift
                 /// online Binary Converter https://www.rapidtables.com/convert/number/ascii-to-binary.html
                 
@@ -122,7 +122,7 @@ final class BinaryCoder {
         //        kCFStringEncodingInvalidId
                 
                 
-                let qqq = input.data(using: koi8rtNSEncoding)!.reduce("") { (acc, byte) -> String in
+                let qqq = input.data(using: Self.koi8rtNSEncoding)!.reduce("") { (acc, byte) -> String in
                     acc + String(byte, radix: 2)
                 }
                 print("qqq", qqq)
@@ -182,7 +182,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        BinaryCoder().encode("")
+        
+        let encodingString = "я"
+        print(
+            BinaryCoder().encodeInAll(encodingString),
+            "\n",
+            BinaryCoder().encode(encodingString, in: BinaryCoder.koi8rtNSEncoding) ?? "nil"
+        )
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
