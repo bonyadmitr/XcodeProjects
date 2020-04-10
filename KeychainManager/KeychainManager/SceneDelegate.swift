@@ -9,6 +9,8 @@
 import UIKit
 
 extension String {
+    
+    /// source https://stackoverflow.com/a/38980231/5893286
     func split(by length: Int) -> [String] {
         var startIndex = self.startIndex
         var results = [Substring]()
