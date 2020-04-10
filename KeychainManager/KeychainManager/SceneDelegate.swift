@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// extension String .."To".. https://stackoverflow.com/a/26811354/5893286
+/// BinaryInteger binaryDescription https://stackoverflow.com/a/56099749/5893286
+
 extension String {
     
     /// source https://stackoverflow.com/a/38980231/5893286
