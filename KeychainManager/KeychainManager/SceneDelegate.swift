@@ -37,10 +37,10 @@ struct Char {
 
 extension String {
     func leftPadding(toLength: Int, withPad padCharacter: Character) -> String {
-        if self.count > toLength {
+        if count > toLength {
             return self
         } else {
-            return String(repeatElement(padCharacter, count: toLength - self.count)) + self
+            return String(repeatElement(padCharacter, count: toLength - count)) + self
         }
     }
 }
