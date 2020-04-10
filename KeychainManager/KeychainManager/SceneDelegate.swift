@@ -11,6 +11,11 @@ import UIKit
 /// extension String .."To".. https://stackoverflow.com/a/26811354/5893286
 /// BinaryInteger binaryDescription https://stackoverflow.com/a/56099749/5893286
 
+/// swift AdvancedOperators https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html
+/// &- &+ &*
+/// ~|&^ << >> 0b00001110
+//let initialBits: UInt8 = 0b00001111
+
 extension String {
     
     /// source https://stackoverflow.com/a/38980231/5893286
