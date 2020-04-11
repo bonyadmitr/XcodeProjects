@@ -63,6 +63,16 @@ final class RealmManager {
     
 }
 
+final class Folder: Object {
+    @objc dynamic var title = ""
+    @objc dynamic var id: Int = 0
+    
+    override class func primaryKey() -> String? {
+        return #keyPath(id)
+    }
+}
+
+
 
 class ViewController: UIViewController {
 
