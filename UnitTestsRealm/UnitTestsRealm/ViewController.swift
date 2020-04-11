@@ -76,11 +76,59 @@ final class Folder: Object {
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var tableView: UITableView!
+    
+    private var folders: Results<Folder>! = RealmManager.shared.realm
+        .objects(Folder.self)
+        //.sorted(byKeyPath: #keyPath(Folder.title))
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .lightGray
+        
+
+
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            print("- started")
+            
+            let newFolders: [Folder] = (1...100).map {
+                let folder = Folder()
+                folder.id = $0
+                folder.title = "Folder \($0)"
+                return folder
+            }
+            
+            RealmManager.shared.perform { [weak self] realm in
+                realm.add(newFolders)
+                print("- saved")
+                
+//                DispatchQueue.main.async {
+//                    self?.tableView.reloadData()
+//                }
+            }
+        }
+        
+        
+        
     }
+    
+    deinit {
+        notificationToken?.invalidate()
+    }
+    
+}
 
-
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return folders.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = folders[indexPath.row].title
+        return cell
+    }
 }
 
