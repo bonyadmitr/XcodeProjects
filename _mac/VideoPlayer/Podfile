@@ -4,5 +4,5 @@
 
 target 'VideoPlayer' do
     platform :macos, '10.9'
-    pod 'VLCKit', '3.3.0'
+    pod 'VLCKit'
 end

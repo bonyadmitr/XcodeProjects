@@ -1,16 +1,16 @@
 PODS:
-  - VLCKit (3.3.0)
+  - VLCKit (3.3.10)
 
 DEPENDENCIES:
-  - VLCKit (= 3.3.0)
+  - VLCKit
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - VLCKit
 
 SPEC CHECKSUMS:
-  VLCKit: deec7578457906c0e88cd1ec066e515d03c73ca3
+  VLCKit: a33cd288c829af52dbaff40f8e8bf4e35ad22e5a
 
-PODFILE CHECKSUM: d8f3a9be47192009d8c254349381511aa2ec8350
+PODFILE CHECKSUM: d18dc7e717ac64c1fcbc31bdac799668d97dbc9b
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4
