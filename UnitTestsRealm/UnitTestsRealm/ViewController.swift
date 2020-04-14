@@ -119,28 +119,27 @@ class ViewController: UIViewController {
 
         }
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            print("- started")
-            
-            let newFolders: [Folder] = (1...100).map {
-                let folder = Folder()
-                folder.id = $0
-                folder.title = "Folder \($0)"
-                return folder
-            }
-            
-            RealmManager.shared.perform { [weak self] realm in
-                realm.add(newFolders)
-                print("- saved")
-                
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                }
-            }
+        saveItems()
+    }
+    
+    func saveItems() {
+        print("- started")
+        
+        let newFolders: [Folder] = (1...1000).map {
+            let folder = Folder()
+            folder.id = $0
+            folder.title = "Folder \($0)"
+            return folder
         }
         
-        
-        
+        RealmManager.shared.perform { [weak self] realm in
+            realm.add(newFolders)
+            print("- saved")
+            
+            //DispatchQueue.main.async {
+            //    self?.tableView.reloadData()
+            //}
+        }
     }
     
     deinit {
