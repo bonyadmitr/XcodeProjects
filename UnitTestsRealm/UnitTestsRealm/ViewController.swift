@@ -173,6 +173,11 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = folders[indexPath.row].title
+        if indexPath.row <= folders.count - 1 {
+            cell.textLabel?.text = folders[indexPath.row].title
+        } else {
+            cell.textLabel?.text = "--------"
+        }
         return cell
     }
 }
