@@ -9,6 +9,9 @@
 import UIKit
 import RealmSwift
 
+/// just place breakpoint inside method:
+/// static NSException *RLMException(NSString *reason, NSDictionary *additionalUserInfo)
+/// source https://stackoverflow.com/a/44762897/5893286
 final class RealmManager {
     
     static let shared = RealmManager()
