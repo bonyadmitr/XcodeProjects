@@ -120,6 +120,23 @@ class ViewController: UIViewController {
         }
         
         saveItems()
+        deleteItems()
+    }
+    
+    func deleteItems() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            try! RealmManager.shared.realm.safeWrite {
+                RealmManager.shared.realm.delete(self.folders)
+            }
+        }
+        
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//            RealmManager.shared.perform { realm in
+//                let folders = realm.objects(Folder.self)
+//                realm.delete(folders)
+//            }
+//        }
+        
     }
     
     func saveItems() {
