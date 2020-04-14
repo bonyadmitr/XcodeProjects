@@ -154,7 +154,7 @@ class ViewController: UIViewController {
             realm.add(newFolders)
             print("- saved")
             
-            //DispatchQueue.main.async {
+            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             //    self?.tableView.reloadData()
             //}
         }
