@@ -161,4 +161,29 @@ final class OCRManager {
         }
         
     }
+    
+    func detectRectangle(in imageBuffer: CVPixelBuffer, handler: @escaping (VNRectangleObservation?) -> Void) {
+
+        let request = VNDetectRectanglesRequest { request, error in
+            guard let results = request.results as? [VNRectangleObservation] else {
+                assertionFailure(error?.localizedDescription ?? "nil")
+                return
+            }
+            handler(results.first)
+        }
+        
+        request.minimumAspectRatio = VNAspectRatio(1.3)
+        request.maximumAspectRatio = VNAspectRatio(1.6)
+        request.minimumSize = Float(0.5)
+        request.maximumObservations = 1
+
+        
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, options: [:])
+        do {
+            try imageRequestHandler.perform([request])
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+
 }
