@@ -15,6 +15,7 @@
 		CE59CC062446C8C700D1931D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE59CC042446C8C700D1931D /* LaunchScreen.storyboard */; };
 		CEF2902D24473E0100FB78FC /* DocumentScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2902C24473E0100FB78FC /* DocumentScanner.swift */; };
 		CEF2902F24473E5600FB78FC /* OCRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2902E24473E5600FB78FC /* OCRManager.swift */; };
+		CEF290312448795800FB78FC /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF290302448795800FB78FC /* CameraManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CE59CC072446C8C700D1931D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF2902C24473E0100FB78FC /* DocumentScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScanner.swift; sourceTree = "<group>"; };
 		CEF2902E24473E5600FB78FC /* OCRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRManager.swift; sourceTree = "<group>"; };
+		CEF290302448795800FB78FC /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				CE59CBFD2446C8C400D1931D /* ViewController.swift */,
 				CEF2902C24473E0100FB78FC /* DocumentScanner.swift */,
 				CEF2902E24473E5600FB78FC /* OCRManager.swift */,
+				CEF290302448795800FB78FC /* CameraManager.swift */,
 				CE59CBFF2446C8C400D1931D /* Main.storyboard */,
 				CE59CC022446C8C700D1931D /* Assets.xcassets */,
 				CE59CC042446C8C700D1931D /* LaunchScreen.storyboard */,
@@ -148,6 +151,7 @@
 				CEF2902F24473E5600FB78FC /* OCRManager.swift in Sources */,
 				CEF2902D24473E0100FB78FC /* DocumentScanner.swift in Sources */,
 				CE59CBFA2446C8C400D1931D /* AppDelegate.swift in Sources */,
+				CEF290312448795800FB78FC /* CameraManager.swift in Sources */,
 				CE59CBFC2446C8C400D1931D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
