@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Vision
+
 class ViewController: UIViewController {
 
     let documentScanner = DocumentScanner()
@@ -15,6 +17,8 @@ class ViewController: UIViewController {
     let cameraManager = CameraManager()
     
     let label = UILabel()
+    
+    private var maskLayer = CAShapeLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +29,35 @@ class ViewController: UIViewController {
         cameraManager.showCameraFeed(in: view)
         
         cameraManager.imageBufferHandler = { imageBuffer in
-            OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
-                DispatchQueue.main.async {
-                    self.label.text = ocrText
-                }
-                
-                print(ocrText)
-                print("--------------------")
-            }
+//            OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
+//                DispatchQueue.main.async {
+//                    self.label.text = ocrText
+//                }
+//
+//                print(ocrText)
+//                print("--------------------")
+//            }
+            
+            
+                    
+                    OCRManager().detectRectangle(in: imageBuffer) { rectangle in
+                        DispatchQueue.main.async {
+                            self.removeMask()
+                            guard let rectangle = rectangle else {
+                                return
+                            }
+                            
+                            self.drawBoundingBox(rect: rectangle)
+            //
+            //                    if self.isTapped{
+            //                        self.isTapped = false
+            //                        self.doPerspectiveCorrection(rect, from: image)
+            //                    }
+
+                        }
+                        
+                    }
+            
         }
         
         view.addSubview(label)
@@ -73,6 +98,34 @@ class ViewController: UIViewController {
         
         cameraManager.updateFrame(with: view.frame)
     }
+    
+    func drawBoundingBox(rect : VNRectangleObservation) {
+    
+        let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -cameraManager.previewLayer.frame.height)
+        let scale = CGAffineTransform.identity.scaledBy(x: cameraManager.previewLayer.frame.width, y: cameraManager.previewLayer.frame.height)
+
+        let bounds = rect.boundingBox.applying(scale).applying(transform)
+        createLayer(in: bounds)
+
+    }
+
+    private func createLayer(in rect: CGRect) {
+
+        maskLayer = CAShapeLayer()
+        maskLayer.frame = rect
+        maskLayer.cornerRadius = 10
+        maskLayer.opacity = 0.75
+        maskLayer.borderColor = UIColor.red.cgColor
+        maskLayer.borderWidth = 5.0
+        
+        cameraManager.previewLayer.insertSublayer(maskLayer, at: 1)
+
+    }
+    
+    func removeMask() {
+            maskLayer.removeFromSuperlayer()
+
+    }
 }
 
 import AVFoundation
@@ -80,7 +133,7 @@ import AVFoundation
 final class CameraManager: NSObject {
     
     private let captureSession = AVCaptureSession()
-    private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+    lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
     var imageBufferHandler: ( (CVImageBuffer) -> Void )?
