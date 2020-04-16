@@ -128,4 +128,37 @@ final class OCRManager {
         
     }
     
+    
+    func scanFast(imageBuffer: CVImageBuffer, handler: @escaping (String) -> Void) {
+        
+        let ocrRequest = VNRecognizeTextRequest { (request, error) in
+            
+            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                assertionFailure("The observations are of an unexpected type.")
+                return
+            }
+            
+             let allStrings = observations
+                       .compactMap { $0.topCandidates(1).first }
+                       .compactMap { $0.string }
+                       .joined(separator: "\n")
+            
+            handler(allStrings)
+        }
+        
+        ocrRequest.recognitionLevel = .accurate
+        ocrRequest.recognitionLanguages = ["en-US"]
+        //ocrRequest.minimumTextHeight = 0.01
+        ocrRequest.usesLanguageCorrection = true
+        //ocrRequest.customWords = ["@gmail.com"]
+        
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: imageBuffer, options: [:])
+        
+        do {
+            try requestHandler.perform([ocrRequest])
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+        
+    }
 }
