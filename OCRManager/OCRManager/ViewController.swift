@@ -12,21 +12,68 @@ class ViewController: UIViewController {
 
     let documentScanner = DocumentScanner()
     
+    let cameraManager = CameraManager()
+    
+    let label = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("- started")
+        
+        cameraManager.prepare()
+        cameraManager.showCameraFeed(in: view)
+        
+        cameraManager.imageBufferHandler = { imageBuffer in
+            OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
+                DispatchQueue.main.async {
+                    self.label.text = ocrText
+                }
+                
+                print(ocrText)
+                print("--------------------")
+            }
+        }
+        
+        view.addSubview(label)
+        label.numberOfLines = 0
+        label.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 8),
+        ])
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        cameraManager.appear()
         
-        documentScanner.open(in: self) { images in
-            for image in images {
-                OCRManager().scan(image: image) { ocrText in
-                    print(ocrText)
-                }
-            }
+//        documentScanner.open(in: self) { images in
+//            for image in images {
+//                OCRManager().scan(image: image) { ocrText in
+//                    print(ocrText)
+//                }
+//            }
+//        }
+        
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        cameraManager.disappear()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        cameraManager.updateFrame(with: view.frame)
+    }
+}
 
 import AVFoundation
 
