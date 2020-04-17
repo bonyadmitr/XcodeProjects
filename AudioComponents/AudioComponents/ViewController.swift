@@ -8,6 +8,12 @@
 
 import UIKit
 
+/// search waveform https://github.com/topics/waveform?l=swift
+///
+/// check waveform
+/// https://github.com/dmrschmidt/DSWaveformImage
+/// https://github.com/fulldecent/FDWaveformView
+///
 /// siri like waveform https://github.com/alankarmisra/SwiftSiriWaveformView
 ///
 /// audio power visualizer
