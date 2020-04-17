@@ -99,6 +99,7 @@ class ViewController: UIViewController {
         cameraManager.updateFrame(with: view.frame)
     }
     
+    /// article https://heartbeat.fritz.ai/scanning-credit-cards-with-computer-vision-on-ios-c3f4d8912de4
     func drawBoundingBox(rect : VNRectangleObservation) {
     
         let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -cameraManager.previewLayer.frame.height)
