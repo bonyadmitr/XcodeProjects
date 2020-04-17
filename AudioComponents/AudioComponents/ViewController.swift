@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// siri like waveform https://github.com/alankarmisra/SwiftSiriWaveformView
+///
+/// audio power visualizer
+/// https://medium.com/@vialyx/ios-avfoundation-avaudioplayer-audio-power-visualizer-28669458c895
+///
 /// Decibel
 /// https://github.com/segmentio/decibel
 /// http://www.mikitamanko.com/blog/2017/04/15/swift-how-to-get-decibels/
