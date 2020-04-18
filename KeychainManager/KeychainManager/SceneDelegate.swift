@@ -191,15 +191,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let w = q.replacingOccurrences(of: " ", with: "")
         //print(q.split(by: 8).joined(separator: " "))
         
-        print("-|\n\(BinaryCoder().decode(w, from: BinaryCoder.koi8rtNSEncoding) ?? "nil")\n|-")
+//        let encoding = BinaryCoder.koi8rtNSEncoding
+        
+        //let q = "11010001 10001111 00100000 11010000 10110010 11010001 10000001 11010001 10001111 00100000 11010000 10110011 11010000 10111110 11010001 10000000 11010001 10001110"
+        //let q = "11111111 11111110 01001111 00000100 00100000 00000000 00110010 00000100 01000001 00000100 01001111 00000100 00100000 00000000 00110011 00000100 00111110 00000100 01000000 00000100 01001110 00000100"
+        let encoding = String.Encoding.unicode
+        
+        print(
+            "-|\n\(BinaryCoder().decode(w, from: encoding) ?? "nil")\n|-"
+        )
         //print("-|\n\(BinaryCoder().decodeFromAll(w))\n|-")
         
         
         let encodingString = "я вся горю"
         print(
+            //BinaryCoder().encodeInAll(encodingString).map({$0.replacingOccurrences(of: " ", with: "")}).map({$0.count}),
             //BinaryCoder().encodeInAll(encodingString),
-            "\n",
-            BinaryCoder().encode(encodingString, in: BinaryCoder.koi8rtNSEncoding) ?? "nil"
+            //"\n",
+        )
+        print(
+            BinaryCoder().encode(encodingString, in: encoding) ?? "nil"
         )
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
