@@ -10,6 +10,16 @@ import UIKit
 
 import Vision
 
+
+extension CGImage {
+    
+    /// inspired https://stackoverflow.com/a/45815004/5893286
+    static func fromCIImage(_ ciImage: CIImage) -> CGImage? {
+        let context = CIContext(options: nil)
+        return context.createCGImage(ciImage, from: ciImage.extent)
+    }
+}
+
 class ViewController: UIViewController {
 
     let documentScanner = DocumentScanner()
