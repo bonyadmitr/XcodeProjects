@@ -20,6 +20,24 @@ extension CGImage {
     }
 }
 
+import AVFoundation
+
+/// https://stackoverflow.com/q/49302828/5893286
+func getImageFromSampleBuffer(buffer: CMSampleBuffer, orientation: UIImage.Orientation) -> UIImage? {
+    if let pixelBuffer = CMSampleBufferGetImageBuffer(buffer) {
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+        let context = CIContext()
+        let imageRect = CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer))
+
+        if let image = context.createCGImage(ciImage, from: imageRect) {
+            return UIImage(cgImage: image, scale: UIScreen.main.scale, orientation: orientation)
+
+        }
+
+    }
+    return nil
+}
+
 class ViewController: UIViewController {
 
     let documentScanner = DocumentScanner()
