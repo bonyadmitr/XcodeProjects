@@ -57,6 +57,10 @@ class ViewController: UIViewController {
         cameraManager.showCameraFeed(in: view)
         
         cameraManager.imageBufferHandler = { imageBuffer in
+            /// crop CVPixelBuffer https://stackoverflow.com/a/44763235/5893286
+            /// stackoverflow.com/a/12315642/806326
+            /// stackoverflow.com/a/10063006/806326
+            //let ciImage = CIImage(cvImageBuffer: imageBuffer)
             
             OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
                 DispatchQueue.main.async {
