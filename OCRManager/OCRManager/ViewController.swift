@@ -70,7 +70,8 @@ class ViewController: UIViewController {
                 print(ocrText)
                 print("--------------------")
             }
-                    
+                  
+            /// project https://github.com/vkrmchowdary/Vision-Object-Tracking
             //OCRManager().detectRectangle(in: imageBuffer) { rectangle in
             //    DispatchQueue.main.async {
             //        self.removeMask()
