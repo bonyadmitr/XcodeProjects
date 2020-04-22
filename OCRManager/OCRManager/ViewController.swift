@@ -57,34 +57,28 @@ class ViewController: UIViewController {
         cameraManager.showCameraFeed(in: view)
         
         cameraManager.imageBufferHandler = { imageBuffer in
-//            OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
-//                DispatchQueue.main.async {
-//                    self.label.text = ocrText
-//                }
-//
-//                print(ocrText)
-//                print("--------------------")
-//            }
             
-            
-                    
-                    OCRManager().detectRectangle(in: imageBuffer) { rectangle in
-                        DispatchQueue.main.async {
-                            self.removeMask()
-                            guard let rectangle = rectangle else {
-                                return
-                            }
-                            
-                            self.drawBoundingBox(rect: rectangle)
-            //
-            //                    if self.isTapped{
-            //                        self.isTapped = false
-            //                        self.doPerspectiveCorrection(rect, from: image)
-            //                    }
+            OCRManager().scanFast(imageBuffer: imageBuffer) {  ocrText in
+                DispatchQueue.main.async {
+                    self.label.text = ocrText
+                }
 
-                        }
-                        
-                    }
+                print(ocrText)
+                print("--------------------")
+            }
+                    
+            //OCRManager().detectRectangle(in: imageBuffer) { rectangle in
+            //    DispatchQueue.main.async {
+            //        self.removeMask()
+            //        guard let rectangle = rectangle else {
+            //            return
+            //        }
+            //
+            //        self.drawBoundingBox(rect: rectangle)
+            //
+            //    }
+            //
+            //}
             
         }
         
