@@ -39,11 +39,11 @@ class ViewController: UIViewController {
 
 import CoreData
 
-@objc(NoteMO)
-public class NoteMO: NSManagedObject {
+//@objc(NoteMO)
+final class NoteMO: NSManagedObject {
     
-    @NSManaged public var body: String
-    @NSManaged public var date: Date
+    @NSManaged var body: String
+    @NSManaged var date: Date
     
     //convenience init(context: NSManagedObjectContext, body: String, date: Date) {
     //    self.init(context: context)
