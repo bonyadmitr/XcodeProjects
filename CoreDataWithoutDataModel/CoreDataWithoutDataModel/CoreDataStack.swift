@@ -9,7 +9,7 @@ extension CoreDataStack {
         return model
     }()
     
-    static let shared = CoreDataStack(storeType: .memory, modelName: "CoreDataStorage", managedObjectModel: moModel)
+    static let shared = CoreDataStack(storeType: .disk, modelName: "CoreDataStorage", managedObjectModel: moModel)
 }
 
 /// no need @objc(NSManagedObject SUBCLASS) CoreDataStack(storeType: .memoty

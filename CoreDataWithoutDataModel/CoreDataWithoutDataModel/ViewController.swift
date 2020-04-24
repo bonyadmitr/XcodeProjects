@@ -27,7 +27,7 @@ class ViewController: UIViewController {
                 //try! request.execute()
                 //context.execute(request)
                 let items = try! context.fetch(request)
-                print(items)
+                print(items.count)
                 print()
 
             }
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
 
 import CoreData
 
-//@objc(NoteMO)
+@objc(NoteMO)
 final class NoteMO: NSManagedObject {
     
     @NSManaged var body: String
