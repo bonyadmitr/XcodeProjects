@@ -12,7 +12,35 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        CoreDataStack.shared.performBackgroundTask { context in
+            
+            let note = NoteMO(context: context)
+            note.body = "body 123 eurwieur"
+            note.date = Date()
+            
+            do {
+                try context.save()
+            } catch {
+                assertionFailure(error.localizedDescription)
+            }
+            
+            CoreDataStack.shared.performBackgroundTask { context in
+                
+                let request: NSFetchRequest<NoteMO> = NoteMO.fetchRequest()
+                //try! request.execute()
+                //context.execute(request)
+                let items = try! context.fetch(request)
+                print(items)
+                print()
+
+            }
+        }
+        
+    }
+
+
+}
 
 import CoreData
 
