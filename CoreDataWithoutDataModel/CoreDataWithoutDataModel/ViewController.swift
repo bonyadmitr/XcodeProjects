@@ -19,11 +19,7 @@ class ViewController: UIViewController {
             note.body = "body 123 eurwieur"
             note.date = Date()
             
-            do {
-                try context.save()
-            } catch {
-                assertionFailure(error.localizedDescription)
-            }
+            context.safeSave()
             
             CoreDataStack.shared.performBackgroundTask { context in
                 
@@ -38,7 +34,6 @@ class ViewController: UIViewController {
         }
         
     }
-
 
 }
 
@@ -112,3 +107,20 @@ extension NSManagedObject {
 //}
 //
 //extension NSObject: ClassNameable {}
+
+
+extension NSManagedObjectContext {
+    
+    func safeSave() {
+        guard hasChanges else {
+            assertionFailure()
+            return
+        }
+
+        do {
+            try save()
+        } catch {
+            assertionFailure(error.localizedDescription)
+        }
+    }
+}
