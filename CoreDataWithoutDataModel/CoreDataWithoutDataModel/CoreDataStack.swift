@@ -1,8 +1,15 @@
 import CoreData
 
-//extension CoreDataStack {
-//    static let shared = CoreDataStack(storeType: .memory, modelName: "ProductsList")
-//}
+extension CoreDataStack {
+    
+    private static let moModel: NSManagedObjectModel = {
+        let model = NSManagedObjectModel()
+        model.entities = [NoteMO.entityDescription]
+        return model
+    }()
+    
+    static let shared = CoreDataStack(storeType: .memory, modelName: "CoreDataStorage", managedObjectModel: moModel)
+}
 
 final class CoreDataStack {
     
