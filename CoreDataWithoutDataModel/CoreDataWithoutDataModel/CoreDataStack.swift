@@ -14,11 +14,15 @@ final class CoreDataStack {
     private let storeType: PersistentStoreType
     private let container: NSPersistentContainer
     
-    init(storeType: PersistentStoreType, modelName: String) {
+    init(storeType: PersistentStoreType, modelName: String, managedObjectModel: NSManagedObjectModel? = nil) {
         self.storeType = storeType
         
-        container = type(of: self).persistentContainer(storeType: storeType, modelName: modelName)
+        container = type(of: self).persistentContainer(storeType: storeType,
+                                                       modelName: modelName,
+                                                       managedObjectModel: managedObjectModel)
+        
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
         // TODO: check
         // TODO: maybe should be in the "loadPersistentStores"
         /// to avoid duplicating objects
@@ -41,8 +45,16 @@ final class CoreDataStack {
         return container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url)
     }
     
-    private static func persistentContainer(storeType: PersistentStoreType, modelName: String) -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: modelName)
+    private static func persistentContainer(storeType: PersistentStoreType,
+                                            modelName: String,
+                                            managedObjectModel: NSManagedObjectModel?) -> NSPersistentContainer {
+        
+        let container: NSPersistentContainer
+        if let managedObjectModel = managedObjectModel {
+            container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        } else {
+            container = NSPersistentContainer(name: modelName)
+        }
         
         switch storeType {
         case .memory:
