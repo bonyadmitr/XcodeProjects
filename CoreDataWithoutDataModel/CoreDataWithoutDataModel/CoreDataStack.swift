@@ -1,5 +1,6 @@
 import CoreData
 
+/// CoreData without .XCDataModel https://habr.com/ru/post/498708/
 extension CoreDataStack {
     
     private static let moModel: NSManagedObjectModel = {
