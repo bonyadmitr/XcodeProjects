@@ -13,6 +13,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+import CoreData
+
+@objc(NoteMO)
+public class NoteMO: NSManagedObject {
+    
+    @NSManaged public var body: String
+    @NSManaged public var date: Date
+    
+    //convenience init(context: NSManagedObjectContext, body: String, date: Date) {
+    //    self.init(context: context)
+    //    self.body = body
+    //    self.date = date
+    //}
+    
+    static let entityDescription: NSEntityDescription = {
+        let entityDescription = NSEntityDescription(from: NoteMO.self)
+        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.body), ofType: .stringAttributeType))
+        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.date), ofType: .dateAttributeType))
+        return entityDescription
+    }()
+}
+
 import CoreData
 
 extension NSEntityDescription {
