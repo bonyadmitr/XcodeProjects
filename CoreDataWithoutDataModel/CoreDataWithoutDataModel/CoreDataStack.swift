@@ -54,8 +54,21 @@ final class CoreDataStack {
             container.persistentStoreDescriptions = [description]
             
         case .disk:
-            /// defalut disk
+            /// defalut disk realization
             break
+            
+            //guard let documentDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            //    fatalError("Unable to resolve document directory")
+            //}
+            //let storeName = modelName + ".sqlite"
+            //let storeUrl = documentDirURL.appendingPathComponent(storeName)
+            //
+            //let description = NSPersistentStoreDescription(url: storeUrl)
+            //description.type = NSSQLiteStoreType
+            //description.setOption(FileProtectionType.none as NSObject, forKey: NSPersistentStoreFileProtectionKey)
+            ////description.shouldMigrateStoreAutomatically = false
+            ////description.shouldInferMappingModelAutomatically = false
+            //container.persistentStoreDescriptions = [description]
         }
         
         container.loadPersistentStores { storeDescription, error in
