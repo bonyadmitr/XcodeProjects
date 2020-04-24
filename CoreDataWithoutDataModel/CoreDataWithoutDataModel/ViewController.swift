@@ -53,8 +53,8 @@ public class NoteMO: NSManagedObject {
     
     static let entityDescription: NSEntityDescription = {
         let entityDescription = NSEntityDescription(from: NoteMO.self)
-        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.body), ofType: .stringAttributeType))
-        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.date), ofType: .dateAttributeType))
+        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.body), type: .stringAttributeType))
+        entityDescription.addProperty(NSAttributeDescription(name: #keyPath(NoteMO.date), type: .dateAttributeType))
         return entityDescription
     }()
 }
@@ -75,10 +75,10 @@ extension NSEntityDescription {
 }
 
 extension NSAttributeDescription {
-    convenience init(name: String, ofType: NSAttributeType, isOptional: Bool = false) {
+    convenience init(name: String, type: NSAttributeType, isOptional: Bool = false) {
         self.init()
         self.name = name
-        self.attributeType = ofType
+        self.attributeType = type
         self.isOptional = isOptional
     }
 }
