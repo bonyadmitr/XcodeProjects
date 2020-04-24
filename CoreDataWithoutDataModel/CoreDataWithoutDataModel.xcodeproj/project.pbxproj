@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE9A7ED7245308EF007C58BD /* CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A7ED6245308EF007C58BD /* CoreDataExtensions.swift */; };
+		CE9A7EE224532281007C58BD /* NoteMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A7EE124532281007C58BD /* NoteMO.swift */; };
 		CEE94C902452E4BB00B4965E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94C8F2452E4BB00B4965E /* AppDelegate.swift */; };
 		CEE94C922452E4BB00B4965E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94C912452E4BB00B4965E /* SceneDelegate.swift */; };
 		CEE94C942452E4BB00B4965E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94C932452E4BB00B4965E /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		CE9A7ED6245308EF007C58BD /* CoreDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtensions.swift; sourceTree = "<group>"; };
+		CE9A7EE124532281007C58BD /* NoteMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMO.swift; sourceTree = "<group>"; };
 		CEE94C8C2452E4BB00B4965E /* CoreDataWithoutDataModel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataWithoutDataModel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE94C8F2452E4BB00B4965E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEE94C912452E4BB00B4965E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				CEE94C932452E4BB00B4965E /* ViewController.swift */,
 				CEE94CA32452E51D00B4965E /* CoreDataStack.swift */,
 				CE9A7ED6245308EF007C58BD /* CoreDataExtensions.swift */,
+				CE9A7EE124532281007C58BD /* NoteMO.swift */,
 				CEE94C952452E4BB00B4965E /* Main.storyboard */,
 				CEE94C982452E4BD00B4965E /* Assets.xcassets */,
 				CEE94C9A2452E4BD00B4965E /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 				CE9A7ED7245308EF007C58BD /* CoreDataExtensions.swift in Sources */,
 				CEE94C942452E4BB00B4965E /* ViewController.swift in Sources */,
 				CEE94C902452E4BB00B4965E /* AppDelegate.swift in Sources */,
+				CE9A7EE224532281007C58BD /* NoteMO.swift in Sources */,
 				CEE94C922452E4BB00B4965E /* SceneDelegate.swift in Sources */,
 				CEE94CA42452E51D00B4965E /* CoreDataStack.swift in Sources */,
 			);
