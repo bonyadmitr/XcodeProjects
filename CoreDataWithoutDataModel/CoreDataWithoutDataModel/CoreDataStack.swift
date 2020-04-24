@@ -1,14 +1,14 @@
 import CoreData
 
-extension CoreDataStack {
-    static let shared = CoreDataStack(storeType: .sqlite, modelName: "ProductsList")
-}
+//extension CoreDataStack {
+//    static let shared = CoreDataStack(storeType: .memory, modelName: "ProductsList")
+//}
 
 final class CoreDataStack {
     
     enum PersistentStoreType {
         case memory
-        case sqlite
+        case disk //sqlite
     }
     
     private let storeType: PersistentStoreType
@@ -52,7 +52,9 @@ final class CoreDataStack {
             //description.shouldMigrateStoreAutomatically = true
             //description.shouldInferMappingModelAutomatically = true
             container.persistentStoreDescriptions = [description]
-        case .sqlite:
+            
+        case .disk:
+            /// defalut disk
             break
         }
         
