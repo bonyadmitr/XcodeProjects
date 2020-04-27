@@ -12,7 +12,7 @@ extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .disk, modelName: "CoreDataStorage", managedObjectModel: moModel)
 }
 
-/// no need @objc(NSManagedObject SUBCLASS) CoreDataStack(storeType: .memoty
+/// no need @objc(NSManagedObject SUBCLASS) for CoreDataStack(storeType: .memoty
 final class CoreDataStack {
     
     enum PersistentStoreType {
