@@ -68,3 +68,47 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
     }
 }
+
+final class AppConfigurator {
+    
+    weak var window: UIWindow?
+    
+    /// SceneDelegate Without Storyboard (short and simple) https://samwize.com/2019/08/05/setup-scenedelegate-without-storyboard/
+    /// UIScene programmatic https://medium.com/@ZkHaider/apples-new-uiscene-api-a-programmatic-approach-52d05e382cf2
+    @available(iOS 13.0, *)
+    func setup(scene: UIScene) -> UIWindow? {
+        guard let windowScene = scene as? UIWindowScene else {
+            assertionFailure()
+            return nil
+        }
+        
+        let window = UIWindow(windowScene: windowScene)
+        setupApp()
+        setupWindow(window)
+        return window
+    }
+    
+    func setupWindowForAppDelegate() -> UIWindow? {
+        if #available(iOS 13.0, *) {
+            return nil
+        } else {
+            let window = UIWindow(frame: UIScreen.main.bounds)
+            setupApp()
+            setupWindow(window)
+            return window
+        }
+    }
+    
+    private func setupApp() {
+    }
+    
+    private func setupWindow(_ window: UIWindow) {
+        let rootVC = UIViewController()
+        rootVC.view.backgroundColor = .cyan
+        
+        window.rootViewController = rootVC
+        window.makeKeyAndVisible()
+        self.window = window
+    }
+    
+}
