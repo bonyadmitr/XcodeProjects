@@ -15,12 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        window = UIWindow()
-        window?.backgroundColor = UIColor.cyan
-        window?.rootViewController = UIViewController()
-        window?.makeKeyAndVisible()
-
+        window = AppConfigurator.shared.setupWindowForAppDelegate()
         return true
     }
 
@@ -57,19 +52,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let scene = scene as? UIWindowScene else {
-            assertionFailure()
-            return
-        }
-        
-        window = UIWindow(windowScene: scene)
-        window?.backgroundColor = UIColor.cyan
-        window?.rootViewController = UIViewController()
-        window?.makeKeyAndVisible()
+        self.window = AppConfigurator.shared.setup(scene: scene)
     }
 }
 
 final class AppConfigurator {
+    
+    static let shared = AppConfigurator()
+    private init() {}
     
     weak var window: UIWindow?
     
