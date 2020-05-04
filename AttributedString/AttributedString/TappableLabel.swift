@@ -1,22 +1,17 @@
 import UIKit
 
-public protocol TapableLabelDelegate: class {
-    func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange)
+public protocol TappableLabelDelegate: class {
+    func tappableLabel(_ label: TappableLabel, didTapAt url: String, in range: NSRange)
 }
-
-// TODO: add background highlight like UITextView click with line breaks
-/// check links and hebrew project (CoreText)
-/// https://stackoverflow.com/questions/21443625/core-text-calculate-letter-frame-in-ios/21497660#21497660
-/// https://stackoverflow.com/questions/21764316/using-nslayoutmanager-to-calculate-frames-for-each-glyph
 
 /// question: https://stackoverflow.com/q/1256887/5893286
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
-public class TapableLabel: UILabel {
+public class TappableLabel: UILabel {
     
     /// defailt is [.foregroundColor: UIColor.purple]
     public var highlightedLinkAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.purple]
     
-    public weak var delegate: TapableLabelDelegate?
+    public weak var delegate: TappableLabelDelegate?
     
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: .zero)
@@ -124,7 +119,7 @@ public class TapableLabel: UILabel {
         
         for (urlString, range) in rangesByLinkUrls {
             if NSLocationInRange(indexOfCharacter, range) {
-                delegate?.tapableLabel(self, didTapAt: urlString, in: range)
+                delegate?.tappableLabel(self, didTapAt: urlString, in: range)
                 
                 if #available(iOS 10.0, *) {
                     let generator = UIImpactFeedbackGenerator(style: .light)
@@ -205,5 +200,30 @@ public class TapableLabel: UILabel {
         }
         
         rangesByLinkUrls[url] = range
+    }
+}
+
+extension TappableLabel {
+    func setup(fullText: NSMutableAttributedString,
+               urlsByLinks: [String: String],
+               linkAttributes: [NSAttributedString.Key: Any]) {
+        
+        for (link, url) in urlsByLinks {
+            let range = fullText.mutableString.range(of: link)
+            fullText.addAttributes(linkAttributes, range: range)
+            addLink(at: range, withURL: url)
+        }
+        
+        attributedText = fullText
+        
+        /// for background usage:
+        /// with async will not update label by highlighting.
+        /// another solution is create fullText in DispatchQueue.main.async too.
+        /// seems like it is a bug.
+        /// tested on iOS 12.
+        /// seems the same bug https://github.com/Cocoanetics/DTCoreText/issues/620
+        //DispatchQueue.main.sync { [weak self] in
+        //    self?.attributedText = fullText
+        //}
     }
 }
