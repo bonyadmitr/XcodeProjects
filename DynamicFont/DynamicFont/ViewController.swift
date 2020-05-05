@@ -56,6 +56,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //let font = UIFont.systemFont(ofSize: 30)
+        //let font = UIFont.preferredFont(forTextStyle: .body)
+        
+        let font = UIFont.systemFont(ofSize: 30).dynamic()
     }
 
 
