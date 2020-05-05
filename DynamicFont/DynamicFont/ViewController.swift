@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// iOS 10 Attributed Text https://medium.com/livefront/practical-dynamic-type-part-3-attributed-text-65c39d8586c4
+
 //protocol DynamicFontable: UIContentSizeCategoryAdjusting {
 //    var font: UIFont? { get set }
 //}
@@ -68,6 +70,7 @@ extension UITextView {
 }
 
 
+/// inspired https://dasdom.github.io/dynamic-type-in-uibuttons/
 final class Button: UIButton {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -80,6 +83,7 @@ final class Button: UIButton {
 
 extension UIButton {
 
+    /// inspired https://blog.kiprosh.com/dynamic-font-size-in-ios/
     func setDynamicFontSize() {
 //        titleLabel?.font = titleLabel?.font.dynamic()
 //        titleLabel?.adjustsFontForContentSizeCategory = true
