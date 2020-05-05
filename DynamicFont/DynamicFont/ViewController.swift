@@ -44,6 +44,14 @@ extension UITextField {
         //adjustsFontSizeToFitWidth = false
     }
 }
+
+extension UITextView {
+    func setDynamicFont(font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+        self.font = font.dynamic(for: textStyle)
+        adjustsFontForContentSizeCategory = true
+    }
+}
+
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
