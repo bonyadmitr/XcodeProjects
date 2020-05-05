@@ -73,6 +73,30 @@ class ViewController: UIViewController {
         button1.titleLabel?.font = font
         button1.titleLabel?.adjustsFontForContentSizeCategory = true
         
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor: UIColor.red,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .font: font]
+        let attrTitle = NSMutableAttributedString(string: "Button 2", attributes: attributes)
+        
+        let button2 = UIButton(type: .system)
+        
+        //button2.setTitleColor(.label, for: .normal)
+        button2.setAttributedTitle(attrTitle, for: .normal)
+        button2.titleLabel?.attributedText = attrTitle
+        button2.titleLabel?.font = font
+        button2.titleLabel?.adjustsFontForContentSizeCategory = true
+        button2.setDynamicFontSize()
+        
+        view.addSubview(button2)
+        button2.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            button2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
+            button2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+        ])
+        
     }
 
 
