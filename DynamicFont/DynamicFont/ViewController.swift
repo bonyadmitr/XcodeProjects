@@ -121,6 +121,14 @@ class ViewController: UIViewController {
         textField1.placeholder = "TextField 1"
         textField1.font = font
         textField1.adjustsFontForContentSizeCategory = true
+        
+        let stackView = UIStackView(arrangedSubviews: [label1, myButton, button1, textField1, textView1])
+        stackView.axis = .vertical
+        stackView.frame = view.bounds
+        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //view.addSubview(stackView)
+        view.insertSubview(stackView, at: 0)
+        
     }
 
 
