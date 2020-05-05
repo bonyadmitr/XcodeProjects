@@ -53,6 +53,9 @@ extension UITextView {
 }
 
 class ViewController: UIViewController {
+    
+    let myButton = UIButton(type: .system)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -96,6 +99,14 @@ class ViewController: UIViewController {
             button2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 8),
             button2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
         ])
+        
+        
+        /// https://stackoverflow.com/a/56826854/5893286
+        
+        let attributedText = NSAttributedString(string: "Press me", attributes: attributes)
+        myButton.titleLabel?.attributedText = attributedText
+        myButton.setAttributedTitle(myButton.titleLabel?.attributedText, for: .normal)
+        myButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
     }
 
