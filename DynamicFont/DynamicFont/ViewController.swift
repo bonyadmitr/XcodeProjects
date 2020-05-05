@@ -115,6 +115,12 @@ class ViewController: UIViewController {
         textView1.adjustsFontForContentSizeCategory = true
         //textView1.translatesAutoresizingMaskIntoConstraints = false
         textView1.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let textField1 = UITextField()
+        textField1.borderStyle = .roundedRect
+        textField1.placeholder = "TextField 1"
+        textField1.font = font
+        textField1.adjustsFontForContentSizeCategory = true
     }
 
 
