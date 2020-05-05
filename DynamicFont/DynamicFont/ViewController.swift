@@ -108,6 +108,13 @@ class ViewController: UIViewController {
         myButton.setAttributedTitle(myButton.titleLabel?.attributedText, for: .normal)
         myButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
+        
+        let textView1 = UITextView()
+        textView1.font = font
+        textView1.text = "UITextView 1"
+        textView1.adjustsFontForContentSizeCategory = true
+        //textView1.translatesAutoresizingMaskIntoConstraints = false
+        textView1.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
 
