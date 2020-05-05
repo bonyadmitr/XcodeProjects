@@ -61,6 +61,11 @@ class ViewController: UIViewController {
         //let font = UIFont.preferredFont(forTextStyle: .body)
         
         let font = UIFont.systemFont(ofSize: 30).dynamic()
+        
+        let label1 = UILabel()
+        label1.text = "Label 1"
+        label1.font = font
+        label1.adjustsFontForContentSizeCategory = true
     }
 
 
