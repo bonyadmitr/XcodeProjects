@@ -29,6 +29,21 @@ extension UILabel {
     
 }
 
+extension UITextField {
+    
+    func setDynamicFont(font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+        self.font = font.dynamic(for: textStyle)
+        adjustsFontForContentSizeCategory = true
+    }
+    
+    func updateFontToDynamic(for textStyle: UIFont.TextStyle = .body) {
+        font = font?.dynamic(for: textStyle)
+        adjustsFontForContentSizeCategory = true
+        
+        // TODO: check
+        //adjustsFontSizeToFitWidth = false
+    }
+}
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
