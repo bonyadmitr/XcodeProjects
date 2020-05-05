@@ -9,8 +9,12 @@
 import UIKit
 
 extension UIFont {
-    func dynamic(for textStyle: UIFont.TextStyle = .body) -> UIFont {
-        //UIFontMetrics.default
+    
+    func dynamic() -> UIFont {
+        return UIFontMetrics.default.scaledFont(for: self)
+    }
+    
+    func dynamic(for textStyle: UIFont.TextStyle) -> UIFont {
         let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
         return fontMetrics.scaledFont(for: self)
     }
