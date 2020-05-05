@@ -62,6 +62,35 @@ final class Button: UIButton {
     }
 
 }
+
+extension UIButton {
+
+    func setDynamicFontSize() {
+//        titleLabel?.font = titleLabel?.font.dynamic()
+//        titleLabel?.adjustsFontForContentSizeCategory = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setButtonDynamicFontSize),
+                                               name: UIContentSizeCategory.didChangeNotification,
+                                               object: nil)
+    }
+
+    @objc private func setButtonDynamicFontSize() {
+//        sizeToFit()
+        
+        let title = currentAttributedTitle
+        
+        titleLabel?.attributedText = title
+//        setAttributedTitle(nil, for: state)
+//        setAttributedTitle(title, for: state)
+        
+        
+//        sizeToFit()
+    }
+
+}
+
+
+
 class ViewController: UIViewController {
     
     let myButton = UIButton(type: .system)
