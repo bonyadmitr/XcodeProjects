@@ -8,6 +8,21 @@
 
 import UIKit
 
+//protocol DynamicFontable: UIContentSizeCategoryAdjusting {
+//    var font: UIFont? { get set }
+//}
+//
+//extension DynamicFontable {
+//    func setDynamicFont(font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+//        self.font = font.dynamic(for: textStyle)
+//        adjustsFontForContentSizeCategory = true
+//    }
+//}
+//
+//extension UILabel: DynamicFontable {}
+//extension UITextField: DynamicFontable {}
+//extension UITextView: DynamicFontable {}
+
 extension UIFont {
     
     func dynamic() -> UIFont {
