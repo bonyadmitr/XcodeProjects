@@ -131,6 +131,8 @@ class ViewController: UIViewController {
         
     }
 
-
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        myButton.sizeToFit()
+    }
 }
 
