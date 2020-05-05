@@ -52,6 +52,16 @@ extension UITextView {
     }
 }
 
+
+final class Button: UIButton {
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let text = currentTitle
+        setTitle(nil, for: state)
+        setTitle(text, for: state)
+    }
+
+}
 class ViewController: UIViewController {
     
     let myButton = UIButton(type: .system)
