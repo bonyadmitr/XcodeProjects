@@ -162,6 +162,9 @@ class ViewController: UIViewController {
         myButton.setAttributedTitle(myButton.titleLabel?.attributedText, for: .normal)
         myButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
+        let label2 = UILabel()
+        label2.attributedText = NSMutableAttributedString(string: "Label 2", attributes: attributes)
+        label2.adjustsFontForContentSizeCategory = true
         
         let textView1 = UITextView()
         textView1.font = font
@@ -176,7 +179,7 @@ class ViewController: UIViewController {
         textField1.font = font
         textField1.adjustsFontForContentSizeCategory = true
         
-        let stackView = UIStackView(arrangedSubviews: [label1, myButton, button1, textField1, textView1])
+        let stackView = UIStackView(arrangedSubviews: [label1, label2, myButton, button1, textField1, textView1])
         stackView.axis = .vertical
         stackView.frame = view.bounds
         stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
