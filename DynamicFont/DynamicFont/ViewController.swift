@@ -66,6 +66,13 @@ class ViewController: UIViewController {
         label1.text = "Label 1"
         label1.font = font
         label1.adjustsFontForContentSizeCategory = true
+        
+        let button1 = UIButton(type: .system)
+        button1.setTitle("Button 1", for: .normal)
+        button1.setTitleColor(.label, for: .normal)
+        button1.titleLabel?.font = font
+        button1.titleLabel?.adjustsFontForContentSizeCategory = true
+        
     }
 
 
