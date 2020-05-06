@@ -10,6 +10,10 @@ import UIKit
 
 /// iOS 10 Attributed Text https://medium.com/livefront/practical-dynamic-type-part-3-attributed-text-65c39d8586c4
 
+/// source https://stackoverflow.com/a/35357416/5893286
+//let pointSize  = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
+//let customFont = UIFont(name: "Chalkboard SE", size: pointSize)
+
 //protocol DynamicFontable: UIContentSizeCategoryAdjusting {
 //    var font: UIFont? { get set }
 //}
