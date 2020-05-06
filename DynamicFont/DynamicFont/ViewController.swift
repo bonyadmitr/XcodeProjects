@@ -9,6 +9,9 @@
 import UIKit
 
 /// iOS 10 Attributed Text https://medium.com/livefront/practical-dynamic-type-part-3-attributed-text-65c39d8586c4
+/// Custom Font With Dynamic Type https://useyourloaf.com/blog/using-a-custom-font-with-dynamic-type/
+
+/// UIFontMetrics.default.scaledFont for ios < 11 https://stackoverflow.com/q/20510094/5893286
 //let customDynamicType: [UIContentSizeCategory: (pointSize: CGFloat, styleName: String,
 //    leading: CGFloat,  tracking: CGFloat)] = [
 //        .extraSmall:                        (10.0, "Heavy",  3.0, 0.6),
