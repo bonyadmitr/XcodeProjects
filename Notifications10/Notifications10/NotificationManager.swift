@@ -63,7 +63,7 @@ class NotificationManager: NSObject {
         content.title = "title 1"
         content.subtitle = "subtitle 2"
         content.body = "body 3"
-        content.sound = .default()
+        content.sound = .default
         content.badge = badge
         content.userInfo = ["someKey": 123]
         content.launchImageName = "keyboard_icon"
