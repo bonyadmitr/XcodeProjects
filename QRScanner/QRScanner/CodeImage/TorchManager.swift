@@ -18,11 +18,16 @@ open class TorchManager {
     
     /// nil for simulator
     public init?() {
+        #if targetEnvironment(simulator)
+        print("- TorchManager: Torch is not available in simulator")
+        return nil
+        #else
         guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else {
-            print("- TorchManager: Torch is not available")
+            assertionFailure("- TorchManager: Torch is not available. system error")
             return nil
         }
         self.device = device
+        #endif
     }
     
     public func setupTorch(with handler: (_ device: AVCaptureDevice) throws -> Void) {
