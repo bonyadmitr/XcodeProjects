@@ -129,6 +129,7 @@ final class TouchLabel: UILabel {
 
 // TODO: best practices with fonts
 // TODO: satisfy font from design with dynamic one
+// TODO: in app font size setting like macOS telegram
 extension UIFont {
     
     // TODO: add guard "is already dynamic" to prevent crash
