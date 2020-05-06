@@ -9,6 +9,23 @@
 import UIKit
 
 /// iOS 10 Attributed Text https://medium.com/livefront/practical-dynamic-type-part-3-attributed-text-65c39d8586c4
+//let customDynamicType: [UIContentSizeCategory: (pointSize: CGFloat, styleName: String,
+//    leading: CGFloat,  tracking: CGFloat)] = [
+//        .extraSmall:                        (10.0, "Heavy",  3.0, 0.6),
+//        .small:                             (12.0, "Heavy",  2.0, 0.4),
+//        .medium:                            (14.0, "Roman",  1.0, 0.2),
+//        .large:                             (14.0, "Roman",  0.0, 0.0),
+//        .unspecified:                       (16.0, "Roman",  0.0, 0.0),
+//        .extraLarge:                        (17.0, "Roman",  0.0, 0.0),
+//        .extraExtraLarge:                   (18.0, "Light",  -1.0, 0.0),
+//        .extraExtraExtraLarge:              (19.0, "Light",  -2.0, -0.1),
+//        .accessibilityMedium:               (20.0, "Light",  -3.0, -0.2),
+//        .accessibilityLarge:                (21.0, "Light",  -4.0, -0.2),
+//        .accessibilityExtraLarge:           (22.0, "Light",  -4.0, -0.2),
+//        .accessibilityExtraExtraLarge:      (23.0, "Light",  -4.0, -0.2),
+//        .accessibilityExtraExtraExtraLarge: (24.0, "Light",  -4.0, -0.2)
+//]
+//let fontType = customDynamicType[UIApplication.shared.preferredContentSizeCategory]
 
 /// source https://stackoverflow.com/a/35357416/5893286
 //let pointSize  = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
