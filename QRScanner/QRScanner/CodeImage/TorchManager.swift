@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 /// check for background
-open class TorchManager {
+public final class TorchManager {
     
     static let shared = TorchManager()
     
@@ -30,7 +30,7 @@ open class TorchManager {
         #endif
     }
     
-    public func setupTorch(with handler: (_ device: AVCaptureDevice) throws -> Void) {
+    private func setupTorch(with handler: (_ device: AVCaptureDevice) throws -> Void) {
         do {
             try device.lockForConfiguration()
             try handler(device)
