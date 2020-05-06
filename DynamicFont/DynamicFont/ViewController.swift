@@ -25,6 +25,19 @@ import UIKit
 //extension UITextField: DynamicFontable {}
 //extension UITextView: DynamicFontable {}
 
+/// https://stackoverflow.com/a/45907509/5893286
+final class InstantPanGestureRecognizer: UIPanGestureRecognizer {
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if state == .began {
+            return
+        }
+        super.touchesBegan(touches, with: event)
+        state = .began
+    }
+
+}
+
 /// set font in .font property or in .attributedText attribute .font
 final class TouchLabel: UILabel {
     
