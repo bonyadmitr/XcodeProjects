@@ -127,6 +127,7 @@ final class TouchLabel: UILabel {
     }
 }
 
+// TODO: best practices with fonts
 extension UIFont {
     
     // TODO: add guard "is already dynamic" to prevent crash
