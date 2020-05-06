@@ -257,8 +257,8 @@ class ViewController: UIViewController {
         /// UIFontDescriptor.SystemDesign example https://github.com/darjeelingsteve/system-design-example
         guard let fontDescriptor = UIFontDescriptor
             .preferredFontDescriptor(withTextStyle: .body)
-            .withDesign(.rounded)?
             .addingAttributes([UIFontDescriptor.AttributeName.traits: [UIFontDescriptor.TraitKey.weight: UIFont.Weight.black]])
+            .withDesign(.rounded) /// write at the end
         else {
             assertionFailure()
             return
