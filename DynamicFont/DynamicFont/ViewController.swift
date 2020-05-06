@@ -12,6 +12,8 @@ import UIKit
 /// Custom Font With Dynamic Type https://useyourloaf.com/blog/using-a-custom-font-with-dynamic-type/
 
 /// UIFontMetrics.default.scaledFont for ios < 11 https://stackoverflow.com/q/20510094/5893286
+/// apple video https://developer.apple.com/videos/play/wwdc2016/803/
+/// apple typography https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
 //let customDynamicType: [UIContentSizeCategory: (pointSize: CGFloat, styleName: String,
 //    leading: CGFloat,  tracking: CGFloat)] = [
 //        .extraSmall:                        (10.0, "Heavy",  3.0, 0.6),
