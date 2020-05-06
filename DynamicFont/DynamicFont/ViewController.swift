@@ -253,8 +253,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        guard let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).withDesign(.rounded) else {
+        
+        /// UIFontDescriptor.SystemDesign example https://github.com/darjeelingsteve/system-design-example
         guard let fontDescriptor = UIFontDescriptor
             .preferredFontDescriptor(withTextStyle: .body)
             .withDesign(.rounded)?
