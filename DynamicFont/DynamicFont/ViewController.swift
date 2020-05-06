@@ -36,6 +36,11 @@ import UIKit
 //let pointSize  = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
 //let customFont = UIFont(name: "Chalkboard SE", size: pointSize)
 
+/// dynamic size UI elements
+//let headlineMetrics = UIFontMetrics(forTextStyle: .headline)
+//let heightBeforeScaling: CGFloat = 44.0
+//let height = headlineMetrics.scaledValue(for: heightBeforeScaling)
+
 //protocol DynamicFontable: UIContentSizeCategoryAdjusting {
 //    var font: UIFont? { get set }
 //}
