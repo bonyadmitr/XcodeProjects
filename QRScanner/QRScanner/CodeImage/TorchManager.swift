@@ -35,9 +35,15 @@ open class TorchManager {
         }
     }
     
-    open func toggleTorch() {
+    public func toggleTorch() {
         setupTorch { device in
-            device.torchMode = device.torchMode == .on ? .off : .on
+            if device.torchMode == .on {
+                device.torchMode = .off
+            } else {
+                try device.setTorchModeOn(level: AVCaptureDevice.maxAvailableTorchLevel)
+            }
+            
+            //device.torchMode = device.torchMode == .on ? .off : .on
         }
     }
     
