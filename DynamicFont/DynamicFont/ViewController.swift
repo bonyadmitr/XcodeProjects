@@ -25,6 +25,95 @@ import UIKit
 //extension UITextField: DynamicFontable {}
 //extension UITextView: DynamicFontable {}
 
+/// set font in .font property or in .attributedText attribute .font
+final class TouchLabel: UILabel {
+    
+    var highlightedAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.purple]
+    var highlightedHandler: ((TouchLabel) -> Void)?
+    var unhighlightedHandler: ((TouchLabel) -> Void)?
+    var touchedUpInsideHandler: (() -> Void)?
+    
+    private var isLinkHighlighted = false
+    private var backupAttributedText: NSAttributedString?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        adjustsFontForContentSizeCategory = true
+        isUserInteractionEnabled = true
+        textAlignment = .center
+        numberOfLines = 0
+        
+        let panGesture = InstantPanGestureRecognizer(target: self, action: #selector(onPanGesture))
+        addGestureRecognizer(panGesture)
+    }
+    
+    @objc private func onPanGesture(_ gesture: UIPanGestureRecognizer) {
+        let touchLocation = gesture.location(in: self)
+        
+        guard bounds.contains(touchLocation) else {
+            unhighlightIfNeed()
+            return
+        }
+        
+        if gesture.state == .ended {
+            touchedUpInsideHandler?()
+            unhighlightIfNeed()
+            return
+        }
+        
+        highlightIfNeed()
+    }
+    
+    private func highlightIfNeed() {
+        
+        if isLinkHighlighted {
+            return
+        }
+        
+        isLinkHighlighted = true
+        
+        guard let attributedText = attributedText else {
+            assertionFailure("you should setup attributedText")
+            return
+        }
+        
+        let range = NSRange(location: 0, length: attributedText.length)
+        backupAttributedText = attributedText
+        
+        let attributedString = NSMutableAttributedString(attributedString: attributedText)
+        attributedString.addAttributes(highlightedAttributes, range: range)
+        
+        /// can be animated
+        /// UIView.transition(with: self, duration: 0.1, options: .transitionCrossDissolve, animations: {
+        self.attributedText = attributedString
+        
+        if #available(iOS 10.0, *) {
+            let generator = UISelectionFeedbackGenerator()
+            generator.selectionChanged()
+        }
+        
+        highlightedHandler?(self)
+    }
+    
+    private func unhighlightIfNeed() {
+        if backupAttributedText != nil {
+            attributedText = backupAttributedText
+            backupAttributedText = nil
+            isLinkHighlighted = false
+            unhighlightedHandler?(self)
+        }
+    }
+}
+
 extension UIFont {
     
     func dynamic() -> UIFont {
