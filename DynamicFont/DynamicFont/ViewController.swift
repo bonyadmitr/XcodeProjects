@@ -256,8 +256,22 @@ class ViewController: UIViewController {
         myButton.titleLabel?.adjustsFontForContentSizeCategory = true
         
         let label2 = UILabel()
-        label2.attributedText = NSMutableAttributedString(string: "Label 2", attributes: attributes)
+        label2.attributedText = NSAttributedString(string: "Label 2", attributes: attributes)
         label2.adjustsFontForContentSizeCategory = true
+        
+        let touchLabel = TouchLabel()
+        //touchLabel.font = font
+        //touchLabel.highlightedAttributes
+        touchLabel.attributedText = NSAttributedString(string: "TouchLabel", attributes: attributes)
+        touchLabel.touchedUpInsideHandler = {
+            print("- click AttributedButton")
+        }
+        touchLabel.highlightedHandler = { button in
+            button.backgroundColor = .gray
+        }
+        touchLabel.unhighlightedHandler = { button in
+            button.backgroundColor = .clear
+        }
         
         let textView1 = UITextView()
         textView1.font = font
@@ -272,7 +286,7 @@ class ViewController: UIViewController {
         textField1.font = font
         textField1.adjustsFontForContentSizeCategory = true
         
-        let stackView = UIStackView(arrangedSubviews: [label1, label2, myButton, button1, textField1, textView1])
+        let stackView = UIStackView(arrangedSubviews: [label1, label2, myButton, button1, touchLabel, textField1, textView1])
         stackView.axis = .vertical
         stackView.frame = view.bounds
         stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
