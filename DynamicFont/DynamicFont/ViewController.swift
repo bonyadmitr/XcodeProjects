@@ -255,10 +255,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         guard let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).withDesign(.rounded) else {
+        guard let fontDescriptor = UIFontDescriptor
+            .preferredFontDescriptor(withTextStyle: .body)
+            .withDesign(.rounded)?
+            .addingAttributes([UIFontDescriptor.AttributeName.traits: [UIFontDescriptor.TraitKey.weight: UIFont.Weight.black]])
+        else {
             assertionFailure()
             return
         }
-        let font = UIFont(descriptor: descriptor, size: descriptor.pointSize)
+        let font = UIFont(descriptor: fontDescriptor, size: fontDescriptor.pointSize)
         
         //let font = UIFont.systemFont(ofSize: 30)
         //let font = UIFont.preferredFont(forTextStyle: .body)
