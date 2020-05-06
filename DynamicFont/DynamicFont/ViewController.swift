@@ -254,11 +254,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        guard let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).withDesign(.rounded) else {
+            assertionFailure()
+            return
+        }
+        let font = UIFont(descriptor: descriptor, size: descriptor.pointSize)
         
         //let font = UIFont.systemFont(ofSize: 30)
         //let font = UIFont.preferredFont(forTextStyle: .body)
         
-        let font = UIFont.systemFont(ofSize: 30).dynamic()
+        //let font = UIFont.systemFont(ofSize: 30).dynamic()
         
         let label1 = UILabel()
         label1.text = "Label 1"
