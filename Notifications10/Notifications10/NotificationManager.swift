@@ -35,6 +35,7 @@ class NotificationManager: NSObject {
         }
     }
     
+    /// cancel all, create new one with updated badge
     func sendAlert() {
         badge = NSNumber(value: badge.intValue + 1)
         
