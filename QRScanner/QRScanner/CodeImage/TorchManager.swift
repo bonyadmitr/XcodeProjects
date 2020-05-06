@@ -40,5 +40,10 @@ open class TorchManager {
             device.torchMode = device.torchMode == .on ? .off : .on
         }
     }
+    
+    public func setTorchLevel(_ level: Float) {
+        assert(level <= AVCaptureDevice.maxAvailableTorchLevel, "level: \(level) > max: \(AVCaptureDevice.maxAvailableTorchLevel)")
+        setupTorch { try $0.setTorchModeOn(level: level) }
+    }
 }
 
