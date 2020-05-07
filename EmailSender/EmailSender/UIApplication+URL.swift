@@ -47,6 +47,6 @@ extension UIApplication {
     /// will open app settings if they are exists
     /// can be not exist if there is no anything to set (you didn't get any privacy)
     func openSettings() {
-        open(scheme: UIApplicationOpenSettingsURLString)
+        open(scheme: UIApplication.openSettingsURLString)
     }
 }

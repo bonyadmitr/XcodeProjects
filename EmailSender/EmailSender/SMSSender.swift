@@ -10,7 +10,7 @@ import MessageUI
 
 open class SMSSender: NSObject {
     
-    open static let shared = SMSSender()
+    public static let shared = SMSSender()
     
     open func sendFromSMSApp(message: String, to phones: [String]) {
         
