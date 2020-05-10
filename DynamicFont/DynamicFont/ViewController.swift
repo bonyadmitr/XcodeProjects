@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// UIFontPickerController https://medium.com/swlh/how-to-implement-custom-font-with-uifontpickercontroller-in-ios-13-5a06958c73d3
+
 /// iOS 10 Attributed Text https://medium.com/livefront/practical-dynamic-type-part-3-attributed-text-65c39d8586c4
 /// Custom Font With Dynamic Type https://useyourloaf.com/blog/using-a-custom-font-with-dynamic-type/
 
