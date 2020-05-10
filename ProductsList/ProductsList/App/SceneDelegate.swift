@@ -1,6 +1,33 @@
 import UIKit
 import Kingfisher
 
+extension UIView {
+    
+    func firstSubview<T: UIView>(of: T.Type) -> T? {
+        
+        func checkViewForType(_ inputView: UIView) -> T? {
+            if let view = inputView as? T {
+                return view
+            }
+            for view in inputView.subviews {
+                if let view2 = checkViewForType(view) {
+                    return view2
+                }
+            }
+            return nil
+        }
+        
+        for view in subviews {
+            if let view2 = checkViewForType(view) {
+                return view2
+            }
+        }
+        return nil
+    }
+    
+}
+
+
 final class AppearanceConfigurator {
     
     func apply() {
