@@ -11,6 +11,11 @@ extension UISearchBar {
             return value(forKey: "_searchField") as? UITextField ?? UITextField()
         }
     }
+    
+    /// iOS 13 Search Bar https://medium.com/better-programming/whats-new-in-the-ios-13-search-bar-f87c1e47f8d0
+    /// you can use new iOS 13 api:
+    //UISearchController.automaticallyShowsCancelButton = false
+    //searchBar.showsCancelButton = true
     var cancelButton: UIButton? {
         if #available(iOS 13, *) {
             return firstSubview(of: UIButton.self)
