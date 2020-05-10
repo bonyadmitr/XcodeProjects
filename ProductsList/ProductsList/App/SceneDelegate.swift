@@ -3,6 +3,8 @@ import Kingfisher
 
 extension UISearchBar {
     
+    /// you can use appearance like:
+    //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
     var textField: UITextField {
         if #available(iOS 13, *) {
             return searchTextField
