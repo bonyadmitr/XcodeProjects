@@ -11,6 +11,15 @@ extension UISearchBar {
             return value(forKey: "_searchField") as? UITextField ?? UITextField()
         }
     }
+    var cancelButton: UIButton? {
+        if #available(iOS 13, *) {
+            return firstSubview(of: UIButton.self)
+        } else {
+            // TODO: check iOS <= 12
+            /// iOS 13 crash: 'Access to UISearchBar's _cancelButton ivar is prohibited. This is an application bug
+            return value(forKey: "_cancelButton") as? UIButton
+        }
+    }
 }
 extension UIView {
     
