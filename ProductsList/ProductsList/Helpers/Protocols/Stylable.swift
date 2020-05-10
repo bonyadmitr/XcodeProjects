@@ -36,6 +36,7 @@ extension UILabel: Stylable {
         backgroundColor = .systemBackground
         textColor = .label
         numberOfLines = 0
+        adjustsFontForContentSizeCategory = true
     }
 }
 
