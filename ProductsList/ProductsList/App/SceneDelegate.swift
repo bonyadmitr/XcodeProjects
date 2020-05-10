@@ -21,6 +21,15 @@ extension UISearchBar {
         }
     }
 }
+
+extension UIFont {
+    
+    // TODO: add guard "is already dynamic" to prevent crash
+    func dynamic() -> UIFont {
+        return UIFontMetrics.default.scaledFont(for: self)
+    }
+}
+
 extension UIView {
     
     func firstSubview<T: UIView>(of: T.Type) -> T? {
