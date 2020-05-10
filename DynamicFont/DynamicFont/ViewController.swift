@@ -358,3 +358,19 @@ class ViewController: UIViewController {
     }
 }
 
+//final class SegmentedControl: UISegmentedControl {
+//
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        allSubviews(of: UILabel.self)
+//            .forEach { $0.adjustsFontSizeToFitWidth() }
+//    }
+//}
+//
+//extension UILabel {
+//    func adjustsFontSizeToFitWidth() {
+//        minimumScaleFactor = 0.5
+//        adjustsFontSizeToFitWidth = true
+//    }
+//}
