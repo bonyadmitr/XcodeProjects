@@ -1,6 +1,17 @@
 import UIKit
 import Kingfisher
 
+extension UISearchBar {
+    
+    var textField: UITextField {
+        if #available(iOS 13, *) {
+            return searchTextField
+        } else {
+            // TODO: assert
+            return value(forKey: "_searchField") as? UITextField ?? UITextField()
+        }
+    }
+}
 extension UIView {
     
     func firstSubview<T: UIView>(of: T.Type) -> T? {
