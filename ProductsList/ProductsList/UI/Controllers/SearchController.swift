@@ -20,6 +20,8 @@ final class SearchController: UISearchController {
         searchBar.smartQuotesType = .no
         searchBar.smartDashesType = .no
         
+        /// there is defalut zoom behavior like tabbar on extra large titles
+        searchBar.textField.adjustsFontForContentSizeCategory = true
         /// removes suggestions bar above keyboard
         //searchBar.autocorrectionType = .yes /// default .no for searchBar
         
@@ -35,6 +37,10 @@ final class SearchController: UISearchController {
     }
     
     private func setFont() {
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        
+        
+        searchBar.textField.font = font
     }
 
     @objc private func onContentSizeChange() {
