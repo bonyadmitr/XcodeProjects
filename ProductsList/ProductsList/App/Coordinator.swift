@@ -36,7 +36,8 @@ final class MainCoordinator: NSObject, Coordinator {
     
     private func childDidFinish(_ child: Coordinator?) {
         guard let childIndex = childCoordinators.enumerated().first(where: { $0.element === child })?.offset else {
-            assertionFailure("- \(child.debugDescription) not found in \(childCoordinators)")
+            /// don't need for app restoration
+            //assertionFailure("- \(child.debugDescription) not found in \(childCoordinators)")
             return
         }
         childCoordinators.remove(at: childIndex)
