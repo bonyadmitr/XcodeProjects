@@ -27,6 +27,18 @@ final class SearchController: UISearchController {
         
         /// to present content in current controller (without it didSelectItemAt will not work)
         obscuresBackgroundDuringPresentation = false
+        
+        /// for dynamic type
+        NotificationCenter.default.addObserver(self, selector: #selector(onContentSizeChange),
+                                               name: UIContentSizeCategory.didChangeNotification,
+                                               object: nil)
+    }
+    
+    private func setFont() {
+    }
+
+    @objc private func onContentSizeChange() {
+        setFont()
     }
     
     func setup(controller: UIViewController) {
