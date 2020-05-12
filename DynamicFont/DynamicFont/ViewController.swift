@@ -34,6 +34,10 @@ import UIKit
 //]
 //let fontType = customDynamicType[UIApplication.shared.preferredContentSizeCategory]
 
+/// custom sizes https://github.com/chuonglaquoc/GV247New_Tam/blob/master/GV24/Extentions/ChangeFontSize.swift
+
+/// automatization change font size in tests https://stackoverflow.com/a/55341947/5893286
+
 /// source https://stackoverflow.com/a/35357416/5893286
 //let pointSize  = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize
 //let customFont = UIFont(name: "Chalkboard SE", size: pointSize)
