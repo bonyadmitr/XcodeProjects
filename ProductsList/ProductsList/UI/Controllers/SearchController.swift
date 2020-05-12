@@ -22,6 +22,12 @@ final class SearchController: UISearchController {
         
         /// there is defalut zoom behavior like tabbar on extra large titles
         searchBar.textField.adjustsFontForContentSizeCategory = true
+        
+        /// delay(.async) to fix behavior of searchBar appear
+        DispatchQueue.main.async {
+            self.setFont()
+        }
+        
         /// removes suggestions bar above keyboard
         //searchBar.autocorrectionType = .yes /// default .no for searchBar
         
