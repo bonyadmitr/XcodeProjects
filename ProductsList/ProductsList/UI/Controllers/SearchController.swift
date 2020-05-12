@@ -45,8 +45,20 @@ final class SearchController: UISearchController {
     private func setFont() {
         let font = UIFont.preferredFont(forTextStyle: .body)
         
+        /// seems like simulator bug ios 13: start app with dynamic font < exstra large(long tap is not working) and after inscreasing to exstra large, long tap is not working yet
+//        searchBar.textField.font = UIFont.preferredFont(forTextStyle: .body)
+//        searchBar.setScopeBarButtonTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .body)], for: .normal)
+        
+//        searchBar
+//            .firstSubview(of: UISegmentedControl.self)?
+//            .allSubviews(of: UILabel.self)
+//            .forEach { $0.font = font }
         
         searchBar.textField.font = font
+        
+//        let label = searchBar.cancelButton?.titleLabel
+//        label?.font = font
+//        label?.lineBreakMode = .byClipping
     }
 
     @objc private func onContentSizeChange() {
