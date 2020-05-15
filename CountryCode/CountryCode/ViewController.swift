@@ -8,6 +8,10 @@
 
 import UIKit
 
+/// simulator iOS 13.3
+/// Locale.isoRegionCodes.count == 256
+/// NSLocale.availableLocaleIdentifiers.count == 930
+
 class ViewController: UIViewController {
     
 //    let languageManager = LanguageManager.shared
