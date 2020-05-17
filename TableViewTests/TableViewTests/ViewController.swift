@@ -11,6 +11,8 @@ import UIKit
 /// UILable memory cost https://www.fadel.io/blog/posts/ios-performance-tips-you-probably-didnt-know/
 /// answer https://twitter.com/Inferis/status/1229872436801228801
 
+/// willDisplayCell vs cellForRowAt  https://jobs.zalando.com/en/tech/blog/proper-use-of-cellforrowatindexpath-and-willdisplaycell
+
 class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView! {
