@@ -34,6 +34,9 @@ extension PhotoManagerDelegate where Self: PhotoManagerColectionViewDelegate {
 
         if collectionChanges.hasIncrementalChanges {
             
+            // TODO: check UICollectionView update
+            /// https://github.com/arthurhammer/FrameGrabber/blob/develop/Frame%20Grabber/Utilities/UICollectionView.swift
+            
             // If we have incremental diffs, animate them in the collection view.
             collectionView.performBatchUpdates({
                 // For indexes to make sense, updates must be in this order:
