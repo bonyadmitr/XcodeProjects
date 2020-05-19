@@ -1,5 +1,7 @@
 import Foundation
 
+/// Require: unwrap or crash https://github.com/JohnSundell/Require
+
 extension Optional {
     
     /**
