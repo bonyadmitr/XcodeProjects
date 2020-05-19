@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE6514B72473C0BD00916A11 /* ResizableHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6514B62473C0BD00916A11 /* ResizableHeaderTableView.swift */; };
 		CEFFCBA623D1F89200AF1519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFCBA523D1F89200AF1519 /* AppDelegate.swift */; };
 		CEFFCBA823D1F89200AF1519 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFCBA723D1F89200AF1519 /* SceneDelegate.swift */; };
 		CEFFCBAA23D1F89200AF1519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFCBA923D1F89200AF1519 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE6514B62473C0BD00916A11 /* ResizableHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableHeaderTableView.swift; sourceTree = "<group>"; };
 		CEFFCBA223D1F89200AF1519 /* ResizableHeaderTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResizableHeaderTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFFCBA523D1F89200AF1519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEFFCBA723D1F89200AF1519 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				CEFFCBA523D1F89200AF1519 /* AppDelegate.swift */,
 				CEFFCBA723D1F89200AF1519 /* SceneDelegate.swift */,
 				CEFFCBA923D1F89200AF1519 /* ViewController.swift */,
+				CE6514B62473C0BD00916A11 /* ResizableHeaderTableView.swift */,
 				CEFFCBAB23D1F89200AF1519 /* Main.storyboard */,
 				CEFFCBAE23D1F89600AF1519 /* Assets.xcassets */,
 				CEFFCBB023D1F89600AF1519 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				CEFFCBAA23D1F89200AF1519 /* ViewController.swift in Sources */,
 				CEFFCBA623D1F89200AF1519 /* AppDelegate.swift in Sources */,
+				CE6514B72473C0BD00916A11 /* ResizableHeaderTableView.swift in Sources */,
 				CEFFCBA823D1F89200AF1519 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
