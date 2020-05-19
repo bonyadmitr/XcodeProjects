@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 /// lib https://github.com/MessageKit/MessageKit
 /// basic example https://github.com/MessageKit/MessageKit/blob/master/Example/Sources/View%20Controllers/ChatViewController.swift
 /// there is no start from bottom https://github.com/MessageKit/MessageKit/issues?q=is%3Aissue+CGAffineTransform
-class ChatViewController: MessagesViewController, MessagesDataSource {
+class ChatViewController: MessagesViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -159,7 +159,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
-    // MARK: - MessagesDataSource
+}
+
+// MARK: - MessagesDataSource
+extension ChatViewController: MessagesDataSource {
     
     func currentSender() -> SenderType {
         return DataProvider.shared.meUser
@@ -177,10 +180,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 /// The MessagesLayoutDelegate and MessagesDisplayDelegate don't require you to implement any methods as they have default implementations for everything. You just need to make your MessagesViewController subclass conform to these two protocols and set them in the MessagesCollectionView object
 extension ChatViewController: MessagesDisplayDelegate, MessagesLayoutDelegate {
     
-    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
-        return .bubbleTail(tail, .curved)
-    }
+//    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+//        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+//        return .bubbleTail(tail, .curved)
+//    }
     
     /// or:
     ///layout?.setMessageOutgoingAvatarSize(.zero)
@@ -259,6 +262,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
 }
 
+// MARK: - MessageCellDelegate
 extension ChatViewController: MessageCellDelegate {
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
