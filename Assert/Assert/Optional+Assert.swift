@@ -61,3 +61,11 @@ extension Optional where Wrapped: Emptyably {
         }
     }
 }
+
+extension URL: ExpressibleByStringLiteral {
+    /// using: let url: URL = "https://www.google.com/"
+    public init(stringLiteral value: StaticString) {
+        self = URL(string: "\(value)").assertOrEmpty()
+    }
+}
+
