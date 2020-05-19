@@ -1,14 +1,6 @@
-//
-//  ViewController.swift
-//  ResizableHeaderTableView
-//
-//  Created by Bondar Yaroslav on 1/17/20.
-//  Copyright © 2020 Bondar Yaroslav. All rights reserved.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: ResizableHeaderTableView!
     
@@ -27,6 +19,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -37,4 +30,5 @@ extension ViewController: UITableViewDataSource {
         cell.backgroundColor = .magenta
         return cell
     }
+    
 }
