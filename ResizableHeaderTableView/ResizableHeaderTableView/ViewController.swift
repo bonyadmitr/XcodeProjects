@@ -16,26 +16,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let header = HeaderView()
-//        let label = UILabel()
-//        label.backgroundColor = .red
-//        label.numberOfLines = 0
         header.titleLabel.font = UIFont.systemFont(ofSize: 25)
-//        header.label.font = UIFont.preferredFont(forTextStyle: .title1)
-//        header.label.lineBreakMode = .byClipping
         header.titleLabel.text = "1-ResizableHeaderTableView 2-ResizableHeaderTableView 3-ResizableHeaderTableView -ResizableHeaderTableView 4-ResizableHeaderTableView 5-ResizableHeaderTableView 6-ResizableHeaderTableView 7-ResizableHeaderTableView 8-ResizableHeaderTableView 9-ResizableHeaderTableView 10-ResizableHeaderTableView 11-ResizableHeaderTableView 12-ResizableHeaderTableView\n\n 13-ResizableHeaderTableView"
         
         tableView.tableHeaderView = header
         tableView.sizeHeaderToFit()
-        
         tableView.dataSource = self
     }
-
 
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
