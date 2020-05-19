@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		CE6514CE2474628C00916A11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6514CC2474628C00916A11 /* Main.storyboard */; };
 		CE6514D02474628F00916A11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE6514CF2474628F00916A11 /* Assets.xcassets */; };
 		CE6514D32474628F00916A11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6514D12474628F00916A11 /* LaunchScreen.storyboard */; };
+		CE6514DB247481DB00916A11 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6514DA247481DB00916A11 /* DataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CE6514CF2474628F00916A11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE6514D22474628F00916A11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE6514D42474628F00916A11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE6514DA247481DB00916A11 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,6 @@
 				4B4C44E98B35F96A401FFBED /* Pods-ChatTests.debug.xcconfig */,
 				698E5B2326BFD52D72E12B08 /* Pods-ChatTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -84,6 +85,7 @@
 				CE6514C62474628C00916A11 /* AppDelegate.swift */,
 				CE6514C82474628C00916A11 /* SceneDelegate.swift */,
 				CE6514CA2474628C00916A11 /* ViewController.swift */,
+				CE6514DA247481DB00916A11 /* DataProvider.swift */,
 				CE6514CC2474628C00916A11 /* Main.storyboard */,
 				CE6514CF2474628F00916A11 /* Assets.xcassets */,
 				CE6514D12474628F00916A11 /* LaunchScreen.storyboard */,
@@ -209,6 +211,7 @@
 			files = (
 				CE6514CB2474628C00916A11 /* ViewController.swift in Sources */,
 				CE6514C72474628C00916A11 /* AppDelegate.swift in Sources */,
+				CE6514DB247481DB00916A11 /* DataProvider.swift in Sources */,
 				CE6514C92474628C00916A11 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
