@@ -28,7 +28,8 @@ class ChatViewController: MessagesViewController {
     
     var messageList: [MockMessage] = []
     
-    let refreshControl = UIRefreshControl()
+    var isLoadingList = false
+    var isAllRecordsLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,15 +70,22 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    @objc
-    func loadMoreMessages() {
+    private func loadMoreMessages() {
+        
+        isLoadingList = true
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
             let messages = DataProvider.shared.messages
+            
+            /// like "messages < limit" from server
+            if self.messageList.count > 100 {
+                self.isAllRecordsLoaded = true
+                return
+            }
             
             DispatchQueue.main.async {
                 self.messageList.insert(contentsOf: messages, at: 0)
                 self.messagesCollectionView.reloadDataAndKeepOffset()
-                self.refreshControl.endRefreshing()
+                self.isLoadingList = false
             }
         }
     }
@@ -91,9 +99,6 @@ class ChatViewController: MessagesViewController {
         
         scrollsToBottomOnKeyboardBeginsEditing = true // default false
         maintainPositionOnKeyboardFrameChanged = true // default false
-        
-        messagesCollectionView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
         
         // Hide the outgoing avatar and adjust the label alignment to line up with the messages
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
@@ -153,6 +158,16 @@ class ChatViewController: MessagesViewController {
         guard !messageList.isEmpty else { return false }
         let lastIndexPath = IndexPath(item: 0, section: messageList.count - 1)
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+    }
+    
+    /// https://github.com/MessageKit/MessageKit/issues/441
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell  {
+        if indexPath.section < 4 {   // Are we within 3 rows from the top?
+            if !isLoadingList && !isAllRecordsLoaded {
+                loadMoreMessages()
+            }
+        }
+        return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
     
 }
