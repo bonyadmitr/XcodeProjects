@@ -2,6 +2,7 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
+// TODO: base on ChatViewController
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
