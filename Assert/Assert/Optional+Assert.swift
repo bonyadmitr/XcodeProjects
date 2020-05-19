@@ -36,3 +36,16 @@ extension Optional {
         }
     }
 }
+
+
+protocol Emptyably {
+    init()
+}
+
+extension String: Emptyably {}
+
+extension URL: Emptyably {
+    init() {
+        self.init(fileURLWithPath: "")
+    }
+}
