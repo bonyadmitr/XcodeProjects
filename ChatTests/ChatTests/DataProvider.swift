@@ -13,6 +13,11 @@ final class DataProvider {
         MockMessage(text: "uiui", user: managerUser, messageId: UUID().uuidString, date: Date()),
         MockMessage(text: "wqiuehqwiueh\nweqe", user: managerUser, messageId: UUID().uuidString, date: Date()),
         MockMessage(text: "12312", user: meUser, messageId: UUID().uuidString, date: Date()),
+        MockMessage(text: "wq\niue\nhq\nwiueh\nw\neq\ne", user: managerUser, messageId: UUID().uuidString, date: Date()),
+        MockMessage(text: "wq\niue\nhq\nwiueh\nw\neq\ne", user: managerUser, messageId: UUID().uuidString, date: Date()),
+        MockMessage(text: "wq\niue\nhq\nwiueh\nw\neq\ne", user: managerUser, messageId: UUID().uuidString, date: Date()),
+        MockMessage(text: "wq\niue\nhq\nwiueh\nw\neq\ne", user: managerUser, messageId: UUID().uuidString, date: Date()),
+        MockMessage(text: "wq\niue\nhq\nwiueh\nw\neq\ne", user: managerUser, messageId: UUID().uuidString, date: Date()),
     ]
     
 }
