@@ -30,12 +30,6 @@ class ChatViewController: MessagesViewController {
     
     let refreshControl = UIRefreshControl()
     
-    let formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +42,7 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // TODO: start socket connection
 //        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
 //            .onNewMessage { [weak self] message in
 //                self?.insertMessage(message)
@@ -56,8 +51,7 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        MockSocket.shared.disconnect()
-//        audioController.stopAnyOngoingPlaying()
+        // TODO: stop socket connection
     }
     
     func loadFirstMessages() {
@@ -68,7 +62,9 @@ class ChatViewController: MessagesViewController {
                 self.messageList = messages
                 self.messagesCollectionView.reloadData()
                 self.messagesCollectionView.scrollToLastItem()
-//                self.messagesCollectionView.scrollToBottom()
+                
+                /// not safe. read doc
+                //self.messagesCollectionView.scrollToBottom()
             }
         }
     }
@@ -112,28 +108,28 @@ class ChatViewController: MessagesViewController {
     
     func configureMessageInputBar() {
         
-        messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
+        let buttonWidth: CGFloat = 36
+        messageInputBar.setRightStackViewWidthConstant(to: buttonWidth, animated: false)
         messageInputBar.sendButton.imageView?.backgroundColor = UIColor(white: 0.85, alpha: 1)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
+        messageInputBar.sendButton.setSize(CGSize(width: buttonWidth, height: buttonWidth), animated: false)
         
+        /// or 1
         //messageInputBar.sendButton.image = UIImage(systemName: "arrow.up")
-//        messageInputBar.sendButton.title = nil
+        //messageInputBar.sendButton.title = nil
         
+        /// or 2
         messageInputBar.sendButton.title = "↑"
         messageInputBar.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+        messageInputBar.sendButton.setTitleColor(.primaryColor, for: .normal)
+        messageInputBar.sendButton.setTitleColor(UIColor.primaryColor.withAlphaComponent(0.3),
+                                                 for: .highlighted)
         
         messageInputBar.sendButton.imageView?.layer.cornerRadius = 16
         messageInputBar.middleContentViewPadding.right = -38
         
         messageInputBar.delegate = self
-        
-//        messageInputBar.inputTextView.tintColor = .primaryColor
-//        messageInputBar.sendButton.setTitleColor(.primaryColor, for: .normal)
-//        messageInputBar.sendButton.setTitleColor(
-//            UIColor.primaryColor.withAlphaComponent(0.3),
-//            for: .highlighted
-//        )
+        messageInputBar.inputTextView.tintColor = .primaryColor
     }
     
     // MARK: - Helpers
