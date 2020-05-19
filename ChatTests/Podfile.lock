@@ -1,4 +1,7 @@
 PODS:
+  - Chatto (3.6.0)
+  - ChattoAdditions (3.6.0):
+    - Chatto
   - InputBarAccessoryView (4.3.2):
     - InputBarAccessoryView/Core (= 4.3.2)
   - InputBarAccessoryView/Core (4.3.2)
@@ -6,17 +9,23 @@ PODS:
     - InputBarAccessoryView (~> 4.3.0)
 
 DEPENDENCIES:
+  - Chatto (= 3.6.0)
+  - ChattoAdditions (= 3.6.0)
   - MessageKit
 
 SPEC REPOS:
   trunk:
+    - Chatto
+    - ChattoAdditions
     - InputBarAccessoryView
     - MessageKit
 
 SPEC CHECKSUMS:
+  Chatto: 44f711a558e421d6b34ac6f097fac95fbf21494c
+  ChattoAdditions: 78f90d4ad4d5fb171c5d11558ca493b5f8e9d419
   InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
   MessageKit: 3beb578737a5aa2bba25cc27c7b6d6faa09af5a7
 
-PODFILE CHECKSUM: f09f1f366abd9ddd98c2706b9e05a374b0f13da7
+PODFILE CHECKSUM: 25977f68ed46139dfc30c54934efe6f0e5d118b4
 
 COCOAPODS: 1.8.4

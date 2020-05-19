@@ -7,4 +7,7 @@ inhibit_all_warnings!
 
 target 'ChatTests' do
   pod 'MessageKit'
+
+  pod 'Chatto', '= 3.6.0'
+  pod 'ChattoAdditions', '= 3.6.0' # if you want to use the cells or the input component
 end
