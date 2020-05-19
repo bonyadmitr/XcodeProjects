@@ -49,3 +49,15 @@ extension URL: Emptyably {
         self.init(fileURLWithPath: "")
     }
 }
+
+extension Optional where Wrapped: Emptyably {
+    func assertOrEmpty(file: String = #file, line: Int = #line) -> Wrapped {
+        switch self {
+        case .none:
+            assertionFailure("\((file as NSString).lastPathComponent):\(line) is nil")
+            return Wrapped()
+        case .some(let value):
+            return value
+        }
+    }
+}
