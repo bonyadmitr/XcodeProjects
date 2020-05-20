@@ -31,7 +31,7 @@ class MSGChatController: MSGMessengerViewController {
             ],
             [
                 MSGMessage(id: 5, body: .text("Ugh, gotta sit through these two…"), user: steve, sentAt: Date()),
-                MSGMessage(id: 6, body: .image(#imageLiteral(resourceName: "Splatoon")), user: steve, sentAt: Date()),
+                MSGMessage(id: 6, body: .image(UIImage(systemName: "car")!), user: steve, sentAt: Date()),
             ],
             [
                 MSGMessage(id: 7, body: .text("Every. Single. Time."), user: tim, sentAt: Date()),
