@@ -33,8 +33,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="zbD-EL-Lpg" kind="relationship" relationship="viewControllers" id="hmI-g6-xyj"/>
+                        <segue destination="BOt-vd-FoE" kind="relationship" relationship="viewControllers" id="Cj5-RT-2yZ"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="6Zj-x3-xne"/>
+                        <segue destination="zbD-EL-Lpg" kind="relationship" relationship="viewControllers" id="hmI-g6-xyj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMV-mo-9Kk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -56,6 +57,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7Z-Lq-FV4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="578" y="1019"/>
+        </scene>
+        <!--MSG-->
+        <scene sceneID="TXU-sv-hqC">
+            <objects>
+                <viewController id="BOt-vd-FoE" customClass="MSGChatController" customModule="ChatTests" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TId-Ad-6QO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="pk3-Hl-Ofl"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="MSG" id="ZdS-s5-5I6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9vc-VD-Ayn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1260" y="1020"/>
         </scene>
     </scenes>
 </document>
