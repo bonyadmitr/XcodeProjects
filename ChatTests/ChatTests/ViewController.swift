@@ -13,8 +13,10 @@ class ViewController: UIViewController {
 
 }
 
+
+
 /// A base class
-/// lib https://github.com/MessageKit/MessageKit
+/// source https://github.com/MessageKit/MessageKit
 /// basic example https://github.com/MessageKit/MessageKit/blob/master/Example/Sources/View%20Controllers/ChatViewController.swift
 /// there is no start from bottom https://github.com/MessageKit/MessageKit/issues?q=is%3Aissue+CGAffineTransform
 class ChatViewController: MessagesViewController {
