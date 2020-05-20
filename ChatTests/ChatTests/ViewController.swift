@@ -13,15 +13,9 @@ struct User2: MSGUser {
 
 
 class MSGChatController: MSGMessengerViewController {
-
-    
-    // Users in the chat
     
     let steve = User2(displayName: "Steve", avatar: nil, avatarUrl: nil, isSender: true)
-    
     let tim = User2(displayName: "Tim", avatar: nil, avatarUrl: nil, isSender: false)
-    
-    // Messages
     
     lazy var messages: [[MSGMessage]] = {
         return [
@@ -31,15 +25,50 @@ class MSGChatController: MSGMessengerViewController {
             [
                 MSGMessage(id: 2, body: .text("Yeah sure, gimme 5"), user: steve, sentAt: Date()),
                 MSGMessage(id: 3, body: .text("Okay ready when you are"), user: steve, sentAt: Date())
+            ],
+            [
+                MSGMessage(id: 4, body: .text("Awesome 😁"), user: tim, sentAt: Date()),
+            ],
+            [
+                MSGMessage(id: 5, body: .text("Ugh, gotta sit through these two…"), user: steve, sentAt: Date()),
+                MSGMessage(id: 6, body: .image(#imageLiteral(resourceName: "Splatoon")), user: steve, sentAt: Date()),
+            ],
+            [
+                MSGMessage(id: 7, body: .text("Every. Single. Time."), user: tim, sentAt: Date()),
+            ],
+            [
+                MSGMessage(id: 8, body: .emoji("🙄😭"), user: steve, sentAt: Date()),
+                MSGMessage(id: 9, body: .imageFromUrl(URL(string: "https://placeimg.com/640/480/any")!), user: steve, sentAt: Date()
+                )
             ]
         ]
     }()
     
-    // Lifecycle
+    override var style: MSGMessengerStyle {
+        var style = MessengerKit.Styles.iMessage
+        style.headerHeight = 0
+//        style.inputPlaceholder = "Message"
+//        style.alwaysDisplayTails = true
+//        style.outgoingBubbleColor = .magenta
+//        style.outgoingTextColor = .black
+//        style.incomingBubbleColor = .green
+//        style.incomingTextColor = .yellow
+//        style.backgroundColor = .orange
+//        style.inputViewBackgroundColor = .purple
+        return style
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         dataSource = self
+        delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        collectionView.scrollToBottom(animated: false)
     }
 
     override func inputViewPrimaryActionTriggered(inputView: MSGInputView) {
@@ -122,6 +151,12 @@ extension MSGChatController: MSGDataSource {
         return messages[section].first?.user.displayName
     }
 
+}
+
+extension MSGChatController: MSGDelegate {
+    func tapReceived(for message: MSGMessage) {
+        print(message)
+    }
 }
 
 
