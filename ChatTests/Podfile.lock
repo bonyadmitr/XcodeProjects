@@ -7,11 +7,13 @@ PODS:
   - InputBarAccessoryView/Core (4.3.2)
   - MessageKit (3.1.0):
     - InputBarAccessoryView (~> 4.3.0)
+  - MessengerKit (1.0.5)
 
 DEPENDENCIES:
   - Chatto (= 3.6.0)
   - ChattoAdditions (= 3.6.0)
   - MessageKit
+  - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
 
 SPEC REPOS:
   trunk:
@@ -20,12 +22,22 @@ SPEC REPOS:
     - InputBarAccessoryView
     - MessageKit
 
+EXTERNAL SOURCES:
+  MessengerKit:
+    :git: https://github.com/steve228uk/MessengerKit.git
+
+CHECKOUT OPTIONS:
+  MessengerKit:
+    :commit: fc7551889d2dae84b0b50c8f00b6daccaff6fa26
+    :git: https://github.com/steve228uk/MessengerKit.git
+
 SPEC CHECKSUMS:
   Chatto: 44f711a558e421d6b34ac6f097fac95fbf21494c
   ChattoAdditions: 78f90d4ad4d5fb171c5d11558ca493b5f8e9d419
   InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
   MessageKit: 3beb578737a5aa2bba25cc27c7b6d6faa09af5a7
+  MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
 
-PODFILE CHECKSUM: 25977f68ed46139dfc30c54934efe6f0e5d118b4
+PODFILE CHECKSUM: f52bd235e380e1f407b776fb7c394af87481ec4f
 
 COCOAPODS: 1.8.4

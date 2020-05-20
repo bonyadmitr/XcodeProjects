@@ -10,4 +10,6 @@ target 'ChatTests' do
 
   pod 'Chatto', '= 3.6.0'
   pod 'ChattoAdditions', '= 3.6.0' # if you want to use the cells or the input component
+
+  pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
 end
