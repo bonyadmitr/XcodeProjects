@@ -4,6 +4,7 @@ public protocol TappableLabelDelegate: class {
     func tappableLabel(_ label: TappableLabel, didTapAt url: String, in range: NSRange)
 }
 
+/// another solution https://github.com/badoo/HyperLabel
 /// question: https://stackoverflow.com/q/1256887/5893286
 /// answer that upgraded: https://stackoverflow.com/a/53407849/5893286
 public class TappableLabel: UILabel {
