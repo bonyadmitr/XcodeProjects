@@ -137,14 +137,18 @@ final class OCRManager {
                 assertionFailure("The observations are of an unexpected type.")
                 return
             }
-            
-             let allStrings = observations
-                       .compactMap { $0.topCandidates(1).first }
-                       .compactMap { $0.string }
-                       .joined(separator: "\n")
+            // TODO: observations.first?.boundingBox
+            let allStrings = observations
+                .compactMap { $0.topCandidates(1).first }
+                .compactMap { $0.string }
+                .joined(separator: "\n")
             
             handler(allStrings)
         }
+        
+        // TODO: ocrRequest.regionOfInterest
+        
+        // TODO: check crop https://stackoverflow.com/q/58288763/5893286
         
         ocrRequest.recognitionLevel = .accurate
         ocrRequest.recognitionLanguages = ["en-US"]
