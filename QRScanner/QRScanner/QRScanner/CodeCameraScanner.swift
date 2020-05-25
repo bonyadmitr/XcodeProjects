@@ -13,6 +13,8 @@ protocol CodeCameraScannerDelegate: class {
     func codeCameraScanner(_ scanner: CodeCameraScanner, didDetect text: String)
 }
 
+/// full QR code reader https://github.com/vinodiOS/SwiftQRCodeScanner
+/// QR Code Generator online https://www.the-qrcode-generator.com/
 final class CodeCameraScanner: NSObject {
     
     private var captureSession: AVCaptureSession!
