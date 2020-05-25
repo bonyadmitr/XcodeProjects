@@ -11,7 +11,7 @@ struct User2: MSGUser {
     var isSender: Bool
 }
 
-
+/// source https://github.com/steve228uk/MessengerKit
 class MSGChatController: MSGMessengerViewController {
     
     let steve = User2(displayName: "Steve", avatar: nil, avatarUrl: nil, isSender: true)
