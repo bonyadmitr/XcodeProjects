@@ -2,6 +2,7 @@
 import Chatto
 import ChattoAdditions
 
+/// https://github.com/badoo/Chatto/wiki/BaseChatViewController
 /// source https://github.com/badoo/Chatto
 class ChattoController: BaseChatViewController {
     var shouldUseAlternativePresenter: Bool = false
