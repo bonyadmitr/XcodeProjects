@@ -19,21 +19,16 @@ class RetainableController: UIViewController {
         if isRetained {
             //handler = someFunc
             handler = {
-                print("- handler", self)
+                print(self)
             }
         } else {
             handler = { [weak self] in
                 guard let self = self else {
                     return
                 }
-                print("- handler", self)
+                print(self)
             }
         }
         
-        handler?()
-    }
-    
-    func someFunc() {
-        print("- handler", self)
     }
 }
