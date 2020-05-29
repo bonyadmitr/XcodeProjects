@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RetainableController.swift
 //  UnitTestsAndPerformance
 //
 //  Created by Yaroslav Bondar on 23/07/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RetainableController: UIViewController {
     
     var isRetained = false
     var handler: (() -> Void)?
