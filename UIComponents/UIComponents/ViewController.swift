@@ -18,3 +18,12 @@ class ViewController: UIViewController {
 
 }
 
+class RoundedProgressView: UIProgressView {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = bounds.midY
+        layer.masksToBounds = true
+    }
+}
