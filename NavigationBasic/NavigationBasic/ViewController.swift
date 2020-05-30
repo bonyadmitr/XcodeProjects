@@ -71,8 +71,10 @@ extension UITabBarController {
     }
     
     func isSelected(_ tab: Tab) -> Bool {
-        //selectedIndex == tab.rawValue
-        selectedViewController == viewControllers?[tab.rawValue]
+        selectedIndex == tab.rawValue
+        
+        /// #2. for more 5
+        //selectedViewController == viewControllers?[tab.rawValue]
     }
     
     func select(_ tab: Tab) {
@@ -84,7 +86,7 @@ extension UITabBarController {
             selectedIndex = index
         }
         
-        /// more 5 https://stackoverflow.com/a/5413606/5893286
+        /// #2. more 5 https://stackoverflow.com/a/5413606/5893286
         /// if the index maps to a tab within the More view controller (should you have more than five tabs), this will not work. In that case, use -setSelectedViewController
         //if controllers.count >= index + 1 {
         //    selectedViewController = controllers[index]
