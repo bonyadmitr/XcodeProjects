@@ -4,6 +4,8 @@ import UIKit
 // TODO: rootVC router
 // TODO: login router
 // TODO: split controller navigation
+// TODO: popups
+// TODO: activity indicator window +- nav bar
 extension UITabBarController {
     
     enum Tab: Int {
