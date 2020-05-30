@@ -24,6 +24,9 @@ class ViewController: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: [button1, button2, button3])
         stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
