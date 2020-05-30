@@ -40,6 +40,10 @@ class ViewController: UIViewController {
 
     @objc private func push() {
         let vc = ViewController()
+        
+        // TODO: example with
+        //vc.hidesBottomBarWhenPushed = true
+        
         vc.view.backgroundColor = .lightGray
         navigationController?.pushViewController(vc, animated: true)
         //navigationController?.replaceTopViewController(vc, animated: true)
