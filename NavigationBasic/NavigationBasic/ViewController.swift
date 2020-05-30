@@ -59,7 +59,7 @@ class ViewController: UIViewController {
 //                tabBarController.selectSecond()
 //            }
 //        }
-        tabBarController?.isSelected(.second) == true ? tabBarController?.select(.first) : tabBarController?.selectSecond()
+        tabBarController?.isSelected(.second) == true ? tabBarController?.select(.first) : tabBarController?.select(.second)
     }
 }
 
@@ -76,16 +76,6 @@ extension UITabBarController {
     
     var controllers: [UIViewController] {
         return viewControllers ?? []
-    }
-    
-    func selectFirst() {
-        if controllers.count >= 1 {
-            selectedIndex = 0
-        }
-    }
-    
-    func selectSecond() {
-        safeSelect(at: 1)
     }
     
     func select(_ tab: Tab) {
