@@ -41,6 +41,12 @@ class ViewController: UIViewController {
 
 }
 
+/**
+ Core Animation engineer: use cornerRadius https://twitter.com/TimOliverAU/status/1135999854176395264
+ How to set corner radius in iOS  https://onmyway133.github.io/blog/How-to-set-corner-radius-in-iOS/
+ shadow http://www.lukeparham.com/blog/2018/3/6/friends-dont-let-friends-render-offscreen
+ */
+
 class RoundedProgressView: UIProgressView {
     
     override func layoutSubviews() {
