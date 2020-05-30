@@ -12,7 +12,27 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let button1 = UIButton()
+        button1.setTitle("button1", for: .normal)
+        
+        let button2 = UIButton()
+        button2.setTitle("button2", for: .normal)
+        
+        let button3 = UIButton(type: .system)
+        button3.setTitle("button3", for: .normal)
+        
+        let stackView = UIStackView(arrangedSubviews: [button1, button2, button3])
+        stackView.axis = .vertical
+        view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            //            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 
 
