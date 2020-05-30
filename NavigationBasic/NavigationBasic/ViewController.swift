@@ -89,8 +89,8 @@ extension UITabBarController {
         
         /// more 5 https://stackoverflow.com/a/5413606/5893286
         /// if the index maps to a tab within the More view controller (should you have more than five tabs), this will not work. In that case, use -setSelectedViewController
-        //if controllers.count >= index {
-        //    selectedViewController = controllers[index - 1]
+        //if controllers.count >= index + 1 {
+        //    selectedViewController = controllers[index]
         //}
     }
     
