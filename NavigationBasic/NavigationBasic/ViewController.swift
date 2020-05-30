@@ -71,11 +71,8 @@ extension UITabBarController {
     }
     
     func isSelected(_ tab: Tab) -> Bool {
-        selectedIndex == tab.rawValue
-    }
-    
-    var controllers: [UIViewController] {
-        return viewControllers ?? []
+        //selectedIndex == tab.rawValue
+        selectedViewController == viewControllers?[tab.rawValue]
     }
     
     func select(_ tab: Tab) {
@@ -83,7 +80,7 @@ extension UITabBarController {
     }
     
     private func safeSelect(at index: Int) {
-        if controllers.count >= index + 1 {
+        if let viewControllers = viewControllers, viewControllers.count >= index + 1 {
             selectedIndex = index
         }
         
