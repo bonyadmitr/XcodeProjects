@@ -6,6 +6,8 @@ import UIKit
 // TODO: split controller navigation
 // TODO: popups
 // TODO: activity indicator window +- nav bar
+// TODO: NavigationPopup project
+
 extension UITabBarController {
     
     enum Tab: Int {
