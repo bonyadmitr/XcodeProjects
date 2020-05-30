@@ -28,7 +28,7 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
     
     func testDeallocation1() {
         assertDeallocationPresentedVC { () -> UIViewController in
-            let vc = ViewController()
+            let vc = RetainableController()
             vc.isRetained = false
             return vc
         }
@@ -39,7 +39,7 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
     /// This one must fail
     func testDeallocation2() {
         assertDeallocationPresentedVC {
-            let vc = ViewController()
+            let vc = RetainableController()
             vc.isRetained = true
             return vc
         }
@@ -67,7 +67,8 @@ final class UnitTestsAndPerformanceTests: XCTestCase {
         }
         
         assertDeallocation {
-            let vc = ViewController()
+            /// viewDidLoad() not called and it is not retained
+            let vc = RetainableController()
             vc.isRetained = true
             return vc
         }
