@@ -84,4 +84,6 @@ extension UIView {
             self.layer.mask = mask
         }
     }
+    
+    // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
 }
