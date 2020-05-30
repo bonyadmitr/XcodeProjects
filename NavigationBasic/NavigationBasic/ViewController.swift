@@ -18,3 +18,26 @@ class ViewController: UIViewController {
 
 }
 
+extension UINavigationController {
+    
+    /// source https://stackoverflow.com/a/25230169/5893286
+    func pushViewController(_ viewController: UIViewController,
+                            animated: Bool,
+                            completion: (() -> Void)?) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        pushViewController(viewController, animated: animated)
+        CATransaction.commit()
+    }
+    
+    func replaceTopViewController(_ viewController: UIViewController, animated: Bool) {
+        var currentStack = viewControllers
+        if currentStack.isEmpty {
+            pushViewController(viewController, animated: animated)
+        } else {
+            currentStack[currentStack.count - 1] = viewController
+            setViewControllers(currentStack, animated: animated)
+        }
+    }
+    
+}
