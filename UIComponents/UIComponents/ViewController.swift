@@ -117,6 +117,29 @@ extension UIView {
     // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
+extension UIColor {
+        
+    open func lighter(by percentage: CGFloat = 30) -> UIColor {
+        return adjust(by: abs(percentage) )
+    }
+    
+    open func darker(by percentage: CGFloat = 30) -> UIColor {
+        return adjust(by: -1 * abs(percentage) )
+    }
+    
+    open func adjust(by percentage: CGFloat = 30) -> UIColor {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        
+        guard getRed(&r, green: &g, blue: &b, alpha: &a) else {
+            return self
+        }
+        return UIColor(red: min(r + percentage / 100, 1.0),
+                       green: min(g + percentage / 100, 1.0),
+                       blue: min(b + percentage / 100, 1.0),
+                       alpha: a)
+    }
+    
+}
 /// https://stackoverflow.com/a/60423075/5893286
 class HighlightButton: UIButton {
 
