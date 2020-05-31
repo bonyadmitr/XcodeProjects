@@ -117,6 +117,20 @@ extension UIView {
     // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
+extension UIImage {
+    convenience init?(color: UIColor) {
+        let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
+
 extension UIColor {
         
     open func lighter(by percentage: CGFloat = 30) -> UIColor {
