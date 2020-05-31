@@ -117,3 +117,22 @@ extension UIView {
     // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
+/// https://stackoverflow.com/a/60423075/5893286
+class HighlightButton: UIButton {
+
+    var normalBackgroundColor: UIColor = .clear {
+        didSet {
+            backgroundColor = normalBackgroundColor
+        }
+    }
+
+    var highlightBackgroundColor: UIColor = .clear
+
+    override open var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? highlightBackgroundColor : normalBackgroundColor
+            //titleLabel?.textColor = isHighlighted ? UIColor.white.darker() : UIColor.white
+        }
+    }
+}
+
