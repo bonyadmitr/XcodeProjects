@@ -117,6 +117,13 @@ extension UIView {
     // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
+extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        let image = UIImage(color: color)
+        setBackgroundImage(image, for: state)
+    }
+}
+
 extension UIImage {
     convenience init?(color: UIColor) {
         let rect = CGRect(origin: .zero, size: CGSize(width: 1, height: 1))
