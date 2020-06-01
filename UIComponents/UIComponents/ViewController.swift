@@ -136,6 +136,47 @@ extension UIView {
     }
 }
 
+// TODO: CollageView
+//final class CollageView: UIView {
+//
+//    @IBOutlet private weak var imagesStackView: UIStackView! {
+//        willSet {
+//            newValue.spacing = 10
+//            newValue.alignment = .bottom
+//            newValue.axis = .horizontal
+//            newValue.distribution = .fill
+//        }
+//    }
+//
+//    private lazy var imageHeight: CGFloat = imagesStackView.bounds.height
+//
+//    private func createImageView(with image: UIImage) -> UIImageView {
+//        let width = image.size.width
+//        let height = image.size.height
+//        let scaleFactor = width / height
+//        let imageViewWidth = imageHeight * scaleFactor
+//
+//        let imageView = UIImageView(image: image)
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
+//        imageHeight -= 10
+//
+//        imageView.layer.shadowColor = UIColor.black.cgColor
+//        imageView.layer.shadowRadius = 2
+//        imageView.layer.shadowOpacity = 0.3
+//        imageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+//
+//        return imageView
+//    }
+//
+//    func setup(images: [UIImage]){
+//        images
+//            .compactMap { self.createImageView(with: $0) }
+//            .forEach { self.imagesStackView.addArrangedSubview($0) }
+//    }
+//}
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         let image = UIImage(color: color)
