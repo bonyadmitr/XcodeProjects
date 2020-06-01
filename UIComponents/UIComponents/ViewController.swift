@@ -377,6 +377,17 @@ class HighlightButton: UIButton {
 //    }
 //}
 
+enum Colors {
+    static let main = UIColor.magenta
+    static let mainHighlighted = UIColor.magenta.darker()
+    
+    static let text = UIColor.label
+    static let textHighlighted = UIColor.label.darker()
+    
+    static let white = UIColor.white
+    static let whiteHighlighted = UIColor.white.darker()
+}
+
     var normalBackgroundColor: UIColor = .clear {
         didSet {
             backgroundColor = normalBackgroundColor
