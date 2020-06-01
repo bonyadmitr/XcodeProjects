@@ -228,6 +228,23 @@ extension UIView {
 //            .forEach { self.imagesStackView.addArrangedSubview($0) }
 //    }
 //}
+
+// TODO: fix highlighted on fast touch
+/// https://stackoverflow.com/a/40062642/5893286
+/// https://stackoverflow.com/q/4627154/5893286
+//public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+////        isHighlighted = true
+//    setBackgroundColor(UIColor.magenta.darker(by: 30), for: .normal)
+//    super.touchesBegan(touches, with: event)
+//    //OperationQueue.main.addOperation { self.isHighlighted = true }
+//}
+//
+//public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    super.touchesEnded(touches, with: event)
+//    setBackgroundColor(UIColor.magenta, for: .normal)
+//
+//}
+
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         let image = UIImage(color: color)
