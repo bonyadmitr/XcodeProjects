@@ -272,8 +272,6 @@ extension UIColor {
     }
     
 }
-/// https://stackoverflow.com/a/60423075/5893286
-class HighlightButton: UIButton {
 
 
 //final class ButtonTest: UIButton {
@@ -427,18 +425,21 @@ extension UIButton {
     }
     
 }
+
+/// inspired https://stackoverflow.com/a/60423075/5893286
+class HighlightButton: MultiLineButton {
+
     var normalBackgroundColor: UIColor = .clear {
         didSet {
             backgroundColor = normalBackgroundColor
         }
     }
 
-    var highlightBackgroundColor: UIColor = .clear
+    var highlightedBackgroundColor: UIColor = .clear
 
-    override open var isHighlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            backgroundColor = isHighlighted ? highlightBackgroundColor : normalBackgroundColor
-            //titleLabel?.textColor = isHighlighted ? UIColor.white.darker() : UIColor.white
+            backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
         }
     }
 }
