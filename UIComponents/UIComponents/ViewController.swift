@@ -118,6 +118,24 @@ extension UIView {
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
 
+extension CACornerMask {
+    static var all: CACornerMask = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
+}
+
+protocol Circled {}
+extension Circled where Self: UIView {
+    func initSetupCircled() {
+        layer.masksToBounds = true
+    }
+
+    func layoutSubviewsSetupCircled() {
+        // TODO: test performance. iOS 11+ and 11-
+        //layer.maskedCorners = .all
+        
+        layer.cornerRadius = bounds.height * 0.5
+        //layer.cornerRadius = bounds.midY
+    }
+}
 extension UIView {
     
     /// https://stackoverflow.com/a/43295741/5893286
