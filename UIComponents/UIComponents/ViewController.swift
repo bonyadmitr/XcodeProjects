@@ -117,6 +117,25 @@ extension UIView {
     // TODO: Different cornerRadius for each corner https://stackoverflow.com/a/53128198/5893286
     // TODO: super-ellipse corners https://gist.github.com/Joony/04cf46cd884eb497d6590b632740b08d
 }
+
+extension UIView {
+    
+    /// https://stackoverflow.com/a/43295741/5893286
+    /// button3.setBackgroundColor(.magenta, for: .normal)
+    /// only button3.backgroundColor = .magenta
+    func addShadow(offset: CGSize, color: UIColor, radius: CGFloat, opacity: Float) {
+        layer.masksToBounds = false
+        layer.shadowOffset = offset
+        layer.shadowColor = color.cgColor
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+
+        let backgroundCGColor = backgroundColor?.cgColor
+        backgroundColor = nil
+        layer.backgroundColor =  backgroundCGColor
+    }
+}
+
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         let image = UIImage(color: color)
