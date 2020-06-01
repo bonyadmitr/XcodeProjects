@@ -136,6 +136,16 @@ extension Circled where Self: UIView {
         //layer.cornerRadius = bounds.midY
     }
 }
+
+protocol Rounded {}
+extension Rounded where Self: UIView {
+    func initSetupRounded() {
+        // TODO: test performance. iOS 11+ and 11-
+        //layer.maskedCorners = .all
+        layer.cornerRadius = 8
+    }
+}
+
 extension UIView {
     
     /// https://stackoverflow.com/a/43295741/5893286
