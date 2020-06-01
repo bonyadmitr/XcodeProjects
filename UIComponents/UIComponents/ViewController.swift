@@ -282,6 +282,36 @@ class HighlightButton: UIButton {
     }
 }
 
+class MultiLineButton: DynamicFontButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        titleLabel?.numberOfLines = 0
+        titleLabel?.lineBreakMode = .byWordWrapping
+        titleLabel?.textAlignment = .center
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return titleLabel?.intrinsicContentSize ?? .zero
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.preferredMaxLayoutWidth = titleLabel?.bounds.width ?? 0
+        super.layoutSubviews()
+    }
+    
+}
+
 class DynamicFontButton: UIButton {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
