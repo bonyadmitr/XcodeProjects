@@ -388,6 +388,28 @@ enum Colors {
     static let whiteHighlighted = UIColor.white.darker()
 }
 
+enum Fonts {
+    //static let button = UIFont.preferredFont(forTextStyle: .body)
+    //static let button = UIFont.systemFont(ofSize: 17).dynamic()
+    static let button = UIFont(name: "HelveticaNeue", size: 17)!
+    
+}
+
+// TODO: best practices with fonts
+// TODO: satisfy font from design with dynamic one
+// TODO: in app font size setting like macOS telegram
+extension UIFont {
+    
+    // TODO: add guard "is already dynamic" to prevent crash
+    func dynamic() -> UIFont {
+        return UIFontMetrics.default.scaledFont(for: self)
+    }
+    
+    func dynamic(for textStyle: UIFont.TextStyle) -> UIFont {
+        let fontMetrics = UIFontMetrics(forTextStyle: textStyle)
+        return fontMetrics.scaledFont(for: self)
+    }
+}
     var normalBackgroundColor: UIColor = .clear {
         didSet {
             backgroundColor = normalBackgroundColor
