@@ -164,6 +164,108 @@ extension UIColor {
 /// https://stackoverflow.com/a/60423075/5893286
 class HighlightButton: UIButton {
 
+
+//final class ButtonTest: UIButton {
+//
+//    private var observer: NSKeyValueObservation?
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    private func setup() {
+//        /// https://stackoverflow.com/a/47684777/5893286
+//        observer = layer.observe(\.bounds) { object, _ in
+//            print("- observer bounds", object.bounds)
+//        }
+//        /// not called for button
+//        //observer = layer.observe(\.frame) { object, _ in
+//        //    print("- observer frame", object.frame)
+//        //}
+//    }
+//
+//    override var frame: CGRect {
+//        didSet {
+//            /// .zero for button
+//            print("- frame", frame)
+//        }
+//    }
+//
+//    override var bounds: CGRect {
+//        didSet {
+//            print("- bounds", bounds)
+//        }
+//    }
+//
+//    /// called several times
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        print("- layoutSubviews", frame)
+//    }
+//
+//    deinit {
+//        observer?.invalidate()
+//    }
+//}
+//
+//final class ViewTest: UIView {
+//
+//    private var observer: NSKeyValueObservation?
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    private func setup() {
+//        backgroundColor = .red
+//
+//        /// https://stackoverflow.com/a/47684777/5893286
+//        observer = layer.observe(\.bounds) { object, _ in
+//            print("- observer bounds", object.bounds)
+//        }
+//        /// not called for button
+//        //observer = layer.observe(\.frame) { object, _ in
+//        //    print("- observer frame", object.frame)
+//        //}
+//    }
+//
+//    override var frame: CGRect {
+//        didSet {
+//            /// .zero for button
+//            /// called twice for UIVIew
+//            print("- frame", frame)
+//        }
+//    }
+//
+//    override var bounds: CGRect {
+//        didSet {
+//            print("- bounds", bounds)
+//        }
+//    }
+//
+//    /// called several times
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        print("- layoutSubviews", frame)
+//    }
+//
+//    deinit {
+//        observer?.invalidate()
+//    }
+//}
+
     var normalBackgroundColor: UIColor = .clear {
         didSet {
             backgroundColor = normalBackgroundColor
