@@ -13,32 +13,53 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let button1 = UIButton()
-        button1.setTitle("button1", for: .normal)
+        view.backgroundColor = .darkGray
         
-        let button2 = UIButton()
-        button2.setTitle("button2", for: .normal)
+        let button1 = ButtonMain()
+        button1.setTitle("Push", for: .normal)
+        button1.addTarget(self, action: #selector(push), for: .touchUpInside)
+        button1.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        let button2 = ButtonMain()
+        button2.setTitle("Present qweqw qweqwe qweqw qqq", for: .normal)
+        button2.addTarget(self, action: #selector(presentVC), for: .touchUpInside)
         
         let button3 = UIButton(type: .system)
-        button3.setTitle("button3", for: .normal)
+        button3.setTitle("Push", for: .normal)
+        button3.addTarget(self, action: #selector(push), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [button1, button2, button3])
+        let button4 = LinkButton()
+        button4.setLinkText("Some link. Some link. Some link. Some link.")
+        button4.addTarget(self, action: #selector(push), for: .touchUpInside)
+        
+        
+        let stackView = UIStackView(arrangedSubviews: [button1, button2, button3, button4])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        //stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -16),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 8),
             //            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 
-
+    @objc private func push() {
+        let vc = ViewController()
+        vc.view.backgroundColor = .lightGray
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func presentVC() {
+        let vc = ViewController()
+        vc.view.backgroundColor = .darkGray
+        present(vc, animated: true)
+    }
 }
 
 /**
