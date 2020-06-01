@@ -444,6 +444,39 @@ class HighlightButton: MultiLineButton {
     }
 }
 
+final class ButtonMain: HighlightButton, Shadowed, Rounded {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() -> Void {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        
+        normalBackgroundColor = Colors.main
+        highlightedBackgroundColor = Colors.mainHighlighted
+        setTitleColor(Colors.white, for: .normal)
+        setTitleColor(Colors.whiteHighlighted, for: .highlighted)
+        
+        setDynamicFont(Fonts.button)
+        
+        initSetupRounded()
+        initSetupShadow()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutSubviewsSetupShadow()
+    }
+    
+}
+
 /// button frame autolayout https://stackoverflow.com/a/35321242/5893286
 /// test by:
 //backgroundColor = .red
