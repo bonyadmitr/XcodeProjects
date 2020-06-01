@@ -180,6 +180,17 @@ class HighlightButton: UIButton {
     }
 }
 
+class DynamicFontButton: UIButton {
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        let font = titleLabel?.font
+        titleLabel?.font = nil
+        titleLabel?.font = font
+    }
+    
+}
 
 // TODO: refactor
 func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
