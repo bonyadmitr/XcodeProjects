@@ -146,6 +146,29 @@ extension Rounded where Self: UIView {
     }
 }
 
+protocol Shadowed {}
+extension Shadowed where Self: UIView {
+    func initSetupShadow() {
+        
+//        addShadow(offset: .zero, color: .black, radius: 5, opacity: 0.5)
+        
+        layer.masksToBounds = false
+        layer.shadowOffset = .zero//CGSize(width: 5.0, height: 5.0)
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 5.0
+        layer.shadowOpacity = 0.5
+//
+//        let backgroundCGColor = backgroundColor?.cgColor
+//        backgroundColor = nil
+//        layer.backgroundColor =  backgroundCGColor
+    }
+
+    func layoutSubviewsSetupShadow() {
+        //CGPath(rect: bounds, transform: nil)
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+    }
+}
+
 extension UIView {
     
     /// https://stackoverflow.com/a/43295741/5893286
