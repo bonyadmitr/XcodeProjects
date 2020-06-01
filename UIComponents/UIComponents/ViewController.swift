@@ -410,6 +410,23 @@ extension UIFont {
         return fontMetrics.scaledFont(for: self)
     }
 }
+
+extension UILabel {
+    
+    func setDynamicFont(_ font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+        self.font = font.dynamic(for: textStyle)
+        adjustsFontForContentSizeCategory = true
+    }
+    
+}
+
+extension UIButton {
+    
+    func setDynamicFont(_ font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+        titleLabel?.setDynamicFont(font, for: textStyle)
+    }
+    
+}
     var normalBackgroundColor: UIColor = .clear {
         didSet {
             backgroundColor = normalBackgroundColor
