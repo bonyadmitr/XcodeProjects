@@ -282,6 +282,10 @@ class HighlightButton: UIButton {
     }
 }
 
+/// button frame autolayout https://stackoverflow.com/a/35321242/5893286
+/// test by:
+//backgroundColor = .red
+//titleLabel?.backgroundColor = .green
 class MultiLineButton: DynamicFontButton {
     
     override init(frame: CGRect) {
