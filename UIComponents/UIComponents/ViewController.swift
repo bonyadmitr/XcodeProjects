@@ -180,3 +180,13 @@ class HighlightButton: UIButton {
     }
 }
 
+
+// TODO: refactor
+func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
+    let attributes: [NSAttributedString.Key: Any] = [
+        //.foregroundColor: UIColor.azure,
+        .underlineStyle: NSUnderlineStyle.single.rawValue,
+        //.font: UIFont.systemFont(ofSize: 16, weight: .bold).dynamic()
+    ]
+    return NSMutableAttributedString(string: text, attributes: attributes)
+}
