@@ -540,6 +540,44 @@ class DynamicFontButton: UIButton {
     
 }
 
+final class LinkButton: MultiLineButton {
+    
+    var normalLinkColor: UIColor = .blue {
+        didSet {
+            titleLabel?.textColor = normalLinkColor
+        }
+    }
+    
+    var highlightedLinkColor: UIColor = UIColor.blue.darker()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            titleLabel?.textColor = isHighlighted ? highlightedLinkColor : normalLinkColor
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() -> Void {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        setDynamicFont(Fonts.button)
+        normalLinkColor = .blue
+    }
+    
+    func setLinkText(_ text: String) {
+        setAttributedTitle(getLinkFontAttrString(text: text), for: .normal)
+    }
+    
+}
+
 // TODO: refactor
 func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
     let attributes: [NSAttributedString.Key: Any] = [
