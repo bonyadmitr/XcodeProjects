@@ -669,6 +669,8 @@ final class LinkButton: MultiLineButton {
 // TODO: refactor
 func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
     let attributes: [NSAttributedString.Key: Any] = [
+        /// apple says that we need to set foregroundColor for dynamic change
+        /// but it working without it in UIButton with setAttributedTitle
         //.foregroundColor: UIColor.azure,
         .underlineStyle: NSUnderlineStyle.single.rawValue,
         //.font: UIFont.systemFont(ofSize: 16, weight: .bold).dynamic()
