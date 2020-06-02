@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         
         /// working in UIButton(type: .system)
         let image = UIImage(systemName: "square.and.arrow.up")
+        button1.image = image
         //button1.currentPreferredSymbolConfiguration
         
 //        let q = UIImage.SymbolConfiguration(textStyle: .body)
@@ -33,7 +34,6 @@ class ViewController: UIViewController {
         
 //        UIImage.SymbolConfiguration.unspecified
         button1.setTitle("Поделиться статьей", for: .normal)
-        button1.setImage(image, for: .normal)
         
         button1.addTarget(self, action: #selector(push), for: .touchUpInside)
         //button1.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -45,7 +45,10 @@ class ViewController: UIViewController {
         let button3 = UIButton(type: .system)
         button3.setTitle("Push", for: .normal)
         button3.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button3.tintColor = .green
+        button3.backgroundColor = .red
         button3.addTarget(self, action: #selector(push), for: .touchUpInside)
+        button3.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         let button4 = LinkButton()
         button4.setLinkText("Some link wqw qwq wwww www www wwwww")
