@@ -573,6 +573,9 @@ class DynamicFontButton: UIButton {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
+            return
+        }
         let font = titleLabel?.font
         titleLabel?.font = nil
         titleLabel?.font = font
