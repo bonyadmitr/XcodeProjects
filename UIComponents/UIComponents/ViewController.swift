@@ -642,6 +642,10 @@ class DynamicFontButton: UIButton {
             assertionFailure("use setPreferredSymbolConfiguration")
             return
         }
+        
+        [UIControl.State.normal, .highlighted].forEach { state in
+            let img = image(for: state)?.withConfiguration(currentPreferredSymbolConfiguration)
+            setImage(img, for: state)
         }
         
     }
