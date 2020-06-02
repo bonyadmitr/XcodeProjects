@@ -414,14 +414,17 @@ extension UIColor {
 //}
 
 enum Colors {
-    static let main = UIColor.magenta
-    static let mainHighlighted = UIColor.magenta.darker()
+    ///  apple colors https://gist.github.com/DavidRysanek/fcca558c27e4e7b7d89d88b1fabeb4f1
+    static let main = UIColor.systemBlue
+    static let mainHighlighted = UIColor.systemBlue.darker()
     
     static let text = UIColor.label
     static let textHighlighted = UIColor.label.darker()
     
     static let white = UIColor.white
     static let whiteHighlighted = UIColor.white.darker()
+    
+    static let background = UIColor.systemBackground
 }
 
 enum Fonts {
