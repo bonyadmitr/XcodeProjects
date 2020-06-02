@@ -570,6 +570,33 @@ class MultiLineButton: DynamicFontButton {
 
 class DynamicFontButton: UIButton {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        setupDynamicImage()
+    }
+    
+    private func setupDynamicImage() {
+        /// UIDynamicProviderImage https://gist.github.com/SpectralDragon/4ddd2a01d8027a2ff831af8859861764
+        
+        ///default  custom button
+        //currentPreferredSymbolConfiguration == UIImage.SymbolConfiguration(scale: .medium)
+        
+        /// default system button
+        //currentPreferredSymbolConfiguration ==  UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
+        
+        let symbolConfig = UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
+        setPreferredSymbolConfiguration(symbolConfig, forImageIn: .normal)
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
