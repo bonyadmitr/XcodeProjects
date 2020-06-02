@@ -664,3 +664,49 @@ func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
     ]
     return NSMutableAttributedString(string: text, attributes: attributes)
 }
+
+class GhostButton: MultiLineButton, Rounded {
+    
+    var normalTintColor: UIColor = .white {
+        didSet {
+            layer.borderColor = normalTintColor.cgColor
+            setTitleColor(normalTintColor, for: .normal)
+        }
+    }
+    
+    var highlightedTintColor: UIColor = UIColor.white.darker() {
+        didSet {
+            setTitleColor(highlightedTintColor, for: .highlighted)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            layer.borderColor = isHighlighted ? highlightedTintColor.cgColor : normalTintColor.cgColor
+        }
+    }
+    
+    private func setup() -> Void {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        
+        normalTintColor = Colors.main
+        highlightedTintColor = Colors.mainHighlighted
+        
+        setDynamicFont(Fonts.button)
+        
+        layer.borderWidth = 2
+        
+        initSetupRounded()
+    }
+    
+}
