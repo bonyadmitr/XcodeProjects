@@ -516,7 +516,17 @@ class HighlightButton: MultiLineButton {
     override var isHighlighted: Bool {
         didSet {
             backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
-//            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
+            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
+        }
+    }
+    
+    var image: UIImage? {
+        get {
+            return currentImage
+        }
+        set {
+            setImage(newValue, for: .normal)
+            setImage(newValue, for: .highlighted)
         }
     }
 }
