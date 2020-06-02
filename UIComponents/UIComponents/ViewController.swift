@@ -576,6 +576,8 @@ class DynamicFontButton: UIButton {
         guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
             return
         }
+        
+        // TODO: is it needed?
         let font = titleLabel?.font
         titleLabel?.font = nil
         titleLabel?.font = font
