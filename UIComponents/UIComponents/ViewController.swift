@@ -608,6 +608,11 @@ class DynamicFontButton: UIButton {
         let font = titleLabel?.font
         titleLabel?.font = nil
         titleLabel?.font = font
+        // TODO: clear
+        if let image = currentImage?.withConfiguration(currentPreferredSymbolConfiguration!) {
+            setImage(image, for: state)
+        }
+        
     }
     
 }
