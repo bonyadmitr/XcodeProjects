@@ -13,23 +13,42 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .darkGray
+        view.backgroundColor = Colors.background
+        /// to test shadows
+        //view.backgroundColor = .darkGray
         
         let button1 = ButtonMain()
-        button1.setTitle("Push", for: .normal)
+        
+//        button1.setTitle("Push", for: .normal)
+//        button1.setImage(UIImage(systemName: "folder.fill"), for: .normal)
+        
+        //let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(textStyle: .body))
+        
+        /// working in UIButton(type: .system)
+        let image = UIImage(systemName: "square.and.arrow.up")
+        //button1.currentPreferredSymbolConfiguration
+        
+//        let q = UIImage.SymbolConfiguration(textStyle: .body)
+//        button1.setPreferredSymbolConfiguration(q, forImageIn: .normal)
+        
+//        UIImage.SymbolConfiguration.unspecified
+        button1.setTitle("Поделиться статьей", for: .normal)
+        button1.setImage(image, for: .normal)
+        
         button1.addTarget(self, action: #selector(push), for: .touchUpInside)
-        button1.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        //button1.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         let button2 = ButtonMain()
-        button2.setTitle("Present qweqw qweqwe qweqw qqq", for: .normal)
+        button2.setTitle("Present wwww www www wwwww", for: .normal)
         button2.addTarget(self, action: #selector(presentVC), for: .touchUpInside)
         
         let button3 = UIButton(type: .system)
         button3.setTitle("Push", for: .normal)
+        button3.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button3.addTarget(self, action: #selector(push), for: .touchUpInside)
         
         let button4 = LinkButton()
-        button4.setLinkText("Some link. Some link. Some link. Some link.")
+        button4.setLinkText("Some link wqw qwq wwww www www wwwww")
         button4.addTarget(self, action: #selector(push), for: .touchUpInside)
         
         let button5 = GhostButton()
