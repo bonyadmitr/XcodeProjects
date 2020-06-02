@@ -477,10 +477,18 @@ class HighlightButton: MultiLineButton {
     }
 
     var highlightedBackgroundColor: UIColor = .clear
+    
+    var normalTintColor = UIColor.clear {
+        didSet {
+            tintColor = normalTintColor
+        }
+    }
+    var highlightedTintColor = UIColor.clear
 
     override var isHighlighted: Bool {
         didSet {
             backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
+//            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
         }
     }
 }
@@ -502,8 +510,16 @@ final class ButtonMain: HighlightButton, Shadowed, Rounded {
         
         normalBackgroundColor = Colors.main
         highlightedBackgroundColor = Colors.mainHighlighted
+        
         setTitleColor(Colors.white, for: .normal)
         setTitleColor(Colors.whiteHighlighted, for: .highlighted)
+        
+        // TODO: highlightedTintColor
+        normalTintColor = Colors.white
+        highlightedTintColor = Colors.whiteHighlighted
+        //tintColor = Colors.white
+        
+        imageEdgeInsets.right = 8
         
         setDynamicFont(Fonts.button)
         
