@@ -32,8 +32,17 @@ class ViewController: UIViewController {
         button4.setLinkText("Some link. Some link. Some link. Some link.")
         button4.addTarget(self, action: #selector(push), for: .touchUpInside)
         
+        let button5 = GhostButton()
+        button5.setTitle("Ghost button wwwww", for: .normal)
+        button5.addTarget(self, action: #selector(push), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [button1, button2, button3, button4])
+        let button6 = GhostButton2()
+        //button6.tintColor = Colors.main
+        button6.setTitle("Ghost button 2 wwwww", for: .normal)
+        button6.addTarget(self, action: #selector(push), for: .touchUpInside)
+        
+        
+        let stackView = UIStackView(arrangedSubviews: [button1, button2, button3, button4, button5, button6])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .fill
