@@ -545,7 +545,6 @@ final class ButtonMain: HighlightButton, Shadowed, Rounded {
         // TODO: highlightedTintColor
         normalTintColor = Colors.white
         highlightedTintColor = Colors.whiteHighlighted
-        //tintColor = Colors.white
         
         imageEdgeInsets.right = 8
         
@@ -633,12 +632,16 @@ class DynamicFontButton: UIButton {
         }
         
         // TODO: is it needed?
+        /// update fonts
         let font = titleLabel?.font
         titleLabel?.font = nil
         titleLabel?.font = font
-        // TODO: clear
-        if let image = currentImage?.withConfiguration(currentPreferredSymbolConfiguration!) {
-            setImage(image, for: state)
+        
+        /// update images
+        guard let currentPreferredSymbolConfiguration = currentPreferredSymbolConfiguration else {
+            assertionFailure("use setPreferredSymbolConfiguration")
+            return
+        }
         }
         
     }
