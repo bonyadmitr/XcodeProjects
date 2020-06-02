@@ -646,7 +646,9 @@ final class LinkButton: MultiLineButton {
     private func setup() -> Void {
         heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
         setDynamicFont(Fonts.button)
-        normalLinkColor = .blue
+        
+        normalLinkColor = Colors.main
+        highlightedLinkColor = Colors.mainHighlighted
     }
     
     func setLinkText(_ text: String) {
