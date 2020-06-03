@@ -43,12 +43,14 @@ class ViewController: UIViewController {
         button2.addTarget(self, action: #selector(presentVC), for: .touchUpInside)
         
         let button3 = UIButton(type: .system)
-        button3.setTitle("Push", for: .normal)
+        button3.setTitle("System Push", for: .normal)
         button3.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        button3.tintColor = .green
-        button3.backgroundColor = .red
+        button3.tintColor = Colors.white
+        button3.backgroundColor = Colors.main
         button3.addTarget(self, action: #selector(push), for: .touchUpInside)
         button3.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button3.layer.cornerRadius = 8
+        //button3.isEnabled = false
         
         let button4 = LinkButton()
         button4.setLinkText("Some link wqw qwq wwww www www wwwww")
@@ -61,6 +63,8 @@ class ViewController: UIViewController {
         let button6 = GhostButton2()
         //button6.tintColor = Colors.main
         button6.setTitle("Ghost button 2 wwwww", for: .normal)
+        button6.image = image
+        button6.imageEdgeInsets.right = 8
         button6.addTarget(self, action: #selector(push), for: .touchUpInside)
         
         
