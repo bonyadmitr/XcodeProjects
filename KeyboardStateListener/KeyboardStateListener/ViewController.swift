@@ -255,7 +255,7 @@ extension ViewController: KeyboardHelperDelegate {
 
 
 
-private extension UIView {
+extension UIView {
     func addTapGestureToHideKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         addGestureRecognizer(tapGesture)
@@ -267,27 +267,7 @@ private extension UIView {
     }
 }
 
-//final class AdvancedScrollView: UIScrollView {
-//    func scrollToView(_ view: UIView) {
-//        let rect = convert(view.frame, to: self)
-//        scrollRectToVisible(rect, animated: true)
-//    }
-//
-//    func scrollToViews(_ views: [UIView]) {
-//        if views.isEmpty {
-//            return
-//        }
-//
-//        let rects: [CGRect] = views.map { convert($0.frame, to: self) }
-//
-//        /// check for isEmpty is above
-//        let firstRect = rects[0]
-//        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
-//
-//        scrollRectToVisible(unionRect, animated: true)
-//    }
-//}
-
+// TODO: optimize by protocol or subclass (example: AdvancedScrollView)
 extension UIScrollView {
     
     func scroll(to view: UIView) {
@@ -312,9 +292,6 @@ extension UIScrollView {
         scrollRectToVisible(unionRect, animated: true)
     }
 }
-
-
-
 
 extension UIView {
     
