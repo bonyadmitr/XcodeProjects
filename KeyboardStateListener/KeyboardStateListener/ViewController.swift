@@ -5,7 +5,7 @@ final class SomeScrollingController: ScrollController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backgroundColor = UIColor.lightGray
+        //view.addTapGestureToHideKeyboard()
         
         let edgeInset: CGFloat = 16
         
@@ -148,9 +148,9 @@ final class ViewController: UIViewController {
         
         keyboardStateListener.delegate = self
         
-        scrollView.subviews.first?.backgroundColor = UIColor.lightGray
-        scrollView.backgroundColor = UIColor.lightGray
-        view.backgroundColor = UIColor.lightGray
+        //scrollView.subviews.first?.backgroundColor = UIColor.lightGray
+        //scrollView.backgroundColor = UIColor.lightGray
+        //view.backgroundColor = UIColor.lightGray
         
         view.addTapGestureToHideKeyboard()
     }
