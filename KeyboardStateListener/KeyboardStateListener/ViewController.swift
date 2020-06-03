@@ -38,6 +38,8 @@ final class SomeScrollingController: ScrollController {
 class KeyboardScrollController: ScrollController {
     private let keyboardStateListener = KeyboardStateListener()
     
+    private var oldHeight: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,14 +52,17 @@ extension KeyboardScrollController: KeyboardHelperDelegate {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
         let coveredHeight = state.keyboardHeightForView(view)
         
-        self.view.frame.size.height -= coveredHeight
+        
+        oldHeight = view.frame.size.height
+        view.frame.size.height -= coveredHeight
+        
         state.animate {
             self.view.layoutIfNeeded()
         }
     }
     
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillHideWithState state: KeyboardState) {
-        self.view.frame.size.height = UIScreen.main.bounds.size.height
+        view.frame.size.height = oldHeight
         state.animate {
             self.view.layoutIfNeeded()
         }
