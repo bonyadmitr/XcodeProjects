@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet private weak var someLabel: TapableLabel!
+    @IBOutlet private weak var someLabel: TappableLabel!
     
     @IBAction private func someButton(_ sender: UIBarButtonItem) {
         
