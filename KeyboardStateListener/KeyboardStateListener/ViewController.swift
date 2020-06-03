@@ -392,3 +392,72 @@ public struct KeyboardState {
             completion: nil)
     }
 }
+
+
+extension UIView {
+    
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.topAnchor
+        } else {
+            return topAnchor
+        }
+    }
+    
+    var safeLeadingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.leadingAnchor
+        } else {
+            return leadingAnchor
+        }
+    }
+    
+    var safeTrailingAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.trailingAnchor
+        } else {
+            return trailingAnchor
+        }
+    }
+    
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return bottomAnchor
+        }
+    }
+    
+    func pinToSuperviewEdges(offset: CGFloat = 0.0) {
+        guard let superview = superview else {
+            assertionFailure("view call addSubview")
+            return
+        }
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: offset),
+            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -offset),
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: offset),
+            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -offset),
+        ])
+    }
+    
+    func safePinToSuperviewEdges(offset: CGFloat = 0.0) {
+        guard let superview = superview else {
+            assertionFailure("view call addSubview")
+            return
+        }
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: superview.safeTopAnchor, constant: offset),
+            bottomAnchor.constraint(equalTo: superview.safeBottomAnchor, constant: -offset),
+            leadingAnchor.constraint(equalTo: superview.safeLeadingAnchor, constant: offset),
+            trailingAnchor.constraint(equalTo: superview.safeTrailingAnchor, constant: -offset),
+            
+            /// temp
+            //safeTopAnchor.constraint(equalTo: superview.safeTopAnchor, constant: offset),
+            //safeBottomAnchor.constraint(equalTo: superview.safeBottomAnchor, constant: -offset),
+            //safeLeadingAnchor.constraint(equalTo: superview.safeLeadingAnchor, constant: offset),
+            //safeTrailingAnchor.constraint(equalTo: superview.safeTrailingAnchor, constant: -offset),
+        ])
+    }
+    
+}
