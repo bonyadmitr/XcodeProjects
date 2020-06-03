@@ -797,11 +797,10 @@ class GhostButton: MultiLineButton, Rounded {
 /// set normalBackgroundColor != UIColor.clear
 final class GhostButton2: HighlightButton, Rounded {
     
-    override var tintColor: UIColor! {
+    override var normalTintColor: UIColor {
         didSet {
-            highlightedBackgroundColor = tintColor
-            layer.borderColor = tintColor.cgColor
-            setTitleColor(tintColor, for: .normal)
+            highlightedBackgroundColor = normalTintColor
+            layer.borderColor = normalTintColor.cgColor
         }
     }
     
@@ -809,6 +808,7 @@ final class GhostButton2: HighlightButton, Rounded {
         didSet {
             //let fixedColor = (normalBackgroundColor == UIColor.clear) ? Colors.background : normalBackgroundColor
             setTitleColor(normalBackgroundColor, for: .highlighted)
+            highlightedTintColor = normalBackgroundColor
         }
     }
     
@@ -832,8 +832,8 @@ final class GhostButton2: HighlightButton, Rounded {
     
     private func setup() -> Void {
         heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        tintColor = Colors.text
         
+        normalTintColor = Colors.text
         normalBackgroundColor = Colors.background
         
         setDynamicFont(Fonts.button)
@@ -849,7 +849,7 @@ final class GhostButton2: HighlightButton, Rounded {
         /// not working COLOR.resolvedColor(with: traitCollection).cgColor https://stackoverflow.com/a/57177411/5893286
         /// cgColor update https://stackoverflow.com/a/58312205/5893286
         if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            layer.borderColor = tintColor.cgColor
+            layer.borderColor = normalTintColor.cgColor
         }
 
     }
