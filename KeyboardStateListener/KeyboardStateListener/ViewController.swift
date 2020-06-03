@@ -52,6 +52,10 @@ extension KeyboardScrollController: KeyboardHelperDelegate {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
         let coveredHeight = state.keyboardHeightForView(view)
         
+        /// coveredHeight == 0 when changed text enter responder (example: focus between 2 textFields)
+        if coveredHeight == 0 {
+            return
+        }
         
         oldHeight = view.frame.size.height
         view.frame.size.height -= coveredHeight
@@ -154,6 +158,11 @@ final class ViewController: UIViewController {
 extension ViewController: KeyboardHelperDelegate {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
         let coveredHeight = state.keyboardHeightForView(scrollView)
+        
+        /// coveredHeight == 0 when changed text enter responder (example: focus between 2 textFields)
+        if coveredHeight == 0 {
+            return
+        }
 //        state.animate {
 //            self.scrollView.contentInset.bottom = coveredHeight
 //        }
