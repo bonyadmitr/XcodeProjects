@@ -66,6 +66,7 @@ extension KeyboardScrollController: KeyboardHelperDelegate {
 
 class ScrollController: UIViewController {
     
+    let scrollView = UIScrollView()
     let contentView = UIView()
     
     var backgroundColor: UIColor? {
@@ -75,36 +76,45 @@ class ScrollController: UIViewController {
         set {
             view.backgroundColor = newValue
             contentView.backgroundColor = newValue
+            scrollView.backgroundColor = newValue
         }
     }
     
-    /// scrollView == self.view
-    private lazy var scrollView: UIScrollView = {
-        if let view = self.view as? UIScrollView {
-            return view
-        } else {
-            assertionFailure("override func loadView")
-            return UIScrollView()
-        }
-    }()
-    
-    override func loadView() {
-        view = UIScrollView()
-    }
+//    override func loadView() {
+//        view = scrollView
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupContentView()
         view.isOpaque = true
-        backgroundColor = UIColor.white
+        scrollView.isOpaque = true
+        contentView.isOpaque = true
+        
+        
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.safePinToSuperviewEdges()
+        
+        
+        setupContentView()
     }
     
     private func setupContentView() {
-        view.addSubview(contentView)
-        contentView.frame = view.bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentView.isOpaque = true
+        scrollView.addSubview(contentView)
+        
+        /// layout
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.pinToSuperviewEdges()
+        
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        heightConstraint.priority = .defaultLow
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            heightConstraint
+        ])
+        
     }
 }
 
