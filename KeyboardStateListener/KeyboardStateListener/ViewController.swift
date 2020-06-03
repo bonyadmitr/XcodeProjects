@@ -1,6 +1,6 @@
 import UIKit
 
-final class SomeScrollingController: ScrollController {
+final class SomeScrollingController: KeyboardScrollController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,28 @@ final class SomeScrollingController: ScrollController {
         bottomTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -edgeInset).isActive = true
         bottomTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -edgeInset).isActive = true
         
-        bottomTextField.topAnchor.constraint(greaterThanOrEqualTo: topTextField.bottomAnchor, constant: -edgeInset).isActive = true
+        //bottomTextField.topAnchor.constraint(greaterThanOrEqualTo: topTextField.bottomAnchor, constant: -edgeInset).isActive = true
+        
+        
+        
+        let label = UILabel()
+        if #available(iOS 13.0, *) {
+            label.backgroundColor = .secondarySystemBackground
+        }
+        label.text = "Label"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(label)
+        
+        label.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: edgeInset).isActive = true
+        label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -edgeInset).isActive = true
+        label.topAnchor.constraint(equalTo: topTextField.bottomAnchor, constant: edgeInset).isActive = true
+        
+        //label.bottomAnchor.constraint(equalTo: bottomTextField.topAnchor, constant: -edgeInset).isActive = true
+        
+        //label.bottomAnchor.constraint(greaterThanOrEqualTo: bottomTextField.topAnchor, constant: -edgeInset).isActive = true
+        bottomTextField.topAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor, constant: edgeInset).isActive = true
     }
 }
 
