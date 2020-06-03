@@ -10,6 +10,7 @@
 		CE119F5E24877C2A000D0345 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE119F5D24877C2A000D0345 /* KeyboardLayoutConstraint.swift */; };
 		CE119F8224884F2D000D0345 /* KeyboardStateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE119F8124884F2D000D0345 /* KeyboardStateListener.swift */; };
 		CE119F842488503D000D0345 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE119F832488503D000D0345 /* Extensions.swift */; };
+		CE119F86248850B5000D0345 /* KeyboardScrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE119F85248850B5000D0345 /* KeyboardScrollController.swift */; };
 		CE85D0802267081F009E4D11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85D07F2267081F009E4D11 /* AppDelegate.swift */; };
 		CE85D0822267081F009E4D11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85D0812267081F009E4D11 /* ViewController.swift */; };
 		CE85D0852267081F009E4D11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE85D0832267081F009E4D11 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 		CE119F5D24877C2A000D0345 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		CE119F8124884F2D000D0345 /* KeyboardStateListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStateListener.swift; sourceTree = "<group>"; };
 		CE119F832488503D000D0345 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE119F85248850B5000D0345 /* KeyboardScrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardScrollController.swift; sourceTree = "<group>"; };
 		CE85D07C2267081F009E4D11 /* KeyboardStateListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyboardStateListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE85D07F2267081F009E4D11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE85D0812267081F009E4D11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				CE85D07F2267081F009E4D11 /* AppDelegate.swift */,
 				CE85D0812267081F009E4D11 /* ViewController.swift */,
+				CE119F85248850B5000D0345 /* KeyboardScrollController.swift */,
 				CE119F8124884F2D000D0345 /* KeyboardStateListener.swift */,
 				CE119F5D24877C2A000D0345 /* KeyboardLayoutConstraint.swift */,
 				CE119F832488503D000D0345 /* Extensions.swift */,
@@ -149,6 +152,7 @@
 				CE85D0802267081F009E4D11 /* AppDelegate.swift in Sources */,
 				CE119F8224884F2D000D0345 /* KeyboardStateListener.swift in Sources */,
 				CE119F5E24877C2A000D0345 /* KeyboardLayoutConstraint.swift in Sources */,
+				CE119F86248850B5000D0345 /* KeyboardScrollController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
