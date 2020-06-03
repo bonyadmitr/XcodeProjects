@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE119F5B248682AD000D0345 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE119F5A248682AD000D0345 /* PlaceholderTextView.swift */; };
 		CE628B0124831104007D3A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE628B0024831104007D3A2B /* AppDelegate.swift */; };
 		CE628B0324831104007D3A2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE628B0224831104007D3A2B /* SceneDelegate.swift */; };
 		CE628B0524831104007D3A2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE628B0424831104007D3A2B /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE119F5A248682AD000D0345 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		CE628AFD24831104007D3A2B /* UIComponents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIComponents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE628B0024831104007D3A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE628B0224831104007D3A2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				CE628B0024831104007D3A2B /* AppDelegate.swift */,
 				CE628B0224831104007D3A2B /* SceneDelegate.swift */,
 				CE628B0424831104007D3A2B /* ViewController.swift */,
+				CE119F5A248682AD000D0345 /* PlaceholderTextView.swift */,
 				CE628B0624831104007D3A2B /* Main.storyboard */,
 				CE628B0924831106007D3A2B /* Assets.xcassets */,
 				CE628B0B24831106007D3A2B /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				CE628B0524831104007D3A2B /* ViewController.swift in Sources */,
 				CE628B0124831104007D3A2B /* AppDelegate.swift in Sources */,
 				CE628B0324831104007D3A2B /* SceneDelegate.swift in Sources */,
+				CE119F5B248682AD000D0345 /* PlaceholderTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
