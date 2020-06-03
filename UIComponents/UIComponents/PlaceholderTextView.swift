@@ -173,3 +173,9 @@ class ResizableTextView: UITextView {
         }
     }
 }
+
+final class ResizableEmptiableTextView: ResizableTextView {
+    override var intrinsicContentSize: CGSize {
+        return text.isEmpty ? .zero : super.intrinsicContentSize
+    }
+}
