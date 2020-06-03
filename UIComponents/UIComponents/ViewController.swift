@@ -583,10 +583,6 @@ final class ButtonMain: HighlightButton, Shadowed, Rounded {
         normalBackgroundColor = Colors.main
         highlightedBackgroundColor = Colors.mainHighlighted
         
-        setTitleColor(Colors.white, for: .normal)
-        setTitleColor(Colors.whiteHighlighted, for: .highlighted)
-        
-        // TODO: highlightedTintColor
         normalTintColor = Colors.white
         highlightedTintColor = Colors.whiteHighlighted
         
