@@ -148,3 +148,28 @@ extension UITextView {
         textContainerInset = .zero
     }
 }
+
+import UIKit
+
+class ResizableTextView: UITextView {
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        isScrollEnabled = false
+    }
+    
+    override var contentSize: CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+}
