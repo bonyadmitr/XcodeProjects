@@ -536,9 +536,33 @@ class HighlightButton: MultiLineButton {
         }
         set {
             setImage(newValue, for: .normal)
-            setImage(newValue, for: .highlighted)
+            
+            /// or 1
+            //adjustsImageWhenHighlighted = false
+            
+            /// or 2
+            //setImage(newValue, for: .highlighted)
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        adjustsImageWhenHighlighted = false
+        //adjustsImageWhenDisabled = false
+        
+        // TODO: check
+        //tintAdjustmentMode = .automatic
+    }
+    
 }
 
 final class ButtonMain: HighlightButton, Shadowed, Rounded {
