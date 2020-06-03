@@ -220,3 +220,61 @@ class ResizablePlaceholderTextView: PlaceholderTextView {
         
     }
 }
+
+class UnderlineResizablePlaceholderTextView: ResizablePlaceholderTextView {
+    
+    var underlineHeight: CGFloat = 1 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    var underlineOffset: CGFloat = 4 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    var underlineColor = UIColor.black {
+        didSet {
+            underlineLayer.backgroundColor = underlineColor.cgColor
+        }
+    }
+    
+    private let underlineLayer = CALayer()
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        layer.addSublayer(underlineLayer)
+        underlineLayer.backgroundColor = underlineColor.cgColor
+        textContainerInset.bottom = underlineOffset
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        CALayer.performWithoutAnimation {
+            underlineLayer.frame = CGRect(x: 0.0,
+                                          y: frame.height - underlineHeight,
+                                          width: frame.width,
+                                          height: underlineHeight);
+        }
+        
+    }
+}
+
+extension CALayer {
+    
+    /// source https://stackoverflow.com/a/33961937/5893286
+    static func performWithoutAnimation(_ actionsWithoutAnimation: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setValue(true, forKey: kCATransactionDisableActions)
+        actionsWithoutAnimation()
+        CATransaction.commit()
+    }
+}
