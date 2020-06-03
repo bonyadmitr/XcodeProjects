@@ -512,13 +512,20 @@ class HighlightButton: MultiLineButton {
     var normalTintColor = UIColor.clear {
         didSet {
             tintColor = normalTintColor
+            setTitleColor(normalTintColor, for: .normal)
         }
     }
-    var highlightedTintColor = UIColor.clear
+    var highlightedTintColor = UIColor.clear {
+        didSet {
+            setTitleColor(highlightedTintColor, for: .highlighted)
+        }
+    }
 
     override var isHighlighted: Bool {
         didSet {
             backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
+            
+            /// To get rid of the tint background https://sasablagojevic.com/how-to-get-rid-of-blue-uibutton-background-on-different-states
             tintColor = isHighlighted ? highlightedTintColor : normalTintColor
         }
     }
