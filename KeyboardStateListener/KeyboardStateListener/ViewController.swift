@@ -148,6 +148,14 @@ class ScrollController: UIViewController {
     }
 }
 
+final class KeyboardHideController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addTapGestureToHideKeyboard()
+    }
+}
+
 final class ViewController: UIViewController {
 
     private let keyboardStateListener = KeyboardStateListener()
