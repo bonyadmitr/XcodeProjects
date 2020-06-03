@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="1061.25" y="52.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Keyboard Hide Controller-->
         <scene sceneID="wps-9k-Guq">
             <objects>
-                <viewController id="O8h-53-xaL" sceneMemberID="viewController">
+                <viewController id="O8h-53-xaL" customClass="KeyboardHideController" customModule="KeyboardStateListener" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xGv-zj-z6T">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -184,7 +184,42 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6JY-kZ-BJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304" y="53"/>
+            <point key="canvasLocation" x="306" y="52"/>
+        </scene>
+        <!--Code-->
+        <scene sceneID="ZSy-4M-HuI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GjC-4y-A8B" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Code" id="o5l-x0-rXi"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Is8-UM-Kau">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4zI-kn-zUJ" kind="relationship" relationship="rootViewController" id="SEQ-9I-tcJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ba4-ly-gnS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="306" y="-617"/>
+        </scene>
+        <!--Some Scrolling Controller-->
+        <scene sceneID="MHQ-0F-96Y">
+            <objects>
+                <viewController id="4zI-kn-zUJ" customClass="SomeScrollingController" customModule="KeyboardStateListener" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bpu-2f-WaM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="yFJ-Ya-H4P"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="L7c-Ym-kWx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNH-Vg-A9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1051" y="-618"/>
         </scene>
         <!--Constraint-->
         <scene sceneID="X85-C7-Vmd">
@@ -215,6 +250,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="GjC-4y-A8B" kind="relationship" relationship="viewControllers" id="CNf-Tv-lnv"/>
                         <segue destination="vBF-2x-yTZ" kind="relationship" relationship="viewControllers" id="o7q-sg-bJz"/>
                         <segue destination="SuQ-oF-daL" kind="relationship" relationship="viewControllers" id="oxs-0F-1eH"/>
                     </connections>
