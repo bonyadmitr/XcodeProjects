@@ -179,3 +179,44 @@ final class ResizableEmptiableTextView: ResizableTextView {
         return text.isEmpty ? .zero : super.intrinsicContentSize
     }
 }
+
+class ResizablePlaceholderTextView: PlaceholderTextView {
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        isScrollEnabled = false
+    }
+    
+    override var contentSize: CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        
+        /// max text size
+        //if placeholderLabel.intrinsicContentSize.height > super.intrinsicContentSize.height {
+        //    return placeholderLabel.intrinsicContentSize
+        //} else {
+        //    return super.intrinsicContentSize
+        //}
+        
+        /// visible text size
+        if text.isEmpty, placeholderLabel.intrinsicContentSize.height > super.intrinsicContentSize.height {
+            return placeholderLabel.intrinsicContentSize
+        } else {
+            return super.intrinsicContentSize
+        }
+        
+    }
+}
