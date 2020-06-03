@@ -246,6 +246,7 @@ private extension UIView {
 //}
 
 extension UIScrollView {
+    
     func scroll(to view: UIView) {
         let rect = convert(view.frame.offsetBy(dx: 0, dy: 8), to: self)
         scrollRectToVisible(rect, animated: true)
@@ -255,13 +256,16 @@ extension UIScrollView {
         if views.isEmpty {
             return
         }
-
+        
         let rects: [CGRect] = views.map { convert($0.frame, to: self) }
-
+        
         /// check for isEmpty is above
         let firstRect = rects[0]
-        let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
-
+        
+        // TODO: test old
+        //let unionRect: CGRect = rects.dropFirst().reduce(into: firstRect) { $0.union($1) }
+        let unionRect: CGRect = rects.dropFirst().reduce(firstRect) { $0.union($1) }
+        
         scrollRectToVisible(unionRect, animated: true)
     }
 }
