@@ -17,6 +17,25 @@ final class SomeStackScrollingController: StackScrollingController {
         }
     }
     
+extension UIView {
+    
+    static let animationDuration: TimeInterval = 0.25
+    
+    static func animate(animations: @escaping () -> Void) {
+        animate(withDuration: animationDuration, animations: animations)
+    }
+    static func animate(animations: @escaping () -> Void, completion:  @escaping () -> Void) {
+        animate(withDuration: animationDuration, animations: animations, completion: { _ in completion() })
+    }
+    
+    func removeFromStackViewAnimated() {
+        UIView.animate(animations: {
+            self.isHidden = true
+        }, completion: {
+            /// view.isHidden = true + stackView.removeArrangedSubview(view) now working
+            self.removeFromSuperview()
+        })
+    }
 }
 
 // TODO: contentView or stackView insets
