@@ -1,5 +1,6 @@
 import UIKit
 
+// TODO: contentView or stackView insets
 class StackScrollingController: KeyboardScrollController {
     
     let stackView = UIStackView()
