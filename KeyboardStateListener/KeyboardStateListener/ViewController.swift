@@ -1,5 +1,24 @@
 import UIKit
 
+final class SomeStackScrollingController: StackScrollingController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        stackView.spacing = 8
+        
+        for i in 1...100 {
+            let label = UILabel()
+            label.backgroundColor = .lightGray
+            label.textAlignment = .center
+            label.text = "Label \(i)"
+            
+            stackView.addArrangedSubview(label)
+        }
+    }
+    
+}
+
 // TODO: contentView or stackView insets
 class StackScrollingController: KeyboardScrollController {
     
