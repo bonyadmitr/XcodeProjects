@@ -1,5 +1,33 @@
 import UIKit
 
+class StackScrollingController: KeyboardScrollController {
+    
+    let stackView = UIStackView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        
+        contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            
+            /// same
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+            //contentView.bottomAnchor.constraint(greaterThanOrEqualTo: stackView.bottomAnchor),
+        ])
+        
+    }
+    
+}
+
 final class SomeScrollingController: KeyboardScrollController {
     
     override func viewDidLoad() {
