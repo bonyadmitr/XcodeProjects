@@ -215,3 +215,15 @@ class ControlContainableTableView: UITableView {
     }
 
 }
+
+class ControlContainableCollectionView: UICollectionView {
+
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view is UIControl && !(view is UITextInput) {
+            return true
+        }
+
+        return super.touchesShouldCancel(in: view)
+    }
+
+}
