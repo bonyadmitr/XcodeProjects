@@ -172,7 +172,7 @@ class InsetsButton: UIButton {
 // or a label in a scroll view. If you press and hold there, you want
 // to get the text editing magnifier cursor, instead of canceling the
 // touch in the text input element.
-final class ControlContainableScrollView: UIScrollView {
+class ControlContainableScrollView: UIScrollView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -194,6 +194,18 @@ final class ControlContainableScrollView: UIScrollView {
         delaysContentTouches = false
     }
     
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view is UIControl && !(view is UITextInput) {
+            return true
+        }
+
+        return super.touchesShouldCancel(in: view)
+    }
+
+}
+
+class ControlContainableTableView: UITableView {
+
     override func touchesShouldCancel(in view: UIView) -> Bool {
         if view is UIControl && !(view is UITextInput) {
             return true
