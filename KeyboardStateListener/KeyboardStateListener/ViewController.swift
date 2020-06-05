@@ -7,14 +7,17 @@ final class SomeStackScrollingController: StackScrollingController {
         
         stackView.spacing = 8
         
-        for i in 1...100 {
-            let label = UILabel()
-            label.backgroundColor = .lightGray
-            label.textAlignment = .center
-            label.text = "Label \(i)"
-            
+        for _ in 1...25 {
+            let label = getLabel()
             stackView.addArrangedSubview(label)
         }
+        
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add)),
+            UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
+        ]
+    }
+    
     @objc private func add() {
         let label = getLabel()
         
