@@ -865,3 +865,5 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: disabled state for buttons
 // TODO: textField password show/hide + custom font fix
 // TODO: textField datepicker
+// TODO: textField custom picker
+// TODO: textField tap or label + placeholder
