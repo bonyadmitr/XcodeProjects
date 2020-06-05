@@ -15,6 +15,12 @@ final class SomeStackScrollingController: StackScrollingController {
             
             stackView.addArrangedSubview(label)
         }
+    @objc private func remove() {
+        let view = stackView.arrangedSubviews.last
+        view?.removeFromStackViewAnimated()
+    }
+}
+
 extension UIStackView {
     
     func addArrangedSubviewAnimated(_ view: UIView) {
