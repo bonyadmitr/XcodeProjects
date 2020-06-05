@@ -879,3 +879,8 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textView max hight
 // TODO: autoscroling label
 // TODO: button image+text
+
+// TODO: disable Long press gesture recogniser in textView
+//https://stackoverflow.com/a/47941549/5893286
+//https://stackoverflow.com/a/53171516/5893286
+//https://stackoverflow.com/a/44878203/5893286
