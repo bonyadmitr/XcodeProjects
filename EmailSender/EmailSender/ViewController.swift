@@ -8,6 +8,18 @@
 
 import UIKit
 
+@dynamicMemberLookup
+struct Template {
+    var template: String = ""
+    private var data : [String:String] = [:]
+    var populatedTemplate : String { data.reduce(template) { $0.replacingOccurrences(of: "${\($1.key)}", with: $1.value) } }
+    
+    subscript (dynamicMember member: String) -> CustomStringConvertible? {
+        get { data[member] }
+        set { data[member] = newValue?.description }
+    }
+}
+
 class ViewController: UIViewController {
 
     let message = "Hello привет world" // can be ""
