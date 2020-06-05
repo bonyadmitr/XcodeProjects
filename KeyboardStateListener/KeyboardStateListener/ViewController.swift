@@ -15,8 +15,18 @@ final class SomeStackScrollingController: StackScrollingController {
             
             stackView.addArrangedSubview(label)
         }
+extension UIStackView {
+    
+    func addArrangedSubviewAnimated(_ view: UIView) {
+        view.isHidden = true
+        addArrangedSubview(view)
+        UIView.animate {
+            view.isHidden = false
+        }
     }
     
+}
+
 extension UIView {
     
     static let animationDuration: TimeInterval = 0.25
