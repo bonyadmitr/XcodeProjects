@@ -700,7 +700,7 @@ class DynamicFontButton: UIButton {
             return
         }
         
-        [UIControl.State.normal, .highlighted].forEach { state in
+        [UIControl.State.normal, .highlighted, .selected, .disabled].forEach { state in
             let img = image(for: state)?.withConfiguration(currentPreferredSymbolConfiguration)
             setImage(img, for: state)
         }
