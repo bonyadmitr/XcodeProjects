@@ -30,6 +30,31 @@ class ViewController: UIViewController {
     let subject: String? = "Some sobject" // can be nil
     let emails: [String] = ["qweqwe@gmail.com", "dwqeweqweq@gmail.com"] // can be []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+
+    }
+    
+    private func template() {
+        let report = """
+        --== TECHNICAL REPORT ==--
+        Date: ${date}
+        System: ${systemName} ${systemVersion}
+        Device: ${deviceModel} - ${deviceName}
+        Processor count: ${processorCount}
+        """
+        
+        var template = Template()
+        template.template = report
+        template.date = Date()
+        template.systemName = UIDevice.current.systemName
+        template.systemVersion = UIDevice.current.systemVersion
+        template.deviceModel = UIDevice.current.model
+        template.deviceName = UIDevice.current.name
+        template.processorCount = ProcessInfo.processInfo.processorCount
+        print(template.populatedTemplate)
+    }
     
     @IBAction func actionSendInAppButton(_ sender: UIButton) {
         EmailSender.shared.send(message: message,
