@@ -278,3 +278,18 @@ extension CALayer {
         CATransaction.commit()
     }
 }
+
+import UIKit
+
+class ResizableCollectionView: UICollectionView {
+    
+    override var contentSize: CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
+}
