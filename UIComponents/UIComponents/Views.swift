@@ -159,3 +159,47 @@ class InsetsButton: UIButton {
 //                      height: size.height + self.titleEdgeInsets.top + self.titleEdgeInsets.bottom)
 //    }
 }
+
+
+/// source https://github.com/Rightpoint/Swiftilities/issues/88
+// These let you start a touch on a button that's inside a scroll view,
+// and then if you start dragging, it cancels the touch on the button
+// and lets you scroll instead. Without these scroll view subclasses,
+// buttons in scroll views will eat touches that start in them, which
+// prevents scrolling and makes the app feel broken.
+//
+// The UITextInput exception is for cases where you have a text field
+// or a label in a scroll view. If you press and hold there, you want
+// to get the text editing magnifier cursor, instead of canceling the
+// touch in the text input element.
+final class ControlContainableScrollView: UIScrollView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        // TODO: check needs. add to others if need
+        /// Hack to allow buttons to show highlight state immediately on touch https://stackoverflow.com/a/19299451/5893286
+        
+        /// tableview hack https://stackoverflow.com/a/33743183/5893286
+        
+        /// maybe don't need this https://stackoverflow.com/a/45240170/5893286
+        delaysContentTouches = false
+    }
+    
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view is UIControl && !(view is UITextInput) {
+            return true
+        }
+
+        return super.touchesShouldCancel(in: view)
+    }
+
+}
