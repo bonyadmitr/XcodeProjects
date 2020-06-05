@@ -10,6 +10,8 @@ import UIKit
 
 /// aricle https://medium.com/flawless-app-stories/minimal-templating-system-in-swift-in-only-10-lines-b031963150e7
 /// swift doc https://github.com/apple/swift-evolution/blob/master/proposals/0195-dynamic-member-lookup.md
+/// @dynamicMemberLookup https://www.hackingwithswift.com/articles/55/how-to-use-dynamic-member-lookup-in-swift
+/// @dynamicCallable https://www.hackingwithswift.com/articles/134/how-to-use-dynamiccallable-in-swift
 @dynamicMemberLookup
 struct Template {
     var template: String = ""
