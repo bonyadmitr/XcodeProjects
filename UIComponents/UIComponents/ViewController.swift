@@ -867,3 +867,5 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textField datepicker
 // TODO: textField custom picker
 // TODO: textField tap or label + placeholder
+// TODO: toolbar
+// TODO: textField + image
