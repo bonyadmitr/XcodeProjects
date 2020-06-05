@@ -293,3 +293,17 @@ class ResizableCollectionView: UICollectionView {
         return contentSize
     }
 }
+
+
+class ResizableTableView: UITableView {
+    
+    override var contentSize: CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return contentSize
+    }
+}
