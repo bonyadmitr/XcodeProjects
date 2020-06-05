@@ -15,6 +15,15 @@ final class SomeStackScrollingController: StackScrollingController {
             
             stackView.addArrangedSubview(label)
         }
+    
+    private func getLabel() -> UILabel {
+        let label = UILabel()
+        label.backgroundColor = .lightGray
+        label.textAlignment = .center
+        label.text = "Label arranged \(stackView.arrangedSubviews.count + 1) - \(stackView.subviews.count + 1) subviews"
+        return label
+    }
+    
     @objc private func remove() {
         let view = stackView.arrangedSubviews.last
         view?.removeFromStackViewAnimated()
