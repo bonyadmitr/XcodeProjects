@@ -875,3 +875,5 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textField + formatter date/carrency
 // TODO: textField custom design
 // TODO: textField error label/design
+// TODO: textField error animation
+// TODO: textView max hight
