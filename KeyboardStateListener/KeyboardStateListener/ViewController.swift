@@ -38,6 +38,14 @@ extension UIStackView {
         addArrangedSubview(view)
     }
     
+    @available(iOS 11.0, *)
+    func addArrangedSubviewAnimated(_ view: UIView, after spacing: CGFloat) {
+        view.isHidden = true
+        addArrangedSubview(view, after: spacing)
+        UIView.animate {
+            view.isHidden = false
+        }
+    }
 }
 
 extension UIView {
