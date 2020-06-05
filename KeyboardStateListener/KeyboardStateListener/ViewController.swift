@@ -15,6 +15,21 @@ final class SomeStackScrollingController: StackScrollingController {
             
             stackView.addArrangedSubview(label)
         }
+    @objc private func add() {
+        let label = getLabel()
+        
+        if #available(iOS 11.0, *) {
+            stackView.addArrangedSubviewAnimated(label, after: 16)
+        } else {
+            stackView.addArrangedSubviewAnimated(label)
+        }
+        
+//        if #available(iOS 11.0, *) {
+////            UIStackView.spacingUseDefault
+////            UIStackView.spacingUseSystem
+//            stackView.setCustomSpacing(16, after: label)
+//        }
+    }
     
     private func getLabel() -> UILabel {
         let label = UILabel()
