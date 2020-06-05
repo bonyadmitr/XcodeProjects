@@ -506,6 +506,15 @@ extension UIButton {
     
 }
 
+extension UITextField {
+    
+    func setDynamicFont(_ font: UIFont, for textStyle: UIFont.TextStyle = .body) {
+        self.font = font.dynamic(for: textStyle)
+        adjustsFontForContentSizeCategory = true
+    }
+    
+}
+
 /// inspired https://stackoverflow.com/a/60423075/5893286
 class HighlightButton: MultiLineButton {
 
