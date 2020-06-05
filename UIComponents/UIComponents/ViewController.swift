@@ -879,7 +879,7 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: toolbar
 // TODO: textField + image
 // TODO: textField limit
-// TODO: textField insets
+// TODO: textField insets InsetsTextField https://stackoverflow.com/a/3969703/5893286
 // TODO: textField mask for phones
 // TODO: textField + formatter date/carrency
 // TODO: textField custom design
