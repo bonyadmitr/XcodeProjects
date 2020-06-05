@@ -25,6 +25,12 @@ extension UIStackView {
         }
     }
     
+    @available(iOS 11.0, *)
+    func addSpacing(_ spacing: CGFloat) {
+        if let view = arrangedSubviews.last {
+            setCustomSpacing(spacing, after: view)
+        }
+    }
 }
 
 extension UIView {
