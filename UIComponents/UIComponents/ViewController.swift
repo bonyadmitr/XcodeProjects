@@ -863,3 +863,5 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: optimize set titleLabel?.backgroundColor and titleLabel?.isOpaque = true
 // TODO: optimize shadows for dark theme
 // TODO: disabled state for buttons
+// TODO: textField password show/hide + custom font fix
+// TODO: textField datepicker
