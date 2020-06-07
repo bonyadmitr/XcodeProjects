@@ -278,6 +278,17 @@ class UnderlineResizablePlaceholderTextView: ResizablePlaceholderTextView {
         size.height += underlineOffset + underlineHeight
         return size
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// not working COLOR.resolvedColor(with: traitCollection).cgColor https://stackoverflow.com/a/57177411/5893286
+        /// cgColor update https://stackoverflow.com/a/58312205/5893286
+        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateUnderlineColor()
+        }
+        
+    }
 }
 
 extension CALayer {
