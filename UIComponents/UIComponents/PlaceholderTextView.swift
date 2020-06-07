@@ -266,6 +266,12 @@ class UnderlineResizablePlaceholderTextView: ResizablePlaceholderTextView {
         }
         
     }
+    
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height += underlineOffset + underlineHeight
+        return size
+    }
 }
 
 extension CALayer {
