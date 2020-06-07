@@ -882,7 +882,7 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textField insets InsetsTextField https://stackoverflow.com/a/3969703/5893286
 // TODO: textField mask for phones
 // TODO: textField + formatter date/carrency
-// TODO: textField custom design
+// TODO: textField custom design, title label, underline highlight
 // TODO: textField error label/design
 // TODO: textField error animation
 // TODO: textView max hight
