@@ -231,9 +231,9 @@ class UnderlineResizablePlaceholderTextView: ResizablePlaceholderTextView {
         didSet { setNeedsDisplay() }
     }
     
-    var underlineColor = UIColor.black {
+    var underlineColor = Colors.text {
         didSet {
-            underlineLayer.backgroundColor = underlineColor.cgColor
+            updateUnderlineColor()
         }
     }
     
@@ -251,8 +251,14 @@ class UnderlineResizablePlaceholderTextView: ResizablePlaceholderTextView {
     
     private func setup() {
         layer.addSublayer(underlineLayer)
+        updateUnderlineColor()
+        
+        /// to test underlineLayer frame
+        //layer.masksToBounds = true
+    }
+    
+    private func updateUnderlineColor() {
         underlineLayer.backgroundColor = underlineColor.cgColor
-        textContainerInset.bottom = underlineOffset
     }
     
     override func layoutSubviews() {
