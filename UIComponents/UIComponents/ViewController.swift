@@ -883,6 +883,8 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textField mask for phones
 // TODO: textField + formatter date/carrency
 // TODO: textField custom design, title label, underline highlight
+// TODO: textField hint
+// TODO: textField validate
 // TODO: textField error label/design
 // TODO: textField error animation
 // TODO: textView max hight
