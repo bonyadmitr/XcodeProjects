@@ -227,3 +227,25 @@ class ControlContainableCollectionView: UICollectionView {
     }
 
 }
+
+final class BorderDotsPageControl: UIPageControl {
+    
+    var borderColor: UIColor = .clear {
+        didSet {
+            updateBorderColor()
+        }
+    }
+
+    override var currentPage: Int {
+        didSet {
+            updateBorderColor()
+        }
+    }
+
+    func updateBorderColor() {
+        subviews.forEach { subview in
+            subview.layer.borderColor = borderColor.cgColor
+            subview.layer.borderWidth = 1
+        }
+    }
+}
