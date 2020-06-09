@@ -249,3 +249,41 @@ final class BorderDotsPageControl: UIPageControl {
         }
     }
 }
+
+class AdjustsFontSizeInsetsButton: UIButton {
+    
+    var insets: UIEdgeInsets = .zero {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    private func setup() {
+        guard let buttonLabel = titleLabel else {
+            assertionFailure()
+            return
+        }
+        /// lineBreakMode must be at the beginning!
+        buttonLabel.lineBreakMode = .byClipping
+
+        buttonLabel.adjustsFontSizeToFitWidth = true
+        buttonLabel.numberOfLines = 0
+        buttonLabel.minimumScaleFactor = 0.5
+        buttonLabel.textAlignment = .center
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.frame = bounds.inset(by: insets)
+    }
+}
