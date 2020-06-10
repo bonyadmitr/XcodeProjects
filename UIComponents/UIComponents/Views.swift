@@ -287,3 +287,10 @@ class AdjustsFontSizeInsetsButton: UIButton {
         titleLabel?.frame = bounds.inset(by: insets)
     }
 }
+extension UILabel {
+    func adjustsFontSizeToFitWidth() {
+        minimumScaleFactor = 0.5
+        adjustsFontSizeToFitWidth = true
+    }
+}
+
