@@ -312,3 +312,19 @@ final class SpringLabel: UILabel {
     }
     
 }
+
+
+extension UIButton {
+    
+    /// https://stackoverflow.com/a/43785519/5893286
+    func forceImageToRightSide() {
+        /// or 1
+        let newTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        transform = newTransform
+        titleLabel?.transform = newTransform
+        imageView?.transform = newTransform
+        
+        /// or 2
+        //sortByButton.semanticContentAttribute = .forceRightToLeft
+    }
+}
