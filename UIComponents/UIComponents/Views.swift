@@ -328,3 +328,62 @@ extension UIButton {
         //sortByButton.semanticContentAttribute = .forceRightToLeft
     }
 }
+
+class UnderlineView: UIView {
+    
+    var underlineHeight: CGFloat = 1 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    var underlineOffset: CGFloat = 4 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    var underlineColor = Colors.text {
+        didSet {
+            updateUnderlineColor()
+        }
+    }
+    
+    private let underlineLayer = CALayer()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        layer.addSublayer(underlineLayer)
+        updateUnderlineColor()
+        
+        /// to test underlineLayer frame
+        //layer.masksToBounds = true
+    }
+    
+    private func updateUnderlineColor() {
+        underlineLayer.backgroundColor = underlineColor.cgColor
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        CALayer.performWithoutAnimation {
+            underlineLayer.frame = CGRect(x: 0.0,
+                                          y: frame.height - underlineHeight,
+                                          width: frame.width,
+                                          height: underlineHeight);
+        }
+        
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height += underlineOffset + underlineHeight
+        return size
+    }
+}
