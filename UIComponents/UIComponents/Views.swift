@@ -387,3 +387,32 @@ class UnderlineView: UIView {
         return size
     }
 }
+
+
+/// need fof iPad
+final class NumbersTextField: UITextField {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        delegate = self
+    }
+    
+    private func isAvailableCharacters(in text: String) -> Bool {
+        return text.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+}
+extension NumbersTextField: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return isAvailableCharacters(in: string)
+    }
+}
+
