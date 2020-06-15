@@ -416,3 +416,77 @@ extension NumbersTextField: UITextFieldDelegate {
     }
 }
 
+
+final class SecureTextField: UnderlineTextField {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private let eyeButton = DynamicFontButton(type: .custom)
+    
+    private func setup() {
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .selected)
+        eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        eyeButton.tintColor = Colors.text
+        //eyeButton.sizeToFit()
+        
+        rightView = eyeButton
+        rightViewMode = .always
+        
+        isSecureTextEntry = true
+        
+        /// style
+        setDynamicFont(Fonts.button)
+        borderStyle = .none
+        textColor = Colors.text
+        backgroundColor = Colors.background
+        isOpaque = true
+        
+        /// return key
+        returnKeyType = .next
+        enablesReturnKeyAutomatically = true
+        
+        /// removes suggestions bar above keyboard
+        autocorrectionType = .no
+        
+        /// removed useless features
+        autocapitalizationType = .none
+        spellCheckingType = .no
+        smartQuotesType = .no
+        smartDashesType = .no
+    }
+    
+    var saveTextAfterTogglePasswordVisibility = true
+    
+    @objc func togglePasswordVisibility() {
+        eyeButton.isSelected.toggle()
+        toggleTextFieldSecureType()
+        
+        if saveTextAfterTogglePasswordVisibility, isSecureTextEntry, let existingText = text {
+            /// fix existing text clearing https://stackoverflow.com/a/48115361/5893286
+            /* When toggling to secure text, all text will be purged if the user
+             * continues typing unless we intervene. This is prevented by first
+             * deleting the existing text and then recovering the original text. */
+            
+            text = nil
+            insertText(existingText)
+            
+            /// instantly shows a text selection on the latest iOS versions
+            //deleteBackward()
+            
+            ////// triggers the .editingChanged event
+            //if let textRange = textRange(from: beginningOfDocument, to: endOfDocument) {
+            //    replace(textRange, withText: existingText)
+            //}
+        }
+    }
+    
+}
