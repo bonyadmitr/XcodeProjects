@@ -490,3 +490,19 @@ final class SecureTextField: UnderlineTextField {
     }
     
 }
+
+extension UITextField {
+    func toggleTextFieldSecureType() {
+        /// incorrect font https://stackoverflow.com/a/35295940/5893286
+        isSecureTextEntry.toggle()
+        let font = self.font
+        self.font = nil
+        self.font = font
+        
+        /// incorrect font https://stackoverflow.com/a/35351541/5893286
+        /// there is keyboard blink on simulator iOS 13.4.1
+        //resignFirstResponder()
+        //isSecureTextEntry.toggle()
+        //becomeFirstResponder()
+    }
+}
