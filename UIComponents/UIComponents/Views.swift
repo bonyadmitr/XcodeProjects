@@ -492,6 +492,11 @@ final class SecureTextField: UnderlineTextField {
 }
 
 extension UITextField {
+    /// call layoutIfNeeded() if placeholderLabel is nil
+    var placeholderLabel: UILabel? {
+        return subviews.first(where: { $0 is UILabel }) as? UILabel
+    }
+    
     func toggleTextFieldSecureType() {
         /// incorrect font https://stackoverflow.com/a/35295940/5893286
         isSecureTextEntry.toggle()
