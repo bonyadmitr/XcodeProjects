@@ -510,4 +510,24 @@ extension UITextField {
         //isSecureTextEntry.toggle()
         //becomeFirstResponder()
     }
+    
+    func addToolBarWithButton(title: String, target: Any, selector: Selector) {
+        let doneButton = UIBarButtonItem(title: title,
+                                         font: UIFont.systemFont(ofSize: 19),
+                                         tintColor: UIColor.white,
+                                         accessibilityLabel: title,
+                                         style: .plain,
+                                         target: target,
+                                         selector: selector)
+        
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            doneButton
+        ]
+        keyboardToolbar.sizeToFit()
+        
+        inputAccessoryView = keyboardToolbar
+    }
+}
 }
