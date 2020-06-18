@@ -18,6 +18,12 @@ class ViewController: UIViewController {
 
 }
 
+/**
+ Custom Tiles https://www.raywenderlich.com/9697133-advanced-mapkit-tutorial-custom-mapkit-tiles
+ cache map tiles https://github.com/merlos/MapCache
+ app example https://github.com/merlos/iOS-Open-GPX-Tracker
+ GPX location files https://github.com/vincentneo/CoreGPX
+ */
 final class OSMMapView: MKMapView {
     
     override init(frame: CGRect) {
