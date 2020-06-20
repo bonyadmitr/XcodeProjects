@@ -569,4 +569,81 @@ extension UIBarButtonItem {
     }
     
 }
+
+import UIKit
+
+class UnderlineTextField: UITextField {
+    
+    var underlineHeight: CGFloat = 1 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    /// not working if heightAnchor constraint set.
+    var underlineOffset: CGFloat = 4 {
+        didSet { setNeedsDisplay() }
+    }
+    
+    var underlineColor = Colors.text {
+        didSet {
+            underlineLayer.backgroundColor = underlineColor.cgColor
+            /// without animation
+            //CALayer.performWithoutAnimation {
+            //    self.underlineLayer.backgroundColor = self.underlineColor.cgColor
+            //}
+        }
+    }
+    
+    private let underlineLayer = CALayer()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        layer.addSublayer(underlineLayer)
+        updateUnderlineColor()
+        
+        /// to test underlineLayer frame
+        //layer.masksToBounds = true
+    }
+    
+    private func updateUnderlineColor() {
+        underlineLayer.backgroundColor = underlineColor.cgColor
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        CALayer.performWithoutAnimation {
+            underlineLayer.frame = CGRect(x: 0.0,
+                                          y: frame.height - underlineHeight,
+                                          width: frame.width,
+                                          height: underlineHeight)
+        }
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height += underlineOffset + underlineHeight
+        return size
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// not working COLOR.resolvedColor(with: traitCollection).cgColor https://stackoverflow.com/a/57177411/5893286
+        /// cgColor update https://stackoverflow.com/a/58312205/5893286
+        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            updateUnderlineColor()
+        }
+        
+    }
+    
+}
 }
