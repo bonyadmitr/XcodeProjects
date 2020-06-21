@@ -431,6 +431,29 @@ final class SecureTextField: UnderlineTextField {
     
     private let eyeButton = DynamicFontButton(type: .custom)
     
+    // TODO: check effectiveUserInterfaceLayoutDirection
+    // TODO: https://stackoverflow.com/a/31759275/5893286
+//    override var semanticContentAttribute: UISemanticContentAttribute {
+//        didSet {
+//            switch UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) {
+//            case .leftToRight:
+//                rightView = eyeButton
+//                rightViewMode = .always
+//                leftView = nil
+//                leftViewMode = .never
+//            case .rightToLeft:
+//                leftView = eyeButton
+//                leftViewMode = .always
+//                rightView = nil
+//                rightViewMode = .never
+//            @unknown default:
+//                assertionFailure()
+//                rightView = eyeButton
+//                rightViewMode = .always
+//            }
+//        }
+//    }
+    
     private func setup() {
         eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
         eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .selected)
