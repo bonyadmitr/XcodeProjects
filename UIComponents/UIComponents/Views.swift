@@ -669,4 +669,133 @@ class UnderlineTextField: UITextField {
     }
     
 }
+
+final class MainUnderlineTextField: UITextField {
+    
+    var shouldAnimateStateChange = true
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        
+        //person
+        let imageView = UIImageView(image: UIImage(systemName: "person"))
+        imageView.contentMode = .scaleAspectFit
+        /// didn't understand
+        //imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        imageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
+        /// can be used self.tintColor
+        imageView.tintColor = Colors.text
+        //imageView.sizeToFit()
+        
+        rightView = imageView
+        rightViewMode = .always
+        
+        /// not working with rightView. possible solution https://stackoverflow.com/a/37327814/5893286
+        //clearButtonMode = .always
+        
+        /// style
+        setDynamicFont(Fonts.button)
+        borderStyle = .none
+        textColor = Colors.text
+        backgroundColor = Colors.background
+        isOpaque = true
+        
+        layer.cornerRadius = 8
+        layer.borderWidth = 1
+        //layer.masksToBounds = true
+        
+        /// caret and selection color
+        //tintColor = Colors.text
+        
+        stateChangedAnimated(false)
+        
+        /// return key
+        returnKeyType = .next
+        enablesReturnKeyAutomatically = true
+        
+        addTarget(self, action: #selector(editingDidBegin), for: .editingDidBegin)
+        addTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
+    }
+    
+    @objc private func editingDidBegin() {
+        stateChangedAnimated(shouldAnimateStateChange)
+    }
+    
+    @objc private func editingDidEnd() {
+        stateChangedAnimated(shouldAnimateStateChange)
+    }
+    
+    private func stateChangedAnimated(_ animated: Bool) {
+        let newBorderColor = borderColorForState().cgColor
+        if newBorderColor == layer.borderColor {
+            assertionFailure("should not be called")
+            return
+        }
+        if animated {
+            let fade = CABasicAnimation()
+            if layer.borderColor == nil {
+                layer.borderColor = UIColor.clear.cgColor
+            }
+            fade.fromValue = layer.borderColor ?? UIColor.clear.cgColor
+            fade.toValue = newBorderColor
+            fade.duration = 0.25
+            layer.add(fade, forKey: "borderColor")
+        }
+        layer.borderColor = newBorderColor
+    }
+    
+    private func borderColorForState() -> UIColor {
+        if isEditing {
+            return Colors.white
+        } else {
+            return Colors.whiteHighlighted
+        }
+    }
+    
+    let insetX: CGFloat = 10
+    let insetY: CGFloat = 4
+    
+    
+    // TODO: https://stackoverflow.com/a/27066764/5893286
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return adjustRectWithWidthRightView(bounds)
+//        return bounds.insetBy(dx: insetX, dy: insetY)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return adjustRectWithWidthRightView(bounds)
+//        return bounds.insetBy(dx: insetX , dy: insetY)
+    }
+    
+    /// don't need
+    ///override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+    
+    /// adjustRectWithWidthRightView https://stackoverflow.com/a/27066764/5893286
+    // TODO: different modes for textRect editingRect: rightViewMode == .always || rightViewMode == .unlessEditing
+    private func adjustRectWithWidthRightView(_ bounds: CGRect) -> CGRect {
+        var rect = bounds.insetBy(dx: insetX , dy: insetY)
+        if let rightView = rightView {
+            rect.size.width -= rightView.bounds.width
+            return rect
+        }
+        return rect
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        let height = bounds.height
+        return CGRect(x: bounds.width - height, y: 0, width: height, height: height)//.insetBy(dx: insetY, dy: insetY)
+        
+//        let rect = super.rightViewRect(forBounds: bounds)
+//        return rect.insetBy(dx: 6 , dy: 6)
+    }
+}
 }
