@@ -798,4 +798,42 @@ final class MainUnderlineTextField: UITextField {
 //        return rect.insetBy(dx: 6 , dy: 6)
     }
 }
+
+class BackgroundStateButton: UIButton {
+    
+    var backgroundStateColor: [UIControl.State: UIColor] = [:] {
+        didSet {
+            backgroundColor = backgroundStateColor[.normal]
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted, let highlightedColor = backgroundStateColor[.highlighted] {
+                backgroundColor = highlightedColor
+            } else if isSelected, let selectedColor = backgroundStateColor[.selected] {
+                backgroundColor = selectedColor
+            } else if let normalColor = backgroundStateColor[.normal] {
+                backgroundColor = normalColor
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if let normalColor = backgroundStateColor[.normal], let selectedColor = backgroundStateColor[.selected] {
+                backgroundColor = isSelected ? selectedColor : normalColor
+            }
+        }
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            if let normalColor = backgroundStateColor[.normal], let disabledColor = backgroundStateColor[.disabled] {
+                backgroundColor = isEnabled ? normalColor : disabledColor
+            }
+        }
+    }
+    
+}
 }
