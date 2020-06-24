@@ -836,4 +836,72 @@ class BackgroundStateButton: UIButton {
     }
     
 }
+
+class BorderStateButton: BackgroundStateButton {
+    
+    var borderColor: [UIControl.State: UIColor] = [:] {
+        didSet {
+            layer.borderColor = borderColor[.normal]?.cgColor
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted, let highlightedColor = borderColor[.highlighted] {
+                layer.borderColor = highlightedColor.cgColor
+            } else if isSelected, let selectedColor = borderColor[.selected] {
+                layer.borderColor = selectedColor.cgColor
+            } else if let normalColor = borderColor[.normal] {
+                layer.borderColor = normalColor.cgColor
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if let normalColor = borderColor[.normal], let selectedColor = borderColor[.selected] {
+                layer.borderColor = isSelected ? selectedColor.cgColor : normalColor.cgColor
+            }
+        }
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            if let normalColor = borderColor[.normal], let disabledColor = borderColor[.disabled] {
+                layer.borderColor = isEnabled ? normalColor.cgColor : disabledColor.cgColor
+            }
+        }
+    }
+    
+}
+
+extension UIControl.State: Hashable {}
+
+final class EventButton: SelectedButton {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    private func setup() {
+        titleLabel?.font = UIFont.systemFont(ofSize: 14)
+
+        layer.masksToBounds = true
+        layer.borderWidth = 1
+        layer.cornerRadius = 5
+
+        let textColor = UIColor.white
+        backgroundStateColor[.normal] = textColor
+        setTitleColor(textColor.darker(by: 10), for: .highlighted)
+        setTitleColor(textColor.darker(by: 10), for: [.highlighted, .selected])
+        setTitleColor(textColor, for: .selected)
+    }
+
+}
 }
