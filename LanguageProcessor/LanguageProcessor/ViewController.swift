@@ -9,10 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let languageProcessor = LanguageProcessor()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        languageProcessor.getVerbs(from: "I had gone for a run in the moonlight, then I have seen a unicorn.") { verbs in
+            print("- verbs: \(verbs)")
+        }
+        
+        let sentence1 = "I love eating broccoli"
+        let sentence2 = "I don't like eating broccoli"
+        
+        languageProcessor.getSentimentScore(from: sentence1) { sentimentScore in
+            print("- \(sentence1) = \(sentimentScore)")
+        }
+        languageProcessor.getSentimentScore(from: sentence2) { sentimentScore in
+            print("- \(sentence2) = \(sentimentScore)")
+        }
     }
 
 
