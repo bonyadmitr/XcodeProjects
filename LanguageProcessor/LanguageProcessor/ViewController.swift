@@ -20,6 +20,8 @@ class ViewController: UIViewController {
 
 import NaturalLanguage
 
+/// article https://www.andyibanez.com/posts/analyzing-text-nltagger/
+/// article https://medium.com/better-programming/analyse-users-language-in-swift-43e3041c521f
 final class LanguageProcessor {
     
     func getVerbs(from stringToRecognize: String, verbs: ([String]) -> Void) {
