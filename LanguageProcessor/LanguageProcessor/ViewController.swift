@@ -15,9 +15,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        languageProcessor.getVerbs(from: "I had gone for a run in the moonlight, then I have seen a unicorn.") { verbs in
-            print("- verbs: \(verbs)")
-        }
+        let verbs = languageProcessor.getVerbs(from: "I had gone for a run in the moonlight, then I have seen a unicorn.")
+        print("- verbs: \(verbs)")
         
         let sentence1 = "I love eating broccoli"
         let sentence2 = "I don't like eating broccoli"
@@ -39,8 +38,7 @@ import NaturalLanguage
 /// article https://medium.com/better-programming/analyse-users-language-in-swift-43e3041c521f
 final class LanguageProcessor {
     
-    func getVerbs(from stringToRecognize: String, verbs: ([String]) -> Void) {
-        
+    func getVerbs(from stringToRecognize: String) -> [String] {
         var verbsArray: [String] = []
         let range = stringToRecognize.startIndex ..< stringToRecognize.endIndex
         
@@ -65,26 +63,31 @@ final class LanguageProcessor {
                                 return true
         }
         
-        verbs(verbsArray)
+        return verbsArray
     }
 
-    func getSentimentScore(from stringToRecognize: String, sentimentScore: (Double) -> Void) {
-        
-        let range = stringToRecognize.startIndex ..< stringToRecognize.endIndex
-        
-        let scheme = NLTagScheme.sentimentScore
-        let tagger = NLTagger(tagSchemes: [scheme])
-        
-        tagger.string = stringToRecognize
-        tagger.enumerateTags(in: range,
-                             unit: .paragraph,
-                             scheme: scheme,
-                             options: [.omitWhitespace]) { tag, range in
-                                
-                                let score = Double(tag?.rawValue ?? "") ?? 0
-                                sentimentScore(score)
-                                return true
+    func getSentimentScore(from stringToRecognize: String, sentimentScore: @escaping (Double) -> Void) {
+        DispatchQueue.global().async {
+            let range = stringToRecognize.startIndex ..< stringToRecognize.endIndex
+            
+            let scheme = NLTagScheme.sentimentScore
+            let tagger = NLTagger(tagSchemes: [scheme])
+            
+            tagger.string = stringToRecognize
+            tagger.enumerateTags(in: range,
+                                 unit: .paragraph,
+                                 scheme: scheme,
+                                 options: [.omitWhitespace]) { tag, range in
+                                    
+                                    if let tag = tag, let score = Double(tag.rawValue) {
+                                        sentimentScore(score)
+                                    } else {
+                                        sentimentScore(0)
+                                    }
+                                    return true
+            }
         }
+
         
     }
 
