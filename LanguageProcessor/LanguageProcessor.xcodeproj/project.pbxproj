@@ -13,6 +13,7 @@
 		CECB170824A3EB8B0017A265 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB170624A3EB8B0017A265 /* Main.storyboard */; };
 		CECB170A24A3EB8E0017A265 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECB170924A3EB8E0017A265 /* Assets.xcassets */; };
 		CECB170D24A3EB8E0017A265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB170B24A3EB8E0017A265 /* LaunchScreen.storyboard */; };
+		CECB171524A478670017A265 /* LanguageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB171424A478670017A265 /* LanguageProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CECB170924A3EB8E0017A265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CECB170C24A3EB8E0017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CECB170E24A3EB8E0017A265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CECB171424A478670017A265 /* LanguageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CECB170024A3EB8B0017A265 /* AppDelegate.swift */,
 				CECB170224A3EB8B0017A265 /* SceneDelegate.swift */,
 				CECB170424A3EB8B0017A265 /* ViewController.swift */,
+				CECB171424A478670017A265 /* LanguageProcessor.swift */,
 				CECB170624A3EB8B0017A265 /* Main.storyboard */,
 				CECB170924A3EB8E0017A265 /* Assets.xcassets */,
 				CECB170B24A3EB8E0017A265 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				CECB170524A3EB8B0017A265 /* ViewController.swift in Sources */,
 				CECB170124A3EB8B0017A265 /* AppDelegate.swift in Sources */,
+				CECB171524A478670017A265 /* LanguageProcessor.swift in Sources */,
 				CECB170324A3EB8B0017A265 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
