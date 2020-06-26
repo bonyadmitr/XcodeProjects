@@ -904,4 +904,39 @@ final class EventButton: SelectedButton {
     }
 
 }
+class SelectedButton: BorderStateButton {
+    
+    var title = "" {
+        didSet {
+            setTitle(title, for: .normal)
+        }
+    }
+    
+    var selectedTitle = "" {
+        didSet {
+            setTitle(selectedTitle, for: .selected)
+            /// [.highlighted, .selected] https://stackoverflow.com/a/42995597/5893286
+            setTitle(selectedTitle, for: [.highlighted, .selected])
+        }
+    }
+    
+    var normalTintColor = UIColor.clear {
+        didSet {
+            borderColor[.normal] = normalTintColor
+            setTitleColor(normalTintColor, for: .normal)
+        }
+    }
+    
+    var selectedTintColor = UIColor.clear {
+        didSet {
+            borderColor[.highlighted] = selectedTintColor.darker()
+            borderColor[.selected] = selectedTintColor
+            
+            backgroundStateColor[.highlighted] = selectedTintColor.darker()
+            backgroundStateColor[.selected] = selectedTintColor
+        }
+    }
+    
+}
+
 }
