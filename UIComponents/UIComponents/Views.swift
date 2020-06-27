@@ -971,4 +971,29 @@ class SelectedButton: BorderStateButton {
     
 }
 
+
+final class GhustButton3: SelectedButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        
+        let textColor = UIColor.white
+        backgroundStateColor[.normal] = textColor
+        setTitleColor(textColor.darker(by: 10), for: .highlighted)
+        setTitleColor(textColor.darker(by: 10), for: [.highlighted, .selected])
+        setTitleColor(textColor, for: .selected)
+    }
+    
+}
+
 }
