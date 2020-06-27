@@ -904,6 +904,38 @@ final class EventButton: SelectedButton {
     }
 
 }
+
+///https://stackoverflow.com/a/42995597/5893286
+//let tintColor = UIColor.systemBlue
+//let highlightedTintColor = tintColor.darker()
+//declineButton.setTitle("Decline", for: .normal)//calendar_meeting_decline_button_text
+//declineButton.setTitle("Declined", for: .selected)//calendar_meeting_declined_button_text
+//declineButton.setTitle("Declined", for: [.highlighted, .selected])
+//declineButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+//
+//declineButton.layer.masksToBounds = true
+//declineButton.layer.borderWidth = 2
+//declineButton.layer.cornerRadius = 8
+////declineButton.layer.borderColor = tintColor.cgColor
+//
+//declineButton.borderColor[.normal] = tintColor
+//declineButton.borderColor[.highlighted] = highlightedTintColor
+//declineButton.borderColor[.selected] = tintColor
+//
+//declineButton.backgroundStateColor[.normal] = UIColor.white
+//declineButton.backgroundStateColor[.highlighted] = highlightedTintColor
+//declineButton.backgroundStateColor[.selected] = tintColor
+//
+//declineButton.setTitleColor(tintColor, for: .normal)
+//declineButton.setTitleColor(UIColor.white.darker(by: 10), for: .highlighted)
+//declineButton.setTitleColor(UIColor.white.darker(by: 10), for: [.highlighted, .selected])
+//declineButton.setTitleColor(UIColor.white, for: .selected)
+//
+////        declineButton.adjustsImageWhenHighlighted = false
+////        declineButton.setBackgroundColor(UIColor.white, for: .normal)
+////        declineButton.setBackgroundColor(highlightedTintColor, for: .highlighted)
+////        declineButton.setBackgroundColor(highlightedTintColor, for: [.highlighted, .selected])
+////        declineButton.setBackgroundColor(tintColor, for: .selected)
 class SelectedButton: BorderStateButton {
     
     var title = "" {
