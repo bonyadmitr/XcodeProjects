@@ -996,4 +996,71 @@ final class GhustButton3: SelectedButton {
     
 }
 
+
+/// inspired https://stackoverflow.com/a/60423075/5893286
+class HighlightButton: MultiLineButton {
+
+    var normalBackgroundColor: UIColor = .clear {
+        didSet {
+            backgroundColor = normalBackgroundColor
+        }
+    }
+
+    var highlightedBackgroundColor: UIColor = .clear
+    
+    var normalTintColor = UIColor.clear {
+        didSet {
+            tintColor = normalTintColor
+            setTitleColor(normalTintColor, for: .normal)
+        }
+    }
+    var highlightedTintColor = UIColor.clear {
+        didSet {
+            setTitleColor(highlightedTintColor, for: .highlighted)
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
+            
+            /// To get rid of the tint background https://sasablagojevic.com/how-to-get-rid-of-blue-uibutton-background-on-different-states
+            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
+        }
+    }
+    
+    var image: UIImage? {
+        get {
+            return currentImage
+        }
+        set {
+            setImage(newValue, for: .normal)
+            
+            /// or 1
+            //adjustsImageWhenHighlighted = false
+            
+            /// or 2
+            //setImage(newValue, for: .highlighted)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        adjustsImageWhenHighlighted = false
+        //adjustsImageWhenDisabled = false
+        
+        // TODO: check
+        //tintAdjustmentMode = .automatic
+    }
+    
+}
 }
