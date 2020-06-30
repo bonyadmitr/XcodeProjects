@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CECB172324AB430D0017A265 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB172224AB430D0017A265 /* AppDelegate.swift */; };
-		CECB172524AB430D0017A265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB172424AB430D0017A265 /* SceneDelegate.swift */; };
-		CECB172724AB430D0017A265 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB172624AB430D0017A265 /* ViewController.swift */; };
-		CECB172A24AB430D0017A265 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB172824AB430D0017A265 /* Main.storyboard */; };
-		CECB172C24AB43100017A265 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECB172B24AB43100017A265 /* Assets.xcassets */; };
-		CECB172F24AB43100017A265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB172D24AB43100017A265 /* LaunchScreen.storyboard */; };
+		CECB174624AB444C0017A265 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB174524AB444C0017A265 /* AppDelegate.swift */; };
+		CECB174824AB444C0017A265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB174724AB444C0017A265 /* SceneDelegate.swift */; };
+		CECB174A24AB444C0017A265 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB174924AB444C0017A265 /* ViewController.swift */; };
+		CECB174D24AB444C0017A265 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB174B24AB444C0017A265 /* Main.storyboard */; };
+		CECB174F24AB444D0017A265 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECB174E24AB444D0017A265 /* Assets.xcassets */; };
+		CECB175224AB444D0017A265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB175024AB444D0017A265 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CECB171F24AB430D0017A265 /* Lottie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lottie.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CECB172224AB430D0017A265 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CECB172424AB430D0017A265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CECB172624AB430D0017A265 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CECB172924AB430D0017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CECB172B24AB43100017A265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CECB172E24AB43100017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CECB173024AB43100017A265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CECB174224AB444C0017A265 /* LottieTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LottieTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CECB174524AB444C0017A265 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CECB174724AB444C0017A265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CECB174924AB444C0017A265 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CECB174C24AB444C0017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CECB174E24AB444D0017A265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CECB175124AB444D0017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CECB175324AB444D0017A265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CECB171C24AB430D0017A265 /* Frameworks */ = {
+		CECB173F24AB444C0017A265 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +37,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CECB171624AB430D0017A265 = {
+		CECB173924AB444C0017A265 = {
 			isa = PBXGroup;
 			children = (
-				CECB172124AB430D0017A265 /* Lottie */,
-				CECB172024AB430D0017A265 /* Products */,
+				CECB174424AB444C0017A265 /* LottieTest */,
+				CECB174324AB444C0017A265 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CECB172024AB430D0017A265 /* Products */ = {
+		CECB174324AB444C0017A265 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CECB171F24AB430D0017A265 /* Lottie.app */,
+				CECB174224AB444C0017A265 /* LottieTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CECB172124AB430D0017A265 /* Lottie */ = {
+		CECB174424AB444C0017A265 /* LottieTest */ = {
 			isa = PBXGroup;
 			children = (
-				CECB172224AB430D0017A265 /* AppDelegate.swift */,
-				CECB172424AB430D0017A265 /* SceneDelegate.swift */,
-				CECB172624AB430D0017A265 /* ViewController.swift */,
-				CECB172824AB430D0017A265 /* Main.storyboard */,
-				CECB172B24AB43100017A265 /* Assets.xcassets */,
-				CECB172D24AB43100017A265 /* LaunchScreen.storyboard */,
-				CECB173024AB43100017A265 /* Info.plist */,
+				CECB174524AB444C0017A265 /* AppDelegate.swift */,
+				CECB174724AB444C0017A265 /* SceneDelegate.swift */,
+				CECB174924AB444C0017A265 /* ViewController.swift */,
+				CECB174B24AB444C0017A265 /* Main.storyboard */,
+				CECB174E24AB444D0017A265 /* Assets.xcassets */,
+				CECB175024AB444D0017A265 /* LaunchScreen.storyboard */,
+				CECB175324AB444D0017A265 /* Info.plist */,
 			);
-			path = Lottie;
+			path = LottieTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CECB171E24AB430D0017A265 /* Lottie */ = {
+		CECB174124AB444C0017A265 /* LottieTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CECB173324AB43100017A265 /* Build configuration list for PBXNativeTarget "Lottie" */;
+			buildConfigurationList = CECB175624AB444D0017A265 /* Build configuration list for PBXNativeTarget "LottieTest" */;
 			buildPhases = (
-				CECB171B24AB430D0017A265 /* Sources */,
-				CECB171C24AB430D0017A265 /* Frameworks */,
-				CECB171D24AB430D0017A265 /* Resources */,
+				CECB173E24AB444C0017A265 /* Sources */,
+				CECB173F24AB444C0017A265 /* Frameworks */,
+				CECB174024AB444C0017A265 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Lottie;
-			productName = Lottie;
-			productReference = CECB171F24AB430D0017A265 /* Lottie.app */;
+			name = LottieTest;
+			productName = LottieTest;
+			productReference = CECB174224AB444C0017A265 /* LottieTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CECB171724AB430D0017A265 /* Project object */ = {
+		CECB173A24AB444C0017A265 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Bondar Yaroslav";
 				TargetAttributes = {
-					CECB171E24AB430D0017A265 = {
+					CECB174124AB444C0017A265 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
 				};
 			};
-			buildConfigurationList = CECB171A24AB430D0017A265 /* Build configuration list for PBXProject "Lottie" */;
+			buildConfigurationList = CECB173D24AB444C0017A265 /* Build configuration list for PBXProject "LottieTest" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = CECB171624AB430D0017A265;
-			productRefGroup = CECB172024AB430D0017A265 /* Products */;
+			mainGroup = CECB173924AB444C0017A265;
+			productRefGroup = CECB174324AB444C0017A265 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CECB171E24AB430D0017A265 /* Lottie */,
+				CECB174124AB444C0017A265 /* LottieTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CECB171D24AB430D0017A265 /* Resources */ = {
+		CECB174024AB444C0017A265 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CECB172F24AB43100017A265 /* LaunchScreen.storyboard in Resources */,
-				CECB172C24AB43100017A265 /* Assets.xcassets in Resources */,
-				CECB172A24AB430D0017A265 /* Main.storyboard in Resources */,
+				CECB175224AB444D0017A265 /* LaunchScreen.storyboard in Resources */,
+				CECB174F24AB444D0017A265 /* Assets.xcassets in Resources */,
+				CECB174D24AB444C0017A265 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CECB171B24AB430D0017A265 /* Sources */ = {
+		CECB173E24AB444C0017A265 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CECB172724AB430D0017A265 /* ViewController.swift in Sources */,
-				CECB172324AB430D0017A265 /* AppDelegate.swift in Sources */,
-				CECB172524AB430D0017A265 /* SceneDelegate.swift in Sources */,
+				CECB174A24AB444C0017A265 /* ViewController.swift in Sources */,
+				CECB174624AB444C0017A265 /* AppDelegate.swift in Sources */,
+				CECB174824AB444C0017A265 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CECB172824AB430D0017A265 /* Main.storyboard */ = {
+		CECB174B24AB444C0017A265 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CECB172924AB430D0017A265 /* Base */,
+				CECB174C24AB444C0017A265 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		CECB172D24AB43100017A265 /* LaunchScreen.storyboard */ = {
+		CECB175024AB444D0017A265 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CECB172E24AB43100017A265 /* Base */,
+				CECB175124AB444D0017A265 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CECB173124AB43100017A265 /* Debug */ = {
+		CECB175424AB444D0017A265 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -226,7 +226,7 @@
 			};
 			name = Debug;
 		};
-		CECB173224AB43100017A265 /* Release */ = {
+		CECB175524AB444D0017A265 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -280,34 +280,34 @@
 			};
 			name = Release;
 		};
-		CECB173424AB43100017A265 /* Debug */ = {
+		CECB175724AB444D0017A265 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Lottie/Info.plist;
+				INFOPLIST_FILE = LottieTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.Lottie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LottieTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		CECB173524AB43100017A265 /* Release */ = {
+		CECB175824AB444D0017A265 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Lottie/Info.plist;
+				INFOPLIST_FILE = LottieTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.by.Lottie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.by.LottieTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -317,25 +317,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CECB171A24AB430D0017A265 /* Build configuration list for PBXProject "Lottie" */ = {
+		CECB173D24AB444C0017A265 /* Build configuration list for PBXProject "LottieTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CECB173124AB43100017A265 /* Debug */,
-				CECB173224AB43100017A265 /* Release */,
+				CECB175424AB444D0017A265 /* Debug */,
+				CECB175524AB444D0017A265 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CECB173324AB43100017A265 /* Build configuration list for PBXNativeTarget "Lottie" */ = {
+		CECB175624AB444D0017A265 /* Build configuration list for PBXNativeTarget "LottieTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CECB173424AB43100017A265 /* Debug */,
-				CECB173524AB43100017A265 /* Release */,
+				CECB175724AB444D0017A265 /* Debug */,
+				CECB175824AB444D0017A265 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = CECB171724AB430D0017A265 /* Project object */;
+	rootObject = CECB173A24AB444C0017A265 /* Project object */;
 }

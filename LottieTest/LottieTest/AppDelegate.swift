@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Lottie
+//  LottieTest
 //
 //  Created by Bondar Yaroslav on 6/30/20.
 //  Copyright © 2020 Bondar Yaroslav. All rights reserved.
