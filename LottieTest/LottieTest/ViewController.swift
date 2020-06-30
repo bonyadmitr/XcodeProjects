@@ -9,6 +9,8 @@ class ViewController: UIViewController {
         print("- viewDidLoad")
         
         /// doc https://airbnb.io/lottie/#/ios
+        /// player https://loupthibault.github.io/bodymovin-player/
+        /// rus article https://habr.com/ru/post/451638/
         let animationView = AnimationView(name: "fishes_lottie")
         
         //let animationView = AnimationView()
