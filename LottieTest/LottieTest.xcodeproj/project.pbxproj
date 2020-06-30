@@ -14,6 +14,7 @@
 		CECB174F24AB444D0017A265 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CECB174E24AB444D0017A265 /* Assets.xcassets */; };
 		CECB175224AB444D0017A265 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB175024AB444D0017A265 /* LaunchScreen.storyboard */; };
 		CECB175B24AB447C0017A265 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CECB175A24AB447C0017A265 /* Lottie */; };
+		CECB175D24AB44B20017A265 /* fishes_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = CECB175C24AB44B20017A265 /* fishes_lottie.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		CECB174E24AB444D0017A265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CECB175124AB444D0017A265 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CECB175324AB444D0017A265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CECB175C24AB44B20017A265 /* fishes_lottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fishes_lottie.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +67,17 @@
 				CECB174E24AB444D0017A265 /* Assets.xcassets */,
 				CECB175024AB444D0017A265 /* LaunchScreen.storyboard */,
 				CECB175324AB444D0017A265 /* Info.plist */,
+				CECB175E24AB465C0017A265 /* Animations */,
 			);
 			path = LottieTest;
+			sourceTree = "<group>";
+		};
+		CECB175E24AB465C0017A265 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				CECB175C24AB44B20017A265 /* fishes_lottie.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECB175D24AB44B20017A265 /* fishes_lottie.json in Resources */,
 				CECB175224AB444D0017A265 /* LaunchScreen.storyboard in Resources */,
 				CECB174F24AB444D0017A265 /* Assets.xcassets in Resources */,
 				CECB174D24AB444C0017A265 /* Main.storyboard in Resources */,
