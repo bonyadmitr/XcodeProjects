@@ -8,6 +8,7 @@ class ViewController: UIViewController {
         
         print("- viewDidLoad")
         
+        /// doc https://airbnb.io/lottie/#/ios
         let animationView = AnimationView(name: "fishes_lottie")
         
         //let animationView = AnimationView()
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
         
         //starAnimationView.play()
         animationView.play { finished in
+            /// not called for 'loopMode = .loop' and 'backgroundBehavior = .pauseAndRestore'
             print("- finished: \(finished)")
         }
         
