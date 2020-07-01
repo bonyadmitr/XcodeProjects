@@ -40,5 +40,9 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    private func printPastboard() {
+        print("- \(UIPasteboard.general.changeCount) | \(Date()) | \(UIPasteboard.general.string ?? "nil")")
+    }
 }
 
