@@ -23,10 +23,25 @@ class ViewController: UIViewController {
             print(Date(), UIPasteboard.general.string ?? "nil")
         }
         
+        /// seems like forking in app change only like: UIPasteboard.general.string = "1"
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changedNotification),
+                                               name: UIPasteboard.changedNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changedNotification),
+                                               name: UIPasteboard.removedNotification,
+                                               object: nil)
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willEnterForeground),
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
+    }
+    
+    @objc private func changedNotification() {
+        print("- changedNotification")
+        printPastboard()
     }
     
     @objc private func willEnterForeground() {
