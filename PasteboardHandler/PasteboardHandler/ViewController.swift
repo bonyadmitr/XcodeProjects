@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// iOS 14 UIPasteboard behavior https://habr.com/ru/company/kaspersky/blog/508784/
+/// UIPasteboard returns nil in the background https://stackoverflow.com/a/54484675/5893286
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
