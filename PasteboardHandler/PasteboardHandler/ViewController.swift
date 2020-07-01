@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
-            print(Date(), UIPasteboard.general.string ?? "nil")
+            self.printPastboard()
         }
         
         /// seems like forking in app change only like: UIPasteboard.general.string = "1"
@@ -51,7 +51,8 @@ class ViewController: UIViewController {
         
         /// called on not first appear
         if UIApplication.shared.applicationState == .background {
-            print("- willEnterForeground", UIPasteboard.general.string ?? "nil")
+            print("- willEnterForeground")
+            printPastboard()
         }
     }
     
