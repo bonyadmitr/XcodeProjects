@@ -10,17 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /// to work timer in background
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-//        _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
-//            print(Date(), UIPasteboard.general.string ?? "nil")
-//        }
+        _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { _ in
+            print(Date(), UIPasteboard.general.string ?? "nil")
+        }
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willEnterForeground),
