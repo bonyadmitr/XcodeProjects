@@ -1099,4 +1099,38 @@ final class ButtonMain: HighlightButton, Shadowed, Rounded {
     }
     
 }
+
+/// button frame autolayout https://stackoverflow.com/a/35321242/5893286
+/// test by:
+//backgroundColor = .red
+//titleLabel?.backgroundColor = .green
+class MultiLineButton: DynamicFontButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        titleLabel?.numberOfLines = 0
+        titleLabel?.lineBreakMode = .byWordWrapping
+        titleLabel?.textAlignment = .center
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return titleLabel?.intrinsicContentSize ?? .zero
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.preferredMaxLayoutWidth = titleLabel?.bounds.width ?? 0
+        super.layoutSubviews()
+    }
+    
+}
 }
