@@ -1133,4 +1133,61 @@ class MultiLineButton: DynamicFontButton {
     }
     
 }
+
+class DynamicFontButton: UIButton {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        setupDynamicImage()
+    }
+    
+    private func setupDynamicImage() {
+        /// UIDynamicProviderImage https://gist.github.com/SpectralDragon/4ddd2a01d8027a2ff831af8859861764
+        
+        ///default  custom button
+        //currentPreferredSymbolConfiguration == UIImage.SymbolConfiguration(scale: .medium)
+        
+        /// default system button
+        //currentPreferredSymbolConfiguration ==  UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
+        
+        let symbolConfig = UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
+        setPreferredSymbolConfiguration(symbolConfig, forImageIn: .normal)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
+            return
+        }
+        
+        // TODO: is it needed?
+        /// update fonts
+        let font = titleLabel?.font
+        titleLabel?.font = nil
+        titleLabel?.font = font
+        
+        /// update images
+        guard let currentPreferredSymbolConfiguration = currentPreferredSymbolConfiguration else {
+            assertionFailure("use setPreferredSymbolConfiguration")
+            return
+        }
+        
+        [UIControl.State.normal, .highlighted, .selected, .disabled].forEach { state in
+            let img = image(for: state)?.withConfiguration(currentPreferredSymbolConfiguration)
+            setImage(img, for: state)
+        }
+        
+    }
+    
+}
 }
