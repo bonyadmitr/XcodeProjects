@@ -1288,4 +1288,66 @@ class GhostButton: MultiLineButton, Rounded {
     }
     
 }
+
+/// set normalBackgroundColor != UIColor.clear
+final class GhostButton2: HighlightButton, Rounded {
+    
+    override var normalTintColor: UIColor {
+        didSet {
+            highlightedBackgroundColor = normalTintColor
+            layer.borderColor = normalTintColor.cgColor
+        }
+    }
+    
+    override var normalBackgroundColor: UIColor {
+        didSet {
+            //let fixedColor = (normalBackgroundColor == UIColor.clear) ? Colors.background : normalBackgroundColor
+            setTitleColor(normalBackgroundColor, for: .highlighted)
+            highlightedTintColor = normalBackgroundColor
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    //override func didMoveToSuperview() {
+    //    super.didMoveToSuperview()
+    //
+    //    /// not working with UIStackView. it's backgroundColor == nil
+    //    let superviewBackgroundColor = superview?.backgroundColor ?? .clear
+    //    normalBackgroundColor = superviewBackgroundColor
+    //}
+    
+    private func setup() -> Void {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        
+        normalTintColor = Colors.text
+        normalBackgroundColor = Colors.background
+        
+        setDynamicFont(Fonts.button)
+        
+        layer.borderWidth = 2
+        
+        initSetupRounded()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// not working COLOR.resolvedColor(with: traitCollection).cgColor https://stackoverflow.com/a/57177411/5893286
+        /// cgColor update https://stackoverflow.com/a/58312205/5893286
+        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            layer.borderColor = normalTintColor.cgColor
+        }
+
+    }
+    
+}
 }
