@@ -1350,4 +1350,26 @@ final class GhostButton2: HighlightButton, Rounded {
     }
     
 }
+
+//UIApplication.shared.preferredContentSizeCategory.isAccessibilityCategory
+/// inspired https://useyourloaf.com/blog/making-space-for-dynamic-type/
+/// inspired https://habr.com/ru/company/dodopizzadev/blog/452226/
+final class DynamicStackView: UIStackView {
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
+            return
+        }
+        
+        if traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+            axis = .vertical
+            alignment = .leading
+        } else {
+            axis = .horizontal
+            alignment = .center
+        }
+    }
+    
 }
