@@ -38,3 +38,18 @@ final class ProductDetailView: UIView {
         descriptionLabel.text = detailedItem.description
     }
 }
+
+import UIKit
+
+extension UIView {
+    
+    static func loadView() -> Self {
+        if isNibExist() {
+            return loadFromNib()
+        } else {
+            return self.init(frame: UIScreen.main.bounds)
+        }
+    }
+    
+}
+
