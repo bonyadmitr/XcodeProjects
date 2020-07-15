@@ -67,5 +67,14 @@ extension UIView {
         return view(bundle, className: className)
     }
     
+    
+    func loadNib(nibName: String? = nil) -> UIView {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = nibName ?? type(of: self).description().components(separatedBy: ".").last!
+        
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        return nib.instantiate(withOwner: self, options: nil).first as! UIView // swiftlint:disable:this force_cast
+    }
+    
 }
 
