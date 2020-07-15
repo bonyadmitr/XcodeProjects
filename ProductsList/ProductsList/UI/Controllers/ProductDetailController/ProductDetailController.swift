@@ -6,7 +6,6 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
     typealias Item = ProductItemDB
     typealias View = ProductDetailView
     
-    weak var coordinator: DetailCoordinator?
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     
@@ -227,7 +226,6 @@ extension ProductDetailController {
 //        userActivity?.invalidate()
 //    }
 }
-
 
 
 import Foundation

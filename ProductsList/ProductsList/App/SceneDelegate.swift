@@ -14,7 +14,6 @@ final class AppearanceConfigurator {
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    private var coordinator: Coordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -61,16 +60,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            window.layer.speed = 100
         }
         
+        let vc = ProductsListController()
+        let navVC = UINavigationController(rootViewController: vc)
         
-        let navVC = UINavigationController()
-        let coordinator = MainCoordinator(navigationController: navVC)
-        coordinator.start()
-        self.coordinator = coordinator
-        
-//        let vc = ProductsListController()
-//        let navVC = UINavigationController(rootViewController: vc)
-        
-        window.rootViewController = coordinator.navigationController
+        window.rootViewController = navVC
         window.makeKeyAndVisible()
         
         // my strategy: each v.c. must have a restorationInfo property...

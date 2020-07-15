@@ -8,7 +8,6 @@ final class ProductsListController: UIViewController, ErrorPresenter {
     typealias Cell = ImageTextCell
     typealias SectionType = Int
     
-    weak var coordinator: MainCoordinator?
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     private let searchController = SearchController(searchResultsController: nil)
@@ -127,7 +126,14 @@ extension ProductsListController: UICollectionViewDelegate {
             assertionFailure()
             return
         }
-        coordinator?.showDetail(item: item)
+        
+        let detailVC = ProductDetailController(item: item)
+        
+        #if os(tvOS)
+        navigationController?.present(detailVC, animated: true, completion: nil)
+        #else
+        navigationController?.pushViewController(detailVC, animated: true)
+        #endif
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
