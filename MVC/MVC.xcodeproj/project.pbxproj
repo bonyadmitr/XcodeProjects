@@ -16,6 +16,7 @@
 		669A148A205C4B47005F9D18 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A1489205C4B47005F9D18 /* LoginView.swift */; };
 		669A148E205C4B82005F9D18 /* LoginModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A148D205C4B82005F9D18 /* LoginModelController.swift */; };
 		669A1490205C4BA5005F9D18 /* LoginCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A148F205C4BA5005F9D18 /* LoginCredentials.swift */; };
+		CE7CF99724BEA8F8002CC35C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7CF99624BEA8F8002CC35C /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		669A1489205C4B47005F9D18 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		669A148D205C4B82005F9D18 /* LoginModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelController.swift; sourceTree = "<group>"; };
 		669A148F205C4BA5005F9D18 /* LoginCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCredentials.swift; sourceTree = "<group>"; };
+		CE7CF99624BEA8F8002CC35C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				669A147A205C4360005F9D18 /* Assets.xcassets */,
 				669A147C205C4360005F9D18 /* LaunchScreen.storyboard */,
 				669A147F205C4360005F9D18 /* Info.plist */,
+				CE7CF99624BEA8F8002CC35C /* BaseViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				669A1488205C4AF9005F9D18 /* LoginViewDelegate.swift in Sources */,
 				669A1476205C4360005F9D18 /* LoginViewController.swift in Sources */,
 				669A148A205C4B47005F9D18 /* LoginView.swift in Sources */,
+				CE7CF99724BEA8F8002CC35C /* BaseViewController.swift in Sources */,
 				669A1474205C4360005F9D18 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

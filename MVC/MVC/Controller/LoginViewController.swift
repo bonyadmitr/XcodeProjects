@@ -46,3 +46,41 @@ extension LoginViewController: LoginViewDelegate {
         }
     }
 }
+
+
+// MARK: - Base
+
+final class LoginViewController2<View: LoginView>: BaseViewController<View> {
+    
+    let model: LoginModelController
+    
+    init(model: LoginModelController) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder aDecoder: NSCoder) { fatalError() }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        vcView.emailTextField.text = model.loginCredentials.email
+        vcView.passwordTextField.text = model.loginCredentials.password
+        vcView.delegate = self
+    }
+    
+}
+extension LoginViewController2: LoginViewDelegate {
+    func didLogin(email: String, password: String) {
+        model.loginWith(email: email, password: password) { (isLoggedIn) in
+            if isLoggedIn {
+                print("Success")
+                print("email:", model.loginCredentials.email)
+                print("password:", model.loginCredentials.password)
+                //present(MainVC, animated: true, completion: nil)
+            } else {
+                print("Error")
+                //present(ErrorPopUp, animated: true, completion: nil)
+            }
+        }
+    }
+}
