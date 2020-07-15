@@ -151,3 +151,10 @@
  
  try local/push notifications test by https://medium.com/@mds6058/push-notification-ui-testing-41bf66bed3fa
  */
+
+
+
+/// another MVC
+/// source https://github.com/JonFir/JMVC
+/// Live-coding https://www.youtube.com/watch?v=sM-AaI32hTc
+/// video list https://www.youtube.com/channel/UCz0ktLk0st8W9i3qsB5__Iw/videos
