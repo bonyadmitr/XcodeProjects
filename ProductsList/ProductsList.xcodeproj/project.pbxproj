@@ -25,7 +25,6 @@
 		CE5F131D23C86E5F00E7C61D /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F131C23C86E5F00E7C61D /* L10n.swift */; };
 		CE6B595823881D5500F32AB2 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */; };
 		CE6B595A238833A100F32AB2 /* ClassNameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B5959238833A100F32AB2 /* ClassNameable.swift */; };
-		CE7CF99524BADF39002CC35C /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7CF99424BADF39002CC35C /* ProductDetailView.xib */; };
 		CE8A8BCD238513BC0015F120 /* ProductsList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCB238513BC0015F120 /* ProductsList.xcdatamodeld */; };
 		CE8A8BD02387F5DD0015F120 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */; };
 		CEB7ADB323D828A0000F0572 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = CEB7ADB523D828A0000F0572 /* Localizable.stringsdict */; };
@@ -90,7 +89,6 @@
 		CE6B595723881D5500F32AB2 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		CE6B5959238833A100F32AB2 /* ClassNameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameable.swift; sourceTree = "<group>"; };
 		CE6B595D2389E91A00F32AB2 /* todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo.swift; sourceTree = "<group>"; };
-		CE7CF99424BADF39002CC35C /* ProductDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
 		CE8A8BCC238513BC0015F120 /* ProductsList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsList.xcdatamodel; sourceTree = "<group>"; };
 		CE8A8BCF2387F5DD0015F120 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CEB7ADB423D828A0000F0572 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 			children = (
 				CEF0FA63237E9E80007056AF /* ProductDetailController.xib */,
 				CEC94E09238D454D000BBB80 /* ProductDetailView.swift */,
-				CE7CF99424BADF39002CC35C /* ProductDetailView.xib */,
 				CEF0FA62237E9E80007056AF /* ProductDetailController.swift */,
 			);
 			path = ProductDetailController;
@@ -466,7 +463,6 @@
 				CEF0FA4D237E8586007056AF /* Assets.xcassets in Resources */,
 				CEF0FA61237E8F9E007056AF /* ImageTextCell.xib in Resources */,
 				CEB7ADB323D828A0000F0572 /* Localizable.stringsdict in Resources */,
-				CE7CF99524BADF39002CC35C /* ProductDetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

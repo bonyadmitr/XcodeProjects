@@ -1,7 +1,6 @@
 import UIKit
 
-final class ProductDetailController<View: ProductDetailView>: BaseViewController<View>, ErrorPresenter {
-//final class ProductDetailController: UIViewController, ErrorPresenter {
+final class ProductDetailController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
     typealias Item = ProductItemDB
@@ -11,14 +10,14 @@ final class ProductDetailController<View: ProductDetailView>: BaseViewController
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     
-//    private lazy var vcView: View = {
-//        if let view = self.view as? View {
-//            return view
-//        } else {
-//            assertionFailure("setup view in IB")
-//            return View()
-//        }
-//    }()
+    private lazy var vcView: View = {
+        if let view = self.view as? View {
+            return view
+        } else {
+            assertionFailure("setup view in IB")
+            return View()
+        }
+    }()
     
     private var item: Item?
     
