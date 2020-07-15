@@ -51,5 +51,21 @@ extension UIView {
         }
     }
     
+    static func loadFromNib() -> Self {
+        
+        let selfClass: AnyClass = self as AnyClass
+        var className = NSStringFromClass(selfClass)
+        let bundle = Bundle(for: selfClass)
+        
+        if bundle.path(forResource: className, ofType: "nib") == nil {
+            className = (className as NSString).pathExtension
+            if bundle.path(forResource: className, ofType: "nib") == nil {
+                fatalError("No xib file for view \(type(of: self))")
+            }
+        }
+        
+        return view(bundle, className: className)
+    }
+    
 }
 
