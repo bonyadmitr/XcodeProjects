@@ -1,6 +1,7 @@
 import UIKit
 
-final class ProductDetailController: UIViewController, ErrorPresenter {
+final class ProductDetailController<View: ProductDetailView>: BaseViewController<View>, ErrorPresenter {
+//final class ProductDetailController: UIViewController, ErrorPresenter {
     
     typealias Model = Product
     typealias Item = ProductItemDB
@@ -10,14 +11,14 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
     private let service = Model.Service()
     private lazy var storage = Item.Storage()
     
-    private lazy var vcView: View = {
-        if let view = self.view as? View {
-            return view
-        } else {
-            assertionFailure("setup view in IB")
-            return View()
-        }
-    }()
+//    private lazy var vcView: View = {
+//        if let view = self.view as? View {
+//            return view
+//        } else {
+//            assertionFailure("setup view in IB")
+//            return View()
+//        }
+//    }()
     
     private var item: Item?
     
@@ -86,19 +87,62 @@ final class ProductDetailController: UIViewController, ErrorPresenter {
         }
     }
     
+    
+    // Encode and decode keys for saving the NSUserActivity to the restoration archive (non-scene based).
+    let restoreActivityKey = "RestoreActivity"
+    let activityTitleKey = "title"
+    //    static let activityNotesKey = "notes"
+    let activityIdentifierKey = "identifier"
+    //    static let activityEditStateKey = "editState"
+    
+    
+    // MARK: - UIUserActivityRestoring
+    
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        super.updateUserActivityState(activity)
+        applyUserActivityEntries(activity)
+    }
+    
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        super.restoreUserActivityState(activity)
+        
+        // Check if the activity is of our type.
+        if activity.activityType == ProductDetailController.activityType {
+            // Get the user activity data.
+            if let activityUserInfo = activity.userInfo {
+                restoreItemInterface(activityUserInfo)
+            }
+        }
+    }
+    
+    // MARK: - State Restoration (UIStateRestoring)
+    
+    /// - Tag: encodeRestorableState
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+        let encodedActivity = NSUserActivityEncoder(detailUserActivity)
+        coder.encode(encodedActivity, forKey: restoreActivityKey)
+    }
+    
+    /// - Tag: decodeRestorableState
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        
+        if coder.containsValue(forKey: restoreActivityKey) {
+            if let decodedActivity = coder.decodeObject(forKey: restoreActivityKey) as? NSUserActivityEncoder {
+                if let activityUserInfo = decodedActivity.userActivity.userInfo {
+                    restoreItemInterface(activityUserInfo)
+                }
+            }
+        }
+    }
 }
 
 
 // MARK: - NSUserActivity Support
 
 extension ProductDetailController {
-
-    // Encode and decode keys for saving the NSUserActivity to the restoration archive (non-scene based).
-    static let restoreActivityKey = "RestoreActivity"
-    static let activityTitleKey = "title"
-//    static let activityNotesKey = "notes"
-    static let activityIdentifierKey = "identifier"
-//    static let activityEditStateKey = "editState"
     
     /** Create the user activity type.
         Note: The activityType string loaded below must be included in your Info.plist file under the `NSUserActivityTypes` array.
@@ -123,14 +167,14 @@ extension ProductDetailController {
             return
         }
         
-        let itemTitle: [String: String] = [ProductDetailController.activityTitleKey: title!]
+        let itemTitle: [String: String] = [activityTitleKey: title!]
         activity.addUserInfoEntries(from: itemTitle)
 //
 //        let itemNotes: [String: String] = [ProductDetailController.activityNotesKey: detailNotes.text!]
 //        activity.addUserInfoEntries(from: itemNotes)
 //
 //        // We remember the item's identifier for unsaved changes.
-        let itemIdentifier: [String: Any] = [ProductDetailController.activityIdentifierKey: item.objectID.uriRepresentation()]
+        let itemIdentifier: [String: Any] = [activityIdentifierKey: item.objectID.uriRepresentation()]
         activity.addUserInfoEntries(from: itemIdentifier)
 //
 //        // Remember the edit mode state to restore next time (we compare the orignal note with the unsaved note).
@@ -154,12 +198,12 @@ extension ProductDetailController {
     }
 
     func restoreItemInterface(_ activityUserInfo: [AnyHashable: Any]) {
-        let itemTitle = activityUserInfo[ProductDetailController.activityTitleKey] as? String
+        let itemTitle = activityUserInfo[activityTitleKey] as? String
         title = itemTitle
         
         let context = CoreDataStack.shared.viewContext
 //        CoreDataStack.shared.performBackgroundTask { context in
-            if let itemID = activityUserInfo[ProductDetailController.activityIdentifierKey] as? URL,
+            if let itemID = activityUserInfo[activityIdentifierKey] as? URL,
                 let id = CoreDataStack.shared.managedObjectID(for: itemID),
                 let item = context.object(with: id) as? Item
             {
@@ -185,55 +229,6 @@ extension ProductDetailController {
 //    }
 }
 
-// MARK: - UIUserActivityRestoring
-
-extension ProductDetailController {
-    
-    override func updateUserActivityState(_ activity: NSUserActivity) {
-        super.updateUserActivityState(activity)
-        applyUserActivityEntries(activity)
-    }
-
-    override func restoreUserActivityState(_ activity: NSUserActivity) {
-         super.restoreUserActivityState(activity)
-        
-        // Check if the activity is of our type.
-        if activity.activityType == ProductDetailController.activityType {
-            // Get the user activity data.
-            if let activityUserInfo = activity.userInfo {
-                restoreItemInterface(activityUserInfo)
-            }
-        }
-    }
-
-}
-
-// MARK: - State Restoration (UIStateRestoring)
-
-extension ProductDetailController {
-    
-/// - Tag: encodeRestorableState
-    override func encodeRestorableState(with coder: NSCoder) {
-        super.encodeRestorableState(with: coder)
-
-        let encodedActivity = NSUserActivityEncoder(detailUserActivity)
-        coder.encode(encodedActivity, forKey: ProductDetailController.restoreActivityKey)
-    }
-   
-/// - Tag: decodeRestorableState
-    override func decodeRestorableState(with coder: NSCoder) {
-        super.decodeRestorableState(with: coder)
-        
-        if coder.containsValue(forKey: ProductDetailController.restoreActivityKey) {
-            if let decodedActivity = coder.decodeObject(forKey: ProductDetailController.restoreActivityKey) as? NSUserActivityEncoder {
-                if let activityUserInfo = decodedActivity.userActivity.userInfo {
-                    restoreItemInterface(activityUserInfo)
-                }
-            }
-        }
-    }
-    
-}
 
 
 import Foundation
