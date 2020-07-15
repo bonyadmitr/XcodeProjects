@@ -16,9 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         
-        let loginView = LoginView.initFromNib()
         let loginModelController = LoginModelController()
-        let loginVC = LoginViewController(view: loginView, model: loginModelController)
+        
+        //let loginView = LoginView.initFromNib()
+        //let loginVC = LoginViewController(view: loginView, model: loginModelController)
+        
+        let loginVC = LoginViewController2(model: loginModelController)
         
         window.rootViewController = loginVC
     }
