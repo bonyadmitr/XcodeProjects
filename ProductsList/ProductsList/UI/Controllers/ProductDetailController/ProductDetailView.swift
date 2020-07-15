@@ -39,6 +39,34 @@ final class ProductDetailView: UIView {
     }
 }
 
+
+// ---------
+
+import UIKit
+
+class BaseViewController<View: UIView>: UIViewController {
+    
+    //typealias OnBackButtonTap = () -> Void
+    
+    //var rootView: View { view as! View }
+    //var onBackButtonTap: OnBackButtonTap?
+    
+    let vcView = View.loadView()
+    
+    override func loadView() {
+        view = vcView
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        if isMovingFromParent {
+//            onBackButtonTap?()
+//        }
+//    }
+    
+}
+
 import UIKit
 
 extension UIView {
