@@ -92,5 +92,14 @@ extension UIView {
         
         return true
     }
+    
+    private static func view<T: UIView>(_ bundle: Bundle, className: String) -> T {
+        guard let nibContents = bundle.loadNibNamed(className, owner: nil, options: nil)
+            else { fatalError("No xib file for view \(className)") }
+        
+        guard let view = nibContents.first(where: { ($0 as AnyObject).isKind(of: self) }) as? T
+            else { fatalError("Xib doesn't have a view of such class \(self)") }
+        return view
+    }
 }
 
