@@ -44,6 +44,9 @@ final class ProductDetailView: UIView {
 
 import UIKit
 
+/// source https://github.com/JonFir/JMVC
+/// Live-coding https://www.youtube.com/watch?v=sM-AaI32hTc
+/// video list https://www.youtube.com/channel/UCz0ktLk0st8W9i3qsB5__Iw/videos
 class BaseViewController<View: UIView>: UIViewController {
     
     //typealias OnBackButtonTap = () -> Void
