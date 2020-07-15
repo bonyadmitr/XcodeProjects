@@ -76,5 +76,21 @@ extension UIView {
         return nib.instantiate(withOwner: self, options: nil).first as! UIView // swiftlint:disable:this force_cast
     }
     
+    // MARK: - Private Methods
+    
+    private static func isNibExist() -> Bool {
+        let selfClass: AnyClass = self as AnyClass
+        var className = NSStringFromClass(selfClass)
+        let bundle = Bundle(for: selfClass)
+        
+        if bundle.path(forResource: className, ofType: "nib") == nil {
+            className = (className as NSString).pathExtension
+            if bundle.path(forResource: className, ofType: "nib") == nil {
+                return false
+            }
+        }
+        
+        return true
+    }
 }
 
