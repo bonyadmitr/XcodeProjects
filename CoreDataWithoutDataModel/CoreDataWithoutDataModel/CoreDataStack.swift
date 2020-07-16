@@ -133,6 +133,7 @@ final class CoreDataStack {
 //                        .compactMap { $0.result as? [NSManagedObjectID] }
 //                        .flatMap { $0 }
 //
+//                    /// Updating in-memory objects https://www.avanderlee.com/swift/nsbatchdeleterequest-core-data/#updating-in-memory-objects
 //                    /// long operation. need only to update NSFetchedResultsController.
 //                    /// for logout can be removed.
 //                    /// context.parent is nil iOS 10+ so used viewContext
