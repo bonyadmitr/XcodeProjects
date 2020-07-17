@@ -83,7 +83,8 @@ extension CoreDataStack {
 //                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
 //                    .compactMap { $0.result as? [NSManagedObjectID] }
 //                    .flatMap { $0 }
-
+                
+                /// Updating in-memory objects https://www.avanderlee.com/swift/nsbatchdeleterequest-core-data/#updating-in-memory-objects
                 let changes = [NSDeletedObjectsKey: objectIDs]
                 NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context.parent ?? viewContext])
                 completion?(.saved)
