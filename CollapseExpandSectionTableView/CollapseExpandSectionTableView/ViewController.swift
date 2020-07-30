@@ -21,6 +21,15 @@ class ViewController: UIViewController {
         return tableView
     }()
     
+    let sctionData = [
+        ["1"],
+        ["1","2"],
+        ["1","2","3"],
+        ["1","2","3","4"],
+        ["1","2","3","4","5"],
+    ]
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,16 +42,16 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sctionData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return sctionData[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath)"
+        cell.textLabel?.text = sctionData[indexPath.section][indexPath.row]
         return cell
     }
     
