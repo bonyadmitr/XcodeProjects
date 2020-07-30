@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// article https://programmingwithswift.com/expand-collapse-uitableview-section-with-swift/
 class ViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
