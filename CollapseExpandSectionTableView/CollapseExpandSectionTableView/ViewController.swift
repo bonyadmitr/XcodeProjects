@@ -12,16 +12,17 @@ import UIKit
 class ViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.frame = self.view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = 44
-        tableView.sectionHeaderHeight = 60
-        tableView.allowsSelection = false
-        return tableView
+        let newValue = UITableView()
+        newValue.dataSource = self
+        newValue.delegate = self
+        newValue.frame = self.view.bounds
+        newValue.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        newValue.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        newValue.register(UINib(nibName: "TitleHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "TitleHeaderView")
+        newValue.rowHeight = 44
+        newValue.sectionHeaderHeight = 60
+        newValue.sectionFooterHeight = 2 /// separator
+        return newValue
     }()
     
     let sectionData = [
