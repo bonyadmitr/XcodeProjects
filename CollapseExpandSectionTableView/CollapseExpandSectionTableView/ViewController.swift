@@ -41,9 +41,8 @@ class ViewController: UIViewController {
         
         view.addSubview(tableView)
     }
-
-    @objc private func hideSection(sender: UIButton) {
-        let section = sender.tag
+    
+    private func hideSection(_ section: Int) {
         let indexPathsForSection = (0..<sectionData[section].count).map { IndexPath(row: $0, section: section) }
         
         tableView.beginUpdates()
