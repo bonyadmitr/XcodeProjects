@@ -16,7 +16,7 @@ final class SectionsDataSource {
     struct Section {
         let title: String
         let rows: [String]
-        let isExpanded: Bool
+        var isExpanded: Bool
     }
     
     var sections = [
