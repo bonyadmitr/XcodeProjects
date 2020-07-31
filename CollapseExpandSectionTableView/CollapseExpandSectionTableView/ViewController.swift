@@ -8,6 +8,36 @@
 
 import UIKit
 
+final class SectionsDataSource {
+    
+//    static let shared = SectionsDataSource()
+//    private init() {}
+    
+    struct Section {
+        let title: String
+        let rows: [String]
+        let isExpanded: Bool
+    }
+    
+    var sections = [
+        Section(title: "UIKit",
+                rows: ["UIButton и UILable",
+                       "UISegmentedControl",
+                       "UISlider"],
+                isExpanded: false),
+        Section(title: "Networking",
+                rows: ["GET Requests",
+                       "POST Request",
+                       "JSONDecoder"],
+                isExpanded: false),
+        Section(title: "Notifications",
+                rows: ["Local notifications",
+                       "Push-Notification",
+                       "Sandbox"],
+                isExpanded: false)
+    ]
+    
+}
 /// article https://programmingwithswift.com/expand-collapse-uitableview-section-with-swift/
 class ViewController: UIViewController {
 
