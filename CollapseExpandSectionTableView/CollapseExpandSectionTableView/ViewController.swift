@@ -90,5 +90,11 @@ extension ViewController: UITableViewDelegate {
         }
         return view
     }
-
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }
+    
 }
