@@ -38,6 +38,20 @@ final class SectionsDataSource {
     ]
     
 }
+
+final class SectionsDataSource2 {
+    
+    let sectionData = [
+        ["1"],
+        ["1","2"],
+        ["1","2","3"],
+        ["1","2","3","4"],
+        ["1","2","3","4","5"],
+    ]
+    
+    var hiddenSections = Set<Int>()
+    
+}
 /// article https://programmingwithswift.com/expand-collapse-uitableview-section-with-swift/
 class ViewController: UIViewController {
 
