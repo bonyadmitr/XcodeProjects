@@ -81,14 +81,14 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionButton = UIButton()
-        sectionButton.setTitle(String(section), for: .normal)
-        sectionButton.backgroundColor = .systemBlue
-        sectionButton.tag = section
-        sectionButton.addTarget(self,
-                                action: #selector(self.hideSection(sender:)),
-                                for: .touchUpInside)
-        return sectionButton
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TitleHeaderView") as? TitleHeaderView else {
+            assertionFailure()
+            return nil
+        }
+        view.setup(title: "Section: \(section)", section: section) { [weak self] section in
+            self?.hideSection(section)
+        }
+        return view
     }
 
 }
