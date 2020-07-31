@@ -52,8 +52,12 @@ final class SectionsDataSource2 {
     var hiddenSections = Set<Int>()
     
 }
+
 /// article https://programmingwithswift.com/expand-collapse-uitableview-section-with-swift/
 class ViewController: UIViewController {
+    
+    //private let sectionsDataSource = SectionsDataSource()
+    private let sectionsDataSource2 = SectionsDataSource2()
 
     private lazy var tableView: UITableView = {
         let newValue = UITableView()
@@ -69,17 +73,6 @@ class ViewController: UIViewController {
         return newValue
     }()
     
-    let sectionData = [
-        ["1"],
-        ["1","2"],
-        ["1","2","3"],
-        ["1","2","3","4"],
-        ["1","2","3","4","5"],
-    ]
-    
-    var hiddenSections = Set<Int>()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,16 +80,16 @@ class ViewController: UIViewController {
     }
     
     private func hideSection(_ section: Int) {
-        let indexPathsForSection = (0..<sectionData[section].count).map { IndexPath(row: $0, section: section) }
+        let indexPathsForSection = (0..<sectionsDataSource2.sectionData[section].count).map { IndexPath(row: $0, section: section) }
         
         tableView.beginUpdates()
         
-        if hiddenSections.contains(section) {
-            hiddenSections.remove(section)
-            tableView.insertRows(at: indexPathsForSection, with: .automatic)
+        if sectionsDataSource2.hiddenSections.contains(section) {
+            sectionsDataSource2.hiddenSections.remove(section)
+            tableView.insertRows(at: indexPathsForSection, with: .fade)
         } else {
-            hiddenSections.insert(section)
-            tableView.deleteRows(at: indexPathsForSection, with: .automatic)
+            sectionsDataSource2.hiddenSections.insert(section)
+            tableView.deleteRows(at: indexPathsForSection, with: .fade)
         }
         
         tableView.endUpdates()
@@ -106,16 +99,17 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionData.count
+        return sectionsDataSource2.sectionData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hiddenSections.contains(section) ? 0 : sectionData[section].count
+        return sectionsDataSource2.hiddenSections.contains(section) ? 0 : sectionsDataSource2.sectionData[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = sectionData[indexPath.section][indexPath.row]
+        cell.textLabel?.backgroundColor = .white
+        cell.textLabel?.text = sectionsDataSource2.sectionData[indexPath.section][indexPath.row]
         return cell
     }
     
