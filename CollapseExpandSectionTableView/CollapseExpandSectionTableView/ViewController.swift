@@ -136,7 +136,8 @@ extension ViewController: UITableViewDelegate {
     
 }
 
-
+/// rus video https://www.youtube.com/watch?v=wSQfdfYP56c
+/// code for rus video https://github.com/IvanAkulov/iOS-Demos/tree/master/65.%20iOS12%20Swift%204.2%20Collapsable%20sections
 class ViewController2: UIViewController {
     
     private let sectionsDataSource = SectionsDataSource()
