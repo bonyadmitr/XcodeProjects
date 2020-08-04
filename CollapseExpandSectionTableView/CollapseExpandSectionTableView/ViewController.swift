@@ -150,7 +150,6 @@ class ViewController2: UIViewController {
         newValue.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         newValue.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         newValue.register(UINib(nibName: "TitleHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "TitleHeaderView")
-        //newValue.rowHeight = 44
         newValue.sectionHeaderHeight = 60
         newValue.sectionFooterHeight = 2 /// separator
         return newValue
@@ -164,10 +163,11 @@ class ViewController2: UIViewController {
     
     private func hideSection(_ section: Int) {
         sectionsDataSource.sections[section].isExpanded.toggle()
-        let indexPathsForSection = (0..<sectionsDataSource.sections[section].rows.count).map { IndexPath(row: $0, section: section) }
         
         tableView.beginUpdates()
-        tableView.reloadRows(at: indexPathsForSection, with: .automatic)
+        /// actually don't need to reloadRows. cause bad optimization due calling `heightForRowAt` more often, you can check by `print(indexPath)` in it
+        //let indexPathsForSection = (0..<sectionsDataSource.sections[section].rows.count).map { IndexPath(row: $0, section: section) }
+        //tableView.reloadRows(at: indexPathsForSection, with: .automatic)
         tableView.endUpdates()
     }
 }
