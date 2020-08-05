@@ -59,6 +59,20 @@ import CoreData
 extension CoreDataStack {
     static let shared = CoreDataStack(storeType: .sqlite, modelName: "UnitTestsCoreData")
     
+//    func deleteAllSimple() {
+//        let context = newBackgroundContext()
+//        //let context = viewContext
+//
+//        do {
+//            try container.persistentStoreCoordinator.managedObjectModel.entities
+//                .compactMap { batchDeleteRequest(for: $0) }
+//                .forEach { try context.execute($0) }
+//        } catch {
+//            assertionFailure(error.localizedDescription)
+//            context.rollback()
+//        }
+//    }
+    
     /// working ONLY with NSSQLiteStoreType
     /// https://stackoverflow.com/a/50154532/5893286
     func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
