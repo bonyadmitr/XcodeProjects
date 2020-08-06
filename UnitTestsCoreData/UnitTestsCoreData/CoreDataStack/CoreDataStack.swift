@@ -73,19 +73,51 @@ extension CoreDataStack {
 //        }
 //    }
     
+    func deleteAllSimple(completion: @escaping () -> Void) {
+        let start = Date()
+        
+        performBackgroundTask { (taskContext) in
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DBEvent")
+            fetchRequest.includesPropertyValues = false
+            fetchRequest.returnsObjectsAsFaults = false
+            fetchRequest.resultType = .managedObjectIDResultType
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            do {
+                let result = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+                let changes = [NSDeletedObjectsKey: result?.result as? [NSManagedObjectID] ?? []]
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes,
+                                                    into: [self.viewContext])
+            } catch {
+                assertionFailure(error.localizedDescription)
+                taskContext.rollback()
+            }
+            
+            let finish = Date()
+            print("time = \(finish.timeIntervalSince1970 - start.timeIntervalSince1970)")
+            completion()
+        }
+    }
+    
     /// working ONLY with NSSQLiteStoreType
     /// https://stackoverflow.com/a/50154532/5893286
     func deleteAll(completion: CoreDataSaveStatusHandler? = nil) {
         
-        
         switch storeType {
         case .sqlite:
+//            deleteAllSimple {
+//                completion?(.saved)
+//            }
+//            return
             
             /// sync
             let context = newBackgroundContext()
             //let context = viewContext
             
             do {
+                
                 let objectIDs = try container.persistentStoreCoordinator.managedObjectModel.entities
                     .compactMap { batchDeleteRequest(for: $0) }
                     .compactMap { try context.execute($0) as? NSBatchDeleteResult }
