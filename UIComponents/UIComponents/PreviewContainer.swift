@@ -38,11 +38,15 @@ struct CustomPreview: PreviewProvider {
             //            label.font = UIFont.preferredFont(forTextStyle: .body)
             //            return label
             
-            let textField = SecureTextField()
-            //            let textField = UITextField()
-            textField.placeholder = "Password"
-            return textField
+//            let textField = SecureTextField()
+//            //            let textField = UITextField()
+//            textField.placeholder = "Password"
+//            return textField
             
+            
+            let textField2 = MainUnderlineTextField()
+            textField2.placeholder = "Username d jfsjh bfjhsb jdj gjdbhgj"
+            return textField2
             
             //            let button6 = ButtonMain()
             //            button6.setTitle("Ghost button 2 wwwww", for: .normal)
