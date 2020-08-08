@@ -48,11 +48,12 @@ struct CustomPreview: PreviewProvider {
             textField2.placeholder = "Username d jfsjh bfjhsb jdj gjdbhgj"
             return textField2
             
-            //            let button6 = ButtonMain()
-            //            button6.setTitle("Ghost button 2 wwwww", for: .normal)
-            //            button6.image = UIImage(systemName: "square.and.arrow.up")
-            //            button6.imageEdgeInsets.right = 8
-            //            return button6
+//            let button6 = ButtonMain()
+//            button6.setTitle("Ghost button 2 wwwww", for: .normal)
+//            button6.image = UIImage(systemName: "square.and.arrow.up")
+//            button6.imageEdgeInsets.right = 8
+//            //button6.imageEdgeInsets.left = 8
+//            return button6
             
             ////            let button3 = MultiLineButton(type: .system)
             //            let button3 = UIButton(type: .system)
