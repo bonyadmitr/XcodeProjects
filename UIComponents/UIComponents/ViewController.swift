@@ -17,6 +17,14 @@ class ViewController: UIViewController {
         /// to test shadows
         //view.backgroundColor = .darkGray
         
+        let textField1 = SecureTextField()
+        textField1.placeholder = "Password"
+        textField1.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        
+        let textField2 = MainUnderlineTextField()
+        textField2.placeholder = "Username d jfsjh bfjhsb jdj gjdbhgj"
+        textField2.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        
         let button1 = ButtonMain()
         
 //        button1.setTitle("Push", for: .normal)
@@ -67,12 +75,12 @@ class ViewController: UIViewController {
         button6.imageEdgeInsets.right = 8
         button6.addTarget(self, action: #selector(push), for: .touchUpInside)
         
-        let placeholderTextView = PlaceholderTextView()
+        let placeholderTextView = UnderlineResizablePlaceholderTextView()
         placeholderTextView.placeholder = "Some placeholder wwww www www wwwww www"
         //placeholderTextView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        placeholderTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        //placeholderTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        let stackView = UIStackView(arrangedSubviews: [placeholderTextView, button1, button2, button3, button4, button5, button6])
+        let stackView = UIStackView(arrangedSubviews: [textField1, textField2, placeholderTextView, button1, button2, button3, button4, button5, button6])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.alignment = .fill
