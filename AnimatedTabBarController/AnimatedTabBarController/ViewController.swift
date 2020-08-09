@@ -18,6 +18,36 @@ class ViewController: UIViewController {
 
 }
 
+final class AnimatedTabBarController: UITabBarController {
+    
+    override var selectedIndex: Int {
+        didSet {
+            guard let item = tabBar.items?[selectedIndex] else {
+                assertionFailure()
+                return
+            }
+            animateTabBarItem(item)
+        }
+    }
+    
+    private func animateTabBarItem(_ item: UITabBarItem) {
+        item.view?.layer.add(Self.bounceAnimation, forKey: nil)
+    }
+    
+}
+
+// MARK: - UITabBarControllerDelegate
+extension AnimatedTabBarController: UITabBarControllerDelegate {
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        // TODO: sound
+        // TODO: vibration
+        animateTabBarItem(item)
+    }
+    
+}
+
+
 extension UITabBarItem {
     
     /// UITabBarButton
