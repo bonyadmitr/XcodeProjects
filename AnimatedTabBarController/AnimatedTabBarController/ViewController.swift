@@ -32,6 +32,14 @@ extension UITabBarItem {
     
 }
 
+
+// MARK: - badgeValue
+
+/// custom badge https://stackoverflow.com/q/16274017/5893286
+///
+/// custom badge https://iosexample.com/add-emojis-and-colored-dots-as-badges-for-your-tab-bar-buttons/
+/// source  https://github.com/odedharth/SuperBadges/blob/master/SuperBadges/Classes/SuperBadges.swift
+
 extension UITabBarController {
     
     static let bounceAnimation: CAKeyframeAnimation = {
