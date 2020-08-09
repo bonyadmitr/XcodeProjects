@@ -17,7 +17,13 @@ class ViewController: UIViewController {
         button1.setTitle("Tab", for: .normal)
         button1.addTarget(self, action: #selector(changeTab), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [button1])
+        let button2 = UIButton(type: .system)
+        button2.setTitle("Badge ++", for: .normal)
+        button2.addTarget(self, action: #selector(incrementBadgeNumber), for: .touchUpInside)
+        
+        
+        
+        let stackView = UIStackView(arrangedSubviews: [button1, button2])
         stackView.axis = .vertical
         view.addSubview(stackView)
         
@@ -41,6 +47,13 @@ class ViewController: UIViewController {
         } else {
             tabBarController.selectedIndex += 1
         }
+    }
+
+    @objc private func incrementBadgeNumber() {
+        guard let tabBarController = tabBarController else {
+            return
+        }
+        tabBarController.incrementBadgeNumber(at: tabBarController.selectedIndex)
     }
 
 }
