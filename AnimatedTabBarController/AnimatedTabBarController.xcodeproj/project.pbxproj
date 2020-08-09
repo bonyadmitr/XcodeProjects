@@ -13,6 +13,7 @@
 		CE4972C724E017FD0093CF76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4972C524E017FD0093CF76 /* Main.storyboard */; };
 		CE4972C924E018000093CF76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE4972C824E018000093CF76 /* Assets.xcassets */; };
 		CE4972CC24E018000093CF76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4972CA24E018000093CF76 /* LaunchScreen.storyboard */; };
+		CE4972D424E018B50093CF76 /* AnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4972D324E018B50093CF76 /* AnimatedTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CE4972C824E018000093CF76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE4972CB24E018000093CF76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE4972CD24E018000093CF76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE4972D324E018B50093CF76 /* AnimatedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CE4972BF24E017FD0093CF76 /* AppDelegate.swift */,
 				CE4972C124E017FD0093CF76 /* SceneDelegate.swift */,
 				CE4972C324E017FD0093CF76 /* ViewController.swift */,
+				CE4972D324E018B50093CF76 /* AnimatedTabBarController.swift */,
 				CE4972C524E017FD0093CF76 /* Main.storyboard */,
 				CE4972C824E018000093CF76 /* Assets.xcassets */,
 				CE4972CA24E018000093CF76 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4972D424E018B50093CF76 /* AnimatedTabBarController.swift in Sources */,
 				CE4972C424E017FD0093CF76 /* ViewController.swift in Sources */,
 				CE4972C024E017FD0093CF76 /* AppDelegate.swift in Sources */,
 				CE4972C224E017FD0093CF76 /* SceneDelegate.swift in Sources */,
