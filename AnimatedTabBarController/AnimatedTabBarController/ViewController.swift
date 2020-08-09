@@ -18,6 +18,9 @@ class ViewController: UIViewController {
 
 }
 
+import UIKit
+
+/// article https://vaseks.me/animation-tabbar-swift-ios/
 final class AnimatedTabBarController: UITabBarController {
     
     override var selectedIndex: Int {
