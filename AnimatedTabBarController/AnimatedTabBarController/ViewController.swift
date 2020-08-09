@@ -18,3 +18,16 @@ class ViewController: UIViewController {
 
 }
 
+extension UITabBarItem {
+    
+    /// UITabBarButton
+    var view: UIControl? {
+        return value(forKey: "view") as? UIControl
+    }
+    
+    /// inspired https://stackoverflow.com/a/45320350/5893286
+    var badgeView: UIView? {
+        return view?.subviews.first { String(describing: type(of: $0)) == "_UIBadgeView" }
+    }
+    
+}
