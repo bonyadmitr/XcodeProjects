@@ -31,3 +31,50 @@ extension UITabBarItem {
     }
     
 }
+
+extension UITabBarController {
+    
+    static let bounceAnimation: CAKeyframeAnimation = {
+        let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+        bounceAnimation.values = [1.0, 1.1, 0.9, 1.02, 1.0]
+        bounceAnimation.duration = TimeInterval(0.3)
+        bounceAnimation.calculationMode = CAAnimationCalculationMode.cubic
+        return bounceAnimation
+    }()
+    
+    func incrementBadgeNumber(for addBadgeNumber: Int = 0, at index: Int, animated: Bool = true) {
+        if let badgeValue = getBadgeValue(at: index), var number = Int(badgeValue) {
+            number += 1 + addBadgeNumber
+            set(badgeNumber: number, at: index, animated: animated)
+        } else {
+            set(badgeValue: "1", at: index, animated: animated)
+        }
+    }
+    
+    func set(badgeNumber: Int, at index: Int, animated: Bool = true) {
+        set(badgeValue: String(badgeNumber), at: index, animated: animated)
+    }
+    
+    func set(badgeValue: String, at index: Int, animated: Bool = true) {
+        if let tabItems = tabBar.items, tabItems.count >= index + 1 {
+            let tabItem = tabItems[index]
+            /// badgeValue https://stackoverflow.com/a/43111460/5893286
+            tabItem.badgeValue = badgeValue
+            
+            if animated {
+                tabItem.badgeView?.layer.add(Self.bounceAnimation, forKey: nil)
+            }
+        }
+    }
+    
+    func getBadgeValue(at index: Int) -> String? {
+        if let tabItems = tabBar.items, tabItems.count >= index + 1 {
+            let tabItem = tabItems[index]
+            /// The default value is nil
+            return tabItem.badgeValue
+        } else {
+            return nil
+        }
+    }
+    
+}
