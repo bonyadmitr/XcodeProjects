@@ -53,3 +53,11 @@ final public class KeyboardLayoutConstraint: NSLayoutConstraint {
         }
     }
 }
+
+private enum Device {
+    
+    /// https://stackoverflow.com/questions/46192280/detect-if-the-device-is-iphone-x
+    static var isIphoneX: Bool {
+        return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
+    }
+}
