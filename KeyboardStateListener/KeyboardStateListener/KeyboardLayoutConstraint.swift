@@ -27,14 +27,36 @@ final public class KeyboardLayoutConstraint: NSLayoutConstraint {
             else { return }
         
         constant = keyboardFrame.size.height + keyboardInset
+        
+        /// 49/32
+        /// iPhone x  83/70
         if isTabBar {
-            constant -= KeyboardLayoutConstraint.tabBarHeight
+            
+            if Device.isIphoneX {
+                if UIApplication.shared.statusBarOrientation.isLandscape {
+                    constant -=  70
+                } else {
+                    constant -= 83
+                }
+            } else {
+                if UIApplication.shared.statusBarOrientation.isLandscape {
+                    constant -= 32
+                } else {
+                    constant -= 49
+                }
+            }
+            
+
+            
+            
+//            constant -= KeyboardLayoutConstraint.tabBarHeight
+        } else {
+            if Device.isIphoneX {
+                // TODO: safeAreaInsets.bottom
+                constant -= 34
+            }
         }
-        // TODO: Device.isIphoneX
-//        if Device.isIphoneX {
-//            // TODO: safeAreaInsets.bottom
-//            constant -= 34
-//        }
+        
         layoutIfNeededWithAnimation()
     }
     
