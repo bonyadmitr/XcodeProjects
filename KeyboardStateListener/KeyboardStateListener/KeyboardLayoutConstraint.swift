@@ -5,6 +5,7 @@ import UIKit
 final public class KeyboardLayoutConstraint: NSLayoutConstraint {
     
     /// used class var bcz instance var = 0
+    // TODO: tabBarHeight for landscape. there is a bug
     static let tabBarHeight: CGFloat = 49
     
     @IBInspectable public var keyboardInset: CGFloat = 1000
