@@ -1,5 +1,72 @@
 import UIKit
 
+/// old
+//final class MulticastDelegate <T> {
+//    private var weakDelegates = [WeakWrapper]()
+//
+//    func add(_ delegate: T) {
+//        #if DEBUG
+//        ///prevent adding the same object more then once
+//        guard (weakDelegates.first { $0.value === delegate as AnyObject } == nil) else {
+//            return
+//        }
+//        #endif
+//        weakDelegates.append(WeakWrapper(value: delegate as AnyObject))
+//    }
+//
+//    func remove(_ delegate: T) {
+//        weakDelegates = weakDelegates.filter { $0.value !== delegate as AnyObject }
+//    }
+//
+//    func removeAll() {
+//        weakDelegates.removeAll()
+//    }
+//
+//    func invoke(invocation: (T) -> Void) {
+//        /// Enumerating in reverse order prevents a race condition from happening when removing elements.
+//        for (index, delegate) in weakDelegates.enumerated().reversed() {
+//            if let delegate = delegate.value as? T {
+//                invocation(delegate)
+//            } else {
+//                weakDelegates.remove(at: index)
+//            }
+//        }
+//    }
+//}
+//private final class WeakWrapper {
+//    weak var value: AnyObject?
+//
+//    init(value: AnyObject) {
+//        self.value = value
+//    }
+//}
+//
+
+/// https://github.com/jonasman/MulticastDelegate/blob/master/Sources/MulticastDelegate/MulticastDelegate.swift
+//final class MulticastDelegate<T> {
+//    private let delegates = NSHashTable<AnyObject>.weakObjects()
+//
+//    /// will not add two same objects
+//    /// Value Types will be ignored
+//    func addDelegate(_ delegate: T) {
+//        delegates.add(delegate as AnyObject)
+//    }
+//
+//    func removeDelegate(_ delegate: T) {
+//        delegates.remove(delegate as AnyObject)
+//    }
+//
+//    func invokeDelegates(_ invocation: (T) -> ()) {
+//        for delegate in delegates.allObjects {
+//            /// for performance can be used unsafe invocation(delegate as! T)
+//            if let delegate = delegate as? T {
+//                invocation(delegate)
+//            } else {
+//                assertionFailure("delegate is not T")
+//            }
+//        }
+//    }
+//}
 protocol KeyboardHelperDelegate: AnyObject {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState)
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardDidShowWithState state: KeyboardState)
