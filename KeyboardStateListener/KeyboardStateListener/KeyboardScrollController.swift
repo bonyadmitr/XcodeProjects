@@ -106,33 +106,35 @@ class KeyboardScrollController3: ScrollController {
         })
     }
 }
+
+/// there is a bug on keyboardWillHideWithState with black background on the simulator only
+class KeyboardScrollController2: ScrollController {
+    private let keyboardStateListener = KeyboardStateListener()
     private var oldHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         keyboardStateListener.delegate = self
         view.addTapGestureToHideKeyboard()
     }
 }
-
-extension KeyboardScrollController: KeyboardHelperDelegate {
+extension KeyboardScrollController2: KeyboardHelperDelegate {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState) {
         let coveredHeight = state.keyboardHeightForView(view)
-        
+
         /// coveredHeight == 0 when changed text enter responder (example: focus between 2 textFields)
         if coveredHeight == 0 {
             return
         }
-        
+
         oldHeight = view.frame.size.height
         view.frame.size.height -= coveredHeight
-        
         state.animate {
             self.view.layoutIfNeeded()
         }
     }
-    
+
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillHideWithState state: KeyboardState) {
         view.frame.size.height = oldHeight
         state.animate {
