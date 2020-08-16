@@ -3,7 +3,67 @@ import UIKit
 /// there is a bug on keyboardWillHideWithState with black background on the simulator only
 class KeyboardScrollController: ScrollController {
     private let keyboardStateListener = KeyboardStateListener()
+final class KeyboardView: UIView {
     
+    private let keyboardStateListener2 = KeyboardStateListener2()
+    var originalHeight: CGFloat = 0
+    
+    override var frame: CGRect {
+//        willSet {
+//            if frame.width != newValue.width {
+//                //                print(frame.height, oldValue.height)
+//                print("rotate")
+//
+//                originalHeight = newValue.height
+////                newValue.size.height = originalHeight
+//            }
+//        }
+        didSet {
+            if frame.width != oldValue.width {
+//                print(frame.height)
+                print("rotate")
+                
+                originalHeight = frame.height
+//                frame.size.height = originalHeight
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        addTapGestureToHideKeyboard()
+//        originalHeight = bounds.height
+        
+        keyboardStateListener2.add(view: self, willShow: { [weak self] keyboardHeight in
+            guard let self = self else {
+                return
+            }
+//            print(self.frame.height)
+            self.originalHeight = self.frame.height// - 14//(739 - 725)//iPhone 11
+            self.frame.size.height -= keyboardHeight
+            print(self.frame.height)
+            self.layoutIfNeeded()
+            
+        }, willHide: { [weak self] keyboardHeight in
+            guard let self = self else {
+                return
+            }
+            self.frame.size.height = self.originalHeight
+            print(self.frame.height)
+            self.layoutIfNeeded()
+        })
+    }
+    
+}
     private var oldHeight: CGFloat = 0
     
     override func viewDidLoad() {
