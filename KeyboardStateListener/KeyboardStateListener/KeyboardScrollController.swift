@@ -2,7 +2,19 @@ import UIKit
 
 /// there is a bug on keyboardWillHideWithState with black background on the simulator only
 class KeyboardScrollController: ScrollController {
-    private let keyboardStateListener = KeyboardStateListener()
+    private let keyboardView = KeyboardView()
+    
+    override func loadView() {
+        view = keyboardView
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+//        keyboardView.originalHeight = size.height
+//        keyboardView.frame.size.height = size.height
+//        print("-", size.height)
+    }
+}
 final class KeyboardView: UIView {
     
     private let keyboardStateListener2 = KeyboardStateListener2()
