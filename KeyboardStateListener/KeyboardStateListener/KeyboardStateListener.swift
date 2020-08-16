@@ -67,6 +67,7 @@ import UIKit
 //        }
 //    }
 //}
+/// https://uptech.team/blog/uiresponder-keyboard-notification-handler-animate
 final class KeyboardStateListener2: NSObject {
     
     typealias KeyboardHandler = (CGFloat) -> Void
