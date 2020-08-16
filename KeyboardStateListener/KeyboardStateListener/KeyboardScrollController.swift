@@ -76,6 +76,36 @@ final class KeyboardView: UIView {
     }
     
 }
+
+class KeyboardScrollController3: ScrollController {
+//    private let keyboardStateListener = KeyboardStateListener()
+    
+    private let keyboardStateListener2 = KeyboardStateListener2()
+    private var originalHeight: CGFloat = 0
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+//        keyboardStateListener.delegate = self
+        view.addTapGestureToHideKeyboard()
+
+        originalHeight = view.frame.height
+        keyboardStateListener2.add(view: view, willShow: { [weak self] keyboardHeight in
+            guard let self = self else {
+                return
+            }
+            self.view.frame.size.height -= keyboardHeight
+            self.view.layoutIfNeeded()
+
+        }, willHide: { [weak self] keyboardHeight in
+            guard let self = self else {
+                return
+            }
+            self.view.frame.size.height = self.originalHeight
+            self.view.layoutIfNeeded()
+        })
+    }
+}
     private var oldHeight: CGFloat = 0
     
     override func viewDidLoad() {
