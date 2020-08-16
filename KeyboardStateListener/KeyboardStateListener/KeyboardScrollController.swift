@@ -1,6 +1,7 @@
 import UIKit
 
-/// there is a bug on keyboardWillHideWithState with black background on the simulator only
+// TODO: check rotation
+// TODO: check memory leak
 class KeyboardScrollController: ScrollController {
     private let keyboardView = KeyboardView()
     
