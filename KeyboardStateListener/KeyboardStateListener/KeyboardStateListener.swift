@@ -67,6 +67,104 @@ import UIKit
 //        }
 //    }
 //}
+final class KeyboardStateListener2: NSObject {
+    
+    typealias KeyboardHandler = (CGFloat) -> Void
+    typealias Handler = (willShow: KeyboardHandler, willHide: KeyboardHandler, view: UIView)
+    
+    var willShow: KeyboardHandler?// = {_ in}
+    var willHide: KeyboardHandler?// = {_ in}
+    weak var view: UIView?
+    
+//    private var multicastDelegate = MulticastDelegate<Handler>()
+    
+    
+    func add(view: UIView, willShow: @escaping KeyboardHandler, willHide: @escaping KeyboardHandler) {
+//        multicastDelegate.addDelegate((willShow, willHide, view)))
+        self.view = view
+        self.willShow = willShow
+        self.willHide = willHide
+    }
+    
+    override init() {
+        super.init()
+        setup()
+    }
+    
+    private func setup() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShowNotification),
+                                               name: UIWindow.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHideNotification),
+                                               name: UIWindow.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShowNotification(_ notification: Notification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            assertionFailure()
+            return
+        }
+        
+        guard let view = view else {
+            return
+        }
+        
+        let coveredHeight = keyboardHeightForView(view, keyboardFrame: keyboardFrame)
+
+        /// coveredHeight == 0 when changed text enter responder (example: focus between 2 textFields)
+        if coveredHeight == 0 {
+            return
+        }
+        willShow?(coveredHeight)
+//
+//        multicastDelegate.invokeDelegates {
+//            let coveredHeight = keyboardHeightForView($0.view, keyboardFrame: keyboardFrame)
+//
+//            /// coveredHeight == 0 when changed text enter responder (example: focus between 2 textFields)
+//            if coveredHeight == 0 {
+//                return
+//            }
+//
+//            $0.willShow(coveredHeight)
+//        }
+    }
+    
+    @objc func keyboardWillHideNotification(_ notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            assertionFailure()
+            return
+        }
+        
+//        multicastDelegate.invokeDelegates {
+//            let coveredHeight = keyboardHeightForView($0.view, keyboardFrame: keyboardFrame)
+//            $0.willHide(coveredHeight)
+//        }
+        
+        guard let view = view else {
+            return
+        }
+        let coveredHeight = keyboardHeightForView(view, keyboardFrame: keyboardFrame)
+        willHide?(coveredHeight)
+        
+//        let keyboardState = KeyboardState(notification.userInfo)
+//        delegate?.keyboardHelper(self, keyboardWillHideWithState: keyboardState)
+    }
+    
+    func keyboardHeightForView(_ view: UIView, keyboardFrame: CGRect) -> CGFloat {
+        let convertedKeyboardFrame = view.convert(keyboardFrame, from: nil)
+        let intersection = convertedKeyboardFrame.intersection(view.bounds)
+        return intersection.size.height
+    }
+    
+}
+
 protocol KeyboardHelperDelegate: AnyObject {
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardWillShowWithState state: KeyboardState)
     func keyboardHelper(_ keyboardHelper: KeyboardStateListener, keyboardDidShowWithState state: KeyboardState)
