@@ -59,21 +59,24 @@ class MainTabBar: UITabBar {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        middleButton.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 0)
+        middleButton.center = CGPoint(x: UIScreen.main.bounds.width * 0.5, y: 0)
     }
     
-    func setupMiddleButton() {
+    private func setupMiddleButton() {
+        // TODO: var size
         middleButton.frame.size = CGSize(width: 70, height: 70)
         middleButton.backgroundColor = .blue
         middleButton.layer.cornerRadius = 35
         middleButton.layer.masksToBounds = true
         middleButton.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 0)
-        middleButton.addTarget(self, action: #selector(test), for: .touchUpInside)
+        middleButton.addTarget(self, action: #selector(onMiddleButton), for: .touchUpInside)
         addSubview(middleButton)
     }
     
-    @objc func test() {
-        print("my name is jeff")
+    @objc private func onMiddleButton() {
+        print("hi")
+    }
+    
     private func updateItemOffset() {
         guard let tabItems = items else { return }
         if tabItems.count == 2 {
@@ -87,4 +90,5 @@ class MainTabBar: UITabBar {
             tabItems[4].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
         }
     }
+    
 }
