@@ -63,5 +63,17 @@ class MainTabBar: UITabBar {
     
     @objc func test() {
         print("my name is jeff")
+    private func updateItemOffset() {
+        guard let tabItems = items else { return }
+        if tabItems.count == 2 {
+            tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
+            tabItems[1].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
+            // TODO: check for 4
+        } else if tabItems.count == 4 {
+            tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
+            tabItems[1].titlePositionAdjustment = UIOffset(horizontal: -7, vertical: 0)
+            tabItems[3].titlePositionAdjustment = UIOffset(horizontal: 7, vertical: 0)
+            tabItems[4].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
+        }
     }
 }
