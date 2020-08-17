@@ -54,6 +54,7 @@ class MainTabBar: UITabBar {
         let from = point
         let to = middleButton.center
         
+        // TODO: why is 39. mb 35
         return sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)) <= 39 ? middleButton : super.hitTest(point, with: event)
     }
     
