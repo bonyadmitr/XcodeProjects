@@ -28,6 +28,7 @@ class MainTabBar: UITabBar {
         super.awakeFromNib()
         setupMiddleButton()
         
+        // TODO: dynamic, 2/4 items
         guard let tabItems = items else { return }
         tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
         tabItems[1].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
