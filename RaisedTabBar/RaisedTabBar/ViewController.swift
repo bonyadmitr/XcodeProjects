@@ -74,6 +74,7 @@ class MainTabBar: UITabBar {
     }
     
     @objc private func onMiddleButton() {
+        // TODO: handler
         print("hi")
     }
     
