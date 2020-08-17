@@ -24,15 +24,26 @@ class MainTabBar: UITabBar {
     
     private var middleButton = UIButton()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override var items: [UITabBarItem]? {
+        didSet {
+            // TODO: check is called
+            updateItemOffset()
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
         setupMiddleButton()
-        
-        // TODO: dynamic, 2/4 items
-        guard let tabItems = items else { return }
-        tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
-        tabItems[1].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
-
+        updateItemOffset()
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
