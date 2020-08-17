@@ -27,6 +27,11 @@ class MainTabBar: UITabBar {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupMiddleButton()
+        
+        guard let tabItems = items else { return }
+        tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
+        tabItems[1].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
+
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
