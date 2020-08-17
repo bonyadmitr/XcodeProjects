@@ -22,7 +22,7 @@ import UIKit
 
 class MainTabBar: UITabBar {
     
-    private var middleButton = UIButton()
+    private let middleButton = UIButton()
     
     override var items: [UITabBarItem]? {
         didSet {
@@ -47,7 +47,7 @@ class MainTabBar: UITabBar {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if self.isHidden {
+        if isHidden {
             return super.hitTest(point, with: event)
         }
         
