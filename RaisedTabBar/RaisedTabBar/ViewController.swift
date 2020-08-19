@@ -20,8 +20,11 @@ class ViewController: UIViewController {
 
 }
 
+
 import UIKit
 
+/// article https://equaleyes.com/blog/2017/09/04/the-common-raised-center-button-problems-in-tabbar/
+/// another solution https://github.com/11Shraddha/STTabbar/blob/master/STTabbar/Classes/STTabbar.swift
 final class RaisedTabBar: UITabBar {
     
     private let middleButton = UIButton()
