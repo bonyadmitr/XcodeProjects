@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
 import UIKit
 
-class MainTabBar: UITabBar {
+final class RaisedTabBar: UITabBar {
     
     private let middleButton = UIButton()
     
