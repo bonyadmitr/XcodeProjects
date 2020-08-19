@@ -32,7 +32,7 @@ final class RaisedTabBar: UITabBar {
     override var items: [UITabBarItem]? {
         didSet {
             // TODO: check is called
-            updateItemOffset()
+            updateItemsOffset()
         }
     }
     
@@ -48,7 +48,7 @@ final class RaisedTabBar: UITabBar {
     
     private func setup() {
         setupMiddleButton()
-        updateItemOffset()
+        updateItemsOffset()
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -59,22 +59,20 @@ final class RaisedTabBar: UITabBar {
         let from = point
         let to = middleButton.center
         
-        // TODO: why is 39. mb 35
-        return sqrt((from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)) <= 39 ? middleButton : super.hitTest(point, with: event)
+        return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)) <= middleButton.bounds.midX ? middleButton : super.hitTest(point, with: event)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        middleButton.center = CGPoint(x: UIScreen.main.bounds.width * 0.5, y: 0)
+        middleButton.center = CGPoint(x: center.x, y: 0)
     }
     
     private func setupMiddleButton() {
-        // TODO: var size
         middleButton.frame.size = CGSize(width: 70, height: 70)
         middleButton.backgroundColor = .blue
-        middleButton.layer.cornerRadius = 35
+        middleButton.layer.cornerRadius = middleButton.bounds.midX
         middleButton.layer.masksToBounds = true
-        middleButton.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 0)
+        middleButton.center = CGPoint(x: center.x, y: 0)
         middleButton.addTarget(self, action: #selector(onMiddleButton), for: .touchUpInside)
         addSubview(middleButton)
     }
@@ -84,7 +82,7 @@ final class RaisedTabBar: UITabBar {
         print("hi")
     }
     
-    private func updateItemOffset() {
+    private func updateItemsOffset() {
         guard let tabItems = items else { return }
         if tabItems.count == 2 {
             tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
