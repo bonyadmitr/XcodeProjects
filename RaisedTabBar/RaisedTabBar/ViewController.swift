@@ -20,6 +20,31 @@ class ViewController: UIViewController {
 
 }
 
+final class RaisedTabBarController: UITabBarController {
+    
+    private let raisedTabBar = RaisedTabBar()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        raisedTabBar.items = super.tabBar.items
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        tabBar.items = super.tabBar.items
+    }
+    
+    private func setup() {
+        raisedTabBar.onRaisedButtonHandler = {
+            print("hi")
+        }
+    }
+    
+    override var tabBar: UITabBar { raisedTabBar }
+    
+}
+
 
 import UIKit
 
