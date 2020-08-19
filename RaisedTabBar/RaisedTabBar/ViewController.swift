@@ -27,7 +27,8 @@ import UIKit
 /// another solution https://github.com/11Shraddha/STTabbar/blob/master/STTabbar/Classes/STTabbar.swift
 final class RaisedTabBar: UITabBar {
     
-    private let middleButton = UIButton()
+    var onRaisedButtonHandler: () -> Void = {}
+    private let raisedButton = UIButton()
     
     override var items: [UITabBarItem]? {
         didSet {
@@ -57,33 +58,34 @@ final class RaisedTabBar: UITabBar {
         }
         
         let from = point
-        let to = middleButton.center
-        
-        return sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)) <= middleButton.bounds.midX ? middleButton : super.hitTest(point, with: event)
+        let to = raisedButton.center
+        let len = sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2))
+        return len <= raisedButton.bounds.midX ? raisedButton : super.hitTest(point, with: event)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        middleButton.center = CGPoint(x: center.x, y: 0)
+        raisedButton.center = CGPoint(x: center.x, y: 0)
     }
     
     private func setupMiddleButton() {
-        middleButton.frame.size = CGSize(width: 70, height: 70)
-        middleButton.backgroundColor = .blue
-        middleButton.layer.cornerRadius = middleButton.bounds.midX
-        middleButton.layer.masksToBounds = true
-        middleButton.center = CGPoint(x: center.x, y: 0)
-        middleButton.addTarget(self, action: #selector(onMiddleButton), for: .touchUpInside)
-        addSubview(middleButton)
+        raisedButton.frame.size = CGSize(width: 70, height: 70)
+        raisedButton.backgroundColor = .blue
+        raisedButton.layer.cornerRadius = raisedButton.bounds.midX
+        raisedButton.layer.masksToBounds = true
+        raisedButton.center = CGPoint(x: center.x, y: 0)
+        raisedButton.addTarget(self, action: #selector(onRaisedButton), for: .touchUpInside)
+        addSubview(raisedButton)
     }
     
-    @objc private func onMiddleButton() {
-        // TODO: handler
-        print("hi")
+    @objc private func onRaisedButton() {
+        onRaisedButtonHandler()
     }
     
     private func updateItemsOffset() {
-        guard let tabItems = items else { return }
+        guard let tabItems = items else {
+            return
+        }
         if tabItems.count == 2 {
             tabItems[0].titlePositionAdjustment = UIOffset(horizontal: -15, vertical: 0)
             tabItems[1].titlePositionAdjustment = UIOffset(horizontal: 15, vertical: 0)
