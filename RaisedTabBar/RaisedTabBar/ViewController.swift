@@ -40,6 +40,8 @@ extension UINavigationController: TabBarRaisedHandler {
     }
 }
 
+/// can be added context (example `let handler: (UIViewController) -> Void`)
+/// can be added enum ActionType to have and custom action and array of actions
 struct TabBarRaisedAction {
     let title: String
     let handler: () -> Void
