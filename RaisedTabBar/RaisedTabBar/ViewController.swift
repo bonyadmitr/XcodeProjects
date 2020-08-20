@@ -72,6 +72,11 @@ final class TabBarController: RaisedTabBarController {
     }
     
 }
+
+protocol RaisedTabBarHandler: class {
+    func onRaisedButton()
+}
+
 class RaisedTabBarController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
