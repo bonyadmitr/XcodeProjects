@@ -64,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="1136.25" y="126.25"/>
         </scene>
-        <!--Raised Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="e3v-BU-8es">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6qa-t3-QYp" customClass="RaisedTabBarController" customModule="RaisedTabBar" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="6qa-t3-QYp" customClass="TabBarController" customModule="RaisedTabBar" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hwt-zt-Kp0">
                         <autoresizingMask key="autoresizingMask"/>
