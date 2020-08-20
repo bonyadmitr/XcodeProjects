@@ -18,11 +18,20 @@ class ViewController: UIViewController {
     }
 
 
+struct TabBarRaisedAction {
+    let title: String
+    let handler: () -> Void
 }
 
-final class RaisedTabBarController: UITabBarController {
+extension TabBarRaisedAction {
+    static let open = TabBarRaisedAction(title: "Open") {
+        print("open")
+    }
     
-    private let raisedTabBar = RaisedTabBar()
+    static let add = TabBarRaisedAction(title: "Add") {
+        print("add")
+    }
+}
 final class TabBarController: RaisedTabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
