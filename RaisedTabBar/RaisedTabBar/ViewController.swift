@@ -34,6 +34,12 @@ extension ViewController: TabBarRaisedHandler {
     }
 }
 
+extension UINavigationController: TabBarRaisedHandler {
+    var tabBarRaisedActions: [TabBarRaisedAction] {
+        return (topViewController as? TabBarRaisedHandler)?.tabBarRaisedActions ?? []
+    }
+}
+
 struct TabBarRaisedAction {
     let title: String
     let handler: () -> Void
