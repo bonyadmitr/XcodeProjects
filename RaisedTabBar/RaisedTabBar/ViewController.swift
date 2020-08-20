@@ -23,16 +23,41 @@ class ViewController: UIViewController {
 final class RaisedTabBarController: UITabBarController {
     
     private let raisedTabBar = RaisedTabBar()
+final class TabBarController: RaisedTabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        raisedTabBar.items = super.tabBar.items
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
         
-        tabBar.items = super.tabBar.items
+        onRaisedButtonHandler = { [weak self] in
+            if let vc = self?.selectedViewController as? TabBarRaisedHandler, !vc.tabBarRaisedActions.isEmpty {
+                self?.alert(for: vc.tabBarRaisedActions)
+            } else {
+                print("default onRaisedButtonHandler")
+            }
+        }
+    }
+    
+    private func alert(for actions: [TabBarRaisedAction]) {
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actions.forEach { action in
+            alertVC.addAction(.init(title: action.title, style: .default) { _ in
+                action.handler()
+            })
+        }
+        alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+}
 class RaisedTabBarController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
