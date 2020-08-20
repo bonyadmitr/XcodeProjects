@@ -25,6 +25,14 @@ extension ViewController: RaisedTabBarHandler {
     }
 }
 
+extension ViewController: TabBarRaisedHandler {
+    var tabBarRaisedActions: [TabBarRaisedAction] {
+        let action = TabBarRaisedAction(title: "ViewController") {
+            print("from ViewController")
+        }
+        return [.open, .add, action]
+    }
+}
 
 struct TabBarRaisedAction {
     let title: String
