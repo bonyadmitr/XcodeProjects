@@ -17,6 +17,14 @@ class ViewController: UIViewController {
         // TODO: add alert sheet for Raisedbutton for different controllers
     }
 
+}
+
+extension ViewController: RaisedTabBarHandler {
+    func onRaisedButton() {
+        print("onRaisedButton ViewController")
+    }
+}
+
 
 struct TabBarRaisedAction {
     let title: String
