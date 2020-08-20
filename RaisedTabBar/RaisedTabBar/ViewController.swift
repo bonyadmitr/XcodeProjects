@@ -32,6 +32,11 @@ extension TabBarRaisedAction {
         print("add")
     }
 }
+
+protocol TabBarRaisedHandler: class {
+    var tabBarRaisedActions: [TabBarRaisedAction] { get }
+}
+
 final class TabBarController: RaisedTabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
