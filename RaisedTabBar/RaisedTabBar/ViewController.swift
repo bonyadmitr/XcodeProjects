@@ -101,6 +101,8 @@ protocol RaisedTabBarHandler: class {
     func onRaisedButton()
 }
 
+// TODO: button customization
+// TODO: tabBar shape
 class RaisedTabBarController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
