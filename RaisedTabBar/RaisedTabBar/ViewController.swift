@@ -36,6 +36,7 @@ extension ViewController: TabBarRaisedHandler {
 
 extension UINavigationController: TabBarRaisedHandler {
     var tabBarRaisedActions: [TabBarRaisedAction] {
+        // TODO: assert empty
         return (topViewController as? TabBarRaisedHandler)?.tabBarRaisedActions ?? []
     }
 }
