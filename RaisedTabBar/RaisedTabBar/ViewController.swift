@@ -34,6 +34,7 @@ extension ViewController: TabBarRaisedHandler {
     }
 }
 
+/// can be created custom class for nav bar vc in tab bar vc
 extension UINavigationController: TabBarRaisedHandler {
     var tabBarRaisedActions: [TabBarRaisedAction] {
         // TODO: assert empty
