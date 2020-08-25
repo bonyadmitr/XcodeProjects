@@ -38,6 +38,15 @@ extension UITabBarController {
         //}
     }
     
+    func selectNextTab() {
+        let isLastTab = selectedIndex + 1 == viewControllers?.count
+        if isLastTab {
+            selectedIndex = 0
+        } else {
+            selectedIndex += 1
+        }
+    }
+    
     //var controllers: [UIViewController] {
     //    return viewControllers ?? []
     //}
