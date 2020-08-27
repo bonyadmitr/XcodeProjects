@@ -74,9 +74,11 @@ struct CustomPreview: PreviewProvider {
         
         func updateUIView(_ uiView: UIView, context: Context) {
             /// intrinsicContentSize https://stackoverflow.com/a/56745210/5893286
+            //uiView.setContentHuggingPriority(.init(750), for: .vertical)
             uiView.setContentHuggingPriority(.required, for: .vertical)
+            
             uiView.setContentHuggingPriority(.required, for: .horizontal)
-            //            uiView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            //uiView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         }
         //        typealias UIViewType = UIView
         
