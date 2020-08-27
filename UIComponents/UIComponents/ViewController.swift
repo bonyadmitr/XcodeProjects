@@ -91,6 +91,7 @@ class ViewController: UIViewController {
         // TODO: check view.directionalLayoutMargins and NSDirectionalEdgeInsets
         
         /// https://twitter.com/JordanMorgan10/status/1266717673053917184
+        // TODO: layoutMarginsGuide vs safeAreaLayoutGuide
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -535,6 +536,10 @@ class HighlightButton: MultiLineButton {
             backgroundColor = normalBackgroundColor
         }
     }
+// TODO: optimize set titleLabel?.backgroundColor and titleLabel?.isOpaque = true
+// TODO: optimize shadows for dark theme
+// TODO: disabled state for buttons
+// TODO: textField password show/hide + custom font fix
 
     var highlightedBackgroundColor: UIColor = .clear
     
