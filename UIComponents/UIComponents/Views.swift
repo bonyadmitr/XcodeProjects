@@ -521,8 +521,10 @@ extension UITextField {
     }
     
     func toggleTextFieldSecureType() {
-        /// incorrect font https://stackoverflow.com/a/35295940/5893286
         isSecureTextEntry.toggle()
+        
+        /// incorrect font https://stackoverflow.com/a/35295940/5893286
+        /// also fixing showing last character
         let font = self.font
         self.font = nil
         self.font = font
