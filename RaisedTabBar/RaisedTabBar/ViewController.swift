@@ -44,6 +44,8 @@ class ViewController: UIViewController {
                 print("- throttle")
             }
             
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(delayedFunction), object: nil)
+            perform(#selector(delayedFunction), with: nil, afterDelay: 1)
         }
         
         // TODO: add tab br controller
