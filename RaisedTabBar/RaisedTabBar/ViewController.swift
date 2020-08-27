@@ -8,7 +8,6 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 /// DispatchWorkItem cancel https://stackoverflow.com/a/38372384/5893286
 /// source https://gist.github.com/daehn/414212e1b4b30a43d995e4b5a4c2dad7
 final class Throttle {
@@ -32,11 +31,27 @@ final class Throttle {
     
 }
 
+
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let throttle = Throttle(delay: 1, queue: .main)
+        
+        for _ in 1...100 {
+            throttle.call {
+                print("- throttle")
+            }
+            
+        }
+        
         // TODO: add tab br controller
         // TODO: add alert sheet for Raisedbutton for different controllers
+    }
+    
+    @objc private func delayedFunction() {
+        print("- delayedFunction")
     }
 
 }
