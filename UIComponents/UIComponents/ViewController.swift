@@ -94,8 +94,11 @@ class ViewController: UIViewController {
         // TODO: layoutMarginsGuide vs safeAreaLayoutGuide
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -16),
+            stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 0),
+            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant:  16),
+//            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+//            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -16),
+            
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 8),
             //            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
@@ -205,8 +208,11 @@ extension Circled where Self: UIView {
         // TODO: test performance. iOS 11+ and 11-
         //layer.maskedCorners = .all
         
-        layer.cornerRadius = bounds.height * 0.5
-        //layer.cornerRadius = bounds.midY
+        //layer.cornerRadius = bounds.height * 0.5
+        layer.cornerRadius = bounds.midY
+        
+        /// iOS 13.0 https://twitter.com/JordanMorgan10/status/1271557777111031814
+        //layer.cornerCurve = .continuous
     }
 }
 
@@ -216,6 +222,9 @@ extension Rounded where Self: UIView {
         // TODO: test performance. iOS 11+ and 11-
         //layer.maskedCorners = .all
         layer.cornerRadius = 8
+        
+        /// iOS 13.0 https://twitter.com/JordanMorgan10/status/1271557777111031814
+        //layer.cornerCurve = .continuous
     }
 }
 
@@ -528,382 +537,6 @@ extension UITextField {
     
 }
 
-/// inspired https://stackoverflow.com/a/60423075/5893286
-class HighlightButton: MultiLineButton {
-
-    var normalBackgroundColor: UIColor = .clear {
-        didSet {
-            backgroundColor = normalBackgroundColor
-        }
-    }
-// TODO: optimize set titleLabel?.backgroundColor and titleLabel?.isOpaque = true
-// TODO: optimize shadows for dark theme
-// TODO: disabled state for buttons
-// TODO: textField password show/hide + custom font fix
-// TODO: textField datepicker
-// TODO: textField custom picker
-// TODO: textField tap or label + placeholder
-// TODO: toolbar
-// TODO: textField + image
-// TODO: textField limit
-// TODO: textField insets InsetsTextField https://stackoverflow.com/a/3969703/5893286
-// TODO: textField mask for phones
-// TODO: textField + formatter date/carrency
-// TODO: textField custom design, title label, underline highlight
-// TODO: textField hint
-// TODO: textField validate
-// TODO: textField + continue button
-// TODO: textField nextResponder
-// TODO: textField error label/design
-// TODO: textField error animation
-// TODO: textView max hight
-// TODO: autoscroling label
-// TODO: button image+text
-
-    var highlightedBackgroundColor: UIColor = .clear
-    
-    var normalTintColor = UIColor.clear {
-        didSet {
-            tintColor = normalTintColor
-            setTitleColor(normalTintColor, for: .normal)
-        }
-    }
-    var highlightedTintColor = UIColor.clear {
-        didSet {
-            setTitleColor(highlightedTintColor, for: .highlighted)
-        }
-    }
-
-    override var isHighlighted: Bool {
-        didSet {
-            backgroundColor = isHighlighted ? highlightedBackgroundColor : normalBackgroundColor
-            
-            /// To get rid of the tint background https://sasablagojevic.com/how-to-get-rid-of-blue-uibutton-background-on-different-states
-            tintColor = isHighlighted ? highlightedTintColor : normalTintColor
-        }
-    }
-    
-    var image: UIImage? {
-        get {
-            return currentImage
-        }
-        set {
-            setImage(newValue, for: .normal)
-            
-            /// or 1
-            //adjustsImageWhenHighlighted = false
-            
-            /// or 2
-            //setImage(newValue, for: .highlighted)
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        adjustsImageWhenHighlighted = false
-        //adjustsImageWhenDisabled = false
-        
-        // TODO: check
-        //tintAdjustmentMode = .automatic
-    }
-    
-}
-
-final class ButtonMain: HighlightButton, Shadowed, Rounded {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    private func setup() -> Void {
-        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        
-        normalBackgroundColor = Colors.main
-        highlightedBackgroundColor = Colors.mainHighlighted
-        
-        normalTintColor = Colors.white
-        highlightedTintColor = Colors.whiteHighlighted
-        
-        imageEdgeInsets.right = 8
-        
-        setDynamicFont(Fonts.button)
-        
-        initSetupRounded()
-        initSetupShadow()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutSubviewsSetupShadow()
-    }
-    
-}
-
-/// button frame autolayout https://stackoverflow.com/a/35321242/5893286
-/// test by:
-//backgroundColor = .red
-//titleLabel?.backgroundColor = .green
-class MultiLineButton: DynamicFontButton {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        titleLabel?.numberOfLines = 0
-        titleLabel?.lineBreakMode = .byWordWrapping
-        titleLabel?.textAlignment = .center
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return titleLabel?.intrinsicContentSize ?? .zero
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        titleLabel?.preferredMaxLayoutWidth = titleLabel?.bounds.width ?? 0
-        super.layoutSubviews()
-    }
-    
-}
-
-class DynamicFontButton: UIButton {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    private func setup() {
-        setupDynamicImage()
-    }
-    
-    private func setupDynamicImage() {
-        /// UIDynamicProviderImage https://gist.github.com/SpectralDragon/4ddd2a01d8027a2ff831af8859861764
-        
-        ///default  custom button
-        //currentPreferredSymbolConfiguration == UIImage.SymbolConfiguration(scale: .medium)
-        
-        /// default system button
-        //currentPreferredSymbolConfiguration ==  UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
-        
-        let symbolConfig = UIImage.SymbolConfiguration(textStyle: .body, scale: .large)
-        setPreferredSymbolConfiguration(symbolConfig, forImageIn: .normal)
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        guard traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory else {
-            return
-        }
-        
-        // TODO: is it needed?
-        /// update fonts
-        let font = titleLabel?.font
-        titleLabel?.font = nil
-        titleLabel?.font = font
-        
-        /// update images
-        guard let currentPreferredSymbolConfiguration = currentPreferredSymbolConfiguration else {
-            assertionFailure("use setPreferredSymbolConfiguration")
-            return
-        }
-        
-        [UIControl.State.normal, .highlighted, .selected, .disabled].forEach { state in
-            let img = image(for: state)?.withConfiguration(currentPreferredSymbolConfiguration)
-            setImage(img, for: state)
-        }
-        
-    }
-    
-}
-
-final class LinkButton: MultiLineButton {
-    
-    var normalLinkColor: UIColor = .blue {
-        didSet {
-            titleLabel?.textColor = normalLinkColor
-        }
-    }
-    
-    var highlightedLinkColor: UIColor = UIColor.blue.darker()
-    
-    override var isHighlighted: Bool {
-        didSet {
-            titleLabel?.textColor = isHighlighted ? highlightedLinkColor : normalLinkColor
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    private func setup() -> Void {
-        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        setDynamicFont(Fonts.button)
-        
-        normalLinkColor = Colors.main
-        highlightedLinkColor = Colors.mainHighlighted
-    }
-    
-    func setLinkText(_ text: String) {
-        setAttributedTitle(getLinkFontAttrString(text: text), for: .normal)
-    }
-    
-}
-
-// TODO: refactor
-func getLinkFontAttrString(text: String) -> NSMutableAttributedString {
-    let attributes: [NSAttributedString.Key: Any] = [
-        /// apple says that we need to set foregroundColor for dynamic change
-        /// but it working without it in UIButton with setAttributedTitle
-        //.foregroundColor: UIColor.azure,
-        .underlineStyle: NSUnderlineStyle.single.rawValue,
-        //.font: UIFont.systemFont(ofSize: 16, weight: .bold).dynamic()
-    ]
-    return NSMutableAttributedString(string: text, attributes: attributes)
-}
-
-class GhostButton: MultiLineButton, Rounded {
-    
-    var normalTintColor: UIColor = .white {
-        didSet {
-            layer.borderColor = normalTintColor.cgColor
-            setTitleColor(normalTintColor, for: .normal)
-        }
-    }
-    
-    var highlightedTintColor: UIColor = UIColor.white.darker() {
-        didSet {
-            setTitleColor(highlightedTintColor, for: .highlighted)
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            layer.borderColor = isHighlighted ? highlightedTintColor.cgColor : normalTintColor.cgColor
-        }
-    }
-    
-    private func setup() -> Void {
-        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        
-        normalTintColor = Colors.main
-        highlightedTintColor = Colors.mainHighlighted
-        
-        setDynamicFont(Fonts.button)
-        
-        layer.borderWidth = 2
-        
-        initSetupRounded()
-    }
-    
-}
-
-/// set normalBackgroundColor != UIColor.clear
-final class GhostButton2: HighlightButton, Rounded {
-    
-    override var normalTintColor: UIColor {
-        didSet {
-            highlightedBackgroundColor = normalTintColor
-            layer.borderColor = normalTintColor.cgColor
-        }
-    }
-    
-    override var normalBackgroundColor: UIColor {
-        didSet {
-            //let fixedColor = (normalBackgroundColor == UIColor.clear) ? Colors.background : normalBackgroundColor
-            setTitleColor(normalBackgroundColor, for: .highlighted)
-            highlightedTintColor = normalBackgroundColor
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    //override func didMoveToSuperview() {
-    //    super.didMoveToSuperview()
-    //
-    //    /// not working with UIStackView. it's backgroundColor == nil
-    //    let superviewBackgroundColor = superview?.backgroundColor ?? .clear
-    //    normalBackgroundColor = superviewBackgroundColor
-    //}
-    
-    private func setup() -> Void {
-        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        
-        normalTintColor = Colors.text
-        normalBackgroundColor = Colors.background
-        
-        setDynamicFont(Fonts.button)
-        
-        layer.borderWidth = 2
-        
-        initSetupRounded()
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        /// not working COLOR.resolvedColor(with: traitCollection).cgColor https://stackoverflow.com/a/57177411/5893286
-        /// cgColor update https://stackoverflow.com/a/58312205/5893286
-        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            layer.borderColor = normalTintColor.cgColor
-        }
-
-    }
-    
-}
 
 // TODO: optimize set titleLabel?.backgroundColor and titleLabel?.isOpaque = true
 // TODO: optimize shadows for dark theme
@@ -928,8 +561,168 @@ final class GhostButton2: HighlightButton, Rounded {
 // TODO: textView max hight
 // TODO: autoscroling label
 // TODO: button image+text
+
+// TODO: static table, list view https://habr.com/ru/post/439016/
 
 // TODO: disable Long press gesture recogniser in textView
 //https://stackoverflow.com/a/47941549/5893286
 //https://stackoverflow.com/a/53171516/5893286
 //https://stackoverflow.com/a/44878203/5893286
+
+import UIKit
+
+/// firstResponder https://stackoverflow.com/a/14135456/5893286
+extension UIResponder {
+
+    private static weak var _currentFirstResponder: UIResponder?
+
+    static var currentFirstResponder: UIResponder? {
+        //_currentFirstResponder = nil
+        UIApplication.shared.sendAction(#selector(findFirstResponder), to: nil, from: nil, for: nil)
+        return _currentFirstResponder
+    }
+
+    @objc private func findFirstResponder() {
+        UIResponder._currentFirstResponder = self
+    }
+}
+
+import UIKit
+
+/// KeyboardResponder https://github.com/sclown/NextResponder/blob/master/NextResponder/Classes/nextResponder.swift
+extension UIView {
+    var firstResponder: UIResponder? {
+        if isFirstResponder {
+            return self
+        }
+        return subviews.firstResponder
+    }
+}
+
+extension UIApplication {
+    var firstResponder: UIResponder? {
+        return keyWindow?.subviews.firstResponder
+    }
+}
+
+private extension Collection where Element: UIView {
+    var firstResponder: UIResponder? {
+        for element in self {
+            if let responder = element.firstResponder {
+                return responder
+            }
+        }
+        return nil
+    }
+}
+
+protocol TableHandler: class {
+    var tableView: UITableView { get }
+}
+extension TableHandler where Self: UIViewController {
+
+    // TODO: clear for MVC
+    func clearsSelectionOnViewWillAppear() {
+        /// https://useyourloaf.com/blog/readable-content-guides/
+        /// or #1
+        //tableView.cellLayoutMarginsFollowReadableWidth = true
+        /// or #2
+        //tableView.widthAnchor.constraint(equalTo: view.readableContentGuide.widthAnchor).isActive = true
+        
+        // TODO: check with apple way
+        //UITableViewController().clearsSelectionOnViewWillAppear = true
+        
+        // TODO: check another solution https://stackoverflow.com/a/51048232/5893286
+        
+        // TODO: check
+        /// table view row animate on push/pop https://twitter.com/JordanMorgan10/status/1266717673053917184
+        guard let transitionCoordinator = transitionCoordinator, let selectedIndexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+        
+        transitionCoordinator.animate(alongsideTransition: { context in
+            self.tableView.deselectRow(at: selectedIndexPath, animated: true)
+        }, completion: { context in
+            if context.isCancelled {
+                self.tableView.selectRow(at: selectedIndexPath, animated: true, scrollPosition: .none)
+            } else {
+                self.tableView.deselectRow(at: selectedIndexPath, animated: true)
+            }
+        })
+        
+    }
+    
+}
+
+extension UIAlertController {
+    
+    /// fixing crash  on shouldAutorotate https://stackoverflow.com/a/48588384/5893286
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
+    }
+    
+    func iPadSetup(in view: UIView) {
+        popoverPresentationController?.sourceView = view
+        popoverPresentationController?.sourceRect = CGRect(origin: view.center, size: .zero)
+        popoverPresentationController?.permittedArrowDirections = []
+    }
+    
+    func iPadSetup(in vc: UIAlertController) {
+        iPadSetup(in: vc.view)
+    }
+    
+}
+
+
+import UIKit
+
+/// https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24
+class GradientProgressView: UIProgressView {
+    
+    @IBInspectable var firstColor: UIColor = UIColor.white {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var secondColor: UIColor = UIColor.black {
+        didSet {
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        
+        if let gradientImage = UIImage(bounds: self.bounds, colors: [firstColor, secondColor]) {
+            self.progressImage = gradientImage
+        }
+    }
+}
+import UIKit
+
+extension UIImage {
+    
+    public enum GradientOrientation {
+        case vertical
+        case horizontal
+    }
+    
+    public convenience init?(bounds: CGRect, colors: [UIColor], orientation: GradientOrientation = .horizontal) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors.map({ $0.cgColor })
+        
+        if orientation == .horizontal {
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5);
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5);
+        }
+        
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
