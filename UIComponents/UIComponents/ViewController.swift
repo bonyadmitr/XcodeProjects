@@ -551,6 +551,14 @@ class HighlightButton: MultiLineButton {
 // TODO: textField + formatter date/carrency
 // TODO: textField custom design, title label, underline highlight
 // TODO: textField hint
+// TODO: textField validate
+// TODO: textField + continue button
+// TODO: textField nextResponder
+// TODO: textField error label/design
+// TODO: textField error animation
+// TODO: textView max hight
+// TODO: autoscroling label
+// TODO: button image+text
 
     var highlightedBackgroundColor: UIColor = .clear
     
