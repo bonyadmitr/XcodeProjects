@@ -87,6 +87,10 @@ class ViewController: UIViewController {
         //stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
+        /// https://blog.smartnsoft.com/layout-guide-margins-insets-and-safe-area-demystified-on-ios-10-11-d6e7246d7cb8
+        // TODO: check view.directionalLayoutMargins and NSDirectionalEdgeInsets
+        
+        /// https://twitter.com/JordanMorgan10/status/1266717673053917184
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
