@@ -24,6 +24,8 @@ class ViewController: UIViewController {
         }
         
         /// seems like forking in app change only like: UIPasteboard.general.string = "1"
+        /// notification not fire https://developer.apple.com/forums/thread/54227
+        /// radar https://openradar.appspot.com/28771678
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(changedNotification),
                                                name: UIPasteboard.changedNotification,
