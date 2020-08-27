@@ -9,6 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
+final class Throttle {
+    
+    private let delay: TimeInterval
+    private var workItem: DispatchWorkItem?
+    private let queue: DispatchQueue
+    
+    init(delay: TimeInterval, queue: DispatchQueue) {
+        self.delay = delay
+        self.queue = queue
+    }
+    
+    /// item can be passed in block for long tasks
+    func call(_ block: @escaping () -> Void) {
+        workItem?.cancel()
+        let item = DispatchWorkItem(block: block)
+        workItem = item
+        queue.asyncAfter(deadline: .now() + delay, execute: item)
+    }
+    
+}
 
     override func viewDidLoad() {
         super.viewDidLoad()
