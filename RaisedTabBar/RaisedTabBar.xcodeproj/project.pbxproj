@@ -14,6 +14,7 @@
 		CE4972EB24EA56720093CF76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE4972EA24EA56720093CF76 /* Assets.xcassets */; };
 		CE4972EE24EA56720093CF76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4972EC24EA56720093CF76 /* LaunchScreen.storyboard */; };
 		CE8AFA4D24F659200063E6CC /* RaisedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AFA4C24F659200063E6CC /* RaisedTabBarController.swift */; };
+		CE8AFA4F24F659700063E6CC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8AFA4E24F659700063E6CC /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE4972ED24EA56720093CF76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE4972EF24EA56720093CF76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8AFA4C24F659200063E6CC /* RaisedTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisedTabBarController.swift; sourceTree = "<group>"; };
+		CE8AFA4E24F659700063E6CC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				CE4972E124EA566E0093CF76 /* AppDelegate.swift */,
 				CE4972E324EA566E0093CF76 /* SceneDelegate.swift */,
 				CE4972E524EA566E0093CF76 /* ViewController.swift */,
+				CE8AFA4E24F659700063E6CC /* TabBarController.swift */,
 				CE8AFA4C24F659200063E6CC /* RaisedTabBarController.swift */,
 				CE4972E724EA566E0093CF76 /* Main.storyboard */,
 				CE4972EA24EA56720093CF76 /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				CE4972E624EA566E0093CF76 /* ViewController.swift in Sources */,
 				CE4972E224EA566E0093CF76 /* AppDelegate.swift in Sources */,
 				CE4972E424EA566E0093CF76 /* SceneDelegate.swift in Sources */,
+				CE8AFA4F24F659700063E6CC /* TabBarController.swift in Sources */,
 				CE8AFA4D24F659200063E6CC /* RaisedTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
