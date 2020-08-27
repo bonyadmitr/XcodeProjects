@@ -540,6 +540,11 @@ class HighlightButton: MultiLineButton {
 // TODO: optimize shadows for dark theme
 // TODO: disabled state for buttons
 // TODO: textField password show/hide + custom font fix
+// TODO: textField datepicker
+// TODO: textField custom picker
+// TODO: textField tap or label + placeholder
+// TODO: toolbar
+// TODO: textField + image
 
     var highlightedBackgroundColor: UIColor = .clear
     
