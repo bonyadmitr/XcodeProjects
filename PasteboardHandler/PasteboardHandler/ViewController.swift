@@ -9,7 +9,11 @@
 import UIKit
 
 /// iOS 14 UIPasteboard behavior https://habr.com/ru/company/kaspersky/blog/508784/
+///
 /// UIPasteboard returns nil in the background https://stackoverflow.com/a/54484675/5893286
+/// UIPasteboard.general.changeCount returns 0 if UIPasteboard was changes in background
+///
+/// you can check UIPasteboard.general.changeCount to prevent copy UIPasteboard every time
 
 class ViewController: UIViewController {
     
