@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+/// DispatchWorkItem cancel https://stackoverflow.com/a/38372384/5893286
+/// source https://gist.github.com/daehn/414212e1b4b30a43d995e4b5a4c2dad7
 final class Throttle {
     
     private let delay: TimeInterval
