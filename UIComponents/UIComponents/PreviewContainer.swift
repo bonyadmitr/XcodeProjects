@@ -1,5 +1,9 @@
 import SwiftUI
 
+/// https://medium.com/better-programming/improving-your-workflow-with-uikit-swift-previews-97ad5cdde742
+/// https://www.vadimbulavin.com/swiftui-previews-at-scale/
+/// code https://github.com/V8tr/SwiftUIPreviewsAtScale
+
 struct CustomPreview: PreviewProvider {
     static var previews: some View {
         PreviewContainer()
