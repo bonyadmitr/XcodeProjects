@@ -48,16 +48,36 @@ class RaisedTabBarController: UITabBarController {
         tabBar.bringSubviewToFront(raisedButton)
     }
     
+    // TODO: enum
+    /// other isTouchDownInside
+    var isTouchUpInside = true
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        if tabBar.isHidden {
+        if !isTouchUpInside && !handleOnButton(in: touches) {
             super.touchesBegan(touches, with: event)
-            return
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isTouchUpInside && !handleOnButton(in: touches) {
+            super.touchesEnded(touches, with: event)
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isTouchUpInside && !handleOnButton(in: touches) {
+            super.touchesCancelled(touches, with: event)
+        }
+    }
+    
+    func handleOnButton(in touches: Set<UITouch>) -> Bool {
+        if tabBar.isHidden {
+            return false
         }
         
         guard let touchLocation = touches.first?.location(in: view) else {
             assertionFailure("touch will be always inside self")
-            return
+            return false
         }
         
         let onButton = view.convert(touchLocation, to: raisedButton)
@@ -65,8 +85,9 @@ class RaisedTabBarController: UITabBarController {
         //if raisedButton.point(inside: onButton, with: event) {
         if raisedButton.bounds.contains(onButton) {
             onRaisedButtonHandler()
+            return true
         } else {
-            super.touchesBegan(touches, with: event)
+            return false
         }
     }
     
