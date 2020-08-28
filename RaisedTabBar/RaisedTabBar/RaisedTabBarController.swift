@@ -33,7 +33,7 @@ class RaisedTabBarController: UITabBarController {
     }
     
     var onRaisedButtonHandler: () -> Void = {}
-    private let raisedButton = UIButton()
+    let raisedButton = UIButton(type: .custom)
     
     override var viewControllers: [UIViewController]? {
         didSet {

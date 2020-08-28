@@ -14,6 +14,9 @@ final class TabBarController: RaisedTabBarController {
     
     private func setup() {
         
+        raisedButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        raisedButton.tintColor = .white
+        
         onRaisedButtonHandler = { [weak self] in
             if let vc = self?.selectedViewController as? TabBarRaisedHandler, !vc.tabBarRaisedActions.isEmpty {
                 self?.alert(for: vc.tabBarRaisedActions)
