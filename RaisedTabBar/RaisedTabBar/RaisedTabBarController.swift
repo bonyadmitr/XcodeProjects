@@ -8,6 +8,15 @@ protocol RaisedTabBarHandler: class {
 // TODO: tabBar shape
 class RaisedTabBarController: UITabBarController {
     
+    enum EventType {
+        case touchUpInside
+        case touchDownInside
+    }
+    
+    var eventType = EventType.touchUpInside
+    var onRaisedButtonHandler: () -> Void = {}
+    let raisedButton = UIButton(type: .custom)
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -32,9 +41,6 @@ class RaisedTabBarController: UITabBarController {
         
     }
     
-    var onRaisedButtonHandler: () -> Void = {}
-    let raisedButton = UIButton(type: .custom)
-    
     override var viewControllers: [UIViewController]? {
         didSet {
             updateItemsOffset()
@@ -48,24 +54,20 @@ class RaisedTabBarController: UITabBarController {
         tabBar.bringSubviewToFront(raisedButton)
     }
     
-    // TODO: enum
-    /// other isTouchDownInside
-    var isTouchUpInside = true
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isTouchUpInside && !handleOnButton(in: touches) {
+        if eventType == .touchDownInside && !handleOnButton(in: touches) {
             super.touchesBegan(touches, with: event)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isTouchUpInside && !handleOnButton(in: touches) {
+        if eventType == .touchUpInside && !handleOnButton(in: touches) {
             super.touchesEnded(touches, with: event)
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isTouchUpInside && !handleOnButton(in: touches) {
+        if eventType == .touchUpInside && !handleOnButton(in: touches) {
             super.touchesCancelled(touches, with: event)
         }
     }
