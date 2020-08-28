@@ -180,6 +180,7 @@ final class RaisedTabBar: UITabBar {
         raisedButton.layer.cornerRadius = raisedButton.bounds.midX
         raisedButton.layer.masksToBounds = true
         raisedButton.center = CGPoint(x: center.x, y: 0)
+        // TODO: chnage for EventType
         raisedButton.addTarget(self, action: #selector(onRaisedButton), for: .touchUpInside)
         addSubview(raisedButton)
     }
