@@ -8,12 +8,6 @@ protocol RaisedTabBarHandler: class {
 // TODO: tabBar shape
 class RaisedTabBarController: UITabBarController {
     
-    enum EventType {
-        case touchUpInside
-        case touchDownInside
-    }
-    
-    var eventType = EventType.touchUpInside
     var onRaisedButtonHandler: () -> Void = {}
     let raisedButton = UIButton(type: .custom)
     
@@ -54,20 +48,15 @@ class RaisedTabBarController: UITabBarController {
         tabBar.bringSubviewToFront(raisedButton)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if eventType == .touchDownInside && !handleOnButton(in: touches) {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
+    /// use `touchesBegan` for touchDownInside. and update `for: .touchUpInside`
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if eventType == .touchUpInside && !handleOnButton(in: touches) {
+        if !handleOnButton(in: touches) {
             super.touchesEnded(touches, with: event)
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if eventType == .touchUpInside && !handleOnButton(in: touches) {
+        if !handleOnButton(in: touches) {
             super.touchesCancelled(touches, with: event)
         }
     }
@@ -180,7 +169,6 @@ final class RaisedTabBar: UITabBar {
         raisedButton.layer.cornerRadius = raisedButton.bounds.midX
         raisedButton.layer.masksToBounds = true
         raisedButton.center = CGPoint(x: center.x, y: 0)
-        // TODO: chnage for EventType
         raisedButton.addTarget(self, action: #selector(onRaisedButton), for: .touchUpInside)
         addSubview(raisedButton)
     }
