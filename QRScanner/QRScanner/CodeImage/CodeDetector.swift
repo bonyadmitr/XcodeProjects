@@ -14,6 +14,7 @@ final class CodeDetector {
     static let shared = CodeDetector()
     
     /// native
+    // TODO: add func with VNDetectBarcodesRequest https://stackoverflow.com/a/57542177/5893286
     func readQR(from image: UIImage) -> String? {
         if let detector = CIDetector(ofType: CIDetectorTypeQRCode,
                                      context: nil,
