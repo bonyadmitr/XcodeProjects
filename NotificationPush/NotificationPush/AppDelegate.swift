@@ -33,5 +33,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+final class NotificationManager: NSObject {
+    
+    static let shared = NotificationManager()
+    
+    private let center = UNUserNotificationCenter.current()
+    
+    private override init() {
+        super.init()
+        
+        center.delegate = self
+    }
+    
+    func registerForPushNotifications() {
+        center.requestAuthorization(options: [.alert, .sound, .badge]) {(granted, error) in
+            print("Permission granted: \(granted)")
+            
+            // TODO: check need
+            /// don't need for silent push in simulator
+//            if granted {
+//                DispatchQueue.main.async {
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
+//            }
+            
+            if let error = error {
+                print("requestAuthorization error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+}
+
+extension NotificationManager: UNUserNotificationCenterDelegate {
+    
+    /// user action
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print(response.actionIdentifier)
+        print(response.notification.request.content.userInfo)
+        completionHandler()
+    }
+    
+    /// handle notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print(notification.request.content.userInfo)
+        print("presenting")
+        
+        /// to show in active foreground app
+        //completionHandler([.alert, .sound, .badge])
+        
+        /// to hide in active app
+        /// will show in background app anyway
+        completionHandler([])
+        /// same from apple
+        //completionHandler(UNNotificationPresentationOptions(rawValue: 0))
+    }
 }
 
