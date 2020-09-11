@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
+    /// system: You've implemented -[<UIApplicationDelegate> application:performFetchWithCompletionHandler:], but you still need to add "fetch" to the list of your supported UIBackgroundModes in your Info.plist.
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("silent push in simulator")
 //        let q = UserDefaults.standard.string(forKey: "1") ?? ""
