@@ -32,6 +32,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print(userInfo)
+//        let q = UserDefaults.standard.string(forKey: "1") ?? ""
+//        UserDefaults.standard.set(q+"2", forKey: "1")
+        completionHandler(.newData)
+    }
+    
+    
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("silent push in simulator")
+//        let q = UserDefaults.standard.string(forKey: "1") ?? ""
+//        UserDefaults.standard.set(q+"3", forKey: "1")
+        completionHandler(.newData)
+    }
+    
+}
 
 import UserNotifications
 
