@@ -14,7 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        NotificationManager.shared.registerForPushNotifications()
+//        let q = UserDefaults.standard.string(forKey: "1") ?? ""
+//        UserDefaults.standard.set(q+"1", forKey: "1")
         return true
     }
 
