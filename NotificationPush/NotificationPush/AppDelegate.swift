@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// to test silent in simulator needs performFetchWithCompletionHandler https://stackoverflow.com/a/60980549/5893286
+/// silent revive th app https://stackoverflow.com/q/58128321/5893286
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
