@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+import UserNotifications
+
 final class NotificationManager: NSObject {
     
     static let shared = NotificationManager()
