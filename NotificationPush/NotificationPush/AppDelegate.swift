@@ -10,6 +10,8 @@ import UIKit
 
 /// to test silent in simulator needs performFetchWithCompletionHandler https://stackoverflow.com/a/60980549/5893286
 /// silent revive th app https://stackoverflow.com/q/58128321/5893286
+/// Background Notification https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
+/// Generating a Remote Notification https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
