@@ -37,6 +37,17 @@ extension Optional {
             return value
         }
     }
+    
+    func asserted(file: String = #file, line: Int = #line) -> Wrapped? {
+        switch self {
+        case .none:
+            assertionFailure("\((file as NSString).lastPathComponent):\(line) is nil")
+            return self
+        case .some(let value):
+            return value
+        }
+    }
+    
 }
 
 
