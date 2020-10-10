@@ -12,6 +12,9 @@ import UIKit
 /// silent revive th app https://stackoverflow.com/q/58128321/5893286
 /// Background Notification https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app
 /// Generating a Remote Notification https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification
+/// `apns-collapse-id` Used if you've sent a notification and it somewhat needs correction/update https://stackoverflow.com/a/60534782/5893286
+/// Dismissing iOS push notifications remotely https://www.thetopsites.net/article/58527191.shtml
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
