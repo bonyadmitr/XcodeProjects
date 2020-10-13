@@ -41,6 +41,11 @@ class ViewController: NSViewController {
 ///
 /// CGImageDestination https://coderoad.ru/23892065/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-Jpeg-%D0%B8%D0%B7-NSData
 /// https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/ImageIOGuide/ikpg_dest/ikpg_dest.html
+
+
+//NSImage is initWithCGImage:size:
+//NSZeroSize is shorthand for "same size as the CGImage"
+
         
     }
     
