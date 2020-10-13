@@ -4,6 +4,8 @@ import Cocoa
 /// https://stackoverflow.com/a/42013661
 /// https://stackoverflow.com/a/55435241
 
+// TODO: free qr gen https://habr.com/ru/post/518476/
+
 // TODO: dock manager
 // TODO: https://stackoverflow.com/a/9220857/5893286
 // TODO: https://stackoverflow.com/a/50832237/5893286 + https://stackoverflow.com/a/4686782/5893286
