@@ -49,6 +49,49 @@ class ViewController: NSViewController {
         
     }
     
+//    func correctImageOrientation(cgImage: CGImage?) -> CGImage? {
+//        guard let cgImage = cgImage else { return nil }
+//        var orientedImage: CGImage?
+//
+//        let originalWidth = cgImage.width
+//        let originalHeight = cgImage.height
+//        let bitsPerComponent = cgImage.bitsPerComponent
+//        let bytesPerRow = cgImage.bytesPerRow
+//        let bitmapInfo = cgImage.bitmapInfo
+//
+//        guard let colorSpace = cgImage.colorSpace else { return nil }
+//
+//        let degreesToRotate = orienation.getDegree()
+//        let mirrored = orienation.isMirror()
+//
+//        var width = originalWidth
+//        var height = originalHeight
+//
+//        let radians = degreesToRotate * Double.pi / 180.0
+//        let swapWidthHeight = Int(degreesToRotate / 90) % 2 != 0
+//
+//        if swapWidthHeight {
+//            swap(&width, &height)
+//        }
+//
+//        let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+//
+//        context?.translateBy(x: CGFloat(width) / 2.0, y: CGFloat(height) / 2.0)
+//        if mirrored {
+//            context?.scaleBy(x: -1.0, y: 1.0)
+//        }
+//        context?.rotate(by: CGFloat(radians))
+//        if swapWidthHeight {
+//            swap(&width, &height)
+//        }
+//        context?.translateBy(x: -CGFloat(width) / 2.0, y: -CGFloat(height) / 2.0)
+//
+//        context?.draw(cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(originalWidth), height: CGFloat(originalHeight)))
+//        orientedImage = context?.makeImage()
+//
+//        return orientedImage
+//    }
+    
     // Method to get image and transform in tuple.
 //    func orientImageWithTransform(_ imageOrientation: CGImageOrientation) -> (CGImage?, CGAffineTransform) {
 //
