@@ -49,6 +49,32 @@ class ViewController: NSViewController {
         
     }
     
+//            // Flip image one more time if needed to, this is to prevent flipped image
+//            switch orientation {
+//            case .upMirrored, .downMirrored:
+//                transform = transform.translatedBy(x: width, y: 0)
+//                transform = transform.scaledBy(x: -1, y: 1)
+//            case .leftMirrored, .rightMirrored:
+//                transform = transform.translatedBy(x: height, y: 0)
+//                transform = transform.scaledBy(x: -1, y: 1)
+//            case .up, .down, .left, .right:
+//                break
+//            @unknown default:
+//                break
+//            }
+//
+//            context.concatenate(transform)
+//
+//            switch orientation {
+//            case .left, .leftMirrored, .right, .rightMirrored:
+//                drawRect = CGRect(x: 0, y: 0, width: height, height: width)
+//            default:
+//                drawRect = CGRect(x: 0, y: 0, width: width, height: height)
+//            }
+//
+//            context.draw(image, in: drawRect)
+            // image released
+//        }
 //    func correctImageOrientation(cgImage: CGImage?) -> CGImage? {
 //        guard let cgImage = cgImage else { return nil }
 //        var orientedImage: CGImage?
