@@ -49,6 +49,56 @@ class ViewController: NSViewController {
         
     }
     
+    // Method to get image and transform in tuple.
+//    func orientImageWithTransform(_ imageOrientation: CGImageOrientation) -> (CGImage?, CGAffineTransform) {
+//
+//        var transform = CGAffineTransform.identity
+//        if imageOrientation == .up { return (self.copy(), transform)}
+//
+//        let size = NSSize(width: width, height: height)
+//        let newSize = [.left,.leftMirrored, .right, .rightMirrored].contains(imageOrientation)
+//            ? NSSize(width: size.height, height: size.width) : size
+//
+//        // Guard that we have color space and core graphics context.
+//        guard let colorSpace = self.colorSpace,
+//            // New graphic context uses transformed width and height.
+//            let ctx = CGContext(data: nil, width: Int(newSize.width), height: Int(newSize.height),
+//                                bitsPerComponent: self.bitsPerComponent, bytesPerRow: 0,
+//                                space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+//            else { return (nil, transform)}
+//
+//        // OK, now the actual work of constructing transform and creating new image.
+//        switch imageOrientation {
+//        case .down, .downMirrored:
+//            transform = transform.translatedBy(x: size.width, y: size.height)
+//            transform = transform.rotated(by: CGFloat.pi)
+//            break
+//        case .left,.leftMirrored:
+//            transform = transform.translatedBy(x: size.height, y: 0)
+//            transform = transform.rotated(by: CGFloat.pi/2)
+//            break
+//        case .right, .rightMirrored:
+//             transform = transform.translatedBy(x: 0, y: size.width)
+//             transform = transform.rotated(by: -CGFloat.pi/2)
+//             break
+//        case .up, .upMirrored:
+//            break
+//        }
+//
+//        if [.upMirrored, .downMirrored,.leftMirrored, .rightMirrored].contains(imageOrientation) {
+//            transform = transform.translatedBy(x: size.width, y: 0)
+//            transform = transform.scaledBy(x: -1, y: 1)
+//        }
+//
+//        ctx.concatenate(transform)
+//        // Interestingly, drawing with the original width and height?!
+//        // So width and height here are pre-transform.
+//        ctx.draw(self, in: NSRect(x: 0, y: 0, width: size.width, height: size.height))
+//
+//        return (ctx.makeImage(), transform)
+//    }
+
+
 }
 
 //import MobileCoreServices
