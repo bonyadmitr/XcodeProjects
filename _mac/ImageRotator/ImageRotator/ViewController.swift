@@ -49,6 +49,35 @@ class ViewController: NSViewController {
         
     }
     
+//            guard let _context = CGContext(data: nil,
+//                                           width: Int(width),
+//                                           height: Int(height),
+//                                           bitsPerComponent: image.bitsPerComponent,
+//                                           bytesPerRow: bytesPerRow,
+//                                           space: image.colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!,
+//                                           bitmapInfo: image.bitmapInfo.rawValue)
+//            else { return }
+//            context = _context
+//
+//            let drawRect: CGRect
+//            var transform: CGAffineTransform = CGAffineTransform.identity
+//
+//            switch orientation {
+//            case .down, .downMirrored:
+//                transform = transform.translatedBy(x: width, y: height)
+//                transform = transform.rotated(by: CGFloat.pi)
+//            case .left, .leftMirrored:
+//                transform = transform.translatedBy(x: width, y: 0)
+//                transform = transform.rotated(by: CGFloat.pi / 2.0)
+//            case .right, .rightMirrored:
+//                transform = transform.translatedBy(x: 0, y: height)
+//                transform = transform.rotated(by: CGFloat.pi / -2.0)
+//            case .up, .upMirrored:
+//                break
+//            @unknown default:
+//                break
+//            }
+//
 //            // Flip image one more time if needed to, this is to prevent flipped image
 //            switch orientation {
 //            case .upMirrored, .downMirrored:
