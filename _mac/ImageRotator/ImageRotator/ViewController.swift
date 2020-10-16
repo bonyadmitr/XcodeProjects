@@ -119,6 +119,48 @@ class ViewController: NSViewController {
         }
         
         
+        
+        guard let context = CGContext(data: nil,
+                                      width: image.height,
+                                      height: image.width,
+                                      bitsPerComponent: image.bitsPerComponent,
+                                      bytesPerRow: image.bytesPerRow,
+                                      space: image.colorSpace ?? CGColorSpace(name: CGColorSpace.sRGB)!,
+                                      bitmapInfo: image.bitmapInfo.rawValue)
+        else {
+            return
+        }
+        
+        let width = CGFloat(image.height)
+        let height = CGFloat(image.width)
+        
+        var transform = CGAffineTransform.identity
+        
+        
+        switch orientation {
+        
+        /// right
+        case .down:
+            transform = transform.translatedBy(x: width, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
+            
+//            transform = transform.translatedBy(x: 0, y: height)
+//            transform = transform.rotated(by: CGFloat.pi / -2.0)
+            
+            
+          /// left
+        case .up:
+            transform = transform.translatedBy(x: 0, y: height)
+            transform = transform.rotated(by: CGFloat.pi / -2.0)
+            
+        default:
+//            assertionFailure()
+            return
+        }
+        
+        
+        
+        context.concatenate(transform)
 
         // OK, now the actual work of constructing transform and creating new image.
 //        switch orientation {
@@ -149,6 +191,13 @@ class ViewController: NSViewController {
 //        ctx.draw(self, in: NSRect(x: 0, y: 0, width: size.width, height: size.height))
 //
 //        return (ctx.makeImage(), transform)
+        
+        
+        
+        let drawRect = CGRect(x: 0, y: 0, width: height, height: width)
+        
+        context.draw(image, in: drawRect)
+        
 //        do {
 
             
