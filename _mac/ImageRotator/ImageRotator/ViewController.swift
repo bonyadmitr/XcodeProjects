@@ -46,6 +46,33 @@ class ViewController: NSViewController {
 //NSImage is initWithCGImage:size:
 //NSZeroSize is shorthand for "same size as the CGImage"
 
+    func changeMetaData() {
+        let destinationURL = self as CFURL
+        
+        guard
+            let imageSource = CGImageSourceCreateWithURL(destinationURL, nil),
+            let type = CGImageSourceGetType(imageSource),
+            let destination = CGImageDestinationCreateWithURL(destinationURL, type, 1, nil)
+        else {
+            return
+        }
+        
+        /// CGImageProperties https://developer.apple.com/documentation/imageio/cgimageproperties
+        /// not working
+        //kCGImagePropertyOrientation: CGImagePropertyOrientation.right.rawValue
+        /// https://github.com/search?l=Swift&q=kCGImageDestinationDateTime&type=Code
+        //kCGImageDestinationDateTime: Date(timeIntervalSince1970: 0)
+        let options = [kCGImageDestinationOrientation: CGImagePropertyOrientation.right.rawValue] as CFDictionary
+        
+        /// apple example https://developer.apple.com/library/archive/qa/qa1895/_index.html
+        /// swift https://gist.github.com/osteslag/085b1265fb3c6a23b60c318b15922185
+        /// CFErrorCopyDescription
+        /// console doc: One of kCGImageDestinationMetadata, kCGImageDestinationOrientation, or kCGImageDestinationDateTime is required
+        /// CGImageDestinationFinalize doesn't need
+        print(
+            "saved:", CGImageDestinationCopyImageSource(destination, imageSource, options, nil)
+        )
+    }
         
     }
     
