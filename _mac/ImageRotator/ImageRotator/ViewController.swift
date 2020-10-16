@@ -155,6 +155,31 @@ class ViewController: NSViewController {
 //            context.draw(image, in: drawRect)
             // image released
 //        }
+
+        guard let newImage = context.makeImage() else { return }
+        
+        /// https://stackoverflow.com/a/40371604/5893286
+        @discardableResult func writeCGImage(_ image: CGImage, to destinationURL: URL) -> Bool {
+//            let type = destinationURL.lastPathComponent.utTypeFromExtension! as CFString// ?? kUTTypeJPEG
+            let type = CGImageSourceGetType(imageSource) ?? kUTTypeJPEG
+            
+            guard let destination = CGImageDestinationCreateWithURL(destinationURL as CFURL, type, 1, nil) else { return false }
+            
+            /// exif create https://github.com/smilesm2/CGImageMetadata/blob/master/func.swift
+            let metadata = CGImageSourceCopyMetadataAtIndex(imageSource, 0, nil)
+            CGImageDestinationAddImageAndMetadata(destination, image, metadata, nil)
+            
+//            CGImageDestinationAddImage(destination, image, nil)
+            return CGImageDestinationFinalize(destination)
+        }
+        
+        print("saved: \(writeCGImage(newImage, to: self))")
+//        newImage
+
+    //    let uiImage = UIImage(cgImage: newImage, scale: 1, orientation: .up)
+    //    return uiImage
+    }
+
 //    func correctImageOrientation(cgImage: CGImage?) -> CGImage? {
 //        guard let cgImage = cgImage else { return nil }
 //        var orientedImage: CGImage?
