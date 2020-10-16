@@ -49,6 +49,27 @@ class ViewController: NSViewController {
         
     }
     
+//        do {
+
+            
+            
+            
+            
+            
+    //        let imageOrientation = UIImage.Orientation(orientation)
+//
+//            let bytesPerRow: Int
+//            switch orientation {
+//            case .left, .leftMirrored, .right, .rightMirrored:
+//                width = CGFloat(image.height)
+//                height = CGFloat(image.width)
+//                bytesPerRow = ((Int(width)+15)/16) * 16 * (image.bitsPerPixel/8)
+//            default:
+//                width = CGFloat(image.width)
+//                height = CGFloat(image.height)
+//                bytesPerRow = image.bytesPerRow
+//            }
+//
 //            guard let _context = CGContext(data: nil,
 //                                           width: Int(width),
 //                                           height: Int(height),
