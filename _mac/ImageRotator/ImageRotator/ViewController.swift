@@ -92,6 +92,33 @@ class ViewController: NSViewController {
         )
     }
     
+    
+    func image() {//} -> UIImage? {
+        
+//        let context: CGContext
+//        let width: CGFloat
+//        let height: CGFloat
+        
+        guard
+            let imageSource = CGImageSourceCreateWithURL(self as CFURL, nil),
+            let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as NSDictionary?,
+            let orientation = CGImagePropertyOrientation(rawValue: properties[kCGImagePropertyOrientation] as? UInt32 ?? 1),
+            let image = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+        else { return }
+        
+        
+//        NSImage(cgImage: <#T##CGImage#>, size: <#T##NSSize#>)
+        guard orientation != .right else {
+            return //UIImage(cgImage: image)
+        }
+        
+        return
+        
+        if image.height > image.width {
+            return
+        }
+        
+        
 
         // OK, now the actual work of constructing transform and creating new image.
 //        switch orientation {
