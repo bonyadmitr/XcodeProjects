@@ -73,7 +73,23 @@ class ViewController: NSViewController {
             "saved:", CGImageDestinationCopyImageSource(destination, imageSource, options, nil)
         )
     }
+    
+    func changeMetaDataWithCompress() {
+        let destinationURL = self as CFURL
         
+        guard
+            let imageSource = CGImageSourceCreateWithURL(destinationURL, nil),
+            let type = CGImageSourceGetType(imageSource),
+            let destination = CGImageDestinationCreateWithURL(destinationURL, type, 1, nil)
+        else { return }
+        
+        /// kCGImageDestinationOrientation not working with CGImageDestinationAddImageFromSource
+        let options = [kCGImagePropertyOrientation: CGImagePropertyOrientation.right.rawValue] as CFDictionary
+        
+        CGImageDestinationAddImageFromSource(destination, imageSource, 0, options)
+        print(
+            "saved:", CGImageDestinationFinalize(destination)
+        )
     }
     
 
