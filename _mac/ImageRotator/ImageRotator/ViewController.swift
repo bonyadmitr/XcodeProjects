@@ -49,6 +49,36 @@ class ViewController: NSViewController {
         
     }
     
+
+        // OK, now the actual work of constructing transform and creating new image.
+//        switch orientation {
+//        case .down, .downMirrored:
+//            transform = transform.translatedBy(x: size.width, y: size.height)
+//            transform = transform.rotated(by: CGFloat.pi)
+//            break
+//        case .left,.leftMirrored:
+//            transform = transform.translatedBy(x: size.height, y: 0)
+//            transform = transform.rotated(by: CGFloat.pi/2)
+//            break
+//        case .right, .rightMirrored:
+//             transform = transform.translatedBy(x: 0, y: size.width)
+//             transform = transform.rotated(by: -CGFloat.pi/2)
+//             break
+//        case .up, .upMirrored:
+//            break
+//        }
+//
+//        if [.upMirrored, .downMirrored,.leftMirrored, .rightMirrored].contains(imageOrientation) {
+//            transform = transform.translatedBy(x: size.width, y: 0)
+//            transform = transform.scaledBy(x: -1, y: 1)
+//        }
+//
+//        ctx.concatenate(transform)
+//        // Interestingly, drawing with the original width and height?!
+//        // So width and height here are pre-transform.
+//        ctx.draw(self, in: NSRect(x: 0, y: 0, width: size.width, height: size.height))
+//
+//        return (ctx.makeImage(), transform)
 //        do {
 
             
