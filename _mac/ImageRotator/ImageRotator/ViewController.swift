@@ -46,6 +46,8 @@ class ViewController: NSViewController {
 //NSImage is initWithCGImage:size:
 //NSZeroSize is shorthand for "same size as the CGImage"
 
+    // TODO: compress
+    /// https://nshipster.com/image-resizing/
     func changeMetaData() {
         let destinationURL = self as CFURL
         
