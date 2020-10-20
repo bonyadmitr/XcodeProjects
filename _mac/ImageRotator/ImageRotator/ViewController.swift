@@ -48,6 +48,9 @@ class ViewController: NSViewController {
 
     // TODO: compress
     /// https://nshipster.com/image-resizing/
+    /// https://medium.com/@zippicoder/downsampling-images-for-better-memory-consumption-and-uicollectionview-performance-35e0b4526425
+    /// https://gist.github.com/douglashill/607578575d249dc1e6db
+    
     func changeMetaData() {
         let destinationURL = self as CFURL
         
