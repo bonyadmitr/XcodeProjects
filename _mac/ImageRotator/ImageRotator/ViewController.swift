@@ -46,6 +46,7 @@ class ViewController: NSViewController {
 //NSImage is initWithCGImage:size:
 //NSZeroSize is shorthand for "same size as the CGImage"
 
+    /// rotate a NSImage https://stackoverflow.com/q/31699235/5893286
     // TODO: compress
     /// https://nshipster.com/image-resizing/
     /// https://medium.com/@zippicoder/downsampling-images-for-better-memory-consumption-and-uicollectionview-performance-35e0b4526425
