@@ -52,6 +52,7 @@ class ViewController: NSViewController {
     /// https://medium.com/@zippicoder/downsampling-images-for-better-memory-consumption-and-uicollectionview-performance-35e0b4526425
     /// https://gist.github.com/douglashill/607578575d249dc1e6db
     
+    // TODO: why CGImageDestinationSetProperties need?
     func changeMetaData() {
         let destinationURL = self as CFURL
         
