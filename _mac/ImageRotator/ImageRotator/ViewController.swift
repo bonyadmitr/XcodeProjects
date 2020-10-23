@@ -53,6 +53,10 @@ class ViewController: NSViewController {
     /// https://gist.github.com/douglashill/607578575d249dc1e6db
     
     // TODO: why CGImageDestinationSetProperties need?
+    /// calling CGImageDestinationSetProperties before CGImageDestinationAddImage solves the problem on iOS10
+    //CGImageDestinationSetProperties(destination, options)
+    //image destination must have at least one image
+    
     func changeMetaData() {
         let destinationURL = self as CFURL
         
