@@ -57,6 +57,7 @@ class ViewController: NSViewController {
     //CGImageDestinationSetProperties(destination, options)
     //image destination must have at least one image
     
+    // TODO: update destination, not recreate it
     func changeMetaData() {
         let destinationURL = self as CFURL
         
