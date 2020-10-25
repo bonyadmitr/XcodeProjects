@@ -46,6 +46,27 @@ class ViewController: NSViewController {
 //NSImage is initWithCGImage:size:
 //NSZeroSize is shorthand for "same size as the CGImage"
 
+extension URL{
+    
+    /// inspired https://stackoverflow.com/a/58729400/5893286
+    var sizeOfImage: CGSize? {
+        
+        // TODO: !
+//        imageProperties[kCGImagePropertyPixelWidth] as? CGFloat
+        
+        guard let imageSource = CGImageSourceCreateWithURL(self as CFURL, nil)
+              , let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [AnyHashable: Any]
+              , let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as! CFNumber?
+              , let pixelHeight = imageProperties[kCGImagePropertyPixelHeight as String] as! CFNumber?
+        else {
+            return nil
+        }
+        var width: CGFloat = 0, height: CGFloat = 0
+        CFNumberGetValue(pixelWidth, .cgFloatType, &width)
+        CFNumberGetValue(pixelHeight, .cgFloatType, &height)
+        return CGSize(width: width, height: height)
+    }
+    
     /// rotate a NSImage https://stackoverflow.com/q/31699235/5893286
     // TODO: compress
     /// https://nshipster.com/image-resizing/
