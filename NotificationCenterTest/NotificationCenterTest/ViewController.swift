@@ -10,4 +10,10 @@ import UIKit
 class ViewController: UIViewController {
 
 
+
+
+}
+
+extension NSNotification.Name {
+    static let custom = NSNotification.Name(rawValue: "custom")
 }
