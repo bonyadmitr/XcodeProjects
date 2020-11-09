@@ -17,6 +17,45 @@ class ViewController: UIViewController {
 extension NSNotification.Name {
     static let custom = NSNotification.Name(rawValue: "custom")
 }
+
+class ViewController2: UIViewController {
+    
+    var tokenRemover: TokenRemover?
+    var notificationToken: NSObjectProtocol?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .red
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(notif1), name: .custom, object: nil)
+        
+        tokenRemover = NotificationCenter.default.observe(name: .custom, object: nil, queue: .main) { [weak self] _ in
+            print(self?.view.backgroundColor)
+            print("did receave custom notification by block")
+        }
+        
+        NotificationCenter.default.addObserver(forName: .custom, object: nil, queue: .main) { [weak self] _ in
+            print(self?.view.backgroundColor)
+            print("did receave custom notification by block")
+        }
+        
+    }
+    
+    @objc private func notif1() {
+        print("did receave custom notification")
+    }
+    
+    deinit {
+        if let notificationToken = notificationToken {
+            NotificationCenter.default.removeObserver(notificationToken)
+        }
+        print("deinit ViewController2")
+    }
+    
+}
+
+
 final class TokenRemover {
     
     private let token: NSObjectProtocol /// can be `Any`
