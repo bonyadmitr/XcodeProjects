@@ -32,3 +32,19 @@ final class TokenRemover {
     }
     
 }
+
+extension NotificationCenter {
+    
+    /// Convenience wrapper for addObserver(forName:object:queue:using:)
+    /// that returns our custom TokenRemover.
+    func observe(name: NSNotification.Name?,
+                 object obj: Any?,
+                 queue: OperationQueue?,
+                 using block: @escaping (Notification) -> ()) -> TokenRemover
+    {
+        let token = addObserver(forName: name, object: obj, queue: queue, using: block)
+        return TokenRemover(token: token, notificationCenter: self)
+    }
+    
+}
+
