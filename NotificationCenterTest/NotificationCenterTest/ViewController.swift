@@ -9,6 +9,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            NotificationCenter.default.post(name: .custom, object: nil)
+            print("did send custom notification 1")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            NotificationCenter.default.post(name: .custom, object: nil)
+            print("did send custom notification 2")
+        }
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        present(ViewController2(), animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 
 
 
