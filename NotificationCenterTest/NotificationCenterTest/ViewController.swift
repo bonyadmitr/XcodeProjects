@@ -82,6 +82,10 @@ class ViewController2: UIViewController {
 }
 
 
+
+
+/// we need to call `notificationCenter.removeObserver` for closure syntax `addObserver(forName`
+/// inspired article https://oleb.net/blog/2018/01/notificationcenter-removeobserver/
 final class TokenRemover {
     
     private let token: NSObjectProtocol /// can be `Any`
