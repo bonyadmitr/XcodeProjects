@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 
 class ViewController: UIViewController {
 
@@ -17,3 +19,10 @@ class ViewController: UIViewController {
 
 }
 
+class IdObject: Object {
+    @objc dynamic var id = ""
+    
+    override class func primaryKey() -> String? {
+        return #keyPath(id)
+    }
+}
