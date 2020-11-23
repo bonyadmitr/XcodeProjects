@@ -19,6 +19,10 @@ class ViewController: UIViewController {
 
 }
 
+final class Note: IdObject {
+    @objc dynamic var title = ""
+    @objc dynamic var user: User?
+}
 class IdObject: Object {
     @objc dynamic var id = ""
     
