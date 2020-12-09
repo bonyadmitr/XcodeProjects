@@ -95,12 +95,19 @@ class ViewController: UIViewController {
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
         }
+        
+//        window.backgroundColor = .cyan
+//        window.windowLevel = .statusBar
         window.rootViewController = vc
         window.isHidden = false
+//        window.makeKeyAndVisible()
         window.tag = 100
         newWindow = window
         
         onButton()
+//        vc.textField.becomeFirstResponder()
+        
+//        print(UIApplication.shared.windows.count)
     }
 
 }
