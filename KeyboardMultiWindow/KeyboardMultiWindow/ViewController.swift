@@ -24,6 +24,24 @@ class ViewController: UIViewController {
         let button2 = UIButton(type: .system)
         button2.addTarget(self, action: #selector(onButton), for: .touchUpInside)
         button2.setTitle("Hide", for: .normal)
+        
+        
+        
+        let stackView = UIStackView(arrangedSubviews: [textField, button1, button2])
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+        ])
+        
     }
 
 
