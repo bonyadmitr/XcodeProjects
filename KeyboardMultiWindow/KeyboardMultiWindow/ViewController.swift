@@ -44,6 +44,13 @@ class ViewController: UIViewController {
         
     }
 
+    @objc private func onButton() {
+        UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
+        
+        
+
+    }
+    
 
 }
 
