@@ -62,6 +62,17 @@ class ViewController: UIViewController {
 //        UIApplication.shared.windows.forEach { $0.endEditing(true) }
 //        UIApplication.shared.delegate?.window??.endEditing(true)
         
+        
+        
+//        let currentWindow = UIApplication.shared.keyWindow
+//
+////        print(UIApplication.shared.windows.count)
+//        for window in UIApplication.shared.windows where window.tag == 100 {
+//            window.makeKeyAndVisible()
+//            UIApplication.shared.sendAction(#selector(resignFirstResponder), to: window, from: nil, for: nil)
+//        }
+//        currentWindow?.makeKeyAndVisible()
+//
 
     }
     
