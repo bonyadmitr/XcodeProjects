@@ -56,6 +56,12 @@ class ViewController: UIViewController {
         UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
         
         
+//        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
+//        keyWindow?.endEditing(true)
+        
+//        UIApplication.shared.windows.forEach { $0.endEditing(true) }
+//        UIApplication.shared.delegate?.window??.endEditing(true)
+        
 
     }
     
