@@ -45,6 +45,14 @@ class ViewController: UIViewController {
     }
 
     @objc private func onButton() {
+//        if newWindow?.isKeyWindow == true {
+//            newWindow.isHidden = true
+//            if #available(iOS 13, *) {
+//                newWindow.windowScene = nil
+//            }
+//            newWindow = nil
+////            globalWindow.makeKeyAndVisible()
+//        }
         UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
         
         
