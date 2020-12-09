@@ -7,6 +7,8 @@
 
 import UIKit
 
+var newWindow: UIWindow!
+
 class ViewController: UIViewController {
 
     let textField = UITextField()
@@ -76,6 +78,30 @@ class ViewController: UIViewController {
 
     }
     
+    @objc private func onButtonWindow() {
+//        print(UIApplication.shared.windows.count)
+        
+        let vc = ViewController()
+        vc.view.backgroundColor = .red
+        
+        let window: UIWindow
+        if #available(iOS 13.0, *) {
+            /// https://stackoverflow.com/a/59967726/5893286
+            window = UIApplication.shared
+                .connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .first { $0.activationState == .foregroundActive }
+                .map { UIWindow(windowScene: $0) }!
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+        window.rootViewController = vc
+        window.isHidden = false
+        window.tag = 100
+        newWindow = window
+        
+        onButton()
+    }
 
 }
 
