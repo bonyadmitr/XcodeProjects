@@ -112,3 +112,40 @@ class ViewController: UIViewController {
 
 }
 
+final class WindowManager {
+    
+    static let shared = WindowManager()
+    
+    let window: UIWindow = {
+        let window: UIWindow
+        if #available(iOS 13.0, *) {
+            /// https://stackoverflow.com/a/59967726/5893286
+            window = UIApplication.shared
+                .connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .first { $0.activationState == .foregroundActive }
+                .map { UIWindow(windowScene: $0) }
+                ?? UIWindow(frame: UIScreen.main.bounds)
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+        
+        return window
+    }()
+    
+    func show() {
+        window.makeKeyAndVisible()
+        //window.isHidden = false
+    }
+    
+    func hide() {
+        //window.isKeyWindow
+        window.isHidden = true
+        
+        //if #available(iOS 13, *) {
+        //    window.windowScene = nil
+        //}
+        //window = nil
+    }
+    
+}
