@@ -7,8 +7,6 @@
 
 import UIKit
 
-var newWindow: UIWindow!
-
 class ViewController: UIViewController {
 
     let textField = UITextField()
@@ -44,6 +42,7 @@ class ViewController: UIViewController {
             //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
         ])
         
+        
     }
 
     @objc private func onButton() {
@@ -55,7 +54,8 @@ class ViewController: UIViewController {
 //            newWindow = nil
 ////            globalWindow.makeKeyAndVisible()
 //        }
-        UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
+        
+        
         
         
 //        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
@@ -75,39 +75,24 @@ class ViewController: UIViewController {
 //        }
 //        currentWindow?.makeKeyAndVisible()
 //
-
+        WindowManager.shared.hide()
+        UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
     @objc private func onButtonWindow() {
-//        print(UIApplication.shared.windows.count)
         
         let vc = ViewController()
         vc.view.backgroundColor = .red
         
-        let window: UIWindow
-        if #available(iOS 13.0, *) {
-            /// https://stackoverflow.com/a/59967726/5893286
-            window = UIApplication.shared
-                .connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .first { $0.activationState == .foregroundActive }
-                .map { UIWindow(windowScene: $0) }!
-        } else {
-            window = UIWindow(frame: UIScreen.main.bounds)
-        }
-        
-//        window.backgroundColor = .cyan
-//        window.windowLevel = .statusBar
+        let window = WindowManager.shared.window
         window.rootViewController = vc
-        window.isHidden = false
+//        window.windowLevel = .statusBar
+//        window.isHidden = false
 //        window.makeKeyAndVisible()
-        window.tag = 100
-        newWindow = window
+//        window.tag = 100
         
-        onButton()
-//        vc.textField.becomeFirstResponder()
         
-//        print(UIApplication.shared.windows.count)
+        WindowManager.shared.show()
     }
 
 }
