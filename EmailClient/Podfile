@@ -1,0 +1,9 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+use_frameworks!
+
+target 'EmailClient' do
+
+  pod 'mailcore2-ios', '~> 0.6'
+
+end

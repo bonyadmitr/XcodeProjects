@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB9FD9211D5719CA8E511EDE /* Pods_EmailClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C517A11772C08F1659AF94C4 /* Pods_EmailClient.framework */; };
 		C4C1D19E25C2D57600AAD637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1D19D25C2D57600AAD637 /* AppDelegate.swift */; };
 		C4C1D1A025C2D57600AAD637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1D19F25C2D57600AAD637 /* SceneDelegate.swift */; };
 		C4C1D1A225C2D57600AAD637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1D1A125C2D57600AAD637 /* ViewController.swift */; };
@@ -24,6 +25,10 @@
 		C4C1D1A625C2D57800AAD637 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4C1D1A925C2D57800AAD637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4C1D1AB25C2D57800AAD637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4C1D1C125C2DA3C00AAD637 /* EmailClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmailClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		C517A11772C08F1659AF94C4 /* Pods_EmailClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmailClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E352BE5B63FB925B4655103B /* Pods-EmailClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailClient.debug.xcconfig"; path = "Target Support Files/Pods-EmailClient/Pods-EmailClient.debug.xcconfig"; sourceTree = "<group>"; };
+		F88AD6E8B194BB31BC2ACEF7 /* Pods-EmailClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailClient.release.xcconfig"; path = "Target Support Files/Pods-EmailClient/Pods-EmailClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +36,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9FD9211D5719CA8E511EDE /* Pods_EmailClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1719E83AB01128FEC9254D7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C517A11772C08F1659AF94C4 /* Pods_EmailClient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F2BA156C199E05F4E1A4C74 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E352BE5B63FB925B4655103B /* Pods-EmailClient.debug.xcconfig */,
+				F88AD6E8B194BB31BC2ACEF7 /* Pods-EmailClient.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C4C1D19125C2D57600AAD637 = {
 			isa = PBXGroup;
 			children = (
 				C4C1D19C25C2D57600AAD637 /* EmailClient */,
 				C4C1D19B25C2D57600AAD637 /* Products */,
+				1F2BA156C199E05F4E1A4C74 /* Pods */,
+				1719E83AB01128FEC9254D7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +88,7 @@
 				C4C1D1A625C2D57800AAD637 /* Assets.xcassets */,
 				C4C1D1A825C2D57800AAD637 /* LaunchScreen.storyboard */,
 				C4C1D1AB25C2D57800AAD637 /* Info.plist */,
+				C4C1D1C125C2DA3C00AAD637 /* EmailClient-Bridging-Header.h */,
 			);
 			path = EmailClient;
 			sourceTree = "<group>";
@@ -74,6 +100,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C4C1D1AE25C2D57800AAD637 /* Build configuration list for PBXNativeTarget "EmailClient" */;
 			buildPhases = (
+				0C7338D16E1A0E6FF632A295 /* [CP] Check Pods Manifest.lock */,
 				C4C1D19625C2D57600AAD637 /* Sources */,
 				C4C1D19725C2D57600AAD637 /* Frameworks */,
 				C4C1D19825C2D57600AAD637 /* Resources */,
@@ -98,6 +125,7 @@
 				TargetAttributes = {
 					C4C1D19925C2D57600AAD637 = {
 						CreatedOnToolsVersion = 12.0.1;
+						LastSwiftMigration = 1200;
 					};
 				};
 			};
@@ -131,6 +159,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C7338D16E1A0E6FF632A295 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EmailClient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C4C1D19625C2D57600AAD637 /* Sources */ = {
@@ -283,9 +336,11 @@
 		};
 		C4C1D1AF25C2D57800AAD637 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E352BE5B63FB925B4655103B /* Pods-EmailClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EmailClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -294,6 +349,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.EmailClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EmailClient/EmailClient-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -301,9 +358,11 @@
 		};
 		C4C1D1B025C2D57800AAD637 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F88AD6E8B194BB31BC2ACEF7 /* Pods-EmailClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EmailClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,6 +371,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.EmailClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EmailClient/EmailClient-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

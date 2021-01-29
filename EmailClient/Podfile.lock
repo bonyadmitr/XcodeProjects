@@ -1,0 +1,16 @@
+PODS:
+  - mailcore2-ios (0.6.4)
+
+DEPENDENCIES:
+  - mailcore2-ios (~> 0.6)
+
+SPEC REPOS:
+  trunk:
+    - mailcore2-ios
+
+SPEC CHECKSUMS:
+  mailcore2-ios: 3ff0be2fa553d4da9c11d39c11d51863c768f24f
+
+PODFILE CHECKSUM: 2392ff9b97cbc33cc9a1bad538ad69ed67129df3
+
+COCOAPODS: 1.9.3
