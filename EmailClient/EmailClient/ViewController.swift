@@ -40,3 +40,8 @@ class ViewController: UIViewController {
 
 }
 
+final class MailCoreManager {
+    
+    static let shared = MailCoreManager()
+    
+}
