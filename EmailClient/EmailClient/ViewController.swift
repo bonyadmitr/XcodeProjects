@@ -65,6 +65,13 @@ final class MailCoreManager {
         smtpSession.timeout = 2
         smtpSession.isCheckCertificateEnabled = false
         
+        // TODO: check google
+//        smtpSession.hostname = "smtp.gmail.com"
+//        smtpSession.username = "matt@gmail.com"
+//        smtpSession.password = "xxxxxxxxxxxxxxxx"
+//        smtpSession.port = 465
+//        smtpSession.authType = .saslPlain
+//        smtpSession.connectionType = .TLS
         
         
     }
