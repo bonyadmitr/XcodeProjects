@@ -44,4 +44,14 @@ final class MailCoreManager {
     
     static let shared = MailCoreManager()
     
+    
+    func login() {
+        
+        
+        let domain = "yandex.ru"
+        
+        
+        
+        
+    }
 }
