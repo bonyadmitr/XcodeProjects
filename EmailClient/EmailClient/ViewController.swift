@@ -44,6 +44,10 @@ final class MailCoreManager {
     
     static let shared = MailCoreManager()
     
+    private let imapSession = MCOIMAPSession()
+    private let smtpSession = MCOSMTPSession()
+    //    private var smtpSession: MCOSMTPSession?
+    
     
     func login() {
         
