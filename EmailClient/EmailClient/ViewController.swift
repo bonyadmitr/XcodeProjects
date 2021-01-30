@@ -74,5 +74,14 @@ final class MailCoreManager {
 //        smtpSession.connectionType = .TLS
         
         
+        
+//        smtpSession.connectionLogger = { (connectionID, type, data) in
+//            if let data = data, let string = String(data: data, encoding: .utf8){
+//                print("- smtp log: \(string)")
+//            } else {
+//                assertionFailure()
+//            }
+//        }
+        
     }
 }
