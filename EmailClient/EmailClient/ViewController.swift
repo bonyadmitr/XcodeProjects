@@ -107,5 +107,11 @@ final class MailCoreManager {
                 print("success smtpSession")
             }
         })
+        
+        
+        // TODO: sync login
+//        let dispatchGroup = DispatchGroup()
+//        dispatchGroup.enter()
+//
     }
 }
