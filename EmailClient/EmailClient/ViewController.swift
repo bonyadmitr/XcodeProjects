@@ -25,6 +25,9 @@ import UIKit
  
  andoid lib
  https://eclipse-ee4j.github.io/mail/
+ 
+ 
+ https://stackoverflow.com/a/31540230/5893286
  */
 
 class ViewController: UIViewController {
