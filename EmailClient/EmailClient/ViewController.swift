@@ -11,6 +11,8 @@ import UIKit
 /**
  imap to get emails
  smtp to send email
+ 
+ yandex IMAP setup https://yandex.ru/support/mail/mail-clients/apple-mail.html
  */
 
 class ViewController: UIViewController {
