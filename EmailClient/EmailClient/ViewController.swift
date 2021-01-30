@@ -20,6 +20,8 @@ import UIKit
  http://libmailcore.com/api/objc/index.html
  https://github.com/MailCore/mailcore2
  https://github.com/MailCore/mailcore2/wiki
+ setup https://stackoverflow.com/a/54954919/5893286
+ setup video https://www.youtube.com/watch?v=NkpLqNN8xtU
  */
 
 class ViewController: UIViewController {
