@@ -18,6 +18,8 @@ import UIKit
  
  MailCore 2 lib
  http://libmailcore.com/api/objc/index.html
+ https://github.com/MailCore/mailcore2
+ https://github.com/MailCore/mailcore2/wiki
  */
 
 class ViewController: UIViewController {
