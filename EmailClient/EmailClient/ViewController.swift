@@ -97,5 +97,15 @@ final class MailCoreManager {
 //                print("- imap log error: \(type.rawValue) \(data?.count ?? -1)")
 //            }
 //        }
+        
+        
+        
+        smtpSession.loginOperation()?.start({ (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("success smtpSession")
+            }
+        })
     }
 }
