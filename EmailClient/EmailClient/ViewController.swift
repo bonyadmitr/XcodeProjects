@@ -7,6 +7,12 @@
 
 import UIKit
 
+
+/**
+ imap to get emails
+ smtp to send email
+ */
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
