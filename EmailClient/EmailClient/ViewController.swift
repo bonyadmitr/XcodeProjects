@@ -22,6 +22,9 @@ import UIKit
  https://github.com/MailCore/mailcore2/wiki
  setup https://stackoverflow.com/a/54954919/5893286
  setup video https://www.youtube.com/watch?v=NkpLqNN8xtU
+ 
+ andoid lib
+ https://eclipse-ee4j.github.io/mail/
  */
 
 class ViewController: UIViewController {
