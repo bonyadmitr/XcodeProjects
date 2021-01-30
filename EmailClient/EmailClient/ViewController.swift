@@ -13,6 +13,9 @@ import UIKit
  smtp to send email
  
  yandex IMAP setup https://yandex.ru/support/mail/mail-clients/apple-mail.html
+ yandex auth problem "This user does not have access rights to this service" https://prnt.sc/uz30rb and https://searchengines.guru/ru/forum/1037543
+ yandex lite client https://mail.yandex.ru/lite/inbox
+ 
  */
 
 class ViewController: UIViewController {
