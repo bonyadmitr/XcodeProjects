@@ -56,6 +56,16 @@ final class MailCoreManager {
         
         
         
+        smtpSession.hostname = "smtp.\(domain)"
+        smtpSession.username = username
+        smtpSession.password = password
+        smtpSession.port = 465
+        smtpSession.authType = .saslPlain
+        smtpSession.connectionType = .TLS
+        smtpSession.timeout = 2
+        smtpSession.isCheckCertificateEnabled = false
+        
+        
         
     }
 }
