@@ -83,5 +83,19 @@ final class MailCoreManager {
 //            }
 //        }
         
+        
+        imapSession.username = username
+        imapSession.password = password
+        imapSession.hostname = "imap.\(domain)"
+        imapSession.port = 993
+        imapSession.connectionType = .TLS
+        imapSession.timeout = 2
+//        imapSession.connectionLogger  = { (connectionID, type, data) in
+//            if let data = data, let string = String(data: data, encoding: .utf8){
+//                print("- imap log: \(string)")
+//            } else {
+//                print("- imap log error: \(type.rawValue) \(data?.count ?? -1)")
+//            }
+//        }
     }
 }
