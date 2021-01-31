@@ -36,6 +36,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    private func generalAction() {
+        //MailCoreManager.shared.send()
+        
 //        MailCoreManager.shared.fetchFolderStatus(folder: "INBOX") { result in
 //            switch result {
 //            case .success(let status):
@@ -66,6 +70,7 @@ class ViewController: UIViewController {
         MailCoreManager.shared.syncMessagesByUIDWithFolder(folder: "INBOX") { result in
 
         }
+    }
 
 }
 
