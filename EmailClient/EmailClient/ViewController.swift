@@ -161,5 +161,17 @@ final class MailCoreManager {
                 print("success imapSession")
             }
         })
+        
+//        fetchAllFolder { result in
+//            switch result {
+//            case .success(let folders):
+//                /// INBOX in yandex `folders[1].path`
+//                print(folders)
+//                print()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                print()
+//            }
+//        }
     }
 }
