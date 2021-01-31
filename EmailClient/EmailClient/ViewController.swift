@@ -113,5 +113,12 @@ final class MailCoreManager {
 //        let dispatchGroup = DispatchGroup()
 //        dispatchGroup.enter()
 //
+        imapSession.checkAccountOperation()?.start({ (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("success imapSession")
+            }
+        })
     }
 }
