@@ -47,6 +47,17 @@ class ViewController: UIViewController {
 //            }
 //        }
 //
+//        MailCoreManager.shared.fetchFolderInfo(folder: "INBOX") { result in
+//            switch result {
+//            case .success(let info):
+//                print("- folder info: \(info.modSequenceValue)")
+//                print()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                print()
+//            }
+//        }
+        
 
 
 }
