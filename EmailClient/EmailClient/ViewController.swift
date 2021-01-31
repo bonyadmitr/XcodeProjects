@@ -34,7 +34,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        print("started")
+        MailCoreManager.shared.login()
+        generalAction()
     }
     
     @IBAction private func onSend(_ sender: UIButton) {
