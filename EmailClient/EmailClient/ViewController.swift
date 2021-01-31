@@ -215,5 +215,19 @@ final class MailCoreManager {
         
         
     }
+    
+    func fetchAllFolder(handler: @escaping (Result<[MCOIMAPFolder], Error>) -> Void) {
+        imapSession.fetchAllFoldersOperation().start { (error, result) -> Void in
+            if let error = error {
+                handler(.failure(error))
+            } else if let result = result as? [MCOIMAPFolder] {
+                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+                handler(.failure(NSError()))
+            }
+        }
+    }
     }
 }
