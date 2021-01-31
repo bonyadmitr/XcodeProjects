@@ -37,6 +37,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction private func onSend(_ sender: UIButton) {
+        generalAction()
+    }
+    
     private func generalAction() {
         //MailCoreManager.shared.send()
         
