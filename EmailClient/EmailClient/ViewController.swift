@@ -184,5 +184,17 @@ final class MailCoreManager {
                 print()
             }
         }
+        
+//        fetchFolderInfo(folder: "INBOX") { result in
+//            switch result {
+//            case .success(let info):
+//                print("- folder info: \(info)")
+//                print()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                print()
+//            }
+//        }
+        
     }
 }
