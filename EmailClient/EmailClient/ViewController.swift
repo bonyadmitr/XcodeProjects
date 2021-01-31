@@ -196,5 +196,24 @@ final class MailCoreManager {
 //            }
 //        }
         
+//        fetchEmails(for: "INBOX") { result in
+//            switch result {
+//            case .success(let emails):
+//                print(emails)
+//                //MCOIMAPMessage().modSeqValue
+//                print()
+//            case .failure(let error):
+//
+//                /// 123 FETCH
+//                /// /// - imap log error: 4 -1
+//                /// Error Domain=MCOErrorDomain Code=1 "A stable connection to the server could not be established." UserInfo={NSLocalizedDescription=A stable connection to the server could not be established.}
+//
+//                print(error.localizedDescription)
+//                print()
+//            }
+//        }
+        
+        
+    }
     }
 }
