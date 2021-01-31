@@ -173,5 +173,16 @@ final class MailCoreManager {
 //                print()
 //            }
 //        }
+        
+        fetchFolderStatus(folder: "INBOX") { result in
+            switch result {
+            case .success(let status):
+                print("- folder status: \(status)")
+                print()
+            case .failure(let error):
+                print(error.localizedDescription)
+                print()
+            }
+        }
     }
 }
