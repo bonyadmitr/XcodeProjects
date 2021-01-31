@@ -36,6 +36,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+//        MailCoreManager.shared.fetchFolderStatus(folder: "INBOX") { result in
+//            switch result {
+//            case .success(let status):
+//                print("- folder status: \(status)")
+//                print()
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                print()
+//            }
+//        }
+//
 
 
 }
