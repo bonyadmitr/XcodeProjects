@@ -58,7 +58,14 @@ class ViewController: UIViewController {
 //            }
 //        }
         
+        MailCoreManager.shared.fetchEmails(for: "INBOX") { result in
 
+        }
+
+        
+        MailCoreManager.shared.syncMessagesByUIDWithFolder(folder: "INBOX") { result in
+
+        }
 
 }
 
