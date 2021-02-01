@@ -229,5 +229,19 @@ final class MailCoreManager {
             }
         }
     }
+    
+    func fetchFolderStatus(folder: String, handler: @escaping (Result<MCOIMAPFolderStatus, Error>) -> Void) {
+        
+        imapSession.folderStatusOperation(folder).start { error, result in
+            if let error = error {
+                handler(.failure(error))
+            } else if let result = result {
+                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+                handler(.failure(NSError()))
+            }
+        }
     }
 }
