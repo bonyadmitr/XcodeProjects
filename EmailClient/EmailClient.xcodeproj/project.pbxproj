@@ -14,6 +14,7 @@
 		C4C1D1A525C2D57600AAD637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C1D1A325C2D57600AAD637 /* Main.storyboard */; };
 		C4C1D1A725C2D57800AAD637 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C1D1A625C2D57800AAD637 /* Assets.xcassets */; };
 		C4C1D1AA25C2D57800AAD637 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C1D1A825C2D57800AAD637 /* LaunchScreen.storyboard */; };
+		C4C1D1DA25C8326600AAD637 /* ExceptionCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C1D1D925C8326600AAD637 /* ExceptionCatcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		C4C1D1A925C2D57800AAD637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4C1D1AB25C2D57800AAD637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4C1D1C125C2DA3C00AAD637 /* EmailClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmailClient-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4C1D1D825C8326600AAD637 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
+		C4C1D1D925C8326600AAD637 /* ExceptionCatcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExceptionCatcher.m; sourceTree = "<group>"; };
 		C517A11772C08F1659AF94C4 /* Pods_EmailClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmailClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E352BE5B63FB925B4655103B /* Pods-EmailClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailClient.debug.xcconfig"; path = "Target Support Files/Pods-EmailClient/Pods-EmailClient.debug.xcconfig"; sourceTree = "<group>"; };
 		F88AD6E8B194BB31BC2ACEF7 /* Pods-EmailClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmailClient.release.xcconfig"; path = "Target Support Files/Pods-EmailClient/Pods-EmailClient.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 				C4C1D1A825C2D57800AAD637 /* LaunchScreen.storyboard */,
 				C4C1D1AB25C2D57800AAD637 /* Info.plist */,
 				C4C1D1C125C2DA3C00AAD637 /* EmailClient-Bridging-Header.h */,
+				C4C1D1D825C8326600AAD637 /* ExceptionCatcher.h */,
+				C4C1D1D925C8326600AAD637 /* ExceptionCatcher.m */,
 			);
 			path = EmailClient;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			files = (
 				C4C1D1A225C2D57600AAD637 /* ViewController.swift in Sources */,
 				C4C1D19E25C2D57600AAD637 /* AppDelegate.swift in Sources */,
+				C4C1D1DA25C8326600AAD637 /* ExceptionCatcher.m in Sources */,
 				C4C1D1A025C2D57600AAD637 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
