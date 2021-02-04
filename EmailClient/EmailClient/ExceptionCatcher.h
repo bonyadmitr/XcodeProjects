@@ -9,8 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ExceptionCatcher : NSObject
-
+/// source https://github.com/sindresorhus/ExceptionCatcher
+@interface ExceptionCatcher: NSObject
++ (BOOL)catchException:(__attribute__((noescape)) void(^)(void))tryBlock error:(__autoreleasing NSError **)error;
 @end
+
 
 NS_ASSUME_NONNULL_END
