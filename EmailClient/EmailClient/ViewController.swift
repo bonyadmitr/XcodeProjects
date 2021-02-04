@@ -17,9 +17,10 @@ import UIKit
  yandex lite client https://mail.yandex.ru/lite/inbox
  
  MailCore 2 lib
- http://libmailcore.com/api/objc/index.html
- https://github.com/MailCore/mailcore2
- https://github.com/MailCore/mailcore2/wiki
+ inside MailCore https://github.com/dinhvh/libetpan
+ classes http://libmailcore.com/api/objc/index.html
+ source https://github.com/MailCore/mailcore2
+ wiki https://github.com/MailCore/mailcore2/wiki
  setup https://stackoverflow.com/a/54954919/5893286
  setup video https://www.youtube.com/watch?v=NkpLqNN8xtU
  
