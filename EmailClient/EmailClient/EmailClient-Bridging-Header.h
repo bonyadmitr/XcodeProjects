@@ -3,3 +3,4 @@
 //
 
 #include "MailCore/MailCore.h"
+#include "ExceptionCatcher.h"
