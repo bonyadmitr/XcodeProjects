@@ -29,6 +29,9 @@ import UIKit
  
  
  https://stackoverflow.com/a/31540230/5893286
+ 
+ В клиентах перемещение реализовано через копирование+удаление
+ https://habr.com/ru/company/mailru/blog/151001/
  */
 
 class ViewController: UIViewController {
