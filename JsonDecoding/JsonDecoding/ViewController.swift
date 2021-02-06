@@ -15,6 +15,28 @@ class ViewController: UIViewController {
     }
 
 
+protocol ReflectedStringConvertible : CustomStringConvertible { }
+
+extension ReflectedStringConvertible {
+    
+    var description: String {
+        let mirror = Mirror(reflecting: self)
+        
+        let descriptions: [String] = mirror.allChildren.compactMap { (label: String?, value: Any) in
+            if let label = label {
+                var value = value
+                if value is String {
+                    value = "\"\(value)\""
+                }
+                return "\(label): \(value)"
+            }
+            
+            return nil
+        }
+        
+        return "\(mirror.subjectType)(\(descriptions.joined(separator: ", ")))"
+    }
+    
 }
 
 extension Mirror {
