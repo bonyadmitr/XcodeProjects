@@ -41,6 +41,15 @@ extension KeyedDecodingContainer {
                                                    debugDescription: "\(type) cannot be inited from '\(string)'")
         }
     }
+    
+    func decodeTypeAsString<T: Decodable & LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> String {
+        do {
+            let value = try decode(T.self, forKey: key)
+            return String(value)
+        } catch {
+            return try decodeStringAsType(String.self, forKey: key)
+        }
+    }
 }
 
 
