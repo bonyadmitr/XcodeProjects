@@ -42,6 +42,9 @@ extension KeyedDecodingContainer {
         }
     }
     
+    // TODO: check/create for array https://github.com/IdleHandsApps/SafeDecoder/blob/master/Sources/KeyedDecodingContainerProtocol%2BSafe.swift
+    
+    
     func decodeTypeAsString<T: Decodable & LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> String {
         do {
             let value = try decode(T.self, forKey: key)
