@@ -23,6 +23,14 @@ extension KeyedDecodingContainer {
         }
     }
     
+    func decodeTypeOrStringAsTypeIfPresent<T: Decodable & LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T? {
+        do {
+            return try decodeIfPresent(T.self, forKey: key)
+        } catch {
+            return try decodeStringAsType(type, forKey: key)
+        }
+    }
+    
     func decodeStringAsType<T: LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T {
         let string = try decode(String.self, forKey: key)
         if let value = T(string) {
