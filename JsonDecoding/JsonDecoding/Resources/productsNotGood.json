@@ -1,0 +1,19 @@
+[
+    {
+        "product_id" : "1",
+        "name" : "Apples",
+        "price" : 120,
+        "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/1.jpg"
+    },
+    {
+        "product_id" : "2",
+        "name" : "Oranges",
+        "price" : "167",
+        "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/2.jpg"
+    },
+    {
+        "product_id" : "3",
+        "name" : "Bananas",
+        "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/3.jpg"
+    }
+]
