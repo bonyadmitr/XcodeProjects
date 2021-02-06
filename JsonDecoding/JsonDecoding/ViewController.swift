@@ -13,6 +13,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+extension KeyedDecodingContainer {
+    
+    func decodeStringAsType<T: LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T {
+        let string = try decode(String.self, forKey: key)
+        if let value = T(string) {
+            return value
+        } else {
+            throw DecodingError.dataCorruptedError(forKey: key,
+                                                   in: self,
+                                                   debugDescription: "\(type) cannot be inited from '\(string)'")
+        }
+    }
+}
 
 
 /// https://github.com/mattcomi/ReflectedStringConvertible/blob/master/ReflectedStringConvertible/ReflectedStringConvertible.swift
