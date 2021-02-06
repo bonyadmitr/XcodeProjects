@@ -1,0 +1,7 @@
+{
+   "product_id" : "1",
+   "name" : "Apples",
+   "price" : 120,
+   "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/1.jpg",
+   "description" : "An apple a day keeps the doctor away."
+}
