@@ -13,6 +13,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+struct StringConvertible: Decodable {
+    let wrappedValue: String
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        guard let number = try? container.decode(Double.self) else {
+            wrappedValue = try container.decode(String.self)
+            return
+        }
+        wrappedValue = "\(number)"
+    }
+}
+
 /// the same
 /// usage `let products = throwables.compactMap { try? $0.result.get() }`
 //struct Throwable<T: Decodable>: Decodable {
