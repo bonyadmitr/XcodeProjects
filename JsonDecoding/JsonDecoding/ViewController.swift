@@ -13,6 +13,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+struct FailableDecodableArray<Value : Decodable> : Decodable {
+    let wrappedValue: [Value]
+
+    init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+
+        var elements = [Value]()
+        if let count = container.count {
+            elements.reserveCapacity(count)
+        }
+
+        while !container.isAtEnd {
+            if let element = try? container.decode(Value.self) {
+                elements.append(element)
+            }
+        }
+
+        wrappedValue = elements
+    }
+}
+
+
+
+
 extension KeyedDecodingContainer {
     
     func decodeTypeOrStringAsType<T: Decodable & LosslessStringConvertible>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T {
