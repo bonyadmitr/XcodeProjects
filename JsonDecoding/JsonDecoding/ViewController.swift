@@ -13,6 +13,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+/// the same
+/// usage `let products = throwables.compactMap { try? $0.result.get() }`
+//struct Throwable<T: Decodable>: Decodable {
+//    let result: Result<T, Error>
+//
+//    init(from decoder: Decoder) throws {
+//        result = Result(catching: { try T(from: decoder) })
+//    }
+//}
 struct FailableDecodable<Value : Decodable> : Decodable {
     let wrappedValue: Value?
 
