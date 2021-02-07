@@ -13,6 +13,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+/// different solutions https://stackoverflow.com/a/46369152/5893286
+
 struct Convertible<Value: Decodable & LosslessStringConvertible>: Decodable {
     let wrappedValue: Value
     init(from decoder: Decoder) throws {
