@@ -13,6 +13,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+struct FailableDecodable<Value : Decodable> : Decodable {
+    let wrappedValue: Value?
+
+    init(from decoder: Decoder) throws {
+        /// new
+        wrappedValue = try? Value(from: decoder)
+        /// old
+        //let container = try decoder.singleValueContainer()
+        //self.wrappedValue = try? container.decode(Value.self)
+    }
+}
+
 struct FailableDecodableArray<Value : Decodable> : Decodable {
     let wrappedValue: [Value]
 
