@@ -13,6 +13,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+struct Convertible<Value: Decodable & LosslessStringConvertible>: Decodable {
+    let wrappedValue: Value
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        guard
+            let stringValue = try? container.decode(String.self),
+            let value = Value(stringValue)
+        else {
+            wrappedValue = try container.decode(Value.self)
+            return
+        }
+        wrappedValue = value
+    }
+}
+
 struct StringConvertible: Decodable {
     let wrappedValue: String
     init(from decoder: Decoder) throws {
