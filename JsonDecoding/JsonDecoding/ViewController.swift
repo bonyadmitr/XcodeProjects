@@ -13,6 +13,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+
+
+
+
+
+/// article https://habr.com/ru/post/501140/
 /// different solutions https://stackoverflow.com/a/46369152/5893286
 
 struct Convertible<Value: Decodable & LosslessStringConvertible>: Decodable {
