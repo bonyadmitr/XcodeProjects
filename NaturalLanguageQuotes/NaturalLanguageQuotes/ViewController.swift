@@ -15,6 +15,9 @@
  Big Json https://type.fit/api/quotes
  
  */
+
+// TODO: CoreML prediction
+
 import UIKit
 
 class ViewController: UIViewController {
