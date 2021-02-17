@@ -9,6 +9,8 @@
 /**
  Big DB with quotes Natural Language + NLLanguageRecognizer
  https://developer.apple.com/documentation/naturallanguage
+ https://www.appcoda.com/natural-language-processing-swift/
+ https://www.analyticsvidhya.com/blog/2019/12/create-nlp-apps-ios-using-apples-core-ml-3/
  
  */
 import UIKit
