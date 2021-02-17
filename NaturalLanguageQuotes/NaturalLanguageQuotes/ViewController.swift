@@ -20,6 +20,11 @@
 
 // TODO: check
 // https://github.com/pmtao/SwiftUtilityFramework/blob/master/SwiftUtilityFramework/Foundation/Text/TextTagger.swift
+// sort https://github.com/sgigou/ibepo/blob/master/src/keyboard/Services/Autocorrect.swift
+// https://stackoverflow.com/a/59032069/5893286
+// github search https://github.com/search?l=Swift&q=completions%28forPartialWordRange&type=Code
+
+
 import UIKit
 
 class ViewController: UIViewController {
