@@ -18,6 +18,8 @@
 
 // TODO: CoreML prediction
 
+// TODO: check
+// https://github.com/pmtao/SwiftUtilityFramework/blob/master/SwiftUtilityFramework/Foundation/Text/TextTagger.swift
 import UIKit
 
 class ViewController: UIViewController {
