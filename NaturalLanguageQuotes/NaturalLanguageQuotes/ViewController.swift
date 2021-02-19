@@ -36,6 +36,13 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction private func onInputChanged() {
+        guard let input = inputTextField.text else {
+            return
+        }
+        process(input: input)
+    }
 
 
 }
