@@ -73,5 +73,24 @@ enum Emotion: String {
         }
     }
     
+    //            let emoji: String
+    //            switch score {
+    //            case -1 ..< -0.8:
+    //                emoji = "😭"
+    //            case -0.8 ..< -0.4:
+    //                emoji = "😢"
+    //            case -0.4 ..< 0:
+    //                emoji = "🙂"
+    //            case 0 ..< 0.4:
+    //                emoji = "🙂"
+    //            case 0.4 ..< 0.8:
+    //                emoji = "😁"
+    //            case 0.8 ... 1:
+    //                emoji = "🤩"
+    //            default:
+    //                assertionFailure()
+    //                emoji = ""
+    //            }
+    
     
 }
