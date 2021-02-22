@@ -77,6 +77,9 @@ final class NaturalLanguageManager {
 //            }
 //            return true
 //        }
+    
+    /// https://rickwierenga.com/blog/apple/NaturalLanguage.html
+    /// https://github.com/rickwierenga/NaturalLanuage/blob/master/NaturalLanguage.playground/Contents.swift
 }
 
 enum Emotion: String {
