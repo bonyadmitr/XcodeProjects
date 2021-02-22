@@ -45,6 +45,12 @@ final class ViewController: UIViewController {
     }
 
 
+
+final class NaturalLanguageManager {
+    
+    static let shared = NaturalLanguageManager()
+    
+    
 }
 
 enum Emotion: String {
