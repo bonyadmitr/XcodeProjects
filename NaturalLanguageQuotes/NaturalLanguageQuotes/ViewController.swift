@@ -46,6 +46,10 @@ final class ViewController: UIViewController {
 
 
 
+
+import NaturalLanguage
+import CoreML
+
 final class NaturalLanguageManager {
     
     static let shared = NaturalLanguageManager()
