@@ -50,6 +50,9 @@ final class ViewController: UIViewController {
 import NaturalLanguage
 import CoreML
 
+// macOS only
+//import CreateML
+//MLGazetteer
 final class NaturalLanguageManager {
     
     static let shared = NaturalLanguageManager()
