@@ -61,6 +61,22 @@ final class NaturalLanguageManager {
 //        return nil
 //    }
     
+    
+    
+////        NSLinguisticTag.placeName == NLTag.placeName
+//        let tagger = NLTagger(tagSchemes: [.nameType])
+//        tagger.string = text
+//        // Ignore Punctuation and Whitespace
+//        let options: NLTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+//        // Tags to extract
+//        let tags: [NLTag] = [.personalName, .placeName, .organizationName]
+//        // Loop over the tokens and print the NER of the tokens
+//        tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .nameType, options: options) { tag, tokenRange in
+//            if let tag = tag, tags.contains(tag) {
+//                print("\(text[tokenRange]): \(tag.rawValue)")
+//            }
+//            return true
+//        }
 }
 
 enum Emotion: String {
