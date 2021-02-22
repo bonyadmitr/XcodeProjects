@@ -50,6 +50,16 @@ final class NaturalLanguageManager {
     
     static let shared = NaturalLanguageManager()
     
+//    func emojiForExpression(_ epxression: String) -> Emotion? {
+//        let tagger = NLTagger(tagSchemes: [.sentimentScore])
+//        tagger.string = epxression
+//
+//        if let sentiment = tagger.tag(at: epxression.startIndex, unit: .paragraph, scheme: .sentimentScore).0,
+//            let score = Double(sentiment.rawValue) {
+//            return Emotion(score: score)
+//        }
+//        return nil
+//    }
     
 }
 
