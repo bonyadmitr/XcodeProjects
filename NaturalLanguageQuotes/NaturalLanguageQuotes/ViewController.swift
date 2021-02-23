@@ -43,6 +43,11 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+extension ViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
+    }
+    
     func autoCompleteText(in textField: UITextField, using string: String, suggestions: [String]) -> Bool {
         if !string.isEmpty,
             let selectedTextRange = textField.selectedTextRange, selectedTextRange.end == textField.endOfDocument,
@@ -64,6 +69,10 @@ final class ViewController: UIViewController {
 
         return false
     }
+
+    
+}
+
 extension String {
 
     /// inspired https://stackoverflow.com/a/37536996/5893286
