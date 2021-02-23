@@ -43,6 +43,7 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+        /// NSSpellChecker https://developer.apple.com/forums/thread/47354
         func isReal(word: String) -> Bool {
             //let checker = UITextChecker()
             let range = NSRange(location: 0, length: word.utf16.count)
