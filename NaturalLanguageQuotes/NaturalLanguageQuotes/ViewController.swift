@@ -48,6 +48,7 @@ extension ViewController: UITextFieldDelegate {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
     }
     
+    /// article https://gkbrown.org/2017/11/03/implementing-auto-complete-with-uitextfield/
     func autoCompleteText(in textField: UITextField, using string: String, suggestions: [String]) -> Bool {
         if !string.isEmpty,
             let selectedTextRange = textField.selectedTextRange, selectedTextRange.end == textField.endOfDocument,
