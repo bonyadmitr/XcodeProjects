@@ -43,6 +43,24 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+extension String {
+
+    /// inspired https://stackoverflow.com/a/37536996/5893286
+    var lastWord: String {
+        let cleared = trimmingCharacters(in: .whitespacesAndNewlines)
+        if let lastIndex = cleared.lastIndex(of: " "),
+           let index = cleared.index(lastIndex, offsetBy: 1, limitedBy: cleared.index(before: cleared.endIndex))
+        {
+            return String(cleared[index...])
+        } else {
+            return cleared
+        }
+        
+    }
+
+}
+
+
 
 
 
