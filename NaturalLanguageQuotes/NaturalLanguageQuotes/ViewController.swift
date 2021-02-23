@@ -43,8 +43,12 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+        
+//        let input = input.lastWord ?? input
         /// NSSpellChecker https://developer.apple.com/forums/thread/47354
+        // print(UITextChecker.availableLanguages)
         /// search problems https://stackoverflow.com/questions/tagged/uitextchecker
+        /// `UITextChecker.learnWord("some_word")` + `UITextChecker.unlearnWord("some_word")`
         func isReal(word: String) -> Bool {
             //let checker = UITextChecker()
             let range = NSRange(location: 0, length: word.utf16.count)
