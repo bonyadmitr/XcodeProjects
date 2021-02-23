@@ -43,6 +43,12 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+        func isReal(word: String) -> Bool {
+            //let checker = UITextChecker()
+            let range = NSRange(location: 0, length: word.utf16.count)
+            let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+            return misspelledRange.location == NSNotFound
+        }
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
