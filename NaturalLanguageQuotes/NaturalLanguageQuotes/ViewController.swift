@@ -90,6 +90,31 @@ final class NaturalLanguageManager {
     
     /// https://rickwierenga.com/blog/apple/NaturalLanguage.html
     /// https://github.com/rickwierenga/NaturalLanuage/blob/master/NaturalLanguage.playground/Contents.swift
+    func emojiForExpression2(_ epxression: String) -> (String, Double)? {
+        
+        
+//        let embedding = NLEmbedding.wordEmbedding(for: .english)!
+//        embedding.enumerateNeighbors(for: epxression.lowercased(), maximumCount: 5) { string, distance in
+//            print("\(string) - \(distance)")
+//            return true
+//        }
+//        print("---------------")
+        
+        /// you can store it. and it will be another results
+        let tagger = NLTagger(tagSchemes: [.sentimentScore])
+        
+        tagger.string = epxression
+        
+        /// Changing the unit to word or sentence would not work
+        if let sentiment = tagger.tag(at: epxression.startIndex, unit: .paragraph, scheme: .sentimentScore).0,
+           let score = Double(sentiment.rawValue),
+           let emotion = Emotion(score: score)
+        {
+            return (emotion.rawValue, score)
+        }
+        return nil
+    }
+    
 }
 
 enum Emotion: String {
