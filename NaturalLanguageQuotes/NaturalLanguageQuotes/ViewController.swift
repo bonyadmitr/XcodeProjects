@@ -53,6 +53,9 @@ import CoreML
 // macOS only
 //import CreateML
 //MLGazetteer
+// https://developer.apple.com/documentation/createml/mlgazetteer
+// https://heartbeat.fritz.ai/exploring-word-embeddings-and-text-catalogs-with-apples-natural-language-framework-in-ios-b4d9164f5a3b
+
 final class NaturalLanguageManager {
     
     static let shared = NaturalLanguageManager()
