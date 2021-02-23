@@ -43,6 +43,27 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+    func autoCompleteText(in textField: UITextField, using string: String, suggestions: [String]) -> Bool {
+        if !string.isEmpty,
+            let selectedTextRange = textField.selectedTextRange, selectedTextRange.end == textField.endOfDocument,
+            let prefixRange = textField.textRange(from: textField.beginningOfDocument, to: selectedTextRange.start),
+            let text = textField.text(in: prefixRange) {
+            let prefix = text + string
+            let matches = suggestions.filter { $0.hasPrefix(prefix) }
+
+            if (matches.count > 0) {
+                textField.text = matches[0]
+
+                if let start = textField.position(from: textField.beginningOfDocument, offset: prefix.count) {
+                    textField.selectedTextRange = textField.textRange(from: start, to: textField.endOfDocument)
+
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
 extension String {
 
     /// inspired https://stackoverflow.com/a/37536996/5893286
