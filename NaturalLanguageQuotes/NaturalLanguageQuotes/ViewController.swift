@@ -49,6 +49,8 @@ final class ViewController: UIViewController {
             let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
             return misspelledRange.location == NSNotFound
         }
+        
+        /// get all misspelled  https://www.albertopasca.it/whiletrue/swift-identify-misspelled-words-and-errors-in-phrases/
         func misspelled(word: String) -> NSRange {
             //let checker = UITextChecker()
             let range = NSRange(location: 0, length: word.utf16.count)
