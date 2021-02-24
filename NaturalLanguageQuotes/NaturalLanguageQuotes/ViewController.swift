@@ -64,6 +64,15 @@ final class ViewController: UIViewController {
             return misspelledRange
         }
 
+    private func emojiFlag(from countryCode: String) -> String {
+        /// 0x1F1E6 - "A".unicodeScalars.first!.value == 127397 == UnicodeScalar("🇦").value - UnicodeScalar("A").value
+        return String(String.UnicodeScalarView(
+            countryCode
+                .uppercased()
+                .unicodeScalars
+                .compactMap { UnicodeScalar(127397 + $0.value) }
+        ))
+    }
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
