@@ -64,6 +64,9 @@ final class ViewController: UIViewController {
             return misspelledRange
         }
 
+    
+    /// ISO2 (two-letter) country code
+    /// source https://stackoverflow.com/a/47327408/5893286
     private func emojiFlag(from countryCode: String) -> String {
         /// 0x1F1E6 - "A".unicodeScalars.first!.value == 127397 == UnicodeScalar("🇦").value - UnicodeScalar("A").value
         return String(String.UnicodeScalarView(
