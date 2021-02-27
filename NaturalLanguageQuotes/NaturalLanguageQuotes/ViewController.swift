@@ -81,6 +81,12 @@ final class ViewController: UIViewController {
 //        let emoji = "👨‍👨‍👧‍👧"
 //        let emoji = "😄"
         
+        let isEmoji = emoji.unicodeScalars.first?.properties.isEmojiPresentation ?? false
+        
+//        Character(UnicodeScalar($0)!)
+        //let emojiInt = emoji.unicodeScalars.first!.value
+        let emojiInt = emoji.unicodeScalars.first!.value
+        
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
