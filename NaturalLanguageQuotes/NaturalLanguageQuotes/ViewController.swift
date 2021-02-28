@@ -87,6 +87,27 @@ final class ViewController: UIViewController {
         //let emojiInt = emoji.unicodeScalars.first!.value
         let emojiInt = emoji.unicodeScalars.first!.value
         
+        if (0x1F1E6...0x1F1FF).contains(emojiInt) {
+            
+            let code = emoji
+                .unicodeScalars
+                .compactMap {
+                    //REGIONAL INDICATOR SYMBOL LETTER R
+                    //REGIONAL INDICATOR SYMBOL LETTER U
+                    if let name = $0.properties.nameAlias ?? $0.properties.name, let last = name.last {
+                        return String(last)
+                    } else {
+                        return nil
+                    }
+                }
+                .joined(separator: "")
+            print(code)
+            
+            let counryName = Locale.current.localizedString(forRegionCode: code)!
+//            let counryName = (Locale.current as NSLocale).displayName(forKey: .countryCode, value: code)!
+            //Locale(identifier: code)
+            print()
+        }
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
