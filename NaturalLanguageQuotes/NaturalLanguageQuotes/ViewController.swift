@@ -108,6 +108,9 @@ final class ViewController: UIViewController {
             //Locale(identifier: code)
             print()
         }
+        let w = emoji.unicodeScalars.compactMap { $0.properties.nameAlias ?? $0.properties.name }.joined(separator: "\n")
+        print(w)
+        
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
