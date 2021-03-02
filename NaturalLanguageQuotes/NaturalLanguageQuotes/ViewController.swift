@@ -64,6 +64,27 @@ final class ViewController: UIViewController {
             return misspelledRange
         }
 
+    func suggestEmoji(for text: String) -> [String] {
+        
+        if text.count == 1 {
+            return []
+        }
+        let text = text.uppercased()
+        
+        let result = emojiesDesc
+            .filter { $0.1.contains(text) }
+            //.filter { $0.1.hasPrefix(text) }
+            .map { $0.0 }
+        
+        if text.count == 2, Locale.isoRegionCodes.first(where: { $0 == text}) != nil {
+            return [emojiFlag(from: text)] + result
+        } else {
+            return result
+        }
+        
+        
+    }
+    
     
     /// ISO2 (two-letter) country code
     /// source https://stackoverflow.com/a/47327408/5893286
