@@ -90,6 +90,12 @@ final class ViewController: UIViewController {
         //let emojiInt = emoji.unicodeScalars.first!.value
         let emojiInt = emoji.unicodeScalars.first!.value
         
+        
+//        let countryList = Locale.isoRegionCodes.compactMap { Locale.current.localizedString(forRegionCode: $0) }
+        Locale.isoRegionCodes.forEach {
+            print("\($0) - \(Locale.current.localizedString(forRegionCode: $0)!) - \(emojiFlag(from: $0))")
+        }
+        
         if (0x1F1E6...0x1F1FF).contains(emojiInt) {
             
             let code = emoji
