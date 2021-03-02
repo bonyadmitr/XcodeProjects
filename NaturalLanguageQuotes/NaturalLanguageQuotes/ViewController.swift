@@ -111,6 +111,12 @@ final class ViewController: UIViewController {
             //Locale(identifier: code)
             print()
         }
+        
+        /// inspired https://stackoverflow.com/a/54915809/5893286
+//        for scalar in emoji.unicodeScalars {
+//            print(scalar.properties.name)
+//        }
+        
         let w = emoji.unicodeScalars.compactMap { $0.properties.nameAlias ?? $0.properties.name }.joined(separator: "\n")
         print(w)
         
