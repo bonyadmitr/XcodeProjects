@@ -76,6 +76,9 @@ final class ViewController: UIViewController {
                 .compactMap { UnicodeScalar(127397 + $0.value) }
         ))
     }
+    
+    private func emojiTest() {
+        
 //        let emoji: Character = "🇷🇺"//.description
         let emoji = "🍕" //"\u{1F355}"
 //        let emoji = "👨‍👨‍👧‍👧"
@@ -111,6 +114,14 @@ final class ViewController: UIViewController {
         let w = emoji.unicodeScalars.compactMap { $0.properties.nameAlias ?? $0.properties.name }.joined(separator: "\n")
         print(w)
         
+
+
+        print(emoji)
+        "pizza"
+    }
+
+}
+
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !autoCompleteText(in: textField, using: string, suggestions: ["apple", "apqqq"])
