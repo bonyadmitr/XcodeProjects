@@ -120,6 +120,9 @@ final class ViewController: UIViewController {
         let w = emoji.unicodeScalars.compactMap { $0.properties.nameAlias ?? $0.properties.name }.joined(separator: "\n")
         print(w)
         
+//        if let result = q.applyingTransform(.toUnicodeName, reverse: false) {
+//            print(result)
+//        }
 
 
         print(emoji)
