@@ -96,6 +96,7 @@ final class ViewController: UIViewController {
             print("\($0) - \(Locale.current.localizedString(forRegionCode: $0)!) - \(emojiFlag(from: $0))")
         }
         
+        // https://stackoverflow.com/a/53388482/5893286
         if (0x1F1E6...0x1F1FF).contains(emojiInt) {
             
             let code = emoji
