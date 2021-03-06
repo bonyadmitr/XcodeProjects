@@ -12,7 +12,7 @@ import Foundation
 /// он должен быть наследником NSObject
 /// подменяемый метод должен иметь атрибут dynamic
 class SomeSiwzzable: NSObject {
-    dynamic func printSome() {
+    @objc dynamic func printSome() {
         print("printSome")
     }
 }
