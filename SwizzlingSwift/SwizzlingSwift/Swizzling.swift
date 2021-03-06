@@ -46,20 +46,20 @@ extension SwizzlingManager {
     }
 }
 extension UIViewController {
-    func sm_viewDidLoad() {
+    @objc func sm_viewDidLoad() {
         print("sm_viewDidLoad")
         /// if comment sm_viewDidLoad(), viewDidLoad will be called anyway
         sm_viewDidLoad()
     }
-    func sm_viewWillAppear() {
+    @objc func sm_viewWillAppear() {
         print("sm_viewWillAppear")
         sm_viewWillAppear()
     }
 }
 extension UIViewController {
-    func sm_dealloc() {
+    @objc func sm_dealloc() {
         print("sm_dealloc:", classForCoder)
-        /// we don't need to call sm_dealloc()
+        /// we don't need to call sm_dealloc(). it will be called itself
     }
 }
 
@@ -72,7 +72,7 @@ extension SwizzlingManager {
     }
 }
 extension UIView {
-    convenience init?(sm_coder aDecoder: NSCoder) {
+    @objc convenience init?(sm_coder aDecoder: NSCoder) {
         self.init(sm_coder: aDecoder)
         print("init(sm_coder:)", classForCoder)
     }
@@ -80,7 +80,7 @@ extension UIView {
 
 
 extension SomeSiwzzable {
-    func sm_printSome() {
+    @objc func sm_printSome() {
         print("sm_printSome")
         /// It will not be a recursive call anymore after the swizzling
         sm_printSome()
@@ -96,7 +96,7 @@ extension SwizzlingManager {
 
 
 extension UIColor {
-    class var sm_grey: UIColor {
+    @objc class var sm_grey: UIColor {
         print("sm_grey")
         return .blue
     }
@@ -111,8 +111,8 @@ extension SwizzlingManager {
 
 
 extension UIButton {
-    func sm_sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
-        print("sm_touch", action, target ?? "nil")
+    @objc func sm_sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+        print("sm_sendAction", action, target ?? "nil")
         sm_sendAction(action, to: target, for: event)
     }
 }
