@@ -41,13 +41,18 @@ final class SwizzlingManager {
     /// https://github.com/inamiy/Swizzle/blob/master/Swizzle/Swizzle.swift
     private static func swizzleMethod(_ class_: AnyClass, from origin: Selector, to override: Selector, isClassMethod: Bool) {
         
-        let c: AnyClass = isClassMethod ? object_getClass(class_) : class_
+        let aClass: AnyClass = isClassMethod ? object_getClass(class_) ?? class_ : class_
         
-        let method1: Method = class_getInstanceMethod(c, origin)
-        let method2: Method = class_getInstanceMethod(c, override)
+        guard
+            let method1 = class_getInstanceMethod(aClass, origin),
+            let method2 = class_getInstanceMethod(aClass, override)
+        else {
+            assertionFailure()
+            return
+        }
         
-        if class_addMethod(c, origin, method_getImplementation(method2), method_getTypeEncoding(method2)) {
-            class_replaceMethod(c, override, method_getImplementation(method1), method_getTypeEncoding(method1))
+        if class_addMethod(aClass, origin, method_getImplementation(method2), method_getTypeEncoding(method2)) {
+            class_replaceMethod(aClass, override, method_getImplementation(method1), method_getTypeEncoding(method1))
         } else {
             method_exchangeImplementations(method1, method2)
         }
