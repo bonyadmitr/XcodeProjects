@@ -38,6 +38,10 @@ import ObjectiveC
 /// https://blog.newrelic.com/2014/04/16/right-way-to-swizzle/
 final class SwizzlingManager {
     
+    /// can be used
+//    static func swizzleMethod(_ class_: AnyClass, from origin: String, to override: String, isClassMethod: Bool) {
+//        swizzleMethod(class_, from: Selector(origin), to: Selector(override), isClassMethod: isClassMethod)
+//    }
     /// https://github.com/inamiy/Swizzle/blob/master/Swizzle/Swizzle.swift
     private static func swizzleMethod(_ class_: AnyClass, from origin: Selector, to override: Selector, isClassMethod: Bool) {
         
