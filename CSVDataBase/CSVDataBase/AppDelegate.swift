@@ -81,8 +81,11 @@ final class CSVParser {
 
         let csvTable = self.csv(data: dataString)
 
-        let names = ["no", "brand", "model", "power_l", "matt", "dim", "color_l", "lm_l", "eq_l", "ra_l", "u", "life", "war", "prod", "d", "h", "w", "barcode", "base", "shape", "type", "type2", "url", "shop", "rub", "usd", "reserve1", "reserve2", "p", "pf", "lm", "color", "cri", "r9", "Rf", "Rg", "flicker", "angle", "switch", "umin", "drv", "tmax", "date", "instruments", "add2", "add3", "add4", "add5", "cqs", "eq", "rating", "act", "lamp_image", "lamp_desc"]
+        let names = ["no", "brand", "model", "power_l", "matt", "dim", "color_l", "lm_l", "eq_l", "ra_l", "u", "pf_l", "angle_l", "life", "war", "prod", "w", "d", "h", "t", "barcode", "plant", "base", "shape", "type", "type2", "url", "shop", "rub", "usd", "p", "pf", "lm", "color", "cri", "r9", "Rf", "Rg", "Duv", "flicker", "angle", "switch", "umin", "drv", "tmax", "date", "instruments", "add2", "add3", "add4", "add5", "cqs", "eq", "rating", "act", "lamp_image", "lamp_desc"]
 
+        print(names.joined(separator: ", "))
+        print(csvTable.first!.joined(separator: ", "))
+        
         guard csvTable.first == names else {
             assertionFailure()
             return
@@ -246,7 +249,7 @@ final class CSVParser {
 //            }
 //        }
 //
-//        return items
+        return items
     }
 
 }
