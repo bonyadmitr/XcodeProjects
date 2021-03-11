@@ -14,6 +14,7 @@
 		C49E81EA25D1B13C003179C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49E81E925D1B13C003179C2 /* Assets.xcassets */; };
 		C49E81ED25D1B13C003179C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49E81EB25D1B13C003179C2 /* LaunchScreen.storyboard */; };
 		C49E81F725D1B1E8003179C2 /* CwlDemangle in Frameworks */ = {isa = PBXBuildFile; productRef = C49E81F625D1B1E8003179C2 /* CwlDemangle */; };
+		C49E81FA25D1B206003179C2 /* CallStackParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E81F925D1B206003179C2 /* CallStackParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		C49E81E925D1B13C003179C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C49E81EC25D1B13C003179C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C49E81EE25D1B13C003179C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C49E81F925D1B206003179C2 /* CallStackParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallStackParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				C49E81E525D1B13A003179C2 /* ViewController.swift in Sources */,
 				C49E81E125D1B13A003179C2 /* AppDelegate.swift in Sources */,
 				C49E81E325D1B13A003179C2 /* SceneDelegate.swift in Sources */,
+				C49E81FA25D1B206003179C2 /* CallStackParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
