@@ -79,6 +79,9 @@ final class CSVParser {
 //        var convertedString: NSString?
 //        let aa = NSString.stringEncoding(for: data, encodingOptions: nil, convertedString: &convertedString, usedLossyConversion: nil)
 
+        /// anroid app and comments https://habr.com/ru/company/lamptest/blog/444288/
+        /// barcode database https://github.com/papyrussolution/UhttBarcodeReference and releases https://github.com/papyrussolution/UhttBarcodeReference/releases and comments https://habr.com/ru/post/420585/
+        /// biiger barcode database https://iceclog.com/coverage-analysis-of-your-catalog/
         let csvTable = self.csv(data: dataString)
 
         let names = ["no", "brand", "model", "power_l", "matt", "dim", "color_l", "lm_l", "eq_l", "ra_l", "u", "pf_l", "angle_l", "life", "war", "prod", "w", "d", "h", "t", "barcode", "plant", "base", "shape", "type", "type2", "url", "shop", "rub", "usd", "p", "pf", "lm", "color", "cri", "r9", "Rf", "Rg", "Duv", "flicker", "angle", "switch", "umin", "drv", "tmax", "date", "instruments", "add2", "add3", "add4", "add5", "cqs", "eq", "rating", "act", "lamp_image", "lamp_desc"]
