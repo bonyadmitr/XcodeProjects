@@ -79,6 +79,7 @@ final class CSVParser {
 //        var convertedString: NSString?
 //        let aa = NSString.stringEncoding(for: data, encodingOptions: nil, convertedString: &convertedString, usedLossyConversion: nil)
 
+        // TODO: use https://github.com/yaslab/CSV.swift or https://github.com/swiftcsv/SwiftCSV
         /// anroid app and comments https://habr.com/ru/company/lamptest/blog/444288/
         /// barcode database https://github.com/papyrussolution/UhttBarcodeReference and releases https://github.com/papyrussolution/UhttBarcodeReference/releases and comments https://habr.com/ru/post/420585/
         /// biiger barcode database https://iceclog.com/coverage-analysis-of-your-catalog/
