@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		C49E81E825D1B13A003179C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49E81E625D1B13A003179C2 /* Main.storyboard */; };
 		C49E81EA25D1B13C003179C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C49E81E925D1B13C003179C2 /* Assets.xcassets */; };
 		C49E81ED25D1B13C003179C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C49E81EB25D1B13C003179C2 /* LaunchScreen.storyboard */; };
+		C49E81F725D1B1E8003179C2 /* CwlDemangle in Frameworks */ = {isa = PBXBuildFile; productRef = C49E81F625D1B1E8003179C2 /* CwlDemangle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49E81F725D1B1E8003179C2 /* CwlDemangle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +61,7 @@
 				C49E81E025D1B13A003179C2 /* AppDelegate.swift */,
 				C49E81E225D1B13A003179C2 /* SceneDelegate.swift */,
 				C49E81E425D1B13A003179C2 /* ViewController.swift */,
+				C49E81F925D1B206003179C2 /* CallStackParser.swift */,
 				C49E81E625D1B13A003179C2 /* Main.storyboard */,
 				C49E81E925D1B13C003179C2 /* Assets.xcassets */,
 				C49E81EB25D1B13C003179C2 /* LaunchScreen.storyboard */,
@@ -83,6 +86,9 @@
 			dependencies = (
 			);
 			name = Debugger;
+			packageProductDependencies = (
+				C49E81F625D1B1E8003179C2 /* CwlDemangle */,
+			);
 			productName = Debugger;
 			productReference = C49E81DD25D1B13A003179C2 /* Debugger.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +116,9 @@
 				Base,
 			);
 			mainGroup = C49E81D425D1B13A003179C2;
+			packageReferences = (
+				C49E81F525D1B1E7003179C2 /* XCRemoteSwiftPackageReference "CwlDemangle" */,
+			);
 			productRefGroup = C49E81DE25D1B13A003179C2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -288,6 +297,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Debugger/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,6 +316,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Debugger/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C49E81F525D1B1E7003179C2 /* XCRemoteSwiftPackageReference "CwlDemangle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattgallagher/CwlDemangle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C49E81F625D1B1E8003179C2 /* CwlDemangle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C49E81F525D1B1E7003179C2 /* XCRemoteSwiftPackageReference "CwlDemangle" */;
+			productName = CwlDemangle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C49E81D525D1B13A003179C2 /* Project object */;
 }
