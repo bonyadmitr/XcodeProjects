@@ -6,6 +6,14 @@
 //
 
 import Foundation
+
+
+//
+//  String+Extensions.swift
+//
+//  https://stackoverflow.com/a/24144365
+//  Copyright © 2018 aleclarson. All rights reserved.
+//
 import Foundation
 
 extension String {
