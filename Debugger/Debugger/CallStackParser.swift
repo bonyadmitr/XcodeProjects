@@ -9,6 +9,13 @@ import Foundation
 final class CallStackParser {
     
     
+    static func stack() -> [String] {
+        return Thread.callStackSymbols
+            .dropFirst()
+            .dropFirst()
+            .map{ parseStack($0) }
+    }
+    
     static func parseStack(_ stackSymbol: String) -> String {
 //        if let info = classAndMethodForStackSymbol(stackSymbol) {
 //            return "\(info.class):\(info.function)"
