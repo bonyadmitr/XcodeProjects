@@ -8,6 +8,37 @@
 import Foundation
 final class CallStackParser {
     
+    private static func parseComponents(_ components: [String]) -> String? {
+//        print(components)
+        guard
+            components.count >= 4,
+            let fullFunc = try? parseMangledSwiftSymbol(components[3])
+                .description
+                .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
+        else {
+            return nil
+        }
+        let fullFuncComponents = fullFunc.split(separator: " ").map { String($0) }
+        
+
+        // TODO: check for "class"
+        guard
+            let projectName = Bundle.main.infoDictionary?["CFBundleName"] as? String,
+            let projectFunc = fullFuncComponents.first (where: { $0.hasPrefix(projectName) })
+        else {
+            return fullFunc
+        }
+        let projectFuncComponents = projectFunc.split(separator: ".")
+        let componentsNumber = projectFuncComponents.count
+        if componentsNumber >= 2 {
+            let method = CallStackParser.cleanMethod(method: String(projectFuncComponents[componentsNumber - 1]))
+            let className = String(projectFuncComponents[componentsNumber - 2])
+            return "\(className):\(method)"
+        } else {
+            return projectFunc
+        }
+    }
+    
     /**
      Analyses the 'NSThread.callStackSymbols()' and returns the calling class and method in the scope of the caller.
      
