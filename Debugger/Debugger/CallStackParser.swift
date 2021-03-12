@@ -8,6 +8,21 @@
 import Foundation
 final class CallStackParser {
     
+    
+    private static func cleanMethod(method:(String)) -> String {
+        var result = method
+        if (result.count > 1) {
+            let firstChar:Character = result[result.startIndex]
+            if (firstChar == "(") {
+                result = String(result[result.startIndex...])
+            }
+        }
+        if !result.hasSuffix(")") {
+            result = result + ")" // add closing bracket
+        }
+        return result
+    }
+    
     /**
      Takes a specific item from 'NSThread.callStackSymbols()' and returns the class and method call contained within.
      
