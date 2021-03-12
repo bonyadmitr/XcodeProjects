@@ -28,6 +28,14 @@ final class CallStackParser {
         else {
             return fullFunc
         }
+        
+//        let w: String
+//        if packageClassAndMethod1.first == "static" || packageClassAndMethod1.first == "class" {
+//            w = packageClassAndMethod1[1]
+//        } else {
+//            w = packageClassAndMethod1[0]
+//        }
+            
         let projectFuncComponents = projectFunc.split(separator: ".")
         let componentsNumber = projectFuncComponents.count
         if componentsNumber >= 2 {
