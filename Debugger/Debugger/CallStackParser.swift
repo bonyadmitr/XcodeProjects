@@ -9,6 +9,24 @@ import Foundation
 final class CallStackParser {
     
     
+    static func parseStack(_ stackSymbol: String) -> String {
+//        if let info = classAndMethodForStackSymbol(stackSymbol) {
+//            return "\(info.class):\(info.function)"
+//        }
+        let replaced = stackSymbol.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
+        let components = replaced.split(separator: " ").map { String($0)}
+        
+        if let parsed = parseComponents(components) {
+            return parsed
+        } else if components.count == 7 {
+            return "\(components[1]) \(components[3]) \(components[4])"
+        } else if components.count == 6 {
+            return "\(components[1]) \(components[3])"
+        } else {
+            return replaced
+        }
+    }
+    
     private static func cleanMethod(method:(String)) -> String {
         var result = method
         if (result.count > 1) {
