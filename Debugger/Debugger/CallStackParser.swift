@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import CwlDemangle
 final class CallStackParser {
     
+    static func printStack() {
+        stack().forEach { Swift.print($0) }
+    }
     
     static func stack() -> [String] {
         return Thread.callStackSymbols
