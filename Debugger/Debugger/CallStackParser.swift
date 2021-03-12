@@ -6,6 +6,25 @@
 //
 
 import Foundation
+final class CallStackParser {
+    
+    
+    /**
+     Analyses the 'NSThread.callStackSymbols()' and returns the current class and method in the scope of the caller.
+     
+     - Parameter includeImmediateParentClass: Whether or not to include the parent class in an innerclass situation.
+     
+     - Returns: a tuple containing the (class,method) or nil if it could not be parsed
+     */
+    static func getThisClassAndMethodInScope(includeImmediateParentClass: Bool = false) -> (class: String, function: String)? {
+        let stackSymbols = Thread.callStackSymbols
+        if (stackSymbols.count >= 2) {
+            return CallStackParser.classAndMethodForStackSymbol(stackSymbols[1], includeImmediateParentClass: includeImmediateParentClass)
+        }
+        return nil
+    }
+    
+}
 
 
 //
