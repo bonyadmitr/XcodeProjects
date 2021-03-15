@@ -22,4 +22,12 @@ extension String.StringInterpolation {
     mutating func appendInterpolation(_ value: CustomStringConvertible?, or: @autoclosure () -> CustomStringConvertible = "nil") {
         appendInterpolation(value ?? or())
     }
+    /// old
+//    mutating func appendInterpolation<T: CustomStringConvertible>(_ value: T?, or: @autoclosure () -> CustomStringConvertible) {
+//        appendInterpolation(value ?? or())
+//    }
+    /// other
+//    mutating func appendInterpolation<T>(_ value: T?, or: @autoclosure () -> T) {
+//        appendInterpolation(value ?? or())
+//    }
 }
