@@ -30,4 +30,11 @@ extension String.StringInterpolation {
 //    mutating func appendInterpolation<T>(_ value: T?, or: @autoclosure () -> T) {
 //        appendInterpolation(value ?? or())
 //    }
+    
+//    mutating func appendInterpolation<T: CustomStringConvertible>(_ value: T?) {
+//        appendInterpolation(value, or: "nil")
+//    }
+//    mutating func appendInterpolation(_ value: CustomStringConvertible?) {
+//        appendInterpolation(value, or: "nil")
+//    }
 }
