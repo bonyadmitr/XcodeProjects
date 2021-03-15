@@ -17,6 +17,16 @@ class ViewController: UIViewController {
 
 }
 
+
+
+
+/**
+ let x: Int? = 1
+ let y: Int! = nil
+ print("x: \(x)") // x: 1
+ print("y: \(y, or: "nil")") // y: nil + will not crash
+ print("y: \(y ?? "nil")") // now you can use `?? ""`
+ */
 extension String.StringInterpolation {
     
     mutating func appendInterpolation(_ value: CustomStringConvertible?, or: @autoclosure () -> CustomStringConvertible = "nil") {
