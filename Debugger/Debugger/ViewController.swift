@@ -17,3 +17,9 @@ class ViewController: UIViewController {
 
 }
 
+extension String.StringInterpolation {
+    
+    mutating func appendInterpolation(_ value: CustomStringConvertible?, or: @autoclosure () -> CustomStringConvertible = "nil") {
+        appendInterpolation(value ?? or())
+    }
+}
