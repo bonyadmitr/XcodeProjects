@@ -25,6 +25,10 @@ func print(_ items: String...,
     let output = items.joined(separator: separator)
     let fileName = (((filePath as NSString).lastPathComponent) as NSString).deletingPathExtension // removes ".swift"
     
+//    let pretty = "\((fileName as NSString).lastPathComponent) [#\(lineNumber)] \(functionName)\n\t-> \(output)"
+//    let pretty = "- \((fileName as NSString).lastPathComponent):\(lineNumber)\n\t- "
+//    let pretty = "- \(output) :\(fileName):\(lineNumber):\(functionName)"
+//    let pretty = "- \(fileName):\(lineNumber):\(functionName): \(output)"
     let pretty = "[\(fileName):\(lineNumber)] \(output)"
 
     Swift.print(pretty, terminator: terminator)
