@@ -15,6 +15,24 @@ class ViewController: UIViewController {
     }
 
 
+func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+    #if DEBUG
+    if items.isEmpty {
+        Swift.print()
+        return
+    }
+    
+    let output = items.map { "\($0)" }.joined(separator: separator)
+    let pretty: String
+    
+    if let thisMethodInfo = CallStackParser.getCallingClassAndMethodInScope(includeImmediateParentClass: true) {
+        pretty = "[\(thisMethodInfo.class):\(thisMethodInfo.function)] \(output)"
+    } else {
+        pretty = "- \(output)"
+    }
+    
+    Swift.print(pretty, terminator: terminator)
+    #endif
 }
 
 
