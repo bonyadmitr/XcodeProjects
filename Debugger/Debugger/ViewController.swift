@@ -13,7 +13,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+func print(_ items: String...,
+                  separator: String = " ",
+                  terminator: String = "\n",
+                  filePath: String = #file,
+                  functionName: String = #function,
+                  lineNumber: UInt = #line)
+{
+    #if DEBUG
+    /// (filePath as NSString) == URL(fileURLWithPath: filePath) in this using
+    let output = items.joined(separator: separator)
+    let fileName = (((filePath as NSString).lastPathComponent) as NSString).deletingPathExtension // removes ".swift"
+    
+    let pretty = "[\(fileName):\(lineNumber)] \(output)"
 
+    Swift.print(pretty, terminator: terminator)
+    #endif
+}
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     #if DEBUG
