@@ -29,6 +29,10 @@ func print(_ items: String...,
 //    let pretty = "- \((fileName as NSString).lastPathComponent):\(lineNumber)\n\t- "
 //    let pretty = "- \(output) :\(fileName):\(lineNumber):\(functionName)"
 //    let pretty = "- \(fileName):\(lineNumber):\(functionName): \(output)"
+//    let pretty = "- \(fileName):\(lineNumber): \(output)"
+//    let pretty = "- \(fileName):\(lineNumber)| \(output)"
+//    let pretty = "ℹ️ [\(fileName):\(lineNumber)] \(output)"
+//    let pretty = "[\(fileName):\(lineNumber):\(functionName)] \(output)"
     let pretty = "[\(fileName):\(lineNumber)] \(output)"
 
     Swift.print(pretty, terminator: terminator)
