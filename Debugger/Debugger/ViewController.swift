@@ -13,6 +13,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+/// https://stackoverflow.com/a/59576554/5893286
+/// https://gist.github.com/zeero/d04279bd17d0555a3ceecb2376834204
 func print(_ items: String...,
                   separator: String = " ",
                   terminator: String = "\n",
