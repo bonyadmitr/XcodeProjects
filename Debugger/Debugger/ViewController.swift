@@ -7,12 +7,47 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        
+//        DispatchQueue.global().async {
+//            CallStackParser.printStack()
+//        }
+        CallStackParser.printStack()
+//        someFunc()
+        
+        
+        
+    //    Swift.print(Thread.callStackSymbols)
+        /// better formatting
+//        Thread.callStackSymbols.forEach{Swift.print($0)}
+        
+        
+//        print("started")
+//        print("started", 123, 123)
     }
+
+    private func someFunc() {
+        DispatchQueue.global().async { [weak self] in
+            DispatchQueue.main.async {
+                self?.www()
+            }
+        }
+    }
+
+    private func www() {
+        CallStackParser.printStack()
+    }
+    
+}
+
+
+
 /// https://stackoverflow.com/a/59576554/5893286
 /// https://gist.github.com/zeero/d04279bd17d0555a3ceecb2376834204
 func print(_ items: String...,
