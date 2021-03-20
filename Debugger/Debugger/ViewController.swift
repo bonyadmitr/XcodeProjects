@@ -22,6 +22,14 @@ class ViewController: UIViewController {
 //        someFunc()
         
         
+//        print("- call stack trace:")
+//        Thread.callStackSymbols
+//            .compactMap{ CallStackParser.parseStack($0) }
+//            .forEach { Swift.print($0) }
+//        Thread.callStackSymbols
+//            .compactMap{ CallStackParser.classAndMethodForStackSymbol($0) }
+//            .forEach { print("\($0.class):\($0.function)") }
+//        print("-")
         
     //    Swift.print(Thread.callStackSymbols)
         /// better formatting
