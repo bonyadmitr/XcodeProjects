@@ -7,6 +7,11 @@
 
 import UIKit
 
+ NSSetUncaughtExceptionHandler { (exception) in
+     print(exception)
+     exception.callStackSymbols.forEach{ print($0)}
+     print()
+ }
 
 class ViewController: UIViewController {
     
