@@ -12,6 +12,9 @@ import UIKit
      exception.callStackSymbols.forEach{ print($0)}
      print()
  }
+ /// to test
+ NSArray().object(at: 1)
+ NSException(name: NSExceptionName(rawValue: "arbitrary"), reason: "arbitrary reason", userInfo: nil).raise()
 
 class ViewController: UIViewController {
     
