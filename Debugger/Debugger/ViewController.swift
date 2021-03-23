@@ -15,6 +15,10 @@ import UIKit
  /// to test
  NSArray().object(at: 1)
  NSException(name: NSExceptionName(rawValue: "arbitrary"), reason: "arbitrary reason", userInfo: nil).raise()
+ 
+ // TODO: check
+ https://github.com/woshiccm/RCBacktrace
+ https://www.raywenderlich.com/6334294-my-app-crashed-now-what
 
 class ViewController: UIViewController {
     
