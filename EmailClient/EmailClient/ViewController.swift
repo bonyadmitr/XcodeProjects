@@ -261,6 +261,18 @@ final class MailCoreManager {
             }
         }
     }
+/** test
+ let uids = ["1"]
+ let indexSet = MCOIndexSet()
+ uids.forEach { (uid) in
+     if let uidUInt64 = UInt64(uid) {
+         indexSet.add(uidUInt64)
+     }
+ }
+ let q = MCOIndexSet(uids)
+ print(q == indexSet)
+ print()
+ */
 // TODO: use
 extension MCOIndexSet {
     
