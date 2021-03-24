@@ -263,6 +263,22 @@ final class MailCoreManager {
     }
 extension Collection {
     
+    /** test
+     //        if let f = array.first, array.dropFirst().first(where: { $0.title != f.title }) == nil {
+     //
+     //        }
+             
+             struct QQQ {
+                 let title: String
+             }
+             
+             let array = [QQQ(title: "1"), QQQ(title: "1")]
+             
+             let isSameTitle = array.isPropertiesEquals(by: \.title)
+             print("isSameTitle: \(isSameTitle)")
+             assert(array.isPropertiesEquals(by: \.title))
+     */
+    // TODO: use
     func isPropertiesEquals<T: Comparable>(by keyPath: KeyPath<Element, T>) -> Bool {
         if let firstItem = first, dropFirst().first(where: { $0[keyPath: keyPath] != firstItem[keyPath: keyPath] }) != nil {
             return false
