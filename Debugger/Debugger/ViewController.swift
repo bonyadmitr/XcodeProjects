@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ Tracking tasks with stack traces https://www.cocoawithlove.com/blog/2016/02/28/stack-traces-in-swift.html
+ utility class for walking through stack frames https://github.com/mattgallagher/CwlUtils/blob/master/Sources/CwlUtils/CwlStackFrame.swift
+ simple steps description https://stackoverflow.com/a/55295072/5893286
 
  /// https://stackoverflow.com/a/31770435/5893286
  /// https://stackoverflow.com/a/36494999/5893286
@@ -25,6 +29,7 @@ import UIKit
  https://www.youtube.com/watch?v=Ba1j4AAD6co
  https://creativeinaustria.wordpress.com/2008/10/20/crash-reporter-for-iphone-applications-part-2/
  
+ */
 
 class ViewController: UIViewController {
     
