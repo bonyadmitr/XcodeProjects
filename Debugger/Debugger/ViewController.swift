@@ -19,6 +19,9 @@ import UIKit
  // TODO: check
  https://github.com/woshiccm/RCBacktrace
  https://www.raywenderlich.com/6334294-my-app-crashed-now-what
+ https://www.youtube.com/watch?v=Ba1j4AAD6co
+ https://creativeinaustria.wordpress.com/2008/10/20/crash-reporter-for-iphone-applications-part-2/
+ 
 
 class ViewController: UIViewController {
     
