@@ -263,6 +263,32 @@ final class MailCoreManager {
     }
 }
 
+/**
+ письмо всегда с новым uid. а сортировка по дате
+ получается отображать мы можешь только когда выкачали все
+ получается новые письма мы всегда получим относительно локального самого последнего uid
+ 
+ --------
+ - folder status: <mailcore::IMAPFolderStatus:0x600002ff8480 msg_count: 3, unseen_count: 0, recent_count: 0, uid_next: 21, uid_validity: 1, highestmodseqvalue :2880>
+ ++++++++ all:
+ 8 - 2021-02-02 07:10:45 +0000
+ 19 - 2021-02-02 07:25:09 +0000
+ 20 - 2021-02-02 10:11:35 +0000
+ --------
+ - folder status: <mailcore::IMAPFolderStatus:0x600002f0c990 msg_count: 2, unseen_count: 0, recent_count: 0, uid_next: 21, uid_validity: 1, highestmodseqvalue :2908>
+ ++++++++ all:
+ 19 - 2021-02-02 07:25:09 +0000
+ 20 - 2021-02-02 10:11:35 +0000
+ --------
+ - folder status: <mailcore::IMAPFolderStatus:0x600002ffef70 msg_count: 3, unseen_count: 0, recent_count: 0, uid_next: 22, uid_validity: 1, highestmodseqvalue :2934>
+ ++++++++ all:
+ 19 - 2021-02-02 07:25:09 +0000
+ 20 - 2021-02-02 10:11:35 +0000
+ 21 - 2021-02-02 07:10:45 +0000
+ --------
+ */
+
+
 /// https://github.com/mattcomi/ReflectedStringConvertible/blob/master/ReflectedStringConvertible/ReflectedStringConvertible.swift
 protocol ReflectedStringConvertible : CustomStringConvertible { }
 
