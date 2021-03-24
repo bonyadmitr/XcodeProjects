@@ -270,6 +270,16 @@ extension Collection {
             return true
         }
     }
+    
+    /// `?` needs for optinal properties
+    func isPropertiesEquals<T: Comparable>(by keyPath: KeyPath<Element, T?>) -> Bool {
+        if let firstItem = first, dropFirst().first(where: { $0[keyPath: keyPath] != firstItem[keyPath: keyPath] }) != nil {
+            return false
+        } else {
+            return true
+        }
+        
+    }
 }
 
 /// inspired https://stackoverflow.com/a/50272973/5893286
