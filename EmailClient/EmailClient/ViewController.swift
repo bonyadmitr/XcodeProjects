@@ -261,7 +261,14 @@ final class MailCoreManager {
             }
         }
     }
+
+/// inspired https://stackoverflow.com/a/50272973/5893286
+func ~= (pattern: MCOIMAPFolderFlag, value: MCOIMAPFolderFlag) -> Bool {
+    return value.contains(pattern)
 }
+
+
+
 
 /**
  письмо всегда с новым uid. а сортировка по дате
