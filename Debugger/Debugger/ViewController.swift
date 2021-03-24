@@ -11,6 +11,9 @@ import UIKit
  Tracking tasks with stack traces https://www.cocoawithlove.com/blog/2016/02/28/stack-traces-in-swift.html
  utility class for walking through stack frames https://github.com/mattgallagher/CwlUtils/blob/master/Sources/CwlUtils/CwlStackFrame.swift
  simple steps description https://stackoverflow.com/a/55295072/5893286
+ 
+ open-source crash reporting https://github.com/microsoft/plcrashreporter
+ 
 
  /// https://stackoverflow.com/a/31770435/5893286
  /// https://stackoverflow.com/a/36494999/5893286
@@ -82,6 +85,7 @@ class ViewController: UIViewController {
 
 /// https://stackoverflow.com/a/59576554/5893286
 /// https://gist.github.com/zeero/d04279bd17d0555a3ceecb2376834204
+/// columnNumber: UInt = #column
 func print(_ items: String...,
                   separator: String = " ",
                   terminator: String = "\n",
