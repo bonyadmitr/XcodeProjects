@@ -261,6 +261,25 @@ final class MailCoreManager {
             }
         }
     }
+// TODO: use
+extension MCOIndexSet {
+    
+    convenience init(_ uids: [String]) {
+        self.init()
+        
+        uids.compactMap { UInt64($0) }
+            .forEach { add($0) }
+    }
+    
+    convenience init(_ uids: [UInt32]) {
+        self.init()
+        
+        uids.compactMap { UInt64($0) }
+            .forEach { add($0) }
+    }
+    
+}
+
 extension Collection {
     
     /** test
