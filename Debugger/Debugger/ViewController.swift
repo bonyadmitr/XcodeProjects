@@ -29,6 +29,7 @@ import UIKit
  https://www.youtube.com/watch?v=Ba1j4AAD6co
  https://creativeinaustria.wordpress.com/2008/10/20/crash-reporter-for-iphone-applications-part-2/
  
+ // TODO: CallStackParser for closures
  */
 
 class ViewController: UIViewController {
