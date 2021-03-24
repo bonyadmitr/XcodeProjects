@@ -262,3 +262,36 @@ final class MailCoreManager {
         }
     }
 }
+protocol ReflectedStringConvertible : CustomStringConvertible { }
+
+extension ReflectedStringConvertible {
+    
+    
+    
+    var description: String {
+        desc
+    }
+    
+    var desc: String {
+        if let nsSelf = self as? NSObject, let type = Self.self as? AnyClass {
+            return nsSelf.desc(from: type)
+        }
+        
+        let mirror = Mirror(reflecting: self)
+        
+        let descriptions: [String] = mirror.allChildren.compactMap { (label: String?, value: Any) in
+            if let label = label {
+                var value = value
+                if value is String {
+                    value = "\"\(value)\""
+                }
+                return "\(label): \(value)"
+            }
+            
+            return nil
+        }
+        
+        return "\(mirror.subjectType)(\(descriptions.joined(separator: ", ")))"
+    }
+    
+}
