@@ -316,5 +316,24 @@ extension NSObject {
         return propertiesDictionary
     }
     
+    var desc2: String {
+        desc(from: Self.self)
+    }
+    
+    func desc(from classType: AnyClass) -> String {
+        
+        var propertiesCount : CUnsignedInt = 0
+        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
+        var result = String(describing: classType) + " {"
+        
+        for i in 0 ..< Int(propertiesCount) {
+            if let property = propertiesInAClass?[i],
+               let strKey = NSString(utf8String: property_getName(property)) as String?
+            {
+                result += "\n\t\(strKey): \(value(forKey: strKey) ?? "nil")"
+            }
+        }
+        return result + "\n}"
+    }
     
 }
