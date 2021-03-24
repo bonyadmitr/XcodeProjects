@@ -295,3 +295,26 @@ extension ReflectedStringConvertible {
     }
     
 }
+
+extension NSObject {
+    
+    
+    
+    /// source https://stackoverflow.com/a/46611354/5893286
+    func toDictionary(from classType: AnyClass) -> [String: Any] {
+        
+        var propertiesCount : CUnsignedInt = 0
+        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
+        var propertiesDictionary = [String:Any]()
+        
+        for i in 0 ..< Int(propertiesCount) {
+            if let property = propertiesInAClass?[i],
+               let strKey = NSString(utf8String: property_getName(property)) as String? {
+                propertiesDictionary[strKey] = value(forKey: strKey)
+            }
+        }
+        return propertiesDictionary
+    }
+    
+    
+}
