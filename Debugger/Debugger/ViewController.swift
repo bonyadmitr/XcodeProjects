@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+ /// https://stackoverflow.com/a/31770435/5893286
+ /// https://stackoverflow.com/a/36494999/5893286
  NSSetUncaughtExceptionHandler { (exception) in
      print(exception)
      exception.callStackSymbols.forEach{ print($0)}
