@@ -12,6 +12,7 @@ import UIKit.UIGestureRecognizerSubclass
 /// only singleton bcz of once init
 /// need iOS 11
 /// need to test for iOS 10
+/// inspired https://www.raywenderlich.com/295-swizzling-in-ios-11-with-uidebugginginformationoverlay
 final class DebugOverlay {
     static let shared = DebugOverlay()
     
