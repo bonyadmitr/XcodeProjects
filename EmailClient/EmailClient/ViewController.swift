@@ -262,6 +262,8 @@ final class MailCoreManager {
         }
     }
 }
+
+/// https://github.com/mattcomi/ReflectedStringConvertible/blob/master/ReflectedStringConvertible/ReflectedStringConvertible.swift
 protocol ReflectedStringConvertible : CustomStringConvertible { }
 
 extension ReflectedStringConvertible {
