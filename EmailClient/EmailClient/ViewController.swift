@@ -104,6 +104,11 @@ final class DataSource {
 //old imapSession.fetchMessageByUIDOperation(withFolder: <#T##String!#>, uid: <#T##UInt32#>, urgent: <#T##Bool#>)
 //imapSession.fetchMessageOperation(withFolder: <#T##String!#>, uid: <#T##UInt32#>)
 
+
+// TODO: check
+//https://github.com/MailCore/mailcore2/wiki/Providers-Syntax
+//MCOMailProvidersManager.shared()?.provider(forEmail: "")?.allMailFolderPath()
+//MCOMailProvidersManager.shared()?.registerProviders(withFilename: "")
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
