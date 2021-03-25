@@ -95,6 +95,10 @@ final class DataSource {
 //https://stackoverflow.com/questions/21096218/fetching-gmails-via-mailcore-2-thread-id-vs-message-id-vs-uid
 //https://stackoverflow.com/questions/tagged/mailcore2
 
+
+// TODO: If x mail moved, its uid/folderName will be changed
+// And if there are other transactions related to this mail we fucked up
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
