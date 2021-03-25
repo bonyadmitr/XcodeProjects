@@ -77,6 +77,18 @@ import UIKit
  Этот сервис предоставляет только облегченную проверку всех атрибутов, но у него есть удобные инструменты, указанные в ссылках выше.
  */
 
+
+final class DataSource {
+    
+    
+    static let shared = DataSource()
+    
+    var uidNext: UInt32 = 0
+    var uidValidity: UInt32 = 0
+    var highestModSeqValue: UInt64 = 0
+    var emails = [MCOIMAPMessage]()
+    
+}
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
