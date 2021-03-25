@@ -7,7 +7,9 @@
 
 import UIKit
 
-
+// TODO: check
+/// Swift SMTP client https://github.com/Kitura/Swift-SMTP with Inspired https://github.com/onevcat/Hedwig and https://github.com/PerfectlySoft/Perfect-SMTP
+/// Postal - MailCore2 swift simple analog  https://github.com/snipsco/Postal
 /**
  imap to get emails
  smtp to send email
