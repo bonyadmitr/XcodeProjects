@@ -89,6 +89,12 @@ final class DataSource {
     var emails = [MCOIMAPMessage]()
     
 }
+
+
+// TODO: check
+//https://stackoverflow.com/questions/21096218/fetching-gmails-via-mailcore-2-thread-id-vs-message-id-vs-uid
+//https://stackoverflow.com/questions/tagged/mailcore2
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
