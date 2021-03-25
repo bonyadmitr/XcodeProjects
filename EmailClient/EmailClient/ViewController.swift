@@ -99,6 +99,11 @@ final class DataSource {
 // TODO: If x mail moved, its uid/folderName will be changed
 // And if there are other transactions related to this mail we fucked up
 
+
+// TODO: mail detail
+//old imapSession.fetchMessageByUIDOperation(withFolder: <#T##String!#>, uid: <#T##UInt32#>, urgent: <#T##Bool#>)
+//imapSession.fetchMessageOperation(withFolder: <#T##String!#>, uid: <#T##UInt32#>)
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
