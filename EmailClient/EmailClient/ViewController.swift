@@ -34,8 +34,11 @@ import UIKit
  https://habr.com/ru/company/mailru/blog/151001/
  */
 
-class ViewController: UIViewController {
 
+
+
+class ViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -85,12 +88,13 @@ class ViewController: UIViewController {
 
 }
 
+
 final class MailCoreManager {
     
     static let shared = MailCoreManager()
     
-    private let imapSession = MCOIMAPSession()
-    private let smtpSession = MCOSMTPSession()
+    let imapSession = MCOIMAPSession()
+    let smtpSession = MCOSMTPSession()
     //    private var smtpSession: MCOSMTPSession?
     
     
@@ -261,6 +265,12 @@ final class MailCoreManager {
             }
         }
     }
+    
+    
+}
+
+
+
 /** test
  let uids = ["1"]
  let indexSet = MCOIndexSet()
