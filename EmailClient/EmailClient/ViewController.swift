@@ -35,6 +35,9 @@ import UIKit
  https://habr.com/ru/company/mailru/blog/151001/
  */
 
+//https://ru.wikipedia.org/wiki/SMTP
+//https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C_MX
+//https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA
 
 
 
