@@ -135,7 +135,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("started")
 //        struct QQQ {
 //            let title: String
 //            let body: String?
@@ -149,7 +148,7 @@ class ViewController: UIViewController {
         
 
         MailCoreManager.shared.login()
-        generalAction()
+//        generalAction()
     }
     
     @IBAction private func onSend(_ sender: UIButton) {
@@ -157,7 +156,9 @@ class ViewController: UIViewController {
     }
     
     private func generalAction() {
-        //MailCoreManager.shared.send()
+//        MailCoreManager.shared.folders()
+        
+//        MailCoreManager.shared.send()
         
 //        MailCoreManager.shared.fetchFolderStatus(folder: "INBOX") { result in
 //            switch result {
@@ -169,11 +170,14 @@ class ViewController: UIViewController {
 //                print()
 //            }
 //        }
-//
+
+//        return
+//        return
+
 //        MailCoreManager.shared.fetchFolderInfo(folder: "INBOX") { result in
 //            switch result {
 //            case .success(let info):
-//                print("- folder info: \(info.modSequenceValue)")
+//                print("- folder info: \(info.desc)")
 //                print()
 //            case .failure(let error):
 //                print(error.localizedDescription)
@@ -181,14 +185,7 @@ class ViewController: UIViewController {
 //            }
 //        }
         
-        MailCoreManager.shared.fetchEmails(for: "INBOX") { result in
-
-        }
-
         
-        MailCoreManager.shared.syncMessagesByUIDWithFolder(folder: "INBOX") { result in
-
-        }
     }
 
 }
