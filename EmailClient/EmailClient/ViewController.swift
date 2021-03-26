@@ -116,6 +116,11 @@ final class DataSource {
 
 
 
+//let array = Array(repeating: 1, count: 9)
+//var page = 0
+//let limit = 2
+//print()
+//array.chunked(into: limit)
 extension Array {
     func chunked(into size: Int) -> [[Element]] {
         return stride(from: 0, to: count, by: size).map {
