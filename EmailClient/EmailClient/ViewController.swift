@@ -109,6 +109,9 @@ final class DataSource {
 //https://github.com/MailCore/mailcore2/wiki/Providers-Syntax
 //MCOMailProvidersManager.shared()?.provider(forEmail: "")?.allMailFolderPath()
 //MCOMailProvidersManager.shared()?.registerProviders(withFilename: "")
+// TODO: https://github.com/MailCore/mailcore2/blob/master/resources/providers.json
+
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
