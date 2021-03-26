@@ -136,6 +136,18 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         print("started")
+//        struct QQQ {
+//            let title: String
+//            let body: String?
+//        }
+//
+//        let array = [QQQ(title: "1", body: "b1"), QQQ(title: "1", body: "b1")]
+//
+//        let isSameTitle = array.isPropertiesEquals(by: \.body)
+//        print("isSameTitle: \(isSameTitle)")
+        //assert(array.isPropertiesEquals(by: \.title))
+        
+
         MailCoreManager.shared.login()
         generalAction()
     }
