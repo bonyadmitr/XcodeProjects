@@ -112,6 +112,10 @@ final class DataSource {
 // TODO: https://github.com/MailCore/mailcore2/blob/master/resources/providers.json
 
 
+/// possible error `CFNetwork SSLHandshake failed (-9847)`. it is wrong connection settings like port. no need to edit info.plist for NSAppTransportSecurity
+
+
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
