@@ -201,6 +201,9 @@ final class MailCoreManager {
     
     
     func login() {
+        //let domain = "yandex.ru"
+//        let domain = "yaanimail.com"
+        let domain = username.split(separator: "@").last!
         
         
         let domain = "yandex.ru"
