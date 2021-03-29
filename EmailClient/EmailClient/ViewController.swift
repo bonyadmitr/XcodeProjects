@@ -218,6 +218,9 @@ final class MailCoreManager {
         
         let domain = "yandex.ru"
         
+        let isYaani = (domain == "yaani.com")
+        let isLife = (domain == "life.com.by")
+        let isOutlook = (domain == "outlook.com")
         
         
         smtpSession.hostname = "smtp.\(domain)"
