@@ -7,6 +7,39 @@
 
 import UIKit
 
+//protocol ReflectedStringConvertible : CustomStringConvertible { }
+//
+//extension ReflectedStringConvertible {
+//
+//
+//
+//    var description: String {
+//        desc
+//    }
+//
+//    var desc: String {
+//        if let nsSelf = self as? NSObject, let type = Self.self as? AnyClass {
+//            return nsSelf.desc(from: type)
+//        }
+//
+//        let mirror = Mirror(reflecting: self)
+//
+//        let descriptions: [String] = mirror.allChildren.compactMap { (label: String?, value: Any) in
+//            if let label = label {
+//                var value = value
+//                if value is String {
+//                    value = "\"\(value)\""
+//                }
+//                return "\(label): \(value)"
+//            }
+//
+//            return nil
+//        }
+//
+//        return "\(mirror.subjectType)(\(descriptions.joined(separator: ", ")))"
+//    }
+//
+//}
 /**
  Tracking tasks with stack traces https://www.cocoawithlove.com/blog/2016/02/28/stack-traces-in-swift.html
  utility class for walking through stack frames https://github.com/mattgallagher/CwlUtils/blob/master/Sources/CwlUtils/CwlStackFrame.swift
