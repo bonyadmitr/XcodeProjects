@@ -216,11 +216,13 @@ final class MailCoreManager {
          Ненадежные приложения, у которых есть доступ к аккаунту
          */
         
-        let domain = "yandex.ru"
-        
         let isYaani = (domain == "yaani.com")
         let isLife = (domain == "life.com.by")
         let isOutlook = (domain == "outlook.com")
+        // need to turn on IMAP: https://mail.yaani.com/settings/synch or web page -> account settings -> Synchronization tab
+        //IMAP server: imap.yaanimail.com – port 993 – SSL
+        //SMTP server: smtp.yaanimail.com – port 587 – TLS
+        //POP3 server: pop.yaanimail.com – port 995 – SSL
         
         
         smtpSession.hostname = "smtp.\(domain)"
