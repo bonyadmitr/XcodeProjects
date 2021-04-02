@@ -229,6 +229,17 @@ final class MailCoreManager {
             smtpSession.port = 587
             smtpSession.connectionType = .startTLS
             smtpSession.authType = .saslLogin //or .saslPlain
+        } else if isLife {
+            // The server does not support STARTTLS connections
+            smtpSession.hostname = "mx01.life.com.by"
+            smtpSession.port = 25
+            smtpSession.connectionType = .clear
+            //AUTH PLAIN eWFyb3NsYXYuYm9uZGFyQGxpZmUuY29tLmJ5AHlhcm9zbGF2LmJvbmRhckBsaWZlLmNvbS5ieQBRZGFjZXpxYzEyMzQ1
+            //504 5.7.4 Unrecognized authentication type
+            //
+            //Unable to authenticate with the current session's credentials
+            //https://stackoverflow.com/a/31942248/5893286
+            smtpSession.authType = .saslPlain
         
         smtpSession.hostname = "smtp.\(domain)"
         smtpSession.username = username
