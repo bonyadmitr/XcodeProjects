@@ -272,6 +272,15 @@ final class MailCoreManager {
 //            }
 //        }
         
+        smtpSession.loginOperation()?.start({ (error) in
+            if let error = error {
+                print("- smtp login error:", error)
+            } else {
+                print("success smtpSession")
+            }
+        })
+        
+        
         
         imapSession.username = username
         imapSession.password = password
