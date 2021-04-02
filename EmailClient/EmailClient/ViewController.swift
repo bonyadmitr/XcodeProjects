@@ -259,30 +259,16 @@ final class MailCoreManager {
 //            smtpSession.authType = .saslPlain
         }
         
-        smtpSession.hostname = "smtp.\(domain)"
         smtpSession.username = username
         smtpSession.password = password
-        smtpSession.port = 465
-        smtpSession.authType = .saslPlain
-        smtpSession.connectionType = .TLS
-        smtpSession.timeout = 2
+        smtpSession.timeout = 10 // 2 for most servers. min 4 for outlook
         smtpSession.isCheckCertificateEnabled = false
-        
-        // TODO: check google
-//        smtpSession.hostname = "smtp.gmail.com"
-//        smtpSession.username = "matt@gmail.com"
-//        smtpSession.password = "xxxxxxxxxxxxxxxx"
-//        smtpSession.port = 465
-//        smtpSession.authType = .saslPlain
-//        smtpSession.connectionType = .TLS
-        
-        
         
 //        smtpSession.connectionLogger = { (connectionID, type, data) in
 //            if let data = data, let string = String(data: data, encoding: .utf8){
 //                print("- smtp log: \(string)")
 //            } else {
-//                assertionFailure()
+//                print("- smtp error: \(type.rawValue)")
 //            }
 //        }
         
