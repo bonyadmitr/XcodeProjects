@@ -240,6 +240,12 @@ final class MailCoreManager {
             //Unable to authenticate with the current session's credentials
             //https://stackoverflow.com/a/31942248/5893286
             smtpSession.authType = .saslPlain
+        } else if isOutlook {
+            // https://support.microsoft.com/en-us/office/pop-imap-and-stmp-settings-8361e398-8af4-4e97-b147-6c6c4ac95353
+            smtpSession.hostname = "smtp-mail.outlook.com"
+            smtpSession.port = 587
+            smtpSession.connectionType = .startTLS
+            smtpSession.authType = .saslLogin
         
         smtpSession.hostname = "smtp.\(domain)"
         smtpSession.username = username
