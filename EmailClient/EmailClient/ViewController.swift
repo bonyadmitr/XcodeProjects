@@ -246,6 +246,18 @@ final class MailCoreManager {
             smtpSession.port = 587
             smtpSession.connectionType = .startTLS
             smtpSession.authType = .saslLogin
+        } else {
+            // gmail, yandex
+            smtpSession.hostname = "smtp.\(domain)"
+            smtpSession.port = 587
+            smtpSession.connectionType = .startTLS
+            smtpSession.authType = .saslLogin
+            
+            // gmail, yandex
+//            smtpSession.port = 465
+//            smtpSession.connectionType = .TLS
+//            smtpSession.authType = .saslPlain
+        }
         
         smtpSession.hostname = "smtp.\(domain)"
         smtpSession.username = username
