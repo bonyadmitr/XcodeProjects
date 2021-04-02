@@ -224,6 +224,11 @@ final class MailCoreManager {
         //SMTP server: smtp.yaanimail.com – port 587 – TLS
         //POP3 server: pop.yaanimail.com – port 995 – SSL
         
+        if isYaani {
+            smtpSession.hostname = "smtp.yaanimail.com"
+            smtpSession.port = 587
+            smtpSession.connectionType = .startTLS
+            smtpSession.authType = .saslLogin //or .saslPlain
         
         smtpSession.hostname = "smtp.\(domain)"
         smtpSession.username = username
