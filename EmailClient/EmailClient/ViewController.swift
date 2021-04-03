@@ -281,6 +281,14 @@ final class MailCoreManager {
         })
         
         
+        if isYaani {
+            imapSession.hostname = "imap.yaanimail.com"
+        /// it is from doc. but working without it
+        //} else if isOutlook {
+        //    imapSession.hostname = "imap-mail.outlook.com"
+        } else {
+            imapSession.hostname = "imap.\(domain)"
+        }
         
         imapSession.username = username
         imapSession.password = password
