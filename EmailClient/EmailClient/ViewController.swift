@@ -290,6 +290,12 @@ final class MailCoreManager {
             imapSession.hostname = "imap.\(domain)"
         }
         
+        if isLife {
+            /// fix error: The certificate for this server is invalid https://stackoverflow.com/a/19018196/5893286
+            imapSession.isCheckCertificateEnabled = false
+        }
+        imapSession.port = 993
+        
         imapSession.username = username
         imapSession.password = password
         imapSession.hostname = "imap.\(domain)"
