@@ -310,6 +310,11 @@ final class MailCoreManager {
 //            }
 //        }
         
+        // TODO: permanentlyDelete action
+        /// delete https://github.com/MailCore/mailcore2/issues/1452
+        /// Updating flags via IMAP https://github.com/MailCore/mailcore2/wiki/IMAP-Examples#updating-flags-via-imap
+//        imapSession.expungeOperation(<#T##folder: String!##String!#>)
+//        imapSession.storeFlagsOperation(withFolder: <#T##String!#>, uids: <#T##MCOIndexSet!#>, kind: <#T##MCOIMAPStoreFlagsRequestKind#>, flags: <#T##MCOMessageFlag#>)
         
         
         smtpSession.loginOperation()?.start({ (error) in
