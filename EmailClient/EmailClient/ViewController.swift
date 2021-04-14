@@ -316,6 +316,8 @@ final class MailCoreManager {
 //        imapSession.expungeOperation(<#T##folder: String!##String!#>)
 //        imapSession.storeFlagsOperation(withFolder: <#T##String!#>, uids: <#T##MCOIndexSet!#>, kind: <#T##MCOIMAPStoreFlagsRequestKind#>, flags: <#T##MCOMessageFlag#>)
         
+        // TODO: trash action
+        // TODO: find trash folder in list
         
         smtpSession.loginOperation()?.start({ (error) in
             if let error = error {
