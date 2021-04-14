@@ -327,34 +327,11 @@ final class MailCoreManager {
 //
         imapSession.checkAccountOperation()?.start({ (error) in
             if let error = error {
-                print(error.localizedDescription)
+                print("- imap login error:", error.localizedDescription)
             } else {
                 print("success imapSession")
             }
         })
-        
-//        fetchAllFolder { result in
-//            switch result {
-//            case .success(let folders):
-//                /// INBOX in yandex `folders[1].path`
-//                print(folders)
-//                print()
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//                print()
-//            }
-//        }
-        
-        fetchFolderStatus(folder: "INBOX") { result in
-            switch result {
-            case .success(let status):
-                print("- folder status: \(status)")
-                print()
-            case .failure(let error):
-                print(error.localizedDescription)
-                print()
-            }
-        }
         
 //        fetchFolderInfo(folder: "INBOX") { result in
 //            switch result {
@@ -402,7 +379,6 @@ final class MailCoreManager {
     }
     
     func fetchFolderStatus(folder: String, handler: @escaping (Result<MCOIMAPFolderStatus, Error>) -> Void) {
-        
         imapSession.folderStatusOperation(folder).start { error, result in
             if let error = error {
                 handler(.failure(error))
