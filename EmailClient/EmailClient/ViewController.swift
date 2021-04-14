@@ -320,6 +320,7 @@ final class MailCoreManager {
         // TODO: trash action
         // TODO: find trash folder in list
         
+        // TODO: Sending Attchaments using MailCore2 on ios 8 https://stackoverflow.com/a/26867310/5893286
         
         // TODO: sync login
 //        let dispatchGroup = DispatchGroup()
