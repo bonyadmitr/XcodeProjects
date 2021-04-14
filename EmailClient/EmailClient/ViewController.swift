@@ -224,6 +224,7 @@ final class MailCoreManager {
         //SMTP server: smtp.yaanimail.com – port 587 – TLS
         //POP3 server: pop.yaanimail.com – port 995 – SSL
         
+        // possible 25, 465, 587
         if isYaani {
             smtpSession.hostname = "smtp.yaanimail.com"
             smtpSession.port = 587
@@ -298,15 +299,15 @@ final class MailCoreManager {
         
         imapSession.username = username
         imapSession.password = password
-        imapSession.hostname = "imap.\(domain)"
-        imapSession.port = 993
         imapSession.connectionType = .TLS
         imapSession.timeout = 2
+
+        
 //        imapSession.connectionLogger  = { (connectionID, type, data) in
 //            if let data = data, let string = String(data: data, encoding: .utf8){
 //                print("- imap log: \(string)")
 //            } else {
-//                print("- imap log error: \(type.rawValue) \(data?.count ?? -1)")
+//                print("- imap log error: \(type.rawValue)")
 //            }
 //        }
         
@@ -318,14 +319,6 @@ final class MailCoreManager {
         
         // TODO: trash action
         // TODO: find trash folder in list
-        
-        smtpSession.loginOperation()?.start({ (error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("success smtpSession")
-            }
-        })
         
         
         // TODO: sync login
