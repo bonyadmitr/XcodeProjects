@@ -392,6 +392,8 @@ final class MailCoreManager {
             }
         }
     }
+    
+    /// similar to fetchFolderStatus. even in doc
     func fetchFolderInfo(folder: String, handler: @escaping (Result<MCOIMAPFolderInfo, Error>) -> Void) {
         imapSession.folderInfoOperation(folder).start { error, result in
             if let error = error {
