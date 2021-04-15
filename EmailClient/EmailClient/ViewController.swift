@@ -408,6 +408,48 @@ final class MailCoreManager {
         }
     }
     
+    func fetchEmails(for folder: String, handler: @escaping (Result<[MCOIMAPMessage], Error>) -> Void) {
+        
+        /// range` from 1` = from the end of the email
+        /// (0, 0) nil
+        /// (0, 1) there is no callback
+        /// (1, 0) = one last mail
+        /// (1, 1) = two last mails
+        /// so `MCORangeMake(FROM_UID, MAILS_COUNT - 1)` where FROM_UID=1 - last mail
+        //let uids = MCOIndexSet(range: MCORangeMake(1, UInt64.max))
+//        let uids = MCOIndexSet(range: MCORangeMake(2, 0))
+        
+        
+        let total: UInt64 = 2
+        let want: UInt64 = 2 - 1
+//        let uids = MCOIndexSet(range: MCORangeMake(total - want, want))
+//        let uids = MCOIndexSet(range: MCORangeMake(1, 10))
+        let uids = MCOIndexSet(range: MCORangeMake(1, UInt64.max))
+        
+        let kind: MCOIMAPMessagesRequestKind = [.flags]//[.headers, .flags, .extraHeaders, .internalDate, .structure]
+        //android 25
+        
+        /// depricated `let fetchOperation: MCOIMAPFetchMessagesOperation = imapSession.fetchMessagesByUIDOperation(withFolder: folder, requestKind: kind, uids: uids)`
+        let fetchOperation: MCOIMAPFetchMessagesOperation = imapSession.fetchMessagesByNumberOperation(withFolder: folder, requestKind: kind, numbers: uids)
+        
+        fetchOperation.start { error, result, vanished in
+            if let error = error {
+                handler(.failure(error))
+            } else if let result = result as? [MCOIMAPMessage] {
+                if let vanished = vanished {
+                    print(vanished)
+                    assertionFailure()
+                }
+//                print(result)
+                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+                handler(.failure(NSError()))
+            }
+        }
+        
+    }
     
 }
 
