@@ -451,6 +451,36 @@ final class MailCoreManager {
         
     }
     
+    func fetchEmails(for folder: String, from: UInt32, to: UInt32, handler: @escaping (Result<[MCOIMAPMessage], Error>) -> Void) {
+        guard from < to else {
+            assertionFailure()
+            handler(.success([]))
+            return
+        }
+        
+        let uids = MCOIndexSet(range: MCORangeMake(UInt64(from), UInt64(to - from) - 1))
+        let kind: MCOIMAPMessagesRequestKind = [.headers, .flags, .extraHeaders, .internalDate, .structure]
+        
+        let fetchOperation: MCOIMAPFetchMessagesOperation = imapSession.fetchMessagesOperation(withFolder: folder, requestKind: kind, uids: uids)
+        //let fetchOperation: MCOIMAPFetchMessagesOperation = imapSession.fetchMessagesByUIDOperation(withFolder: folder, requestKind: kind, uids: uids)
+        fetchOperation.start { error, result, vanished in
+            if let error = error {
+                handler(.failure(error))
+            } else if let result = result as? [MCOIMAPMessage] {
+                if let vanished = vanished {
+                    print(vanished)
+                    assertionFailure()
+                }
+//                print(result)
+                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+                handler(.failure(NSError()))
+            }
+        }
+        
+    }
 }
 
 
