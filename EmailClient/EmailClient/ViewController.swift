@@ -481,6 +481,46 @@ final class MailCoreManager {
         }
         
     }
+    
+    
+    
+    func syncMessagesByUIDWithFolder(folder: String, modSeq: UInt64, handler: @escaping (Result<[MCOIMAPMessage], Error>) -> Void) {
+        //let uids = MCOIndexSet(range: MCORangeMake(1, UInt64.max))
+        
+        let total: UInt64 = 1
+        let want: UInt64 = 1 - 1
+        // TODO: convert my array of UIDS to an MCOIndexSet -> create a new MCOIndexSet and use -addIndex: to add each uid
+//        let uids = MCOIndexSet(range: MCORangeMake(total - want, want))
+//        let uids = MCOIndexSet(range: MCORangeMake(1, 10))
+        let uids = MCOIndexSet(range: MCORangeMake(1, UInt64.max))
+        
+        //let kind: MCOIMAPMessagesRequestKind = [.headers, .flags, .extraHeaders, .internalDate, .structure, .fullHeaders, .size, .headerSubject] //.gmailLabels, .gmailMessageID, .gmailThreadID
+        let kind: MCOIMAPMessagesRequestKind = [.headers, .flags]
+        let syncOperation: MCOIMAPFetchMessagesOperation = imapSession.syncMessages(withFolder: folder, requestKind: kind, uids: uids, modSeq: modSeq)
+        
+        syncOperation.start { (error, messages, vanishedMessages) in
+            
+            if let error = error {
+                handler(.failure(error))
+            } else {
+                /// @warn *Important*: This is only for servers that support Conditional Store. See [RFC4551](http://tools.ietf.org/html/rfc4551)
+                if let messages = messages as? [MCOIMAPMessage] {
+                    //print("- messages \(messages)")
+//                    print("- modSeqValue", messages.map{ $0.modSeqValue})
+                    print()
+                    handler(.success(messages))
+                }
+                
+                if let vanishedMessages = vanishedMessages {
+                    print("- vanishedMessages \(vanishedMessages)")
+                }
+                
+                
+                
+//                handler(.success(()))
+            }
+        }
+    }
 }
 
 
