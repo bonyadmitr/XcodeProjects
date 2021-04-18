@@ -496,6 +496,20 @@ final class MailCoreManager {
         
         //let kind: MCOIMAPMessagesRequestKind = [.headers, .flags, .extraHeaders, .internalDate, .structure, .fullHeaders, .size, .headerSubject] //.gmailLabels, .gmailMessageID, .gmailThreadID
         let kind: MCOIMAPMessagesRequestKind = [.headers, .flags]
+        
+        /**
+         
+         sync logic:
+         
+         check remote and local uid_validity
+         if local_uid_validity != remote_uid_validity {
+            fetchAll
+            local_uid_validity = remote_uid_validity
+         } else {
+            fetch from latest_local_mail_uid to uid_next
+         }
+         
+         */
         let syncOperation: MCOIMAPFetchMessagesOperation = imapSession.syncMessages(withFolder: folder, requestKind: kind, uids: uids, modSeq: modSeq)
         
         syncOperation.start { (error, messages, vanishedMessages) in
