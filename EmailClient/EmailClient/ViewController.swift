@@ -546,6 +546,16 @@ final class MailCoreManager {
                     handler(.success(messages))
                 }
                 
+                // modSeq / CONDSTORE or Conditional Store / QRESYNC
+                // You can get modSeqValues in messages you fetch when fetching the list of messages. MCOIMAPMessage has a modSeqValue property.
+                // another trick https://stackoverflow.com/q/26262531/5893286
+                // https://github.com/MailCore/mailcore2/issues/483
+                // search https://github.com/MailCore/mailcore2/issues?q=is%3Aissue+syncMessagesWithFolder
+                
+                // https://github.com/MailCore/mailcore2/issues/1671
+                // If QRESYNC is not available (vanishedMessages), the best way is to list all the UID of a folder and remove locally the one that are not available remotely any more.
+                // One trick to speed it up is to get UID only of the last x messages frequently (every couple of minutes or one IDLE notifications) and then do a full list of UIDs infrequently.
+                /// vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162](http://tools.ietf.org/html/rfc5162)
                 if let vanishedMessages = vanishedMessages {
                     print("- vanishedMessages \(vanishedMessages)")
                 }
