@@ -525,6 +525,8 @@ final class MailCoreManager {
 
          */
         
+        // TODO: optimization: combinaison of CONDSTORE + fetching only the list of uids should work https://github.com/MailCore/mailcore2/issues/752
+        
         // modSeq: 10800 for yaani.
         ///  https://github.com/MailCore/mailcore2/issues?q=is%3Aissue+syncMessagesWithFolder
         /// modSeq if equl will not come
