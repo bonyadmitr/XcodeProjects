@@ -700,6 +700,57 @@ final class MailCoreManager {
         
         
     }
+    
+    // TODO: !!!
+    func searchLocalsToDelete(folder: String, uids: [UInt32],  handler: @escaping () -> Void) {
+        let requestUidsSet = MCOIndexSet(uids)
+        let searchExpression = MCOIMAPSearchExpression.searchUIDs(requestUidsSet)
+        imapSession.searchExpressionOperation(withFolder: folder, expression: searchExpression)?.start { error, indexSet in
+            if let error = error {
+//                handler(.failure(error))
+                print(error)
+                handler()
+            } else if let responseIndexSet = indexSet {
+                let isDeletedSomething = requestUidsSet != responseIndexSet
+                print("is deleted something?", isDeletedSomething)
+                
+                guard isDeletedSomething else {
+//                    print("--------")
+                    handler()
+                    return
+                }
+                
+                print("- request: \(requestUidsSet)")
+                print("- response: \(responseIndexSet)")
+                requestUidsSet.remove(responseIndexSet)
+                print("- deleted: \(requestUidsSet)")
+                
+                var deleteCount = 0
+                requestUidsSet.enumerate { uid in
+                    deleteCount += 1
+                    
+                    if let index = DataSource.shared.emails.firstIndex(where: { $0.uid == uid}) {
+                        DataSource.shared.emails.remove(at: index)
+                    } else {
+                        deleteCount -= 1
+                        assertionFailure()
+                    }
+                    
+                }
+                print("- deleteCount: \(deleteCount)")
+//                print("--------")
+                
+                handler()
+                print()
+//                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+//                handler(.failure(NSError()))
+                handler()
+            }
+        }
+    }
 }
 
 
