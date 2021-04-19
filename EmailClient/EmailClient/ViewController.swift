@@ -524,6 +524,13 @@ final class MailCoreManager {
          QRESYNC, only implemented on a small amount of servers would solve proper syncing.
 
          */
+        
+        // modSeq: 10800 for yaani.
+        ///  https://github.com/MailCore/mailcore2/issues?q=is%3Aissue+syncMessagesWithFolder
+        /// modSeq if equl will not come
+        /// uids to cut vanishedMessages
+        /// modSeq to cut messages
+        /// don't use `modSeq: 0` it is wrong working for yaani (modSeqValue = 0 for all messages and vanishedMessages will not come), so min `modSeq: 1`
         let syncOperation: MCOIMAPFetchMessagesOperation = imapSession.syncMessages(withFolder: folder, requestKind: kind, uids: uids, modSeq: modSeq)
         
         syncOperation.start { (error, messages, vanishedMessages) in
