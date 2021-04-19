@@ -619,6 +619,87 @@ final class MailCoreManager {
         
         
     }
+    
+    func searchLocalsToDelete(handler: @escaping () -> Void) {
+        /// An error occurred while fetching messages in the requested folder
+        /// max `0..<2609` for "life" server (count 2609)
+        let uids: [UInt32]
+        if DataSource.shared.emails.count > 2609 {
+            uids = DataSource.shared.emails[0..<2609].compactMap { $0.uid }
+        } else {
+            uids = DataSource.shared.emails.compactMap { $0.uid }
+        }
+        
+        
+        let requestUidsSet = MCOIndexSet(uids)
+        
+//        let searchExpression = MCOIMAPSearchExpression.searchHeader("Message-ID", value: "SOME_ID")
+        let searchExpression = MCOIMAPSearchExpression.searchUIDs(requestUidsSet)
+        imapSession.searchExpressionOperation(withFolder: "INBOX", expression: searchExpression)?.start { error, indexSet in
+            if let error = error {
+//                handler(.failure(error))
+                print(error)
+                handler()
+            } else if let responseIndexSet = indexSet {
+                let isDeletedSomething = requestUidsSet != responseIndexSet
+                print("is deleted something?", isDeletedSomething)
+                
+                guard isDeletedSomething else {
+//                    print("--------")
+                    handler()
+                    return
+                }
+                
+                print("- request: \(requestUidsSet)")
+                print("- response: \(responseIndexSet)")
+                requestUidsSet.remove(responseIndexSet)
+                print("- deleted: \(requestUidsSet)")
+                
+                var deleteCount = 0
+                requestUidsSet.enumerate { uid in
+                    deleteCount += 1
+                    
+                    if let index = DataSource.shared.emails.firstIndex(where: { $0.uid == uid}) {
+                        DataSource.shared.emails.remove(at: index)
+                    } else {
+                        deleteCount -= 1
+                        assertionFailure()
+                    }
+                    
+                }
+                print("- deleteCount: \(deleteCount)")
+//                print("--------")
+                
+                handler()
+                
+                /// UnsafeBufferPointer to Array https://gist.github.com/kirsteins/6d6e96380db677169831
+//                let ranges = Array(UnsafeBufferPointer(start: uidsSet.allRanges(), count: Int(uidsSet.rangesCount())))
+//                    .map { NSRange(location: Int($0.location), length: Int($0.length)) }
+//                    .compactMap { Range<Int>.init($0) }
+//                assert(ranges.count == uidsSet.rangesCount())
+//
+//                let emailCountWas = DataSource.shared.emails.count
+//                print("- email count: \(DataSource.shared.emails.count)")
+//                // Fatal error: Array replace: subrange extends past the end
+//                ranges.forEach { DataSource.shared.emails.removeSubrange($0) }
+//                print("- email count: \(DataSource.shared.emails.count)")
+//                assert(emailCountWas - DataSource.shared.emails.count == deleteCount)
+                
+                print()
+//                handler(.success(result))
+            } else {
+                assertionFailure()
+                // TODO: unknown error
+//                handler(.failure(NSError()))
+                handler()
+            }
+        }
+        
+        
+//        imapSession.searchOperation(withFolder: <#T##String!#>, kind: <#T##MCOIMAPSearchKind#>, search: <#T##String!#>)
+        
+        
+    }
 }
 
 
