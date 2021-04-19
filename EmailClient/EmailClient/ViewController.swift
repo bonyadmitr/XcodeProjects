@@ -510,6 +510,20 @@ final class MailCoreManager {
          }
          
          */
+        
+        /**
+         search https://github.com/MailCore/mailcore2/issues?q=is%3Aissue+QRESYNC
+         
+         https://github.com/MailCore/mailcore2/issues/1746
+         So how do people usually sync the new emails ?
+         You need to use UIDVALIDITY on folder to make sure that the UIDs were the same.
+         If UIDVALIDITY is the same, you can assume that UIDs are the same. Then, get the latests UIDs.
+
+         Then, as @haithngn mentioned, UIDs could be removed by another email client. In this case, you need to get the list of messages anyway to update the list of messages that disappeared.
+
+         QRESYNC, only implemented on a small amount of servers would solve proper syncing.
+
+         */
         let syncOperation: MCOIMAPFetchMessagesOperation = imapSession.syncMessages(withFolder: folder, requestKind: kind, uids: uids, modSeq: modSeq)
         
         syncOperation.start { (error, messages, vanishedMessages) in
