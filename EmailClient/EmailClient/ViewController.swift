@@ -568,6 +568,57 @@ final class MailCoreManager {
             }
         }
     }
+    
+    
+    func send() {
+        
+        let builder = MCOMessageBuilder()
+        builder.header.to = [MCOAddress(displayName: nil, mailbox: "zdaecq@gmail.com")!]
+        /// will not work for gmail if mailbox != username
+//        builder.header.from = MCOAddress(displayName: nil, mailbox: "witchkingforever@yandex.ru")
+        builder.header.from = MCOAddress(displayName: nil, mailbox: username)
+//        zzdaecq@gmail.com
+        builder.header.subject = "Test message"
+        builder.htmlBody = "Yo, this is a test message!"
+        //builder.addAttachment(MCOAttachment(text: "MCOAttachment"))
+
+        let rfc822Data = builder.data()
+        
+        /// will try to auth if wasn't
+        let sendOperation: MCOSMTPSendOperation = smtpSession.sendOperation(with: rfc822Data)
+        sendOperation.start { [weak self] error in
+            if let error = error {
+                
+                let nsError = error as NSError
+                if nsError.domain == MCOErrorDomain, nsError.code == 30 {
+                    print("Error sending email: Sender address rejected: not owned by auth user")
+                } else {
+                    print("Error sending email: \(error)")
+                }
+            } else {
+                print("Successfully sent email!")
+                
+                /// issue https://github.com/MailCore/mailcore2/issues/366
+                /// need for `yandex`. don't need for `gmail`
+                /// save in Sent folder. don't use "SENT"
+                self?.imapSession.appendMessageOperation(withFolder: "Sent", messageData: rfc822Data, flags: [.seen])?.start { error, createdUID in
+                // TODO: GMAIL
+//                self?.imapSession.appendMessageOperation(withFolder: "[Gmail]/&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-", messageData: rfc822Data, flags: [.seen])?.start { error, createdUID in
+                    if let error = error {
+                        print("Error saving email: \(error)")
+                    } else {
+                        print("Successfully saved email in SENT folder! id: \(createdUID)")
+                    }
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        
+    }
 }
 
 
