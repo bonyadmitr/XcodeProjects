@@ -751,6 +751,68 @@ final class MailCoreManager {
             }
         }
     }
+    
+    
+    
+    func updateLocalEmails(folder: String, handler: @escaping () -> Void) {
+        // TODO: batch update(fetch by pages)
+        //let uids = DataSource.shared.emails.compactMap { $0.uid }
+        let uids: [UInt32]
+        // not 2609 like for search delete
+        // TODO: check for different kind. 2608 for life server and kine = .flags
+        let limit = 2608
+        if DataSource.shared.emails.count > limit {
+            uids = DataSource.shared.emails[0..<limit].compactMap { $0.uid }
+        } else {
+            uids = DataSource.shared.emails.compactMap { $0.uid }
+        }
+        let requestUidsSet = MCOIndexSet(uids)
+        
+        /// only flags can be changes so we fetch only them
+        let kind: MCOIMAPMessagesRequestKind = [.flags]
+        
+        let fetchOperation: MCOIMAPFetchMessagesOperation = imapSession.fetchMessagesOperation(withFolder: folder, requestKind: kind, uids: requestUidsSet)
+        fetchOperation.start { error, result, vanished in
+            if let error = error {
+//                handler(.failure(error))
+                print(error)
+                handler()
+            } else if let result = result as? [MCOIMAPMessage] {
+                if let vanished = vanished {
+                    print(vanished)
+                    assertionFailure()
+                }
+                
+                var updatedCount = 0
+                for email in result {
+                    // TODO: update flags if need
+                    let localEmail = DataSource.shared.emails.first(where: { $0.uid == email.uid })!
+                    if localEmail.flags != email.flags {
+                        localEmail.flags = email.flags
+                        //print("updated: \(localEmail.uid) - \(localEmail.header.receivedDate!), \(localEmail.header.subject!)")
+                        print("updated: \(localEmail.uid) - \(localEmail.header.receivedDate!))")
+                        updatedCount += 1
+                    }
+                }
+                print("- updated count: \(updatedCount)")
+                
+                handler()
+                
+//                print(result)
+//                handler(.success(result))
+            } else {
+                assertionFailure()
+                handler()
+                // TODO: unknown error
+//                handler(.failure(NSError()))
+            }
+        }
+        
+        
+//        imapSession.searchOperation(withFolder: <#T##String!#>, kind: <#T##MCOIMAPSearchKind#>, search: <#T##String!#>)
+        
+        
+    }
 }
 
 
