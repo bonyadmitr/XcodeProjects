@@ -824,6 +824,26 @@ final class MailCoreManager {
      
      */
     
+    func sync() {
+        
+
+        
+        MailCoreManager.shared.fetchFolderStatus(folder: "INBOX") { result in
+            switch result {
+            case .success(let status):
+                print("- folder status: \(status)")
+                
+                // TODO: try find HighestModSeqChanged | a HIGHESTMODSEQ resp-code is sent by the server (signifying that the value has changed)
+                // TODO: check https://github.com/jstedfast/MailKit/issues/805
+                // TODO: check https://stackoverflow.com/questions/54232790/mailkit-imap-fetch-only-new-not-downloaded-messages
+        }
+
+        
+        
+        
+    }
+    
+    
 }
 
 
