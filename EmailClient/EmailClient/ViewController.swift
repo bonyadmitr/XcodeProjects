@@ -836,6 +836,58 @@ final class MailCoreManager {
                 // TODO: try find HighestModSeqChanged | a HIGHESTMODSEQ resp-code is sent by the server (signifying that the value has changed)
                 // TODO: check https://github.com/jstedfast/MailKit/issues/805
                 // TODO: check https://stackoverflow.com/questions/54232790/mailkit-imap-fetch-only-new-not-downloaded-messages
+                    // TODO: chunk
+                    /// check and delete old locals
+                    MailCoreManager.shared.searchLocalsToDelete() {
+                        
+                        /// highestModSeqValue
+                        /// - yandex
+                        /// + gmail
+                        /// + yaani
+                        if DataSource.shared.highestModSeqValue == 0 {
+                            
+                            /// do manual sync
+                            print("- highestModSeqValue is not supported")
+
+                            // TODO: chunk
+                            MailCoreManager.shared.updateLocalEmails(folder: "INBOX") {
+                                print("- updated local emails")
+                                
+                                
+                                let isThereNewMails = (DataSource.shared.uidNext != status.uidNext)
+                                
+                                if isThereNewMails {
+                                    
+                                    // TODO: chunk
+                                    MailCoreManager.shared.fetchEmails(for: "INBOX", from: DataSource.shared.uidNext, to: status.uidNext) { result in
+                                        switch result {
+                                        case .success(let emails):
+                                            print("++++++++ new emails: \(emails.count)")
+            
+                                            for email in emails {
+                                                print("\(email.uid) - \(email.header.receivedDate!), \(email.header.subject!)")
+                                            }
+                                            print("--------")
+            
+                                            DataSource.shared.emails.append(contentsOf: emails)
+                                            DataSource.shared.uidNext = status.uidNext
+                                            assert(DataSource.shared.emails.count == status.messageCount)
+            
+                                        case .failure(let error):
+                                            print(error.localizedDescription)
+                                            print()
+                                        }
+                                    }
+            
+            
+                                } else {
+                                    print("- there is no new emails")
+                                    print("--------")
+                                    assert(DataSource.shared.emails.count == status.messageCount)
+                                }
+                                
+                            }
+                            
         }
 
         
