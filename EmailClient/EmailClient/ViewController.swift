@@ -836,6 +836,9 @@ final class MailCoreManager {
                 // TODO: try find HighestModSeqChanged | a HIGHESTMODSEQ resp-code is sent by the server (signifying that the value has changed)
                 // TODO: check https://github.com/jstedfast/MailKit/issues/805
                 // TODO: check https://stackoverflow.com/questions/54232790/mailkit-imap-fetch-only-new-not-downloaded-messages
+                if DataSource.shared.uidValidity == status.uidValidity {
+                    /// fetch new + check local
+                             
                     // TODO: chunk
                     /// check and delete old locals
                     MailCoreManager.shared.searchLocalsToDelete() {
@@ -888,6 +891,69 @@ final class MailCoreManager {
                                 
                             }
                             
+                            
+                            
+                            
+                        } else {
+                            
+                            /// or `!=`
+                            if DataSource.shared.highestModSeqValue < status.highestModSeqValue {
+                                
+                                print("- there are changes in the folder")
+                                
+                                // TODO: can be a problem with return emails count (too many)
+                                // TODO: chunk (try)
+                                MailCoreManager.shared.syncMessagesByUIDWithFolder(folder: "INBOX", modSeq: DataSource.shared.highestModSeqValue) { result in
+                                    switch result {
+                                    case .success(let emails):
+                                        print("++++++++ emails: \(emails.count)")
+                                        
+                                        for email in emails {
+                                            
+                                            if email.uid >= DataSource.shared.uidNext {
+                                                print("new: \(email.uid) - \(email.header.receivedDate!), \(email.header.subject!)")
+                                                DataSource.shared.emails.append(email)
+                                            } else {
+                                                print("updated: \(email.uid) - \(email.header.receivedDate!), \(email.header.subject!)")
+                                                /// `!` bcz we sure that we have it
+                                                DataSource.shared.emails.first(where: { $0.uid == email.uid })!.flags = email.flags
+                                            }
+                                            
+                                        }
+                                        print("--------")
+                                        
+                                        DataSource.shared.uidNext = status.uidNext
+                                        DataSource.shared.highestModSeqValue = status.highestModSeqValue
+                                        
+                                        assert(DataSource.shared.emails.count == status.messageCount)
+                                        
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                        print()
+                                    }
+                                }
+                                
+                                
+                            } else {
+                                assert(DataSource.shared.emails.count == status.messageCount)
+                                print("- there are NO changes in the folder")
+                                print("--------")
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    
+                        
+                    
+                } else {
+                    
+                    
+                    
+                }
+                
+                
         }
 
         
