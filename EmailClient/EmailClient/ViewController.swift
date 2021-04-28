@@ -948,6 +948,37 @@ final class MailCoreManager {
                         
                     
                 } else {
+                    /// fetch all
+                    
+                    // TODO: chunk
+                    MailCoreManager.shared.fetchEmails(for: "INBOX") { result in
+                        switch result {
+                        case .success(let emails):
+                            print("++++++++ all:")
+                            
+                            
+                            for email in emails {
+                                //print("\(email.uid) - \(email.header.receivedDate!), \(email.header.subject!)")
+                                print("\(email.uid) - \(email.header.receivedDate!)")
+                            }
+                            
+                            print("--------")
+                            
+                            DataSource.shared.uidValidity = status.uidValidity
+                            DataSource.shared.uidNext = status.uidNext
+                            DataSource.shared.highestModSeqValue = status.highestModSeqValue
+                            
+                            DataSource.shared.emails = emails
+                            
+                            assert(DataSource.shared.emails.count == status.messageCount)
+                            
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            print()
+                            // TODO: retry
+                        }
+                    }
+                    
                     
                     
                     
