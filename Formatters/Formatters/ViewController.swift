@@ -35,7 +35,15 @@ class ViewController: UIViewController {
         // TODO: formats: h + K vs H + k
         /// http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Field_Symbol_Table
         /// https://stackoverflow.com/a/14276208/5893286
+        
+        
+        //ru - "HH"
+        //en - "h a"
+        //en_RU - "HH"
+        //"en_US" - "h a"
+        //"en_US_POSIX" - "h a"
         let locale = Locale.current
+        //let locale = Locale(identifier: "en_US")
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
         let is12hoursDeviceFormat = dateFormat.last == "a"//safe: dateFormat.contains("a")
         print("12 hours?", is12hoursDeviceFormat)
