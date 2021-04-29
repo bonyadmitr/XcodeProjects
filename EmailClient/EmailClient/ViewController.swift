@@ -985,6 +985,12 @@ final class MailCoreManager {
                 }
                 
                 
+                
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                print()
+            }
         }
 
         
