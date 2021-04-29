@@ -30,6 +30,11 @@ class ViewController: UIViewController {
         // https://developer.apple.com/documentation/foundation/dateformatter
         // https://developer.apple.com/documentation/foundation/nsdateformatter/1417087-setlocalizeddateformatfromtempla
         //DateFormatter().setLocalizedDateFormatFromTemplate("")
+        
+        // TODO: 12-hour mode vs 24 hour mode
+        // TODO: formats: h + K vs H + k
+        /// http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Field_Symbol_Table
+        /// https://stackoverflow.com/a/14276208/5893286
         let locale = Locale.current
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
         let is12hoursDeviceFormat = dateFormat.last == "a"//safe: dateFormat.contains("a")
