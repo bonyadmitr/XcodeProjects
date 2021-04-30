@@ -35,6 +35,11 @@ class ViewController: UIViewController {
         // TODO: formats: h + K vs H + k
         /// http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Field_Symbol_Table
         /// https://stackoverflow.com/a/14276208/5893286
+        /// https://stackoverflow.com/a/33758481/5893286
+        
+        
+        // TODO: Locale(identifier: "en_BY") == Locale.current // false
+        // in 24 hours style
         
         
         //ru - "HH"
