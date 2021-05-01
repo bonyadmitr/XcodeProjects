@@ -995,6 +995,163 @@ final class MailCoreManager {
 
         
         
+    }
+    
+    
+    
+    func folders() {
+        
+        fetchAllFolder { result in
+            switch result {
+            case .success(let folders):
+                /// INBOX in yandex `folders[1].path`
+//                print(folders)
+                
+                // TODO: check MCOIMAPNamespace().components(fromPath: PATH) https://github.com/MailCore/mailcore2/issues/1554
+                /// needs for russian folder names (gmail, yandex)
+                func IMAPtoUTF8(str: String) -> String? {
+                    /// https://github.com/MailCore/mailcore2/issues/1554
+                    let cfEncoding = CFStringEncoding(CFStringEncodings.UTF7_IMAP.rawValue)
+                    let nsEncoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding)
+                    let encoding = String.Encoding(rawValue: nsEncoding)
+
+                    let cString = str.cString(using: String.defaultCStringEncoding)!
+                    return String(cString: cString, encoding: encoding)
+                }
+                
+                for folder in folders {
+                    
+                    //                    if folder.flags == .folderTypeMask {
+                    /// Imap server support folder flags
+                    
+                    
+                    /// IMAP has 3 main folders - All Mail, Trash and Spam https://github.com/MailCore/mailcore2/issues/1484#issuecomment-235821386
+                    
+                    
+                    // TODO: check more
+                    // for yandex:
+                    // not working: "sent", "SENT" `The requested folder does not exist.  Folder selection failed`
+                    // working: "Sent", "INBOX", "inbox", "Inbox"
+                    //
+                    // TODO: `result.first!.flags == .sentMail` As i saw some servers doesnt support this flag check. But if it support we will use it otherwise current checking will work
+                    
+                    
+                    
+//                    let flags = folder.flags
+//                    let q = flags ~= .inbox
+                    
+//                    MCOIMAPFolderFlag
+                    
+
+                    
+//                    if flags.contains(.inbox) {
+//                        print("inbox:", terminator: "")
+//                    } else if flags.contains(.drafts) {
+//                        print("drafts:", terminator: "")
+//                    } else {
+//                        print("other:", terminator: "")
+//                    }
+//                      //vs
+//                    switch flags {
+//                    case _ where flags.contains(.inbox):
+//                        print("inbox:", terminator: "")
+//                    case _ where flags.contains(.drafts):
+//                        print("drafts:", terminator: "")
+//                    default:
+//                        print("other:", terminator: "")
+//                    }
+                    
+                    
+                    
+                    /// used global func
+                    //func ~= (pattern: MCOIMAPFolderFlag, value: MCOIMAPFolderFlag) -> Bool {
+                    //    return value.contains(pattern)
+                    //}
+                    switch folder.flags {
+                    case .inbox:
+                        print("inbox:", terminator: "")
+                    case .drafts:
+                        print("drafts:", terminator: "")
+                    case .sentMail:
+                        print("sent:", terminator: "")
+                    case .trash:
+                        print("trash:", terminator: "")
+                    case .spam: /// same as .junk
+                        print("spam:", terminator: "")
+                    case .important:
+                        /// gmail has
+                        print("important:", terminator: "")
+//                    case []:
+//                        //gmail "INBOX"
+//                        print("none:", terminator: "")
+                    case .noSelect:
+                        //gmail "[Gmail]"
+                        print("skip:", terminator: "")
+                    case .allMail:
+                        /// gmail spam not included
+                        print("allMail:", terminator: "")
+                    case .starred:
+                        /// gmail has, yandex not
+                        print("starred:", terminator: "")
+                    case .archive:
+                        /// gmail has no it. Google's method of "Archiving" - simply removing the "Inbox Label". use allMail for it
+                        /// gmail logic https://gmail-miscellany.blogspot.com/2012/10/how-gmail-stores-your-mail.html
+                        print("archive:", terminator: "")
+                    case .unmarked, []:
+                        /// user custom folder
+                        /// yandex, yaani has. gmail has no it
+                        /// gmail INBOX here
+                        /// yandex Outbox here
+                        print("custom:", terminator: "")
+                    default:
+                        
+                        // TODO: imapFolder.path
+//                        switch imapFolder.path.lowercased() {
+//                        case "inbox":
+
+//                        case "drafts":
+
+//                        case "sent":
+
+//                        case "trash":
+
+//                        case "spam", "junk":
+
+//                        case "outbox":
+//                            /// I'm not sure for this. bcz user cant open mail detail from oubox folder. it acts our local folder.
+
+//                        default:
+//                            folder.id = imapFolder.path
+//                        }
+                        
+                        
+                        
+                        print("other:", terminator: "")
+                    }
+                    
+                    
+                    //                    }
+                    
+                    print(IMAPtoUTF8(str: folder.path)!, folder.path!)
+                    
+//                    print()
+                    
+                }
+                
+                // TODO: check type https://stackoverflow.com/a/32713563/5893286
+
+
+                /// utf7 "+g0l6P3ux-"
+                //print(IMAPtoUTF8(str: "+g0l6P3ux-")!)
+                //print(folders.compactMap{ IMAPtoUTF8(str: $0.path)})
+
+
+                print()
+            case .failure(let error):
+                print(error.localizedDescription)
+                print()
+            }
+        }
         
     }
     
