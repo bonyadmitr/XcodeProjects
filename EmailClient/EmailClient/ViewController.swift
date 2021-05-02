@@ -1062,6 +1062,45 @@ final class MailCoreManager {
 //                    }
                     
                     
+//                    switch folder.flags {
+//                    case .inbox, [.inbox, .noInferiors, .unmarked]:
+//                        print("inbox:", terminator: "")
+//                    case .drafts, [.drafts, .unmarked]:
+//                        print("drafts:", terminator: "")
+//                    case .sentMail, [.sentMail, .unmarked]:
+//                        print("sent:", terminator: "")
+//                    case .trash, [.trash, .unmarked]:
+//                        print("trash:", terminator: "")
+//                    case .spam, [.spam, .unmarked], [.spam, .noInferiors]:
+//                        print("spam:", terminator: "")
+//                    case .important:
+//                        /// gmail has
+//                        print("important:", terminator: "")
+////                    case []:
+////                        //gmail "INBOX"
+////                        print("none:", terminator: "")
+//                    case .noSelect:
+//                        //gmail "[Gmail]"
+//                        print("skip:", terminator: "")
+//                    case .allMail:
+//                        /// gmail spam not included
+//                        print("allMail:", terminator: "")
+//                    case .starred:
+//                        /// gmail has, yandex not
+//                        print("starred:", terminator: "")
+//                    case .archive:
+//                        /// gmail has no it. Google's method of "Archiving" - simply removing the "Inbox Label". use allMail for it
+//                        /// gmail logic https://gmail-miscellany.blogspot.com/2012/10/how-gmail-stores-your-mail.html
+//                        print("archive:", terminator: "")
+//                    case .unmarked, []:
+//                        /// user custom folder
+//                        /// yandex, yaani has. gmail has no it
+//                        /// gmail INBOX here
+//                        print("custom:", terminator: "")
+//                    default:
+//                        print("other:", terminator: "")
+//                    }
+                    
                     
                     /// used global func
                     //func ~= (pattern: MCOIMAPFolderFlag, value: MCOIMAPFolderFlag) -> Bool {
