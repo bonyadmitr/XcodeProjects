@@ -72,6 +72,21 @@ class ViewController: UIViewController {
         print("24 hours?", is24hoursDeviceFormat)
         print()
         //DateFormatter.dateFormat(fromTemplate: "j", options:0, locale: Locale(identifier: "en_BY"))!.last == "a"
+        
+        
+        //DateFormatter.dateFormat(fromTemplate: "MM.dd.yyyy HH:mm:ss", options:0, locale: Locale(identifier: "tr"))
+        let dateFormat2 = DateFormatter.dateFormat(fromTemplate: "MM.dd.yyyy HH:mm:ss", options:0, locale: locale) ?? "HH"
+        // ru 24: dd.MM.yyyy, HH:mm:ss
+        // ru 12: dd.MM.yyyy, h:mm:ss a
+        print(dateFormat2)
+        
+        let df = DateFormatter()
+        df.dateFormat = dateFormat2
+        print( df.string(from: Date()) )
+        
+        print()
+        
+        
     }
 
 
