@@ -157,6 +157,7 @@ class ViewController: UIViewController {
     
     private func generalAction() {
 //        MailCoreManager.shared.folders()
+        MailCoreManager.shared.sync()
         
 //        MailCoreManager.shared.send()
         
@@ -1398,3 +1399,5 @@ extension Mirror {
     }
     
 }
+
+extension MCOIMAPFolderInfo: ReflectedStringConvertible {}
