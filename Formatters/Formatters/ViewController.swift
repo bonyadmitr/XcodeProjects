@@ -49,9 +49,6 @@ class ViewController: UIViewController {
         //"en_US_POSIX" - "h a"
         let locale = Locale.current
         //let locale = Locale(identifier: "en_US")
-        let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
-        let is12hoursDeviceFormat = dateFormat.last == "a"//safe: dateFormat.contains("a")
-        print("12 hours?", is12hoursDeviceFormat)
         
         
         // TODO: doc
@@ -60,6 +57,11 @@ class ViewController: UIViewController {
 //        let usLocale = Locale(identifier: "en_US")
 //        let gbLocale = Locale(identifier: "en_GB")
 //        let template = "yMMMMd"
+//
+//        let usDateFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: usLocale)!
+//        // Date format for English (United States): "MMMM d, y"
+//        let gbDateFormat = DateFormatter.dateFormat(fromTemplate: template, options: 0, locale: gbLocale)!
+//        // Date format for English (United Kingdom): "d MMMM y"
     }
 
 
