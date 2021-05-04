@@ -52,6 +52,14 @@ class ViewController: UIViewController {
         let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options:0, locale:locale)!
         let is12hoursDeviceFormat = dateFormat.last == "a"//safe: dateFormat.contains("a")
         print("12 hours?", is12hoursDeviceFormat)
+        
+        
+        // TODO: doc
+        /// difference between the date formats for British and American English:
+        /// https://developer.apple.com/documentation/foundation/dateformatter/1408112-dateformat
+//        let usLocale = Locale(identifier: "en_US")
+//        let gbLocale = Locale(identifier: "en_GB")
+//        let template = "yMMMMd"
     }
 
 
