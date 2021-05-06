@@ -40,6 +40,49 @@ import UIKit
 //    }
 //
 //}
+//
+//extension NSObject {
+//
+//
+//
+//    /// source https://stackoverflow.com/a/46611354/5893286
+//    func toDictionary(from classType: AnyClass) -> [String: Any] {
+//
+//        var propertiesCount : CUnsignedInt = 0
+//        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
+//        var propertiesDictionary = [String:Any]()
+//
+//        for i in 0 ..< Int(propertiesCount) {
+//            if let property = propertiesInAClass?[i],
+//               let strKey = NSString(utf8String: property_getName(property)) as String? {
+//                propertiesDictionary[strKey] = value(forKey: strKey)
+//            }
+//        }
+//        return propertiesDictionary
+//    }
+//
+//    var desc2: String {
+//        desc(from: Self.self)
+//    }
+//
+//    func desc(from classType: AnyClass) -> String {
+//
+//        var propertiesCount : CUnsignedInt = 0
+//        let propertiesInAClass = class_copyPropertyList(classType, &propertiesCount)
+//        var result = String(describing: classType) + " {"
+//
+//        for i in 0 ..< Int(propertiesCount) {
+//            if let property = propertiesInAClass?[i],
+//               let strKey = NSString(utf8String: property_getName(property)) as String?
+//            {
+//                result += "\n\t\(strKey): \(value(forKey: strKey) ?? "nil")"
+//            }
+//        }
+//        return result + "\n}"
+//    }
+//
+//}
+//
 /**
  Tracking tasks with stack traces https://www.cocoawithlove.com/blog/2016/02/28/stack-traces-in-swift.html
  utility class for walking through stack frames https://github.com/mattgallagher/CwlUtils/blob/master/Sources/CwlUtils/CwlStackFrame.swift
