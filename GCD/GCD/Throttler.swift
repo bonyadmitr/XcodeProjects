@@ -1,4 +1,27 @@
 import Foundation
+
+// usage
+//Throttler.go {
+//    print("go! > \(1)")
+//}
+//Throttler.go {
+//    print("go! > \(2)")
+//}
+//
+//Throttler.go(id: "3") {
+//    print("go! > \(3)")
+//}
+//Throttler.go(id: "3") {
+//    print("go! > \(3)")
+//}
+//
+//for i in 1...1000 {
+//    Throttler.go {
+//        print("go! > \(i)")
+//    }
+//}
+/// inspired https://github.com/boraseoksoon/Throttler
+/// can be created DispatchQueue extension
 enum Throttler {
     
     static private var workItems: [String: DispatchWorkItem] = [:]
