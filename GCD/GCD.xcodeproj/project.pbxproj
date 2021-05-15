@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C48DFAAC263E86C3002897DE /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48DFAAB263E86C3002897DE /* Throttler.swift */; };
 		CE47AEEE22B83162006B527F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47AEED22B83162006B527F /* AppDelegate.swift */; };
 		CE47AEF022B83162006B527F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47AEEF22B83162006B527F /* ViewController.swift */; };
 		CE47AEF322B83162006B527F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE47AEF122B83162006B527F /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C48DFAAB263E86C3002897DE /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		CE47AEEA22B83162006B527F /* GCD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GCD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE47AEED22B83162006B527F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE47AEEF22B83162006B527F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				CE69CF3B22BF723400CFA6D1 /* DispatchQueue+Main.swift */,
 				CE69CF3D22C496A700CFA6D1 /* Dispatch+Assert.swift */,
 				CE69CF3F22C4970C00CFA6D1 /* Benchmark.swift */,
+				C48DFAAB263E86C3002897DE /* Throttler.swift */,
 				CE47AEF122B83162006B527F /* Main.storyboard */,
 				CE47AEF422B83164006B527F /* Assets.xcassets */,
 				CE47AEF622B83164006B527F /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 			files = (
 				CE69CF3E22C496A700CFA6D1 /* Dispatch+Assert.swift in Sources */,
 				CE69CF4022C4970C00CFA6D1 /* Benchmark.swift in Sources */,
+				C48DFAAC263E86C3002897DE /* Throttler.swift in Sources */,
 				CE69CF3C22BF723400CFA6D1 /* DispatchQueue+Main.swift in Sources */,
 				CE761F0122BF62680051EF21 /* CountWhere.swift in Sources */,
 				CE47AEF022B83162006B527F /* ViewController.swift in Sources */,
