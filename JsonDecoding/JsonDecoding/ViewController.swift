@@ -34,6 +34,13 @@ struct ProductDetails: Decodable {
     let image: String
     let description: String
 }
+
+struct Product: Decodable {
+    let productId: String
+    let name: String
+    let price: Int
+    let image: String
+}
     }
 
 
