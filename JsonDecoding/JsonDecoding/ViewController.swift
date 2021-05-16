@@ -141,6 +141,9 @@ extension JSONDecoder {
     /// JSONDecoder keypath
     /// another solution https://github.com/dgrzeszczak/KeyedCodable/
     /// another solution https://gist.github.com/aunnnn/9a6b4608ae49fe1594dbcabd9e607834
+    /// another solution https://github.com/aunnnn/NestedDecodable
+    ///
+    /// code https://gist.github.com/sgr-ksmt/d3b79ed1504768f2058c5ea06dc93698
     func decode<T: Decodable>(_ type: T.Type, from data: Data, keyPath: String) throws -> T {
         let toplevel = try JSONSerialization.jsonObject(with: data) as AnyObject
         if let nestedJson = toplevel.value(forKeyPath: keyPath) {
