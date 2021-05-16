@@ -17,6 +17,10 @@ import UIKit
  Big Json https://type.fit/api/quotes
  
  
+ https://balajahe.github.io/swift_vs_rust/
+ https://gist.github.com/ivan-ushakov/ee8257e5bb3e8c872f2f07c712e76972
+ try lib https://github.com/Joannis/IkigaJSON
+ 
  */
 class ViewController: UIViewController {
 
