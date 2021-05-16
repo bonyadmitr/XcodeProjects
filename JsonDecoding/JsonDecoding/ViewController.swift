@@ -136,6 +136,21 @@ extension KeyedDecodingContainer {
 }
 
 
+extension JSONDecoder {
+    
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, keyPath: String) throws -> T {
+        let toplevel = try JSONSerialization.jsonObject(with: data) as AnyObject
+        if let nestedJson = toplevel.value(forKeyPath: keyPath) {
+            let nestedJsonData = try JSONSerialization.data(withJSONObject: nestedJson)
+            return try decode(type, from: nestedJsonData)
+        } else {
+            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Nested json not found for key path \"\(keyPath)\""))
+        }
+    }
+}
+
+
+
 /// https://github.com/mattcomi/ReflectedStringConvertible/blob/master/ReflectedStringConvertible/ReflectedStringConvertible.swift
 protocol ReflectedStringConvertible : CustomStringConvertible { }
 
