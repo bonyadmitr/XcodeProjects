@@ -138,6 +138,9 @@ extension KeyedDecodingContainer {
 
 extension JSONDecoder {
     
+    /// JSONDecoder keypath
+    /// another solution https://github.com/dgrzeszczak/KeyedCodable/
+    /// another solution https://gist.github.com/aunnnn/9a6b4608ae49fe1594dbcabd9e607834
     func decode<T: Decodable>(_ type: T.Type, from data: Data, keyPath: String) throws -> T {
         let toplevel = try JSONSerialization.jsonObject(with: data) as AnyObject
         if let nestedJson = toplevel.value(forKeyPath: keyPath) {
