@@ -70,7 +70,24 @@ class ProductClass: Decodable, ReflectedStringConvertible {
         price = try container.decodeTypeOrStringAsType(Int.self, forKey: .price)
     }
 }
+
+final class ProductDetailsClass: ProductClass {
+    let desc: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case desc = "description"
     }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        desc = try container.decode(String.self, forKey: .desc)
+        try super.init(from: decoder)
+    }
+}
+
+
+
+
 
 
 
