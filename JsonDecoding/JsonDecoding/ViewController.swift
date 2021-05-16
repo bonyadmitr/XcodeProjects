@@ -104,6 +104,59 @@ class ViewController: UIViewController {
             """)
         }
     }
+    
+    private func jsonChunks() {
+        
+        /// inspired https://stackoverflow.com/a/53888979/5893286
+        func measure(block: () -> Void) {
+            var results = [CFTimeInterval]()
+            let count = 10
+            for _ in 1...count {
+                let startTime = CACurrentMediaTime()
+                block()
+                let endTime = CACurrentMediaTime()
+                results.append(endTime - startTime)
+            }
+            
+            print(results)
+            print(results.reduce(0, { $0 + $1 }) / CFTimeInterval(count) )
+        }
+        
+        struct Quote: Decodable {
+            let text: String
+            let author: String?
+        }
+        
+        // 1643
+        //[0.011267591966316104, 0.008694753982126713, 0.008589101023972034, 0.008496747817844152, 0.008271147962659597, 0.0074710240587592125, 0.007086320081725717, 0.007109537022188306, 0.0076550068333745, 0.0070984389167279005]
+        //0.008173966966569423 | 0.00813282891176641
+        let url = URL(string: "https://type.fit/api/quotes")!
+        let data = try! Data(contentsOf: url)
+        
+        // #2
+//        measure {
+//            _ = try! JSONDecoder().decode([Quote].self, from: data)
+//        }
+        
+        // #2 chunks parse
+        //[0.015013829804956913, 0.012103984132409096, 0.01195448893122375, 0.01117734401486814, 0.010261397110298276, 0.009990822058171034, 0.009905562037602067, 0.009876755066215992, 0.01073588989675045, 0.010298894951120019]
+        //0.011131896800361574 | 0.011040727607905865
+        measure {
+            let jsonArray = try! JSONSerialization.jsonObject(with: data, options: []) as! NSArray
+            let chunkSize = 1000 // TODO: guard
+            let q1 = jsonArray.subarray(with: .init(location: 0, length: chunkSize))
+            let q2 = jsonArray.subarray(with: .init(location: chunkSize, length: jsonArray.count - chunkSize))
+        
+            let q1Data = try! JSONSerialization.data(withJSONObject: q1, options: [])
+            let q2Data = try! JSONSerialization.data(withJSONObject: q2, options: [])
+            _ = try! JSONDecoder().decode([Quote].self, from: q1Data) + (try! JSONDecoder().decode([Quote].self, from: q2Data))
+        }
+
+        
+        print()
+    }
+
+}
 
 private let snakeDecoder: JSONDecoder = {
     let decoder = JSONDecoder()
