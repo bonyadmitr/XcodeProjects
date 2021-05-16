@@ -64,6 +64,46 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    private func fetchProducts() {
+        
+        guard
+            let productDetailsURL = Bundle.main.url(forResource: "productDetails", withExtension: "json"),
+            let productsURL = Bundle.main.url(forResource: "products", withExtension: "json"),
+            let productsNotGoodURL = Bundle.main.url(forResource: "productsNotGood", withExtension: "json")
+        else {
+            print("didn't find file")
+            return
+        }
+        
+        do {
+            let productDetailsData = try Data(contentsOf: productDetailsURL)
+            let productsData = try Data(contentsOf: productsURL)
+            let productsNotGoodData = try Data(contentsOf: productsNotGoodURL)
+            
+            let productDetails: ProductDetails = try dataToJson(productDetailsData)
+            let productDetailsClass: ProductDetailsClass = try dataToJson(productDetailsData)
+            
+            let products: [Product] = try dataToJson(productsData)
+            let productsNotGood = (try dataToJson(productsNotGoodData) as [FailableDecodable<ProductCustom>]).compactMap(\.wrappedValue)
+            let productsNotGoodClass = (try dataToJson(productsNotGoodData) as [FailableDecodable<ProductClass>]).compactMap(\.wrappedValue)
+            
+            print("""
+            - success
+            - good json: \(productDetails))
+            - good json class: \(productDetailsClass))
+
+            - good json: \(products.count): \(products)
+            - not good json: \(productsNotGood.count): \(productsNotGood)
+            - not good json class: \(productsNotGoodClass.count): \(productsNotGoodClass)
+            """)
+            
+        } catch {
+            print("""
+            - failed
+            - \(error)
+            """)
+        }
+    }
 
 private let snakeDecoder: JSONDecoder = {
     let decoder = JSONDecoder()
