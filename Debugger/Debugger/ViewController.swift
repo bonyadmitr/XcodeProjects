@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: dump()
 //protocol ReflectedStringConvertible : CustomStringConvertible { }
 //
 //extension ReflectedStringConvertible {
@@ -135,6 +136,8 @@ import UIKit
  
  // TODO: CallStackParser for closures
  */
+
+// TODO: check debug bookmarks
 
 class ViewController: UIViewController {
     
