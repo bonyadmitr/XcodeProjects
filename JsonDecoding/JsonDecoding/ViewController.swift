@@ -22,6 +22,43 @@ import UIKit
  try lib https://github.com/Joannis/IkigaJSON
  
  */
+
+// TODO: enum Decodable
+/**
+ enum RemoteItem2: Decodable, Hashable {
+     case file(RemoteItem)
+     case folder(RemoteFolder)
+     
+     private enum CodingKeys: String, CodingKey {
+         case isFolder = "folder"
+         case contentType = "content_type"
+     }
+     
+     init(from decoder: Decoder) throws {
+         let container = try decoder.container(keyedBy: CodingKeys.self)
+         let isFolder = try container.decode(Bool.self, forKey: .isFolder)
+         
+         let contentType = try container.decode(String.self, forKey: .contentType)
+         let types = contentType.components(separatedBy: "/")
+         guard types.count == 2 else {
+             assertionFailure(types.debugDescription)
+             throw Errors.unknown
+         }
+         
+         let primaryType = types[0]
+         let secondaryType = types[1]
+         
+         let type = ItemType(rawValue: primaryType)!// ?? .unknown
+         
+         
+         if isFolder {
+             self = try .folder(.init(from: decoder))
+         } else {
+             self = try .file(.init(from: decoder))
+         }
+     }
+ */
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
