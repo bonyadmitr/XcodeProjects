@@ -27,6 +27,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+struct ProductDetails: Decodable {
+    let productId: String
+    let name: String
+    let price: Int
+    let image: String
+    let description: String
+}
     }
 
 
