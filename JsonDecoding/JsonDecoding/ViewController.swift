@@ -41,6 +41,13 @@ struct Product: Decodable {
     let price: Int
     let image: String
 }
+
+struct ProductCustom: Decodable {
+    let productId: String
+    let name: String
+    let price: Convertible<Int>
+    let image: String
+}
     }
 
 
