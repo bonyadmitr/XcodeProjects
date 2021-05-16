@@ -27,6 +27,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+/// use for ` = "product_id"`
+//private let decoder = JSONDecoder()
+//private func defaultDataToJson<T: Decodable>(_ data: Data) throws -> T {
+//    return try decoder.decode(T.self, from: data)
+//}
+
+
+// MARK: - Models
+
 struct ProductDetails: Decodable {
     let productId: String
     let name: String
