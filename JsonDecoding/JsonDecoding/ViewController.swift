@@ -7,6 +7,17 @@
 
 import UIKit
 
+
+
+// TODO: json stream
+/**
+ https://github.com/tris-code/json + InputByteStream https://github.com/tris-code/stream/blob/master/Sources/Stream/Library/ByteStream.swift
+ old https://github.com/dhoerl/SAX-JSON-Parser-ForStreamingData
+ Alamofire stream https://stackoverflow.com/a/60451335/5893286
+ Big Json https://type.fit/api/quotes
+ 
+ 
+ */
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
