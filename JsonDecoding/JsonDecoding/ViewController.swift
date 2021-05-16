@@ -48,6 +48,28 @@ struct ProductCustom: Decodable {
     let price: Convertible<Int>
     let image: String
 }
+
+class ProductClass: Decodable, ReflectedStringConvertible {
+    let productId: String
+    let name: String
+    let price: Int
+    let image: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case productId
+        case name
+        case price
+        case image
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        productId = try container.decode(String.self, forKey: .productId)
+        name = try container.decode(String.self, forKey: .name)
+        image = try container.decode(String.self, forKey: .image)
+        price = try container.decodeTypeOrStringAsType(Int.self, forKey: .price)
+    }
+}
     }
 
 
