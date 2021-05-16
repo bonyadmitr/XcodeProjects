@@ -27,6 +27,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+private let snakeDecoder: JSONDecoder = {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    return decoder
+}()
+
+private func dataToJson<T: Decodable>(_ data: Data) throws -> T {
+    return try snakeDecoder.decode(T.self, from: data)
+}
+
 /// use for ` = "product_id"`
 //private let decoder = JSONDecoder()
 //private func defaultDataToJson<T: Decodable>(_ data: Data) throws -> T {
