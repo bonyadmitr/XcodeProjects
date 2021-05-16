@@ -63,7 +63,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //fetchProducts()
+        jsonChunks()
+        
+    }
+    
     private func fetchProducts() {
         
         guard
