@@ -146,12 +146,19 @@ class ViewController: UIViewController {
 //        $0.text = ""
 //    }
     
-    let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
+    let queue = DispatchQueue(label: "___concurrent line \(#line)", attributes: .concurrent)
     //let queue = DispatchQueue(label: "123", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
     let semaphoreForQueue = DispatchSemaphore(value: 3)
+    let queue2 = DispatchQueue(label: "___serial line \(#line)", target: .global())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
+        
+        //queue2.activate()
+        queue2.async {
+            print("isMainThread: \(Thread.isMainThread)")
+        }
         
 //        let safeString = SafeString()
 ////        let safeString = ThreadSafeString("")
