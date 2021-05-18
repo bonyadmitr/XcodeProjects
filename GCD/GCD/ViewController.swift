@@ -197,6 +197,28 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    func semaphore1() {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            for i in 1...20 {
+                print("start", i)
+                self.longBackgroundTask(i: i) {
+                    semaphore.signal()
+                }
+                semaphore.wait()
+                print("end", i)
+            }
+            
+            print("--- done all")
+        }
+        
+    }
+    
+    
+    
     func semaphore2() {
         /// https://medium.com/@roykronenfeld/semaphores-in-swift-e296ea80f860
         let queue = DispatchQueue(label: "com.gcd.myQueue", attributes: .concurrent)
