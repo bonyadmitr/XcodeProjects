@@ -212,9 +212,15 @@ class ViewController: UIViewController {
         }
         print("--- done all")
     }
+    
+    private func longBackgroundTask(i: Int, handler: @escaping () -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            print("work", i)
+            handler()
+        }
     }
     
-    func q1() {
+    func semaphoreForQueue1() {
         
         DispatchQueue.global().async {
             
