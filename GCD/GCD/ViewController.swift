@@ -116,6 +116,12 @@ extension Student: Equatable {
         return lhs.passportNumber == rhs.passportNumber
     }
 }
+// #2
+//func == (lhs: Student, rhs: Student) -> Bool {
+//    return lhs.passportNumber == rhs.passportNumber
+//}
+///let isSame = Student(name: "1", passportNumber: "1") == Student(name: "2", passportNumber: "2")
+
 /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
 class ViewController: UIViewController {
 
