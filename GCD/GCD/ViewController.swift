@@ -34,7 +34,13 @@ final class DispatchOperation {
     
 }
 
-/// https://medium.com/@dmytro.anokhin/concurrency-in-swift-reader-writer-lock-4f255ae73422
+// general + Dispatch Sources https://khanlou.com/2016/04/the-GCD-handbook/
+
+// TODO: attributes: .initiallyInactive
+// TODO: autoreleaseFrequency: .inherit
+//let queue = DispatchQueue(label: "lessAggressiveQueue", attributes: .initiallyInactive, autoreleaseFrequency: .inherit, target: .global())
+//queue.activate()
+
 /**
  concurrentQueue.async(flags: .barrier)
  // .barrier flag ensures that within the queue all reading is done
