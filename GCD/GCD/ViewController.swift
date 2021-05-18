@@ -197,6 +197,21 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    func semaphore2() {
+        /// https://medium.com/@roykronenfeld/semaphores-in-swift-e296ea80f860
+        let queue = DispatchQueue(label: "com.gcd.myQueue", attributes: .concurrent)
+        let semaphore = DispatchSemaphore(value: 3)
+        for songNumber in 1 ... 15 {
+           queue.async {
+              semaphore.wait()
+              print("Downloading song", songNumber)
+              sleep(2) // Download take ~2 sec each
+              print("Downloaded song", songNumber)
+              semaphore.signal()
+           }
+        }
+        print("--- done all")
+    }
     }
     
     func q1() {
