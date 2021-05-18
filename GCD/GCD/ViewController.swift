@@ -160,6 +160,34 @@ class ViewController: UIViewController {
             print("isMainThread: \(Thread.isMainThread)")
         }
         
+        /// same `sleep(1)`
+        
+//        for i in 1...100 {
+//            queue.async {
+//                Thread.sleep(forTimeInterval: 1)
+//                print("Task \(i)")
+//            }
+//        }
+        let semaphore = DispatchSemaphore(value: 3)
+        for i in 1...10 {
+            queue.async {
+                Thread.sleep(forTimeInterval: 1)
+                print("Task \(i)")
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+        
+        queue.async(flags: .barrier) {
+            print("done")
+            print()
+            
+            self.queue2.async {
+                print("done 2")
+            }
+        }
+
+        
 //        let safeString = SafeString()
 ////        let safeString = ThreadSafeString("")
 //
