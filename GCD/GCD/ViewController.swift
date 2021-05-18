@@ -265,6 +265,31 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+/// DispatchGroup answer
+//func urlsInitial() {
+//    let urls = (1...5).compactMap { URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/\($0).jpg") }
+//    var imagesData = [Data]()
+//    let group = DispatchGroup()
+//
+//    for url in urls {
+//        group.enter()
+//        DispatchQueue.global().async {
+//            if let data = try? Data(contentsOf: url) {
+//                imagesData.append(data)
+//            }
+//            group.leave()
+//        }
+//    }
+//
+//    group.wait()
+//    assert(imagesData.count == urls.count)
+//    assert(Thread.isMainThread == true)
+//    print("\(imagesData.count) images downloaded. Is main thread? \(Thread.isMainThread)")
+//}
+    
+    
+    
+    
     func semaphore1() {
         
         let semaphore = DispatchSemaphore(value: 0)
