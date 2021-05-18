@@ -45,6 +45,10 @@ final class DispatchOperation {
 // TODO: test
 // google swift overcommit queue
 /// setting a target queue on serial queues is generally a good idea, specifically to turn off overcommit
+/// https://twitter.com/Catfish_Man/status/1369796012135485440
+/// source https://mjtsai.com/blog/2021/03/16/underused-and-overused-gcd-patterns/
+//let lessAggressiveQueue = DispatchQueue(label: "lessAggressiveQueue", attributes: .initiallyInactive, autoreleaseFrequency: .inherit, target: .global())
+
 /**
  concurrentQueue.async(flags: .barrier)
  // .barrier flag ensures that within the queue all reading is done
