@@ -106,6 +106,16 @@ public class ThreadSafeString {
     }
 }
 
+struct Student {
+    let name: String
+    let passportNumber: String
+}
+// #1
+extension Student: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.passportNumber == rhs.passportNumber
+    }
+}
 /// https://theswiftdev.com/2018/07/10/ultimate-grand-central-dispatch-tutorial-in-swift/
 class ViewController: UIViewController {
 
