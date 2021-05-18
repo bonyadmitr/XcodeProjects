@@ -49,6 +49,9 @@ final class DispatchOperation {
 /// source https://mjtsai.com/blog/2021/03/16/underused-and-overused-gcd-patterns/
 //let lessAggressiveQueue = DispatchQueue(label: "lessAggressiveQueue", attributes: .initiallyInactive, autoreleaseFrequency: .inherit, target: .global())
 
+
+
+/// ReadWriteLock vs queue https://medium.com/@dmytro.anokhin/concurrency-in-swift-reader-writer-lock-4f255ae73422
 /**
  concurrentQueue.async(flags: .barrier)
  // .barrier flag ensures that within the queue all reading is done
