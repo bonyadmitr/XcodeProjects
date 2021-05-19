@@ -265,6 +265,31 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    // task 3: any order, constant number of threads
+    func task3() {
+        
+        var res = ""
+        let threadsMaxCount = 3
+        let semaphore = DispatchSemaphore(value: threadsMaxCount)
+        
+        for task in tasks {
+            semaphore.wait()
+            
+            perform(task) { taskTitle in
+                res += taskTitle
+                semaphore.signal()
+            }
+        }
+        
+        (1...threadsMaxCount).forEach { _ in semaphore.wait() }
+        (1...threadsMaxCount).forEach { _ in semaphore.signal() }
+        
+        print("\(#function) result: \(res)")
+        
+    }
+    
+    
+    
     // MARK: - others
     
     func groupUrls() {
