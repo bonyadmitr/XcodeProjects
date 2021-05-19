@@ -265,6 +265,24 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    
+    // task 2: same order, one thread (1 by 1)
+    func task2() {
+        var res = ""
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        for task in tasks {
+            
+            perform(task) { taskTitle in
+                res += taskTitle
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+        
+        print("\(#function) result: \(res)")
+    }
+    
     // task 3: any order, constant number of threads
     func task3() {
         
