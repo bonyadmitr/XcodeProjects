@@ -265,6 +265,33 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    func semaphoreUrls() {
+        let urls = [URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/1.jpg")!,
+                    URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/2.jpg")!,
+                    URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/3.jpg")!,
+                    URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/4.jpg")!,
+                    URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/5.jpg")!]
+        
+        var imagesData = [Data]()
+        let semaphore = DispatchSemaphore(value: 0)
+
+        for url in urls {
+            
+            DispatchQueue.global().async {
+                print("started \(url.lastPathComponent)")
+                if let data = try? Data(contentsOf: url) {
+                    imagesData.append(data)
+                    print("downloaded \(url.lastPathComponent)")
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+
+        print("\(imagesData.count) images downloaded. Is main thread? \(Thread.isMainThread)")
+        
+    }
+    
     func semaphoreThreadsUrls() {
         let urls = (1...5).compactMap { URL(string: "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/\($0).jpg") }
         
