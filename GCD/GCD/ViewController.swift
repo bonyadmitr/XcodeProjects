@@ -265,6 +265,27 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    // task 1: any order, any number of threads
+    func task1() {
+        var res = ""
+        let group = DispatchGroup()
+        
+        for task in tasks {
+            
+            group.enter()
+            perform(task) { taskTitle in
+                Self.safeWrite {
+                    res += taskTitle
+                    group.leave()
+                }
+                
+            }
+            
+        }
+        
+        group.wait()
+        print("\(#function) result: \(res)")
+    }
     
     // task 2: same order, one thread (1 by 1)
     func task2() {
