@@ -55,7 +55,52 @@ extension ViewController: YTPlayerViewDelegate {
         
         
     }
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        if state == .buffering {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                let indicatorView = playerView.firstSubview(whereView: { view in
+                    return view.bounds.width == 64
+                })
+                
+                indicatorView?.isHidden = true
+                
 
+            }
+        } else if state == .playing {
+            
+//            let topView1 = playerView.firstSubview(whereView: { view in
+//                return view.bounds.height == 57
+//            })
+//            topView1?.isHidden = true
+//
+//            let topView2 = playerView.firstSubview(whereView: { view in
+//                return view.bounds.height == 110
+//            })
+//            topView2?.isHidden = true
+            //topView2?.superview?.isHidden = true
+            
+            print()
+        }
+//        switch state {
+//        case .unstarted:
+//            <#code#>
+//        case .ended:
+//            <#code#>
+//        case .playing:
+//            <#code#>
+//        case .paused:
+//            <#code#>
+//        case .buffering:
+//            <#code#>
+//        case .cued:
+//            <#code#>
+//        case .unknown:
+//            <#code#>
+//        @unknown default:
+//            <#code#>
+//        }
+    }
 }
 
 extension UIView {
