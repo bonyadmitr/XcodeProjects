@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,46 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+}
+
+
+extension ViewController: YTPlayerViewDelegate {
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        
+        
+//        let topView1 = playerView.firstSubview(whereView: { view in
+//            return view.bounds.height == 57
+//        })
+//        topView1?.isHidden = true
+//
+//        let topView2 = playerView.firstSubview(whereView: { view in
+//            return view.bounds.height == 110
+//        })
+//        topView2?.isHidden = true
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//            let topView1 = playerView.firstSubview(whereView: { view in
+//                return view.bounds.height == 57
+//            })
+//            topView1?.isHidden = true
+//
+//            let topView2 = playerView.firstSubview(whereView: { view in
+//                return view.bounds.height == 110
+//            })
+//            topView2?.isHidden = true
+//        }
+//
+//        print()
+        
+//        let topView2 = playerView.firstSubview(whereView: { view in
+//            return view.bounds.height == 110
+//        })
+//        topView2?.isHidden = true
+        
+        //topView2?.superview?.isHidden = true
+        
+        
+    }
 
 }
 
