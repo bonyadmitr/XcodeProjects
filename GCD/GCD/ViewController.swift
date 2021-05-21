@@ -265,6 +265,19 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    func taskInitial() {
+        var res = ""
+        
+        for task in tasks {
+            
+            perform(task) { taskTitle in
+                res += taskTitle
+            }
+        }
+        
+        print("\(#function) result: \(res)")
+    }
+    
     // task 1: any order, any number of threads
     func task1() {
         var res = ""
