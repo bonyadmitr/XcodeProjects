@@ -17,3 +17,43 @@ class ViewController: UIViewController {
 
 }
 
+extension UIView {
+    func firstSubview<T: UIView>(of: T.Type) -> T? {
+        var viewWeAreLookingFor: T?
+        
+        func checkViewForType(_ view: UIView) {
+            guard viewWeAreLookingFor == nil else {
+                return
+            }
+            if let view = view as? T {
+                viewWeAreLookingFor = view
+                return
+            }
+            view.subviews.forEach {
+                checkViewForType($0)
+            }
+        }
+        subviews.forEach { checkViewForType($0) }
+        return viewWeAreLookingFor
+    }
+    
+    func firstSubview(whereView: (UIView) -> Bool) -> UIView? {
+        var viewWeAreLookingFor: UIView?
+        
+        func checkViewForType(_ view: UIView) {
+            guard viewWeAreLookingFor == nil else {
+                return
+            }
+            if whereView(view) {
+                viewWeAreLookingFor = view
+                return
+            }
+            view.subviews.forEach {
+                checkViewForType($0)
+            }
+        }
+        subviews.forEach { checkViewForType($0) }
+        return viewWeAreLookingFor
+    }
+    
+}
