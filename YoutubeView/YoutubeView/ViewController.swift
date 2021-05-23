@@ -29,6 +29,12 @@ extension YTPlayerView {
             
         }
     }
+    func isMuted(completion: @escaping (Bool) -> Void) {
+        webView?.evaluateJavaScript("player.isMuted();") { result, error in
+            let isMuted = result as? Int == 1
+            completion(isMuted)
+        }
+    }
 }
 
 class ViewController: UIViewController {
