@@ -11,6 +11,9 @@ import youtube_ios_player_helper
 /// you cannot override YTPlayerView
 /// error: Received error rendering template: Error Domain=NSCocoaErrorDomain Code=258 "The file name is invalid."
 
+/// github source https://github.com/youtube/youtube-ios-player-helper
+/// doc + Best practices and limitations https://developers.google.com/youtube/v3/guides/ios_youtube_helper
+/// old swift analog https://github.com/malkouz/youtube-ios-player-helper-swift
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
