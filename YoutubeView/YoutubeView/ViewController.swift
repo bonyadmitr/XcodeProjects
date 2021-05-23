@@ -113,6 +113,19 @@ class ViewController: UIViewController {
         }
         
     }
+
+
+    func videoIdFrom(url: String) -> String? {
+        let pattern = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+        
+        let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        let range = NSRange(location: 0, length: url.count)
+        
+        guard let result = regex?.firstMatch(in: url, range: range) else {
+            return nil
+        }
+        
+        return (url as NSString).substring(with: result.range)
     }
 
 }
