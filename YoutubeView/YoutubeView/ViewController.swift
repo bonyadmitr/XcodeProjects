@@ -99,6 +99,20 @@ class ViewController: UIViewController {
         //playerView.webView?.configuration.allowsPictureInPictureMediaPlayback = true /// default true
         playerView.webView?.configuration.allowsInlineMediaPlayback = true
     }
+    
+    func mute() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            print("mute()")
+            self.playerView.mute {
+                self.playerView.isMuted { isMuted in
+                    print("isMuted", isMuted)
+                }
+            }
+            
+        }
+        
+    }
     }
 
 }
