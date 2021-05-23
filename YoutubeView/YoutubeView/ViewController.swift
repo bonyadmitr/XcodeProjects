@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     
     private let playerView = YTPlayerView()
     
+    /// needs to hide youtube video title and player controls if need
     private let playerContainer = UIView()
     
     /// https://developers.google.com/youtube/player_parameters#Parameters
