@@ -8,6 +8,9 @@
 import UIKit
 import youtube_ios_player_helper
 
+/// you cannot override YTPlayerView
+/// error: Received error rendering template: Error Domain=NSCocoaErrorDomain Code=258 "The file name is invalid."
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
