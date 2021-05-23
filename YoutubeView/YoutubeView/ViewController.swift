@@ -87,6 +87,18 @@ class ViewController: UIViewController {
 //        playerView.frame = .init(x: 0, y: 100, width: view.frame.width, height: 500)
 //        view.addSubview(playerView)
         
+        
+        let url = "https://www.youtube.com/watch?v=d5827e923Lw"
+        let id = videoIdFrom(url: url)!
+        
+//        playerView.load(withVideoId: id)
+        playerView.load(withVideoId: id, playerVars: playerParams)
+        
+        
+        /// `webView` is nill before `load(withVideoId`
+        //playerView.webView?.configuration.allowsPictureInPictureMediaPlayback = true /// default true
+        playerView.webView?.configuration.allowsInlineMediaPlayback = true
+    }
     }
 
 }
