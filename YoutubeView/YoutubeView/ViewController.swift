@@ -42,6 +42,20 @@ extension YTPlayerView {
 }
 
 class ViewController: UIViewController {
+    private let playerParams = [
+        "playsinline": 1, // 0 to play fullscreen
+        //"autoplay": 1, // not working. use playerViewDidBecomeReady + playerView.playVideo()
+        "iv_load_policy": 3, //3 to hide video anotations
+        "controls": 2, // 0 to hide controls
+//        "enablejsapi": 0, // 1 to enable API Javascript
+        "fs": 0, //1 to show fullscreen button
+//        "origin": "https://www.youtube.com", // security for enablejsapi
+        "rel": 0, // 0 to stop play similar videos
+        //"showinfo": 0, // deprecated as of 25/09/2018. 0 to hide video title
+        "loop": 0, // 1 to loop video playing
+        "modestbranding": 1, // 1 to remove youtube logo
+        "cc_load_policy": 0 // субтитры
+    ] as [String: Any]
 
     override func viewDidLoad() {
         super.viewDidLoad()
