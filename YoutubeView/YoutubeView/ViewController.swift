@@ -14,6 +14,10 @@ import youtube_ios_player_helper
 /// github source https://github.com/youtube/youtube-ios-player-helper
 /// doc + Best practices and limitations https://developers.google.com/youtube/v3/guides/ios_youtube_helper
 /// old swift analog https://github.com/malkouz/youtube-ios-player-helper-swift
+
+/// possible extensions https://developers.google.com/youtube/iframe_api_reference
+/// example: playerView.playVideo() == playerView.webView?.evaluateJavaScript("player.playVideo();")
+/// https://github.com/youtube/youtube-ios-player-helper/pull/338
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
