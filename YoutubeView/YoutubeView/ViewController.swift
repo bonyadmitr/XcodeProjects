@@ -42,6 +42,7 @@ extension YTPlayerView {
 }
 
 class ViewController: UIViewController {
+    /// https://developers.google.com/youtube/player_parameters#Parameters
     private let playerParams = [
         "playsinline": 1, // 0 to play fullscreen
         //"autoplay": 1, // not working. use playerViewDidBecomeReady + playerView.playVideo()
