@@ -68,6 +68,9 @@ class ViewController: UIViewController {
         print(#function)
         
         
+        playerView.isHidden = true
+        playerView.delegate = self
+        
         
         
         playerContainer.addSubview(playerView)
@@ -77,6 +80,13 @@ class ViewController: UIViewController {
         playerView.centerYAnchor.constraint(equalTo: playerContainer.centerYAnchor).isActive = true
         //playerView.bottomAnchor.constraint(equalTo: playerContainer.bottomAnchor).isActive = true
         playerView.widthAnchor.constraint(equalTo: playerContainer.widthAnchor).isActive = true
+        
+        playerContainer.clipsToBounds = true
+        playerContainer.frame = .init(x: 0, y: 100, width: view.frame.width, height: 300)
+        view.addSubview(playerContainer)
+//        playerView.frame = .init(x: 0, y: 100, width: view.frame.width, height: 500)
+//        view.addSubview(playerView)
+        
     }
 
 }
