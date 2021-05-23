@@ -42,6 +42,11 @@ extension YTPlayerView {
 }
 
 class ViewController: UIViewController {
+    
+    private let playerView = YTPlayerView()
+    
+    private let playerContainer = UIView()
+    
     /// https://developers.google.com/youtube/player_parameters#Parameters
     private let playerParams = [
         "playsinline": 1, // 0 to play fullscreen
@@ -60,7 +65,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print(#function)
+        
+        
+        
+        
+        playerContainer.addSubview(playerView)
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.heightAnchor.constraint(equalTo: playerContainer.heightAnchor, multiplier: 1).isActive = true /// to hide controles `multiplier: 2`
+        playerView.centerXAnchor.constraint(equalTo: playerContainer.centerXAnchor).isActive = true
+        playerView.centerYAnchor.constraint(equalTo: playerContainer.centerYAnchor).isActive = true
+        //playerView.bottomAnchor.constraint(equalTo: playerContainer.bottomAnchor).isActive = true
+        playerView.widthAnchor.constraint(equalTo: playerContainer.widthAnchor).isActive = true
     }
 
 }
