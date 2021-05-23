@@ -18,6 +18,19 @@ import youtube_ios_player_helper
 /// possible extensions https://developers.google.com/youtube/iframe_api_reference
 /// example: playerView.playVideo() == playerView.webView?.evaluateJavaScript("player.playVideo();")
 /// https://github.com/youtube/youtube-ios-player-helper/pull/338
+extension YTPlayerView {
+    
+    func mute(completion: (() -> Void)? = nil) {
+        webView?.evaluateJavaScript("player.mute();") { _, _ in
+            /// needs some deleay for `isMuted`
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                completion?()
+            }
+            
+        }
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
