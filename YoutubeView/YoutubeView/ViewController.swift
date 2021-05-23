@@ -133,6 +133,13 @@ class ViewController: UIViewController {
 
 extension ViewController: YTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.playVideo()
+        
+        /// to prevent showing loaded preview and it's blinking
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            playerView.isHidden = false
+        }
+        
         
         
 //        let topView1 = playerView.firstSubview(whereView: { view in
