@@ -265,6 +265,11 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    
+    
+    // TODO: problem in lock free `res += taskTitle`
+    // TODO: assert(res.count == tasks.count)
+    
     // TODO: todo tasks:
     // task 1: any order, any number of threads
     // task 2: same order, one thread (1 by 1)
