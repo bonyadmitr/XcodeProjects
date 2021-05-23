@@ -265,6 +265,12 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    // TODO: todo tasks:
+    // task 1: any order, any number of threads
+    // task 2: same order, one thread (1 by 1)
+    // task 3: any order, constant number of threads
+    // task 4: same order, any number of threads
+    // task 5: same order, constant number of threads
     func taskInitial() {
         var res = ""
         
