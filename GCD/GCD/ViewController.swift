@@ -265,6 +265,23 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+    // MARK: - tasks
+    
+    private let tasks = [
+        ("1", 3),
+        ("2", 1),
+        ("3", 1),
+        ("4", 2),
+        ("5", 2),
+    ]
+    private func perform(_ task: (String, Int), handler: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            print("- started task: \(task.0)")
+            sleep(UInt32(task.1))
+            print("- ended task: \(task.0)")
+            handler(task.0)
+        }
+    }
     
     
     // TODO: problem in lock free `res += taskTitle`
