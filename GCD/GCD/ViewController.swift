@@ -265,6 +265,20 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+//        let queue = DispatchQueue(label: "qqq")//, attributes: .concurrent)
+//        DispatchQueue.global().async {
+//
+//            for i in 1...10 {
+//                print("start \(i)")
+//                queue.async {
+//                    sleep(1)
+//                    print("work \(i)")
+//                }
+//                print("end \(i)")
+//            }
+//
+//        }
+        
         ///Race condition
         //import Foundation
         //let queue = DispatchQueue(label: "qqq", attributes: .concurrent)
