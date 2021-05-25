@@ -259,12 +259,33 @@ class ViewController: UIViewController {
 //        testDispatchAssert()
         
 //        globalTestCountWhere()
+//        globalTest()
         
 //        let array1 = testConcurrentInitDefault()
 //        let array2 = testConcurrentInitSeparate()
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+        
+        
+//        semaphore1()
+//        semaphore2()
+        
+//        semaphoreForQueue1()
+        
+//        groupUrls()
+//        semaphoreUrls()
+//        semaphoreThreadsUrls()
+//        urlsInitial()
+        
+        
+        //taskInitial()
+        //task1()
+        //task2()
+//        task3()
+        
+        
+        
 //        let queue = DispatchQueue(label: "qqq")//, attributes: .concurrent)
 //        DispatchQueue.global().async {
 //
@@ -293,6 +314,8 @@ class ViewController: UIViewController {
         //}
         
         
+    }
+    
     // MARK: - tasks
     
     private let tasks = [
