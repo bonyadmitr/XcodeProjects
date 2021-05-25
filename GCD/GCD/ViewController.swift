@@ -287,6 +287,8 @@ class ViewController: UIViewController {
     // TODO: problem in lock free `res += taskTitle`
     // TODO: assert(res.count == tasks.count)
     
+    /// Dispatch Barrier Block Dispatch barrier blocks create a serial-style bottleneck when working with concurrent queues
+    /// thread safe
     private static let safeWriteQueue = DispatchQueue(label: "safeWriteQueue", attributes: .concurrent)
     private static func safeWrite(handler: @escaping () -> Void) {
         safeWriteQueue.async(flags: .barrier, execute: handler)
