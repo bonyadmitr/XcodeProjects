@@ -270,6 +270,11 @@ class ViewController: UIViewController {
     // TODO: problem in lock free `res += taskTitle`
     // TODO: assert(res.count == tasks.count)
     
+    private static let safeWriteQueue = DispatchQueue(label: "safeWriteQueue", attributes: .concurrent)
+    private static func safeWrite(handler: @escaping () -> Void) {
+        safeWriteQueue.async(flags: .barrier, execute: handler)
+    }
+    
     // TODO: todo tasks:
     // task 1: any order, any number of threads
     // task 2: same order, one thread (1 by 1)
