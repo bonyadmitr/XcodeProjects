@@ -265,6 +265,20 @@ class ViewController: UIViewController {
 //        let array3 = testInitDefault()
 //        print(array1 == array2)
 //        print(array1 == array3)
+        ///Race condition
+        //import Foundation
+        //let queue = DispatchQueue(label: "qqq", attributes: .concurrent)
+        //var array = [String]()
+        //for _ in 1...100 {
+        //    queue.async {//}(flags: .barrier) {
+        //        array.append("1")
+        //    }
+        //}
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        //    print("count: \(array.count)")
+        //}
+        
+        
     // MARK: - tasks
     
     private let tasks = [
