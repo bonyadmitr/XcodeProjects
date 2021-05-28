@@ -64,6 +64,10 @@ final class ViewController: UIViewController {
             return misspelledRange
         }
 
+    // swift CLDR Short Name / apple logic https://stackoverflow.com/a/64038084/5893286
+    private let emojiesDesc: [(String, String)] = {
+        
+        let allEmojies: [String] = {
             let ranges = [
             0x1F600...0x1F64F, // Emoticons
             0x1F300...0x1F5FF, // Misc Symbols and Pictographs
@@ -78,6 +82,23 @@ final class ViewController: UIViewController {
 //            9100...9300, // Misc items
 //            8400...8447 // Combining Diacritical Marks for Symbols
             ]
+            
+            var all = ranges.joined().map {
+                return String(Character(UnicodeScalar($0)!))
+            }
+            
+            //⌚️⌨️⭐️
+            let solos = [0x231A, 0x231B, 0x2328, 0x2B50]
+            all.append(contentsOf: solos.map({ String(Character(UnicodeScalar($0)!))}))
+            return all
+        }()
+        
+        return allEmojies.map {
+            ($0, $0.unicodeScalars.compactMap { $0.properties.nameAlias ?? $0.properties.name }.joined(separator: " ") )
+        }
+        
+    }()
+    
     func suggestEmoji(for text: String) -> [String] {
         
         if text.count == 1 {
