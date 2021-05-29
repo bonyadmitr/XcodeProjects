@@ -128,6 +128,65 @@ func measure(block: () -> Void) {
 //
 //}
 
+
+extension String {
+    
+    private static let pathChar = "/".utf8.first ?? 47
+    
+    //    “/tmp/scratch.tiff”     “scratch.tiff”
+    //    “/tmp/scratch”          “scratch”
+    //    “/tmp/”                 “tmp”
+    //    “scratch///”            “scratch”
+    //    “/”                     “/”
+    func lastPathComponent() -> String {
+        
+        let utf = utf8
+        
+        func qq(s: Substring.UTF8View) -> String {
+            if let i = s.lastIndex(of: Self.pathChar) {
+                let nextI = s.index(i, offsetBy: 1)
+                let suffix = s.suffix(from: nextI)
+                
+                if suffix.isEmpty {
+                    return qq(s: s[..<i])
+                } else {
+                    return String(suffix) ?? "/"
+                }
+            } else {
+                return "/"
+            }
+        }
+        
+        if let i = utf.lastIndex(of: Self.pathChar) {
+            let nextI = utf.index(i, offsetBy: 1)
+            let suffix = utf.suffix(from: nextI)
+            
+            if suffix.isEmpty {
+                return qq(s: utf[..<i])
+            } else {
+                return String(suffix) ?? "/"
+            }
+        }
+        
+        
+        
+//        let rr = utf8
+//        if let i = rr.lastIndex(of: 47) {
+//            let res = rr.suffix(from: rr.index(i, offsetBy: 1) )
+//            return String(res)!
+//        }
+        
+        
+        /// https://stackoverflow.com/a/40536964/5893286
+        //        let rr = ArraySlice(utf16)
+        //        if let i = rr.lastIndex(of: 47) {
+        //            let res = rr.suffix(from: i + 1)
+        //            return res.withUnsafeBufferPointer { String(utf16CodeUnits: $0.baseAddress!, count: res.count) }
+        //            //return String(utf16CodeUnits: res, count: res.count)
+        //        }
+        
+        return "/"
+        
     }
     
 }
