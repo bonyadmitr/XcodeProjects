@@ -187,6 +187,24 @@ extension String {
         
         return "/"
         
+        
+        //        if let i = lastIndex(of: "/") {
+        //
+        //            //return String(self[index(i, offsetBy: 1)...])
+        //
+        //            let nextI = index(i, offsetBy: 1)
+        //            let result = suffix(from: nextI)//self[nextI...]
+        //            if result.isEmpty {
+        //                return String(self[..<i]).lastPathComponent()
+        //            } else {
+        //                return String(result)
+        //            }
+        //
+        //        } else {
+        //            return "/"
+        //            //return self
+        //        }
+        
     }
     
 }
