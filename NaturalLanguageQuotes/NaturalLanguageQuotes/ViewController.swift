@@ -70,6 +70,10 @@ final class ViewController: UIViewController {
         // print(UITextChecker.availableLanguages)
         /// search problems https://stackoverflow.com/questions/tagged/uitextchecker
         /// `UITextChecker.learnWord("some_word")` + `UITextChecker.unlearnWord("some_word")`
+        let checker = UITextChecker()
+        
+        
+        
         func isReal(word: String) -> Bool {
             //let checker = UITextChecker()
             let range = NSRange(location: 0, length: word.utf16.count)
@@ -86,6 +90,10 @@ final class ViewController: UIViewController {
         }
 
         
+////        /// nil for empty string
+//        let w = checker.completions(forPartialWordRange: NSRange(location: 0, length: input.count), in: input, language: "en_US") ?? []
+//        print(w)
+//        print()
         //resultLabel.text = input
         //print(input)
     }
