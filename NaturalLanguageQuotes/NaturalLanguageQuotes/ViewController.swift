@@ -118,6 +118,41 @@ final class ViewController: UIViewController {
             print(completions)
             
             
+            
+        } else {
+            
+            
+            /// inspired https://github.com/willowtreeapps/vocable-ios/blob/develop/Vocable/Extensions/TextSuggestionController.swift
+            let fullExpression = input//.trimmingCharacters(in: .whitespacesAndNewlines)
+            let lastWord = input.lastWord
+            let range = NSRange(location: fullExpression.count - lastWord.count, length: lastWord.count)
+            
+            // TODO: do we need utf16.count? https://stackoverflow.com/a/60847716/5893286
+            //let range = NSRange(location: fullExpression.utf16.count - lastWord.utf16.count, length: lastWord.utf16.count)
+    
+            let language = Locale.current.identifier
+            
+            
+            let misspelledRange = misspelled(word: input)
+            
+            if misspelledRange.location == NSNotFound {
+//            if isReal(word: input) {
+                /// It will return completed words, but in alphabetical order, not ranked by usage.
+                let completions = checker.completions(forPartialWordRange: range, in: fullExpression, language: language) ?? []
+                print(completions)
+                
+            } else {
+                /// replacements for a misspelled word
+                /// not the same for iOS
+                /// The top guess sometimes has quotation marks around it, but other then that it works great
+                let guesses = checker.guesses(forWordRange: misspelledRange, in: fullExpression, language: language) ?? []
+                print(guesses)
+            }
+
+            
+            print("-------")
+        }
+        
         //resultLabel.text = input
         //print(input)
     }
