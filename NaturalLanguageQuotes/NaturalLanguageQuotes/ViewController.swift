@@ -34,7 +34,22 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //inputTextField.autocapitalizationType = .sentences
+        //inputTextField.autocorrectionType = .yes /// suggestions
+        //inputTextField.spellCheckingType = .yes
+        inputTextField.delegate = self
+        //inputTextField.textContentType = .newPassword
+//        inputTextField.autocorrectionType
+        
+        emojiTest()
+        
+        resultLabel.text = ""
+        inputTextField.becomeFirstResponder()
+        
+        let text = "how are you going "
+        inputTextField.text = text
+        process(input: text)
     }
     
     @IBAction private func onInputChanged() {
