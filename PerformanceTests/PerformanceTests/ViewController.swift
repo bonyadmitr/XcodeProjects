@@ -87,6 +87,20 @@ class ViewController: UIViewController {
 //[3.899913281202316e-08, 2.898741513490677e-08, 2.2992026060819626e-08, 2.200249582529068e-08, 2.2992026060819626e-08, 2.0954757928848267e-08, 2.200249582529068e-08, 2.1944288164377213e-08, 2.2992026060819626e-08, 2.2992026060819626e-08]
 //average: 2.468586899340153e-08
 
+
+func measure(block: () -> Void) {
+    var results = [CFTimeInterval]()
+    let times = 10
+    for _ in 1...times {
+        let startTime = CACurrentMediaTime()
+        block()
+        let endTime = CACurrentMediaTime()
+        results.append(endTime - startTime)
+    }
+    let average = results.reduce(0, +) / Double(times)
+    print(results)
+    print("average: \(average)")
+}
     }
     
 }
