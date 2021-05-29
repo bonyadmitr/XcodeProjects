@@ -174,6 +174,9 @@ final class ViewController: UIViewController {
     }
     
 
+    
+    
+    // TODO: mb use https://github.com/safx/Emoji-Swift or https://github.com/maxoumime/emoji-data-ios or https://github.com/integer256/emojimap
     // swift CLDR Short Name / apple logic https://stackoverflow.com/a/64038084/5893286
     private let emojiesDesc: [(String, String)] = {
         
