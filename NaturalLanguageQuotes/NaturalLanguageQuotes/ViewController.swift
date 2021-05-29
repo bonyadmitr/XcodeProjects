@@ -94,6 +94,30 @@ final class ViewController: UIViewController {
 //        let w = checker.completions(forPartialWordRange: NSRange(location: 0, length: input.count), in: input, language: "en_US") ?? []
 //        print(w)
 //        print()
+        
+        if input.last == " " {
+            /// min 7, max 13
+            /// insipred https://developer.apple.com/forums/thread/47354
+            
+            let input: String = {
+                if input.count < 6 {
+                    return Array(repeating: " ", count: 6 - input.count) + input
+                } else if input.count > 13 {
+                    let index = input.index(input.endIndex, offsetBy: -13)
+                    return String(input[index...])
+                } else {
+                    return input
+                }
+            }()
+            
+            let augmentedInput = input + " *"
+            let range = NSRange(location: input.count, length: -1)
+            let completions = checker.completions(forPartialWordRange: range,
+                                                  in: augmentedInput,
+                                                  language: "en_US") ?? []
+            print(completions)
+            
+            
         //resultLabel.text = input
         //print(input)
     }
