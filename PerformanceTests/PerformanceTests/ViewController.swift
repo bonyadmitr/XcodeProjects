@@ -101,6 +101,33 @@ func measure(block: () -> Void) {
     print(results)
     print("average: \(average)")
 }
+
+//extension String {
+//
+//    //    “/tmp/scratch.tiff”     “scratch.tiff”
+//    //    “/tmp/scratch”          “scratch”
+//    //    “/tmp/”                 “tmp”
+//    //    “scratch///”            “scratch”
+//    //    “/”                     “/”
+//    func lastPathComponent() -> String {
+//        if let i = lastIndex(where: { $0 == "/" }) {
+//            let nextI = index(i, offsetBy: 1)
+//            let result = self[nextI...]
+//            if result.isEmpty {
+//                return String(self[..<i]).lastPathComponent()
+//            } else {
+//                return String(result)
+//            }
+//
+//        } else {
+//            return "/"
+//            //return self
+//        }
+//
+//    }
+//
+//}
+
     }
     
 }
