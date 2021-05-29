@@ -43,6 +43,12 @@ final class ViewController: UIViewController {
         }
         process(input: input)
     }
+    
+    func process(input: String) {
+        
+        print("- emojies \(suggestEmoji(for: input))")
+        
+        
         
 //        let input = input.lastWord ?? input
         /// NSSpellChecker https://developer.apple.com/forums/thread/47354
@@ -63,6 +69,12 @@ final class ViewController: UIViewController {
             let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
             return misspelledRange
         }
+
+        
+        //resultLabel.text = input
+        //print(input)
+    }
+    
 
     // swift CLDR Short Name / apple logic https://stackoverflow.com/a/64038084/5893286
     private let emojiesDesc: [(String, String)] = {
