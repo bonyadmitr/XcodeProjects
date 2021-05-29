@@ -153,6 +153,19 @@ final class ViewController: UIViewController {
             print("-------")
         }
         
+        
+
+        
+//        let result = completions + guesses
+//        print(result)
+        
+//        if let q = NaturalLanguageManager.shared.emojiForExpression2(input) {
+//            resultLabel.text = q.0 + " \(q.1)"
+//        } else {
+//            resultLabel.text = "-"
+//        }
+        
+        
         //resultLabel.text = input
         //print(input)
     }
