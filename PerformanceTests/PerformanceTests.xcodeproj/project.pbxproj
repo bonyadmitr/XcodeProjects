@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C480BA60264DE0BC0015CD39 /* NSStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C480BA5F264DE0BC0015CD39 /* NSStringTests.swift */; };
 		CE5C837323104BAD00FA24FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C837223104BAD00FA24FF /* AppDelegate.swift */; };
 		CE5C837523104BAD00FA24FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C837423104BAD00FA24FF /* ViewController.swift */; };
 		CE5C837823104BAD00FA24FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5C837623104BAD00FA24FF /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C480BA5F264DE0BC0015CD39 /* NSStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStringTests.swift; sourceTree = "<group>"; };
 		CE5C836F23104BAD00FA24FF /* PerformanceTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerformanceTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5C837223104BAD00FA24FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5C837423104BAD00FA24FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5C838723104BAE00FA24FF /* ClassVsStruct.swift */,
+				C480BA5F264DE0BC0015CD39 /* NSStringTests.swift */,
 				CE5C838923104BAE00FA24FF /* Info.plist */,
 			);
 			path = PerformanceTestsTests;
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5C838823104BAE00FA24FF /* ClassVsStruct.swift in Sources */,
+				C480BA60264DE0BC0015CD39 /* NSStringTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
