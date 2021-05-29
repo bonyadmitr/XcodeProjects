@@ -60,6 +60,26 @@ class ViewController: UIViewController {
 //        print(filePath.lastPathComponent())
 //        print()
         
+        
+        
+        
+//        var q = Food.artichoke
+//        func some() {
+//            q = .broccoli
+//        }
+//        q = .beef
+//        some()
+//
+//        measure {
+//            for _ in 1...1_000_000_000 {
+//                _ = q.isVegetable()
+//            }
+//        }
+        
+        
+    }
+    
+}
     }
     
 }
