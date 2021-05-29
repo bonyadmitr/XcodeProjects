@@ -38,6 +38,28 @@ class ViewController: UIViewController {
 //
 //        }
         
+        
+        
+        
+//        measure {
+//            for _ in 1...1_000_000 {
+//                _ = (filePath as NSString).lastPathComponent
+//            }
+//        }
+
+//        measure {
+//            for _ in 1...1_000_000 {
+//                //_ = filePath.lastPathComponent()
+//            }
+//        }
+//        for _ in 1...1_000_000 {
+//            _ = filePath.lastPathComponent()
+//        }
+        
+//        let filePath = "/Users/yaroslav/XcodeProjects/PerformanceTests/PerformanceTests.xcodeproj///"
+//        print(filePath.lastPathComponent())
+//        print()
+        
     }
     
 }
