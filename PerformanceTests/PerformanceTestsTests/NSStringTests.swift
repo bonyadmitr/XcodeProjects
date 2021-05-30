@@ -21,6 +21,14 @@ class NSStringTests: XCTestCase {
 extension String {
     
     private static let pathChar: String.UTF8View.Element = "/".utf8.first ?? 47
+    
+    // TODO: like original
+    //    “/tmp/scratch.tiff”     “scratch.tiff”
+    //    “/tmp/scratch”          “scratch”
+    //    “/tmp/”                 “tmp”
+    //    “scratch///”            “scratch”
+    //    “/”                     “/”
+    
     func lastPathComponent() -> String {
         /// 4.310 sec
         //return self.components(separatedBy: "/").last ?? ""
