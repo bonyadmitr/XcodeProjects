@@ -18,6 +18,31 @@ class NSStringTests: XCTestCase {
     }
 }
 
+extension String {
+    
+    private static let pathChar: String.UTF8View.Element = "/".utf8.first ?? 47
+    func lastPathComponent() -> String {
+        /// 4.310 sec
+        //return self.components(separatedBy: "/").last ?? ""
+        let utf = utf8
+
+        if let i = utf.lastIndex(of: Self.pathChar),
+           case let nextI = utf.index(i, offsetBy: 1),
+           case let suffix = utf.suffix(from: nextI),
+           let result = String(suffix)
+        {
+            return result
+        }
+
+        return "/"
+        
+
+        
+    }
+    
+}
+
+
 enum Food {
     case beef
     case broccoli
