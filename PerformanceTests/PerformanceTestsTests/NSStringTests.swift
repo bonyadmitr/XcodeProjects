@@ -16,6 +16,14 @@ class NSStringTests: XCTestCase {
         print()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
+    func test_stringInterpolation() {
+        measure {
+            for _ in 1...1_000_000 {
+                _ = "1qwertyuiop[] \(2)3\(4)5\(6)7\(8.5)9"
+            }
+        }
+    }
+    
     func test_ifSpeed() {
         var q = Food.artichoke
         func some() {
