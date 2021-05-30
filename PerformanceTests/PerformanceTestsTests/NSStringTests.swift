@@ -26,6 +26,21 @@ extension String {
         //return self.components(separatedBy: "/").last ?? ""
         let utf = utf8
 
+        //func qq(s: Substring.UTF8View) -> String {
+        //    if let i = s.lastIndex(of: Self.pathChar) {
+        //        let nextI = s.index(i, offsetBy: 1)
+        //        let suffix = s.suffix(from: nextI)
+        //
+        //        if suffix.isEmpty {
+        //            return qq(s: s[..<i])
+        //        } else {
+        //            return String(suffix) ?? "/"
+        //        }
+        //    } else {
+        //        return "/"
+        //    }
+        //}
+        //
         if let i = utf.lastIndex(of: Self.pathChar),
            case let nextI = utf.index(i, offsetBy: 1),
            case let suffix = utf.suffix(from: nextI),
