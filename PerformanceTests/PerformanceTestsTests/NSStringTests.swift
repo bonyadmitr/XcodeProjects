@@ -16,6 +16,21 @@ class NSStringTests: XCTestCase {
         print()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
+    func test_switchSpeed() {
+        var q = Food.artichoke
+        func some() {
+            q = .broccoli
+        }
+        q = .beef
+        some()
+        
+        measure {
+            for _ in 1...1000000_000_000_000_000 {
+                _ = q.isVegetableSwitch()
+            }
+        }
+    }
+
 }
 
 extension String {
