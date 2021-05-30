@@ -41,6 +41,17 @@ extension String {
         //    }
         //}
         //
+        //if let i = utf.lastIndex(of: Self.pathChar) {
+        //    let nextI = utf.index(i, offsetBy: 1)
+        //    let suffix = utf.suffix(from: nextI)
+        //
+        //    if suffix.isEmpty {
+        //        return qq(s: utf[..<i])
+        //    } else {
+        //        return String(suffix) ?? "/"
+        //    }
+        //}
+
         if let i = utf.lastIndex(of: Self.pathChar),
            case let nextI = utf.index(i, offsetBy: 1),
            case let suffix = utf.suffix(from: nextI),
