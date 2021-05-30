@@ -1,3 +1,23 @@
+//
+//  NSStringTests.swift
+//  PerformanceTestsTests
+//
+//  Created by Yaroslav Bondar on 14.05.2021.
+//  Copyright © 2021 Bondar Yaroslav. All rights reserved.
+//
+
+import XCTest
+//@testable import PerformanceTests
+
+class NSStringTests: XCTestCase {
+    
+
+    override func setUpWithError() throws {
+        print()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+}
+
 enum Food {
     case beef
     case broccoli
