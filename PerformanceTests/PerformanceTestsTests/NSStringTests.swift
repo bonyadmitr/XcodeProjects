@@ -16,6 +16,14 @@ class NSStringTests: XCTestCase {
         print()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
+    func test_stringConcatenation() {
+        measure {
+            for _ in 1...1_000_000 {
+                _ = "1qwertyuiop[] " + String(2) + "3" + String(4) + "5" + String(6) + "7" + String(8.5) + "9"
+            }
+            
+        }
+    }
     func test_stringInterpolation() {
         measure {
             for _ in 1...1_000_000 {
