@@ -20,6 +20,7 @@ class NSStringTests: XCTestCase {
 
 extension String {
     
+    /// String.UTF8View.Element == UInt8
     private static let pathChar: String.UTF8View.Element = "/".utf8.first ?? 47
     
     // TODO: like original
@@ -29,6 +30,8 @@ extension String {
     //    “scratch///”            “scratch”
     //    “/”                     “/”
     
+    /// don't use `URL(fileURLWithPath: filePath).lastPathComponent` it is very low performance
+    /// `(filePath as NSString).lastPathComponent` is good
     func lastPathComponent() -> String {
         /// 4.310 sec
         //return self.components(separatedBy: "/").last ?? ""
