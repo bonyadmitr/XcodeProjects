@@ -9,6 +9,36 @@ import UIKit
 import Realm
 import RealmSwift
 
+//func getProviderForLogin(request: Any) -> AuthProviderProtocol {
+//  switch request {
+//  case is LoginRequestForApi:
+//    return AuthService()
+//  case is LoginRequestForImap:
+//    return AuthImap()
+//  default:
+//    return AuthService()
+//  }
+//}
+//func getProviderForMailList(request: Any) -> MailListProviderProtocol {
+//  switch request {
+//  case is MailListItemForApi:
+//    return MailListService()
+//  case is MailListItemForImap:
+//    return MailListImap()
+//  default:
+//    return MailListService()
+//  }
+//}
+
+
+
+
+
+
+
+
+
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
