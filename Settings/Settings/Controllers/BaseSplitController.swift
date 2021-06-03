@@ -66,7 +66,9 @@ extension BaseSplitController: UISplitViewControllerDelegate {
         switch svc.displayMode {
         case .primaryHidden:
             return .allVisible
-        case .allVisible, .primaryOverlay, .automatic:
+        default:
+        // TODO: check bugs
+        //case .allVisible, .primaryOverlay, .automatic:
             return .primaryHidden
         }
     }
