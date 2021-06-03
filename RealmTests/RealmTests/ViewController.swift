@@ -9,6 +9,30 @@ import UIKit
 import Realm
 import RealmSwift
 
+
+final class LoginRequestForApi {
+  var username: String?
+  var password: String?
+}
+final class LoginRequestForImap {
+  var username: String?
+  var password: String?
+}
+final class MailListItemForApi {
+  var title: String?
+}
+final class MailListItemForImap {
+  var title: String?
+}
+
+func login() {
+    
+    let isImap = true
+    
+    
+    
+}
+
 protocol Login {
     associatedtype Model
     func login(request: Model)
