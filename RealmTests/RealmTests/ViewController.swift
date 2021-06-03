@@ -9,6 +9,27 @@ import UIKit
 import Realm
 import RealmSwift
 
+protocol Model {
+    var title: String { get }
+}
+
+final class Model1 {
+    var title1 = ""
+}
+extension Model1: Model {
+    var title: String { title1 }
+}
+
+final class Model2 {
+    var title2 = ""
+}
+extension Model2: Model {
+    var title: String { title2 }
+}
+
+func someFunc(model: Model) {
+    print(model.title)
+}
 
 final class LoginRequestForApi {
   var username: String?
