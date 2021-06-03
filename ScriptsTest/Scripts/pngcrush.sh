@@ -4,11 +4,14 @@
 # SC2039: In POSIX sh, arrays are undefined
 
 if which pngcrush >/dev/null; then
-
+    #parentdir="$(dirname "$(pwd)")"
+    
     result_file_path="./Scripts/pngcrush_result.txt"
-
+    
+    ## to prevent space splitting
+    IFS=$'\n'
     ## read file paths from file
-    IFS=$'\n' read -d '' -r -a all_pngs_file < "$result_file_path"
+    read -d '' -r -a all_pngs_file < "$result_file_path"
     ## find new ones
     all_pngs_find=( $(find ./ScriptsTest -type f -name "*.png") )
     ## write new paths to file
@@ -23,10 +26,10 @@ if which pngcrush >/dev/null; then
         fi
       done
     done
-
+    
     ## exec pngcrush for new files
     for png in "${all_pngs_find[@]}"; do
-        echo "pngcrush $png ..."
+        echo "pngcrush "$png" ..."
         res=$(pngcrush -brute -reduce "$png" temp.png > /dev/null 2>&1)
 
         # preserve original on error
