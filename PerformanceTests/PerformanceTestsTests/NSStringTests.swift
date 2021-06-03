@@ -30,6 +30,15 @@ class NSStringTests: XCTestCase {
             
         }
     }
+    
+    /// 10 sec
+//    func test_url() throws {
+//        self.measure {
+//            for _ in 1...1_000_000 {
+//                _ = URL(fileURLWithPath: filePath).lastPathComponent
+//            }
+//        }
+//    }
     func test_stringConcatenation() {
         measure {
             for _ in 1...1_000_000 {
