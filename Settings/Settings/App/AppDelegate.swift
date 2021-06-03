@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: get ideas from https://github.com/davejacobsen/UltimateMenuScreen
+
 /// Features:
 //
 // Supports 4 languages
