@@ -195,6 +195,9 @@ extension Object {
         
     }
 }
+
+
+/// https://github.com/realm/realm-cocoa/issues/5578#issuecomment-364475728
 protocol DetachableObject: AnyObject {
     func detached() -> Self
 }
