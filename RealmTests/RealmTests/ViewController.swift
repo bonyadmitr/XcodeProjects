@@ -9,6 +9,21 @@ import UIKit
 import Realm
 import RealmSwift
 
+protocol Login {
+    associatedtype Model
+    func login(request: Model)
+}
+class LoginApi: Login {
+    func login(request: String) {
+        
+    }
+}
+class LoginImap: Login {
+    func login(request: Int) {
+        
+    }
+}
+
 //func getProviderForLogin(request: Any) -> AuthProviderProtocol {
 //  switch request {
 //  case is LoginRequestForApi:
