@@ -23,6 +23,12 @@ final class Note: IdObject {
     @objc dynamic var title = ""
     @objc dynamic var user: User?
 }
+
+final class User: IdObject {
+    @objc dynamic var name = ""
+}
+
+
 class IdObject: Object {
     @objc dynamic var id = ""
     
