@@ -30,6 +30,37 @@ class IdObject: Object {
         return #keyPath(id)
     }
 }
+
+// TODO: type(of: realmObject) == type(of: oldRealmObject)
+extension Object {
+    
+    func update(by new: Object) {
+        /// 'Primary key can't be changed after an object is inserted.'
+        for property in new.objectSchema.properties {
+            
+            guard
+                property.name != Self.primaryKey(),
+                let newValue = new.value(forKey: property.name)
+            else {
+                  //, let oldValue = value(forKey: property.name), newValue != oldValue else {
+                continue
+            }
+            
+            
+//            print(property.name, newValue)
+            
+            if let realmObject = newValue as? Object,
+               let oldRealmObject = self.value(forKey: property.name) as? Object,
+               type(of: realmObject) == type(of: oldRealmObject)
+            {
+                oldRealmObject.update(by: realmObject)
+            } else { // Then it is a primitive
+                setValue(newValue, forKey: property.name)
+            }
+        }
+        
+    }
+}
 protocol DetachableObject: AnyObject {
     func detached() -> Self
 }
