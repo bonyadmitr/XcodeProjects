@@ -21,6 +21,15 @@ class NSStringTests: XCTestCase {
 //    override func tearDownWithError() throws {
 //        // Put teardown code here. This method is called after the invocation of each test method in the class.
 //    }
+
+    func test_NSString() throws {
+        measure {
+            for _ in 1...1_000_000 {
+                _ = (filePath as NSString).lastPathComponent
+            }
+            
+        }
+    }
     func test_stringConcatenation() {
         measure {
             for _ in 1...1_000_000 {
