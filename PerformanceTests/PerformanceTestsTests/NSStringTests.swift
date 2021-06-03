@@ -39,6 +39,15 @@ class NSStringTests: XCTestCase {
 //            }
 //        }
 //    }
+    
+    func test_swift() throws {
+        measure {
+            for _ in 1...1_000_000 {
+                _ = filePath.lastPathComponent()
+            }
+        }
+    }
+    
     func test_stringConcatenation() {
         measure {
             for _ in 1...1_000_000 {
