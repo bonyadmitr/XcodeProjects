@@ -30,3 +30,17 @@ class IdObject: Object {
         return #keyPath(id)
     }
 }
+extension List: DetachableObject {
+    func detached() -> List<Element> {
+        let result = List<Element>()
+        forEach {
+            if let detachableObject = $0 as? DetachableObject,
+               let element = detachableObject.detached() as? Element {
+                result.append(element)
+            } else { // Then it is a primitive
+                result.append($0)
+            }
+        }
+        return result
+    }
+}
