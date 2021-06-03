@@ -30,6 +30,10 @@ class IdObject: Object {
         return #keyPath(id)
     }
 }
+protocol DetachableObject: AnyObject {
+    func detached() -> Self
+}
+
 extension Object: DetachableObject {
     
     func detached() -> Self {
