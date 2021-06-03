@@ -13,7 +13,45 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+//        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+//        let realm = try! Realm(configuration: config)
+        
+        /// Crash when using deleteRealmIfMigrationNeeded with Realm in Swift https://stackoverflow.com/a/47530251/5893286
+        /// solution:  turn off the Realm Browser if you have it open
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm()
+        
+        let user = User()
+        user.id = "1"
+        user.name = "user 111"
+        
+        let note = Note()
+        note.id = "1"
+        note.title = "title 1"
+        note.user = user
+        
+//        try! realm.write {
+//            realm.add(note, update: .modified)
+//        }
+        
+        let oldNote = realm.object(ofType: Note.self, forPrimaryKey: "1")!
+        print(oldNote.user!.name)
+        
+        try! realm.write {
+            realm.add(note, update: .modified)
+//            oldNote.update(by: note)
+//            oldNote.user = note.user
+//            oldNote.title = note.title
+        }
+
+
+        let oldNote2 = realm.object(ofType: Note.self, forPrimaryKey: "1")!
+        print(oldNote2.user!.name)
+        
+        
     }
 
 
