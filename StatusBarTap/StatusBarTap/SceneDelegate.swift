@@ -111,6 +111,18 @@ final class CustomWindow: UIWindow {
     }
 
 }
+
+extension CustomWindow: UIScrollViewDelegate {
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrolls?.forEach {
+            /// https://stackoverflow.com/a/46615230/5893286
+            $0.setContentOffset(CGPoint(x: 0, y: -$0.adjustedContentInset.top), animated: true)
+        }
+        statusBarTapped()
+        return false
+    }
+}
+
 extension UIScrollView {
     func scrollToTop() {
         setContentOffset(CGPoint(x: 0, y: -adjustedContentInset.top), animated: true)
