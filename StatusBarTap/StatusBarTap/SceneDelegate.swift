@@ -68,6 +68,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+extension UIScrollView {
+    func scrollToTop() {
+        setContentOffset(CGPoint(x: 0, y: -adjustedContentInset.top), animated: true)
+    }
+}
+
 extension UIApplication {
 
     class func getTopViewController(base: UIViewController? = UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController) -> UIViewController? {
