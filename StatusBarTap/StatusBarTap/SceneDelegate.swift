@@ -68,6 +68,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+/// not owkring
+//override func sendEvent(_ event: UIEvent) {
+//    super.sendEvent(event)
+//
+//    guard event.type == .touches, let touches = event.allTouches else {
+//        return
+//    }
+//
+//    for touch in touches {
+//        //print(touch.phase.rawValue)
+//
+//        /// inspired https://github.com/aaronabentheuer/AAWindow/blob/master/AAWindow.swift
+//        /// not working for app switcher, notification center
+//        /// UIScreenEdgePanGestureRecognizer cannot prevent open any system center
+//        if touch.phase == .began {
+//            let statuBarHeight = windowScene?.statusBarManager?.statusBarFrame.height ?? 20
+//            print(touch.location(in: self).y, statuBarHeight, touch.location(in: self).y - statuBarHeight)
+//            if touch.location(in: self).y - statuBarHeight <= 0 {
+//                print("status bar")
+//            }
+//        }
+//    }
+//
+//}
 final class CustomWindow: UIWindow {
     
     var statusBarTapped: () -> Void = {}
