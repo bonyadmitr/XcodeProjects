@@ -68,6 +68,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+final class CustomWindow: UIWindow {
+    
+    var statusBarTapped: () -> Void = {}
+    
+    private let scrollView = UIScrollView()
+    
+    // TODO: check for needs weak
+    /// rootViewController will change and scrolls will be changed.
+    /// will not work for inner VC and added scrollView later
+    private var scrolls: [UIScrollView]?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override init(windowScene: UIWindowScene) {
+        super.init(windowScene: windowScene)
+        setup()
+    }
+    
+    private func setup() {
+        scrollView.frame = frame
+        scrollView.contentSize.height = frame.height + 1
+        scrollView.contentOffset.y = 1
+        scrollView.delegate = self
+        addSubview(scrollView)
+    }
+    
+    override var rootViewController: UIViewController? {
+        didSet {
+            // TODO: find
+            scrolls = rootViewController?.view.allSubviews(of: UIScrollView.self)
+            scrolls?.forEach { $0.scrollsToTop = false }
+        }
+    }
+
+}
 extension UIScrollView {
     func scrollToTop() {
         setContentOffset(CGPoint(x: 0, y: -adjustedContentInset.top), animated: true)
