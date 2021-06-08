@@ -39,6 +39,18 @@ extension SwizzlingManager {
     }
 }
 
+extension UIStatusBarManager {
+    /// working instead of UIStatusBarManager+StatusBarTap.m
+    @objc private func handleTapAction(_ arg: Any) {
+        print("handleTapAction")
+    }
+    
+    @objc private func sm_handleTapAction(_ arg: Any) {
+        print("sm_handleTapAction")
+        perform(NSSelectorFromString("sm_handleTapAction:"), with: arg)
+    }
+}
+
 //extension SwizzlingManager {
 //    static func swizzlingViewDidLoad() {
 //        let original = #selector(UIViewController.viewDidLoad)
