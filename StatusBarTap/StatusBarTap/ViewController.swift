@@ -33,6 +33,12 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
         return true
     }
 }
+extension SwizzlingManager {
+    static func swizzlingAll() {
+        SwizzlingManager.swizzleInstanceMethodString(UIStatusBarManager.self, from: "handleTapAction:", to: "sm_handleTapAction:")
+    }
+}
+
 //extension SwizzlingManager {
 //    static func swizzlingViewDidLoad() {
 //        let original = #selector(UIViewController.viewDidLoad)
