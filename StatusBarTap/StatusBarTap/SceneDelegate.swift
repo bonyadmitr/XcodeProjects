@@ -68,6 +68,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+@objc(MyApplication)
+final class MyApplication: UIApplication {
+
+//    override func sendEvent(_ event: UIEvent) {
+//        super.sendEvent(event)
+//    }
+
+//    override init() {
+//        super.init()
+//
+//    }
+}
+
+
+
 /// not owkring
 //override func sendEvent(_ event: UIEvent) {
 //    super.sendEvent(event)
