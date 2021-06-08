@@ -68,6 +68,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
+// MARK: - !!!
+
+
+/// https://stackoverflow.com/a/31673478/5893286
 @objc(MyApplication)
 final class MyApplication: UIApplication {
 
