@@ -33,6 +33,28 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
         return true
     }
 }
+//extension SwizzlingManager {
+//    static func swizzlingViewDidLoad() {
+//        let original = #selector(UIViewController.viewDidLoad)
+//        let swizzled = #selector(UIViewController.sm_viewDidLoad)
+//        SwizzlingManager.swizzleInstanceMethod(UIViewController.self, from: original, to: swizzled)
+//    }
+//    static func swizzlingDealloc() {
+//        /// not available for NSObject due to crash
+//        SwizzlingManager.swizzleInstanceMethodString(UIViewController.self, from: "dealloc", to: "sm_dealloc")
+//    }
+//}
+//
+//extension UIViewController {
+//    @objc func sm_viewDidLoad() {
+//        print("sm_viewDidLoad")
+//        /// if comment sm_viewDidLoad(), viewDidLoad will be called anyway
+//        sm_viewDidLoad()
+//    }
+//}
+
+
+
 final class SwizzlingManager {
     
     static func swizzleMethod(_ class_: AnyClass, from origin: String, to override: String, isClassMethod: Bool) {
