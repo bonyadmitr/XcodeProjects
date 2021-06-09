@@ -33,6 +33,13 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
         return true
     }
 }
+
+
+
+
+// MARK: - swizzle
+
+/// http://stackoverflow.com/questions/42824541/swift-3-1-deprecates-initialize-how-can-i-achieve-the-same-thing
 //extension UIApplication {
 //
 //    private static let runOnce: Void = {
