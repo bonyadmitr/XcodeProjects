@@ -34,6 +34,14 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
     }
 }
 
+//extension UIViewController {
+//    @_dynamicReplacement(for: viewDidLoad() )
+//    func some_viewDidLoad() {
+//        print("some_viewDidLoad")
+//        viewDidLoad()
+//    }
+//}
+
 //extension UIStatusBarManager {
 //    @_dynamicReplacement(for: handleTapAction())
 //    func some_viewDidLoad() {
