@@ -40,6 +40,16 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
 //    }
 //}
 //
+//extension Test {
+//
+//    @_dynamicReplacement(for: test())
+//    func test2() {
+//        print("test2")
+//        //test()
+//    }
+//}
+
+
 //extension UIViewController {
 //    @_dynamicReplacement(for: viewDidLoad() )
 //    func some_viewDidLoad() {
