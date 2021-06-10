@@ -35,6 +35,8 @@ extension ViewController: UIScrollViewDelegate, UITableViewDelegate {
 }
 
 /// https://forums.swift.org/t/dynamic-method-replacement/16619
+/// https://stackoverflow.com/q/60986318/5893286
+/// article https://tech.guardsquare.com/posts/swift-native-method-swizzling/
 //class Test {
 //    @objc dynamic func test() {
 //        print("test")
