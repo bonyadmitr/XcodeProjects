@@ -25,6 +25,7 @@ class RaisedTabBarController: UITabBarController {
         setupMiddleButton()
         updateItemsOffset()
         
+        // TODO: clear and RaisedTabBarHandler
         onRaisedButtonHandler = { [weak self] in
             if let vc = self?.selectedViewController as? RaisedTabBarHandler {
                 vc.onRaisedButton()
