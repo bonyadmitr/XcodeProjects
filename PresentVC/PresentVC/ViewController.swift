@@ -40,4 +40,46 @@ class ViewController: UIViewController {
         
     }
 
+    private func presentDismissAnimationFix() {
+        modalPresentationStyle = .fullScreen
+        let delay: TimeInterval = 1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            let vc1 = UIViewController()
+            vc1.view.backgroundColor = .red
+            vc1.modalPresentationStyle = .fullScreen
+            self.present(vc1, animated: true, completion: nil)
+            
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                
+                let vc2 = UIViewController()
+                vc2.view.backgroundColor = .blue
+                vc2.modalPresentationStyle = .fullScreen
+                
+                let someView = UIView(frame: .init(x: 0, y: 0, width: 100, height: 100))
+                someView.backgroundColor = .green
+                vc2.view.addSubview(someView)
+                
+                vc1.present(vc2, animated: true, completion: nil)
+                
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    //                    vc1.view.addSubview(vc2.view.copyView())
+                    //                    self.dismiss(animated: true, completion: nil)
+                    
+                    vc2.presentingViewController?.view.addSubview(vc2.view.copyView())
+                    /// if need
+                    //vc2.presentingViewController?.dismiss(animated: false, completion: nil)
+                    //vc2.dismiss(animated: false, completion: nil)
+                    vc2.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                    
+                }
+                
+                
+            }
+        }
+    }
 }
