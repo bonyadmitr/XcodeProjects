@@ -82,4 +82,18 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    private func pushCrash() {
+        DispatchQueue.main.async {
+            /// need 3 calles for simulator iOS 14 and 2 calles for device ios 13
+            self.navigationController?.pushViewController(UIViewController(), animated: true)
+            self.navigationController?.pushViewController(UIViewController(), animated: true)
+            self.navigationController?.pushViewController(UIViewController(), animated: true)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
 }
