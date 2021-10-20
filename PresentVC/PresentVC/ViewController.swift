@@ -104,4 +104,13 @@ class ViewController: UIViewController {
         navVC.pushViewController(vc, animated: false)
         navVC.pushViewController(vc, animated: false)
     }
+    
+    func pushCrash3() {
+        /// Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'All view controllers in a navigation controller must be distinct (( "<UIViewController: 0x7f9620c16b90>", "<UIViewController: 0x7f9620c16b90>" ))'
+        let vc = UIViewController()
+        let navVC = FixedNavigationController()
+        navVC.viewControllers = [vc, vc]
+    }
+
+}
 }
