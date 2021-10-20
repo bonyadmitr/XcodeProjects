@@ -120,4 +120,10 @@ extension UIView {
     }
 }
 
+
+class FixedNavigationController: UINavigationController {
+    
+    private var isPushBlocked = false
+    
+    
 }
