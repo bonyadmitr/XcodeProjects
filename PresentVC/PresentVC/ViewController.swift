@@ -96,4 +96,12 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    func pushCrash2() {
+        /// Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '<PresentVC.FixedNavigationController: 0x7fae8f808800> is pushing the same view controller instance (<UIViewController: 0x7fae90005430>) more than once which is not supported and is most likely an error in the application : com.zdaecq.PresentVC'
+        let vc = UIViewController()
+        let navVC = FixedNavigationController()
+        navVC.pushViewController(vc, animated: false)
+        navVC.pushViewController(vc, animated: false)
+    }
 }
