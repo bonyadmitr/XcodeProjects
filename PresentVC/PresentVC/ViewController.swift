@@ -125,5 +125,17 @@ class FixedNavigationController: UINavigationController {
     
     private var isPushBlocked = false
     
+    override var viewControllers: [UIViewController] {
+        get {
+            return super.viewControllers
+        }
+        set {
+            guard newValue.count == Set(newValue).count else {
+                assertionFailure("all vcs must be distinct: \(newValue)")
+                return
+            }
+            super.viewControllers = newValue
+        }
+    }
     
 }
