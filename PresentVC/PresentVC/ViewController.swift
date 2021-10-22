@@ -138,4 +138,36 @@ class FixedNavigationController: UINavigationController {
         }
     }
     
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        guard Thread.isMainThread else {
+            assertionFailure("pushViewController called not on main queue for vc: \(viewController)")
+            return
+        }
+        /// fix for animated and not animated push
+        if viewControllers.contains(viewController) {
+            assertionFailure("push blocked for same vc: \(viewController)")
+            return
+        }
+        if isPushBlocked {
+            //assertionFailure("animated push blocked for vc: \(viewController)")
+            return
+        }
+        guard animated else {
+            super.pushViewController(viewController, animated: animated)
+            return
+        }
+        isPushBlocked = true
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.isPushBlocked = false
+            print("- setCompletionBlock push")
+        }
+        /// possible bug https://developer.apple.com/forums/thread/664043
+        /// Bug for ios 14, ok for ios 13. Seems like problem in animation.
+        /// fix if need: DispatchQueue.main.async { super.pushViewController(viewController, animated: animated) }
+        super.pushViewController(viewController, animated: animated)
+        CATransaction.commit()
+    }
+    
 }
