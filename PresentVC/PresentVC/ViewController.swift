@@ -138,6 +138,7 @@ class FixedNavigationController: UINavigationController {
         }
     }
     
+    /// crash example: user clicks on the same button again causing the code to push the same view controller twice into the navigation controller
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         guard Thread.isMainThread else {
             assertionFailure("pushViewController called not on main queue for vc: \(viewController)")
