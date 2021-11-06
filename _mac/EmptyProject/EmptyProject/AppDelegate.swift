@@ -21,6 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let mainMenu = NSMenu()
         let mainMenuFileItem = NSMenuItem(title: "File", action: nil, keyEquivalent: "")
         let fileMenu = NSMenu(title: "File")
+        //fileMenu.addItem(withTitle: "Quit", action: #selector(NSApp.terminate), keyEquivalent: "q")
         fileMenu.addItem(withTitle: "Quit", action: #selector(quit(sender:)), keyEquivalent: "q")
         mainMenuFileItem.submenu = fileMenu
         mainMenu.addItem(mainMenuFileItem)
