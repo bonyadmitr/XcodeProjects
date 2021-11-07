@@ -19,3 +19,5 @@ NSApplication.shared.run()
 //NSApplication.shared.delegate = delegate
 //
 //NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+
+//import Cocoa;class W:NSWindow{override func close(){NSApp.terminate(nil)}};let w=W(contentRect:CGRect(x:0,y:0,width:150,height:0),styleMask:[.titled,.closable,.miniaturizable,.resizable],backing:.buffered,defer:false);w.title="Hello World";w.center();w.makeKeyAndOrderFront(nil);NSApp.setActivationPolicy(.regular);NSApp.activate(ignoringOtherApps:true);NSApp.run()
