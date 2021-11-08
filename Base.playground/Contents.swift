@@ -28,3 +28,12 @@ struct Quote: Decodable, ReflectedStringConvertible {
 }
 
 
+print("started")
+
+//let data = try "quotes.json".file()
+//let quotes = try JSONDecoder.shared.decode([Quote].self, from: data)
+
+print(
+    try "quotes.json".decodeFileJson(type: [Quote].self)
+)
+
