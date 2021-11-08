@@ -11,3 +11,9 @@ import Foundation
 //import PlaygroundSupport
 //PlaygroundPage.current.needsIndefiniteExecution = true
 //PlaygroundPage.current.finishExecution()
+
+/// Exception breakpoint
+NSSetUncaughtExceptionHandler { exception in print("💥 \(exception)") }
+//NSObject().value(forKey: "1") /// Exception example
+
+
