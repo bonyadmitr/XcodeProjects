@@ -37,3 +37,22 @@ print(
     try "quotes.json".decodeFileJson(type: [Quote].self)
 )
 
+/// long operations
+//print(
+//    try "quotes.json".decodeFileJson(type: [FailableDecodable<Quote>].self).compactMap { $0.base }
+//)
+
+print(
+    try """
+    [
+        {
+            "text": "Music in the soul can be heard by the universe.",
+            "author": "Lao Tzu"
+        },
+        {
+            "text": "What we see depends mainly on what we look for.",
+            "author": "John Lubbock"
+        },
+    ]
+    """.decodeJson(type: [Quote].self)
+)
