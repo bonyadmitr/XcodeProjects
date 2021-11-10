@@ -56,6 +56,11 @@ print(
     ]
     """.decodeJson(type: [Quote].self)
 )
+
+/// possible playground error in iOS
+/// solution: open right panael - playground settings - macOS
+//error: Execution was interrupted, reason: EXC_BAD_ACCESS (code=1, address=0x18).
+//The process has been left at the point where it was interrupted, use "thread return -x" to return to the state before expression evaluation.
 print(
     try """
     [
