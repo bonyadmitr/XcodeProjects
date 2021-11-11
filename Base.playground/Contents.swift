@@ -77,3 +77,28 @@ print(
 
 
 
+
+
+
+class SomeStruct: ReflectedStringConvertible {
+    var text: String = "123"
+}
+class SomeClass: ReflectedStringConvertible {
+    var text: String = "123"
+}
+class SomeNSClass: NSObject, ReflectedStringConvertible {
+    var text: String = "123"
+    
+    override var description : String {
+        return desc
+    }
+}
+
+class SomeNSClass2: SomeNSClass {
+    var text2: String = "456"
+}
+
+print(SomeStruct())
+print(SomeClass())
+print(SomeNSClass())
+print(SomeNSClass2())
