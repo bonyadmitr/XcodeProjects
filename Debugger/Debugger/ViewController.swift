@@ -270,3 +270,11 @@ extension String.StringInterpolation {
 //        appendInterpolation(value, or: "nil")
 //    }
 }
+
+
+
+extension Double {
+    var allDigitsString: String {
+        Decimal(self).description
+    }
+}
