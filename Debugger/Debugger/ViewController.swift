@@ -278,3 +278,12 @@ extension Double {
         Decimal(self).description
     }
 }
+/// +
+//let output = items.map {
+//    if let d = $0 as? Double {
+//        return d.allDigitsString
+//    } else if let a = $0 as? [Double] {
+//        return "[" + a.map { $0.allDigitsString }.joined(separator: ", ") + "]"
+//    } else {
+//        return "\($0)"
+//    }
