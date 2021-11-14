@@ -40,7 +40,7 @@ class ViewController: UIViewController {
                 do {
                     let duplicatesByNameDict = try ContactsManager.shared.findDuplicateContacts()
                     
-                    duplicatesByNameDict.forEach { self.duplicatesByName.append($0) }
+                    duplicatesByNameDict.forEach { self.duplicatesByName.append(($0.key, $0.value)) }
                     self.duplicatesByName.sort { $0.name < $1.name }
                     
                     DispatchQueue.main.async {
