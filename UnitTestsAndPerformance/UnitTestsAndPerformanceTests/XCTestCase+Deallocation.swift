@@ -5,6 +5,7 @@ import XCTest
 /// https://medium.com/@amlcurran/custom-assertions-in-swift-3b91b413665e
 
 /// test Memory leaks
+/// https://swiftrocks.com/unit-testing-weak-references--deallocation-in-swift
 /// https://www.avanderlee.com/swift/memory-leaks-unit-tests/
 /// https://github.com/leandromperez/specleaks/blob/master/SpecLeaks/Classes/AnalyzeLeak.swift
 extension XCTestCase {
