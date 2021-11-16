@@ -16,6 +16,13 @@ struct SchemeApp {
     let appStoreId: String
 }
 
+/// possible error:  -canOpenURL: failed for URL: "youtube://" - error: "This app is not allowed to query for scheme youtube"
+/// solution: add to Info.plist
+//<key>LSApplicationQueriesSchemes</key>
+//<array>
+//    <string>youtube</string>
+//</array>
+///
 final class DeveloperAppsManager {
     
     static let shared = DeveloperAppsManager()
