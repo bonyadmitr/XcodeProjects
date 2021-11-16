@@ -14,6 +14,7 @@
  https://heartbeat.fritz.ai/exploring-word-embeddings-and-text-catalogs-with-apples-natural-language-framework-in-ios-b4d9164f5a3b
  Big Json https://type.fit/api/quotes
  
+ Identifying the Language in a Text https://www.createwithswift.com/article-identifying-language-in-text-using-the-natural-language-framework/
  */
 
 // TODO: CoreML prediction
