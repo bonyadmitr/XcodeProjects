@@ -724,57 +724,6 @@ func urlsInitial() {
         assert(count == targetCount)
     }
     
-    // MARK: - anti-patterns
-    
-    func testDeadlockQueue() {
-        let queue = DispatchQueue(label: "queue line \(#line)")
-        //queue.sync {
-        queue.async {
-            
-            /// Calling this function and targeting the current queue results in deadlock
-            /// https://developer.apple.com/documentation/dispatch/dispatchqueue/1452870-sync
-            queue.sync {
-                /// this won't be executed -> deadlock!
-                /// app will crash
-            }
-        }
-    }
-    
-    func testDeadlockMain1() {
-        /// Calling this function and targeting the current queue results in deadlock
-        /// app will crash
-        DispatchQueue.main.sync {}
-    }
-    
-    func testDeadlockMain2() {
-        /// What you are trying to do here is to launch the main thread synchronously from a background thread before it exits. This is a logical error.
-        /// https://stackoverflow.com/questions/49258413/dispatchqueue-crashing-with-main-sync-in-swift?rq=1
-        /// app will crash
-        DispatchQueue.global().sync {
-            DispatchQueue.main.sync {}
-        }
-    }
-    
-    /// https://github.com/AgranatMarkit/YouCanHaveFunWithConcurrentQueue
-    func testDeadlockQueue4() {
-        let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
-        for i in 1...10000 {
-            queue.async {
-                
-                for j in 1...10 {
-                    queue.sync {
-                        print("\(i)-\(j)")
-                    }
-                }
-
-            }
-        }
-
-        /// this won't be executed
-        queue.asyncAfter(deadline: .now() + 3) {
-            print("!!!!!!!!!!!!!!!!! testDeadlockQueue4")
-        }
-    }
     
     // MARK: - groups
     
@@ -1000,3 +949,77 @@ func urlsInitial() {
         return array
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MARK: - Deadlock
+
+//    func testDeadlockQueue() {
+//        let queue = DispatchQueue(label: "queue line \(#line)")
+//        //queue.sync {
+//        queue.async {
+//
+//            /// Calling this function and targeting the current queue results in deadlock
+//            /// https://developer.apple.com/documentation/dispatch/dispatchqueue/1452870-sync
+//            queue.sync {
+//                /// this won't be executed -> deadlock!
+//                /// app will crash
+//            }
+//        }
+//    }
+//
+//    func testDeadlockMain1() {
+//        /// Calling this function and targeting the current queue results in deadlock
+//        /// app will crash
+//        DispatchQueue.main.sync {}
+//    }
+//
+//    func testDeadlockMain2() {
+//        /// What you are trying to do here is to launch the main thread synchronously from a background thread before it exits. This is a logical error.
+//        /// https://stackoverflow.com/questions/49258413/dispatchqueue-crashing-with-main-sync-in-swift?rq=1
+//        /// app will crash
+//        DispatchQueue.global().sync {
+//            DispatchQueue.main.sync {}
+//        }
+//    }
+//
+//    /// https://github.com/AgranatMarkit/YouCanHaveFunWithConcurrentQueue
+//    func testDeadlockQueue4() {
+//        let queue = DispatchQueue(label: "queue line \(#line)", attributes: .concurrent)
+//        for i in 1...10000 {
+//            queue.async {
+//
+//                for j in 1...10 {
+//                    queue.sync {
+//                        print("\(i)-\(j)")
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//        /// this won't be executed
+//        queue.asyncAfter(deadline: .now() + 3) {
+//            print("!!!!!!!!!!!!!!!!! testDeadlockQueue4")
+//        }
+//    }
