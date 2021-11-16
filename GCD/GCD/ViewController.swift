@@ -19,7 +19,7 @@ final class DispatchOperation {
 //        item = nil
     }
     
-    var isCanceled: Bool {
+    var isCancelled: Bool {
         return item?.isCancelled ?? true
     }
     
@@ -630,7 +630,7 @@ func urlsInitial() {
                 let q = DispatchOperation { item in
                     print("start", i)
                     
-                    if item.isCanceled {
+                    if item.isCancelled {
                         self.semaphoreForQueue.signal()
                         print("cancel-1", i)
                         return
@@ -638,7 +638,7 @@ func urlsInitial() {
                     
                     func delayCheckIsCanceled() {
                         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.3) {
-                            if item.isCanceled {
+                            if item.isCancelled {
                                 print("checkIsCanceled", i)
                                 self.semaphoreForQueue.signal()
                             } else {
@@ -650,7 +650,7 @@ func urlsInitial() {
                     delayCheckIsCanceled()
                     
                     DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-                        if item.isCanceled {
+                        if item.isCancelled {
                             print("cancel-2", i)
                             self.semaphoreForQueue.signal()
                             return
