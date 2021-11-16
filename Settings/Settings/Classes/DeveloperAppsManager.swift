@@ -23,6 +23,8 @@ struct SchemeApp {
 //    <string>youtube</string>
 //</array>
 ///
+/// possible error:  -canOpenURL: failed for URL: "unavailableApp://" - error: "The operation couldn’t be completed. (OSStatus error -10814.)"
+/// means there is no such app
 final class DeveloperAppsManager {
     
     static let shared = DeveloperAppsManager()
