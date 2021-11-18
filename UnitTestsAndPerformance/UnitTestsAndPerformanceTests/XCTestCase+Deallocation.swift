@@ -64,24 +64,24 @@ extension XCTestCase {
     ///   - condition: The condition to check for.
     ///   - timeout: The timeout in which the callback should return true.
     ///   - description: A string to display in the test log for this expectation, to help diagnose failures.
-    private func wait(for condition: @autoclosure @escaping () -> Bool, timeout: TimeInterval, description: String, file: StaticString = #file, line: UInt = #line) {
-        
-        let end = Date().addingTimeInterval(timeout)
-        var value = false
-        
-        let closure: () -> Void = {
-            value = condition()
-        }
-        
-        while !value && 0 < end.timeIntervalSinceNow {
-            if RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.002)) {
-                Thread.sleep(forTimeInterval: 0.002)
-            }
-            closure()
-        }
-        
-        closure()
-        
-        XCTAssertTrue(value, "➡️? Timed out waiting for condition to be true: \"\(description)\"", file: file, line: line)
-    }
+//    private func wait(for condition: @autoclosure @escaping () -> Bool, timeout: TimeInterval, description: String, file: StaticString = #file, line: UInt = #line) {
+//        
+//        let end = Date().addingTimeInterval(timeout)
+//        var value = false
+//        
+//        let closure: () -> Void = {
+//            value = condition()
+//        }
+//        
+//        while !value && 0 < end.timeIntervalSinceNow {
+//            if RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.002)) {
+//                Thread.sleep(forTimeInterval: 0.002)
+//            }
+//            closure()
+//        }
+//        
+//        closure()
+//        
+//        XCTAssertTrue(value, "➡️? Timed out waiting for condition to be true: \"\(description)\"", file: file, line: line)
+//    }
 }
