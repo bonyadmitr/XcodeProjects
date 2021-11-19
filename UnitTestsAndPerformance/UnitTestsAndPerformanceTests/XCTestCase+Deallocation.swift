@@ -14,16 +14,25 @@ extension XCTestCase {
     
     func assertDeallocation(file: StaticString = #file, line: UInt = #line, _ constructor: () -> AnyObject) {
         weak var mayBeLeakingRef: AnyObject?
-        
-        let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should drain")
         autoreleasepool {
             mayBeLeakingRef = constructor()
-            autoreleasepoolExpectation.fulfill()
         }
-        
-        wait(for: [autoreleasepoolExpectation], timeout: XCTestCase.autoreleasepoolExpectationtTmeout)
         XCTAssertNil(mayBeLeakingRef, file: file, line: line)
     }
+    
+    /// expectation realization, but we don't need to sync autoreleasepool
+    //func assertDeallocation(file: StaticString = #file, line: UInt = #line, _ constructor: () -> AnyObject) {
+    //    weak var mayBeLeakingRef: AnyObject?
+    //
+    //    let autoreleasepoolExpectation = expectation(description: "Autoreleasepool should drain")
+    //    autoreleasepool {
+    //        mayBeLeakingRef = constructor()
+    //        autoreleasepoolExpectation.fulfill()
+    //    }
+    //
+    //    wait(for: [autoreleasepoolExpectation], timeout: XCTestCase.autoreleasepoolExpectationtTmeout)
+    //    XCTAssertNil(mayBeLeakingRef, file: file, line: line)
+    //}
     
     /// Verifies whether the given constructed UIViewController gets deallocated after being presented and dismissed.
     ///
