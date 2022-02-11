@@ -53,6 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let navBarProxy = UINavigationBar.appearance()
+        let backgroundColor = UIColor.yellow
+        
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = backgroundColor
+            navBarProxy.standardAppearance = navBarAppearance
+            navBarProxy.scrollEdgeAppearance = navBarAppearance
+        } else {
+            navBarProxy.barTintColor = backgroundColor
+        }
+        
         // Override point for customization after application launch.
         window = UIWindow()
         window?.backgroundColor = UIColor.cyan
@@ -62,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             
             let vc = NavigationPopup()
             let navVC = UINavigationController(rootViewController: vc)
