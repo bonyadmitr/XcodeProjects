@@ -127,7 +127,7 @@ enum AppInfo {
         return totalUsageOfCPU
     }
     
-    /// app memoty usage
+    /// app memory usage
     static func memoryUsage() -> UInt64 {
         
         
