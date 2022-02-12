@@ -22,17 +22,18 @@ final class ViewController: UIViewController {
         view.addSubview(areaSelectionView)
         
         let timer = Timer(timeInterval: 2, repeats: true) { (_) in
-            print(RunLoop.current.currentMode!.rawValue)
-            sleep(1)
-            print("sleep end")
+//            sleep(1)
+//            print("sleep end", RunLoop.current.currentMode!.rawValue)
+            print("default", RunLoop.current.currentMode!.rawValue)
         }
-        
+        timer.tolerance = 0.1
         RunLoop.main.add(timer, forMode: .default)
+       
         
         let timerTracking = Timer(timeInterval: 1, repeats: true) { (_) in
-            print("tracking")
-            print(RunLoop.current.currentMode!.rawValue)
+            print("tracking", RunLoop.current.currentMode!.rawValue)
         }
+        timerTracking.tolerance = 0.1
         
         RunLoop.main.add(timerTracking, forMode: .tracking)
         
