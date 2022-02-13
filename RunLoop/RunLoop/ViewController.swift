@@ -37,6 +37,11 @@ final class ViewController: UIViewController {
         
         RunLoop.main.add(timerTracking, forMode: .tracking)
         
+            // TODO: check scrollViewWillBeginDragging + scrollViewDidEndScrolling https://stackoverflow.com/a/44113900/5893286
+            /// not working https://stackoverflow.com/a/15619927/5893286
+            //let tableView = self.view.subviews.first!.subviews.first!
+            //let isScrolling = tableView.layer.animation(forKey: "bounds") != nil
+            //print("isScrolling", isScrolling)
         //        func q() {
         //            RunLoop.main.perform(inModes: [.default]) {
         //                print("- someSleep start")
