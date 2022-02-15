@@ -37,11 +37,28 @@ final class ViewController: UIViewController {
         
         RunLoop.main.add(timerTracking, forMode: .tracking)
         
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
             // TODO: check scrollViewWillBeginDragging + scrollViewDidEndScrolling https://stackoverflow.com/a/44113900/5893286
             /// not working https://stackoverflow.com/a/15619927/5893286
             //let tableView = self.view.subviews.first!.subviews.first!
             //let isScrolling = tableView.layer.animation(forKey: "bounds") != nil
             //print("isScrolling", isScrolling)
+            
+            print("isScrolling anything", RunLoop.current.currentMode == .tracking)
+            if RunLoop.current.currentMode == .tracking {
+                let timer = Timer(timeInterval: 0, repeats: false) { (_) in
+                    print("delayed reload data when user stop scroll intaraction")
+                }
+                
+                RunLoop.main.add(timer, forMode: .default)
+            }
+            
+        }
+        
+        
+        
         //        func q() {
         //            RunLoop.main.perform(inModes: [.default]) {
         //                print("- someSleep start")
