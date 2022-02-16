@@ -157,7 +157,11 @@ final class AreaSelectionView: UIView {
         /// needs adapt with "dashAnimation". done by constatnt "lineDashPattern" + reduce
         shapeLayer.lineDashPattern = lineDashPattern as [NSNumber]
         /// line dash color
-        shapeLayer.strokeColor = UIColor.black.cgColor
+        if #available(iOS 13.0, *) {
+            shapeLayer.strokeColor = UIColor.label.cgColor
+        } else {
+            shapeLayer.strokeColor = UIColor.black.cgColor
+        }
         /// inner rect color
         shapeLayer.fillColor = UIColor.clear.cgColor
         return shapeLayer
