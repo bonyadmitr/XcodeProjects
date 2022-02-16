@@ -190,6 +190,8 @@ final class AreaSelectionView: UIView {
     
     private var runLoop: CFRunLoop?
     
+    var isTouchStarted = false
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
@@ -204,8 +206,16 @@ final class AreaSelectionView: UIView {
         /// "removeAnimation" doesn't need bcz it was removed by "removeFromSuperlayer"
         self.shapeLayer.add(self.dashAnimation, forKey: "linePhase")
         
-        //RunLoop.current.acceptInput(forMode: .tracking, before: Date.distantFuture)
-        let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+        
+        // TODO: check with CADisplayLink
+        isTouchStarted = true
+        while isTouchStarted {
+            //RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+            let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+            assert(isChangedRunLoopMode)
+
+        }
+        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
         assert(isChangedRunLoopMode)
     }
     
