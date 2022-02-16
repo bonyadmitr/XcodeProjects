@@ -95,6 +95,7 @@ final class ViewController: UIViewController {
         /// https://stackoverflow.com/questions/43825263/how-to-exit-a-runloop
         /// https://stackoverflow.com/a/4260609/5893286
         /// https://github.com/ReactiveX/RxSwift/blob/master/RxBlocking/RunLoopLock.swift
+        /// https://habr.com/ru/company/otus/blog/590319/
         //            CFRunLoopPerformBlock(CFRunLoopGetMain(), CFRunLoopMode.defaultMode.rawValue) {
         //                someSleep()
         //            }
