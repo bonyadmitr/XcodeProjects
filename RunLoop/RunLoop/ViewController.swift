@@ -268,4 +268,15 @@ final class AreaSelectionView: UIView {
         //            print("--- !!! 2")
         //        }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// cgColor update https://stackoverflow.com/a/58312205/5893286
+        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            shapeLayer.strokeColor = UIColor.label.cgColor
+        }
+        
+    }
+    
 }
