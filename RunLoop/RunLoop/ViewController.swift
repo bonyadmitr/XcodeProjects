@@ -217,6 +217,10 @@ final class AreaSelectionView: UIView {
         }
         let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
         assert(isChangedRunLoopMode)
+        
+        //RunLoop.current.acceptInput(forMode: .tracking, before: Date.distantFuture)
+//        let isChangedRunLoopMode = RunLoop.current.run(mode: .tracking, before: Date.distantFuture)
+//        assert(isChangedRunLoopMode)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
