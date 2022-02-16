@@ -259,8 +259,10 @@ final class AreaSelectionView: UIView {
         self.shapeLayer.removeFromSuperlayer()
         self.shapeLayer.path = nil
         
-        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
-        assert(isChangedRunLoopMode)
+        isTouchStarted = false
+//        let isChangedRunLoopMode = RunLoop.current.run(mode: .default, before: Date.distantFuture)
+//        assert(isChangedRunLoopMode)
+        
         //
         //        print("--- !!! 1")
         //        RunLoop.main.perform(inModes: [.tracking]) {
