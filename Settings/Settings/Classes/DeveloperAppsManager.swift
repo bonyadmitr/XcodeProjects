@@ -16,6 +16,8 @@ struct SchemeApp {
     let appStoreId: String
 }
 
+// TODO: in memory cache, on disk cache for last run, check only when screen opened https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl
+// TODO: check real limit
 /// possible error:  -canOpenURL: failed for URL: "youtube://" - error: "This app is not allowed to query for scheme youtube"
 /// solution: add to Info.plist
 //<key>LSApplicationQueriesSchemes</key>
