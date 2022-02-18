@@ -18,6 +18,10 @@ struct SchemeApp {
 
 // TODO: in memory cache, on disk cache for last run, check only when screen opened https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl
 // TODO: check real limit
+/// doc: after iOS 15 are limited to a maximum of 50 entries in the LSApplicationQueriesSchemes
+/// doc: you can call `canOpenURL` up to 50 times
+/// doc: After reaching that limit, subsequent calls always return false. If the user reinstalls or upgrades the app, iOS resets the limit.
+
 /// possible error:  -canOpenURL: failed for URL: "youtube://" - error: "This app is not allowed to query for scheme youtube"
 /// solution: add to Info.plist
 //<key>LSApplicationQueriesSchemes</key>
