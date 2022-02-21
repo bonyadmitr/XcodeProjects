@@ -38,3 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // TODO: app with PosixPermissions set
 
 
+/** apple source
+ 
+ Foundation
+ latest with linux https://github.com/apple/swift-corelibs-foundation/tree/main/Sources/Foundation
+ swift3, apple only https://github.com/apple/swift-corelibs-foundation/blob/swift-3/Foundation
+ SiriusObfuscator - apple source code by SymbolExtractor https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/tree/master/swift-corelibs-foundation/Foundation
+ 
+ 
+ */
+
