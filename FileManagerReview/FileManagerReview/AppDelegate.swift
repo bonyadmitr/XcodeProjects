@@ -33,3 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+// TODO: app with 1 feature: FileManager.default.removeItemWithoutPermissions(at: folderUrl)
+// TODO: app with PosixPermissions set
+
+
