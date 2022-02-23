@@ -55,6 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager+POSIX.swift
  https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestFileManager.swift
  
+ Data
+ new / fread / readChunk https://github.com/weichsel/ZIPFoundation/blob/development/Sources/ZIPFoundation/Data%2BSerialization.swift
+ apple source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/Data.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSData.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestNSData.swift
+ 
  
  */
 
