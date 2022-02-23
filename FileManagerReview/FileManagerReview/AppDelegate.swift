@@ -79,5 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://github.com/apple/swift-corelibs-foundation/blob/main/CoreFoundation/URL.subproj/CFURL.c#L4916
  https://github.com/opensource-apple/CF/blob/master/CFURL.c#L4532
  
+ resourceValues(forKeys
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift#L594
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift#L663
+ storage init https://github.com/apple/swift-corelibs-foundation/blob/main/CoreFoundation/URL.subproj/CFURL.c#L5320
+ 
+ 
  */
 
