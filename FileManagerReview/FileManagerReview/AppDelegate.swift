@@ -85,5 +85,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  storage init https://github.com/apple/swift-corelibs-foundation/blob/main/CoreFoundation/URL.subproj/CFURL.c#L5320
  
  
+ 
+ URLCache
+ apple source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/FoundationNetworking/URLCache.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestURLCache.swift
+ 
+ 
+ NSCache
+ apple source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSCache.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestNSCache.swift
+ 
  */
 
