@@ -71,5 +71,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift
  https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestNSURL.swift
  
+ 
+ deletingLastPathComponent source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSPathUtilities.swift#L241
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/URL.swift#L810
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift#L874
+ https://github.com/apple/swift-corelibs-foundation/blob/main/CoreFoundation/URL.subproj/CFURL.c#L4916
+ https://github.com/opensource-apple/CF/blob/master/CFURL.c#L4532
+ 
  */
 
