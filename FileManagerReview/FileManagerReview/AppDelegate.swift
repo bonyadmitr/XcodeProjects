@@ -63,5 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestNSData.swift
  
  
+ URL
+ apple source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/URL.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestURL.swift
+ NSURL
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestNSURL.swift
+ 
  */
 
