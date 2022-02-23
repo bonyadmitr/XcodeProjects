@@ -45,6 +45,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  swift3, apple only https://github.com/apple/swift-corelibs-foundation/blob/swift-3/Foundation
  SiriusObfuscator - apple source code by SymbolExtractor https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/tree/master/swift-corelibs-foundation/Foundation
  
+
+ 
+ 
+ 
+ FileManager
+ apple source
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager+POSIX.swift
+ https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestFileManager.swift
+ 
  
  */
 
