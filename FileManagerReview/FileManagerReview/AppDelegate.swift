@@ -99,3 +99,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  */
 
+
+
+
+/**
+ TODO
+ 
+ check https://github.com/GianniCarlo/DirectoryWatcher
+ check https://github.com/vmanot/Filesystem
+ check PosixPermissions vs FilePermission https://github.com/vmanot/Filesystem/blob/master/Sources/Intramodular/Access%20Control/FilePermission.swift
+ 
+
+ 
+ */
