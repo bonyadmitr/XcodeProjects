@@ -109,6 +109,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  check https://github.com/vmanot/Filesystem
  check PosixPermissions vs FilePermission https://github.com/vmanot/Filesystem/blob/master/Sources/Intramodular/Access%20Control/FilePermission.swift
  
+ 
+ //String(contentsOf: URL)
+ //String(contentsOfFile: String)
+ 
+ 
+ //        Data(contentsOf: URL)
+ 
 
  
  */
