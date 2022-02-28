@@ -113,6 +113,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //String(contentsOf: URL)
  //String(contentsOfFile: String)
  
+ //        NSDictionary(contentsOf: URL)
+ //        NSDictionary(contentsOf: URL, error: () )
+ //        NSDictionary(contentsOfFile: String)
+ //        let dict = NSDictionary() as? Dictionary<String, AnyObject>
+ //        PropertyListSerialization
  
  //        Data(contentsOf: URL)
  
