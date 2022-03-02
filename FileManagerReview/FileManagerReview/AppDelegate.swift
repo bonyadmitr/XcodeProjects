@@ -121,6 +121,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  //        Data(contentsOf: URL)
  
+ //        if let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
+ //            let nsDictionary = NSDictionary(contentsOfFile: path)
+ //        }
+ //        if let url = Bundle.main.url(forResource: "Config", withExtension: "plist") {
+ //            let nsDictionary = NSDictionary(contentsOf: url)
+ //        }
+ 
+ //        Bundle.main.infoDictionary
+ 
+ 
 
  
  */
