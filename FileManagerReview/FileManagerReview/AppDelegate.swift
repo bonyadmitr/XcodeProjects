@@ -131,6 +131,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //        Bundle.main.infoDictionary
  
  
+ func check free disk space before write file
+ 
+ clear cache by remove folder https://stackoverflow.com/a/14910128/5893286
+ 
+ 
+ GCD in fileSystem?
+ multythread fast read several big files
 
  
  */
