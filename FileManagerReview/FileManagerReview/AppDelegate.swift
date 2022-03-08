@@ -138,6 +138,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  GCD in fileSystem?
  multythread fast read several big files
+ 
+ DispatchSource for files
+ FileMonitor - DispatchSource: Detecting changes in files and folders in Swift https://swiftrocks.com/dispatchsource-detecting-changes-in-files-and-folders-in-swift
+ FolderMonitor - Detecting changes to a folder https://medium.com/over-engineering/monitoring-a-folder-for-changes-in-ios-dc3f8614f902
+ 
 
  
  */
