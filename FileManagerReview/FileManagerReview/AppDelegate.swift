@@ -175,6 +175,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  Буфер NSData хранится на диске, а не в оперативной памяти. Это очень легко проверить, открыв какой-нить фильмец на пару гигабайт размером через NSData
  
  
+ nscache
+ 
+ urlCache
+ 
+ NSPurgeableData https://developer.apple.com/documentation/foundation/nspurgeabledata
+ https://github.com/search?l=Swift&q=purgeable&type=Code
+ 
+ 
 
  
  */
