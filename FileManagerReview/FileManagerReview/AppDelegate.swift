@@ -153,6 +153,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  /// but for delegates - create a unique instance
  most(or all) functions execute sync
 
+ ---------------------------- NSData cache
+ /// Disable file system caching for files being read once `Data(contentsOf: URL, options: .uncached)` https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/PerformanceTips/PerformanceTips.html
+ /// doc: file should not be stored in the file-system caches
+ //        try! Data(contentsOf: URL(string: "")!, options: .uncached)
+ 
+ NSData cache for fileSystem file
+ 
 
  
  */
