@@ -167,6 +167,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  ---
  
  
+ 
+ /// doc: file should not be stored in the file-system caches
+ try! Data(contentsOf: URL(string: "")!, options: .uncached)
+ 
+ https://habr.com/ru/post/591775/#comment_23776127
+ Буфер NSData хранится на диске, а не в оперативной памяти. Это очень легко проверить, открыв какой-нить фильмец на пару гигабайт размером через NSData
+ 
+ 
 
  
  */
