@@ -160,6 +160,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  NSData cache for fileSystem file
  
+ NSData cache for remote file (seems like NSURLConnection used or URLSession)
+ apple source https://github.com/Polidea/SiriusObfuscator/blob/master/SymbolExtractorAndRenamer/swift-corelibs-foundation/Foundation/NSData.swift#L168 +
+ apple source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSData.swift#L217
+ 
+ ---
+ 
+ 
 
  
  */
