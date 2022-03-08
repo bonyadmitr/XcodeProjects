@@ -143,6 +143,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  FileMonitor - DispatchSource: Detecting changes in files and folders in Swift https://swiftrocks.com/dispatchsource-detecting-changes-in-files-and-folders-in-swift
  FolderMonitor - Detecting changes to a folder https://medium.com/over-engineering/monitoring-a-folder-for-changes-in-ios-dc3f8614f902
  
+ ---------------------------- Thread Safe access
+ 
+ files
+ posix functions
+ 
+ FileManager
+ /// doc: The methods of the shared FileManager object can be called from multiple threads safely https://developer.apple.com/documentation/foundation/filemanager
+ /// but for delegates - create a unique instance
+ most(or all) functions execute sync
+
 
  
  */
