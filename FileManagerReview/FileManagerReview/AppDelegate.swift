@@ -183,6 +183,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://github.com/search?l=Swift&q=purgeable&type=Code
  
  
+ URLSession.shared.dataTask(with: url) cache
+ downloadTask cache
+ https://habr.com/ru/post/591775/#comment_23776247
+ https://developer.apple.com/documentation/foundation/url_loading_system/fetching_website_data_into_memory
+ 
+ 
 
  
  */
