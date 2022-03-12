@@ -189,6 +189,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://developer.apple.com/documentation/foundation/url_loading_system/fetching_website_data_into_memory
  
  
+ memory for Low-Memory Warnings https://developer.apple.com/documentation/xcode/responding-to-low-memory-warnings
+ `UIApplication.shared.perform(Selector(("_performMemoryWarning")))` https://stackoverflow.com/a/48202910/5893286
+ 
 
  
  */
