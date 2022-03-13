@@ -192,6 +192,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  memory for Low-Memory Warnings https://developer.apple.com/documentation/xcode/responding-to-low-memory-warnings
  `UIApplication.shared.perform(Selector(("_performMemoryWarning")))` https://stackoverflow.com/a/48202910/5893286
  
+ ------ UIImage cache
+ 
+ UIImage cache (there is no for CGImage)
+ 
+ https://habr.com/ru/post/591775/#comment_23776127
+ UIImage. Так он (как и Image в Свифт) работает поверх NSData все с тем же механизмом. Я это четко осознал, когда бил на тайлы 100МБ jpeg военную карту Москвы на 4S. Просто прикиньте, какой размер эта карта занимает попиксельно после декодирования jpeg. И тем не менее данная карта прекрасно отображалась на экранчике мобильного телефона. Правда, плохо масштабировалась, что я позже и решал тайлингом.
+ 
 
  
  */
