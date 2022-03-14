@@ -199,6 +199,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  https://habr.com/ru/post/591775/#comment_23776127
  UIImage. Так он (как и Image в Свифт) работает поверх NSData все с тем же механизмом. Я это четко осознал, когда бил на тайлы 100МБ jpeg военную карту Москвы на 4S. Просто прикиньте, какой размер эта карта занимает попиксельно после декодирования jpeg. И тем не менее данная карта прекрасно отображалась на экранчике мобильного телефона. Правда, плохо масштабировалась, что я позже и решал тайлингом.
  
+ 
+ short https://stackoverflow.com/a/8644628/5893286
+ /// uses memory cache - Because these methods cache the image data automatically, they are especially recommended for images that you use frequently https://developer.apple.com/documentation/uikit/uiimage
+ /// doc: The system may purge cached image data at any time to free up memory. Purging occurs only for images that are in the cache but are not currently being used. https://developer.apple.com/documentation/uikit/uiimage/1624154-init
+ /// doc: In iOS 9 and later, this method is thread safe
+ UIImage(named: "")
 
  
  */
