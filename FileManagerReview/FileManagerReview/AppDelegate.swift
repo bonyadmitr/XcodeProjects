@@ -205,6 +205,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  /// doc: The system may purge cached image data at any time to free up memory. Purging occurs only for images that are in the cache but are not currently being used. https://developer.apple.com/documentation/uikit/uiimage/1624154-init
  /// doc: In iOS 9 and later, this method is thread safe
  UIImage(named: "")
+ 
+ /// without caching - These methods load the image data from disk each time, so you should not use them to load the same image repeatedly
+ /// doc: This method loads the image data into memory and marks it as purgeable. If the data is purged and needs to be reloaded, the image object loads that data again from the specified path. https://developer.apple.com/documentation/uikit/uiimage/1624112-init
+ UIImage(contentsOfFile: "")
 
  
  */
