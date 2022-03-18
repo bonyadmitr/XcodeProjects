@@ -233,6 +233,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  
  
+ 
+/// Clear launch screen cache
+/// Make sure to call only in debug mode
+func clearLaunchScreenCache() {
+    do {
+        try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+    } catch {
+        print("Failed to delete launch screen cache: \(error)")
+    }
+}
 
  
  */
