@@ -214,6 +214,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  todo custom cache if need https://stackoverflow.com/a/34792550/5893286
  
  
+ 
+ todo
+ check purgeable virtual memory Statistics + find other memory stats https://gist.github.com/algal/cd3b5dfc16c9d577846d96713f7fba40 + https://github.com/JosephDuffy/GatheredKit/blob/master/Source/Sources/Memory.swift
+ check with memory for Low-Memory Warnings `UIApplication.shared.perform(Selector(("_performMemoryWarning")))` https://developer.apple.com/documentation/xcode/responding-to-low-memory-warnings
 
  
  */
