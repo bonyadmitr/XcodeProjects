@@ -229,6 +229,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  //UIImage._clearAssetCaches
  //UIImage._flushCache()
 
+ assets library vs in folder file(localization, cache, app store optimizations, different platforms, different trait environments, different scale factors, Different Appearances) https://developer.apple.com/documentation/uikit/uiimage
+ 
+ 
+ 
 
  
  */
