@@ -209,6 +209,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  /// without caching - These methods load the image data from disk each time, so you should not use them to load the same image repeatedly
  /// doc: This method loads the image data into memory and marks it as purgeable. If the data is purged and needs to be reloaded, the image object loads that data again from the specified path. https://developer.apple.com/documentation/uikit/uiimage/1624112-init
  UIImage(contentsOfFile: "")
+ 
+ extension UIImage https://stackoverflow.com/a/39551766/5893286
+ todo custom cache if need https://stackoverflow.com/a/34792550/5893286
+ 
+ 
 
  
  */
