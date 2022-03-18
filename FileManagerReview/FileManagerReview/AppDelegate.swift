@@ -222,6 +222,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  CGImage
  CIImage
  help https://developer.apple.com/documentation/uikit/uiimage
+ 
+ /// private api https://github.com/xybp888/iOS-Header/blob/master/13.0/PrivateFrameworks/UIKitCore.framework/UIImage.h
+ //UIImage._flushSharedImageCache()
+ //UIImage()._isCached
+ //UIImage._clearAssetCaches
+ //UIImage._flushCache()
+
 
  
  */
