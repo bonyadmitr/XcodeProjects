@@ -243,6 +243,14 @@ func clearLaunchScreenCache() {
         print("Failed to delete launch screen cache: \(error)")
     }
 }
+ 
+ 
+ ----------- custom cache
+ 
+ Nuke
+ https://kean.blog/post/nuke-9
+ https://github.com/kean/Nuke/blob/master/Tests/ImageCacheTests.swift
+ https://github.com/kean/Nuke/blob/master/Tests/DataCacheTests.swift
 
  
  */
