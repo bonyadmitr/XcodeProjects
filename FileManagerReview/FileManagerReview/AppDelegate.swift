@@ -251,6 +251,11 @@ func clearLaunchScreenCache() {
  https://kean.blog/post/nuke-9
  https://github.com/kean/Nuke/blob/master/Tests/ImageCacheTests.swift
  https://github.com/kean/Nuke/blob/master/Tests/DataCacheTests.swift
+ algorithm for NSCache is not documented
+ server Cache-Control https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+ Resumable Downloads https://kean.blog/post/nuke-9#resumable-downloads + HTTP range requests https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests
+ 
+ 
 
  
  */
