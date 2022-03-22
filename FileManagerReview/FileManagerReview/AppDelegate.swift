@@ -256,6 +256,14 @@ func clearLaunchScreenCache() {
  Resumable Downloads https://kean.blog/post/nuke-9#resumable-downloads + HTTP range requests https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests
  
  
+ ----------------------------
+ // MARK: - Mapping Files Into Memory / read file
+ 
+ /// apple: When to Map Files + When Not to Map Files https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemAdvancedPT/MappingFilesIntoMemory/MappingFilesIntoMemory.html
+ //mmap + munmap https://en.wikipedia.org/wiki/Mmap + https://en.wikipedia.org/wiki/Memory-mapped_file
+ //swift example https://github.com/akirark/MemoryMappedFileSwift/blob/master/MemoryMappedFile/MemoryMappedFile.swift
+ //MAP_FAILED https://github.com/apple/swift-corelibs-foundation/blob/swift-3/Foundation/NSData.swift#L288
+ 
 
  
  */
