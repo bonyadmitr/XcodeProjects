@@ -264,6 +264,11 @@ func clearLaunchScreenCache() {
  //swift example https://github.com/akirark/MemoryMappedFileSwift/blob/master/MemoryMappedFile/MemoryMappedFile.swift
  //MAP_FAILED https://github.com/apple/swift-corelibs-foundation/blob/swift-3/Foundation/NSData.swift#L288
  
+ /// ru virtual memory - mmap + PROT_NONE + mprotect https://habr.com/ru/company/otus/blog/537568/
+ mmap macOS - VirtualAlloc windows https://stackoverflow.com/a/3561988/5893286 + https://en.wikipedia.org/wiki/Mmap
+ ! mmap wrapper + PROT_NONE https://github.com/ixy-languages/ixy.swift/blob/master/ixy/Sources/ixy/Memory/MemoryMap.swift
+ PROT_NONE https://github.com/vmanot/POSIX/blob/master/Sources/Intermodular/Helpers/Darwin/Darwin.POSIXMemoryMapProtection.swift + https://github.com/vmanot/POSIX/blob/master/Sources/Intermodular/Helpers/Darwin/Darwin.POSIXMemoryMap.swift
+ mmap demo https://github.com/J0hnngWong/mmapInSwift/blob/master/mmapDemo/ViewController.swift
 
  
  */
