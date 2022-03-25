@@ -269,6 +269,11 @@ func clearLaunchScreenCache() {
  ! mmap wrapper + PROT_NONE https://github.com/ixy-languages/ixy.swift/blob/master/ixy/Sources/ixy/Memory/MemoryMap.swift
  PROT_NONE https://github.com/vmanot/POSIX/blob/master/Sources/Intermodular/Helpers/Darwin/Darwin.POSIXMemoryMapProtection.swift + https://github.com/vmanot/POSIX/blob/master/Sources/Intermodular/Helpers/Darwin/Darwin.POSIXMemoryMap.swift
  mmap demo https://github.com/J0hnngWong/mmapInSwift/blob/master/mmapDemo/ViewController.swift
+ logic example https://stackoverflow.com/a/28717769/5893286
+ inspired ru https://habr.com/ru/post/598781/
+ //virtual_memory_guard_exception_codes
+ //vm_statistics64.init
+ 
 
  
  */
