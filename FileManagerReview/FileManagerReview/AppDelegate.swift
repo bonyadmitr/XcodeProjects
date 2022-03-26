@@ -274,6 +274,10 @@ func clearLaunchScreenCache() {
  //virtual_memory_guard_exception_codes
  //vm_statistics64.init
  
+ // theory https://www.usenix.org/system/files/conference/hotstorage17/hotstorage17-paper-choi.pdf
+ // ENOMEM https://developer.apple.com/documentation/foundation/posixerror/2292966-enomem
+ //low-memory scenarios https://stackoverflow.com/q/6172919/5893286
+ 
 
  
  */
