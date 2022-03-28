@@ -278,6 +278,11 @@ func clearLaunchScreenCache() {
  // ENOMEM https://developer.apple.com/documentation/foundation/posixerror/2292966-enomem
  //low-memory scenarios https://stackoverflow.com/q/6172919/5893286
  
+ check: map file to virtual memory vs simple cache
+ 
+ For data read randomly from a file, you can sometimes improve performance by mapping that file directly into your app’s virtual memory space. File mapping is a programming convenience for files you want to access with read-only permissions. It lets the kernel take advantage of the virtual memory paging mechanism to read the file data only when it is needed. You can also use file mapping to overwrite existing bytes in a file; however, you cannot extend the size of the file using this technique. Mapped files bypass the system disk caches, so only one copy of the file is stored in memory.
+ If you map a file into memory and the file becomes inaccessible—because the disk containing the file was ejected or the network server containing the file is unmounted—your app will crash with a SIGBUS error. Your app can also crash if you map a file into memory, that file gets truncated, and you attempt to access data at a range that not longer exists
+ https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/PerformanceTips/PerformanceTips.html
 
  
  */
