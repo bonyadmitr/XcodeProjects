@@ -328,4 +328,9 @@ func clearLaunchScreenCache() {
  
  view file manager https://www.raywenderlich.com/666-filemanager-class-tutorial-for-macos-getting-started-with-the-file-system
  
+ macOS icons
+ let fileIcon = NSWorkspace.shared().icon(forFile: item.path)
+ 
+ create documents app (project)
+ 
  */
