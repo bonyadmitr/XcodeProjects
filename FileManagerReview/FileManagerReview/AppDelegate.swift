@@ -289,6 +289,18 @@ func clearLaunchScreenCache() {
  /// https://forums.swift.org/t/what-s-the-recommended-way-to-memory-map-a-file/19113/3
  /// Safe File Mapping for NSData https://developer.apple.com/library/archive/releasenotes/Foundation/RN-Foundation-iOS/Foundation_iOS5.html
  
+ /// Old. only with NSData
+ //NSData(contentsOfMappedFile: "")
+ //NSData.dataWithContentsOfMappedFile("")
+ 
+ /// new
+ /// file should be mapped into virtual memory, if possible and safe
+ try! Data(contentsOf: URL(string: "")!, options: .mappedIfSafe)
+ /// map the file in if possible
+ try! Data(contentsOf: URL(string: "")!, options: .alwaysMapped)
+ /// apple source alwaysMapped https://github.com/Polidea/SiriusObfuscator/blob/master/SymbolExtractorAndRenamer/swift-corelibs-foundation/Foundation/NSData.swift#L388
+ 
+ 
 
  
  */
