@@ -308,6 +308,18 @@ func clearLaunchScreenCache() {
     return
  }
  --
+     // Open the file.
+    fileDescriptor = open( inPathName, O_RDONLY, 0 );
+    if( fileDescriptor < 0 )
+    {
+       outError = errno;
+    }
+    else
+    {
+        // We now know the file exists. Retrieve the file size.
+        if( fstat( fileDescriptor, &statInfo ) != 0 )
+ ----------------------------
+ 
 
  
  */
