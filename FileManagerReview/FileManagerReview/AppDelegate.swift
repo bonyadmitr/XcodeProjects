@@ -322,4 +322,10 @@ func clearLaunchScreenCache() {
  
 
  
+ // It's good habit to alloc/init the file manager for move/copy operations,
+ // just in case you decide to add a delegate later.
+ https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/ManagingFIlesandDirectories/ManagingFIlesandDirectories.html
+ 
+ view file manager https://www.raywenderlich.com/666-filemanager-class-tutorial-for-macos-getting-started-with-the-file-system
+ 
  */
