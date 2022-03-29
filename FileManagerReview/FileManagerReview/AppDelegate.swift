@@ -301,6 +301,13 @@ func clearLaunchScreenCache() {
  /// apple source alwaysMapped https://github.com/Polidea/SiriusObfuscator/blob/master/SymbolExtractorAndRenamer/swift-corelibs-foundation/Foundation/NSData.swift#L388
  
  
+ ---------------------------- open file
+ 
+ guard let file = fopen(filePath, "r") else {
+    assertionFailure("Could not open file at \(filePath)")
+    return
+ }
+ --
 
  
  */
