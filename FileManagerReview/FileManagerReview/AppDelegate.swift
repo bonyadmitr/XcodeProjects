@@ -333,4 +333,8 @@ func clearLaunchScreenCache() {
  
  create documents app (project)
  
+ NSDocument + NSDocumentController macOS
+ https://developer.apple.com/documentation/appkit/nsdocument
+ https://developer.apple.com/documentation/appkit/documents_data_and_pasteboard/developing_a_document-based_app
+ 
  */
