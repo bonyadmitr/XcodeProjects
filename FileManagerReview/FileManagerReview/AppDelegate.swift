@@ -337,4 +337,10 @@ func clearLaunchScreenCache() {
  https://developer.apple.com/documentation/appkit/nsdocument
  https://developer.apple.com/documentation/appkit/documents_data_and_pasteboard/developing_a_document-based_app
  
+ UIDocument (Document app xcode template) UIDocumentBrowserViewController
+ 
+ 
+ UISupportsDocumentBrowser - LSSupportsOpeningDocumentsInPlace https://stackoverflow.com/a/52262367/5893286
+ UIDocumentPickerViewController https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/DocumentPickerProgrammingGuide/Introduction/Introduction.html
+ ??? UIDocumentInteractionController
  */
