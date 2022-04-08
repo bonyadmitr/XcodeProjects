@@ -10,6 +10,7 @@ import UIKit
 
 typealias VoidHandler = () -> Void
 
+/// not so good animation for button and nav bar title during pop
 final class BackButtonItem: UIBarButtonItem {
     convenience init(action: @escaping VoidHandler) {
         let button = BackButton(action: action)
@@ -21,6 +22,7 @@ final class BackButton: UIButton {
     
     private var action: VoidHandler?
     
+    /// text color is not gray during alert like arrow image (see example)
     var buttonColor: UIColor {
         get {
             return tintColor
@@ -28,7 +30,7 @@ final class BackButton: UIButton {
         set (color) {
             tintColor = color
             setTitleColor(color, for: .normal)
-            setTitleColor(color.darker(by: 50), for: .highlighted)
+            setTitleColor(color.darker(by: 50), for: .highlighted) /// not like system back button
         }
     }
     
