@@ -50,28 +50,27 @@ final class BackButton: UIButton {
     }
     
     private func setup() {
-        let color = UIColor.black
+        /// image can be resized to be like system arrow
 //        let image = UIImage(named: "im_backButton") /// as template
         let image = UIImage(named: "im_default_back_button") /// as template
-        let title = "Back"
-        let font = UIFont.systemFont(ofSize: 17)
-        let imageInset: CGFloat = -20
-        let titleInset: CGFloat = -10
+//        let image = UIImage(named: "backIndicatorImage") /// as template
         
-        titleLabel?.font = font
+        let title = NSLocalizedString("Back", comment: "")
+        
+        titleLabel?.font = UIFont.systemFont(ofSize: 17)
         setTitle(title, for: .normal)
         setImage(image, for: .normal)
-        buttonColor = color
+        buttonColor = UIColor.systemBlue
         
-        imageEdgeInsets = UIEdgeInsets(top: 2, left: imageInset, bottom: 0, right: 0)
-        titleEdgeInsets = UIEdgeInsets(top: 2, left: titleInset, bottom: 0, right: 0)
+        imageEdgeInsets = UIEdgeInsets(top: -1, left: -15, bottom: 0, right: 0)
+        titleEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
         
-        sizeToFit()
+//        sizeToFit()
         
         addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
     }
     
-    @objc func actionTouchUp() {
+    @objc private func actionTouchUp() {
         action?()
     }
 }
