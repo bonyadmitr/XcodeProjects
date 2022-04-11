@@ -13,12 +13,6 @@ class BackButtonController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// nothing is working
-//        self.navigationController?.navigationBar.backIndicatorImage = image
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
-//        navigationItem.backBarButtonItem
-
-        
         navigationItem.leftBarButtonItem = BackButtonItem(action: {
             
             let vc = UIAlertController(title: "Exit without save?", message: nil, preferredStyle: .actionSheet)
