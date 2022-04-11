@@ -56,3 +56,16 @@ extension UINavigationController: UINavigationBarDelegate  {
         }
     }
 }
+
+/// inspired https://stackoverflow.com/a/64386528/5893286
+final class NoMenuBackBarButtonItem: UIBarButtonItem {
+    
+    /// target-action is not working to handle back button action
+    static let shared = NoMenuBackBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
+    
+    @available(iOS 14.0, *)
+    override var menu: UIMenu? {
+        get { super.menu }
+        set { /* Don't set the menu here to prevent navigation menu */ }
+    }
+}
