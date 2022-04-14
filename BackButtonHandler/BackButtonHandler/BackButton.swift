@@ -12,11 +12,20 @@ typealias VoidHandler = () -> Void
 
 /// not so good animation for button and nav bar title during pop
 final class BackButtonItem: UIBarButtonItem {
-    convenience init(action: @escaping VoidHandler) {
-        let button = BackButton(action: action)
+    
+    /// use `[weak self] in` for `action` to avoid memory leak
+    convenience init(title: String? = nil, action: @escaping VoidHandler) {
+        let button = BackButtonView(title: title, action: action)
         self.init(customView: button)
     }
+    
+//    convenience init(action: @escaping VoidHandler) {
+//        let button = BackButton(action: action)
+//        self.init(customView: button)
+//    }
 }
+
+
 
 final class BackButton: UIButton {
     
