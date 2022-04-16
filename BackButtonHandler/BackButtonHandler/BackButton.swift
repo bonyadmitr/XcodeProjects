@@ -63,12 +63,14 @@ final class BackButton: UIButton {
 
     private func setup() {
         /// image can be resized to be like system arrow
+//        let image = UIImage(named: "im_default_back_button") /// as template
 //        let image = UIImage(named: "im_backButton") /// as template
-        let image = UIImage(named: "im_default_back_button") /// as template
 //        let image = UIImage(named: "backIndicatorImage") /// as template
-        
+        let image = UIImage(named: "backArrow") /// as template
+
+
         let title = NSLocalizedString("Back", comment: "")
-        
+
         titleLabel?.font = UIFont.systemFont(ofSize: 17)
         setTitle(title, for: .normal)
         setImage(image, for: .normal)
