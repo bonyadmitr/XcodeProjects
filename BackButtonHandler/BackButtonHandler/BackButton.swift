@@ -10,6 +10,7 @@ import UIKit
 
 typealias VoidHandler = () -> Void
 
+/// loose the "swipe to go back". `navigationController?.interactivePopGestureRecognizer?.delegate = self` to fix it
 /// not so good animation for button and nav bar title during pop
 final class BackButtonItem: UIBarButtonItem {
     
@@ -27,10 +28,12 @@ final class BackButtonItem: UIBarButtonItem {
 
 
 
+
+
 final class BackButton: UIButton {
-    
+
     private var action: VoidHandler?
-    
+
     /// text color is not gray during alert like arrow image (see example)
     var buttonColor: UIColor {
         get {
@@ -42,22 +45,22 @@ final class BackButton: UIButton {
             setTitleColor(color.darker(by: 50), for: .highlighted) /// not like system back button
         }
     }
-    
+
     convenience init(action: @escaping VoidHandler) {
         self.init(type: .custom)
         self.action = action
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
-    
+
     private func setup() {
         /// image can be resized to be like system arrow
 //        let image = UIImage(named: "im_backButton") /// as template
