@@ -75,6 +75,24 @@ final class BackButton: UIButton {
         setTitle(title, for: .normal)
         setImage(image, for: .normal)
         buttonColor = UIColor.systemBlue
+
+        imageView?.contentMode = .scaleAspectFit
+        let adjustSize: CGFloat = 2
+        imageEdgeInsets = UIEdgeInsets(top: -1 + adjustSize, left: -15 + adjustSize, bottom: 0 + adjustSize, right: 0 + adjustSize)
+        titleEdgeInsets = UIEdgeInsets(top: -1, left: 1, bottom: 0, right: -1)
+
+//        sizeToFit()
+
+        addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
+    }
+
+    @objc private func actionTouchUp() {
+        action?()
+    }
+}
+
+
+
         
         imageEdgeInsets = UIEdgeInsets(top: -1, left: -15, bottom: 0, right: 0)
         titleEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
