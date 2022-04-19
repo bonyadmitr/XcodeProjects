@@ -93,6 +93,37 @@ final class BackButton: UIButton {
 
 
 
+
+
+final class BackButtonView: UIView {
+    
+    private let arrowImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let touchButton = UIButton(type: .custom)
+    
+    private let highlightedColor = UIColor.systemBlue.withAlphaComponent(0.4)
+    
+    private var action: VoidHandler?
+    
+    convenience init(title: String?, action: @escaping VoidHandler) {
+        self.init(frame: .zero)
+        self.action = action
+        titleLabel.text = title ?? NSLocalizedString("Back", comment: "")
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+        titleLabel.text = NSLocalizedString("Back", comment: "")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+        titleLabel.text = NSLocalizedString("Back", comment: "")
+    }
+    
+    private func setup() {
         
         imageEdgeInsets = UIEdgeInsets(top: -1, left: -15, bottom: 0, right: 0)
         titleEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
