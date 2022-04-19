@@ -169,7 +169,28 @@ final class BackButtonView: UIView {
         ])
     }
     
-    @objc private func actionTouchUp() {
+    private func setButtonHighlighted(_ isHightlited: Bool) {
+        let color = isHightlited ? highlightedColor : UIColor.systemBlue
+        titleLabel.textColor = color
+        arrowImageView.tintColor = color
+        
+        /// need to sync animation of titleLabel and arrowImageView
+        //UIView.transition(with: self, duration: 0.25, options: .transitionCrossDissolve) {
+        //    self.titleLabel.textColor = color
+        //    self.arrowImageView.tintColor = color
+        //}
+    }
+    
+    @objc private func highlightButton() {
+        setButtonHighlighted(true)
+    }
+    
+    @objc private func dehighlightButton() {
+        setButtonHighlighted(false)
+    }
+    
+    @objc private func onButton() {
+        setButtonHighlighted(false)
         action?()
     }
 }
