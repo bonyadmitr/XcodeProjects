@@ -141,6 +141,32 @@ final class BackButtonView: UIView {
         touchButton.addTarget(self, action: #selector(dehighlightButton), for: .touchUpOutside)
         touchButton.addTarget(self, action: #selector(dehighlightButton), for: .touchCancel)
         touchButton.addTarget(self, action: #selector(onButton), for: .touchUpInside)
+        
+        setButtonHighlighted(false)
+        
+        addSubview(titleLabel)
+        addSubview(arrowImageView)
+        addSubview(touchButton)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        touchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            arrowImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -6.5),
+            arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 20),
+            arrowImageView.widthAnchor.constraint(equalTo: arrowImageView.heightAnchor, multiplier: 6.0/11.0),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: arrowImageView.trailingAnchor, constant: 10), /// 10 good for Back title, but not for custom one, didn't find connection
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -0.3),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            touchButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            touchButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            touchButton.topAnchor.constraint(equalTo: topAnchor),
+            touchButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
     }
     
     @objc private func actionTouchUp() {
