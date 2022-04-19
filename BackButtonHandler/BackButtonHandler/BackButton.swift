@@ -193,4 +193,15 @@ final class BackButtonView: UIView {
         setButtonHighlighted(false)
         action?()
     }
+    
+    
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        //action = nil
+    }
+    
+    deinit {
+        print("- deinit BackButtonView")
+    }
+    
 }
