@@ -124,13 +124,23 @@ final class BackButtonView: UIView {
     }
     
     private func setup() {
+        arrowImageView.contentMode = .scaleAspectFit
         
-        imageEdgeInsets = UIEdgeInsets(top: -1, left: -15, bottom: 0, right: 0)
-        titleEdgeInsets = UIEdgeInsets(top: -1, left: 0, bottom: 0, right: 0)
+        /// or 1
+        let base64EncodedImageData = Data(base64Encoded: "iVBORw0KGgoAAAANSUhEUgAAACQAAABCBAMAAADNg2nsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAVUExURUdwTEaM/0SL/0WN/0WP/0SK/0SK/5mP1MwAAAAGdFJOUwBf50wpr+TiczwAAABuSURBVDjLY2AgCAwN0EWM0pLQxBjT0tJSUIXEgEKpGIrSkjAUoQqBFaFqBCtCMR6iKE0AQ1HiqCK6KXLDUMQQhqGIQQ1DETYhLBqxGI/FEVicOqpsoJSlEMjIWLI7tkIBS9GBrYDBUgxhK6xAAACa2ZDv/A+rZAAAAABJRU5ErkJggg==")!
+        arrowImageView.image = UIImage(data: base64EncodedImageData)?.withRenderingMode(.alwaysTemplate)
         
-//        sizeToFit()
+        /// or 2 from asset
+        //arrowImageView.image = UIImage(named: "backArrow") /// as template
         
-        addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        
+        touchButton.addTarget(self, action: #selector(highlightButton), for: .touchDown)
+        touchButton.addTarget(self, action: #selector(dehighlightButton), for: .touchDragOutside)
+        touchButton.addTarget(self, action: #selector(highlightButton), for: .touchDragInside)
+        touchButton.addTarget(self, action: #selector(dehighlightButton), for: .touchUpOutside)
+        touchButton.addTarget(self, action: #selector(dehighlightButton), for: .touchCancel)
+        touchButton.addTarget(self, action: #selector(onButton), for: .touchUpInside)
     }
     
     @objc private func actionTouchUp() {
