@@ -30,5 +30,18 @@ class BackButtonController: UIViewController {
             vc.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             self?.present(vc, animated: true, completion: nil)
         })
+        
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            let vc = UIViewController()
+//            vc.view.backgroundColor = .red
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+        
     }
+    
+    deinit {
+        print("- deinit BackButtonController")
+    }
+    
 }
