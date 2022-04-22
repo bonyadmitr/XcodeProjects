@@ -8,13 +8,34 @@
 
 import UIKit
 
-public typealias BoolHandler = (Bool) -> Void
+typealias BoolHandler = (Bool) -> Void
 
-public protocol BackButtonHandler {
+protocol BackButtonHandler {
     func shouldPopOnBackButton(_ handler: @escaping BoolHandler)
 }
 
-extension UINavigationController: UINavigationBarDelegate  {
+extension BackButtonHandler where Self: UIViewController {
+    
+    func viewWillAppearBackButtonHandler() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        previousNavigationVC().navigationItem.backBarButtonItem = NoMenuBackBarButtonItem.shared
+    }
+    
+    func viewWillDisappearBackButtonHandler() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.topViewController?.navigationItem.backBarButtonItem = nil
+    }
+    
+//    private func previousVC() -> UIViewController {
+//        guard let navigationController = navigationController, navigationController.viewControllers.count >= 2 else {
+//            assertionFailure()
+//            return UIViewController()
+//        }
+//        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+//        return navigationController.viewControllers[navigationController.viewControllers.count - 2]
+//    }
+    
+}
     /// NOTE: this funcion will be called for all pop actions
     /// https://stackoverflow.com/a/43585267
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
