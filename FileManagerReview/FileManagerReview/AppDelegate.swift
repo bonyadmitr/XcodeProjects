@@ -108,6 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  check https://github.com/GianniCarlo/DirectoryWatcher
  check https://github.com/vmanot/Filesystem
  check PosixPermissions vs FilePermission https://github.com/vmanot/Filesystem/blob/master/Sources/Intramodular/Access%20Control/FilePermission.swift
+ https://github.com/nvzqz/FileKit
+ https://github.com/Augustyniak/FileExplorer
+ 
  
  
  //String(contentsOf: URL)
