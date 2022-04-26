@@ -105,6 +105,8 @@ final class BackButtonHandlerNavigationController: UINavigationController {
     
 }
 
+/// inspired https://stackoverflow.com/a/43585267
+/// for iOS 15 needs UINavigationController subclass
 extension BackButtonHandlerNavigationController: UINavigationBarDelegate  {
     
     /// not working for long press menu. use NoMenuBackBarButtonItem
@@ -132,6 +134,7 @@ extension BackButtonHandlerNavigationController: UINavigationBarDelegate  {
         return false
     }
     
+    // TODO: check needs
     private func animateNavigationBar() {
         for subView in navigationBar.subviews {
             if 0 < subView.alpha && subView.alpha < 1 {
