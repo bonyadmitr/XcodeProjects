@@ -36,6 +36,7 @@ extension BackButtonHandler where Self: UIViewController {
 //    }
     
 }
+
 extension UIViewController {
     func previousNavigationVC() -> UIViewController {
         guard let navigationController = navigationController, navigationController.viewControllers.count >= 2 else {
@@ -94,9 +95,21 @@ extension UIViewController {
 //        }
 //    }
 //}
+
+final class BackButtonHandlerNavigationController: UINavigationController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBar.delegate = self
+    }
+    
+}
+
+extension BackButtonHandlerNavigationController: UINavigationBarDelegate  {
+    
+    /// not working for long press menu. use NoMenuBackBarButtonItem
     /// NOTE: this funcion will be called for all pop actions
-    /// https://stackoverflow.com/a/43585267
-    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
         
         /// or maybe need to check: viewControllers.count > 1
         if viewControllers.count < navigationBar.items?.count ?? 0 {
@@ -104,7 +117,7 @@ extension UIViewController {
         }
         
         guard let vc = topViewController as? BackButtonHandler else {
-            popVC()
+            //popVC() /// used for `extension UINavigationController: UINavigationBarDelegate`, but not for subclass
             return true
         }
         
