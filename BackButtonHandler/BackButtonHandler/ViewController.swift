@@ -13,6 +13,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
+final class ViewController: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewWillAppearBackButtonHandler()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        viewWillDisappearBackButtonHandler()
     }
 }
 
@@ -30,4 +43,5 @@ extension ViewController: BackButtonHandler {
         present(vc, animated: true, completion: nil)
     }
 }
+
 
