@@ -8,11 +8,41 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class TableVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        /// to test BackButtonItem
+        //performSegue(withIdentifier: "backButton", sender: nil)
+        
+        
+        /// clear back button title
+//        if #available(iOS 14.0, *) {
+//            navigationItem.backButtonDisplayMode = .minimal
+//        }
+        
+        /// clear back button title
+//        if #available(iOS 11.0, *) {
+//            navigationItem.backButtonTitle = ""
+//        }
+        
+        /// clear back button title
+        //navigationItem.backBarButtonItem = UIBarButtonItem()
+        
+        
+        /// custom title
+        //navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .plain, target: nil, action: nil)
+        
+        /// custom title
+        //navigationItem.backButtonTitle = NSLocalizedString("Back", comment: "")
+    }
+}
+
+
+
+
+
 
 final class ViewController: UIViewController {
     
