@@ -346,4 +346,9 @@ func clearLaunchScreenCache() {
  UISupportsDocumentBrowser - LSSupportsOpeningDocumentsInPlace https://stackoverflow.com/a/52262367/5893286
  UIDocumentPickerViewController https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/DocumentPickerProgrammingGuide/Introduction/Introduction.html
  ??? UIDocumentInteractionController
+ 
+NSOpenPanel + NSSavePanel macOS https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/UsingtheOpenandSavePanels/UsingtheOpenandSavePanels.html
+ https://developer.apple.com/documentation/appkit/nssavepanel
+ 
+
  */
