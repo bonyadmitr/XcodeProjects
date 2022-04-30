@@ -351,4 +351,8 @@ NSOpenPanel + NSSavePanel macOS https://developer.apple.com/library/archive/docu
  https://developer.apple.com/documentation/appkit/nssavepanel
  
 
+ File Promises
+ https://developer.apple.com/documentation/appkit/documents_data_and_pasteboard/supporting_drag_and_drop_through_file_promises
+ https://developer.apple.com/documentation/appkit/nsfilepromiseprovider
+ 
  */
