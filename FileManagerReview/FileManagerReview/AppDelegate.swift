@@ -361,4 +361,8 @@ NSOpenPanel + NSSavePanel macOS https://developer.apple.com/library/archive/docu
  
  check `includesDirectoriesPostOrder: FileManager.DirectoryEnumerationOptions`
 
+ custom ObjectStorage
+ https://gist.github.com/khanlou/69309d9b0b078409a7b0445dac45c23e
+ NSFileCoordinator https://gist.github.com/khanlou/d5328cf31fe681e027385d75ef335d13
+ 
  */
