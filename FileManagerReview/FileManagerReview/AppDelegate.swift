@@ -365,4 +365,12 @@ NSOpenPanel + NSSavePanel macOS https://developer.apple.com/library/archive/docu
  https://gist.github.com/khanlou/69309d9b0b078409a7b0445dac45c23e
  NSFileCoordinator https://gist.github.com/khanlou/d5328cf31fe681e027385d75ef335d13
  
+ --------------- NSFileCoordinator + NSFilePresenter
+ https://khanlou.com/2019/03/file-coordination/
+ 
+ NSFileCoordinator is indispensable in a few cases:
+
+Since Mac apps deal with files being edited by multiple apps at once, almost all document-based Mac apps use it. It provides the underpinning for NSDocument.
+Extensions on iOS and the Mac are run in different process and may be mutating the same files at the same time.
+Syncing with cloud services requires the ability to handle updates to files while they are open, as well as special dispensation for reading files for the purpose of uploading them.
  */
