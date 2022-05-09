@@ -373,4 +373,8 @@ NSOpenPanel + NSSavePanel macOS https://developer.apple.com/library/archive/docu
 Since Mac apps deal with files being edited by multiple apps at once, almost all document-based Mac apps use it. It provides the underpinning for NSDocument.
 Extensions on iOS and the Mac are run in different process and may be mutating the same files at the same time.
 Syncing with cloud services requires the ability to handle updates to files while they are open, as well as special dispensation for reading files for the purpose of uploading them.
+
+ Note: if you don’t care about other processes or in-process code outside of your control (i.e. in a framework), you absolutely should NOT use file coordination as a means of mutual exclusion. The cross-process functionality is definitely the main motivation to use File Coordination, but it comes with a relatively high performance (and cognitive) cost in comparison to in-process means.
+ 
+
  */
