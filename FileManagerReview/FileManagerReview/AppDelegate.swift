@@ -377,4 +377,23 @@ Syncing with cloud services requires the ability to handle updates to files whil
  Note: if you don’t care about other processes or in-process code outside of your control (i.e. in a framework), you absolutely should NOT use file coordination as a means of mutual exclusion. The cross-process functionality is definitely the main motivation to use File Coordination, but it comes with a relatively high performance (and cognitive) cost in comparison to in-process means.
  
 
+ 
+ /// needs for ShareViewController in share extension
+ final class FilesExistManager {
+    
+    static let shared = FilesExistManager()
+    
+    /// need to test:
+    /// can one NSFileCoordinator coordinate some urls?
+    /// put NSFileCoordinator() in property
+    func waitFilePreparation(at url: URL, complition: ResponseVoid) {
+        do {
+            _ = try NSFileCoordinator().coordinate(readingItemAt: url, options: .forUploading)
+            complition(ResponseResult.success(()))
+        } catch  {
+            complition(ResponseResult.failed(error))
+        }
+    }
+}
+ 
  */
