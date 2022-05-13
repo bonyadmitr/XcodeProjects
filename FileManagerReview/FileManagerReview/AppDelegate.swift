@@ -110,7 +110,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  check PosixPermissions vs FilePermission https://github.com/vmanot/Filesystem/blob/master/Sources/Intramodular/Access%20Control/FilePermission.swift
  https://github.com/nvzqz/FileKit
  https://github.com/Augustyniak/FileExplorer
+ https://github.com/saoudrizwan/Disk
  
+ 
+ 
+ disk space changes notification https://stackoverflow.com/a/14604552/5893286
+ only use timer, or other app triggers like enter foreground
  
  
  //String(contentsOf: URL)
