@@ -401,6 +401,8 @@ Syncing with cloud services requires the ability to handle updates to files whil
     }
 }
  
+ // using
+ FilesExistManager.shared.waitFilePreparation(at: item.url)
  
  /// NSFileCoordinator+Coordinate
  extension NSFileCoordinator {
@@ -438,5 +440,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  uuid
  ProcessInfo.processInfo.globallyUniqueString
  UUID(),stringValue
+ 
+ 
+ 
+ 
+ URL FileSystemRepresentation
+ https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/blob/master/swift-corelibs-foundation/Foundation/FileManager.swift#L641
+ 
  
  */
