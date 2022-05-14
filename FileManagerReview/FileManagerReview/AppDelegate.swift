@@ -422,4 +422,13 @@ Syncing with cloud services requires the ability to handle updates to files whil
         }
     }
 }
+---------------
+ 
+ 
+ !!! check for new code https://github.com/weichsel/ZIPFoundation/tree/development/Sources/ZIPFoundation
+ 
+ Localizing the Name of a Directory
+ https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemAdvancedPT/Introduction/Introduction.html
+ 
+ 
  */
