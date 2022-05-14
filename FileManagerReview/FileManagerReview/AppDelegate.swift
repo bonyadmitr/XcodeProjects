@@ -431,4 +431,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemAdvancedPT/Introduction/Introduction.html
  
  
+ zip
+ https://github.com/weichsel/ZIPFoundation/tree/development/Sources/ZIPFoundation
+ 
+ 
+ uuid
+ ProcessInfo.processInfo.globallyUniqueString
+ UUID(),stringValue
+ 
  */
