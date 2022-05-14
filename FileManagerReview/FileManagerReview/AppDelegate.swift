@@ -448,4 +448,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/blob/master/swift-corelibs-foundation/Foundation/FileManager.swift#L641
  
  
+ write(toFile atomic https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSData.swift#L461
+ 
+ 
+ folder size with symlinks and hardlinks
+ 
+ check new
+ !!! https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/Introduction/Introduction.html
+ 
  */
