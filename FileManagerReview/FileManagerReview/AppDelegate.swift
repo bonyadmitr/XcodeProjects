@@ -461,4 +461,8 @@ Syncing with cloud services requires the ability to handle updates to files whil
  https://developer.apple.com/documentation/foundation/filemanager/2293212-replaceitemat
  https://developer.apple.com/documentation/foundation/filemanager/1411577-url
  https://developer.apple.com/documentation/foundation/filemanager/1413929-componentstodisplay
+ https://developer.apple.com/documentation/foundation/filemanager/1415275-contentsequal
+ https://developer.apple.com/documentation/foundation/filemanager/1407229-getrelationship
+ https://developer.apple.com/documentation/foundation/filemanager/1412020-changecurrentdirectorypath
+ https://developer.apple.com/documentation/foundation/filemanager/1414306-trashitem
  */
