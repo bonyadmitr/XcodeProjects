@@ -102,6 +102,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
+
+
+
+/** file read / write
+
+ 
+ real file copy, nor mark if copy
+ by char read or stream
+ 
+ Reading and Writing Files Asynchronously
+ NSInputStream and NSOutputStream
+ apple source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/Stream.swift
 /**
  TODO
  
