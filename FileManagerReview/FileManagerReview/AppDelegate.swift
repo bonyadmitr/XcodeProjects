@@ -114,6 +114,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  Reading and Writing Files Asynchronously
  NSInputStream and NSOutputStream
  apple source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/Stream.swift
+ +tests https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestStream.swift
+ https://stackoverflow.com/a/35392367/5893286
+ Reading and Writing Files Without File Coordinators https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/TechniquesforReadingandWritingCustomFiles/TechniquesforReadingandWritingCustomFiles.html
+ BinaryReader https://github.com/vmanot/Data/blob/master/Sources/Intramodular/CSV/BinaryReader.swift
+
+ 
 /**
  TODO
  
