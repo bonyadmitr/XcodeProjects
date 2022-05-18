@@ -120,6 +120,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  BinaryReader https://github.com/vmanot/Data/blob/master/Sources/Intramodular/CSV/BinaryReader.swift
 
  
+ security
+ md5
+ File protection
+ device is locked + Keychain + Extension https://nemecek.be/blog/104/checking-if-device-is-locked-or-sleeping-in-ios
+ real delete
+ Zero-Filling - delay when closing your files https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/PerformanceTips/PerformanceTips.html
+ 
 /**
  TODO
  
