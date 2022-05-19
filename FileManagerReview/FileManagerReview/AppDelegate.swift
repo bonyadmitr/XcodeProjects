@@ -132,6 +132,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  notes from Notes
  
+ POSIX Level / open vs fopen
+ fopen + fclose
+ fgetln + strncpy
+ optimized file read line by line
+ concatFiles https://github.com/amosavian/ExtDownloader/blob/master/Utility.swift#L159
+ read by char https://github.com/amosavian/ExtDownloader/blob/master/Utility.swift#L159
+ 
+ 
+ 
 /**
  TODO
  
