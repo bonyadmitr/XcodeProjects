@@ -151,6 +151,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  FileHandle
  FileHandle is wrapper arround `fopen`
  NSFileHandle - parallels the process for reading and writing files at the POSIX level
+ ?  default file observing
+ concatFiles https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L970
+ apple source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileHandle.swift
+ + tests https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestFileHandle.swift
+ 
+ 
 /**
  TODO
  
