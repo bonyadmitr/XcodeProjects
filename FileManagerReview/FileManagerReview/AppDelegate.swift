@@ -127,6 +127,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  real delete
  Zero-Filling - delay when closing your files https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/PerformanceTips/PerformanceTips.html
  
+ File Provider (files app) https://developer.apple.com/documentation/fileprovider
+ ? file observing in app
+ 
+ notes from Notes
+ 
 /**
  TODO
  
