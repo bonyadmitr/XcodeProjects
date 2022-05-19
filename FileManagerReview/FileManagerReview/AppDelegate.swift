@@ -141,6 +141,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  
  
+ 
+ 
+ 
+ done
+ 
+ simple Working with Files in Swift https://www.techotopia.com/index.php/Working_with_Files_in_Swift_on_iOS_8
+ 
+ FileHandle
+ FileHandle is wrapper arround `fopen`
+ NSFileHandle - parallels the process for reading and writing files at the POSIX level
 /**
  TODO
  
