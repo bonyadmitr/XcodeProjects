@@ -157,6 +157,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  + tests https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestFileHandle.swift
  
  
+ 
+ 
+ /// DispatchIO + DispatchData
+ DispatchIO work at the POSIX level
+ /// Copy - read + write https://github.com/empty666/DispatchCopier/blob/master/DispatchCopier/worker/DispatchCopyWorker.swift
+ /// !!! Wrapper https://github.com/vitali-kurlovich/DispatchIOWrapper/blob/main/Sources/DispatchIOWrapper/DispatchIOWrapper.swift
+ /// search https://github.com/search?l=Swift&q=DispatchIO&type=Repositories
+ swift doc https://developer.apple.com/documentation/dispatch/dispatchio
+ objc doc https://developer.apple.com/documentation/dispatch/1388933-dispatch_read
+ 
 /**
  TODO
  
