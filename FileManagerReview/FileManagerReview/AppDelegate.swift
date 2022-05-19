@@ -167,6 +167,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  swift doc https://developer.apple.com/documentation/dispatch/dispatchio
  objc doc https://developer.apple.com/documentation/dispatch/1388933-dispatch_read
  
+         let lock = DispatchWorkItem{}
+        
+        DispatchQueue.global().async {
+            
+            /// DispatchData https://developer.apple.com/documentation/dispatch/dispatchdata
+            let dispatchData = data.withUnsafeBytes { DispatchData(bytes: $0) }
+
 /**
  TODO
  
