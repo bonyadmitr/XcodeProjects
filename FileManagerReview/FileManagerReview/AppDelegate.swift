@@ -174,6 +174,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             /// DispatchData https://developer.apple.com/documentation/dispatch/dispatchdata
             let dispatchData = data.withUnsafeBytes { DispatchData(bytes: $0) }
 
+            let writeChannel = DispatchIO(type: .stream,
+                                          path: fileUrl.path,
+                                          oflag: (O_RDWR | O_CREAT | O_APPEND),
+                                          mode: (S_IWUSR | S_IRGRP | S_IRUSR | S_IROTH),
+                                          queue: .global()) { error in
+                // Execute once Close Channel
+                if error == 0 {
+                    print("Complete Clean Write Channel");
+                } else {
+                    print("Failed to Write File. Error Code : \(error)");
+                }
+                lock.perform()
+            }!
+
+            writeChannel.write(offset: 0, data: dispatchData, queue: .global(), ioHandler: { [writeChannel] done, data, error in //doc: data that remains to be written
+                print("- ioHandler", done, data?.count ?? "nil")
+                if !done {
+                    print("failed to Write File. Error Code : \(error)")
+                    writeChannel.close()
+                }
+            })
+            
+        }
+        
+        lock.wait()
+ 
 /**
  TODO
  
