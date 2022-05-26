@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  SiriusObfuscator - apple source code by SymbolExtractor https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/tree/master/swift-corelibs-foundation/Foundation
  
 
- 
+ Bundle url(forResource return url in CFBundleCopyResourceURLForLocalization https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/Bundle.swift#L299=
  
  
  FileManager
@@ -200,6 +200,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         lock.wait()
  
+ 
+ */
+
+
+
+
+
 /**
  TODO
  
