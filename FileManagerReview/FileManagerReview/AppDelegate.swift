@@ -210,6 +210,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 /**
  TODO
  
+!!! extendedAttribute = withUnsafeFileSystemRepresentation + getxattr https://github.com/DaveWoodCom/XCGLogger/blob/master/Sources/XCGLogger/Extensions/URL%2BXCGAdditions.swift#L17=
+ 
+ 
+ posixError https://github.com/DaveWoodCom/XCGLogger/blob/master/Sources/XCGLogger/Extensions/URL%2BXCGAdditions.swift#L79=
+     private static func posixError(_ err: Int32) -> NSError {
+        return NSError(domain: NSPOSIXErrorDomain, code: Int(err), userInfo: [NSLocalizedDescriptionKey: String(cString: strerror(err))])
+    }
+ 
+ TextOutputStream https://nshipster.com/textoutputstream/
+ AXIsProcessTrustedWithOptions  https://gist.github.com/drhisham-code/6fc2a721d4e289623e10e8a490a23cd3
+ 
  check https://github.com/GianniCarlo/DirectoryWatcher
  check https://github.com/vmanot/Filesystem
  check PosixPermissions vs FilePermission https://github.com/vmanot/Filesystem/blob/master/Sources/Intramodular/Access%20Control/FilePermission.swift
