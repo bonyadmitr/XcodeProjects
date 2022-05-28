@@ -581,4 +581,9 @@ Syncing with cloud services requires the ability to handle updates to files whil
  https://developer.apple.com/documentation/foundation/filemanager/1407229-getrelationship
  https://developer.apple.com/documentation/foundation/filemanager/1412020-changecurrentdirectorypath
  https://developer.apple.com/documentation/foundation/filemanager/1414306-trashitem
+ 
+ print( dirToEnumerate.startAccessingSecurityScopedResource() )
+ dirToEnumerate.stopAccessingSecurityScopedResource()
+ https://medium.com/fantageek/how-to-access-bookmark-url-in-macos-b38bc82f03e9
+ 
  */
