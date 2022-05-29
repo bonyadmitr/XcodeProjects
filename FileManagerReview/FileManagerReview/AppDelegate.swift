@@ -586,4 +586,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  dirToEnumerate.stopAccessingSecurityScopedResource()
  https://medium.com/fantageek/how-to-access-bookmark-url-in-macos-b38bc82f03e9
  
+ URL relativeTo
+ apple tests https://github.com/apple/swift-corelibs-foundation/blob/main/Tests/Foundation/Tests/TestURL.swift#L143
+ 
+ UIDocument
+ 
+ !!! share extension
+ handle objects and files
+ shared folder
  */
