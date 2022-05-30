@@ -594,4 +594,10 @@ Syncing with cloud services requires the ability to handle updates to files whil
  !!! share extension
  handle objects and files
  shared folder
+ 
+ ! share action
+ hardlinks
+ share as name
+ share as size (compression)
+ 
  */
