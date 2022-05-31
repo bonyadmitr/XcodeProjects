@@ -600,4 +600,10 @@ Syncing with cloud services requires the ability to handle updates to files whil
  share as name
  share as size (compression)
  
+ compression images, files - optimization sizes
+ zip
+ 
+ ! pastboard + new api
+ copy - past files
+ 
  */
