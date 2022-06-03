@@ -637,4 +637,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  EXIF reader and editor
  
  jailbreak file system https://medium.com/@lucideus/understanding-the-ios-file-system-eee3dc87e455 + find others
+ 
+ import CoreFoundation posiblities and optimizations
+ 
+ ?base64
+ 
+ !!! autoreleasepool for datas
+ 
+ 
  */
