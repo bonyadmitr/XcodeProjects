@@ -622,4 +622,12 @@ Syncing with cloud services requires the ability to handle updates to files whil
  LoggerErrors.logError(CustomErrors.commonError(error: error))
  }
  
+ qr code gen + reader
+ 
+ text scanner (? new api)
+ 
+ add images picker + camera
+ 
+ pdf create
+ 
  */
