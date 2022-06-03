@@ -630,4 +630,11 @@ Syncing with cloud services requires the ability to handle updates to files whil
  
  pdf create
  
+ file editor (with lines)
+ 
+ html browser + colors
+ 
+ EXIF reader and editor
+ 
+ jailbreak file system https://medium.com/@lucideus/understanding-the-ios-file-system-eee3dc87e455 + find others
  */
