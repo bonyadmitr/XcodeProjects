@@ -613,4 +613,13 @@ Syncing with cloud services requires the ability to handle updates to files whil
  
  secret space + gestures
  passcode
+ isExcludedFromBackup
+ do {
+ var resourceValues = URLResourceValues()
+ resourceValues.isExcludedFromBackup = true
+ try url.setResourceValues(resourceValues)
+ } catch {
+ LoggerErrors.logError(CustomErrors.commonError(error: error))
+ }
+ 
  */
