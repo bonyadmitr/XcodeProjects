@@ -606,4 +606,11 @@ Syncing with cloud services requires the ability to handle updates to files whil
  ! pastboard + new api
  copy - past files
  
+ undo - redo actions and gestures + UI
+ 
+ siri open file (some photo)
+ spotlight search file (some photo)
+ 
+ secret space + gestures
+ passcode
  */
