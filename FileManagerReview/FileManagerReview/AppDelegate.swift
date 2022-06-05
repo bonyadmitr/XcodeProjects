@@ -645,4 +645,9 @@ Syncing with cloud services requires the ability to handle updates to files whil
  !!! autoreleasepool for datas
  
  
+ file size
+ disk size
+ ByteCountFormatter
+ https://nemecek.be/blog/22/how-to-get-file-size-using-filemanager-formatting
+ 
  */
