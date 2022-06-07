@@ -650,4 +650,13 @@ Syncing with cloud services requires the ability to handle updates to files whil
  ByteCountFormatter
  https://nemecek.be/blog/22/how-to-get-file-size-using-filemanager-formatting
  
+ external disks api
+ gmail
+ yandex
+ ftp
+ iCloud - FileManager.default.url(forUbiquityContainerIdentifier https://nemecek.be/blog/6/saving-files-into-users-icloud-drive-using-filemanager
+ 
+ 
+ 
+ 
  */
