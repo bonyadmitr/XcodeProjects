@@ -665,4 +665,7 @@ Syncing with cloud services requires the ability to handle updates to files whil
  scan documents https://nemecek.be/blog/26/how-to-scan-documents-in-under-10-lines-of-code
  QLPreviewController https://nemecek.be/blog/13/how-to-easily-display-files-like-pdf-documents-images-and-more-in-your-app
  ??? create event EKCalendarChooser https://nemecek.be/blog/16/how-to-use-ekcalendarchooser-in-swift-to-let-user-select-calendar-in-ios
+ ??? or EKEventEditViewController https://nemecek.be/blog/3/how-to-use-ekeventeditviewcontroller-in-swift-to-let-user-save-event-to-ios-calendar
+ ? contacts backup CNContactVCardSerialization + CNContactStore + my project ContactsManager + https://stackoverflow.com/a/38338768/5893286
+ QLThumbnailGenerator for previews / thumbnails https://nemecek.be/blog/12/how-to-generate-image-previewsthumbnails-of-various-files
  */
