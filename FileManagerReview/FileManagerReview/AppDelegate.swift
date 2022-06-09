@@ -693,4 +693,10 @@ var stringByUniqueFileName: String {
     }
 }
 
+ 
+ 
+ UTType find
+ UTTypeCreatePreferredIdentifierForTag https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L288
+ ImageFormat https://github.com/bonyadmitr/ImageFormat/blob/master/ImageFormat/ImageFormat.swift
+ 
  */
