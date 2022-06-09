@@ -659,4 +659,10 @@ Syncing with cloud services requires the ability to handle updates to files whil
  
  
  
+ 
+ 
+ iOS file manager app
+ scan documents https://nemecek.be/blog/26/how-to-scan-documents-in-under-10-lines-of-code
+ QLPreviewController https://nemecek.be/blog/13/how-to-easily-display-files-like-pdf-documents-images-and-more-in-your-app
+ ??? create event EKCalendarChooser https://nemecek.be/blog/16/how-to-use-ekcalendarchooser-in-swift-to-let-user-select-calendar-in-ios
  */
