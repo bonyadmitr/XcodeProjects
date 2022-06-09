@@ -668,4 +668,10 @@ Syncing with cloud services requires the ability to handle updates to files whil
  ??? or EKEventEditViewController https://nemecek.be/blog/3/how-to-use-ekeventeditviewcontroller-in-swift-to-let-user-save-event-to-ios-calendar
  ? contacts backup CNContactVCardSerialization + CNContactStore + my project ContactsManager + https://stackoverflow.com/a/38338768/5893286
  QLThumbnailGenerator for previews / thumbnails https://nemecek.be/blog/12/how-to-generate-image-previewsthumbnails-of-various-files
+ string localizedCompare or localizedStandardCompare in file names sorting https://stackoverflow.com/a/15436564/5893286
+ sortFilesList https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L1074
+ image converter
+ 
+ 
+ 
  */
