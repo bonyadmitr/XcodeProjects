@@ -674,4 +674,23 @@ Syncing with cloud services requires the ability to handle updates to files whil
  
  
  
+ 
+var stringByUniqueFileName: String {
+    if (try? NSFileManager.defaultManager().attributesOfItemAtPath(self)) != nil {
+        let curFileNum = self.lastPathComponent
+        var unique = false
+        var i = Int(curFileNum.split(" ").last ?? "noname") ?? 2
+        var newName = self
+        while !unique && i < 1000 {
+            newName = ((self.fileURL.URLByDeletingLastPathComponent!).path! + " \(i)").fileURL.URLByAppendingPathExtension(self.pathExtension).path!;
+            newName = newName.stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet())
+            unique = (try? NSFileManager.defaultManager().attributesOfItemAtPath(newName)) == nil;
+            i++;
+        }
+        return newName
+    } else {
+        return self
+    }
+}
+
  */
