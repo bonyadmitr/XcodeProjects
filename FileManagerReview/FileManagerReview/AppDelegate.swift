@@ -675,6 +675,9 @@ Syncing with cloud services requires the ability to handle updates to files whil
  
  
  
+ 
+ new folder name generator `new_folder_1`
+ 
 var stringByUniqueFileName: String {
     if (try? NSFileManager.defaultManager().attributesOfItemAtPath(self)) != nil {
         let curFileNum = self.lastPathComponent
@@ -695,8 +698,12 @@ var stringByUniqueFileName: String {
 
  
  
+ 
+ 
  UTType find
  UTTypeCreatePreferredIdentifierForTag https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L288
  ImageFormat https://github.com/bonyadmitr/ImageFormat/blob/master/ImageFormat/ImageFormat.swift
  
+ mime
+ uti
  */
