@@ -706,4 +706,28 @@ var stringByUniqueFileName: String {
  
  mime
  uti
+var extensionInfo: (mime: String, uti: String, desc: String) {
+    let attrib = try? NSFileManager.defaultManager().attributesOfItemAtPath(self)
+    let isDirectory = (attrib?[NSFileType] as? String ?? "") == NSFileTypeDirectory
+    let isSymLink = (attrib?[NSFileType] as? String ?? "") == NSFileTypeSymbolicLink
+    if isDirectory {
+        return("inode/directory", "public.directory", "Folder")
+    } else if isSymLink {
+        return("inode/symlink", "public.symlink", "Alias")
+    } else {
+        if !NSFileManager.defaultManager().fileExistsAtPath(self) {
+            return ("", "", "")
+        }
+        let fileExt = self.pathExtension;
+        let utiu = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExt, nil)?.takeUnretainedValue();
+        let uti = String(utiu).hasPrefix("dyn.") ? "public.data" : String(utiu)
+        let mimeu = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType);
+        let mime = mimeu == nil ? "application/octet-stream" : mimeu?.takeUnretainedValue();
+        let descu = UTTypeCopyDescription(utiu ?? "")
+        let desc = (descu == nil) ? (self.pathExtension.uppercaseString + " File") : String(descu?.takeUnretainedValue());
+        return (mime as? String ?? "application/octet-stream", uti, desc);
+    }
+}
+
+ 
  */
