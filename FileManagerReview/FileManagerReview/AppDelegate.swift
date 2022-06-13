@@ -730,4 +730,36 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
 }
 
  
+ 
+ private func clearCache() {
+    let fileManager = FileManager.default
+    guard let documentsUrl =  fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
+        assertionFailure()
+        return
+    }
+    let documentsPath = documentsUrl.path
+    
+    do {
+        let fileNames = try fileManager.contentsOfDirectory(atPath: "\(documentsPath)")
+        print("--- all files in cache:\n\(fileNames)")
+        
+        for fileName in fileNames {
+            /// System Error Code=513:
+            /// "Snapshots" couldn’t be removed because you don’t have permission to access it.
+            guard fileName != "Snapshots" else {
+                return
+            }
+            let filePathName = "\(documentsPath)/\(fileName)"
+            try fileManager.removeItem(atPath: filePathName)
+        }
+        
+        let files = try fileManager.contentsOfDirectory(atPath: "\(documentsPath)")
+        print("--- all files in cache after deleting images:\n\(files)")
+        
+    } catch {
+        assertionFailure("Could not clear temp folder: \(error)")
+    }
+
+    
+}
  */
