@@ -760,6 +760,16 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
         assertionFailure("Could not clear temp folder: \(error)")
     }
 
+    /// #2
+    /// https://stackoverflow.com/a/50122279/5893286
+//        let caches = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+//        let appId = Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
+//        let path = String(format:"%@/%@/Cache.db-wal",caches, appId)
+//        do {
+//            try FileManager.default.removeItem(atPath: path)
+//        } catch {
+//            print("ERROR DESCRIPTION: \(error)")
+//        }
     
 }
  */
