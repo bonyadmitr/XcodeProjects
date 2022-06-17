@@ -772,4 +772,16 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
 //        }
     
 }
+ 
+ 
+ macOS
+ SearchPathDomainMask.localDomainMask + others
+ 
+ NSWorkspace.shared.isFilePackage(atPath
+ 
+ 
+ NSFileOwnerAccountID
+ NSFileGroupOwnerAccountID
+ NSFilePosixPermissions
+ try! FileManager.default.attributesOfItem(atPath: libUrl.path)
  */
