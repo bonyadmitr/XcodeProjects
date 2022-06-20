@@ -784,4 +784,22 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
  NSFileGroupOwnerAccountID
  NSFilePosixPermissions
  try! FileManager.default.attributesOfItem(atPath: libUrl.path)
+ 
+ /// Initialize with string.
+ ///
+ /// Returns `nil` if a `URL` cannot be formed with the string (for example, if the string contains characters that are illegal in a URL, or is an empty string).
+ public init?(string: String)
+ 
+ /// Initialize with string, relative to another URL.
+ ///
+ /// Returns `nil` if a `URL` cannot be formed with the string (for example, if the string contains characters that are illegal in a URL, or is an empty string).
+ public init?(string: String, relativeTo url: URL?)
+ 
+ /// Initializes a newly created file URL referencing the local file or directory at path, relative to a base URL.
+ ///
+ /// If an empty string is used for the path, then the path is assumed to be ".".
+ /// - note: This function avoids an extra file system access to check if the file URL is a directory. You should use it if you know the answer already.
+ @available(macOS 10.11, iOS 9.0, *)
+ public init(fileURLWithPath path: String, isDirectory: Bool, relativeTo base: URL?)
+ 
  */
