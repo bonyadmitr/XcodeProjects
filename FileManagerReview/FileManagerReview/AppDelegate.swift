@@ -825,4 +825,16 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
  @available(macOS 10.11, iOS 9.0, *)
  public init?(dataRepresentation: Data, relativeTo url: URL?, isAbsolute: Bool = false)
  
+ /// Initializes a URL that refers to a location specified by resolving bookmark data.
+ @available(swift 4.2)
+ public init(resolvingBookmarkData data: Data, options: URL.BookmarkResolutionOptions = [], relativeTo url: URL? = nil, bookmarkDataIsStale: inout Bool) throws
+ 
+ /// Creates and initializes an NSURL that refers to the location specified by resolving the alias file at url. If the url argument does not refer to an alias file as defined by the NSURLIsAliasFileKey property, the NSURL returned is the same as url argument. This method fails and returns nil if the url argument is unreachable, or if the original file or directory could not be located or is not reachable, or if the original file or directory is on a volume that could not be located or mounted. The URLBookmarkResolutionWithSecurityScope option is not supported by this method.
+ @available(macOS 10.10, iOS 8.0, *)
+ public init(resolvingAliasFileAt url: URL, options: URL.BookmarkResolutionOptions = []) throws
+ 
+ /// Initializes a newly created URL referencing the local file or directory at the file system representation of the path. File system representation is a null-terminated C string with canonical UTF-8 encoding.
+ public init(fileURLWithFileSystemRepresentation path: UnsafePointer<Int8>, isDirectory: Bool, relativeTo baseURL: URL?)
+ 
+ 
  */
