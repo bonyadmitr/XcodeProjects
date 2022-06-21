@@ -861,4 +861,14 @@ extension NSURL {
     }
 }
 
+ https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L342
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  */
