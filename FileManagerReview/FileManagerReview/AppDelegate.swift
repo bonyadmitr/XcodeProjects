@@ -871,4 +871,11 @@ extension NSURL {
  
  
  
+ ---------------------------------------- done
+ 
+ /// !!! `URL(fileURLWithPath path: String, isDirectory: Bool)` This function avoids an extra file system access to check if the file URL is a directory. You should use it if you know the answer already.
+ /// source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/NSURL.swift#L231
+
+ 
+ 
  */
