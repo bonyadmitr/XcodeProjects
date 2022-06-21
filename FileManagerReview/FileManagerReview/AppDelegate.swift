@@ -814,4 +814,15 @@ var extensionInfo: (mime: String, uti: String, desc: String) {
  /// - note: This function avoids an extra file system access to check if the file URL is a directory. You should use it if you know the answer already.
  public init(fileURLWithPath path: String, isDirectory: Bool)
  
+ /// Initializes a newly created file URL referencing the local file or directory at path.
+ ///
+ /// If an empty string is used for the path, then the path is assumed to be ".".
+ public init(fileURLWithPath path: String)
+ 
+ /// Initializes a newly created URL using the contents of the given data, relative to a base URL.
+ ///
+ /// If the data representation is not a legal URL string as ASCII bytes, the URL object may not behave as expected. If the URL cannot be formed then this will return nil.
+ @available(macOS 10.11, iOS 9.0, *)
+ public init?(dataRepresentation: Data, relativeTo url: URL?, isAbsolute: Bool = false)
+ 
  */
