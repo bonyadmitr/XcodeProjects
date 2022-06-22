@@ -878,4 +878,13 @@ extension NSURL {
 
  
  
+ Performance Tips https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/PerformanceTips/PerformanceTips.html
+ 1. Minimize the number of file operations - less read from disk and network
+ 2. reuse URLs - NSURL objects can be expensive to construct +  resourceValuesForKeys(_:) cache
+ 3. use big chunks of Data - how fast data is read from disk to a local buffer (TODO example)
+ 4. sequential reads much faster
+ 5. Defer read from disk
+ 6. Recomputing simple values is significantly faster than reading the same value from disk.
+ 7. Caching files in memory increases memory usage + system may cache some file data for you automatically
+ 
  */
