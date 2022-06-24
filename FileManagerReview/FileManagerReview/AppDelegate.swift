@@ -887,4 +887,12 @@ extension NSURL {
  6. Recomputing simple values is significantly faster than reading the same value from disk.
  7. Caching files in memory increases memory usage + system may cache some file data for you automatically
  
+ my:
+ 1. use URL(fileURLWithPath path: String, isDirectory: Bool)
+ 2. use and reuse URLs when using `resourceValuesForKeys`
+ 3. Use Modern File System Interfaces - URLs based functions "designed to take advantage of technologies like Grand Central Dispatch. This gives your code an immediate advantage on multicore computers while not requiring you to do much work"
+ 4, do not use init with cache for big files and images used once
+ 5. cache files - Caching is most appropriate for files you plan to access multiple times - Disk caching can be a good way to accelerate access to file data -
+ 6.
+ 
  */
