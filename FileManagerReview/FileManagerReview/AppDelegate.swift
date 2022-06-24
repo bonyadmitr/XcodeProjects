@@ -895,4 +895,11 @@ extension NSURL {
  5. cache files - Caching is most appropriate for files you plan to access multiple times - Disk caching can be a good way to accelerate access to file data -
  6.
  
+ 
+ instant optimizations
+ find global uses of
+ 1. `UIImage(named` + use `UIImage(contentsOfFile`
+ 2. `Data(contentsOf` + add `, options: .uncached`
+ 
+ 
  */
