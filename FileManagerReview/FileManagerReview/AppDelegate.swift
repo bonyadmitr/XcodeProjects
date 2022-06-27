@@ -902,4 +902,11 @@ extension NSURL {
  2. `Data(contentsOf` + add `, options: .uncached`
  
  
+ apple - File System Basics https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html
+ app bundle - The contents of this directory are not backed up by iTunes or iCloud. However, iTunes does perform an initial sync of any apps purchased from the App Store
+ Documents - The contents of this directory are backed up by iTunes and iCloud
+ Library - The contents of the Library directory (with the exception of the Caches subdirectory) are backed up by iTunes and iCloud
+ Caches - system may delete the Caches directory on rare occasions when the system is very low on disk space. This will never occur while an app is running
+ Application Support - iCloud sync - directory includes files that the app uses to run but that should remain hidden from the user. This directory can also include data files, configuration files, templates and modified versions of resources loaded from the app bundle.
+ tmp - the system may purge this directory when your app is not running - The contents of this directory are not backed up by iTunes or iCloud
  */
