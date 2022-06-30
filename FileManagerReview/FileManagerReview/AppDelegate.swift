@@ -914,4 +914,9 @@ extension NSURL {
  check exclude backup folder with files in it https://github.com/amosavian/ExtDownloader/blob/master/Utility.swift#L181
  better https://github.com/amosavian/ExtDownloader/blob/master/ClassExtensions.swift#L441
  
+ Files app - file provider
+ `Info.plist` = `UIFileSharingEnabled` + `LSSupportsOpeningDocumentsInPlace`to `YES`.
+ !!! you can read and edit files from iOS Files app and macOS Finder
+ files from your app available in the iOS Files app https://nemecek.be/blog/57/making-files-from-your-app-available-in-the-ios-files-app
+ 
  */
