@@ -902,6 +902,11 @@ extension NSURL {
  2. `Data(contentsOf` + add `, options: .uncached`
  
  
+ `URL.standardized` to remove relative path `..`
+ 
+ purgeable disk size
+ 
+ 
  apple - File System Basics https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html
  app bundle - The contents of this directory are not backed up by iTunes or iCloud. However, iTunes does perform an initial sync of any apps purchased from the App Store
  Documents - The contents of this directory are backed up by iTunes and iCloud
@@ -935,4 +940,13 @@ extension NSURL {
  
  */
 
+
+/**
+ check
+ copy big file without using memory
+ 
+
+ 
+
+ 
  */
