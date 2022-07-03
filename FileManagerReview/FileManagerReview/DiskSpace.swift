@@ -9,6 +9,13 @@ import Foundation
 
 // TODO: there is DiskSpace project
 /// another possible name `VolumeStorage`
+
+extension Int {
+    init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
+        self.init((value * 100).rounded(rule))
+    }
+}
+
 extension Double {
     
     /// Rounds the double to decimal places value
