@@ -924,4 +924,15 @@ extension NSURL {
  appDir(home) file:///var/mobile/Containers/Data/Application/D7EE36B7-294A-4053-8084-0B1250476864/
  
  
+ 
+ apple source https://github.com/apple/swift-corelibs-foundation/tree/main/Sources
+ + tests https://github.com/apple/swift-corelibs-foundation/tree/main/Tests/Foundation/Tests
+ fuchsia ОС from Google use Foundation https://fuchsia.googlesource.com/third_party/swift-corelibs-foundation/+/upstream/fuchsia_release/Foundation
+ 
+ CoreFoundation apple source
+ https://github.com/apple/swift-corelibs-foundation/tree/main/CoreFoundation
+ https://github.com/opensource-apple/CF
+ 
+ */
+
  */
