@@ -919,4 +919,9 @@ extension NSURL {
  !!! you can read and edit files from iOS Files app and macOS Finder
  files from your app available in the iOS Files app https://nemecek.be/blog/57/making-files-from-your-app-available-in-the-ios-files-app
  
+ 
+ Bundle.main.resourceURL file:///private/var/containers/Bundle/Application/0B89195A-9D40-46EF-A41D-4FCC7547844D/FileManagerReview.app/
+ appDir(home) file:///var/mobile/Containers/Data/Application/D7EE36B7-294A-4053-8084-0B1250476864/
+ 
+ 
  */
