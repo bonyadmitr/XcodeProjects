@@ -70,6 +70,37 @@ struct DiskSpace {
     
 }
 
+// MARK: - DiskSpace formatted
+
+extension DiskSpace {
+    
+    enum SpaceType {
+        case free
+        case used
+        case total
+    }
+    
+    private static var totalformatted = ""
+    
+    func formatted(for spaceType: SpaceType) -> String {
+        switch spaceType {
+        case .free:
+            return Formatters.fileSize(from: free)
+        case .used:
+            return Formatters.fileSize(from: used)
+        case .total:
+            /// optimized to format `total` 1 time. it will not be changed
+            guard Self.totalformatted.isEmpty else {
+                return Self.totalformatted
+            }
+            let total = Formatters.fileSize(from: total)
+            Self.totalformatted = total
+            return total
+        }
+    }
+    
+
+}
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
         self.init((value * 100).rounded(rule))
