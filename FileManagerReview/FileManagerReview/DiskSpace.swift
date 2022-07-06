@@ -99,6 +99,33 @@ extension DiskSpace {
         }
     }
     
+    func percents(for spaceType: SpaceType) -> (double: Double, int: Int) {
+        let percent = percent(for: spaceType)
+        return (double: percent, int: Int(percent: percent))
+    }
+    
+    func percentInt(for spaceType: SpaceType) -> Int {
+        let percent = percent(for: spaceType)
+        return Int(percent: percent)
+    }
+    
+    func percent(for spaceType: SpaceType) -> Double {
+        let total = Double(total)
+        let spaceTypeValue: Double
+        
+        switch spaceType {
+        case .free:
+            spaceTypeValue = Double(free)
+        case .used:
+            spaceTypeValue = Double(used)
+        case .total:
+            assertionFailure("we never need total")
+            return 100
+        }
+        return spaceTypeValue / total
+    }
+
+}
 
 }
 extension Int {
