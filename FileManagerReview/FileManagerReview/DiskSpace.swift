@@ -127,6 +127,51 @@ extension DiskSpace {
 
 }
 
+extension DiskSpace {
+    
+    enum DiskStatusType {
+        case normal
+        case warning
+        case critical
+    }
+    
+    func diskStatusType() -> DiskStatusType {
+        let freeDiskSpaceInMB = free / 1024 / 1024
+        
+        if freeDiskSpaceInMB <= 70 {
+            return .critical
+        } else if freeDiskSpaceInMB <= 250 {
+            return .warning
+        } else {
+            return .normal
+        }
+    }
+    
+    // TODO: test
+    static func shouldShowDiskStatusAlert() -> Bool {
+        let diskSpace = now()
+        
+        let shouldShow: Bool
+
+        switch diskSpace.diskStatusType() {
+        case .normal:
+            shouldShow = false
+        case .warning:
+            if let lastShown = UserDefaults.standard.value(forKey: "shouldShowDiskStatusPopup") as? Date {
+                // TODO: check Date(timeIntervalSinceNow: lastShown.timeIntervalSince1970)
+                let diff = Date() - lastShown.timeIntervalSince1970
+                let day = NSCalendar.current.component(.day, from: diff)
+                shouldShow = day > 0
+            } else {
+                UserDefaults.standard.set(Date(), forKey: "shouldShowDiskStatusPopup")
+                shouldShow = true
+            }
+        case .critical:
+            shouldShow = true
+        }
+
+        return shouldShow
+    }
 }
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
