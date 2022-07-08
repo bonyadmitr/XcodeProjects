@@ -173,6 +173,38 @@ extension DiskSpace {
         return shouldShow
     }
 }
+
+
+
+
+
+
+enum Formatters {
+    
+    /// apple source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/ByteCountFormatter.swift
+    private static let storageFormatter: ByteCountFormatter = {
+        let formatter = ByteCountFormatter()
+        
+        /// defailt `[]`: uses platform-appropriate settings
+        //formatter.allowedUnits = []
+        
+        /// drop units like`MB or GB`
+        //formatter.includesUnit = false
+        
+        /// doc: display of file or storage byte counts. may change over time
+        /// `.decimal` - like system values
+        formatter.countStyle = .file
+        
+        /// disable `0` as `Zero KB`
+        formatter.allowsNonnumericFormatting = false
+        
+        /// false - more 100 GB is rounded, in iOS system: `18,3 GB of 128 GB`
+        /// default true: `18,35 GB of 127,87 GB`, in macOS system `499.96 GB`
+        formatter.isAdaptive = false
+        
+        return formatter
+    }()
+}
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
         self.init((value * 100).rounded(rule))
