@@ -204,6 +204,15 @@ enum Formatters {
         
         return formatter
     }()
+    static func fileSize(from bytes: Int64) -> String {
+#if targetEnvironment(macCatalyst)
+        /// like macOS system sizes
+        ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
+#else
+        storageFormatter.string(fromByteCount: bytes)
+#endif
+    }
+}
 }
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
