@@ -204,6 +204,28 @@ enum Formatters {
         
         return formatter
     }()
+    
+    
+    /// test code:
+    //let mb: Int64 = 1000 * 1000
+    //let gb: Int64 = mb * 1000
+    //let volumes: [Int64] = [
+    //    128 * gb,
+    //    128 * gb - 500 * mb,
+    //    101 * gb - 500 * mb,
+    //    100 * gb - 500 * mb,
+    //    20 * gb - 500 * mb,
+    //    700 * mb,
+    //    1024,
+    //]
+    //print( volumes.map { fileSize(from: $0) } )
+    ///
+    /// more 100 GB is rounded, like system `formatter.isAdaptive = false`
+    /// ["128 GB", "128 GB", "101 GB", "99.5 GB", "19.5 GB", "700 MB", "1.02 KB"]
+    ///
+    /// default `formatter.isAdaptive = true`
+    /// ["128 GB", "127.5 GB", "100.5 GB", "99.5 GB", "19.5 GB", "700 MB", "1 KB"]
+    ///
     static func fileSize(from bytes: Int64) -> String {
 #if targetEnvironment(macCatalyst)
         /// like macOS system sizes
