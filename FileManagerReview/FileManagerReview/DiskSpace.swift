@@ -235,6 +235,34 @@ enum Formatters {
 #endif
     }
 }
+
+
+extension DiskSpace {
+    
+    static func purgeableSize() -> Int64 {
+        let rootPath = NSHomeDirectory()
+        let rootURL = URL(fileURLWithPath: rootPath, isDirectory: true)
+        
+        func format(_ bytes: Int64) -> String {
+            ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
+        }
+        
+        do {
+            let resourceValues = try rootURL.resourceValues(forKeys: [.volumeAvailableCapacityKey, .volumeAvailableCapacityForImportantUsageKey, .volumeAvailableCapacityForOpportunisticUsageKey, .volumeTotalCapacityKey])
+            let volumeAvailableCapacity = Int64(resourceValues.volumeAvailableCapacity ?? 0)
+            let volumeAvailableCapacityForImportantUsage = resourceValues.volumeAvailableCapacityForImportantUsage ?? 0
+            return volumeAvailableCapacityForImportantUsage - volumeAvailableCapacity
+        } catch {
+            assertionFailure(error.debugDescription)
+            return 0
+        }
+    }
+    
+}
+
+
+
+
 }
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
