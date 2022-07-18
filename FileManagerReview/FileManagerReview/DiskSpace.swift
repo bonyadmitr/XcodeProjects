@@ -239,6 +239,9 @@ enum Formatters {
 
 extension DiskSpace {
     
+    // TODO: think, add to SpaceType
+    /// `0` for iOS simulator bcz `volumeAvailableCapacity == volumeAvailableCapacityForImportantUsage`
+    /// for macOS(my: 3,79 GB) and iOS (my: 1,28 GB)
     static func purgeableSize() -> Int64 {
         let rootPath = NSHomeDirectory()
         let rootURL = URL(fileURLWithPath: rootPath, isDirectory: true)
