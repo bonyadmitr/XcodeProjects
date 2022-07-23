@@ -240,6 +240,10 @@ enum Formatters {
 extension DiskSpace {
     
     // TODO: think, add to SpaceType
+    /// macOS purgeable disk size
+    //https://apple.stackexchange.com/a/394660/407549
+    //https://stackoverflow.com/a/55810703/5893286
+    //https://www.cleverfiles.com/howto/purgeable-space-mac.html
     /// `0` for iOS simulator bcz `volumeAvailableCapacity == volumeAvailableCapacityForImportantUsage`
     /// for macOS(my: 3,79 GB) and iOS (my: 1,28 GB)
     static func purgeableSize() -> Int64 {
