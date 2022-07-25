@@ -270,6 +270,79 @@ extension DiskSpace {
 
 
 
+
+extension DiskSpace {
+    
+    static func testDiskSpace() {
+        
+        let rootPath = NSHomeDirectory()
+        
+        /// iOS 15, device,`0` for volumeAvailableCapacityForImportantUsageKey, volumeAvailableCapacityForOpportunisticUsageKey
+        //let rootPath = "/"
+        
+        /// directory of the user’s system `"/"`
+        //let rootPath = NSOpenStepRootDirectory()
+        
+        let rootURL = URL(fileURLWithPath: rootPath, isDirectory: true)
+        
+        func format(_ bytes: Int64) -> String {
+            ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
+        }
+        
+        do {
+            let resourceValues = try rootURL.resourceValues(forKeys: [.volumeAvailableCapacityKey, .volumeAvailableCapacityForImportantUsageKey, .volumeAvailableCapacityForOpportunisticUsageKey, .volumeTotalCapacityKey])
+            
+            let volumeAvailableCapacity = Int64(resourceValues.volumeAvailableCapacity ?? 0)
+            print("AvailableCapacity: \(volumeAvailableCapacity), \(format(volumeAvailableCapacity))")
+            
+            let volumeAvailableCapacityForImportantUsage = resourceValues.volumeAvailableCapacityForImportantUsage ?? 0
+            print("Available capacity for important usage: \(volumeAvailableCapacityForImportantUsage), \(format(volumeAvailableCapacityForImportantUsage))")
+            
+            let volumeAvailableCapacityForOpportunisticUsage = resourceValues.volumeAvailableCapacityForOpportunisticUsage ?? 0
+            print("AvailableCapacityForOpportunistic: \(volumeAvailableCapacityForOpportunisticUsage), \(format(volumeAvailableCapacityForOpportunisticUsage))")
+            
+            let volumeTotalCapacity = Int64(resourceValues.volumeTotalCapacity ?? 0)
+            print("total: \(volumeTotalCapacity), \(format(Int64(volumeTotalCapacity)))")
+            
+            let purgeableSize = volumeAvailableCapacityForImportantUsage - volumeAvailableCapacity
+            print("purgeable size: \(purgeableSize), \(format(purgeableSize))")
+            
+            let nonessentialSize = volumeAvailableCapacityForImportantUsage - volumeAvailableCapacityForOpportunisticUsage
+            print("nonessential difference size: \(nonessentialSize), \(format(nonessentialSize))")
+            
+            print()
+            
+#if targetEnvironment(macCatalyst)
+            assert(volumeAvailableCapacityForImportantUsage > volumeAvailableCapacity)
+            assert(volumeAvailableCapacity > volumeAvailableCapacityForOpportunisticUsage)
+
+#elseif targetEnvironment(simulator)
+            assert(volumeAvailableCapacity == volumeAvailableCapacityForImportantUsage)
+            assert(volumeAvailableCapacity == volumeAvailableCapacityForOpportunisticUsage)
+#elseif os(iOS)
+            assert(volumeAvailableCapacityForImportantUsage > volumeAvailableCapacity)
+            assert(volumeAvailableCapacity > volumeAvailableCapacityForOpportunisticUsage)
+
+#else /// tvOS
+            assertionFailure()
+#endif
+            
+            /// do not breakpoint here bcz `.systemFreeSize` can be changed and `assert(volumeAvailableCapacity == freeSpace)` will fail
+            if let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: rootPath),
+               let freeSpace = systemAttributes[.systemFreeSize] as? Int64,
+               let totalSpace = systemAttributes[.systemSize] as? Int64
+            {
+                assert(volumeAvailableCapacity == freeSpace)
+                assert(volumeTotalCapacity == totalSpace)
+            } else {
+                assertionFailure("")
+            }
+            
+        } catch {
+            assertionFailure(error.debugDescription)
+        }
+    }
+    
 }
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
