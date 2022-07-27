@@ -344,6 +344,12 @@ extension DiskSpace {
     }
     
 }
+
+
+
+
+
+
 extension Int {
     init(percent value: Double, rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) {
         self.init((value * 100).rounded(rule))
@@ -362,6 +368,11 @@ extension Double {
     
 }
 
+
+/// apple like for 127.6 GB
+// TODO: check for other bytes
+///
+/// ByteCountFormatter is not capable to show only one digit after decimal point https://stackoverflow.com/a/51658718/5893286
 func humanReadableByteCount(bytes: Int) -> String {
     if (bytes < 1000) { return "\(bytes) B" }
     let exp = Int(log2(Double(bytes)) / log2(1000.0))
