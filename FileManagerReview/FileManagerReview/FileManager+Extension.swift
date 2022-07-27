@@ -44,5 +44,44 @@ extension FileManager {
         /// `/PROJECT_NAME.app/`
         static let bundle = Bundle.main.resourceURL!
         
+        
+        
+        static func directory(for directory: FileManager.SearchPathDirectory) -> URL {
+#if os(iOS) && !targetEnvironment(macCatalyst)
+            assert(
+                directory == .applicationSupportDirectory
+                || directory == .cachesDirectory
+                || directory == .libraryDirectory
+                || directory == .documentDirectory
+                , "\(directory.rawValue) is not available in iOS")
+#endif
+            
+            /// 1 doc: preferred format
+            /// source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager.swift#L146
+            /// needs `create: true` for `.applicationSupportDirectory`, it is not created by default.
+            do {
+                return try FileManager.default.url(for: directory, in: .userDomainMask, appropriateFor: nil, create: true)
+            } catch {
+                assertionFailure(error.debugDescription)
+                return directoryManually(for: directory)
+            }
+            
+            // TODO: check Directory.applicationSupport to create file in it after app deleted
+            /// 2 doc: preferred format
+            //let url = FileManager.default.urls(for: directory, in: .userDomainMask).first ?? directoryManually(for: directory)
+            //FileManager.default.createFoldersIfNeed(for: url)
+            //return url
+            
+            // TODO: check Directory.applicationSupport to create file in it after app deleted
+            /// 3
+            //let url: URL
+            //if let dirPath = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true).first {
+            //    url = URL(fileURLWithPath: dirPath, isDirectory: true)
+            //} else {
+            //    url = directoryManually(for: directory)
+            //}
+            //FileManager.default.createFoldersIfNeed(for: url)
+            //return url
+        }
     }
 }
