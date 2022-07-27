@@ -83,5 +83,25 @@ extension FileManager {
             //FileManager.default.createFoldersIfNeed(for: url)
             //return url
         }
+        
+        /// created just to guard system method fail
+        private static func directoryManually(for directory: FileManager.SearchPathDirectory) -> URL {
+            let dirName: String
+            
+            if directory == .applicationSupportDirectory {
+                dirName = "Library/Application Support" //"Library/Application%20Support"
+            } else if directory == .cachesDirectory {
+                dirName = "Library/Caches"
+            } else if directory == .libraryDirectory {
+                dirName = "Library"
+            } else if directory == .documentDirectory {
+                dirName = "Documents"
+            } else {
+                assertionFailure("used not supported dir: \(directory.rawValue)")
+                dirName = String(directory.rawValue)
+            }
+            
+            return Directory.app.appendingPathComponent(dirName, isDirectory: true)
+        }
     }
 }
