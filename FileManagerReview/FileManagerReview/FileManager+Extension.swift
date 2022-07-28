@@ -103,5 +103,12 @@ extension FileManager {
             
             return Directory.app.appendingPathComponent(dirName, isDirectory: true)
         }
+        
+        private static func tempDir() -> URL {
+            /// 1 source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager.swift#L1139
+            //FileManager.default.temporaryDirectory
+            /// 2
+            URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        }
     }
 }
