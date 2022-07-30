@@ -120,4 +120,17 @@ extension FileManager {
             //URL(fileURLWithPath: NSString("~").expandingTildeInPath, isDirectory: true)
         }
     }
+    func createSystemTempDir() -> URL {
+        /// doc: appropriate url, to get volume of this parameter https://stackoverflow.com/a/43743835/5893286
+        /// doc: create: false, When creating a temporary directory, this parameter is ignored and the directory is always created.
+        /// source https://github.com/apple/swift-corelibs-foundation/blob/main/Sources/Foundation/FileManager.swift#L211
+        /// creates new temporary directory every time for the same appropriate url
+        let volumeUrl = Directory.app
+        do {
+            return try url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: volumeUrl, create: false)
+        } catch {
+            assertionFailure(error.debugDescription)
+            return createTempDir()
+        }
+    }
 }
