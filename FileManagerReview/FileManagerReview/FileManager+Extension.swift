@@ -110,5 +110,14 @@ extension FileManager {
             /// 2
             URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         }
+        
+        private static func appDir() -> URL {
+            /// 1 macOS. app's home folder instead of user's if sandbox
+            //FileManager.default.homeDirectoryForCurrentUser
+            /// 2
+            URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+            /// 3
+            //URL(fileURLWithPath: NSString("~").expandingTildeInPath, isDirectory: true)
+        }
     }
 }
