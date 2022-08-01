@@ -125,6 +125,9 @@ extension FileManager {
     /// `/private/var/folders/72/gld2v2rx3fdbk83npn509m48w9ydmb/T/com.by.MediaExtractor-macOS/TemporaryItems`
     /// `file:///var/folders/72/gld2v2rx3fdbk83npn509m48w9ydmb/T/com.by.MediaExtractor-macOS/TemporaryItems/NSIRD_MediaExtractor-macOS_p9c0O8/`
     ///
+    /// it is better not use for iOS simulator
+    // TODO: check for iOS device
+    /// for iOS name = `(A Document Being Saved By PROJECT_NAME)`
     func createSystemTempDir() -> URL {
         /// doc: appropriate url, to get volume of this parameter https://stackoverflow.com/a/43743835/5893286
         /// doc: create: false, When creating a temporary directory, this parameter is ignored and the directory is always created.
