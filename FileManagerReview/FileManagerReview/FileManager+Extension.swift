@@ -141,4 +141,15 @@ extension FileManager {
             return createTempDir()
         }
     }
+    
+    func createTempDir() -> URL {
+        let newDirUrl = Directory.temp.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        do {
+            try createDirectory(at: newDirUrl, withIntermediateDirectories: false, attributes: nil)
+            return newDirUrl
+        } catch {
+            assertionFailure(error.debugDescription)
+            return Directory.temp
+        }
+    }
 }
