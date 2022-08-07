@@ -152,4 +152,20 @@ extension FileManager {
             return Directory.temp
         }
     }
+    
+    func removeItemIfExists(at url: URL) {
+        guard fileExists(atPath: url.path) else {
+            return
+        }
+        
+        do {
+            /// will delete for `PosixPermissions = [.User.read]`
+            try removeItem(at: url)
+        }  catch let error as NSError where error.code == NSFileWriteNoPermissionError {
+            removeItemWithoutPermissions(at: url)
+        } catch {
+            assertionFailure(error.debugDescription)
+        }
+        
+    }
 }
