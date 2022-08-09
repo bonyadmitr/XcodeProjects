@@ -168,4 +168,13 @@ extension FileManager {
         }
         
     }
+    func removeItemWithoutPermissions(at url: URL) {
+        do {
+            try setAttributes([.immutable: false], ofItemAtPath: url.path)
+            try setAttributes([.posixPermissions: PosixPermissions.User.read.rawValue], ofItemAtPath: url.path)
+            try removeItem(at: url)
+        } catch {
+            assertionFailure(error.debugDescription)
+        }
+    }
 }
