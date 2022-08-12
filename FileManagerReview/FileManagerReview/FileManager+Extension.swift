@@ -168,6 +168,10 @@ extension FileManager {
         }
         
     }
+    
+    // TODO: check NSFileProtectionKey https://developer.apple.com/documentation/foundation/nsfileprotectionkey
+    /// macOS alert: cannot be deleted `Operation not permitted` + `"NAME" couldn’t be removed because you don’t have permission to access it`
+    ///
     /// error debugDescriptions are the same for `.immutable` and `.posixPermissions`:
     /// Error Domain=NSCocoaErrorDomain Code=513 "“PosixPermissions” couldn’t be removed because you don’t have permission to access it." UserInfo={NSUserStringVariant=(Remove),
     /// NSFilePath=/Users/yaroslav.bondar/Downloads/PosixPermissions, NSUnderlyingError=0x600003bb0a80 {Error Domain=NSPOSIXErrorDomain Code=13 "Permission denied"}}
