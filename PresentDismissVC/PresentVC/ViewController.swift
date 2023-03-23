@@ -70,6 +70,8 @@ class ViewController: UIViewController {
                     //                    vc1.view.addSubview(vc2.view.copyView())
                     //                    self.dismiss(animated: true, completion: nil)
                     
+                    /// similar logic https://github.com/ladeiko/GroupedControllerDismissal
+                    // TODO: check snapshot
                     vc2.presentingViewController?.view.addSubview(vc2.view.copyView())
                     /// if need
                     //vc2.presentingViewController?.dismiss(animated: false, completion: nil)
