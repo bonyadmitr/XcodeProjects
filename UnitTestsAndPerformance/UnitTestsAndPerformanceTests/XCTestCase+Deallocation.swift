@@ -17,7 +17,26 @@ extension XCTestCase {
         autoreleasepool {
             mayBeLeakingRef = constructor()
         }
-        XCTAssertNil(mayBeLeakingRef, file: file, line: line)
+        XCTAssertNil(
+            mayBeLeakingRef,
+            "Instance should have been deallocated. Potential memory leak.",
+            file: file,
+            line: line
+        )
+    }
+    
+    /// inspired https://medium.com/@daren_44261/swift-tracking-memory-leaks-in-tests-d0be08d72bbb
+    func assertDeallocation(instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        /// doc: Teardown blocks are executed after the current test method has returned but before -tearDown is invoked.
+        /// doc: Registered blocks are run on the main thread but can be registered from any thread. They are guaranteed to run only once,
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(
+                instance,
+                "Instance should have been deallocated. Potential memory leak.",
+                file: file,
+                line: line
+            )
+        }
     }
     
     /// expectation realization, but we don't need to sync autoreleasepool

@@ -45,6 +45,7 @@ extension NSManagedObject {
     /// delete NSManagedObject on same context that was fetched
     func delete(completion: ManagedObjectDeleteStatusHandler? = nil) {
         guard let context = managedObjectContext else {
+            assertionFailure()
             completion?(.thereIsNoContext)
             return
         }
