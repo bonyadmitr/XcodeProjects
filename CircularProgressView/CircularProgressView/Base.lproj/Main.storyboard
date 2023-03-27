@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dru-wn-Q96">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CircularProgressView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mt3-8k-bkv" customClass="CircularProgressView" customModule="CircularProgressView" customModuleProvider="target">
+                                <rect key="frame" x="25" y="150" width="364" height="364"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mt3-8k-bkv" secondAttribute="height" id="IKz-Ir-s5v"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mt3-8k-bkv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="106" id="c4e-os-HWk"/>
+                            <constraint firstItem="mt3-8k-bkv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gUC-en-u8L"/>
+                            <constraint firstItem="mt3-8k-bkv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-50" id="piu-QX-dsK"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="downloads" id="CIE-1u-alP"/>
+                    <connections>
+                        <outlet property="circularProgressView" destination="mt3-8k-bkv" id="eyr-pF-L0j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="548" y="842"/>
+        </scene>
+        <!--View Controller2-->
+        <scene sceneID="IzW-Dy-NIm">
+            <objects>
+                <viewController id="wes-jR-99d" customClass="ViewController2" customModule="CircularProgressView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2fe-dJ-Xah">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DRd-H0-tt1" customClass="CircularRadialGradientView" customModule="CircularProgressView" customModuleProvider="target">
+                                <rect key="frame" x="25" y="150" width="364" height="364"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DRd-H0-tt1" secondAttribute="height" id="cF8-Wp-utw"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lyc-xW-Yxu" customClass="CircleGradientView" customModule="CircularProgressView" customModuleProvider="target">
+                                <rect key="frame" x="25" y="358" width="364" height="377"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q1U-xf-1fo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DRd-H0-tt1" firstAttribute="width" secondItem="2fe-dJ-Xah" secondAttribute="width" constant="-50" id="lWc-1O-Cu0"/>
+                            <constraint firstItem="DRd-H0-tt1" firstAttribute="top" secondItem="q1U-xf-1fo" secondAttribute="top" constant="106" id="neG-x7-k5m"/>
+                            <constraint firstItem="DRd-H0-tt1" firstAttribute="centerX" secondItem="q1U-xf-1fo" secondAttribute="centerX" id="skR-cz-QAW"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="sAw-fQ-j6k"/>
+                    <connections>
+                        <outlet property="circularProgressView" destination="DRd-H0-tt1" id="PA8-3c-P9y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bpv-q6-k4r" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410.14492753623193" y="841.74107142857144"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="K75-RZ-aJa">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Dru-wn-Q96" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ap7-0B-Jqq">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2vM-Cs-gjw"/>
+                        <segue destination="wes-jR-99d" kind="relationship" relationship="viewControllers" id="lGp-HQ-qt1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l8X-Yi-HdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="112.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
