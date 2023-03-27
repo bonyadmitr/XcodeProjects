@@ -39,4 +39,11 @@ final class CircularProgressView: UIView {
         }
     }
     
+    /// slight animatable on change
+    var progressColor = UIColor.lightGray {
+        didSet {
+            progressLayer.strokeColor = progressColor.cgColor
+        }
+    }
+    
 }
