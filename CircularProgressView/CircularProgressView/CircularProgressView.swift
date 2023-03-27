@@ -23,4 +23,12 @@ final class CircularProgressView: UIView {
         }
     }
     
+    /// slight animatable on change
+    var circleColor = UIColor.white {
+        didSet {
+            circleGradientLayer.colors = [circleColor.withAlphaComponent(0.3).cgColor, circleColor.cgColor]
+            circleGradientLayer.opacity = 0.4
+        }
+    }
+    
 }
