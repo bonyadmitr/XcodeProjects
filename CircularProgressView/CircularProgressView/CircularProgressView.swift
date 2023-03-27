@@ -11,4 +11,16 @@ final class CircularProgressView: UIView {
         case linearAnimation
         case animation(duration: CGFloat)
     }
+    
+    // MARK: - public properties
+    
+    /// slight animatable on change
+    var ringWidth: CGFloat = 20 {
+        didSet {
+            circleLayer.lineWidth = ringWidth
+            progressLayer.lineWidth = ringWidth
+            setNeedsLayout()
+        }
+    }
+    
 }
