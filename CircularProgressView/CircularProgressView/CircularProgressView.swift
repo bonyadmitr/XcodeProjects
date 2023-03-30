@@ -46,4 +46,20 @@ final class CircularProgressView: UIView {
         }
     }
     
+    /// max for progress from 0 to 100 (and 100 to 0)
+    var maxLinearAnimationDuration: CGFloat = 2
+    
+    // MARK: - private properties
+    
+    private let circleLayer = CAShapeLayer()
+    private let progressLayer = CAShapeLayer()
+    private let circleGradientLayer = CAGradientLayer()
+    
+    private let startPoint = -CGFloat.pi / 2
+    private let endPoint = 3 * CGFloat.pi / 2
+    
+    private var setProgressInBackgroundStartedTime: CFTimeInterval = 0
+    private var progressInBackground: CGFloat = 0
+    private var animationDurationInBackground: CGFloat = 0
+    
 }
