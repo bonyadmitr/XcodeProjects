@@ -62,4 +62,20 @@ final class CircularProgressView: UIView {
     private var progressInBackground: CGFloat = 0
     private var animationDurationInBackground: CGFloat = 0
     
+    // MARK: - override
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayersPath()
+    }
 }
