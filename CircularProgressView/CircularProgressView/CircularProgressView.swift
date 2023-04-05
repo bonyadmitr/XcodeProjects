@@ -89,4 +89,17 @@ final class CircularProgressView: UIView {
         }
         
     }
+    
+    // MARK: - public functions
+    
+    func setProgress(_ progress: CGFloat, animationOption: AnimationOption) {
+        switch animationOption {
+        case .none:
+            setProgressWithoutAnimation(progress)
+        case .linearAnimation:
+            setProgressLinearAnimation(progress)
+        case .animation(let duration):
+            setProgress(progress, animationDuration: duration)
+        }
+    }
 }
