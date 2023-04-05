@@ -112,6 +112,12 @@ final class CircularProgressView: UIView {
         CATransaction.commit()
     }
     
+    private func setProgressLinearAnimation(_ progress: CGFloat) {
+        let progress = clampedProgress(from: progress)
+        let duration = abs(progress - animationProgress) * maxLinearAnimationDuration
+        setProgress(progress, animationDuration: duration)
+    }
+    
     
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
