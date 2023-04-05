@@ -78,4 +78,15 @@ final class CircularProgressView: UIView {
         super.layoutSubviews()
         updateLayersPath()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        /// cgColor update https://stackoverflow.com/a/58312205/5893286
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            circleLayer.strokeColor = circleColor.cgColor
+            progressLayer.strokeColor = progressColor.cgColor
+        }
+        
+    }
 }
