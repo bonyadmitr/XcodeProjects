@@ -102,4 +102,13 @@ final class CircularProgressView: UIView {
             setProgress(progress, animationDuration: duration)
         }
     }
+    
+    private func setProgressWithoutAnimation(_ progress: CGFloat) {
+        let progress = clampedProgress(from: progress)
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        progressLayer.strokeEnd = progress
+        CATransaction.commit()
+    }
+    
 }
