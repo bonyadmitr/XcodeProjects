@@ -103,6 +103,15 @@ final class CircularProgressView: UIView {
         }
     }
     
+    func setMinimumNotZeroProgress() {
+        setProgress(0.0001, animationOption: .none)
+    }
+    
+    func stopAnimations() {
+        progressLayer.removeAllAnimations()
+    }
+    
+    // MARK: - private functions
     
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
