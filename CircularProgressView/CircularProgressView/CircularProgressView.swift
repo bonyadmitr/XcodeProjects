@@ -156,6 +156,36 @@ final class CircularProgressView: UIView {
         progressLayer.add(animation, forKey: animationKey)
     }
     
+    private func setup() {
+        setupLayers()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWilllEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil)
+  
+        
+        self.addSubview(imageView)
+        imageView.layer.anchorPoint = CGPoint(x: 0.4, y: 0.7)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.simulateProgress()
+//            self.setProgress(0.5)
+        }
+        
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            let animation = CAKeyframeAnimation(keyPath: #keyPath(CALayer.position))
+//            animation.duration = 3
+//            animation.repeatCount = MAXFLOAT
+//                        animation.path = self.circleLayer.path
+//
+//            let imageView = UIImageView(image: UIImage(named: "iconCleaning"))
+//            self.addSubview(imageView)
+//            imageView.layer.anchorPoint = CGPoint(x: 0.4, y: 0.7)
+//            imageView.layer.add(animation, forKey: nil)
+//        }
+    }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
