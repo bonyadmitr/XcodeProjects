@@ -186,6 +186,34 @@ final class CircularProgressView: UIView {
 //            imageView.layer.add(animation, forKey: nil)
 //        }
     }
+    
+    let imageView = UIImageView(image: UIImage(named: "iconCleaning"))
+    
+    func simulateProgress() {
+        
+        var progress: CGFloat = 0
+        
+        DispatchQueue.global().async {
+            for _ in 1...10000 {
+                progress += 0.002
+                if progress > 1 {
+                    progress = 0
+                }
+                Thread.sleep(forTimeInterval: 0.01)
+                DispatchQueue.main.async {
+                    if progress > 0.95 {
+                        self.imageView.isHidden = true
+                    } else {
+                        self.imageView.isHidden = false
+                    }
+                    self.setIconProgress(progress)
+                    self.setProgress(progress, animationOption: .none)
+                }
+            }
+
+        }
+        
+    }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
