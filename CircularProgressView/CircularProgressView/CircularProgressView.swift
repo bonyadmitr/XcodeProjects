@@ -1,3 +1,10 @@
+//
+//  CircularProgressView.swift
+//  CircularProgressView
+//
+//  Created by Yaroslav Bondar on 12.11.2021.
+//
+
 import UIKit
 
 /// another solution https://github.com/luispadron/UICircularProgressRing/tree/master/Legacy
@@ -228,6 +235,10 @@ final class CircularProgressView: UIView {
         let y = bounds.midY + radius * sin(angle) - Xdiff
         
         imageView.layer.position = CGPoint(x: x, y: y)
+    }
+    
+    @objc private func applicationWilllEnterForeground() {
+        restoreAnimationIfNeed()
     }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
