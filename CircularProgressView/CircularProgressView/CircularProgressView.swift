@@ -288,6 +288,20 @@ final class CircularProgressView: UIView {
         layer.addSublayer(progressLayer)
     }
     
+    private func updateLayersPath() {
+        let circularPath = UIBezierPath(
+            arcCenter: CGPoint(x: bounds.midX, y: bounds.midY),
+            radius: min(bounds.midX, bounds.midY) - ringWidth * 0.5,
+            startAngle: startPoint,
+            endAngle: endPoint,
+            clockwise: true
+        ).cgPath
+        
+        circleLayer.path = circularPath
+        progressLayer.path = circularPath
+        circleGradientLayer.frame = bounds
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
