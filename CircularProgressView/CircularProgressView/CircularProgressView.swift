@@ -240,6 +240,33 @@ final class CircularProgressView: UIView {
     @objc private func applicationWilllEnterForeground() {
         restoreAnimationIfNeed()
     }
+    
+    private func restoreAnimationIfNeed() {
+        guard setProgressInBackgroundStartedTime != 0 else {
+            return
+        }
+        let elapsedInBackgroundTime: CGFloat = CACurrentMediaTime() - setProgressInBackgroundStartedTime
+        setProgressInBackgroundStartedTime = 0
+        guard elapsedInBackgroundTime < animationDurationInBackground else {
+            return
+        }
+        let animationDuration = self.animationDurationInBackground - elapsedInBackgroundTime
+        
+        let elapsedPart = elapsedInBackgroundTime / self.animationDurationInBackground
+        progressLayer.strokeEnd = progressInBackground * elapsedPart
+        
+        let animationKey = #keyPath(CAShapeLayer.strokeEnd)
+        progressLayer.removeAnimation(forKey: animationKey)
+        
+        let animation = CABasicAnimation(keyPath: animationKey)
+        animation.duration = animationDuration
+        animation.fromValue = progressLayer.strokeEnd
+        animation.toValue = progressInBackground
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        progressLayer.add(animation, forKey: animationKey)
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
