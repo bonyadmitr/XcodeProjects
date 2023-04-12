@@ -214,6 +214,21 @@ final class CircularProgressView: UIView {
         }
         
     }
+    
+    func setIconProgress(_ progress: CGFloat) {
+        let angle = progress * (endPoint - startPoint) + startPoint + CGFloat.pi / 20
+        let radius = min(bounds.midX, bounds.midY) - ringWidth * 0.5
+        
+        let sinAngle = sin(angle)
+        
+        let Xdiff: CGFloat = sinAngle * 4
+//        let ydiff: CGFloat = abs(sinAngle) * 4
+        
+        let x = bounds.midX + radius * cos(angle) - Xdiff
+        let y = bounds.midY + radius * sin(angle) - Xdiff
+        
+        imageView.layer.position = CGPoint(x: x, y: y)
+    }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
