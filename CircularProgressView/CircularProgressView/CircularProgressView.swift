@@ -267,6 +267,27 @@ final class CircularProgressView: UIView {
         progressLayer.add(animation, forKey: animationKey)
     }
     
+    private func setupLayers() {
+        circleGradientLayer.startPoint = CGPoint.zero
+        circleGradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        circleGradientLayer.colors = [circleColor.withAlphaComponent(0.3).cgColor, circleColor.cgColor]
+        layer.addSublayer(circleGradientLayer)
+        
+        circleLayer.fillColor = UIColor.clear.cgColor
+        circleLayer.lineCap = .round
+        circleLayer.lineWidth = ringWidth
+        circleLayer.strokeEnd = 1
+        circleLayer.strokeColor = circleColor.cgColor
+        circleGradientLayer.mask = circleLayer
+        
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.lineCap = .round
+        progressLayer.lineWidth = ringWidth
+        progressLayer.strokeEnd = 0
+        progressLayer.strokeColor = progressColor.cgColor
+        layer.addSublayer(progressLayer)
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
