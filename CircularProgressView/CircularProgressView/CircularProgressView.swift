@@ -302,12 +302,20 @@ final class CircularProgressView: UIView {
         circleGradientLayer.frame = bounds
     }
     
+    private var animationProgress: CGFloat {
+        /// inspired https://stackoverflow.com/a/20245200/5893286
+        progressLayer.presentation()?.strokeEnd ?? 0
+    }
     
     /// guard progress for 0...1
     private func clampedProgress(from progress: CGFloat) -> CGFloat {
         max(min(progress, 1), 0)
     }
     
+}
+
+
+
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
