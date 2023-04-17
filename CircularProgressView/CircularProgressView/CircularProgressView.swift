@@ -316,6 +316,25 @@ final class CircularProgressView: UIView {
 
 
 
+/// disable animations
+/// 1
+//        let properties: [String] = [
+//            #keyPath(CAShapeLayer.strokeEnd),
+//            #keyPath(CAShapeLayer.lineWidth),
+//            #keyPath(CAShapeLayer.strokeColor)
+//        ]
+//        circleLayer.disalbeAnimations(for: properties)
+//        progressLayer.disalbeAnimations(for: properties)
+
+/// 2
+//        let properties: [PartialKeyPath<CAShapeLayer>] = [\.strokeEnd, \.lineWidth, \.strokeColor]
+//        circleLayer.disalbeAnimations(for: properties)
+//        progressLayer.disalbeAnimations(for: properties)
+
+/// 3
+//        circleLayer.areAnimationsEnabledByDelegate = false
+//        progressLayer.areAnimationsEnabledByDelegate = false
+
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
