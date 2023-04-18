@@ -335,6 +335,20 @@ final class CircularProgressView: UIView {
 //        circleLayer.areAnimationsEnabledByDelegate = false
 //        progressLayer.areAnimationsEnabledByDelegate = false
 
+
+
+// MARK: - with gradient
+
+final class CircularGradientView: UIView {
+    
+    /// can be added Configuration for public properties
+    /// `slight animatable on change` can be removed by disabling layers animations
+    
+    enum AnimationOption {
+        case none
+        case linearAnimation
+        case animation(duration: CGFloat)
+    }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
@@ -342,6 +356,8 @@ final class CircularProgressView: UIView {
         progressLayer.strokeEnd = progress
         CATransaction.commit()
     }
+    
+}
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
