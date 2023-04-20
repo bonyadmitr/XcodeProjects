@@ -406,6 +406,17 @@ final class CircularRadialGradientView: UIView {
         }
     }
     
+    // MARK: - private properties
+    
+    private let circleLayer = CAShapeLayer()
+    private let circleGradientLayer = CAGradientLayer()
+    
+    private let progressLayer = CAShapeLayer()
+    private let progressGradientLayer = CAGradientLayer()
+    
+    private let startPoint: CGFloat = 3 * .pi / 4
+    private let endPoint: CGFloat = .pi / 4
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
