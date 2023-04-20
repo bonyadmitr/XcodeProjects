@@ -400,6 +400,12 @@ final class CircularRadialGradientView: UIView {
     /// max for progress from 0 to 100 (and 100 to 0)
     var maxLinearAnimationDuration: CGFloat = 2
     
+    var sideInset: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
