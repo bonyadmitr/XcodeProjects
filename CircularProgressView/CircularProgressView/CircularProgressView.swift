@@ -369,6 +369,10 @@ final class CircularProgressView: UIView {
 //}
 
 
+
+import UIKit
+
+final class CircularRadialGradientView: UIView {
     
     /// can be added Configuration for public properties
     /// `slight animatable on change` can be removed by disabling layers animations
