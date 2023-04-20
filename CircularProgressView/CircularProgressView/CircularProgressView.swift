@@ -382,6 +382,17 @@ final class CircularRadialGradientView: UIView {
         case linearAnimation
         case animation(duration: CGFloat)
     }
+    
+    // MARK: - public properties
+    
+    /// slight animatable on change
+    var ringWidth: CGFloat = 20 {
+        didSet {
+            circleLayer.lineWidth = ringWidth
+            progressLayer.lineWidth = ringWidth
+            setNeedsLayout()
+        }
+    }
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
