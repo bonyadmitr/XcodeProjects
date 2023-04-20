@@ -393,6 +393,13 @@ final class CircularRadialGradientView: UIView {
             setNeedsLayout()
         }
     }
+    
+    var progressGradientStartColor = UIColor.white
+    var progressGradientEndColor = UIColor.white
+    
+    /// max for progress from 0 to 100 (and 100 to 0)
+    var maxLinearAnimationDuration: CGFloat = 2
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
