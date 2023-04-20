@@ -417,6 +417,18 @@ final class CircularRadialGradientView: UIView {
     private let startPoint: CGFloat = 3 * .pi / 4
     private let endPoint: CGFloat = .pi / 4
     
+    // MARK: - override
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
