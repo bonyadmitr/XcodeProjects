@@ -429,6 +429,19 @@ final class CircularRadialGradientView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayersPath()
+    }
+    
+    // MARK: - public functions
+    
+    func setProgressGradienColors(start: UIColor, end: UIColor) {
+        let cgStart = start.cgColor
+        let cgEnd = end.cgColor
+        progressGradientLayer.colors = [cgStart, cgStart, cgEnd, cgEnd]
+    }
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
