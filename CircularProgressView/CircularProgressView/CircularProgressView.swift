@@ -448,6 +448,23 @@ final class CircularRadialGradientView: UIView {
         circleGradientLayer.colors = [cgStart, cgStart, cgEnd, cgEnd]
     }
     
+    func setProgress(_ progress: CGFloat, animationOption: AnimationOption) {
+        switch animationOption {
+        case .none:
+            setProgressWithoutAnimation(progress)
+        case .linearAnimation:
+            setProgressLinearAnimation(progress)
+        case .animation(let duration):
+            setProgress(progress, animationDuration: duration)
+        }
+    }
+    
+    func setMinimumNotZeroProgress() {
+        setProgress(0.0001, animationOption: .none)
+    }
+    
+    // MARK: - private functions
+    
     private func setProgressWithoutAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
         CATransaction.begin()
