@@ -473,13 +473,36 @@ final class CircularRadialGradientView: UIView {
         CATransaction.commit()
     }
     
-}
-    private func setProgressWithoutAnimation(_ progress: CGFloat) {
+    private func setProgressLinearAnimation(_ progress: CGFloat) {
         let progress = clampedProgress(from: progress)
+        let duration = abs(progress - animationProgress) * maxLinearAnimationDuration
+        setProgress(progress, animationDuration: duration)
+    }
+    
+    private func setProgress(_ progress: CGFloat, animationDuration: CGFloat) {
+        let progress = clampedProgress(from: progress)
+        
+        /// save current progress
+        progressLayer.strokeEnd = animationProgress
+        
+        let animationKey = #keyPath(CAShapeLayer.strokeEnd)
+        progressLayer.removeAnimation(forKey: animationKey)
+        
+        let animation = CABasicAnimation(keyPath: animationKey)
+        animation.duration = animationDuration
+        animation.fromValue = progressLayer.strokeEnd
+        animation.toValue = progress
+        animation.fillMode = .forwards
+        
         CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        progressLayer.strokeEnd = progress
+        CATransaction.setCompletionBlock { [weak self] in
+            self?.setProgressWithoutAnimation(progress)
+        }
         CATransaction.commit()
+        
+        progressLayer.add(animation, forKey: animationKey)
+    }
+    
     }
     
 }
