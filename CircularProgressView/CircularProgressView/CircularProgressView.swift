@@ -503,6 +503,36 @@ final class CircularRadialGradientView: UIView {
         progressLayer.add(animation, forKey: animationKey)
     }
     
+    private func setup() {
+        setupLayers()
+    }
+    
+    private func setupLayers() {
+        
+        circleLayer.fillColor = UIColor.clear.cgColor
+        circleLayer.lineCap = .round
+        circleLayer.lineWidth = ringWidth
+        circleLayer.strokeEnd = 1
+        circleLayer.strokeColor = UIColor.black.cgColor // any color
+        
+        circleGradientLayer.type = .conic
+        circleGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        circleGradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        circleGradientLayer.mask = circleLayer
+        layer.addSublayer(circleGradientLayer)
+        
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.lineCap = .round
+        progressLayer.lineWidth = ringWidth
+        progressLayer.strokeEnd = 0
+        progressLayer.strokeColor = UIColor.black.cgColor // any color
+        
+        progressGradientLayer.type = .conic
+        progressGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        progressGradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        progressGradientLayer.mask = progressLayer
+        layer.addSublayer(progressGradientLayer)
+    }
     }
     
 }
