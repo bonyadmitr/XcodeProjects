@@ -533,6 +533,23 @@ final class CircularRadialGradientView: UIView {
         progressGradientLayer.mask = progressLayer
         layer.addSublayer(progressGradientLayer)
     }
+    
+    private func updateLayersPath() {
+        let rect = bounds
+        let circularPath = UIBezierPath(
+            arcCenter: CGPoint(x: rect.midX, y: rect.midY),
+            radius: min(bounds.midX, bounds.midY) - ringWidth * 0.5 - sideInset,
+            startAngle: startPoint,
+            endAngle: endPoint,
+            clockwise: true
+        ).cgPath
+        
+        circleLayer.path = circularPath
+        progressLayer.path = circularPath
+        circleGradientLayer.frame = rect
+        progressGradientLayer.frame = rect
+    }
+    
     }
     
 }
