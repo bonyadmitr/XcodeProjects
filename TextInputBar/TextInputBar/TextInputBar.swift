@@ -14,4 +14,18 @@ final class TextInputBar: UIView, NibInit {
     @IBOutlet private weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var playButton: UIButton!
     
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    private func setup() {
+////        autoresizingMask = .flexibleHeight
+//
+//    }
 }
