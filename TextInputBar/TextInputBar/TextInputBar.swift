@@ -28,4 +28,13 @@ final class TextInputBar: UIView, NibInit {
 ////        autoresizingMask = .flexibleHeight
 //
 //    }
+    
+    var onSizeChange: (() -> Void)?
+    
+    private let font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    private let maxNumberOfLines: CGFloat = 6
+    
+    private lazy var maxHeight: CGFloat = {
+        return ceil(font.lineHeight * maxNumberOfLines + textView.textContainerInset.top + textView.textContainerInset.bottom)// + 8 + 8
+    }()
 }
