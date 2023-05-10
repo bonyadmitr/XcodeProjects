@@ -125,4 +125,35 @@ final class TextInputBar: UIView, NibInit {
         
     }
 }
+
+extension TextInputBar: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        
+        placeholderLabel.isHidden = !textView.text.isEmpty
+        
+        let attributes = [NSAttributedString.Key.font: font]
+        let boundingSize = CGSize(width: textView.frame.width - textView.textContainerInset.left - textView.textContainerInset.right, height: .greatestFiniteMagnitude)
+        let textSize = textView.text.boundingRect(with: boundingSize, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        let needHeight: CGFloat = ceil(textSize.height) + textView.textContainerInset.top + textView.textContainerInset.bottom
+        
+        let isMoreThanMax = needHeight > maxHeight
+        textView.isScrollEnabled = isMoreThanMax
+        
+        let height: CGFloat = (isMoreThanMax ? maxHeight : needHeight)
+        
+        if heightConstraint.constant != height {
+            heightConstraint.constant = height
+            
+            invalidateIntrinsicContentSize()
+            layoutIfNeeded()
+            onSizeChange?()
+        }
+        
+        
+        
+        
+    }
+}
+
+
 }
