@@ -37,4 +37,35 @@ final class TextInputBar: UIView, NibInit {
     private lazy var maxHeight: CGFloat = {
         return ceil(font.lineHeight * maxNumberOfLines + textView.textContainerInset.top + textView.textContainerInset.bottom)// + 8 + 8
     }()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textView.font = font
+        placeholderLabel.font = font
+        
+        /// to remove insets https://stackoverflow.com/a/42333832/5893286
+        textView.textContainer.lineFragmentPadding = 0
+        textView.textContainerInset = .zero
+        
+        textView.delegate = self
+        
+        /// to set height first time
+        textViewDidChange(textView)
+        
+        SpeachManager.shared.onTextChange = { [weak self] text in
+            guard let self = self else {
+                return
+            }
+            self.textView.text = text
+            self.textViewDidChange(self.textView)
+            
+            /// move caret to the end on voice recognition
+            self.textView.scrollRangeToVisible(NSRange(location: text.count - 1, length: 1))
+        }
+        SpeachManager.shared.onAutoStop = { [weak self] in
+            self?.playButton.isSelected = false
+        }
+        
+    }
 }
