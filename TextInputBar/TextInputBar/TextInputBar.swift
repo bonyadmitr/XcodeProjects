@@ -152,6 +152,25 @@ extension TextInputBar: UITextViewDelegate {
         
         
         
+//        let attributes = [NSAttributedString.Key.font: font]
+//        let boundingSize = CGSize(width: textView.frame.width - textView.textContainerInset.left - textView.textContainerInset.right, height: .greatestFiniteMagnitude)
+//        let textSize = textView.text.boundingRect(with: boundingSize, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+//        let needHeight = ceil(textSize.height) + textView.textContainerInset.top + textView.textContainerInset.bottom + 8 + 8
+//        print("needHeight: \(needHeight)")
+//
+//
+//
+//        //        var contentSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude))
+//        //        let needHeight = contentSize.height + 8 + 8
+//
+//        let isMoreThanMax = needHeight > maxHeight
+//        let height: CGFloat = isMoreThanMax ? maxHeight : needHeight
+//
+//        if lastCalculatedHeight != height {
+//            lastCalculatedHeight = height
+//            textView.isScrollEnabled = isMoreThanMax
+//            invalidateIntrinsicContentSize()
+//        }
     }
 }
 
