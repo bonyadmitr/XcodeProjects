@@ -75,4 +75,54 @@ final class TextInputBar: UIView, NibInit {
         CGSize(width: bounds.width, height: heightConstraint.constant + 8 + 8) //8 + 8 - top and bottom insets
     }
     
+    @IBAction private func onMic(_ sender: UIButton) {
+        
+        
+        SpeachManager.shared.requestSpeechAuthorization { result in
+            switch result {
+                
+            case .authorized:
+                if sender.isSelected {
+                    SpeachManager.shared.stop()
+                } else {
+                    SpeachManager.shared.start()
+                }
+                sender.isSelected.toggle()
+            case .denied(let deniedType):
+                
+                let title: String
+                switch deniedType {
+                case .voiceRecord:
+                    title = "voiceRecord denied "
+                case .speechRecognizer:
+                    title = "speechRecognizer denied "
+                }
+                
+                // TODO: do UI
+                let alertVC = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                alertVC.addAction(.init(title: "OK", style: .cancel))
+                alertVC.addAction(.init(title: "Settings", style: .default, handler: { _ in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }))
+                UIApplication.shared.keyWindow?.rootViewController?.present(alertVC, animated: true)
+            }
+//            if isAuthorized {
+//                SpeachManager.shared.start()
+////                if sender.isHighlighted {
+////                    SpeachManager.shared.start()
+////                } else {
+////                    SpeachManager.shared.stop()
+////                }
+//                
+//            } else {
+                
+//                
+//                print("SpeachManager NOT Authorized")
+//            }
+        }
+        
+        
+        
+    }
+}
 }
