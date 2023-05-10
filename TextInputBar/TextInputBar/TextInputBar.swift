@@ -68,4 +68,11 @@ final class TextInputBar: UIView, NibInit {
         }
         
     }
+    
+    private var lastCalculatedHeight: CGFloat = -1
+    
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: bounds.width, height: heightConstraint.constant + 8 + 8) //8 + 8 - top and bottom insets
+    }
+    
 }
