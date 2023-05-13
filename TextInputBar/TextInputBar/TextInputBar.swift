@@ -175,4 +175,18 @@ extension TextInputBar: UITextViewDelegate {
 }
 
 
+
+protocol NibInit {}
+
+extension NibInit where Self: UIView {
+    static func initFromNib() -> Self {
+        let nibName = String(describing: self)
+        let nib = UINib(nibName: nibName, bundle: nil)
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? Self else {
+            assertionFailure("check all IBOtlets")
+            return Self()
+        }
+        return view
+    }
+}
 }
