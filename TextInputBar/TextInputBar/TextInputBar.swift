@@ -189,4 +189,17 @@ extension NibInit where Self: UIView {
         return view
     }
 }
+
+class RoundedCornerView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat = 30 {
+        didSet { layer.cornerRadius = cornerRadius }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.masksToBounds = true
+        layer.cornerRadius = cornerRadius
+    }
 }
