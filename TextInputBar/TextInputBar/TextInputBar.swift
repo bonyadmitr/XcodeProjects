@@ -190,6 +190,38 @@ extension NibInit where Self: UIView {
     }
 }
 
+
+//class FlexibleTextView: UITextView {
+//    // limit the height of expansion per intrinsicContentSize
+//    var maxHeight: CGFloat = 0.0
+//
+//    private let placeholderLabel: UITextView = {
+//        let tv = UITextView()
+//        tv.translatesAutoresizingMaskIntoConstraints = false
+//        tv.backgroundColor = .clear
+//        tv.isScrollEnabled = false
+//        tv.isUserInteractionEnabled = false
+//        tv.textColor = UIColor.gray
+//        return tv
+//    }()
+//    var placeholder: String? {
+//        get {
+//            return placeholderLabel.text
+//        }
+//        set {
+//            placeholderLabel.text = newValue
+//        }
+//    }
+//
+//    override init(frame: CGRect, textContainer: NSTextContainer?) {
+//        super.init(frame: frame, textContainer: textContainer)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
 class RoundedCornerView: UIView {
     
     @IBInspectable var cornerRadius: CGFloat = 30 {
