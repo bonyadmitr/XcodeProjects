@@ -222,6 +222,35 @@ extension NibInit where Self: UIView {
 //        super.init(coder: aDecoder)
 //        setup()
 //    }
+//
+//    private func setup() {
+//        isScrollEnabled = false
+//        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        NotificationCenter.default.addObserver(self, selector: #selector(UITextInputDelegate.textDidChange(_:)), name: UITextView.textDidChangeNotification, object: self)
+//        placeholderLabel.font = font
+//        addSubview(placeholderLabel)
+//
+//        NSLayoutConstraint.activate([
+//            placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            placeholderLabel.topAnchor.constraint(equalTo: topAnchor),
+//            placeholderLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+//        ])
+//    }
+//
+//    override var text: String! {
+//        didSet {
+//            invalidateIntrinsicContentSize()
+//            placeholderLabel.isHidden = !text.isEmpty
+//        }
+//    }
+//
+//    override var font: UIFont? {
+//        didSet {
+//            placeholderLabel.font = font
+//            invalidateIntrinsicContentSize()
+//        }
+//    }
 class RoundedCornerView: UIView {
     
     @IBInspectable var cornerRadius: CGFloat = 30 {
