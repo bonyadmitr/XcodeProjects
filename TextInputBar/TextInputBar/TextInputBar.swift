@@ -251,6 +251,43 @@ extension NibInit where Self: UIView {
 //            invalidateIntrinsicContentSize()
 //        }
 //    }
+//
+//    override var contentInset: UIEdgeInsets {
+//        didSet {
+//            placeholderLabel.contentInset = contentInset
+//        }
+//    }
+//
+//    override var intrinsicContentSize: CGSize {
+//        var size = super.intrinsicContentSize
+//
+//        if size.height == UIView.noIntrinsicMetric {
+//            // force layout
+//            layoutManager.glyphRange(for: textContainer)
+//            size.height = layoutManager.usedRect(for: textContainer).height + textContainerInset.top + textContainerInset.bottom
+//        }
+//
+//        if maxHeight > 0.0 && size.height > maxHeight {
+//            size.height = maxHeight
+//
+//            if !isScrollEnabled {
+//                isScrollEnabled = true
+//            }
+//        } else if isScrollEnabled {
+//            isScrollEnabled = false
+//        }
+//
+//        return size
+//    }
+//
+//    @objc private func textDidChange(_ note: Notification) {
+//        // needed incase isScrollEnabled is set to true which stops automatically calling invalidateIntrinsicContentSize()
+//        invalidateIntrinsicContentSize()
+//        placeholderLabel.isHidden = !text.isEmpty
+//    }
+//}
+
+
 class RoundedCornerView: UIView {
     
     @IBInspectable var cornerRadius: CGFloat = 30 {
