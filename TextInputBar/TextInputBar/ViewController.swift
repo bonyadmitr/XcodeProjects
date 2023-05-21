@@ -24,3 +24,21 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         //becomeFirstResponder()
+
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+    
+    override var inputAccessoryView: UIView? {
+        textInputBar
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        onTap()
+//    }
+    
+//    deinit {
+//        onTap()
+//    }
+    
