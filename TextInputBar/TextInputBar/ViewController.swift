@@ -24,6 +24,11 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
         
         //becomeFirstResponder()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
 
     override var canBecomeFirstResponder: Bool {
         true
@@ -42,3 +47,9 @@ class ViewController: UIViewController {
 //        onTap()
 //    }
     
+//            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+////            textInputBar.frame.origin.y = frame.origin.y
+//
+//            let insets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
+//            tableView.contentInset = insets
+//            tableView.scrollIndicatorInsets = insets
