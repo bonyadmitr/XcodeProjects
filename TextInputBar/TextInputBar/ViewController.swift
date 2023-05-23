@@ -53,3 +53,18 @@ class ViewController: UIViewController {
 //            let insets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
 //            tableView.contentInset = insets
 //            tableView.scrollIndicatorInsets = insets
+
+extension ViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+        //cell.backgroundColor = .red
+        return cell
+    }
+    
+}
