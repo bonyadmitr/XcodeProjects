@@ -29,6 +29,12 @@ class ViewController: UIViewController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
+        print("textInputBar.bounds.height \(textInputBar.bounds.height)")
+        //let insets = UIEdgeInsets(top: 0, left: 0, bottom: textInputBar.bounds.height, right: 0)
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 86, right: 0)
+        tableView.contentInset = insets
+        tableView.scrollIndicatorInsets = insets
+    }
 
     override var canBecomeFirstResponder: Bool {
         true
