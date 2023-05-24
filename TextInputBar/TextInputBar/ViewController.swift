@@ -77,6 +77,37 @@ class ViewController: UIViewController {
 //            tableView.scrollIndicatorInsets = insets
 //        }
     }
+    
+    
+    @objc func keyboardFrameChanged(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+            print("keyboardFrameChanged", frame)
+            
+            let isReachingEnd = tableView.contentOffset.y >= 0 && tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height)
+            if isReachingEnd {
+                DispatchQueue.main.async {
+                    self.tableView.scrollToRow(at: IndexPath(row: 29 , section: 0), at: .bottom, animated: true)
+                }
+
+            }
+            print(isReachingEnd)
+            
+            
+            //let insets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height - 33, right: 0)
+            
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height - (UIDevice.hasNotch ? 34 : 0), right: 0)
+//            print(frame.height)
+            UIView.animate(withDuration: 0.3) {
+                self.tableView.contentInset = insets
+                self.tableView.scrollIndicatorInsets = insets
+
+            }
+        }
+    }
+
+}
 
 extension ViewController: UITableViewDataSource {
     
