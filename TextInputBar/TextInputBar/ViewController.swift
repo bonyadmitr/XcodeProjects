@@ -53,12 +53,17 @@ class ViewController: UIViewController {
 //        onTap()
 //    }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        print("keyboardWillShow")
+        if let userInfo = notification.userInfo {
 //            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
 ////            textInputBar.frame.origin.y = frame.origin.y
 //
 //            let insets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height, right: 0)
 //            tableView.contentInset = insets
 //            tableView.scrollIndicatorInsets = insets
+        }
+    }
 
 extension ViewController: UITableViewDataSource {
     
