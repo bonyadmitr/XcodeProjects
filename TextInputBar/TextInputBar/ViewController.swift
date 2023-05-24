@@ -35,6 +35,10 @@ class ViewController: UIViewController {
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
     }
+    
+    @objc private func onTap() {
+        textInputBar.textView.resignFirstResponder()
+    }
 
     override var canBecomeFirstResponder: Bool {
         true
