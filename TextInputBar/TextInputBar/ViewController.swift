@@ -127,3 +127,18 @@ extension ViewController: UITableViewDataSource {
     }
     
 }
+
+
+extension UIDevice {
+    /// Returns `true` if the device has a notch
+    static var hasNotch: Bool {
+        true
+//        UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
+//        guard #available(iOS 11.0, *), let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return false }
+//        if UIDevice.current.orientation.isPortrait {
+//            return window.safeAreaInsets.top >= 44
+//        } else {
+//            return window.safeAreaInsets.left > 0 || window.safeAreaInsets.right > 0
+//        }
+    }
+}
