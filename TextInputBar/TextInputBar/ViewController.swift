@@ -64,6 +64,19 @@ class ViewController: UIViewController {
 //            tableView.scrollIndicatorInsets = insets
         }
     }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        print("keyboardWillHide")
+        
+//        if let userInfo = notification.userInfo {
+//            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+////            textInputBar.frame.origin.y = frame.origin.y
+//
+//            let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            tableView.contentInset = insets
+//            tableView.scrollIndicatorInsets = insets
+//        }
+    }
 
 extension ViewController: UITableViewDataSource {
     
