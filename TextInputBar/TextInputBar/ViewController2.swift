@@ -33,6 +33,15 @@ class ViewController2: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTap))
         view.addGestureRecognizer(tapGesture)
         
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameChanged(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        textInputBar.layoutIfNeeded()
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: textInputBar.bounds.height, right: 0)
+        tableView.contentInset = insets
+        tableView.scrollIndicatorInsets = insets
+        
     }
     
 }
