@@ -42,6 +42,16 @@ class ViewController2: UIViewController {
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 66.0
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.allowsSelection = false
+        
+        tableView.register(UINib(nibName: "UserChatCell", bundle: nil), forCellReuseIdentifier: "UserChatCell")
+        tableView.register(UINib(nibName: "AssistantChatCell", bundle: nil), forCellReuseIdentifier: "AssistantChatCell")
+        
     }
     
 }
