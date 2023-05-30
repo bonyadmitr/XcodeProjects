@@ -52,6 +52,25 @@ class ViewController2: UIViewController {
         tableView.register(UINib(nibName: "UserChatCell", bundle: nil), forCellReuseIdentifier: "UserChatCell")
         tableView.register(UINib(nibName: "AssistantChatCell", bundle: nil), forCellReuseIdentifier: "AssistantChatCell")
         
+        textInputBar.onSizeChange = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            UIView.animate(withDuration: 0.25) {
+                let height: CGFloat = -self.bottomTextInputBarConstraint.constant + self.textInputBar.bounds.height - (UIDevice.hasNotch ? 34 : 0)
+                let insets = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
+                self.tableView.contentInset = insets
+                self.tableView.scrollIndicatorInsets = insets
+                
+                let isReachingEnd = self.tableView.contentOffset.y >= 0 && self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.frame.size.height)
+                if isReachingEnd {
+                    self.tableView.scrollToRow(at: IndexPath(row: 29 , section: 0), at: .bottom, animated: false)
+                }
+
+            }
+        }
+    }
     }
     
 }
