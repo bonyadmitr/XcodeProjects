@@ -71,6 +71,10 @@ class ViewController2: UIViewController {
             }
         }
     }
+    
+    @objc private func onTap() {
+        textInputBar.textView.resignFirstResponder()
+    }
     }
     
 }
