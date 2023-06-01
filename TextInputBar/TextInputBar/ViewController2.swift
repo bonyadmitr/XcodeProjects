@@ -75,6 +75,42 @@ class ViewController2: UIViewController {
     @objc private func onTap() {
         textInputBar.textView.resignFirstResponder()
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        print("keyboardWillShow")
+        
+        let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        let height = frame.height
+        self.bottomTextInputBarConstraint.constant = -height
+        
+        func animations() {
+            self.view.layoutIfNeeded()
+            
+            let insetHeight: CGFloat = height + self.textInputBar.bounds.height - (UIDevice.hasNotch ? 34 : 0)
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: insetHeight, right: 0)
+            self.tableView.contentInset = insets
+            self.tableView.scrollIndicatorInsets = insets
+            
+            
+//
+            let isReachingEnd = self.tableView.contentOffset.y >= 0 && self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.frame.size.height)
+            if isReachingEnd {
+                self.tableView.scrollToRow(at: IndexPath(row: 29 , section: 0), at: .bottom, animated: false)
+            }
+        }
+        
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+              let curveRawValue = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else {
+            animations()
+            return
+        }
+        
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: curveRawValue), animations: { ()->() in
+            animations()
+        }, completion: nil)
+        
+    }
     }
     
 }
