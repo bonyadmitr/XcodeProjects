@@ -138,6 +138,14 @@ class ViewController2: UIViewController {
             animations()
         }, completion: nil)
     }
+    
+    
+    @objc func keyboardFrameChanged(notification: NSNotification) {
+            print("keyboardFrameChanged")
+    }
+    
+}
+
     }
     
 }
