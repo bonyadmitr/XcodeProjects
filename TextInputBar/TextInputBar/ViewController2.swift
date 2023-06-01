@@ -111,6 +111,33 @@ class ViewController2: UIViewController {
         }, completion: nil)
         
     }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        print("keyboardWillHide")
+        
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: self.textInputBar.bounds.height, right: 0)
+        
+        func animations() {
+            let height: CGFloat = 0//textInputBar.bounds.height +
+            self.bottomTextInputBarConstraint.constant = -height
+            self.view.layoutIfNeeded()
+            
+            
+            self.tableView.contentInset = insets
+            self.tableView.scrollIndicatorInsets = insets
+        }
+        
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+              let curveRawValue = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else {
+            animations()
+            return
+        }
+        
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions(rawValue: curveRawValue), animations: { ()->() in
+            animations()
+        }, completion: nil)
+    }
     }
     
 }
