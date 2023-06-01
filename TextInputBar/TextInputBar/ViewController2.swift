@@ -146,6 +146,32 @@ class ViewController2: UIViewController {
     
 }
 
+extension ViewController2: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserChatCell", for: indexPath) as? UserChatCell else {
+            assertionFailure()
+            return UITableViewCell()
+        }
+        cell.setup(with: "Row \(indexPath.row + 1). \(randomString(length: .random(in: 2...100)))")
+        //cell.backgroundColor = .red
+        return cell
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+//        //cell.backgroundColor = .red
+//        return cell
+        
+        
+    }
+    
+    
+    
+}
     }
     
 }
