@@ -172,6 +172,25 @@ extension ViewController2: UITableViewDataSource {
     
     
 }
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        guard let cell = tableView.cellForRow(at: indexPath) else {
+//            assertionFailure()
+//            return nil
+//        }
+        
+        let text = "Row \(indexPath.row + 1)"
+        
+        return UIContextMenuConfiguration(identifier: indexPath as NSCopying, previewProvider: nil) { _ in
+            let copyAction = UIAction(title: "Copy", image: UIImage(systemName: "doc.on.doc")) { action in
+                UIPasteboard.general.string = text
+            }
+            let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+                let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+                self?.present(activityViewController, animated: true, completion: nil)
+            }
+            return UIMenu(title: "", children: [shareAction, copyAction])
+        }
+    }
     }
     
 }
