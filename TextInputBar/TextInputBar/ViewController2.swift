@@ -191,6 +191,11 @@ extension ViewController2: UITableViewDataSource {
             return UIMenu(title: "", children: [shareAction, copyAction])
         }
     }
+    
+    func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        targetedPreview(for: configuration)
+    }
+    
     }
     
 }
