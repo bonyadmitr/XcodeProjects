@@ -196,6 +196,9 @@ extension ViewController2: UITableViewDataSource {
         targetedPreview(for: configuration)
     }
     
+    func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        targetedPreview(for: configuration)
+    }
     }
     
 }
