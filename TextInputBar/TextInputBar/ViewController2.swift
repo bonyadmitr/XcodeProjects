@@ -172,6 +172,8 @@ extension ViewController2: UITableViewDataSource {
     
     
 }
+
+extension ViewController2: UITableViewDelegate {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
 //        guard let cell = tableView.cellForRow(at: indexPath) else {
 //            assertionFailure()
@@ -199,6 +201,17 @@ extension ViewController2: UITableViewDataSource {
     func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         targetedPreview(for: configuration)
     }
+    
+    private func targetedPreview(for configuration: UIContextMenuConfiguration) -> UITargetedPreview?  {
+        guard let indexPath = configuration.identifier as? IndexPath,
+              let cell = tableView.cellForRow(at: indexPath) as? UserChatCell
+        else {
+            return nil
+        }
+        return UITargetedPreview(view: cell.textBackgroundView)
+    }
+    
+}
     }
     
 }
