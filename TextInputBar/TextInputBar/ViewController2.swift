@@ -225,6 +225,14 @@ func randomString(length: Int) -> String {
  swift ui https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
  https://heartbeat.comet.ml/speech-recognition-and-speech-synthesis-on-ios-with-swift-d1a63e469cd9
  */
+
+/*
+ TODO
+ - check keyboard voice recognition errors
+ - character limit + keyboard voice recognition
+ - button change
+ - add text, not replace all (if need)
+ */
     }
     
 }
