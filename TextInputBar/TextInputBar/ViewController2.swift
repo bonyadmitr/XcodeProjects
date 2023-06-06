@@ -218,6 +218,13 @@ func randomString(length: Int) -> String {
     return String((0..<length).map{ _ in letters.randomElement()! })
 }
 
+
+
+/*
+ https://medium.com/ios-os-x-development/speech-recognition-with-swift-in-ios-10-50d5f4e59c48
+ swift ui https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
+ https://heartbeat.comet.ml/speech-recognition-and-speech-synthesis-on-ios-with-swift-d1a63e469cd9
+ */
     }
     
 }
