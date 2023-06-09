@@ -233,6 +233,13 @@ func randomString(length: Int) -> String {
  - button change
  - add text, not replace all (if need)
  */
+/*
+ DONE
+ - audio interupt and continue
+ - caret scroll
+ - fixed text change after stop
+ - auto stop 5 sec
+ */
     }
     
 }
