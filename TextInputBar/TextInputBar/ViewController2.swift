@@ -240,6 +240,28 @@ func randomString(length: Int) -> String {
  - fixed text change after stop
  - auto stop 5 sec
  */
+import Speech
+final class SpeachManager {
+    
+    static let shared = SpeachManager()
+    private init() {}
+    
+    private let audioEngine = AVAudioEngine()
+    private let request = SFSpeechAudioBufferRecognitionRequest()
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioSession = AVAudioSession.sharedInstance()
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    
+    private let autoStopTaskSecond: TimeInterval = 5
+    
+    private var isRecording = false
+    
+    var onTextChange: ((String) -> Void)?
+    var onAutoStop: (() -> Void)?
+    
+    private var autoStopTask: DispatchWorkItem?
+    
     }
     
+}
 }
