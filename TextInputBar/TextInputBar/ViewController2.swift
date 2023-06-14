@@ -261,6 +261,27 @@ final class SpeachManager {
     
     private var autoStopTask: DispatchWorkItem?
     
+    private func tryRecordAndRecognizeSpeech() {
+        assert(AVAudioSession.sharedInstance().recordPermission == .granted, "Speech recognition is not available. Check mic permission")
+        
+        do {
+            //try audioSession.setCategory(.record, mode: .default, options: .duckOthers)
+            /*
+             fixed crash during user audio playing: `required condition is false: IsFormatSampleRateAndChannelCountValid` https://stackoverflow.com/a/61317322/5893286
+             
+             use `.duckOthers` to low volume for user audio
+             */
+            try audioSession.setCategory(.playAndRecord, options: .defaultToSpeaker)
+            try audioSession.setActive(true)
+        } catch {
+            assertionFailure(error.debugDescription)
+            return
+        }
+        
+        let node = audioEngine.inputNode
+        let recordingFormat = node.outputFormat(forBus: 0)
+        
+    }
     }
     
 }
