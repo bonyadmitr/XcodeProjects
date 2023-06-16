@@ -300,6 +300,43 @@ final class SpeachManager {
             return
         }
         resetAutoStopTask()
+        recognitionTask = speechRecognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
+            if let result = result {
+                
+//                let bestString = result.bestTranscription.formattedString
+//                var lastString: String = ""
+//                for segment in result.bestTranscription.segments {
+//                    let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
+//                    lastString = String(bestString[indexTo...])
+//                }
+//                self?.onTextChange?(bestString)
+//                print("bestString \(bestString)")
+//                print("lastString \(lastString)")
+                
+                /// called after recognitionTask stop and text can be changed
+                if !result.isFinal {
+                    self?.onTextChange?(result.bestTranscription.formattedString)
+                    self?.resetAutoStopTask()
+                }
+                
+            } else if let error = error as? NSError {
+//                kAFAssistantErrorDomain
+                /**
+                 on autoStopTask `Domain=kAFAssistantErrorDomain Code=1110 "No speech detected" UserInfo={NSLocalizedDescription=No speech detected`
+                 possible error 216 https://developer.apple.com/forums/thread/80993
+                 */
+                if !(error.domain == "kAFAssistantErrorDomain" && error.code == 1110) {
+                    print(error.debugDescription + "- speech recognition error.")
+                    self?.stop()
+                }
+                
+                
+            } else {
+                assertionFailure()
+            }
+            
+        })
+    }
     }
     }
     
