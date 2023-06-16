@@ -349,6 +349,17 @@ final class SpeachManager {
         self.autoStopTask = autoStopTask
         DispatchQueue.main.asyncAfter(deadline: .now() + autoStopTaskSecond, execute: autoStopTask)
     }
+    
+    func start() {
+        guard !isRecording else {
+            assertionFailure()
+            return
+        }
+        isRecording = true
+        
+        tryRecordAndRecognizeSpeech()
+    }
+    
     }
     
 }
