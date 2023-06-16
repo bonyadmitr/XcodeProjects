@@ -383,5 +383,33 @@ final class SpeachManager {
         try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }
     
+    
+    enum SpeechAuthorizationResult {
+        case authorized
+        case denied(DeniedType)
+        
+        enum DeniedType {
+            case voiceRecord
+            case speechRecognizer
+        }
+    }
+    func requestSpeechAuthorization(handler: @escaping (SpeechAuthorizationResult) -> Void) {
+        AVAudioSession.sharedInstance().requestRecordPermission { granted in
+            if granted {
+                SFSpeechRecognizer.requestAuthorization { authStatus in
+                    DispatchQueue.main.async {
+                        let result: SpeechAuthorizationResult = (authStatus == .authorized) ? .authorized : .denied(.speechRecognizer)
+                        handler(result)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    handler(.denied(.voiceRecord))
+                }
+            }
+        }
+        
+        
+    }
 }
 }
