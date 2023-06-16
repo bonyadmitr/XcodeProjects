@@ -360,6 +360,27 @@ final class SpeachManager {
         tryRecordAndRecognizeSpeech()
     }
     
+    func stop() {
+        guard isRecording else {
+            assertionFailure()
+            return
+        }
+        isRecording = false
+        
+        recognitionTask?.finish()
+        recognitionTask = nil
+        
+        // stop audio
+        request.endAudio()
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        
+        autoStopTask?.cancel()
+        autoStopTask = nil
+
+        
+        /// `.notifyOthersOnDeactivation` to continue users audio
+        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
     }
     
 }
