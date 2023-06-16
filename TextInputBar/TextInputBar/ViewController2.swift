@@ -281,6 +281,25 @@ final class SpeachManager {
         let node = audioEngine.inputNode
         let recordingFormat = node.outputFormat(forBus: 0)
         
+        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            self.request.append(buffer)
+        }
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch {
+            assertionFailure(error.debugDescription + " There has been an audio engine error.")
+            return
+        }
+        guard let speechRecognizer = speechRecognizer else {
+            assertionFailure("Speech recognition is not supported for current locale.")
+            return
+        }
+        guard speechRecognizer.isAvailable else {
+            assertionFailure("Speech recognition is not currently available. Check back at a later time.")
+            return
+        }
+        resetAutoStopTask()
     }
     }
     
