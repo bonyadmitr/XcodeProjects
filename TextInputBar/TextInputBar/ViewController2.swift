@@ -337,6 +337,17 @@ final class SpeachManager {
             
         })
     }
+    
+    private func resetAutoStopTask() {
+        print("- resetAutoStopTask")
+        let autoStopTask = DispatchWorkItem { [weak self] in
+            print("- autoStopTask")
+            self?.stop()
+            self?.onAutoStop?()
+        }
+        self.autoStopTask?.cancel()
+        self.autoStopTask = autoStopTask
+        DispatchQueue.main.asyncAfter(deadline: .now() + autoStopTaskSecond, execute: autoStopTask)
     }
     }
     
