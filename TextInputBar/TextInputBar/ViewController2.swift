@@ -412,4 +412,9 @@ final class SpeachManager {
         
     }
 }
+
+extension Error {
+    var debugDescription: String {
+        String(describing: self)
+    }
 }
