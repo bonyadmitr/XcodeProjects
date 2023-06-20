@@ -7,6 +7,10 @@
 
 import UIKit
 
+class ViewController: UIViewController {
+    
+    @IBOutlet private weak var collectionView: UICollectionView!
+
     private let columnLayout: UICollectionViewCompositionalLayout = {
         
         let deviceInset: CGFloat = 16
@@ -31,3 +35,17 @@ import UIKit
         
         return UICollectionViewCompositionalLayout(section: section)
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+//        collectionView.register(UINib(nibName: "TaskViewCell", bundle: nil), forCellWithReuseIdentifier: "TaskViewCell")
+//        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.collectionViewLayout = columnLayout
+        collectionView.reloadData()
+    }
+
+
+}
