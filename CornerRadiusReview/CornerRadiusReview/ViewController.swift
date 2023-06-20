@@ -76,3 +76,22 @@ final class ColCell: UICollectionViewCell {
 
 
 
+final class StyledCornerView: UIView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    private func setup() {
+        layer.cornerRadius = 16
+        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+        layer.masksToBounds = true
+    }
+
+}
