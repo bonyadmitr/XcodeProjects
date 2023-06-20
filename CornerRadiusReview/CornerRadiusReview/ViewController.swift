@@ -95,3 +95,22 @@ final class StyledCornerView: UIView {
     }
 
 }
+
+final class StyledCornerView2: CornerView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        cornerRadius = 16
+        corners = [.topLeft, .topRight, .bottomRight]
+    }
+    
+}
