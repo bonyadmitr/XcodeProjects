@@ -49,3 +49,22 @@ class ViewController: UIViewController {
 
 
 }
+
+extension ViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        1000
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColCell", for: indexPath) as? ColCell else {
+            assertionFailure()
+            return UICollectionViewCell()
+        }
+        
+        cell.titleLabel.text = "\(indexPath.item)"
+        
+        return cell
+    }
+}
