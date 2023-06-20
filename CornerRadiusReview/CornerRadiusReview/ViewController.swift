@@ -68,3 +68,11 @@ extension ViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+final class ColCell: UICollectionViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+}
+
+
+
+
