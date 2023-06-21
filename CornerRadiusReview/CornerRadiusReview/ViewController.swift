@@ -114,3 +114,18 @@ final class StyledCornerView2: CornerView {
     }
     
 }
+
+/*
+ https://stackoverflow.com/a/34754375/5893286
+ 
+ ! bad solution - needs a lot of memory just to draw it
+ */
+class StyledCornerView3: UIView {
+    
+    override func draw(_ rect: CGRect) {
+        let borderPath = UIBezierPath(roundedRect: bounds, cornerRadius: 16)
+        //UIColor.white.set()
+        superview?.backgroundColor?.set()
+        borderPath.fill()
+    }
+}
