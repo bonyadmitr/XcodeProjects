@@ -129,3 +129,21 @@ class StyledCornerView3: UIView {
         borderPath.fill()
     }
 }
+
+final class StyledCornerView4: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+//    override var backgroundColor: UIColor? {
+//        didSet {
+////            image = resizableImage(16, color: backgroundColor!)
+//        }
+//    }
