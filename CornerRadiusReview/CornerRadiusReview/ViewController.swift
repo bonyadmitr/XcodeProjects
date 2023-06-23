@@ -147,3 +147,33 @@ final class StyledCornerView4: UIView {
 ////            image = resizableImage(16, color: backgroundColor!)
 //        }
 //    }
+    
+    private func setup() {
+        let cornerRadius: CGFloat = 16
+        
+        
+        let image = resizableImage(cornerRadius, color: backgroundColor!)
+        backgroundColor = .clear
+        
+        
+        
+        layer.contentsScale = image.scale
+        //layer.contentsGravity = .resize
+        
+        /// doc + https://stackoverflow.com/a/11928188/5893286
+        //image.capInsets.top
+        let capInset = cornerRadius/image.size.width
+        let widthCap = 1 - capInset * 2
+        layer.contentsCenter = CGRectMake(capInset,
+                                          capInset,
+                                          widthCap,
+                                          widthCap)
+        layer.contents = image.cgImage
+        //layer.isGeometryFlipped = true
+        
+        //UIImage().stretchableImage(withLeftCapWidth: 16, topCapHeight: 16)
+        
+//        layer.cornerRadius = 16
+//        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+//        layer.masksToBounds = true
+    }
