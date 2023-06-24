@@ -177,3 +177,34 @@ final class StyledCornerView4: UIView {
 //        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
 //        layer.masksToBounds = true
     }
+    
+    func resizableImage(_ inset: CGFloat, color: UIColor) -> UIImage {
+        let side = inset * 2
+        let size = CGSize(width: side, height: side)
+        
+        //let format = UIGraphicsImageRendererFormat(for: UITraitCollection(displayScale: 1))
+        let format = UIGraphicsImageRendererFormat()
+        format.opaque = false
+        format.scale = UIScreen.main.scale
+        
+        let image = UIGraphicsImageRenderer(size: size, format: format).image { context in
+            
+            color.setFill()
+            
+            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            
+//            UIBezierPath(roundedRect: rect, cornerRadius: inset).addClip()
+            
+                        UIBezierPath(roundedRect: rect,
+                                     byRoundingCorners: [.topLeft, .topRight, .bottomRight],
+                                     cornerRadii: CGSize(width: inset, height: inset)).addClip()
+            
+            
+            context.fill(CGRect(origin: .zero, size: size))
+        }
+        //        return image
+        let insets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        return image.resizableImage(withCapInsets: insets, resizingMode: .stretch)
+    }
+    
+}
