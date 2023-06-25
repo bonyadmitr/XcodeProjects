@@ -208,3 +208,48 @@ final class StyledCornerView4: UIView {
     }
     
 }
+class CornerView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat = 0
+    //    {
+    //        didSet {
+    //            updateCorners()
+    //        }
+    //    }
+    
+    var corners: UIRectCorner = .allCorners
+    //    {
+    //        didSet {
+    //            updateCorners()
+    //        }
+    //    }
+    
+    private let maskLayer = CAShapeLayer()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        layer.mask = maskLayer
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateCorners()
+    }
+    
+    private func updateCorners() {
+        maskLayer.path = UIBezierPath(roundedRect: bounds,
+                                      byRoundingCorners: corners,
+                                      cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+    }
+    
+}
