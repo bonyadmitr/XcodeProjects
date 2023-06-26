@@ -208,6 +208,17 @@ final class StyledCornerView4: UIView {
     }
     
 }
+
+/*
+ maskLayer.path = UIBezierPath(roundedRect: bounds,
+ byRoundingCorners: corners,
+ cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+ 
+ similar to
+ layer.cornerRadius = 16
+ layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+ layer.masksToBounds = true
+ */
 class CornerView: UIView {
     
     @IBInspectable var cornerRadius: CGFloat = 0
