@@ -264,3 +264,15 @@ class CornerView: UIView {
     }
     
 }
+
+/*
+ not working for IB bcz `superview?.backgroundColor` = nil
+ */
+//class OptimizedLabel: UILabel {
+//
+//    override func didMoveToSuperview() {
+//        super.didMoveToSuperview()
+//
+//        backgroundColor = superview?.backgroundColor
+//    }
+//}
