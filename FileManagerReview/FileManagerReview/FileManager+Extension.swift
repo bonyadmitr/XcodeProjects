@@ -153,21 +153,21 @@ extension FileManager {
         }
     }
     
-    func removeItemIfExists(at url: URL) {
-        guard fileExists(atPath: url.path) else {
-            return
-        }
-        
-        do {
-            /// will delete for `PosixPermissions = [.User.read]`
-            try removeItem(at: url)
-        }  catch let error as NSError where error.code == NSFileWriteNoPermissionError {
-            removeItemWithoutPermissions(at: url)
-        } catch {
-            assertionFailure(error.debugDescription)
-        }
-        
-    }
+    //func removeItemIfExists(at url: URL) {
+    //    guard fileExists(atPath: url.path) else {
+    //        return
+    //    }
+    //    
+    //    do {
+    //        /// will delete for `PosixPermissions = [.User.read]`
+    //        try removeItem(at: url)
+    //    }  catch let error as NSError where error.code == NSFileWriteNoPermissionError {
+    //        removeItemWithoutPermissions(at: url)
+    //    } catch {
+    //        assertionFailure(error.debugDescription)
+    //    }
+    //    
+    //}
     
     // TODO: check NSFileProtectionKey https://developer.apple.com/documentation/foundation/nsfileprotectionkey
     /// macOS alert: cannot be deleted `Operation not permitted` + `"NAME" couldn’t be removed because you don’t have permission to access it`
