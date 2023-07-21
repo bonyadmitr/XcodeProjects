@@ -1,16 +1,16 @@
 PODS:
-  - Connectivity (2.2.0)
+  - Connectivity (6.0.0)
 
 DEPENDENCIES:
   - Connectivity
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Connectivity
 
 SPEC CHECKSUMS:
-  Connectivity: a9e42ebad089cc92ecb8b68ed1b8c30dfe61a74c
+  Connectivity: 1919d4dc94c63514a2ec0574336f2e83857a20a8
 
 PODFILE CHECKSUM: 05eca2bb9d6a9d59918a1f6ccc6d0f143ff749f3
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.12.0
