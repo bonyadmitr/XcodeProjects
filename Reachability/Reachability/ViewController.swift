@@ -11,20 +11,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 12.0, *) {
-            _ = NetworkReachability2.shared
-        } else {
-            setupNetworkReachability()
-        }
-        
-//        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
-//            self?.updateConnectionStatus(connectivity.status)
+//        if #available(iOS 12.0, *) {
+//            _ = NetworkReachability2.shared
+//        } else {
+//            setupNetworkReachability()
 //        }
-//
-//        connectivity.whenConnected = connectivityChanged
-//        connectivity.whenDisconnected = connectivityChanged
-//
-//        connectivity.startNotifier()
+        
+        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
+            self?.updateConnectionStatus(connectivity.status)
+        }
+
+        connectivity.whenConnected = connectivityChanged
+        connectivity.whenDisconnected = connectivityChanged
+
+        connectivity.startNotifier()
     }
     
     func updateConnectionStatus(_ status: ConnectivityStatus) {
