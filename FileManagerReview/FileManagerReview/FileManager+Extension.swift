@@ -183,5 +183,9 @@ extension FileManager {
         } catch {
             assertionFailure(error.debugDescription)
         }
+
+extension Error {
+    var debugDescription: String {
+        String(describing: self)
     }
 }
