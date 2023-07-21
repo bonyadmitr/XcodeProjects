@@ -34,15 +34,21 @@ class ViewController: UIViewController {
         case .connected:
             view.backgroundColor = .cyan
         case .connectedViaCellular:
-            view.backgroundColor = .yellow
+            view.backgroundColor = .green
         case .connectedViaCellularWithoutInternet:
-            view.backgroundColor = .red
+            view.backgroundColor = .orange
         case .connectedViaWiFi:
             view.backgroundColor = .green
         case .connectedViaWiFiWithoutInternet:
-            view.backgroundColor = .red
+            view.backgroundColor = .orange
         case .notConnected:
             view.backgroundColor = .red
+        case .determining:
+            view.backgroundColor = .magenta
+        case .connectedViaEthernet:
+            view.backgroundColor = .magenta
+        case .connectedViaEthernetWithoutInternet:
+            view.backgroundColor = .magenta
         }
     }
 
