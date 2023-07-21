@@ -7,6 +7,9 @@
 
 import Foundation
 
+
+/// https://developer.apple.com/forums/thread/678819
+
 /// apple source by SymbolExtractor https://github.com/Polidea/SiriusObfuscator-SymbolExtractorAndRenamer/tree/master/swift-corelibs-foundation/Foundation
 ///
 
@@ -175,14 +178,16 @@ extension FileManager {
     /// error debugDescriptions are the same for `.immutable` and `.posixPermissions`:
     /// Error Domain=NSCocoaErrorDomain Code=513 "“PosixPermissions” couldn’t be removed because you don’t have permission to access it." UserInfo={NSUserStringVariant=(Remove),
     /// NSFilePath=/Users/yaroslav.bondar/Downloads/PosixPermissions, NSUnderlyingError=0x600003bb0a80 {Error Domain=NSPOSIXErrorDomain Code=13 "Permission denied"}}
-    func removeItemWithoutPermissions(at url: URL) {
-        do {
-            try setAttributes([.immutable: false], ofItemAtPath: url.path)
-            try setAttributes([.posixPermissions: PosixPermissions.User.read.rawValue], ofItemAtPath: url.path)
-            try removeItem(at: url)
-        } catch {
-            assertionFailure(error.debugDescription)
-        }
+    //func removeItemWithoutPermissions(at url: URL) {
+    //    do {
+    //        try setAttributes([.immutable: false], ofItemAtPath: url.path)
+    //        try setAttributes([.posixPermissions: PosixPermissions.User.read.rawValue], ofItemAtPath: url.path)
+    //        try removeItem(at: url)
+    //    } catch {
+    //        assertionFailure(error.debugDescription)
+    //    }
+    //}
+}
 
 extension Error {
     var debugDescription: String {
