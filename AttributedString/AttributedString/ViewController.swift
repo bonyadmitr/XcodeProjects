@@ -41,9 +41,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.global().async { [weak self] in
-            self?.setupLabelAndTextViewByAttributedText()
-        }
+//        DispatchQueue.global().async { [weak self] in
+            setupLabelAndTextViewByAttributedText()
+//        }
         
         setupHtmlTextView()
     }
@@ -154,8 +154,8 @@ class ViewController: UIViewController {
 }
 
 // MARK: - TapableLabelDelegate
-extension ViewController: TapableLabelDelegate {
-    func tapableLabel(_ label: TapableLabel, didTapAt url: String, in range: NSRange) {
+extension ViewController: TappableLabelDelegate {
+    func tappableLabel(_ label: TappableLabel, didTapAt url: String, in range: NSRange) {
         switch url {
         case termsAndConditionsUrl:
             print("open termsAndConditions")
