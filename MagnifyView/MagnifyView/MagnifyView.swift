@@ -4,9 +4,12 @@ import UIKit
 /// Unable to look up screen scale
 /// Unexpected physical screen orientation
 ///
+
+// TODO: check another solution https://github.com/john-rocky/ZoomDragView/blob/main/Sources/ZoomDragView/ZoomDragView.swift
 // TODO: frame edge cases
 // TODO: create new logic to render one time and only move view
 /// https://github.com/damidund/Magnifying-Glass-Effect
+/// ZoomView
 final class MagnifyView: UIView {
     
     var viewToMagnify: UIView?
