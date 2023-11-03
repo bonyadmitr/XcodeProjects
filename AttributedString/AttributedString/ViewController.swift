@@ -187,25 +187,3 @@ extension ViewController: UITextViewDelegate {
         return false
     }
 }
-
-extension TapableLabel {
-    func setup(fullText: NSMutableAttributedString,
-               urlsByLinks: [String: String],
-               linkAttributes: [NSAttributedString.Key: Any]) {
-        
-        for (link, url) in urlsByLinks {
-            let range = fullText.mutableString.range(of: link)
-            fullText.addAttributes(linkAttributes, range: range)
-            addLink(at: range, withURL: url)
-        }
-        
-        /// with async will not update label by highlighting.
-        /// another solution is create fullText in DispatchQueue.main.async too.
-        /// seems like it is a bug.
-        /// tested on iOS 12.
-        /// seems the same bug https://github.com/Cocoanetics/DTCoreText/issues/620
-        DispatchQueue.main.sync { [weak self] in
-            self?.attributedText = fullText
-        }
-    }
-}
