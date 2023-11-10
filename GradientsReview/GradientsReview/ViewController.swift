@@ -8,6 +8,8 @@
 import UIKit
 
 
+// TODO: gradient with fixed started Locations
+
 
 /*
      @IBInspectable var firstColor: UIColor = UIColor.magenta {
