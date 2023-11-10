@@ -8,6 +8,19 @@
 import UIKit
 
 
+
+/*
+     @IBInspectable var firstColor: UIColor = UIColor.magenta {
+        didSet { updateColors() }
+    }
+    
+    @IBInspectable var secondColor: UIColor = UIColor.cyan {
+        didSet { updateColors() }
+    }
+ 
+ @IBInspectable var verticalMode: Bool = true
+ */
+
 class ViewController: UIViewController {
 
     @IBOutlet private weak var gradientView: GradientThemeView!
