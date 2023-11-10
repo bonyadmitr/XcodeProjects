@@ -10,6 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var gradientView: GradientThemeView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        assert(UIColor(light: .red, dark: .blue).resolvedColor(for: .light) == .red)
+        assert(UIColor(light: .red, dark: .blue).resolvedColor(for: .unspecified) == .red)
+        assert(UIColor(light: .red, dark: .blue).resolvedColor(for: .dark) == .blue)
+        
+        
+    }
 
 
 }
