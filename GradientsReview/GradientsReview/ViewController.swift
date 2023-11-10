@@ -24,3 +24,9 @@ class ViewController: UIViewController {
 
 
 }
+
+
+//class GradientView: UIView {
+//    override class var layerClass: AnyClass { CAGradientLayer.self }
+//    var gradientLayer: CAGradientLayer { layer as! CAGradientLayer }
+//}
