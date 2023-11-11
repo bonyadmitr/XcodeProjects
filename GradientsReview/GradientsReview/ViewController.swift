@@ -143,3 +143,17 @@ class GradientView: UIView {
 //        .init(startPoint: CGPoint(x: 1, y: 0),
 //              endPoint: CGPoint(x: 0, y: 0))
 //    }
+//    
+//    /// default state for CAGradientLayer
+//    static var topToBottom: Self {
+//        .init(startPoint: CGPoint(x: 0, y: 0),
+//              endPoint: CGPoint(x: 0, y: 1))
+//    }
+//    
+//    static var bottomToTop: Self {
+//        .init(startPoint: CGPoint(x: 0, y: 1),
+//              endPoint: CGPoint(x: 0, y: 0))
+//    }
+//    
+//}
+
