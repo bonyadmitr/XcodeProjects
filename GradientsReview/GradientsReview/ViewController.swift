@@ -35,6 +35,17 @@ class ViewController: UIViewController {
         assert(UIColor(light: .red, dark: .blue).resolvedColor(for: .dark) == .blue)
         
         
+        
+//        gradientView.setDirection(.leftToRight)
+        gradientView.setColors([.red, .orange])
+        //gradientView.setColors([.label, .systemBackground])
+        
+//        gradientView.gradientLayer.locations = [0, 0.3, 0.7, 1]
+        //gradientView.gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor]
+//        gradientView.setColors([.red, .orange, .green, .blue])
+        
+//        gradientView.setColors([.systemBackground, UIColor(light: .red, dark: .blue)])
+        
     }
 
 
