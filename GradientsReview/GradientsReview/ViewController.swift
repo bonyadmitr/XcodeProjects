@@ -110,3 +110,20 @@ class GradientView: UIView {
 //            self.type = type
 //        }
 //    }
+//    
+//    func setupRaw(_ config: Config) {
+//        gradientLayer.startPoint = config.startPoint
+//        gradientLayer.endPoint = config.endPoint
+//        
+//        if config.locations != nil {
+//            gradientLayer.locations = config.locations
+//        }
+//        
+//        if config.colors != nil {
+//            gradientLayer.colors = config.colors
+//        }
+//        
+//        gradientLayer.type = config.type
+//    }
+//}
+//
