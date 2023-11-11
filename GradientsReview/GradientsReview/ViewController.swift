@@ -46,6 +46,21 @@ class ViewController: UIViewController {
         
 //        gradientView.setColors([.systemBackground, UIColor(light: .red, dark: .blue)])
         
+        
+    
+//        gradientView.setLocationsAndColors([0.0: .red,
+//                                           0.3: .orange,
+//                                           0.7: .green,
+//                                           1.0: .blue])
+        
+        
+//        gradientView.setLocationsAndColors([0.0: .systemBackground,
+//                                           0.3: .secondarySystemBackground,
+//                                           0.7: .tertiarySystemBackground,
+//                                           1.0: .systemGroupedBackground])
+        
+//        gradientView.setLocationsAndColors([0.5: .systemBackground,
+//                                            0.9: .label])
     }
 
 
