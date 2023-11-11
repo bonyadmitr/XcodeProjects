@@ -192,4 +192,9 @@ extension GradientView.Direction {
               endPoint: CGPoint(x: 0, y: 0))
     }
     
+    static var topLeftToBottomRight: Self {
+        .init(startPoint: CGPoint(x: 0, y: 0),
+              endPoint: CGPoint(x: 1, y: 1))
+    }
+    
 }
