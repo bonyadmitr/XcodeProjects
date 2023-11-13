@@ -90,18 +90,11 @@ final class GradientShadowView: UIView {
         setup()
     }
     
-
-extension GradientView {
-    struct Direction {
-        let startPoint: CGPoint
-        let endPoint: CGPoint
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
     }
     
-    func setDirection(_ direction: Direction) {
-        gradientLayer.startPoint = direction.startPoint
-        gradientLayer.endPoint = direction.endPoint
-    }
-}
 
 extension GradientView.Direction {
     
