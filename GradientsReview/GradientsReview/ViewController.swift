@@ -80,18 +80,14 @@ class ViewController: UIViewController {
 }
 
 
-//class GradientView: UIView {
-//    override class var layerClass: AnyClass { CAGradientLayer.self }
-//    var gradientLayer: CAGradientLayer { layer as! CAGradientLayer }
-//}
-class GradientView: UIView {
+final class GradientShadowView: UIView {
     
-    override class var layerClass: AnyClass {
-        CAGradientLayer.self
-    }
+    private let gradientLayer = CAGradientLayer()
+    private let shadowLayer = CALayer()
     
-    var gradientLayer: CAGradientLayer {
-        layer as! CAGradientLayer
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
     }
     
     /// topToBottom is default direction for CAGradientLayer
