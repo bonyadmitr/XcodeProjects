@@ -18,3 +18,26 @@ class GradientView: UIView {
         gradientLayer.colors = colors.map { $0.cgColor }
     }
 }
+
+//extension GradientView {
+//
+//    struct Config {
+//        let startPoint: CGPoint
+//        let endPoint: CGPoint
+//        let locations: [NSNumber]?
+//        let colors: [CGColor]?
+//        let type: CAGradientLayerType
+//
+//        init(startPoint: CGPoint,
+//             endPoint: CGPoint,
+//             locations: [NSNumber]? = nil,
+//             colors: [CGColor]? = nil,
+//             type: CAGradientLayerType = .axial)
+//        {
+//            self.startPoint = startPoint
+//            self.endPoint = endPoint
+//            self.locations = locations
+//            self.colors = colors
+//            self.type = type
+//        }
+//    }
