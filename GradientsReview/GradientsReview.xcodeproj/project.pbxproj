@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31ADEC7E2B0036AB00CD15A5 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ADEC7D2B0036AB00CD15A5 /* GradientView.swift */; };
 		31EB1D2D2AFC2B9C00E80FF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EB1D2C2AFC2B9C00E80FF2 /* AppDelegate.swift */; };
 		31EB1D2F2AFC2B9C00E80FF2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EB1D2E2AFC2B9C00E80FF2 /* SceneDelegate.swift */; };
 		31EB1D312AFC2B9C00E80FF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EB1D302AFC2B9C00E80FF2 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31ADEC7D2B0036AB00CD15A5 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		31EB1D292AFC2B9C00E80FF2 /* GradientsReview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GradientsReview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31EB1D2C2AFC2B9C00E80FF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31EB1D2E2AFC2B9C00E80FF2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				31EB1D2C2AFC2B9C00E80FF2 /* AppDelegate.swift */,
 				31EB1D2E2AFC2B9C00E80FF2 /* SceneDelegate.swift */,
 				31EB1D302AFC2B9C00E80FF2 /* ViewController.swift */,
+				31ADEC7D2B0036AB00CD15A5 /* GradientView.swift */,
 				31EB1D322AFC2B9C00E80FF2 /* Main.storyboard */,
 				31EB1D382AFC2B9D00E80FF2 /* Assets.xcassets */,
 				31EB1D3A2AFC2B9D00E80FF2 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				31EB1D312AFC2B9C00E80FF2 /* ViewController.swift in Sources */,
 				31EB1D2D2AFC2B9C00E80FF2 /* AppDelegate.swift in Sources */,
+				31ADEC7E2B0036AB00CD15A5 /* GradientView.swift in Sources */,
 				31EB1D2F2AFC2B9C00E80FF2 /* SceneDelegate.swift in Sources */,
 				31EB1D372AFC2B9C00E80FF2 /* GradientsReview.xcdatamodeld in Sources */,
 			);
