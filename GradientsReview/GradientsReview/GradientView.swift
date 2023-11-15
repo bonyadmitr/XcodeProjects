@@ -100,3 +100,11 @@ extension GradientView {
     }
 }
 
+extension GradientView.Direction {
+    
+    static var leftToRight: Self {
+        .init(startPoint: CGPoint(x: 0, y: 0),
+              endPoint: CGPoint(x: 1, y: 0))
+    }
+    
+}
