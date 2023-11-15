@@ -87,3 +87,16 @@ class GradientView: UIView {
 //    }
 //
 //}
+
+extension GradientView {
+    struct Direction {
+        let startPoint: CGPoint
+        let endPoint: CGPoint
+    }
+    
+    func setDirection(_ direction: Direction) {
+        gradientLayer.startPoint = direction.startPoint
+        gradientLayer.endPoint = direction.endPoint
+    }
+}
+
