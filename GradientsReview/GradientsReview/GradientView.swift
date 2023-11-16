@@ -159,4 +159,21 @@ extension GradientView {
 //              colors: [UIColor.red.cgColor, UIColor.orange.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor])
 //    }
 //}
+
+
+//extension GradientView {
+//
+//    func bottomToTop() {
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+//        gradientLayer.endPoint = CGPoint(x: 0, y: 0)
+//        gradientLayer.locations = [0, 1]
+//    }
+//
+//    func leftToRight() {
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+//    }
+//
+//}
+
 }
