@@ -145,4 +145,18 @@ extension GradientView {
     //    }
     
 }
+//extension GradientView.Config {
+//    static var conic: Self {
+//        .init(startPoint: CGPoint(x: 0.5, y: 0.5),
+//              endPoint: CGPoint(x: 0.5, y: 0),
+//              type: .conic)
+//    }
+//
+//    static var custom: Self {
+//        .init(startPoint: CGPoint(x: 0, y: 0),
+//              endPoint: CGPoint(x: 1, y: 0),
+//              locations: [0, 0.3, 0.7, 1],
+//              colors: [UIColor.red.cgColor, UIColor.orange.cgColor, UIColor.green.cgColor, UIColor.blue.cgColor])
+//    }
+//}
 }
