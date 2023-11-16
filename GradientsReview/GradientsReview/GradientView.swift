@@ -176,4 +176,16 @@ extension GradientView {
 //
 //}
 
+
+/// GradientDynamicColorsView
+class GradientThemeView: GradientView {
+    
+    var colors = [UIColor]() {
+        didSet {
+            assert(colors.first { $0.resolvedColor(with: .init(userInterfaceStyle: .dark)) != $0.resolvedColor(with: .init(userInterfaceStyle: .light)) } != nil, "There is no dynamic color in \(colors). Use simple GradientView")
+            updateColors()
+        }
+    }
+}
+
 }
