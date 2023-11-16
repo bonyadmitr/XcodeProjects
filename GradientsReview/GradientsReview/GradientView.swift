@@ -127,4 +127,22 @@ extension GradientView.Direction {
         .init(startPoint: CGPoint(x: 0, y: 0),
               endPoint: CGPoint(x: 1, y: 1))
     }
+    
+}
+
+extension GradientView {
+    
+    func setLocationsAndColors(_ dict: [NSNumber: UIColor]) {
+        assert(!dict.isEmpty)
+        let sortedDict = dict.sorted(by: { $0.key.compare($1.key) == .orderedAscending })
+        gradientLayer.locations = sortedDict.map { $0.key }
+        setColors(sortedDict.map { $0.value })
+    }
+    
+    //    func set(direction: GradientView.Direction, colors: [UIColor]) {
+    //        setDirection(direction)
+    //        setColors(colors)
+    //    }
+    
+}
 }
