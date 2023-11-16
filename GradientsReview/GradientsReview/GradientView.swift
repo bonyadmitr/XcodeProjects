@@ -1,3 +1,14 @@
+//
+//  GradientView.swift
+//  GradientsReview
+//
+//  Created by Yaroslav Bondar on 12.11.2023.
+//
+
+import UIKit
+
+
+
 //class GradientView: UIView {
 //    override class var layerClass: AnyClass { CAGradientLayer.self }
 //    var gradientLayer: CAGradientLayer { layer as! CAGradientLayer }
@@ -186,6 +197,11 @@ class GradientThemeView: GradientView {
             updateColors()
         }
     }
+    
+    override func setColors(_ colors: [UIColor]) {
+        self.colors = colors
+    }
+    
 }
 
 }
