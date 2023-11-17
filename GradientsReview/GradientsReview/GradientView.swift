@@ -209,6 +209,14 @@ class GradientThemeView: GradientView {
             updateColors()
         }
     }
+    
+    private func updateColors() {
+        assert(!colors.isEmpty, "`colors` is not used. Use simple GradientView")
+        if !colors.isEmpty {
+            super.setColors(colors)
+        }
+    }
+
 }
 
 }
