@@ -156,6 +156,7 @@ extension GradientView {
     //    }
     
 }
+
 //extension GradientView.Config {
 //    static var conic: Self {
 //        .init(startPoint: CGPoint(x: 0.5, y: 0.5),
@@ -216,7 +217,19 @@ class GradientThemeView: GradientView {
             super.setColors(colors)
         }
     }
+}
 
+
+extension UIColor {
+    
+    /// `.resolvedColor(with: .init(userInterfaceStyle: .dark))` -> `.resolvedColor(with: .dark)`
+    func resolvedColor(for userInterfaceStyle: UIUserInterfaceStyle) -> UIColor {
+        resolvedColor(with: UITraitCollection(userInterfaceStyle: userInterfaceStyle))
+    }
+    
+    convenience init(light: UIColor, dark: UIColor) {
+        self.init { $0.userInterfaceStyle == .dark ? dark : light }
+    }
 }
 
 }
