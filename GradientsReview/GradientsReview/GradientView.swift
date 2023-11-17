@@ -243,4 +243,12 @@ class GradientComplexView: UIView {
         layer as! CAGradientLayer
     }
     
+    
+    func setDynamicColors(_ colors: [UIColor]) {
+        assert(!colors.isEmpty)
+        assert(colors.first { $0.resolvedColor(with: .init(userInterfaceStyle: .dark)) != $0.resolvedColor(with: .init(userInterfaceStyle: .light)) } != nil, "There is no dynamic color in \(colors). Use `setStaticColors`")
+        self.colors = colors
+        setStaticColors(colors)
+    }
+    
 }
