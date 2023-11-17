@@ -243,6 +243,12 @@ class GradientComplexView: UIView {
         layer as! CAGradientLayer
     }
     
+    private var colors: [UIColor]?
+    
+    func setStaticColors(_ colors: [UIColor]) {
+        assert(!colors.isEmpty)
+        gradientLayer.colors = colors.map { $0.cgColor }
+    }
     
     func setDynamicColors(_ colors: [UIColor]) {
         assert(!colors.isEmpty)
