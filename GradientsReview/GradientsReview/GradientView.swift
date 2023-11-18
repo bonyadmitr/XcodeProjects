@@ -257,4 +257,15 @@ class GradientComplexView: UIView {
         setStaticColors(colors)
     }
     
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            if let colors = colors, !colors.isEmpty {
+                setStaticColors(colors)
+            }
+        }
+    }
+    
 }
