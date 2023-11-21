@@ -257,6 +257,11 @@ class GradientComplexView: UIView {
         setStaticColors(colors)
     }
     
+    //    func setLocationsAndColors(_ dict: [NSNumber: UIColor]) {
+    //        let sortedDict = dict.sorted(by: { $0.key.compare($1.key) == .orderedAscending })
+    //        gradientLayer.locations = sortedDict.map { $0.key }
+    //        setDynamicColors(sortedDict.map { $0.value })
+    //    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
