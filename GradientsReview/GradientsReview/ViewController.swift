@@ -107,6 +107,22 @@ final class GradientShadowView: UIView {
         
         gradientLayer.startPoint = CGPoint(x: 1, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0, y: 0)
+        
+//        gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+
+        
+        
+        
+//        gradientLayer.masksToBounds = true
+        
+        
+        
+        shadowLayer.backgroundColor = UIColor.cyan.cgColor
+        
+        shadowLayer.shadowColor = UIColor.yellow.cgColor
+        shadowLayer.shadowOpacity = 1 //0.08
+        shadowLayer.shadowRadius = 20 // max for insetBy 40
+        shadowLayer.shadowOffset = .zero
 
     }
     
