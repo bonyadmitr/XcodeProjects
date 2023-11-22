@@ -142,6 +142,13 @@ final class GradientShadowView: UIView {
     static var topLeftToBottomRight: Self {
         .init(startPoint: CGPoint(x: 0, y: 0),
               endPoint: CGPoint(x: 1, y: 1))
+        
+//        let rect = CGRect.init(
+//            x: bounds.minX - 40,
+//            y: bounds.minY - 40,
+//            width: bounds.width + 80,
+//            height: bounds.height + 80)
+        
 //        shadowLayer.frame = bounds//.insetBy(dx: 20, dy: 20)
 //        shadowLayer.shadowPath = CGPath(rect: shadowLayer.frame, transform: nil)
         
