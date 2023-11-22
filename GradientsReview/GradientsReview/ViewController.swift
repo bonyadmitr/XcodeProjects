@@ -123,6 +123,17 @@ final class GradientShadowView: UIView {
         shadowLayer.shadowOpacity = 1 //0.08
         shadowLayer.shadowRadius = 20 // max for insetBy 40
         shadowLayer.shadowOffset = .zero
+        
+        
+        /// inspired https://stackoverflow.com/a/45257449/5893286
+        gradientLayer.mask = shadowLayer
+        
+        layer.addSublayer(gradientLayer)
+        
+        
+        let cornerRadius: CGFloat =  16
+        shadowLayer.cornerRadius = cornerRadius
+        layer.cornerRadius = cornerRadius
 
     }
     
