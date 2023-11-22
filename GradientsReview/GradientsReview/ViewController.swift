@@ -149,6 +149,15 @@ final class GradientShadowView: UIView {
 //            width: bounds.width + 80,
 //            height: bounds.height + 80)
         
+        gradientLayer.frame = bounds.insetBy(dx: -40, dy: -40)
+        
+        /// when some of the layer is a mask then you should calculate the frame of the mask like if it is just a sublayer of the superlayer https://stackoverflow.com/a/30880145/5893286
+        var f = gradientLayer.frame
+        f.origin.x += 40
+        f.origin.y += 40
+        
+        shadowLayer.frame = f.insetBy(dx: 40, dy: 40)
+        
 //        shadowLayer.frame = bounds//.insetBy(dx: 20, dy: 20)
 //        shadowLayer.shadowPath = CGPath(rect: shadowLayer.frame, transform: nil)
         
