@@ -95,6 +95,18 @@ final class GradientShadowView: UIView {
         setup()
     }
     
+    private func setup() {
+        
+        backgroundColor = .magenta
+        
+        
+        gradientLayer.colors = [UIColor.red.cgColor,
+                                UIColor.yellow.cgColor,
+                                UIColor.green.cgColor,
+                                UIColor.blue.cgColor]
+        
+        gradientLayer.startPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 0)
 
     }
     
