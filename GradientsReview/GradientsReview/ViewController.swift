@@ -135,11 +135,18 @@ final class GradientShadowView: UIView {
         shadowLayer.cornerRadius = cornerRadius
         layer.cornerRadius = cornerRadius
 
+        
+//        layer.addSublayer(shadowLayer)
     }
     
     static var topLeftToBottomRight: Self {
         .init(startPoint: CGPoint(x: 0, y: 0),
               endPoint: CGPoint(x: 1, y: 1))
+//        shadowLayer.frame = bounds//.insetBy(dx: 20, dy: 20)
+//        shadowLayer.shadowPath = CGPath(rect: shadowLayer.frame, transform: nil)
+        
+        
+//        shadowLayer.shadowPath = UIBezierPath(rect: rect.insetBy(dx: 20, dy: 20)).cgPath
     }
     
 }
