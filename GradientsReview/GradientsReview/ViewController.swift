@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         
         
         
-        
+        /// glow effect view
         let vw = UIView(frame: CGRect(x: 100, y: 600, width: 128, height: 128))
         vw.backgroundColor = .white
         
@@ -139,9 +139,9 @@ final class GradientShadowView: UIView {
 //        layer.addSublayer(shadowLayer)
     }
     
-    static var topLeftToBottomRight: Self {
-        .init(startPoint: CGPoint(x: 0, y: 0),
-              endPoint: CGPoint(x: 1, y: 1))
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
         
 //        let rect = CGRect.init(
 //            x: bounds.minX - 40,
