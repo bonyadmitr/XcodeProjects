@@ -12,4 +12,7 @@
  !!! iOS 16 problem https://stackoverflow.com/q/73867713/5893286
  
  
+ https://github.com/shakurocom/GS1BarcodeParser
+ https://github.com/xremix/SwiftGS1Barcode
+ 
  */
