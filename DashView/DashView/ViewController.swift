@@ -1,3 +1,35 @@
+//final class DashView: UIView {
+//    private let shapeLayer: CAShapeLayer = {
+//        let shapeLayer = CAShapeLayer()
+//        shapeLayer.lineWidth = 1.0
+//        shapeLayer.lineDashPattern = [15, 5]
+//        shapeLayer.strokeColor = UIColor.red.cgColor
+//        shapeLayer.fillColor = nil //UIColor.clear.cgColor
+//        return shapeLayer
+//    }()
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+//
+//    private func setup() {
+//        layer.addSublayer(shapeLayer)
+//    }
+//
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        shapeLayer.path = CGPath(rect: bounds, transform: nil)
+//        shapeLayer.frame = bounds
+//    }
+//
+//}
 final class DashView: UIView {
     
     override class var layerClass: AnyClass { CAShapeLayer.self }
