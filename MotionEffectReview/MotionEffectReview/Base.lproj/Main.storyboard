@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MotionEffectReview" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="galaxy1" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-lC-e2f">
+                                <rect key="frame" x="-40" y="-40" width="473" height="932"/>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhO-hd-Zib">
+                                <rect key="frame" x="32" y="726" width="329" height="60"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="galaxy4" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-Pu-Ulb">
+                                        <rect key="frame" x="-40" y="-40" width="409" height="140"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galaxy button" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MS6-5v-xtx">
+                                        <rect key="frame" x="0.0" y="0.0" width="329" height="60"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="T5d-Pu-Ulb" firstAttribute="top" secondItem="LhO-hd-Zib" secondAttribute="top" constant="-40" id="5Py-G2-DDd"/>
+                                    <constraint firstItem="MS6-5v-xtx" firstAttribute="top" secondItem="LhO-hd-Zib" secondAttribute="top" id="5W6-NT-nCg"/>
+                                    <constraint firstAttribute="trailing" secondItem="MS6-5v-xtx" secondAttribute="trailing" id="B5n-Ry-U2P"/>
+                                    <constraint firstItem="T5d-Pu-Ulb" firstAttribute="leading" secondItem="LhO-hd-Zib" secondAttribute="leading" constant="-40" id="EEJ-qh-zBY"/>
+                                    <constraint firstAttribute="height" constant="60" id="V4R-kC-ThL"/>
+                                    <constraint firstAttribute="bottom" secondItem="MS6-5v-xtx" secondAttribute="bottom" id="ZvJ-SC-Syv"/>
+                                    <constraint firstItem="MS6-5v-xtx" firstAttribute="leading" secondItem="LhO-hd-Zib" secondAttribute="leading" id="bSc-Sw-BQx"/>
+                                    <constraint firstAttribute="trailing" secondItem="T5d-Pu-Ulb" secondAttribute="trailing" constant="-40" id="vJq-XG-zL2"/>
+                                    <constraint firstAttribute="bottom" secondItem="T5d-Pu-Ulb" secondAttribute="bottom" constant="-40" id="zrE-G3-YvX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wvB-lC-e2f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-40" id="04T-aW-Zfb"/>
+                            <constraint firstItem="LhO-hd-Zib" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="79z-XB-3eJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LhO-hd-Zib" secondAttribute="bottom" constant="32" id="8EE-rp-VZm"/>
+                            <constraint firstItem="wvB-lC-e2f" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-40" id="Fpb-HK-etg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wvB-lC-e2f" secondAttribute="trailing" constant="-40" id="IEe-ny-n0k"/>
+                            <constraint firstAttribute="bottom" secondItem="wvB-lC-e2f" secondAttribute="bottom" constant="-40" id="b4r-S8-mjS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LhO-hd-Zib" secondAttribute="trailing" constant="32" id="ePY-wT-gBl"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="wvB-lC-e2f"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="wvB-lC-e2f" id="xbb-5M-pmP"/>
+                        <outlet property="buttonImageView" destination="T5d-Pu-Ulb" id="ziW-vL-Vdv"/>
+                        <outlet property="buttonView" destination="LhO-hd-Zib" id="OMx-QG-RUG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="19"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="galaxy1" width="1920" height="1403"/>
+        <image name="galaxy4" width="604" height="441"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
