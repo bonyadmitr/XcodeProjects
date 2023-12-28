@@ -1,3 +1,13 @@
+    /*
+     Could you check a few things that might be a source of the problem:
+     
+     Double check that Settings > Accessibility > Motion > Reduce Motion is not turned on. Because if it is turned on, then UIInterpolatingMotionEffect won't work.
+     Test that the accelerometer of the device that you are testing on actually works. Or better still, use another device to test it. (This won't work on the simulator).
+     If you are editing the frame of the imageView in code anywhere (or especially in viewWillLayout / viewDidLayout), you shouldn't be doing that.
+     https://stackoverflow.com/a/61948741/5893286
+
+     */
+    //parallax effect extension https://gist.github.com/NSHouseCat/3d1f4691b6e56903097a01f1ba898e54 or https://gist.github.com/rtking1993/e0692e99f0dde15b3cbb32eee0ef8ca0
     func applyMotionEffect(to view: UIView, magnitude: Float) {
         
         //#keyPath(UIView.center.x)
