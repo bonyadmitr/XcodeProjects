@@ -1,3 +1,32 @@
+//
+//  ViewController.swift
+//  MotionEffectReview
+//
+//  Created by Yaroslav Bondar on 22.12.2023.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var buttonImageView: UIImageView!
+    @IBOutlet private weak var buttonView: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        buttonView.layer.cornerRadius = 16
+        buttonView.layer.cornerCurve = .continuous
+        buttonView.layer.borderColor = UIColor.white.cgColor
+        buttonView.layer.borderWidth = 1
+        
+        
+        applyMotionEffect(to: buttonImageView, magnitude: 40)
+        //applyMotionEffect(to: backgroundImageView, magnitude: 40)
+    }
+    
+    // TODO: check disable on reduce motion accability
     /*
      Could you check a few things that might be a source of the problem:
      
@@ -24,3 +53,7 @@
         
         view.addMotionEffect(group)
     }
+
+
+}
+
