@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dw1-2V-S5P">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Table Controller-->
+        <scene sceneID="bcx-o8-CZI">
+            <objects>
+                <tableViewController id="3gE-qb-X22" customClass="TableController" customModule="SegueActionReview" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="oM6-Xi-Hzs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="Vkm-E2-kEj" style="IBUITableViewCellStyleDefault" id="FQc-w8-UXN">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FQc-w8-UXN" id="znr-FK-Idx">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vkm-E2-kEj">
+                                            <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sS8-rl-rmx" kind="show" destinationCreationSelector="onSUIText:sender:" id="Hyv-ZL-sdk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3gE-qb-X22" id="p3M-mo-smj"/>
+                            <outlet property="delegate" destination="3gE-qb-X22" id="uIH-u3-ox1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="EDv-vB-3Nx">
+                        <barButtonItem key="rightBarButtonItem" title="showTextShared" id="QMD-7B-Qsd">
+                            <connections>
+                                <segue destination="bEX-g7-J9B" kind="show" destinationCreationSelector="onShowTextShared:" id="G8Z-op-wjd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="bEX-g7-J9B" kind="show" identifier="showText" destinationCreationSelector="onShowText:text:" id="yN0-Gc-oje"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F8z-D8-BTS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1851" y="831"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SegueActionReview" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nOR-QY-Mae">
+                                <rect key="frame" x="40.666666666666657" y="248.66666666666666" width="312" height="330.66666666666674"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvX-We-TU5">
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="showTextMinSegue"/>
+                                        <connections>
+                                            <segue destination="HTZ-qK-trE" kind="presentation" destinationCreationSelector="showTextMinSegue:" id="YqR-dF-eCW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8v-1A-1Lc">
+                                        <rect key="frame" x="0.0" y="42.333333333333343" width="312" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="showTextAnySegue"/>
+                                        <connections>
+                                            <segue destination="HTZ-qK-trE" kind="presentation" destinationCreationSelector="showTextAnySegue:sender:" id="ih5-Wz-vKf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5QR-AL-1SP">
+                                        <rect key="frame" x="0.0" y="84.666666666666657" width="312" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="onShowTextFull"/>
+                                        <connections>
+                                            <segue destination="HTZ-qK-trE" kind="presentation" destinationCreationSelector="onShowTextInheritance:" id="4qE-Nt-lGl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRd-c2-3xB">
+                                        <rect key="frame" x="0.0" y="127.00000000000001" width="312" height="34.333333333333329"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="onShowTextShared"/>
+                                        <connections>
+                                            <segue destination="HTZ-qK-trE" kind="presentation" destinationCreationSelector="onShowTextShared:" id="Xeg-B6-Ehd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIX-T6-ozl">
+                                        <rect key="frame" x="0.0" y="169.33333333333334" width="312" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="onShowTextInheritance"/>
+                                        <connections>
+                                            <segue destination="HTZ-qK-trE" kind="presentation" destinationCreationSelector="onShowTextInheritance:" id="xr0-v4-Zhz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRx-vf-ybr">
+                                        <rect key="frame" x="0.0" y="211.66666666666666" width="312" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="onShowTextNibShared"/>
+                                        <connections>
+                                            <segue destination="tN2-ZT-IRS" kind="presentation" destinationCreationSelector="onShowTextNibShared:" id="eLG-GR-d6S"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLv-ZU-qG8">
+                                        <rect key="frame" x="0.0" y="254.00000000000003" width="312" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="onSUIShared"/>
+                                        <connections>
+                                            <segue destination="sgW-1C-Sff" kind="presentation" destinationCreationSelector="onSUIShared:" id="36L-H1-sZr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7o-tS-blG">
+                                        <rect key="frame" x="0.0" y="296.33333333333337" width="312" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="showTextStringSegue / performSegue"/>
+                                        <connections>
+                                            <action selector="onPerformSegue" destination="BYZ-38-t0r" eventType="touchUpInside" id="JKN-tA-Cke"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nOR-QY-Mae" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8Hw-E4-pSW"/>
+                            <constraint firstItem="nOR-QY-Mae" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Cfv-Lb-QvJ"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Main" image="star.fill" catalog="system" id="DP1-eM-wFg"/>
+                    <connections>
+                        <segue destination="HTZ-qK-trE" kind="presentation" identifier="showText" destinationCreationSelector="showTextStringSegue:text:" id="Cqf-P8-qrD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924.4274809160305" y="24.647887323943664"/>
+        </scene>
+        <!--TextController-->
+        <scene sceneID="uDO-iu-u6r">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TextController" id="HTZ-qK-trE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aiP-w6-ADg"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyc-rq-yxC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1808.3969465648854" y="-40.140845070422536"/>
+        </scene>
+        <!--TextNibController-->
+        <scene sceneID="e7N-y7-6oc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TextNibController" id="tN2-ZT-IRS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SNR-6M-NP6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="110"/>
+        </scene>
+        <!--Table-->
+        <scene sceneID="B2q-DU-qMq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Ni-JU-a4q" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table" image="list.bullet" catalog="system" id="Bsw-nc-bTd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a5B-rm-B46">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3gE-qb-X22" kind="relationship" relationship="rootViewController" id="N0q-hD-0e4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZnM-FI-gdB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="831"/>
+        </scene>
+        <!--TextController-->
+        <scene sceneID="kPq-kX-vLo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TextController" id="bEX-g7-J9B" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="kNP-Q2-QTF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I4B-PG-Pg3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2592" y="831"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="Ep2-g6-hYe">
+            <objects>
+                <hostingController id="sS8-rl-rmx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="jMS-67-HXS"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vCW-M5-ieT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3077" y="831"/>
+        </scene>
+        <!--TextNibController-->
+        <scene sceneID="uHT-5x-ICG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TextNibController" id="uF4-Oe-zfg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="osv-02-brO"/>
+                    <navigationItem key="navigationItem" id="eqG-Ez-49q"/>
+                    <attributedString key="userComments">
+                        <fragment content="Not working"/>
+                    </attributedString>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yq9-Fh-ex4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="808"/>
+        </scene>
+        <!--SUI-->
+        <scene sceneID="pgf-XY-LQ9">
+            <objects>
+                <hostingController id="nvG-kI-hGh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="SUI" image="swift" catalog="system" id="5FM-wo-MNr"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yjO-mH-6ls" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-985" y="1163"/>
+        </scene>
+        <!--SUI-->
+        <scene sceneID="Zhf-Yp-5Yx">
+            <objects>
+                <hostingController id="sgW-1C-Sff" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="SUI" image="swift" catalog="system" id="zwl-Bm-wNF"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fx9-rw-82K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2318" y="147"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Whz-w0-0cL">
+            <objects>
+                <viewController id="dw1-2V-S5P" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xui-dY-tHI">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qco-G9-qyn">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <connections>
+                                    <segue destination="0q2-SD-MVL" kind="embed" id="QVO-Sk-nmD"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PA1-7x-Ref"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qco-G9-qyn" firstAttribute="top" secondItem="xui-dY-tHI" secondAttribute="top" id="567-gQ-Q2Q"/>
+                            <constraint firstAttribute="bottom" secondItem="qco-G9-qyn" secondAttribute="bottom" id="AC9-I7-dYk"/>
+                            <constraint firstItem="qco-G9-qyn" firstAttribute="leading" secondItem="PA1-7x-Ref" secondAttribute="leading" id="Lg3-AV-XtS"/>
+                            <constraint firstItem="qco-G9-qyn" firstAttribute="trailing" secondItem="PA1-7x-Ref" secondAttribute="trailing" id="UCo-ch-xrz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9yC-TB-oia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-873" y="401"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="e5I-3S-92a">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0q2-SD-MVL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wJq-qq-Uk5">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aQo-eV-Bz7"/>
+                        <segue destination="1Ni-JU-a4q" kind="relationship" relationship="viewControllers" id="utu-5z-8aF"/>
+                        <segue destination="44N-3a-0Ru" kind="relationship" relationship="viewControllers" destinationCreationSelector="onShowTextNibShared:" id="5zO-0V-zSk"/>
+                        <segue destination="nvG-kI-hGh" kind="relationship" relationship="viewControllers" destinationCreationSelector="onSUIShared:" id="6QO-mP-Ati"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcT-dO-Ttd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-100" y="401"/>
+        </scene>
+        <!--Text Nib-->
+        <scene sceneID="ev1-i8-sXU">
+            <objects>
+                <viewController id="44N-3a-0Ru" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Text Nib" image="text.book.closed.fill" catalog="system" id="lMV-XG-8g7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="swp-Bp-063" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-100" y="1163"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="G8Z-op-wjd"/>
+        <segue reference="xr0-v4-Zhz"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="swift" catalog="system" width="128" height="108"/>
+        <image name="text.book.closed.fill" catalog="system" width="115" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
