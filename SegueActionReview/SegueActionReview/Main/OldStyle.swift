@@ -58,3 +58,39 @@ final class OldStyleTableController: UITableViewController {
     
 }
 
+
+
+// MARK: - New Style
+
+/*
+
+final class OldStyleTextController: UIViewController, StoryboardInitable {
+    
+    @IBOutlet private weak var textLabel: UILabel!
+    
+    private let text: String
+    
+    static func initFromStoryboard(text: String) -> Self {
+        _initFromStoryboard(storyboardName: "OldStyle", identifier: "OldStyleTextController") { Self.init(coder: $0, text: text) }!
+    }
+    
+    init?(coder: NSCoder, text: String) {
+        self.text = text
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        textLabel.text = text
+    }
+    
+}
+ 
+ */
+
+
