@@ -135,3 +135,19 @@ final class OldStyleTableController: UITableViewController {
  */
 
 
+
+
+
+// MARK: - helpers
+
+/*
+
+init?(coder: NSCoder, text: String) {
+    self.text = text
+    super.init(coder: coder)
+}
+ 
+required init?(coder: NSCoder) {
+    fatalError()
+}
+
