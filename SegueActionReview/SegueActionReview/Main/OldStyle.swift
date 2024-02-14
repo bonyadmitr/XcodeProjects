@@ -151,3 +151,20 @@ required init?(coder: NSCoder) {
     fatalError()
 }
 
+required init?(coder: NSCoder) {
+    assertionFailure("use @IBSegueAction or initFromStoryboard")
+    text = "unknown"
+    super.init(coder: coder)
+}
+ 
+ 
+ private let text: String
+ 
+ 
+StoryboardInitable
+ 
+    static func initFromStoryboard(text: String) -> Self {
+        _initFromStoryboard(storyboardName: "OldStyle", identifier: "OldStyleTextController") { Self.init(coder: $0, text: text) }!
+    }
+
+*/
