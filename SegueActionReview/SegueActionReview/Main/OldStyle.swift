@@ -90,6 +90,25 @@ final class OldStyleTextController: UIViewController, StoryboardInitable {
     }
     
 }
+
+
+final class OldStyleTableController: UITableViewController {
+    
+    private let dataSource = (1...100).map { "Item \($0)" }
+    
+    @IBSegueAction private func showText(_ coder: NSCoder, text: String) -> UIViewController? {
+        OldStyleTextController(coder: coder, text: text)
+    }
+    
+    //@IBSegueAction private func showTextFromCell(_ coder: NSCoder) -> UIViewController? {
+    //    let text = "showTextFromCell " + dataSource[tableView.indexPathForSelectedRow?.row ?? 0]
+    //    return OldStyleTextController(coder: coder, text: text)
+    //}
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
+    }
+    
  
  */
 
