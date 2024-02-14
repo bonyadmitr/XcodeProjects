@@ -193,3 +193,23 @@ final class OldStyleTextController: UIViewController {
     }
     
 }
+
+
+final class OldStyleTableController: UITableViewController {
+    
+    private let dataSource = (1...100).map { "Item \($0)" }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? OldStyleTextController,
+           let item = sender as? String
+        {
+            vc.text = item
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
+    }
+    
+ 
+ */
