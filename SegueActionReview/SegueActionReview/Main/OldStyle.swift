@@ -1,3 +1,12 @@
+//
+//  OldStyle.swift
+//  SegueActionReview
+//
+//  Created by Yaroslav Bondar on 10.02.2024.
+//
+
+import UIKit
+
 
 final class OldStyleTextController: UIViewController {
     
@@ -211,5 +220,25 @@ final class OldStyleTableController: UITableViewController {
         dataSource.count
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let item = dataSource[indexPath.row]
+        cell.textLabel?.text = item
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = "didSelectRowAt " + dataSource[indexPath.row]
+        
+        // #1
+        performSegue(withIdentifier: "showText", sender: item)
+        
+        // #2
+        //let vc = storyboard?.instantiateViewController(withIdentifier: "OldStyleTextController") as! OldStyleTextController
+        //vc.text = item
+        //navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
  
  */
