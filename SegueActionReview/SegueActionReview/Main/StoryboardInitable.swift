@@ -1,3 +1,21 @@
+//
+//  StoryboardInitable.swift
+//  SegueActionReview
+//
+//  Created by Yaroslav Bondar on 02.02.2024.
+//
+
+import UIKit
+
+/**
+ `super.init(nibName: nil, bundle: nil)` not working for Storyboard. only for xib
+ 
+ Usage
+ 
+ static func initFromSB(text: String) -> TextController {
+ _initFromSB { Self.init(coder: $0, text: text) }!
+ }
+ */
 protocol StoryboardInitable: UIViewController {
     static func _initFromStoryboard <T: UIViewController>(storyboardName: String?, identifier: String?, bundle: Bundle?, _ creator: @escaping ((NSCoder) -> T?)) -> T?
 }
