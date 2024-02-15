@@ -11,3 +11,8 @@ extension StoryboardInitable {
         }
     }
 }
+//extension UIViewController {
+//    static func _initFromSB <T: UIViewController>(_ creator: @escaping ((NSCoder) -> T?)) -> T? {
+//        UIStoryboard(name: String(describing: T.self), bundle: nil).instantiateInitialViewController(creator: creator)
+//    }
+//}
