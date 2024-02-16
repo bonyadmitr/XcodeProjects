@@ -33,3 +33,11 @@ struct SwiftUIView: View {
 //        super.init(coder: coder, rootView: SwiftUIView(text: "SwiftUI"))
 //    }
 //}
+
+extension UIViewController {
+    @IBSegueAction private func onSUIShared(_ coder: NSCoder) -> UIViewController? {
+        UIHostingController(coder: coder, rootView: SwiftUIView(text: "SUI Shared"))
+        //SUIController(coder: coder, text: "SUI Shared")
+    }
+}
+
