@@ -1,3 +1,10 @@
+//
+//  SwiftUIView.swift
+//  SegueActionReview
+//
+//  Created by Yaroslav Bondar on 02.02.2024.
+//
+
 import SwiftUI
 
 struct SwiftUIView: View {
@@ -41,6 +48,14 @@ extension UIViewController {
     }
 }
 
+
+/*
+ SwiftUI in UIKit https://sarunw.com/posts/swiftui-in-uikit/
+ SwiftUI in Storyboard https://sarunw.com/posts/swiftui-view-in-uikit-using-uihostingcontroller-subclass/
+ IBSegueAction not working with UITabBarController https://sarunw.com/posts/custom-uihostingcontroller/
+ ! SwiftUI in UIKit + Storyboard + Update UIKit layer from SwiftUI https://books.nilcoalescing.com/integrating-swiftui/swiftui-in-a-view-controller/hosting-controller-in-storyboards
+ */
+/// will remove `import SwiftUI` in UIKit file
 extension View {
     func hostingController() -> UIHostingController<Self> {
         UIHostingController(rootView: self)
