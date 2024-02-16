@@ -41,3 +41,11 @@ extension UIViewController {
     }
 }
 
+extension View {
+    func hostingController() -> UIHostingController<Self> {
+        UIHostingController(rootView: self)
+    }
+    func hostingController(coder: NSCoder) -> UIHostingController<Self>? {
+        UIHostingController(coder: coder, rootView: self)
+    }
+}
