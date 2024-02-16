@@ -22,3 +22,14 @@ struct SwiftUIView: View {
         //        .navigationTitle("SwiftUI View")
     }
 }
+
+//final class SUIController: UIHostingController<SwiftUIView> {
+//
+//    init?(coder: NSCoder, text: String) {
+//        super.init(coder: coder, rootView: SwiftUIView(text: text))
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder, rootView: SwiftUIView(text: "SwiftUI"))
+//    }
+//}
