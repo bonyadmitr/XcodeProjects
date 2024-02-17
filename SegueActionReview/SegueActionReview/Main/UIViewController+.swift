@@ -24,3 +24,6 @@
             dismiss(animated: true)
         }
     }
+    @IBAction private func sharedUnwind(_ segue: UIStoryboardSegue) {
+        print("sharedUnwind from: \(String(describing: type(of: segue.source))), to: \(String(describing: type(of: segue.destination)))")
+    }
