@@ -1,3 +1,14 @@
+//
+//  UIViewController+.swift
+//  SegueActionReview
+//
+//  Created by Yaroslav Bondar on 02.02.2024.
+//
+
+import UIKit
+
+extension UIViewController {
+    
     @IBAction private func sharedClose() {
         /// short version `navigationController != nil ? _ = navigationController?.popViewController(animated: true) : dismiss(animated: true)`
         if let navigationController {
@@ -24,6 +35,14 @@
             dismiss(animated: true)
         }
     }
+    
+    /**
+     not working with xibs
+     crash `Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[UIButton sourceViewController]: unrecognized selector sent to instance`
+     
+     doc https://developer.apple.com/documentation/uikit/resource_management/dismissing_a_view_controller_with_an_unwind_segue
+     */
     @IBAction private func sharedUnwind(_ segue: UIStoryboardSegue) {
         print("sharedUnwind from: \(String(describing: type(of: segue.source))), to: \(String(describing: type(of: segue.destination)))")
     }
+}
