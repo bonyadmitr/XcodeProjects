@@ -1,3 +1,10 @@
+//
+//  TextController.swift
+//  SegueActionReview
+//
+//  Created by Yaroslav Bondar on 29.01.2024.
+//
+
 import UIKit
 
 final class TextController: UIViewController, StoryboardInitable {
@@ -21,3 +28,23 @@ final class TextController: UIViewController, StoryboardInitable {
         super.init(coder: coder)
     }
     
+    required init?(coder: NSCoder) {
+        assertionFailure("use @IBSegueAction or initFromStoryboard")
+        text = "unknown"
+        super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        textLabel.text = text
+    }
+    
+}
+
+
+extension UIViewController {
+    @IBSegueAction private func onShowTextShared(_ coder: NSCoder) -> UIViewController? {
+        TextController(coder: coder, text: "Shared")
+    }
+}
