@@ -36,3 +36,7 @@ extension UIViewController {
 
 
 
+
+extension UINavigationController {
+    @IBSegueAction private func showNavBarText(_ coder: NSCoder) -> UIViewController? { fatalError("will never be called. implemented in presentingViewController") }
+}
