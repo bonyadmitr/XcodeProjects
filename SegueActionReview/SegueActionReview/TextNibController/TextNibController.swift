@@ -26,3 +26,13 @@ final class TextNibController: UIViewController {
     }
     
 }
+
+
+extension UIViewController {
+    @IBSegueAction private func onShowTextNibShared(_ coder: NSCoder) -> UIViewController? {
+        TextNibController(coder: coder, text: "Nib Shared")
+    }
+}
+
+
+
