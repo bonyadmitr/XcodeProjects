@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextController" customModule="SegueActionReview" customModuleProvider="target">
+            <connections>
+                <outlet property="textLabel" destination="Fnt-kr-Ba9" id="DXP-Wh-yA7"/>
+                <outlet property="view" destination="lmX-Tf-ZKX" id="lzC-KK-kn3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lmX-Tf-ZKX">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-kr-Ba9">
+                    <rect key="frame" x="32" y="428.33333333333331" width="329" height="20.333333333333314"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bjv-b8-hm2">
+                    <rect key="frame" x="126.66666666666667" y="644" width="139.66666666666663" height="68.666666666666629"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeb-43-yIB">
+                            <rect key="frame" x="0.0" y="0.0" width="139.66666666666666" height="34.333333333333336"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Shared Close"/>
+                            <connections>
+                                <action selector="sharedClose" destination="-1" eventType="touchUpInside" id="QoK-mU-Ima"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foq-ka-WEk">
+                            <rect key="frame" x="0.0" y="34.333333333333371" width="139.66666666666666" height="34.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Shared Unwind"/>
+                            <connections>
+                                <action selector="sharedUnwind:" destination="-2" eventType="touchUpInside" id="r4X-a5-qin"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ehW-SJ-fHf"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="bjv-b8-hm2" secondAttribute="bottom" constant="139.33333333333337" id="AeY-eb-Rji"/>
+                <constraint firstItem="Fnt-kr-Ba9" firstAttribute="leading" secondItem="ehW-SJ-fHf" secondAttribute="leading" constant="32" id="FQ2-yu-yMF"/>
+                <constraint firstItem="Fnt-kr-Ba9" firstAttribute="centerY" secondItem="ehW-SJ-fHf" secondAttribute="centerY" id="HOm-cL-PP1"/>
+                <constraint firstItem="ehW-SJ-fHf" firstAttribute="trailing" secondItem="Fnt-kr-Ba9" secondAttribute="trailing" constant="32" id="oji-8w-4jM"/>
+                <constraint firstItem="bjv-b8-hm2" firstAttribute="centerX" secondItem="ehW-SJ-fHf" secondAttribute="centerX" id="vwY-Xa-lcQ"/>
+            </constraints>
+            <point key="canvasLocation" x="138" y="41"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
