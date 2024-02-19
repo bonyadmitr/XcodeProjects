@@ -23,3 +23,13 @@ import UIKit
  */
 
 
+
+/**
+ Init from storyboard without optional properties
+ 
+ @IBSegueAction - Storyboard Dependency Injection
+ p.s. you can find `UIIBDependencyInjectionInternal` from `Thread.callStackSymbols` inside implementation of any`@IBSegueAction func`
+ 
+ 
+ iOS 13 / macOS 10.15 / Xcode 11 introduced @IBSegueAction https://useyourloaf.com/blog/better-storyboards-with-xcode-11/
+ Better dependency injection for Storyboards in iOS13 https://sarunw.com/posts/better-dependency-injection-for-storyboards-in-ios13/
