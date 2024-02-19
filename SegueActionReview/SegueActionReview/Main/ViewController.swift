@@ -15,3 +15,11 @@ import UIKit
  UIStoryboardUnwindSegueSource
  full exa,ple: func showPreview(coder: NSCoder, sender: Any?, segueIdentifier: String?)
 
+ 
+ INFO
+ _initFromSB
+ xib init
+ xib in storyboard
+ */
+
+
