@@ -50,3 +50,10 @@ import UIKit
  }
  ```
  
+ --- Comparing IBSegueAction vs prepare(for:sender:)
+ Here are the advantages of using IBSegueAction:
+ * Cleaner code: Each segue can have its own IBSegueAction, resulting in code that is easier to design and maintain.
+ * No switching on string constants: prepare(for:sender:) requires you to switch on segue.identifier values that can get out of sync with the identifier properties in the storyboard file.
+ * Better encapsulation: The properties can now be private since the value can be set by the initializer and not after initialization inprepare(for:sender:).
+ * Immutability: The required properties can be let constants when appropriate since the value is set by the initializer.
+ * Less casting: There’s no need to cast the sender.destination to an EditNoteViewController to configure its properties. You create an instance of the view controller type you need.
