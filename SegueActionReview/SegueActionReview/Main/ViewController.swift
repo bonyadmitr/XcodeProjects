@@ -68,3 +68,9 @@ import UIKit
  `override func performSegue(withIdentifier identifier: String, sender: Any?)` called BEFORE `@IBSegueAction`
  `override func performSegue(withIdentifier identifier: String, sender: Any?)` will be called for manual `performSegue(withIdentifier: "ID", sender: nil)`, NOT for view based segues
  
+ `override func prepare(for segue: UIStoryboardSegue, sender: Any?)` called AFTER `@IBSegueAction`
+ will be called without `super.prepare(for: segue, sender: sender)` in `override func prepare(for segue: UIStoryboardSegue, sender: Any?)`
+ 
+ if `@IBSegueAction func ... { return nil }` than will be called `required init?(coder: NSCoder)` that we don't want to implement.
+ It does not prevent the segue from happening. so use `if/guard` + `performSegue(withIdentifier: "ID", sender: text)` for optionals
+ 
