@@ -57,3 +57,8 @@ import UIKit
  * Better encapsulation: The properties can now be private since the value can be set by the initializer and not after initialization inprepare(for:sender:).
  * Immutability: The required properties can be let constants when appropriate since the value is set by the initializer.
  * Less casting: There’s no need to cast the sender.destination to an EditNoteViewController to configure its properties. You create an instance of the view controller type you need.
+ * Easier to test: Since you are not relying on UIKit to create your view controller instances, it will be much easier to create tests for your view controllers.
+ Disadvantage:
+ * It is only available for iOS 13 or later
+ https://www.kodeco.com/9296192-improving-storyboard-segues-with-ibsegueaction/page/2
+ * @IBSegueAction with Tab Bar Controllers https://useyourloaf.com/blog/using-@ibsegueaction-with-tab-bar-controllers/ + You can use @IBSegueAction with relationship segue by binding relationship segue to a presentation view controller (The view controller that presented navigation controller). (or container view for UITabBarController)
