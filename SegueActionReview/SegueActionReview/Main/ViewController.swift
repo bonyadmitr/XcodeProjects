@@ -74,3 +74,10 @@ import UIKit
  if `@IBSegueAction func ... { return nil }` than will be called `required init?(coder: NSCoder)` that we don't want to implement.
  It does not prevent the segue from happening. so use `if/guard` + `performSegue(withIdentifier: "ID", sender: text)` for optionals
  
+ `@IBSegueAction` can be and should be `private`
+ 
+ NSObject in storyboard is not working - called `required init?(coder: NSCoder)`
+ 
+ Inheritance for UIViewController is working
+ 
+ 
