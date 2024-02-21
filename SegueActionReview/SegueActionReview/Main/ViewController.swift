@@ -81,3 +81,8 @@ import UIKit
  Inheritance for UIViewController is working
  
  
+ not working: `convenience required init?(coder: NSCoder) { self.init(coder: coder, text: "") }
+ console: `-[<SegueActionReview.ViewController: 0x109606ff0> onShowTextClear:sender:] returned nil, falling back to -[_TtC17SegueActionReview14TextController initWithCoder:]`
+ crash: `Terminating app due to uncaught exception 'NSGenericException', reason: 'This coder is expecting the replaced object 0x109621b40 to be returned from UIClassSwapper.initWithCoder instead of <SegueActionReview.TextController: 0x109d07480>'`
+ 
+ 
