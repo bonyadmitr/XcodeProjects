@@ -62,3 +62,9 @@ import UIKit
  * It is only available for iOS 13 or later
  https://www.kodeco.com/9296192-improving-storyboard-segues-with-ibsegueaction/page/2
  * @IBSegueAction with Tab Bar Controllers https://useyourloaf.com/blog/using-@ibsegueaction-with-tab-bar-controllers/ + You can use @IBSegueAction with relationship segue by binding relationship segue to a presentation view controller (The view controller that presented navigation controller). (or container view for UITabBarController)
+ 
+ 
+ !!! will NOT be called without `super.performSegue(withIdentifier: identifier, sender: sender)` in `override func performSegue(withIdentifier identifier: String, sender: Any?)`.
+ `override func performSegue(withIdentifier identifier: String, sender: Any?)` called BEFORE `@IBSegueAction`
+ `override func performSegue(withIdentifier identifier: String, sender: Any?)` will be called for manual `performSegue(withIdentifier: "ID", sender: nil)`, NOT for view based segues
+ 
