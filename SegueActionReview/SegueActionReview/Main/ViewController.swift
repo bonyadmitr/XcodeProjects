@@ -86,6 +86,8 @@ import UIKit
  crash: `Terminating app due to uncaught exception 'NSGenericException', reason: 'This coder is expecting the replaced object 0x109621b40 to be returned from UIClassSwapper.initWithCoder instead of <SegueActionReview.TextController: 0x109d07480>'`
  
  
+
+final class ViewController: BaseController {
     
     // MARK: - Segue
     
@@ -94,6 +96,12 @@ import UIKit
         print("performSegue: \(identifier), sender: \(sender ?? "nil")")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        print("prepare(for segue id: \(segue.identifier ?? "nil"), from: \(String(describing: type(of: segue.source))), to: \(String(describing: type(of: segue.destination)))")//, sender: \(sender ?? "nil")")
+    }
+    
+    // MARK: - @IBSegueAction
     
     @IBSegueAction private func showTextMinSegue(_ coder: NSCoder) -> UIViewController? {
         /// not working `UINavigationController(rootViewController: TextController(coder: coder, text: "showTextMinSegue")!)`
@@ -120,3 +128,4 @@ import UIKit
         return vc
     }
     
+}
