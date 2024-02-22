@@ -100,3 +100,15 @@ import UIKit
         TextController(coder: coder, text: sender as? String ?? "from button showTextAnySegue")
     }
     
+    @IBSegueAction private func showTextFull(_ coder: NSCoder, sender: Any?, segueIdentifier: String?) -> TextController? {
+        guard let text = sender as? String ?? (sender as? UIButton)?.title(for: .normal) else {
+            assertionFailure()
+            return nil
+        }
+        guard let vc = TextController(coder: coder, text: text) else {
+            assertionFailure()
+            return nil
+        }
+        return vc
+    }
+    
