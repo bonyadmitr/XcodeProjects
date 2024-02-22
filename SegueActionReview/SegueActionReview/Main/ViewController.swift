@@ -87,6 +87,14 @@ import UIKit
  
  
     
+    // MARK: - Segue
+    
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        super.performSegue(withIdentifier: identifier, sender: sender)
+        print("performSegue: \(identifier), sender: \(sender ?? "nil")")
+    }
+    
+    
     @IBSegueAction private func showTextMinSegue(_ coder: NSCoder) -> UIViewController? {
         /// not working `UINavigationController(rootViewController: TextController(coder: coder, text: "showTextMinSegue")!)`
         TextController(coder: coder, text: "showTextMinSegue")
