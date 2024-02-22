@@ -91,3 +91,7 @@ import UIKit
         /// not working `UINavigationController(rootViewController: TextController(coder: coder, text: "showTextMinSegue")!)`
         TextController(coder: coder, text: "showTextMinSegue")
     }
+    
+    @IBSegueAction private func showTextStringSegue(_ coder: NSCoder, text: String) -> UIViewController? {
+        TextController(coder: coder, text: text)
+    }
