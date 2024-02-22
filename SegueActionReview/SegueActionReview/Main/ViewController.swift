@@ -95,3 +95,8 @@ import UIKit
     @IBSegueAction private func showTextStringSegue(_ coder: NSCoder, text: String) -> UIViewController? {
         TextController(coder: coder, text: text)
     }
+
+    @IBSegueAction private func showTextAnySegue(_ coder: NSCoder, sender: Any?) -> UIViewController? {
+        TextController(coder: coder, text: sender as? String ?? "from button showTextAnySegue")
+    }
+    
