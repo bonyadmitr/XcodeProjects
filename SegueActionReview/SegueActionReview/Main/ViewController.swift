@@ -86,3 +86,8 @@ import UIKit
  crash: `Terminating app due to uncaught exception 'NSGenericException', reason: 'This coder is expecting the replaced object 0x109621b40 to be returned from UIClassSwapper.initWithCoder instead of <SegueActionReview.TextController: 0x109d07480>'`
  
  
+    
+    @IBSegueAction private func showTextMinSegue(_ coder: NSCoder) -> UIViewController? {
+        /// not working `UINavigationController(rootViewController: TextController(coder: coder, text: "showTextMinSegue")!)`
+        TextController(coder: coder, text: "showTextMinSegue")
+    }
