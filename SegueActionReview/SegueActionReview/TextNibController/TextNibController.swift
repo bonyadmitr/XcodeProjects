@@ -36,6 +36,25 @@ extension UIViewController {
 
 
 
+/// not working as tab bar https://useyourloaf.com/blog/using-@ibsegueaction-with-tab-bar-controllers/
+//final class NavBarSenderController: UINavigationController {
+//    
+//    private let text: String
+//    
+//    init?(coder: NSCoder, text: String) {
+//        self.text = text
+//        super.init(coder: coder)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError()
+//    }
+//    
+//    @IBSegueAction private func showNavBarSender111(_ coder: NSCoder) -> UIViewController? {
+//        TextNibController(coder: coder, text: text)
+//    }
+//    
+//}
 
 extension UINavigationController {
     @IBSegueAction private func showNavBarText(_ coder: NSCoder) -> UIViewController? { fatalError("will never be called. implemented in presentingViewController") }
