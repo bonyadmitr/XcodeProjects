@@ -113,6 +113,14 @@ import UIKit
  Unwind segue пропадут при переносе
  */
 
+
+
+//final class RootController: UIViewController {
+//    @IBSegueAction private func onShowTextRoot(_ coder: NSCoder) -> UIViewController? {
+//        TextNibController(coder: coder, text: "from root")
+//    }
+//}
+
 final class ViewController: BaseController {
     
     // MARK: - Segue
