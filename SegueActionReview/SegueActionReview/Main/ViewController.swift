@@ -94,6 +94,15 @@ import UIKit
  }
  ```
  
+ apple doc is only in Xcode 11 Release Notes https://developer.apple.com/documentation/xcode-release-notes/xcode-11-release-notes
+ */
+
+/*
+ Swift 5.1 also allows us to omit the `return`
+ 
+ use SwiftGen for safe segue identifiers in `performSegue(withIdentifier: "showText", sender: text)` like `perform(segue: StoryboardSegue.Message.embed)` https://github.com/SwiftGen/SwiftGen
+ */
+
 
 final class ViewController: BaseController {
     
