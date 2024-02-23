@@ -104,6 +104,15 @@ import UIKit
  */
 
 
+/*
+ Nib injection
+ если хочется чтобы была навигация по несколько контроллеров в одном сториборде, но версать экраны разным людям, то можно вынести вьюху в xib
+ 
+ !!! Storyboard ID should be empty + remove view from controller in storyboard
+ 
+ Unwind segue пропадут при переносе
+ */
+
 final class ViewController: BaseController {
     
     // MARK: - Segue
