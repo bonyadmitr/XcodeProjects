@@ -86,6 +86,14 @@ import UIKit
  crash: `Terminating app due to uncaught exception 'NSGenericException', reason: 'This coder is expecting the replaced object 0x109621b40 to be returned from UIClassSwapper.initWithCoder instead of <SegueActionReview.TextController: 0x109d07480>'`
  
  
+ `super.init(nibName: nil, bundle: nil)` not working for Storyboard. only for xib. so use `StoryboardInitable`
+ ```
+ init(text: String) {
+     self.text = text
+     super.init(nibName: nil, bundle: nil)
+ }
+ ```
+ 
 
 final class ViewController: BaseController {
     
