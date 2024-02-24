@@ -176,6 +176,12 @@ final class ViewController: BaseController {
         TextNibController(coder: coder, text: "showNavBarText 111")
     }
     
+    // MARK: - @IBAction
+    
+    @IBAction private func onPerformSegue() {
+        performSegue(withIdentifier: "showText", sender: "showTextStringSegue / performSegue")
+    }
+    
     
     @IBAction private func onNibCode() {
         let vc = TextNibController(text: "onNibCode")
