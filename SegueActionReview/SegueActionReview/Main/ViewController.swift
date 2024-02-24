@@ -168,4 +168,8 @@ final class ViewController: BaseController {
         return vc
     }
     
+    @IBSegueAction private func onSUItext(_ coder: NSCoder) -> UIViewController? {
+        SwiftUIView(text: "onSUItext").hostingController(coder: coder)
+    }
+    
 }
