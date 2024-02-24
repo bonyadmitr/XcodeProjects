@@ -176,4 +176,9 @@ final class ViewController: BaseController {
         TextNibController(coder: coder, text: "showNavBarText 111")
     }
     
+    
+    @IBAction private func onNibCode() {
+        let vc = TextNibController(text: "onNibCode")
+        present(vc, animated: true)
+    }
 }
