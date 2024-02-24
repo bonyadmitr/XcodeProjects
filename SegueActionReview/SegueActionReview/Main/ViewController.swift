@@ -182,6 +182,10 @@ final class ViewController: BaseController {
         performSegue(withIdentifier: "showText", sender: "showTextStringSegue / performSegue")
     }
     
+    @IBAction private func onInitFromStoryboard() {
+        let vc = TextController.initFromStoryboard(text: "onInitFromStoryboard")
+        present(vc, animated: true)
+    }
     
     @IBAction private func onNibCode() {
         let vc = TextNibController(text: "onNibCode")
