@@ -121,6 +121,12 @@ import UIKit
 //    }
 //}
 
+internal class BaseController: UIViewController {
+    @IBSegueAction private func onShowTextInheritance(_ coder: NSCoder) -> UIViewController? {
+        TextController(coder: coder, text: "from Inheritance")
+    }
+}
+
 final class ViewController: BaseController {
     
     // MARK: - Segue
