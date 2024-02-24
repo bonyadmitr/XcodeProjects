@@ -172,4 +172,8 @@ final class ViewController: BaseController {
         SwiftUIView(text: "onSUItext").hostingController(coder: coder)
     }
     
+    @IBSegueAction private func showNavBarText(_ coder: NSCoder) -> UIViewController? {
+        TextNibController(coder: coder, text: "showNavBarText 111")
+    }
+    
 }
