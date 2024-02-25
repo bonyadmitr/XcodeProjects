@@ -219,4 +219,30 @@ extension Array {
  
  https://developer.limneos.net/?ios=11.1.2&framework=UIKit.framework&header=UINibDecoder.h
  */
+
+/*
+ #0    0x000000010c8eeba6 in TextController.init(coder:text:) at /Users/yaroslav.bondar/Downloads/SegueActionReview/SegueActionReview/ViewController.swift:69
+ #1    0x000000010c8edf7a in TextController.__allocating_init(coder:text:) ()
+ #2    0x000000010c8ee1a0 in ViewController.onShowTextClear(_:sender:) at /Users/yaroslav.bondar/Downloads/SegueActionReview/SegueActionReview/ViewController.swift:41
+ #3    0x000000010c8ee20a in @objc ViewController.onShowTextClear(_:sender:) ()
+ #4    0x00007ff80563d5e7 in -[UIClassSwapper performSelectorForObject:selector:withObject:withObject:withObject:] ()
+ #5    0x00007ff80563db32 in -[UIClassSwapper initWithCoder:] ()
+ #6    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #7    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #8    0x00007ff805645940 in -[UIRuntimeConnection initWithCoder:] ()
+ #9    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #10    0x00007ff804ad39ce in UINibDecoderDecodeObjectForValue ()
+ #11    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #12    0x00007ff80563d06b in -[NSCoder(UIIBDependencyInjectionInternal) _decodeObjectsWithSourceSegueTemplate:creator:sender:forKey:] ()
+ #13    0x00007ff80563fd70 in -[UINib instantiateWithOwner:options:] ()
+ #14    0x00007ff805dc278f in -[UIStoryboard __reallyInstantiateViewControllerWithIdentifier:creator:storyboardSegueTemplate:sender:] ()
+ #15    0x00007ff805dc2634 in -[UIStoryboard _instantiateViewControllerWithIdentifier:creator:storyboardSegueTemplate:sender:] ()
+ #16    0x00007ff805dbfb24 in -[UIStoryboardViewControllerPlaceholder initWithCoder:] ()
+ #17    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #18    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #19    0x00007ff805645963 in -[UIRuntimeConnection initWithCoder:] ()
+ #20    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #21    0x00007ff804ad39ce in UINibDecoderDecodeObjectForValue ()
+ #22    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #23    0x00007ff80563d06b in -[NSCoder(UIIBDependencyInjectionInternal) _decodeObjectsWithSourceSegueTemplate:creator:sender:forKey:] ()
 }
