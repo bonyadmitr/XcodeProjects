@@ -211,4 +211,12 @@ extension Array {
 
 
 
+
+
+/*
+ let nib = UINib(nibName: "TextController.storyboardc/TextController", bundle: .main)
+ let q = nib.instantiate(withOwner: nil, options: [.externalObjects: ["text": text]])
+ 
+ https://developer.limneos.net/?ios=11.1.2&framework=UIKit.framework&header=UINibDecoder.h
+ */
 }
