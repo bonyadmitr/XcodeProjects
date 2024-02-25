@@ -200,4 +200,15 @@ extension Array {
     func lastUnsafe(_ offset: Int = 0) -> Element {
         self[count - 1 - offset]
     }
+    func last(_ offset: Int) -> Element? {
+        let count = self.count
+        if offset < count {
+            return self[count - 1 - offset]
+        }
+        return nil
+    }
+}
+
+
+
 }
