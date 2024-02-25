@@ -191,4 +191,13 @@ final class ViewController: BaseController {
         let vc = TextNibController(text: "onNibCode")
         present(vc, animated: true)
     }
+    
+}
+
+
+
+extension Array {
+    func lastUnsafe(_ offset: Int = 0) -> Element {
+        self[count - 1 - offset]
+    }
 }
