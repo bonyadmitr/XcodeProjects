@@ -280,4 +280,27 @@ extension Array {
  
  
  
+ 
+ 
+ 
+ 
+ ---------------------
+ UINib(nibName: "TextController.storyboardc/TextController", bundle: .main).instantiate(withOwner: nil, options: [.externalObjects: ["text": text]])
+ 
+ 
+ #0    0x000000010786dd1c in TextController.init(coder:) at /Users/yaroslav.bondar/Downloads/SegueActionReview/SegueActionReview/ViewController.swift:78
+ #1    0x000000010786de48 in @objc TextController.init(coder:) ()
+ #2    0x00007ff80563df1a in -[UIClassSwapper initWithCoder:] ()
+ #3    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #4    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #5    0x00007ff805645940 in -[UIRuntimeConnection initWithCoder:] ()
+ #6    0x00007ff804ad37c4 in UINibDecoderDecodeObjectForValue ()
+ #7    0x00007ff804ad39ce in UINibDecoderDecodeObjectForValue ()
+ #8    0x00007ff804ad34f2 in -[UINibDecoder decodeObjectForKey:] ()
+ #9    0x00007ff80563d06b in -[NSCoder(UIIBDependencyInjectionInternal) _decodeObjectsWithSourceSegueTemplate:creator:sender:forKey:] ()
+ #10    0x00007ff80563fd70 in -[UINib instantiateWithOwner:options:] ()
+ #11    0x000000010786d737 in TextController.init(text:) at /Users/yaroslav.bondar/Downloads/SegueActionReview/SegueActionReview/ViewController.swift:61
+ 
+ */
+
 }
