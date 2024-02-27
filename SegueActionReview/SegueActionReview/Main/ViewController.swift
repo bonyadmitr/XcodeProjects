@@ -342,3 +342,20 @@ class ContainerViewController: SlideMenuController {
         super.awakeFromNib()
     }
 }
+
+class SetMenuSegue: UIStoryboardSegue {
+    override func perform() {
+        
+        guard let slideMenuController = source as? SlideMenuController else {
+            fatalError("container is not SlideMenuController subclass")
+        }
+        if identifier == "main" {
+            slideMenuController.mainViewController = destination
+        } else if identifier == "left" {
+            slideMenuController.leftViewController = destination
+        } else {
+            fatalError("segue identifier is not 'main' or 'left'")
+        }
+    }
+}
+
