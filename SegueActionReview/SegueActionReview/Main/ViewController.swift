@@ -304,6 +304,17 @@ extension Array {
  */
 
 
+
+
+
+
+
+
+// MARK: - UIStoryboardSegue
+
+
+
+
 // TODO: PopupSegue
 //final class SomeSegue: UIStoryboardSegue {
 //    override func perform() {
@@ -329,6 +340,7 @@ extension Array {
         }
     }
 }
+
  
  
  
@@ -365,3 +377,10 @@ class PushMenuSegue: UIStoryboardSegue {
     }
 }
 
+extension UIViewController {
+    @IBAction func toggleLeftMenu(_ sender: Any) {
+        slideMenuController()?.toggleLeft()
+    }
+}
+
+ */
