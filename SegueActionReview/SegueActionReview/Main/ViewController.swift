@@ -359,3 +359,9 @@ class SetMenuSegue: UIStoryboardSegue {
     }
 }
 
+class PushMenuSegue: UIStoryboardSegue {
+    override func perform() {
+        source.slideMenuController()!.changeMainViewController(destination, close: true)
+    }
+}
+
