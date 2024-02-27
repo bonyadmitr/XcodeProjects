@@ -329,3 +329,16 @@ extension Array {
         }
     }
 }
+ 
+ 
+ 
+ import SlideMenuControllerSwift
+
+class ContainerViewController: SlideMenuController {
+    
+    override func awakeFromNib() {
+        performSegue(withIdentifier: "main", sender: nil)
+        performSegue(withIdentifier: "left", sender: nil)
+        super.awakeFromNib()
+    }
+}
